@@ -9,9 +9,18 @@ import time
 import threading
 import concurrent.futures
 from urllib import request
+from http.client import IncompleteRead
+import socket
 
 total_memory = 0
-MAX_MEMORY = 1.5*1024*10**6 # 1GB 1024*10**6 only 976
+MAX_MEMORY = 1.5*1024*(10**6) # 1GB 1024*10**6 only 976
+def remove(urlpage):
+    text = re.sub(r'^(http)?s?:?//(www.)? *', '', urlpage, flags=re.MULTILINE) 
+    page_name = re.sub(r'.edu/?$', '', text, flags=re.MULTILINE) 
+    return page_name
+
+def create_url(page_name):
+    return 'https://' + page_name + ".edu"
 
 def main():
     NUM_WORKERS = 16
@@ -23,44 +32,63 @@ def main():
     total_link_list.append(urlpage)
     level = 1 
     link_index = {} # { html: level }
-    link_index[urlpage] = level
+    link_index[remove(urlpage)] = level
 
     new_link = [] 
     index = 0
     for i in range(len(total_link_list)):
         link_item =  total_link_list.pop(0)
-        next_level, link_index = search_download(link_item, level, link_index,1)
+        next_level, link_index = search_download(link_item, level, link_index,1,True)
         new_link += next_level
-    print(new_link)
+    #print(new_link)
     
     total_link_list += list(set().union(new_link))
-
-    for i in range (2):
+    not_over_limit  = True
+    while not_over_limit:
+        pass
         new_link.clear()
         level += 1
         with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
-            futures = {executor.submit(search_download, address, level, link_index,total_link_list.index(address)+1) for address in total_link_list}
+            futures = {executor.submit(search_download, address, level, link_index,total_link_list.index(address)+1,not_over_limit) for address in total_link_list}
             concurrent.futures.wait(futures)
             for item in futures:
                 new_link += item.result()[0]
                 link_index = item.result()[1]
         total_link_list.clear()
         total_link_list += list(set().union(new_link))
-    print(total_link_list)
-    print(total_memory)
+        print(size(total_memory))
+        if total_memory > MAX_MEMORY :
+            not_over_limit = False
+    #print(total_link_list)
+    
     print(link_index)
+    print(total_memory)
 
-def search_download (urlpage,level,link_index,page):
+def search_download (urlpage,level,link_index,page,not_over_limit):
     global total_memory 
     list_link = []
-    headers = {'User-Agent':'Mozilla/5.0'}
+
     # build the header/user-agent to deal with webPAGE 403
-    req = urllib.request.Request(url=urlpage, headers=headers)
+    headers = {'User-Agent':'Mozilla/5.0'}
+    
+    # check URL error 
+    if urlpage.startswith("https//"):
+        urlpage = urlpage.replace("https//" , "https://")
+    if urlpage.startswith("http//"):
+        urlpage = urlpage.replace("http//" , "https://")
     try:    
-        soup = bs(urllib.request.urlopen(req),'html.parser')
+        req = urllib.request.Request(url=urlpage, headers=headers)
+        soup = bs(urllib.request.urlopen(req,timeout = 20),'html.parser')
     except urllib.error.URLError as error:
         print (error)
         return list_link, link_index
+    except IncompleteRead:
+    # Oh well, reconnect and keep trucking
+        #continue 
+        return list_link, link_index
+    except socket.error:
+        return list_link, link_index
+
     html = soup.prettify()
     filename = "web_" + str(level) + "_" + str(page)
     with open('data/' + filename, "w") as f:
@@ -69,19 +97,24 @@ def search_download (urlpage,level,link_index,page):
 
     memory =  os.stat('data/' + filename)
     total_memory += memory.st_size
-    print(size(total_memory)+ " data/" + filename)
+    print("data/" + filename)
     
-    
-    level += 1
-    for link in soup.find_all('a'):
-        link_name = link.get('href')
-        if(link_name):
-            if link_name.startswith("http"):
-                if link_name.endswith(".edu") or link_name.endswith(".edu/"):
-                    if link_name not in link_index:
-                        list_link.append(link_name) 
-                        link_index[link_name] = level
-    list_link = list(set().union(list_link))
+    if not_over_limit :
+        level += 1
+        for link in soup.find_all('a'):
+            link_name = link.get('href')
+            if(link_name):
+                if link_name.startswith("http"):
+                    if link_name.endswith(".edu") or link_name.endswith(".edu/"):
+                        if remove(link_name) not in link_index:
+                            if link_name.startswith("https//"):
+                                link_name = link_name.replace("https//" , "https://")
+                            if link_name.startswith("http//"):
+                                link_name = link_name.replace("http//" , "https://")
+
+                            list_link.append(link_name)
+                            link_index[remove(link_name)] = level
+        list_link = list(set().union(list_link))
 
     return list_link, link_index
 # main function
