@@ -1,0 +1,1812 @@
+http://systemstatus.berkeley.edu/
+<!DOCTYPE html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
+<head>
+ <meta charset="utf-8"/>
+ <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+ <script type="text/javascript">
+  window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+ </script>
+ <script type="text/javascript">
+  window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":0,"licenseKey":"6801a0194c","agent":"","transactionName":"NlVRN0NVVkNYWhFbDA8fdRZfV0xZVldKQRcAREYQVVVLWFtWBEAHT1RSEFlWV1FLXUtECgRHQE1cVVFeA1ALVgYZ","applicationID":"7822476","errorBeacon":"bam.nr-data.net","applicationTime":172}
+ </script>
+ <meta content="width=device-width, initial-scale=1" name="viewport"/>
+ <title>
+  UC Berkeley | System Status
+ </title>
+ <meta content="Check here at any time to obtain status information for our systems" name="description">
+  <!-- Vendor CSS -->
+  <link href="static-assets/A.vendors,,_bootgrid,,_jquery.bootgrid.min.css+vendors,,_animate-css,,_animate.min.css+css_bs,,_app.min.css,Mcc.JBfSTES3Bw.css.pagespeed.cf.J2Phkb9kWt.css" rel="stylesheet"/>
+  <!-- CSS -->
+  <!-- GA -->
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-65379508-1','auto');ga('send','pageview');
+  </script>
+  <style>
+   a{color:#005596}.navbar-inverse .navbar-nav>li>a,.navbar-header a.navbar-text{color:#656565}.navbar-inverse .navbar-nav>li>a:hover,.navbar-header a.navbar-text:hover{color:#00b050}.navbar-inverse .navbar-nav>li>a:focus,.navbar-header a.navbar-text:focus{color:#00b050}.navbar-inverse .navbar-toggle{border-color:#656565}.navbar-inverse .navbar-toggle .icon-bar{background-color:#656565}.btn-login,.btn-login:focus{color:#656565!important;background-color:#fff!important;border-color:#656565!important;border:1px solid #656565!important}.btn-login:hover,.btn-login:active{color:#00b050!important;background-color:#fff!important;border-color:#00b050!important;border:1px solid #00b050!important}.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a:focus{background-color:#fff;color:#00b050!important}.btn-primary{color:#fff;background-color:#3b7ea1;border-color:#3b7ea1;border:1px solid #3b7ea1}.btn-primary:hover,.btn-primary:active,.btn-primary:focus,.btn-primary:active.focus,.btn-primary:active:focus{color:#fff;background-color:#ddd;border-color:#ddd;border:1px solid #ddd}h1,h2,h3,h4{color:#656565}.card .card-header h2{color:#4d4d4d}.cal-icon:focus i{color:#ddd}.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus{background-color:#888}.icon-color{color:#888}.db-event-detail .badge{background-color:#888;font-weight:bold;margin-bottom:5px}.bootstrap-datetimepicker-widget td.active,.bootstrap-datetimepicker-widget td.active:hover{background-color:#888}.fg-line:not([class*=has-]):after {background:#888}.checkbox .input-helper:after{border-bottom:2px solid #888;border-left:2px solid #888}#ft_footer{border-top:1px solid #e0e0e0}.footer-db{background:#003262;background-color:#003262}.footer-db a{color:#eee}.footer-db a:hover{color:#005596}.fa-twitter-square{color:#eee}.fa-twitter-square:hover{color:#005596}.fa-facebook-square{color:#eee}.fa-facebook-square:hover{color:#005596}.fa-google-plus-square{color:#656565}.fa-google-plus-square:hover{color:#005596}
+  </style>
+ </meta>
+</head>
+<body style="background-color: #ffffff;">
+ <!-- Loading spinner -->
+ <div class="spinner" id="spinner" style="display:none;">
+  <img alt="Loading" id="img-spinner" src="static-assets/img/loading.gif.pagespeed.ce.VycB-9hRcJ.gif"/>
+ </div>
+ <!-- Navigation -->
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+   <div class="navbar-header">
+    <a class="navbar-text visible-xs-inline-block" href="/" style="margin-left: 15px; font-size: 14px; font-weight: bold;">
+     Home
+    </a>
+    <button class="navbar-toggle" data-target="#bs-navbar-collapse-1" data-toggle="collapse" type="button">
+     <span class="sr-only">
+      Toggle navigation
+     </span>
+     <span class="icon-bar">
+     </span>
+     <span class="icon-bar">
+     </span>
+     <span class="icon-bar">
+     </span>
+    </button>
+   </div>
+   <!-- Collect the nav links, forms, and other content for toggling -->
+   <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+     <li class="hidden-xs">
+      <a href="/">
+       Home
+      </a>
+     </li>
+     <li>
+      <a href="search/events">
+       Search
+      </a>
+     </li>
+     <li>
+      <a href="uptime">
+       Uptime
+      </a>
+     </li>
+     <li>
+      <a href="https://berkeley.service-now.com/ess/create_incident">
+       Report a Problem
+      </a>
+     </li>
+     <li>
+      <a href="https://goo.gl/forms/IaaL4Sw5ZdrDl4In2">
+       Submit an Update
+      </a>
+     </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+     <li>
+      <p class="navbar-btn hidden-xs">
+       <a class="btn btn-primary btn-sm m-t-5 btn-login" href="subscribe">
+        Subscribe to Alerts
+       </a>
+      </p>
+     </li>
+    </ul>
+   </div>
+   <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+ </nav>
+ <style>
+  html,body{height:100%}
+ </style>
+ <div id="ft_wrap">
+  <div class="container" id="ft_main">
+   <!-- Load Jquery -->
+   <script src="static-assets/js_bs/jquery-2.1.1.min.js.pagespeed.jm.OH66oSK0of.js">
+   </script>
+   <div class="row">
+    <div class="col-sm-12">
+     <img class="img-responsive" src="https://d32xswuv22qqkq.cloudfront.net/2018/09/14/9363f09233034ec7a4d30706a897b082.png"/>
+     <br/>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-sm-12">
+     <p>
+      If you need assistance with a computer system or network problem, please call Campus Shared Services IT at 510-664-9000 Option 1. After hours you can escalate a major telecom issue by selecting option 2 and major network issues by selecting option 3. Additionally, you may use the Report a Problem link at the top of this page.
+     </p>
+     <br/>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-sm-12 visible-xs">
+     <a class="btn btn-primary btn-sm m-t-5 btn-login btn-login-small" href="subscribe">
+      Subscribe to Alerts
+     </a>
+    </div>
+   </div>
+   <br/>
+   <div class="alert global-status global-status-green">
+    <span class="gs-left" span="">
+     All Services Operational
+    </span>
+    <span class="gs-right hidden-xs">
+     Status as of 2019-03-06 10:41:53 PST
+    </span>
+   </div>
+   <div class="row">
+    <div class="col-sm-6 m-t-10">
+    </div>
+    <div class="col-sm-6 text-right">
+     <form action="prefs/jump" class="sd-form-spinner" method="post">
+      <input name="csrfmiddlewaretoken" type="hidden" value="RQER4omnobBPyNXWIyGtYb81nxwD6IYJ"/>
+      <div class="form-inline">
+       <div class="input-group">
+        <span class="input-group-addon">
+         <i class="zmdi zmdi-hc-lg zmdi-calendar icon-color icon-form">
+         </i>
+        </span>
+        <div class="form-group">
+         <input class="form-control fg-line date-picker" id="jump_to" name="jump_to" placeholder="Jump to date" type="text"/>
+        </div>
+       </div>
+       <input class="btn btn-primary btn-sm btn-db-nav" data-original-title="Jump to a specific date." data-toggle="tooltip" type="submit" value="Go"/>
+       <a class="btn btn-primary btn-sm btn-db-nav" data-original-title="Move back one week." data-toggle="tooltip" href="/?ref=2019-02-27">
+        <i class="zmdi zmdi-arrow-left">
+        </i>
+       </a>
+       <a class="btn btn-primary btn-sm btn-db-nav" data-original-title="Move forward one week." data-toggle="tooltip" href="/?ref=2019-03-13">
+        <i class="zmdi zmdi-arrow-right">
+        </i>
+       </a>
+      </div>
+     </form>
+    </div>
+   </div>
+   <ul class="list-group dashboard-list hidden-md hidden-lg hidden-xl">
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     bConnected
+     <i class="zmdi zmdi-info" data-original-title="bDrive, bCal, bMail, Box, Google" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     bCourses and Learning Services
+     <i class="zmdi zmdi-info" data-original-title="Course Capture, Course Evaluation, iClickers" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     Business Apps
+     <i class="zmdi zmdi-info" data-original-title="BFS, BearBuy, Cal Answers, CalPlanning, Imagine" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     CalCentral and SIS Campus Solutions
+     <i class="zmdi zmdi-info" data-original-title="Campus Solution, SIS APIs" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     CalNet Services
+     <i class="zmdi zmdi-info" data-original-title="2-Step, ADFS, CAS, Shibboleth" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     CalTime
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     Law Specific Applications
+     <i class="zmdi zmdi-info" data-original-title="Online Exams, Schedule of Classes, Teaching Evaluations" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     Network Services
+     <i class="zmdi zmdi-info" data-original-title="Airbears2, Calvisitor, Data Network Services, Eduroam" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     Systems Infrastructure
+     <i class="zmdi zmdi-info" data-original-title="Data Center, Storage, UCBackup, Virtual Servers, Web Hosting, Citrix" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     Telecom Services
+     <i class="zmdi zmdi-info" data-original-title="Cellular - (ATT &amp; Verizon), Voice - (ATT &amp; Avaya), Voicemail, Zoom" data-toggle="tooltip">
+     </i>
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     UC Learning
+    </li>
+    <li class="list-group-item">
+     <span class="badge">
+      Operational
+     </span>
+     UCPath (beta)
+    </li>
+   </ul>
+   <div class="table-responsive hidden-sm hidden-xs">
+    <table class="table table-striped dashboard">
+     <thead>
+      <tr>
+       <th class="status">
+        <span class="sr-only">
+         Current Status
+        </span>
+       </th>
+       <th class="service">
+        Service
+       </th>
+       <th class="date">
+        2019-02-28
+        <br/>
+        Thu
+       </th>
+       <th class="date">
+        2019-03-01
+        <br/>
+        Fri
+       </th>
+       <th class="date">
+        2019-03-02
+        <br/>
+        Sat
+       </th>
+       <th class="date">
+        2019-03-03
+        <br/>
+        Sun
+       </th>
+       <th class="date">
+        2019-03-04
+        <br/>
+        Mon
+       </th>
+       <th class="date">
+        2019-03-05
+        <br/>
+        Tue
+       </th>
+       <th class="date">
+        2019-03-06
+        <br/>
+        Wed
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="status">
+        <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+         <span class="sr-only">
+          Operational
+         </span>
+        </i>
+       </td>
+       <th class="service service-name">
+        <span style="border-bottom: 0;">
+         bConnected
+         <i class="zmdi zmdi-info" data-original-title="bDrive, bCal, bMail, Box, Google" data-toggle="tooltip" role="tooltip">
+         </i>
+        </span>
+       </th>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </div>
+</body>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   bCourses and Learning Services
+   <i class="zmdi zmdi-info" data-original-title="Course Capture, Course Evaluation, iClickers" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <div aria-labelledby="label_11" class="modal fade" id="maintenance_11" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_11">
+      Scheduled Maintenance: 2019-03-03
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=18450">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=18450">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-03 05:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-03 11:30:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        bCourses tools, including Add People and Roster Photos, will be unavailable on Sunday,  March 3rd from 5:00am-2:00pm due to scheduled maintenance and Student Information Systems new release.
+       </p>
+       <p>
+        CMR: CHG0032314
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_11" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   Business Apps
+   <i class="zmdi zmdi-info" data-original-title="BFS, BearBuy, Cal Answers, CalPlanning, Imagine" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   CalCentral and SIS Campus Solutions
+   <i class="zmdi zmdi-info" data-original-title="Campus Solution, SIS APIs" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <div aria-labelledby="label_25" class="modal fade" id="maintenance_25" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_25">
+      Scheduled Maintenance: 2019-03-03
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=18434">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=18434">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-03 05:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-03 14:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        The Student Information System (SIS) will be releasing new functionality on Sunday, Murch 3rd from 5:00am-2:00pm
+       </p>
+       <p>
+        CMR: CHG0032314
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_25" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <div aria-labelledby="label_28" class="modal fade" id="maintenance_28" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_28">
+      Scheduled Maintenance: 2019-03-06
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=20041">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=20041">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-06 06:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-06 07:30:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        CalCentral servers will be restarted on Wednesday, March 6th from 6:00am - 7:30am to change settings to address links in the Student Resources Card.
+       </p>
+       <p>
+        CMR: CHG0032346
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_28" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   CalNet Services
+   <i class="zmdi zmdi-info" data-original-title="2-Step, ADFS, CAS, Shibboleth" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   CalTime
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   Law Specific Applications
+   <i class="zmdi zmdi-info" data-original-title="Online Exams, Schedule of Classes, Teaching Evaluations" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   Network Services
+   <i class="zmdi zmdi-info" data-original-title="Airbears2, Calvisitor, Data Network Services, Eduroam" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <div aria-labelledby="label_56" class="modal fade" id="maintenance_56" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_56">
+      Scheduled Maintenance: 2019-03-06
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=18684">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=18684">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-06 02:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-06 08:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        On Wednesday, March 6th, 2019 from 2:00am-8:00am, the Campus WiFi on the Cisco platform will undergo a software upgrade.
+       </p>
+       <p>
+        This upgrade is the vendor resolution to  INC0822848 .
+       </p>
+       <p>
+        There is a possibility that certain individual access points may need individual attention due to a different software issue that is also going to be resolved by this change.
+       </p>
+       <p>
+        It is expected that the access points would be offline for less than 20 minutes, unless the unit is one that requires the special attention and a manual restart.
+       </p>
+       <p>
+        CMR:  CHG0032333
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_56" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   Systems Infrastructure
+   <i class="zmdi zmdi-info" data-original-title="Data Center, Storage, UCBackup, Virtual Servers, Web Hosting, Citrix" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   Telecom Services
+   <i class="zmdi zmdi-info" data-original-title="Cellular - (ATT &amp; Verizon), Voice - (ATT &amp; Avaya), Voicemail, Zoom" data-toggle="tooltip" role="tooltip">
+   </i>
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <div aria-labelledby="label_67" class="modal fade" id="maintenance_67" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_67">
+      Scheduled Maintenance: 2019-03-03
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=18395">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=18395">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-03 09:07:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-03 18:29:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        In preparation to the Avaya Communication Manager IST Telecom will be installing the latest Avaya 7.1.3 firmware on Avaya peripheral boards.
+       </p>
+       <p>
+        The work will be performed afterhours therefore there will be no downtime expected during this maintenance.
+       </p>
+       <p>
+        CMR: CHG0032309
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_67" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<td>
+ <div aria-labelledby="label_68" class="modal fade" id="maintenance_68" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_68">
+      Scheduled Maintenance: 2019-03-04
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=18397">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=18397">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-04 21:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-04 23:59:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        IST Telecom will be performing system reboots and patches to maintain healthy systems with up to date bug fixes and security patches.
+       </p>
+       <p>
+        Work will be performed after hours with little to no traffic and impact should be minimal.
+       </p>
+       <p>
+        Equipment:
+       </p>
+       <p>
+        ucbdc-vmsystem1.IST.1918.Berkeley.EDU
+ucbdc-vmsystem2.IST.1918.Berkeley.EDU
+ucbdc-vmsystem.IST.1918.Berkeley.EDU
+ucbdc-vmavaya.IST.1918.Berkeley.EDU
+ucbdc-vmcentrex.IST.1918.Berkeley.EDU
+calvm-access
+       </p>
+       <p>
+        CMR: CHG0032316
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_68" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<td>
+ <div aria-labelledby="label_69" class="modal fade" id="maintenance_69" role="dialog" tabindex="-1">
+  <div class="modal-dialog" role="document">
+   <div class="modal-content">
+    <div class="modal-header">
+     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <span aria-hidden="true">
+       ×
+      </span>
+     </button>
+     <h4 class="modal-title" id="label_69">
+      Scheduled Maintenance: 2019-03-05
+     </h4>
+     <hr/>
+    </div>
+    <div class="modal-body" style="text-align: left;">
+     <div class="row">
+      <div class="col-sm-12">
+       <a href="maintenance/detail?i=18398">
+        More info
+       </a>
+       |
+       <a href="maintenance/calendar?i=18398">
+        Add to calendar
+       </a>
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Start:
+       </b>
+       2019-03-05 21:00:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        End:
+       </b>
+       2019-03-05 23:59:00 PST
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Severity:
+       </b>
+       Minor Outage
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-12">
+       <b>
+        Status:
+       </b>
+       Completed
+      </div>
+     </div>
+     <br/>
+     <div class="row">
+      <div class="col-sm-12">
+       <p>
+        IST Telecom team will be installing Microsoft updates on the Taske ACD, CDR and PCI server.
+       </p>
+       <p>
+        Work will be performed after hours and no user impact is expected.
+       </p>
+       <p>
+        Equipment:
+        ucbdctaskeapp1
+        ucbsdtaskeapp2
+        ucbdcvoicepci
+        atcomm-cdr1.ist.1918.berkeley.edu.
+        atcomm-cdr2.ist.1918.berkeley.edu.
+       </p>
+       <p>
+        CMR: CHG0032317
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-primary btn-sm m-t-5" data-dismiss="modal" type="button">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <a class="cal-icon" data-target="#maintenance_69" data-toggle="modal" href="#">
+  <i class="zmdi zmdi-wrench icon-maintenance" data-original-title="Scheduled Maintenance - click to view more information." data-toggle="tooltip">
+   <span class="sr-only">
+    Scheduled Maintenance
+   </span>
+  </i>
+ </a>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   UC Learning
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<tr>
+ <td class="status">
+  <i class="zmdi zmdi-check-circle" data-original-title="Service is operating normally." data-toggle="tooltip">
+   <span class="sr-only">
+    Operational
+   </span>
+  </i>
+ </td>
+ <th class="service service-name">
+  <span style="border-bottom: 0;">
+   UCPath (beta)
+  </span>
+ </th>
+</tr>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<td>
+ <i class="zmdi zmdi-check-circle">
+  <span class="sr-only">
+   Operational
+  </span>
+ </i>
+</td>
+<div class="row dashboard-key hidden-sm hidden-xs">
+ <div class="col-sm-12">
+  <i class="zmdi zmdi-check-circle">
+  </i>
+  Service Operational
+  <i class="zmdi zmdi-alert-triangle icon-incident-active">
+  </i>
+  Active Incident
+  <i class="zmdi zmdi-dot-circle icon-incident-resolved">
+  </i>
+  Resolved Incident
+  <i class="zmdi zmdi-wrench icon-maintenance">
+  </i>
+  Scheduled Maintenance
+ </div>
+</div>
+<br/>
+<br/>
+<div class="active-incident-module">
+ <h3>
+  Active Incidents
+ </h3>
+ <hr/>
+ <p>
+  There are currently no active incidents.
+ </p>
+ <br/>
+</div>
+<div class="active-maintenance-module">
+ <h3>
+  Active Scheduled Maintenance
+ </h3>
+ <hr/>
+ <p>
+  There are currently no active scheduled maintenance events.
+ </p>
+ <br/>
+</div>
+<div class="planned-maintenance-module">
+ <h3>
+  Planned Maintenance
+ </h3>
+ <hr/>
+ <div class="event-module-header">
+  <div class="event-module-date">
+   2019-03-21 06:00:00 PDT
+  </div>
+  <div class="event-module-link">
+   <a href="maintenance/detail?i=20040">
+    Full Event Details
+   </a>
+  </div>
+ </div>
+ <div class="event-module-body">
+  <p>
+   CalTime will be unavailable do to the conversion to UCPATH Implementation.
+  </p>
+  <p>
+   CMR: CHG0032343
+  </p>
+ </div>
+ <br/>
+</div>
+<footer class="container-fluid" id="ft_footer">
+ <div class="row footer-db">
+  <div class="col-sm-4 text-center">
+   <a href="subscribe/manage">
+    Manage Subscriptions
+   </a>
+   |
+   <a href="timezone">
+    Adjust Timezone
+   </a>
+  </div>
+  <div class="col-sm-4 text-center">
+   <a href="https://www.twitter.com/UCBerkeley" rel="”nofollow”">
+    <i class="fa fa-2x fa-twitter-square">
+    </i>
+   </a>
+   <a href="https://www.facebook.com/UCBerkeley" rel="”nofollow”">
+    <i class="fa fa-2x fa-facebook-square">
+    </i>
+   </a>
+  </div>
+  <div class="col-sm-4 text-center">
+   Powered by
+   <a href="https://www.statusdashboard.com">
+    StatusDashboard
+   </a>
+  </div>
+ </div>
+</footer>
+<!-- Javascript Libraries -->
+<script src="static-assets/vendors/moment/moment.min.js.pagespeed.jm.zuBzVj6wul.js">
+</script>
+<script src="static-assets/vendors/jquery-ui/jquery-ui.min.js.pagespeed.jm.Ey3QjrER2n.js">
+</script>
+<script src="static-assets/js_bs/bootstrap.min.js.pagespeed.jm.L7OpMnRymf.js">
+</script>
+<script src="static-assets/vendors/nicescroll/jquery.nicescroll.js">
+</script>
+<script src="static-assets/vendors/bootgrid,_jquery.bootgrid.js+auto-size,_jquery.autosize.min.js.pagespeed.jc.uBkNhFknee.js">
+</script>
+<script>
+ eval(mod_pagespeed_oN67$viI28);
+</script>
+<script>
+ eval(mod_pagespeed_uDjiWZYeea);
+</script>
+<script src="static-assets/vendors,_bootstrap-datetimepicker,_bootstrap-datetimepicker.min.js+vendors,_bootstrap-growl,_bootstrap-growl.min.js+js_bs,_sd.js.pagespeed.jc.o0senrwHe4.js">
+</script>
+<script>
+ eval(mod_pagespeed_Hs69i3t9Bz);
+</script>
+<script>
+ eval(mod_pagespeed_Znx1rUNYC1);
+</script>
+<script>
+ eval(mod_pagespeed_JF3uRxXysB);
+</script>
+<script src="static-assets/js_bs/functions.js.pagespeed.jm.Fn0PxYyucE.js">
+</script>
+

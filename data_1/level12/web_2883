@@ -1,0 +1,459 @@
+https://healtheconnect.sdsu.edu
+<!DOCTYPE html>
+<!--[if lt IE 9]>
+        <html class="ie8">
+<![endif]-->
+<!--[if IE 9]>
+        <html class="ie8">
+<![endif]-->
+<html lang="en">
+ <head>
+  <title>
+   Welcome
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+  <link href="img/favicon.ico" rel="Shortcut Icon"/>
+  <script src="js/jquery-1.11.3.min.js" type="text/javascript">
+  </script>
+  <script src="js/tether.min.js">
+  </script>
+  <script src="js/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="js/modernizr-2.6.2.js" type="text/javascript">
+  </script>
+ </head>
+ <body>
+  <script type="text/javascript">
+   $(document).ready(function () {
+         $("#btnKeepAlive").click(function (e) {
+             e.preventDefault();
+             alert("hello");
+             $.ajax({
+                 type: "POST",
+                 url: "home.aspx/ResetSession",
+
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function () {
+                     alert("You are still alive!!")
+                 },
+                 error: function (xml, textStatus, errorThrown) {
+                     alert(xml.status + "||" + xml.responseText);
+                 }
+             });
+
+         });
+     });
+
+
+        var sessionTimeoutWarning = "15";
+        var sessionTimeout = "90";
+        var timeOnPageLoad = new Date();
+        var sessionWarningTimer = null;
+        var redirectToWelcomePageTimer = null;
+        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+        setTimeout('SessionWarning()', sTimeout);
+        setTimeout('RedirectToLoginPage()',parseInt(sessionTimeout) * 60 * 1000);
+
+        function SessionWarning() {
+            //minutes left for expiry
+            var minutesForExpiry = (parseInt(sessionTimeout) -
+				parseInt(sessionTimeoutWarning));
+            var message = "Your session will expire in " + minutesForExpiry +
+			" minutes!";
+            $('#lblSessionExpire').text(message);
+            if(location.href.split('/').pop() != "default.aspx" && location.href.split('/').pop() != "login.aspx" && location.href.split('/').pop() != ""){
+            $('#sessionExpireModal').modal('show');
+            }
+            var currentTime = new Date();
+            //time for expiry
+            var timeForExpiry = timeOnPageLoad.setMinutes(timeOnPageLoad.getMinutes()
+				+ parseInt(sessionTimeout));
+
+            //Current time is greater than the expiry time
+            if (Date.parse(currentTime) > timeForExpiry) {
+                $('#lblSessionExpire').text("Your session has expired. You will be redirected to login page");
+                $('#sessionExpireModal').modal('show');
+                //alert("Session expired. You will be redirected to welcome page");
+                window.location = "login.aspx";
+            }
+        }
+
+        
+
+        //Session timeout
+        function RedirectToLoginPage() {
+            window.location = "login.aspx";
+        }
+
+        function KeepAlive(){
+            var img = new Image(1, 1);
+            img.src = 'KeepAlive.aspx?date=' + escape(new Date());
+
+            //Clear the RedirectToWelcomePage method
+            if (redirectToWelcomePageTimer != null) {
+                clearTimeout(redirectToWelcomePageTimer);
+            }
+   	    //reset the time on page load
+            timeOnPageLoad =  new Date();
+            sessionWarningTimer = setTimeout('SessionWarning()', 
+			parseInt(sessionTimeoutWarning) * 60 * 1000);
+            //To redirect to the welcome page
+            redirectToWelcomePageTimer = setTimeout
+		('RedirectToWelcomePage()',parseInt(sessionTimeout) * 60 * 1000);
+        }
+  </script>
+  <form action="./default.aspx" autocomplete="off" id="aspnetForm" method="post">
+   <div class="aspNetHidden">
+    <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+    <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="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"/>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+   </script>
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+    <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="0SZmOEMCmk0SslvL7fBXYVIsiDeZ/2JSHUo/W1GNJZqCAexAQM9wlK2GEviQzWDbIb4tMIsVN/JMnb8U6sd/hRozOrTRHYe6DU7Rkm6OMzv7eG2XO9x5vYzOB/cfygIpJswH6FXdGER9QUEyDJGJX6qv1vadgwbvrQjZ5Hwrut9zalI/fVvTyqEGAowgXeLPF0g780Nw0Q+Q82WjI184Q9rDZzWyudnLoN/azrAQWLVjdI3/prBH/7iOqrD4EfYeSm9+mcPhPcIect8aexFs7a3R1XqGuH0X87oHyVFTbapbtYE9hvxVB1ska8jPd62XBF7WiBy1URh+hYwK"/>
+   </div>
+   <a class="sr-only" href="#content" id="skipContent">
+    Skip to main content
+   </a>
+   <div class="container">
+    <nav class="navbar navbar-light bg-faded">
+     <div class="form-inline pull-xs-right" id="ctl00_loginBar_pnlNavBar" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_loginBar_lbtnLogin')">
+      <input autocomplete="off" class="form-control" id="ctl00_loginBar_txtUserName" name="ctl00$loginBar$txtUserName" placeholder="User Name" style="width:200px" type="text"/>
+      <input autocomplete="off" class="form-control" id="ctl00_loginBar_txtPassword" name="ctl00$loginBar$txtPassword" placeholder="Password" style="width:200px" type="password"/>
+      <a class="btn btn-primary" data-loading-text="Validating.." href="javascript:__doPostBack('ctl00$loginBar$lbtnLogin','')" id="ctl00_loginBar_lbtnLogin">
+       <i class="fa fa-user fa fa-white">
+       </i>
+       Login
+      </a>
+      <a class="btn btn-secondary" href="javascript:__doPostBack('ctl00$loginBar$lbtnRegister','')" id="ctl00_loginBar_lbtnRegister">
+       <i class="fa fa-lock">
+       </i>
+       Register
+      </a>
+     </div>
+     <!--<div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bar"></span>
+            <span class="fa fa-bar"></span>
+            <span class="fa fa-bar"></span>
+        </button>
+    </div>-->
+    </nav>
+    <!--<div class="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-form pull-right">
+            <div id="ctl00_loginBar_Panel1" onkeypress="javascript:return WebForm_FireDefaultButton(event, &#39;ctl00_loginBar_lbtnLogin&#39;)">
+	
+                <input name="ctl00$loginBar$TextBox1" type="text" id="ctl00_loginBar_TextBox1" class="form-control" placeholder="User Name" style="width:200px" />
+                <input name="ctl00$loginBar$TextBox2" type="password" id="ctl00_loginBar_TextBox2" class="form-control" placeholder="Password" style="width:200px" />
+                <a id="ctl00_loginBar_LinkButton1" class="btn btn-primary" href="javascript:__doPostBack(&#39;ctl00$loginBar$LinkButton1&#39;,&#39;&#39;)"><i class="fa fa-user fa fa-white"></i> Login</a>
+                <a id="ctl00_loginBar_LinkButton2" class="btn btn-white" href="javascript:__doPostBack(&#39;ctl00$loginBar$LinkButton2&#39;,&#39;&#39;)"><i class="fa fa-lock"></i> Register</a>
+            
+</div>
+        </div>
+    </div>
+</div>-->
+    <div class="row">
+     <div class="col-lg-6">
+      <img alt="Logo" class="img-fluid" id="ctl00_imgLogo" src="img/SDSULogo3.png" style="padding-bottom:20px" title="Logo"/>
+     </div>
+     <div class="col-lg-6">
+     </div>
+    </div>
+    <div class="row">
+     <div class="col-lg-12">
+     </div>
+    </div>
+    <br/>
+    <div class="row">
+     <div class="col-lg-12">
+      <div id="content">
+       <div class="span8 offset2">
+        <span id="ctl00_ContentPlaceHolder1_lblWelcomeMessage">
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:20pt;font-weight:normal;font-style:normal;">
+          </span>
+          <span style="color:#1F497D;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           Welcome to Health
+          </span>
+          <span style="color:#C00000;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:italic;">
+           e
+          </span>
+          <span style="color:#1F497D;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           Connect Student Health Services
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#1F497D;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           San Diego State University at Calpulli Center
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#1F497D;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           Hours of operation 8:30am - 4:30pm Monday-Friday
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#1F497D;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           619.594.4325
+          </span>
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:10pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:normal;font-style:normal;">
+           HealtheConnect is not appropriate for urgent medical conditions.
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#C00000;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;text-decoration: underline;">
+           FOR A LIFE THREATENING ILLNESS OR INJURY, CALL 911
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:14pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#C00000;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+          </span>
+          <span style="color:#0C0C0C;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           To register for HealtheConnect please click on "Register" at the top right of this screen.
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#0C0C0C;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:bold;font-style:normal;">
+           To log in please enter your user name and password at the top right of this screen.
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:5pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;" width="636">
+          <tr style="height:162pt;">
+           <td style="width:238.5pt;padding:0pt 0pt 0pt 0pt;border-top:none;border-right:none;border-bottom:none;border-left:none;" valign="top" width="398">
+            <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+             <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:14pt;font-weight:normal;font-style:normal;">
+             </span>
+            </p>
+            <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 18pt;">
+             <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:normal;">
+              Use HealtheConnect to:
+             </span>
+            </p>
+            <ul start="1" style="margin-top:0;margin-bottom:0;">
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Inquire about a non-urgent medical issue
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Renew your prescription
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Request and receive most lab and x-ray test results
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Request an advanced appointment
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Self schedule a Family PACT enrollment or renewal appointment
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Self schedule a basic immunization appointments
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               View and cancel existing appointments
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 0pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Update your contact information
+              </span>
+             </li>
+            </ul>
+            <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+             <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:5pt;font-weight:normal;font-style:normal;">
+             </span>
+            </p>
+           </td>
+           <td style="width:238.5pt;padding:0pt 0pt 0pt 0pt;border-top:none;border-right:none;border-bottom:none;border-left:none;" valign="top" width="398">
+            <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+             <span style="color:#C22E41;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+             </span>
+            </p>
+            <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+             <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:normal;">
+              HealtheConnect is NOT for:
+             </span>
+             <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+             </span>
+            </p>
+            <ul start="1" style="margin-top:0;margin-bottom:0;">
+             <li style="text-align:left;margin:0pt 0pt 0pt 36pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Urgent or emergency medical issues
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 36pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               HIV and pregnancy test results
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 36pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Mental health issues
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 36pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Drug screening information
+              </span>
+             </li>
+             <li style="text-align:left;margin:0pt 0pt 0pt 36pt;list-style-type:disc;color:#000000;background-color:transparent;font-family:Arial;font-size:10pt;font-weight:normal;font-style:normal;">
+              <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+               Multiple concerns or complicated medical problems
+              </span>
+             </li>
+            </ul>
+            <p style="text-align:right;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+             <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:14pt;font-weight:normal;font-style:normal;">
+             </span>
+            </p>
+           </td>
+          </tr>
+         </table>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+           A staff member will respond to your inquiry by the end of the next business day. If your medical concern requires attention sooner, call 619-594-4325 during business hours or 858-225-3105 after regular hours.
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 18pt;line-height:16.65pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:normal;">
+           Health
+          </span>
+          <span style="color:#C00000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:italic;">
+           e
+          </span>
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:normal;">
+           Connect messages will become a permanent part of your medical record.
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 18pt;line-height:16.65pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+           This web portal provides access to sensitive health information. HealtheConnect messages will become a permanent part of your medical record.
+          </span>
+          <span style="color:#000000;background-color:#FFFFFF;font-family:Arial;font-size:12pt;font-weight:bold;font-style:normal;text-decoration: underline;">
+           We urge you to consider the implications of sharing access to your private health information with others.
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:10pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:-18pt;margin:0pt 0pt 0pt 36pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+           If you experience difficulties please call the Student Health Services operator at 619.594.4325.
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+         <p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:italic;">
+           We are committed to protecting your personal information. Data that you provide cannot be viewed by anyone else on the Web and is securely maintained by industry standard. We do not share your information with anyone else without your permission unless required by law. For more information regarding Notice of Privacy, visit our website at
+          </span>
+          <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:14pt;font-weight:normal;font-style:normal;">
+           <a href="http://shs.sdsu.edu/shsHIPAAStatement.html">
+            <span style="color:#0000FF;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:bold;font-style:italic;text-decoration: underline;">
+             shs.sdsu.edu
+            </span>
+           </a>
+          </span>
+         </p>
+         <p style="text-align:center;text-indent:0pt;margin:0pt 0pt 0pt 0pt;">
+          <span style="color:#000000;background-color:transparent;font-family:Arial;font-size:14pt;font-weight:normal;font-style:normal;">
+          </span>
+         </p>
+        </span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="modal fade" id="sessionExpireModal">
+    <div class="modal-dialog">
+     <div class="modal-content">
+      <div class="modal-header">
+       <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+        Ã—
+       </button>
+       <span class="header3">
+        Session Expire
+       </span>
+      </div>
+      <div class="modal-body">
+       <div class="form-group">
+        <label id="lblSessionExpire">
+         Your session is about to expire
+        </label>
+       </div>
+      </div>
+      <div class="modal-footer">
+       <a class="btn btn-white" href="javascript:__doPostBack('ctl00$lbtnLogMeOut','')" id="ctl00_lbtnLogMeOut">
+        Log Me Out
+       </a>
+       <a class="btn btn-primary" href="javascript:__doPostBack('ctl00$lbtnKeepMeSignedIn','')" id="ctl00_lbtnKeepMeSignedIn" onclick="KeepAlive();">
+        Keep Me Signed In
+       </a>
+       <button class="btn btn-info" id="btnKeepAlive" style="display:none">
+        Keep Me Signed In
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script src="/WebResource.axd?d=3yWFDhjP5-tnsFTfui-zQiJ3-eU6W4vHrjf-7Wmh2x-sssthsDRTp14qrCKu_hZChXiVSU9PowW0yzGPEWHLtr5qW-c1&amp;t=636776436783889403" type="text/javascript">
+   </script>
+  </form>
+ </body>
+</html>
+

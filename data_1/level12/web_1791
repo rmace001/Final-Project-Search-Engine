@@ -1,0 +1,166 @@
+https://canvas.csus.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   SacLink Login
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/csus.cas/css/cas.css" rel="stylesheet"/>
+  <link href="/csus.cas/css/csus.css" rel="stylesheet" type="text/css"/>
+  <script>
+   /*<![CDATA[*/
+        
+        function onsubmitFunction(){
+        var uname = document.getElementById('username');
+        uname.value = uname.value.split('@')[0];
+        return true;
+        }
+        
+        window.onload = function()
+        {
+            var input = document.getElementById('username');
+            if (input !== null) input.focus();
+        }
+        
+        /*]]>*/
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.3.0/zxcvbn.js" type="text/javascript">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript">
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript">
+  </script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+  </script>
+  <script>
+   /*<![CDATA[*/
+
+        var trackGeoLocation = false;
+
+        var googleAnalyticsTrackingId = null;
+
+        if (googleAnalyticsTrackingId != null && googleAnalyticsTrackingId != '') {
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', googleAnalyticsTrackingId, 'auto');
+            ga('send', 'pageview');
+        }
+
+        /*]]>*/
+  </script>
+ </head>
+ <body class="login" id="cas">
+  <div class="container" id="container">
+   <header>
+    <a href="http://www.apereo.org" id="logo" title="go to Apereo home page">
+     Apereo
+    </a>
+    <h1>
+     Apereo Central Authentication Service (CAS)
+    </h1>
+   </header>
+   <div id="content">
+    <div class="row">
+     <div class="col-sm-12">
+      <div class="box" id="login">
+       <div class="logodiv" id="logodiv" style="text-align: center">
+        <img alt="Sac State Logo" class="logo" src="/csus.cas/images/sac_logo.png"/>
+       </div>
+       <form id="fm1" method="post" onsubmit="return onsubmitFunction(this);">
+        <h2>
+         Enter your Username and Password
+        </h2>
+        <section class="row">
+         <div class="form-group">
+          <label class="col-md-3 col-form-label" for="username">
+           <span class="accesskey">
+            U
+           </span>
+           sername
+          </label>
+          <div>
+           <div class="col-md-6">
+            <input accesskey="u" autocomplete="off" class="required" id="username" name="username" size="25" tabindex="1" type="text" value=""/>
+           </div>
+          </div>
+         </div>
+        </section>
+        <section class="row">
+         <div class="form-group">
+          <label class="col-md-3 col-form-label" for="password">
+           <span class="accesskey">
+            P
+           </span>
+           assword
+          </label>
+          <div class="col-md-6">
+           <input accesskey="p" autocomplete="off" class="required" id="password" name="password" size="25" tabindex="2" type="password" value=""/>
+           <span id="capslock-on" style="display:none;">
+            <p>
+             <i class="fa fa-exclamation-circle">
+             </i>
+             <span>
+              CAPSLOCK key is turned on!
+             </span>
+            </p>
+           </span>
+          </div>
+         </div>
+        </section>
+        <section class="row check">
+        </section>
+        <section class="row btn-row">
+         <input name="execution" type="hidden" value="a4e20075-8b0a-41d1-96f5-dfe055573921_ZXlKaGJHY2lPaUpJVXpVeE1pSjkuVms5WlJWZDFObkZxY1ZONFJWQlBWM3BzWkRNNFMzRkxibkpGWW1GbGFEQlNhMWhsWTJzMU1UaHhkMDFUVkZvMGNqTkhRa1pFWkhCNU1YbE9UR0ZzUjFFcmIzSnhUSGxxYldKNU5WQm1VR1ZvU21weVdEZHRlSHB0UkhjM1lrRjFjV2hzZEdWU2NHSnFSVEkzZUhsYVdrRnpaaTluYlVwQ1EwdzROMmhRVVhvemRVSTVZVUpVZG1SUE9VeHJibnBwWXpZdmVpOHdWemQwUkRVM2VHMXpPRzlyUldJMFIwTjVTaTl0WVZSVWRVOXFNMHhRY1d3eVkxTk9SMEZvVFRCUmRtOHhkMU5SUjA5ME1uUlNXbmxsV1VaTmVWUTNTMDV4V1hJdlRETmlUbWhLZFVWSlNWTlpPRkZFVDFCNVVUWlpVWGR2TWxVMlVqZE1MelpTT0dkamRERmtiREZWWjFscU1TOTJhaTgzYzNaaEx5dHdPRmh5Tm5VeVNreERUbU5sSzNsM1drcE1ka2RCUVdsak5HbExhVzV6S3pCMmRGTmpaRTVNVlU5cFVEQTBWbmhHTmtzdlFsUnhOM2RQYm1kNGNVZGpSVXRVVFRCbWVDdFBja3RDWkVjd2IyZHdZVkZWTWxCNE5VWXdaRVp2WVM4ME1UQlRjbEpJUVcxbE1YazVkRkZWYlZwSE9HMXlTV1p2VWtKT2F6UkdlRFFyTmk5a05uUkpjekJCUkhncmJVTTRLM1pTYUhSRU5FUmtRbEpwWmxkRFVsTmhRVzQyVUd0dWJITk1WR1VyTkRFeWVERlhabE50VTBVNU1sTnRSbUY0VDNoTlpsbEJZMGR1V25scVZFcGhlQzh2YmxJcmRXVnRla1JqUjBoemExUTNjbEJ6WXpkS09YRnpSM1I0Y0d0amVrc3JSRWREWlc1S01UbDFkVmxTU1dkSFNsRXJUblJxUXpsMU1HRkpTakZNTTFSWFlqaFNNWFo1VjFkbFpuWTVSbTVGVm5aM2JHaDZaR1pVTmk5clV6VkdWemxtYjNvMk1tcFZNMlJoVkVKclFqa3hjR1JCVnpneVZFeDBiU3RYUTJWbVpWRkhNalJpY0daUVFtdzJkVXMwV1c4d2NHbE1lV05NZEM5MldWWldOVzh2ZFVaS1ZFTnpTVkZWYTBaSWNrOHhRMHM1YVZSR01UQTVkMXB4UlhOT1IxQXJXVUZCVDFRMWNtRkhTbGwyWlZOMVZraDRSVzlxUjI5bFp6WlNaRkppZW1wV2NESlhOazFMVEhSUGExaGtObTV1YVM5VE5XaHlkSE5tWmxwaVNYcDRURkpYYkVaUFRXZGplRVZTTnpWSFJUYzNaU3RwU1M5d2VtNW5VMHRLUTJ4TE5VUkZkWEoxUTJ4bk9IUlJPV05RV1VGaVNsazJRMFUyY2pRelIxa3lUMlpDZDNoVGFUVjFhMGgyTVRSMGEzTlNhemx2UlRjck9VbFlPRmc1UWsxMWIxRm9la3gwWmpkRldubDFSMG92YVhOSlRFbHpMMHRzTm14a1VIQjZZMUpSYWtkNWNUTnlVMGhpU0dGMFNHY3pWblpDVERWdVdGQjFjSEJNV1dwRmMybDJWM0pCYUdSRk5rSk9RMlk0WlhORFMxSkxORWRuYW1oWGFISlVZME5aTkZKSldqaG9NRVF5TlU1SVJWUTJiMVpvV2xwQ1NXTTRiRVF3YTFGUVYxQmtiMXBUZUhBMVRITllaazFhUWpWa1lUVnlkbU5DYTBWMVpFbHhjMlpNUjBzNWFWcHdNVXBtVkRaU0wwTmlaalExV0dadU9FOUdPR3R4VGxBeVdrMDNXbkpvVDJwVFNIRm1ReTg1ZHpKM1FVeGxWa05oZFd0SFJHMTZia2cxYVV4SGVqUk5SVUpPU2k4ekx6Um5lakJ1YlVWdE0yOU5lQ3RwU25Ob1JtTmpjVGRNV1dNNFRtbHRibnBOVTIxVlZsaGxUazh5YVhwd1JuZE5ZMUZOTjBSQlMybzRWWGRJVUVaTFYycEZaVTlGYldGWmJYZEtTR2s0ZFVWamJFSnZUMEo1UTNVNVpGVlFOV0pGYzFrMVRFdzRZM2hHZUdZNFlYTkNTM1ZEUjJ0dlNFcFZiSHBwTURGTWREUlRMMmxQWkd4UE5WZDJVV05QVGtJMU5HdzJjV1JPUW5CQ1REQlFZVTFhYlZWSVdqVnJlSGwwZUdadlQzQm1WSGxGUzBZNGMyTTNTa3hsU201Qk1XOVdjQzlxZVhBNGQzZDRla3hRYlVwek4zVmlVakZyWVUxUmVWVkplV3BGTHpaekx5dFZjVFptZURWWWVUWk9WREpHVkhSdWFFUmFVMWhzT1U1dFVVaHNiU3Q0Tm5oV0x6aFFVVk5aU0RVNFFXZHhLM054YURWc1EyUlJOVVpNTVdkQ1ptaElaVnBWWTA4MlRYa3pNM0F2Tm1sb1pTdEhObkJIYjJrMmJHSlJWbTFwYTBKdWQwbGFXamhGWjJSUFJFNTVZMnBKYjBwalVGTmphVk5XVldvellrRXpTQ3RpTTNWSGFrNVlMek4xVWxKVFNVVk5RWEpIV1ZOT1JqTlBURVJWVm5FNFFVVjBNa1pTUXpGMlUwdDRaRVYzUVVJelowczNWWFJQVEcxYVZYb3hZVFJ4Vm05SU9YWkZUVzFpYjNoc2JHaFNjVTlWU0U5QldqWXhNRzVVVFc5NVZuUlpSRkoyUldwbVpFbzNVSEU0TTBKNVEwWklhVzF2VDNBM1dYSklLMk5xVkd0WFlWQnJXVEV6ZGsxS2VrdzRLMUZCZWxjd1ltZzFiRXNyVFhkMVRUZE9iMWhTTVdVMlMwUjNaMU5VTWxSaGFrNDBOMXBoVW10VVN6a3dUSGxPTjNwVmJFTkhVSGQyV1ZkSk9HcEthMEZPT1ZsUFoyaGpNbTVYWlZGQldUUnFLMjB6Wm5GMVUyOXJjSEJDTVVKbWFqUnVSVUlyYzBsd1pubFFUM0p2Y0ZwamVIYzNiakZMWTBwUWFFNXdTVTFKTjBJdmFsUjFhRmRMYjBoNWNFOU5ka3B5TjJGdU4wZE1lVTlrYzBzMVZXNXpiemhUVVRGRk9HSmFXbGRSYTBjMU5FbzNNVGh4VDBNNFVtTXJWbkU0TVdWbmIyMDBOamQ0WmpoT1MxUlJORE01Wm5RNVRuZG9SazlyTVdoelduTlhjVXgzV21jMlQzZ3dkMUpUSzI1Q2NHOWhWV2htYUU0NGNEVnVPVmh6VHpjeE1WcGlPVnBWWTFsNmNVUXZSMmhvV0dabFVVeDNURU15WVRFclowWlFOVlJFUjFkYWVEVnhiVzUzYUc1NlRVZFJZMFZtUW5wVWRDOWhSbFpMYjNGWWRHZzJXakZaUzJaRU9ISnRhalpxWW14amRtNHdSV28zU2pCSmQwZFhNVkJXUm01a1JITkhTRVZ3UzBoM1NXaEVNM0J4Y1RWS1MxSklRM2RtTkhaSU5EYzRXRUZDWlM5emVsbFJjamhQTDNSSldGRk5TVTltTVZWcVlYUXdha3RpY0hkWWVWRlZkVTFRT1M5TFpsVjFPRzkyVldkVEwyRk9OMEpzWjJsR01HeFpSbEJxV0UwME9IWlZlbkp6Tm5CRmFYRlVXRzlCY0RGalMyWTRXV2RtWm10S1ZEaFpRV3BoVEVkRWNtSnZhM1ZIUWpoVldqRlZUbmxsYmxCNU1WRTVlVEI0U0hnNFYwVTRiR1pCWTFFeVQybFpRbWRHVTNsUUwydE5OVkV2TURWdU5uUklaRUpuWVdWaFVrSTJWMHhoT1VsSGRsRXJURmhsTDI1VWRqSjJUemh3WnlzeWNFOW1XamRPVUhwT09ISm1ZM1JaUm5reU56Vk5ZekpLY1VSdGJHNUpjRlpDYjI5bFVXdFBhRFpyWTNaSVRGRXhLMWwxT0dZNFlWQnVXVk0xVkZwemIyOUVPV2RoZVhGbVJ6aHVWbUpZTlZKcU1VeHFUU3ROUjIxUGNFMXdPVnBhTVRodFRUZEpXRWQxU1hkNU1VWjRVa2xDU0ZWR1ltTk9XWGhUUkd4UVRtWlFURzl0YzI1TmJFOVRaR0YxVHl0amVXOHdZa0ZsVmtKT1ZUTk5UMVZFUVdOU1RYbDJTM0pXVXpkdVZtUkxLekZuZFdSUFlWcFRMeTlrY1VGclRuRmxaalJvUzJ4MlNsQXJRbVZXUm5obWJGY3dVSEZCZDFwRVIyUmhNMUIyYVRJclYyRllLMGxHYzJ4eEx5dE5abmxTZEdOMFZUTXZjRkpOVlZCc05tWmFZV3BKVEZsSmNWRktWbkJTYnpaelVscHVjbkk1U2tWeWJ6TnZXazl5VFdsaGVESjVWVXQwTjIxUWJFZGpZVTFTTUVKT1FqVkthVzFHYkRObGRVVmxUblZHZEVJMEx6Qk9VR3g2VGxCalpUbDRWV2hVV25SQmNuUnVMM2w2TkZGUU9Gb3diMkZTTkVwS1FVTmpNbFJvVEdNelluRlROakZyYUV3eFFtMTRNRGRwTkdGRmEzZGhlbnBOZG05UmNURnlUMjkxUVdoS2RWQkdNalJSVjBrNFowOXBlamRZUmxCdlpqbEtiMGx3YjNaVFExZG1NVTUzSzJSR05EaGxObTVWVUhRdkwydEVWazVKZEV4TGExRjZkVTAyUVZKUU5rczVXamR6Y0VSQ2EwbDROM2MzUW5WeU5tOVNVRmR6VEVoeWVsSnlXbTlrZGtKUlExaEpTRFpRU1UwMFBRLmpBTVFzQ09CcThvQXNNVXgtM2ZlRlhYcDNiOUJaWjBjM2wwUFJ4ODRRQ2phNVpHUm1Hd2pBN3VBOU5KT0FDM1h5SFIzZWZvNDNsdWp3M0FNODE3ZkN3"/>
+         <input name="_eventId" type="hidden" value="submit"/>
+         <input name="geolocation" type="hidden"/>
+         <div class="col-md-6 col-md-offset-3 loginButton text-center">
+          <input accesskey="l" class="btn btn-submit green" name="submit" tabindex="6" type="submit" value="Login"/>
+         </div>
+        </section>
+        <section class="row rowlinks text-center">
+         <p>
+          <a class="" href="https://password.csus.edu/" target="_blank">
+           Manage Password
+          </a>
+          |
+          <a class="" href="https://mysaclink.csus.edu/" target="_blank">
+           Help
+          </a>
+         </p>
+         <br/>
+         <p id="casTitle">
+          Central Authentication Service
+         </p>
+        </section>
+       </form>
+       <script type="text/javascript">
+        var i = "One moment please..."
+        $("#fm1").submit(function() {
+            $(":submit").attr("disabled", true);
+            $(":submit").attr("value", i);
+            return true;
+        });
+       </script>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js">
+   </script>
+   <script src="/csus.cas/js/cas.js" type="text/javascript">
+   </script>
+  </div>
+ </body>
+</html>
+

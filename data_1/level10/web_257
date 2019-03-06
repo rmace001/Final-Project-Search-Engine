@@ -1,0 +1,290 @@
+https://apps.law.utah.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Login - The University of Utah - The University of Utah
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!--
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" th:href="@{${#themes.code('standard.custom.css.file')}}"/>
+    -->
+  <link href="/cas/css/main.css" rel="stylesheet"/>
+  <link href="/cas/css/normalize.min.css" rel="stylesheet"/>
+  <link href="/cas/favicon.ico" rel="icon" type="image/x-icon"/>
+  <script src="/cas/js/jquery-1.9.1.min.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/html5shiv.min.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/respond.min.js" type="text/javascript">
+  </script>
+  <!--
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.3.0/zxcvbn.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript">
+  </script>
+  <script>
+   /*<![CDATA[*/
+
+        var trackGeoLocation = false;
+
+        var googleAnalyticsTrackingId = null;
+
+        if (googleAnalyticsTrackingId != null && googleAnalyticsTrackingId != '') {
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', googleAnalyticsTrackingId, 'auto');
+            ga('send', 'pageview');
+        }
+
+        /*]]>*/
+  </script>
+ </head>
+ <body class="cis-login" id="cas">
+  <div class="clearfix" id="header-container" role="banner">
+   <header class="wrapper clearfix">
+    <div id="brand-left">
+     <a href="http://utah.edu/">
+      <img alt="The University of Utah" src="images/uofu/ulogo_white.png"/>
+     </a>
+    </div>
+    <div id="brand-right">
+     <a href="http://healthcare.utah.edu/">
+      <img alt="University of Utah Health Care" src="images/uofu/u_healthcare_white.png"/>
+     </a>
+    </div>
+   </header>
+  </div>
+  <div class="clearfix container" id="main-container">
+   <div id="content">
+    <div class="wrapper">
+     <div>
+      <h1>
+       Login
+      </h1>
+      <div id="login-area">
+       <form id="fm1" method="post">
+        <section class="row">
+         <label for="username">
+          <span class="accesskey">
+           u
+          </span>
+          NID:
+          <span class="help-text">
+           (e.g. u8675309)
+          </span>
+         </label>
+         <div>
+          <input accesskey="u" autocomplete="off" class="required" id="username" name="username" onblur="edu.caslogin._flipOtoU(this)" size="25" tabindex="1" type="text" value=""/>
+          <span>
+           <span class="login-help">
+            <a href="https://auxiliary.apps.utah.edu/uofu/misc/UnidRetrieval">
+             Forgot your uNID?
+            </a>
+           </span>
+          </span>
+         </div>
+        </section>
+        <section class="row">
+         <label for="password">
+          <span class="accesskey">
+           P
+          </span>
+          assword:
+         </label>
+         <div>
+          <input accesskey="p" autocomplete="off" class="required" id="password" name="password" size="25" tabindex="2" type="password" value=""/>
+          <span id="capslock-on" style="display:none;">
+           <p>
+            <i class="fa fa-exclamation-circle">
+            </i>
+            <span>
+             CAPSLOCK key is turned on!
+            </span>
+           </p>
+          </span>
+          <span>
+           <span class="login-help">
+            <a href="https://system.apps.utah.edu/uofu/acs/uupasswd/portal-self-service">
+             Forgot your password?
+            </a>
+           </span>
+          </span>
+         </div>
+        </section>
+        <section class="row check">
+        </section>
+        <section class="row btn-group">
+         <input name="execution" type="hidden" value="4272b201-b975-41c7-a99c-d8e1de041115_ZXlKaGJHY2lPaUpJVXpVeE1pSjkuV2t0UVQyUlJMME52Tmxjck1tYzVNbGhSTkd0cVJqSllZVTF3TWtscGNqbDBUR0Z1UkhVNFJsTlplVEpPV0RocFIyNVpXRW96UzBoUGJUWjNUamRFWVc5V1NIQmpTMFZoV2toelp5ODRiVFJuZEZSV2IyUk9lSHB1UkRCSVZqbG1WVEZKV0dOUFIyTnRjeXRrY0haNkwwdHJhMlF2VFZNNGJtdFpUVEZLWjBKSWEzVlZibkZOTlVkMmJVVTNNR1F5ZWxFclJHMUZURE5EUkhSblZFVkZWV050YUhsc2RrOHJVSEZaYmtoTlFqRTFTbmRyTlhRelZVTjNkMGxoV1hwV0swWlZibmhaU0ZkM1JIbHZjRnBhTkVGVFp6Vm5TWFoxVDNSWFdGUTVUbHBIYWtoMVNFMVlOVkZvVkZSSFEzaHJNaTkxYVhGalduTkZLMGxIYUM5bU9FeG1WMjVDSzJNMFdqZFZVVlJZTWpOclZuZDZibW8yZFcxNVJuVmhWbE5uZFdOYVdpOUpZVk4zVmtseFkxTktaMlkzTlZwb1VuWlBVbEZJTUhobkwwSnNZVkpGYVhGdk9XVlhkbkF4TDNkd2VTOVpNR2xKSzJGb2VFcDBVek5QVW1OelMyWm5TbGRwUXpObVdrTjVZakJUWlRCemRXOUphMjFtU1dWUVpsSTNabUpQVEVsc2FEWmtNMjFHVUVFdk5WTlpkV28xWVhoNlFWRlpjV2wzTW1OMFpUa3ZTbkUzYlZWbFRuaDRlRTQzY1ZsbmJ6Vk5XR2wyTVhsUk4xQjBXaXRvYm5oQ1ZqbE1OREY2T1cxMGNuRlNMMWxhV2xVd2NHaENXRzAyY2tocWQxRk1ha3hKYkRkQ1pVdG9XRU5IWkVwaGQzVlVTMUZZUWtGWGJEbEpWVEpOYmxkb1J6TlpSSFJuYm5kUVYxZHZNMDFMWTA1cFZXWlZiMkl2TVRJd2RIZFVhakp2VnpKTFlpODJaVEl4V0VreGJrVXhjMVJvYUVkSk0wWk5UemhLUkZCVlZuTlNNV1ZtYTNac05VcFBObGt5UlVaMU1UZ3lSMjg0ZFRSeVpEVmtlVVZoZUdaaFYyUlZPVEp6YVRjeGVqbEphMWc0UlZscldVcG9hamhQU0dob1YwSlhkVXB6ZEZWbVRsZGpiWFJNZVZCNVRrOVFRbmRCYlhCYWNDdERVR0kwVEhNek5YRkpjbG92Y0dwdlRYTmlNbXhJYzA5YVJIaGpWM3AyWTFSbFREbFdlVGMyYkVzdmFVc3labTVWVFhsWFJGSXJObTgwV1N0Qk9TOWtUMll4ZEc0d1VVdFVTRWxuYkdSclpESm9Ua05aTUc5UVEwTnJjR2w2TTBkRVlsaHNhMFZXU3pSWVMwSjRVMDlLZEd0b00wSllaRVphYWpSRWFITXdZM2xtTVVJNFRVYzBabmx5ZVd4UVRGWkJTRGg2TkhjNVlrdE5XVGQyVlhNMWJsbFRhbTFNUjFKNkwwRmxVSGxyTUVGbFZreFJNRlpDTTFCak9HVXZXVTFMVmtOS2RHMDJkR1ZyTTJwcVZYbFBRVGx5U1VFeVdYcDNWbVJNTkZwc2JqTm9aV1p6ZVZKdksyNVZiMmRyTTJkSldraFhPRTlJSzBsQ1RrNHhkMDVXWjJVelpYTldSbUpuY25GTWMyVk1kV28wZWtkUlpDOVFPR1YyVjFSS1pVMTBZVmdySzBaSk5qWlROalpETTBWd2RGbEJaREZrVTBwWGIwbzRRWEZQZWtwRVFrbFJUV2hqVTFOU2FFNXFUemRVZFRoME5WTkRZMGcxUlhsS1VUVmtOWE5oUVdFNGFsZEhSMEl4VjNaNGFISkxWalpzUkZwNWVtSXZhbHB5ZFRabFZHMDBiMkkxWlZWdmNWbGtZWEJ1V0d3eE5VOVdTRU5RWmxkR2FWSlVSVUoySzJoc2EyWkVSV3hVTDNBeFVHMWFWaTlCUkdaSmFEUkJlWEV2ZUdVcmJVSjNjVEZvUzFscU16ZERZVkJRZEV0Mk1tTmxMM2RaWVdaUFowdEpURTVVVERkaFNGQjRTVmtyYUVKVlFsRlZVWE5FUkVGMFkzbEJlbXMwVlZZNGVGcDBMell5WmpKbWVYZEhTbkZSY1c1S09FWlRjRXNyVDBObVJtVlFjSGxuVHk4MVVXeExkMWhMVXpKM00xRkJMM0ZRZGpRME1USm1TMDQ1UzNSeGRsUkxSa05IYWpGeVZVeEpaelpFVW1wS2NtSkxaSFYzWm01Q2REVk1ZM3BvTkd4eU5FMDBaemhvWkhGeE5GRjJPV3hIY2k5U2IxbzVNRU5VWWxwTFNHeHRMMDV2TDFObU1GWlRaMFJuZURWWlFXWlVSeXR4YVRWUVdXTldiSGRXYjFGYVkxQjNTRWhOU0daWVRYSkNOM1JSZEcxdk1VRllXR2hCVEVsT2JuZEZiV2w0VlU1Q2VpczBjMUoyY3pSYWRrTkhUVEZKWW5aaVIyeFRPR2hwT1M5RFVXcElaMWRaWjJsR1RtOHlTSEpsZFc5d1EydHZkM2w2YkVrNVFXaGFRVmczTWt4cWVXRkJlR2w2SzFGaGRGbElPVEZtWTNBMFowcHZOMms0TVRkM1EwSlpiMmxrV2tvM05FZEVZVTVzVTJ4VUt6ZGlUME5TTW1reE9USlpWbXBFTWxZelZtczVObmQxVlVwWlpIVTBlRVJSTWxnMldtRkNlRzVsWldSNFpETjJWMkZEUVhkaVJHUkxhakZ3ZERKV2RtSmFja0p0WlVKa2NscERORUUzZUc1dlJsUlBPR3h0YUhsQlVHbHZLMm81TTJwblNsUkllVVV5UjJKRVVUaDBZamRVZFZOckt6aHlTV3hKTjBkd05qZE1kMWc1VW5SVk1rZHhlSFV3WVRNNE5WWldWbFYxUVVFd1lVcHFZbkYyTlRjeVZFSkdjV1JIZURSbGJHWjJNMUY1T1ZKcFRFdE1NWE5tY0Rsd00zZFliMmRxZFZaeFRUVk5SSEEzV1Zrd1NVcFhVbFZDV2trMlluVk1WRWRhZFRobVJuWkdPREJzVFNzellqWnpURkZFWkV4Vk9WQnFhbE5tWkdKYU1GaE5VV05wY2xsbmRWcEZRalIxUkd4dFRXcHRiSGt5UVdSM1JFYzBXV2cyYUhCNFFsRXpObEJhVXpWeVNrSlhibG8wVUcxUE0yWk5iRTVCUzNCR2JsUjZVazFwWTFaR1dYZE9TazFNYmpONFduaEZiSEJNS3k4eWQxVmFUWEV4UjJWNU9YZFRZamxCWkZvNFFuQTBWRXRJTVZJMmF6QnFNVE0zTm1oWWJqTXhUVXhtVjBsSE5FbFdkeTlIVTFOblkzcHNSMk0wVVROT1lVY3dUVmcyVXpOTE1qWnJNRFppVW1scVVGRnRNa2N5ZUZnNGEwVjBSazVOWjB4Q2NEUjZlRXB1UmtGblprcHNMMlJZV1hOb056TmtkekIyUXpBMFEzcE1RMEpETkhaQlVtOUdRM0J0VVRNd2FVdHFLMUJoWlZKcGRuUktXWEpwSzBVeGIwUktWRXBSVEhoUlZVcG1SRTQ1Y21SQ2IyTndSV3N5WlZwRE1IaFJLMGxQWkZnelIwdGtlbXhCUW1kU1NtVTFkbmhzWjBGV1FYQTBSelV3U1dGNFJtYzJkbWQ2ZFhsa1MxWk5RakpaVWpRelpqSTNMekkwWmpZdmIyNWhkRzV4U0haME16SkdiWFpoUW14TVdFSm1aSEZuVVhnNVdHd3ZSekp5T0hsRmRWSnhXVnAwV1hkUVN6RklOWEkyUVVGRmFuSlNNM2tyYzBOVk1XTk9aWFYxYjNSVFREQmpPRzFtU2xaWU5qQk5kRFlyUkhOTFpFRnZhWFZVYURoUFpXOUlhbVozVVRoNlVIcEhOR0prTWs5UmFTdHBkMnB2YzA1TFUxVkZlbHBKVGxGcVJrZFViR2RZTDNoalQyYzVValY2VUZRMmFWRllOMUZLVG1Sek5FRnZTVkJyU0VSb2RFMDRWWGxCYkhWWU5UWnpVMk4wYlhwMlpYTktOemszZUdaelNteEViVlJ4U21sNmJYWkxjVFJRV0d4cVpuVkRTelk1U0RSVE9GcHNiWEZVWkRodlUyZHBUVEUxYVZwR1pVZEhSR1ZCVGs1S1ZqWldSRmhqUm1SaFl6YzVaRTlaVm5GSWFtOUdlVVJCVFhBNFdYWXJSMUJhV1ZCT1ozcGlUa3hIUjJ4cGRsVk1aM0ZvUW1OcmJpc3ZNM2N3ZVV0SlZYQjFkR3BpYlhNNGNXRk9ZbloyTWtrME1ISkhUM2RqVEZrMU4yRkhXV000UmxGUFZsTnVVV05LZVUxNWFuSlBTWFp3UmpKeGVFbEdWV3RuYkdoSlREVlpSalF5YjNaRVNHdFdPUzlWZFRadFdERXZaME52VjBsTWNVaHBXbWh1YVRFeVYyUTJaVEZKZVRFek1EQk9OaXQ0VFRONlVrRk5NRkZ5VjNWRWFHMVVWSHBTVlhoaVUxVkxlRGxPVERRemJVTnFOakpCY2tGb01rWmFNM042VVZoV1pFWlBOV3N6ZWpSSGJWQlRiRFZ0UVd4RFoxZDVaMFJyV0VoV2JpOVdUUzlwSzNOTE1VOHhUMDl6ZFdadlJrZFpabEo0UkhGMlVqaFBUMVpoZW5jeWFtSm9TRGx0Uld3eUwyYzFURkp0UkM5Vk1YVllNakZHVUVoTFUzUkNZVVpvWjBkSllpc3llVU5VSzJkeFNqazBhaTlDVDNvM2FsWlRUWFprYTJkNllVTmhMMEZpVDBsR1JEWXZMMDF2TVdNdlFVZzNZbEV6UWsxVVpqRlVTR1ZDZFZoNGFFTXZTVzlxTW5aUlRUMC5lVFhtYmV1Njl6RnM5WXoyMW9mZl90cVRwSkNyQ3BXM0tEWkwyU0hSb3NlSnJBNGJDQjRCZjd0TEhVT3VUTmcwdE1ybS1pNHRsWE5FQkZMWFZTM29zdw=="/>
+         <input name="_eventId" type="hidden" value="submit"/>
+         <input name="geolocation" type="hidden"/>
+         <input accesskey="l" class="inputareabutton btn-submit" name="submit" tabindex="6" type="submit" value="LOGIN"/>
+        </section>
+       </form>
+       <p>
+       </p>
+       <!-- Disable Submit -->
+       <script type="text/javascript">
+        var i = "One moment please..."
+            $("#fm1").submit(function() {
+                $(":submit").attr("disabled", true);
+                //$(":submit").attr("value", i);
+                return true;
+            });
+       </script>
+      </div>
+      <!-- ***** END LOGIN AREA ***** -->
+      <div class="info-text">
+       <p>
+        <strong>
+         Caution:
+        </strong>
+        Before entering your uNID or password, verify that the address in the URL bar of your browser is directing you to a University of Utah web site.
+        <p>
+         <strong>
+          Important security information:
+         </strong>
+         This login uses cookies to provide access to the site you requested and to other protected University of Utah websites. For your security, log out of the services you are using and exit your browser when you have finished your session. Some browsers, including Google Chrome, retain cookie information by default even after you close your browser. Review your browser’s support documentation to set your browser to clear cookies automatically upon exit.
+         <a href="https://support.google.com/chrome/answer/95647?hl=en">
+          Instructions for Google Chrome
+         </a>
+         .
+        </p>
+       </p>
+      </div>
+      <!--UofU script for making sure 'u' is in place and in correct format -->
+      <script type="text/javascript">
+       if (!edu)
+            var edu = {};
+        if (!edu.caslogin) {
+            edu.caslogin = {
+                _trim: function(str) {
+                    return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+                },
+                _flipOtoU: function(node) {
+                    var unid = node.value;
+
+                    if (null !== unid && unid.length > 1 && (unid.charAt(0) === 'U' || unid.charAt(0) === '0')) {
+                        unid = edu.caslogin._trim(unid);
+                        unid = unid.toLowerCase();
+                        unid = "u" + unid.substring(1);
+                        node.value = unid;
+                    }
+                }
+            };
+        }
+
+        $(document).ready(function() {
+            if (($("#username-error").length) && ($("#password-error").length)) {
+                $("#username").focus();
+                $("#username").attr('aria-invalid', 'true');
+                $("#password").attr('aria-invalid', 'true');
+            } else if ($("#username-error").length) {
+                $("#username").focus();
+                $("#username").attr('aria-invalid', 'true');
+                $("#password").attr('aria-invalid', 'false');
+            } else if ($("#password-error").length) {
+                $("#password").focus();
+                $("#password").attr('aria-invalid', 'true');
+                $("#username").attr('aria-invalid', 'false');
+            } else {
+                $("#username").focus();
+                $("#username").attr('aria-invalid', 'false');
+                $("#password").attr('aria-invalid', 'false');
+            }
+        });
+      </script>
+      <div class="alert alert-info" id="cookiesDisabled" style="display:none;">
+       <h2>
+        Browser cookies disabled
+       </h2>
+       <p>
+        Your browser does not accept cookies. Single Sign On WILL NOT WORK.
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="clearfix" id="footer-container">
+   <footer class="wrapper">
+    <div class="column-1">
+     <div class="spacer">
+      <p>
+       <a href="http://it.utah.edu">
+        University Information Technology
+       </a>
+      </p>
+      <p>
+       <a href="http://it.utah.edu/services/helpDesk/">
+        Campus Help Desk
+       </a>
+       <br/>
+       801-581-4000
+       <br/>
+      </p>
+      <p>
+       <a href="http://support.med.utah.edu/">
+        Hospital Help Desk
+       </a>
+       <br/>
+       801-587-6000
+       <br/>
+      </p>
+      <p>
+       © 2017 The University of Utah
+      </p>
+     </div>
+    </div>
+    <div class="column-2">
+     <div class="spacer">
+      <ul>
+       <li>
+        <a href="http://www.utah.edu/nondiscrimination/">
+         Nondiscrimination &amp; Accessibility
+        </a>
+       </li>
+       <li>
+        <a href="http://www.utah.edu/disclaimer/">
+         Disclaimer
+        </a>
+       </li>
+       <li>
+        <a href="http://www.utah.edu/privacy/">
+         Privacy
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <div class="column-3">
+     <div class="spacer">
+      <a href="http://imagineu.utah.edu/">
+       <img alt="Imagine U: The University of Utah" src="images/uofu/imagine_u.png"/>
+      </a>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <div>
+   <!--
+<script src="//cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js"></script>
+-->
+   <script src="/cas/js/cas.js" type="text/javascript">
+   </script>
+   <script src="/cas/js/bootstrap.js" type="text/javascript">
+   </script>
+  </div>
+ </body>
+</html>
+

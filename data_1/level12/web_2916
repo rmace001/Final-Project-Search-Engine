@@ -1,0 +1,352 @@
+https://admin.uinform.ucdavis.edu/
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta content="IE=10.000" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta content="text/html;charset=utf-8" http-equiv="content-type"/>
+  <meta content="no-cache,no-store" http-equiv="cache-control"/>
+  <meta content="no-cache" http-equiv="pragma"/>
+  <meta content="-1" http-equiv="expires"/>
+  <meta content="Connecting to UC Davis uConnect ADFS" name="mswebdialog-title"/>
+  <title>
+   Sign In
+  </title>
+  <script type="text/javascript">
+   //<![CDATA[
+function LoginErrors(){this.userNameFormatError = 'Enter your user ID in the format \u0026quot;domain\\user\u0026quot; or \u0026quot;user@domain\u0026quot;.'; this.passwordEmpty = 'Enter your password.'; this.passwordTooLong = 'Password must be shorter than 128 characters.';}; var maxPasswordLength = 128;
+//]]>
+  </script>
+  <script type="text/javascript">
+   //<![CDATA[
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+function InputUtil(errTextElementID, errDisplayElementID) {
+
+    if (!errTextElementID)  errTextElementID = 'errorText'; 
+    if (!errDisplayElementID)  errDisplayElementID = 'error'; 
+
+    this.hasFocus = false;
+    this.errLabel = document.getElementById(errTextElementID);
+    this.errDisplay = document.getElementById(errDisplayElementID);
+};
+InputUtil.prototype.canDisplayError = function () {
+    return this.errLabel && this.errDisplay;
+}
+InputUtil.prototype.checkError = function () {
+    if (!this.canDisplayError){
+        throw new Error ('Error element not present');
+    }
+    if (this.errLabel && this.errLabel.innerHTML) {
+        this.errDisplay.style.display = '';        
+        var cause = this.errLabel.getAttribute('for');
+        if (cause) {
+            var causeNode = document.getElementById(cause);
+            if (causeNode && causeNode.value) {
+                causeNode.focus();
+                this.hasFocus = true;
+            }
+        }
+    }
+    else {
+        this.errDisplay.style.display = 'none';
+    }
+};
+InputUtil.prototype.setInitialFocus = function (input) {
+    if (this.hasFocus) return;
+    var node = document.getElementById(input);
+    if (node) {
+        if ((/^\s*$/).test(node.value)) {
+            node.focus();
+            this.hasFocus = true;
+        }
+    }
+};
+InputUtil.prototype.setError = function (input, errorMsg) {
+    if (!this.canDisplayError) {
+        throw new Error('Error element not present');
+    }
+    input.focus();
+
+    if (errorMsg) {
+        this.errLabel.innerHTML = errorMsg;
+    }
+    this.errLabel.setAttribute('for', input.id);
+    this.errDisplay.style.display = '';
+};
+InputUtil.makePlaceholder = function (input) {
+    var ua = navigator.userAgent;
+
+    if (ua != null && 
+        (ua.match(/MSIE 9.0/) != null || 
+         ua.match(/MSIE 8.0/) != null ||
+         ua.match(/MSIE 7.0/) != null)) {
+        var node = document.getElementById(input);
+        if (node) {
+            var placeholder = node.getAttribute("placeholder");
+            if (placeholder != null && placeholder != '') {
+                var label = document.createElement('input');
+                label.type = "text";
+                label.value = placeholder;
+                label.readOnly = true;
+                label.style.position = 'absolute';
+                label.style.borderColor = 'transparent';
+                label.className = node.className + ' hint';
+                label.tabIndex = -1;
+                label.onfocus = function () { this.nextSibling.focus(); };
+
+                node.style.position = 'relative';
+                node.parentNode.style.position = 'relative';
+                node.parentNode.insertBefore(label, node);
+                node.onkeyup = function () { InputUtil.showHint(this); };
+                node.onblur = function () { InputUtil.showHint(this); };
+                node.style.background = 'transparent';
+
+                node.setAttribute("placeholder", "");
+                InputUtil.showHint(node);
+            }
+        }
+    }
+};
+InputUtil.focus = function (inputField) {
+    var node = document.getElementById(inputField);
+    if (node) node.focus();
+};
+InputUtil.hasClass = function(node, clsName) {
+    return node.className.match(new RegExp('(\\s|^)' + clsName + '(\\s|$)'));
+};
+InputUtil.addClass = function(node, clsName) {
+    if (!this.hasClass(node, clsName)) node.className += " " + clsName;
+};
+InputUtil.removeClass = function(node, clsName) {
+    if (this.hasClass(node, clsName)) {
+        var reg = new RegExp('(\\s|^)' + clsName + '(\\s|$)');
+        node.className = node.className.replace(reg, ' ');
+    }
+};
+InputUtil.showHint = function (node, gotFocus) {
+    if (node.value && node.value != '') {
+        node.previousSibling.style.display = 'none';
+    }
+    else {
+        node.previousSibling.style.display = '';
+    }
+};
+//]]>
+  </script>
+  <link href="/adfs/portal/css/style.css?id=AE8A3CC9786CEE67C7EAC6974300BF68E4FAA9C2DC72F902CCF5E0298223BA93" rel="stylesheet" type="text/css"/>
+  <style>
+   .illustrationClass {background-image:url(/adfs/portal/illustration/illustration.jpg?id=660BCCB1D8E86A3D360256A2B47C7927B84A571C452DF478865339CB57D2A4E2);}
+  </style>
+ </head>
+ <body class="body" dir="ltr">
+  <div id="noScript" style="position:static; width:100%; height:100%; z-index:100">
+   <h1>
+    JavaScript required
+   </h1>
+   <p>
+    JavaScript is required. This web browser does not support JavaScript or JavaScript in this web browser is not enabled.
+   </p>
+   <p>
+    To find out if your web browser supports JavaScript or to enable JavaScript, see web browser help.
+   </p>
+  </div>
+  <script language="JavaScript" type="text/javascript">
+   document.getElementById("noScript").style.display = "none";
+  </script>
+  <div id="fullPage">
+   <div class="float" id="brandingWrapper">
+    <div id="branding">
+    </div>
+   </div>
+   <div class="float" id="contentWrapper">
+    <div id="content">
+     <div id="header">
+      <img alt="UC Davis uConnect ADFS" class="logoImage" src="/adfs/portal/logo/logo.gif?id=2A7FB7B18F032E213BE16E59C76D5D0464C378D9C23136EBCB81B19931F68CE3"/>
+     </div>
+     <div id="workArea">
+      <div class="groupMargin" id="authArea">
+       <div id="loginArea">
+        <div class="groupMargin" id="loginMessage">
+         Sign in with your organizational account
+        </div>
+        <form action="/adfs/ls/?wa=wsignin1.0&amp;wtrealm=https%3a%2f%2fadmin.uinform.ucdavis.edu%2f&amp;wctx=rm%3d0%26id%3dpassive%26ru%3d%252f&amp;wct=2019-03-06T18%3a46%3a47Z" autocomplete="off" id="loginForm" method="post" novalidate="novalidate" onkeypress="if (event &amp;&amp; event.keyCode == 13) Login.submitLoginRequest();">
+         <div class="fieldMargin error smallText" id="error">
+          <label for="" id="errorText">
+          </label>
+         </div>
+         <div id="formsAuthenticationArea">
+          <div id="userNameArea">
+           <input autocomplete="off" class="text fullWidth" id="userNameInput" name="UserName" placeholder="someone@example.com" spellcheck="false" tabindex="1" type="email" value=""/>
+          </div>
+          <div id="passwordArea">
+           <input autocomplete="off" class="text fullWidth" id="passwordInput" name="Password" placeholder="Password" tabindex="2" type="password"/>
+          </div>
+          <div id="kmsiArea" style="display:none">
+           <input id="kmsiInput" name="Kmsi" tabindex="3" type="checkbox" value="true"/>
+           <label for="kmsiInput">
+            Keep me signed in
+           </label>
+          </div>
+          <div class="submitMargin" id="submissionArea">
+           <span class="submit" id="submitButton" onclick="return Login.submitLoginRequest();" onkeypress="if (event &amp;&amp; event.keyCode == 32) Login.submitLoginRequest();" tabindex="4">
+            Sign in
+           </span>
+          </div>
+         </div>
+         <input id="optionForms" name="AuthMethod" type="hidden" value="FormsAuthentication"/>
+        </form>
+        <div id="authOptions">
+         <form action="https://adfs.ucdavis.edu:443/adfs/ls/?wa=wsignin1.0&amp;wtrealm=https%3a%2f%2fadmin.uinform.ucdavis.edu%2f&amp;wctx=rm%3d0%26id%3dpassive%26ru%3d%252f&amp;wct=2019-03-06T18%3a46%3a47Z" id="options" method="post">
+          <script type="text/javascript">
+           function SelectOption(option) {
+                    var i = document.getElementById('optionSelection');
+                    i.value = option;
+                    document.forms['options'].submit();
+                    return false;
+                }
+          </script>
+          <input id="optionSelection" name="AuthMethod" type="hidden"/>
+          <div class="groupMargin">
+          </div>
+         </form>
+        </div>
+        <div class="groupMargin" id="introduction">
+         <p>
+          <b>
+           To Sign-in please use username@ucdavis.edu
+          </b>
+         </p>
+        </div>
+        <script type="text/javascript">
+         //<![CDATA[
+
+            function Login() {
+            }
+
+            Login.userNameInput = 'userNameInput';
+            Login.passwordInput = 'passwordInput';
+
+            Login.initialize = function () {
+
+                var u = new InputUtil();
+
+                u.checkError();
+                u.setInitialFocus(Login.userNameInput);
+                u.setInitialFocus(Login.passwordInput);
+            }();
+
+            Login.submitLoginRequest = function () { 
+                var u = new InputUtil();
+                var e = new LoginErrors();
+
+                var userName = document.getElementById(Login.userNameInput);
+                var password = document.getElementById(Login.passwordInput);
+
+                if (!userName.value || !userName.value.match('[@\\\\]')) {
+                    u.setError(userName, e.userNameFormatError);
+                    return false;
+                }
+
+                if (!password.value) {
+                    u.setError(password, e.passwordEmpty);
+                    return false;
+                }
+
+                if (password.value.length > maxPasswordLength) {
+                    u.setError(password, e.passwordTooLong);
+                    return false;
+                }
+
+                document.forms['loginForm'].submit();
+                return false;
+            };
+
+            InputUtil.makePlaceholder(Login.userNameInput);
+            InputUtil.makePlaceholder(Login.passwordInput);
+        //]]>
+        </script>
+       </div>
+      </div>
+     </div>
+     <div id="footerPlaceholder">
+     </div>
+    </div>
+    <div id="footer">
+     <div class="floatReverse" id="footerLinks">
+      <div>
+       <span id="copyright">
+        © 2013 Microsoft
+       </span>
+       <a class="pageLink" href="https://adfs.ucdavis.edu/adfs/ls/idpinitiatedsignon.aspx" id="home">
+        University of California, Davis, One Shields Avenue, Davis, CA 95616 | 530-752-1011
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   //<![CDATA[
+TelemetryManager={Initialize:function(){_self=this;var NOT_SET_CONST='NOTSET';_self.currentUri=window.location.href.split('?')[0];_self.mswtrealm=_self.getQueryString("wtrealm")||NOT_SET_CONST;_self.decodedwtrealm=decodeURIComponent(_self.mswtrealm)||NOT_SET_CONST;_self.requestID=_self.getQueryString("client-request-id")||NOT_SET_CONST;_self.wfresh=_self.getQueryString("wfresh")||NOT_SET_CONST;_self.wauth=_self.getQueryString("wauth")||NOT_SET_CONST;_self.debugging=_self.getQueryString("debug")||NOT_SET_CONST;_self.wauth=decodeURIComponent(_self.wauth);_self.Username=NOT_SET_CONST;_self.startedPfaWaiting=!1;_self.pfaTimestamp=null;_self.pfaTimestampOldBrowser=null;_self.startedAuthSelectionWaiting=!1;_self.authSelectionTimestamp=null;_self.authSelectionTimestampOldBrowser=null;_self.authSelectionLinkClicked=null;_self.authSelectionMethod=null;_self.startedFormsPage=!1;if(!window.appInsights){if(console&&_self.debugging)console.log("TelemetryManager: Generating a new App Insights object");var appInsights=_self.GenerateAppInsightsObject.call();window.appInsights=appInsights;if(console&&_self.debugging)console.log("TelemetryManager: Set new App Insights object against the current window")}
+if(window.addEventListener){window.addEventListener("unload",function(){_self.LeavingCurrentPageCallback(_self)},!1)}else if(window.attachEvent){window.attachEvent('onunload',function(){_self.LeavingCurrentPageCallback(_self)})}
+if(console&&_self.debugging)console.log("Exit: TelemetryManager.Initialize")},GenerateAppInsightsObject:function(){return function(config){function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t}({samplingPercentage:100,instrumentationKey:"4d1d32a6-129f-41b8-a99e-566c722dd825"})},getQueryString:function(qsName){qsName=qsName.replace(/[\[\]]/g,"\\$&");var regex=new RegExp("[?&]"+qsName+"(=([^&#]*)|&|#|$)"),results=regex.exec(location.href);if(!results)return"";if(!results[2])return"";return decodeURIComponent(results[2].replace(/\+/g," "))},ProducePageDetectionTelemetry:function(){var _self=this;if(console&&_self.debugging)console.log("Enter: TelemetryManager.ProducePageDetectionTelemetry");window.appInsights.trackPageView("Generic");var hrd=document.getElementById('hrd');if(hrd){window.appInsights.trackPageView("HomeRealmDiscovery");if(console&&_self.debugging)console.log("ProducePageDetectionTelemetry: Found HRD Page");return}
+var pageloginForm=document.getElementById('loginForm');if(!hrd&&pageloginForm&&document.title=='Sign In'){window.appInsights.trackPageView("FormsPage");window.appInsights.trackEvent("FormsPageStart",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wauth:_self.wauth,wfresh:_self.wfresh,wtrealm:_self.decodedwtrealm});_self.startedFormsPage=!0;if(console&&_self.debugging)console.log("ProducePageDetectionTelemetry: Found Forms Page");return}
+var ierrorText=document.getElementById("errorText");if(ierrorText){var ierrorCurrent=ierrorText.innerHTML;if(ierrorCurrent.length>0){var pageTitle=document.title;var erruserAccount=_self.GetUserNameFromAuthArea();var erractivityId=(document.getElementById('activityId')||{innerText:''}).innerText;var errcontextId=(document.getElementById('contextId')||{innerText:''}).innerText;var errtimestamp=(document.getElementById('timestamp')||{innerText:''}).innerText;if(erractivityId||errcontextId||errtimestamp){window.appInsights.trackPageView("ErrorDetailedPage");window.appInsights.trackEvent("ErrorDetailedPageStart",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,PageTitle:pageTitle,Username:erruserAccount,ActivityID:erractivityId,ContextId:errcontextId,ErrorTimestamp:errtimestamp});if(console&&_self.debugging)console.log("ProducePageDetectionTelemetry: Found Detailed Error Page")}
+return}}
+var authOptions=document.getElementById('authOptions')
+var progress=document.getElementById('Progress')
+if(authOptions&&!progress){var foundUsername=_self.GetUserNameFromAuthArea();_self.Username=foundUsername;window.appInsights.trackPageView("AuthSelectionPage");window.appInsights.trackEvent("AuthSelectionPageStart",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:_self.Username});if(console&&_self.debugging)console.log("ProducePageDetectionTelemetry: Found Auth Selection Page");var certOption=document.getElementById('CertificateAuthentication');if(certOption){certOption.addEventListener("click",function(){_self.AuthSelectionPageSubmitCallback("cert","manual",_self)},!1)}
+var azureOption=document.getElementById('WindowsAzureMultiFactorAuthentication');if(azureOption){azureOption.addEventListener("click",function(){_self.AuthSelectionPageSubmitCallback("phonefactor","manual",_self)},!1)}
+return}
+var workArea=document.getElementById('workArea');var authArea=document.getElementById('authArea');var progressDiv=document.getElementById('Progress');var authMethod=document.getElementById('authMethod');var errorDiv=document.getElementById('errorDiv');if(workArea&&authArea&&progressDiv&&authMethod&&!errorDiv){var phonefactorUserID=_self.GetUserNameFromAuthArea();var authchildren=authArea.childNodes;for(var i=0;i<authchildren.length;i++){if(authchildren[i].className==='fieldMargin bigText'){window.appInsights.trackPageView("PhoneFactorWaitingPage");window.appInsights.trackEvent("PhoneFactorWaitingStart",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:phonefactorUserID});if(console&&_self.debugging)console.log("ProducePageDetectionTelemetry: Found PFA Waiting Page");_self.startedPfaWaiting=!0;_self.Username=phonefactorUserID;if(performance&&performance.now()){_self.pfaTimestamp=performance.now()}
+if(Date&&Date.now()){_self.pfaTimestampOldBrowser=Date.now()}
+return}}}
+if(console&&_self.debugging)console.log("Exit: TelemetryManager.ProducePageDetectionTelemetry")},GetUserNameFromAuthArea:function(){var authchildren=document.getElementById('authArea').childNodes;for(var i=0;i<authchildren.length;i++){if(authchildren[i].className==='fieldMargin bigText'){var tempuserAccount=authchildren[i].innerText;return tempuserAccount.replace("Welcome ","")}}},AuthSelectionPageSubmitCallback:function(linkClicked,selectionMethod,_self){if(console&&_self.debugging)console.log("Enter: TelemetryManager.AuthSelectionPageSubmitCallback");window.appInsights.trackEvent("AuthSelectionPicked",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wauth:_self.wauth,wfresh:_self.wfresh,Type:linkClicked,SelectionMethod:selectionMethod,wtrealm:_self.decodedwtrealm,Username:_self.Username});if(console&&_self.debugging)console.log("AuthSelectionPageSubmitCallback: Link Clicked: "+linkClicked);_self.startedAuthSelectionWaiting=!0;_self.authSelectionLinkClicked=linkClicked;_self.authSelectionMethod=selectionMethod;if(performance&&performance.now()){_self.authSelectionTimestamp=performance.now()}
+if(Date&&Date.now()){_self.authSelectionTimestampOldBrowser=Date.now()}
+if(console&&_self.debugging)console.log("Exit: TelemetryManager.AuthSelectionPageSubmitCallback")},LeavingCurrentPageCallback:function(_self){var localAppInsights=window.appInsights;var flushMePlease=!1;if(_self.startedFormsPage){_self.Username=document.getElementById(Login.userNameInput).value;localAppInsights.trackEvent("FormsPageEnd",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:_self.Username});_self.startedFormsPage=!1;flushMePlease=!0}
+var pfaTime=null;if(_self.pfaTimestamp){pfaTime=(performance.now()-_self.pfaTimestamp)/1000.0}
+var pfaTimeOldBrowser=null;if(_self.pfaTimestampOldBrowser){pfaTimeOldBrowser=(Date.now()-_self.pfaTimestampOldBrowser)/1000.0}
+if(pfaTime){localAppInsights.trackEvent("PhoneFactorLatency",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:_self.Username},{Latency:pfaTime});flushMePlease=!0}else if(pfaTimeOldBrowser){localAppInsights.trackEvent("PhoneFactorLatency",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:_self.Username},{OldBrowserLatency:pfaTimeOldBrowser});flushMePlease=!0}
+if(_self.startedPfaWaiting){localAppInsights.trackEvent("PhoneFactorWaitingEnd",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:_self.Username});_self.startedPfaWaiting=!1;flushMePlease=!0}
+if(_self.startedAuthSelectionWaiting){localAppInsights.trackEvent("AuthSelectionPageEnd",{CorrelationID:_self.requestID,CurrentUri:_self.currentUri,CurrentRealm:_self.mswtrealm,wtrealm:_self.decodedwtrealm,wfresh:_self.wfresh,wauth:_self.wauth,Username:_self.Username,Type:_self.authSelectionLinkClicked,SelectionMethod:_self.authSelectionMethod});_self.startedAuthSelectionWaiting=!1;flushMePlease=!0}
+var authSelectionTime=null;if(_self.authSelectionTimestamp){authSelectionTime=(performance.now()-_self.authSelectionTimestamp)/1000.0}
+var authSelectionTimeOldBrowser=null;if(_self.authSelectionTimestampOldBrowser){authSelectionTimeOldBrowser=(Date.now()-_self.authSelectionTimestampOldBrowser)/1000.0}
+if(authSelectionTime){localAppInsights.trackEvent("AuthSelectionLatency",{CorrelationID:_self.requestID,Username:_self.Username,wauth:_self.wauth,wfresh:_self.wfresh,wtrealm:_self.decodedwtrealm,Type:_self.authSelectionLinkClicked,SelectionMethod:_self.authSelectionMethod},{Latency:authSelectionTime});flushMePlease=!0}else if(authSelectionTimeOldBrowser){localAppInsights.trackEvent("AuthSelectionLatency",{CorrelationID:_self.requestID,Username:_self.Username,wauth:_self.wauth,wfresh:_self.wfresh,wtrealm:_self.decodedwtrealm,Type:_self.authSelectionLinkClicked,SelectionMethod:_self.authSelectionMethod},{OldBrowserLatency:authSelectionTimeOldBrowser});flushMePlease=!0}
+if(flushMePlease){if(localAppInsights){if(localAppInsights.flush){localAppInsights.flush()}}}},};if(console)console.log("TelemetryManager: Start trying to produce telemetry");var pageTelemetryManager=TelemetryManager;pageTelemetryManager.Initialize();pageTelemetryManager.ProducePageDetectionTelemetry();if(console)console.log("TelemetryManager: End trying to produce telemetry");"use strict";if(navigator.userAgent.match(/iPhone/i)!=null){var emails=document.querySelectorAll("input[type='email']");if(emails){for(var i=0;i<emails.length;i++){emails[i].type='text'}}}
+if(window.innerWidth&&window.outerWidth&&window.innerWidth!==window.outerWidth){var viewport=document.querySelector("meta[name=viewport]");viewport.setAttribute('content','width='+window.innerWidth+'px; initial-scale=1.0; maximum-scale=1.0')}
+function getStyle(element,styleProp){var propStyle=null;if(element&&element.currentStyle){propStyle=element.currentStyle[styleProp]}
+else if(element&&window.getComputedStyle){propStyle=document.defaultView.getComputedStyle(element,null).getPropertyValue(styleProp)}
+return propStyle}
+var computeLoadIllustration=function(){var branding=document.getElementById("branding");var brandingDisplay=getStyle(branding,"display");var brandingWrapperDisplay=getStyle(document.getElementById("brandingWrapper"),"display");if(brandingDisplay&&brandingDisplay!=="none"&&brandingWrapperDisplay&&brandingWrapperDisplay!=="none"){var newClass="illustrationClass";if(branding.classList&&branding.classList.add){branding.classList.add(newClass)}else if(branding.className!==undefined){branding.className+=" "+newClass}
+if(window.removeEventListener){window.removeEventListener('load',computeLoadIllustration,!1);window.removeEventListener('resize',computeLoadIllustration,!1)}
+else if(window.detachEvent){window.detachEvent('onload',computeLoadIllustration);window.detachEvent('onresize',computeLoadIllustration)}}};if(window.addEventListener){window.addEventListener('resize',computeLoadIllustration,!1);window.addEventListener('load',computeLoadIllustration,!1)}
+else if(window.attachEvent){window.attachEvent('onresize',computeLoadIllustration);window.attachEvent('onload',computeLoadIllustration)}
+if(typeof Login!='undefined'){Login.submitLoginRequest=function(){var u=new InputUtil();var e=new LoginErrors();var userName=document.getElementById(Login.userNameInput);var password=document.getElementById(Login.passwordInput);if(userName.value&&!userName.value.match('[@\\\\]'))
+{var userNameValue='AD3\\'+userName.value;document.forms.loginForm.UserName.value=userNameValue}
+if(!userName.value){u.setError(userName,e.userNameFormatError);return!1}
+if(!password.value)
+{u.setError(password,e.passwordEmpty);return!1}
+document.forms.loginForm.submit();return!1}}
+var loginMessage=document.getElementById('loginMessage'),loginArea=document.getElementById('loginArea'),loginForm=document.getElementById('loginForm'),userNameInput=document.getElementById('userNameInput'),helpContent,usernameLink,passwordResetLink,errorText=document.getElementById("errorText"),introArea=document.getElementById("introduction"),authArea=document.getElementById("authArea");var showingHelper=!1,showingLoginform=!1;function createHelpersForLoginForm(){passwordResetLink=document.createElement('a');var linkText="Need help?";passwordResetLink.appendChild(document.createTextNode(linkText));passwordResetLink.title=linkText;passwordResetLink.href="#";passwordResetLink.onclick=toggleHelpContent;loginArea.appendChild(passwordResetLink)}
+function createHelpContent(){if(!authArea){return}
+helpContent=document.createElement("div");helpContent.style.display='none';helpContent.innerHTML='\
+    <br><br>\
+    <h2><strong>What is my username?</strong></h2>\
+    <p>Your username is the same as your email address. Example: annandersson@ucdavis.edu</p><br>\
+    <h2><strong>What is my password?</strong></h2>\
+    <p>This is a secret chosen by you. UC Davis will never ask you to provide your passphrase via phone or email. If you forgot your password, you can reset it <a href="https://computingaccounts.ucdavis.edu/cgi-bin/services/index.cgi" target="_blank">here</a><br><br>\
+    </p>\
+    <h2><strong>Support</strong></h2>\
+    <p>For self-service help information, please refer to our <a href="https://ucdavisit.service-now.com/servicehub/?id=ucd_kb_category&kb_category=0cd55a4b2b145600e0b209d417da1536">knowledge base articles</a> for passphrase assistance or call your local IT service desk: <br><br>UC Davis Campus: IT Express at 530-754-HELP (4357)<br><br>UC Davis Health: Technology Operations Center at 916-734-HELP (4357)<br><br><br></p>\
+    ';var closeHelpContentLink=document.createElement('span');closeHelpContentLink.innerHTML="Back to the login form";closeHelpContentLink.className="submit";closeHelpContentLink.onclick=toggleHelpContent;helpContent.appendChild(closeHelpContentLink);authArea.appendChild(helpContent)}
+function updateUI(){if(!loginForm||!helpContent){return}
+if(showingHelper){openHelpContent()}else{closeHelpContent()}}
+function toggleHelpContent(){showingHelper=!showingHelper;updateUI()}
+function openHelpContent(){helpContent.style.display="block";loginArea.style.display="none"}
+function closeHelpContent(){helpContent.style.display="none";loginArea.style.display="block"}
+if(loginArea!=null){createHelpersForLoginForm();createHelpContent();updateUI()}
+//]]>
+  </script>
+ </body>
+</html>
+

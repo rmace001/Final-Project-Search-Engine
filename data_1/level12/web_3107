@@ -1,0 +1,175 @@
+https://apply.cybersecurity.berkeley.edu/
+<!DOCTYPE html>
+<html class="no-js" id="ng-app" lang="en" ng-app="oarsApp" ng-class="{'no-scroll': !appReady()}">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Berkeley School of Information
+  </title>
+  <meta content="width=device-width" name="viewport"/>
+  <link href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Merriweather:400,300,700|Merriweather+Sans:400,700,300" rel="stylesheet" type="text/css"/>
+  <link href="img/favicon.ico" rel="icon"/>
+  <!-- browser update notification: http://browser-update.org/ -->
+  <script>
+   var $buoop = {vs:{i:9,f:15,o:12.1,s:5.1},c:2};
+            function $buo_f(){
+                var e = document.createElement("script");
+                e.src = "//browser-update.org/update.js";
+                document.body.appendChild(e);
+            };
+            try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+            catch(e){window.attachEvent("onload", $buo_f)}
+  </script>
+  <!-- end -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link href="program.css" rel="stylesheet">
+   <!-- endbuild -->
+   <link href="https://2tor-static.s3.amazonaws.com/supload/supload.css" rel="stylesheet"/>
+   <!-- Prevent flicker of hidden elements -->
+   <style type="text/css">
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
+   </style>
+   <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.js"></script>
+        <![endif]-->
+  </link>
+ </head>
+ <body ng-controller="VkngAppCtrl">
+  <div vkng-site-alert="">
+  </div>
+  <header class="site-header" ng-cloak="" ng-show="appReady()">
+   <div class="header-overlay">
+   </div>
+   <div class="container">
+    <div class="grid">
+     <div class="xs-span-12">
+      <a class="logo" href="#/overview">
+       <img alt="school logo" src="img/logo-white.png"/>
+      </a>
+      <div class="tool-bar">
+       <a href="/change-password" ng-show="isAuthenticated()">
+        Change Password
+       </a>
+       <a href="#" ng-click="logout()" ng-show="isAuthenticated()">
+        Sign Out
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <nav class="site-progress" ng-cloak="" ng-show="appReady() &amp;&amp; isAuthenticated()">
+   <div class="container">
+    <div class="indicator">
+    </div>
+    <div class="nav-items" ng-if="local.getApplicationStatus() !== 'SUBMITTED'">
+     <ul class="enabled" ng-cloak="">
+      <li ng-class="{active: activeProgress == 'overview'}">
+       <a href="#/overview">
+        Overview
+       </a>
+      </li>
+      <li ng-class="{active: activeProgress == 'application'}">
+       <a href="#/personal-information">
+        Application Form
+       </a>
+      </li>
+      <li ng-class="{active: activeProgress == 'reviewSubmit'}">
+       <a href="#/review-and-submit">
+        Review &amp; Submit
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="nav-items" ng-if="local.getApplicationStatus() === 'SUBMITTED' &amp;&amp; !local.applicationLocked()">
+     <ul class="enabled" ng-cloak="">
+      <li ng-class="{active: activeProgress == 'overview'}">
+       <a href="#/overview">
+        Overview
+       </a>
+      </li>
+      <li ng-class="{active: activeProgress == 'application'}">
+       <a href="#/recommendations">
+        Update Your Information
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="help-bar xs-hide lg-show">
+     <span>
+      Need help? Call us at 855-860-5259.
+     </span>
+    </div>
+   </div>
+  </nav>
+  <div autoscroll="true" class="site-body" ng-cloak="" ng-show="appReady()" ng-view="">
+  </div>
+  <footer class="site-footer" ng-cloak="" ng-show="appReady()">
+   <div class="container">
+    <div class="grid lg-md-gutter">
+     <div class="lg-span-6">
+      <div class="grid xs-md-gutter">
+       <div class="xs-span-6 md-span-2">
+        <img alt="" src="img/footer-logo.png"/>
+       </div>
+       <div class="xs-span-6 md-span-8">
+        <p>
+         Phone: 855-860-5259
+        </p>
+        <p>
+         <a href="mailto:admissions@cybersecurity.berkeley.edu" style="color:#333;">
+          admissions@cybersecurity.berkeley.edu
+         </a>
+        </p>
+       </div>
+      </div>
+      <div class="grid">
+       <div class="lg-span-12">
+        <ul class="links">
+         <li>
+          © {{ getYear() }} by cybersecurity@berkeley
+         </li>
+         <li>
+          <a href="/terms">
+           Terms of Use
+          </a>
+         </li>
+         <li>
+          <a href="/privacy">
+           Privacy Policy
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="lg-span-6 xs-hide lg-show">
+     </div>
+    </div>
+   </div>
+  </footer>
+  <section class="loader" ng-cloak="" ng-hide="appReady()">
+   <div class="inner">
+    <img alt="school logo" src="img/logo.png"/>
+    <p ng-show="!isAuthenticated()">
+     <i class="ion-load-c spin">
+     </i>
+     Checking your identity...
+    </p>
+    <p ng-show="isAuthenticated()">
+     <i class="ion-load-c spin">
+     </i>
+     Loading your application...
+    </p>
+   </div>
+  </section>
+  <div class="body-overlay">
+  </div>
+  <script src="viking.combined.js">
+  </script>
+ </body>
+</html>

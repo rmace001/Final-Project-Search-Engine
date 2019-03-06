@@ -1,0 +1,857 @@
+https://weather.atmos.ucla.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta content="" name="description"/>
+  <meta content="" name="“AOS" weather”=""/>
+  <meta content="http://weather.atmos.ucla.edu" property="og:url">
+   <meta content="article" property="og:type">
+    <meta content="Weather Forecast" property="og:title">
+     <meta content="Latest weather forecast for UCLA" property="og:description">
+      <meta content="http://weather.atmos.ucla.edu/latest.jpg" property="og:image">
+       <link href="https://www.atmos.ucla.edu/sites/default/files/favicon-ucla.png" rel="shortcut icon" type="image/png"/>
+       <title>
+        AOS Weather Forecast | UCLA
+       </title>
+       <!-- Bootstrap core CSS -->
+       <link href="css/bootstrap.min.css" rel="stylesheet"/>
+       <!-- Custom styles for this template -->
+       <link href="css/weather-icons.css" rel="stylesheet"/>
+       <link href="css/weather-icons-wind.css" rel="stylesheet"/>
+       <link href="css/aoswx.css" rel="stylesheet"/>
+       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+       <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,100" rel="stylesheet" type="text/css"/>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+       </script>
+       <script src="js/ie-emulation-modes-warning.js">
+       </script>
+       <script src="js/bootstrap.min.js">
+       </script>
+       <script src="js/aoswx.js">
+       </script>
+       <script src="js/ismobile.js">
+       </script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js">
+       </script>
+       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+       <script src="js/ie10-viewport-bug-workaround.js">
+       </script>
+       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+       <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+      </meta>
+     </meta>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body id="page-weatherb">
+  <div class="container-fluid" id="wx_window">
+   <header class="container-fluid" id="mainnav">
+    <section class="row">
+     <div class="hidden-xs" id="wx-background-r">
+      <p class="wx-icon">
+       <i class="wi wi-showers" id="79">
+       </i>
+      </p>
+     </div>
+     <div class="hidden-xs" id="wx-background-l">
+      <p class="wx-icon">
+       <i class="wi wi-showers" id="79">
+       </i>
+      </p>
+     </div>
+     <div class="col-xs-12 col-md-6 col-lg-6" id="aos-logo-container">
+      <span>
+      </span>
+     </div>
+     <div class="col-xs-12 col-md-6 col-lg-5 col-lg-offset-1" id="wx-latest-container">
+      <div class="row" id="wx-forecast-container">
+       <div class="col-xs-6 col-md-5 col-lg-5 col-xl-2" id="wx-icon-container">
+        <p class="wx-icon">
+         <i class="wi wi-showers" id="79">
+         </i>
+        </p>
+       </div>
+       <div class="col-xs-6 col-md-5 col-lg-4" id="wx-current-temperature-container">
+        <p id="current_temperature">
+         53
+         <span id="current_degrees">
+          °
+         </span>
+        </p>
+       </div>
+       <div class="hidden-xs hidden-sm col-sm-12 col-md-2 col-lg-2" id="wx-min-max-container">
+        <div class="row">
+         <div class="col-xs-6 col-md-12" id="daily_high">
+          <i class="wi wi-direction-up">
+          </i>
+          <strong>
+           57
+          </strong>
+          <span>
+           °
+          </span>
+         </div>
+         <div class="col-xs-6 col-md-12" id="daily_low">
+          <i class="wi wi-direction-down">
+          </i>
+          <strong>
+           52
+          </strong>
+          <span>
+           °
+          </span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="row" id="wx-forecast2-container">
+       <div class="col-xs-12" id="wx-icon-description-container">
+        <p>
+         Showers
+        </p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </header>
+   <section class="jumbotron" id="splash1">
+   </section>
+   <header class="navbar container-fluid navbar-default" id="navbar-new" role="banner">
+    <div class="container-fluid">
+     <div class="navbar-header visible-xs">
+      <a class="name navbar-brand" href="/" title="Home">
+       Department of Atmospheric and Oceanic Sciences
+      </a>
+      <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+      </button>
+     </div>
+     <div class="navbar-collapse collapse">
+      <nav role="navigation">
+       <ul class="menu nav navbar-nav">
+        <li class="first leaf active">
+         <a class="active" href="/">
+          Home
+         </a>
+        </li>
+        <li class="expanded dropdown">
+         <a class="active" href="#quicklook-content">
+          Five Day Forecast
+         </a>
+        </li>
+        <li class="expanded dropdown">
+         <a class="active" href="#graph_container">
+          Graphs
+         </a>
+        </li>
+        <li class="expanded dropdown">
+         <a class="active" href="#synopsis_container">
+          Synopsis
+         </a>
+        </li>
+        <li class="dropdown">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+          Data
+          <span class="caret">
+          </span>
+         </a>
+         <ul class="dropdown-menu">
+          <li>
+           <a href="livedata.php">
+            Latest Reading
+           </a>
+          </li>
+          <li>
+           <a href="datatoday.php">
+            Wednesday's Data
+           </a>
+          </li>
+          <li>
+           <a href="yesterday.php">
+            Tuesday's Data
+           </a>
+          </li>
+          <li>
+           <a href="fetch.php">
+            Search Data
+           </a>
+          </li>
+          <li>
+           <a href="livejson.php">
+            JSON Feed
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li class="dropdown">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+          About
+          <span class="caret">
+          </span>
+         </a>
+         <ul class="dropdown-menu">
+          <li>
+           <a href="https://www.atmos.ucla.edu/people/staff/james-murakami">
+            Contact
+           </a>
+          </li>
+          <li>
+           <a href="https://www.atmos.ucla.edu/weather/tour">
+            Weather Tour
+           </a>
+          </li>
+          <li>
+           <a href="https://www.atmos.ucla.edu/weather/satellite/about">
+            About Satellite Images
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a href="https://www.atmos.ucla.edu">
+          UCLA | AOS
+         </a>
+        </li>
+        <li class="last leaf">
+        </li>
+       </ul>
+      </nav>
+     </div>
+    </div>
+   </header>
+   <section class="row" id="weather-content">
+    <aside class="col-md-4 col-lg-3" id="left-column">
+     <div class="well" id="details_container">
+      <h1 class="page-header">
+       Live Details
+      </h1>
+      <div class="table-responsive" id="daily_details">
+       <table class="table table-hover">
+        <thead>
+        </thead>
+        <tbody>
+         <tr id="max_temp_container">
+          <td>
+           Current High
+          </td>
+          <td>
+           <span id="current_max_temp">
+            57 °
+           </span>
+          </td>
+          <td id="temp_icon">
+           <i class="wi wi-thermometer">
+           </i>
+          </td>
+         </tr>
+         <tr id="min_temp_container">
+          <td>
+           Current Low
+          </td>
+          <td>
+           <span id="current_min_temp">
+            52 °
+           </span>
+          </td>
+          <td id="temp_icon">
+           <i class="wi wi-thermometer">
+           </i>
+          </td>
+         </tr>
+         <tr id="wind_direction_container">
+          <td>
+           Wind Direction
+          </td>
+          <td>
+           <span id="direction">
+            47
+           </span>
+           <span>
+            °
+           </span>
+           <span id="cardinaldir">
+            NE
+           </span>
+          </td>
+          <td id="direction_icon">
+           <i class="wi wi-wind wi-wind towards-47-deg">
+           </i>
+          </td>
+         </tr>
+         <tr id="wind_speed_container">
+          <td>
+           Wind Speed
+          </td>
+          <td>
+           <span id="windinfo">
+            3mph
+           </span>
+          </td>
+          <td id="wind_icon">
+           <i class="wi wi-strong-wind">
+           </i>
+          </td>
+         </tr>
+         <tr id="wind_gust_container">
+          <td>
+           Gust Speed
+          </td>
+          <td>
+           <span id="gustinfo">
+            8mph
+           </span>
+          </td>
+          <td id="wind_icon">
+           <i class="wi wi-strong-wind">
+           </i>
+          </td>
+         </tr>
+         <tr id="hourly_precip_container">
+          <td>
+           Hourly Rainfall
+          </td>
+          <td>
+           <span id="current_hourly_precip">
+            0.06
+           </span>
+           in.
+          </td>
+          <td>
+           <i class="wi wi-raindrops">
+           </i>
+          </td>
+         </tr>
+         <tr id="daily_precip_container">
+          <td>
+           Daily Rainfall
+          </td>
+          <td>
+           <span id="current_daily_precip">
+            0.7
+           </span>
+           in.
+          </td>
+          <td>
+           <i class="wi wi-raindrops">
+           </i>
+          </td>
+         </tr>
+         <tr id="dewpoint_container">
+          <td>
+           Dew Point
+          </td>
+          <td>
+           <span id="current_dewpoint">
+            51
+           </span>
+           ℉
+          </td>
+          <td>
+           <i class="wi wi-humidity">
+           </i>
+          </td>
+         </tr>
+         <tr id="humidity_container">
+          <td>
+           Humidity
+          </td>
+          <td>
+           <span id="current_humidity">
+            91
+           </span>
+           %
+          </td>
+          <td>
+           <i class="wi wi-humidity">
+           </i>
+          </td>
+         </tr>
+         <tr id="pressure_container">
+          <td>
+           Pressure
+          </td>
+          <td>
+           <span id="current_pressure">
+            1014.6
+           </span>
+           mb
+          </td>
+          <td>
+           <i class="wi wi-barometer">
+           </i>
+          </td>
+         </tr>
+         <tr id="wetbulb_container">
+          <td>
+           Wet Bulb
+          </td>
+          <td>
+           <span id="current_wetbulb">
+            52
+           </span>
+           ℉
+          </td>
+          <td>
+           <i class="wi wi-raindrop">
+           </i>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+      </div>
+      <div class="dailydata">
+       <a href="/datatoday.php">
+        Today's Readings
+       </a>
+      </div>
+      <div id="wx_contact_container">
+       <h3>
+        Contact Information:
+       </h3>
+       <ul>
+        <li>
+         AOS Meteorologist: (310) 825-2418
+        </li>
+        <li>
+         Email:
+         <a href="mailto:tenki@atmos.ucla.edu?subject=General%20Weather%20Info">
+          tenki@atmos.ucla.edu
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </aside>
+    <section class="col-md-8" id="main-content">
+     <div class="hidden-xs" id="wx-background-m">
+      <p class="wx-icon">
+       <i class="wi wi-showers" id="79">
+       </i>
+      </p>
+     </div>
+     <div class="row" id="title_container">
+      <h1 id="title">
+       UCLA Weather
+      </h1>
+      <p class="lead">
+       from the
+       <em>
+        Department of Atmospheric and Oceanic Sciences
+       </em>
+       .
+      </p>
+     </div>
+     <div class="row" id="time_container">
+      <h1 id="dayfield">
+       Wednesday -
+       <span id="timefield">
+        10:37am
+       </span>
+      </h1>
+     </div>
+     <div id="forecast_container">
+      <div class="row" id="wxsplash">
+       <div class="col-xs-12">
+        <div class="row">
+         <div class="col-xs-12 col-md-6 col-lg-8" id="current_icon">
+          <p class="wx_icon">
+           <i class="wi wi-showers" id="79">
+           </i>
+           <span>
+            Showers
+           </span>
+          </p>
+         </div>
+         <div class="col-xs-12 col-md-6 col-lg-4">
+          <h2 id="current_temperature">
+           53
+           <span id="current_degrees">
+            °
+           </span>
+          </h2>
+         </div>
+        </div>
+       </div>
+       <div class="col-xs-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-4" id="minmaxtemp">
+        <div class="row">
+         <div class="col-xs-6" id="daily_high">
+          <p>
+           High -
+           <strong>
+            57
+           </strong>
+           <span>
+            °
+           </span>
+           <i class="wi wi-direction-up">
+           </i>
+          </p>
+         </div>
+         <div class="col-xs-6" id="daily_low">
+          <p>
+           Low -
+           <strong>
+            52
+           </strong>
+           <span>
+            °
+           </span>
+           <i class="wi wi-direction-down">
+           </i>
+          </p>
+         </div>
+        </div>
+       </div>
+       <div class="col-xs-12" id="dailyforecast">
+        <p>
+         <strong>
+          Today
+         </strong>
+         : Mostly cloudy through the evening. Rain tapering to occasional showers in the afternoon and evening.
+        </p>
+       </div>
+       <div class="col-xs-12" id="astr_container">
+        <div id="moondata">
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </section>
+   <section class="jumbotron" id="splash2">
+   </section>
+   <section class="row" id="quicklook_container">
+    <div id="quicklook-background">
+     <p>
+      <i aria-hidden="true" class="fa fa-calendar">
+      </i>
+     </p>
+    </div>
+    <div class="col-md-10 col-md-offset-1" id="quicklook-content" name="fiveday">
+     <table class="table">
+      <thead>
+       <h1>
+        Five Day Forecast
+       </h1>
+      </thead>
+      <tbody>
+       <tr id="ql-row0">
+        <td class="ql-day">
+        </td>
+        <td class="table">
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td class="ql-fixed">
+            </td>
+            <td class="ql-high-icon">
+            </td>
+            <td class="ql-high-temp">
+            </td>
+            <td class="ql-low-icon">
+            </td>
+            <td class="ql-low-temp">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td class="ql-day-description">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </td>
+       </tr>
+       <tr id="ql-row1">
+        <td class="ql-day">
+        </td>
+        <td class="table">
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td>
+            </td>
+            <td class="ql-high-icon">
+            </td>
+            <td class="ql-high-temp">
+            </td>
+            <td class="ql-low-icon">
+            </td>
+            <td class="ql-low-temp">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td class="ql-day-description">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </td>
+       </tr>
+       <tr id="ql-row2">
+        <td class="ql-day">
+        </td>
+        <td class="table">
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td>
+            </td>
+            <td class="ql-high-icon">
+            </td>
+            <td class="ql-high-temp">
+            </td>
+            <td class="ql-low-icon">
+            </td>
+            <td class="ql-low-temp">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td class="ql-day-description">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </td>
+       </tr>
+       <tr id="ql-row3">
+        <td class="ql-day">
+        </td>
+        <td class="table">
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td>
+            </td>
+            <td class="ql-high-icon">
+            </td>
+            <td class="ql-high-temp">
+            </td>
+            <td class="ql-low-icon">
+            </td>
+            <td class="ql-low-temp">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td class="ql-day-description">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </td>
+       </tr>
+       <tr id="ql-row4">
+        <td class="ql-day">
+        </td>
+        <td class="table">
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td>
+            </td>
+            <td class="ql-high-icon">
+            </td>
+            <td class="ql-high-temp">
+            </td>
+            <td class="ql-low-icon">
+            </td>
+            <td class="ql-low-temp">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+         <table class="table borderless">
+          <tbody>
+           <tr>
+            <td class="ql-day-description">
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </section>
+   <section class="row" id="graph_container">
+    <article class="col-md-8" id="view_graph">
+     <h1 class="page-header">
+      Latest Average Hourly Temperatures
+     </h1>
+     <div class="col-lg-8 col-lg-offset-2" id="graph_content">
+      <canvas height="400" id="airtemp" width="400">
+      </canvas>
+     </div>
+    </article>
+    <aside class="well col-md-4" id="graph_key">
+     <div id="graph-background">
+      <p>
+       <i class="fa fa-line-chart" id="graph_icon">
+       </i>
+      </p>
+     </div>
+     <div id="graph_labels">
+      <h1 class="page-header">
+       Weather Graphs
+      </h1>
+      <ul>
+       <li class="temp">
+        Temperatures
+       </li>
+       <li class="winddir">
+        Wind Direction
+       </li>
+       <li class="wind">
+        Wind Speed
+       </li>
+       <li class="gust">
+        Gust Speed
+       </li>
+       <li class="precipitation">
+        Precipitation (avg in.)
+       </li>
+       <li class="dew">
+        Dew Point
+       </li>
+       <li class="humid">
+        Relative Humidity
+       </li>
+       <li class="pressure">
+        Pressure (mb)
+       </li>
+       <li class="bulb">
+        Wet Bulb
+       </li>
+      </ul>
+     </div>
+    </aside>
+   </section>
+  </div>
+ </body>
+</html>
+<section class="row" id="synopsis_container">
+ <div class="col-md-8 col-md-offset-2">
+  <div id="forecast_text">
+   <h2 class="page-header" id="synopsis">
+    Wednesday's Synopsis
+   </h2>
+   <p class="forecast">
+    <font color="RED">
+     <b>
+      Note: Forecasts will not be issued on Thursdays and Friday through 15 March. Potentially, there could of other days on occasion (my father undergoing cancer treatment)
+     </b>
+    </font>
+    <br/>
+    <p>
+    </p>
+    <p class="forecast">
+     <p>
+      Time permitting, a new synopsis should follow around 2:30 PM.
+      <p>
+       Previous synopsis:
+A storm off the California coast is bringing inclement weather to much of the state today. Some light showers began at UCLA shortly after 2 PM, but the main event isn't expected to arrive till early tomorrow morning in L.A. County (area moving west to east). The heaviest, most persistent rains are predicted to occur west of L.A. County, but a short period of heavy rain is likely during the daylight, morning hours. Things should taper off to more showery weather in the afternoon and evening hours.
+       <p>
+        The current storm is tapped into an atmospheric river, but that connection should get severed by tomorrow morning (should reside over over San Luis Obispo/Santa Barbara Counties overnight hours). Thus storm totals should be greatest west of Ventura County (isolated mountain totals could approach eight inches). In L.A. County rainfall through tomorrow is expected to range between 0.75 - 1.5 inches in lowland areas away from the mountains (not too different from past weekend storm). However, totals could exceed four inches in some locales against south facing mountains (nothing widespread though).  Another storm is predicted for the Thursday/Friday period, but additional rainfall from that storm should be minor in comparison (mostly less than a third inch lowland areas).
+        <p>
+         Snow levels are predicted to remain well above 7000 feet tomorrow (several inches of rain possible). Snow levels should come down on Thursday/Friday (4500 feet by early Friday). However, by that time, the bulk of the heavier precipitation should have passed. Up to six inches of snow may fall at resort level by the end of the wet period (Friday evening), but only a few inches is likely to be more common.
+         <p>
+          Dry weather is expected on Saturday (partly cloudy weather).  A new storm is predicted to approach the state on Sunday. Many of the computer model forecasts show the storm taking a course paralleling the state as it travels from northwest to southeast. A period of wet weather is currently forecast for Sunday night through Monday morning, but there is potential for most of the rain clouds to stay off the coast. Storm totals with this scenario would be no higher than a quarter inch (wet weather wouldn't necessarily be widespread).
+          <p>
+           Yet another storm is possible around the middle of next week, but most model solutions favor an "inside slider" type storm (more wind than wet weather). It may yield only marine layer, induced rain in the lowlands (mostly south and east of L.A. County) along with some mountain showers (snow levels around 5000 feet).
+           <p>
+            It's not a clear majority, model solution, but the state may finally dry out around mid-month. A number of model solutions show the Pacific jet stream migrating back to the north and allowing a persistent, high pressure to build over the state. If true, a period of warmer than normal weather will finally return to southern California (possibly continuing right up to the arrival of spring...20 March, astronomically speaking).
+           </p>
+           <p>
+            UCLA Forecasts and analyses are written by
+            <em>
+             <a href="https://www.atmos.ucla.edu/people/staff/james-murakami">
+              James Murakami
+             </a>
+            </em>
+           </p>
+          </p>
+         </p>
+        </p>
+       </p>
+      </p>
+     </p>
+    </p>
+   </p>
+  </div>
+ </div>
+</section>
+<p>
+ – posted: 2019-03-06
+</p>
+<section class="jumbotron" id="splash3">
+</section>
+<div class="row" id="siteinfo_container">
+ <div class="col-md-8 col-md-offset-2">
+  <div class="row">
+   <div id="issuedby">
+    <p>
+     Data and technology is provided by UCLA's
+    </p>
+   </div>
+  </div>
+ </div>
+</div>
+<em>
+ Department of Atmospheric and Oceanic Sciences
+</em>
+<div class="row">
+ <div id="aoscontact">
+  <p>
+   © 2018 UC Regents |
+   <strong>
+    University of California, Los Angeles
+   </strong>
+  </p>
+  <p>
+   <em>
+    Department of Atmospheric and Oceanic Sciences
+   </em>
+  </p>
+  <p>
+   Math Sciences Building 7127 | Los Angeles, CA 90095-1565 | Phone: (310) 825-1217
+  </p>
+ </div>
+</div>
+<!-- /.container -->
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+

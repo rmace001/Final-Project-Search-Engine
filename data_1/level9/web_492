@@ -1,0 +1,571 @@
+http://maps.ucsc.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-131157910-1">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-131157910-1');
+  </script>
+  <link href="./favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <!--
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Campus Map | University of California, Santa Cruz</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.1.0/css/calcite-web.min.css">
+    
+    <link rel="stylesheet" href="https://js.arcgis.com/4.9/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <link rel="stylesheet" href="app_styles4.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    
+    <script src="https://js.arcgis.com/4.9/"></script>
+    -->
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="The official interactive map of the University of California, Santa Cruz. Created and maintained by campus staff. Thank you for your patience as we migrate to more efficient technology, designed to make updates more efficient, so that we can always offer you the latest and greatest content. We are open to your feedback! Please send an email to maps@ucsc.edu for questions, comments, or general opinions about your experience with the map." name="Description"/>
+  <meta content="-aFo-1oVHoMXc9RrXzD0S4gsiDvI4LWdV5FIxoVm8mo" name="google-site-verification">
+   <title>
+    Campus Map | University of California, Santa Cruz
+   </title>
+   <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed|Roboto|Questrial" rel="stylesheet"/>
+   <link href="css/calcite-web.min.css" rel="stylesheet"/>
+   <link href="https://js.arcgis.com/4.9/dijit/themes/claro/claro.css" rel="stylesheet"/>
+   <link href="https://js.arcgis.com/4.9/esri/css/main.css" rel="stylesheet"/>
+   <link href="css/w3.css" rel="stylesheet"/>
+   <link href="css/app_styles.css" rel="stylesheet"/>
+   <!--
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.1.0/css/calcite-web.min.css">
+	-->
+   <script src="https://js.arcgis.com/4.9/">
+   </script>
+   <script src="js/main.js">
+   </script>
+  </meta>
+ </head>
+ <body>
+  <div id="header">
+   <div id="header-content">
+    <div id="menu-icon-div">
+     <i class="icon-ui-menu footer-text">
+     </i>
+     <h3 class="footer-text">
+      MENU
+     </h3>
+    </div>
+    <div id="header-main">
+     <h1 class="app-title">
+      Campus Map
+     </h1>
+     <em>
+      <h5 id="browser-message">
+       ! This site is best viewed with Google Chrome. Further optimization for all web-browsers is scheduled for Spring 2019
+      </h5>
+     </em>
+    </div>
+    <div id="logo-div">
+     <a href="https://www.ucsc.edu" rel="noopener" target="_blank" title="University of California, Santa Cruz Homepage">
+      <img src="images/logos/primary_logo_with_seal_white.png" style="width:;height:25px"/>
+     </a>
+    </div>
+   </div>
+  </div>
+  <div class="dark-blue" id="sub-header">
+   <div id="sub-header-content">
+    <div id="map-options">
+     <h6>
+      MAP OPTIONS
+     </h6>
+     <button class="nav-button map-options-button" onclick="toggleBasemap()">
+      <i class="icon-ui-basemap footer-text">
+      </i>
+      <h6>
+       SWITCH BASEMAP
+      </h6>
+     </button>
+     <button class="nav-button map-options-button" onclick="toggleBuildingLabels()">
+      <i class="icon-ui-labels footer-text">
+      </i>
+      <h6>
+       TURN BUILDING LABELS ON/OFF
+      </h6>
+     </button>
+    </div>
+    <div id="sub-header-nav">
+     <h6>
+      <i class="icon-ui-printer footer-text">
+      </i>
+      <a href="printable-maps" rel="noopener" target="_blank" title="PDF area maps suitable for printing">
+       PRINTABLE AREA MAPS
+      </a>
+     </h6>
+     <h6>
+      <i class="icon-ui-directions footer-text">
+      </i>
+      <a href="http://maps.google.com" rel="noopener" target="_blank" title="Go to Google maps for routing">
+       GET DIRECTIONS
+      </a>
+     </h6>
+     <h6>
+      <i class="icon-ui-documentation footer-text">
+      </i>
+      <a href="help" rel="noopener" target="_blank" title="Map help page">
+       HELP
+      </a>
+     </h6>
+     <h6>
+      <i class="icon-ui-contact footer-text">
+      </i>
+      <a href="mailto:maps@ucsc.edu" title="Email the map administrator">
+       CONTACT
+      </a>
+     </h6>
+    </div>
+    <div id="sub-header-logo">
+     <a href="https://ppc.ucsc.edu/" rel="noopener" target="_blank" title="Physical Planning, Development &amp; Operations Homepage">
+      <h5 class="button-title">
+       // PPDO
+      </h5>
+     </a>
+    </div>
+   </div>
+  </div>
+  <div class="hidden" id="mobile-menu">
+   <div id="mobile-menu-contents-header">
+    <em>
+     <h4>
+      Tap features to turn OFF and ON
+     </h4>
+    </em>
+   </div>
+   <div id="mobile-menu-content">
+    <aside class="js-accordion accordion">
+     <!-- FOOD AND DRINK --->
+     <div class="accordion-section" id="amenities" onclick="showMobileAmenities();highlightAmenities()">
+      <h4 class="accordion-title adjusted">
+       <div class="menu-cat-box">
+        <span class="accordion-icon">
+         <svg class="svg-icon" height="14" viewbox="0 0 32 32" width="14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z">
+          </path>
+         </svg>
+        </span>
+        <img class="mobile-menu-icon" src="images/25x25/amenities.png"/>
+        Food and Drink
+       </div>
+      </h4>
+     </div>
+     <div class="hidden" id="mobile-amenities">
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Restaurants and Cafes
+       </h4>
+       <button class="visibility-toggle-pink" onclick="changeVisibility(cafes_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        The Perk Coffee Shops
+       </h4>
+       <button class="visibility-toggle-pink" onclick="changeVisibility(perks_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        College Dining Halls
+       </h4>
+       <button class="visibility-toggle-pink" onclick="changeVisibility(dining_halls_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Food Trucks
+       </h4>
+       <button class="visibility-toggle-pink" onclick="changeVisibility(food_trucks_lyr)">
+       </button>
+      </div>
+     </div>
+     <!-- TRANSPORTATION AND PARKING--->
+     <div class="accordion-section" id="transportation" onclick="showMobileTransportation();highlightTransportation()">
+      <h4 class="accordion-title">
+       <div class="menu-cat-box">
+        <span class="accordion-icon">
+         <svg class="svg-icon" height="14" viewbox="0 0 32 32" width="14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z">
+          </path>
+         </svg>
+        </span>
+        <img class="mobile-menu-icon" src="images/25x25/transportation.png"/>
+        Transportation and Parking
+       </div>
+      </h4>
+     </div>
+     <div class="hidden" id="mobile-transportation">
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Parking Lots
+       </h4>
+       <button class="visibility-toggle-gold" onclick="changeVisibility(parking_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Bus / Shuttle Stops
+       </h4>
+       <button class="visibility-toggle-gold" onclick="changeVisibility(shuttles_lyr); changeVisibility(metro_bus_lyr); changeVisibility(bus_route_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Bike Parking
+       </h4>
+       <button class="visibility-toggle-gold" onclick="changeVisibility(bike_parking_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Bike Repair Stations
+       </h4>
+       <button class="visibility-toggle-gold" onclick="changeVisibility(bike_repair_lyr)">
+       </button>
+      </div>
+     </div>
+     <!-- STUDENT LIFE --->
+     <div class="accordion-section" id="academics" onclick="showMobileAcademics();highlightAcademics()">
+      <h4 class="accordion-title">
+       <div class="menu-cat-box">
+        <span class="accordion-icon">
+         <svg class="svg-icon" height="14" viewbox="0 0 32 32" width="14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z">
+          </path>
+         </svg>
+        </span>
+        <img class="mobile-menu-icon" src="images/25x25/academics.png"/>
+        Academics
+       </div>
+      </h4>
+     </div>
+     <div class="hidden" id="mobile-academics">
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        The Campus Colleges
+       </h4>
+       <button class="visibility-toggle-purple" onclick="changeVisibility(colleges_lyr);changeVisibility(labels_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Libraries and Study Spaces
+       </h4>
+       <button class="visibility-toggle-purple" onclick="changeVisibility(libraries_lyr)">
+       </button>
+      </div>
+     </div>
+     <!-- LIFE SAFETY AND INCLUSIVITY --->
+     <div class="accordion-section" id="safety" onclick="showMobileSafety();highlightSafety()">
+      <h4 class="accordion-title">
+       <div class="menu-cat-box">
+        <span class="accordion-icon">
+         <svg class="svg-icon" height="14" viewbox="0 0 32 32" width="14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z">
+          </path>
+         </svg>
+        </span>
+        <img class="mobile-menu-icon" src="images/25x25/health-safety-facilities.png"/>
+        Health, Safety &amp; Facilities
+       </div>
+      </h4>
+     </div>
+     <div class="hidden" id="mobile-safety">
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Blue Light Emergency Phones
+       </h4>
+       <button class="visibility-toggle-blue" onclick="changeVisibility(emergency_phones_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        All-Gender Restrooms
+       </h4>
+       <button class="visibility-toggle-blue" onclick="changeVisibility(genderinclusive_lyr)">
+       </button>
+      </div>
+     </div>
+     <!-- RECREATION --->
+     <div class="accordion-section" id="recreation" onclick="showMobileRecreation();highlightRecreation()">
+      <h4 class="accordion-title">
+       <div class="menu-cat-box">
+        <span class="accordion-icon">
+         <svg class="svg-icon" height="14" viewbox="0 0 32 32" width="14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 9v5L16 26 4 14V9l12 12L28 9z">
+          </path>
+         </svg>
+        </span>
+        <img class="mobile-menu-icon" src="images/25x25/recreation.png"/>
+        Recreation
+       </div>
+      </h4>
+     </div>
+     <div class="hidden" id="mobile-recreation">
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Campus Garden Spaces
+       </h4>
+       <button class="visibility-toggle-green" onclick="changeVisibility(gardens_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Trails, Courts, &amp; Athletic Facilities
+       </h4>
+       <button class="visibility-toggle-green" onclick="changeVisibility(rec_lyr)">
+       </button>
+      </div>
+      <div class="menu-bottom-border">
+       <h4 style="margin-right:auto">
+        Places of Interest
+       </h4>
+       <button class="visibility-toggle-orange" onclick="changeVisibility(poi_lyr)">
+       </button>
+      </div>
+     </div>
+    </aside>
+   </div>
+   <div id="mobile-menu-footer">
+    <h4 class="accordion-title top-border">
+     <div class="menu-cat-box" onclick="window.open('https://maps-gis.ucsc.edu/printable-maps/index.html', '_blank');">
+      <i class="icon-ui-printer">
+      </i>
+      Printable Maps
+     </div>
+    </h4>
+    <h4 class="accordion-title">
+     <div class="menu-cat-box" onclick="window.open('http://maps.google.com', '_blank');">
+      <i class="icon-ui-directions">
+      </i>
+      Get Directions
+     </div>
+    </h4>
+    <h4 class="accordion-title">
+     <div class="menu-cat-box" onclick="window.open('help/index.html', '_blank')">
+      <i class="icon-ui-documentation">
+      </i>
+      Help
+     </div>
+    </h4>
+    <h4 class="accordion-title bottom-border">
+     <div class="menu-cat-box" onclick="window.open('mailto:pawelch@ucsc.edu', '_blank');">
+      <i class="icon-ui-contact">
+      </i>
+      Contact
+     </div>
+    </h4>
+   </div>
+  </div>
+  <div id="body-wrapper">
+   <div id="sidebar-menu">
+    <div class="sidebar-header">
+     <em>
+      <h5>
+       Click the box next to a feature to make it visible or invisible.
+      </h5>
+     </em>
+    </div>
+    <div id="sidebar-menu-content">
+     <div class="cat-box">
+      <img class="sidebarbutton" src="images/25x25/amenities.png"/>
+      <h3 style="margin-right:auto">
+       Food and Drink
+      </h3>
+      <h4 style="margin:0px 8px 0px 0px">
+       ON/OFF
+      </h4>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Restaurants and Cafes
+      </h4>
+      <button class="visibility-toggle-pink" onclick="changeVisibility(cafes_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       The Perk Coffee Shops
+      </h4>
+      <button class="visibility-toggle-pink" onclick="changeVisibility(perks_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       College Dining Halls
+      </h4>
+      <button class="visibility-toggle-pink" onclick="changeVisibility(dining_halls_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Food Trucks
+      </h4>
+      <button class="visibility-toggle-pink" onclick="changeVisibility(food_trucks_lyr)">
+      </button>
+     </div>
+     <div class="cat-box">
+      <img class="sidebarbutton" src="images/25x25/transportation.png"/>
+      <h3>
+       Transportation
+      </h3>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Bus / Shuttle Stops
+      </h4>
+      <button class="visibility-toggle-gold" onclick="changeVisibility(shuttles_lyr);changeVisibility(metro_bus_lyr);changeVisibility(bus_route_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Parking Lots
+      </h4>
+      <button class="visibility-toggle-gold" onclick="changeVisibility(parking_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Bike Repair
+      </h4>
+      <button class="visibility-toggle-gold" onclick="changeVisibility(bike_repair_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Bike Parking
+      </h4>
+      <button class="visibility-toggle-gold" onclick="changeVisibility(bike_parking_lyr)">
+      </button>
+     </div>
+     <div class="cat-box">
+      <img class="sidebarbutton" src="images/25x25/academics.png"/>
+      <h3>
+       Academics
+      </h3>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Colleges
+      </h4>
+      <button class="visibility-toggle-purple" onclick="changeVisibility(colleges_lyr);changeVisibility(labels_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Libraries
+      </h4>
+      <button class="visibility-toggle-purple" onclick="changeVisibility(libraries_lyr)">
+      </button>
+     </div>
+     <div class="cat-box">
+      <img class="sidebarbutton" src="images/25x25/health-safety-facilities.png"/>
+      <h3>
+       Health, Safety &amp; Facilities
+      </h3>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       All-Gender Restrooms
+      </h4>
+      <button class="visibility-toggle-blue" onclick="changeVisibility(genderinclusive_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Emergency Phones
+      </h4>
+      <button class="visibility-toggle-blue" onclick="changeVisibility(emergency_phones_lyr)">
+      </button>
+     </div>
+     <div class="cat-box" style="margin-bottom:auto">
+      <img class="sidebarbutton" src="images/25x25/recreation.png"/>
+      <h3>
+       Recreation
+      </h3>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Campus Gardens
+      </h4>
+      <button class="visibility-toggle-green" onclick="changeVisibility(gardens_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Trails, Courts &amp; Athletic Facilities
+      </h4>
+      <button class="visibility-toggle-green" onclick="changeVisibility(rec_lyr)">
+      </button>
+     </div>
+     <div class="toc-row">
+      <h4 class="toc-row-content">
+       Places of Interest
+      </h4>
+      <button class="visibility-toggle-orange" onclick="changeVisibility(poi_lyr)">
+      </button>
+     </div>
+    </div>
+    <div id="sidebar-footer" style="background-color:#AA1712">
+     <button class="nav-button">
+      <h3>
+       <i class="icon-ui-contact footer-text">
+       </i>
+       <a href="mailto:maps@ucsc.edu" title="Email the map administrator">
+        Report an Issue
+       </a>
+      </h3>
+     </button>
+    </div>
+    <div id="ucop-copyright">
+     <p class="no-margin">
+      UC SANTA CRUZ, 1156 HIGH STREET, SANTA CRUZ, CA 95064
+      <br/>
+      © REGENTS OF THE UNIVERSITY OF CALIFORNIA. ALL RIGHTS RESERVED.
+     </p>
+    </div>
+   </div>
+   <div id="viewDiv">
+   </div>
+  </div>
+  <div class="gray-border" id="footer" style="background-color:#AA1712">
+   <div id="footer-content">
+    <button class="nav-button">
+     <h5>
+      <i class="icon-ui-contact footer-text">
+      </i>
+      <a href="mailto:maps@ucsc.edu" title="Email the map administrator">
+       Report an Issue
+      </a>
+     </h5>
+    </button>
+   </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js">
+  </script>
+ </body>
+</html>

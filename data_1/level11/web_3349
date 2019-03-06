@@ -1,0 +1,385 @@
+http://ecg.utah.edu
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>
+   ECG Learning Center - An introduction to clinical electrocardiography
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <link href="/img/favicon.ico" rel="shortcut icon"/>
+  <!-- mobile device settings -->
+  <meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no" name="viewport"/>
+  <!-- Meta Tags-->
+  <meta content="clinical electrocardiography ekg tutorial frank yanowitz" name="Keywords"/>
+  <meta content="Tutorial site on clinical electrocardiography (ECG)" name="Description"/>
+  <!-- CSS -->
+  <link href="/main.css" rel="stylesheet" type="text/css"/>
+  <!-- Google Tag Manager -->
+  <script>
+   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TR9Q4X');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- Jquery -->
+  <script src="//code.jquery.com/jquery-3.3.1.min.js" type="text/javascript">
+  </script>
+  <!-- Fancybox -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.js" type="text/javascript">
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" type="text/javascript">
+  </script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/css/jquery.fancybox.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <!-- Javascripts Setup -->
+  <script type="text/javascript">
+   // <![CDATA[
+		$(document).ready(function() 
+		{
+			// fancybox
+			$("a.fancybox").fancybox(
+			{
+				'transitionIn'		: 'elastic',
+				'transitionOut'		: 'none',
+				'titlePosition'		: 'inside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9,
+				//'centerOnScroll'	: true,
+				'titleFormat'		: formatTitle
+
+			});
+
+			// fancybox - format title for display - [title], {copyright}
+			function formatTitle(title) {
+				var newTitle = title.replace('[', '<span class="fancyboxTITLE">');
+				newTitle = newTitle.replace(']', '</span><br &frasl;>');
+				newTitle = newTitle.replace('{', '<span class="copyright">');
+				newTitle = newTitle.replace('}', '</span><br &frasl;>');
+				newTitle = newTitle.replace(/ \|\| /g,'<br>');
+				newTitle = '<div class="fancyboxTITLEWRAPPER">'+newTitle+'</div>';
+    			return newTitle;
+			}
+
+			// external links
+			$('a[rel="external"]').after('&nbsp;<img src="/img/new_window_icon.gif" title="launch in new window" &frasl;>');
+			$('a[rel="external"]').click( function(e) {
+				e.preventDefault();
+				window.open($(this).attr('href'));
+				//return false;
+			});
+			
+			$('a.fancybox').click( function() {
+				_gaq.push(['_trackEvent', 'image', 'clicked', $(this).attr('href')]);
+			});
+
+			// G-A tracking, 2014-02
+			//_gaq.push(['_trackEvent', 'image', 'clicked', $(this).attr('href')]);
+			
+			// hide nav on resize if smaller than max width
+			/*function navhide() {
+				var window_width = $(window).width();
+				if(window_width < 960)
+				{
+					$('#main_nav').hide();
+				}
+				else
+				{
+					$('#main_nav').show();
+				}
+			}
+			$(window).resize(function(){
+				navhide();
+			});*/
+
+			// hide nav on load if smaller than max width
+			//navhide();
+		});
+	// ]]>
+  </script>
+  <!--[if lte IE 6]>
+.ie6_alert { display: block; }
+<![endif]-->
+ </head>
+ <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+   <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-TR9Q4X" style="display:none;visibility:hidden" width="0">
+   </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- ie6 alert -->
+  <div class="ie6_alert">
+   <p>
+    I am sorry, but this site is only supported in an strict HTML compliant browser.  The site may continue to function, but may not display properly.
+   </p>
+   <p>
+    If you are using Internet Explorer 6 or earlier, we recommend you update your browser to Intenet Explorer 8+ or try a compliant browser such as
+    <a href="http://www.mozilla.com/en-US/firefox/firefox.html">
+     Firefox
+    </a>
+    or
+    <a href="http://www.google.com/chrome">
+     Google Chrome
+    </a>
+    .
+   </p>
+  </div>
+  <!-- header -->
+  <div id="header">
+   <!-- logo -->
+   <div class="title">
+    <a href="/">
+     <img alt="ecg logo" src="/img/ecg_logo_320w.png"/>
+    </a>
+   </div>
+   <!-- search -->
+   <!--<form method="post" action="http://search.utah.edu:8765/custom/query.html" class="search">
+		<input type="hidden" name="qpurl" value="url:ecg.utah.edu">
+		<input type="hidden" name="qpname" value="ECG Learning Center">
+		<input type="search" name="qt" placeholder="Search ECG">
+		<input type="submit" value="Search">
+	</form>-->
+   <form action="https://gsa.search.utah.edu/search" id="gsa_search" method="get" name="search">
+    <label for="gsa_searchbox">
+     Search Site:
+    </label>
+    <input id="gsa_searchbox" name="q" onblur="watermark();" onfocus="noWatermark();" title="enter search terms" type="text" value=""/>
+    <input name="site" type="hidden" value="Look-only-in-ecg-website"/>
+    <input name="client" type="hidden" value="ecg_frontend"/>
+    <input name="output" type="hidden" value="xml_no_dtd"/>
+    <input name="proxystylesheet" type="hidden" value="ecg_frontend"/>
+    <input name="numgm" type="hidden" value="10"/>
+    <input alt="submit search" id="gsa_searchbutton" name="btnG" src="/img/gsa_search_btn.png" title="submit search" type="image" value="Submit Search"/>
+    <img class="gsa_spacer" onload="loadWatermark();" src="/img/spacer.gif"/>
+   </form>
+   <script type="text/javascript">
+    // add or remove watermark if no text is entered
+		function watermark(){
+		if (inputId.value.length > 0){
+		if (inputId.className == "gsa_watermark")
+		inputId.className = "";
+		}else
+		inputId.className = "gsa_watermark";
+		}
+		// remove watermark when input has focus
+		function noWatermark() {
+		inputId.className = "";
+		}
+		var inputId; //declare reference to input <
+		function loadWatermark() {
+		inputId = document.getElementById("gsa_searchbox");
+		watermark(); //initialize watermark
+		}
+   </script>
+   <div id="nav_icon">
+    <a href="/">
+     <img alt="map icon" src="/img/map.png" title="navigation (home page)"/>
+    </a>
+   </div>
+   <!-- navigation -->
+   <div id="main_nav">
+    <ul>
+     <li>
+      <a href="/">
+       Home
+      </a>
+     </li>
+     <li class="search_nav">
+      <a href="/search">
+       Search
+      </a>
+     </li>
+     <li>
+      <a href="/introduction">
+       Introduction
+      </a>
+     </li>
+     <li>
+      <a href="/outline">
+       Outline
+      </a>
+     </li>
+     <li>
+      <a href="/img_index">
+       Image Index
+      </a>
+     </li>
+     <li>
+      <a href="/tests">
+       Test Your Knowledge
+      </a>
+     </li>
+     <li>
+      <a href="/acc_aha">
+       ACC/AHA Clinical Competence
+      </a>
+     </li>
+     <li class="site_index_hide">
+      <a href="/pdf">
+       PDF outline
+      </a>
+     </li>
+     <li class="main_hide">
+      <a href="/pdf">
+       Outline of ECG Interpretation
+       <br/>
+       2018 Update (PDF)
+      </a>
+     </li>
+     <li>
+      <a href="/work-assignments">
+       Work Assignments
+      </a>
+     </li>
+     <li class="last">
+      <a href="/feedback">
+       Feedback
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+  <!-- main content -->
+  <div class="home_bk" id="content">
+   <!-- site index box -->
+   <div class="site_index">
+    <div class="title">
+     Site Index
+    </div>
+    <ul>
+     <li>
+      <a href="/">
+       Home
+      </a>
+     </li>
+     <li class="search_nav">
+      <a href="/search">
+       Search
+      </a>
+     </li>
+     <li>
+      <a href="/introduction">
+       Introduction
+      </a>
+     </li>
+     <li>
+      <a href="/outline">
+       Outline
+      </a>
+     </li>
+     <li>
+      <a href="/img_index">
+       Image Index
+      </a>
+     </li>
+     <li>
+      <a href="/tests">
+       Test Your Knowledge
+      </a>
+     </li>
+     <li>
+      <a href="/acc_aha">
+       ACC/AHA Clinical Competence
+      </a>
+     </li>
+     <li class="site_index_hide">
+      <a href="/pdf">
+       PDF outline
+      </a>
+     </li>
+     <li class="main_hide">
+      <a href="/pdf">
+       Outline of ECG Interpretation
+       <br/>
+       2018 Update (PDF)
+      </a>
+     </li>
+     <li>
+      <a href="/work-assignments">
+       Work Assignments
+      </a>
+     </li>
+     <li class="last">
+      <a href="/feedback">
+       Feedback
+      </a>
+     </li>
+    </ul>
+   </div>
+   <!-- contributers -->
+   <div class="contributers">
+    <!-- authored -->
+    <div class="authored">
+     <span>
+      Authored by:
+     </span>
+     <br/>
+     <strong>
+      Frank G. Yanowitz, MD
+     </strong>
+     <br/>
+     Professor of Medicine (Retired)
+     <br/>
+     University of Utah School of Medicine
+     <br/>
+     <a href="mailto:fyanow@mac.com">
+      Email
+     </a>
+    </div>
+    <!-- dedication -->
+    <div class="dedication">
+     <a class="fancybox" href="/img/items/ecg_lindsay.gif">
+      <img alt="Alan Lindsay" src="/img/alan_lindsay.png"/>
+     </a>
+     <p>
+      This site is dedicated to Dr. Alan Lindsay,
+      <br/>
+      "A teacher of substance and style."
+     </p>
+    </div>
+   </div>
+   <br style="clear: both;"/>
+   <!-- fixes floats and background issues -->
+  </div>
+  <!-- footer -->
+  <div id="footer">
+   <div class="home_link">
+    <a href="/">
+     « Home »
+    </a>
+   </div>
+   <div class="left_links">
+    <a href="http://creativecommons.org/licenses/by-nd-nc/1.0" title="Creative Commons">
+     <img alt="creative commons license" src="/img/creative_commons.gif"/>
+    </a>
+    <span>
+     This work is licensed under the
+     <a href="http://creativecommons.org/licenses/by-nd-nc/1.0">
+      Creative Commons License
+     </a>
+    </span>
+   </div>
+   <div class="right_links">
+    <a href="https://library.med.utah.edu/" title="Eccles Health Sciences Library">
+     <img alt="Eccles Health Sciences Library" class="ehsl_logo" src="https://library.med.utah.edu/blog/media/files/2018/08/ehsl_sponsorbar.png"/>
+    </a>
+    <!--<img src="/img/IHC_logo_35h.png" alt="IHC logo" title="Intermountain Healthcare" class="IHC" />
+		<div class="text">Images on this site are used with the permission of Intermountain Healthcare.<br />&copy;2006 all rights reserved.</div>-->
+    <div class="text">
+     Created by the
+     <a href="https://library.med.utah.edu/">
+      Eccles Health Sciences Library
+     </a>
+     <br/>
+     <a href="https://utah.edu">
+      University of Utah
+     </a>
+    </div>
+   </div>
+   <!--<div class="text_mobile">images: courtesy of Intermountain Healthcare. &copy;2006</div>-->
+   <br class="clear"/>
+  </div>
+ </body>
+</html>
+

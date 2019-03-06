@@ -1,0 +1,1016 @@
+http://events.ucmerced.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>
+   UC Merced Events Calendar
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/images/favicon.ico" rel="icon" type="image/ico"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/bootstrap3/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/jquery/jquery-ui-1.10.3.custom.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/bwThemeGlobal.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/bwThemeResponsive-00-Tiny.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/bwThemeResponsive-01-Small.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/bwThemeResponsive-02-Medium.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/bwThemeResponsive-03-Large.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/print.css" media="print" rel="stylesheet" type="text/css"/>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/modernizr-2.6.2-input.min.js" type="text/javascript">
+   /* include modernizr */
+  </script>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/jquery/jquery-1.10.2.min.js" type="text/javascript">
+   /* include jquery */
+  </script>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/jquery/jquery-ui-1.10.3.custom.min.js" type="text/javascript">
+   /* include jquery UI */
+  </script>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/bootstrap3/respond.min.js" type="text/javascript">
+   /* include respond for IE6-8 responsive support */
+  </script>
+  <script type="text/javascript">
+   var bwStrEvent = "event returned";
+      var bwStrEvents = "events returned";
+  </script>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/bedework/bedework.js" type="text/javascript">
+   /* bedework */
+  </script>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/bedework/navigation.js" type="text/javascript">
+   /* bedework navigation (menus, links) */
+  </script>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/bedework/eventList.js" type="text/javascript">
+   /* bedework list events object */
+  </script>
+  <script src="/bedework-common/javascript/bedework/bedeworkUtil.js" type="text/javascript">
+   /* bedework utilities */
+  </script>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/magnific/magnific-popup.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/magnific/jquery.magnific-popup.min.js" type="text/javascript">
+   /* for export/subscribe lightbox */
+  </script>
+  <link href="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/css/bwExportSubscribe.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/javascript/bedework/exportSubscribe.js" type="text/javascript">
+   /* bedework export/subscribe form */
+  </script>
+  <script type="text/javascript">
+   var bwPage = "eventList";
+        var bwListPage = "";
+        var bwLastDateSeparatorInList = "";
+        var bwClearFilterStr = '(clear all)';
+        var bwResourcesRoot = "/calrsrc.MainCampus/themes/ucMercedTheme-3.10";
+
+        var bwUrls = new Object;
+        bwUrls = {
+          "setSelection" : "/cal/main/setSelection.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de",
+          "setSelectionList" : "/cal/main/setSelectionList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de",
+          "async" : "/cal/misc/async.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de",
+          "feedPrefix" : "http://events.ucmerced.edu:7070",
+          "feedResources" : "/calfeedrsrc.MainCampus/default/default/theme"
+        }
+
+        // calendar explorers
+        var closedViews = new Array();
+        var openCals = new Array();
+        
+
+        // set up the filtering objects
+        var bwQuery = "";
+
+        // search query
+        
+        var bwQueryName = "Filter:";
+        
+            var bwClearQueryMarkup = '<a href="javascript:bwClearSearch();" id="bwClearQuery">(clear)</a>';
+          
+
+
+        // filters from menus
+        var bwFilters = new Array(); 
+        var bwFilterPaths = new Array(); 
+
+        
+          bwFilters[0] = new Array();
+        
+
+        var bwFilterPrefix = "";
+        
+          bwFilterPrefix = '(categories.href!="/public/.bedework/categories/sys/Ongoing")';
+        
+
+        
+        var bwMainEventsListOptions = {
+          title: "Upcoming Events",
+          showTitle: false,
+          displayDescription: false,
+          displayEventDetailsInline: false,
+          displayDayNameInList: true,
+          displayTimeInList: true,
+          displayLocationInList: true,
+          locationTitle: "Location:",
+          displayTopicalAreasInList: true,
+          topicalAreasTitle: "Topics:",
+          displayThumbnailInList: true,
+          thumbWidth: 80,
+          useFullImageThumbs: true,
+          usePlaceholderThumb: false,
+          eventImagePrefix: "/pubcaldav",
+          resourcesRoot: "/calrsrc.MainCampus/themes/ucMercedTheme-3.10",
+          limitList: false,
+          limit: 5,
+          listMode: "byTitle",
+          displayContactInDetails: true,
+          displayCostInDetails: true,
+          displayTagsInDetails: true,
+          displayTimezoneInDetails: true,
+          displayNoEventText: true,
+          showTitleWhenNoEvents: false,
+          noEventsText: "No events found.  Please try a different view or time period."
+        };
+
+        var bwMainEventList;
+
+        
+        $(document).ready(function(){
+          
+          bwFilterPaths = buildFilterPaths();
+
+          
+          bwMainEventList = new BwEventList("listEvents","html",bwMainEventsListOptions,"2019-03-06",bwFilterPrefix,bwFilterPaths,bwQuery,"/cal/main/setMainEventList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de","/cal/main/nextMainEventList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de","bwStartDate","bwResultSize");
+
+          
+          displayAllFilters(bwFilters);
+        });
+  </script>
+  <script src="http://w.sharethis.com/button/buttons.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   stLight.options({
+            publisher:'bogus',
+            offsetTop:'0',
+            tracking:'false',
+            onhover:'false'
+           })
+  </script>
+ </head>
+ <body>
+  <header id="header">
+   <div id="masthead">
+    <div class="container">
+     <a class="btn btn-default navbar-toggle" href="#" id="mobileMenu">
+      <span class="sr-only">
+       menu
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+     </a>
+     <div class="hidden-xs" id="siteTitleAndNav">
+      <h1>
+       Events Calendar
+      </h1>
+      <ul>
+       <li>
+        <a href="http://www.ucmerced.edu">
+         UC Merced Home
+        </a>
+       </li>
+       <li class="last">
+        <a href="https://catlife.ucmerced.edu/Events">
+         Student Organizations
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div id="siteLogo">
+      <a href="/cal">
+       <img alt="UC Merced Events Calendar" height="70" onerror="this.src='/files/images/ucmlogohires3.png'" src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/images/ucmlogohires3.svg"/>
+      </a>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <noscript>
+    Your browser does not support JavaScript!
+   </noscript>
+   <section id="content">
+    <div class="row">
+     <div class="col-lg-3 col-md-3 col-sm-3" id="leftColumn">
+      <div id="bwDatePicker">
+       <form action="/cal/main/setSelectionList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de" method="post" name="calForm" onsubmit="return changeStartDate(this,bwMainEventList);">
+        <ul id="bwDatePickerTodayLink">
+         <li class="last">
+          <a href="/cal/main/setSelectionList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de&amp;start=2019-03-06&amp;listMode=true&amp;setappvar=navDate(2019-03-06)">
+           today
+          </a>
+         </li>
+        </ul>
+        <label for="bwDatePickerInput">
+         Start date:
+        </label>
+        <div class="bwInputs">
+         <input class="form-control" id="bwDatePickerInput" name="start" onchange="return changeStartDate(this.form,bwMainEventList);" type="date" value="2019-03-06"/>
+         <input name="setappvar" type="hidden" value="navDate(2019-03-06)"/>
+         <input class="btn btn-default sr-only" type="submit" value="go"/>
+        </div>
+        <div id="bwDatePickerLinks">
+         <ul id="bwDatePickerRangeLinks">
+          <li>
+           <a class="bwUpcomingLink" href="/cal/main/setSelectionList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de&amp;listMode=true&amp;setappvar=listPage(upcoming)">
+            upcoming
+           </a>
+          </li>
+          <li>
+           <a class="bwRangeLink" href="/cal/main/setViewPeriod.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de&amp;viewType=dayView&amp;setappvar=listPage(eventscalendar)">
+            day
+           </a>
+          </li>
+          <li>
+           <a class="bwRangeLink" href="/cal/main/setViewPeriod.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de&amp;viewType=weekView&amp;setappvar=listPage(eventscalendar)">
+            week
+           </a>
+          </li>
+          <li class="last">
+           <a class="bwRangeLink" href="/cal/main/setViewPeriod.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de&amp;viewType=monthView&amp;setappvar=listPage(eventscalendar)">
+            month
+           </a>
+          </li>
+         </ul>
+        </div>
+       </form>
+      </div>
+      <script type="text/javascript">
+       $.datepicker.setDefaults({
+         constrainInput: true,
+         dateFormat: "yy-mm-dd",
+         gotoCurrent: true,
+         duration: ""
+       });
+       $(document).ready(function() {
+       
+           if (Modernizr.inputtypes['date']) {
+             // use HTML5 picker if available
+             $("#bwDatePickerInput").attr("value","2019-03-06");
+           } else {
+             // use jQuery datepicker otherwise
+             $("#bwDatePickerInput").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                setDate: "2019-03-06"
+             });
+           }
+         
+       });
+      </script>
+      <noscript>
+       Your browser does not support JavaScript!
+      </noscript>
+      <form action="#" class="form-group" id="bwBasicSearch" method="post" name="bwBasicSearch" onsubmit="return bwSearch(this.query.value)">
+       <label class="sr-only" for="bwBasicSearchInput">
+        Search for events:
+       </label>
+       <div class="bwInputs">
+        <input class="form-control" id="bwBasicSearchInput" name="query" placeholder="search" type="text"/>
+        <button class="btn" id="searchSubmit" name="submit" type="submit">
+         <span class="glyphicon glyphicon-search">
+         </span>
+        </button>
+       </div>
+      </form>
+      <div id="bwViewList">
+       <div class="bwMenu" id="bwNav0">
+        <div class="bwMenuTitle">
+         Topics
+         <span class="caret">
+         </span>
+        </div>
+        <div class="bwMenuTree">
+         <ul>
+          <li id="bwNav0-useragrpcalsuiteMainCampusAcademicCalendarexp">
+           <a href="/user/agrp_calsuite-MainCampus/Academic Calendar" id="bwNav0-useragrpcalsuiteMainCampusAcademicCalendar">
+            Academic Calendar
+           </a>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-useragrpcalsuiteMainCampusArtsandEntertainmentexp">
+           <span class="menuTreeToggle">
+            ►
+           </span>
+           <a href="/user/agrp_calsuite-MainCampus/Arts and Entertainment" id="bwNav0-useragrpcalsuiteMainCampusArtsandEntertainment">
+            Arts and Entertainment
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesArtsandEntertainmentConcertsexp">
+             <a href="/public/aliases/Arts and Entertainment/Concerts" id="bwNav0-publicaliasesArtsandEntertainmentConcerts">
+              Concerts
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsandEntertainmentDanceexp">
+             <a href="/public/aliases/Arts and Entertainment/Dance" id="bwNav0-publicaliasesArtsandEntertainmentDance">
+              Dance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsandEntertainmentExhibitsexp">
+             <a href="/public/aliases/Arts and Entertainment/Exhibits" id="bwNav0-publicaliasesArtsandEntertainmentExhibits">
+              Exhibits
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsandEntertainmentFilmexp">
+             <a href="/public/aliases/Arts and Entertainment/Film" id="bwNav0-publicaliasesArtsandEntertainmentFilm">
+              Film
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsandEntertainmentReadingsexp">
+             <a href="/public/aliases/Arts and Entertainment/Readings" id="bwNav0-publicaliasesArtsandEntertainmentReadings">
+              Readings
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsandEntertainmentTheaterexp">
+             <a href="/public/aliases/Arts and Entertainment/Theater" id="bwNav0-publicaliasesArtsandEntertainmentTheater">
+              Theater
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusCampusAnnouncementsexp">
+           <a href="/user/agrp_calsuite-MainCampus/Campus Announcements" id="bwNav0-useragrpcalsuiteMainCampusCampusAnnouncements">
+            Campus Announcements
+           </a>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusCommunityOutreachexp">
+           <a href="/user/agrp_calsuite-MainCampus/Community Outreach" id="bwNav0-useragrpcalsuiteMainCampusCommunityOutreach">
+            Community Outreach
+           </a>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusConferencesexp">
+           <a href="/user/agrp_calsuite-MainCampus/Conferences" id="bwNav0-useragrpcalsuiteMainCampusConferences">
+            Conferences
+           </a>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusEmployeeTrainingexp">
+           <a href="/user/agrp_calsuite-MainCampus/Employee Training" id="bwNav0-useragrpcalsuiteMainCampusEmployeeTraining">
+            Employee Training
+           </a>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-useragrpcalsuiteMainCampusLecturesandSeminarsexp">
+           <span class="menuTreeToggle">
+            ►
+           </span>
+           <a href="/user/agrp_calsuite-MainCampus/Lectures and Seminars" id="bwNav0-useragrpcalsuiteMainCampusLecturesandSeminars">
+            Lectures and Seminars
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesLecturesandSeminarsArtsexp">
+             <a href="/public/aliases/Lectures and Seminars/Arts" id="bwNav0-publicaliasesLecturesandSeminarsArts">
+              Arts
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesLecturesandSeminarsEngineeringexp">
+             <a href="/public/aliases/Lectures and Seminars/Engineering" id="bwNav0-publicaliasesLecturesandSeminarsEngineering">
+              Engineering
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesLecturesandSeminarsHumanitiesexp">
+             <a href="/public/aliases/Lectures and Seminars/Humanities" id="bwNav0-publicaliasesLecturesandSeminarsHumanities">
+              Humanities
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesLecturesandSeminarsNaturalSciencesexp">
+             <a href="/public/aliases/Lectures and Seminars/Natural Sciences" id="bwNav0-publicaliasesLecturesandSeminarsNaturalSciences">
+              Natural Sciences
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesLecturesandSeminarsSocialSciencesexp">
+             <a href="/public/aliases/Lectures and Seminars/Social Sciences" id="bwNav0-publicaliasesLecturesandSeminarsSocialSciences">
+              Social Sciences
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusSpecialEventsexp">
+           <a href="/user/agrp_calsuite-MainCampus/Special Events" id="bwNav0-useragrpcalsuiteMainCampusSpecialEvents">
+            Special Events
+           </a>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusSportsandRecreationexp">
+           <a href="/user/agrp_calsuite-MainCampus/Sports and Recreation" id="bwNav0-useragrpcalsuiteMainCampusSportsandRecreation">
+            Sports and Recreation
+           </a>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-useragrpcalsuiteMainCampusStudentLifeexp">
+           <span class="menuTreeToggle">
+            ►
+           </span>
+           <a href="/user/agrp_calsuite-MainCampus/Student Life" id="bwNav0-useragrpcalsuiteMainCampusStudentLife">
+            Student Life
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesStudentLifeClubMeetingsandEventsexp">
+             <a href="/public/aliases/Student Life/Club Meetings and Events" id="bwNav0-publicaliasesStudentLifeClubMeetingsandEvents">
+              Club Meetings and Events
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesStudentLifeGraduateStudentLifeexp">
+             <a href="/public/aliases/Student Life/Graduate Student Life" id="bwNav0-publicaliasesStudentLifeGraduateStudentLife">
+              Graduate Student Life
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesStudentLifeGreekLifeexp">
+             <a href="/public/aliases/Student Life/Greek Life" id="bwNav0-publicaliasesStudentLifeGreekLife">
+              Greek Life
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesStudentLifeInternationalStudentsexp">
+             <a href="/public/aliases/Student Life/International Students" id="bwNav0-publicaliasesStudentLifeInternationalStudents">
+              International Students
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesStudentLifeSocialEventsexp">
+             <a href="/public/aliases/Student Life/Social Events" id="bwNav0-publicaliasesStudentLifeSocialEvents">
+              Social Events
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesStudentLifeStudentGovernmentexp">
+             <a href="/public/aliases/Student Life/Student Government" id="bwNav0-publicaliasesStudentLifeStudentGovernment">
+              Student Government
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li id="bwNav0-useragrpcalsuiteMainCampusWorkshopsexp">
+           <a href="/user/agrp_calsuite-MainCampus/Workshops" id="bwNav0-useragrpcalsuiteMainCampusWorkshops">
+            Workshops
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="sideBarContainer">
+       <div class="leftMenuTitle" id="optionMenuTitle">
+        OPTIONS:
+       </div>
+       <div id="desktopOnlyLinks">
+        <ul class="sideLinks">
+         <li class="submitLink">
+          <a href="/eventsubmit">
+           Submit an Event
+          </a>
+         </li>
+         <li>
+          <a href="/caladmin">
+           Manage Events
+          </a>
+         </li>
+         <li>
+          <a href="http://communications.ucmerced.edu/web/events-calendar">
+           Help
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div id="desktopMobileLinks">
+        <ul class="sideLinks">
+         <li>
+          <a href="/cal/calendar/fetchPublicCalendars.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de">
+           Download Calendars
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div id="mobileOnlyLinks">
+        <ul class="sideLinks">
+         <li>
+          <a href="http://www.ucmerced.edu">
+           UC Merced Home
+          </a>
+         </li>
+         <li>
+          <a href="https://catlife.ucmerced.edu/Events">
+           Student Organizations
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="col-lg-9 col-md-9 col-sm-9" id="rightFullColumn">
+      <div class="hidden-xs" id="feature">
+       <a href="/cal">
+        <img alt="Welcome to our campus" class="img-responsive singleFeatureMode" src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/featured/UCMCalendarHeader2.jpg"/>
+       </a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3" id="ongoing">
+       <div id="bwOngoing">
+       </div>
+       <script type="text/javascript">
+        var bwOngoingOptions = {
+        title: "Ongoing",
+        showTitle: true,
+        showCaret: true,
+        displayDescription: false,
+        displayEventDetailsInline: false,
+        suppressStartDateInList: true,
+        untilText: "Ends",
+        displayTimeInList: false,
+        displayLocationInList: false,
+        limitList: false,
+        limit: 5,
+        listMode: "byTitle",
+        displayContactInDetails: true,
+        displayCostInDetails: true,
+        displayTagsInDetails: true,
+        displayTimezoneInDetails: true,
+        displayNoEventText: true,
+        showTitleWhenNoEvents: true,
+        noEventsText: "There are no ongoing events in this time period or view"
+      };
+
+      var ongoingFilter = '(vpath="/user/agrp_calsuite-MainCampus/Ongoing")';
+
+      
+      var bwOngoingEventList = new BwEventList("bwOngoing","json",bwOngoingOptions,"20190306",ongoingFilter,"","","/cal/main/setOngoingList.do;jsessionid=E9AF4BAC518D905436FEFF293142DE52?b=de");
+
+      $(document).ready(function () {
+        bwOngoingEventList.display();
+      });
+       </script>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9" id="centerColumn">
+       <div class="secondaryColHeader">
+        <h2>
+         <span id="bwStartDate">
+          Wednesday, March 6, 2019
+         </span>
+        </h2>
+        <a class="rss" href="#exportSubscribePopup" id="expSubLinksList" title="Export/Subscribe">
+         Export/Subscribe
+         <img alt="Export/Subscribe" src="/calrsrc.MainCampus/themes/ucMercedTheme-3.10/images/feed-icon-14x14.png"/>
+        </a>
+        <script type="text/javascript">
+         $(document).ready(function(){
+        $('#expSubLinksList').magnificPopup({
+          type:'inline',
+          fixedBgPos: true,
+          midClick: true,
+          callbacks: {
+            open: function() {
+              
+              $("#bwExpFeed").click();
+
+              
+              $("#exportSubscribeFiltersBox").hide(); 
+              $("#exportSubscribeFilters").html(""); 
+
+              if ($(".bwQueryText").length || $(".calFilterContainer .bwFilterName").length) {
+                if ($(".bwQueryText").length) { 
+                  var queryText = '<div class="eventFilterInfo">';
+                  queryText += '<span class="bwExpFilterName">' + $(".bwQueryText .bwQueryTitle").text() + "</span> ";
+                  queryText += '<span class="bwExpFilterItems">' + $(".bwQueryText .bwQueryQuery").text() + "</span>";
+                  queryText += "</div>";
+                  $("#exportSubscribeFilters").append(queryText);
+                }
+
+                $(".calFilterContainer").each(function() {
+                  if($(this).find(".bwFilterName").length) { 
+                    var filterText = '<div class="eventFilterInfo">';
+                    filterText += '<span class="bwExpFilterName">' + $(this).find(".bwFilterName").text() + ":</span> ";
+                    var filterItemsLength = $(this).find(".bwFilterText .bwFilterItemName").length;
+                    filterText += '<span class="bwExpFilterItems">';
+                    $(this).find(".bwFilterText .bwFilterItemName").each(function(i) {
+                      filterText += $(this).text();
+                      if(i != filterItemsLength - 1) {
+                        filterText += ", ";
+                      }
+                    });
+                    filterText += "</span>";
+                    filterText += "</div>";
+                    $("#exportSubscribeFilters").append(filterText);
+                  }
+                });
+
+                $("#exportSubscribeFiltersBox").show(); 
+              }
+            }
+          }
+        });
+      });
+        </script>
+       </div>
+       <div id="bwResultSize">
+       </div>
+       <div id="bwQueryContainer">
+       </div>
+       <div class="calFilterContainer" id="calFilterContainer0">
+       </div>
+       <div id="listEvents">
+       </div>
+       <script type="text/javascript">
+        $(document).ready(function () {
+
+        bwMainEventList.display();
+
+      });
+       </script>
+       <div id="loadMoreEventsLink">
+        <a class="button" href="javascript:bwMainEventList.appendEvents();">
+         Load more events
+        </a>
+       </div>
+       <div class="invisible" id="noEventsToDisplayText">
+       </div>
+       <div class="mfp-hide" id="exportSubscribePopup">
+        <h2 id="exportSubscribeTitle">
+         Export / Subscribe
+        </h2>
+        <div id="exportSubscribeFiltersBox">
+         <h3>
+          Current Filters:
+         </h3>
+         <div id="exportSubscribeFilters">
+         </div>
+        </div>
+        <div id="exportSubscribeForm">
+         <h3>
+          Event feed or embeddable widget?
+         </h3>
+         <ul>
+          <li>
+           <input checked="checked" class="bwExpTrigger" id="bwExpFeed" name="feedOrWidget" onclick="updateUrlDisplay();" type="radio" value="feed"/>
+           <label for="bwExpFeed">
+            Feed
+           </label>
+          </li>
+          <li>
+           <input class="bwExpTrigger" id="bwExpWidget" name="feedOrWidget" onclick="updateUrlDisplay();" type="radio" value="widget"/>
+           <label for="bwExpWidget">
+            Widget (code to copy and paste onto a website)
+           </label>
+          </li>
+         </ul>
+         <div id="bwExpDataFormat">
+          <h3>
+           Data format?
+          </h3>
+          <ul>
+           <li>
+            <input checked="checked" class="bwExpDfTrigger" id="bwExpRss" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="rss"/>
+            <label for="bwExpRss">
+             RSS
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpJson" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="json"/>
+            <label for="bwExpJson">
+             JSON
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpXml" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="xml"/>
+            <label for="bwExpXml">
+             XML
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpCsv" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="csv"/>
+            <label for="bwExpCsv">
+             CSV
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpHtml" name="bwExpDataType" onclick="updateUrlDisplay();" type="radio" value="html"/>
+            <label for="bwExpHtml">
+             HTML list (copy &amp; paste into Word, etc.)
+            </label>
+            <ul id="bwHtmlListOptions">
+             <li>
+              <div class="bwExpOptionName">
+               Include download link?
+              </div>
+              <div class="bwExpOptionFields">
+               <input id="bwHtmlListDownloadTrue" name="bwHtmlListDownloadLink" onclick="updateUrlDisplay();" type="radio" value="true"/>
+               <label for="bwHtmlListDownloadTrue">
+                True
+               </label>
+               <input checked="checked" id="bwHtmlListDownloadFalse" name="bwHtmlListDownloadLink" onclick="updateUrlDisplay();" type="radio" value="false"/>
+               <label for="bwHtmlListDownloadFalse">
+                False
+               </label>
+              </div>
+             </li>
+             <li>
+              <div class="bwExpOptionName">
+               Show details or summary?
+              </div>
+              <div class="bwExpOptionFields">
+               <input checked="checked" id="bwHtmlDetailsTrue" name="bwHtmlDetails" onclick="updateUrlDisplay();" type="radio" value="true"/>
+               <label for="bwHtmlDetailsTrue">
+                Details
+               </label>
+               <input id="bwHtmlDetailsFalse" name="bwHtmlDetails" onclick="updateUrlDisplay();" type="radio" value="false"/>
+               <label for="bwHtmlDetailsFalse">
+                Summary
+               </label>
+              </div>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </div>
+         <div id="bwExpCount">
+          <h3>
+           Event count
+          </h3>
+          <div id="bwExpCountWidget">
+           <label for="bwExpEventCount">
+            Total number of events returned:
+           </label>
+           <input id="bwExpEventCount" name="count" onchange="updateUrlDisplay();" size="3" type="text" value="10"/>
+           <div class="bwExpSubField">
+            <div class="bwSlider" id="bwExpCountSlider">
+            </div>
+           </div>
+          </div>
+         </div>
+         <div id="bwExpTimeframeUnit">
+          <h3>
+           Time frame
+          </h3>
+          <ul id="bwExpTimeFrameWidgets">
+           <li>
+            <input checked="checked" id="bwExpDaysDefault" name="timeframe" onclick="updateUrlDisplay();" type="radio" value="default"/>
+            <label for="bwExpDaysDefault">
+             Default: pull events from "today" forward
+            </label>
+           </li>
+           <li>
+            <input id="bwExpNumberOfDays" name="timeframe" onclick="updateUrlDisplay();" type="radio" value="days"/>
+            <label for="bwExpNumberOfDays">
+             Limit to
+             <input class="slider" id="bwExpNumDays" onclick="updateUrlDisplay();" size="3" type="text"/>
+             days from "today"
+            </label>
+            <div class="bwExpSubField">
+             <div class="bwSlider" id="bwExpSlider">
+             </div>
+            </div>
+           </li>
+           <li>
+            <input id="bwExpStartEndDates" name="timeframe" onclick="updateUrlDisplay();" type="radio" value="dates"/>
+            <label for="bwExpStartEndDates">
+             Date Range:
+             <span class="bwExpSubField">
+              Start Date:
+              <input class="datepicker" id="bwExpStartDate" onclick="updateUrlDisplay();" size="8" type="text"/>
+              End Date:
+              <input class="datepicker" id="bwExpEndDate" onclick="updateUrlDisplay();" size="8" type="text"/>
+             </span>
+            </label>
+            <br/>
+            <span class="bwExpNote">
+             Note: Event count takes precedence over date range!
+            </span>
+           </li>
+          </ul>
+         </div>
+         <div id="bwExpJsWidgetOptions">
+          <h3>
+           Widget Options
+          </h3>
+          <ul id="bwJsWidgetOptionsGeneral">
+           <li>
+            <div class="bwExpOptionName">
+             Limit the number of events listed?
+            </div>
+            <div class="bwExpOptionFields">
+             <input class="bwExpTrigger" id="bwExpJsShowLimitListTrue" name="jsLimitList" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwExpJsShowLimitListTrue">
+              True
+             </label>
+             <input checked="checked" class="bwExpTrigger" id="bwExpJsShowLimitListFalse" name="jsLimitList" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwExpJsShowLimitListFalse">
+              False
+             </label>
+             <em>
+              (default: false)
+             </em>
+             <div class="bwExpSubField" id="bwExpWidgetLimit">
+              <label for="bwExpJsLimit">
+               Limit to:
+              </label>
+              <input id="bwExpJsLimit" name="jsLimit" onblur="updateUrlDisplay();" size="3" type="text" value="5"/>
+              events
+             </div>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Show a title above event list?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" class="bwExpTrigger" id="bwExpJsShowTitleTrue" name="jsShowTitle" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwExpJsShowTitleTrue">
+              True
+             </label>
+             <input class="bwExpTrigger" id="bwExpJsShowTitleFalse" name="jsShowTitle" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwExpJsShowTitleFalse">
+              False
+             </label>
+             <em>
+              (default: true)
+             </em>
+             <div id="bwExpJsSetTitle">
+              Title:
+              <input id="bwExpJsSetTitleName" name="jsTitleName" onblur="updateUrlDisplay();" size="20" type="text" value="Upcoming Events"/>
+              <em>
+               (default: "Upcoming Events")
+              </em>
+             </div>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Highlight event dates or event titles?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" id="bwJsDisplayByTitle" name="jsDisplayDateOrTitle" onclick="updateUrlDisplay();" type="radio" value="byTitle"/>
+             <label for="bwJsDisplayByTitle">
+              By title
+             </label>
+             <input id="bwJsDisplayByDate" name="jsDisplayDateOrTitle" onclick="updateUrlDisplay();" type="radio" value="byDate"/>
+             <label for="bwJsDisplayByDate">
+              By date
+             </label>
+             <em>
+              (default 'by title')
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Show description in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input id="bwJsDisplayDescriptionTrue" name="jsDisplayDescription" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayDescriptionTrue">
+              True
+             </label>
+             <input checked="checked" id="bwJsDisplayDescriptionFalse" name="jsDisplayDescription" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayDescriptionFalse">
+              False
+             </label>
+             <em>
+              (default: false)
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Display end date in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" id="bwJsDisplayEndDateTrue" name="jsDisplayEndDate" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayEndDateTrue">
+              True
+             </label>
+             <input id="bwJsDisplayEndDateFalse" name="jsDisplayEndDate" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayEndDateFalse">
+              False
+             </label>
+             <em>
+              (default: true)
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Display time in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" id="bwJsDisplayTimeTrue" name="jsDisplayTime" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayTimeTrue">
+              True
+             </label>
+             <input id="bwJsDisplayTimeFalse" name="jsDisplayTime" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayTimeFalse">
+              False
+             </label>
+             <em>
+              (default: true)
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Display location in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input id="bwJsDisplayLocationTrue" name="jsDisplayLocation" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayLocationTrue">
+              True
+             </label>
+             <input checked="checked" id="bwJsDisplayLocationFalse" name="jsDisplayLocation" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayLocationFalse">
+              False
+             </label>
+             <em>
+              (default: false)
+             </em>
+            </div>
+           </li>
+          </ul>
+         </div>
+         <div id="bwExpURL">
+          <p class="bwExpOutput">
+           Your URL:
+           <a href="" id="bwExpUrlBox" target="_blank">
+           </a>
+          </p>
+         </div>
+         <div id="bwExpCodeBox">
+          <p class="bwExpOutput">
+           Widget Code:
+          </p>
+          <div id="bwExpCodeBoxOutput">
+          </div>
+         </div>
+        </div>
+        <script type="text/javascript">
+         $(document).ready(function(){
+        // hide components:
+        $('#bwExpCodeBox').hide();
+        $('#bwHtmlListOptions').hide();
+        $('#bwExpJsWidgetOptions').hide();
+        $('#bwExpWidgetLimit').hide();
+        $('#bwJsWidgetOptionsInline').hide();
+
+        $(".bwExpTrigger").click(function() {
+          switch ($(this).val()) {
+            case "feed":
+              $('#bwExpDataFormat').show('fast');
+              $('#bwExpURL').show('fast');
+              $('#bwExpCodeBox').hide('fast');
+              $('#bwExpJsWidgetOptions').hide('fast');
+              break;
+            case "widget":
+              $('#bwExpDataFormat').hide('fast');
+              $('#bwExpURL').hide('fast');
+              $('#bwExpCodeBox').show('fast');
+              $('#bwExpJsWidgetOptions').show('fast');
+              break;
+            default:
+              // show/hide widget options:
+              if ($('#bwExpJsDisplayInlineTrue').prop('checked')) {
+                $('#bwExpJsWidgetOptionsInline').show();
+              } else {
+                $('#bwExpJsWidgetOptionsInline').hide();
+              }
+
+              if ($('#bwExpJsShowTitleTrue').prop('checked')) {
+                $('#bwExpJsSetTitle').show();
+              } else {
+                $('#bwExpJsSetTitle').hide();
+              }
+
+              if ($('#bwJsDisplayInlineTrue').prop('checked')) {
+                $('#bwJsWidgetOptionsInline').show();
+              } else {
+                $('#bwJsWidgetOptionsInline').hide();
+              }
+
+              if ($('#bwExpJsShowLimitListTrue').prop('checked')) {
+                $('#bwExpWidgetLimit').show();
+              } else {
+                $('#bwExpWidgetLimit').hide();
+              }
+          }
+        });
+
+        $(".bwExpDfTrigger").click(function() {
+          // show/hide html list options
+          if ($('#bwExpHtml').prop('checked')) {
+            $('#bwHtmlListOptions').show();
+          } else {
+            $('#bwHtmlListOptions').hide();
+          }
+        });
+      });
+        </script>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <footer class="row" id="footer">
+    Based on the
+    <a href="https://www.apereo.org/bedework">
+     Bedework Calendar System
+    </a>
+    <br/>
+   </footer>
+  </div>
+ </body>
+</html>
+

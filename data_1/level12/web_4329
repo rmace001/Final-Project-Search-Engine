@@ -1,0 +1,763 @@
+http://coe.sfsu.edu/
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+  </script>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8">
+   <link href="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/themes/sfstate_template/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+   <meta content="Graduate College of Education: San Francisco State was founded as a normal school, or teachers’ training college, in 1899. Today, we continue our commitment to excellence in preparing outstanding educators, leaders and clinicians who transform lives in schools and communities." name="description">
+    <meta content="Drupal 7 (http://drupal.org)" name="generator"/>
+    <link href="http://gcoe.sfsu.edu/" rel="canonical"/>
+    <link href="http://gcoe.sfsu.edu/" rel="shortlink"/>
+    <title>
+     Graduate College of Education
+    </title>
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet" type="text/css"/>
+    <link href="http://gcoe.sfsu.edu/sites/default/files/css/css_lQaZfjVpwP_oGNqdtWCSpJT1EMqXdMiU84ekLLxQnc4.css" media="all" rel="stylesheet">
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css/css_W9MxcEKq01PeTygCHbqc6NEQE_eEioWbLNp_c_hILy0.css" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css/css_ltltwBEV1zmpAQaVTaIVKDMLI1nMYvKgXcp-n9m5rDc.css" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css/css_hHypbf9h5Gk24AYqHmE-9h4IdMCDLYXLXkA3LJ4vFm4.css" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css/css_m_bQ3I7Rh8grFlsfqAE_MbNVAESDE2SYeem61MepSBw.css" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_7.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_21.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_26.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_31.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_36.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_86.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_102.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_104.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_110.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_114.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_115.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_116.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_117.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_120.css?pmtqw4" media="all" rel="stylesheet"/>
+     <link href="http://gcoe.sfsu.edu/sites/default/files/css_injector/css_injector_132.css?pmtqw4" media="all" rel="stylesheet"/>
+     <!-- HTML5 element support for IE6-8 -->
+     <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+     </script>
+     <script>
+      window.jQuery || document.write("<script src='/profiles/sfstatedrupal7/modules/jquery_update/replace/jquery/1.9/jquery.min.js'>\x3C/script>")
+     </script>
+     <script src="http://gcoe.sfsu.edu/misc/jquery.once.js?v=1.2">
+     </script>
+     <script src="http://gcoe.sfsu.edu/misc/drupal.js?pmtqw4">
+     </script>
+     <script src="http://gcoe.sfsu.edu/misc/form.js?v=7.63">
+     </script>
+     <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/modules/extlink/extlink.js?pmtqw4">
+     </script>
+     <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/modules/views_bootstrap/js/views-bootstrap-carousel.js?pmtqw4">
+     </script>
+     <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/modules/google_analytics/googleanalytics.js?pmtqw4">
+     </script>
+     <script>
+      (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","http://gcoe.sfsu.edu/sites/default/files/googleanalytics/analytics.js?pmtqw4","ga");ga("create", "UA-56606809-14", {"cookieDomain":"auto"});ga("send", "pageview");
+     </script>
+     <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/themes/bootstrap/js/misc/_collapse.js?v=7.63">
+     </script>
+     <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/themes/sfstate_template/bootstrap/js/bootstrap.min.js?pmtqw4">
+     </script>
+     <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/themes/sfstate_template/js/style.js?pmtqw4">
+     </script>
+     <script>
+      jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"sfstate_template","theme_token":"ZwJSwkxeczxy82GwgouI4GcpAcF1EfMmxBGX7CdRq80","js":{"profiles\/sfstatedrupal7\/themes\/bootstrap\/js\/bootstrap.js":1,"\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.9.1\/jquery.min.js":1,"0":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/form.js":1,"profiles\/sfstatedrupal7\/modules\/extlink\/extlink.js":1,"profiles\/sfstatedrupal7\/modules\/views_bootstrap\/js\/views-bootstrap-carousel.js":1,"profiles\/sfstatedrupal7\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"profiles\/sfstatedrupal7\/themes\/bootstrap\/js\/misc\/_collapse.js":1,"profiles\/sfstatedrupal7\/themes\/sfstate_template\/bootstrap\/js\/bootstrap.min.js":1,"profiles\/sfstatedrupal7\/themes\/sfstate_template\/js\/style.js":1},"css":{"modules\/system\/system.base.css":1,"profiles\/sfstatedrupal7\/modules\/calendar\/css\/calendar_multiday.css":1,"profiles\/sfstatedrupal7\/modules\/date\/date_api\/date.css":1,"profiles\/sfstatedrupal7\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"profiles\/sfstatedrupal7\/modules\/office_hours\/office_hours.css":1,"profiles\/sfstatedrupal7\/modules\/extlink\/extlink.css":1,"profiles\/sfstatedrupal7\/modules\/views\/css\/views.css":1,"profiles\/sfstatedrupal7\/modules\/ckeditor\/css\/ckeditor.css":1,"profiles\/sfstatedrupal7\/modules\/ctools\/css\/ctools.css":1,"profiles\/sfstatedrupal7\/modules\/panels\/css\/panels.css":1,"profiles\/sfstatedrupal7\/libraries\/fontawesome\/css\/font-awesome.css":1,"profiles\/sfstatedrupal7\/themes\/sfstate_template\/bootstrap\/css\/bootstrap.min.css":1,"profiles\/sfstatedrupal7\/themes\/sfstate_template\/css\/style.css":1,"profiles\/sfstatedrupal7\/modules\/sfsu\/features\/sfsu_slideshow\/css\/sfsu_slideshow.css":1,"sites\/default\/files\/css_injector\/css_injector_7.css":1,"sites\/default\/files\/css_injector\/css_injector_21.css":1,"sites\/default\/files\/css_injector\/css_injector_26.css":1,"sites\/default\/files\/css_injector\/css_injector_31.css":1,"sites\/default\/files\/css_injector\/css_injector_36.css":1,"sites\/default\/files\/css_injector\/css_injector_86.css":1,"sites\/default\/files\/css_injector\/css_injector_102.css":1,"sites\/default\/files\/css_injector\/css_injector_104.css":1,"sites\/default\/files\/css_injector\/css_injector_110.css":1,"sites\/default\/files\/css_injector\/css_injector_114.css":1,"sites\/default\/files\/css_injector\/css_injector_115.css":1,"sites\/default\/files\/css_injector\/css_injector_116.css":1,"sites\/default\/files\/css_injector\/css_injector_117.css":1,"sites\/default\/files\/css_injector\/css_injector_120.css":1,"sites\/default\/files\/css_injector\/css_injector_132.css":1}},"viewsBootstrap":{"carousel":{"1":{"id":1,"name":"image_slideshow","attributes":{"interval":0,"pause":false}}}},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":true,"extSubdomains":1,"extExclude":"facebook\\.com|twitter\\.com|instagram\\.com","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":0,"extAlertText":"This link will take you to an external web site.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/":true},"bootstrap":{"anchorsFix":"1","anchorsSmoothScrolling":"1","formHasError":1,"popoverEnabled":"1","popoverOptions":{"animation":1,"html":0,"placement":"right","selector":"","trigger":"click","triggerAutoclose":1,"title":"","content":"","delay":0,"container":"body"},"tooltipEnabled":"1","tooltipOptions":{"animation":1,"html":0,"placement":"auto left","selector":"","trigger":"hover focus","delay":0,"container":"body"}}});
+     </script>
+    </link>
+   </meta>
+  </meta>
+ </head>
+ <body class="html front not-logged-in two-sidebars page-node page-node- page-node-181 node-type-page">
+  <div id="skip-link">
+   <a class="element-invisible element-focusable" href="#main-content">
+    Skip to main content
+   </a>
+   <a class="element-invisible element-focusable" href="#main-navigation">
+    Skip to navigation
+   </a>
+  </div>
+  <div id="header">
+   <header class="navbar container navbar-default">
+    <div class="row">
+     <div class="navbar-right" id="utilitybox">
+      <ul class="list-inline">
+       <li>
+        <strong>
+         <a href="http://www.sfsu.edu/">
+          San Francisco State University
+         </a>
+        </strong>
+       </li>
+       <li>
+        <a href="http://www.sfsu.edu/atoz/">
+         A–Z
+        </a>
+       </li>
+       <li>
+        <a href="http://www.sfsu.edu/calendar/">
+         Calendar
+        </a>
+       </li>
+       <li>
+        <a href="http://www.sfsu.edu/login.htm">
+         Login
+        </a>
+       </li>
+       <li>
+        <form action="http://google.sfsu.edu/search" id="search-box" method="get" role="search" title="Search SF State">
+         <div class="input-group">
+          <label class="sr-only sr-only-focusable" for="search">
+           Search SF State
+          </label>
+          <input class="form-control text-center" id="search" name="q" placeholder="Search" type="text"/>
+          <div class="input-group-btn">
+           <button class="btn" type="submit">
+            <span aria-hidden="true" class="glyphicon glyphicon-search">
+            </span>
+            <span class="sr-only sr-only-focusable">
+             Search SF State Button
+            </span>
+           </button>
+          </div>
+         </div>
+        </form>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <div class="row">
+     <a class="name navbar-brand" href="/" title="Graduate College of Education">
+      Graduate College of Education
+     </a>
+    </div>
+   </header>
+   <div class="region region-navigation">
+    <div class="block block-block vertical_buttons clearfix" id="block-block-91">
+     <div class="expandlink">
+      <a href="/current-students/how-apply">
+       <button id="btn">
+        <i aria-hidden="true" class="fa fa-pencil-square-o">
+        </i>
+        <span>
+         Apply Now
+        </span>
+       </button>
+      </a>
+      <a href="/content/contact-us">
+       <button id="btn">
+        <i aria-hidden="true" class="fa fa-info" style="min-width: 18px;">
+        </i>
+        <span>
+         Contact Us
+        </span>
+       </button>
+      </a>
+      <a href="/faculty-staff-resources">
+       <button id="btn">
+        <i aria-hidden="true" class="fa fa-sign-in">
+        </i>
+        <span>
+         Faculty Login
+        </span>
+       </button>
+      </a>
+      <a href="/donate">
+       <button id="btn">
+        <i aria-hidden="true" class="fa fa-gift">
+        </i>
+        <span>
+         Make a Gift
+        </span>
+       </button>
+      </a>
+      <a href="https://www.facebook.com/gcoesfsu" target="_blank">
+       <button class="fbicon" id="btn">
+        <i aria-hidden="true" class="fa fa-facebook-official">
+        </i>
+        <span>
+         Facebook
+        </span>
+       </button>
+      </a>
+      <a href="https://twitter.com/GCOE_SFState" target="_blank">
+       <button class="twicon" id="btn">
+        <i aria-hidden="true" class="fa fa-twitter-square">
+        </i>
+        <span>
+         Twitter
+        </span>
+       </button>
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="main-container container" id="main">
+   <div class="row">
+    <a id="main-navigation">
+    </a>
+    <nav class="col-sm-3 navbar" id="navigation" role="navigation">
+     <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+       <i class="fa fa-bars">
+       </i>
+       Menu
+      </button>
+     </div>
+     <div class="navbar-collapse collapse">
+      <div class="region region-sidebar-first">
+       <div class="block block-system block-menu clearfix" id="block-system-main-menu">
+        <ul class="menu nav">
+         <li class="first leaf">
+          <a href="/content/departments" title="The Departments of the Graduate College of Education">
+           Academic Programs
+          </a>
+         </li>
+         <li class="leaf">
+          <a href="/current-students/how-apply" title="How to Apply to SF State - Credential Forms">
+           How to Apply
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/current-students/scholarships" title="Scholarship Opportunities">
+           Scholarships
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/calendar/upcoming" title="Graduate College of Education Events Calendar">
+           Events
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/content/about-college" title="Mission Statement and About the College of the Graduate College of Education">
+           About Us
+          </a>
+         </li>
+         <li class="last leaf">
+          <a href="/content/contact-us" title="Contact Us for the Graduate College of Education">
+           Contact Us
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="block block-views sliderblock clearfix" id="block-views-image-slideshow-block">
+        <div class="view view-image-slideshow view-id-image_slideshow view-display-id-block view-dom-id-8746ccdd0f5d0b56aa00476a264895c6">
+         <div class="view-content">
+          <div class="views-bootstrap-carousel-plugin-style carousel slide" id="views-bootstrap-carousel-1">
+           <!-- Carousel indicators -->
+           <div class="carousel-indicator">
+            <div class="row">
+             <div class="carousel-container">
+              <ol class="carousel-indicators">
+               <li class="active">
+                <button data-slide-to="0" data-target="#views-bootstrap-carousel-1">
+                 1
+                 <span class="sr-only">
+                  Slideshow of 3 images. You are at image number 1 with caption : Teachers, SLPs, Career and Hiring Information Fair 2019
+    
+          Teachers, SLPs, Career and Hiring Information Fair 2019
+                 </span>
+                </button>
+               </li>
+               <li class="">
+                <button data-slide-to="1" data-target="#views-bootstrap-carousel-1">
+                 2
+                 <span class="sr-only">
+                  Slideshow of 3 images. You are at image number 2 with caption : CSU EduCorps 2018 - Preview Banner
+    
+          CSU EduCorps 2018
+                 </span>
+                </button>
+               </li>
+               <li class="">
+                <button data-slide-to="2" data-target="#views-bootstrap-carousel-1">
+                 3
+                 <span class="sr-only">
+                  Slideshow of 3 images. You are at image number 3 with caption : Application Summit &amp; Open House 2019
+    
+          GCOE Application Summit / Open House 2019
+                 </span>
+                </button>
+               </li>
+              </ol>
+             </div>
+            </div>
+           </div>
+           <!-- Carousel items -->
+           <div class="carousel-inner">
+            <div class="item active">
+             <img alt="Teacher Career, Hiring, and Information Fair 2019" class="img-responsive" height="400" src="http://gcoe.sfsu.edu/sites/default/files/careerfair_Banner_2019.jpg" width="2500"/>
+             <div class="carousel-caption">
+              <h2>
+               <a href="/content/teachers-slps-career-and-hiring-information-fair-2019">
+                Teachers, SLPs, Career and Hiring Information Fair 2019
+               </a>
+              </h2>
+              <p>
+               <p>
+                <a href="/careerfair2019">
+                 Teachers, SLPs, Career and Hiring Information Fair 2019
+                 <i class="fa fa-chevron-right">
+                 </i>
+                </a>
+               </p>
+              </p>
+             </div>
+            </div>
+            <div class="item ">
+             <img alt="CSU EduCorps 2018" class="img-responsive" height="400" src="http://gcoe.sfsu.edu/sites/default/files/EduCorps_Banner_2018_v2.jpg" width="2500"/>
+             <div class="carousel-caption">
+              <h2>
+               <a href="/content/csu-educorps-2018-preview-banner">
+                CSU EduCorps 2018 - Preview Banner
+               </a>
+              </h2>
+              <p>
+               <p>
+                <a href="/educorps-2018">
+                 CSU EduCorps 2018
+                 <i class="fa fa-chevron-right">
+                 </i>
+                </a>
+               </p>
+              </p>
+             </div>
+            </div>
+            <div class="item ">
+             <img alt="Application Summit &amp; Open House 2019" class="img-responsive" height="400" src="http://gcoe.sfsu.edu/sites/default/files/appsummit_Banner_2019.jpg" width="2500"/>
+             <div class="carousel-caption">
+              <h2>
+               <a href="/content/application-summit-open-house-2019">
+                Application Summit &amp; Open House 2019
+               </a>
+              </h2>
+              <p>
+               <p>
+                <a href="/summit2019">
+                 GCOE Application Summit / Open House 2019
+                 <i class="fa fa-chevron-right">
+                 </i>
+                </a>
+               </p>
+              </p>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </nav>
+    <!-- /#sidebar-first -->
+    <section class="col-sm-6" role="main">
+     <a id="main-content">
+     </a>
+     <h1 class="page-header">
+      Graduate College of Education (GCOE)
+     </h1>
+     <div class="region region-content">
+      <div class="block block-block gcoe_news_linkbox clearfix" id="block-block-96">
+       <style type="text/css">
+        <!--/*--><![CDATA[/* ><!--*/
+
+.gcoe_news_linkbox {
+    background-image: url('/sites/default/files/images/2018/gcoe_news_bg.png');
+    background-size: cover;
+    border-radius: 10px;
+    width: 69%;
+    margin: 10px auto 0 !important;
+}
+.gcoe_news_linkbox a {
+    font-size: 20px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 5px #303;
+}
+#main .gcoe_news_linkbox a:hover {
+    border-bottom: 2px solid #ffcc33 !important;
+    color: #fff;
+}
+.gcoe_news_linkbox p {
+    margin: 0;
+    padding: 10px;
+}
+#main .region-content .gcoe_news_linkbox p a {
+    text-decoration: none;
+}
+.big {
+    color: #ffcc33;
+    font-size: 25px;
+}
+/*--><!]]>*/
+       </style>
+       <p>
+        <a href="/gcoe-announcements">
+         <span class="big">
+          News:
+         </span>
+         Find out what's happening in the SF State Graduate College of Education
+        </a>
+       </p>
+      </div>
+      <div class="block block-block landing_links clearfix" id="block-block-90">
+       <div class="sectionbox">
+        <div class="linkbox" id="first">
+         <a href="/programs/undergraduate">
+          <span class="text">
+           Undergraduate Programs
+          </span>
+          <img alt="Graphic: Undergraduate Information" src="/sites/default/files/images/GCOE_UPD_2017/choose2.jpg"/>
+         </a>
+        </div>
+        <div class="linkbox">
+         <a href="/programs/credential">
+          <span class="text">
+           Credential Programs
+          </span>
+          <img alt="Graphic: Credential Information" src="/sites/default/files/images/GCOE_UPD_2017/credential1.jpg"/>
+         </a>
+        </div>
+        <div class="linkbox">
+         <a href="/programs/masters">
+          <span class="text">
+           Graduate Programs
+          </span>
+          <img alt="Graphic: Masters Programs" src="/sites/default/files/images/GCOE_UPD_2017/whysfsu.jpg"/>
+         </a>
+        </div>
+        <div class="linkbox" id="last">
+         <a href="/programs/doctoral">
+          <span class="text">
+           Doctoral Programs
+          </span>
+          <img alt="Graphic: Doctoral Programs" src="/sites/default/files/images/GCOE_UPD_2017/contactus.jpg"/>
+         </a>
+        </div>
+       </div>
+      </div>
+      <div class="block block-views eventsblock clearfix" id="block-views-calendar-events-block-2">
+       <h2 class="block-title">
+        Events
+       </h2>
+       <div class="view view-calendar-events view-id-calendar_events view-display-id-block_2 view-dom-id-7828f86ed70d303a1e1203e10a20af53">
+        <div class="view-header">
+         <hr/>
+        </div>
+        <div class="view-content">
+         <div class="item-list">
+          <ul>
+           <li class="views-row views-row-1 views-row-odd views-row-first">
+            <div class="views-field views-field-field-event-date">
+             <div class="field-content">
+              <span class="date-display-single">
+               Mar 6 2019 - 3:00pm
+              </span>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <span class="field-content">
+              <a href="/events/information-session-programs-special-education-0">
+               Information Session: Programs in Special Education
+              </a>
+             </span>
+            </div>
+           </li>
+           <li class="views-row views-row-2 views-row-even">
+            <div class="views-field views-field-field-event-date">
+             <div class="field-content">
+              <span class="date-display-single">
+               Mar 9 2019 - 1:00pm
+              </span>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <span class="field-content">
+              <a href="/events/teachers-slps-career-and-hiring-information-fair-2019">
+               Teachers, SLPs, Career and Hiring Information Fair 2019
+              </a>
+             </span>
+            </div>
+           </li>
+           <li class="views-row views-row-3 views-row-odd">
+            <div class="views-field views-field-field-event-date">
+             <div class="field-content">
+              <span class="date-display-single">
+               Mar 19 2019 - 2:30pm
+              </span>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <span class="field-content">
+              <a href="/events/single-subject-credential-and-masters-degree-program-information-meeting-19">
+               Single Subject Credential and Masters Degree Program Information Meeting
+              </a>
+             </span>
+            </div>
+           </li>
+           <li class="views-row views-row-4 views-row-even">
+            <div class="views-field views-field-field-event-date">
+             <div class="field-content">
+              <span class="date-display-single">
+               Mar 19 2019 - 4:00pm
+              </span>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <span class="field-content">
+              <a href="/events/single-subject-credential-intern-program-information-meeting-17">
+               Single Subject Credential Intern Program Information Meeting
+              </a>
+             </span>
+            </div>
+           </li>
+           <li class="views-row views-row-5 views-row-odd views-row-last">
+            <div class="views-field views-field-field-event-date">
+             <div class="field-content">
+              <span class="date-display-single">
+               Mar 20 2019 - 3:00pm
+              </span>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <span class="field-content">
+              <a href="/events/child-development-permit-information-session-5">
+               Child Development Permit Information Session
+              </a>
+             </span>
+            </div>
+           </li>
+          </ul>
+         </div>
+        </div>
+        <div class="more-link">
+         <a href="/calendar/upcoming">
+          view more events
+         </a>
+        </div>
+       </div>
+      </div>
+      <div class="block block-block introbox clearfix" id="block-block-92">
+       <ul class="intro-inline">
+        <li class="box" id="first">
+         <a href="/our-students">
+          Our Students
+         </a>
+        </li>
+        <li class="box">
+         <a href="/our-faculty">
+          Our Faculty
+         </a>
+        </li>
+        <li class="box">
+         <a href="/people/staff">
+          Our Staff
+         </a>
+        </li>
+        <li class="box" id="last">
+         <a href="/people/alumni">
+          Our Alumni
+         </a>
+        </li>
+        <!-- moving to faculty page	<li class="box" id="last"><p>		<a href="/remembering-nick-certo">In Memory</a></li>
+<p>-->
+       </ul>
+      </div>
+      <div class="block block-system clearfix" id="block-system-main">
+       <div class="ds-1col node node-page node-promoted node-sticky view-mode-full clearfix">
+        <div class="">
+         <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+          <div class="field-items">
+           <div class="field-item even">
+            <div>
+             <div class="splash_mobile">
+              <img alt="Graduate College of Education Graduates - Mobile version" src="/sites/default/files/images/GCOE_UPD_2016/splash_mobile.jpg"/>
+             </div>
+             <p id="leadbody">
+              The Graduate College of Education prepares reflective, transformative educators, clinicians, leaders, and scholars who advance the broad profession of education across the life span through excellence in the art and science of teaching and learning, research on critical issues in education and communicative disorders, integration of new technologies, and commitment to equity and social justice. Our programs are designed to meet global challenges through authentic learning experiences in academic and clinical environments that are grounded in our commitment to inclusiveness, integrity, community, social action, and evidence-based practice.
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="block block-block splash_bottom clearfix" id="block-block-93">
+       <div class="splash_bot">
+        <div class="content">
+         <div class="left">
+          <div class="contactgeneral">
+           <img alt="Graduate College of Education Logo" src="/sites/default/files/images/gcoe2017/GCOE_Logo.png"/>
+           <p>
+            1600 Holloway Avenue Burk Hall, Room 501 San Francisco, CA 94132
+            <br/>
+            <i aria-hidden="true" class="fa fa-location-arrow">
+            </i>
+            <a class="ext" href="https://www.google.com/maps/place/Graduate+College+of+Education/@37.7225952,-122.4799347,18z/data=!4m13!1m7!3m6!1s0x808f7da57e09a411:0x6bf3867d9956c79b!2s1600+Holloway+Ave,+San+Francisco,+CA+94132!3b1!8m2!3d37.7211776!4d-122.4769623!3m4!1s0x0:0x475914b513cdcb2a!8m2!3d37.7230121!4d-122.4793561" target="_blank">
+             Directions
+             <span class="ext">
+              <span class="element-invisible">
+               (link is external)
+              </span>
+             </span>
+            </a>
+            <br/>
+            <i aria-hidden="true" class="fa fa-phone-square">
+            </i>
+            Main office: (415) 405-3681
+            <br/>
+            <i aria-hidden="true" class="fa fa-phone-square">
+            </i>
+            Credential related questions: (415) 405-3594
+            <br/>
+            <i aria-hidden="true" class="fa fa-envelope">
+            </i>
+            <a class="mailto" href="mailto:gcoe@sfsu.edu">
+             gcoe@sfsu.edu
+            </a>
+           </p>
+          </div>
+         </div>
+         <div class="right">
+          <h3>
+           Quick Links
+          </h3>
+          <ul>
+           <li>
+            <i aria-hidden="true" class="fa fa-caret-right">
+            </i>
+            <a href="/content/about-college">
+             About the Graduate College of Education
+            </a>
+           </li>
+           <li>
+            <i aria-hidden="true" class="fa fa-caret-right">
+            </i>
+            <a href="/content/contact-us">
+             Contact Us
+            </a>
+           </li>
+           <li>
+            <i aria-hidden="true" class="fa fa-caret-right">
+            </i>
+            <a href="/teach">
+             The Education Advising Community Hub (TEACH)
+            </a>
+           </li>
+           <li>
+            <i aria-hidden="true" class="fa fa-caret-right">
+            </i>
+            <a href="/cahill">
+             The Cahill Learning Resources and Media Laboratory
+            </a>
+           </li>
+           <!-- removed announcement archive - may change to gcoe news archive <li><p>					<i aria-hidden="true" class="fa fa-caret-right">&nbsp;</i><a href="/highlight-archive">GCOE Announcement Archive</a></li>
+<p>-->
+           <li>
+            <i aria-hidden="true" class="fa fa-caret-right">
+            </i>
+            <a href="/faculty-staff-resources">
+             Faculty / Staff Login
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <aside class="col-sm-3" role="complementary">
+     <div class="region region-sidebar-second">
+      <div class="block block-search clearfix" id="block-search-form">
+       <h2 class="block-title">
+        GCOE Search
+       </h2>
+       <form accept-charset="UTF-8" action="/" class="form-search content-search" id="search-block-form" method="post">
+        <div>
+         <div>
+          <div class="input-group">
+           <input class="form-control form-text form-search" data-toggle="tooltip" id="edit-search-block-form--2" maxlength="128" name="search_block_form" placeholder="Search" size="15" title="Enter the terms you wish to search for." type="search" value="">
+            <span class="input-group-btn">
+             <button class="btn btn-primary" type="submit">
+              <span aria-hidden="true" class="icon glyphicon glyphicon-search">
+              </span>
+             </button>
+            </span>
+           </input>
+          </div>
+          <div class="form-actions form-wrapper form-group" id="edit-actions">
+           <button class="element-invisible btn btn-primary form-submit" id="edit-submit" name="op" type="submit" value="Search">
+            Search
+           </button>
+          </div>
+          <input name="form_build_id" type="hidden" value="form-H9zkh-Q8gTRkf03Mxbr38n0LGzXc2ZNQItLw_ugoFrY"/>
+          <input name="form_id" type="hidden" value="search_block_form"/>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+    </aside>
+    <!-- /#sidebar-second -->
+   </div>
+  </div>
+  <footer class="footer container-fluid">
+   <div class="container">
+    <div class="row" id="footer-row">
+     <div class="col-sm-6" id="contact-university">
+      <a href="http://www.sfsu.edu/">
+       <img alt="San Francisco State University Logo" class="logo" src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/themes/sfstate_template/logo.png" width="50"/>
+      </a>
+      <ul class="list-unstyled ">
+       <li>
+        <a href="http://www.sfsu.edu/">
+         San Francisco State University
+        </a>
+       </li>
+       <li class="first">
+        <a href="http://www.calstate.edu/">
+         A California State University Campus
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-sm-6" id="contact-local">
+      <ul class="list-unstyled ">
+       <li>
+        <strong>
+         Graduate College of Education
+        </strong>
+       </li>
+       <li>
+        Web Contact: gcoe@sfsu.edu
+       </li>
+       <li>
+        <a href="http://www.sfsu.edu/accessibility">
+         Accessibility
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="http://gcoe.sfsu.edu/profiles/sfstatedrupal7/themes/bootstrap/js/bootstrap.js?pmtqw4">
+  </script>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"eb0d191cd9","applicationID":"21086258","transactionName":"YlZSNRcEVhFRBkNZDlscZRMMShcLXgFSSE9FW0A=","queueTime":0,"applicationTime":86,"atts":"ThFRQ18eRR8=","errorBeacon":"bam.nr-data.net","agent":""}
+  </script>
+ </body>
+</html>
+

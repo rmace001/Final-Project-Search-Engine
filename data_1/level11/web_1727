@@ -1,0 +1,792 @@
+http://jacobsschool.ucsd.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <title>
+   UCSD Jacobs School of Engineering
+  </title>
+  <meta content="en-US" http-equiv="Content-Language">
+   <meta content="text/javascript" http-equiv="Content-Script-Type">
+    <meta content="text/css" http-equiv="Content-Style-Type">
+     <meta content="width=device-width, initial-scale=1" name="viewport"/>
+     <meta content="UCSD,UCSD Jacobs School of Engineering,ucsd engineering,engineering,bioengineering,computer science,electrical engineering,mechanical engineering,aerospace engineering,nanoengineering,structural engineering,research,research expo,cosmos,top engineering schools,engineering california,bioinformatics,ucsd chemical engineering,engineering schools,engineering schools california,engineering research,engineering faculty,internship,team internship program,ucsd ranking,ranking,environmental engineering, part-time engineering degree, part-time engineering San Diego, part-time engineering master's degree" lang="en-US" name="keywords">
+      <meta content="The UCSD Jacobs School of Engineering is a premier research school set apart by our entrepreneurial culture and integrative engineering approach. The Jacobs School's mission is to educate tomorrow's technology leaders and to seek discoveries that fuel economic prosperity of the nation, and enhance the quality of life for people everywhere." lang="en-US" name="description"/>
+      <meta content="UCSD Jacobs School of Engineering" lang="en-US" name="copyright"/>
+      <link href="/assets/bootstrap/bootstrap-jacobs/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+      <link href="/assets/bootstrap/smartmenus-1.0.0/addons/bootstrap/jquery.smartmenus.bootstrap.css" rel="stylesheet"/>
+      <link href="/assets/bootstrap/smartmenus-1.0.0/css/sm-core-css.css" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" type="text/css"/>
+      <link href="/assets/bootstrap/font-awesome-4.4.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+       <link href="/assets/css/styles.css" rel="stylesheet" type="text/css"/>
+       <script src="/assets/bootstrap/bootstrap-3.3.6-dist/jquery-1.11.1.js">
+       </script>
+       <script src="/assets/bootstrap/bootstrap-jacobs/js/bootstrap.js">
+       </script>
+       <script src="/assets/bootstrap/smartmenus-1.0.0/jquery.smartmenus.js">
+       </script>
+       <script src="/assets/bootstrap/smartmenus-1.0.0/addons/bootstrap/jquery.smartmenus.bootstrap.js">
+       </script>
+       <script src="/assets/scripts/date.js">
+       </script>
+       <script>
+        $(function() {
+
+	$('.sm-vertical').smartmenus();
+
+	var pathName = window.location.pathname;
+	var firstSlash = pathName.split('/',1).join('/').length;
+	var secondSlash = pathName.split('/',2).join('/').length;
+	var subDir = pathName.substring(firstSlash + 1,secondSlash);
+
+	if (subDir != 'undefined' && subDir != '') {
+
+		var current_path = window.location.pathname.split('/').pop();
+		var subLinks = '.submenu a';
+
+		console.log(pathName);
+
+		$(subLinks).each(function(){
+			if (($(this).attr('href') != '' || typeof $(this).attr('href') != 'undefined') && $(this).attr('href') == pathName) {
+				$(this).addClass('active');
+			}
+		});
+	}
+
+
+	var $mainMenuState = $('#main-menu-state');
+
+	if ($mainMenuState.length) {
+		// animate mobile menu
+		$mainMenuState.change(function(e) {
+			var $menu = $('.sm-vertical');
+			if (this.checked) {
+				$menu.hide().slideDown(250, function() { $menu.css('display', ''); });
+			} else {
+				$menu.show().slideUp(250, function() { $menu.css('display', ''); });
+			}
+		});
+
+		// hide mobile menu beforeunload
+		$(window).bind('beforeunload unload', function() {
+
+			if ($mainMenuState[0].checked) {
+				$mainMenuState[0].click();
+			}
+		});
+	}
+
+	$('.search-icon').on('click',function(){
+		$('#header-search').toggle();
+	});
+});
+       </script>
+      </link>
+     </meta>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body>
+  <header>
+   <div class="logo-container">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-12">
+       <div class="header-logo">
+        <a href="/">
+         <img alt="UC San Diego Jacobs School of Engineering" border="0" src="/assets/images/UCSanDiego-JacobsSchool-Black.png"/>
+        </a>
+       </div>
+       <div class="navbar-header">
+        <button class="search-icon" type="button">
+         <i class="fa fa-search">
+         </i>
+        </button>
+        <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+         <span class="sr-only">
+          Toggle navigation
+         </span>
+         <span class="icon-bar">
+         </span>
+         <span class="icon-bar">
+         </span>
+         <span class="icon-bar">
+         </span>
+        </button>
+       </div>
+       <div id="header-search">
+        <form action="/search/" id="search-box">
+         <input id="magnifier" type="submit" value=""/>
+         <input id="search" name="q" placeholder="Search" type="text" value=""/>
+         <input name="cx" type="hidden" value="015220887430374600807:svuxli1obig"/>
+         <input name="cof" type="hidden" value="FORID:11"/>
+        </form>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container">
+    <div class="row">
+     <div class="col-sm-12 nav-container">
+      <nav class="navbar">
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav main-nav">
+         <li>
+          <a href="/">
+           Home
+          </a>
+         </li>
+         <li class="dropdown" id="about-nav">
+          <a class="dropdown-toggle" href="/about/">
+           About
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/about/mission.sfe">
+             Mission &amp; Vision
+            </a>
+           </li>
+           <li>
+            <a href="/about/about_leadership/">
+             Leadership
+            </a>
+           </li>
+           <li>
+            <a href="/about/rankings.sfe">
+             Rankings
+            </a>
+           </li>
+           <!--<li><a href="/about/statistics.sfe">School Statistics</a></li>-->
+           <li>
+            <a href="/about/about_hx/">
+             History
+            </a>
+           </li>
+           <li>
+            <a href="/about/map.sfe">
+             Map &amp; Directions
+            </a>
+           </li>
+           <li>
+            <a href="/about/careers.sfe">
+             Careers
+            </a>
+           </li>
+           <li>
+            <a href="/about/about_contacts/">
+             Contacts
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="dropdown nav-medium" id="dept-nav">
+          <a href="/academic/departments.sfe">
+           Departments
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="http://be.ucsd.edu/" target="_blank">
+             Bioengineering
+            </a>
+           </li>
+           <li>
+            <a href="http://www.cse.ucsd.edu/" target="_blank">
+             Computer Science &amp; Engineering
+            </a>
+           </li>
+           <li>
+            <a href="http://www.ece.ucsd.edu/" target="_blank">
+             Electrical &amp; Computer Engineering
+            </a>
+           </li>
+           <li>
+            <a href="http://maeweb.ucsd.edu/" target="_blank">
+             Mechanical &amp; Aerospace Engineering
+            </a>
+           </li>
+           <li>
+            <a href="http://nanoengineering.ucsd.edu/" target="_blank">
+             NanoEngineering
+            </a>
+           </li>
+           <li>
+            <a href="http://structures.ucsd.edu/" target="_blank">
+             Structural Engineering
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="dropdown" id="academics-nav">
+          <a href="/academic/">
+           Academics
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/academic/academic_undergrad/undergrad_majors/">
+             Undergraduate Majors
+            </a>
+           </li>
+           <li>
+            <a href="/academic/masters.sfe">
+             Master's Degree Programs
+            </a>
+           </li>
+           <li>
+            <a href="/academic/doctoral.sfe">
+             PH.D.
+            </a>
+           </li>
+           <li>
+            <a href="http://maseng.ucsd.edu/">
+             Master's Degrees for Working Professionals
+            </a>
+           </li>
+           <li>
+            <a href="/cosmos/" target="_blank">
+             COSMOS (Pre-College)
+            </a>
+           </li>
+           <li>
+            <a href="/admissions/continuing.sfe">
+             Continuing Education
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="dropdown" id="research-nav">
+          <a href="/faculty">
+           Research
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/faculty/research_inst.sfe">
+             Research Centers
+            </a>
+           </li>
+           <li>
+            <a href="/faculty/collaboration.sfe">
+             Industry Partnerships
+            </a>
+           </li>
+           <li>
+            <a href="http://ige.ucsd.edu">
+             Commercialization
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="dropdown" id="faculty-nav">
+          <a href="/faculty/faculty_bios/">
+           Faculty
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/faculty/faculty_bios/">
+             Faculty Profiles
+            </a>
+           </li>
+           <li>
+            <a href="/faculty/faculty_bios/na_members.sfe">
+             NAE Members
+            </a>
+           </li>
+           <li>
+            <a href="/faculty/faculty_bios/endowed_chairs.sfe">
+             Endowed Chair Professors
+            </a>
+           </li>
+           <li>
+            <a href="/faculty/teacher_awards.sfe">
+             Best Teacher Awardees
+            </a>
+           </li>
+           <li>
+            <a href="http://soeadm.ucsd.edu/">
+             For Faculty &amp; Staff
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="dropdown" id="students-nav">
+          <a href="/student/landing.sfe">
+           Students
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/student/">
+             IDEA Engineering Student Center
+            </a>
+           </li>
+           <li>
+            <a href="/envision/">
+             EnVision Maker Studio
+            </a>
+           </li>
+           <li>
+            <a href="/academic/academic_undergrad/undergrad_majors/">
+             Undergraduate Majors
+            </a>
+           </li>
+           <li>
+            <a href="/academic/academic_undergrad/undergrad_admissions.sfe">
+             Prospective Undergraduates
+            </a>
+           </li>
+           <li>
+            <a href="/academic/masters.sfe">
+             Prospective MS Students
+            </a>
+           </li>
+           <li>
+            <a href="/academic/doctoral.sfe">
+             Prospective PhD Students
+            </a>
+           </li>
+           <li>
+            <a href="/career-resources/">
+             Career Resources
+            </a>
+           </li>
+           <li>
+            <a href="http://jacobsschool.ucsd.edu/idea/studentlife/undergradorgs.shtml">
+             Student Organizations
+            </a>
+           </li>
+           <li>
+            <a href="/GordonCenter/">
+             Gordon Engineering Leadership Center
+            </a>
+           </li>
+           <li>
+            <a href="http://globalties.ucsd.edu/">
+             Global TIES
+            </a>
+           </li>
+           <li>
+            <a href="http://ige.ucsd.edu">
+             Institute for the Global Entrepreneur
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li id="alumni-nav">
+          <a href="/alumni/">
+           Alumni
+          </a>
+         </li>
+         <li class="dropdown" id="industry-nav">
+          <a href="/industry/">
+           Industry
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/external/external_cap/">
+             Corporate Affiliates Program
+            </a>
+           </li>
+           <li>
+            <a href="http://ige.ucsd.edu">
+             Institute for the Global Entrepreneur
+            </a>
+           </li>
+           <li>
+            <a href="/industry/recruiting.sfe">
+             Recruit Students
+            </a>
+           </li>
+           <li>
+            <a href="http://maseng.ucsd.edu/">
+             Master's Degrees for Working Professionals
+            </a>
+           </li>
+           <li>
+            <a href="http://innovation.ucsd.edu/" target="_blank">
+             Office of Innovation and Commercialization
+            </a>
+           </li>
+           <li>
+            <a href="/tokyooffice/reserve/">
+             Tokyo Office
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="dropdown" id="news-nav">
+          <a href="/news/">
+           News
+           <span class="caret">
+           </span>
+          </a>
+          <ul class="dropdown-menu">
+           <li>
+            <a href="/news/news_resources/resources_logos">
+             Logos
+            </a>
+           </li>
+           <li>
+            <a href="/news/news_resources/contacts.sfe">
+             Media Contacts
+            </a>
+           </li>
+           <li>
+            <a href="/news/news_releases/">
+             News Releases
+            </a>
+           </li>
+           <li>
+            <a href="/faculty/faculty_bios/">
+             Faculty Experts
+            </a>
+           </li>
+           <li>
+            <a href="http://www.flickr.com/photos/jsoe/albums" target="_blank">
+             Photos
+            </a>
+           </li>
+           <li>
+            <a href="/news/news_resources/publications.sfe" target="_blank">
+             Brochures
+            </a>
+           </li>
+           <li>
+            <a href="/news/monthly-newsletter.sfe" target="_blank">
+             Monthly News Email
+            </a>
+           </li>
+           <li>
+            <a href="http://www.facebook.com/UCSDJacobs" target="_blank">
+             Facebook
+            </a>
+           </li>
+           <li>
+            <a href="http://jacobsschoolofengineering.blogspot.com/" target="_blank">
+             Blog
+            </a>
+           </li>
+           <!--                                    <li><a href="/news/news_events/">Events</a></li>-->
+           <li>
+            <a href="http://www.youtube.com/user/JacobsSchoolNews" target="_blank">
+             Video
+            </a>
+           </li>
+           <li>
+            <a href="/news/news_clips/">
+             Press Clips
+            </a>
+           </li>
+           <li>
+            <a href="/news/news_resources/">
+             Media Resources
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="nav-medium noborder" id="give-nav">
+          <a href="/external/external_giving/">
+           Giving
+          </a>
+         </li>
+        </ul>
+       </div>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="front-page container">
+   <div class="row">
+    <div class="col-sm-12">
+     <div class="carousel slide" data-ride="carousel" id="carousel-example-generic">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+       <!-- <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
+       <li class="active" data-slide-to="0" data-target="#carousel-example-generic">
+       </li>
+       <li class="" data-slide-to="1" data-target="#carousel-example-generic">
+       </li>
+       <li class="" data-slide-to="2" data-target="#carousel-example-generic">
+       </li>
+       <li class="" data-slide-to="3" data-target="#carousel-example-generic">
+       </li>
+       <li class="" data-slide-to="4" data-target="#carousel-example-generic">
+       </li>
+       <li class="" data-slide-to="5" data-target="#carousel-example-generic">
+       </li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+       <!-- What is this slideActiveFlag needed for? Is it to initialize the carousel with the active class? Please comment these things. --->
+       <!--					<div class="item active">
+					  <a href="http://jacobsschool.ucsd.edu/re/register.sfe" target="_blank">
+						  <img src="re/dist/img/re18-slide-1.jpg" alt="Research Expo 2018"/>
+					  </a>
+					</div>-->
+       <div class="item active">
+        <a href="/news/news_releases/release.sfe?id=2731">
+         <img alt="" src="http://jacobsschool.ucsd.edu/uploads/news_release/2019/ROTATOR-IPEK.jpg">
+         </img>
+        </a>
+        <div class="carousel-caption">
+        </div>
+       </div>
+       <div class="item">
+        <a href="/news/news_releases/release.sfe?id=2720">
+         <img alt="" src="http://jacobsschool.ucsd.edu/uploads/news_release/2019/rotator.jpg"/>
+        </a>
+        <div class="carousel-caption">
+        </div>
+       </div>
+       <div class="item">
+        <a href="/news/news_releases/release.sfe?id=2715">
+         <img alt="" src="http://jacobsschool.ucsd.edu/uploads/news_release/2019/ROTATOR-IEM-telesurgery-AR-system.jpg"/>
+        </a>
+        <div class="carousel-caption">
+        </div>
+       </div>
+       <div class="item">
+        <a href="/news/news_releases/release.sfe?id=2714">
+         <img alt="" src="http://jacobsschool.ucsd.edu/uploads/news_release/2019/ROTATOR-training-clinical-engineers.jpg"/>
+        </a>
+        <div class="carousel-caption">
+        </div>
+       </div>
+       <div class="item">
+        <a href="/news/news_releases/release.sfe?id=2710">
+         <img alt="" src="http://jacobsschool.ucsd.edu/uploads/news_release/2019/ROTATOR-heart-stiff-arrhythmia.jpg"/>
+        </a>
+        <div class="carousel-caption">
+        </div>
+       </div>
+       <div class="item">
+        <a href="/news/news_releases/release.sfe?id=2699">
+         <img alt="" src="http://jacobsschool.ucsd.edu/uploads/news_release/2019/ROTATOR-3d-printed-spinal-cord-implant.jpg"/>
+        </a>
+        <div class="carousel-caption">
+        </div>
+       </div>
+      </div>
+      <!-- Controls -->
+      <a class="left carousel-control" data-slide="prev" href="#carousel-example-generic" role="button">
+       <span aria-hidden="true" class="glyphicon glyphicon-chevron-left">
+       </span>
+       <span class="sr-only">
+        Previous
+       </span>
+      </a>
+      <a class="right carousel-control" data-slide="next" href="#carousel-example-generic" role="button">
+       <span aria-hidden="true" class="glyphicon glyphicon-chevron-right">
+       </span>
+       <span class="sr-only">
+        Next
+       </span>
+      </a>
+     </div>
+    </div>
+   </div>
+   <div class="row home-cols">
+    <div class="col-sm-4">
+     <h2>
+      Jacobs School Monthly Email
+     </h2>
+     <a href="http://jacobsschool.ucsd.edu/news/monthly-newsletter.sfe" target="_blank">
+      <img alt="Newsletter" src="/assets/images/home/emailnewsl-JS.jpg" style="border:none;padding:0;"/>
+     </a>
+     <br/>
+     <p>
+      <a href="http://jacobsschool.ucsd.edu/news/monthly-newsletter.sfe">
+       View the Latest Newsletter
+       <i aria-hidden="true" class="fa fa-arrow-circle-right">
+       </i>
+      </a>
+     </p>
+     <br/>
+     <iframe frameborder="0" height="250" src="https://signup.e2ma.net/signup/1836280/1755893/" width="100%">
+     </iframe>
+    </div>
+    <div class="col-sm-4">
+     <h2>
+      Continue the nontradition
+     </h2>
+     <a href="http://campaign.ucsd.edu/" target="_blank">
+      <img alt="Continue the Tradition" class="photo-of-week" src="/assets/images/home/CampaignWebGraphic-f1.svg"/>
+     </a>
+    </div>
+    <div class="col-sm-4">
+     <!-- REMEMBER TO GO TO /assets/includes/photo.html and update there as well-->
+     <h2>
+      Prospective Students
+     </h2>
+     <a href="http://jacobsschool.ucsd.edu/academic/academic_undergrad/undergrad_admissions.sfe" target="_blank">
+      <img alt="Photo of the Week" class="photo-of-week" src="/assets/images/home/prospective_students_3.jpg"/>
+     </a>
+     <div class="prospective_student_links">
+      <p>
+       <a href="http://jacobsschool.ucsd.edu/academic/academic_undergrad/undergrad_admissions.sfe" target="_blank">
+        Information for Prospective Undergraduates
+       </a>
+      </p>
+      <p>
+       <a href="/academic/masters.sfe" target="_blank">
+        Information for Prospective Master's Students
+       </a>
+      </p>
+      <p>
+       <a href="/academic/doctoral.sfe" target="_blank">
+        Information for Prospective PhD Students
+       </a>
+      </p>
+     </div>
+    </div>
+    <!--		<div class="col-sm-12">
+			<br/>
+			<iframe src="https://signup.e2ma.net/signup/1836280/1755893/" width="40%" height="250" frameborder="0"></iframe>
+		</div>-->
+   </div>
+  </div>
+  <footer>
+   <div class="container">
+    <div class="row">
+     <div class="col-sm-5">
+      <img src="/assets/images/UCSD-JSOE-logo-wht.png"/>
+      <h2 class="copyright-msg">
+       ©
+       <script type="text/javascript">
+        document.write(new Date().getFullYear());
+       </script>
+       Regents of the University of California
+      </h2>
+      <br/>
+     </div>
+     <div class="col-sm-3">
+      <h2>
+       Social Media
+      </h2>
+      <ul class="social-media">
+       <li>
+        <a href="http://www.facebook.com/UCSDJacobs" target="_blank">
+         <i class="fa fa-facebook">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href=" https://twitter.com/UCSDJacobs" target="_blank">
+         <i class="fa fa-twitter">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.instagram.com/ucsandiegoengineering/" target="_blank">
+         <i class="fa fa-instagram">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.linkedin.com/school/university-of-california-san-diego---jacobs-school-of-engineering/" target="_blank">
+         <i class="fa fa-linkedin">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="http://www.youtube.com/user/JacobsSchoolNews" target="_blank">
+         <i class="fa fa-youtube">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.flickr.com/photos/jsoe/albums" target="_blank">
+         <i class="fa fa-flickr">
+         </i>
+        </a>
+       </li>
+      </ul>
+      <br/>
+      <h2>
+       Weather
+      </h2>
+      <p>
+       <a href="/about/weather.sfe">
+        <script language="javascript">
+         PrintDate();
+        </script>
+        - Weather@UCSanDiego
+       </a>
+      </p>
+      <br/>
+     </div>
+     <div class="col-sm-3">
+      <ul class="footer-menu">
+       <li>
+        <a href="/">
+         Jacobs School Home
+        </a>
+       </li>
+       <li>
+        <a href="http://jacobsschool.ucsd.edu/academic/academic_undergrad/undergrad_admissions.sfe" target="_blank">
+         Prospective Undergrad Info
+        </a>
+       </li>
+       <li>
+        <a href="/about/about_contacts/">
+         Contact
+        </a>
+       </li>
+       <li>
+        <a href="/faculty/faculty_bios/">
+         Faculty Database
+        </a>
+       </li>
+       <li>
+        <a href="http://support.eng.ucsd.edu/" target="_blank">
+         Jacobs School IT Support
+        </a>
+       </li>
+       <li>
+        <a href="http://soeadm.ucsd.edu/">
+         For Faculty &amp; Staff
+        </a>
+       </li>
+       <li>
+        <a href="http://www.ucsd.edu/directory/">
+         UC San Diego Directory
+        </a>
+       </li>
+       <li>
+        <a href="/about/privacy.sfe">
+         Privacy
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-9709862-1', 'auto');
+	ga('send', 'pageview');
+  </script>
+ </body>
+</html>
+

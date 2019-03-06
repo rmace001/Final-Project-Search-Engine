@@ -1,0 +1,272 @@
+https://stanfordwho.stanford.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   Public View of Stanford People Search
+  </title>
+  <link href="/SWApp/jsp/osd.xml" rel="search" title="StanfordWho (public)" type="application/opensearchdescription+xml"/>
+  <link href="/SWApp/jsp/osd_stanford.xml" rel="search" title="StanfordWho (authenticated)" type="application/opensearchdescription+xml"/>
+  <script src="/SWApp/jsp/common/swho.js" type="text/javascript">
+  </script>
+  <link href="/SWApp/jsp/common/swho.css" rel="stylesheet" type="text/css"/>
+  <style type="text/css">
+   #SearchHeading h1, #SearchHeading2 h1 {
+        margin-bottom: 2px;
+    }
+
+    #SearchStanford, #SearchStanford2 {
+        float: left;
+    }
+
+    #search_string, #search_string2 {
+        margin-right: 0;
+    }
+
+    #SearchSubmit, #SearchSubmit2 {
+        float: left;
+    }
+  </style>
+  <link href="#Tabs" rel="index" title="Search Types "/>
+  <link href="#SWhoBody" rel="search" title="New Search "/>
+ </head>
+ <body onload="startstate()">
+  <div class="hidden">
+   <a href="#SWhoBody">
+    skip navigation
+   </a>
+  </div>
+  <div id="printbanner">
+   <h1>
+    STANFORD UNIVERSITY
+   </h1>
+   <h2>
+    SEARCHING STANFORD: PEOPLE SEARCH
+   </h2>
+  </div>
+  <div id="container">
+   <!-- end of this div is in SearchStanford-foot.jsp -->
+   <div id="container_header">
+    <div id="header">
+     <div id="logo">
+      <a href="http://www.stanford.edu">
+       <img alt="Stanford University" src="/SWApp/jsp/common/stanford_title.jpg" style="float: left;"/>
+      </a>
+      <img alt="Searching Stanford" src="/SWApp/jsp/common/searching_stanford.gif"/>
+     </div>
+    </div>
+   </div>
+   <div id="topnav">
+    <ul>
+     <li>
+      <a href="http://www.stanford.edu/search" id="a0" onclick="return qs(this, 'web');">
+       Stanford
+                    Web
+      </a>
+     </li>
+     <li>
+      <a class="here" href="/SWApp" id="a1" onclick="return qs(this, 'who');">
+       People
+      </a>
+     </li>
+     <li>
+      <a href="/OSApp" id="a2" onclick="return qs(this, 'org');">
+       Organizations
+      </a>
+     </li>
+     <li>
+      <a href="http://campus-map.stanford.edu" id="a3" onclick="return qs(this, 'map');">
+       Campus
+                    Map
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div id="content_main">
+    <!-- end of this div is in SearchStanford-foot.jsp -->
+    <div id="subnav">
+     <ul>
+      <li>
+       <a href="https://stanfordhealthcare.org/search-results.doctors.html" title="Stanford Hospital: Find a Physician">
+        Stanford
+                        Hospital: Find a Physician
+       </a>
+      </li>
+      <li>
+       <a href="http://www.stanfordchildrens.org/en/search/default?tab=doctors" title="Lucile Packard Children's Hospital: Find a Doctor">
+        LPCH: Find a Doctor
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div id="Notice" style="background-color: #D2C295; padding: 10px 20px; margin: 10px; font-size: 0.9em; border-bottom: 1px solid #820000; border-top: 1px solid #820000;">
+     <p style="margin: 0;">
+      The public view of StanfordWho will soon have a new display and features.
+      <a href="https://uit.stanford.edu/service/stanfordwho/public" target="_blank">
+       Learn more.
+      </a>
+     </p>
+    </div>
+    <div id="SWhoBody">
+     <div id="SWhoLogin">
+      <div id="ToggleLink">
+       <strong>
+        guest
+       </strong>
+       |
+       <a href="https://stanford.rimeto.io">
+        login
+       </a>
+      </div>
+      <noscript>
+       <div id="Noscript">
+        <strong>
+         guest
+        </strong>
+        |
+        <a href="https://stanford.rimeto.io">
+         login
+        </a>
+       </div>
+      </noscript>
+     </div>
+     <div id="SWhoSearch">
+      <form action="/SWApp/Search.do" id="searchform" method="post">
+       <fieldset>
+        <div id="SearchHeading">
+         <h1>
+          <label for="search_string">
+           Search by name, email, work phone, or sunetid
+          </label>
+         </h1>
+        </div>
+        <div id="SearchStanford">
+         <a href="https://stanford.rimeto.io">
+          Search in Stanford and Affiliates view &gt;&gt;
+         </a>
+        </div>
+        <div id="SearchString">
+         <input class="srchbox" id="search_string" name="search" type="text"/>
+         <input id="boxstatus" name="filters" type="hidden" value="closed"/>
+         <div id="ToggleShowTop">
+          <a href="javascript:;" onclick="showextras()">
+           show more options
+          </a>
+         </div>
+         <div id="SearchExtrasTop">
+          <ul>
+           <li>
+            <input id="soundex" name="soundex" type="checkbox" value="checkbox"/>
+            <label for="soundex">
+             Find
+                                        last names that sound like my search term
+            </label>
+           </li>
+           <li>
+            <label for="affilfilter">
+             Search within:
+            </label>
+            <select id="affilfilter" name="affilfilter">
+             <option selected="selected" value="everyone">
+              Stanford
+                                            University and Affiliates (everyone)
+             </option>
+             <optgroup label="or only:">
+              <option value="stanford:*">
+               University (including SLAC &amp;
+                                                Med School)
+              </option>
+              <option value="stanford:faculty*">
+               University faculty
+              </option>
+              <option value="stanford:staff*">
+               University staff
+              </option>
+              <option value="stanford:student*">
+               University students &amp;
+                                                postdocs
+              </option>
+              <option value="sumc:staff*">
+               Hospital, Clinic &amp; LPCH staff
+              </option>
+             </optgroup>
+            </select>
+           </li>
+          </ul>
+          <div id="ToggleHideTop">
+           <a href="javascript:;" onclick="hideextras()">
+            hide &amp; clear search options
+           </a>
+          </div>
+         </div>
+        </div>
+        <div id="SearchSubmit">
+         <input class="button" name="btnG" type="submit" value="Search"/>
+        </div>
+       </fieldset>
+      </form>
+     </div>
+     <br style="clear: both;"/>
+    </div>
+    <!-- <div id="content_main"> -->
+   </div>
+   <div class="clear" id="footer">
+    <ul id="nav_footer">
+     <li>
+      <a href="http://www.stanford.edu/">
+       Stanford Home
+      </a>
+     </li>
+     <li>
+      <a href="/SWApp/logout.do">
+       Re-Authenticate
+      </a>
+     </li>
+     <li>
+      <a href="http://helpsu.stanford.edu/">
+       HelpSU
+      </a>
+     </li>
+     <li class="last">
+      <a href="http://itservices.stanford.edu/service/stanfordwho/search">
+       Help with StanfordWho
+      </a>
+     </li>
+    </ul>
+    <div id="copyright">
+     <p>
+      © Stanford University. 450 Serra Mall, Stanford, California 94305. (650) 723-2300.
+      <a href="http://www.stanford.edu/site/terms.html">
+       Terms of Use
+      </a>
+      |
+      <a href="http://www.stanford.edu/site/copyright.html">
+       Copyright Complaints
+      </a>
+     </p>
+    </div>
+   </div>
+   <!-- end of <div id="container"> -->
+  </div>
+  <!-- Piwik -->
+  <script type="text/javascript">
+   var pkBaseURL = (("https:" == document.location.protocol) ? "https://analytics.stanford.edu/" : "http://analytics.stanford.edu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 5);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+  </script>
+  <noscript>
+   <p>
+    <img alt="" src="https://analytics.stanford.edu/piwik.php?idsite=5" style="border:0"/>
+   </p>
+  </noscript>
+  <!-- End Piwik Tracking Code -->
+ </body>
+</html>
+

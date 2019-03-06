@@ -1,0 +1,1617 @@
+http://slc.berkeley.edu/
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+  </script>
+  <link href="https://slc.berkeley.edu/sites/all/themes/MDALLC/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" name="viewport"/>
+  <meta content="Drupal 7 (https://www.drupal.org)" name="generator"/>
+  <link href="https://slc.berkeley.edu/" rel="canonical"/>
+  <link href="https://slc.berkeley.edu/" rel="shortlink"/>
+  <meta content="SLC | UC Berkeley" property="og:site_name"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://slc.berkeley.edu/" property="og:url"/>
+  <meta content="SLC | UC Berkeley" property="og:title"/>
+  <meta content="summary" name="twitter:card"/>
+  <meta content="https://slc.berkeley.edu/" name="twitter:url"/>
+  <meta content="SLC | UC Berkeley" name="twitter:title"/>
+  <title>
+   SLC | UC Berkeley |
+  </title>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all" rel="stylesheet"/>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_CWWNfVmjJfPlbmMyHwP3Feo8eX4-ARQdRHnXtqyFhZc.css" media="all" rel="stylesheet"/>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_mSo1G5fIParbqab6f6XgDDBT7DA8ChWH4-90fTSfU3g.css" media="all" rel="stylesheet"/>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_jixNg9iviObmAD2I46XIJUqb0bbAEnNLaWyPguMM_ks.css" media="all" rel="stylesheet"/>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU.css" media="all" rel="stylesheet"/>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_T-JB7RV9mowmDZPLwf68BG3ECVkC8x4fVZSBlq9y30A.css" media="all" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=latin-ext,latin" media="all" rel="stylesheet"/>
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_NZQrox-s0z3sEgeie_SZR1QcPJPKcKjjLOTSRXh-KbY.css" media="all" rel="stylesheet"/>
+  <!--[if (lt IE 9)&(!IEMobile)]>
+<link rel="stylesheet" href="https://slc.berkeley.edu/sites/default/files/css/css_IIZonmhqChFakOT4r6t9m1czMHSAXC3kHIRtWFBKYT8.css" media="all" />
+<![endif]-->
+  <!--[if gte IE 9]><!-->
+  <link href="https://slc.berkeley.edu/sites/default/files/css/css_EnvXxsjZ7mj-WQ9MIQIhmsVjPa62utwEKoplwGgpA18.css" media="all" rel="stylesheet"/>
+  <!--<![endif]-->
+  <script>
+   document.cookie = 'adaptive_image=' + Math.max(screen.width, screen.height) + '; path=/';
+  </script>
+  <script src="https://slc.berkeley.edu/sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js">
+  </script>
+  <script src="https://slc.berkeley.edu/sites/default/files/js/js_52yzXVz9Nxn4WCCUc3MA_G7Smjg3cZyrrfWu9AveL4I.js">
+  </script>
+  <script>
+   jQuery(document).ready(function(){jQuery("#accordion, #accordion2, #accordion3, #accordion4, #accordion5, #accordion6").accordion({active:false,autoHeight:false,navigation:true,collapsible:true});});
+  </script>
+  <script src="https://slc.berkeley.edu/sites/default/files/js/js_s_HOf7jTdR6JuwZN72mL540_KQRGbFbljx8dfEMD6Ko.js">
+  </script>
+  <script src="https://slc.berkeley.edu/sites/default/files/js/js_S4Fotzj2_g0hGXDc_oaoBxECIPze1RkFsgbTggDlDh8.js">
+  </script>
+  <script src="https://slc.berkeley.edu/sites/default/files/js/js_43n5FBy8pZxQHxPXkf-sQF7ZiacVZke14b0VlvSA554.js">
+  </script>
+  <script>
+   jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"MDALLC","theme_token":"LvTHhSc8Clnj1URORoWG_ZlSJs8SGVloKcegEVrcv1E","js":{"sites\/all\/modules\/menu_minipanels\/js\/menu_minipanels.js":1,"sites\/all\/libraries\/qtip\/jquery.qtip-1.0.0-rc3.min.js":1,"0":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/ui\/jquery.ui.core.min.js":1,"misc\/ui\/jquery.ui.widget.min.js":1,"misc\/ui\/jquery.ui.accordion.min.js":1,"sites\/all\/modules\/views_slideshow\/js\/views_slideshow.js":1,"sites\/all\/modules\/nice_menus\/js\/jquery.bgiframe.js":1,"sites\/all\/modules\/nice_menus\/js\/jquery.hoverIntent.js":1,"sites\/all\/modules\/nice_menus\/js\/superfish.js":1,"sites\/all\/modules\/nice_menus\/js\/nice_menus.js":1,"1":1,"sites\/all\/modules\/jquerymenu\/jquerymenu.js":1,"sites\/all\/libraries\/jquery.cycle\/jquery.cycle.all.min.js":1,"sites\/all\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/js\/views_slideshow_cycle.js":1,"sites\/all\/modules\/megamenu\/megamenu.js":1,"sites\/all\/modules\/menu_minipanels\/js\/menu_minipanels.callbacks.js":1,"sites\/all\/themes\/MDALLC\/js\/custom-accordion.js":1,"sites\/all\/themes\/MDALLC\/js\/playvideo.js":1,"sites\/all\/themes\/omega\/omega\/js\/jquery.formalize.js":1,"sites\/all\/themes\/omega\/omega\/js\/omega-mediaqueries.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.accordion.css":1,"sites\/all\/modules\/views_slideshow\/views_slideshow.css":1,"sites\/all\/modules\/adaptive_image\/css\/adaptive-image.css":1,"modules\/aggregator\/aggregator.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/jquerymenu\/jquerymenu.css":1,"sites\/all\/modules\/panels\/css\/panels.css":1,"public:\/\/ctools\/css\/c61181db49f97e0f16183c2e98502785.css":1,"sites\/all\/modules\/views_slideshow\/views_slideshow_controls_text.css":1,"sites\/all\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/views_slideshow_cycle.css":1,"sites\/all\/modules\/panels\/plugins\/layouts\/flexible\/flexible.css":1,"public:\/\/ctools\/css\/0a2d2db161d346075c06ba181c752133.css":1,"sites\/all\/modules\/nice_menus\/css\/nice_menus.css":1,"sites\/all\/themes\/MDALLC\/nicemenu-skin-mda.css":1,"sites\/all\/modules\/megamenu\/megamenu.css":1,"sites\/all\/modules\/megamenu\/megamenu-skins.css":1,"sites\/all\/modules\/menu_minipanels\/css\/menu_minipanels.css":1,"public:\/\/google_fonts.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-reset.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-mobile.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-alpha.css":1,"sites\/all\/themes\/omega\/omega\/css\/formalize.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-text.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-branding.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-menu.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-forms.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-visuals.css":1,"sites\/default\/files\/fontyourface\/font.css":1,"https:\/\/fonts.googleapis.com\/css?family=Open+Sans:300,400,600\u0026subset=latin-ext,latin":1,"sites\/all\/themes\/MDALLC\/css\/global.css":1,"ie::normal::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default.css":1,"ie::normal::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default-normal.css":1,"ie::normal::sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1,"narrow::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default.css":1,"narrow::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default-narrow.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/narrow\/alpha-default-narrow-12.css":1,"normal::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default.css":1,"normal::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default-normal.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-12.css":1,"wide::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default.css":1,"wide::sites\/all\/themes\/MDALLC\/css\/MDALLC-alpha-default-wide.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/wide\/alpha-default-wide-12.css":1}},"jquerymenu":{"hover":0,"animate":1,"edit_link":1,"click_to_expand":0},"viewsSlideshow":{"Homepage_slideshow-block_1":{"methods":{"goToSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"nextSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"pause":["viewsSlideshowControls","viewsSlideshowCycle"],"play":["viewsSlideshowControls","viewsSlideshowCycle"],"previousSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"transitionBegin":["viewsSlideshowPager","viewsSlideshowSlideCounter"],"transitionEnd":[]},"paused":0}},"viewsSlideshowControls":{"Homepage_slideshow-block_1":{"top":{"type":"viewsSlideshowControlsText"}}},"viewsSlideshowCycle":{"#views_slideshow_cycle_main_Homepage_slideshow-block_1":{"num_divs":5,"id_prefix":"#views_slideshow_cycle_main_","div_prefix":"#views_slideshow_cycle_div_","vss_id":"Homepage_slideshow-block_1","effect":"fade","transition_advanced":1,"timeout":7000,"speed":1000,"delay":0,"sync":1,"random":0,"pause":1,"pause_on_click":0,"play_on_hover":0,"action_advanced":1,"start_paused":0,"remember_slide":0,"remember_slide_days":1,"pause_in_middle":0,"pause_when_hidden":0,"pause_when_hidden_type":"full","amount_allowed_visible":"","nowrap":0,"pause_after_slideshow":0,"fixed_height":1,"items_per_slide":1,"wait_for_image_load":1,"wait_for_image_load_timeout":3000,"cleartype":0,"cleartypenobg":0,"advanced_options":"{}"}},"urlIsAjaxTrusted":{"\/":true},"nice_menus_options":{"delay":800,"speed":"slow"},"menuMinipanels":{"panels":{"panel_218":{"position":{"target":"custom","target_custom":"#block-system-main-menu","type":"absolute","corner":{"target":"bottomLeft","tooltip":"topLeft"}},"show":{"delay":"0","when":{"event":"mouseover"},"effect":{"type":"slide","length":"300"}},"hide":{"delay":"300","effect":{"type":"fade","length":"300"}},"style":{"name":"light","width":{"min":"220","max":"940"},"border":{"width":"0","color":"#d3d3d3","radius":"0"}},"mlid":"218"},"panel_1158":{"position":{"target":"custom","target_custom":"#block-system-main-menu","type":"absolute","corner":{"target":"bottomLeft","tooltip":"topLeft"}},"show":{"delay":"0","when":{"event":"mouseover"},"effect":{"type":"slide","length":"300"}},"hide":{"delay":"300","effect":{"type":"slide","length":"100"}},"style":{"name":"light","width":{"min":"220","max":"940"},"border":{"width":"0","color":"#d3d3d3","radius":"0"}},"mlid":"1158"},"panel_1159":{"position":{"target":"custom","target_custom":"#block-system-main-menu","type":"absolute","corner":{"target":"bottomLeft","tooltip":"topLeft"}},"show":{"delay":"0","when":{"event":"mouseover"},"effect":{"type":"slide","length":"300"}},"hide":{"delay":"300","effect":{"type":"slide","length":"100"}},"style":{"name":"light","width":{"min":"220","max":"940"},"border":{"width":"0","color":"#d3d3d3","radius":"0"}},"mlid":"1159"}}},"megamenu":{"timeout":"500","sizewait":"250","hoverwait":"400"},"omega":{"layouts":{"primary":"normal","order":["narrow","normal","wide"],"queries":{"narrow":"all and (min-width: 740px) and (min-device-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation:landscape)","normal":"all and (min-width: 980px) and (min-device-width: 980px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)","wide":"all and (min-width: 1220px)"}}}});
+  </script>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+ </head>
+ <body class="html front not-logged-in page-grid">
+  <div id="skip-link">
+   <a class="element-invisible element-focusable" href="#main-content">
+    Skip to main content
+   </a>
+  </div>
+  <div class="page clearfix" id="page">
+   <header class="section section-header" id="section-header">
+    <div class="zone-wrapper zone-user-wrapper clearfix" id="zone-user-wrapper">
+     <div class="zone zone-user clearfix container-12" id="zone-user">
+      <div class="grid-12 region region-user-second" id="region-user-second">
+       <div class="region-inner region-user-second-inner">
+        <div class="block block-megamenu block-menu-masthead-navigation block-megamenu-menu-masthead-navigation odd block-without-title" id="block-megamenu-menu-masthead-navigation">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <ul class="megamenu-menu columnar megamenu-skin-masthead" id="megamenu-menu-masthead-navigation">
+            <li class="megamenu-parent megamenu-parent-0 odd half-1 leaf-0 first menu-1350 first" id="megamenu-mlid-1350">
+             <h2 class="megamenu-parent-title">
+              <a href="/faculty-and-staff">
+               Faculty and Staff
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-1 even half-1 leaf-1 menu-1352 " id="megamenu-mlid-1352">
+             <h2 class="megamenu-parent-title">
+              <a href="/slc-affirmation">
+               Students
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-2 odd half-2 leaf-2 menu-1349 " id="megamenu-mlid-1349">
+             <h2 class="megamenu-parent-title">
+              <a href="/slc-alumni">
+               SLC Alums
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-3 even half-2 leaf-3 last menu-1504 last" id="megamenu-mlid-1504">
+             <h2 class="megamenu-parent-title">
+              <a href="/training">
+               Training
+              </a>
+             </h2>
+             <ul class="megamenu-bin megamenu-slots-columnar">
+              <li class="megamenu-slot megamenu-slot-0 odd half-1 leaf-0 first first" id="megamenu-mlid-1507">
+               <h3 class="megamenu-slot-title">
+                <a href="/overview">
+                 Overview
+                </a>
+               </h3>
+              </li>
+              <li class="megamenu-slot megamenu-slot-1 even half-1 leaf-1 " id="megamenu-mlid-1505">
+               <h3 class="megamenu-slot-title">
+                <a href="/training-0">
+                 Training
+                </a>
+               </h3>
+              </li>
+              <li class="megamenu-slot megamenu-slot-2 odd half-2 leaf-2 last last" id="megamenu-mlid-1506">
+               <h3 class="megamenu-slot-title">
+                <a href="/faq-4">
+                 FAQ
+                </a>
+               </h3>
+              </li>
+             </ul>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="zone-wrapper zone-branding-wrapper clearfix" id="zone-branding-wrapper">
+     <div class="zone zone-branding clearfix container-12" id="zone-branding">
+      <div class="grid-12 region region-branding" id="region-branding">
+       <div class="region-inner region-branding-inner">
+        <div class="branding-data clearfix">
+         <div class="logo-img">
+          <a class="active" href="/" rel="home" title="">
+           <img alt="" id="logo" src="https://slc.berkeley.edu/sites/all/themes/MDALLC/logo.png"/>
+          </a>
+         </div>
+        </div>
+        <div class="block block-panels-mini block-mobile-header block-panels-mini-mobile-header odd block-without-title" id="block-panels-mini-mobile-header">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <div class="panel-flexible panels-flexible-3 clearfix" id="mini-panel-mobile_header">
+            <div class="panel-flexible-inside panels-flexible-3-inside">
+             <div class="panels-flexible-row panels-flexible-row-3-1 panels-flexible-row-first clearfix ">
+              <div class="inside panels-flexible-row-inside panels-flexible-row-3-1-inside panels-flexible-row-inside-first clearfix">
+               <div class="panels-flexible-region panels-flexible-region-3-left_region panels-flexible-region-first ">
+                <div class="inside panels-flexible-region-inside panels-flexible-region-3-left_region-inside panels-flexible-region-inside-first">
+                 <div class="panel-pane pane-custom pane-1">
+                  <div class="pane-content">
+                   <a href="/">
+                    Home
+                   </a>
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-region panels-flexible-region-3-social_region panels-flexible-region-last ">
+                <div class="inside panels-flexible-region-inside panels-flexible-region-3-social_region-inside panels-flexible-region-inside-last">
+                 <div class="panel-pane pane-custom pane-3">
+                  <div class="pane-content">
+                   <div class="header-social-1 rteright" style="">
+                    Contact Us |
+                    <a class="mobile-mail" href="/contact-slc-staff">
+                    </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="panels-flexible-row panels-flexible-row-3-main-row clearfix header1">
+              <div class="inside panels-flexible-row-inside panels-flexible-row-3-main-row-inside clearfix">
+               <div class="panels-flexible-region panels-flexible-region-3-menu_toggle panels-flexible-region-first ">
+                <div class="inside panels-flexible-region-inside panels-flexible-region-3-menu_toggle-inside panels-flexible-region-inside-first">
+                 <div class="panel-pane pane-custom pane-2">
+                  <div class="pane-content">
+                   <div id="menu_btn">
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-region panels-flexible-region-3-center panels-flexible-region-last ">
+                <div class="inside panels-flexible-region-inside panels-flexible-region-3-center-inside panels-flexible-region-inside-last">
+                 <div class="panel-pane pane-block pane-search-form">
+                  <div class="pane-content">
+                   <form accept-charset="UTF-8" action="/" id="search-block-form" method="post">
+                    <div>
+                     <div class="container-inline">
+                      <h2 class="element-invisible">
+                       Search form
+                      </h2>
+                      <div class="form-item form-type-searchfield form-item-search-block-form">
+                       <label class="element-invisible" for="edit-search-block-form--2">
+                        Search
+                       </label>
+                       <input class="form-text form-search" id="edit-search-block-form--2" maxlength="128" name="search_block_form" onblur="if (this.value == '') {this.value = 'Find Tutoring and Resources';}" onfocus="if (this.value == 'Find Tutoring and Resources') {this.value = '';}" size="30" title="Enter the terms you wish to search for." type="search" value="Find Tutoring and Resources"/>
+                      </div>
+                      <div class="form-actions form-wrapper" id="edit-actions">
+                       <input class="form-submit" id="edit-submit" name="op" type="submit" value="Search"/>
+                      </div>
+                      <input name="form_build_id" type="hidden" value="form-K2Y4ZoWpC0t08G8JcpxgWLiyn8migLEZAOqhOJJl6b4"/>
+                      <input name="form_id" type="hidden" value="search_block_form"/>
+                     </div>
+                    </div>
+                   </form>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="panels-flexible-row panels-flexible-row-3-2 panels-flexible-row-last clearfix ">
+              <div class="inside panels-flexible-row-inside panels-flexible-row-3-2-inside panels-flexible-row-inside-last clearfix">
+               <div class="panels-flexible-region panels-flexible-region-3-branding panels-flexible-region-first panels-flexible-region-last ">
+                <div class="inside panels-flexible-region-inside panels-flexible-region-3-branding-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                 <div class="panel-pane pane-page-logo">
+                  <div class="pane-content">
+                   <a href="/" id="logo" rel="home" title="Home">
+                    <img alt="Home" src="https://slc.berkeley.edu/sites/all/themes/MDALLC/logo.png"/>
+                   </a>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="zone-wrapper zone-menu-wrapper clearfix" id="zone-menu-wrapper">
+     <div class="zone zone-menu clearfix container-12" id="zone-menu">
+      <div class="grid-12 region region-menu" id="region-menu">
+       <div class="region-inner region-menu-inner">
+        <div class="block block-search block-form block-search-form odd block-without-title" id="block-search-form">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <form accept-charset="UTF-8" action="/" id="search-block-form--2" method="post">
+            <div>
+             <div class="container-inline">
+              <h2 class="element-invisible">
+               Search form
+              </h2>
+              <div class="form-item form-type-searchfield form-item-search-block-form">
+               <label class="element-invisible" for="edit-search-block-form--4">
+                Search
+               </label>
+               <input class="form-text form-search" id="edit-search-block-form--4" maxlength="128" name="search_block_form" onblur="if (this.value == '') {this.value = 'Find Tutoring and Resources';}" onfocus="if (this.value == 'Find Tutoring and Resources') {this.value = '';}" size="30" title="Enter the terms you wish to search for." type="search" value="Find Tutoring and Resources"/>
+              </div>
+              <div class="form-actions form-wrapper" id="edit-actions--2">
+               <input class="form-submit" id="edit-submit--2" name="op" type="submit" value="Search"/>
+              </div>
+              <input name="form_build_id" type="hidden" value="form-ksCQPO7RSihFmyNpg6Ol3umN-EMUHCwFQOI25kzbow0"/>
+              <input name="form_id" type="hidden" value="search_block_form"/>
+             </div>
+            </div>
+           </form>
+          </div>
+         </div>
+        </div>
+        <div class="block block-system block-menu block-main-menu block-system-main-menu even block-without-title" id="block-system-main-menu">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <ul class="menu">
+            <li class="first collapsed">
+             <a class="menu-minipanel menu-minipanel-218" href="/welcome-slc">
+              About the SLC
+             </a>
+            </li>
+            <li class="collapsed">
+             <a class="active menu-minipanel menu-minipanel-1158" href="/" title="">
+              Academic programs &amp; services
+             </a>
+            </li>
+            <li class="leaf">
+             <a href="http://slc.berkeley.edu/summer-bridge" title="">
+              Summer Bridge
+             </a>
+            </li>
+            <li class="leaf">
+             <a href="/spear">
+              SPEAR Academy
+             </a>
+            </li>
+            <li class="collapsed">
+             <a href="/summer-sessions">
+              Summer Sessions
+             </a>
+            </li>
+            <li class="collapsed">
+             <a class="menu-minipanel menu-minipanel-1159" href="/become-tutor">
+              Become a Tutor
+             </a>
+            </li>
+            <li class="last expanded">
+             <a href="/give-slc">
+              Support the SLC
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+        <section class="block block-nice-menus block-1 block-nice-menus-1 odd" id="block-nice-menus-1">
+         <div class="block-inner clearfix">
+          <h2 class="block-title block-title">
+           Main Menu
+          </h2>
+          <div class="content clearfix">
+           <ul class="nice-menu nice-menu-down nice-menu-main-menu" id="nice-menu-1">
+            <li class="menu-218 menuparent menu-path-node-31 first odd ">
+             <a class="menu-minipanel menu-minipanel-218" href="/welcome-slc">
+              About the SLC
+             </a>
+             <ul>
+              <li class="menu-1351 menuparent menu-path-node-180 first odd ">
+               <a href="/about-slc">
+                Purpose &amp; Core Values
+               </a>
+               <ul>
+                <li class="menu-1520 menu-path-node-215 first odd last">
+                 <a href="/location-and-hours">
+                  Location and Hours
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-1355 menu-path-node-33 even ">
+               <a href="/programs-and-service-formats">
+                Programs and Service Formats
+               </a>
+              </li>
+              <li class="menu-1517 menu-path-node-13 odd ">
+               <a href="/faculty-and-staff">
+                For Faculty and Staff
+               </a>
+              </li>
+              <li class="menu-1356 menu-path-node-35 even ">
+               <a href="/current-students">
+                For Students
+               </a>
+              </li>
+              <li class="menu-1519 menu-path-node-15 odd ">
+               <a href="/slc-alumni">
+                For SLC Alumni
+               </a>
+              </li>
+              <li class="menu-1615 menuparent menu-path-events-and-dates even ">
+               <a href="/events-and-dates">
+                Events and Important Dates
+               </a>
+               <ul>
+                <li class="menu-1616 menu-path-all-events-and-dates first odd last">
+                 <a href="/all-events-and-dates" title="">
+                  All Events and Important Dates
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-1516 menu-path-node-14 odd last">
+               <a href="/slc-affirmation">
+                Statement of Affirmation
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-1158 menuparent menu-path-front even ">
+             <a class="active menu-minipanel menu-minipanel-1158" href="/" title="">
+              Academic programs &amp; services
+             </a>
+             <ul>
+              <li class="menu-1717 menuparent menu-path-node-312 first odd ">
+               <a href="/econ">
+                Economics Program
+               </a>
+               <ul>
+                <li class="menu-2336 menu-path-node-404 first odd ">
+                 <a href="/econ-tutor">
+                  Become an Econ Tutor
+                 </a>
+                </li>
+                <li class="menu-2245 menu-path-node-401 even ">
+                 <a href="/exam-review">
+                  Exam Review
+                 </a>
+                </li>
+                <li class="menu-2129 menu-path-node-375 odd last">
+                 <a href="/meet-our-tutors-0">
+                  Meet Our Tutors
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-1369 menuparent menu-path-node-150 even ">
+               <a href="/isp">
+                International Student Program
+               </a>
+               <ul>
+                <li class="menu-2564 menu-path-node-419 first odd ">
+                 <a href="/fiat-luxicon-0">
+                  Fiat Luxicon
+                 </a>
+                </li>
+                <li class="menu-2241 menu-path-node-398 even ">
+                 <a href="/lep">
+                  Language Exchange Program
+                 </a>
+                </li>
+                <li class="menu-2519 menu-path-slcberkeleyedu-node-416 odd ">
+                 <a href="http://slc.berkeley.edu/node/416" title="">
+                  Become an LEP Student Coordinator
+                 </a>
+                </li>
+                <li class="menu-2242 menu-path-node-399 even ">
+                 <a href="/lepfaq">
+                  Language Exchange Program FAQ
+                 </a>
+                </li>
+                <li class="menu-2626 menu-path-node-429 odd last">
+                 <a href="/lep-book-club">
+                  LEP Global Book Club
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-1371 menuparent menu-path-node-45 odd ">
+               <a href="/math-and-statistics">
+                Math &amp; Statistics Program
+               </a>
+               <ul>
+                <li class="menu-1373 menu-path-node-46 first odd ">
+                 <a href="/math-1a">
+                  Math 1A
+                 </a>
+                </li>
+                <li class="menu-1379 menu-path-node-47 even ">
+                 <a href="/math-1b">
+                  Math 1B
+                 </a>
+                </li>
+                <li class="menu-1375 menu-path-node-48 odd ">
+                 <a href="/math-10a">
+                  Math 10A
+                 </a>
+                </li>
+                <li class="menu-1376 menu-path-node-49 even ">
+                 <a href="/math-10b">
+                  Math 10B
+                 </a>
+                </li>
+                <li class="menu-1377 menu-path-node-50 odd ">
+                 <a href="/math-16a">
+                  Math 16A
+                 </a>
+                </li>
+                <li class="menu-1378 menu-path-node-51 even ">
+                 <a href="/math-16b">
+                  Math 16B
+                 </a>
+                </li>
+                <li class="menu-1380 menu-path-node-52 odd ">
+                 <a href="/math-32">
+                  Math 32
+                 </a>
+                </li>
+                <li class="menu-1372 menu-path-node-53 even ">
+                 <a href="/math-53">
+                  Math 53
+                 </a>
+                </li>
+                <li class="menu-1381 menu-path-node-54 odd ">
+                 <a href="/math-54">
+                  Math 54
+                 </a>
+                </li>
+                <li class="menu-1382 menu-path-node-55 even ">
+                 <a href="/math-55">
+                  Math 55
+                 </a>
+                </li>
+                <li class="menu-1383 menu-path-node-56 odd ">
+                 <a href="/statistics-2">
+                  Statistics 2
+                 </a>
+                </li>
+                <li class="menu-1384 menu-path-node-57 even ">
+                 <a href="/statistics-20">
+                  Statistics 20
+                 </a>
+                </li>
+                <li class="menu-1385 menu-path-node-58 odd ">
+                 <a href="/statistics-21">
+                  Statistics 21
+                 </a>
+                </li>
+                <li class="menu-1391 menu-path-node-59 even ">
+                 <a href="/statistics-134">
+                  Statistics 134
+                 </a>
+                </li>
+                <li class="menu-1386 menu-path-node-60 odd ">
+                 <a href="/other-resources-0">
+                  Other Resources
+                 </a>
+                </li>
+                <li class="menu-1374 menu-path-node-61 even ">
+                 <a href="/math-and-statistics-links">
+                  Math and Statistics Links
+                 </a>
+                </li>
+                <li class="menu-1387 menu-path-node-62 odd ">
+                 <a href="/next-semester-0">
+                  Next Semester
+                 </a>
+                </li>
+                <li class="menu-1388 menu-path-node-63 even ">
+                 <a href="/summer-session">
+                  Summer Session
+                 </a>
+                </li>
+                <li class="menu-1389 menu-path-node-64 odd ">
+                 <a href="/faq">
+                  FAQ
+                 </a>
+                </li>
+                <li class="menu-1390 menu-path-node-65 even ">
+                 <a href="/become-math-statistics-tutor">
+                  Become a Math &amp; Statistics Tutor
+                 </a>
+                </li>
+                <li class="menu-2620 menu-path-node-422 odd last">
+                 <a href="/field%20studies">
+                  Join the Field Studies Program
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-2293 menu-path-node-403 even ">
+               <a href="/slcrap">
+                Research Associate Program
+               </a>
+              </li>
+              <li class="menu-1366 menuparent menu-path-node-66 odd ">
+               <a href="/science">
+                Science Program
+               </a>
+               <ul>
+                <li class="menu-1413 menu-path-node-68 first odd ">
+                 <a href="/biology-1a-1al">
+                  Biology 1A  &amp; 1AL
+                 </a>
+                </li>
+                <li class="menu-1414 menu-path-node-69 even ">
+                 <a href="/biology-1b">
+                  Biology 1B
+                 </a>
+                </li>
+                <li class="menu-1415 menu-path-node-70 odd ">
+                 <a href="/chemistry-1a-1al">
+                  Chemistry 1A  &amp; 1AL
+                 </a>
+                </li>
+                <li class="menu-1416 menu-path-node-71 even ">
+                 <a href="/chemistry-3a-3al">
+                  Chemistry 3A &amp; 3AL
+                 </a>
+                </li>
+                <li class="menu-1418 menu-path-node-73 odd ">
+                 <a href="/chemistry-3b-3bl">
+                  Chemistry 3B &amp; 3BL
+                 </a>
+                </li>
+                <li class="menu-2081 menu-path-node-74 even ">
+                 <a href="/mcb-102">
+                  Molecular &amp; Cell Biology 102
+                 </a>
+                </li>
+                <li class="menu-1422 menu-path-node-77 odd ">
+                 <a href="/physics">
+                  Physics 8A &amp; 8B
+                 </a>
+                </li>
+                <li class="menu-1424 menu-path-node-79 even ">
+                 <a href="/chemistry-p">
+                  Chemistry 32
+                 </a>
+                </li>
+                <li class="menu-1429 menu-path-node-84 odd ">
+                 <a href="/become-science-tutor">
+                  Become a Science Tutor
+                 </a>
+                </li>
+                <li class="menu-1425 menu-path-node-80 even last">
+                 <a href="/slc-science-tutors">
+                  For SLC Science Tutors
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-1370 menuparent menu-path-node-151 even ">
+               <a href="/social-science">
+                Social Science Program
+               </a>
+               <ul>
+                <li class="menu-1450 menu-path-node-152 first odd ">
+                 <a href="/anthropology">
+                  Anthropology
+                 </a>
+                </li>
+                <li class="menu-1452 menu-path-node-154 even ">
+                 <a href="/history">
+                  History
+                 </a>
+                </li>
+                <li class="menu-1714 menu-path-node-302 odd ">
+                 <a href="/ias">
+                  International and Area Studies
+                 </a>
+                </li>
+                <li class="menu-1453 menu-path-node-155 even ">
+                 <a href="/political-science">
+                  Political Science
+                 </a>
+                </li>
+                <li class="menu-1454 menu-path-node-156 odd ">
+                 <a href="/psychology">
+                  Psychology
+                 </a>
+                </li>
+                <li class="menu-1455 menu-path-node-157 even ">
+                 <a href="/sociology">
+                  Sociology
+                 </a>
+                </li>
+                <li class="menu-1457 menu-path-node-159 odd ">
+                 <a href="/other-resources-2">
+                  Study Group Schedule
+                 </a>
+                </li>
+                <li class="menu-1469 menu-path-node-161 even ">
+                 <a href="/next-semester-4">
+                  Drop-in Schedule
+                 </a>
+                </li>
+                <li class="menu-1461 menu-path-node-163 odd ">
+                 <a href="/become-social-science-tutor">
+                  Become a Social Science Tutor
+                 </a>
+                </li>
+                <li class="menu-1458 menu-path-node-160 even last">
+                 <a href="/slc-social-science-tutor-resources">
+                  SLC Tutor Resources
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-2619 menuparent menu-path-node-421 odd ">
+               <a href="/ucftr">
+                UCFTR Program
+               </a>
+               <ul>
+                <li class="menu-1462 menu-path-node-142 first odd ">
+                 <a href="/startup-workshops">
+                  Deadlines
+                 </a>
+                </li>
+                <li class="menu-1347 menu-path-node-145 even ">
+                 <a href="/resources">
+                  Resources
+                 </a>
+                </li>
+                <li class="menu-1466 menu-path-node-146 odd ">
+                 <a href="/department-contacts">
+                  Department Contacts
+                 </a>
+                </li>
+                <li class="menu-1468 menu-path-node-147 even ">
+                 <a href="/faq-2">
+                  FAQ
+                 </a>
+                </li>
+                <li class="menu-2629 menu-path-node-436 odd last">
+                 <a href="/become-ucftr-peercoordinator">
+                  Become a Peer Coordinator
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-1365 menuparent menu-path-node-87 even ">
+               <a href="/writing">
+                Writing Program
+               </a>
+               <ul>
+                <li class="menu-2244 menu-path-node-121 first odd ">
+                 <a href="/become-writing-tutor" title="">
+                  Become a Writing Tutor
+                 </a>
+                </li>
+                <li class="menu-2229 menu-path-node-389 even ">
+                 <a href="/appointment-service">
+                  Appointment Service
+                 </a>
+                </li>
+                <li class="menu-2230 menu-path-node-390 odd ">
+                 <a href="/weekly-service">
+                  Weekly Service
+                 </a>
+                </li>
+                <li class="menu-2228 menu-path-node-388 even ">
+                 <a href="/drop-service">
+                  Drop-in Service
+                 </a>
+                </li>
+                <li class="menu-2231 menu-path-node-392 odd ">
+                 <a href="/rcworkshops" title="Reading and Composition Workshops">
+                  Reading and Composition Workshops
+                 </a>
+                </li>
+                <li class="menu-2232 menu-path-node-393 even ">
+                 <a href="/research-workshops">
+                  Research Workshops
+                 </a>
+                </li>
+                <li class="menu-2233 menu-path-node-394 odd ">
+                 <a href="/academic-writing-workshops">
+                  Academic Writing Workshops
+                 </a>
+                </li>
+                <li class="menu-2235 menu-path-node-396 even ">
+                 <a href="/rrr-week-writing-retreat">
+                  RRR Week Writing Retreat
+                 </a>
+                </li>
+                <li class="menu-2234 menu-path-node-395 odd ">
+                 <a href="/undergraduate-thesis-workshops">
+                  Undergraduate Thesis Workshops
+                 </a>
+                </li>
+                <li class="menu-2236 menu-path-node-391 even ">
+                 <a href="/online-service">
+                  Online Service
+                 </a>
+                </li>
+                <li class="menu-1406 menu-path-node-118 odd ">
+                 <a href="/meet-our-tutors">
+                  Meet Our Tutors
+                 </a>
+                </li>
+                <li class="menu-2563 menu-path-node-418 even ">
+                 <a href="/fiat-luxicon">
+                  Fiat Luxicon
+                 </a>
+                </li>
+                <li class="menu-2624 menu-path-node-426 odd ">
+                 <a href="/writing-contest">
+                  Lumina Creative Writing Contest
+                 </a>
+                </li>
+                <li class="menu-2243 menu-path-node-117 even ">
+                 <a href="/writing-worksheets">
+                  Writing Worksheets
+                 </a>
+                </li>
+                <li class="menu-2616 menuparent menu-path-node-402 odd last">
+                 <a href="/special-events">
+                  Special Events
+                 </a>
+                 <ul>
+                  <li class="menu-2520 menu-path-node-417 first odd last">
+                   <a href="/nexus-between-scholarship-creativity" title="">
+                    Faculty Panel Spring 2017
+                   </a>
+                  </li>
+                 </ul>
+                </li>
+               </ul>
+              </li>
+              <li class="menu-2621 menuparent menu-path-node-423 odd last">
+               <a href="/strategic-learning">
+                Strategic Learning  Program
+               </a>
+               <ul>
+                <li class="menu-1432 menu-path-node-123 first odd ">
+                 <a href="/freshmen">
+                  Strategic Learning Courses
+                 </a>
+                </li>
+                <li class="menu-1433 menu-path-node-124 even ">
+                 <a href="/continuing-students">
+                  Strategic Learning COACHING
+                 </a>
+                </li>
+                <li class="menu-1434 menu-path-node-125 odd ">
+                 <a href="/transferre-entry-students">
+                  FIRST-YEAR SUCCESS
+                 </a>
+                </li>
+                <li class="menu-1435 menu-path-node-126 even ">
+                 <a href="/students-experiencing-academic-difficulty">
+                  For Students Experiencing Academic Difficulty
+                 </a>
+                </li>
+                <li class="menu-1436 menu-path-node-127 odd ">
+                 <a href="/students-exploring-learning-differences">
+                  For Students Exploring Learning Differences
+                 </a>
+                </li>
+                <li class="menu-1437 menu-path-node-128 even last">
+                 <a href="/study-and-success-strategies">
+                  Study Strategies Resource Materials
+                 </a>
+                </li>
+               </ul>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-2131 menu-path-slcberkeleyedu-summer-bridge odd ">
+             <a href="http://slc.berkeley.edu/summer-bridge" title="">
+              Summer Bridge
+             </a>
+            </li>
+            <li class="menu-1478 menu-path-node-186 even ">
+             <a href="/spear">
+              SPEAR Academy
+             </a>
+            </li>
+            <li class="menu-1480 menuparent menu-path-node-188 odd ">
+             <a href="/summer-sessions">
+              Summer Sessions
+             </a>
+             <ul>
+              <li class="menu-1481 menu-path-node-189 first odd last">
+               <a href="/summer-job-opportunities">
+                Summer Job Opportunities
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-1159 menuparent menu-path-node-169 even ">
+             <a class="menu-minipanel menu-minipanel-1159" href="/become-tutor">
+              Become a Tutor
+             </a>
+             <ul>
+              <li class="menu-2084 menu-path-node-372 first odd ">
+               <a href="/http%3A//slc.berkeley.edu/become-economics-tutor" title="">
+                in Economics
+               </a>
+              </li>
+              <li class="menu-1471 menu-path-node-65 even ">
+               <a href="/become-math-statistics-tutor" title="">
+                in Mathematics &amp; Statistics
+               </a>
+              </li>
+              <li class="menu-1472 menu-path-node-84 odd ">
+               <a href="/become-science-tutor" title="">
+                in Science
+               </a>
+              </li>
+              <li class="menu-1473 menu-path-node-163 even ">
+               <a href="/become-social-science-tutor" title="">
+                in Social Science
+               </a>
+              </li>
+              <li class="menu-1475 menu-path-node-121 odd last">
+               <a href="/become-writing-tutor">
+                in Writing
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-1330 menuparent menu-path-node-175 odd last">
+             <a href="/give-slc">
+              Support the SLC
+             </a>
+             <ul>
+             </ul>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </section>
+       </div>
+      </div>
+     </div>
+    </div>
+   </header>
+   <section class="section section-content" id="section-content">
+    <div class="zone-wrapper zone-slideshow-wrapper clearfix" id="zone-slideshow-wrapper">
+     <div class="zone zone-slideshow clearfix container-12" id="zone-slideshow">
+      <div class="grid-12 region region-slideshow" id="region-slideshow">
+       <div class="region-inner region-slideshow-inner">
+        <div class="block block-views block-homepage-slideshow-block block-views-homepage-slideshow-block odd block-without-title" id="block-views-homepage-slideshow-block">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <div class="view view-Homepage-slideshow view-id-Homepage_slideshow view-display-id-block view-dom-id-e17b2b8527b6702594374924793f3bdb">
+            <div class="view-content">
+             <div class="skin-default">
+              <div class="views-slideshow-controls-top clearfix">
+               <div class="views-slideshow-controls-text views_slideshow_controls_text" id="views_slideshow_controls_text_Homepage_slideshow-block_1">
+                <span class="views-slideshow-controls-text-previous views_slideshow_controls_text_previous" id="views_slideshow_controls_text_previous_Homepage_slideshow-block_1">
+                 <a href="#" rel="prev">
+                  Previous
+                 </a>
+                </span>
+                <span class="views-slideshow-controls-text-pause views_slideshow_controls_text_pause views-slideshow-controls-text-status-play" id="views_slideshow_controls_text_pause_Homepage_slideshow-block_1">
+                 <a href="#">
+                  Pause
+                 </a>
+                </span>
+                <span class="views-slideshow-controls-text-next views_slideshow_controls_text_next" id="views_slideshow_controls_text_next_Homepage_slideshow-block_1">
+                 <a href="#" rel="next">
+                  Next
+                 </a>
+                </span>
+               </div>
+              </div>
+              <div class="views_slideshow_cycle_main views_slideshow_main" id="views_slideshow_cycle_main_Homepage_slideshow-block_1">
+               <div class="views-slideshow-cycle-main-frame views_slideshow_cycle_teaser_section" id="views_slideshow_cycle_teaser_section_Homepage_slideshow-block_1">
+                <div class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-1 views-row-first views-row-odd" id="views_slideshow_cycle_div_Homepage_slideshow-block_1_0">
+                 <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd views-row-first">
+                  <div class="views-field views-field-field-background-image">
+                   <div class="field-content">
+                    <img alt="" height="1080" src="https://slc.berkeley.edu/sites/default/files/pictures/frontbackground/thecenter_0.png" width="1920"/>
+                   </div>
+                  </div>
+                  <div class="views-field views-field-body">
+                   <div class="field-content">
+                    <h2>
+                     Seek Knowledge. Locate Passion. Change the World.
+                    </h2>
+                    <div class="node-links">
+                     <a href="/welcome-slc">
+                      Start here
+                     </a>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-2 views_slideshow_cycle_hidden views-row-even" id="views_slideshow_cycle_div_Homepage_slideshow-block_1_1">
+                 <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+                  <div class="views-field views-field-field-background-image">
+                   <div class="field-content">
+                    <img alt="" height="1080" src="https://slc.berkeley.edu/sites/default/files/pictures/frontbackground/sls_day2-38.png" width="1920"/>
+                   </div>
+                  </div>
+                  <div class="views-field views-field-body">
+                   <div class="field-content">
+                    <h2>
+                     There's always something happening at the SLC.
+                    </h2>
+                    <div class="node-links">
+                     <a href="/events-and-dates">
+                      Check the schedule
+                     </a>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-3 views_slideshow_cycle_hidden views-row-odd" id="views_slideshow_cycle_div_Homepage_slideshow-block_1_2">
+                 <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+                  <div class="views-field views-field-field-background-image">
+                   <div class="field-content">
+                    <img alt="" height="1080" src="https://slc.berkeley.edu/sites/default/files/pictures/frontbackground/room.png" width="1920"/>
+                   </div>
+                  </div>
+                  <div class="views-field views-field-body">
+                   <div class="field-content">
+                    <h2>
+                     Academic programs that promote research readiness
+                    </h2>
+                    <div class="node-links">
+                     <a href="/academic-programs-and-services">
+                      Learn more
+                     </a>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-4 views_slideshow_cycle_hidden views-row-even" id="views_slideshow_cycle_div_Homepage_slideshow-block_1_3">
+                 <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+                  <div class="views-field views-field-field-background-image">
+                   <div class="field-content">
+                    <img alt="" height="1080" src="https://slc.berkeley.edu/sites/default/files/pictures/frontbackground/tutoring.png" width="1920"/>
+                   </div>
+                  </div>
+                  <div class="views-field views-field-body">
+                   <div class="field-content">
+                    <h2>
+                     Hone your leadership skills by becoming a tutor
+                    </h2>
+                    <div class="node-links">
+                     <a href="/become-tutor">
+                      Learn how
+                     </a>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-5 views_slideshow_cycle_hidden views-row-last views-row-odd" id="views_slideshow_cycle_div_Homepage_slideshow-block_1_4">
+                 <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd">
+                  <div class="views-field views-field-field-background-image">
+                   <div class="field-content">
+                    <img alt="" height="1080" src="https://slc.berkeley.edu/sites/default/files/pictures/frontbackground/students_building6new_0.png" width="1920"/>
+                   </div>
+                  </div>
+                  <div class="views-field views-field-body">
+                   <div class="field-content">
+                    <h2>
+                     Sign up to work with a tutor throughout the summer
+                    </h2>
+                    <div class="node-links">
+                     <a href="/summer-programs">
+                      Learn more
+                     </a>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="zone-wrapper zone-content-wrapper clearfix" id="zone-content-wrapper">
+     <div class="zone zone-content clearfix container-12" id="zone-content">
+      <aside class="grid-4 region region-sidebar-second" id="region-sidebar-second">
+       <div class="region-inner region-sidebar-second-inner">
+        <section class="block block-views block-dates-block-3 block-views-dates-block-3 odd" id="block-views-dates-block-3">
+         <div class="block-inner clearfix">
+          <h2 class="block-title block-title">
+           Announcements
+          </h2>
+          <div class="content clearfix">
+           <div class="view view-dates view-id-dates view-display-id-block_3 view-dom-id-79fb89ef0238e53c9b43c72ffbe796b4">
+            <div class="view-content">
+             <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+              <div class="views-field views-field-title">
+               <span class="field-content">
+                <a href="/learners-lens">
+                 SLC PHOTO CONTEST
+                </a>
+               </span>
+              </div>
+              <div class="views-field views-field-field-event-date">
+               <div class="field-content">
+                <span class="date-display-single">
+                 Friday, March 22, 2019 (All day)
+                </span>
+               </div>
+              </div>
+              <div class="views-field views-field-field-event-location">
+               <div class="field-content">
+               </div>
+              </div>
+              <div class="views-field views-field-nothing">
+               <span class="field-content">
+                <div class="more-links">
+                 <a href="/learners-lens">
+                  See more
+                 </a>
+                </div>
+               </span>
+              </div>
+             </div>
+            </div>
+            <div class="view-footer">
+             <style>
+              <!--/*--><![CDATA[/* ><!--*/
+
+#region-sidebar-second .more-links {
+    width: auto;
+}
+
+/*--><!]]>*/
+             </style>
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+       </div>
+      </aside>
+      <div class="grid-8 region region-content" id="region-content">
+       <div class="region-inner region-content-inner">
+        <a id="main-content">
+        </a>
+        <div class="block block-system block-main block-system-main odd block-without-title" id="block-system-main">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <div class="panel-flexible panels-flexible-4 clearfix">
+            <div class="panel-flexible-inside panels-flexible-4-inside">
+             <div class="panels-flexible-row panels-flexible-row-4-21 panels-flexible-row-first clearfix ">
+              <div class="inside panels-flexible-row-inside panels-flexible-row-4-21-inside panels-flexible-row-inside-first clearfix">
+               <div class="panels-flexible-region panels-flexible-region-4-academic_programs_and_resources panels-flexible-region-first panels-flexible-region-last ">
+                <div class="inside panels-flexible-region-inside panels-flexible-region-4-academic_programs_and_resources-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="panels-flexible-row panels-flexible-row-4-1 clearfix ">
+              <div class="inside panels-flexible-row-inside panels-flexible-row-4-1-inside clearfix">
+               <div class="panels-flexible-column panels-flexible-column-4-5 panels-flexible-column-first ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-5-inside panels-flexible-column-inside-first">
+                 <div class="panels-flexible-region panels-flexible-region-4-section_1 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-section_1-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-column panels-flexible-column-4-4 ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-4-inside">
+                 <div class="panels-flexible-region panels-flexible-region-4-section_2 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-section_2-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-column panels-flexible-column-4-3 ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-3-inside">
+                 <div class="panels-flexible-region panels-flexible-region-4-section_3 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-section_3-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-column panels-flexible-column-4-2 panels-flexible-column-last ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-2-inside panels-flexible-column-inside-last">
+                 <div class="panels-flexible-region panels-flexible-region-4-section_4 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-section_4-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="panels-flexible-row panels-flexible-row-4-11 panels-flexible-row-last clearfix ">
+              <div class="inside panels-flexible-row-inside panels-flexible-row-4-11-inside panels-flexible-row-inside-last clearfix">
+               <div class="panels-flexible-column panels-flexible-column-4-12 panels-flexible-column-first ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-12-inside panels-flexible-column-inside-first">
+                 <div class="panels-flexible-region panels-flexible-region-4-column_1 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-column_1-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-column panels-flexible-column-4-14 ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-14-inside">
+                 <div class="panels-flexible-region panels-flexible-region-4-column_2 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-column_2-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-column panels-flexible-column-4-16 ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-16-inside">
+                 <div class="panels-flexible-region panels-flexible-region-4-column_3 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-column_3-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+               <div class="panels-flexible-column panels-flexible-column-4-18 panels-flexible-column-last ">
+                <div class="inside panels-flexible-column-inside panels-flexible-column-4-18-inside panels-flexible-column-inside-last">
+                 <div class="panels-flexible-region panels-flexible-region-4-column_4 panels-flexible-region-first panels-flexible-region-last ">
+                  <div class="inside panels-flexible-region-inside panels-flexible-region-4-column_4-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <footer class="section section-footer" id="section-footer">
+    <div class="zone-wrapper zone-footer-wrapper clearfix" id="zone-footer-wrapper">
+     <div class="zone zone-footer clearfix container-12" id="zone-footer">
+      <div class="grid-12 region region-footer-first" id="region-footer-first">
+       <div class="region-inner region-footer-first-inner">
+        <div class="block block-megamenu block-menu-footer-menu block-megamenu-menu-footer-menu odd block-without-title" id="block-megamenu-menu-footer-menu">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <ul class="megamenu-menu columnar megamenu-skin-minimal" id="megamenu-menu-footer-menu">
+            <li class="megamenu-parent megamenu-parent-0 odd half-1 leaf-0 first menu-1171 first" id="megamenu-mlid-1171">
+             <h2 class="megamenu-parent-title">
+              <a class="active" href="/" title="">
+               Home
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-1 even half-1 leaf-1 menu-1313 " id="megamenu-mlid-1313">
+             <h2 class="megamenu-parent-title">
+              <a href="/links">
+               Links
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-2 odd half-1 leaf-2 menu-1314 " id="megamenu-mlid-1314">
+             <h2 class="megamenu-parent-title">
+              <a href="/contact-us">
+               Contact SLC Staff
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-3 even half-1 leaf-3 menu-1335 " id="megamenu-mlid-1335">
+             <h2 class="megamenu-parent-title">
+              <a href="/slc-tutors">
+               SLC Tutors
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-4 odd half-2 leaf-4 menu-1176 " id="megamenu-mlid-1176">
+             <h2 class="megamenu-parent-title">
+              <a href="/privacy-policy">
+               Privacy Policy
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-5 even half-2 leaf-5 menu-1177 " id="megamenu-mlid-1177">
+             <h2 class="megamenu-parent-title">
+              <a href="http://vpapf.chance.berkeley.edu/" title="">
+               Division of Teaching, Learning, Academic Planning and Facilities
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-6 odd half-2 leaf-6 menu-1178 " id="megamenu-mlid-1178">
+             <h2 class="megamenu-parent-title">
+              <a href="http://www.berkeley.edu/" title="">
+               UC Berkeley
+              </a>
+             </h2>
+            </li>
+            <li class="megamenu-parent megamenu-parent-7 even half-2 leaf-7 last menu-1179 last" id="megamenu-mlid-1179">
+             <h2 class="megamenu-parent-title">
+              <a href="http://mollyduggan.com" title="Designed and Built by Molly Duggan Associates, LLC">
+               Designed and Built by Molly Duggan Associates, LLC
+              </a>
+             </h2>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="grid-12 region region-footer-second" id="region-footer-second">
+       <div class="region-inner region-footer-second-inner">
+        <div class="block block-block block-11 block-block-11 odd block-without-title" id="block-block-11">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <p>
+            Copyright ©2019 UC Regents. All rights reserved.
+           </p>
+          </div>
+         </div>
+        </div>
+        <div class="block block-block block-6 block-block-6 even block-without-title" id="block-block-6">
+         <div class="block-inner clearfix">
+          <div class="content clearfix">
+           <script src="//static.getclicky.com/js" type="text/javascript">
+           </script>
+           <script type="text/javascript">
+            try{ clicky.init(100581314); }catch(e){}
+           </script>
+           <noscript>
+            <p>
+             <img alt="Clicky" height="1" src="//in.getclicky.com/100581314ns.gif" width="1"/>
+            </p>
+           </noscript>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <div class="region region-page-bottom" id="region-page-bottom">
+   <div class="region-inner region-page-bottom-inner">
+    <div class="menu-minipanels menu-minipanel-218">
+     <div class="panel-display omega-grid omega-12-threecol-4-4-4" id="mini-panel-start_nav">
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-custom pane-4">
+         <div class="pane-content">
+          <div id="global-submenu">
+           <div id="bin">
+            <div id="bin-inset-title">
+             <h2>
+              Welcome to the SLC
+             </h2>
+            </div>
+            <p>
+             We are dedicated to fostering academic excellence and are driven by the philosophy that students working with students promotes academic and personal success.
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-block pane-menu-block-4" id="global-submenu">
+         <h2 class="pane-title">
+          About the SLC
+         </h2>
+         <div class="pane-content">
+          <div class="menu-block-wrapper menu-block-4 menu-name-main-menu parent-mlid-218 menu-level-1">
+           <ul class="menu">
+            <li class="first leaf has-children menu-mlid-1351">
+             <a href="/about-slc">
+              Purpose &amp; Core Values
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1355">
+             <a href="/programs-and-service-formats">
+              Programs and Service Formats
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1517">
+             <a href="/faculty-and-staff">
+              For Faculty and Staff
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1356">
+             <a href="/current-students">
+              For Students
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1519">
+             <a href="/slc-alumni">
+              For SLC Alumni
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-1615">
+             <a href="/events-and-dates">
+              Events and Important Dates
+             </a>
+            </li>
+            <li class="last leaf menu-mlid-1516">
+             <a href="/slc-affirmation">
+              Statement of Affirmation
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-custom pane-5">
+         <div class="pane-content">
+          <div id="global-submenu">
+           <div id="bin">
+            <blockquote>
+             <p>
+              The rigor of classes and the expectations here at Cal are very difficult and high. However, with the help of tutors, I was able to learn the level of analysis needed to succeed at Cal.
+             </p>
+            </blockquote>
+            <p class="rteright">
+             - Paolo Garcia, fourth year Political Science Major, Study Strategies Peer Mentor
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menu-minipanels menu-minipanel-1158">
+     <div class="panel-display omega-grid omega-12-threecol-4-4-4" id="mini-panel-academics_nav">
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-custom pane-6">
+         <div class="pane-content">
+          <div id="global-submenu">
+           <div id="bin">
+            <div id="bin-inset-title">
+             <h2>
+              Academic Programs &amp; Services
+             </h2>
+            </div>
+            <p>
+             We are dedicated to fostering academic excellence and are driven by the philosophy that students working with students promotes academic and personal success.
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-block pane-menu-block-3" id="global-submenu">
+         <h2 class="pane-title">
+          Academic programs &amp; services
+         </h2>
+         <div class="pane-content">
+          <div class="menu-block-wrapper menu-block-3 menu-name-main-menu parent-mlid-1158 menu-level-1">
+           <ul class="menu">
+            <li class="first leaf has-children menu-mlid-1717">
+             <a href="/econ">
+              Economics Program
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-1369">
+             <a href="/isp">
+              International Student Program
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-1371">
+             <a href="/math-and-statistics">
+              Math &amp; Statistics Program
+             </a>
+            </li>
+            <li class="leaf menu-mlid-2293">
+             <a href="/slcrap">
+              Research Associate Program
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-1366">
+             <a href="/science">
+              Science Program
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-1370">
+             <a href="/social-science">
+              Social Science Program
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-2619">
+             <a href="/ucftr">
+              UCFTR Program
+             </a>
+            </li>
+            <li class="leaf has-children menu-mlid-1365">
+             <a href="/writing">
+              Writing Program
+             </a>
+            </li>
+            <li class="last leaf has-children menu-mlid-2621">
+             <a href="/strategic-learning">
+              Strategic Learning  Program
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-custom pane-7">
+         <div class="pane-content">
+          <div id="global-submenu">
+           <div id="bin">
+            <blockquote>
+             <p>
+              It is my wish that your experience in the SLC allows you to discover your personal gifts, to expand intellectually and to develop an awareness and understanding of others.
+             </p>
+            </blockquote>
+            <p class="rteright">
+             - Cara Stanley,
+             <br/>
+             Director, Student Learning Center
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menu-minipanels menu-minipanel-1159">
+     <div class="panel-display omega-grid omega-12-threecol-4-4-4" id="mini-panel-tutor_nav">
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-custom pane-8">
+         <div class="pane-content">
+          <div id="global-submenu">
+           <div id="bin">
+            <div id="bin-inset-title">
+             <h2>
+              Become a Tutor
+             </h2>
+            </div>
+            <p>
+             In preparing for future careers or graduate/professional school, students hone their leadership skills by joining the SLC.
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-block pane-menu-block-5" id="global-submenu">
+         <h2 class="pane-title">
+          Become a Tutor
+         </h2>
+         <div class="pane-content">
+          <div class="menu-block-wrapper menu-block-5 menu-name-main-menu parent-mlid-1159 menu-level-1">
+           <ul class="menu">
+            <li class="first leaf menu-mlid-2084">
+             <a href="/http%3A//slc.berkeley.edu/become-economics-tutor" title="">
+              in Economics
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1471">
+             <a href="/become-math-statistics-tutor" title="">
+              in Mathematics &amp; Statistics
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1472">
+             <a href="/become-science-tutor" title="">
+              in Science
+             </a>
+            </li>
+            <li class="leaf menu-mlid-1473">
+             <a href="/become-social-science-tutor" title="">
+              in Social Science
+             </a>
+            </li>
+            <li class="last leaf menu-mlid-1475">
+             <a href="/become-writing-tutor">
+              in Writing
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="panel-panel grid-4">
+       <div class="inside">
+        <div class="panel-pane pane-custom pane-9">
+         <div class="pane-content">
+          <div id="global-submenu">
+           <div id="bin">
+            <blockquote>
+             <p>
+              Working as a tutor at the SLC when I was a junior at Berkeley helped me to become a better writer. It was also my first introduction to the profound pleasure of the pedagogic moment, when two people are thinking through ideas together.
+             </p>
+            </blockquote>
+            <p class="rteright">
+             - Colleen Lye, Professor of English, UC Berkeley
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script src="https://slc.berkeley.edu/sites/default/files/js/js_XWYQWmnEXPvgUg1El2FGrm2bOMYbPS_GSM1B3UD94Xw.js">
+  </script>
+  <script src="/sites/all/themes/MDALLC/js/clear-default-webform.js" type="text/javascript">
+  </script>
+  <script src="/sites/all/themes/MDALLC/js/paralax.js" type="text/javascript">
+  </script>
+  <script src="/sites/all/themes/MDALLC/js/scripts.js" type="text/javascript">
+  </script>
+  <script src="/sites/all/themes/MDALLC/js/jquery.localscroll.js" type="text/javascript">
+  </script>
+  <script src="/sites/all/themes/MDALLC/js/jquery.scrollTo.js" type="text/javascript">
+  </script>
+  <script src="/sites/all/themes/MDALLC/js/plugins.minimize.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"f153c68f50","applicationID":"1834544","transactionName":"YAdXMhZRXEFUBhdeVllNdAUQWV1cGhUCUFxoD1QIBVdXQGoVAlBcaAdNAwdFRlc=","queueTime":0,"applicationTime":1291,"atts":"TEBURF5LT08=","errorBeacon":"bam.nr-data.net","agent":""}
+  </script>
+ </body>
+</html>

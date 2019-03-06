@@ -1,0 +1,643 @@
+https://d2l.pdx.edu/
+<!DOCTYPE html>
+<!--[if lte IE 8]> <html class="lte-ie8 lte-ie9" lang="en"> <![endif]-->
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <title>
+   Portland State University
+  </title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   td.default, th.default {
+    font-size: 11px;
+    font-family: 'verdana';
+    text-decoration: none;
+}
+a.blue, a.blue:link, a.blue:visited {
+	color: #000062;
+	text-decoration: none; 
+	font-size: 12px; 
+	font-family: verdana;
+}
+a.blue:active {
+	color: #ff0000; 
+}
+a.blue:hover {
+	color: #ffffff;
+	text-decoration: none; 
+}
+
+font.small {COLOR: #000000; TEXT-DECORATION: none; FONT-SIZE: 8px; FONT-FAMILY: Verdana}
+font.medium {COLOR: #000000; TEXT-DECORATION: none; FONT-SIZE: 14px; FONT-FAMILY: Verdana}
+font.large {COLOR: #000000; TEXT-DECORATION: none; FONT-SIZE: 16px; FONT-FAMILY: Verdana}
+
+A.default {COLOR: #3366CC; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+A.default:visited {COLOR: #3366CC; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+A.default:active {COLOR: #003399; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+A.default:hover {COLOR: #003399; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+
+A.wnu:link {COLOR: #FFFFFF; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.wnu:active {COLOR: #FF0000; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.wnu:visited {COLOR: #FFFFFF; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.wnu:hover {COLOR: #FF0000; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+
+A.topwnu:link {COLOR: #FFFFFF; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.topwnu:active {COLOR: #dddddd; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.topwnu:visited {COLOR: #FFFFFF; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.topwnu:hover {COLOR: #dddddd; TEXT-DECORATION: none; FONT-SIZE: 10px; FONT-FAMILY: Verdana}
+A.curLink:link {COLOR: #CC0000; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+A.curLink:visited {COLOR: #CC0000; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+A.curLink:active {COLOR: #CC0000; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+A.curLink:hover {COLOR: #CC0000; TEXT-DECORATION: underline;  FONT-SIZE: 11px; FONT-FAMILY: Verdana}
+  </style>
+  <style type="text/css">
+   body, td, th {
+	font-size: 13px;
+	font-family: arial, sans-serif;
+	text-decoration: none;
+}
+body {
+    margin: 0px;
+    background-color: #ffffff;
+}
+input, select, textarea {
+	font-family: arial, sans-serif;
+	font-size: 13px;
+}
+a, a:link, a:visited {
+	color: #3366CC;
+    text-decoration: underline;
+}
+a:hover {
+	color: #003399;
+}
+a.white, a.white:link, a.white:visited {
+    color: #ffffff;
+}
+a.white:hover {
+	color: #ffffdd;
+}
+a.black, a.black:link, a.black:visited {
+	color: #000000;
+}
+a.black:hover {
+	color: #003399;
+}
+a.nu, a.nu:link, a.nu:visited, a.nu:hover {
+	color: #3366CC;
+    text-decoration: none;
+}
+a.bnu, a.bnu:link, a.bnu:visited, a.bnu:hover {
+    color: #000000;
+    text-decoration: none;
+}
+a.gnu, a.gnu:link, a.gnu:visited, a.gnu:hover {
+	color: #777777;
+    text-decoration: none;
+}
+font.selectedTab, font.tab, a.selectedTab:link, a.tab:link {
+	font-family: arial, sans-serif;
+	font-size: 13px;
+}
+  </style>
+  <link href="/d2l/orgtools/style/colour.css" rel="stylesheet" type="text/css"/>
+  <style type="text/css">
+   input.dbtn {
+	background-color: #ffffff;
+	background-position: left bottom;
+	background-repeat: repeat-x;
+	border-style: solid;
+	border-width: 1px;
+	border-top-color: #999999;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #999999;
+	color: #000000;
+	cursor: pointer;
+	cursor: hand;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	font-weight: normal;
+	margin: 0.2em;
+	padding: 3px;
+}
+
+input.dbtn_n {
+	background-image: url(/d2l/img/LP/button/n3.gif);
+}
+
+input.dbtn[disabled], input.dbtn_d {
+	background-image: url(/d2l/img/LP/button/d.gif);
+	border-top-color: #cccccc;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	border-left-color: #cccccc;
+	color: #999999;
+	cursor: default;
+}
+
+input.dbtn_o {
+	background-image: url(/d2l/img/LP/button/o.gif);
+}
+
+input.dbtn_c {
+	background-image: none;
+	background-color: #DFDFDF;
+	padding: 3px 2px 3px 4px;
+}
+  </style>
+  <style type="text/css">
+   .btnLight {
+	BORDER-TOP: #808080 1px solid;
+	BORDER-RIGHT: #808080 1px solid;
+	BORDER-BOTTOM: #808080 1px solid;
+	BORDER-LEFT: #808080 1px solid;
+	PADDING-TOP: 0px;
+	PADDING-RIGHT: 3px;
+	PADDING-BOTTOM: 0px;
+	PADDING-LEFT: 3px;
+	MARGIN: 2px 0px;
+	LINE-HEIGHT: 12px;
+	CURSOR: hand;
+	COLOR: #000000;
+	BACKGROUND-COLOR: #DDDDDD;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	FONT-FAMILY: arial, sans-serif;
+	TEXT-ALIGN: center;
+	TEXT-DECORATION: none
+}
+
+.btnLightUp {
+	BORDER-TOP: #A4A4BB 1px solid;
+	BORDER-RIGHT: #A4A4BB 1px solid;
+	BORDER-BOTTOM: #A4A4BB 1px solid;
+	BORDER-LEFT: #A4A4BB 1px solid;
+	PADDING-TOP: 0px;
+	PADDING-RIGHT: 3px;
+	PADDING-BOTTOM: 0px;
+	PADDING-LEFT: 3px;
+	MARGIN: 2px 0px;
+	LINE-HEIGHT: 12px;
+	CURSOR: hand;
+	COLOR: #000000;
+	BACKGROUND-COLOR: #E8E8FF;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	FONT-FAMILY: arial, sans-serif;
+	TEXT-ALIGN: center;
+	TEXT-DECORATION: none
+}
+
+.btnLightDown {
+	BORDER-TOP: #808080 1px solid;
+	BORDER-RIGHT: #808080 1px solid;
+	BORDER-BOTTOM: #808080 1px solid;
+	BORDER-LEFT: #808080 1px solid;
+	PADDING-TOP: 0px;
+	PADDING-RIGHT: 3px;
+	PADDING-BOTTOM: 0px;
+	PADDING-LEFT: 3px;
+	MARGIN: 2px 0px;
+	LINE-HEIGHT: 12px;
+	CURSOR: hand;
+	COLOR: #000000;
+	BACKGROUND-COLOR: #BBBBBB;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	FONT-FAMILY: arial, sans-serif;
+	TEXT-ALIGN: center;
+	TEXT-DECORATION: none
+}
+
+.btnLightDisabled {
+	BORDER-TOP: #808080 1px solid;
+	BORDER-RIGHT: #808080 1px solid;
+	BORDER-BOTTOM: #808080 1px solid;
+	BORDER-LEFT: #808080 1px solid;
+	PADDING-TOP: 0px;
+	PADDING-RIGHT: 3px;
+	PADDING-BOTTOM: 0px;
+	PADDING-LEFT: 3px;
+	MARGIN: 2px 0px;
+	LINE-HEIGHT: 12px;
+	CURSOR: hand;
+	COLOR: #000000;
+	BACKGROUND-COLOR: #DDDDDD;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	FONT-FAMILY: arial, sans-serif;
+	TEXT-ALIGN: center;
+	TEXT-DECORATION: none
+}
+
+.clsButton
+{
+    BORDER-RIGHT: #303030 2px solid;
+    PADDING-RIGHT: 3px;
+    BORDER-TOP: #707070 2px solid;
+    PADDING-LEFT: 3px;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 2px 0px;
+    BORDER-LEFT: #707070 2px solid;
+    WIDTH: 60px;
+    CURSOR: hand;
+    COLOR: #ffffff;
+    LINE-HEIGHT: 12px;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #303030 2px solid;
+    FONT-FAMILY: arial, sans-serif;
+    BACKGROUND-COLOR: #404040;
+    TEXT-ALIGN: center;
+    TEXT-DECORATION: none
+}
+.clsButtonDisabled
+{
+    BORDER-RIGHT: #404040 2px solid;
+    PADDING-RIGHT: 3px;
+    BORDER-TOP: #606060 2px solid;
+    PADDING-LEFT: 3px;
+    FONT-SIZE: 9px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 2px 0px;
+    BORDER-LEFT: #606060 2px solid;
+    WIDTH: 60px;
+    CURSOR: default;
+    COLOR: #707070;
+    LINE-HEIGHT: 12px;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #303030 2px solid;
+    FONT-FAMILY: arial, sans-serif;
+    BACKGROUND-COLOR: #404040;
+    TEXT-ALIGN: center;
+    TEXT-DECORATION: none
+}
+.clsButtonUp
+{
+    BORDER-RIGHT: #003399 2px solid;
+    PADDING-RIGHT: 3px;
+    BORDER-TOP: #99ccff 2px solid;
+    PADDING-LEFT: 3px;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 2px 0px;
+    BORDER-LEFT: #99ccff 2px solid;
+    WIDTH: 60px;
+    CURSOR: hand;
+    COLOR: white;
+    LINE-HEIGHT: 12px;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #003399 2px solid;
+    FONT-FAMILY: arial, sans-serif;
+    BACKGROUND-COLOR: #3366CC;
+    TEXT-ALIGN: center;
+    TEXT-DECORATION: none
+}
+.clsButtonDown
+{
+    BORDER-RIGHT: #99ccff 2px solid;
+    PADDING-RIGHT: 3px;
+    BORDER-TOP: #003399 2px solid;
+    PADDING-LEFT: 3px;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 2px 0px;
+    BORDER-LEFT: #003399 2px solid;
+    WIDTH: 60px;
+    CURSOR: hand;
+    COLOR: white;
+    LINE-HEIGHT: 12px;
+    PADDING-TOP: 0px;
+    BORDER-BOTTOM: #99ccff 2px solid;
+    FONT-FAMILY: arial, sans-serif;
+    BACKGROUND-COLOR: #3366CC;
+    TEXT-ALIGN: center;
+    TEXT-DECORATION: none
+}
+TABLE.clsBordered
+{
+    BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    BORDER-LEFT: #000000 1px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    TEXT-ALIGN: center
+}
+TD.clsBordered
+{
+    BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    BORDER-LEFT: #000000 1px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    TEXT-ALIGN: center
+}
+TH.clsBordered
+{
+    BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    BORDER-LEFT: #000000 1px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    TEXT-ALIGN: center
+}
+  </style>
+  <script type="text/javascript">
+   function up(obj)
+{
+	obj.className = 'clsButtonUp';
+};
+
+function down(obj)
+{
+	obj.className = 'clsButtonDown';
+};
+
+function off(obj)
+{
+	obj.className = 'clsButton';
+};
+
+function button_up(obj, classname) {
+	obj.className = classname + 'Up';
+}
+
+function button_down(obj, classname) {
+	obj.className = classname + 'Down';
+}
+
+function button_off(obj, classname) {
+	obj.className = classname;
+}
+  </script>
+  <style>
+  </style>
+  <script language="javascript" src="/d2l/tools/include/_global/javascript/all.js">
+  </script>
+  <script language="javaScript">
+   <!--
+	var g_orgUnitId = 6605;
+	var g_orgId = 6605;
+	
+	function goHome() {
+		top.location.href = '/d2l/lp/ouhome/defaultHome.d2l';	
+	}
+		
+	function getForm() {
+		var form = document.new_form;
+		return form;
+	}
+	
+	function getFormName() {
+		return 'document.new_form';
+	}
+//-->
+  </script>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <style type="text/css">
+   body {font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif; font-size: 16px; color: #000;}
+		* { margin:0; padding:0; box-sizing:border-box; }
+		html {height:100%; min-height:100%;}
+
+		.cf:after { content:""; display:table; clear:both; }	/* micro-clearfix */
+
+		body {
+			background: url(images/pdx-portal-bg.jpg) no-repeat top center fixed #000;
+			min-height: 100%;
+			height: 100%;
+			-webkit-background-size: cover;
+			   -moz-background-size: cover;
+			     -o-background-size: cover;
+			        background-size: cover;
+		}
+		html.lte-ie9 .wrapper {background: url(images/pdx-portal-bg.jpg) no-repeat top center fixed #000;}
+
+		.content { width:960px; margin:0 auto; padding-top:15px; }
+		.header { height:60px; padding:5px 30px;
+			background: -webkit-linear-gradient(90deg,rgba(0,0,0,0.85), rgba(106,127,16,0.85), rgba(0,0,0,0.85)); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient(90deg,rgba(0,0,0,0.85), rgba(106,127,16,0.85), rgba(0,0,0,0.85)); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient(90deg,rgba(0,0,0,0.85), rgba(106,127,16,0.85), rgba(0,0,0,0.85)); /* For Firefox 3.6 to 15 */
+			background: linear-gradient(90deg,rgba(0,0,0,0.85), rgba(106,127,16,0.85), rgba(0,0,0,0.85)); /* Standard syntax */
+		}
+		html.lte-ie9 .header { background:#000000; }
+		.welcome-frame { background:rgba(255,255,255,0.9); padding:2em 180px 0 180px; }
+		html.lte-ie8 .welcome-frame { background:#FFFFFF; }
+		.welcome { width:100%; }
+		#welcome { height:120px; }
+		.main { background:rgba(255, 255, 255, 0.9); padding:2em 180px 0 180px; }
+
+		.fillerimg { float:left; width:195px; }
+		.randomImg { border:solid 1px #d4d4d4; padding:10px; border-radius:5px; background:#fff; }
+
+		.login-options { float:right; width:380px; }
+
+		/* TYPOGRAPHY */
+		h1 {font-size: 19px; font-weight: 700; color: #3E4F18;}
+
+		/* Spacing - 960gs defaults */
+		ol {list-style: decimal;}
+		ul {list-style: disc;}
+		li {margin-left: 30px;}
+		p,dl,hr,h1,h2,ol,ul,table,fieldset { margin-bottom: 20px; }
+		hr {border: 0 #ccc solid; border-top-width: 1px; clear: both; height: 0;}
+		strong { font-weight:bold; }
+		a.odin { color:#000; text-decoration:underline; }
+
+		/* LINK STYLES */
+		.main a.pdx-link { color: #A33F1F; text-decoration: underline; font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;}
+		.main a.pdx-link:visited { color: #A33F1F; }
+		.main a.pdx-link:hover { color: #603417; text-decoration: underline; }
+		.main a.pdx-link:focus { outline: thin dotted; }
+		.main a.pdx-link:hover, .main a.pdx-link:active { outline: 0; }
+
+		.main a.pdx-btn-login { color: #fff; text-decoration: none; font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+		.main a.pdx-btn-login:visited { color: #fff; }
+		.main a.pdx-btn-login:hover { color: #fff; text-decoration: none; }
+
+		.main a.pdx-btn-login-sso {color: #fff; background:#6A7F10;}
+		.main a.pdx-btn-login-sso:hover {color: #fff; background: rgba(106, 127, 13, 0.9);}
+		.main a.pdx-btn-login-d2l {color: #fff; background:#ABB400;}
+		.main a.pdx-btn-login-d2l:hover {color: #fff; background:#ABB400; background: rgba(171, 180, 0, 0.9);}
+
+		.main a.pdx-btn-help {float:left; width: 48%; color: #fff; border-radius: 5px; background: #555; text-decoration: none; text-align: center; padding: 7px 0;}
+		.main a.pdx-btn-help:hover {color: #fff; background: rgba(85, 85, 85, 0.9); text-decoration: none;}
+
+		/* Text Selection Colour in Firefox */
+		::-moz-selection { background: #cfeafa; color: #000000; text-shadow: none; }
+		::selection { background: #cfeafa; color: #000000; text-shadow: none; }
+
+		.pdx-message {background: none;}
+
+		/* FORM STYLING */
+
+		label {display: block; font-size: 14px; font-weight: 700; }
+		input {width: 340px; height: 22px; border: 1px solid #d4d4d4; }
+		.LbLusername {margin: 10px 0 0 0;}
+		.LbLpassword {margin: 18px 0 0 0;}
+		.passwordNote {margin: 0 0 10px 0; font-size: 13px; font-style: italic;}
+		.loginButton {margin: 0 15px 10px 0; border-radius: 5px; background: #6A7F10; width: 80px; height: 35px; border: none; cursor: pointer; color: #fff; font-size:16px; text-decoration:none; line-height:10px; text-align:center;}
+		.loginButton:hover {background: rgba(106, 127, 13, 0.9);}
+
+		.guest-login {padding: 20px 0 0;}
+		.pdx-login span {display: block; padding: 0 0 5px; font-style:italic; font-size:14px;}
+		.pdx-btn-login {display:block; border-radius: 5px; padding: 15px; text-align: center;}
+		.pdx-btn-login-expand {display:block; border-radius: 5px 5px 0 0; padding: 15px; text-align: center;}
+
+		#d2l-login { height: 230px; width: 100%; margin-left: -9999px; border-radius: 0 0 5px 5px; padding: 0; background: #ABB400; overflow: hidden; }
+		#loginPanel {padding: 20px;}
+
+		.pdx-help {margin-top: 20px;}
+		.main a.pdx-btn-help-stud {margin-right:2%;}
+		.main a.pdx-btn-help-inst {margin-left:2%;}
+
+		.footer { background:rgba(255, 255, 255, 0.9); color:#6b6b6b; text-align:center; padding:5em 30px 1em 30px; font-size:10px; }
+
+		html.lte-ie8 .welcome-frame, html.lte-ie8 .main, html.lte-ie8 .footer { background:#FFFFFF; }
+
+		/* RESPONSIVE RESIZING OF ELEMENTS */
+
+		/* small desktop windows */
+		@media only screen and (max-width: 1365px) {
+			.content { width:960px; margin:0 auto; }
+			.welcome-frame { padding:1em 180px 0 180px; }
+			.footer { padding:2em 30px 1em 30px; }
+		}
+
+		/* iPad (landscape) or smaller */
+		@media only screen and (max-width: 1024px) {
+			.content { width:720px; margin:0 auto; padding:0; }
+			.welcome-frame, .main { padding:1em 60px 0 60px; }
+			.main { padding-top:2em; }
+		}
+
+		/* smaller than iPad (portrait) */
+		@media only screen and (max-width: 767px) {
+			body { background-image:none; background-color:#fff; }
+			.content { width:100%; margin:0 auto;  }
+			.welcome-frame, .main { padding:1em 15px 0 15px; }
+			.main { padding-top:1.5em; }
+			.fillerimg { display:none; }
+			.login-options { float:none; width:100%; }
+		}
+
+		/* smaller mobile devices */
+		@media only screen and (max-width: 480px) {
+			input { width:100%; }
+			.main a.pdx-btn-help { width:100%; }
+			.main a.pdx-btn-help-stud {margin-right:0; margin-bottom:0.5em; }
+			.main a.pdx-btn-help-inst {margin-left:0;}
+
+		}
+  </style>
+ </head>
+ <body onload="document.processLogonForm.userName.focus();">
+  <div class="wrapper">
+   <div class="content">
+    <div class="header">
+     <img alt="Portland State University" class="clientlogo" src="images/pdx-logo.png"/>
+    </div>
+    <div class="main cf">
+     <div class="fillerimg">
+      <img alt="" class="randomImg" height="195" src="images/pdx-rdm-img-1.jpg" width="195"/>
+     </div>
+     <div class="login-options">
+      <form action="/d2l/lp/auth/login/login.d2l" method="post" name="processLogonForm">
+       <div class="pdx-login-cont">
+        <div class="pdx-login">
+         <span>
+          PSU Faculty, Staff &amp; Students (
+          <a class="odin" href="http://www.pdx.edu/oit/computer-accounts" target="_blank">
+           Odin Account
+          </a>
+          )
+         </span>
+         <a class="pdx-btn-login pdx-btn-login-sso" href="cas_redirect.asp" title="PSU Faculty, Staff &amp; Students">
+          PSU Login
+         </a>
+         <!--
+								<a href="cas_redirect.asp?TARGET=%2Fd2l%2Flms%2Femail%2Fframe.d2l%3Fou%3D6605" title="PSU Faculty, Staff &amp; Students" class="pdx-btn-login pdx-btn-login-sso">PSU Login</a>
+								-->
+        </div>
+        <div class="pdx-login guest-login">
+         <span>
+          D2L Guest Account Holders
+         </span>
+         <a class="pdx-btn-login pdx-btn-login-d2l" href="#" id="loginToggle" title="D2L Guest Account Holders Login">
+          Guest Login
+         </a>
+        </div>
+        <div id="d2l-login">
+         <div id="loginPanel">
+          <label class="LbLusername" for="Username">
+           USERNAME
+          </label>
+          <input autocomplete="off" id="Username" name="userName"/>
+          <label class="LbLpassword" for="Password">
+           PASSWORD
+          </label>
+          <input autocomplete="off" id="Password" name="password" type="password"/>
+          <p class="passwordNote">
+           Passwords are case sensitive.
+          </p>
+          <input class="loginButton" name="Login" type="submit" value="Login"/>
+         </div>
+        </div>
+        <div class="pdx-help">
+         <a class="pdx-btn-help pdx-btn-help-stud" href="http://www.pdx.edu/oit/online-class-support" title="Student Help">
+          Student Help
+         </a>
+         <a class="pdx-btn-help pdx-btn-help-inst" href="https://oaiplus.pdx.edu/technology-tutorials/" title="Instructor Help">
+          Instructor Help
+         </a>
+        </div>
+       </div>
+      </form>
+     </div>
+    </div>
+    <div class="welcome-frame">
+     <iframe allowtransparency="true" class="welcome" frameborder="0" id="welcome" marginwidth="0" name="welcome" onload="autoResize('welcome');" scrolling="auto" src="/shared/portal/message.html" title="Welcome message">
+     </iframe>
+    </div>
+    <div class="footer">
+     <p class="copyright">
+      © Copyright 2019 Desire2Learn Incorporated. All rights reserved.
+     </p>
+    </div>
+   </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+  </script>
+  <script>
+   window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
+  </script>
+  <script type="text/javascript">
+   $(function(){
+			$("#d2l-login").css("margin-left", "0").css("height", "0px").css("padding-top", "0px");
+			
+			$("#loginToggle").click(function(event) {
+				event.preventDefault();
+				if ($("#d2l-login").css("height") == "0px") {
+					$("#d2l-login").animate({height: "230px"}, 100);
+					$(".pdx-btn-login-d2l").addClass("pdx-btn-login-expand");
+				}
+			});
+		});
+
+		// test this on the same domain!
+		function autoResize(id){
+			var newheight;
+			if(document.getElementById){
+				newheight=document.getElementById(id).contentWindow.document.body.scrollHeight;
+			}
+			$('#'+id).css('height',(newheight+15)+"px");
+		};
+  </script>
+ </body>
+</html>
+
