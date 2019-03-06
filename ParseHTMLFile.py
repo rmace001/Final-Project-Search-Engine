@@ -13,9 +13,9 @@ import pandas as pd
 import math
 #For processing file in particular format based off of <doc>/<DOCNO>
 from bs4 import BeautifulSoup
-#For stemming  
+#For stemming
 from nltk.stem import PorterStemmer
-#For use of tokenizing to be applied with stemming (NOT USED)   
+#For use of tokenizing to be applied with stemming (NOT USED)
 from nltk.tokenize import word_tokenize
 import operator
 import urllib.request
@@ -29,27 +29,26 @@ def getFiles():
     htmlParse(filePath)
 
 def htmlParse(fileToParse):
+    #Start the soup
     soup = BeautifulSoup(open(fileToParse),'lxml')
-    
+
+    #Get URL
+    with open(fileToParse) as f:
+        web_url = f.readline()
+
     #Get title works correctly
     web_title = soup.find('title').get_text()
-    
-    #Get body works correctly 
+
+    #Get body works correctly
     tempBody = []
     for sentences in soup.find_all('p'):
         tempBody.append(sentences.getText())
-        
+
+    #Pop the source URL before converting to string
+    tempBody.pop(0)
     body = ''.join(str(word) for word in tempBody)
-   
-    #Get URL not working currently 
-    for url in soup.find('line'):
-        print(url.get('href'))
-        #web_url = url
-    
-        
-'''   
-    print()
-    print()
+
+
     print('{' + '\n')
     print(' ' + '"' + 'web_title' + '"' + ' = ' + web_title)
     print()
@@ -58,7 +57,7 @@ def htmlParse(fileToParse):
     print(' ' + '"' + 'body' + '"' + ' = ' + body)
     print()
     print('}' + '\n')
-'''   
-    
-    
+
+
+
 getFiles()
