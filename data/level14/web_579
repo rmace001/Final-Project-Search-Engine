@@ -1,0 +1,295 @@
+http://hcp.stanford.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   STANFORD HABITAT CONSERVATION PLAN :: Home
+  </title>
+  <link href="habitat.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   /***********************************************
+* Ultimate Fade-In Slideshow (v1.51): ï¿½ Dynamic Drive (http://www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+
+var fadeimages=new Array()
+//SET IMAGE PATHS. Extend or contract array as needed
+fadeimages[0]=["images/abouttop.jpg", "", ""] //plain image syntax
+fadeimages[1]=["images/benefitstop.jpg", "", ""]
+fadeimages[2]=["images/analysis_top.jpg", "", ""]
+fadeimages[3]=["images/perennial_top.jpg", "", ""]
+fadeimages[4]=["images/horsehead_top.jpg", "", ""]
+fadeimages[5]=["images/riparian_top.jpg", "", ""]
+fadeimages[6]=["images/serpentine_top2.jpg", "", ""]
+fadeimages[7]=["images/lonetreeheader.jpg","",""]
+
+var fadebgcolor="white"
+
+////NO need to edit beyond here/////////////
+
+var fadearray=new Array() //array to cache fadeshow instances
+var fadeclear=new Array() //array to cache corresponding clearinterval pointers
+
+var dom=(document.getElementById) //modern dom browsers
+var iebrowser=document.all
+
+function fadeshow(theimages, fadewidth, fadeheight, borderwidth, delay, pause, displayorder){
+this.pausecheck=pause
+this.mouseovercheck=0
+this.delay=delay
+this.degree=10 //initial opacity degree (10%)
+this.curimageindex=0
+this.nextimageindex=1
+fadearray[fadearray.length]=this
+this.slideshowid=fadearray.length-1
+this.canvasbase="canvas"+this.slideshowid
+this.curcanvas=this.canvasbase+"_0"
+if (typeof displayorder!="undefined")
+theimages.sort(function() {return 0.5 - Math.random();}) //thanks to Mike (aka Mwinter) :)
+this.theimages=theimages
+this.imageborder=parseInt(borderwidth)
+this.postimages=new Array() //preload images
+for (p=0;p<theimages.length;p++){
+this.postimages[p]=new Image()
+this.postimages[p].src=theimages[p][0]
+}
+
+var fadewidth=fadewidth+this.imageborder*2
+var fadeheight=fadeheight+this.imageborder*2
+
+if (iebrowser&&dom||dom) //if IE5+ or modern browsers (ie: Firefox)
+document.write('<div id="master'+this.slideshowid+'" style="position:relative;width:'+fadewidth+'px;height:'+fadeheight+'px;overflow:hidden;"><div id="'+this.canvasbase+'_0" style="position:absolute;width:'+fadewidth+'px;height:'+fadeheight+'px;top:0;left:0;filter:progid:DXImageTransform.Microsoft.alpha(opacity=10);opacity:0.1;-moz-opacity:0.1;-khtml-opacity:0.1;background-color:'+fadebgcolor+'"></div><div id="'+this.canvasbase+'_1" style="position:absolute;width:'+fadewidth+'px;height:'+fadeheight+'px;top:0;left:0;filter:progid:DXImageTransform.Microsoft.alpha(opacity=10);opacity:0.1;-moz-opacity:0.1;-khtml-opacity:0.1;background-color:'+fadebgcolor+'"></div></div>')
+else
+document.write('<div><img name="defaultslide'+this.slideshowid+'" src="'+this.postimages[0].src+'"></div>')
+
+if (iebrowser&&dom||dom) //if IE5+ or modern browsers such as Firefox
+this.startit()
+else{
+this.curimageindex++
+setInterval("fadearray["+this.slideshowid+"].rotateimage()", this.delay)
+}
+}
+
+function fadepic(obj){
+if (obj.degree<100){
+obj.degree+=10
+if (obj.tempobj.filters&&obj.tempobj.filters[0]){
+if (typeof obj.tempobj.filters[0].opacity=="number") //if IE6+
+obj.tempobj.filters[0].opacity=obj.degree
+else //else if IE5.5-
+obj.tempobj.style.filter="alpha(opacity="+obj.degree+")"
+}
+else if (obj.tempobj.style.MozOpacity)
+obj.tempobj.style.MozOpacity=obj.degree/101
+else if (obj.tempobj.style.KhtmlOpacity)
+obj.tempobj.style.KhtmlOpacity=obj.degree/100
+else if (obj.tempobj.style.opacity&&!obj.tempobj.filters)
+obj.tempobj.style.opacity=obj.degree/101
+}
+else{
+clearInterval(fadeclear[obj.slideshowid])
+obj.nextcanvas=(obj.curcanvas==obj.canvasbase+"_0")? obj.canvasbase+"_0" : obj.canvasbase+"_1"
+obj.tempobj=iebrowser? iebrowser[obj.nextcanvas] : document.getElementById(obj.nextcanvas)
+obj.populateslide(obj.tempobj, obj.nextimageindex)
+obj.nextimageindex=(obj.nextimageindex<obj.postimages.length-1)? obj.nextimageindex+1 : 0
+setTimeout("fadearray["+obj.slideshowid+"].rotateimage()", obj.delay)
+}
+}
+
+fadeshow.prototype.populateslide=function(picobj, picindex){
+var slideHTML=""
+if (this.theimages[picindex][1]!="") //if associated link exists for image
+slideHTML='<a href="'+this.theimages[picindex][1]+'" target="'+this.theimages[picindex][2]+'">'
+slideHTML+='<img src="'+this.postimages[picindex].src+'" border="'+this.imageborder+'px">'
+if (this.theimages[picindex][1]!="") //if associated link exists for image
+slideHTML+='</a>'
+picobj.innerHTML=slideHTML
+}
+
+
+fadeshow.prototype.rotateimage=function(){
+if (this.pausecheck==1) //if pause onMouseover enabled, cache object
+var cacheobj=this
+if (this.mouseovercheck==1)
+setTimeout(function(){cacheobj.rotateimage()}, 100)
+else if (iebrowser&&dom||dom){
+this.resetit()
+var crossobj=this.tempobj=iebrowser? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+crossobj.style.zIndex++
+fadeclear[this.slideshowid]=setInterval("fadepic(fadearray["+this.slideshowid+"])",50)
+this.curcanvas=(this.curcanvas==this.canvasbase+"_0")? this.canvasbase+"_1" : this.canvasbase+"_0"
+}
+else{
+var ns4imgobj=document.images['defaultslide'+this.slideshowid]
+ns4imgobj.src=this.postimages[this.curimageindex].src
+}
+this.curimageindex=(this.curimageindex<this.postimages.length-1)? this.curimageindex+1 : 0
+}
+
+fadeshow.prototype.resetit=function(){
+this.degree=10
+var crossobj=iebrowser? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+if (crossobj.filters&&crossobj.filters[0]){
+if (typeof crossobj.filters[0].opacity=="number") //if IE6+
+crossobj.filters(0).opacity=this.degree
+else //else if IE5.5-
+crossobj.style.filter="alpha(opacity="+this.degree+")"
+}
+else if (crossobj.style.MozOpacity)
+crossobj.style.MozOpacity=this.degree/101
+else if (crossobj.style.KhtmlOpacity)
+crossobj.style.KhtmlOpacity=this.degree/100
+else if (crossobj.style.opacity&&!crossobj.filters)
+crossobj.style.opacity=this.degree/101
+}
+
+
+fadeshow.prototype.startit=function(){
+var crossobj=iebrowser? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+this.populateslide(crossobj, this.curimageindex)
+if (this.pausecheck==1){ //IF SLIDESHOW SHOULD PAUSE ONMOUSEOVER
+var cacheobj=this
+var crossobjcontainer=iebrowser? iebrowser["master"+this.slideshowid] : document.getElementById("master"+this.slideshowid)
+crossobjcontainer.onmouseover=function(){cacheobj.mouseovercheck=1}
+crossobjcontainer.onmouseout=function(){cacheobj.mouseovercheck=0}
+}
+this.rotateimage()
+}
+  </script>
+  <script>
+   if (top != self) top.location=location
+  </script>
+  <!-- to prevent frameable page error -->
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69776802-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+ </head>
+ <body>
+  <script language="JavaScript1.2" src="pop_core.js">
+  </script>
+  <script language="JavaScript1.2" src="pop_data.js">
+  </script>
+  <table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" style="border: #4e750b 1px solid; font-size: 12px;" width="800">
+   <!--DWLayoutTable-->
+   <tr>
+    <td class="bottomR" height="114" valign="middle" width="190">
+     <div align="center">
+      <a href="index.html">
+       <img align="middle" alt="Stanford University Habitat Conservation Plan Home Page" border="0" height="81" hspace="2" src="IMAGES/HCP_Logos_FIN2.jpg" vspace="0" width="178"/>
+      </a>
+     </div>
+    </td>
+    <td bgcolor="#d6e532" colspan="5" style="border-bottom: solid 1px">
+     <script type="text/javascript">
+      //new fadeshow(IMAGES_ARRAY_NAME, slideshow_width, slideshow_height, borderwidth, delay, pause (0=no, 1=yes), optionalRandomOrder)
+    new fadeshow(fadeimages, 620, 114, 0, 3000, 1)
+     </script>
+    </td>
+   </tr>
+   <tr>
+    <td bgcolor="#d6e532" class="rightB" rowspan="4" valign="top">
+     <img height="722" src="IMAGES/homepgleft.jpg" width="189"/>
+    </td>
+    <td bgcolor="#d6e532" class="bottomB" colspan="5" height="21" style="margin: 0; padding:0;" valign="middle">
+     <!--menus render here-->
+    </td>
+   </tr>
+   <tr>
+    <td colspan="4" height="0">
+    </td>
+    <td width="25">
+    </td>
+   </tr>
+   <tr>
+    <td colspan="5" height="387" valign="top">
+     <table border="0" cellpadding="0" width="99%">
+      <tr>
+       <td valign="top" width="584">
+        <table border="0" cellpadding="0" cellspacing="15" width="99%">
+         <!--DWLayoutTable-->
+         <tr>
+          <td rowspan="3" valign="top" width="262">
+           <p class="header1">
+            STANFORD HABITAT CONSERVATION PLAN
+           </p>
+           <p class="header2">
+            Welcome
+           </p>
+           <p class="bodytext">
+            Proper stewardship of Stanford's lands has been, and will continue to be, essential to the success of the University. Stanford has prepared a Habitat Conservation Plan (HCP) that will be in effect for 50 years.
+           </p>
+           <p class="bodytext">
+            Stanford's HCP establishes a comprehensive conservation program that protects, restores and enhances habitat areas; monitors and reports on covered species populations; and avoids and minimizes impacts on species and their habitats. The HCP also provides major new commitments of land protection, personnel, and resources dedicated to habitat conservation.
+           </p>
+           <p class="bodytext">
+            In August 2013, the U.S. Fish and Wildlife Service issued an incidental take permit to Stanford pursuant to the federal Endangered Species Act, authorizing Stanford's implementation of the HCP.  In May 2016, the California Department of Fish and Wildlife determined the incidental take permit is consistent with the California Endangered Species Act.
+           </p>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+   <tr>
+    <td height="81" valign="middle" width="256">
+     <a href="http://www.stanford.edu" target="_blank">
+      <img align="middle" alt="Stanford University" border="0" height="46" hspace="10" src="IMAGES/stanford_seal75x74.gif" vspace="5" width="46"/>
+     </a>
+     <span class="bodytext">
+      Stanford University
+     </span>
+    </td>
+    <td valign="middle" width="69">
+     <a href="http://land-buildings.stanford.edu" target="_blank">
+      <img align="middle" alt="RE" border="0" height="36" hspace="5" src="IMAGES/stanfordRE.gif" width="46"/>
+     </a>
+    </td>
+    <td valign="middle" width="298">
+     <span class="bodytext">
+      Stanford Land Buildings
+      <br/>
+      &amp; Real Estate
+     </span>
+    </td>
+    <td colspan="2" valign="top">
+     <!--DWLayoutEmptyCell-->
+    </td>
+   </tr>
+   <tr>
+    <td align="right" bgcolor="#4e750b" colspan="5" height="26" valign="middle">
+     <span class="bottom_nav">
+      <a class="bottom_nav" href="index.html">
+       home
+      </a>
+      ::
+     </span>
+     <a class="bottom_nav" href="sitemap.html">
+      site map
+     </a>
+     <span class="bottom_nav">
+      ::
+     </span>
+     <span class="bottom_nav">
+      © 2012 Stanford University
+     </span>
+    </td>
+    <td bgcolor="#4e750b" valign="top">
+     <!--DWLayoutEmptyCell-->
+    </td>
+   </tr>
+  </table>
+  <script language="JavaScript1.2" src="pop_events.js">
+  </script>
+ </body>
+</html>
+

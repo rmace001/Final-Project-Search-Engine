@@ -1,0 +1,568 @@
+https://islander.tamucc.edu/
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=1" name="viewport"/>
+  <meta content="text/html;charset=utf-8" http-equiv="content-type"/>
+  <meta content="no-cache,no-store" http-equiv="cache-control"/>
+  <meta content="no-cache" http-equiv="pragma"/>
+  <meta content="-1" http-equiv="expires"/>
+  <meta content="Connecting to TAMUCC" name="mswebdialog-title"/>
+  <title>
+   Sign In
+  </title>
+  <script type="text/javascript">
+   //<![CDATA[
+function LoginErrors(){this.userNameFormatError = 'Enter your user ID in the format \u0026quot;domain\\user\u0026quot; or \u0026quot;user@domain\u0026quot;.'; this.passwordEmpty = 'Enter your password.'; this.passwordTooLong = 'Password is too long (\u0026gt; 128 characters).';}; var maxPasswordLength = 128;
+//]]>
+  </script>
+  <script type="text/javascript">
+   //<![CDATA[
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+function InputUtil(errTextElementID, errDisplayElementID) {
+
+    if (!errTextElementID)  errTextElementID = 'errorText'; 
+    if (!errDisplayElementID)  errDisplayElementID = 'error'; 
+
+    this.hasFocus = false;
+    this.errLabel = document.getElementById(errTextElementID);
+    this.errDisplay = document.getElementById(errDisplayElementID);
+};
+InputUtil.prototype.canDisplayError = function () {
+    return this.errLabel && this.errDisplay;
+}
+InputUtil.prototype.checkError = function () {
+    if (!this.canDisplayError){
+        throw new Error ('Error element not present');
+    }
+    if (this.errLabel && this.errLabel.innerHTML) {
+        this.errDisplay.style.display = '';        
+        var cause = this.errLabel.getAttribute('for');
+        if (cause) {
+            var causeNode = document.getElementById(cause);
+            if (causeNode && causeNode.value) {
+                causeNode.focus();
+                this.hasFocus = true;
+            }
+        }
+    }
+    else {
+        this.errDisplay.style.display = 'none';
+    }
+};
+InputUtil.prototype.setInitialFocus = function (input) {
+    if (this.hasFocus) return;
+    var node = document.getElementById(input);
+    if (node) {
+        if ((/^\s*$/).test(node.value)) {
+            node.focus();
+            this.hasFocus = true;
+        }
+    }
+};
+InputUtil.prototype.setError = function (input, errorMsg) {
+    if (!this.canDisplayError) {
+        throw new Error('Error element not present');
+    }
+    input.focus();
+
+    if (errorMsg) {
+        this.errLabel.innerHTML = errorMsg;
+    }
+    this.errLabel.setAttribute('for', input.id);
+    this.errDisplay.style.display = '';
+};
+InputUtil.makePlaceholder = function (input) {
+    var ua = navigator.userAgent;
+
+    if (ua != null && 
+        (ua.match(/MSIE 9.0/) != null || 
+         ua.match(/MSIE 8.0/) != null ||
+         ua.match(/MSIE 7.0/) != null)) {
+        var node = document.getElementById(input);
+        if (node) {
+            var placeholder = node.getAttribute("placeholder");
+            if (placeholder != null && placeholder != '') {
+                var label = document.createElement('input');
+                label.type = "text";
+                label.value = placeholder;
+                label.readOnly = true;
+                label.style.position = 'absolute';
+                label.style.borderColor = 'transparent';
+                label.className = node.className + ' hint';
+                label.tabIndex = -1;
+                label.onfocus = function () { this.nextSibling.focus(); };
+
+                node.style.position = 'relative';
+                node.parentNode.style.position = 'relative';
+                node.parentNode.insertBefore(label, node);
+                node.onkeyup = function () { InputUtil.showHint(this); };
+                node.onblur = function () { InputUtil.showHint(this); };
+                node.style.background = 'transparent';
+
+                node.setAttribute("placeholder", "");
+                InputUtil.showHint(node);
+            }
+        }
+    }
+};
+InputUtil.focus = function (inputField) {
+    var node = document.getElementById(inputField);
+    if (node) node.focus();
+};
+InputUtil.hasClass = function(node, clsName) {
+    return node.className.match(new RegExp('(\\s|^)' + clsName + '(\\s|$)'));
+};
+InputUtil.addClass = function(node, clsName) {
+    if (!this.hasClass(node, clsName)) node.className += " " + clsName;
+};
+InputUtil.removeClass = function(node, clsName) {
+    if (this.hasClass(node, clsName)) {
+        var reg = new RegExp('(\\s|^)' + clsName + '(\\s|$)');
+        node.className = node.className.replace(reg, ' ');
+    }
+};
+InputUtil.showHint = function (node, gotFocus) {
+    if (node.value && node.value != '') {
+        node.previousSibling.style.display = 'none';
+    }
+    else {
+        node.previousSibling.style.display = '';
+    }
+};
+InputUtil.updatePlaceholder = function (input, placeholderText) {
+    var node = document.getElementById(input);
+    if (node) {
+        var ua = navigator.userAgent;
+        if (ua != null &&
+            (ua.match(/MSIE 9.0/) != null ||
+            ua.match(/MSIE 8.0/) != null ||
+            ua.match(/MSIE 7.0/) != null)) {
+            var label = node.previousSibling;
+            if (label != null) {
+                label.value = placeholderText;
+            }
+        }
+        else {
+            node.placeholder = placeholderText;
+        }
+    }
+};
+
+//]]>
+  </script>
+  <link href="/adfs/portal/css/style.css?id=DBC0B4741D4217A138377E7BCC747D0D30B93B979DC99146E4C4016785BA8C42" rel="stylesheet" type="text/css"/>
+  <style>
+   .illustrationClass {background-image:url(/adfs/portal/illustration/illustration.jpg?id=79DB7444E677A5F51E0256C8E9EEB4F689A4C22B8ADDEC322815D17532C063E1);}
+  </style>
+ </head>
+ <body class="body" dir="ltr">
+  <div id="noScript" style="position:static; width:100%; height:100%; z-index:100">
+   <h1>
+    JavaScript required
+   </h1>
+   <p>
+    JavaScript is required. This web browser does not support JavaScript or JavaScript in this web browser is not enabled.
+   </p>
+   <p>
+    To find out if your web browser supports JavaScript or to enable JavaScript, see web browser help.
+   </p>
+  </div>
+  <script language="JavaScript" type="text/javascript">
+   document.getElementById("noScript").style.display = "none";
+  </script>
+  <div id="fullPage">
+   <div class="float" id="brandingWrapper">
+    <div id="branding">
+    </div>
+   </div>
+   <div class="float" id="contentWrapper">
+    <div id="content">
+     <div id="header">
+      <img alt="TAMUCC" class="logoImage" id="companyLogo" src="/adfs/portal/logo/logo.png?id=852311AE4365271B1708C76BFBA87EDE1B70A10E3EC574BAE443A70BC7F8C24D"/>
+     </div>
+     <div id="workArea">
+      <div class="groupMargin" id="authArea">
+       <div id="loginArea">
+        <div class="groupMargin" id="loginMessage">
+         Sign in with your organizational account
+        </div>
+        <form action="/adfs/ls/?client-request-id=b80751b9-1270-4017-ab2f-c76a30aa48e1&amp;username=&amp;wa=wsignin1.0&amp;wtrealm=urn%3afederation%3aMicrosoftOnline&amp;wctx=estsredirect%3d2%26estsrequest%3drQIIAY2RPU_bQACGuRiMyNIKVepaVVWHVmefv84fElINDnISpzQpgpAF2Wc7OCG-yB8c5Bd0hJWRMRUCdaL9A0hMDJ3Y2Dp0qDp1LFGXjjzDo3d-3jecJEjWK_QPGc4MURxLkESz9R_ZcvXp1_bi1Xj5-bvP4vUATd37U1At_FFJiBCF5RS83CuKcW6JIi2LfUqHAo3jhEQK1gRCRyJlvngFwC0A04qOFWzoumko2FQlFeu6JmjIN4NQ8SGOZBWqMjZhICsRDNWABEEYyDhGd5UnG3ZZ7Mkz0SyZRL8rSzHNRrtjmhenXOqQXK9Ru-_YTofaMWu4rFXfcQe1lrOR99xDuN809HDHZp6WJ2yY1VeZlmhtUoarDa_RIGvZFh2Y3aO216x1m4eJ6_mb74vt8midMDxRDEPq7kppKWtDP_7Aptyj2n3h-IcAI5recDwdR2kS3s6DP_PgbOEh6rVXvr7_ueKen1yef7_Q524WxInM1rRB37S9lpZ16FZd7PY2O2-3D5pOf9110s7HpDDUA7FdM1YUSzrmwTHP_-DBLx58Wpz7tvSII-6qz2QkmRApUEIvkG4hbCGz9xc1" autocomplete="off" id="loginForm" method="post" novalidate="novalidate" onkeypress="if (event &amp;&amp; event.keyCode == 13) Login.submitLoginRequest();">
+         <div class="fieldMargin error smallText" id="error">
+          <span for="" id="errorText">
+          </span>
+         </div>
+         <div id="formsAuthenticationArea">
+          <div id="userNameArea">
+           <label class="hidden" for="userNameInput" id="userNameInputLabel">
+            User Account
+           </label>
+           <input autocomplete="off" class="text fullWidth" id="userNameInput" name="UserName" placeholder="someone@example.com" spellcheck="false" tabindex="1" type="email" value=""/>
+          </div>
+          <div id="passwordArea">
+           <label class="hidden" for="passwordInput" id="passwordInputLabel">
+            Password
+           </label>
+           <input autocomplete="off" class="text fullWidth" id="passwordInput" name="Password" placeholder="Password" tabindex="2" type="password"/>
+          </div>
+          <div id="kmsiArea" style="display:none">
+           <input id="kmsiInput" name="Kmsi" tabindex="3" type="checkbox" value="true"/>
+           <label for="kmsiInput">
+            Keep me signed in
+           </label>
+          </div>
+          <div class="submitMargin" id="submissionArea">
+           <span class="submit" id="submitButton" onclick="return Login.submitLoginRequest();" onkeypress="if (event &amp;&amp; event.keyCode == 32) Login.submitLoginRequest();" role="button" tabindex="4">
+            Sign in
+           </span>
+          </div>
+         </div>
+         <input id="optionForms" name="AuthMethod" type="hidden" value="FormsAuthentication"/>
+        </form>
+        <div id="authOptions">
+         <form action="https://sts.tamucc.edu:443/adfs/ls/?client-request-id=b80751b9-1270-4017-ab2f-c76a30aa48e1&amp;username=&amp;wa=wsignin1.0&amp;wtrealm=urn%3afederation%3aMicrosoftOnline&amp;wctx=estsredirect%3d2%26estsrequest%3drQIIAY2RPU_bQACGuRiMyNIKVepaVVWHVmefv84fElINDnISpzQpgpAF2Wc7OCG-yB8c5Bd0hJWRMRUCdaL9A0hMDJ3Y2Dp0qDp1LFGXjjzDo3d-3jecJEjWK_QPGc4MURxLkESz9R_ZcvXp1_bi1Xj5-bvP4vUATd37U1At_FFJiBCF5RS83CuKcW6JIi2LfUqHAo3jhEQK1gRCRyJlvngFwC0A04qOFWzoumko2FQlFeu6JmjIN4NQ8SGOZBWqMjZhICsRDNWABEEYyDhGd5UnG3ZZ7Mkz0SyZRL8rSzHNRrtjmhenXOqQXK9Ru-_YTofaMWu4rFXfcQe1lrOR99xDuN809HDHZp6WJ2yY1VeZlmhtUoarDa_RIGvZFh2Y3aO216x1m4eJ6_mb74vt8midMDxRDEPq7kppKWtDP_7Aptyj2n3h-IcAI5recDwdR2kS3s6DP_PgbOEh6rVXvr7_ueKen1yef7_Q524WxInM1rRB37S9lpZ16FZd7PY2O2-3D5pOf9110s7HpDDUA7FdM1YUSzrmwTHP_-DBLx58Wpz7tvSII-6qz2QkmRApUEIvkG4hbCGz9xc1" id="options" method="post">
+          <script type="text/javascript">
+           function SelectOption(option) {
+                    var i = document.getElementById('optionSelection');
+                    i.value = option;
+                    document.forms['options'].submit();
+                    return false;
+                }
+          </script>
+          <input id="optionSelection" name="AuthMethod" type="hidden"/>
+          <div class="groupMargin" id="authOptionLinks">
+          </div>
+         </form>
+        </div>
+        <div class="groupMargin" id="introduction">
+         For login issues, visit
+         <a href="https://passwords.tamucc.edu" target="_blank">
+          passwords.tamucc.edu
+         </a>
+         <br/>
+         <br/>
+         <ul>
+          <li>
+           You are accessing a Texas A&amp;M University - Corpus Christi ("TAMUCC") information system.
+          </li>
+          <li>
+           Unauthorized use is prohibited;
+          </li>
+          <li>
+           Usage may be subject to security testing and monitoring;
+          </li>
+          <li>
+           Misuse is subject to criminal prosecution; and
+          </li>
+          <li>
+           Users have no expectation of privacy except as otherwise provided by applicable privacy laws.
+          </li>
+         </ul>
+        </div>
+        <script type="text/javascript">
+         //<![CDATA[
+
+            function Login() {
+            }
+
+            Login.userNameInput = 'userNameInput';
+            Login.passwordInput = 'passwordInput';
+
+            Login.initialize = function () {
+
+                var u = new InputUtil();
+
+                u.checkError();
+                u.setInitialFocus(Login.userNameInput);
+                u.setInitialFocus(Login.passwordInput);
+            }();
+
+            Login.submitLoginRequest = function () { 
+                var u = new InputUtil();
+                var e = new LoginErrors();
+
+                var userName = document.getElementById(Login.userNameInput);
+                var password = document.getElementById(Login.passwordInput);
+
+                if (!userName.value || !userName.value.match('[@\\\\]')) {
+                    u.setError(userName, e.userNameFormatError);
+                    return false;
+                }
+
+                if (!password.value) {
+                    u.setError(password, e.passwordEmpty);
+                    return false;
+                }
+
+                if (password.value.length > maxPasswordLength) {
+                    u.setError(password, e.passwordTooLong);
+                    return false;
+                }
+
+                document.forms['loginForm'].submit();
+                return false;
+            };
+
+            InputUtil.makePlaceholder(Login.userNameInput);
+            InputUtil.makePlaceholder(Login.passwordInput);
+        //]]>
+        </script>
+       </div>
+      </div>
+     </div>
+     <div id="footerPlaceholder">
+     </div>
+    </div>
+    <div id="footer">
+     <div class="floatReverse" id="footerLinks">
+      <div>
+       <span id="copyright">
+        © 2016 Microsoft
+       </span>
+       <a class="pageLink" href="https://www.tamucc.edu" id="home">
+        Home
+       </a>
+       <a class="pageLink" href="https://it.tamucc.edu/Security/TAC202.html" id="privacy">
+        Privacy
+       </a>
+       <a class="pageLink" href="https://passwords.tamucc.edu" id="helpDesk">
+        Help
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   //<![CDATA[
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+
+// This file contains several workarounds on inconsistent browser behaviors that administrators may customize.
+"use strict";
+
+// Commented out because @ is more important 2016-07-10 SEF
+
+// iPhone email friendly keyboard does not include "\" key, use regular keyboard instead.
+// Note change input type does not work on all versions of all browsers.
+//if (navigator.userAgent.match(/iPhone/i) != null) {
+//    var emails = document.querySelectorAll("input[type='email']");
+//    if (emails) {
+//        for (var i = 0; i < emails.length; i++) {
+//            emails[i].type = 'text';
+//        }
+//    }
+//}
+
+// In the CSS file we set the ms-viewport to be consistent with the device dimensions, 
+// which is necessary for correct functionality of immersive IE. 
+// However, for Windows 8 phone we need to reset the ms-viewport's dimension to its original
+// values (auto), otherwise the viewport dimensions will be wrong for Windows 8 phone.
+// Windows 8 phone has agent string 'IEMobile 10.0'
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+    var msViewportStyle = document.createElement("style");
+    msViewportStyle.appendChild(
+        document.createTextNode(
+            "@-ms-viewport{width:auto!important}"
+        )
+    );
+    msViewportStyle.appendChild(
+        document.createTextNode(
+            "@-ms-viewport{height:auto!important}"
+        )
+    );
+    document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+}
+
+// If the innerWidth is defined, use it as the viewport width.
+if (window.innerWidth && window.outerWidth && window.innerWidth !== window.outerWidth) {
+    var viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute('content', 'width=' + window.innerWidth + 'px; initial-scale=1.0; maximum-scale=1.0');
+}
+
+// Gets the current style of a specific property for a specific element.
+function getStyle(element, styleProp) {
+    var propStyle = null;
+
+    if (element && element.currentStyle) {
+        propStyle = element.currentStyle[styleProp];
+    }
+    else if (element && window.getComputedStyle) {
+        propStyle = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
+    }
+
+    return propStyle;
+}
+
+// The script below is used for downloading the illustration image 
+// only when the branding is displaying. This script work together
+// with the code in PageBase.cs that sets the html inline style
+// containing the class 'illustrationClass' with the background image.
+var computeLoadIllustration = function () {
+    var branding = document.getElementById("branding");
+    var brandingDisplay = getStyle(branding, "display");
+    var brandingWrapperDisplay = getStyle(document.getElementById("brandingWrapper"), "display");
+
+    if (brandingDisplay && brandingDisplay !== "none" &&
+        brandingWrapperDisplay && brandingWrapperDisplay !== "none") {
+        var newClass = "illustrationClass";
+
+        if (branding.classList && branding.classList.add) {
+            branding.classList.add(newClass);
+        } else if (branding.className !== undefined) {
+            branding.className += " " + newClass;
+        }
+        if (window.removeEventListener) {
+            window.removeEventListener('load', computeLoadIllustration, false);
+            window.removeEventListener('resize', computeLoadIllustration, false);
+        }
+        else if (window.detachEvent) {
+            window.detachEvent('onload', computeLoadIllustration);
+            window.detachEvent('onresize', computeLoadIllustration);
+        }
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('resize', computeLoadIllustration, false);
+    window.addEventListener('load', computeLoadIllustration, false);
+}
+else if (window.attachEvent) {
+    window.attachEvent('onresize', computeLoadIllustration);
+    window.attachEvent('onload', computeLoadIllustration);
+}
+
+// Code to change "Sign in with organizational account" string.
+
+// Check whether the loginMessage element is present on this page.
+var loginMessage = document.getElementById('loginMessage');
+if (loginMessage)
+{
+       // loginMessage element is present, modify its properties.
+       loginMessage.innerHTML = 'Sign in with your IslandID or University Email address';
+}
+
+// Code to change "someone@example.com" placeholder string.
+
+// Check whether the usernameInput is present on this page.
+var userNameInput = document.getElementById('userNameInput');
+if (userNameInput)
+{
+       // userNameInput element is present, modify its properties.
+       userNameInput.placeholder = 'IslandID or University Email address';
+}
+
+// Code to Allow sAMAccountname logins
+
+if (typeof Login != 'undefined'){
+    Login.submitLoginRequest = function () { 
+    var u = new InputUtil();
+    var e = new LoginErrors();
+    var userName = document.getElementById(Login.userNameInput);
+    var password = document.getElementById(Login.passwordInput);
+    //  Check for BannerID
+    if (userName.value && userName.value.match('^[Aa][0-9]')) {
+       u.setError(userName, 'Student ID detected. Please enter your IslandID');
+       return false;
+    }
+
+    if (userName.value && !userName.value.match('[@\\\\]')) 
+    {
+        var userNameValue = 'ad.tamucc.edu\\' + userName.value;
+        document.forms['loginForm'].UserName.value = userNameValue;
+    }
+
+    if (!userName.value) {
+       u.setError(userName, e.userNameFormatError);
+       return false;
+    }
+
+
+    if (!password.value) 
+    {
+        u.setError(password, e.passwordEmpty);
+        return false;
+    }
+    document.forms['loginForm'].submit();
+    return false;
+};
+}
+
+// Code to Allow sAMAccountname logins on update password page
+
+if (typeof UpdatePassword != 'undefined') {
+ UpdatePassword.submitPasswordChange = function () {
+  var u = new InputUtil();
+  var e = new UpdErrors();
+ 
+  var userName = document.getElementById(UpdatePassword.userNameInput);
+  var oldPassword = document.getElementById(UpdatePassword.oldPasswordInput);
+  var newPassword = document.getElementById(UpdatePassword.newPasswordInput);
+  var confirmNewPassword = document.getElementById(UpdatePassword.confirmNewPasswordInput);
+ 
+  if (!userName.value || !userName.value.match('[@\\\\]')) {
+   var userName = 'ad.tamucc.edu\\' + userName.value;
+   document.forms['updatePasswordForm'].userNameInput.value = userName;
+  }
+ 
+  if (!oldPassword.value) {
+   u.setError(oldPassword, e.oldPasswordEmpty);
+   return false;
+  }
+ 
+  if (!newPassword.value) {
+   u.setError(newPassword, e.newPasswordEmpty);
+   return false;
+  }
+ 
+  if (!confirmNewPassword.value) {
+   u.setError(confirmNewPassword, e.confirmNewPasswordEmpty);
+   return false;
+  }
+ 
+  if (newPassword.value !== confirmNewPassword.value) {
+   u.setError(confirmNewPassword, e.mismatchError);
+   return false;
+  }
+ 
+  var error = document.getElementById('error');
+  error.innerHTML = '';
+  return true;
+ };
+}
+
+// Dynamic TAC 202 warning
+
+var DynamicTAC202 = function () {
+
+    var intro = document.getElementById('introduction');
+    if (intro) {
+        var origIntroduction = intro.innerHTML;
+    }
+
+    var computeTAC202 = function () {
+       var intro = document.getElementById('introduction');
+
+        if (intro && window.innerHeight > 700 && window.innerWidth > 340) {
+                intro.innerHTML = origIntroduction;
+            } else if (intro) {
+                intro.innerHTML = "For login issues, visit <A href='https://passwords.tamucc.edu' target='_blank'>passwords.tamucc.edu</A><br><br>By logging into this system, you agree to bound by our <A href='https://it.tamucc.edu/informationsecurity/TAC%20202%20Login%20Banner.html' target='_blank'>terms and conditions</A>.";
+            }
+    };
+
+    if (window.addEventListener) {
+        window.addEventListener('resize', computeTAC202, false);
+        window.addEventListener('load', computeTAC202, false);
+    }
+    else if (window.attachEvent) {
+        window.attachEvent('onresize', computeTAC202);
+        window.attachEvent('onload', computeTAC202);
+    }
+};
+
+DynamicTAC202();
+//]]>
+  </script>
+ </body>
+</html>
+

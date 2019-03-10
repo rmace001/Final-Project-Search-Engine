@@ -1,0 +1,1085 @@
+http://solutions.csueastbay.edu/
+<!DOCTYPE html>
+<html class=" ltr " data-doctype="true" dir="ltr" lang="en">
+ <head>
+  <title>
+   CSUEB ServiceNow
+  </title>
+  <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="public" http-equiv="cache-control"/>
+  <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <script data-description="globals population" type="text/javascript">
+   window.NOW = window.NOW || {};
+	var g_loadTime = new Date();
+	var lastActivity = new Date();
+	var g_lang = 'en';
+	var g_system_lang = 'en';
+	var g_enhanced_activated = 'true';
+	  var g_popup_timeout = parseInt(100);
+	var g_export_warn_threshold = parseInt(10000);
+	  var g_event_handler_ids = {};
+	var g_event_handlers = [];
+	var g_event_handlers_onLoad = [];
+	var g_event_handlers_onSubmit = [];
+	var g_event_handlers_onChange = [];
+	var g_event_handlers_onCellEdit = {};
+	var g_event_handlers_localCache = {};
+	var g_event_handlers_queryTracking = true;
+	var g_user_date_time_format = "yyyy-MM-dd HH:mm:ss";
+	var g_user_date_format = "yyyy-MM-dd";
+	var g_user_decimal_separator = ".";
+	var g_user_grouping_separator = ",";
+	var g_glide_list_separator = ", ";
+	var g_tz_offset = -28800000;
+	  var g_tz_user_offset = true;
+	var g_first_day_of_week = parseInt(1, 10);
+	var g_date_picker_first_day_of_week = parseInt(0, 10);
+	  var g_full_calendar_edit = true;
+	var g_submitted = false;
+	var g_max_table_length = 80;
+	var g_fontSizePreference = "";
+	var g_fontSize = "10pt";
+	// use to be the sys_property glide.ui.js_error_notify, hard coded for PRB603998
+	var g_jsErrorNotify = "true";
+	var g_cancelPreviousTransaction = true;
+	var g_text_direction = "ltr";
+	var g_glide_list_filter_max_length =  parseInt("0", 10);
+	var g_accessibility = false;
+	var g_accessibility_visual_patterns = false;
+	var g_detail_row = false;
+	window.g_load_functions = [];
+	window.g_render_functions = [];
+	window.g_late_load_functions = [];
+
+	
+	var g_ck = 'de30afd6dbc4b3406174fce9af9619b3ba0ed1c6d2c21fd43807743cb48a95fb8eb43c97';
+	
+
+	
+	var g_acWaitTime = parseInt(250);
+	
+
+	var g_autoRequest = '';
+
+	try {
+		window.NOW.dateFormat = JSON.parse("{\"timeAgo\": false, \"dateBoth\": false}");
+	} catch (e) {
+		window.NOW.dateFormat = {timeAgo: false, dateBoth: false};
+	}
+
+	window.NOW.shortDateFormat = false;
+	window.NOW.listTableWrap = true;
+	window.NOW.compact = false;
+  	window.NOW.templateToggle = false;
+	window.NOW.tabbed = true;
+	window.NOW.permalink = true;
+	window.NOW.useSimpleStorage = true;
+	window.NOW.simpleStorageSynch = "7fe41232db3323006174fce9af961926";
+	window.NOW.language =  'en';
+	window.NOW.listOpenInAppTab = false;
+	window.NOW.floatingScrollbars = false;
+	
+	window.NOW.user = {};
+	window.NOW.user.preferences = [];
+	window.NOW.user.roles = '';
+	window.NOW.user.allRoles = '';
+	window.NOW.user.userID = '5136503cc611227c0183e96598c4f706';
+	window.NOW.user.departmentID = '';
+	window.NOW.user.firstName = '';
+	window.NOW.user.lastName = 'Guest';
+	window.NOW.user.name = 'guest';
+    window.NOW.batch_glide_ajax_requests = 'true' === 'true';
+    window.NOW.batch_glide_ajax_requests_max_time_in_queue = ~~'50';
+    window.NOW.batch_glide_ajax_disable_time = ~~'1000';
+
+	window.NOW.currency = {};
+    window.NOW.currency.code = 'USD';
+    window.NOW.locale = {};
+	window.NOW.locale.code = 'en_US';
+  </script>
+  <script data-comment="GlideUser initialization">
+   (function() {
+		 g_render_functions.push(setGlideUser);
+		function setGlideUser() {
+			if (window.g_user || !window.GlideUser)
+		return;
+
+		window.g_user = new GlideUser(NOW.user.name,
+			  NOW.user.firstName,
+			  NOW.user.lastName,
+			  NOW.user.roles,
+			  NOW.user.userID,
+			  NOW.user.departmentID);
+		window.g_user.setRoles(NOW.user.allRoles, true);
+		}
+	})();
+  </script>
+  <script data-comment="Fiscal schedule constants">
+   window.NOW.filter_globals = "[[\"This fiscal month\", \"javascript:gs.beginningOfThisSchedulePeriod(\'\',\'This fiscal month\')\", \"javascript:gs.endOfThisSchedulePeriod(\'\',\'This fiscal month\')\", \"javascript:gs.endOfThisSchedulePeriod(\'\',\'This fiscal month\')\"], [\"Last fiscal month\", \"javascript:gs.beginningOfLastSchedulePeriod(\'\',\'Last fiscal month\')\", \"javascript:gs.endOfLastSchedulePeriod(\'\',\'Last fiscal month\')\", \"javascript:gs.endOfLastSchedulePeriod(\'\',\'Last fiscal month\')\"], [\"Next fiscal month\", \"javascript:gs.beginningOfNextSchedulePeriod(\'\',\'Next fiscal month\')\", \"javascript:gs.endOfNextSchedulePeriod(\'\',\'Next fiscal month\')\", \"javascript:gs.endOfNextSchedulePeriod(\'\',\'Next fiscal month\')\"], [\"Last 3 fiscal months\", \"javascript:gs.beginningOfSchedulePeriodsAgo(3, \'\',\'Last 3 fiscal months\')\", \"javascript:gs.endOfSchedulePeriodsAgo(1, \'\',\'Last 3 fiscal months\')\", \"javascript:gs.beginningOfSchedulePeriodsAgo(3, \'\',\'Last 3 fiscal months\')\"], [\"Last 12 fiscal months\", \"javascript:gs.beginningOfSchedulePeriodsAgo(12, \'\',\'Last 12 fiscal months\')\", \"javascript:gs.endOfSchedulePeriodsAgo(1, \'\',\'Last 12 fiscal months\')\", \"javascript:gs.beginningOfSchedulePeriodsAgo(12, \'\',\'Last 12 fiscal months\')\"], [\"Next 3 fiscal months\", \"javascript:gs.beginningOfSchedulePeriodsAgo(-1, \'\',\'Next 3 fiscal months\')\", \"javascript:gs.endOfSchedulePeriodsAgo(-3, \'\',\'Next 3 fiscal months\')\", \"javascript:gs.endOfSchedulePeriodsAgo(-3, \'\',\'Next 3 fiscal months\')\"], [\"Next 12 fiscal months\", \"javascript:gs.beginningOfSchedulePeriodsAgo(-1, \'\',\'Next 12 fiscal months\')\", \"javascript:gs.endOfSchedulePeriodsAgo(-12, \'\',\'Next 12 fiscal months\')\", \"javascript:gs.endOfSchedulePeriodsAgo(-12, \'\',\'Next 12 fiscal months\')\"], [\"This fiscal quarter\", \"javascript:gs.beginningOfThisSchedulePeriod(\'\',\'This fiscal quarter\')\", \"javascript:gs.endOfThisSchedulePeriod(\'\',\'This fiscal quarter\')\", \"javascript:gs.endOfThisSchedulePeriod(\'\',\'This fiscal quarter\')\"], [\"Last fiscal quarter\", \"javascript:gs.beginningOfLastSchedulePeriod(\'\',\'Last fiscal quarter\')\", \"javascript:gs.endOfLastSchedulePeriod(\'\',\'Last fiscal quarter\')\", \"javascript:gs.endOfLastSchedulePeriod(\'\',\'Last fiscal quarter\')\"], [\"Last 4 fiscal quarters\", \"javascript:gs.beginningOfSchedulePeriodsAgo(4, \'\',\'Last 4 fiscal quarters\')\", \"javascript:gs.endOfSchedulePeriodsAgo(1, \'\',\'Last 4 fiscal quarters\')\", \"javascript:gs.beginningOfSchedulePeriodsAgo(4, \'\',\'Last 4 fiscal quarters\')\"], [\"Next fiscal quarter\", \"javascript:gs.beginningOfNextSchedulePeriod(\'\',\'Next fiscal quarter\')\", \"javascript:gs.endOfNextSchedulePeriod(\'\',\'Next fiscal quarter\')\", \"javascript:gs.endOfNextSchedulePeriod(\'\',\'Next fiscal quarter\')\"], [\"Next 4 fiscal quarters\", \"javascript:gs.beginningOfSchedulePeriodsAgo(-1, \'\',\'Next 4 fiscal quarters\')\", \"javascript:gs.endOfSchedulePeriodsAgo(-4, \'\',\'Next 4 fiscal quarters\')\", \"javascript:gs.endOfSchedulePeriodsAgo(-4, \'\',\'Next 4 fiscal quarters\')\"], [\"This fiscal year\", \"javascript:gs.beginningOfThisSchedulePeriod(\'\',\'This fiscal year\')\", \"javascript:gs.endOfThisSchedulePeriod(\'\',\'This fiscal year\')\", \"javascript:gs.endOfThisSchedulePeriod(\'\',\'This fiscal year\')\"], [\"Last fiscal year\", \"javascript:gs.beginningOfLastSchedulePeriod(\'\',\'Last fiscal year\')\", \"javascript:gs.endOfLastSchedulePeriod(\'\',\'Last fiscal year\')\", \"javascript:gs.endOfLastSchedulePeriod(\'\',\'Last fiscal year\')\"], [\"Next fiscal year\", \"javascript:gs.beginningOfNextSchedulePeriod(\'\',\'Next fiscal year\')\", \"javascript:gs.endOfNextSchedulePeriod(\'\',\'Next fiscal year\')\", \"javascript:gs.endOfNextSchedulePeriod(\'\',\'Next fiscal year\')\"]]" || "[]";
+  </script>
+  <script data-description="NOW glide web analytics siteid and url">
+   window.NOW = window.NOW || {};
+		// glide web analytics config
+		window.NOW.webaConfig = {};
+		window.NOW.webaConfig.siteId = "";
+		window.NOW.webaConfig.trackerURL = "";
+		window.NOW.webaConfig.webaScriptPath = "scripts/piwik-2.16/thirdparty/piwik.min.js";
+  </script>
+  <link href="csueb_browser_logo.pngx?v=4" rel="shortcut icon"/>
+  <script>
+   // window.performance in Chrome, Firefox, and Internet Explorer 9+ (not Safari)
+				window.NOW.xperf = window.performance || {};
+				if (!NOW.xperf.now) {
+					NOW.xperf.now = function() { return new Date().getTime(); };
+				}
+				NOW.xperf.parseBegin = NOW.xperf.now(); 
+				NOW.xperf.cssBegin = NOW.xperf.now();
+  </script>
+  <link href="/styles/css_includes_doctype.cssx?v=12-04-2018_0932&amp;c=2018-04-11_22:29:45_0b051632db3323006174fce9af9619bf&amp;theme=" rel="stylesheet" type="text/css"/>
+  <link href="/styles/heisenberg/source_sans_pro.cssx?v=12-04-2018_0932&amp;c=2018-04-11_22:29:45_0b051632db3323006174fce9af9619bf&amp;theme=null" rel="stylesheet" type="text/css"/>
+  <link href="/styles/heisenberg/heisenberg_all.cssx?v=12-04-2018_0932&amp;c=2018-04-11_22:29:45_0b051632db3323006174fce9af9619bf&amp;theme=null" rel="stylesheet" type="text/css"/>
+  <script>
+   NOW.xperf.cssEnd = NOW.xperf.now();
+			NOW.xperf.scriptBegin = NOW.xperf.now();
+  </script>
+  <script src="/scripts/doctype/js_includes_doctype.jsx?v=12-04-2018_0932&amp;lp=Thu_Aug_23_13_21_59_PDT_2018&amp;c=19_238" type="text/javascript">
+  </script>
+  <script src="/scripts/js_includes_customer.jsx?v=12-04-2018_0932&amp;lp=Thu_Aug_23_13_21_59_PDT_2018&amp;c=19_238" type="text/javascript">
+  </script>
+  <script>
+   NOW.xperf.scriptEnd = NOW.xperf.now();
+				NOW.xperf.parseEnd = NOW.xperf.now();  
+				$j(function() {
+					var x = NOW.xperf;
+					var last = x.lastDoctypeEnd - x.lastDoctypeBegin;
+					if (window.console) {
+						console.log("+-- Parse times");
+						console.log("| CSS parse: " + (x.cssEnd - x.cssBegin));
+						console.log("| JS  doctype: " + (x.scriptEnd - x.scriptBegin));
+						console.log("| JS at end of page: " + last);
+						console.log("+-- All parsing: " + (x.parseEnd - x.parseBegin + last));	
+					}
+					
+					var ms = Math.round(x.parseEnd - x.parseBegin + last);
+					CustomEvent.fire('page_timing', { name: 'PARS', ms: ms, win: window });
+					
+					if (window.performance && performance.timing) {
+						NOW.xperf.z = new Date().getTime();
+						setTimeout(function () {
+						   var x = performance.timing.loadEventEnd - performance.timing.domContentLoadedEventStart;
+						   CustomEvent.fire('page_timing', { name: 'DOMC', ms: x, win: window });
+						   x = performance.timing.loadEventStart - NOW.xperf.z;
+						   CustomEvent.fire('page_timing', { name: 'PROC', ms: x, win: window });
+						}, 250);  // has to be done after the loadEvent ends
+					}
+				})
+  </script>
+  <script src="/scripts/doctype/js_includes_legacy.jsx?v=12-04-2018_0932&amp;lp=Thu_Aug_23_13_21_59_PDT_2018&amp;c=19_238" type="text/javascript">
+  </script>
+  <script data-comment="navpage layout preferences, onfocus observation" type="text/javascript">
+   /**
+	* Every window needs to observe these events.
+	*/
+	if (Prototype.Browser.IE && !isMSIE9) {
+		document.onfocusout = function() { CustomEvent.fireTop(GlideEvent.WINDOW_BLURRED, window); };
+		document.onfocusin = function() { CustomEvent.fireTop(GlideEvent.WINDOW_FOCUSED, window); };
+	} else {
+		Event.observe(window, 'blur', function() { CustomEvent.fireTop(GlideEvent.WINDOW_BLURRED, window); });
+		Event.observe(window, 'focus', function() { CustomEvent.fireTop(GlideEvent.WINDOW_FOCUSED, window); });
+	}
+  </script>
+  <script type="text/javascript">
+   g_swLoadTime = new StopWatch(g_loadTime);
+
+    if (window.CustomEvent){
+        CustomEvent.fireAll("ck_updated", "de30afd6dbc4b3406174fce9af9619b3ba0ed1c6d2c21fd43807743cb48a95fb8eb43c97");
+	    CustomEvent.fireTop("navigation.complete", window);
+	}
+
+    addLoadEvent( function() {
+
+		if (isValidTouchDevice())
+			addTouchScrollClassToBody();
+
+      if (typeof g_ck != 'undefined') {
+        CustomEvent.observe("ck_updated", function(ck) { g_ck = ck; });
+        CustomEvent.fireAll("ck_updated", "de30afd6dbc4b3406174fce9af9619b3ba0ed1c6d2c21fd43807743cb48a95fb8eb43c97");}try {
+              var helpico = getTopWindow().document.getElementById("help_ico");
+
+              if (helpico) {
+                var urlname=window.location.pathname.split("?");
+                var search_str = window.location.search;
+                
+                // if this is a form, extract the record's sys_id...
+                var sys_id_loc = search_str.search(/sys_id=[0-9a-f]{32}/i);
+                var sys_id_str = (sys_id_loc != -1) ? search_str.substr(sys_id_loc, 39) : null;
+                
+                // make the URL to our context help processor...
+                var url_search = "?sysparm_url=" + urlname[0];
+                if (sys_id_loc != -1)
+                   url_search += "&" + sys_id_str;
+
+               	helpico.href="context_help.do" + url_search;                	
+              }
+            } catch (exception) {}
+
+      synchCache();
+      pageLoaded();
+    });
+    
+    function synchCache() {
+      try {
+        var w = getTopWindow();
+        if (w.g_cache_message)
+          w.g_cache_message.stamp("7fe41232db3323006174fce9af961926");
+  
+        if (w.g_cache_td)
+          w.g_cache_td.stamp("53d9b85edbcc73406174fce9af961981");
+      } catch(e) {}
+    }
+
+    function isValidTouchDevice() {
+		var navigator = window.navigator || {};
+		var devices;
+		try {
+			devices = 'iPad,Android'.split(',');
+		} catch(ex) {
+			devices = [];
+		}
+		return devices.some(function(item) {return item.trim() === navigator.platform;});
+	}
+
+	function addTouchScrollClassToBody() {
+		if ('ontouchstart' in window ||
+				(navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 0) ||
+				(navigator.msMaxTouchPoints !== 'undefined' && navigator.msMaxTouchPoints > 0)) {
+			if (typeof document.body != undefined) {
+				document.body.classList.add('touch_scroll');
+			}
+		}
+	}
+  </script>
+  <!--googleoff: all-->
+  <noscript>
+   This site requires JavaScript to be enabled
+  </noscript>
+  <!--googleon: all-->
+  <script src="/scripts/app.guided_tours/js_guided_tours_includes.jsx?v=12-04-2018_0932" type="text/javascript">
+  </script>
+ </head>
+ <body class=" " data-formname="ui_page_render" onclick="CustomEvent.fireAll('body_clicked', event);" ontouchend="CustomEvent.fireAll('body_clicked', event);">
+  <span class="sr-only">
+   <span aria-live="polite" id="html_page_aria_live_polite" role="region">
+   </span>
+   <span aria-live="assertive" id="html_page_aria_live_assertive" role="region">
+   </span>
+  </span>
+  <div class="outputmsg_div">
+   <div class="outputmsg_container" id="output_messages" style="display:none">
+    <h2 class="sr-only">
+     Notifications
+    </h2>
+    <button class="btn btn-icon close icon-cross" onclick="GlideUI.get().clearOutputMessages(this); return false;">
+     <span class="sr-only">
+      Close Messages"
+     </span>
+    </button>
+    <div class="outputmsg_div">
+    </div>
+   </div>
+   <script>
+    addRenderEvent(function() {CustomEvent.fire('glide_optics_inspect_update_watchfield', '');});
+   </script>
+   <span class="ui_notification" data-attr-session_domain="global" data-text="" data-type="session_change">
+   </span>
+  </div>
+  <link href="kb_styles.cssx" rel="stylesheet" type="text/css"/>
+  <script language="JavaScript" src="kb_drag.jsx?v=12-04-2018_0932">
+  </script>
+  <script language="JavaScript" src="kb.jsx?v=12-04-2018_0932">
+  </script>
+  <link href="/styles/heisenberg/heisenberg_all.cssx?v=12-04-2018_0932" rel="stylesheet" type="text/css"/>
+  <div style="margin-bottom: 8px;">
+   <table border="0" cellspacing="0" class="wide">
+    <tr>
+     <td class="title" nowrap="true">
+      <link href="styles/legacy/kb_header.cssx" rel="stylesheet" type="text/css"/>
+      <script src="/scripts/lib/jquery_includes.jsx?v=12-04-2018_0932" type="text/javascript">
+      </script>
+      <script>
+       var $j = window.$j || window.jQuery;
+		var kbPublicationsList = [];
+		var kbParentDragPartZindex = '0';
+		var kbParentDragSectionOverflow = null;
+		var kbParentWidgetBodyOverflow = null;
+		var kbParentWidgetBodyDisplay = null;
+		var menu_item;
+		function kbOnLoad() {
+			$j(window).scroll(hideAdvancedMenu);
+			$j('body').click(function(event) {
+				if (event) {
+					var $target = $j(event.target);
+
+					// testing if we didn't click on the component or the menu itself.
+					if ($target.closest('#kb_advanced_search_menu, .kb-btn-advanced').length < 1) {
+						hideAdvancedMenu();
+					}
+				}
+			});
+
+			var form = gel('kb_view');
+
+			
+			
+				$j('.kb-hide-adv-btn').removeClass('kb-hide-adv-btn');
+			
+		}
+
+		function createNewIncident() {
+			window.open("/incident.do?sys_id=-1");
+		}
+
+		function submitSearch() {
+			
+				if (gel("sysparm_search").value == "")
+					return false;
+			
+
+			var form = gel('kb_view');
+			if (form['kb_knowledge.topic'])
+				form['sysparm_topic'].value = form['kb_knowledge.topic'].value;
+
+			if (form['kb_knowledge.category'])
+				form['sysparm_category'].value = form['kb_knowledge.category'].value;
+
+			var sysparmSearch = $('sysparm_search');
+			var searchEngine = $('search_engine');
+
+			if (sysparmSearch.value.length == 0 || !sysparmSearch.value) {
+				form.action = "kb_list.do";
+
+				if (form['sysparm_topic'])
+				addInput(form, 'HIDDEN', 'jvar_view_topic', form['sysparm_topic'].value);
+
+				if (form['sysparm_category'])
+				addInput(form, 'HIDDEN', 'jvar_view_category', form['sysparm_category'].value);
+
+				return true;
+
+			} else if (!searchEngine || searchEngine.options.selectedIndex < 1) {
+				return true;
+			} else {
+				var value = searchEngine.options[searchEngine.options.selectedIndex].value;
+				window["script_" + value](sysparmSearch.value); // execute function w/o eval
+				return false;
+			}	
+		}
+
+		function toggleAdvancedSearch() {
+			var menu = $j("#kb_advanced_search_menu");
+			if (menu.css('display') === 'none')
+				showAdvancedSearch();
+			else
+				hideAdvancedMenu();
+		}
+
+		function showAdvancedSearch() {
+			var cnt = $j("#kb-input-container");
+			var dragPart = cnt.closest('.drag_section_part');
+
+			// backup and change drag_section_part's z-index
+			if (dragPart.length > 0) {
+				kbParentDragPartZindex = dragPart.css('z-index');
+				dragPart.css('z-index', '10');
+			}
+		
+			// backup and change drag_section's overflow
+			var dragSection = cnt.closest('.drag_section');
+			if (dragSection.length > 0) {
+				kbParentDragSectionOverflow = dragSection.css('overflow');
+				dragSection.css('overflow', 'visible');
+			}
+		
+			// Back and change widget_body's overflow and display when not in doctype mode
+			if (!isDoctype()) {
+				var widgetBody = cnt.closest('.widget_body');
+				if (widgetBody.length > 0) {
+					kbParentWidgetBodyOverflow = widgetBody.css('overflow');
+					kbParentWidgetBodyDisplay = widgetBody.css('display');
+					widgetBody.css('overflow', 'visible');
+					widgetBody.css('display', 'inline-block');
+				}
+			}
+
+			var menu = $j("#kb_advanced_search_menu");
+			var width = cnt.outerWidth();
+			var offset = cnt.offset();
+			offset.top = offset.top - $j(window).scrollTop() + cnt.outerHeight();
+			offset.left = offset.left - $j(window).scrollLeft();
+
+			if (isMSIE7 || isMSIE8 || !isDoctype()) {
+				var path = window.location.pathname;
+				if (path.indexOf('/home.do') != -1) {
+					if (!isMSIE7 && !isMSIE8 && !isDoctype()) {
+						offset.top = 37;
+						offset.left = 10;
+					}
+                    else {
+						offset.top = 33;
+						offset.left = 10;
+					}
+				} else if (path.indexOf('/kb_home.do') != -1 || path.indexOf('/kb_find.do') != -1) {
+					offset.top -= 10;
+					offset.left -= 4;
+				}
+				if (isMSIE7 || isMSIE8)
+					width -= 36;
+				else
+					width -= 2;
+			}
+
+			menu.width(width);
+			menu.css({'top': offset.top + 'px', 'left': offset.left + 'px', 'right':'', 'display':'block'});
+		}
+
+		function sysparmSearchFocus(that) {
+			that.select();
+
+			if (!that.ac) {
+				addLoadEvent(function() {
+					var e = $('sysparm_search');
+					if (!e.ac) {
+						new AJAXTextSearchCompleter('global_search_completer', 'sysparm_search', 'left', $$('span.searchBox')[0]);
+					}
+				});
+			}
+		}
+
+		function filterPublications(that) {
+			// this could be a lot simpler if we didn't support Quirks mode IE.
+			var kbParentId = that.value;
+			var form = gel('kb_view');
+			var pubSelect = form['sysparm_publication'];
+
+			if (kbParentId !== 'null') {
+				pubSelect.innerHTML = '';
+				for (var i = 0; i < kbPublicationsList.length; i++) {
+					var opt = kbPublicationsList[i];
+
+					if (opt.sysId === 'null' || opt.parentSysId === kbParentId) {
+						var optElem = $j('<option></option>')
+						.val(opt.sysId)
+						.attr('data-kb-sysid', opt.parentSysId)
+						.text(opt.label);
+
+						if (opt.selected) {
+							optElem.attr('selected', 'true');
+							pubSelect.selectedIndex = i;
+						}
+
+						$j(pubSelect).append(optElem);
+					}
+				}
+				pubSelect.disabled = '';
+			} else {
+				pubSelect.options.selectedIndex = 0;
+				pubSelect.disabled = 'disabled';
+			}
+		}
+
+		function hideAdvancedMenu() {
+			var menu = $j("#kb_advanced_search_menu");
+			// restore drag_section_part's original z-index
+			var dragPart = menu.closest('.drag_section_part');
+			if (dragPart.length > 0) {
+				dragPart.css('z-index', kbParentDragPartZindex);
+			}
+		
+			// restore drag_section original overflow
+			if (kbParentDragSectionOverflow) {
+				var dragSection = menu.closest('.drag_section');
+				if (dragSection.length > 0) 
+					dragSection.css('overflow', kbParentDragSectionOverflow);
+			}
+		
+			// restore widget_body original overflow and dislay when not in doctype mode
+			if (!isDoctype() && kbParentWidgetBodyOverflow && kbParentWidgetBodyDisplay) {
+				var widgetBody = menu.closest('.widget_body');
+				if (widgetBody.length > 0) {
+					widgetBody.css('overflow', kbParentWidgetBodyOverflow);
+					widgetBody.css('display', kbParentWidgetBodyDisplay);
+				}
+			}
+		
+			menu.css('display', 'none');
+			menu.css('top', '-999px');
+			if ($j('html').is('.rtl')) {
+				menu.css({'right':'-999px', 'left':''});
+			} else {
+				menu.css({'right':'', 'left':'-999px'});
+			}
+		}
+
+		addLoadEvent(kbOnLoad);
+
+		
+		var gcm = new GwtContextMenu('context_ui_page_render');
+		var mRowsPerPage = new GwtContextMenu('context_rowsperpage_ui_page_render');
+		var sorting = new GwtContextMenu('context_sort_ui_page_render');
+		gcm.clear();
+		gcm.addMenu("Show", mRowsPerPage);
+		sorting.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> Views', "changeSort('views');",'','Select to sort by Views','menu_views');
+				menu_item = sorting.getItem('menu_views');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to sort by Views');
+					}
+				}
+			sorting.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> Relevancy', "changeSort('relevancy');",'','Select to sort by Relevancy','menu_relevancy');
+				menu_item = sorting.getItem('menu_relevancy');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to sort by Relevancy');
+					}
+				}
+			sorting.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> Last modified', "changeSort('sys_updated_on');",'','Select to sort by Last modified','menu_sys_updated_on');
+				menu_item = sorting.getItem('menu_sys_updated_on');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to sort by Last modified');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> 10 per page', "changeRowCountFromMenu(10);",'','Select to show 10 results per page', 'menu_10');
+				menu_item = mRowsPerPage.getItem('menu_10');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to show 10 results per page');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> 15 per page', "changeRowCountFromMenu(15);",'','Select to show 15 results per page', 'menu_15');
+				menu_item = mRowsPerPage.getItem('menu_15');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to show 15 results per page');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> 20 per page', "changeRowCountFromMenu(20);",'','Select to show 20 results per page', 'menu_20');
+				menu_item = mRowsPerPage.getItem('menu_20');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to show 20 results per page');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> 50 per page', "changeRowCountFromMenu(50);",'','Select to show 50 results per page', 'menu_50');
+				menu_item = mRowsPerPage.getItem('menu_50');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to show 50 results per page');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> 100 per page', "changeRowCountFromMenu(100);",'','Select to show 100 results per page', 'menu_100');
+				menu_item = mRowsPerPage.getItem('menu_100');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to show 100 results per page');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx" style="visibility:hidden;" aria-hidden="true"></img> 1000 per page', "changeRowCountFromMenu(1000);",'','Select to show 1000 results per page', 'menu_1000');
+				menu_item = mRowsPerPage.getItem('menu_1000');
+				if(menu_item) {
+					elems = menu_item.getElementsByTagName('img');
+					if(elems && elems.length > 0) {
+						elems[0].setAttribute('alt','Select to show 1000 results per page');
+					}
+				}
+			mRowsPerPage.addHref('<img src="images/checked.pngx"></img> per page', "changeRowCountFromMenu(1000);",'','Select to show 1000 results per page', 'menu_1000');
+			menu_item = mRowsPerPage.getItem('menu_1000');
+			if(menu_item) {
+				elems = menu_item.getElementsByTagName('img');
+				if(elems && elems.length > 0) {
+					elems[0].setAttribute('alt','Select to show 1000 results per page');
+				}
+			}
+		$j(document).ready(function() { 
+			$j("input[id^='sysparm_'][type='HIDDEN']").attr('type','hidden');
+		});
+		
+		function displayKBPopupMenu(elem) {
+			contextShow(event, 'ui_page_render', 200, grabOffsetTop(elem) - 1, grabOffsetLeft(elem) + 10);
+		}
+
+		$j(function () {
+			// move the drop-down menus to the body as it could not position well otherwise.
+			$j('#kb_advanced_search_menu').css({'visibility':'', 'display':'none'});
+
+			if (isMSIE7 || isMSIE8) {
+				// making sure the menu appears on top of the msg bar.
+				$j('.outputmsg_container').css('z-index', '-1');
+
+				if ($j('html').is('.rtl')) {
+					var inc = 0;
+					var fnc = function() {
+						if (!window.contextMenuMoved) {
+							// Modify menus inline css to prevent them from stretching the page width, and subsequently miscalculate their own position.
+							$j('.context_menu').css({'position':'absolute', 'left':'', 'right':'-999px', 'width':'200px', 'display':'none'});
+							window.contextMenuMoved = true;
+						}
+						var buttons = $j('button').filter(function () {
+							return this.style.left == '-9999px';
+						});
+						if (buttons.length) {
+							// Delete useless hidden buttons which caused to stretch the page width.
+							buttons.remove();
+						}
+						if (++inc > 5) {
+							clearInterval(window.interval);
+						}
+					};
+					// Timeout needed to catch hidden buttons and menus generated/injected after the page has loaded.
+					window.interval = setInterval(fnc, 150);
+				}
+			}
+		});
+      </script>
+      <div class="navbar navbar-default kb-header-container" id="kb-header-container" role="navigation">
+       <form action="kb_find.do" id="kb_view" name="kb_view" onsubmit="return submitSearch();" style="DISPLAY: inline">
+        <input id="sysparm_base_form" name="sysparm_base_form" type="HIDDEN" value="ui_page_render"/>
+        <input id="sysparm_view" name="sysparm_view" type="HIDDEN" value=""/>
+        <input name="sysparm_operator" type="hidden" value="IR_AND_OR_QUERY"/>
+        <input id="sysparm_order" name="sysparm_order" type="hidden" value="relevancy"/>
+        <button aria-label="Back button. Click this button to navigate to to previous page" class="btn btn-default icon-chevron-left navbar-btn" id="backButton" onclick="window.history.back()" title="Click to goto previous page" type="button">
+        </button>
+        <div class="kb_search_container">
+         <div class="kb-input-container kb-hide-adv-btn" id="kb-input-container">
+          <input aria-label="Search text field. Type search text and press enter to search" autocomplete="off" class="search-input" function="$('kb_view').submit()" id="sysparm_search" name="sysparm_search" onfocus="sysparmSearchFocus(this)" onkeydown="return acReferenceKeyDown(this, event);" onkeypress="return acReferenceKeyPress(this, event);" onkeyup="return acReferenceKeyUp(this, event);" placeholder="Search" value=""/>
+          <a aria-label="Advanced Search options. Click to open advanced search options" class="kb-btn-advanced" href="javascript:void(0)" onclick="toggleAdvancedSearch()">
+           Advanced search
+           <span class="kb-arrow">
+           </span>
+          </a>
+         </div>
+         <div class="context_menu" id="kb_advanced_search_menu" style="visibility: hidden; z-index: 999999; left: -1000px; top: -1000px;">
+          <div class="context_item">
+           <label for="sysparm_kb" style="display: block; margin: 5px 0;">
+            Knowledge Base
+           </label>
+           <select aria-label="Knowledge Base list. Choose a knowledge base to search" id="sysparm_kb" name="sysparm_kb" style="width:100%">
+            <option aria-label="Choose to search all the available knowledge bases" value="null">
+             -- All --
+            </option>
+            <option aria-label="Choose to search Public Knowledge knowledge base" value="6df96d47dbc96240e582fbec0f961934">
+             Public Knowledge
+            </option>
+           </select>
+          </div>
+          <br/>
+         </div>
+         <button aria-label="Search button. Click to search the entered text" class="btn btn-primary kb-btn-primary" type="submit">
+          Search
+         </button>
+        </div>
+       </form>
+       <div class="kb_btn_container">
+        <button aria-label="Home button. Click to goto knowledge home page" class="btn btn-default" id="my_kb_home" onclick="window.open('knowledge_home_launcher.do', '_self')" role="button" type="button">
+         Home
+        </button>
+       </div>
+      </div>
+     </td>
+    </tr>
+   </table>
+  </div>
+  <table border="0" cellspacing="6" class="kb_main" draggrid="kb_home">
+   <tr>
+    <td dragging="true" id="dcolumn_0" valign="top" width="50%">
+     <div dragpart="General">
+      <table border="0" cellpadding="1" cellspacing="0" class="kb_section">
+       <tr>
+        <td class="kb_section_top" colspan="2">
+         <table border="0" class="kb_section_header">
+          <tr>
+           <td nowrap="true">
+            <a href="kb_home.do?jvar_view_topic=General&amp;sysparm_refer=kb_home.do">
+             General
+            </a>
+           </td>
+           <td id="General_extras" nowrap="true">
+           </td>
+           <td class="" id="General_header">
+           </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <table border="0" cellpadding="0" cellspacing="2" width="100%">
+          <tbody>
+           <tr>
+            <td class="kb_linkable_cell" width="90%">
+             <a class="kb_link" href="kb_view.do?sys_kb_id=00125059dbd82200e582fbec0f96195b" onmouseout="lockPopupID(event, '00125059dbd82200e582fbec0f96195b')" onmouseover="popKnowledgeDiv(event, '00125059dbd82200e582fbec0f96195b')">
+              <img alt="Connect a Gaming Console or Entertainment Device to the Wireless Network" src="images/nav_bult.gifx"/>
+             </a>
+             <a class="kb_link" href="kb_view.do?sys_kb_id=00125059dbd82200e582fbec0f96195b">
+              Connect a Gaming Console or Entertainment Device to the Wireless Network
+             </a>
+            </td>
+            <td align="right" nowrap="true" valign="top">
+             <span style="padding-right:4px;">
+              <i>
+               2016-06-27
+              </i>
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="kb_linkable_cell" width="90%">
+             <a class="kb_link" href="kb_view.do?sys_kb_id=67025059dbd82200e582fbec0f96193a" onmouseout="lockPopupID(event, '67025059dbd82200e582fbec0f96193a')" onmouseover="popKnowledgeDiv(event, '67025059dbd82200e582fbec0f96193a')">
+              <img alt="Activate my NetID" src="images/nav_bult.gifx"/>
+             </a>
+             <a class="kb_link" href="kb_view.do?sys_kb_id=67025059dbd82200e582fbec0f96193a">
+              Activate my NetID
+             </a>
+            </td>
+            <td align="right" nowrap="true" valign="top">
+             <span style="padding-right:4px;">
+              <i>
+               2016-06-27
+              </i>
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="kb_linkable_cell" width="90%">
+             <a class="kb_link" href="kb_view.do?sys_kb_id=c4deac32db612700e582fbec0f9619d4" onmouseout="lockPopupID(event, 'c4deac32db612700e582fbec0f9619d4')" onmouseover="popKnowledgeDiv(event, 'c4deac32db612700e582fbec0f9619d4')">
+              <img alt="Access and Install Adobe Creative Cloud and its products" src="images/nav_bult.gifx"/>
+             </a>
+             <a class="kb_link" href="kb_view.do?sys_kb_id=c4deac32db612700e582fbec0f9619d4">
+              Access and Install Adobe Creative Cloud and its products
+             </a>
+            </td>
+            <td align="right" nowrap="true" valign="top">
+             <span style="padding-right:4px;">
+              <i>
+               2018-11-07
+              </i>
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="kb_linkable_cell" width="90%">
+             <a class="kb_link" href="kb_view.do?sys_kb_id=60125059dbd82200e582fbec0f961976" onmouseout="lockPopupID(event, '60125059dbd82200e582fbec0f961976')" onmouseover="popKnowledgeDiv(event, '60125059dbd82200e582fbec0f961976')">
+              <img alt="Cannot connect to CSUEB wireless" src="images/nav_bult.gifx"/>
+             </a>
+             <a class="kb_link" href="kb_view.do?sys_kb_id=60125059dbd82200e582fbec0f961976">
+              Cannot connect to CSUEB wireless
+             </a>
+            </td>
+            <td align="right" nowrap="true" valign="top">
+             <span style="padding-right:4px;">
+              <i>
+               2016-06-27
+              </i>
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="kb_linkable_cell" width="90%">
+             <a class="kb_link" href="kb_view.do?sys_kb_id=c710db8edbcfabc0e582fbec0f9619ac" onmouseout="lockPopupID(event, 'c710db8edbcfabc0e582fbec0f9619ac')" onmouseover="popKnowledgeDiv(event, 'c710db8edbcfabc0e582fbec0f9619ac')">
+              <img alt="LinkedIn Learning Account Activation for Students" src="images/nav_bult.gifx"/>
+             </a>
+             <a class="kb_link" href="kb_view.do?sys_kb_id=c710db8edbcfabc0e582fbec0f9619ac">
+              LinkedIn Learning Account Activation for Students
+             </a>
+            </td>
+            <td align="right" nowrap="true" valign="top">
+             <span style="padding-right:4px;">
+              <i>
+               2019-01-22
+              </i>
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td class="kb_linkable_cell" width="90%">
+             <a class="kb_link" href="kb_view.do?sys_kb_id=a8125059dbd82200e582fbec0f961970" onmouseout="lockPopupID(event, 'a8125059dbd82200e582fbec0f961970')" onmouseover="popKnowledgeDiv(event, 'a8125059dbd82200e582fbec0f961970')">
+              <img alt="What is the 'eduroam' wireless network I see at CSU East Bay?" src="images/nav_bult.gifx"/>
+             </a>
+             <a class="kb_link" href="kb_view.do?sys_kb_id=a8125059dbd82200e582fbec0f961970">
+              What is the 'eduroam' wireless network I see at CSU East Bay?
+             </a>
+            </td>
+            <td align="right" nowrap="true" valign="top">
+             <span style="padding-right:4px;">
+              <i>
+               2016-06-27
+              </i>
+             </span>
+            </td>
+           </tr>
+           <tr>
+            <td align="center" colspan="2">
+             <a class="kb_more_link" href="kb_list.do?jvar_view_topic=General&amp;sysparm_refer=kb_home.do">
+              More...
+             </a>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </td>
+       </tr>
+      </table>
+     </div>
+     <div id="lastdiv">
+     </div>
+    </td>
+    <td dragging="true" id="dcolumn_1" valign="top" width="50%">
+     <div id="lastdiv">
+     </div>
+    </td>
+   </tr>
+  </table>
+  <script language="javascript" src="KnowledgeIframeFix.jsdbx">
+   //  
+
+//
+  </script>
+  <script type="text/javascript">
+   //  
+
+      addLoadEvent(function() {
+        setTimeout(function() {
+          var e = $("sysparm_search");
+          if (e)
+            e.focus();
+        }, 100);
+      });
+    
+//
+  </script>
+  <div style="border:none; visibility:hidden">
+   <form action="slushbucket.do" method="GET" name="sys_personalize" style="display:inline">
+    <input name="sysparm_referring_url" type="hidden" value="kb_home.do"/>
+    <input name="sysparm_view" type="hidden" value=""/>
+   </form>
+  </div>
+  <script>
+   (function() {
+        addLateLoadEvent(throwFrameLoaded);
+        // find if padding is needed
+        var pad = (isMSIE6 || isMSIE7 || navigator.userAgent.indexOf('MSIE 8') != -1) ? 1 : 0;
+        function throwFrameLoaded() {
+            try {
+                if (window.parent.CustomEvent) {
+                    // history suggests that if we don't size it down on page load,
+                    // when we check the height it will show the previous page's height
+                    window.parent.CustomEvent.fire('content_frame.loaded', self.name, 10);
+                    window.parent.CustomEvent.fire('content_frame.loaded', self.name, getPageHeight());
+                }
+            } catch (e) {}
+        }
+        function throwFrameSized() {
+            try {
+                if (window.parent.CustomEvent) {
+                    // IE9/IE10: resize events will be continuously triggered when there is a difference between document.body.scrollHeight and window.frameElement.height
+                    // to solve this issue, we do not fire event if the height we are going to set is the same as the height obtained after the previous fired event
+                    var previousHeight = window["g_iframe_height"];
+                    var pageHeight = getPageHeight();
+                    if (previousHeight != pageHeight) {
+                        window.parent.CustomEvent.fire('content_frame.resized', self.name, pageHeight);
+                        // IE9/IE10: page height may be changed again after the above firing. So we have to call getPageHeight() to get the new height after the above event has been fired.
+                        window["g_iframe_height"] = getPageHeight();
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function throwFrameSizedSmaller(){
+            try {
+                if (window.parent.CustomEvent) {
+                    window.parent.CustomEvent.fire('content_frame.loaded', self.name, getPageHeight(true));
+                }
+            } catch (e) {}
+        }
+
+        /**
+         * Simply speaking, scrollHeight and offsetHeight work differently on different browsers
+         * and in and out of quirks mode. IE9 has bugs that do not report them correctly even if
+         * you pick the right one, so we've built some extra controls.
+         */
+        function getPageHeight(resizeSmall) {
+            var popupElement, popupHeight;
+            // first, look for popups
+            var popups = $$('body > div.popup, .modal.in > .modal-dialog');
+            if (popups.length > 0) {
+                popupElement = popups[0];
+                popupHeight = popupElement.scrollHeight + popupElement.offsetTop;
+                //padding is needed or else the bottom border of the popup will be missing
+                return (document.body.scrollHeight > popupHeight ? document.body.scrollHeight : popupHeight) + pad;
+            }
+            // then, look for form elements
+            // use more specific selector to reduce browser response time
+            if ($$('body > div.section_header_content_no_scroll').length > 0) {
+                var mainContentHeight = $$('body > div.section_header_content_no_scroll')[0].scrollHeight;
+                
+                // we use the form_title class to distinguish between UI15+ where the form title actually adds to the height
+                var header = $$('body > div.section_header_div_no_scroll.form_title');
+                var headerHeight = header.length == 0 ? 0 : header[0].scrollHeight;
+                return mainContentHeight + headerHeight;
+            }
+            // then, look for touch scroll elements *CALGARY and forward*
+            if ($$('body > .touch_scroll').length > 0)
+                return $$('body > .touch_scroll')[0].scrollHeight;
+            // then, get the normal page height
+            if (document.body.scrollHeight || document.documentElement.scrollHeight) {
+                if (!resizeSmall){
+                    if(document.body.scrollHeight > document.documentElement.scrollHeight)
+                        return document.body.scrollHeight;
+                    else
+                        return document.documentElement.scrollHeight;
+                }
+                else{
+                    if(document.documentElement.scrollHeight > document.body.scrollHeight)
+                        return document.body.scrollHeight;
+                    else
+                        return document.documentElement.scrollHeight;
+                }
+            }
+            return document.body.offsetHeight;
+        }
+        // start observing only after page has been loaded to avoid handling large number of resize events especially on IE 7 and IE 8
+        addAfterPageLoadedEvent(function() {
+            CustomEvent.observe('frame.resized', throwFrameSized);
+            CustomEvent.observe('frame.resized.smaller', throwFrameSizedSmaller);
+            CustomEvent.observe('partial.page.reload', throwFrameLoaded); // specifically, reports and lists that cause the page to shrink
+            Event.observe(document.onresize ? document : window, "resize", throwFrameSized);
+            _frameChanged();
+        });
+    })();
+  </script>
+  <span data-comments="js_includes_last_doctype" style="display:none">
+  </span>
+  <script>
+   NOW.xperf.lastDoctypeBegin = NOW.xperf.now();
+  </script>
+  <script src="/scripts/doctype/js_includes_last_doctype.jsx?v=12-04-2018_0932&amp;lp=Thu_Aug_23_13_21_59_PDT_2018&amp;c=19_238" type="text/javascript">
+  </script>
+  <script src="/scripts/heisenberg/heisenberg_all.jsx?v=12-04-2018_0932" type="text/javascript">
+  </script>
+  <script src="/scripts/js_includes_list_edit_doctype.jsx?v=12-04-2018_0932&amp;lp=Thu_Aug_23_13_21_59_PDT_2018&amp;c=19_238" type="text/javascript">
+  </script>
+  <script src="/scripts/transaction_scope_includes.jsx?v=12-04-2018_0932" type="text/javascript">
+  </script>
+  <script>
+   if ('') 
+			GlideTransactionScope.setTransactionScope('');
+		if ('') 
+			GlideTransactionScope.setRecordScope('');
+		if (typeof g_form != 'undefined')
+			$(g_form.getFormElement()).fire('glidescope:initialized', {gts : GlideTransactionScope});
+  </script>
+  <span data-comments="requires" style="display:none">
+  </span>
+  <script>
+   NOW.xperf.lastDoctypeEnd = NOW.xperf.now();
+  </script>
+  <span data-comments="db_context_menu_script" style="display:none">
+  </span>
+  <script>
+   NOW.xperf.dbContextBegin = NOW.xperf.now();
+  </script>
+  <script>
+   NOW.xperf.dbContextEnd = NOW.xperf.now();
+  </script>
+  <span data-comments="db_context_menu_script" style="display:none">
+  </span>
+  <script id="glide:page_timing_div" type="application/xml">
+   <button class="pointerhand icon-stop-watch btn btn-icon" style="padding:5px 5px;" type="button" aria-controls="glide:timing_widget" title="Response time(ms): #{RESP}, Network: #{NETW}, server: #{SERV}, browser: #{REND}" aria-expanded="false" aria-label="Response Time"></button><span class="timing_span" id="glide:timing_widget" style="display:none">
+         Response time(ms): #{RESP}, Network: #{NETW}, server: #{SERV},&nbsp;<a role="button" aria-controls="page_timing_details" aria-expanded="false" tabindex="0" class="timing_span">browser: #{REND}<span class="sr-only">Toggle browser timing details</span></a><span style="position:relative; width: 1px;" role="region" aria-label="Browser Timing Detail" aria-hidden="true">&nbsp;<span style="position:absolute; bottom:0px; right:0px"><span id="page_timing_details"></span><a aria-hidden="true"><div>&nbsp;</div></a></span></span><div class="timingGraphDiv"><span class="timing_graph" data-aria-label="Show Timing Breakdown"><span class="timing_network" title="Network #{NETW}ms"></span><span class="timing_server" title="Server #{SERV}ms"></span><span class="timing_browser" title="Browser #{REND}ms"></span></span><button class="page_timing_expand icon-chevron-down btn btn-default btn-sm" data-toggle="tooltip" data-title-expand="Expand timing details" data-title-collapse="Collapse timing details" aria-label="Timing details"></button></div></span>
+  </script>
+  <script id="glide:page_timing_details" type="application/xml">
+   <div class="timing_details">#{details}</div>
+  </script>
+  <script id="glide:page_timing_detail_line" type="application/xml">
+   <div class="timing_detail_line #{has_children}" data-children="#{child_count}">#{HTML:name}: #{ms}
+         #{children}</div>
+  </script>
+  <script id="glide:page_timing_child_line" type="application/xml">
+   <div class="timing_detail_line timing_detail_line_child">#{HTML:name}: #{ms}</div>
+  </script>
+  <script type="text/javascript">
+   var g_serverTime = parseInt("192") + parseInt("0");
+            var g_logClientViewRoles = "";
+
+			// do not do this for the navigation menu
+            if (window.name != 'gsft_nav') {
+				 addAfterPageLoadedEvent(function() {
+					 if (window.performance)
+						setTimeGraph();
+					 else 
+						firePageTimer();
+				 });
+			 }
+			 
+			function setTimeGraph() {
+				if (window.performance.timing.loadEventEnd > 0)
+			 		firePageTimer();
+			 	else 
+			 		setTimeout(setTimeGraph, 300);
+			 }
+			 
+			function firePageTimer() {
+				 if (window.performance && performance.timing.requestStart != performance.timing.responseStart) {
+				 	var p = performance.timing;
+
+				 	CustomEvent.fire('page_timing', { name: 'SERV', ms: p.responseEnd - p.requestStart});
+				 	CustomEvent.fire('page_timing', { name: 'REND', ms: (p.loadEventEnd - p.responseEnd) });
+				 	CustomEvent.fire('page_timing_network', { name: 'NETW', ms: (p.responseEnd - p.navigationStart) });
+				 } else {
+				    CustomEvent.fire('page_timing', { name: 'SERV', ms: g_serverTime });
+					CustomEvent.fire('page_timing', { name: 'REND', startTime: g_loadTime });
+					CustomEvent.fire('page_timing_network', { name: 'NETW', loadTime: g_loadTime });
+				 }
+			 
+			 	CustomEvent.fire('page_timing_show', { show: 'false' });var o = {};
+	      o.types = {};o.types['SECT'] = true;o.types['RLV2'] = true;o.types['UIOL'] = true;o.types['CSOL'] = true;
+	
+	      o.transaction_id = '9230afd6dbc4b3406174fce9af9619b4';
+	      o.table_name = '';
+	      o.form_name = 'ui_page_render';
+	      o.view_id = 'Default view';
+	      o.logged_in = false;
+	      o.win = window;
+	      CustomEvent.fire('page_timing_client', o);}
+			 
+            // The following line is used to set the time when we start requesting a new page
+            Event.observe(window, 'beforeunload', function() {
+				new CookieJar().put('g_startTime', new Date().getTime());
+                CustomEvent.fireTop('request_start', document);
+            });
+
+            // simple pages fire this (stats.do, etc.)
+            CustomEvent.observe('simple_page.unload', function() {
+				new CookieJar().put('g_startTime', new Date().getTime());
+            }); 
+
+            // indicate we have completed the request (used by RequestManager.js for cancel widget)
+            addLoadEvent(function() {
+            	CustomEvent.fireTop("request_complete", window.location);
+            });
+  </script>
+  <script src="/scripts/doctype/z_last_include.jsx?v=12-04-2018_0932" type="text/javascript">
+  </script>
+ </body>
+ <script id="popup_template" type="text/html">
+  <div class="popup popup_form" style=""><iframe src="$src" style=""></iframe></div>
+ </script>
+</html>

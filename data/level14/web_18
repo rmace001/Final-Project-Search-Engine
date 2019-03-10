@@ -1,0 +1,183 @@
+https://pcard.apps.uillinois.edu/
+<!DOCTYPE doctype html>
+<html class="no-js" lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="-1" http-equiv="Expires"/>
+  <meta charset="utf-8"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   System Login |  University of Illinois System
+  </title>
+  <link href="css/smlogin.css?version=2.2" rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet"/>
+  <script type="text/javascript">
+   var type="";
+    var authReason="";
+    var method="";
+    var agentName="";
+    var target="";
+    var theAcctURL = '<a href="acct.html';
+    var theHelpURL = '<a href="help.html';
+	  
+	function show(ele) {
+    	var srcElement = document.getElementById(ele);
+        if(srcElement != null) {
+        	if(srcElement.style.display == "block") {
+            	srcElement.style.display= 'none';
+        	}
+            else {
+                   srcElement.style.display='block';
+            }
+            return false;
+    	}
+	}
+	function infoKeypress(event) {
+		var srcElement = document.getElementById('tttext1');
+		var key = event.keyCode;
+		
+		var testDisplay = srcElement.style.display;
+		if (testDisplay == "block") {
+		  srcElement.style.display = 'none';
+		}
+		else {
+		  srcElement.style.display = 'block';
+		}
+
+	
+	}
+	
+	function displayOff() {
+	  var srcElement = document.getElementById('tttext1');
+	  var testDisplay = srcElement.style.display;
+	  if (testDisplay == "block") {
+		  srcElement.style.display = 'none';
+		}
+		
+	}
+	
+	function getQueryString(field, url) {
+   
+      var href = url ? url : window.location.href;
+      var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+      var string = reg.exec(href);
+      return string ? string[1] : null;
+    }
+    
+    
+    function submitForm()
+    {
+      var element = document.getElementById('netid');
+      var username = element.value;
+      element.value = username.toLowerCase().trim();
+      document.Login.submit();
+    }
+    
+    function clearCookie(){
+        document.cookie = "SMSESSION" + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=.uillinois.edu; path=/";
+        
+        type = getQueryString("TYPE");
+     
+        authReason = getQueryString("SMAUTHREASON");
+        method = getQueryString("METHOD");
+        agentName = getQueryString("SMAGENTNAME");
+        target = getQueryString("TARGET");
+        theAcctURL += '?TYPE='+type+'&SMAUTHREASON='+authReason+'&METHOD='+method+'&SMAGENTNAME='+agentName+'&TARGET='+target+'">Account options</a>';
+        var linkACCTID = document.getElementById("PRE_ACCT_URL");
+        linkACCTID.innerHTML = theAcctURL;
+        
+        theHelpURL += '?TYPE='+type+'&SMAUTHREASON='+authReason+'&METHOD='+method+'&SMAGENTNAME='+agentName+'&TARGET='+target+'">Help logging in</a>';
+        var linkHELPID = document.getElementById("PRE_HELP_URL");
+        linkHELPID.innerHTML = theHelpURL;
+        
+	  }
+  </script>
+ </head>
+ <body onload="clearCookie()">
+  <div class="box">
+   <div class="content">
+    <header>
+     <img alt="University of Illinois System" class="logo" src="images/system.png"/>
+     <h1 class="hidden">
+      System Login
+     </h1>
+    </header>
+    <main>
+     <div class="mainbox">
+      <form class="easform" method="post" name="Login">
+       <input name="SMENC" type="HIDDEN" value="ISO-8859-1"/>
+       <input name="SMLOCALE" type="HIDDEN" value="US-EN"/>
+       <div class="quest">
+        <label for="netid">
+         NetID
+        </label>
+        <span class="ttipcontainer info">
+         <span class="tooltip" onclick="show('tttext1')" onkeypress="infoKeypress(event)" role="button" tabindex="0" title="tool tip">
+          <img alt="ID information" aria-label="What ID do I use?" src="images/info.png"/>
+         </span>
+         <span aria-live="polite" class="ttiptext" id="tttext1" style="display:none">
+          This can be your NetID or your Enterprise ID.  Forgotten your ID?
+          <a href="https://identity.uillinois.edu/iamFrontEnd/iam/selfservice/netid/">
+           Recover it here
+          </a>
+         </span>
+        </span>
+        <input autofocus="" id="netid" maxlength="30" name="USER" size="18" type="text">
+        </input>
+       </div>
+       <div class="quest">
+        <label for="easpass">
+         Password
+        </label>
+        <input id="easpass" maxlength="128" name="PASSWORD" onfocus="displayOff()" type="password"/>
+        <input name="queryString" type="hidden" value="null">
+        </input>
+       </div>
+       <input name="target" type="hidden" value="HTTPS://webprod.admin.uillinois.edu/ssa/servlet/SelfServiceLogin?appName=edu.uillinois.aits.PcardLogin"/>
+       <input name="smquerydata" type="hidden" value=""/>
+       <input name="smauthreason" type="hidden" value="0"/>
+       <input name="smagentname" type="hidden" value="dr9Cn7JnD4pZ/X9Y7a9FAQedR3gjL8aBVPXnJiLeXLOpk38WGJuo/OQRlFkbatU7C+9kHQgeqhK7gmsMW81KnMmzfZ3v0paM"/>
+       <input name="postpreservationdata" type="hidden" value=""/>
+       <input class="bttn" name="BTN_LOGIN" onclick="submitForm();" type="submit" value="Log In">
+        <p class="forgot">
+         <a href="https://identity.uillinois.edu/iamFrontEnd/iam/selfservice/reset/">
+          Forgotten or expired password?
+         </a>
+        </p>
+       </input>
+      </form>
+     </div>
+     <!-- mainbox -->
+     <div class="links">
+      <div class="acct">
+       <a href="acct.html" id="PRE_ACCT_URL">
+        Account options
+       </a>
+      </div>
+      <div class="helpme">
+       <a href="help.html" id="PRE_HELP_URL">
+        Help logging in
+       </a>
+      </div>
+     </div>
+    </main>
+   </div>
+  </div>
+  <footer class="copyright" role="contentinfo">
+   ©
+   <script type="text/javascript">
+    document.write(new Date().getFullYear());
+   </script>
+   University of Illinois Board of Trustees |
+   <a href="https://www.vpaa.uillinois.edu/resources/web_privacy">
+    Privacy policy
+   </a>
+   <div class="screenid">
+    SM-UA-EAS-002
+   </div>
+  </footer>
+ </body>
+</html>
+

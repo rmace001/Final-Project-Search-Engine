@@ -1,0 +1,973 @@
+http://routt.extension.colostate.edu/
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#" xmlns:addthis="https://www.addthis.com/help/api-spec" xmlns:fb="https://www.facebook.com/2008/fbml">
+ <head>
+  <script type="text/javascript">
+   function hide_all(){
+    document.getElementById("topinfobox").style.display='none';
+ }
+  </script>
+  <!-- The jQuery library is needed in order to make the generic event tracking take place for Google Analytics -->
+  <script src="jquery-1.12.3.js" type="text/javascript">
+  </script>
+  <!-- The following script will set up generic event tracking for downloaded files in Google Analytics.
+		Source: http://www.blastam.com/blog/index.php/2013/03/how-to-track-downloads-in-google-analytics-v2
+		Tracks file downloads as events for the following extensions: .zip, .exe, dmg, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .mp3, .txt, rar, wma, mov, avi, wmv, flv, wav -->
+  <script type="text/javascript">
+   if (typeof jQuery != 'undefined') {
+  jQuery(document).ready(function($) {
+    var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
+    var baseHref = '';
+    if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
+
+    jQuery('a').on('click', function(event) {
+      var el = jQuery(this);
+      var track = true;
+      var href = (typeof(el.attr('href')) != 'undefined' ) ? el.attr('href') :"";
+      var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
+      if (!href.match(/^javascript:/i)) {
+    	var elEv = []; elEv.value=0, elEv.non_i=false;
+        if (href.match(/^mailto\:/i)) {
+          elEv.category = "email";
+          elEv.action = "click";
+          elEv.label = href.replace(/^mailto\:/i, '');
+          elEv.loc = href;
+        }
+        else if (href.match(filetypes)) {
+          var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+          elEv.category = "download";
+          elEv.action = "click-" + extension[0];
+          elEv.label = href.replace(/ /g,"-");
+          elEv.loc = baseHref + href;
+        }
+        else if (href.match(/^https?\:/i) && !isThisDomain) {
+          elEv.category = "external";
+          elEv.action = "click";
+          elEv.label = href.replace(/^https?\:\/\//i, '');
+          elEv.non_i = true;
+          elEv.loc = href;
+        }
+        else if (href.match(/^tel\:/i)) {
+          elEv.category = "telephone";
+          elEv.action = "click";
+          elEv.label = href.replace(/^tel\:/i, '');
+          elEv.loc = href;
+        }
+        else track = false;
+
+       	if (track) {
+          _gaq.push(['_trackEvent', elEv.category.toLowerCase(), elEv.action.toLowerCase(), elEv.label.toLowerCase(), elEv.value, elEv.non_i]);
+          if ( el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank') {
+            setTimeout(function() { location.href = elEv.loc; }, 400);
+            return false;
+	  }
+	}
+      }
+    });
+  });
+}
+  </script>
+  <title>
+   Routt County Extension - Providing trusted, practical education to help you solve problems, develop skills and build a better future.Routt County Extension | Providing trusted, practical education to help you solve problems, develop skills and build a better future.
+  </title>
+  <meta content="CSU Extension - Routt County" name="author"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <link href="http://gmpg.org/xfn/11" rel="profile"/>
+  <link href="https://routt.extension.colostate.edu/xmlrpc.php" rel="pingback"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/style.css" media="all" rel="stylesheet" type="text/css"/>
+  <!-- This site is optimized with the Yoast SEO plugin v9.6 - https://yoast.com/wordpress/plugins/seo/ -->
+  <meta content="Providing trusted, practical education to help you solve problems, develop skills and build a better future." name="description"/>
+  <link href="https://routt.extension.colostate.edu/" rel="canonical"/>
+  <meta content="en_US" property="og:locale"/>
+  <meta content="website" property="og:type"/>
+  <meta content="Routt County Extension - Providing trusted, practical education to help you solve problems, develop skills and build a better future." property="og:title"/>
+  <meta content="Providing trusted, practical education to help you solve problems, develop skills and build a better future." property="og:description"/>
+  <meta content="https://routt.extension.colostate.edu/" property="og:url"/>
+  <meta content="Routt County Extension" property="og:site_name"/>
+  <meta content="summary" name="twitter:card"/>
+  <meta content="Providing trusted, practical education to help you solve problems, develop skills and build a better future." name="twitter:description"/>
+  <meta content="Routt County Extension - Providing trusted, practical education to help you solve problems, develop skills and build a better future." name="twitter:title"/>
+  <script type="application/ld+json">
+   {"@context":"https:\/\/schema.org","@type":"WebSite","@id":"https:\/\/routt.extension.colostate.edu\/#website","url":"https:\/\/routt.extension.colostate.edu\/","name":"Routt County Extension","potentialAction":{"@type":"SearchAction","target":"https:\/\/routt.extension.colostate.edu\/?s={search_term_string}","query-input":"required name=search_term_string"}}
+  </script>
+  <!-- / Yoast SEO plugin. -->
+  <link href="//maxcdn.bootstrapcdn.com" rel="dns-prefetch"/>
+  <link href="//s.w.org" rel="dns-prefetch"/>
+  <link href="https://routt.extension.colostate.edu/feed/" rel="alternate" title="Routt County Extension » Feed" type="application/rss+xml"/>
+  <link href="https://routt.extension.colostate.edu/comments/feed/" rel="alternate" title="Routt County Extension » Comments Feed" type="application/rss+xml"/>
+  <script type="text/javascript">
+   window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/routt.extension.colostate.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=c7b6112847a23ec09d9f1b27a340a54a"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+  </script>
+  <style type="text/css">
+   img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+  </style>
+  <link href="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/color/darkgreen.css?ver=c7b6112847a23ec09d9f1b27a340a54a" id="coloroptions-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/css/shortcode.css?ver=c7b6112847a23ec09d9f1b27a340a54a" id="shortcodes-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/plugins/custom-facebook-feed/css/cff-style.css?ver=2.8" id="cff-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" id="sb-font-awesome-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/plugins/instagram-feed/css/sb-instagram.min.css?ver=1.11.1" id="sb_instagram_styles-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/plugins/shortcode-toggle/style.min.css?ver=c7b6112847a23ec09d9f1b27a340a54a" id="shortcode-toggle-css-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/plugins/tablepress/css/default.min.css?ver=1.9.1" id="tablepress-default-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://routt.extension.colostate.edu/wp-content/plugins/addthis/frontend/build/addthis_wordpress_public.min.css?ver=c7b6112847a23ec09d9f1b27a340a54a" id="addthis_all_pages-css" media="all" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+var MyAjax = {"ajaxurl":"https:\/\/routt.extension.colostate.edu\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/functions/leads_form/demo.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/jquery.aw-showcase.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/jcarousellite_1.0.1.min.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/ddsmoothmenu.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/jquery.prettyPhoto.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/jquery.validate.min.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/custom.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/slider-init.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/plugins/shortcode-toggle/script.min.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+  </script>
+  <link href="https://routt.extension.colostate.edu/wp-json/" rel="https://api.w.org/"/>
+  <link href="https://routt.extension.colostate.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+  <link href="https://routt.extension.colostate.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+  <script type="text/javascript">
+   (function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		if (window.wfLogHumanRan) { return; }
+		window.wfLogHumanRan = true;
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//routt.extension.colostate.edu/?wordfence_lh=1&hid=0FD689D2096270386DBE044C0D66F302');
+  </script>
+  <link href="http://extension.colostate.edu/wp-content/uploads/2015/05/ram.jpg" rel="shortcut icon"/>
+  <!-- Custom Styling -->
+  <style type="text/css">
+   a {color:#307743;}
+a:hover {color:#666;}
+.footer a {color:#fff;}
+.footer a:hover {color:#ccc;}
+form .searchform {background-color:none;}
+.info a {color:#ead469;}
+.storefront {color:#CC0033;font-weight:bold;}
+  </style>
+  <!-- Google Universal Analytics for WordPress v2.4.3 -->
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-116596149-1', 'auto');
+
+
+
+
+	ga('set', 'forceSSL', true);
+	ga('send', 'pageview');
+  </script>
+  <!-- Google Universal Analytics for WordPress v2.4.3 - https://wordpress.org/plugins/google-universal-analytics -->
+  <script data-cfasync="false" type="text/javascript">
+   if (window.addthis_product === undefined) { window.addthis_product = "wpp"; } if (window.wp_product_version === undefined) { window.wp_product_version = "wpp-6.1.8"; } if (window.wp_blog_version === undefined) { window.wp_blog_version = "4.9.9"; } if (window.addthis_share === undefined) { window.addthis_share = {}; } if (window.addthis_config === undefined) { window.addthis_config = {"data_track_clickback":true,"ignore_server_config":true,"ui_atversion":300}; } if (window.addthis_layers === undefined) { window.addthis_layers = {}; } if (window.addthis_layers_tools === undefined) { window.addthis_layers_tools = [{"sharetoolbox":{"numPreferredServices":"5","counts":"5","size":"5","style":"5","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"l","counts":"l","size":"l","style":"l","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"6","counts":"6","size":"6","style":"6","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"b","counts":"b","size":"b","style":"b","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"b","counts":"b","size":"b","style":"b","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"f","counts":"f","size":"f","style":"f","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"5","counts":"5","size":"5","style":"5","shareCountThreshold":0}},{"sharetoolbox":{"numPreferredServices":"T","counts":"T","size":"T","style":"T","shareCountThreshold":0}},{"share":{"counts":"none","numPreferredServices":5,"mobile":false,"position":"left","theme":"transparent"}},{"sharedock":{"counts":"one","numPreferredServices":6,"mobileButtonSize":"large","position":"bottom","theme":"transparent"}}]; } else { window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"5","counts":"5","size":"5","style":"5","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"l","counts":"l","size":"l","style":"l","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"6","counts":"6","size":"6","style":"6","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"b","counts":"b","size":"b","style":"b","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"b","counts":"b","size":"b","style":"b","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"f","counts":"f","size":"f","style":"f","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"5","counts":"5","size":"5","style":"5","shareCountThreshold":0}}); window.addthis_layers_tools.push({"sharetoolbox":{"numPreferredServices":"T","counts":"T","size":"T","style":"T","shareCountThreshold":0}}); window.addthis_layers_tools.push({"share":{"counts":"none","numPreferredServices":5,"mobile":false,"position":"left","theme":"transparent"}}); window.addthis_layers_tools.push({"sharedock":{"counts":"one","numPreferredServices":6,"mobileButtonSize":"large","position":"bottom","theme":"transparent"}});  } if (window.addthis_plugin_info === undefined) { window.addthis_plugin_info = {"info_status":"enabled","cms_name":"WordPress","plugin_name":"Share Buttons by AddThis","plugin_version":"6.1.8","plugin_mode":"WordPress","anonymous_profile_id":"wp-9c2313c231d6b36554ab4098c41bcd91","page_info":{"template":"home","post_type":""},"sharing_enabled_on_post_via_metabox":false}; } 
+                    (function() {
+                      var first_load_interval_id = setInterval(function () {
+                        if (typeof window.addthis !== 'undefined') {
+                          window.clearInterval(first_load_interval_id);
+                          if (typeof window.addthis_layers !== 'undefined' && Object.getOwnPropertyNames(window.addthis_layers).length > 0) {
+                            window.addthis.layers(window.addthis_layers);
+                          }
+                          if (Array.isArray(window.addthis_layers_tools)) {
+                            for (i = 0; i < window.addthis_layers_tools.length; i++) {
+                              window.addthis.layers(window.addthis_layers_tools[i]);
+                            }
+                          }
+                        }
+                     },1000)
+                    }());
+  </script>
+  <script async="async" data-cfasync="false" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=wp-9c2313c231d6b36554ab4098c41bcd91" type="text/javascript">
+  </script>
+  <script src="https://routt.extension.colostate.edu/wp-content/plugins/wp-spamshield/js/jscripts.php" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /* Fix Google Searchbox Accessibility Issues */
+jQuery(document).ready(function() { 
+  jQuery('.gsc-branding-img img').attr('alt', 'Google');  
+  jQuery('.gsc-search-button input').attr('alt', 'Search');  
+});
+  </script>
+ </head>
+ <!--[if IE 7]>
+<style>
+#carousel-full .carousel-posts {
+	margin:0;
+	width:620px !important;
+ }
+</style>
+<![endif]-->
+ <body class="home blog" style=" background: fixed url('http://extension.colostate.edu/wp-content/uploads/2016/01/bg.jpg') ">
+  <div class="wrapper-csu-logo">
+   <!-- <div align="left"><a href="http://www.colostate.edu/" onclick="this.target='_blank';"><img src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/images/csu-logo-linear-white-285.png" alt="Offsite Link: Colorado State University"  /></a></div> -->
+  </div>
+  <div class="wrapper">
+   <!-- Begin CSU Branding Header -->
+   <section id="BrandLogo">
+    <script>
+     (function(){BrandLogo.style.cssText = 'opacity:0; height:67px; overflow:hidden;'})();
+    </script>
+    <h1>
+     <a href="http://colostate.edu">
+      Colorado State University
+     </a>
+    </h1>
+    <!-- <h2><a href=""></a></h2> -->
+    <h2>
+     <a href="http://extension.colostate.edu">
+      Extension
+     </a>
+    </h2>
+    <script async="" defer="" src="//static.colostate.edu/logo/reslogo/logo.min.js">
+    </script>
+    <script>
+     var logosettings = {
+screenSM: 480
+,screenMD: 768
+,screenLG: 992
+,baseSize: 380
+,fontSize: 'large' //large or small (default is small)
+};
+    </script>
+   </section>
+   <!-- End CSU Branding Header -->
+   <div class="body_wrapper">
+    <div class="topmain_wrapper">
+     <div class="topinfobar" id="topinfobox">
+      <div class="container_24">
+       <div class="grid_24">
+        <div class="grid_5 alpha">
+         <div class="socialicon">
+          <ul class="social_logos">
+           <li class="sl-2">
+            <a href="https://www.facebook.com/Routt-County-Extension-264619928170/" title="Share on Facebook">
+             <span>
+             </span>
+             <span style="display:none">
+              Facebook Link
+             </span>
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+        <div class="grid_15">
+         <div class="info">
+          <p>
+           Visit our
+           <a href="http://extension.colostate.edu" onclick="this.target='_blank';" title="Offsite link">
+            Colorado State Extension office
+           </a>
+           for more news, tools and resources.
+          </p>
+         </div>
+        </div>
+        <div class="grid_2">
+         <div class="siteinfourl">
+          <a href="http://extension.colostate.edu/staff-directory/?cn-s=&amp;cn-cat=53">
+           <p>
+            Online Directory
+           </p>
+          </a>
+         </div>
+        </div>
+        <div class="grid_2 omega">
+         <!--<div class="closeicon"><a href="javascript:hide_all();"><img src="/images/close-icon.png" alt="Close Icon"  /></a></div>-->
+        </div>
+       </div>
+       <div class="clear">
+       </div>
+       <div class="toptip">
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="container_24">
+     <div class="grid_24">
+      <div class="header" id="#top">
+       <div class="grid_12 alpha">
+        <div class="logo">
+         <a href="https://routt.extension.colostate.edu">
+          <img alt="Routt County Extension" src="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/04/routt-graphical-header.png"/>
+         </a>
+        </div>
+       </div>
+       <div class="grid_12 omega">
+        <div class="contactinfo">
+         <!--<img src="/images/mobile-icon.png" alt="Contact Info" />&nbsp;&nbsp;&nbsp;&nbsp;-->
+         <span class="calldetails">
+          The Routt County - Colorado State University Extension office brings the resources and research of the university within easy reach. We are here for you.
+         </span>
+         <br/>
+         <a class="btn" href="tel:(970) 879-0825">
+          <span>
+          </span>
+          <span style="display:none;">
+           Tap to Call
+          </span>
+         </a>
+        </div>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="wrapper_menu">
+       <div class="menu_container">
+        <div class="menu_bar">
+         <div id="MainNav">
+          <a class="mobile_nav closed" href="#">
+           Pages Navigation Menu
+           <span>
+           </span>
+          </a>
+          <div class="menu-topnav-container" id="menu">
+           <ul class="ddsmoothmenu" id="menu-topnav">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-4" id="menu-item-4">
+             <a href="http://routt.extension.colostate.edu/">
+              Home
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-30" id="menu-item-30">
+             <a href="https://routt.extension.colostate.edu/4-h/">
+              4-H
+             </a>
+             <ul class="sub-menu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-741" id="menu-item-741">
+               <a href="https://routt.extension.colostate.edu/4-h/4-h-forms/">
+                4-H Member Information
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-324" id="menu-item-324">
+               <a href="https://routt.extension.colostate.edu/4-h/enrollment/">
+                Enrolling in 4-H
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-556" id="menu-item-556">
+               <a href="https://routt.extension.colostate.edu/4-h/4-h-calendar/">
+                4-H Calendar
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-25" id="menu-item-25">
+             <a href="https://routt.extension.colostate.edu/foods/">
+              Food
+             </a>
+             <ul class="sub-menu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-358" id="menu-item-358">
+               <a href="https://routt.extension.colostate.edu/foods/yampavore/">
+                Yampavore
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-612" id="menu-item-612">
+               <a href="https://routt.extension.colostate.edu/foods/northwest-colorado-food-coalition/">
+                NW Food Coalition
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-519" id="menu-item-519">
+               <a href="https://routt.extension.colostate.edu/foods/local-food-projects/">
+                Start a Food Business
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1814" id="menu-item-1814">
+               <a href="https://routt.extension.colostate.edu/foods/cottage-foods/">
+                Cottage Foods
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2299" id="menu-item-2299">
+               <a href="https://routt.extension.colostate.edu/foods/food-preparation/">
+                Food Preparation
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1593" id="menu-item-1593">
+               <a href="https://routt.extension.colostate.edu/foods/master-food-safety-advisors/">
+                Master Food Safety Advisors
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-28" id="menu-item-28">
+             <a href="https://routt.extension.colostate.edu/agriculture/">
+              Ag &amp; Natural Resources
+             </a>
+             <ul class="sub-menu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-355" id="menu-item-355">
+               <a href="https://routt.extension.colostate.edu/agriculture/rural-living/">
+                Guide to Rural Living
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-360" id="menu-item-360">
+               <a href="https://routt.extension.colostate.edu/agriculture/small-scale-ag/">
+                Small Scale Agriculture
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-361" id="menu-item-361">
+               <a href="https://routt.extension.colostate.edu/agriculture/ag-resources/">
+                Ag Resources
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-356" id="menu-item-356">
+               <a href="https://routt.extension.colostate.edu/agriculture/ready-references/">
+                Ready References
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-232" id="menu-item-232">
+             <a href="https://routt.extension.colostate.edu/services/">
+              Services
+             </a>
+             <ul class="sub-menu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-225" id="menu-item-225">
+               <a href="https://routt.extension.colostate.edu/services/radon/">
+                Radon Test Kits
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275" id="menu-item-275">
+               <a href="https://routt.extension.colostate.edu/services/soil-testing/">
+                Soil Test Kits
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224" id="menu-item-224">
+               <a href="https://routt.extension.colostate.edu/services/water-testing/">
+                Water Test Kits
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-278" id="menu-item-278">
+               <a href="https://routt.extension.colostate.edu/services/pressure-canner-test/">
+                Pressure Canner Testing
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-221" id="menu-item-221">
+               <a href="https://routt.extension.colostate.edu/services/equipment-rental/">
+                Equipment Rental
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-222" id="menu-item-222">
+               <a href="https://routt.extension.colostate.edu/services/home-energy-audit-kit/">
+                Home Energy Audit Kit
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1453" id="menu-item-1453">
+               <a href="https://routt.extension.colostate.edu/services/cottage-food-ph-testing/">
+                Cottage Food – pH Testing
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2104" id="menu-item-2104">
+             <a href="https://routt.extension.colostate.edu/gardening-and-horticulture/">
+              Gardening and Horticulture
+             </a>
+             <ul class="sub-menu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2105" id="menu-item-2105">
+               <a href="https://routt.extension.colostate.edu/gardening-and-horticulture/cmg-volunteers/">
+                Master Gardener Volunteers
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2086" id="menu-item-2086">
+             <a href="https://routt.extension.colostate.edu/about-us/">
+              About Us
+             </a>
+             <ul class="sub-menu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2089" id="menu-item-2089">
+               <a href="https://routt.extension.colostate.edu/about-us/rc-ext-staff/">
+                Routt County Extension Staff
+               </a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2087" id="menu-item-2087">
+               <a href="https://routt.extension.colostate.edu/about-us/contact-us/">
+                Contact Our Office
+               </a>
+              </li>
+             </ul>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="slider_wrapper">
+       <input id="txt_name" type="hidden" value=" 6000		"/>
+       <div id="featured">
+        <div class="showcase" id="showcase">
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://routt.extension.colostate.edu/topic-areas/agriculture/">
+            <img alt="Slide 1" src="http://routt.extension.colostate.edu/wp-content/uploads/sites/4/2016/04/viewfromMongerranch_arrow.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             Ag &amp; Natural Resources
+            </h3>
+            <p>
+             Improving agriculture, improving lives.
+            </p>
+           </div>
+          </div>
+         </div>
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://routt.extension.colostate.edu/foods/master-food-safety-advisors/">
+            <img alt="Slide 2" src="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/05/TripleBerryJam-7.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             Nutrition &amp; Food Safety
+            </h3>
+            <p>
+             Building skills in foods &amp; nutrition.
+            </p>
+           </div>
+          </div>
+         </div>
+         <!-- Third Content -->
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://routt.extension.colostate.edu/4-h/">
+            <img alt="Slide 3" src="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/09/FunDay2012.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             4-H
+            </h3>
+            <p>
+             Supporting positive youth development.
+            </p>
+           </div>
+          </div>
+         </div>
+         <!-- Fourth Content -->
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://routt.extension.colostate.edu/foods/">
+            <img alt="Slide 4" src="http://routt.extension.colostate.edu/wp-content/uploads/sites/4/2016/04/ElkstoneGreenhouse2.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             Local Foods
+            </h3>
+            <p>
+             Connecting our valley through food.
+            </p>
+           </div>
+          </div>
+         </div>
+         <!-- Fifth Slider -->
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://routt.extension.colostate.edu/gardening-and-horticulture/">
+            <img alt="Slide 5" src="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/09/2015GardenTour.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             Gardening and Horticulture
+            </h3>
+            <p>
+             Supporting growers in Routt County.
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="slider_shadow">
+       </div>
+       <div class="infotag">
+        <h1>
+         Routt County Extension - Providing trusted, practical education to help you solve problems, develop skills and build a better future.
+        </h1>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="contentbox">
+       <div class="grid_16 alpha">
+        <div class="feturebox">
+         <div class="featurebox_inner">
+          <!-- <div class="grid_5 alpha">-->
+          <div class="featurebox_desc first">
+           <!-- <h2><a href=""></a></h2> -->
+           <!-- STRIP OUT THE HREF TO ELIMINATE REDUNDANT LINK - ADA COMPLIANCE -->
+           <h2>
+            About Routt County - CSU Extension
+           </h2>
+           <p>
+            CSU Extension in Routt County serves a very unique community. Our agricultural landscape provides a livelihood to many and an inspiration to those who come to recreate. To all who call Routt County home, the Extension office is a valued resource.
+           </p>
+           <a class="readmore" href="http://extension.colostate.edu/about-us/">
+            Learn More about Colorado Extension
+            <span class="button-tip">
+            </span>
+           </a>
+          </div>
+          <!--   </div>-->
+          <!-- <div class="grid_5">-->
+          <div class="featurebox_desc second">
+           <!-- <h2><a href=""></a></h2> -->
+           <!-- STRIP OUT THE HREF TO ELIMINATE REDUNDANT LINK - ADA COMPLIANCE -->
+           <h2>
+            Are You a Yampavore?
+           </h2>
+           <p>
+            What is a Yampavore? A person who eats, drinks, consumes and uses locally grown food and products from the Yampa Valley.
+           </p>
+           <a class="readmore" href="http://routt.extension.colostate.edu/foods/yampavore/">
+            Learn how to become a Yampavore
+            <span class="button-tip">
+            </span>
+           </a>
+          </div>
+          <!-- </div>-->
+          <!-- <div class="grid_5 omega">-->
+          <div class="featurebox_desc third">
+           <!-- STRIP OUT THE HREF TO ELIMINATE REDUNDANT LINK - ADA COMPLIANCE -->
+           <!-- <h2><a href=""></a></h2> -->
+           <h2>
+            Master Gardeners
+           </h2>
+           <p>
+            Routt County is very lucky to have a thriving and active group of Colorado Master Gardeners (CMG) who volunteer more than 1,800 hours of their time each year to our community. These dedicated volunteers assist CSU Extension by providing knowledge and research-based information to the public.
+           </p>
+           <a class="readmore" href="http://routt.extension.colostate.edu/gardening-and-horticulture/cmg-volunteers/">
+            Colorado Master Gardener Volunteers
+            <span class="button-tip">
+            </span>
+           </a>
+          </div>
+          <!--</div>-->
+         </div>
+        </div>
+        <div class="clear">
+        </div>
+        <!--carousel slider goes here - front-page-carousel-slider.php	-->
+        <!--carousel slider	-->
+        <!-- /End Carousel -->
+        <!-- END slideshow carousel -->
+       </div>
+       <div class="grid_8 omega">
+        <div class="signinwidgetarea">
+         <div class="signinformbox1 widget">
+          <h3>
+           Search
+          </h3>
+          <div class="side-search">
+           <script>
+            <!-- Solve Google Accessibility Issues -->
+jQuery(document).ready(function() { 
+  jQuery('.gsc-branding-img img').attr('alt', 'Google');  
+  jQuery('.gsc-search-button input').attr('alt', 'Search');  
+});
+  (function() {
+    var cx = '010767680283762075896:s5jvnl-kanm';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+           </script>
+           <gcse:search>
+           </gcse:search>
+          </div>
+          <div class="clear">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="testimonial">
+       <div class="grid_24">
+        <!-- <h2></h2> -->
+        <!-- <p></p> -->
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="clear">
+    </div>
+    <!--Start Footer-->
+    <div class="footer-wrapper">
+     <div class="footer">
+      <div class="container_24">
+       <div class="grid_24">
+        <div class="grid_6 alpha">
+         <div class="footer_widget first">
+          <h4>
+           Contact us:
+          </h4>
+          <div class="textwidget">
+           <p>
+            136 6th St.
+            <br/>
+            P.O. Box 772830
+            <br/>
+            Steamboat Springs, CO, 80477
+           </p>
+           <p>
+            Office:  (970) 879-0825
+            <br/>
+            Fax:  (970) 870-5383
+            <br/>
+            Email:
+            <a href="mailto:rcextension@co.routt.co.us">
+             rcextension@co.routt.co.us
+            </a>
+           </p>
+          </div>
+         </div>
+        </div>
+        <div class="grid_6">
+         <div class="footer_widget second">
+          <div class="textwidget">
+          </div>
+         </div>
+        </div>
+        <div class="grid_6">
+         <div class="footer_widget third">
+          <div class="textwidget">
+          </div>
+         </div>
+        </div>
+        <div class="grid_6 omega">
+         <div class="footer_widget last">
+          <h4>
+           UPCOMING WORKSHOPS
+          </h4>
+          <div class="textwidget">
+           <p>
+            2/6:
+            <a href="https://routt.extension.colostate.edu/foods/cottage-foods/">
+             Cottage Food Safety Training
+            </a>
+            , BCC, Routt County Courthouse
+           </p>
+           <p>
+            1/30:
+            <a href="http://www.yvsc.org/healthy-homes/">
+             Healthy Homes for Healthy Familie
+            </a>
+            s, St. Paul’s Episcopal Church
+           </p>
+           <p>
+            11/29:
+            <a href="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/11/Promotion-Flyer_1-004.pdf">
+             Leaving a Lasting Legacy
+            </a>
+            : Northwest Colorado, Craig, CNCC
+           </p>
+           <p>
+            11/28:
+            <a href="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/11/Promotion-Flyer_1-004.pdf">
+             Leaving a Lasting Legacy
+            </a>
+            : Delta County, Bill Heddles Recreation Center
+           </p>
+           <p>
+            11/12:
+            <a href="https://www.eventbrite.com/e/from-kitchen-to-commercial-a-food-business-development-seminar-tickets-49091503007">
+             From Kitchen to Commercial
+            </a>
+            : Arapahoe County Fairgrounds
+           </p>
+           <p>
+            10/17: Water Bath Canning Salsa: Routt County Extension Office
+           </p>
+           <p>
+            10/16:
+            <a href="https://routt.extension.colostate.edu/wp-content/uploads/sites/4/2018/10/Water-Workshop-3.pdf">
+             CLICK HERE
+            </a>
+            for more info on the CSU Water Research Workshop and Roundtable
+           </p>
+          </div>
+          <p>
+          </p>
+          <!-- <a href="http://www.4hstemk12.colostate.edu/"><img src="http://extension.colostate.edu/images/AmeriCorps-Logo-150.gif" alt="AmeriCorps Logo" /></a> -->
+         </div>
+        </div>
+       </div>
+       <div class="clear">
+       </div>
+      </div>
+      <div class="footersep">
+      </div>
+      <div class="clear">
+      </div>
+      <div class="footer-bottom-wrapper">
+       <div class="footer-bottom">
+        <div class="container_24">
+         <div class="grid_24">
+          <!--<div class="grid_10 alpha">-->
+          <div class="copyrightinfo">
+           <p>
+            <span style="font-size:.9em;padding64px;">
+             <a href="http://extension.colostate.edu/employment/">
+              Employment
+             </a>
+             |
+             <a href="http://www.colostate.edu/equal-opportunity/" onclick="this.target='_blank';" title="Offsite link">
+              Equal Opportunity
+             </a>
+             |
+             <a href="http://www.colostate.edu/disclaimer/" onclick="this.target='_blank';" title="Offsite link">
+              Disclaimer
+             </a>
+             |
+             <a href="http://extension.colostate.edu/?p=4054">
+              Non-Discrimination Statement
+             </a>
+             |
+             <a href="http://www.colostate.edu/privacy/" onclick="this.target='_blank';" title="Offsite link">
+              Privacy Statement
+             </a>
+             |
+             <a href="http://extension.colostate.edu/webmaster/">
+              Webmaster
+             </a>
+             |
+             <a href="http://admissions.colostate.edu/" onclick="this.target='_blank';" title="Offsite link">
+              Apply to CSU
+             </a>
+             |
+             <!-- <a href="http://www.colostate.edu/" onclick="this.target='_blank';" title="Offsite link">CSU Home</a><br /> -->
+             <a href="http://www.colostate.edu/search" onclick="this.target='_blank';" title="Offsite link">
+              CSU A-Z Search
+             </a>
+             <br/>
+             ©2019, Colorado State University Extension, Fort Collins, Colorado 80523 USA
+            </span>
+           </p>
+          </div>
+          <div id="responsive-img" style="margin-top:-12px;">
+           <a href="http://giving.colostate.edu/" onclick="this.target='_blank';" title="Offsite link - Giving page for CSU's State Your Purpose Campaign">
+            <img alt="CSU State Your Purpose - The Giving Campaign for Colorado State University" src="http://extension.colostate.edu/wp-content/uploads/2016/02/csu-state-your-purpose-325.png"/>
+           </a>
+          </div>
+          <!-- Begin Constant Contact Active Forms -->
+          <script>
+           var _ctct_m = "8ec80b8e22d8e41f1bf8318d8dd34b2d";
+          </script>
+          <script async="" defer="" id="signupScript" src="//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js">
+          </script>
+          <!-- End Constant Contact Active Forms -->
+          <!--</div>-->
+          <!--<div class="grid_14 omega">
+            <div class="copyright_right"><a id="scroll-top" href="#top"><img src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/images/topsroll-icon.png" alt="Topscroll Icon" /></a>
+             </div>-->
+         </div>
+        </div>
+        <div class="clear">
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<!-- container -->
+<!-- Custom Facebook Feed JS -->
+<script type="text/javascript">
+ var cfflinkhashtags = "true";
+</script>
+<!-- Instagram Feed JS -->
+<script type="text/javascript">
+ var sbiajaxurl = "https://routt.extension.colostate.edu/wp-admin/admin-ajax.php";
+</script>
+<script type="text/javascript">
+ /* <![CDATA[ */
+r3f5x9JS=escape(document['referrer']);
+hf4N='2902f228596a1c44632f6b52ff2c1f93';
+hf4V='e6a8038a44d767daa7da19afcea5b579';
+jQuery(document).ready(function($){var e="#commentform, .comment-respond form, .comment-form, #lostpasswordform, #registerform, #loginform, #login_form, #wpss_contact_form";$(e).submit(function(){$("<input>").attr("type","hidden").attr("name","r3f5x9JS").attr("value",r3f5x9JS).appendTo(e);$("<input>").attr("type","hidden").attr("name",hf4N).attr("value",hf4V).appendTo(e);return true;});$("#comment").attr({minlength:"15",maxlength:"15360"})});
+/* ]]> */
+</script>
+<script src="https://routt.extension.colostate.edu/wp-content/plugins/custom-facebook-feed/js/cff-scripts.js?ver=2.8" type="text/javascript">
+</script>
+<script type="text/javascript">
+ /* <![CDATA[ */
+var sb_instagram_js_options = {"sb_instagram_at":"","font_method":"svg"};
+/* ]]> */
+</script>
+<script src="https://routt.extension.colostate.edu/wp-content/plugins/instagram-feed/js/sb-instagram.min.js?ver=1.11.1" type="text/javascript">
+</script>
+<script src="https://routt.extension.colostate.edu/wp-content/plugins/wp-spamshield/js/jscripts-ftr-min.js" type="text/javascript">
+</script>
+<script src="https://routt.extension.colostate.edu/wp-includes/js/wp-embed.min.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+</script>
+<script src="https://routt.extension.colostate.edu/wp-content/themes/csu-extension/js/mobile-menu.js?ver=c7b6112847a23ec09d9f1b27a340a54a" type="text/javascript">
+</script>
+

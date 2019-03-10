@@ -1,0 +1,308 @@
+https://ptool.msm.edu/
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- SSRPM Version 6.68 Build 1111 -->
+<!-- SSRPM Version 6.68 Build 1111 -->
+<html>
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="IE=9; IE=8" http-equiv="X-UA-Compatible"/>
+  <meta content="IE=9; IE=8" http-equiv="X-UA-Compatible"/>
+ </head>
+</html>
+<script language="JavaScript" type="text/javascript">
+ function SsrpmException(Message) 
+{
+    this.Message = Message;
+    this.Name = "SsrpmException";
+}
+
+function FormatText(sFormat, sInput) 
+{
+    sFormat = sFormat.replace("%TEXT%", sInput);
+    return sFormat;
+}
+
+function FormatText2(sFormat, sInput1, sInput2) 
+{
+    sFormat = sFormat.replace("%TEXT%", sInput1);
+    sFormat = sFormat.replace("%TEXT2%", sInput2);
+    return sFormat;
+}
+
+function EnableButton(btnId, counter, btnName, btnNameCount) 
+{
+    var button = document.getElementById(btnId);
+    counter--
+    if (counter <= 0) 
+    {
+        button.disabled = false;
+        button.style.color = "#f0f6fc";
+        button.value = btnName;
+    }
+    else 
+    {
+        button.value = FormatText(btnNameCount, counter);
+        setTimeout("EnableButton('" + btnId + "', " + counter + ", '" + btnName + "', '" + btnNameCount + "')", 1000);
+    }
+}
+
+function OnChangeUserName() 
+{
+    var UserName = document.getElementById("username").value
+    var Domain = document.getElementById("domain")
+   
+    if (UserName.search("@|\\\\") != -1)
+        Domain.disabled = true
+    else
+        Domain.disabled = false
+    
+    return true;
+}
+
+function TestPassword(LanguageId, ProfileOptions, PcmOptions, OldPassword, UserName, MinimumPasswordLength) 
+{
+    var NewPassword = document.getElementById("password");
+    
+    NewPasswordVal = "";
+    if(NewPassword != undefined)
+        NewPasswordVal = NewPassword.value;
+    if(OldPassword == undefined)
+        OldPassword = "";
+    if(UserName == undefined)
+        UserName = ""
+   if(MinimumPasswordLength == undefined)
+        MinimumPasswordLength = 0
+
+    //PCM    
+    if(ProfileOptions & 33554432)
+    {
+        return TestPasswordPCM(LanguageId, PcmOptions, NewPasswordVal, OldPassword);
+    }
+    else if(ProfileOptions & 64) //Windows
+    {
+       return TestPasswordWindows(NewPasswordVal, OldPassword, UserName, MinimumPasswordLength);
+    }    
+}
+
+function TestPasswordWindows(NewPassword, OldPassword, UserName, MinimumPasswordLength) 
+{
+    var IsPasswordValid = true;
+    var RegExComplexity = "(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*[0-9])(?=.*[A-Z])(?=.*[^A-Za-z0-9])";
+    var RuleComplexity = document.getElementById("PwdComplexityTextCategory");
+    var RuleLength = document.getElementById("PwdComplexityTextLength");
+    var RuleSimilarity = document.getElementById("PwdComplexityTextSimilarity");
+     
+    var SimilarityMatched = false; 
+    var ComplexityMatched = false;
+    var LengthMatched = false;
+    
+    if(RuleComplexity != undefined)
+    {
+        ComplexityMatched = NewPassword.match(RegExComplexity); 
+        if(ComplexityMatched)
+            RuleComplexity.className =  "PwdComplexityText RulePassed"
+        else
+        {
+            RuleComplexity.className =  "PwdComplexityText RuleFailed"
+            IsPasswordValid = false;
+        }
+    }
+    
+    if(RuleLength != undefined)
+    {
+        if(NewPassword.length >= MinimumPasswordLength)
+            RuleLength.className =  "PwdComplexityText RulePassed"
+        else
+        {
+            RuleLength.className =  "PwdComplexityText RuleFailed"
+            IsPasswordValid = false;
+        }
+    }
+    
+    if(RuleSimilarity != undefined)
+    { 
+        SimilarityMatched = NewPassword.match(UserName)
+        if(!SimilarityMatched)
+            RuleSimilarity.className =  "PwdComplexityText RulePassed"
+        else
+        {
+            RuleSimilarity.className =  "PwdComplexityText RuleFailed"
+            IsPasswordValid = false;
+        }
+    }
+    return IsPasswordValid;
+}
+
+function RequestListener() {
+    var Container = document.getElementById("password_complexity_rules_container");
+    Container.innerHTML = this.responseText;
+}
+
+function TestPasswordPCM(LanguageId, Options, NewPassword, OldPassword) {
+    var HttpReq = new XMLHttpRequest();
+    var Url = "TestPassword.asp";
+    var Params =    "Domain=\
+                    &UserName=\
+                    &NewPassword=" + NewPassword +
+                    "&OldPassword=" + OldPassword +      
+                    "&LanguageId=" + LanguageId +
+                    "&Options=" + Options;
+    HttpReq.onload = RequestListener;
+    HttpReq.open("POST", Url, true);
+
+    //Send the proper header information along with the request
+    HttpReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    HttpReq.setRequestHeader("Content-length", Params.length);
+    HttpReq.setRequestHeader("Connection", "close");
+
+    //Call a function when the state changes.
+    /*
+    HttpReq.onreadystatechange = function() 
+    {   
+        if (HttpReq.readyState == 4 && HttpReq.status == 200) 
+        {
+            //alert(HttpReq.responseText);
+        }
+    }
+    */
+    HttpReq.send(Params);
+}
+
+function ShowError(ErrorTitle, ErrorText) {
+    var Container = document.getElementById('error_container');
+    Container.innerHTML = "<div class='input_block_info'>           \
+                                <div class='error_block_bottom'>    \
+                                    <div class='error_block_top'>   \
+                                        <div class='error_block'>   \
+                                            <div class='text_container'>    \
+                                                <p class='errortitle'>" + ErrorTitle + "</p>    \
+                                                <p class='errormessage'>" + ErrorText + "</p>   \
+                                            </div>  \
+                                        </div>      \
+                                    </div>          \
+                                 </div>             \
+                           </div>"
+
+    var ServiceErrorContainer = document.getElementById('ServiceErrorContainer');
+    if (ServiceErrorContainer != undefined)
+        ServiceErrorContainer.style.display = "none";
+}
+ 
+function SetDoResendAndSubmit() {
+    document.forms[0].DoResend.value = 1;   
+    document.forms[0].submit();   
+    return true;
+}
+</script>
+<html>
+ <head>
+  <title>
+   Self Service Reset Password Management
+  </title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  <link href="style/desktop.css" rel="stylesheet" type="text/css"/>
+ </head>
+ <body>
+  <div class="wrapper">
+   <div class="outerborder_top">
+    <div class="outerborder_topleft">
+     <div class="outerborder_topright">
+      <div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="outerborder_left">
+    <div class="outerborder_right">
+     <div class="content">
+      <div class="title_block">
+       <h1>
+        Self Service Reset Password Management
+       </h1>
+       <p>
+        Welcome to Self Service Reset Password Management. This program will help you reset your password if you have forgotten your password.
+       </p>
+       <p class="AdditionalInfo">
+        Please choose between one of the SSRPM options below:
+       </p>
+      </div>
+      <form action="" method="post">
+       <div>
+        <input id="posted" name="LogonPosted" type="hidden" value="1"/>
+        <div class="input_block_bottom">
+         <div class="input_block_top">
+          <div class="input_block_info input_block_info_background">
+           <div class="text_container">
+            <ul id="options">
+             <li>
+              <a href="Logon.asp" rel="nofollow">
+               <h1>
+                Enroll into SSRPM
+               </h1>
+               <p>
+                You must enroll into SSRPM to be able to reset your password.
+               </p>
+              </a>
+              <hr/>
+             </li>
+             <li>
+              <a href="Identify.asp?Action=reset" rel="nofollow">
+               <h1>
+                Reset your password
+               </h1>
+               <p>
+                Reset your password if you have forgotten your password and would like to reset it.
+               </p>
+              </a>
+              <hr/>
+             </li>
+             <li>
+              <a href="Identify.asp?Action=unlock" rel="nofollow">
+               <h1>
+                Unlock your account
+               </h1>
+               <p>
+                Unlock your account if you are locked out and you still know your password.
+               </p>
+              </a>
+             </li>
+             <li>
+              <a href="Logon.asp?Action=ChangeAccountPassword" rel="nofollow">
+               <h1>
+                Change your password
+               </h1>
+               <p>
+                Use this option if you want to change your password and if you know your current password.
+               </p>
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+   <div class="outerborder_bottom">
+    <div class="outerborder_bottomleft">
+     <div class="outerborder_bottomright">
+      <div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="footertext">
+   <a class="footertext" href="http://www.tools4ever.com/products/self-service-reset-password-management/">
+    SSRPM
+   </a>
+   is powered by
+   <a class="footertext" href="http://www.tools4ever.com">
+    Tools4ever ©
+   </a>
+  </div>
+ </body>
+</html>

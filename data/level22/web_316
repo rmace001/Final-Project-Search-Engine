@@ -1,0 +1,7074 @@
+http://calendar.lib.montana.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <!-- iid: 1003 -->
+  <meta charset="utf-8"/>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+   <link href="/css170/LibCal_public.min.css" rel="stylesheet"/>
+   <link href="/css170/print.min.css" media="print" rel="stylesheet"/>
+   <title>
+    Library Calendars
+   </title>
+   <link href="/css170/fullcalendar.min.css" rel="stylesheet">
+    <style>
+     .bootstrap-select.btn-group .btn .filter-option { font-size: 90%;}
+    </style>
+    <script src="/js170/LibCal_public.min.js">
+    </script>
+    <script>
+     var springLang  = { Ge_Next: "Next", Ge_Prev: "Previous", eq_js_add_cart_btn: "Add to Cart", eq_js_add_cc_btn: "Add to Cart & Checkout", eq_js_add_eq_btn: "Add Equipment", eq_js_add_start: "All additional items must have a starting time of", eq_js_add_to_cart: "Add Item to Cart", eq_js_booking_summary_title: "Thank you!", eq_js_cart_tt: "Create a shopping cart with these space bookings, and go to equipment booking page to add more items to the cart.", eq_js_close: "Close", eq_js_date: "Change Return Date", eq_js_det_return: "Determining return time", eq_js_from: "From:", eq_js_from_det: "from", eq_js_go_to_date: "Go To Date", eq_js_isRequired: "is required!", eq_js_rem_pending: "Remove Pending Booking", eq_js_spacew_forb_multi: "Forbidden from booking same resource multiple times in a single booking.<br><br>Please only select sequential checkboxes.", eq_js_spacew_forb_single: "Forbidden from booking different resources in a single booking.", eq_js_to: "To:", eq_js_until_det: "until...", eq_start_over: "Make Another Booking", eq_unavail: "Unavailable/Padding", eq_your_book: "Your Booking" };
+    </script>
+    <script src="/js170/fullcalendar.min.js" type="text/javascript">
+    </script>
+    <link href="http://www.lib.montana.edu/meta/img/msu_favicon.ico" rel="shortcut icon">
+     <link href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic" rel="stylesheet" type="text/css"/>
+     <style media="screen, projection" type="text/css">
+      body {
+margin-top: 8em;}
+
+#appm 
+{
+margin-top:0px;
+}
+
+.fa {
+  padding:5px;
+}
+
+#ask a {
+  color: white;
+}
+
+body {
+  border-top: none;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+header {
+  background: #003f7f;
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-bottom: 4px solid #003f7f;;
+  z-index: 100; 
+}
+
+header #logo{
+  margin: .5% 0 .5% 2%;
+  float: left;
+  display: block;
+  z-index: 101;
+}
+
+header nav {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;  
+}
+
+#menu-icon {
+  display: hidden;
+  width: 40px;
+  height: 40px;
+  background: #003f7f url(http://www.lib.montana.edu/meta/img/menu-icon.png) center;
+}
+
+header ul {
+  list-style: none;
+  font-family: 'Noto Sans';
+  font-size: 1.2em;
+  position: relative;
+  top: 8px;
+}
+
+header li {
+  display: inline-block;
+  float: left;
+  padding: 12px;
+}
+
+a.header {
+  color: white;
+  font-size: 1.1em;
+  line-height: 1.25em;
+}
+
+a.header:hover {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+header a:hover#menu-icon {
+  background-color: #054b8c;
+}
+
+a.ask {
+  text-shadow:none;
+  font-size: 16px;
+  width:auto;
+  float: right;
+  font-family: 'Noto Sans';
+  margin-top: 20px;
+  padding: 5px 10px;
+  border: 1px solid white;
+  border-radius: 4px;
+  position: relative;
+  right: 5%;
+  bottom: 88%;
+  color: white;
+}
+
+a.ask:hover {
+  text-decoration: none;
+  color: #003f7f;
+  background-color: white;
+   -webkit-transition: all 200ms ease-in-out; 
+    transition: all 200ms ease-in-out;
+}
+
+.nav-ask {
+visibility:hidden;
+}
+
+
+@media only screen and (max-width : 1000px) {
+
+
+  header #menu-icon {
+    display:inline-block;
+    float:right;
+    margin-top: -5px;
+  }
+
+  header nav {
+    width:85%;
+  }
+
+  a.header {
+    color: #003f7f;
+  }
+
+  a.header:hover {
+    color: #003f7f;
+    text-decoration: none;
+    border-bottom: 1px dashed #003f7f;
+  }
+
+  a.ask {
+    bottom:60%;
+  }
+
+  header nav ul, header nav:active ul { 
+    display: none;
+    position: absolute;
+    padding: 20px;
+    background: #fff;
+    border: 2px solid #003f7f;
+    right: 60px;
+    top: 40px;
+    width: 30%;
+    height:300px;
+    border-radius: 4px 0 4px 4px;
+
+  }
+
+  header nav li {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  header nav:hover ul {display: block; }
+
+.nav-ask {visibility:visible;
+}
+
+}
+@media only screen and (max-width: 666px) {
+        header #logo {
+            width: 70%
+        }
+        header img {
+            width: 70%;
+            height: 70%;
+            margin-top: 2%;
+        }
+        a.ask {
+            display: none
+        }
+        .nav-ask {
+            visibility: visible;
+        }
+    }
+
+
+#footer {text-align: center; font-size: 12px; padding: 8px 0px 8px 0px; margin: auto; clear: both; border-top: 1px #003f7f solid}
+#footer {text-align: center; font-size: 12px; padding: 8px 0px 8px 0px; margin: auto; clear: both;}
+#footer .linkspacingmsu {padding-right:20px;}
+#footer a {color: #585858; text-decoration: none; cursor: pointer;}
+#footer a:hover, a:active {color:#003f7f; text-decoration:underline;}
+#footer .linkspacingmsu-guides {padding-right:20px; font-size: 11px;}
+#footer .linkspacing {padding-right: 10px;}
+#footer .linkspacing-guides {padding-right: 10px; font-size: 11px;}
+#ada {width:9px; height:12px; vertical-align: middle;padding: 4px;}
+#mobileSite {width:14px; height:14px;vertical-align: middle; padding: 2px;}
+
+#s-lc-content-hours-3446 {font-weight: bold;}
+.s-lc-box-content {padding-bottom: 0; margin-bottom:-20px;}
+
+.loc_name {font-weight: bold;}
+.s-lc-time {font-weight: bold;}
+.s-lc-closed {font-weight: bold;}
+
+/*.col-md-12  {padding-bottom: 0; margin-bottom:-40px;}*/
+.s-lc-header {padding: 10px 10px 0 0;}
+h1#s-lc-public-header-title {margin-bottom: 0;}
+.s-lc-public-header-text {margin-bottom: 0;}
+
+.s-lc-color-bars-border {border-color: #054B8C;}
+     </style>
+     <script type="application/ld+json">
+      {
+  "@context": "http://schema.org",
+  "@type": "Library",
+  "name": "Montana State University Library",
+  "url": "http://www.lib.montana.edu/",
+  "logo": 
+"http://www.lib.montana.edu/meta/img/montana-state-university-library.jpg",
+  "telephone": "+1-406-994-3119",
+  "sameAs": [
+    "https://en.wikipedia.org/wiki/Montana_State_University_Library",
+    "https://www.wikidata.org/wiki/Q15255419",
+    "https://www.freebase.com/m/0j3y9r1",
+    "https://plus.google.com/+MontanaStateUniversityLibraryBozeman",
+    "https://www.facebook.com/MontanaStateUniversityLibrary",
+    "https://twitter.com/msulibrary/",
+    "http://msulibrary.tumblr.com/",
+    "http://pinterest.com/msulibrary/",
+    "http://www.youtube.com/user/msulibrary"
+  ],
+  "openingHours": [
+    "Mo-Th 07:00:00-21:00:00",
+    "Fr 07:00:00-17:00:00",
+    "Sa 10:00:00-17:00:00",
+    "Su 09:00-21:00:00"
+      ],
+  "openingHoursSpecification": [
+  {
+    "@type": "OpeningHoursSpecification",
+    "description": "Building Hours",
+    "validFrom": "2015-07-03",
+    "validThrough": "2015-07-04",
+    "opens": "00:00:00",
+    "closes": "00:00:00"
+  }
+  ]
+}
+     </script>
+     <meta content="irWauuvo28z6jjnPUPr6oykwIxMv95H6nblRHCwC7HQ" name="google-site-verification"/>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="s-lc-public s-lc-public-page-1" id="index_php">
+  <div class="sr-only" title="Information for Screenreader Users">
+  </div>
+  <a class="alert-info" href="#s-lc-page-maincontent" id="s-lc-public-skiplink">
+   Skip to Main Content
+  </a>
+  <div id="s-lc-public-cust-header" role="banner">
+   <header>
+    <div id="logo">
+     <img alt="Montana State University - Bozeman" height="50" src="http://www.lib.montana.edu/meta/img/msu-library-header.png" title="Montana State University - Bozeman" usemap="#Map" width="300"/>
+    </div>
+    <map id="Map" name="Map">
+     <area alt="Montana State University - Home" coords="0,0,188,60" href="http://www.montana.edu/" shape="rect"/>
+     <area alt="Montana State University Library - Home" coords="0,0,320,60" href="http://www.lib.montana.edu/" shape="rect"/>
+    </map>
+    <nav>
+     <a href="#" id="menu-icon">
+     </a>
+     <ul>
+      <li>
+       <a class="header" href="http://www.lib.montana.edu/find/" title="link to find">
+        Find
+       </a>
+      </li>
+      <li>
+       <a class="header" href="http://www.lib.montana.edu/request/" title="link to request">
+        Request
+       </a>
+      </li>
+      <li>
+       <a class="header" href="http://www.lib.montana.edu/services/" title="link to services">
+        Services
+       </a>
+      </li>
+      <li>
+       <a class="header" href="http://www.lib.montana.edu/spaces/" title="link to spaces">
+        Spaces
+       </a>
+      </li>
+      <li>
+       <a class="header" href="http://www.lib.montana.edu/people/" title="link to people">
+        People
+       </a>
+      </li>
+     </ul>
+    </nav>
+    <a class="ask" href="http://www.lib.montana.edu/ask/">
+     Ask the Library
+     <span class="fa fa-comments fa-lg">
+     </span>
+    </a>
+   </header>
+  </div>
+  <div class="container">
+   <div class="row" id="s-lc-public-bc">
+    <div class="col-md-12">
+     <ol class="breadcrumb">
+      <li>
+       <a href="http://www.lib.montana.edu/">
+        Montana State University Library
+       </a>
+      </li>
+      <li class="active">
+       Library Calendars
+      </li>
+     </ol>
+    </div>
+   </div>
+   <noscript>
+    <div class="alert alert-danger" id="noscript">
+     Your browser has javascript disabled. Without javascript some functions will not work.
+    </div>
+   </noscript>
+   <div class="s-lc-header row clearfix" id="s-lc-public-header">
+    <div class="col-md-12">
+     <div class="s-lc-public-header-text">
+      <h1 id="s-lc-public-header-title">
+       MSU Library Hours
+      </h1>
+     </div>
+    </div>
+   </div>
+   <div id="s-lc-page-maincontent" role="main">
+    <div class="s-lc-row row">
+     <div class="s-lc-column-top col-md-12" id="s-lc-page-column-0">
+     </div>
+    </div>
+    <div class="s-lc-row row">
+     <div class="s-lc-page-column col-md-9" id="s-lc-page-column-1">
+      <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-5227-container">
+       <div class="s-lc-box s-lc-box-html" id="s-lc-box-5227">
+        <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+         <h2>
+         </h2>
+        </div>
+        <div class="s-lc-box-content clearfix">
+         <div class="s-lc-content-hours s-lc-content s-lc-content-hours-t-2" id="s-lc-content-hours-3515">
+          <div class="s-lc-h-w-cont cf">
+           <div class="s-lc-h-sw table-responsive" id="s-lc-w-w1-3515" style="display: block;">
+            <table class="table table-condensed table-hover s-lc-h-w">
+             <caption class="sr-only">
+              Display of Opening hours
+             </caption>
+             <thead>
+              <tr>
+               <th class="s-lc-h-bh">
+                <button class="btn btn-default btn-sm" disabled="disabled" onclick="jQuery('#s-lc-w-w1-3515').hide();jQuery('#s-lc-w-w1-3515').fadeIn();" title="Previous week">
+                 <i class="fa fa-angle-double-left">
+                 </i>
+                 <span class="sr-only">
+                  Previous
+                 </span>
+                </button>
+                <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w1-3515').hide();jQuery('#s-lc-w-w2-3515').fadeIn();" title="Next week">
+                 <i class="fa fa-angle-double-right">
+                 </i>
+                 <span class="sr-only">
+                  Next
+                 </span>
+                </button>
+               </th>
+               <th class="s-lc-h-today-h">
+                <span class="s-lc-h-head-date">
+                 Mar 10
+                 <br/>
+                </span>
+                Sunday
+               </th>
+              </tr>
+             </thead>
+            </table>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 11
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 12
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 13
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 14
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 15
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 16
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td class="s-lc-h-today">
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 6pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Friday before Spring Break
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed s-lc-h-excep">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td class="s-lc-h-today">
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td class="s-lc-h-today">
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w2-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w2-3515').hide();jQuery('#s-lc-w-w1-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w2-3515').hide();jQuery('#s-lc-w-w3-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Mar 17
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 18
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 19
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 20
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 21
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 22
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 23
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed s-lc-h-excep">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 5pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Spring Break
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 5pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Spring Break
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 5pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Spring Break
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 5pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Spring Break
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 5pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Spring Break
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed s-lc-h-excep">
+   Closed
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Saturday after Spring Break
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w3-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w3-3515').hide();jQuery('#s-lc-w-w2-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w3-3515').hide();jQuery('#s-lc-w-w4-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Mar 24
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 25
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 26
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 27
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 28
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 29
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Mar 30
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 7pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 5pm
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w4-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w4-3515').hide();jQuery('#s-lc-w-w3-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w4-3515').hide();jQuery('#s-lc-w-w5-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Mar 31
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 01
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 02
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 03
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 04
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 05
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 06
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 7pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 5pm
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w5-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w5-3515').hide();jQuery('#s-lc-w-w4-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w5-3515').hide();jQuery('#s-lc-w-w6-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Apr 07
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 08
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 09
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 10
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 11
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 12
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 13
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 7pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 5pm
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w6-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w6-3515').hide();jQuery('#s-lc-w-w5-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w6-3515').hide();jQuery('#s-lc-w-w7-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Apr 14
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 15
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 16
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 17
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 18
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 19
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 20
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 6pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   University Day
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 5pm
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed s-lc-h-excep">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed s-lc-h-excep">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w7-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w7-3515').hide();jQuery('#s-lc-w-w6-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w7-3515').hide();jQuery('#s-lc-w-w8-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Apr 21
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 22
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 23
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 24
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 25
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 26
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 27
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 9pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Extended hours
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   10am – 9pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Extended hours
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w8-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w8-3515').hide();jQuery('#s-lc-w-w7-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w8-3515').hide();jQuery('#s-lc-w-w9-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Apr 28
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 29
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Apr 30
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 01
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 02
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 03
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 04
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   10am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 3am
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time s-lc-h-excep">
+   7am – 6pm
+  </span>
+  <span class="s-lc-note s-lc-h-excep">
+   Last day of Spring Semester
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   8am – 5pm
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="s-lc-closed">
+   Closed
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="s-lc-time">
+   7am – 4:30pm
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w9-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w9-3515').hide();jQuery('#s-lc-w-w8-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w9-3515').hide();jQuery('#s-lc-w-w10-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      May 05
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 06
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 07
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 08
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 09
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 10
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 11
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w10-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w10-3515').hide();jQuery('#s-lc-w-w9-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w10-3515').hide();jQuery('#s-lc-w-w11-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      May 12
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 13
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 14
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 15
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 16
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 17
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 18
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w11-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w11-3515').hide();jQuery('#s-lc-w-w10-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w11-3515').hide();jQuery('#s-lc-w-w12-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      May 19
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 20
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 21
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 22
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 23
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 24
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 25
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w12-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w12-3515').hide();jQuery('#s-lc-w-w11-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w12-3515').hide();jQuery('#s-lc-w-w13-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      May 26
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 27
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 28
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 29
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 30
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  May 31
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 01
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w13-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w13-3515').hide();jQuery('#s-lc-w-w12-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w13-3515').hide();jQuery('#s-lc-w-w14-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jun 02
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 03
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 04
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 05
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 06
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 07
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 08
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w14-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w14-3515').hide();jQuery('#s-lc-w-w13-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w14-3515').hide();jQuery('#s-lc-w-w15-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jun 09
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 10
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 11
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 12
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 13
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 14
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 15
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w15-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w15-3515').hide();jQuery('#s-lc-w-w14-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w15-3515').hide();jQuery('#s-lc-w-w16-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jun 16
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 17
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 18
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 19
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 20
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 21
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 22
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w16-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w16-3515').hide();jQuery('#s-lc-w-w15-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w16-3515').hide();jQuery('#s-lc-w-w17-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jun 23
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 24
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 25
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 26
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 27
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 28
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jun 29
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w17-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w17-3515').hide();jQuery('#s-lc-w-w16-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w17-3515').hide();jQuery('#s-lc-w-w18-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jun 30
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 01
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 02
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 03
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 04
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 05
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 06
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w18-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w18-3515').hide();jQuery('#s-lc-w-w17-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w18-3515').hide();jQuery('#s-lc-w-w19-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jul 07
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 08
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 09
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 10
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 11
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 12
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 13
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w19-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w19-3515').hide();jQuery('#s-lc-w-w18-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w19-3515').hide();jQuery('#s-lc-w-w20-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jul 14
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 15
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 16
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 17
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 18
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 19
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 20
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-h-sw table-responsive" id="s-lc-w-w20-3515">
+ <table class="table table-condensed table-hover s-lc-h-w">
+  <caption class="sr-only">
+   Display of Opening hours
+  </caption>
+  <thead>
+   <tr>
+    <th class="s-lc-h-bh">
+     <button class="btn btn-default btn-sm" onclick="jQuery('#s-lc-w-w20-3515').hide();jQuery('#s-lc-w-w19-3515').fadeIn();" title="Previous week">
+      <i class="fa fa-angle-double-left">
+      </i>
+      <span class="sr-only">
+       Previous
+      </span>
+     </button>
+     <button class="btn btn-default btn-sm" disabled="disabled" onclick="jQuery('#s-lc-w-w20-3515').hide();jQuery('#s-lc-w-w20-3515').fadeIn();" title="Next week">
+      <i class="fa fa-angle-double-right">
+      </i>
+      <span class="sr-only">
+       Next
+      </span>
+     </button>
+    </th>
+    <th class="">
+     <span class="s-lc-h-head-date">
+      Jul 21
+      <br/>
+     </span>
+     Sunday
+    </th>
+   </tr>
+  </thead>
+ </table>
+</div>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 22
+  <br/>
+ </span>
+ Monday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 23
+  <br/>
+ </span>
+ Tuesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 24
+  <br/>
+ </span>
+ Wednesday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 25
+  <br/>
+ </span>
+ Thursday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 26
+  <br/>
+ </span>
+ Friday
+</th>
+<th class="">
+ <span class="s-lc-h-head-date">
+  Jul 27
+  <br/>
+ </span>
+ Saturday
+</th>
+<tr class="s-lc-h-loc s-lc-h-tr_644 libbg_644">
+ <td class="s-lc-h-locname">
+  <a href="http://calendar.lib.montana.edu/">
+   Building Hours
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1453 libbg_1453">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/archives/">
+   Special Collections
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<tr class="s-lc-h-loc s-lc-h-tr_1454 libbg_1454">
+ <td class="s-lc-h-locname">
+  <a href="http://www.lib.montana.edu/ill/">
+   Interlibrary Loan
+  </a>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+ <td>
+  <span class="no_time">
+   –
+  </span>
+ </td>
+</tr>
+<div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-5229-container">
+ <div class="s-lc-box s-lc-box-html" id="s-lc-box-5229">
+  <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+   <h2>
+   </h2>
+  </div>
+  <div class="s-lc-box-content clearfix">
+   <div class="s-lc-content-hours s-lc-content s-lc-content-hours-t-3" id="s-lc-content-hours-3517">
+    <div class="cf" id="s-lc-hm-cont">
+     <div class="s-lc-hm-s table-responsive" id="s-lc-hm-m1-3517" style="display: block;">
+      <table class="table table-condensed table-bordered s-lc-hm-tb">
+       <caption class="sr-only">
+        Display of Opening hours
+       </caption>
+       <tr>
+        <thead>
+         <th class="s-lc-hm-header" colspan="7">
+          <button class="btn btn-default btn-sm pull-left" disabled="disabled" onclick="jQuery('#s-lc-hm-m1-3517').hide();jQuery('#s-lc-hm-m1-3517').fadeIn();" title="Previous month">
+           <i class="fa fa-angle-double-left">
+           </i>
+           <span class="sr-only">
+            Previous
+           </span>
+          </button>
+          March 2019
+          <button class="btn btn-default btn-sm pull-right" onclick="jQuery('#s-lc-hm-m1-3517').hide();jQuery('#s-lc-hm-m2-3517').fadeIn();" title="Next month">
+           <i class="fa fa-angle-double-right">
+           </i>
+           <span class="sr-only">
+            Next
+           </span>
+          </button>
+         </th>
+        </thead>
+       </tr>
+       <tr class="s-lc-hm-days">
+        <td>
+         Sunday
+        </td>
+        <td>
+         Monday
+        </td>
+        <td>
+         Tuesday
+        </td>
+        <td>
+         Wednesday
+        </td>
+        <td>
+         Thursday
+        </td>
+        <td>
+         Friday
+        </td>
+        <td>
+         Saturday
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          1
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          2
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          3
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          4
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          5
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          6
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          7
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          8
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          9
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day today">
+         <div class="s-lc-hm-day-l">
+          10
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          11
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          12
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          13
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          14
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          15
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 6pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Friday before Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          16
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-closed s-lc-h-excep">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          17
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-closed s-lc-h-excep">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          18
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 5pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          19
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 5pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          20
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 5pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          21
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 5pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          22
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 5pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          23
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-closed s-lc-h-excep">
+           Closed
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Saturday after Spring Break
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          24
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          25
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          26
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          27
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          28
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          29
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 7pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          30
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          31
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+       </tr>
+      </table>
+      <div id="s-lc-hm-footnote">
+      </div>
+     </div>
+     <div class="s-lc-hm-s table-responsive" id="s-lc-hm-m2-3517">
+      <table class="table table-condensed table-bordered s-lc-hm-tb">
+       <caption class="sr-only">
+        Display of Opening hours
+       </caption>
+       <tr>
+        <thead>
+         <th class="s-lc-hm-header" colspan="7">
+          <button class="btn btn-default btn-sm pull-left" onclick="jQuery('#s-lc-hm-m2-3517').hide();jQuery('#s-lc-hm-m1-3517').fadeIn();" title="Previous month">
+           <i class="fa fa-angle-double-left">
+           </i>
+           <span class="sr-only">
+            Previous
+           </span>
+          </button>
+          April 2019
+          <button class="btn btn-default btn-sm pull-right" onclick="jQuery('#s-lc-hm-m2-3517').hide();jQuery('#s-lc-hm-m3-3517').fadeIn();" title="Next month">
+           <i class="fa fa-angle-double-right">
+           </i>
+           <span class="sr-only">
+            Next
+           </span>
+          </button>
+         </th>
+        </thead>
+       </tr>
+       <tr class="s-lc-hm-days">
+        <td>
+         Sunday
+        </td>
+        <td>
+         Monday
+        </td>
+        <td>
+         Tuesday
+        </td>
+        <td>
+         Wednesday
+        </td>
+        <td>
+         Thursday
+        </td>
+        <td>
+         Friday
+        </td>
+        <td>
+         Saturday
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="noday">
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          1
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          2
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          3
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          4
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          5
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 7pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          6
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          7
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          8
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          9
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          10
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          11
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          12
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 7pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          13
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          14
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          15
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          16
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          17
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          18
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          19
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 6pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           University Day
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed s-lc-h-excep">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed s-lc-h-excep">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          20
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          21
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          22
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          23
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          24
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          25
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          26
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 9pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Extended hours
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          27
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           10am – 9pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Extended hours
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          28
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           10am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-closed">
+           Closed
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          29
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          30
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+       </tr>
+      </table>
+      <div id="s-lc-hm-footnote">
+      </div>
+     </div>
+     <div class="s-lc-hm-s table-responsive" id="s-lc-hm-m3-3517">
+      <table class="table table-condensed table-bordered s-lc-hm-tb">
+       <caption class="sr-only">
+        Display of Opening hours
+       </caption>
+       <tr>
+        <thead>
+         <th class="s-lc-hm-header" colspan="7">
+          <button class="btn btn-default btn-sm pull-left" onclick="jQuery('#s-lc-hm-m3-3517').hide();jQuery('#s-lc-hm-m2-3517').fadeIn();" title="Previous month">
+           <i class="fa fa-angle-double-left">
+           </i>
+           <span class="sr-only">
+            Previous
+           </span>
+          </button>
+          May 2019
+          <button class="btn btn-default btn-sm pull-right" onclick="jQuery('#s-lc-hm-m3-3517').hide();jQuery('#s-lc-hm-m4-3517').fadeIn();" title="Next month">
+           <i class="fa fa-angle-double-right">
+           </i>
+           <span class="sr-only">
+            Next
+           </span>
+          </button>
+         </th>
+        </thead>
+       </tr>
+       <tr class="s-lc-hm-days">
+        <td>
+         Sunday
+        </td>
+        <td>
+         Monday
+        </td>
+        <td>
+         Tuesday
+        </td>
+        <td>
+         Wednesday
+        </td>
+        <td>
+         Thursday
+        </td>
+        <td>
+         Friday
+        </td>
+        <td>
+         Saturday
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          1
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          2
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time">
+           7am – 3am
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          3
+         </div>
+         <div class=" s-lc-hm-loc locf_644 s-lc-hm-bg-644">
+          <div class=" loc_name">
+           Building Hours
+          </div>
+          <span class="s-lc-time s-lc-h-excep">
+           7am – 6pm
+          </span>
+          <span class="s-lc-note s-lc-h-excep">
+           Last day of Spring Semester
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1453 s-lc-hm-bg-1453">
+          <div class=" loc_name">
+           Special Collections
+          </div>
+          <span class="s-lc-time">
+           8am – 5pm
+          </span>
+         </div>
+         <div class=" s-lc-hm-loc locf_1454 s-lc-hm-bg-1454">
+          <div class=" loc_name">
+           Interlibrary Loan
+          </div>
+          <span class="s-lc-time">
+           7am – 4:30pm
+          </span>
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          4
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          5
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          6
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          7
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          8
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          9
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          10
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          11
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          12
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          13
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          14
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          15
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          16
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          17
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          18
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          19
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          20
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          21
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          22
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          23
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          24
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          25
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          26
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          27
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          28
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          29
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          30
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          31
+         </div>
+        </td>
+        <td class="noday">
+        </td>
+       </tr>
+      </table>
+      <div id="s-lc-hm-footnote">
+      </div>
+     </div>
+     <div class="s-lc-hm-s table-responsive" id="s-lc-hm-m4-3517">
+      <table class="table table-condensed table-bordered s-lc-hm-tb">
+       <caption class="sr-only">
+        Display of Opening hours
+       </caption>
+       <tr>
+        <thead>
+         <th class="s-lc-hm-header" colspan="7">
+          <button class="btn btn-default btn-sm pull-left" onclick="jQuery('#s-lc-hm-m4-3517').hide();jQuery('#s-lc-hm-m3-3517').fadeIn();" title="Previous month">
+           <i class="fa fa-angle-double-left">
+           </i>
+           <span class="sr-only">
+            Previous
+           </span>
+          </button>
+          June 2019
+          <button class="btn btn-default btn-sm pull-right" disabled="disabled" onclick="jQuery('#s-lc-hm-m4-3517').hide();jQuery('#s-lc-hm-m4-3517').fadeIn();" title="Next month">
+           <i class="fa fa-angle-double-right">
+           </i>
+           <span class="sr-only">
+            Next
+           </span>
+          </button>
+         </th>
+        </thead>
+       </tr>
+       <tr class="s-lc-hm-days">
+        <td>
+         Sunday
+        </td>
+        <td>
+         Monday
+        </td>
+        <td>
+         Tuesday
+        </td>
+        <td>
+         Wednesday
+        </td>
+        <td>
+         Thursday
+        </td>
+        <td>
+         Friday
+        </td>
+        <td>
+         Saturday
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          1
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          2
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          3
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          4
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          5
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          6
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          7
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          8
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          9
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          10
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          11
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          12
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          13
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          14
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          15
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          16
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          17
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          18
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          19
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          20
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          21
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          22
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          23
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          24
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          25
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          26
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          27
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          28
+         </div>
+        </td>
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          29
+         </div>
+        </td>
+       </tr>
+       <tr class="s-lc-hm-cells">
+        <td class="s-lc-hm-day ">
+         <div class="s-lc-hm-day-l">
+          30
+         </div>
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+        <td class="noday">
+        </td>
+       </tr>
+      </table>
+      <div id="s-lc-hm-footnote">
+      </div>
+     </div>
+    </div>
+    <style>
+     .s-lc-hm-bg-644 { background-color: #6692E3; } 
+ .s-lc-hm-bg-1453 { background-color: #EDAD4E; } 
+ .s-lc-hm-bg-1454 { background-color: #4FBD49; }
+    </style>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="s-lc-page-column col-md-3" id="s-lc-page-column-2">
+ <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-5156-container">
+  <div class="s-lc-box s-lc-box-html" id="s-lc-box-5156">
+   <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+    <h2>
+     Contact Us
+    </h2>
+   </div>
+   <div class="s-lc-box-content clearfix">
+    <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-3453">
+     <p>
+      <a href="http://www.lib.montana.edu/about/borrow/" target="_blank">
+       <strong>
+        <span style="line-height: 20.7999992370605px;">
+         Service Desk
+        </span>
+       </strong>
+      </a>
+      <span style="line-height: 20.7999992370605px;">
+       : 406-994-3139
+      </span>
+     </p>
+     <p>
+      <span style="line-height: 20.7999992370605px;">
+       <a href="http://www.lib.montana.edu/ill/" target="_blank">
+        <strong>
+         Interlibrary Loan
+        </strong>
+       </a>
+       : 406-994-3161
+      </span>
+     </p>
+     <p>
+      <a href="http://www.lib.montana.edu/services/research-and-instruction/" target="_blank">
+       <strong>
+        Research Assistance
+       </strong>
+      </a>
+      : 406-994-3171
+     </p>
+     <p>
+      <a href="http://www.lib.montana.edu/archives/" target="_blank">
+       <strong>
+        Special Collections
+       </strong>
+      </a>
+      : 406-994-4242
+     </p>
+     <p>
+     </p>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-5139-container">
+  <div class="s-lc-box s-lc-box-html" id="s-lc-box-5139">
+   <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+    <h2>
+     At A Glance
+    </h2>
+   </div>
+   <div class="s-lc-box-content clearfix">
+    <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-5233">
+     <p>
+      Fri, March 15:
+      <strong>
+       7 am-6 pm
+      </strong>
+      <em>
+       (Friday before Spring Break)
+      </em>
+     </p>
+     <p>
+      Sat-Sun, March 16-17:
+      <strong>
+       Closed
+      </strong>
+      <em>
+       (Weekend before Spring Break)
+      </em>
+     </p>
+     <p>
+      Mon-Fri, March 18-22:
+      <strong>
+       7 am-5 pm
+      </strong>
+      <em>
+       (Spring Break)
+      </em>
+     </p>
+     <p>
+      Sat, March 23:
+      <strong>
+       Closed
+      </strong>
+     </p>
+     <p>
+      <strong>
+       <a href="http://calendar.msu.montana.edu/academic-term-calendar" target="_blank">
+        University Master Calendar
+       </a>
+      </strong>
+     </p>
+     <p>
+     </p>
+     <p>
+     </p>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-thinborder s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-5154-container">
+  <div class="s-lc-box s-lc-box-html" id="s-lc-box-5154">
+   <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+    <h2>
+     Upcoming Library Events
+    </h2>
+   </div>
+   <div class="s-lc-box-content clearfix">
+    <div class="s-lc-content-evt s-lc-content" id="s-lc-content-evt-3451">
+     <div class="s-lc-evt">
+      <div class="s-lc-evt-date">
+       <div class="s-lc-evt-date-m">
+        Mar
+       </div>
+       <div class="s-lc-evt-date-d">
+        14
+       </div>
+      </div>
+      <div class="s-lc-evt-title">
+       <a href="https://calendar.lib.montana.edu/event/5215718">
+        Introduction to Library Databases
+       </a>
+      </div>
+      <div>
+       2:00pm - 3:00pm,  Heathcote Classroom, .
+      </div>
+     </div>
+     <div class="s-lc-evt">
+      <div class="s-lc-evt-date">
+       <div class="s-lc-evt-date-m">
+        Mar
+       </div>
+       <div class="s-lc-evt-date-d">
+        14
+       </div>
+      </div>
+      <div class="s-lc-evt-title">
+       <a href="https://calendar.lib.montana.edu/event/4929317">
+        Data Wrangling in R
+       </a>
+      </div>
+      <div>
+       2:30pm - 5:00pm,  Innovative Learning Studio (1st Floor Library), .
+      </div>
+     </div>
+     <div class="s-lc-evt">
+      <div class="s-lc-evt-date">
+       <div class="s-lc-evt-date-m">
+        Apr
+       </div>
+       <div class="s-lc-evt-date-d">
+        4
+       </div>
+      </div>
+      <div class="s-lc-evt-title">
+       <a href="https://calendar.lib.montana.edu/event/4929318">
+        Data Visualization in R
+       </a>
+      </div>
+      <div>
+       2:30pm - 5:00pm,  Innovative Learning Studio (1st Floor Library), .
+      </div>
+     </div>
+    </div>
+    <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-3532">
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-3876-container">
+  <div class="s-lc-box s-lc-box-html" id="s-lc-box-3876">
+   <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+    <h2>
+     Library Partners
+    </h2>
+   </div>
+   <div class="s-lc-box-content clearfix">
+    <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-3454">
+     <p>
+      <a href="http://www.montana.edu/sub/schedule/month.html?dept=awakening">
+       <strong>
+        <span style="font-size:12px;">
+         Brewed Awakening
+        </span>
+       </strong>
+      </a>
+     </p>
+     <p>
+      <strong>
+       <span style="font-size:12px;">
+        <a href="http://www.montana.edu/itcenter/" target="_blank">
+         UIT
+        </a>
+       </span>
+      </strong>
+     </p>
+     <p>
+      <strong>
+       <span style="font-size: 12px;">
+        <a href="http://www.msusmartycats.com/" target="_blank">
+         Smarty Cats
+        </a>
+       </span>
+      </strong>
+     </p>
+     <p>
+      <strong>
+       <a href="http://www.montana.edu/ehhd/testing/" target="_blank">
+        Testing Services
+       </a>
+      </strong>
+     </p>
+     <p>
+      <strong>
+       <span style="font-size:12px;">
+        <a href="http://www.montana.edu/writingcenter/" target="_blank">
+         Writing Center
+        </a>
+       </span>
+      </strong>
+     </p>
+     <p>
+     </p>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="s-lc-row row">
+ <div class="s-lc-column-bottom col-md-12" id="s-lc-page-column-4">
+ </div>
+</div>
+<div class="s-lc-public-footer row" id="s-lc-public-footer" role="contentinfo">
+ <div id="s-lc-public-footer-brand">
+  <span title="libcal-2">
+   Powered by
+  </span>
+  <a href="https://www.springshare.com">
+   Springshare
+  </a>
+  .
+ </div>
+ <div id="s-lc-public-footer-rights">
+  All rights reserved.
+ </div>
+ <div id="s-lc-footer-support-link">
+  <a href="mailto:align@montana.edu">
+   Report a tech support issue.
+  </a>
+ </div>
+ <div id="s-lc-public-footer-admin-links">
+  <a href="https://montana.libapps.com/libapps/login.php?site_id=4122&amp;target=" id="s-lc-sign-in">
+   Login to LibApps
+  </a>
+ </div>
+</div>
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-2733436-2', 'auto', {'allowLinker': true});
+	ga('require', 'linker');
+	ga('linker:autoLink', ['lib.montana.edu']);
+	ga('send', 'pageview');
+</script>
+<div id="s-lc-public-cust-footer">
+ <div id="footer">
+  <div id="footerhr">
+  </div>
+  <a class="linkspacingmsu" href="http://www.montana.edu/">
+   MSU
+  </a>
+  <a class="linkspacing" href="http://www.lib.montana.edu/about/">
+   About MSU Library
+  </a>
+  <a class="linkspacing" href="http://www.lib.montana.edu/help/ada.php">
+   Accessibility
+  </a>
+  <a class="linkspacing" href="http://www.lib.montana.edu/contact/">
+   Contact Us
+  </a>
+  <a class="linkspacing" href="http://www.lib.montana.edu/policy/">
+   Privacy Policy
+  </a>
+  <a class="linkspacing" href="http://www.lib.montana.edu/help/">
+   Help
+  </a>
+  <a class="linkspacing" href="http://www.lib.montana.edu/sitemap.php">
+   Site Index &amp; Site Search
+  </a>
+ </div>
+</div>
+<script>
+ jQuery('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+						jQuery(".s-lc-calcon").fullCalendar("render");
+					});
+</script>
+<script>
+ hit('1003','home','r');
+</script>
+

@@ -1,0 +1,178 @@
+http://cayuse.rf.ohio-state.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Copyright 2005-2011 Cayuse, Inc. All rights reserved. -->
+<html lang="en">
+ <head>
+  <title>
+   Cayuse 424 Login
+  </title>
+  <script src="/308/jslib/d64_1/DHTMLAPI.js" type="text/javascript">
+  </script>
+  <script src="/308/jslib/d64_1/common.js" type="text/javascript">
+  </script>
+  <script src="/308/jslib/simModal.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // jumps back to the top window if an inner iframe detects
+// an expired or empty session and forward to the login page.
+// (Unless we are running inside of selenium, i.e., automated
+// test suite).
+//
+if (top != self)
+{
+if ((top.location.href.indexOf("selenium-server") < 0) &&
+(top.location.href.indexOf("selenium-core") < 0))
+{
+if (isC424Window(top))
+top.location.href = location.href;
+}
+}
+function showPrivacyPolicyWindow()
+{
+var width = "650";
+var height = "600";
+var attr = "resizable=no,scrollbars=yes,width="
++ width
++ ",height="
++ height;
+var win = window.open("/308/pages/sawPrivacyPolicy.jsp", "About_DUNS", attr);
+if (win)
+win.focus();
+}
+  </script>
+  <base href="https://cayuse.rf.ohio-state.edu/308/pages/login.jsp"/>
+  <link href="/308/styles/loginStyles.css" rel="stylesheet" type="text/css"/>
+  <link href="/308/favicon.ico" rel="shortcut icon"/>
+  <script src="/308/jslib/appurl.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   if (window.opener != null && isC424Window(window.opener))
+{
+if (isC424Window(window.opener.parent))
+window.opener.parent.location = "/308/login.do?timeout=null";
+else
+window.opener.location = "/308/login.do?timeout=null";
+window.close();
+}
+function displayErrorsDialog(title, messages)
+{
+openGenericModal("alert", title, messages,
+new Array(new genericModalButton("  OK  ")), 600, 200)
+}
+function bodyOnLoad()
+{
+if ($elem("btnEnterC424"))
+$elem("btnEnterC424").disabled = false;
+if ($elem("btnEnterSAW"))
+$elem("btnEnterSAW").disabled = false;
+
+}
+  </script>
+ </head>
+ <body onload="bodyOnLoad()">
+  <div id="wrapper">
+   <img height="96" id="header" src="/308/images/research-header.jpg" width="970"/>
+   <div id="content">
+    <div id="contentInner">
+     <a class="cayuseButton" href="http://cayuse.com">
+      <img height="39" src="/308/images/cayuse_com-button.png" width="196"/>
+     </a>
+     <h1>
+      The Ohio State University Office of Sponsored Programs
+     </h1>
+     <p class="vNumber">
+      Cayuse424/v8.5
+     </p>
+     <div id="errorMessage" style="display:none">
+      <script type="text/javascript">
+       if ((location + "").indexOf("timeout=") != -1)
+{
+$elem("errorMessage").style.display = "block"
+document.write("<p>Sorry.  For security reasons your session has timed out.<br/> All unsaved data has been lost. You must log in again to continue working.</p>")
+}
+      </script>
+     </div>
+     <div id="formContent">
+      <div id="formContentInner">
+       <div class="login" id="formLeft">
+        <form action="/308/login.do;jsessionid=7D28612CF4A3DFB72094CBB81CC1ECCA" id="loginForm" method="post" name="loginForm">
+         <input name="submitted" type="hidden" value="true"/>
+         <p>
+          <label name="username">
+           Username:
+          </label>
+          <input id="username" maxlength="40" name="uname" type="text" value=""/>
+         </p>
+         <p>
+          <label name="password">
+           Password:
+          </label>
+          <input id="password" maxlength="40" name="pword" type="password" value=""/>
+         </p>
+         <p class="button">
+          <button disabled="disabled" id="btnEnterC424" type="submit">
+           Sign in
+           <span>
+            <img height="12" src="/308/images/button-arrow.png" width="8"/>
+           </span>
+          </button>
+         </p>
+         <noscript>
+          <p>
+           This site requires that Javascript be enabled.
+          </p>
+         </noscript>
+         <input name="submitted" type="hidden" value="true"/>
+        </form>
+        <script language="JavaScript" type="text/javascript">
+         <!--
+  var focusControl = document.forms["loginForm"].elements["uname"];
+
+  if (focusControl.type != "hidden") {
+     focusControl.focus();
+  }
+  // -->
+        </script>
+        <div align="left">
+         <span style="color:red; font-weight:bold;">
+          If you need assistance please contact orhelpdesk@osu.edu.
+         </span>
+        </div>
+       </div>
+       <div id="formRight">
+        <p>
+         First time signing in and need a password?
+         <a href="/308/firstSignIn.do">
+          Click here
+         </a>
+        </p>
+        <p>
+         Forgot username or password?
+         <a href="/308/forgotNameOrPassword.do">
+          Click here
+         </a>
+        </p>
+        <p>
+         Need compatible browser info?
+         <a href="https://support.cayuse.com/hc/en-us/articles/115014381248-Browser-Support-for-the-Research-Suite" id="compat" target="_browsers">
+          Click here
+         </a>
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <p class="devVersion">
+     38827/Cayuse424/v8.5
+    </p>
+   </div>
+  </div>
+  <div id="footer">
+   <p>
+    <span class="company">
+     Copyright © 2005-2019 Cayuse, LLC
+    </span>
+   </p>
+  </div>
+ </body>
+</html>

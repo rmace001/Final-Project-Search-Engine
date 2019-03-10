@@ -1,0 +1,989 @@
+http://map.harvard.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- VERSION release 1.3 -->
+<html>
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   Harvard University Campus Map
+  </title>
+  <script language="JavaScript" src="cssjs/mm_menu.js" type="text/javascript">
+  </script>
+  <script language="JavaScript1.2" src="cssjs/map_menu.js" type="text/javascript">
+  </script>
+  <script language="JavaScript1.2" src="cssjs/map_nav.js" type="text/javascript">
+  </script>
+  <script language="JavaScript" src="cssjs/menu.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   djConfig = { parseOnLoad:true }
+  </script>
+  <script src="https://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7" type="text/javascript">
+  </script>
+  <script language="JavaScript1.2" src="cssjs/campusmap.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   djConfig = { parseOnLoad:true, isDebug:false }
+  </script>
+  <link href="cssjs/claro.css" rel="stylesheet" type="text/css"/>
+  <link href="cssjs/campusmap.css" media="screen,print" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   var ConfigFile = "cssjs/Mapconfig.json";
+  </script>
+  <script type="text/javascript">
+   dojo.require("esri.map");					// for Map functions
+		dojo.require("esri.tasks.query");			// for querying feature table data
+		dojo.require("dojo.data.ItemFileReadStore"); // for reading the configuration file
+		dojo.require("dijit.form.ComboBox"); // for dynamic search
+		dojo.require("esri.tasks.identify");	// for Identify results
+
+	    dojo.require("dijit.layout.TabContainer");		// for tabs within Identify results
+		dojo.require("dijit.layout.ContentPane"); // for Identify results
+		dojo.addOnLoad(init);
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-46421302-2', 'auto');
+	  ga('send', 'pageview');
+  </script>
+ </head>
+ <body class="claro">
+  <script language="JavaScript1.2" type="text/javascript">
+   mmLoadMenus();
+  </script>
+  <div id="content_container">
+   <!-- HEADER -->
+   <div id="header">
+    <div id="banner">
+     <a href="http://www.harvard.edu" title="Harvard Home">
+      <img align="left" alt="Harvard University Homepage" src="./images/harvard.gif"/>
+     </a>
+    </div>
+    <!-- end banner -->
+    <!-- NAVIGATION BAR -->
+    <div id="nav">
+     <span id="maptitle">
+      <img alt="Campus Map" src="images/CampusMap.png"/>
+      [ver. 2.2]
+     </span>
+     <ul>
+      <li class="top" style="border:none; font-size:0.8em; padding-top:0px;">
+       <a href="http://m.harvard.edu" name="HarvardMobile" title="Harvard Mobile">
+        <img align="top" alt="Mobile App" height="27" src="images/smart_phone_icon.png" width="16"/>
+       </a>
+       <br/>
+       Mobile
+      </li>
+      <li class="top" id="jump" onclick="getMenu('m1')" onmouseout="cleanUp()">
+       <span>
+        ZOOM TO
+       </span>
+       <img align="middle" alt="Show Zoom menu" height="7" src="images/arrow_menu.gif" width="7"/>
+       <div class="dropdown" id="m1Sub">
+        <ul>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(759885,2961755,7)">
+           Harvard Yard
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(763320,2947850,7)">
+           Longwood Medical Area
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(757600,2964350,7)">
+           The Quad
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(758310,2958770,7)">
+           Business School
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(760740,2963720,7)">
+           Divinity School
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(758295,2960590,7)">
+           Kennedy School
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(759150,2963000,7)">
+           Law School
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(763320,2947850,7)">
+           Medical School
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(763780,2947800,7)">
+           School of Dental Medicine
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(760500,2962240,7)">
+           School of Design
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(758250,2962000,7)">
+           School of Education
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(759620,2963080,7)">
+           School of Eng &amp; Appl Sciences
+          </a>
+         </li>
+         <li onmouseout="cleanUp()" onmouseover="retainMenu()">
+          <a href="javascript:zoomToCoords(763700,2947530,7)">
+           School of Public Health
+          </a>
+         </li>
+        </ul>
+       </div>
+      </li>
+      <li class="top" id="openhelp" onclick="toggleMapSubPanel('help');">
+       <span>
+        <!--<img src="images/symb_help_up.png" alt="Map Help"/>&nbsp;&nbsp;&nbsp;-->
+        HELP
+       </span>
+      </li>
+      <!--<li class="top" id="export"><span onclick="initPrint(map,mapState); dojo.byId('print').style.display='block';"  >	-->
+      <!--<img src="images/symb_print_up.png" border="0" name="Print" alt="Print Map" onclick="javascript:alert('Print functionality not yet available');" onmouseover="imgHover('Print')" onmouseout="imgOff('Print')" />&nbsp;&nbsp;&nbsp;-->
+      <!--PRINT</span></li>-->
+      <li class="top" id="link">
+       <span onclick="generateURL();toggleMapSubPanel('linkinfo');">
+        <!--<img src="images/symb_help_up.png" alt="Email Link" align="" hspace=""/>&nbsp;&nbsp;&nbsp;-->
+        LINK
+       </span>
+      </li>
+      <!-- SEARCH FORM -->
+      <li class="topimg" id="opensearch">
+       <form action="javascript:mapsearch();" class="search" id="searchForm" name="searchForm">
+        SEARCH THE MAP
+        <input id="srch" maxlength="50" name="str" size="25" type="text" value=""/>
+        <input alt="Start Search" id="go" type="submit" value="Go"/>
+       </form>
+      </li>
+     </ul>
+     <span id="threedlink">
+      <a alt="3D Campus Model" href="https://harvard-cga.maps.arcgis.com/apps/webappviewer3d/index.html?id=e1c067ed58c5408b853cdb5cf3511446" name="3D Campus Model" target="_blank" title="Interactive 3D Model">
+       <img alt="3D Model" src="images/3d_redbox.jpg"/>
+      </a>
+      <br/>
+      3D Campus Model
+     </span>
+     <span id="pdflink">
+      <a alt="PDF Campus Map" href="https://map.harvard.edu/pdf/8.5x11%20Campus%20Map.pdf" name="PDFCampusMap" target="_blank" title="PDF Campus Map">
+       <img alt="Adobe Acrobat" src="images/acrobat_icon.png"/>
+      </a>
+      <br/>
+      PDF Campus Map
+     </span>
+    </div>
+    <!-- end nav -->
+    <div class="bannerbottom">
+    </div>
+   </div>
+   <!-- header -->
+   <div id="lowerpanel">
+    <!--  *************** MAP PANEL ****************** -->
+    <div id="mappanel">
+     <div id="clockImg">
+     </div>
+     <!-- SEARCH -->
+     <div id="search">
+      <div class="panel_title" id="search_results_title" onclick="togglePanel('search_results_title','search_results')" style="background-image:url(images/collapse15.gif)">
+       <div class="close" onclick="clearSearch();">
+        <span class="txtClose">
+         Close
+        </span>
+        <span class="btnClose">
+         <img alt="Close Search" height="20" src="images/cancel_crimson20.png" width="20"/>
+        </span>
+       </div>
+       <h3>
+        SEARCH RESULTS
+       </h3>
+      </div>
+      <div id="search_results" title="Search Results">
+      </div>
+     </div>
+     <!-- LINK INFO -->
+     <div id="linkinfo">
+      <div class="close" onclick="dojo.byId('linkinfo').style.display='none'">
+       <span class="txtClose">
+        Close
+       </span>
+       <span class="btnClose">
+        <img alt="Close Link" height="20" src="images/cancel_crimson20.png" width="20"/>
+       </span>
+      </div>
+      <div class="mappanel_title" id="linkinfo_title">
+       <h3>
+        COPY OR E-MAIL MAP LINK
+       </h3>
+      </div>
+      <p>
+       Copy the following URL and paste it into a browser address field or other application to reference this map. The scale, center point and layer visibility of the current map are preserved, but the size of the map depends on the dimensions of the browser window.
+      </p>
+      <p>
+       <strong>
+        Note:
+       </strong>
+       The 'Layers' parameter may be omitted unless you want to specify that Map layers other than the default Base map should be displayed.
+      </p>
+      <div id="linkURL">
+       <a href="https://www.map.harvard.edu" name="MapLink" title="Map Link">
+        http://www.map.harvard.edu
+       </a>
+      </div>
+     </div>
+     <!-- HELP -->
+     <div id="help" style="height:80%; overflow:scroll;">
+      <div class="close" onclick="dojo.byId('help').style.display='none'">
+       <span class="txtClose">
+        Close
+       </span>
+       <span class="btnClose">
+        <img alt="Close Help" height="20" src="images/cancel_crimson20.png" width="20"/>
+       </span>
+      </div>
+      <div class="mappanel_title" id="help_title">
+       <h3>
+        MAP HELP
+       </h3>
+      </div>
+      <div class="panel_title" id="navhelptitle" onclick="togglePanel('navhelptitle','navhelptext')">
+       <h3>
+        Navigation
+       </h3>
+      </div>
+      <div id="navhelptext" style="display:none">
+       <h5>
+        Pan
+       </h5>
+       <p>
+        Click + drag.
+       </p>
+       <h5>
+        Zoom
+       </h5>
+       <p>
+        Use the zoom bar to the left of the screen.
+        <br/>
+        Double-click the map to zoom in.
+        <br/>
+        Shift + Drag to define a box to zoom in on.
+        <br/>
+        Ctrl + Shift + Drag to define a box to zoom out.
+        <br/>
+        Use the mouse scroll wheel to zoom in (forward) or out (back).
+       </p>
+      </div>
+      <div class="panel_title" id="searchhelptitle" onclick="togglePanel('searchhelptitle','searchhelptext')">
+       <h3>
+        Search
+       </h3>
+      </div>
+      <div id="searchhelptext" style="display:none">
+       <p>
+        Enter the name — or part of the name — of a feature you want to find in the
+        <strong>
+         Search the Map
+        </strong>
+        text box. A list of all indexed features containing the text you entered will be returned. Click on any entry to center the map at its location. Indexed features include: Harvard buildings; Harvard schools, departments, institutes and centers; principal auditoriums and lecture halls; Harvard libraries and museums; most streets in Cambridge, Allston and the Longwood Medical Area, and selected streets elsewhere; selected other landmarks and places of interest, with focus on the immediate campus surroundings.
+       </p>
+      </div>
+      <div class="panel_title" id="inquiryhelptitle" onclick="togglePanel('inquiryhelptitle','inquiryhelptext')">
+       <h3>
+        Get Feature Information
+       </h3>
+      </div>
+      <div id="inquiryhelptext" style="display:none">
+       <p>
+        Click on a feature in the map to view information about it. Where features on different map layers overlap, results will be returned only for the top layer (i.e. farthest down the list of map layers). Use the Campus Base theme to view general information about campus buildings. You cannot query map layers which are turned off in the Map Layers menu or which are designed not to display when the map is zoomed past a particular level.
+       </p>
+      </div>
+      <div class="panel_title" id="layershelptitle" onclick="togglePanel('layershelptitle','layershelptext')">
+       <h3>
+        Map Layers
+       </h3>
+      </div>
+      <div id="layershelptext" style="display:none">
+       <p>
+        The Map Layers window lists the different layers of information that can be displayed. Turn layers on or off by clicking in the box next to them. Some layers have sub-layers that can be controlled individually. View the list of sub-layers by clicking on the red pointer next to the layer name. Note that turning a layer on or off turns all its sub-layers on or off too.
+       </p>
+      </div>
+      <div class="panel_title" id="legendhelptitle" onclick="togglePanel('legendhelptitle','legendhelptext')">
+       <h3>
+        Legend
+       </h3>
+      </div>
+      <div id="legendhelptext" style="display:none">
+       <p>
+        The legend, or list of symbology used for each map layer or sub-layer, can be displayed by clicking the red pointer next to its name in the Map Layers panel.
+       </p>
+      </div>
+      <div class="panel_title" id="printhelptitle" onclick="togglePanel('printhelptitle','printhelptext')">
+       <h3>
+        Printing
+       </h3>
+      </div>
+      <div id="printhelptext" style="display:none">
+       <p>
+        Use your web browser's Print function to print the map. For printing purposes, the page is reformatted to remove frame decoration. Note that the area of the map that's printed may vary according to the size of the map window, the page settings (such as paper size, orientation and margins) and browser you are using. Where available, use the browser's Print Preview option to check the print and adjust page or zoom factors as necessary.
+       </p>
+       <p>
+        The Zoom controls, Scale Bar and Map Layers window are suppressed from printing, but the Feature Information window can be printed. For best results, to print Feature Information, turn on printing of background colors:
+       </p>
+       <ul style="list-style-type:disc; margin:0 4em 0 4em;">
+        <li>
+         <strong>
+          Internet Explorer:
+         </strong>
+         Select Tools-&gt;Options and click the Advanced tab. Scroll down to find the Printing settings and select "Print background colors and images". Also
+         <strong>
+          turn off Compatibility Mode:
+         </strong>
+         Select Tools-&gt; and uncheck Compatibility View (or deselect the Compatibility View icon next to the Refresh icon on the Address Bar.
+        </li>
+        <li>
+         <strong>
+          Firefox:
+         </strong>
+         Select File-&gt;Page Setup and click the Format &amp; Options tab. Under Options select "Print Background (colors and images).
+        </li>
+        <li>
+         <strong>
+          Safari for Mac:
+         </strong>
+         Select File-&gt;Print. In the Copies &amp; Pages dropdown box select Safari and click "Print backgrounds" option.
+        </li>
+        <li>
+         <strong>
+          Safari for Windows:
+         </strong>
+         Printing of background images is not supported. Instead you can copy an image of the browser window to the system clipboard by pressing ALT+PrintScreen. Then Paste from the clipboard  into an email, document, or image editing program.
+        </li>
+       </ul>
+       <p>
+        <strong>
+         <font color="red">
+          Special note for Internet Explorer prior to version 8:
+         </font>
+        </strong>
+        A deficiency of earlier IE browsers is that they do not support transparency when printing. That is, even though the Print Preview appears correct, any images that use transparency are printed with the transparent areas opaque white.
+        <strong>
+         Other browsers (Firefox, Safari, Chrome) are not affected.
+        </strong>
+        . This is a problem for printing the map, because each map layer - other than the base layer - is transparent in areas where there are no features. Typically what you will get is the text layer but nothing else.
+       </p>
+       <p>
+        <strong>
+         Workaround:
+        </strong>
+        One solution is to make a screen capture from the map window or the Print Preview window in the browser. On Windows computers, press Alt+PrintScreen to copy an image of the window to the system clipboard and then Paste (Ctrl-V) from the clipboard into another application (word processor, email, graphics program, etc.).
+       </p>
+       <p>
+        Users may find the
+        <a href="http://map.harvard.edu/maps/pdf/8.5x11%20Campus%20Map.pdf" target="_blank">
+         <strong>
+          Adobe PDF Campus Map
+         </strong>
+        </a>
+        useful as well.
+       </p>
+      </div>
+      <!-- METADATA -->
+      <div class="panel_title" id="metadatahelptitle" onclick="togglePanel('metadatahelptitle','metadatahelptext')">
+       <h3>
+        About the Map Data
+       </h3>
+      </div>
+      <div id="metadatahelptext" style="display:none">
+       <!--<iframe src="metadata.htm" frameborder="0" scrolling="no"></iframe> -->
+       <ul>
+        <li>
+         <div class="MetaItem" id="CampusBaseMeta" onclick="toggleTOC('CampusBaseMetaText');">
+          <img alt="Show Metadata" id="CampusBaseMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Campus Base Map and Buildings
+         </div>
+         <div id="CampusBaseMetaText" style="display:none">
+          <p>
+           Map of Harvard University's main campuses in Cambridge and Boston including buildings, streets, green space, athletic fields and other features. The most detail is provided for areas immediately surrounding Harvard Square in Cambridge, the Business School and Athletics areas in Allston, and Longwood Medical Area in Boston. Click buildings owned by, or leased to Harvard for academic purposes for information about them.
+          </p>
+          <p>
+           Data Sources: Planimetric information (street layouts, buildings, etc.) is compiled by the
+           <a href="http://www.upo.harvard.edu" target="_blank">
+            Harvard University Planning and Project Management
+           </a>
+           from a variety of sources including City of Cambridge, City of Boston and MassGIS. Additional data comes from aerial and ground surveys conducted for or by Harvard University. The date when data were collected varies, but the map is current as of March 2016.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="AerialMeta" onclick="toggleTOC('AerialMetaText');">
+          <img alt="Show Metadata" id="AerialMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Aerial Photo
+         </div>
+         <div id="AerialMetaText" style="display:none">
+          <p>
+           Aerial photo mosaic of Harvard's campus areas. The resolution of the imagery is 3"/pixel.
+          </p>
+          <p>
+           Data Sources: Cambridge imagery was acquired by Harvard in conjunction with MIT and the City of Cambridge in April 2010. Boston imagery was collected in 2011 and provided courtesy of the City of Boston.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="HousingMeta" onclick="toggleTOC('HousingMetaText');">
+          <img alt="Show Metadata" id="HousingMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Housing
+         </div>
+         <div id="HousingMetaText" style="display:none">
+          <p>
+           Residential buildings available to Harvard students, fellows, faculty, or staff. Click on individual buildings for further information.
+          </p>
+          <p>
+           Data Sources: Data for Graduate Student and Affiliate housing supplied by
+           <a href="http://www.hres.harvard.edu" target="_blank">
+            Harvard Real Estate Services
+           </a>
+           . Other housing information compiled by the
+           <a href="http://www.upo.harvard.edu" target="_blank">
+            Harvard University Planning Office
+           </a>
+           . The map is current as of February, 2013.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="NetworkMeta" onclick="toggleTOC('NetworkMetaText');">
+          <img alt="Show Metadata" id="NetworkMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Network and Communications
+         </div>
+         <div id="NetworkMetaText" style="display:none">
+          <h5>
+           Telepresence systems
+          </h5>
+          <p>
+           Location of rooms equipped with audio/video teleconferencing systems.
+          </p>
+          <p>
+           Data Source:
+           <a href="http://www.uis.harvard.edu" target="_blank">
+            Harvard University Information Systems
+           </a>
+           . The map is current as of June, 2010.
+          </p>
+          <h5>
+           Buildings with WiFi
+          </h5>
+          <p>
+           Buildings with Wireless LAN access. Click a building for service details.
+          </p>
+          <p>
+           Data Source:
+           <a href="http://www.uis.harvard.edu" target="_blank">
+            Harvard University Information Systems
+           </a>
+           . The map is current as of June, 2010.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="BikeMeta" onclick="toggleTOC('BikeMetaText');">
+          <img alt="Show Metadata" id="BikeMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Bike Facilities
+         </div>
+         <div id="BikeMetaText" style="display:none">
+          <h5>
+           Bike Racks
+          </h5>
+          <p>
+           Location of bicycle racks on the Cambridge campus.
+          </p>
+          <p>
+           Data Source:
+           <a href="http://www.commuterchoice.harvard.edu" target="_blank">
+            UOS Transportation Services Commuter Choice Program
+           </a>
+           . Rack data was compiled from a survey in  Spring, 2011.
+          </p>
+          <h5>
+           Bike Routes, Caution and No-Riding Zones
+          </h5>
+          <p>
+           Bicycle lanes, paths, and other suggested routes in the vicinity of Harvard's campus in Cambridge and Allston.
+          </p>
+          <p>
+           Data Source: Bike lanes and paths were provided by
+           <a href="http://www.cambridgema.gov/GIS/" target="_blank">
+            Cambridge GIS
+           </a>
+           (Sept. 2009), additional routes and zones supplied by the
+           <a href="http://www.commuterchoice.harvard.edu" target="_blank">
+            Commuter Choice Program
+           </a>
+           in consultation with cyclists. Bike routes and rack locations last updated March, 2015.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="AccessMeta" onclick="toggleTOC('AccessMetaText');">
+          <img alt="Show Metadata" id="AccessMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Accessibility
+         </div>
+         <div id="AccessMetaText" style="display:none">
+          <h5>
+           Entrances
+          </h5>
+          <p>
+           Entrances of type A are accessible; type AA accessible with assistance. Note that some buildings are accessible via underground tunnels or passageways not shown on the map.  Contact the
+           <a href="http://www.accessibility.harvard.edu/contact.php" name="Contact" target="_blank" title="Contact Us">
+            University Disability Coordinator
+           </a>
+           for more information about these entrances.
+          </p>
+          <h5>
+           Intra-University Phones
+          </h5>
+          <p>
+           These phones provide connection to the campus telephone system and University Police.
+          </p>
+          <h5>
+           Garages
+          </h5>
+          <p>
+           Accessible parking is available in these garages.  Contact the
+           <a href="http://www.accessibility.harvard.edu/contact.php" name="Contact" target="_blank" title="Contact Us">
+            University Disability Coordinator
+           </a>
+           at least one week in advance to arrange to use the accessible parking.
+          </p>
+          <h5>
+           Construction Areas
+          </h5>
+          <p>
+           These areas were under construction at the time of data collection.  Contact the
+           <a href="http://www.accessibility.harvard.edu/contact.php" name="Contact" target="_blank" title="Contact Us">
+            University Disability Coordinator
+           </a>
+           for up-to-date information about entrances and paths in this area
+          </p>
+          <p>
+           Data Source: Based on surveys conducted in 2007 for the University Disability Coordinator.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="AthleticsMeta" onclick="toggleTOC('AthleticsMetaText');">
+          <img alt="Show Metadata" id="AthleticsMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Athletics
+         </div>
+         <div id="AthleticsMetaText" style="display:none">
+          <h5>
+           Athletics Facilitie
+          </h5>
+          <p>
+           Location of arenas, gyms, playing fields and other sports venues in Cambridge and Allston
+          </p>
+          <p>
+           Data Source: Based on information provided by the Department of Athletics, April 2011.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="SafetyMeta" onclick="toggleTOC('SafetyMetaText');">
+          <img alt="Show Metadata" id="SafetyMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Public Safety
+         </div>
+         <div id="SafetyMetaText" style="display:none">
+          <h5>
+           HUPD Locations
+          </h5>
+          <p>
+           Locations of Harvard University Police Department main station (HQ) and sub-stations.
+          </p>
+          <h5>
+           Emergency Phones
+          </h5>
+          <p>
+           Also known as "blue light phones", these phones provide connection to the campus telephone system and University Police.
+          </p>
+          <h5>
+           Safe Routes
+          </h5>
+          <p>
+           These routes connecting key parts of the campus tend to be better lit and more widely traveled than other routes.
+          </p>
+          <p>
+           Data Source:
+           <a href="http://www.uis.harvard.edu" target="_blank">
+            Harvard University Information Systems
+           </a>
+           provides information about the Emergency Phone system;
+           <a href="http://www.hupd.harvard.edu" target="_blank">
+            Harvard University Police Department
+           </a>
+           publishes designated Safe Routes. Safe Route information updated March, 2011; phone data was updated January, 2016.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="ParkingMeta" onclick="toggleTOC('ParkingMetaText');">
+          <img alt="Show Metadata" id="ParkingMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Parking
+         </div>
+         <div id="ParkingMetaText" style="display:none">
+          <h5>
+           Visitor Parking
+          </h5>
+          <p>
+           Parking lots and garages available for use by visitors to Harvard. Includes public lots and garages as well as Harvard facilities open to visitors. Note that other than the HBS lot and short term visitor parking, Harvard lots and garages require reservations.
+          </p>
+          <p>
+           Data Source:
+           <a href="http://www.uos.harvard.edu/transportation/parking/" target="_blank">
+            Harvard University Parking Services
+           </a>
+           , updated in August, 2011.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="GreenMeta" onclick="toggleTOC('GreenMetaText');">
+          <img alt="Show Metadata" id="GreenMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Sustainability
+         </div>
+         <div id="GreenMetaText" style="display:none">
+          <h5>
+           Alternative Energy Projects
+          </h5>
+          <p>
+           Locations of building and other projects where alternative sources of energy - solar, geothermal, wind and biofuels - are being used.
+          </p>
+          <h5>
+           Electronics Recycling
+          </h5>
+          <p>
+           Locations where electronic waste — batteries, CDs/DVDs, tapes, floppy disks, cables, cords, cell phones, PDAs, and other small electronic devices, as well as computers, monitors and other types of large equipment — may be recycled.
+          </p>
+          <h5>
+           LEED Certified Building
+          </h5>
+          <p>
+           New or renovated buildings which have been certified according to the Leadership in Energy &amp; Environmental Design program for their use of design and construction materials and techniques to promote energy and water efficiency, CO2 emissions reduction, improved indoor environmental quality,  stewardship of resources and sensitivity to their impacts.
+          </p>
+          <p>
+           Data Source: Data was provided by the
+           <a href="http://www.greencampus.harvard.edu" target="_blank">
+            Green Campus Initiative
+           </a>
+           at the Office of Sustainability. Project data was last updated in November, 2009.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="LibraryMeta" onclick="toggleTOC('LibraryMetaText');">
+          <img alt="Show Metadata" id="LibraryMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Libraries
+         </div>
+         <div id="LibraryMetaText" style="display:none">
+          <p>
+           Locations of library buildings and specialized libraries within buildings on Harvard's campuses in Cambridge and Boston.
+          </p>
+          <p>
+           Data Source: Data courtesy of  the
+           <a href="http://lib.harvard.edu" target="_blank">
+            Harvard Libraries
+           </a>
+           , March, 2010.
+          </p>
+          <h4>
+           Museums and Galleries
+          </h4>
+          <p>
+           Locations of art and science museums, as well as galleries or exhibition spaces around campus. Click a museum or gallery symbol for more information about it.
+          </p>
+          <p>
+           Data Source: Data courtesy of  the
+           <a href="http://lib.harvard.edu" target="_blank">
+            Harvard Libraries
+           </a>
+           , March, 2010.
+          </p>
+         </div>
+        </li>
+        <li>
+         <div class="MetaItem" id="DiningMeta" onclick="toggleTOC('DiningMetaText');">
+          <img alt="Show Metadata" id="DiningMetaTextIcon" src="images/expand_arrow.gif" title="Show Metadata"/>
+          Dining
+         </div>
+         <div id="DiningMetaText" style="display:none">
+          <p>
+           Location of dining facilities on Harvard's campuses, not including unaffiliated commercial restaurants. Student dining halls are not open to the general public.
+          </p>
+          <p>
+           Data Source: Data courtesy of  the
+           <a href="http://lib.harvard.edu" target="_blank">
+            Harvard Dining Services
+           </a>
+           , July, 2010.
+          </p>
+         </div>
+        </li>
+       </ul>
+      </div>
+      <!-- API HELP -->
+      <div class="panel_title" id="apihelptitle" onclick="togglePanel('apihelptitle','apihelptext')">
+       <h3>
+        Map API
+       </h3>
+      </div>
+      <div id="apihelptext" style="display:none">
+       <p>
+        You can use the following URL parameters to control how the map is displayed when you call it from a link or other web application. The easiest way, however, to generate a URL is to use the Link button. Turn on the map layers that you want to select, then center and zoom the map to the location that you want to show and click Link.
+       </p>
+       <table cellspacing="0">
+        <tr>
+         <td width="15%">
+          Center Coordinate
+         </td>
+         <td>
+          ctrX=
+          <em>
+           n
+          </em>
+          <br/>
+          ctrY=
+          <em>
+           n
+          </em>
+         </td>
+         <td width="50%">
+          Center the map at the specified X and Y coordinate where n = a number. Both coordinates must be supplied. The coordinate values are expressed in terms of the Massachusetts State Plane NAD 83 Feet coordinate system. The easiest way to determine a coordinate is to manually position the map with the desired location at its center, click
+          <strong>
+           Link
+          </strong>
+          , and copy the values from the dialog box. Note that the map is designed automatically to fill the screen space available to it, so it is not necessary to specify the size of the map image.
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Zoom Level
+         </td>
+         <td width="10%">
+          level=
+          <em>
+           n
+          </em>
+         </td>
+         <td>
+          Zoom the map to a specific zoom level (1-10) where 10 is the closest zoom (largest scale).
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Turn on Map Layers
+         </td>
+         <td>
+          layers=
+          <em>
+           layername1, layername2...
+          </em>
+         </td>
+         <td>
+          Turn on specific map layers. Unless otherwise specified (see below), turning on a layer turns on all its sub-layers. Use the layer names shown in the
+          <strong>
+           Map Layers
+          </strong>
+          panel (capitalization is ignored). For best browser compatibility, replace spaces occuring in layer names with '%20' (omit the quotes), the character code for a space.
+          <br/>
+          <br/>
+          When the layers parameter is omitted, the default is to show the base map and text layers.
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Turn on Map Sub-layers
+         </td>
+         <td>
+          layers=
+          <em>
+           layer1.sublayer1 | sublayer2 | sublayer3 ..., layer2, layer3 ...
+          </em>
+         </td>
+         <td>
+          You can control the display of individual sub-layers within each map layer by appending the sub-layer's name(s) to the layer name using a period ('.') after the layer name and a pipe character ('|') between sub-layer names.
+          <br/>
+          <br/>
+          Only the specified sub-layers are turned on. If no sub-layer names are specified with a layer name, all sub-layers are turned on. The same rules for capitalization and spaces apply for sub-layer names as for layer names.
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Highlight a building
+         </td>
+         <td>
+          bld=
+          <em>
+           root,root ...
+          </em>
+         </td>
+         <td>
+          Highlight the building(s) matching the specified root number(s) using a black border. A building's root number is displayed in the 'Details' tab when you click on a building on the map.
+          <br/>
+          <br/>
+          By default the map view zooms to the extent of the selected building(s). If the URL includes parameters for center point coordinates, the view is centered at the specified location rather than on the building; this may leave the building off screen. Likewise, when a zoom level is specified with a building number (with or without center point coordinates) the view is adjusted to the requested zoom level.
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Turn off map borders
+         </td>
+         <td>
+          pgfrm=no
+         </td>
+         <td>
+          Hides the map header and footer to make the map more suitable for embedding in another web page using an &lt;IFRAME&gt; HTML tag.
+         </td>
+        </tr>
+       </table>
+      </div>
+     </div>
+     <div id="mapimg">
+      <div id="panarrows">
+       <div class="panbtn" id="panN" onclick="map.panUp()" onmouseout="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanNESW.png)'" onmouseover="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanNhover.png)'">
+       </div>
+       <div class="panbtn" id="panE" onclick="map.panRight()" onmouseout="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanNESW.png)'" onmouseover="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanEhover.png)'">
+       </div>
+       <div class="panbtn" id="panS" onclick="map.panDown()" onmouseout="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanNESW.png)'" onmouseover="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanShover.png)'">
+       </div>
+       <div class="panbtn" id="panW" onclick="map.panLeft()" onmouseout="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanNESW.png)'" onmouseover="dojo.byId('panarrows').style.backgroundImage = 'url(images/PanWhover.png)'">
+       </div>
+      </div>
+      <div id="zoombar">
+       <img align="middle" alt="Zoom In" border="0" class="buttons" hspace="0" name="ZoomIn" onmousedown="zoomOneLevel('plus');" onmouseout="imgOff('ZoomIn')" onmouseover="imgHover('ZoomIn')" src="images/symb_plus_up.png"/>
+       <span id="zoomscale">
+       </span>
+       <img align="middle" alt="Zoom Out" border="0" class="buttons" hspace="0" name="ZoomOut" onmousedown="zoomOneLevel('minus');" onmouseout="imgOff('ZoomOut')" onmouseover="imgHover('ZoomOut')" src="images/symb_minus_up.png"/>
+      </div>
+      <div id="scalebar">
+       <span style="float:left">
+        <img align="bottom" alt="scalebar left" hspace="0" src="images/scalebarvert.png"/>
+       </span>
+       <div id="scalebarline">
+        <span id="scalebartext">
+         100 feet
+        </span>
+       </div>
+       <span style="float:left">
+        <img align="bottom" alt="scalebar right" hspace="0" src="images/scalebarvert.png"/>
+       </span>
+      </div>
+      <!-- Side bar -->
+      <div id="sidepanel">
+       <div id="tocpanel">
+        <div ;="" class="close" id="TOCbutton" onclick="toggleSidePanel('map_layers','TOCbutton','Map Layers');" style="border-left:#9e1c21 solid 1px;">
+         <span class="txtClose">
+          Map Layers
+         </span>
+         <span class="btnClose">
+          <img alt="Show Map Layers" height="20" src="images/plus_crimson20.png" title="Show Map Layers" width="20"/>
+         </span>
+        </div>
+        <div id="map_layers" style="display:none;">
+         <div class="panel_title" id="themes_title" onclick="togglePanel('themes_title','themes_list');" style="background-image:url(images/collapse15.gif)">
+          <h3>
+           MAP LAYERS
+          </h3>
+         </div>
+         <div id="themes_list">
+          <!-- This gets filled in by code -->
+         </div>
+        </div>
+       </div>
+       <!--toc panel -->
+       <!-- QUERY -->
+       <!-- Part 1 Suppress query window for now
+			<div id="querypanel">
+				<div id='qrybutton' class="close"  onclick="toggleSidePanel('query','qrybutton','Query');" >
+							<span class="txtClose">QClose</span>&nbsp;<span class="btnClose">	<img src="images/cancel_crimson20.png" width="20" height="20" alt="Close Query" /></span>				</div>   
+				
+				<div id="query">
+					<div id="query_results_title" class="panel_title" onclick="togglePanel('query_results_title','query_results')">
+							<h3>FIND FEATURES</h3>
+					</div>
+					<div id="query_results" title="Query Results"> end part 1-->
+       <!-- This gets filled in by code -->
+       <!-- Part 2 Suppress query window for now
+					</div>
+				</div> 
+			</div> end part 2-->
+       <!-- queryPanel-->
+      </div>
+      <!-- side panel -->
+     </div>
+     <!-- mapimg -->
+     <!--********************  INFO PANEL ****************-->
+    </div>
+    <!-- map panel -->
+   </div>
+   <!-- lower panel -->
+   <!-- 	BEGIN FOOTER -->
+   <div id="footer">
+    <div class="bannerbottom">
+    </div>
+    <p>
+     <span>
+      •
+     </span>
+     Copyright © 2019
+     <a href="http://www.harvard.edu" target="_blank" title="Harvard Home Page">
+      The President and Fellows of Harvard College
+     </a>
+     <span>
+      •
+     </span>
+     Map Production:
+     <a href="http://home.hppm.harvard.edu">
+      Harvard Planning Office
+     </a>
+     <span class="noprint">
+      <span>
+       •
+      </span>
+      Feedback:
+      <a href="mailto:giovanni_zambotti@harvard.edu">
+       Map Webmaster
+      </a>
+     </span>
+     <span>
+      •
+     </span>
+     Aerial Image: Courtesy of
+     <a href="http://go.nearmap.com/">
+      Nearmap
+     </a>
+     , June 2016-2018
+    </p>
+   </div>
+   <!--    END FOOTER -->
+  </div>
+  <!--   content_container -->
+ </body>
+</html>
+

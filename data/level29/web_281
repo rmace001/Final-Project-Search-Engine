@@ -1,0 +1,1223 @@
+http://catalog.crl.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <link href="/scripts/ProStyles.css" rel="stylesheet" type="text/css"/>
+  <link href="/screens/styles.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/elcontent.js" type="text/javascript">
+  </script>
+  <script src="/scripts/common.js" type="text/javascript">
+  </script>
+  <script src="/scripts/features.js" type="text/javascript">
+  </script>
+  <meta content="no-cache" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="-1" http-equiv="expires"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+   <title>
+    Center for Research Libraries Online Catalog
+   </title>
+   <link href="http://www.crl.edu/sites/default/themes/crl/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+   <!--[if lte IE 8]>
+
+<link rel="stylesheet" media="all" type="text/css" href="/screens/ie_styles.css" />
+
+<![endif]-->
+  </meta>
+ </head>
+ <body onload="document.forms[1].elements[0].focus(); setSearchType();">
+  <!-- 
+AJE starting 2017-10-13 : wwwoptions file INSERTTAG_INHEAD and INSERTTAG_INHEAD_frc loads jQuery and crlFunctions.js ; this fails so 2017-10-18 revert to explcitly including jQuery and crlFunctions.js 
+AJE 21-Feb-2011: digital repository querying on briefcit.html used to be handled by gbsclasses.js - now crlFunctions.js calls + processes both Google + Hathi Trust 
+-->
+  <script src="/screens/jquery-1.5.1.min.js" type="text/javascript">
+  </script>
+  <script src="/screens/crlFunctions.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // set document.title, as displayed in title bar, based on SESSION_SCOPE cookie
+	setTitle(); //lives in crlFunctions.js
+  </script>
+  <!--
+	AJE 14-Apr-09 json2.js and json_parse.js are for parsing data returned by Open Library.org, used on bib_display.html
+	AJE 27-Apr-09: these scripts may not be necessary: Open Library fails
+-->
+  <script src="/screens/json2.js" type="text/javascript">
+  </script>
+  <script src="/screens/json_parse.js" type="text/javascript">
+  </script>
+  <div id="container">
+   <!-- Container sets page width etc. -->
+   <div id="header">
+    <!-- logo and site title -->
+    <a href="http://www.crl.edu">
+     <img alt="Center for Research Libraries - Global Resources Network" border="0" height="61" src="/screens/images/crl/logo.gif" width="389"/>
+    </a>
+    <h1>
+     Online Catalog
+    </h1>
+   </div>
+   <div id="scopeTabs">
+    <span class="inactive" id="all">
+     <a href="/search~S1" onclick="javascript:document.cookie='searchtype=Y;domain=.crl.edu;path=/';">
+      All CRL
+     </a>
+    </span>
+    <span class="inactive" id="serials">
+     <a href="/search~S2" onclick="javascript:document.cookie='searchtype=Y;domain=.crl.edu;path=/';">
+      Serials
+     </a>
+    </span>
+    <span class="inactive" id="newspapers">
+     <a href="/search~S3" onclick="javascript:document.cookie='searchtype=Y;domain=.crl.edu;path=/';">
+      Newspapers
+     </a>
+    </span>
+    <span class="inactive" id="dissertations">
+     <a href="/search~S4" onclick="javascript:document.cookie='searchtype=Y;domain=.crl.edu;path=/';">
+      Dissertations
+     </a>
+    </span>
+    <span class="inactive" id="digital">
+     <a href="/search~S5" onclick="javascript:document.cookie='searchtype=Y;domain=.crl.edu;path=/';">
+      Digital
+     </a>
+    </span>
+   </div>
+   <script type="text/javascript">
+    setTabsForScope(); //highlight active tab; in crlFunctions.js
+   </script>
+   <!--AJE 14-Dec-07: begin language switch-->
+   <div id="languageHandler">
+    <noscript>
+     <p>
+      This site makes extensive of use of Javascript.  If you are seeing this message, you have either turned off javascript in your browser, or your browser does not support it.  As a result, this page may not work as intended for you.  Please review your browser's documentation for specifics on how to remedy this problem.
+     </p>
+    </noscript>
+    <span class="button">
+     <a class="languageSwitchLink" href="" id="frenchHref">
+      français
+     </a>
+    </span>
+    <span class="button">
+     <a class="languageSwitchLink" href="" id="englishHref">
+      english
+     </a>
+    </span>
+   </div>
+   <script type="text/javascript">
+    languageLink();
+   </script>
+   <!--AJE 14-Dec-07: end language switch-->
+   <div id="content">
+    <!-- white boxed area of page, contains main content, language handlers and sidebar -->
+    <div id="sidebar">
+     <div class="block" id="Illiad_div">
+      <!--2016-10-17 new section per AW-->
+      <h4>
+       Request Items from CRL
+      </h4>
+      <p>
+       Via ILLiad:
+       <select class="Illiad_form_list" id="Illiad_form_list" name="Illiad_form_list">
+        <option class="illiadNO" value="http://www.oclc.org/illiad.en.html">
+         Choose CRL member
+        </option>
+        <option class="illiadYES" value="https://adler.illiad.oclc.org/illiad/logon.html">
+         Adler University
+        </option>
+        <option class="illiadYES" value="https://uakron.illiad.oclc.org/illiad/AKR/logon.html">
+         University of Akron
+        </option>
+        <option class="illiadYES" value="https://ua.illiad.oclc.org/illiad/">
+         University of Alabama
+        </option>
+        <option class="illiadYES" value="https://uablh.illiad.oclc.org/illiad/logon.html">
+         University of Alabama at Birmingham
+        </option>
+        <option class="illiadNO" value="https://www.library.ualberta.ca/services/interlibrary-loan">
+         University of Alberta
+        </option>
+        <option class="illiadNO" value="https://www.aub.edu.lb/ULIBRARIES/FORMS/Pages/index.aspx">
+         American University of Beirut
+        </option>
+        <option class="illiadYES" value="https://atlasilliad.amherst.edu/illiad/">
+         Amherst College
+        </option>
+        <option class="illiadYES" value="https://weblogin.asu.edu/cas/login?service=https%3a%2f%2filliad.lib.asu.edu%2filliad%2filliad.dll">
+         Arizona State University
+        </option>
+        <option class="illiadYES" value="https://azilliad.library.arizona.edu/illiad/illiad.dll?Action%3D10&amp;Form%3D81">
+         University of Arizona
+        </option>
+        <option class="illiadNO" value="http://dbellis.library.astate.edu/vwebv/login">
+         Arkansas State University
+        </option>
+        <option class="illiadYES" value="https://uark.illiad.oclc.org/illiad/Lending/LendingLogon.html">
+         University of Arkansas
+        </option>
+        <option class="illiadNO" value="http://forms.saic.edu/flaxmanlibrary/interlibrary-loan-request-a-book/">
+         The School of the Art Institute of Chicago
+        </option>
+        <option class="illiadNO" value="https://www.ashland.edu/administration/content/interlibrary-loan-request-book">
+         Ashland University
+        </option>
+        <option class="illiadNO" value="http://www.ala.org/Template.cfm?Section=interlibraryloan&amp;template=/ContentManagement/ContentDisplay.cfm&amp;ContentID=104201">
+         Association of Research Libraries
+        </option>
+        <option class="illiadNO" value="http://www.bsu.edu/libraries/forms/ill.php">
+         Ball State University
+        </option>
+        <option class="illiadYES" value="https://bard.illiad.oclc.org/illiad/logon.html">
+         Bard College
+        </option>
+        <option class="illiadYES" value="https://ill.baruch.cuny.edu/">
+         Baruch College - CUNY
+        </option>
+        <option class="illiadYES" value="https://illiad.baylor.edu/illiad/logon.html">
+         Baylor University
+        </option>
+        <option class="illiadNO" value="https://beloit.on.worldcat.org/discovery">
+         Beloit College
+        </option>
+        <option class="illiadYES" value="http://libweb.ben.edu/login?url=https://illiad.ben.edu/illiad/illiad.dll">
+         Benedictine University
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.binghamton.edu/illiad/">
+         Binghamton University
+        </option>
+        <option class="illiadYES" value="https://illiad.bc.edu/illiad/bxm/logon.html">
+         Boston College
+        </option>
+        <option class="illiadYES" value="https://bgsu.illiad.oclc.org/illiad/logon.html">
+         Bowling Green State University
+        </option>
+        <option class="illiadNO" value="http://brandeis.worldcat.org/">
+         Brandeis University
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.byu.edu/ILLiad/">
+         Brigham Young University
+        </option>
+        <option class="illiadNO" value="http://services.library.ubc.ca/borrowing-services/ill/">
+         University of British Columbia
+        </option>
+        <option class="illiadNO" value="https://racer1.scholarsportal.info/en/zportal/zengine?VDXaction=LoginPage">
+         Brock University
+        </option>
+        <option class="illiadNO" value="https://acu.relais-host.com/user/login.html?group=patron&amp;LS=ACU">
+         University of Calgary
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.calpoly.edu/illiad/logon.html">
+         California Polytechnic State University
+        </option>
+        <option class="illiadNO" value="https://berkeley.worldcat.org/">
+         University of California, Berkeley
+        </option>
+        <option class="illiadNO" value="http://ucelinks.cdlib.org:8888/sfx_local/cgi/core/citation-linkerVDX.cgi">
+         University of California, Davis
+        </option>
+        <option class="illiadNO" value="https://uci.worldcat.org/">
+         University of California, Irvine
+        </option>
+        <option class="illiadNO" value="https://ucla.worldcat.org/">
+         University of California, Los Angeles
+        </option>
+        <option class="illiadNO" value="http://ucelinks.cdlib.org:8888/sfx_local/cgi/core/citation-linker.cgi?rft.genre=book">
+         University of California, Merced
+        </option>
+        <!--option value="https://ucill.vdxhost.com/zportal/zengine?VDXaction=LoginPage" class="illiadNO">University of California, Riverside</option # requested to be removed per Amy email 2017-07-13 -->
+        <option class="illiadNO" value="http://ucsd.worldcat.org/">
+         University of California, San Diego
+        </option>
+        <option class="illiadNO" value="https://ucsf.worldcat.org/">
+         University of California, San Francisco
+        </option>
+        <option class="illiadNO" value="https://www.library.ucsb.edu/search-research/citation-linker">
+         University of California, Santa Barbara
+        </option>
+        <option class="illiadNO" value="https://ucsc.worldcat.org/">
+         University of California, Santa Cruz
+        </option>
+        <option class="illiadYES" value="https://illiad.canisius.edu/">
+         Canisius College
+        </option>
+        <option class="illiadYES" value="https://carleton.illiad.oclc.org/illiad/logon.html">
+         Carleton College
+        </option>
+        <option class="illiadNO" value="https://racer2.scholarsportal.info/en/zportal/zengine?VDXaction=LoginPage">
+         Carleton University
+        </option>
+        <option class="illiadYES" value="https://login.cmu.edu/idp/profile/SAML2/Redirect/SSO;jsessionid=72E9724024B4123D79588BEB43849FC3?execution=e1s1">
+         Carnegie Mellon University
+        </option>
+        <option class="illiadYES" value="https://carroll.illiad.oclc.org/illiad/logon.html">
+         Carroll College
+        </option>
+        <option class="illiadYES" value="https://carthage.illiad.oclc.org/illiad/">
+         Carthage College
+        </option>
+        <option class="illiadYES" value="http://cwru.hosts.atlas-sys.com/ILLiad/ILL/logon.html">
+         Case Western Reserve University
+        </option>
+        <option class="illiadNO" value="https://idp-prod.cc.ucf.edu/idp/Authn/UserPassword">
+         University of Central Florida
+        </option>
+        <option class="illiadNO" value="http://library.csu.edu/ill/bookloanrequest.php">
+         Chicago State University
+        </option>
+        <option class="illiadYES" value="http://requests.lib.uchicago.edu/ill/lending/LendingLogon.html">
+         University of Chicago
+        </option>
+        <option class="illiadYES" value="http://illiad.uc.edu/illiad/">
+         University of Cincinnati
+        </option>
+        <option class="illiadNO" value="https://webauth.claremont.edu/cas/login?entityId=https://ccl.idm.oclc.org/shibboleth&amp;service=https://webauth.claremont.edu/idp/Authn/Cas">
+         The Claremont Colleges
+        </option>
+        <option class="illiadYES" value="https://colby.idm.oclc.org/login?url=https://colby.illiad.oclc.org/illiad/illiad.dll">
+         Colby College
+        </option>
+        <option class="illiadYES" value="https://colgate.illiad.oclc.org/illiad/logon.html">
+         Colgate University
+        </option>
+        <option class="illiadYES" value="https://csi.illiad.oclc.org/illiad/logon.html">
+         College of Staten Island - CUNY
+        </option>
+        <option class="illiadYES" value="https://coloradocollege.illiad.oclc.org/illiad/logon.html">
+         Colorado College
+        </option>
+        <option class="illiadYES" value="https://colorado.idm.oclc.org/login?url=https://colorado.illiad.oclc.org/illiad/COD/illiad.dll">
+         University of Colorado
+        </option>
+        <option class="illiadYES" value="https://colum.illiad.oclc.org/illiad/logon.html">
+         Columbia College Chicago
+        </option>
+        <option class="illiadYES" value="https://columbia.illiad.oclc.org/illiad/zcu/Lending/LendingLogon.html">
+         Columbia University
+        </option>
+        <option class="illiadNO" value="https://library.concordia.ca/find/interlibrary-loans/?guid=request">
+         Concordia University
+        </option>
+        <option class="illiadYES" value="https://uconn.illiad.oclc.org/illiad/logon.html">
+         University of Connecticut
+        </option>
+        <option class="illiadYES" value="http://cornell.hosts.atlas-sys.com/nonetid/logon.html">
+         Cornell University
+        </option>
+        <option class="illiadYES" value="https://dartmouth.illiad.oclc.org/illiad/berry/logon.html">
+         Dartmouth College
+        </option>
+        <option class="illiadYES" value="https://udayton.illiad.oclc.org/illiad/logon.html#illiad">
+         University of Dayton
+        </option>
+        <option class="illiadYES" value="https://udel.illiad.oclc.org/illiad/lending/lendinglogon.html">
+         University of Delaware
+        </option>
+        <option class="illiadYES" value="https://lib-europa.cair.du.edu/illiad/DVP/illiad.dll">
+         University of Denver
+        </option>
+        <option class="illiadYES" value="https://depaullib.illiad.oclc.org/illiad/logon.html">
+         DePaul University
+        </option>
+        <option class="illiadNO" value="https://shib.oit.duke.edu/idp/authn/external?conversation=e1s1">
+         Duke University
+        </option>
+        <option class="illiadYES" value="https://illiad.library.emory.edu/illiad/illiad.dll">
+         Emory University
+        </option>
+        <option class="illiadYES" value="https://fau.illiad.oclc.org/illiad/Logon.html">
+         Florida Atlantic University
+        </option>
+        <option class="illiadYES" value="https://fiu.illiad.oclc.org/illiad/logon.html">
+         Florida International University
+        </option>
+        <option class="illiadYES" value="https://fsu.illiad.oclc.org/illiad/TECSRV/logon.html">
+         Florida State University
+        </option>
+        <option class="illiadYES" value="https://uflib.illiad.oclc.org/illiad/FUG/logon.html">
+         University of Florida
+        </option>
+        <option class="illiadYES" value="https://furman.illiad.oclc.org/illiad/logon.html">
+         Furman University
+        </option>
+        <option class="illiadYES" value="https://gmu.illiad.oclc.org/illiad/VGM/logon.html">
+         George Mason University
+        </option>
+        <option class="illiadYES" value="https://webill.lib.georgiasouthern.edu/illiad/illiad.dll?Action=99">
+         Georgia Southern University
+        </option>
+        <option class="illiadYES" value="https://gsu.illiad.oclc.org/illiad/gsu/logon.html">
+         Georgia State University
+        </option>
+        <option class="illiadYES" value="https://illiad.libs.uga.edu/illiad/Logon.html">
+         University of Georgia
+        </option>
+        <option class="illiadYES" value="https://gc-cuny.illiad.oclc.org/illiad/logon.html">
+         Graduate Center - CUNY
+        </option>
+        <option class="illiadYES" value="https://grinnell.illiad.oclc.org/illiad/">
+         Grinnell College
+        </option>
+        <option class="illiadYES" value="https://hamilton.illiad.oclc.org/illiad/logon.html">
+         Hamilton College
+        </option>
+        <option class="illiadYES" value="https://login.proxy2.hampshire.edu/login?url=https://hampshire.illiad.oclc.org/illiad/illiad.dll">
+         Hampshire College
+        </option>
+        <option class="illiadYES" value="https://illiad.hul.harvard.edu/illbasicauth/HLS/lending/lendinglogon.html">
+         Harvard University
+        </option>
+        <option class="illiadYES" value="http://lund.highpoint.edu/illiad/">
+         High Point University
+        </option>
+        <option class="illiadYES" value="https://hku.illiad.oclc.org/illiad/HUA/Lending/lendinglogon.html">
+         University of Hong Kong
+        </option>
+        <option class="illiadNO" value="http://www.hope.edu/library/help-services/">
+         Hope College
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.uh.edu/illiad/logon.html">
+         University of Houston
+        </option>
+        <option class="illiadNO" value="https://my.ico.edu/library/services">
+         Illinois College of Optometry
+        </option>
+        <option class="illiadYES" value="https://iit.illiad.oclc.org/illiad/logon.html">
+         Illinois Institute of Technology
+        </option>
+        <option class="illiadYES" value="https://illiad.iwu.edu/illiad/logon.html">
+         Illinois Wesleyan University
+        </option>
+        <option class="illiadYES" value="https://uic.illiad.oclc.org/illiad/IAY/logon.html">
+         University of Illinois at Chicago
+        </option>
+        <option class="illiadYES" value="https://loanshark.library.illinois.edu/illiad/lending/lendinglogon.html">
+         University of Illinois at Urbana-Champaign
+        </option>
+        <option class="illiadYES" value="https://ill.ulib.iupui.edu/ILLiad/IUM/logon.html">
+         Indiana University
+        </option>
+        <option class="illiadYES" value="http://www.lib.iastate.edu/info/6961">
+         Iowa State University
+        </option>
+        <option class="illiadYES" value="https://login.proxy.lib.uiowa.edu/login?url=https://uiowa.illiad.oclc.org/illiad/illiad.dll">
+         University of Iowa
+        </option>
+        <option class="illiadNO" value="https://www.monticello.org/site/research-and-collections/interlibrary-loan-request-form">
+         Jefferson Library, Thomas Jefferson Foundation
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.ku.edu/ILLiad/KKU/">
+         University of Kansas
+        </option>
+        <option class="illiadYES" value="https://er.lib.k-state.edu/login?url=https://ksu.illiad.oclc.org/illiad/illiad.dll">
+         Kansas State University
+        </option>
+        <option class="illiadYES" value="https://kennesaw.illiad.oclc.org/illiad/logon.html">
+         Kennesaw State University
+        </option>
+        <option class="illiadYES" value="https://kent.illiad.oclc.org/illiad/logon.html">
+         Kent State University
+        </option>
+        <option class="illiadYES" value="https://lib.uky.edu/wtyill/">
+         University of Kentucky
+        </option>
+        <option class="illiadYES" value="https://kenyon.illiad.oclc.org/illiad/logon.html">
+         Kenyon College
+        </option>
+        <option class="illiadYES" value="https://knox.illiad.oclc.org/illiad/logon.html">
+         Knox College
+        </option>
+        <option class="illiadYES" value="http://ezproxy.lafayette.edu/login?url=https://lafayette.illiad.oclc.org/illiad/illiad.dll">
+         Lafayette College
+        </option>
+        <option class="illiadNO" value="https://lakeforest.illiad.oclc.org/illiad/logon.html">
+         Lake Forest College
+        </option>
+        <option class="illiadNO" value="https://racer1.scholarsportal.info/en/zportal/zengine?VDXaction=LoginPage">
+         Lakehead University
+        </option>
+        <option class="illiadNO" value="https://1941.account.worldcat.org/profile/">
+         Le Moyne College
+        </option>
+        <option class="illiadNO" value="https://login.uleth.ca/cas/login?service=https://darius.uleth.ca/illb~S1/">
+         University of Lethbridge
+        </option>
+        <option class="illiadYES" value="https://www.liberty.edu/library/interlibrary-loan-account/">
+         Liberty University
+        </option>
+        <option class="illiadYES" value="https://illiad.luc.edu/illiad/IAL/logon.html">
+         Loyola University of Chicago
+        </option>
+        <option class="illiadYES" value="https://illiad.luther.edu/illiad/">
+         Luther College
+        </option>
+        <option class="illiadYES" value="https://macalester.illiad.oclc.org/illiad/logon.html">
+         Macalester College
+        </option>
+        <option class="illiadNO" value="https://umanitoba.ca/libraries/units/docdel/patron_request_form.ssl.php">
+         University of Manitoba
+        </option>
+        <option class="illiadYES" value="http://libguides.marquette.edu/ill">
+         Marquette University
+        </option>
+        <option class="illiadNO" value="https://login.umd.edu/cas/login?service=https%3A%2F%2Fshib.idm.umd.edu%2Fshibboleth-idp%2FAuthn%2FRemoteUser%3Fconversation%3De1s1">
+         University of Maryland, College Park
+        </option>
+        <option class="illiadYES" value="https://illiad.library.umass.edu/illiad/AMH/">
+         University of Massachusetts Amherst
+        </option>
+        <option class="illiadYES" value="https://umb.illiad.oclc.org/illiad/logon.html">
+         University of Massachusetts-Boston
+        </option>
+        <option class="illiadNO" value="https://login.ezproxy.mpib-berlin.mpg.de/login?url=http://intra.mpib-berlin.mpg.de/en/i/service-departments/library">
+         Max Planck Institute for Human Development
+        </option>
+        <option class="illiadNO" value="https://shibboleth.mcgill.ca/idp/profile/SAML2/POST/SSO;jsessionid=3B48112176F8ACD224241ABA7A146E38?execution=e1s2">
+         McGill University
+        </option>
+        <option class="illiadYES" value="https://ill.lib.miamioh.edu/illiad/logon.html">
+         Miami University of Ohio
+        </option>
+        <option class="illiadYES" value="https://caneid.miami.edu/cas/login?service=https://triton.library.miami.edu/illiad/illiad.dll">
+         University of Miami
+        </option>
+        <option class="illiadYES" value="http://interlib.lib.msu.edu/lending/lendinglogon.html">
+         Michigan State University
+        </option>
+        <option class="illiadYES" value="https://weblogin.umich.edu/?cosign-ill.lib.umich.edu&amp;https://ill.lib.umich.edu/illiad/lending/lending.asp">
+         University of Michigan
+        </option>
+        <option class="illiadYES" value="https://ill.middlebury.edu/illiad/mdy/logon.html">
+         Middlebury College
+        </option>
+        <option class="illiadYES" value="https://login.millikin.edu/cas/login?service=https%3A%2F%2Fmy.millikin.edu%2Fmuportal%2Fsecure%2Fsso%2Fproxy%2FilliadLogin.jsp">
+         Millikin University
+        </option>
+        <option class="illiadYES" value="http://www.d.umn.edu/lib/ill/">
+         University of Minnesota-Twin Cities
+        </option>
+        <option class="illiadYES" value="https://illiad.library.msstate.edu/illiad/">
+         Mississippi State University
+        </option>
+        <option class="illiadNO" value="https://ill.mul.missouri.edu/">
+         University of Missouri-Columbia
+        </option>
+        <option class="illiadYES" value="https://monm.illiad.oclc.org/illiad/logon.html">
+         Monmouth College
+        </option>
+        <option class="illiadYES" value="https://proxy.mtholyoke.edu:2443/login?url=https://mtholyoke.illiad.oclc.org/illiad/illiad.dll">
+         Mount Holyoke College
+        </option>
+        <option class="illiadNO" value="http://www.nalandauniv.edu.in/library/">
+         Nalanda University
+        </option>
+        <option class="illiadNO" value="https://request.nal.usda.gov/access/loginp.jsp">
+         National Agricultural Library
+        </option>
+        <option class="illiadNO" value="http://nationalhumanitiescenter.org/library-guide/">
+         National Humanities Center
+        </option>
+        <option class="illiadYES" value="https://unl.illiad.oclc.org/illiad/Lending/LendingLogon.html">
+         University of Nebraska - Lincoln
+        </option>
+        <option class="illiadYES" value="https://usf.hosts.atlas-sys.com/nonauth/logon.html">
+         The New College of Florida
+        </option>
+        <option class="illiadYES" value="https://illiad.unm.edu/illiad/ill/">
+         University of New Mexico
+        </option>
+        <option class="illiadYES" value="https://nypl.illiad.oclc.org/illiad/NYP/logon.html">
+         New York Public Library
+        </option>
+        <option class="illiadNO" value="http://library.nyu.edu/services/borrowing/from-non-nyu-libraries/interlibrary-loan/">
+         New York University
+        </option>
+        <option class="illiadNO" value="https://www.newberry.org/interlibrary-loan">
+         The Newberry Library
+        </option>
+        <option class="illiadNO" value="https://www.lib.ncsu.edu/tripsaver">
+         North Carolina State University
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.unc.edu/NOH/">
+         University of North Carolina at Chapel Hill
+        </option>
+        <option class="illiadNO" value="https://libids1.uncg.edu/illiad/">
+         University of North Carolina at Greensboro
+        </option>
+        <option class="illiadYES" value="https://ndsu.illiad.oclc.org/illiad/logon.html">
+         North Dakota State University
+        </option>
+        <option class="illiadYES" value="https://unf.illiad.oclc.org/illiad/logon.html">
+         University of North Florida
+        </option>
+        <option class="illiadYES" value="https://unt.illiad.oclc.org/illiad/logon.html">
+         University of North Texas
+        </option>
+        <option class="illiadYES" value="https://ill.lib.neu.edu/illiad/snell/">
+         Northeastern University
+        </option>
+        <option class="illiadYES" value="https://niu.illiad.oclc.org/illiad/JNA/logon.html">
+         Northern Illinois University
+        </option>
+        <option class="illiadNO" value="http://www.library.northwestern.edu/find-borrow-request/requests-interlibrary-loan/requesting-unavailable-items.html">
+         Northwestern University
+        </option>
+        <option class="illiadYES" value="https://norwich.illiad.oclc.org/illiad/logon.html">
+         Norwich University
+        </option>
+        <option class="illiadYES" value="https://nd.illiad.oclc.org/illiad/IND/illiad.dll">
+         University of Notre Dame
+        </option>
+        <option class="illiadYES" value="https://login.ezproxy.oberlin.edu/login?qurl=http%3ahttp%3a%2f%2filliad.oberlin.edu%2filliad%2flogon.html">
+         Oberlin College
+        </option>
+        <option class="illiadYES" value="https://oxy.idm.oclc.org/login?url=https://oxy.illiad.oclc.org/illiad/illiad.dll?Action=10&amp;Form=21">
+         Occidental College
+        </option>
+        <option class="illiadYES" value="https://library.osu.edu/find/borrowing-and-lending/interlibrary-services/borrowing-from-non-osu-collections/">
+         Ohio State University
+        </option>
+        <option class="illiadYES" value="https://ohio.hosts.atlas-sys.com/illiad/">
+         Ohio University
+        </option>
+        <option class="illiadYES" value="https://illiad-s.library.okstate.edu/illiad/logon.html">
+         Oklahoma State University
+        </option>
+        <option class="illiadYES" value="https://libraries.ou.edu/illiad_login">
+         University of Oklahoma
+        </option>
+        <option class="illiadNO" value="http://library.olivet.edu/forms/interlibrary-loan-request/index.php">
+         Olivet Nazarene University
+        </option>
+        <option class="illiadNO" value="http://osulibrary.oregonstate.edu/ill">
+         Oregon State University
+        </option>
+        <option class="illiadYES" value="https://illiad.uoregon.edu/illiad/oru/logon.html">
+         University of Oregon
+        </option>
+        <option class="illiadNO" value="https://racer1.scholarsportal.info/en/zportal/zengine?VDXaction=LoginPage">
+         University of Ottawa
+        </option>
+        <option class="illiadYES" value="https://libraries.psu.edu/services/interlibrary-loan">
+         Pennsylvania State University
+        </option>
+        <option class="illiadNO" value="https://weblogin.pennkey.upenn.edu/login?factors=UPENN.EDU&amp;cosign-library-accountsvcs-0&amp;https://dla.library.upenn.edu/ils/resourcesharing/">
+         University of Pennsylvania
+        </option>
+        <option class="illiadYES" value="https://pepperdine.illiad.oclc.org/illiad/PAY/logon.html">
+         Pepperdine University
+        </option>
+        <option class="illiadYES" value="https://pitt.idm.oclc.org/login?url=https://pitt.illiad.oclc.org/illiad/illiad.dll">
+         University of Pittsburgh
+        </option>
+        <option class="illiadNO" value="https://library.ptsem.edu/interlibrary-loan-request">
+         Princeton Theological Seminary
+        </option>
+        <option class="illiadNO" value="https://library.princeton.edu/services/interlibrary-services">
+         Princeton University
+        </option>
+        <option class="illiadYES" value="https://login.ezproxy.lib.purdue.edu/login?qurl=https%3a%2f%2fpurdue.illiad.oclc.org%2filliad%2filliad.dll">
+         Purdue University
+        </option>
+        <option class="illiadYES" value="http://qc.illiad.oclc.org/illiad/logon.html">
+         Queens University
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.rochester.edu/min/">
+         University of Rochester
+        </option>
+        <option class="illiadYES" value="https://rollins.illiad.oclc.org/illiad/logon.html">
+         Rollins College
+        </option>
+        <option class="illiadNO" value="http://law-new.rutgers.edu/screens/ill.html">
+         Rutgers, The State University of New Jersey
+        </option>
+        <option class="illiadYES" value="https://illiad.stlawu.edu/illiad/">
+         Saint Lawrence University
+        </option>
+        <option class="illiadYES" value="https://stolaf.illiad.oclc.org/illiad/logon.html">
+         Saint Olaf College
+        </option>
+        <option class="illiadYES" value="https://sandiego.illiad.oclc.org/illiad/copley/illiad.dll?Action=99">
+         University of San Diego
+        </option>
+        <option class="illiadYES" value="https://usfca.illiad.oclc.org/illiad/logon.html">
+         University of San Francisco
+        </option>
+        <option class="illiadNO" value="https://usask.vdxhost.com/zportal/zengine?VDXaction=LoginPage">
+         University of Saskatchewan
+        </option>
+        <option class="illiadNO" value="http://saisill.jhu.edu/">
+         Paul H Nitze School of Advanced International Studies at Johns Hopkins University
+        </option>
+        <option class="illiadNO" value="http://www.lib.sfu.ca/borrow/request-materials/ill/request-form">
+         Simon Fraser University
+        </option>
+        <option class="illiadYES" value="https://smithcollege.illiad.oclc.org/illiad/logon.html">
+         Smith College
+        </option>
+        <option class="illiadYES" value="http://ill3.tcl.sc.edu/illiad/colum/logon.html">
+         University of South Carolina
+        </option>
+        <option class="illiadYES" value="https://webauth.usf.edu/login?service=https%3A%2F%2Fshibboleth.usf.edu%2Fidp%2FAuthn%2FExtCas%3Fconversation%3De1s2%26entityId%3Dhttps%3A%2F%2Fusf.hosts.atlas-sys.com%2Fshibboleth&amp;entityId=https%3A%2F%2Fusf.hosts.atlas-sys.com%2Fshibboleth">
+         University of South Florida
+        </option>
+        <option class="illiadYES" value="https://sewanee.illiad.oclc.org/illiad/logon.html">
+         University of the South
+        </option>
+        <option class="illiadYES" value="http://libproxy2.usc.edu/login?url=http://usc.illiad.oclc.org/illiad/illiad.dll">
+         University of Southern California
+        </option>
+        <option class="illiadYES" value="https://ill.libraries.smu.edu/logon.html">
+         Southern Methodist University
+        </option>
+        <option class="illiadYES" value="https://sul-illiad.stanford.edu/illiad/ST2/lending/lendinglogon.html">
+         Stanford University
+        </option>
+        <option class="illiadYES" value="https://sso.cc.stonybrook.edu/cas/login?service=https%3A%2F%2Fsso.cc.stonybrook.edu%2Fidp%2FAuthn%2FRemoteUser">
+         Stony Brook University
+        </option>
+        <option class="illiadYES" value="https://illiad.geneseo.edu/">
+         SUNY Geneseo
+        </option>
+        <option class="illiadYES" value="https://temple.illiad.oclc.org/illiad/paley/logon.html">
+         Temple University
+        </option>
+        <option class="illiadYES" value="https://www.lib.utk.edu/ils/">
+         University of Tennessee
+        </option>
+        <option class="illiadYES" value="http://getitforme.library.tamu.edu/MSLLocal/lending/LendingLogon.html">
+         Texas A &amp; M University
+        </option>
+        <option class="illiadYES" value="https://eraider.ttu.edu/signin.asp?redirect=http%3A%2F%2Frequest-it.lib.ttu.edu%2Filliad.dll">
+         Texas Tech University
+        </option>
+        <option class="illiadYES" value="https://login.ezproxy.lib.utexas.edu/login?qurl=https%3a%2f%2flib-pclcz020.austin.utexas.edu%2fIlliad%2fIXA%2filliad.dll">
+         University of Texas at Austin
+        </option>
+        <option class="illiadNO" value="https://sso.it.utsa.edu/idp/profile/SAML2/Redirect/SSO;jsessionid=196vxk5r3zvf21xrvhwkq8jn23?execution=e1s1">
+         University of Texas at San Antonio
+        </option>
+        <option class="illiadNO" value="https://onesearch.library.utoronto.ca/ill">
+         University of Toronto
+        </option>
+        <option class="illiadNO" value="https://www.trentu.ca/library/ill">
+         Trent University
+        </option>
+        <option class="illiadYES" value="http://illiad.trinity.edu/illiad/logon.html">
+         Trinity University
+        </option>
+        <option class="illiadYES" value="https://illiad.tulane.edu/">
+         Tulane University
+        </option>
+        <option class="illiadYES" value="https://union.illiad.oclc.org/illiad/logon.html">
+         Union College
+        </option>
+        <option class="illiadYES" value="https://usmalibrary.illiad.oclc.org/illiad/logon.html">
+         United States Military Academy
+        </option>
+        <option class="illiadYES" value="https://utah.illiad.oclc.org/illiad/logon.html">
+         University of Utah
+        </option>
+        <option class="illiadYES" value="https://valpo.illiad.oclc.org/illiad/IVU/logon.html">
+         Valparaiso University
+        </option>
+        <option class="illiadYES" value="https://illiad.library.vanderbilt.edu/illiad/ill/">
+         Vanderbilt University
+        </option>
+        <option class="illiadYES" value="https://vassar.illiad.oclc.org/illiad/logon.html">
+         Vassar College
+        </option>
+        <option class="illiadYES" value="https://webauth.uvm.edu/webauth/login?RT=WAfWjAz%2F4EpVHAmx79RG7S6UyHWFzQ7zBC%20XERfLSz3jbFCb2obRrcHgcxWChuVUd1ATsvQEnsP6AFjdO%2FVjy3qlfSvS3GznCefoTMxjy3tT0nD3OWLMDbMe9KUNou4NGXyIW%2F1Ee5Tt0LlHLN%20nPor4ehEglva6Ywf6n5YuA4sJWZbp%20KHAuMwE71BHqmVOu7Tp6hLsLD19MqPL2PnnYWseTud2ryHURehwsMKOl6K5o7KqfyZDhQ%20NHcHAEjn3qY3U3xy%20NBJbDzWSC9YnF2MuCxTzo5dLXCDuFvKURXdH9hCkNHdFI%2FQhRbqHBcsc%2F3urz1lP7J%20WKuGjngnYhbNTyrulfmPcRhqA2WZQ9BsZy%2FIy;ST=WATVn92EzHVq%209gBWB3bZmTQ5Fk7mj5BvUorssaRWrc%20IOTcZvr41xNvcp85A6j70ley4ZSFXBEwiffKoEz9ga0PpeamwGgf6OxDSkchI%2FJevY7%2Ff1E1e9G3t%20gd5GbwEo0%2FdDpuOifPz4FHRVdKWbcDwbKXipsLSQT21S2OFh%2063cpA;test_cookie=1">
+         University of Vermont
+        </option>
+        <option class="illiadNO" value="http://www.uvic.ca/library/use/borrow/illo/not_at_uvic.php">
+         University of Victoria
+        </option>
+        <option class="illiadYES" value="https://vcu.illiad.oclc.org/illiad/AtlasAuthPortal">
+         Virginia Commonwealth University
+        </option>
+        <option class="illiadYES" value="https://login.vt.edu/profile/SAML2/Redirect/SSO;jsessionid=16ugbtza26i381tj4we6exfuam?execution=e1s1">
+         Virginia Tech
+        </option>
+        <option class="illiadNO" value="http://www.library.virginia.edu/services/ils/ill/">
+         University of Virginia
+        </option>
+        <option class="illiadYES" value="https://illiad.wustl.edu/illiad/logon.html">
+         Washington University
+        </option>
+        <option class="illiadNO" value="http://www.lib.washington.edu/ill">
+         University of Washington
+        </option>
+        <option class="illiadYES" value="https://wayne.illiad.oclc.org/illiad/illiad.dll">
+         Wayne State University
+        </option>
+        <option class="illiadYES" value="https://uwf.illiad.oclc.org/illiad/ill_new.htm">
+         University of West Florida
+        </option>
+        <option class="illiadYES" value="https://illiad.lib.wvu.edu/">
+         West Virginia University
+        </option>
+        <option class="illiadYES" value="https://wmich.illiad.oclc.org/illiad/logon.html">
+         Western Michigan University
+        </option>
+        <option class="illiadYES" value="https://illiad.westernu.edu/illiad/logon.html">
+         Western University
+        </option>
+        <option class="illiadNO" value="https://library.wlu.ca/services/request-from-other-libraries">
+         Wilfrid Laurier University
+        </option>
+        <option class="illiadYES" value="https://illiad.swem.wm.edu/Illiad.dll">
+         College of William and Mary
+        </option>
+        <option class="illiadYES" value="https://williams.illiad.oclc.org/illiad/logon.html">
+         Williams College
+        </option>
+        <option class="illiadYES" value="https://madison.hosts.atlas-sys.com/illiad/logon.html">
+         University of Wisconsin-Madison
+        </option>
+        <option class="illiadYES" value="https://wooster.illiad.oclc.org/illiad/logon.html">
+         College of Wooster
+        </option>
+        <option class="illiadYES" value="https://ill.library.yale.edu/illlogin/default.aspx?service=https%3a%2f%2fill.library.yale.edu%2fILLiad%2flogin.ashx%3fReturnUrl%3d%2filliad%2filliad.dll">
+         Yale University
+        </option>
+        <option class="illiadYES" value="https://york-cuny.illiad.oclc.org/illiad/logon.html">
+         York University
+        </option>
+       </select>
+       <img alt="Open ILL form for the chosen CRL member" height="14" id="Illiad_arrow" src="/screens/images/crl/searchArrow.gif" style="vertical-align:top;" width="9"/>
+      </p>
+      <div class="boxfoot">
+       <a class="more" href="http://www.crl.edu/services/borrowing/" target="_blank">
+        All other methods »
+       </a>
+      </div>
+     </div>
+     <div class="block">
+      <h4>
+       Borrowing from CRL
+      </h4>
+      <p>
+       Scholars and researchers from CRL member institutions have free and unlimited use of the CRL collections through interlibrary loan.
+      </p>
+      <div class="boxfoot">
+       <a class="more" href="http://www.crl.edu/services/borrowing/" target="_blank">
+        Learn More »
+       </a>
+      </div>
+     </div>
+     <div class="block">
+      <!--2015-10-27 new section per VK-->
+      <h4>
+       Unsuccessful Search?
+      </h4>
+      <p>
+       If you are affiliated with one of our member institutions CRL may be able to acquire the material you are looking for through the
+       <a href="http://www.crl.edu/collections/cooperative-collection-building/demand-purchase-program" target="_blank">
+        Demand Purchase Program
+       </a>
+       .
+      </p>
+      <div class="boxfoot">
+       <a class="more" href="http://www.crl.edu/collections/cooperative-collection-building/demand-purchase-program" target="_blank">
+        Learn More »
+       </a>
+      </div>
+     </div>
+     <div class="block">
+      <h4>
+       Research Help
+      </h4>
+      <p>
+       <!-- 2015-10-27 new text per VK
+		  A Reference Consultation can help you identify material in our collection that is relevant to your field. You can get help from Mary Wilke, CRL's Member Liaison &amp; Outreach Services Director.-->
+       A Reference Consultation can help you identify material in our collection that is relevant to your research topic. You can get help from Mary Wilke, CRL's Member Liaison &amp; Outreach Services Director.
+      </p>
+      <div class="boxfoot">
+       <a class="more" href="http://www.crl.edu/services/reference/" target="_blank">
+        Learn More »
+       </a>
+      </div>
+     </div>
+    </div>
+    <div id="page">
+     <!-- main text and search results area -->
+     <!--end toplogo.html-->
+     <h3>
+      <span class="searchType">
+       Search
+      </span>
+     </h3>
+     <div class="searchBox">
+      <form id="searchTypeForm" method="get" name="searchTypeForm" style="display:inline;">
+       <select id="searchTypeSelect" name="searchTypeSelect" onchange="changeTarget(this);">
+        <option selected="" value="Y">
+         Keyword
+        </option>
+        <option value="t">
+         Title begins with
+        </option>
+        <option value="a">
+         Author
+        </option>
+        <option value="d">
+         Subject
+        </option>
+        <option value="q">
+         Author/Title
+        </option>
+        <option value="i">
+         ISBN/ISSN
+        </option>
+        <option value="o">
+         OCLC #
+        </option>
+        <option value="e">
+         LC Class. #
+        </option>
+        <option value="l">
+         LCCN/PL480 #
+        </option>
+       </select>
+       <input name="selectedType" type="hidden" value="Y"/>
+      </form>
+      <div id="search1" style="display:inline;">
+       <form action="/search/Y" class="unpadded" id="search" method="get" name="search" style="display:inline;">
+        <input name="SEARCH" size="20" type="text" value="">
+         <input name="searchscope" type="hidden" value="1"/>
+         <input alt="Go" height="23" src="/screens/images/crl/searchArrow.gif" style="vertical-align:top;" type="image" width="13"/>
+        </input>
+       </form>
+      </div>
+      <div id="search2" style="display:none; float:left; margin-left:10px; width:95%;">
+       <br/>
+       <form action="/search/q" class="unpadded" id="authorTitle" method="get" name="authorTitle">
+        <label for="author">
+         Author:
+        </label>
+        <input name="author" size="20" type="text" value="">
+         <br/>
+         <label for="title">
+          Title:
+         </label>
+         <input name="title" size="20" type="text" value="">
+          <input name="searchscope" type="hidden" value="1"/>
+          <input alt="Go" height="23" src="/screens/images/crl/searchArrow.gif" style="vertical-align:top;" type="image" width="13"/>
+         </input>
+        </input>
+       </form>
+      </div>
+      <!--AJE 2015-10-27 -->
+      <p>
+       <a href="/search~S1/X">
+        advanced search
+       </a>
+       <br/>
+       <a href="#" id="search_tips_collapser">
+        show search tips
+       </a>
+      </p>
+      <script>
+       $( document ).ready(function() {
+  $('#search_tips_collapser').click(function() {
+    search_tips_toggle(); // crlFunctions.js
+  }); // end click
+});  // end doc
+      </script>
+      <!--END AJE 2015-10-27 -->
+     </div>
+    </div>
+    <!--end div page-->
+    <div id="pageBottom">
+     <div id="searchTips">
+      <a name="searchTips">
+      </a>
+      <h3>
+       Search Tips
+      </h3>
+      <dl>
+       <dt>
+        Adjacency
+       </dt>
+       <dd>
+        Multiple words are searched together as one phrase.
+        <br/>
+        <em>
+         Example:
+        </em>
+        world health organization
+       </dd>
+       <dt>
+        Wildcards
+       </dt>
+       <dd>
+        Words may be right-hand truncated using an asterisk. '*' for 1-5 characters, '**' for open-ended truncation, '?' to replace a single character anywhere within a word.
+        <br/>
+        <em>
+         Examples:
+        </em>
+        environment* polic*, comput**, wom?n
+       </dd>
+       <dt>
+        Boolean Operators
+       </dt>
+       <dd>
+        Use "and" or "or" to specify multiple words in any field, any order. Use "and not" to exclude words.
+        <br/>
+        <em>
+         Example:
+        </em>
+        stocks and bonds
+        <br/>
+        <em>
+         Example:
+        </em>
+        (alaska or canada) and (adventure and not vacation)
+       </dd>
+       <dt>
+        Proximity Operators
+       </dt>
+       <dd>
+        Use "near" to specify words close to each other, in any order.
+        <br/>
+        <em>
+         Example:
+        </em>
+        california near university
+       </dd>
+       <dt>
+        Field limits
+       </dt>
+       <dd>
+        A field limit causes the system to search only the specified field for the specified word(s).
+       </dd>
+       <dt>
+        Grouping
+       </dt>
+       <dd>
+        Keyword search results are usually grouped by relevance to bring the most likely titles to the top of the list. Each group represents a similar level of relevance and results are sorted within the group by date or title. To get an ungrouped result set, use boolean operators to form a complex query.
+       </dd>
+      </dl>
+     </div>
+     <div id="focus">
+      <img alt="FOCUS Newsletter" src="/screens/focus.gif">
+       <p>
+        <!--
+  # 2015-10-27 text revised per VK
+  The FOCUS newsletter highlights CRL's collection as well as preservation and digitization initiatives.-->
+        FOCUS, CRL's periodic publication, examines the challenges of preservation and access for primary source materials in various fields.
+       </p>
+       <p>
+        <!--2015-10-27 new-->
+        The annual spring issue of FOCUS is dedicated to announcing the projects cited in CRL's Primary Source Awards.
+       </p>
+       <b>
+        Recent Issues
+       </b>
+       <ul>
+        <li>
+         <a href="http://www.crl.edu/focus/winter-2013" target="_blank">
+          International Studies and Research Libraries
+         </a>
+        </li>
+        <li>
+         <a href="http://www.crl.edu/focus/fall-2012" target="_blank">
+          Civil Society: Legal and Governmental Resources
+         </a>
+        </li>
+        <li>
+         <a href="http://www.crl.edu/focus/summer-2012" target="_blank">
+          Resources in Agriculture
+         </a>
+        </li>
+        <!--
+2015-10-27 new links per VK
+<li><a href="http://www.crl.edu/focus/summer-2010" target="_blank">Resources on Africa</a></li>
+<li><a href="http://www.crl.edu/focus/spring-2010" target="_blank">2010 Primary Source Awards</a></li>
+<li><a href="http://www.crl.edu/focus/winter-2009-10" target="_blank">South and Southeast Asian Resources</a></li>
+-->
+       </ul>
+       <div class="boxfoot">
+        <a class="more" href="http://www.crl.edu/focus" target="_blank">
+         FOCUS Home  »
+        </a>
+       </div>
+      </img>
+     </div>
+     <div id="ecollections">
+      <a href="http://catalog.crl.edu/record=b1262191~S5" target="_blank" title="Soap Lake siphon in the Columbia Basin irrigation system in Washington State, taken near the end of the 2.44 mile-long concrete bore, c. 1942. Boasting an inside diameter of 25 feet, the siphon carries the entire flow of the West Canal from the east side of the Grand Coulee around the northern end of Soap Lake to the west side of the Grand Coulee. University of Washington Libraries, Special Collections, UW 8237.">
+       <img border="0" height="111" src="/screens/images/crl/water.png" width="184"/>
+      </a>
+      <h4>
+       Digital Collections
+      </h4>
+      <p>
+       <!--
+2015-10-27 new text provided by VK
+In addition to the electronic titles available via the e-Resources catalog search, you can explore CRL's <a href="http://www.crl.edu/collections/digital/" target="_blank">digital collections</a>.
+-->
+       In addition to finding e-resource materials via the Digital tab in a catalog search, you can browse selected CRL
+       <a href="http://www.crl.edu/collections/digital/" target="_blank">
+        digital collections
+       </a>
+       .
+      </p>
+     </div>
+     <div id="topicguides">
+      <h4>
+       topic guides
+      </h4>
+      <!--
+2015-10-27 new text provided by VK
+<p>CRLâs Topic Guides are a starting point for your research. They contain:</p>
+<ul>
+<li>Introductory text</li>
+<li>Images</li>
+<li>Sample subject searches</li>
+<li>Select bibliographic  records</li>
+</ul>
+-->
+      <p>
+       CRL's Topic Guides are a valuable starting point for your research. They contain:
+      </p>
+      <ul>
+       <li>
+        Bibliographic citations for selected resources
+       </li>
+       <li>
+        Sample subject searches
+       </li>
+       <li>
+        Links to related resources, such as CRL collections webinars
+       </li>
+       <li>
+        Introductory comments on trends in collecting in various subject areas
+       </li>
+      </ul>
+      <div class="boxfoot">
+       <a class="more" href="http://www.crl.edu/collections/topics/" target="_blank">
+        Topic Guides  »
+       </a>
+      </div>
+     </div>
+     <div style="clear:both">
+     </div>
+     <script type="text/javascript">
+      hideScopeSelect(); //in crlFunctions.js: prevent scope list with all its DLIR options
+
+	/*
+		AJE 7/18/2011
+		Long strings of search terms --> Search History select box expands into sidebar.
+			That <select> has no id, is generated by token searchhistory.
+	*/
+	$("#page").find("select").each(function(i){
+		if (i == 0) { $(this).width(500); }
+   });
+     </script>
+    </div>
+    <!-- end Page div; main text and search results area -->
+   </div>
+   <!-- end Content div; white boxed area of page, contains main content, language handlers and sidebar -->
+  </div>
+  <!-- end Container div; sets page width etc. -->
+  <div id="footer">
+   <div id="footer_bar">
+   </div>
+   <div id="footer_container">
+    <div id="footer_title">
+     <a href="http://www.crl.edu" target="_blank">
+      Center for Research Libraries
+     </a>
+    </div>
+    <div id="subfooter">
+     <ul id="metanav">
+      <li>
+       <a href="http://www.crl.edu/about/staff-directory/" target="_blank">
+        Staff Directory
+       </a>
+      </li>
+      <li>
+       <a href="http://www.crl.edu/feedback?location=node/11&amp;title=Membership" target="_blank">
+        Feedback
+       </a>
+      </li>
+     </ul>
+     <div id="address">
+      <div>
+       6050 S. Kenwood Avenue
+       <br/>
+       Chicago, IL 60637-2804 USA
+      </div>
+      <div>
+       Phone:  (800) 621-6044
+       <em>
+        or
+       </em>
+       (773) 955-4545
+       <br/>
+       Fax:  (773) 955-4339
+      </div>
+     </div>
+     <div id="footer_nav">
+      <ul class="left">
+       <li>
+        <a href="http://www.crl.edu/about/" target="_blank">
+         About CRL
+        </a>
+       </li>
+       <li>
+        <a href="http://www.crl.edu/membership/">
+         Membership
+        </a>
+       </li>
+       <li>
+        <a href="http://www.crl.edu/collaborations" target="_blank">
+         Collaborations
+        </a>
+       </li>
+      </ul>
+      <ul class="right">
+       <li>
+        <a href="http://www.crl.edu/collections/" target="_blank">
+         Collections
+        </a>
+       </li>
+       <li>
+        <a href="http://www.crl.edu/services/" target="_blank">
+         Services
+        </a>
+       </li>
+       <li>
+        <a href="http://www.crl.edu/archiving-preservation/" target="_blank">
+         Archiving &amp; Preservation
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div style="clear:both;">
+     </div>
+    </div>
+   </div>
+  </div>
+  <!--AJE 2017-04-03 -->
+  <script>
+   $( document ).ready(function() { // reduce the size of labels for fields in advanced search
+  $("[name^='fieldLimit']").css("width", "100px");
+});
+  </script>
+  <!--end AJE 2017-04-03 -->
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   var pageTracker = _gat._getTracker("UA-497327-6");
+	pageTracker._trackPageview();
+  </script>
+  <span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; visibility: visible; font-size: 85%; text-align: center; display: block; ">
+   WebPAC PRO © Innovative Interfaces, Inc.
+  </span>
+ </body>
+</html>
+<!--this is customized <screens/mainmenu.html>-->
+

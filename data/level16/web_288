@@ -1,0 +1,1710 @@
+https://osp.msu.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head id="ctl00_Head1">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   MSU Office of Sponsored Programs/Contract and Grant Administration
+  </title>
+  <meta content="0" http-equiv="Expires"/>
+  <meta content="no-cache" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="text/html" http-equiv="Content-Type"/>
+  <meta content="Michigan State University:  Advancing Knowledge. Transforming Lives. MSU's teaching and research serve Michigan, the nation, and the world.  Est. 1855." name="description"/>
+  <meta content="michigan state, michigan state home page, Michigan State, university, msu, spartans, msu home page, university, college" name="keywords"/>
+  <link href="//cloud.typography.com/7054272/642706/css/fonts.css" rel="stylesheet"/>
+  <link href="/UI/css/bootstrap-sass/_bootstrap.css?v=2.6" rel="Stylesheet"/>
+  <link href="/UI/images/favicon.ico?v=2" rel="shortcut icon" type="image/x-icon"/>
+  <script src="/UI/javascript/jquery_min_v.2.2.4.js" type="text/javascript">
+  </script>
+  <script src="/UI/javascript/bootstrap_javascript/bootstrap.min.js">
+  </script>
+  <script src="/UI/javascript/moment_min_v2.11.2.js">
+  </script>
+  <script src="/UI/javascript/bootstrap_javascript/bootstrap-datetimepicker.js">
+  </script>
+  <script src="/UI/javascript/typeahead.jquery.js">
+  </script>
+  <script src="/ckeditor/ckeditor.js">
+  </script>
+  <script src="/UI/javascript/jquery.tablesorter.js" type="text/javascript">
+  </script>
+  <script src="/UI/javascript/plupload/plupload_2.2.1/plupload.full.min.js" type="text/javascript">
+  </script>
+  <script src="/UI/javascript/respond_min.js">
+  </script>
+  <script src="/UI/javascript/custom.jquery.js" type="text/javascript">
+  </script>
+  <script src="/UI/javascript/rwdImageMaps.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /*Enables PDF converter tool to capture show/hide webpage content, JLH 10/10/16*/
+        var hashTags = new Array();
+        window.onhashchange = function () {
+            if (window.location.hash == "#expanded") {
+                $(".hdPdfHashTag").val(location.hash);
+                $("#aspnetForm [data-toggle=collapse]").addClass("expandSelected");
+                $(".expandSelected").each(function () {
+                    hashTag = $(this).attr('href');
+                    hashTags.push(hashTag);
+                });
+            }
+            else if (window.location.hash == "#collapsed") {
+                $("#aspnetForm [data-toggle=collapse]").removeClass("expandSelected");
+                $(".hdPdfHashTag").val("");
+            }
+            else {
+                $(".hdPdfHashTag").val(location.hash);
+            }
+        };
+        $(document).ready(function () {
+            var openAll = window.location.hash.substr(0);
+            if (openAll == "#expanded") {
+                $("#aspnetForm .collapse").collapse("show");
+            }
+            else {
+                var selected = $(".hdPdfHashTag").val();
+                $(selected).collapse("show");
+            }
+
+            //Enables skip ahead links
+            $("#skip_box").focusin(function () {
+                $(this).css({ "position": "absolute", "left": "0px" });
+            });
+            $("#skip_box").focusout(function () {
+                $(this).css({ "position": "absolute", "left": "-10000px" });
+            });
+
+            $(".dateTimePicker").datetimepicker({
+                format: 'L',
+                widgetPositioning: {
+                    vertical: 'bottom'
+                },
+                allowInputToggle: true,
+                useCurrent: false
+                //debug:true
+            });
+            $(".dateTimePicker").parent().addClass("layer-order");
+        });
+
+        function menuHighlighting() {
+            $(".topMenuItem").click(function () {
+                if ($("#navMain").hasClass("mobile-closed")) {
+                    var path = $(this).attr("href");
+                    var begFile = path.lastIndexOf("/");
+                    var fileName = path.slice(begFile + 1);
+                    if (fileName == "Forms.aspx" || fileName == "forms.aspx" || fileName == "OfficeStaff.aspx") {
+                        $(this).closest("div").css("background-color", "#18453b");
+                    }
+                    else if (fileName == "Default.aspx" || fileName == "default.aspx") {
+                        $(this).css("background-color", "#18453b");
+                    }
+                    else if (fileName == "Funding.aspx" || fileName == "funding.aspx") {
+                        $(this).closest("div").addClass("selectedHighlightRight");
+                    }
+                    else if (fileName == "AwardCloseout.aspx") {
+                        $(this).closest("div").addClass("selectedHighlightLeft");
+                    } else {
+                        $(this).closest("div").addClass("selectedHighlight");
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            $(window).resize(function () {
+                menuHighlighting();
+            });
+        });
+        /*
+        $("#slide").animate({width:'toggle'},350);
+        $("div").show().animate({
+        left: '250px',
+        height: '+=150px',
+        width: '+=150px'
+        });
+        */
+        function toggleMobileMenu() {
+            if ($("#navMain").hasClass("mobile-open")) {
+                $("#navMain").removeClass("mobile-open");
+            }
+            else if (window.innerWidth <= 991) {
+                $("#navMain").addClass("mobile-open");
+                $("#navMain").removeClass("mobile-closed");
+//                $("#navMain").show().animate({ width: '640px' });
+            }
+        }
+        function resetMobileNavigation() {
+            if (window.innerWidth > 991) {
+                toggleMobileMenu();
+                $(".dropdown").removeClass("open");
+                $("#navMain").addClass("mobile-closed");
+
+            }
+            else {
+                $("#navMain").removeClass("mobile-closed");
+            }
+        }
+        $(document).ready(resetMobileNavigation);
+        $(window).resize(resetMobileNavigation);
+
+        function addLocation() {
+            location.href = this.href;
+        }
+
+        $(document).ready(function () {
+            $(window).resize(function () {
+                if (window.innerWidth > 991) {
+                    $('.navbar .dropdown').on('mouseenter', function () {
+                        $(this).find('.dropdown-menu').first().stop(true, true).delay(50).slideDown();
+
+                    }).on('mouseleave', function () {
+                        $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp();
+
+                    });
+
+                    $('.navbar .dropdown > a').on("click", addLocation);
+                }
+                else {
+                    $('.navbar .dropdown').off('mouseenter mouseleave');
+                    $('.navbar .dropdown > a').off("click", addLocation);
+                    $('.dropdown-menu').css("display", "");
+
+                }
+            }).resize();
+        });
+
+
+        $(document).ready(function changeFormatting() {
+            var path = $(location).attr("pathname");
+            if (path == "/" || path == "/Default.aspx" || path == "/default.aspx") {
+                $(".mainPanel").removeClass("mainContentPanel");
+                $("#pdfLink").css("display", "none");
+            }
+            else if (path == "/pl/logout.aspx" || path == "/PL/logout.aspx") {
+                $("#pdfLink").css("display", "none");
+            }
+            else {
+                $(".mainPanel").addClass("mainContentPanel");
+                $("#pdfLink").css("display", "block");
+                $("#smScreen-help").css("display", "none");
+            }
+        });
+        $(document).ready(function assignSubmenuHighlight() {
+            var path = location.pathname;
+            var queryString = location.search;
+            // console.log(queryString);
+            var path_wString = path + queryString;
+            //console.log(path_wString);
+            $(".left-box").find("li a").each(function () {
+                if ($(this).attr("href") == path_wString) {
+                    $(this).addClass("active-nav");
+                    $(this).closest("ul").addClass("in");
+                    $(this).closest("ul").prev().find("span").removeClass("glyphicon-plus");
+                    $(this).closest("ul").prev().find("span").addClass("glyphicon-minus");
+                    $(this).closest("ul").parentsUntil("div").not("li").not(".left-box").addClass("in");
+                    $(this).closest("ul").parentsUntil("div").not("li").not(".left-box").prev().find("span").removeClass("glyphicon-plus");
+                    $(this).closest("ul").parentsUntil("div").not("li").not(".left-box").prev().find("span").addClass("glyphicon-minus");
+
+                    $(this).closest("span").addClass("active-nav");
+                    $(this).closest("span").next("ul").addClass("in");
+                    $(this).next().children().removeClass("glyphicon-plus");
+                    $(this).next().children().addClass("glyphicon-minus active-glyph");
+                }
+            });
+
+            $(".left-box").find(".glyphicon").click(function () {
+                if ($(this).hasClass("glyphicon-plus")) {
+                    $(this).removeClass("glyphicon-plus");
+                    $(this).addClass("glyphicon-minus");
+                }
+                else if ($(this).hasClass("glyphicon-minus")) {
+                    $(this).addClass("glyphicon-plus");
+                    $(this).removeClass("glyphicon-minus");
+                }
+            });
+        });
+
+        // Google Analytics
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26150426-1']);
+        _gaq.push(['_setDomainName', 'msu.edu']); // prevent tracking on localhost
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+  </script>
+  <!--[if lt IE 9]>
+	<script type="text/javascript" src="/UI/javascript/html5shiv.min.js"></script>
+    <script type="text/javascript" src="/UI/javascript/html5shiv-printshiv.min.js"></script>
+<![endif]-->
+  <style>
+   .layer-order {
+		z-index:500;
+	}
+  </style>
+ </head>
+ <body>
+  <div id="skip_box">
+   <h3>
+    Skip to Content Options:
+   </h3>
+   <ul>
+    <li>
+     <a href="#sidebar">
+      Skip to Sidebar Navigation / Tools
+     </a>
+    </li>
+    <li>
+     <a href="#siteManagement">
+      Skip to Site Management Options
+     </a>
+    </li>
+    <li>
+     <a href="#aspnetForm">
+      Skip to Main Page Content
+     </a>
+    </li>
+   </ul>
+  </div>
+  <div id="lgScreen-help">
+   <div id="popup-help">
+    <div class="popup-wrapper">
+     <p>
+      Would you like some help?
+     </p>
+     <button aria-label="Close" class="close" id="popup-help-close" type="button">
+      <span aria-hidden="true">
+       X
+      </span>
+     </button>
+     <div id="popup-start-btn">
+      <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAA2ADIA">
+       START HERE
+      </a>
+     </div>
+     <div id="helpMsgDisableWrapper">
+      <input id="helpMsgDisableOpt" type="checkbox"/>
+      <p>
+       Select to disable message
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="background-overlay" style="display:none">
+  </div>
+  <header class="container">
+   <div class="row">
+    <div class="col-md-8">
+     <div id="MSUmasthead" role="banner">
+      <a href="http://www.msu.edu">
+       <img alt="Michigan State University masthead graphic" class="screen-msugraphic img-responsive" src="/UI/images/masthead-helmet-green.png" style="min-width:175px"/>
+       <img alt="Michigan State University masthead graphic" class="print-msugraphic" src="/UI/images/masthead-helmet-black.png"/>
+      </a>
+     </div>
+    </div>
+    <!-- Static navbar -->
+    <div class="col-md-4 navbar-header">
+     <div class="navbar-toggle navbar-mobile">
+      <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle menu-toggle" onclick="toggleMobileMenu()" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span>
+        Menu
+       </span>
+      </button>
+      <button class="navbar-toggle search-toggle" onclick="toggleMobileMenu()" type="button">
+       <span class="sr-only">
+        Toggle search
+       </span>
+       <span class="glyphicon glyphicon-search">
+       </span>
+      </button>
+     </div>
+     <div id="search-container">
+      <form action="//u.search.msu.edu/index.php" id="form1" method="get">
+       <div class="white-fill" id="MSUSearchTool" role="search">
+        <div id="search-tool-box">
+         <label class="hide" for="q">
+          Search Tool
+         </label>
+         <input name="client" type="hidden" value="MSU Sponsored Programs Administration"/>
+         <input name="analytics" type="hidden" value="26150426-1"/>
+         <input name="sitesearch" type="hidden" value="cga.msu.edu"/>
+         <input id="q" name="q" placeholder="Search..."/>
+         <input id="btn_search" type="submit" value="search button"/>
+        </div>
+       </div>
+      </form>
+     </div>
+    </div>
+    <!--/ -->
+   </div>
+   <div class="row" style="padding:5px 0 10px 0;clear:left">
+    <div class="col-xs-12 orgNameContainer">
+     <a class="orgName orgName_styling" href="Default.aspx" id="ctl00_A1">
+      Sponsored Programs Administration
+     </a>
+     <div class="row">
+      <div class="ospDept">
+       <a class="deptNames" href="Default.aspx" id="ctl00_A2">
+        Office of Sponsored Programs
+       </a>
+      </div>
+      <div class="deptNames" style="width:3%;float:left;text-align:center">
+       |
+      </div>
+      <div class="cgaDept">
+       <a class="deptNames" href="Default.aspx" id="ctl00_A3">
+        Contract and Grant Administration
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <!--Start Navigation -->
+  <div id="navMain">
+   <div class="container">
+    <div class="row">
+     <nav class="col-xs-12 navbar" id="navbar">
+      <div id="mobile-only_header" style="text-align:right">
+       <p class="mobile-close" onclick="toggleMobileMenu()">
+        X Close
+       </p>
+       <div class="mobile-Org">
+        <a class="spa" href="Default.aspx" id="ctl00_spa">
+         Sponsored Programs Administration
+        </a>
+        <br/>
+        <div class="mobile-Depts">
+         <div class="mobile-OSP">
+          <a href="Default.aspx" id="ctl00_A4">
+           Office of
+           <br/>
+           Sponsored
+           <br/>
+           Programs
+          </a>
+         </div>
+         <div class="mobile-CGA">
+          <a href="Default.aspx" id="ctl00_A5">
+           Contract
+           <br/>
+           and Grant
+           <br/>
+           Administration
+          </a>
+         </div>
+        </div>
+       </div>
+       <div>
+        <form action="//u.search.msu.edu/index.php" id="form2" method="get">
+         <div role="search">
+          <div class="mobile-search">
+           <label class="hide" for="q">
+            Search Tool
+           </label>
+           <input name="client" type="hidden" value="MSU Sponsored Programs Administration"/>
+           <input name="analytics" type="hidden" value="26150426-1"/>
+           <input name="sitesearch" type="hidden" value="cga.msu.edu"/>
+           <input id="Text2" name="q" placeholder="Search..." style="padding-top:3px"/>
+           <button class="add-on" id="Submit1" type="submit">
+            <i class="glyphicon glyphicon-search">
+            </i>
+           </button>
+          </div>
+         </div>
+        </form>
+       </div>
+      </div>
+      <ul class="nav navbar-nav">
+       <li class="border" id="ctl00_MainNavigation_homePage" style="background-color:#18453b;">
+        <a class="nav-home topMenuItem" href="/Default.aspx" role="button">
+         <span class="glyphicon glyphicon-home">
+         </span>
+        </a>
+       </li>
+       <li class="life-cycle-left">
+        <div class="dropdown left-hover" id="ctl00_MainNavigation_fundingOpps">
+         <a class="nav-noDropdown topMenuItem" href="/PL/Portal/Funding.aspx" role="button">
+          Funding
+          <br/>
+          Opportunities
+         </a>
+        </div>
+       </li>
+       <li class="life-cycle-center">
+        <div class="dropdown center-hover" id="ctl00_MainNavigation_propDev">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown triple topMenuItem" data-toggle="dropdown" href="/PL/Portal/ProposalDevelopment.aspx" id="drop1" role="button">
+          Proposal Development
+          <br/>
+          &amp; Submission
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop1" class="dropdown-menu nav-dropMenu2 nav-dropMenu-lifeCycle" style="width:500px">
+          <li>
+           <ul>
+            <li>
+             <a href="/PL/Portal/ProposalDevelopment.aspx">
+              Overview
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA1ADcA">
+              Eligibility
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwAwADEA">
+              Proposal Submission Deadline Policy
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA4ADgA">
+              Prepare Proposal Development Document
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADMA">
+              Develop Proposal
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA1ADYA">
+              Develop Budget
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADMA">
+              Regulatory Requirements
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA1ADgA">
+              Submit Proposal
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAzADIAOQA=">
+              Roles &amp; Responsibilities Guidance for MSU Sponsored Programs
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li>
+           <div class="dropdown-header">
+            Preaward Toolbox
+           </div>
+           <ul id="ctl00_MainNavigation_preawardToolsOnly">
+            <li>
+             <a href="/PL/Portal/Portal.aspx">
+              Portal
+             </a>
+            </li>
+            <li>
+             <a href="/PL/proposal/MyProposals.aspx">
+              All Award Search
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ActivityLog/ActivityLogSearch.aspx">
+              Activity Log Search
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ConflictOfInterest/ManageAnnualDisclosures.aspx">
+              Conflict of Interest Tools
+             </a>
+            </li>
+            <li>
+             <a href="https://kc.researchadmin.msu.edu/kcprd" target="_blank">
+              KC (Kuali Coeus - Research Administration System)
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Tools.aspx">
+              See all Tools
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="life-cycle-center">
+        <div class="dropdown center-hover" id="ctl00_MainNavigation_awardNeg">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown triple topMenuItem" data-toggle="dropdown" href="/PL/Portal/AwardNegotiation.aspx" id="A4" role="button">
+          Award Negotiation
+          <br/>
+          &amp; Acceptance
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop2" class="dropdown-menu nav-dropMenu2 nav-dropMenu-lifeCycle" style="width:475px">
+          <li>
+           <ul>
+            <li>
+             <a href="/PL/Portal/AwardNegotiation.aspx">
+              Overview
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADUA">
+              Just in Time
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADcA">
+              Request Hardship/Advance Account
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADcA">
+              Award Types
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAwADgANwA=">
+              OSP Award Process
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADQA">
+              Subaward
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAzADIAOQA=">
+              Roles &amp; Responsibilities Guidance for MSU Sponsored Programs
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li>
+           <div class="dropdown-header">
+            Preaward Toolbox
+           </div>
+           <ul id="ctl00_MainNavigation_preawardToolsOnly">
+            <li>
+             <a href="/PL/Portal/Portal.aspx">
+              Portal
+             </a>
+            </li>
+            <li>
+             <a href="/PL/proposal/MyProposals.aspx">
+              All Award Search
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ActivityLog/ActivityLogSearch.aspx">
+              Activity Log Search
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ConflictOfInterest/ManageAnnualDisclosures.aspx">
+              Conflict of Interest Tools
+             </a>
+            </li>
+            <li>
+             <a href="https://kc.researchadmin.msu.edu/kcprd" target="_blank">
+              KC (Kuali Coeus - Research Administration System)
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Tools.aspx">
+              See all Tools
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="life-cycle-center">
+        <div class="dropdown center-hover setup" id="ctl00_MainNavigation_acctSetup">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown triple-setup topMenuItem" data-toggle="dropdown" href="/PL/Portal/AccountSetup-Modifications.aspx" role="button">
+          Account Setup/
+          <br/>
+          Modifications
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop3" class="dropdown-menu nav-dropMenu2 nav-dropMenu-lifeCycle" style="width:475px">
+          <li>
+           <ul>
+            <li>
+             <a href="/PL/Portal/AccountSetup-Modifications.aspx">
+              Overview
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAzADUA">
+              Account (RC) Types
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA5ADkA">
+              Account Modifications
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA5ADgA">
+              Subawards
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA5ADcA">
+              Signature Authority
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADcA">
+              Request Hardship/Advance Account
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADMA">
+              Regulatory Requirements
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAyADcA">
+              Fee-for-Service Procedure
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAzADIAOQA=">
+              Roles &amp; Responsibilities Guidance for MSU Sponsored Programs
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li>
+           <div class="dropdown-header">
+            Postaward Toolbox
+           </div>
+           <ul id="ctl00_MainNavigation_postawardToolsOnly">
+            <li>
+             <a href="/PL/Accounting/AE2/AE2.aspx">
+              Account Explorer
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Effort/EffortReportingTools.aspx">
+              Effort Reporting Tools
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ConflictOfInterest/ManageAnnualDisclosures.aspx">
+              Conflict of Interest Tools
+             </a>
+            </li>
+            <li>
+             <a href="/PL/proposal/MyProposals.aspx">
+              All Award Search
+             </a>
+            </li>
+            <li>
+             <a href="/pl/portal/flyamericaactsteps.aspx">
+              Flight Compliance Checker
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Portal.aspx">
+              Portal
+             </a>
+            </li>
+            <li>
+             <a href="https://login.msu.edu/?App=EBSP-SecPortal" target="_blank">
+              KFS (Kuali Financial System)
+             </a>
+            </li>
+            <li>
+             <a href="https://kc.researchadmin.msu.edu/kcprd" target="_blank">
+              KC (Kuali Coeus - Research Administration System)
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Tools.aspx">
+              See all Tools
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="life-cycle-center">
+        <div class="dropdown center-hover" id="ctl00_MainNavigation_awardMgnt">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown double topMenuItem" data-toggle="dropdown" href="/PL/Portal/AwardManagement.aspx" id="drop4" role="button">
+          Award
+          <br/>
+          Management
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop4" class="dropdown-menu nav-dropMenu2 nav-dropMenu-lifeCycle" style="width:450px">
+          <li>
+           <ul>
+            <li>
+             <a href="/PL/Portal/AwardManagement.aspx">
+              Overview
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADAA">
+              Agency Prior Approvals
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAxADEA">
+              Monitoring &amp; Oversight
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADEA">
+              Financial Reporting
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADIA">
+              Technical Reporting
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAzADIAOQA=">
+              Roles &amp; Responsibilities Guidance for MSU Sponsored Programs
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li>
+           <div class="dropdown-header">
+            Postaward Toolbox
+           </div>
+           <ul id="ctl00_MainNavigation_postawardToolsOnly">
+            <li>
+             <a href="/PL/Accounting/AE2/AE2.aspx">
+              Account Explorer
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Effort/EffortReportingTools.aspx">
+              Effort Reporting Tools
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ConflictOfInterest/ManageAnnualDisclosures.aspx">
+              Conflict of Interest Tools
+             </a>
+            </li>
+            <li>
+             <a href="/PL/proposal/MyProposals.aspx">
+              All Award Search
+             </a>
+            </li>
+            <li>
+             <a href="/pl/portal/flyamericaactsteps.aspx">
+              Flight Compliance Checker
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Portal.aspx">
+              Portal
+             </a>
+            </li>
+            <li>
+             <a href="https://login.msu.edu/?App=EBSP-SecPortal" target="_blank">
+              KFS (Kuali Financial System)
+             </a>
+            </li>
+            <li>
+             <a href="https://kc.researchadmin.msu.edu/kcprd" target="_blank">
+              KC (Kuali Coeus - Research Administration System)
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Tools.aspx">
+              See all Tools
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="border">
+        <div class="dropdown right-hover" id="ctl00_MainNavigation_awardClsout">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown double topMenuItem" data-toggle="dropdown" href="/PL/Portal/AwardCloseout.aspx" id="drop-closeout" role="button">
+          Award/
+          <br/>
+          Closeout
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop-closeout" class="dropdown-menu nav-dropMenu2 nav-dropMenu-lifeCycle">
+          <li>
+           <ul>
+            <li>
+             <a href="/PL/Portal/AwardCloseout.aspx">
+              Overview
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADEA">
+              RC Account Closeout Process
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADIA">
+              RG Account Closeout Process
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADMA">
+              Record Retention
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAwADAA">
+              Closeout Documents
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li>
+           <div class="dropdown-header">
+            Postaward Toolbox
+           </div>
+           <ul id="ctl00_MainNavigation_postawardToolsOnly">
+            <li>
+             <a href="/PL/Accounting/AE2/AE2.aspx">
+              Account Explorer
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Effort/EffortReportingTools.aspx">
+              Effort Reporting Tools
+             </a>
+            </li>
+            <li>
+             <a href="/PL/ConflictOfInterest/ManageAnnualDisclosures.aspx">
+              Conflict of Interest Tools
+             </a>
+            </li>
+            <li>
+             <a href="/PL/proposal/MyProposals.aspx">
+              All Award Search
+             </a>
+            </li>
+            <li>
+             <a href="/pl/portal/flyamericaactsteps.aspx">
+              Flight Compliance Checker
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Portal.aspx">
+              Portal
+             </a>
+            </li>
+            <li>
+             <a href="https://login.msu.edu/?App=EBSP-SecPortal" target="_blank">
+              KFS (Kuali Financial System)
+             </a>
+            </li>
+            <li>
+             <a href="https://kc.researchadmin.msu.edu/kcprd" target="_blank">
+              KC (Kuali Coeus - Research Administration System)
+             </a>
+            </li>
+            <li>
+             <a href="/PL/Portal/Tools.aspx">
+              See all Tools
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="border" id="ctl00_MainNavigation_contactAbout">
+        <div class="dropdown misc-menu">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown double topMenuItem" data-toggle="dropdown" href="/PL/HR/OfficeStaff.aspx" id="drop5" role="button">
+          Contact/
+          <br/>
+          About Us
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop5" class="dropdown-menu nav-dropMenu" style="white-space:nowrap">
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAA2ADIA">
+            Welcome
+           </a>
+          </li>
+          <li>
+           <a href="/PL/HR/OfficeStaff.aspx">
+            Directory
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA4ADAA">
+            OSP Department Organization
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQA3ADAA">
+            OSP Contacts by College
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADkA">
+            CGA Department Organization
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwAxADYA">
+            OSP and CGA FAQs
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADIA">
+            SPA Organization
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQA1ADUA">
+            SPA Listserv Subscription
+           </a>
+          </li>
+          <li>
+           <a href="https://spartanmail.msu.edu">
+            OSP/CGA Mail Server
+           </a>
+          </li>
+          <li>
+           <a href="https://sp.campusad.msu.edu/units/spa">
+            SPARK
+           </a>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="no-border" id="ctl00_MainNavigation_resources">
+        <div class="dropdown misc-menu">
+         <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-withDropdown double topMenuItem" data-toggle="dropdown" href="/PL/Portal/Forms.aspx" id="drop6" role="button">
+          Resources/
+          <br/>
+          Training
+          <span class="caret nav-caret">
+          </span>
+         </a>
+         <ul aria-labelledby="drop6" class="dropdown-menu nav-dropMenu resources-drop">
+          <li>
+           <a href="/PL/Portal/Forms.aspx">
+            Forms &amp; Templates
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/Tools.aspx">
+            Tools
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQA0ADYA">
+            Frequently Required Budget and Proposal Data
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADgA">
+            Policies
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Report/Reports.aspx">
+            Reports &amp; Statistics
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/SPAMetrics.aspx" id="SPAMetrics">
+            SPA Metrics
+           </a>
+          </li>
+          <li>
+          </li>
+          <li>
+           <a href="/PL/Portal/Training.aspx">
+            Training
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMgAzADcA">
+            SPA Newsletters
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAxADYA">
+            Resources, Initiatives, and Related Units
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADEA">
+            Sponsor Information
+           </a>
+          </li>
+         </ul>
+        </div>
+       </li>
+      </ul>
+     </nav>
+    </div>
+   </div>
+  </div>
+  <!--/.nav-collapse -->
+  <div id="site-login-wrapper">
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 site-login">
+      <div id="smScreen-help" style="font-size:14px;font-weight:500;border-radius:7px;border:1px solid #ffffff;background-color:#6d7373;padding:10px;float:left">
+       <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAA2ADIA">
+        NEED HELP?
+       </a>
+      </div>
+      <div id="login-wrapper">
+       <span class="lblWelcome" id="ctl00_lblWelcome">
+       </span>
+       <a class="lnkLogIn" href="pl/portal/portal.aspx" id="ctl00_lnkLogIn">
+        Sign In
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="background-HomeImage" id="ctl00_bckgrdContainer">
+   <div class="container container-custom" style="padding-bottom:30px">
+    <div class="row">
+     <div class="col-md-8 col-md-push-4" id="PDFPrintZone">
+      <form action="default.aspx" class="mainPanel mainContentPanel" id="aspnetForm" method="post" name="aspnetForm">
+       <div>
+        <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+        <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+        <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwULLTE0NDU1NTg3NjkPZBYCZg9kFgwCBw9kFgQCAQ8WAh4Fc3R5bGUFGWJhY2tncm91bmQtY29sb3I6IzE4NDUzYjtkAhEPZBYCAgEPFgIeB1Zpc2libGVoZAIIDxYCHwFoZAIJDw8WAh4EVGV4dGVkZAIKDw8WAh8BaGRkAgwPDxYEHghDc3NDbGFzcwUUYmFja2dyb3VuZC1Ib21lSW1hZ2UeBF8hU0ICAmQWBAIBD2QWAgIBD2QWCAIHDw8WAh4LTmF2aWdhdGVVcmwFMX4vUEwvUG9ydGFsL0NhdGVnb3J5RG9jTGlzdC5hc3B4P2NnYT1hUUJrQUQwQU1nQT1kZAIJD2QWAmYPFQHuDjxhcnRpY2xlPjxoMz48YSBocmVmPSIuLi8uLi9QTC9Qb3J0YWwvRG9jdW1lbnRWaWV3ZXIuYXNweD9jZ2E9YVFCa0FEMEFNUUF5QURrQU13QT0iPlNwb25zb3JlZCBQcm9ncmFtcyBGZWRlcmFsIEdvdmVybm1lbnQgU2h1dGRvd24gSW5mb3JtYXRpb248L2E+PC9oMz48cD48c3BhbiBzdHlsZT0iZm9udC1zaXplOjE0cHg7Ij48c3BhbiBzdHlsZT0iY29sb3I6I0ZGMDAwMDsiPjxzdHJvbmc+VXBkYXRlIDEvMjUvMTk6IDwvc3Ryb25nPjwvc3Bhbj48L3NwYW4+VGhlIGZlZGVyYWwgZ292ZXJubWVudCBoYXMgdGVtcG9yYXJpbHkgcmVvcGVuZWQgdW50aWwgRmVicnVhcnkgMTV0aC4gRHVyaW5nIHRoaXMgdGltZSBtb3N0IGZlZGVyYWwgYWdlbmNpZXMgaGF2ZSByZXN1bWVkIG5vcm1hbCBvcGVyYXRpb25zLiBQbGVhc2UgdmVyaWZ5IHRoZSBkZWFkbGluZSBkYXRlcyBmb3IgdXBjb21pbmcgcHJvcG9zYWw8L3A+IDwvYXJ0aWNsZT48cCBjbGFzcz0icmVhZF9tb3JlIj48YSBocmVmPSIuLi8uLi9QTC9Qb3J0YWwvRG9jdW1lbnRWaWV3ZXIuYXNweD9jZ2E9YVFCa0FEMEFNUUF5QURrQU13QT0iPlJlYWQgTW9yZSBBYm91dCBTcG9uc29yZWQgUHJvZ3JhbXMgRmVkZXJhbCBHb3Zlcm5tZW50IFNodXRkb3duIEluZm9ybWF0aW9uPC9hPjwvcD48YXJ0aWNsZT48aDM+PGEgaHJlZj0iLi4vLi4vUEwvUG9ydGFsL0RvY3VtZW50Vmlld2VyLmFzcHg/Y2dhPWFRQmtBRDBBTVFBeUFESUFOZ0E9Ij5TUEEgTmV3c2xldHRlciAtIEZhbGwgMjAxODwvYT48L2gzPjxwPlRoZSA8YSBocmVmPSJodHRwczovL2NnYS5tc3UuZWR1L1BML1BvcnRhbC9Eb2N1bWVudFZpZXdlci5hc3B4P2NnYT1hUUJrQUQwQU1RQXlBREVBT1FBPSI+RmFsbCAyMDE4IGlzc3VlIG9mIHRoZSBTUEEgTmV3czwvYT4gcHJvdmlkZXMgaW5mb3JtYXRpb24gb24gdGhlIHVuaWZvcm0gZ3VpZGFuY2UgcHJvY3VyZW1lbnQgdXBkYXRlIGFsb25nIHdpdGggdGlwcyBvbiBpZGVudGlmeWluZyBwcm9wb3NhbCBjb2xsYWJvcmF0b3JzIGFuZCBwYXlpbmcgcmVzZWFyY2ggcGFydGljaXBhbnRzLiBBbHNvLCByZWFkIGFib3V0IHRoZTwvcD48L3A+IDwvYXJ0aWNsZT48cCBjbGFzcz0icmVhZF9tb3JlIj48YSBocmVmPSIuLi8uLi9QTC9Qb3J0YWwvRG9jdW1lbnRWaWV3ZXIuYXNweD9jZ2E9YVFCa0FEMEFNUUF5QURJQU5nQT0iPlJlYWQgTW9yZSBBYm91dCBTUEEgTmV3c2xldHRlciAtIEZhbGwgMjAxODwvYT48L3A+PGFydGljbGU+PGgzPjxhIGhyZWY9Ii4uLy4uL1BML1BvcnRhbC9Eb2N1bWVudFZpZXdlci5hc3B4P2NnYT1hUUJrQUQwQU1RQXdBRFlBTkFBPSI+TWFraW5nIEl0IFJlYWwsIFBhcnQgMiBWaWRlbzwvYT48L2gzPjxwPlNQQSByZWNlbnRseSByZWxlYXNlZCBhIG5ldyB2aWRlbyBvbiZuYnNwO2V4Y2l0aW5nIGludGVybmF0aW9uYWwgcHJvamVjdHMgYXQgTVNVIGFuZCByZWxhdGVkIGFkbWluaXN0cmF0aXZlIGVmZm9ydHMgYXMgc2hhcmVkIGJ5IGZhY3VsdHkuJm5ic3A7IEZlYXR1cmVkIGZhY3VsdHkgaW5jbHVkZSBEci4gVi4gQm9iYnkgQnJpbmdpLCBEci4gRGFuIENsYXksIERyLiBDcmlzdGlhbiBNZWdoZWEgJmFtcDsgRHIuIElydmluIFdpZGRlcnMsIGRpc2N1c3NpbmcgdGhlIGZvY3VzLCBpbXBhY3RzIGFuZCBjaGFsbGVuZ2VzIG9mPGEgaHJlZj0iaHR0cHM6Ly9tZWRpYXNwYWNlLm1zdS5lZHUvbWVkaWEvTWFraW5nK0l0K1JlYWwlMkMrUGFydCtJSS8xX21iZHRtandpIiB0YXJnZXQ9Il9ibGFuayI+PC9hPjwvcD4gPC9hcnRpY2xlPjxwIGNsYXNzPSJyZWFkX21vcmUiPjxhIGhyZWY9Ii4uLy4uL1BML1BvcnRhbC9Eb2N1bWVudFZpZXdlci5hc3B4P2NnYT1hUUJrQUQwQU1RQXdBRFlBTkFBPSI+UmVhZCBNb3JlIEFib3V0IE1ha2luZyBJdCBSZWFsLCBQYXJ0IDIgVmlkZW88L2E+PC9wPmQCCw8PFgIfBQU1fi9QTC9Qb3J0YWwvQ2F0ZWdvcnlEb2NMaXN0LmFzcHg/Y2dhPWFRQmtBRDBBTVFBeEFBPT1kZAIND2QWAmYPFQF4PGgzPjxhIGhyZWY9Ii4uLy4uL1BML1BvcnRhbC9Eb2N1bWVudFZpZXdlci5hc3B4P2NnYT1hUUJrQUQwQU5BQXhBRFVBIj5SZXNlYXJjaCBBZG1pbmlzdHJhdGlvbiBQcm9qZWN0IFRyYWluaW5nPC9hPjwvaDM+ZAIDD2QWAgIBD2QWAmYPDxYCHwFnZGQCDQ9kFhBmDxYCHwFoFgoCAQ8WAh8BaGQCAw8WAh8BaGQCBQ8WAh8BaGQCBw8WAh8BaGQCCQ8WAh8BaGQCAg8WAh8BaGQCBg8WAh8BaGQCCA8WAh8BaGQCCg8WAh8BaGQCDA8WAh8BaGQCDg8WAh8BaGQCEA8WAh8BaBYEAgMPFgIfAWhkAgUPFgIfAWhkZIyBUZyr7dBO1rS5RkoXipXMxYf6"/>
+       </div>
+       <script type="text/javascript">
+        //<![CDATA[
+var theForm = document.forms['aspnetForm'];
+	if (!theForm) {
+    theForm = document.aspnetForm;
+}
+	function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+	//]]>
+       </script>
+       <div>
+        <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+        <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="/wEWAgKe+vUpAonfk+QKltDIOmpDYP2lv38/OKWZiUP/hLs="/>
+       </div>
+       <!--Department Introduction-->
+       <p class="home-intro">
+        The
+        <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADIA">
+         Sponsored Programs Administration (SPA)
+        </a>
+        office departments,
+        <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA4ADAA">
+         Office of Sponsored Programs (OSP)
+        </a>
+        and
+        <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA3ADkA">
+         Contract and Grant Administration (CGA)
+        </a>
+        , collaborate with MSU's researchers to provide effective and efficient administration throughout the research award process. Learn more about the
+        <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA2ADIA">
+         SPA mission and vision
+        </a>
+        and
+        <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAA2ADIA">
+         navigating this website
+        </a>
+        .
+       </p>
+       <img class="img-responsive" id="horzLifecycle" src="UI/images/award_lifecycle_horz_arrows.png" style="border-width:0px;" usemap="#ImageMap_horzLifecycle"/>
+       <map id="horzLifecycle" name="ImageMap_horzLifecycle">
+        <area alt="Funding Opportunities" coords="0,63,113,64,139,128,112,194,1,192" href="/PL/Portal/Funding.aspx" shape="poly" title="Funding Opportunities"/>
+        <area alt="Proposal Development &amp; Submission" coords="118,64,245,64,272,127,245,193,118,192,142,128" href="/PL/Portal/ProposalDevelopment.aspx" shape="poly" title="Proposal Development &amp; Submission"/>
+        <area alt="Award Negotiation &amp; Acceptance" coords="249,64,375,64,401,128,375,193,249,192,274,129" href="/PL/Portal/AwardNegotiation.aspx" shape="poly" title="Award Negotiation &amp; Acceptance"/>
+        <area alt="Account Setup/Modifications" coords="378,64,504,64,530,128,504,194,377,194,403,128" href="/PL/Portal/AccountSetup-Modifications.aspx" shape="poly" title="Account Setup/Modifications"/>
+        <area alt="Award Management" coords="505,64,633,63,659,127,633,193,507,193,530,128" href="/PL/Portal/AwardManagement.aspx" shape="poly" title="Award Management"/>
+        <area alt="Award Closeout" coords="636,64,768,64,768,193,636,194,660,129" href="/PL/Portal/AwardCloseout.aspx" shape="poly" title="Award Closeout"/>
+       </map>
+       <img id="vertLifecycle" src="UI/images/award_lifecycle_sm-screen.png" usemap="#ImageMap_vertLifecycle"/>
+       <map id="vertLifecycle" name="ImageMap_vertLifecycle">
+        <area alt="Funding Opportunities" coords="3,60,265,61,266,117,133,145,3,116" href="/PL/Portal/Funding.aspx" shape="poly" title="Funding Opportunities"/>
+        <area alt="Proposal Development &amp; Submission" coords="3,120,135,147,266,120,266,204,133,227,2,203" href="/PL/Portal/ProposalDevelopment.aspx" shape="poly" title="Proposal Development &amp; Submission"/>
+        <area alt="Award Negotiation &amp; Acceptance" coords="2,206,133,229,265,206,266,273,134,298,3,274" href="/PL/Portal/AwardNegotiation.aspx" shape="poly" title="Award Negotiation &amp; Acceptance"/>
+        <area alt="Account Setup/Modifications" coords="2,277,134,301,266,277,266,349,133,375,3,350" href="/PL/Portal/AccountSetup-Modifications.aspx" shape="poly" title="Account Setup/Modifications"/>
+        <area alt="Award Management" coords="2,352,134,377,266,353,266,429,134,455,2,429" href="/PL/Portal/AwardManagement.aspx" shape="poly" title="Award Management"/>
+        <area alt="Award Closeout" coords="1,431,134,458,265,433,266,518,3,518" href="/PL/Portal/AwardCloseout.aspx" shape="poly" title="Award Closeout"/>
+       </map>
+       <div class="dropdown col-xs-12" id="find-dropdown">
+        <p class="col-xs-12 col-sm-4 col-lg-3" style="padding:0">
+         How do I find . . .
+        </p>
+        <div class="col-xs-12 col-sm-9" id="find-dropdown-wrapper" style="padding:0">
+         <button class="btn btn-find dropdown-toggle" data-toggle="dropdown" type="button">
+          Select an Option
+          <span class="glyphicon glyphicon-menu-down">
+          </span>
+         </button>
+         <ul class="dropdown-menu" id="find-dropdown-menu">
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwAwADEA">
+            MSU proposal deadline policy
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMwA1ADkA">
+            Signature authority for OSP
+           </a>
+          </li>
+          <li>
+           <a href="PL/ActivityLog/ActivityLogSearch.aspx">
+            Status of my award
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/Portal.aspx">
+            My proposal, award, and effort statuses
+           </a>
+          </li>
+          <li>
+           <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAzADQA">
+            MSU Federal/State Cost Policy
+           </a>
+          </li>
+          <li>
+           <a href="https://cga.msu.edu/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANQAyADcA">
+            Changes to website content
+           </a>
+          </li>
+          <li>
+           <a href="//u.search.msu.edu/index.php?client=MSU+Sponsored+Programs+Administration&amp;analytics=26150426-1&amp;sitesearch=cga.msu.edu">
+            Not here? Use the Search option to find more information
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="row news-events" style="clear:left">
+        <section class="col-md-6 news">
+         <h2>
+          <a class="btn btn-news-events btn-block" href="PL/Portal/CategoryDocList.aspx?cga=aQBkAD0AMgA=" id="ctl00_content__lnkNews">
+           News
+          </a>
+         </h2>
+         <article>
+          <h3>
+           <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAyADkAMwA=">
+            Sponsored Programs Federal Government Shutdown Information
+           </a>
+          </h3>
+          <p>
+           <span style="font-size:14px;">
+            <span style="color:#FF0000;">
+             <strong>
+              Update 1/25/19:
+             </strong>
+            </span>
+           </span>
+           The federal government has temporarily reopened until February 15th. During this time most federal agencies have resumed normal operations. Please verify the deadline dates for upcoming proposal
+          </p>
+         </article>
+         <p class="read_more">
+          <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAyADkAMwA=">
+           Read More About Sponsored Programs Federal Government Shutdown Information
+          </a>
+         </p>
+         <article>
+          <h3>
+           <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAyADIANgA=">
+            SPA Newsletter - Fall 2018
+           </a>
+          </h3>
+          <p>
+           The
+           <a href="https://cga.msu.edu/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAyADEAOQA=">
+            Fall 2018 issue of the SPA News
+           </a>
+           provides information on the uniform guidance procurement update along with tips on identifying proposal collaborators and paying research participants. Also, read about the
+          </p>
+         </article>
+        </section>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<p class="read_more">
+ <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAyADIANgA=">
+  Read More About SPA Newsletter - Fall 2018
+ </a>
+</p>
+<article>
+ <h3>
+  <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAwADYANAA=">
+   Making It Real, Part 2 Video
+  </a>
+ </h3>
+ <p>
+  SPA recently released a new video on exciting international projects at MSU and related administrative efforts as shared by faculty.  Featured faculty include Dr. V. Bobby Bringi, Dr. Dan Clay, Dr. Cristian Meghea &amp; Dr. Irvin Widders, discussing the focus, impacts and challenges of
+  <a href="https://mediaspace.msu.edu/media/Making+It+Real%2C+Part+II/1_mbdtmjwi" target="_blank">
+  </a>
+ </p>
+</article>
+<p class="read_more">
+ <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQAwADYANAA=">
+  Read More About Making It Real, Part 2 Video
+ </a>
+</p>
+<h3 class="last">
+ <a href="/PL/Portal/CategoryDocList.aspx?cga=aQBkAD0AMgA=">
+  See More News
+ </a>
+</h3>
+<a class="btn btn-signup btn-block" href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQA1ADUA">
+ Sign Up for SPA Newsletters
+</a>
+<section class="col-md-6 events">
+ <h2>
+  <a class="btn btn-news-events btn-block" href="PL/Portal/CategoryDocList.aspx?cga=aQBkAD0AMQAxAA==" id="ctl00_content__lnkEvents">
+   Events
+  </a>
+ </h2>
+ <h3>
+  <a href="../../PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANAAxADUA">
+   Research Administration Project Training
+  </a>
+ </h3>
+ <div class="freq-req-budget-prop">
+  <h2>
+   <a class="btn btn-signup btn-block" href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQA0ADYA">
+    <span class="glyphicon glyphicon-bookmark">
+    </span>
+    <span class="contact-text">
+     Frequently Required Budget and Proposal Data
+    </span>
+   </a>
+  </h2>
+  <ul>
+   <li>
+    <strong>
+     Cage Code:
+    </strong>
+    4B834
+   </li>
+   <li>
+    <strong>
+     DUNS Number:
+    </strong>
+    193247145
+   </li>
+   <li>
+    <strong>
+     Employer Identification Number (EIN) for DHHS/NIH:
+    </strong>
+    138-6005984A1
+   </li>
+   <li>
+    <strong>
+     IRS EIN:
+    </strong>
+    38-6005984
+   </li>
+   <li>
+    <strong>
+     <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0AMQA0ADYA">
+      Find More Frequently Required Budget and Proposal Data
+     </a>
+    </strong>
+   </li>
+  </ul>
+ </div>
+ <a href="/PL/Portal/SPAMetrics.aspx">
+  <img alt="SPA Metrics, Fiscal Year 2018: 3,904 Proposals Submitted, 2,960 Awards Received, and $615,000,000 Funds Awarded" class="img-responsive" src="/UI/images/home_metrics_122018.png" style="margin:10px auto 0 auto"/>
+ </a>
+ <p class="metrics-footnote">
+  Based on date of acceptance by the Board of Trustees
+ </p>
+ <p class="metrics-footnote">
+  <a href="http://research.msu.edu/about/facts-figures/" target="_blank">
+   Click here for more information about research funding figures.
+  </a>
+ </p>
+</section>
+<script type="text/javascript">
+ //Functions for disabling home page help popup message
+    function SetHelpMsgStorage() {
+        $("#lgScreen-help").fadeOut(500);
+        document.getElementById("smScreen-help").style.display = "none";
+        localStorage.setItem("helpMsg", "hide");
+    }
+   $("#helpMsgDisableOpt").on("change", function () {
+        SetHelpMsgStorage();
+    });
+    function GetHelpMsgStorage() {
+        if (localStorage.helpMsg == "hide") {
+            document.getElementById("lgScreen-help").style.display = "none";
+            document.getElementById("smScreen-help").style.display = "none";
+        }
+        else {
+            document.getElementById("helpMsgDisableOpt").checked = false;
+        }
+    }
+
+//Necessary to ensure image map coordinates adapt to different screen sizes
+    $(document).ready(function () {
+        //        $('#horzLifecycle').imageMapResize();
+        $('img[usemap]').rwdImageMaps();
+
+        $("#popup-help").delay(500).slideDown(500);
+
+        $("#popup-help-close").click(function () {
+            $("#popup-help").slideUp(500);
+        });
+
+       GetHelpMsgStorage();
+    });
+</script>
+<div class="clearfix">
+</div>
+<div id="pdfLink">
+ <a class="btn btn-pdf btn-sm" href="javascript:__doPostBack('ctl00$lnkpdf','')" id="ctl00_lnkpdf">
+  Convert this Page to PDF
+ </a>
+</div>
+<div class="clearfix">
+</div>
+<div id="ctl00_sidebarWrapper">
+ <div class="col-md-4 col-md-pull-8" id="sidebar">
+  <div id="ctl00_dynamicContent_HomeIntro">
+   <div class="helpInfo">
+    <p class="KCtitle">
+     KC System Now Available
+    </p>
+    <div style="float:left;margin-left:10px;margin-right:10px;margin-top:8px">
+     <img height="65px" src="/UI/images/proposalIcon.png" width="53px"/>
+    </div>
+    <p class="KCsubtitle">
+     Use KC for Proposal Development and Conflict of Interest Reporting
+    </p>
+    <ul style="clear:left">
+     <li>
+      For support materials, click
+      <a href="/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANwA4ADcA">
+       here
+      </a>
+      .
+     </li>
+     <li>
+      Email technical questions to
+      <a href="mailto:kchelpdesk@msu.edu">
+       kchelpdesk@msu.edu
+      </a>
+      .
+     </li>
+     <li>
+      For technical support, call
+      <br/>
+      517-355-2000.
+     </li>
+    </ul>
+    <p class="KCwebforms">
+     <a href="/PL/Portal/Forms.aspx#kcForms" style="color:#000000;font-size:15px;font-weight:bold">
+      KC Web Forms
+     </a>
+     <br/>
+     Log in and add keywords, sponsors, non-MSU employees, performance sites
+    </p>
+   </div>
+  </div>
+  <div class="panel panel-toolbox panel-box" id="ctl00_dynamicContent_frequentlyUsedTools">
+   <h2>
+    Frequently Used Tools
+   </h2>
+   <ul>
+    <li>
+     <a href="/PL/Accounting/AE2/AE2.aspx">
+      Account Explorer
+     </a>
+    </li>
+    <li>
+     <a href="/PL/ActivityLog/ActivityLogSearch.aspx">
+      Activity Log Search
+     </a>
+    </li>
+    <li>
+     <a href="/PL/proposal/MyProposals.aspx">
+      All Award Search
+     </a>
+    </li>
+    <li>
+     <a href="/PL/ConflictOfInterest/ManageAnnualDisclosures.aspx">
+      Conflict of Interest Tools
+     </a>
+    </li>
+    <li>
+     <a href="https://login.msu.edu/?App=EBSP-SecPortal" target="_blank">
+      KFS (Kuali Financial System)
+     </a>
+    </li>
+    <li>
+     <a href="https://kc.researchadmin.msu.edu/kcprd" target="_blank">
+      KC (Kuali Coeus - Research Administration System)
+     </a>
+    </li>
+    <li>
+     <a href="/PL/Portal/Portal.aspx">
+      Portal
+     </a>
+    </li>
+    <li>
+     <a href="/PL/Portal/Tools.aspx">
+      See all Tools
+     </a>
+    </li>
+   </ul>
+  </div>
+  <span id="ctl00_dynamicContent_Category">
+  </span>
+  <div class="clearfix">
+  </div>
+ </div>
+</div>
+<!-- End Background Image Wrapper -->
+<!--Start SPA Sitewide Management-->
+<div class="container-fluid">
+ <div class="row">
+  <h3 class="col-md-12 siteTools" style="margin-top:0">
+   Site Management
+  </h3>
+ </div>
+</div>
+<div style="background-color:#6d7373">
+ <div class="container container-custom">
+  <div class="row siteTools-container" id="siteManagement">
+   <ul class="site-management">
+    <li class="profile">
+     <a aria-controls="profile" aria-expanded="false" class="contentIndicator collapsed" data-toggle="collapse" href="#profile">
+      Manage User Profile
+     </a>
+     <ul class="siteTools-dropdown collapse" id="profile">
+      <li>
+       <a href="PL/HR/UserProfile.aspx" id="ctl00__siteManagementTools_A46">
+        My Profile
+       </a>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <a href="https://cga.msu.edu/PL/Portal/DocumentViewer.aspx?cga=aQBkAD0ANQAyADcA">
+      View Content Changes
+     </a>
+    </li>
+   </ul>
+  </div>
+ </div>
+</div>
+<!--End SPA Sitewide Management-->
+<!--Start MSU Standard Website Footer-->
+<footer id="MSUstandardFooter" role="contentinfo">
+ <div class="container container-footer">
+  <div class="row">
+   <div class="col-xs-12 col-md-9" id="msu-info">
+    <div id="standard-footer-site-links">
+     <ul>
+      <li>
+       Call us:
+       <strong>
+        (517) 355-5040
+       </strong>
+      </li>
+      <li>
+       <a accesskey="6" href="/PL/HR/OfficeStaff.aspx">
+        Contact Information
+       </a>
+      </li>
+      <li>
+       <a accesskey="3" href="/PL/Portal/Sitemap.aspx">
+        Site Map
+       </a>
+      </li>
+      <li>
+       <a href="/PL/HR/PrivacyPolicy.aspx">
+        Privacy Policy
+       </a>
+      </li>
+      <li>
+       <a accesskey="0" href="/PL/HR/Accessibility.aspx">
+        Site Accessibility
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div id="standard-footer-MSU-info">
+     <ul>
+      <li>
+       Call MSU:
+       <span class="msu-phone">
+        (517) 355-1855
+       </span>
+      </li>
+      <li>
+       Visit:
+       <a class="msu-website" href="http://msu.edu">
+        msu.edu
+       </a>
+      </li>
+      <li>
+       MSU is an affirmative-action, equal-opportunity employer.
+      </li>
+      <li>
+       <a class="msu-website" href="http://oie.msu.edu/">
+        Notice of Nondiscrimination
+       </a>
+      </li>
+     </ul>
+     <ul>
+      <li class="spartans-will">
+       Spartans Will.
+      </li>
+      <li>
+       © Michigan State University
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="col-xs-12 col-md-3" id="standard-footer-MSU-wordmark">
+    <a href="http://www.msu.edu">
+     <img alt="Michigan State University Wordmark" class="screen-msuwordmark" src="/UI/images/msu-wordmark-white-221x47.png"/>
+     <img alt="Michigan State University Wordmark" class="print-msuwordmark" src="/UI/images/msu-wordmark-black-221x47.png"/>
+    </a>
+   </div>
+  </div>
+ </div>
+</footer>
+<!--End MSU Standard Website Footer-->
+<script type="text/javascript">
+ jQuery(document).ready(function () {
+                
+                $(":disabled").each(function () {
+                    if ($(this).attr('type') == 'text' || $(this).is('textarea')) {
+                        var val = $(this).val();
+                        if ($(this).css('display') != "none") {
+                            $(this).wrap("<span>" + val + "<\/span>");
+                        }
+                        $(this).remove();
+                    }
+                    else if ($(this).is('select')) {
+                        var val = $(this).children('option:selected').html();
+                        if ($(this).css('display') != "none") {
+                            $(this).wrap("<span>" + val + "<\/span>");
+                        }
+                        $(this).remove();
+                    }
+                });
+                
+                          
+});
+ // -----------------
+            function pageLoad() {
+                if (!Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack()) {
+                    
+                    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(AjaxEnd);
+                    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(AjaxBegin);
+                    
+                }
+//                $("#ajax-loader").dialog({
+//                    height: 52,
+//                    width:150,
+//                    modal: true,
+//                    autoOpen: false,
+//                    closeOnEscape: false,
+//                    draggable: false,
+//                    resizable: false
+//                });
+                $("#ajax-loader").modal({
+                    keyboard:true,
+                    show:false
+                });
+                $("#ajax-loader").css("display", "none");
+            }
+
+            function AjaxEnd(sender, args) {
+                //$("input:submit").button();
+                $(".dateTimePicker").datetimepicker();
+                //$(".datePicker").datepicker();
+                //$(".ui-dialog-titlebar").css("display", "");
+                //$("#ajax-loader").dialog('close');
+                $("#ajax-loader").modal('hide');
+            }
+
+            function AjaxBegin(sender, args) {
+                //$("#ajax-loader").dialog('open');
+                $("#ajax-loader").modal('show');
+                //$(".ui-dialog-titlebar").css("display", "none");
+            }
+
+
+// show/hide contextual help on Conflict of Interest ("Report My Interests") pages          
+            var collapsedSize = '45px';
+            $('.contextualHelp').each(function () {
+                var h = this.scrollHeight;
+                
+                var div = $(this);
+                if (h > 30) {
+                    div.css('height', collapsedSize);
+                    div.after('<a class="contextualHelp" href="#">Read more</a><br/>');
+                    var link = div.next();
+                    link.click(function (e) {
+                        e.stopPropagation();
+
+                        if (link.text() != 'Collapse') {
+                            link.text('Collapse');
+                            div.animate({
+                                'height': h
+                            });
+
+                        } else {
+                            div.animate({
+                                'height': collapsedSize
+                            });
+                            link.text('Read more');
+                        }
+                    });
+                }
+            });
+</script>
+

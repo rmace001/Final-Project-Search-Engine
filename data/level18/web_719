@@ -1,0 +1,115 @@
+https://mywssu.wssu.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <meta charset="utf-8"/>
+  <title>
+   WSSU SSO Login
+  </title>
+  <link href="/idp/css/idp.css" rel="stylesheet" type="text/css"/>
+  <script language="Javascript" src="https://federation.northcarolina.edu/wayf/functions.js">
+  </script>
+  <script type="text/javascript">
+   function validateUserId()
+		{
+			var x, text;
+
+		    // Get the value of the input field with id="username"
+		    username = document.getElementById("username").value;
+		    var reg = RegExp(/[@]/).test(username);
+
+		    // If username has @ sign,
+		    if (reg) {
+		        text = "Please enter your User ID without domain name";
+		    } else {
+		        text = "";
+		    }
+		    document.getElementById("error").innerHTML = text;
+
+		}
+
+		if (!("autofocus" in document.createElement("input"))) {
+		    document.getElementById("username").focus();
+		 }
+  </script>
+ </head>
+ <body>
+  <div class="flex" id="wayfContainer">
+   <div class="flex" id="login_wrapper">
+    <div id="login_form_logo">
+     <img alt="WSSU" src="/idp/images/wssu-logo2016.png"/>
+     <span class="North_Carolina">
+      Winston-Salem State University
+     </span>
+    </div>
+    <div id="login_form_wrapper">
+     <div id="campus_login">
+      <form action="/idp/profile/SAML2/Redirect/SSO;jsessionid=1l5a1xmn448s6w644u7tnh3y8?execution=e1s1" id="login_form" method="post" name="login_form">
+       <fieldset>
+        <label class="userid">
+         RAM ID
+         <input autofocus="autofocus" id="username" name="j_username" onkeyup="validateUserId()" type="text" value=""/>
+        </label>
+        <div class="username_error" id="error">
+        </div>
+        <label class="password">
+         Password
+         <input id="password" name="j_password" type="password" value=""/>
+        </label>
+        <!-- <br /><input type="checkbox" name="donotcache" value="1"> Don't Remember Login -->
+        <label class="login_button">
+         <input id="_eventId_proceed" name="_eventId_proceed" onclick="this.childNodes[0].nodeValue='Signing in, please wait...'" type="submit" value="Sign In"/>
+        </label>
+       </fieldset>
+      </form>
+      <!-- /#login_form -->
+      <div class="login_disclaimer">
+       <p>
+        <strong>
+         Trouble signing in?
+        </strong>
+        <a href="https://pw.wssu.edu" target="_blank">
+         Click Here
+        </a>
+        for assistance.
+       </p>
+       <p>
+        <strong>
+         Need Technical Support?
+        </strong>
+        <a href="https://ramsupport.wssu.edu" target="_blank">
+         Click Here
+        </a>
+        for assistance.
+       </p>
+       <p>
+        By using this service, you agree to adhere to the WSSU
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+computing
+<a href="https://www.wssu.edu/about/offices-and-departments/legal-affairs/policies-and-procedures/chapter-400-research-intellectual-property/400.6.html" target="_blank">
+ policies
+</a>
+and
+<a href="https://www.wssu.edu/about/offices-and-departments/the-office-of-information-technology/departments/information-security-compliance-services/it-security-standards/index.html" target="_blank">
+ standards
+</a>
+.
+<!--/#login_disclaimer -->
+<!--/#campus_login -->
+<!-- /#login_form_wrapper -->
+<!-- /#login_wrapper -->
+<!--/#wayfContainer-->
+<!--  <footer>
+        <div class="container container-footer">
+          <p class="footer-text">WSSU Copyright 2018.</p>
+        </div>
+      </footer> -->
+

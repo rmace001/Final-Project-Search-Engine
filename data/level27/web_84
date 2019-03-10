@@ -1,0 +1,1037 @@
+http://tickets.uww.edu/
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>
+   Tickets
+  </title>
+  <meta content="width=device-width, height=device-height, initial-scale=1.0" name="viewport"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="no" http-equiv="Imagetoolbar"/>
+  <link href="/ArticleMedia/Images/logo-wordmark-stacked.png?_7.31.1" rel="shortcut icon"/>
+  <link href="branding/home-screen-icon.png?_7.31.1" rel="apple-touch-icon"/>
+  <!-- inclusion of bootstrap specific CSS -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css?_7.31.1" rel="Stylesheet"/>
+  <!-- end of bootstrap specific CSS -->
+  <link href="../../content/images/branding/global.css?_=7.31.1" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../content/images/branding/global_IE.css?_7.31.1" type="text/css">
+<![endif]-->
+  <script language="Javascript">
+  </script>
+  <link href="/ArticleMedia/Files/css/UWW10.css?_=7.31.1" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Check whether cookies are enabled.
+	document.cookie = "TestCookie=1";
+	var testCookie = document.cookie;
+
+	// Try to retrieve the value we just set.
+	if (testCookie.indexOf("TestCookie=1") == -1)
+	{
+		
+		    document.location = "error.asp?nocookie=";
+		
+    }
+	else
+		document.cookie = "TestCookie=;expires=Thu, 01-Jan-1970 00:00:00 GMT";
+  </script>
+  <script type="text/javascript">
+   function setRSVPButtons(response, eventCode)
+{
+                var url = '/' + eventCode + '/invited?user=' + response.authResponse.userID + '&access_token=' + response.authResponse.accessToken;
+                 FB.api(url, 'get',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred: " + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                        if (response.data[0].rsvp_status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else if (response.data[0].rsvp_status == "unsure")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                    }
+                });
+}
+function setRSVPButtonsLogin(eventCode)
+{
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                setRSVPButtons(response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        setRSVPButtons(response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+
+function rsvpToFBEvent(status, response, eventCode)
+{
+
+                var url = '/' + eventCode + '/' + status + '?access_token=' + response.authResponse.accessToken;
+
+                 FB.api(url, 'post',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred:" + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                      gaTrackEvent('Facebook', 'RSVP to Event Success');
+
+                        if (status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                        else if (status == "maybe")
+                        {
+                            var buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                    }
+                 });
+}
+
+function rsvpToFBEventLogin(status, eventCode) {
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                rsvpToFBEvent(status, response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        rsvpToFBEvent(status, response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+  </script>
+  <script src="../Common/browser_detect.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var genericConfirmationMessage = "Are you sure?";
+  var offerExpired = "Your order has expired.";
+  var admissionsExpired = "An offer on one of your tickets has expired.";
+  var alertHeaderText = "Attention";
+  var termsHeaderText = "Terms and Conditions";
+  var helpHeaderText = "Help";
+  var sectionHeaderText = "More Information";
+
+  var okayButtonText = "OK";
+  var cancelButtonText = "Cancel";
+  var acceptButtonText = "Accept";
+  var declineButtonText = "Decline";
+  var closeButtonText = "Close";
+
+  var sTokenName = 'sToken';
+  var sToken = '1,54bd2296,5c84b89e,401E9A19-6112-4099-A53D-58758787266C,MxHJlaCF3mPI5YQ4/DqyJQ3pNFE=';
+  </script>
+  <script src="../Common/online-jscript.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/online-navigation-jscript.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/widgetParent.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /*
+
+*/
+function displayMessage(onClickEvent)
+{
+
+}
+
+function tsOrderChanged( url )
+{
+  new showConfirmPopup( '', 'The current order has unsaved changes that may be lost. Continue anyway?', function () { document.location = url }, '' );
+}
+
+// Used for drop-down menu in IE 6
+<!--//--><![CDATA[//><!--
+function startList() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("menuTop");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.id=="menuTopItem") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+
+                node.onfocus=function(){
+                    this.className+=" over";
+                }
+
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+
+                node.onblur=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+//--><!]]>
+
+var plusApi_loaded = false;
+var twitterApi_loaded = false;
+var fbApi_loaded = false;
+  </script>
+  <noscript>
+   <meta content="0; URL=error.asp" http-equiv="refresh"/>
+  </noscript>
+  <script type="text/javascript">
+   var longMonthsOfYear = new Array();
+longMonthsOfYear[ 0 ] = "January";
+longMonthsOfYear[ 1 ] = "February";
+longMonthsOfYear[ 2 ] = "March";
+longMonthsOfYear[ 3 ] = "April";
+longMonthsOfYear[ 4 ] = "May";
+longMonthsOfYear[ 5 ] = "June";
+longMonthsOfYear[ 6 ] = "July";
+longMonthsOfYear[ 7 ] = "August";
+longMonthsOfYear[ 8 ] = "September";
+longMonthsOfYear[ 9 ] = "October";
+longMonthsOfYear[ 10 ] = "November";
+longMonthsOfYear[ 11 ] = "December";
+  </script>
+  <script src="../Common/Widgets/articleWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/TabularSearchResultsWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/SearchFilterWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/LoginWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/VideoWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/Tk3DDVWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/CalendarWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/twitterWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googlePlusOneWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googleMapsWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookSocialWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookEvent.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/instagramFeedWebWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function loadLocalPage()
+{
+
+}
+
+var articleContext = {
+  searchHeaders : [ "Id", "Object Type", "Type", "Category", "Name", "Description", "Short Description", "Start Date", "End Date", "On Sale Date", "Sales Status", "Availability", "Available Number", "Keywords", "Additional Info", "Group", "Image 1", "Image 2", "thumbnail", "Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9", "Data 10", "Data 11", "Data 12", "Data 13", "Data 14", "Data 15", "Data 16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "Organization Short Description", "Sales Type", "Options", "Street", "City", "Province / State", "Postal Code", "Country", "Longitude", "Latitude", "Venue ID", "Venue Name", "Venue Description", "Venue Short Description", "Venue Group", "Venue Data 1", "Venue Data 2", "Venue Data 3", "Venue Data 4", "Venue Data 5", "Venue Data 6", "Venue Data 7", "Venue Data 8", "Venue Data 9", "Venue Data 10", "Venue Data 11", "Venue Data 12", "Series Name", "Minimum Price", "Maximum Price", "Upsell Article", "Add-on Article", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "Venue Organization Id", "Meta Description", "" ],
+  searchNames : [ "id", "object_type", "type", "category", "name", "description", "short_description", "start_date", "end_date", "on_sale_date", "sales_status", "availability_status", "availability_num", "keywords", "additional_info", "group", "image1", "image2", "thumbnail", "data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10", "data11", "data12", "data13", "data14", "data15", "data16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "organization_short_description", "sales_type", "options", "street", "city", "state", "zip", "country", "longitude", "latitude", "venue_id", "venue_name", "venue_description", "venue_short_description", "venue_group", "venue_data1", "venue_data2", "venue_data3", "venue_data4", "venue_data5", "venue_data6", "venue_data7", "venue_data8", "venue_data9", "venue_data10", "venue_data11", "venue_data12", "series_name", "min_price", "max_price", "upsell_article_id", "addon_article_id", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "organization_id", "meta_description", "" ],
+  searchResults : [ 
+    [ "2B16CA52-9EAC-4A15-9AB3-41C49CBF335D", "P", "Matinee", "", "MU0310SWE", "<p>The UW-Whitewater Symphonic Wind Ensemble is the premiere wind and percussion ensemble on campus. SWE has distinguished itself internationally, nationally and regionally and honors include being the first university band from Wisconsin to perform at Carnegie Hall. The Symphonic Wind Ensemble has performed by invitation at conventions of the British Association of Symphonic Bands and Ensembles, College Band Directors National Conference and the National Association of Music Educators.<br />\n<br />\nThe UW-Whitewater University/Community Band is specifically designed to serve the non-music major, community resident and UW-W staff member that wants to have fun playing in a band.<\/p>", "Concert: Symphonic Wind Ensemble & University/Community Band", "Sunday, March 10, 2019 - 03:00 PM", "", "", "S", "E", "1342", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "Symphonic Wind Ensemble", "& University Band", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "4725706F-BE8E-4370-94E2-E87ACEB23836", "Young Auditorium GA", "Young Auditorium GA", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "7868ADCC-DD71-44F2-AA71-555A3A0C0A15", "P", "Evening", "Music", "MU0310ChamberSingers", "<p>The UW-Whitewater Chamber Singers and Vocal Jazz Ensemble come together for a concert with a wide repertoire. Featuring works ranging from Renaissance madrigals, to contemporary jazz, pop, and Broadway, to masterworks of the eighteenth and nineteenth centuries, to music composed within the last several years, both ensembles are comprised of both music majors and non majors from across campus.<\/p>", "Concert: Chamber Singers and Vocal Jazz", "Sunday, March 10, 2019 - 07:30 PM", "", "", "S", "E", "273", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "Chamber Singers", "& Vocal Jazz", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3","7"], "950 W Main St", "Whitewater", "WI", "", "USA", "", "", "7E3A227B-BE50-4572-82C7-245FBC97D94C", "Light Recital Hall", "Light Recital Hall", "Light Recital Hall", "Theatre/Dance/Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "4641CDBF-B553-4F53-9E8C-7CC5717A2E5A", "P", "Evening", "Music", "MU0312Sonict", "<p><span style=\"font-size:11.0pt\"><span style=\"color:black\">UW-Whitewater alumni Grant Blaschka is a bassist and composer living in Madison Wisconsin. His work is inspired by an interest in the natural world, partial theory, and harmonic structures. Most often he is exploring the intersections between improvisation and composition, while utilizing computers and electronics. Recently he has been working on meditative and ethereal music which relies on just intonation and microtonal relationships, while pushing the bounds of natural harmonics on the upright bass.<\/span><\/span><\/p>", "Concert: Sonict presents Grant Blaschka", "Tuesday, March 12, 2019 - 07:30 PM", "", "", "S", "E", "308", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "Collect / Project", "", "Sonict Concert with", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3","7"], "950 W Main St", "Whitewater", "WI", "", "USA", "", "", "7E3A227B-BE50-4572-82C7-245FBC97D94C", "Light Recital Hall", "Light Recital Hall", "Light Recital Hall", "Theatre/Dance/Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "20654E18-CBF9-4E14-926E-CA55878CE849", "P", "Evening", "Theatre", "YA031219TUE730PMWinter", "<p>Shakespeare’s magnificent late play is a roller-coaster ride from romance to tragedy to comedy and finally to a place of transcendent beauty that few other works of art have ever gone. “A sad tale’s best for winter,” but after unleashing a wintry tempest onto his characters, Shakespeare ultimately conjures spring’s miraculous rebirth. Watch as the American Shakespeare Center blends renaissance era stage craft with modern sensibility, giving today’s audiences a true taste of a Shakespearean theatre-going experience.<\/p>", "The Winter\'s Tale", "Tuesday, March 12, 2019 - 07:30 PM", "", "", "S", "G", "440", "", "https://tickets.uww.edu/online/article/winterticle/midsummer", "", "/content/Images/18-19 Young Auditorium/AmShakespeareCtr_150x150.jpg", "", "", "", "The Winter\'s Tale", "American Shakespeare Center", "", "Sound Bites", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Young Auditorium", "$16.00", "$26.50", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "203632E5-21DA-44E0-ADB9-D0DA953B4C19", "P", "Evening", "Theatre", "YA031319WED730PMErrors", "<p>In this rollicking farce, Shakespeare elevates Roman comedy to dizzying heights. Two long-separated twins, their two tricky servants (also twins), a jealous wife, and her lovelorn sister romp through this fast-paced comedy. Filled with mistaken identities and slapstick humor, The Comedy of Errors will have audiences laughing from the first confusion to the last. Prepare for a level of audience contact rarely seen in modern day theatre as the American Shakespeare Center breathes new life into the Bard’s finest works!<\/p>\n\n<p>&nbsp;<\/p>", "The Comedy of Errors", "Wednesday, March 13, 2019 - 07:30 PM", "", "", "S", "G", "426", "", "https://tickets.uww.edu/online/article/comedy", "", "/content/Images/18-19 Young Auditorium/AmShakespeareCtr_150x150.jpg", "", "", "", "The Comedy of Errors", "American Shakespeare Center", "", "Sound Bites", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Young Auditorium", "$16.00", "$26.50", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "07EDD95A-4BB3-4751-BF8E-4DFA11E79640", "P", "Matinee", "", "TD0316Dance*O", "<p>Featuring choreography by faculty, students and guest artists, <em>DanceScapes ‘19 <\/em>combines diverse creative visions into performances that will entertain, provoke thought, express an idea or story, or simply present movement for movement’s sake. This year, the dance program is proud to host guest choreographers, Alfonso Cervera and Alessandra Williams as part of the Inclusive Excellence Fellows program, who will create exciting works that will bring inspiring vitality to this seasons’ performance.<\/p>\n\n<p><em><strong>\"Dance is the hidden language of the soul of the body\"<\/strong><\/em> - Martha Graham<\/p>", "DanceScapes \'19", "Saturday, March 16, 2019 - 02:00 PM", "", "", "S", "G", "188", "dance,theater,theatre", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=7F56B38B-834B-4032-9D74-4677E1C940E7&BOparam::WScontent::loadArticle::context_id=07EDD95A-4BB3-4751-BF8E-4DFA11E79640", "", "https://tickets.uww.edu/content/Images/18-19TheatreDance/1819 Dance dummy 200x200.jpg", "", "", "DanceScapes \'19", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","6","7"], "950 West Main Street", "Whitewater", "WI", "53190", "USA", "", "", "F5166F7F-42F5-4B56-8DB9-059E893F2E41", "Barnett Theatre", "Barnett Theatre", "", "Theater / Dance / Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19TDSeason", "$5.50", "$12.00", "BB52A8ED-D6E8-481B-A006-BCCE48F22FAF", "", "", "", "", "", "", "", "#SCAPES19", "https://www.facebook.com/pg/UWWTheatreDance/events", "Public", "", "", "" ],
+    [ "2A772CBD-B0F6-4552-A83C-40A9A9A2F18B", "P", "Matinee", "Music", "MU0316KarenBoe", "Faculty member Karen Boe, piano will be joined by guest artists Xavier Pleindoux, violin, and Karl Lavine, cello. This talented group of musicians will perform works including Claure Debussy\'s first composition, <em>Piano Trio in G major<\/em> and Maurice Ravel\'s <em>Piano Trio in A minor<\/em>.", "Concert: Karen Boe, Piano & Friends", "Saturday, March 16, 2019 - 07:30 PM", "", "", "S", "E", "328", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "piano & friends", "", "Karen Boe,", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3"], "950 W Main St", "Whitewater", "WI", "", "USA", "", "", "7E3A227B-BE50-4572-82C7-245FBC97D94C", "Light Recital Hall", "Light Recital Hall", "Light Recital Hall", "Theatre/Dance/Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "E71A2E38-23F6-476F-B9A3-C66F83619BA3", "P", "Evening", "Music", "YA031619SAT730PMBeethoven", "<p>The Lake Geneva Symphony Orchestra culminates its nine-year “Beethoven Project” with a performance of the monumental Ninth Symphony, complete with chorus and soloists. The LGSO launched its multi-year effort to perform one Beethoven symphony each season in 2010–11, and is pleased to finish that journey at Young Auditorium with Beethoven’s massive final symphony and celebration of joy.<\/p>\n\n<p>&nbsp;<\/p>", "Beethoven\'s 9th", "Saturday, March 16, 2019 - 07:30 PM", "", "", "S", "L", "91", "", "https://tickets.uww.edu/online/article/beethoven", "", "/content/Images/18-19 Young Auditorium/LakeGenevaSymphony_150x150.jpg", "", "", "", "Beethoven\'s 9th", "Lake Geneva Symphony Orchestra", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Young Auditorium", "$14.50", "$21.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "55C68356-9E9F-4600-9706-3366AB5908CF", "P", "Matinee", "", "TD0317Dance", "<p>Featuring choreography by faculty, students and guest artists, <em>DanceScapes ‘19 <\/em>combines diverse creative visions into performances that will entertain, provoke thought, express an idea or story, or simply present movement for movement’s sake. This year, the dance program is proud to host guest choreographers, Alfonso Cervera and Alessandra Williams as part of the Inclusive Excellence Fellows program, who will create exciting works that will bring inspiring vitality to this seasons’ performance.<\/p>\n\n<p><em><strong>\"Dance is the hidden language of the soul of the body\"<\/strong><\/em> - Martha Graham<\/p>", "DanceScapes \'19", "Sunday, March 17, 2019 - 02:00 PM", "", "", "S", "E", "203", "dance,theater,theatre", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=7F56B38B-834B-4032-9D74-4677E1C940E7&BOparam::WScontent::loadArticle::context_id=07EDD95A-4BB3-4751-BF8E-4DFA11E79640", "", "https://tickets.uww.edu/content/Images/18-19TheatreDance/1819 Dance dummy 200x200.jpg", "", "", "DanceScapes \'19", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","6","7"], "950 West Main Street", "Whitewater", "WI", "53190", "USA", "", "", "F5166F7F-42F5-4B56-8DB9-059E893F2E41", "Barnett Theatre", "Barnett Theatre", "", "Theater / Dance / Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19TDSeason", "$5.50", "$12.00", "BB52A8ED-D6E8-481B-A006-BCCE48F22FAF", "", "", "", "", "", "", "", "#SCAPES19", "https://www.facebook.com/pg/UWWTheatreDance/events", "Public", "", "", "" ],
+    [ "BC95F770-CB9C-427F-BC98-449939BE11A3", "P", "Evening", "", "TD0318Dance", "<p>Featuring choreography by faculty, students and guest artists, <em>DanceScapes ‘19 <\/em>combines diverse creative visions into performances that will entertain, provoke thought, express an idea or story, or simply present movement for movement’s sake. This year, the dance program is proud to host guest choreographers, Alfonso Cervera and Alessandra Williams as part of the Inclusive Excellence Fellows program, who will create exciting works that will bring inspiring vitality to this seasons’ performance.<\/p>\n\n<p><em><strong>\"Dance is the hidden language of the soul of the body\"<\/strong><\/em> - Martha Graham<\/p>", "DanceScapes \'19", "Monday, March 18, 2019 - 07:30 PM", "", "", "S", "G", "191", "dance,theater,theatre", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=7F56B38B-834B-4032-9D74-4677E1C940E7&BOparam::WScontent::loadArticle::context_id=07EDD95A-4BB3-4751-BF8E-4DFA11E79640", "", "https://tickets.uww.edu/content/Images/18-19TheatreDance/1819 Dance dummy 200x200.jpg", "", "", "DanceScapes \'19", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","6","7"], "950 West Main Street", "Whitewater", "WI", "53190", "USA", "", "", "F5166F7F-42F5-4B56-8DB9-059E893F2E41", "Barnett Theatre", "Barnett Theatre", "", "Theater / Dance / Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19TDSeason", "$5.50", "$12.00", "BB52A8ED-D6E8-481B-A006-BCCE48F22FAF", "", "", "", "", "", "", "", "#SCAPES19", "https://www.facebook.com/pg/UWWTheatreDance/events", "Public", "", "", "" ],
+    [ "3110ACAB-FCD4-4AC4-ABF7-1177B70A050F", "P", "Evening", "Dance", "YA031919TUE730PMMayumana", "<p>Cutting-edge Israeli music and dance troupe MAYUMANA presents Currents, a spectacular visual and auditory experience, originally created for the Jerusalem Light Festival. Inspired by the historical ‘Battle of Currents’ between Thomas Edison and Nikola Tesla, two separate performance troops, each inspired by a different esthetic and artistic approach, use unique sounds, lights, and visual effects to portray different viewpoints of the essence of light and electricity.<\/p>", "Mayumana - Currents", "Tuesday, March 19, 2019 - 07:30 PM", "", "", "S", "G", "444", "", "https://tickets.uww.edu/online/article/mayumana", "", "/content/Images/18-19 Young Auditorium/Mayumana_150x150.jpg", "", "", "Cultural Affairs Presents", "Contemporary Issues", "MAYUMANA", "Currents", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Contemporary Issues & Cultural Affairs", "$22.50", "$35.50", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "A590C4E4-D3E6-4BE8-A5CC-ED89E4EA272A", "P", "Evening", "", "TD0319Dance*C", "<p>Featuring choreography by faculty, students and guest artists, <em>DanceScapes ‘19 <\/em>combines diverse creative visions into performances that will entertain, provoke thought, express an idea or story, or simply present movement for movement’s sake. This year, the dance program is proud to host guest choreographers, Alfonso Cervera and Alessandra Williams as part of the Inclusive Excellence Fellows program, who will create exciting works that will bring inspiring vitality to this seasons’ performance.<\/p>\n\n<p><em><strong>\"Dance is the hidden language of the soul of the body\"<\/strong><\/em> - Martha Graham<\/p>", "DanceScapes \'19", "Tuesday, March 19, 2019 - 07:30 PM", "", "", "S", "E", "232", "dance,theater,theatre", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=7F56B38B-834B-4032-9D74-4677E1C940E7&BOparam::WScontent::loadArticle::context_id=07EDD95A-4BB3-4751-BF8E-4DFA11E79640", "", "https://tickets.uww.edu/content/Images/18-19TheatreDance/1819 Dance dummy 200x200.jpg", "", "", "DanceScapes \'19", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","6","7"], "950 West Main Street", "Whitewater", "WI", "53190", "USA", "", "", "F5166F7F-42F5-4B56-8DB9-059E893F2E41", "Barnett Theatre", "Barnett Theatre", "", "Theater / Dance / Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19TDSeason", "$5.50", "$12.00", "BB52A8ED-D6E8-481B-A006-BCCE48F22FAF", "", "", "", "", "", "", "", "#SCAPES19", "https://www.facebook.com/pg/UWWTheatreDance/events", "Public", "", "", "" ],
+    [ "EFA3278C-F8D9-450A-9FA9-46F9E457A6AF", "P", "Evening", "Dinner", "DN040619SAT6PMCountryRoyaltyDinner", "<p>We\'ve made it easy to decide where to gather with your friends before the <em>Country Royalty <\/em>performance by offering a pre-show dining experience right here at Young Auditorium. The chefs at UW-Dining Services have come up with a delicious themed menu.<br />\n<br />\nMenu: Bourbon Glazed Smoked Pork Loin, Southern Skillet Sweet Potatoes, Chicken Fried Steak, Mashed Potatoes, Green Beans with Bacon, Chopped Salad with Peach Vinaigrette, Chocolate Cake with Cherries and Whipped Cream<\/p>\n\n<p>Meals are served buffet style with water and coffee. A cash bar is available and seating for dinner begins 90 minutes before curtain time, providing ample time to enjoy the dining experience and conversation prior to curtain time. Meals are hosted in the Kachel Center, which is adjacent to the auditorium, in tables of eight.<\/p>", "Country Royalty Dinner", "Saturday, April 06, 2019 - 06:00 PM", "", "", "S", "L", "1", "", "https://www.tickets.uww.edu/online/article/country-royalty-dinner", "", "/content/Images/18-19 Young Auditorium/DiningOptionThumb_CRoyalty_150x150.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ["1","3"], ["1","2","3","4","7"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "645B19B3-18B4-4B26-ADC6-20080A7130DA", "Kachel Center Dining", "Kachel Center Dining", "Kachel Center Dining", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Kachel Center Dinner", "$18.00", "$18.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "B0081545-05A6-4D89-B562-1EA71D8AF42D", "P", "Evening", "Music", "YA040619SAT730PMCountryRoyalty", "The two biggest legends of country music will appear on the same stage at the same time when Obie award winner Jason Petty and Katie Deal pay tribute to Hank Williams and Patsy Cline. In a show like no other, Petty and Martin honor the two most influential singers in country music history. Over 20 of their chart-topping hits will be performed with a live band. These are the two legends that audiences all around the world want to see, as performed by two of the best entertainers in the country.", "Country Royalty - Jason Petty & Katie Deal pay Tribute to Hank Williams & Patsy Cline", "Saturday, April 06, 2019 - 07:30 PM", "", "", "S", "L", "84", "", "https://tickets.uww.edu/online/article/country-royalty19", "", "/content/Images/18-19 Young Auditorium/CountryRoyalty_150x150.jpg", "", "", "Cultural Affairs Presents", "Country Royalty - Jason Petty", "and Katie Deal pay Tribute to", "Hank Williams & Patsy Cline", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Cultural Affairs", "$17.50", "$32.50", "", "8D5A8C5A-8594-4ED2-BA64-8BF935C96457", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "05F327BE-BD92-4FA8-855A-505CA68C0D39", "P", "Evening", "", "MM0407Brass*C", "After 35 years the winds of change have brought the Whitewater Brass Quintet a new musician. The ensemble welcomes its newest member Dafydd Bevil, horn; with Frank Hanson and Jessica Jensen, trumpet; Mike Dugan, trombone; and John Tuinstra, tuba. Join them to celebrate their 36th year of music mastery.<br />\n<br />\n&nbsp;", "Transitional Variance", "Sunday, April 07, 2019 - 03:00 PM", "", "", "S", "E", "293", "Mosaics", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=08E13D7F-DBFE-4415-BC23-5EBAA02C89AD&BOparam::WScontent::loadArticle::context_id=05F327BE-BD92-4FA8-855A-505CA68C0D39", "", "/content/Images/18-19 Music Mosaics/1819 MM Transitional Variance 200x200.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ["1"], ["1","7"], "950 W Main St", "Whitewater", "WI", "", "USA", "", "", "7E3A227B-BE50-4572-82C7-245FBC97D94C", "Light Recital Hall", "Light Recital Hall", "Light Recital Hall", "Theatre/Dance/Music", "", "", "", "", "", "", "", "", "", "", "", "", "Music Mosaics", "$5.50", "$12.00", "", "", "", "", "", "", "", "", "#MUSICMOSAICS", "https://www.facebook.com/pg/uwwmusic/events/?ref=p", "Public", "", "", "" ],
+    [ "E310DABE-B214-4491-852D-6BA2EA218380", "P", "Evening", "", "MU0309WSO", "The Whitewater Symphony Orchestra is the flagship orchestra at UW-W and includes woodwinds, brass, percussion, and strings. In addition to performing 2-3 concerts each semester, the Symphony Orchestra tours semi-annually. Repertoire selections focus on standard symphonic masterworks, but include a variety of works from the classical period to modern day. Each year student concerto soloists are selected to perform with the orchestras through the annual concerto competition and members of the music faculty at UW-Whitewater make guest solo appearances with the orchestras.", "Concert: Whitewater Symphony Orchestra", "Wednesday, April 10, 2019 - 07:30 PM", "", "", "S", "E", "1546", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "Whitewater Symphony Orchestra", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "4725706F-BE8E-4370-94E2-E87ACEB23836", "Young Auditorium GA", "Young Auditorium GA", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "9DFFF687-8C0F-4F32-873B-230FEF95FBE2", "P", "Evening", "Musical", "YA041319SAT3PMMagicBus", "<p>When the planetarium is closed and the field trip is ruined, The Magic School Bus blasts off into outer space to explore the solar system! Ms. Frizzle gets separated from the group and her class must travel through the planets and beyond to rescue her.<\/p>", "The Magic School Bus", "Saturday, April 13, 2019 - 03:00 PM", "", "", "S", "G", "377", "", "https://tickets.uww.edu/online/article/schoolbus", "", "/content/Images/18-19 Young Auditorium/Magic Bus_150x150.jpg", "", "", "", "Horizons Family Series", "The Magic School Bus", "Lost in the Solar System", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Horizons Family", "$10.50", "$17.50", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "D760BB38-1CB8-4E13-86E8-840B1623CD48", "P", "Evening", "Music", "MU0414Sonict", "Cosmographie performances convey awareness and inspiration to the audience concerning our earth and its environment. These performances bring live music, interactive video, audio mash-ups, poetry, dance, and natural soundscapes into a moving, thought-provoking event.", "Concert: Sonict presents Cosmographie", "Sunday, April 14, 2019 - 07:30 PM", "", "", "S", "E", "333", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "Cosmographie", "", "Sonict Concert with", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3","7"], "950 W Main St", "Whitewater", "WI", "", "USA", "", "", "7E3A227B-BE50-4572-82C7-245FBC97D94C", "Light Recital Hall", "Light Recital Hall", "Light Recital Hall", "Theatre/Dance/Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "293BA2A0-B91D-4390-9FC9-3B6EDB9F5B26", "P", "Evening", "Theatre", "YA042819SUN7PMRent", "<p>In 1996, an original rock musical by a little-known composer opened on Broadway and forever changed the landscape of American theatre. Two decades later, Jonathan Larson’s RENT continues to speak loudly and defiantly to audiences across generations and all over the world. And now, this Pulitzer Prize and Tony Award®-winning masterpiece returns to the stage in a vibrant 20th anniversary touring production. A re-imagining of Puccini’s La Bohème, RENT follows an unforgettable year in the lives of seven artists struggling to follow their dreams without selling out. With its inspiring message of joy and hope in the face of fear, this timeless celebration of friendship and creativity reminds us to measure our lives with the only thing that truly matters—love.<\/p>", "Rent", "Sunday, April 28, 2019 - 07:00 PM", "", "", "S", "L", "183", "", "https://tickets.uww.edu/online/article/rent", "", "/content/Images/18-19 Young Auditorium/Rent_150x150.jpg", "", "", "Cultural Affairs Presents", "RENT", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","2","3"], "930 W Main St", "Whitewater", "WI", "53190", "USA", "", "", "B94749E0-09B2-44EC-8BF6-4CE91C19DB8A", "Young Auditorium", "Young Auditorium", "Young Auditorium", "Young Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "Cultural Affairs", "$37.50", "$59.50", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "F47F3E90-79C7-4E70-A68F-0E0ED170D482", "P", "Evening", "Music", "MU0430Holocaust", "Professor Matt Sintchak will present a concert of works exporing the Holocaust as part of Yom HaShoah, the Holocaust Memorial holiday.", "Concert: Music and the Holocaust by faculty member Matt Sintchak", "Tuesday, April 30, 2019 - 07:30 PM", "", "", "S", "E", "341", "", "https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367", "", "/content/Images/18-19 Music Mosaics/1819 Music Dept Event Thumbnail 400x400 - final.jpg", "", "", "Music and the Holocaust", "with Matt Sintchak", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3","7"], "950 W Main St", "Whitewater", "WI", "", "USA", "", "", "7E3A227B-BE50-4572-82C7-245FBC97D94C", "Light Recital Hall", "Light Recital Hall", "Light Recital Hall", "Theatre/Dance/Music", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Music FGA", "$5.50", "$8.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ]
+  ],
+  searchFilters : [ 
+    { name : "object_type_filter", label : "Type Filter", className : "objectTypeFilterList", clearFilterLabel : "Clear Type Filter", selectedValue : "", values : [  ]  },
+    { name : "month_filter", label : "Month Filter", className : "monthFilterList", clearFilterLabel : "Clear Month Filter", selectedValue : "", values : [  ]  },
+    { name : "city_filter", label : "City Filter", className : "cityFilterList", clearFilterLabel : "Clear City Filter", selectedValue : "", values : [  ]  },
+    { name : "venue_filter", label : "Venue Filter", className : "venueFilterList", clearFilterLabel : "Clear Venue Filter", selectedValue : "", values : [  ]  },
+    { name : "category_filter", label : "Category Filter", className : "categoryFilterList", clearFilterLabel : "Clear Category Filter", selectedValue : "", values : [  ]  },
+    { name : "organization_short_description_filter", label : "Organization Filter", className : "organizationShortDescriptionFilterList", clearFilterLabel : "Clear Organization Filter", selectedValue : "", values : [  ]  },
+    { name : "filter1", label : "Filter 1", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter2", label : "Filter 2", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter3", label : "Filter 3", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter4", label : "Filter 4", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent1", label : "Filter Parent 1", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent2", label : "Filter Parent 2", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter1", label : "Multi Filter 1", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter2", label : "Multi Filter 2", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  }
+  ],
+  searchLabels: { performances: "Events", date: "Date", unavailable_message: "No Tickets Required", sold_out_message: "Sold Out!", on_sale_message: "On sale", to_be_determined_message: "TBD", next: "»", previous: "«", avail_excellent: "Excellent", avail_good: "Good", avail_limited: "Limited", avail_sold_out: "Sold Out", promo_item: "This item is available with a promocode", buy_seats_message: "Buy", buy_bundle_message: "Buy", buy_item_message: "Buy", buy_gift_message: "Donate", buy_storedvalueitem_message: "Buy", view_article_message: "View", upsell_seats_message: "Upgrade", upsell_bundle_message: "Upgrade", upsell_item_message: "Upgrade", upsell_gift_message: "Upgrade", upsell_storedvalueitem_message: "Upgrade", upsell_popup_title: "Interested in Upgrading?", addon_seats_message: "Select", addon_bundle_message: "Select", addon_item_message: "Select", addon_gift_message: "Select", addon_storedvalueitem_message: "Select", price_title: "Price", availability_title: "Availability", active_promo_codes: "Active promotions:", promo_code_item_title: "This item is available with a promocode", has_promo_code: "false", brand_path: "../../content/images/branding/" }, 
+  searchSUMO: { availability_access: "true", mapSelect_access: "true" }, 
+  pagination: { current_page: "1", page_size: "20", total_pages: "2" },
+  loginLabels: { pageTarget: "maintainAccount.asp", loginBoxClass: "login-required", forgotPassword: "true", formLoginName: "", accountLogin: "true" }, 
+  contextId: "", 
+  articleId: "64C39D67-4069-46E6-B3B1-060BB7601A7A", 
+  articleSearchId: "", 
+  salesType: "P",
+  sToken: "1,54bd2296,5c84b89e,401E9A19-6112-4099-A53D-58758787266C,MxHJlaCF3mPI5YQ4/DqyJQ3pNFE="
+ };
+
+createSearchMapping(articleContext);
+
+tsAddLoadEvent(function() {
+    setCalendarWidgetDisplayMonth();
+    drawWidgets(articleContext);
+    insertToken(articleContext);
+});
+
+function setCalendarWidgetDisplayMonth()
+{
+    // If a date has been selected from the calendar widget, we will receive a 'search_from' parameter.
+    // Pass this back to the widget so that it redisplays the month that was previously visible
+    
+}
+  </script>
+  <script type="text/javascript">
+   function doGAClicks(selectedItem) {
+        //do nothing
+    };
+
+    function gaTrackEvent(category, action) {
+        //do nothing
+    };
+  </script>
+ </head>
+ <body lang="en" onload='startList();loadLocalPage(); displayMessage(""); displayOnOfferTimeout();' onunload="closeChildren()">
+  <div class="spinner" id="spinner">
+  </div>
+  <script>
+   var spinnerDelayTimeout;
+    
+    var showSpinner = function(){};
+    var spinnerElement = document.querySelector('body')
+
+
+
+    var spinnerDelay = 3;
+    
+
+    function stopSpinner() {
+        spinnerElement.classList.remove('show-spinner');
+        cancelSpinnerTimeouts();
+        expandSpinner();
+    }
+
+    function startSpinner() {
+        expandSpinner();
+        spinnerElement.classList.add('show-spinner');
+    }
+    
+    
+    function cancelSpinnerTimeouts() {
+        clearTimeout(spinnerDelayTimeout);
+    }
+    
+    function expandSpinner() {
+        spinnerElement.classList.remove('minimize-spinner');
+    }
+    
+    function minimizeSpinner() {
+        spinnerElement.classList.add('minimize-spinner');
+    }
+    
+    // stop spinner if a JS error occurred
+    window.addEventListener('error', stopSpinner);
+    
+    // Mimimize spinner if clicked
+    spinnerElement.addEventListener('click', minimizeSpinner);
+
+    // Shows the spinner if page takes long to load
+    (showSpinner = function() {
+        if (!document.querySelector('#popupDiv')) {
+            spinnerDelayTimeout = setTimeout(startSpinner, spinnerDelay*1000);
+        }
+    })();
+  </script>
+  <div id="header">
+   <div class="header-content container">
+    <a href="default.asp" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <img alt="" src="/ArticleMedia/Images/UWW%20Ticket%20Site%20Logo-White%20copy.png"/>
+    </a>
+   </div>
+   <a class="menu-toggle menu-button btn btn-default">
+    <span class="glyphicon glyphicon-align-justify">
+    </span>
+   </a>
+   <a class="menu-toggle sidebar-button btn btn-default">
+    <span class="glyphicon glyphicon-shopping-cart">
+    </span>
+   </a>
+  </div>
+  <div class="content-wrapper">
+   <div id="menu">
+    <div class="menuContainer main-nav">
+     <ul class="nav clearfix" id="menuTop">
+      <li class="menuTopItem " id="menuTopItem0">
+       <a class="menu_item menu-link" href="default.asp?menu_id=5A16B5CC-1FF7-4875-921B-4EA7D913F6D5" tabindex="1" title="HOME">
+        <span class="menu-label">
+         HOME
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem has-sub-menu clearfix" id="menuTopItem1">
+       <a class="menu_item empty-link-dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" tabindex="2" title="EVENT SERIES">
+        <span class="menu-label">
+         EVENT SERIES
+        </span>
+        <span class="glyphicon glyphicon-chevron-down">
+        </span>
+       </a>
+       <ul class="menuSub dropdown-menu">
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=7162FF8C-4BC2-49E3-9CCF-D31E04E042E9&amp;menu_id=B224A558-C931-4580-8547-59AF477D858F&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="3" title="Athletics">
+          Athletics
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=B415142F-8F02-4844-8786-96546E661ED5" tabindex="4" target="_blank" title="Music Mosaics">
+          Music Mosaics
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=683F60CE-236D-42BE-B952-60CA2DF77367" tabindex="5" target="_blank" title="Music Faculty/Guest Artists">
+          Music Faculty/Guest Artists
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="https://tickets.uww.edu/online/default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=70CE0906-7846-4F26-A51C-4EF736A7B37A" tabindex="6" target="_blank" title="Theatre/Dance Dept">
+          Theatre/Dance Dept
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=5D73804A-F108-4066-A12C-87942B291000&amp;menu_id=B224A558-C931-4580-8547-59AF477D858F&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="7" title="Young Auditorium">
+          Young Auditorium
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menuTopItem has-sub-menu clearfix" id="menuTopItem2">
+       <a class="menu_item menu-link" data-target="#" data-toggle="dropdown" href="javascript:void(0);" tabindex="8" title="SEASON TICKETS">
+        <span class="menu-label">
+         SEASON TICKETS
+        </span>
+        <span class="glyphicon glyphicon-chevron-down">
+        </span>
+       </a>
+       <!--
+                                         <a tabindex="9" href="https://tickets.uww.edu/Online/bundleSelect.asp?createBO::WSbundlemap=1&amp;BOparam::WSbundlemap::loadBestAvailable::bundle_id=8F0FAE45-89C8-444A-BC1E-F2DD5A6C128B" class="menu_item menu-link" title="SEASON TICKETS" target="_blank">
+                                            <span class="menu-label">SEASON TICKETS</span>
+                                        </a>										
+                                        <a tabindex="10" href="javascript:void(0);" class="menu_item dropdown-toggle" title="SEASON TICKETS" data-toggle="dropdown" data-target="#" >
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </a>
+										-->
+       <ul class="menuSub dropdown-menu">
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=BE8EE3FE-35BB-4C81-8689-C93F47C6AA63&amp;menu_id=3E3FB5C2-B4F2-4C6A-97BB-95098C45111B&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="11" title="2018-19 Athletics Seasons">
+          2018-19 Athletics Seasons
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=5D82163A-22A4-4D2C-AB83-888E56CB0EBB&amp;menu_id=3E3FB5C2-B4F2-4C6A-97BB-95098C45111B&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="12" title="2019 Gala Holiday Dinner &amp; Concert">
+          2019 Gala Holiday Dinner &amp; Concert
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menuTopItem has-sub-menu clearfix" id="menuTopItem3">
+       <a class="menu_item empty-link-dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" tabindex="13" title="CAMPUS LINKS">
+        <span class="menu-label">
+         CAMPUS LINKS
+        </span>
+        <span class="glyphicon glyphicon-chevron-down">
+        </span>
+       </a>
+       <ul class="menuSub dropdown-menu">
+        <li class="menuSubItem">
+         <a href="http://www.uwwsports.com" tabindex="14" target="_blank" title="Athletics">
+          Athletics
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="http://www.uww.edu/cac" tabindex="15" target="_blank" title="College of Arts &amp; Communication">
+          College of Arts &amp; Communication
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="http://www.uww.edu/cac/music" tabindex="16" target="_blank" title="Music Department">
+          Music Department
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="http://www.uww.edu/cac/theatre-dance" tabindex="17" target="_blank" title="Theatre/Dance Department">
+          Theatre/Dance Department
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="http://www.uww.edu/youngauditorium" tabindex="18" target="_blank" title="Young Auditorium">
+          Young Auditorium
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="http://www.uww.edu/uc" tabindex="19" target="_blank" title="University Center">
+          University Center
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="http://www.uww.edu" tabindex="20" target="_blank" title="UW-Whitewater">
+          UW-Whitewater
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menuTopItem has-sub-menu clearfix" id="menuTopItem4">
+       <a class="menu_item empty-link-dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" tabindex="21" title="DIRECTIONS &amp; PARKING">
+        <span class="menu-label">
+         DIRECTIONS &amp; PARKING
+        </span>
+        <span class="glyphicon glyphicon-chevron-down">
+        </span>
+       </a>
+       <ul class="menuSub dropdown-menu">
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=14ADBF19-109A-4F5E-AC19-1B5274379692&amp;menu_id=3CD3099C-E1FA-45ED-8066-9C7856768BBA&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="22" title="Performing Arts Parking">
+          Performing Arts Parking
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=F093A118-3FBE-4CC6-A16A-DDD873467801&amp;menu_id=3CD3099C-E1FA-45ED-8066-9C7856768BBA&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="23" title="Performing Arts Directions">
+          Performing Arts Directions
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=C371CD34-159E-4385-8ECF-C7BBA62340B2&amp;menu_id=3CD3099C-E1FA-45ED-8066-9C7856768BBA&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="24" title="Athletics Parking &amp; Directions">
+          Athletics Parking &amp; Directions
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menuTopItem " id="menuTopItem5">
+       <a class="menu_item menu-link" href="http://www.uww.edu/youngauditorium/membership" tabindex="25" target="_blank" title="YA MEMBERSHIP">
+        <span class="menu-label">
+         YA MEMBERSHIP
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem has-sub-menu clearfix" id="menuTopItem6">
+       <a class="menu_item empty-link-dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" tabindex="26" title="ACCESSIBILITY">
+        <span class="menu-label">
+         ACCESSIBILITY
+        </span>
+        <span class="glyphicon glyphicon-chevron-down">
+        </span>
+       </a>
+       <ul class="menuSub dropdown-menu">
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=998F35C9-446A-4784-97E4-26FBB5F385A3&amp;menu_id=1CC35C21-4C09-44F1-81EA-D430D480F985&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="27" title="Performing Arts Accessibility">
+          Performing Arts Accessibility
+         </a>
+        </li>
+        <li class="menuSubItem">
+         <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=9AE8D180-E96F-4498-AB62-A1E1CEEFCB3C&amp;menu_id=1CC35C21-4C09-44F1-81EA-D430D480F985&amp;sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" tabindex="28" title="Athletics Accessibility">
+          Athletics Accessibility
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menuTopItem " id="menuTopItem7">
+       <a class="menu_item menu-link" href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=C80F1BA2-E38A-4C10-AC30-83A4024C10B9&amp;menu_id=CEFC2C60-D289-4416-833C-0C99B49A3A6C" tabindex="29" title="CONTACT US">
+        <span class="menu-label">
+         CONTACT US
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem8">
+       <a class="menu_item menu-link" href="maintainAccount.asp?menu_id=77E87883-30DD-49E0-A827-A639DF828E6C" tabindex="30" title="My Account">
+        <span class="menu-label">
+         My Account
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem" id="menuTopItem-help">
+       <a class="menu_item menu-link" href="javascript:var jsPop=new showInformationPopup( 'Help', 'loadArticle.asp?BOparam::WScontent::loadArticle::article_id=F8103D8C-7EA0-4B4B-A37E-9DE398B93107' )" tabindex="31" title="Help">
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- customer/order information -->
+   <div class="customer-options" id="customer-utilities">
+    <!--ORDER DETAILS BOX-->
+    <div id="orderInfo">
+     <div id="customer-order-info">
+      <div class="customer-greeting">
+       <span class="greeting-message">
+        Order for
+       </span>
+       <span class="greeting-name">
+        Guest
+       </span>
+      </div>
+      <div class="customer-order shopping-cart-details order-message ">
+       <span id="orderInfoEmptyMessage">
+        Your shopping cart is empty.
+       </span>
+      </div>
+      <div class="customer-buttons">
+       <div class="cart-callout">
+        <a class="shopping-cart-link btn btn-default" href="shoppingCart.asp?sToken=1%2C54bd2296%2C5c84b89e%2C401E9A19-6112-4099-A53D-58758787266C%2CMxHJlaCF3mPI5YQ4%2FDqyJQ3pNFE%3D" id="orderInfoCartLink" tabindex="32" title="Shopping Cart">
+         <span>
+          Shopping Cart
+         </span>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menuContainer utility-nav">
+     <ul class="nav" id="utility-menu">
+      <li class="utility-menu-item" id="utility-menu-item-login">
+       <a class="menu_item" href="login.asp" tabindex="33" title="Login">
+        Login
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- CONTENT START -->
+   <div id="content">
+    <div class="container">
+     <div class="bodyDetails" id="default">
+      <div class="search-box" id="searchBox">
+       <form action="default.asp" class="form-inline" id="searchItems" method="post">
+        <input class="form-inline" name="sToken" type="hidden" value="1,54bd2296,5c84b89e,401E9A19-6112-4099-A53D-58758787266C,MxHJlaCF3mPI5YQ4/DqyJQ3pNFE="/>
+        <input name="BOset::WScontent::SearchCriteria::venue_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::city_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::month_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::object_type_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::category_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_from" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_to" type="hidden" value=""/>
+        <input name="doWork::WScontent::search" type="hidden" value="1"/>
+        <input name="BOparam::WScontent::search::article_search_id" type="hidden" value="EE8716B4-0827-4B0D-9ACB-038A148DF966"/>
+        <ul class="list-unstyled">
+         <li class="item-search-keyword">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Search Events
+           </span>
+           <input class="form-control" id="BOset::WScontent::SearchCriteria::search_criteria" name="BOset::WScontent::SearchCriteria::search_criteria" tabindex="34" title="Search Events" type="text" value=""/>
+          </label>
+         </li>
+         <li class="item-search-start-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Event Dates
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_from::0" name="BOset::WScontent::SearchCriteria::search_from" tabindex="35" title="Event Dates" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_from::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_from::0", "0", "true", "sToken", "1,54bd2296,5c84b89e,401E9A19-6112-4099-A53D-58758787266C,MxHJlaCF3mPI5YQ4/DqyJQ3pNFE=");' title="Show date picker" type="button">
+             </button>
+            </div>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-end-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            to
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_to::0" name="BOset::WScontent::SearchCriteria::search_to" tabindex="36" title="to" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_to::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_to::0", "0", "true", "sToken", "1,54bd2296,5c84b89e,401E9A19-6112-4099-A53D-58758787266C,MxHJlaCF3mPI5YQ4/DqyJQ3pNFE=");' title="Show date picker" type="button">
+             </button>
+            </div>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-submit">
+          <input class="btn btn-default" name="Go" onclick="doGAClicks('Search')" tabindex="37" type="submit" value="Go"/>
+         </li>
+        </ul>
+       </form>
+      </div>
+      <div class="articles has-primary-features has-secondary-features has-tertiary-features">
+       <!-- top scrolling features included -->
+       <div class="article-container primary-feature-wrapper">
+        <div class="carousel slide" data-ride="carousel" id="feature-box-wrap">
+         <ol class="carousel-indicators">
+          <li class="indicator-0 active" data-slide-to="0" data-target="#feature-box-wrap">
+          </li>
+          <li class="indicator-1" data-slide-to="1" data-target="#feature-box-wrap">
+          </li>
+          <li class="indicator-2" data-slide-to="2" data-target="#feature-box-wrap">
+          </li>
+          <li class="indicator-3" data-slide-to="3" data-target="#feature-box-wrap">
+          </li>
+         </ol>
+         <div class="carousel-inner" id="feature-box">
+          <div class="item item-0 active" data-target="feature">
+           <a href="http://www.uww.edu/youngauditorium" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+            <img alt="" src="/ArticleMedia/Images/YA-General-Carousel-Image-AV%20copy.jpg"/>
+           </a>
+          </div>
+          <div class="item item-1" data-target="feature">
+           <p xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+            <a href="http://www.uww.edu/cac/music" shape="rect">
+             <img alt="" src="/ArticleMedia/Images/MUSIC-General-Carousel-Image-AV%20copy.jpg"/>
+            </a>
+           </p>
+          </div>
+          <div class="item item-2" data-target="feature">
+           <a href="http://www.uww.edu/cac/theatre-dance" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+            <img alt="TheatreDance Department header" src="/ArticleMedia/Images/TD-General-Carousel-Image-AV.jpg"/>
+           </a>
+          </div>
+          <div class="item item-3" data-target="feature">
+           <a href="http://www.uwwsports.com" shape="rect" target="_blank" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+            <img alt="" src="/ArticleMedia/Images/Athletics%20Carousel%20Image.jpg"/>
+           </a>
+          </div>
+         </div>
+         <a class="left carousel-control" data-slide="prev" href="#feature-box-wrap">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+         </a>
+         <a class="right carousel-control" data-slide="next" href="#feature-box-wrap">
+          <span class="glyphicon glyphicon-chevron-right">
+          </span>
+         </a>
+        </div>
+       </div>
+       <div class="article-body-container">
+        <div class="article-container main-article-body">
+         <div id="avWidget_64C39D67-4069-46E6-B3B1-060BB7601A7A_IDRBZB00GZABOXHPNMSIWMBQBY2C5YH4Z0XJVT0BHFXPJ3E0MINFFP" name="avWidget" xmlns:av="http://www.audienceview.com/xml/email/" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+          <script type="text/javascript">
+           registerWidget( "SearchWebWidget2", "avWidget_64C39D67-4069-46E6-B3B1-060BB7601A7A_IDRBZB00GZABOXHPNMSIWMBQBY2C5YH4Z0XJVT0BHFXPJ3E0MINFFP", {
+  "SearchWebWidget2": "Upcoming Shows", 
+  
+  "css_class": "", 
+  
+  "css_id": "", 
+  
+  "css_style": "", 
+  
+  "showPrice": "true", 
+  
+  "showLegend": "true", 
+  
+  "showNoResults": "true", 
+  
+  "title": "Upcoming Shows", 
+   "1": "1"});
+          </script>
+         </div>
+        </div>
+        <div class="article-container secondary-linked-features">
+         <div class="promotional-code-input" id="promoCodeBox">
+          <form action="" method="get">
+           <input name="sToken" type="hidden" value="1,54bd2296,5c84b89e,401E9A19-6112-4099-A53D-58758787266C,MxHJlaCF3mPI5YQ4/DqyJQ3pNFE="/>
+           <input name="BOparam::WScontent::loadArticle::article_id" type="hidden" value="64C39D67-4069-46E6-B3B1-060BB7601A7A"/>
+           <h4>
+            <span class="glyphicon glyphicon-tag promotag">
+            </span>
+            Promotional Code
+           </h4>
+           <ul class="list-unstyled">
+            <li class="promotional-code-message">
+             If you have a promotion, please enter the Access Code here:
+            </li>
+            <li>
+             <div class="input-group">
+              <input class="form-control" id="promoCodeBoxInput" name="BOparam::WScontent::loadArticle::promocode_access_code" tabindex="38" title="If you have a promotion, please enter the Access Code here:" type="text"/>
+              <span class="input-group-btn">
+               <input class="btn btn-default" name="doWork::WScontent::loadArticle" onclick="doGAClicks('Apply')" tabindex="39" type="submit" value="Go"/>
+              </span>
+             </div>
+            </li>
+           </ul>
+          </form>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-0">
+          <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=7F56B38B-834B-4032-9D74-4677E1C940E7" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <img alt="DanceScapes '19" src="https://tickets.uww.edu/content/Images/18-19TheatreDance/19%20TD%20%235%20Feature%20Ad.jpg" style="margin: 5px; float: left; width: 260px; height: 324px;"/>
+          </a>
+         </div>
+        </div>
+        <div class="article-container tertiary-linked-features">
+         <div class="tertiary-linked-features-div" id="tertiary-linked-features-0">
+          <div id="avWidget_B3B83067-1483-45F9-827E-0905BCC4D388_IDHAXDYUEAUAHQMVBXQRGWYVSYSGOB4KPGW15DFNZHLAD3ABFZAMN" name="avWidget" xmlns:av="http://www.audienceview.com/xml/email/" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+           <script type="text/javascript">
+            registerWidget( "CalendarWidget", "avWidget_B3B83067-1483-45F9-827E-0905BCC4D388_IDHAXDYUEAUAHQMVBXQRGWYVSYSGOB4KPGW15DFNZHLAD3ABFZAMN", { "1": "1"});
+           </script>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!--\\ .bodyDetails -->
+   </div>
+   <!--\\ .container -->
+  </div>
+  <!--\\ #content -->
+  <div id="footer">
+   <div class="footer-content container">
+    <div class="row" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <div class="col-md-8" style="text-align: center;">
+      <span style="font-size:18px;">
+       <span style="font-weight: 700; line-height: 20px;">
+        UW-Whitewater Ticket Services
+       </span>
+      </span>
+      <br clear="none"/>
+      950 W Main St
+      <br clear="none"/>
+      Whitewater, WI 53190
+      <br clear="none"/>
+      (262) 472-2222
+      <br clear="none"/>
+      <br clear="none"/>
+      <strong>
+       HOURS:
+      </strong>
+      <br clear="none"/>
+      <strong>
+       Academic Year: M-F 9:30 a.m. - 5:00 p.m.
+       <br clear="none"/>
+       Summer/Winterim: M-F 9:30 a.m. - 4:00 p.m.
+      </strong>
+     </div>
+     <div class="col-md-8" style="text-align: center;">
+      <br clear="none"/>
+      <br clear="none"/>
+      <br clear="none"/>
+      <strong>
+       NO REFUNDS OR EXCHANGES ON ANY TICKET PURCHASES.
+       <br clear="none"/>
+       ALL EVENTS, DATES AND TIMES ARE SUBJECT TO CHANGE.
+      </strong>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!--\\ .content-wrapper -->
+  <div class="black_overlay" id="fade">
+  </div>
+  <!-- inclusion of bootstrap.js and jquery -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <script src="/lib/jquery/jquery.min.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js?_=7.31.1" type="text/javascript">
+  </script>
+  <!-- end of bootstrap.js and jquery -->
+  <!-- contains bootstrap specific function declarations -->
+  <script src="/lib/bootstrap/js/bootstrap-functions.js?_=7.31.1" type="text/javascript">
+  </script>
+  <!-- Logout Handler -->
+  <script>
+   $(document).ready(function() {
+    var body = $("body");
+    
+    body
+    .on("logged-out", function(e) {
+        var targetPage = "default.asp?";
+        window.location.assign("login.asp?targetPage="+encodeURIComponent(targetPage));
+    });
+    
+    // on pressing Enter key on an anchor trigger click
+    $("a").keypress(function(e){
+      if(e.keyCode == 13){
+        $(this).trigger("click");
+      }
+    });
+    
+    // When page is loaded make sure the Page Load Spinner is not shown
+    if (spinnerDelayTimeout) {
+        cancelSpinnerTimeouts();
+    }
+    
+    body.removeClass("show-spinner");
+    
+    // Show spinner when form submitted or link clicked
+    var onSubmit;
+    $("form").each(
+      //Trigger the spinner after any other onsubmit functions for the form
+      function(index)
+      {
+        onSubmit = $(this).attr("onsubmit");
+        onSubmit && onSubmit != "" ? onSubmit += ";" : onSubmit = "";
+        $(this).attr("onsubmit", onSubmit + "showSpinner()");
+      }
+    );
+    
+    $("a").click(function(e) {
+      var href = $(this).attr("href") || "";
+      var target = $(this).attr("target") || "";
+      
+      if ((target == "" || /^(_self|_top|_parent)/.test(href)) && href != "" && !/^(#|javascript:|mailto:|file:)/.test(href))
+        showSpinner();
+    });
+    
+    
+});
+  </script>
+  <!-- CONTENT END -->
+ </body>
+</html>
+<script>
+ $(function(){
+
+    // "Continue Shopping" and "Look for other events" buttons to redirect back to Brochure page user came from
+    $("a[name=continue-shopping], a[name=continueShopping], input[name=startOver], a[name=error-StartOver], input[name=error-StartOver]").on("click", function(e) {
+      var returnTo = getCookie('returnTo');
+      if(returnTo){
+        e.preventDefault();
+        deleteCookie('returnTo');
+        window.location.href = returnTo;
+      }
+    })
+
+    // "New Order" button to redirect to EIF home page
+    $("input.new-order,input[name=cancel-order]").on("click", function(e){
+         var returnTo = getCookie('returnTo');
+          if(returnTo){
+            e.preventDefault();
+            $("#popupDiv_okayButton").on("click", function(e){
+               $.ajax({
+                 url: 'clearOrder.asp',
+                 complete: function() {
+                    deleteCookie('returnTo');
+                    window.location.href = returnTo;           
+                 }
+                });
+               
+             });
+          }
+    })
+  });
+
+//adding the returnTo to the cookie
+  var returnTo = "";
+
+  if (returnTo) {
+      var reffA = document.createElement('a');
+      reffA.href = returnTo;
+
+    if(reffA.host != window.location.host) {
+      setCookie("returnTo", returnTo, 1);
+    }
+  }
+
+  /*
+    *****************************************************
+    Cookie methods
+    *****************************************************
+  */
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function deleteCookie(cname) {
+      setCookie(cname, "", -1);
+  }
+</script>

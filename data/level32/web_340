@@ -1,0 +1,33 @@
+https://go.csn.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <meta content="initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0" name="viewport"/>
+  <script type="text/javascript">
+   var isInitialized = false;
+            
+            isInitialized = true;
+            
+                
+            var isDesktop = true;
+            var isIphone = false;
+            function checkSize() {
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+                var urlPath = "wap/";
+                //this is the same size logic used in UserAgent to determine what is a tablet
+                //I added a special case for iphone due to 18974.  The timing issues with the iphone resizing made it unreliable.
+                if (w >= 420 && h >= 420 || isDesktop && !isIphone) { 
+                    urlPath = "";
+                }
+                var url = isInitialized ? "LoginPolicy.jsp" : "NoLoginPolicy.jsp";
+                var qs = "";
+                location.href = urlPath + url + qs;
+            }
+  </script>
+ </head>
+ <body onload="checkSize()">
+ </body>
+</html>
+

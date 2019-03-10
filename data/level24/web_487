@@ -1,0 +1,1152 @@
+https://events.crk.umn.edu/
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>
+   Events Calendar - University of Minnesota Crookston
+  </title>
+  <meta content="Crookston home" name="description"/>
+  <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="719033375fdfd8fe-ffc0c28ec05bdf25-g9d3c5bb0a0dd3166-1a" name="google-translate-customization"/>
+  <meta content="Events Calendar - University of Minnesota Crookston" property="og:title"/>
+  <meta content="https://events.crk.umn.edu/Online//default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=37B9A033-79D1-4950-8000-CEBDC1163DFB&amp;BOparam::WScontent::loadArticle::context_id=undefined" property="og:url"/>
+  <meta content="Crookston home" property="og:description"/>
+  <meta content="Crookston" property="og:site_name"/>
+  <meta content="no" http-equiv="Imagetoolbar"/>
+  <link href="/ArticleMedia/Images/umn/umnfavicon-16x16.png?_7.20.0" rel="shortcut icon"/>
+  <link href="/ArticleMedia/Images/marketview-brand/home-screen-icon.png?_7.20.0" rel="apple-touch-icon"/>
+  <!-- inclusion of bootstrap specific CSS -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css?_7.20.0" rel="Stylesheet"/>
+  <!-- end of bootstrap specific CSS -->
+  <link href="../../content/images/branding/global.css?_=7.20.0" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../content/images/branding/global_IE.css?_7.20.0" type="text/css">
+<![endif]-->
+  <script language="Javascript">
+  </script>
+  <link href="/ArticleMedia/Files/CSS/avc-umn-duluth_091318_1.css?_=7.20.0" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Check whether cookies are enabled.
+	document.cookie = "TestCookie=1";
+	var testCookie = document.cookie;
+
+	// Try to retrieve the value we just set.
+	if (testCookie.indexOf("TestCookie=1") == -1)
+	{
+		
+		    document.location = "error.asp?nocookie=";
+		
+    }
+	else
+		document.cookie = "TestCookie=;expires=Thu, 01-Jan-1970 00:00:00 GMT";
+  </script>
+  <script type="text/javascript">
+   function setRSVPButtons(response, eventCode)
+{
+                var url = '/' + eventCode + '/invited?user=' + response.authResponse.userID + '&access_token=' + response.authResponse.accessToken;
+                 FB.api(url, 'get',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred: " + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                        if (response.data[0].rsvp_status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else if (response.data[0].rsvp_status == "unsure")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                    }
+                });
+}
+function setRSVPButtonsLogin(eventCode)
+{
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                setRSVPButtons(response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        setRSVPButtons(response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+
+function rsvpToFBEvent(status, response, eventCode)
+{
+
+                var url = '/' + eventCode + '/' + status + '?access_token=' + response.authResponse.accessToken;
+
+                 FB.api(url, 'post',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred:" + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                      gaTrackEvent('Facebook', 'RSVP to Event Success');
+
+                        if (status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                        else if (status == "maybe")
+                        {
+                            var buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                    }
+                 });
+}
+
+function rsvpToFBEventLogin(status, eventCode) {
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                rsvpToFBEvent(status, response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        rsvpToFBEvent(status, response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+  </script>
+  <script src="../Common/browser_detect.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var genericConfirmationMessage = "Are you sure?";
+  var offerExpired = "Your order has expired.";
+  var admissionsExpired = "An offer on one of your tickets has expired.";
+  var alertHeaderText = "Attention";
+  var termsHeaderText = "Terms and Conditions";
+  var helpHeaderText = "Help";
+  var sectionHeaderText = "More Information";
+
+  var okayButtonText = "OK";
+  var cancelButtonText = "Cancel";
+  var acceptButtonText = "Accept";
+  var declineButtonText = "Decline";
+  var closeButtonText = "Close";
+
+  var sTokenName = 'sToken';
+  var sToken = '1,37258cf2,5c84b800,00D50F65-23B4-4213-911C-71E86EF685A5,SeVljnuq3VEu6Pnh2/HA3I4iyRU=';
+  </script>
+  <script src="../Common/online-jscript.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/online-navigation-jscript.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/widgetParent.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /*
+
+*/
+function displayMessage(onClickEvent)
+{
+
+}
+
+function tsOrderChanged( url )
+{
+  new showConfirmPopup( '', 'The current order has unsaved changes that may be lost. Continue anyway?', function () { document.location = url }, '' );
+}
+
+// Used for drop-down menu in IE 6
+<!--//--><![CDATA[//><!--
+function startList() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("menuTop");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.id=="menuTopItem") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+
+                node.onfocus=function(){
+                    this.className+=" over";
+                }
+
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+
+                node.onblur=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+//--><!]]>
+
+var plusApi_loaded = false;
+var twitterApi_loaded = false;
+var fbApi_loaded = false;
+
+    fbApi_loaded = true;
+
+    plusApi_loaded = true;
+
+    twitterApi_loaded = true;
+  </script>
+  <noscript>
+   <meta content="0; URL=error.asp" http-equiv="refresh"/>
+  </noscript>
+  <script type="text/javascript">
+   var longMonthsOfYear = new Array();
+longMonthsOfYear[ 0 ] = "January";
+longMonthsOfYear[ 1 ] = "February";
+longMonthsOfYear[ 2 ] = "March";
+longMonthsOfYear[ 3 ] = "April";
+longMonthsOfYear[ 4 ] = "May";
+longMonthsOfYear[ 5 ] = "June";
+longMonthsOfYear[ 6 ] = "July";
+longMonthsOfYear[ 7 ] = "August";
+longMonthsOfYear[ 8 ] = "September";
+longMonthsOfYear[ 9 ] = "October";
+longMonthsOfYear[ 10 ] = "November";
+longMonthsOfYear[ 11 ] = "December";
+  </script>
+  <script src="../Common/Widgets/articleWidgets.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/TabularSearchResultsWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/SearchFilterWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/LoginWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/VideoWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/Tk3DDVWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/CalendarWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/twitterWidgets.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googlePlusOneWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googleMapsWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookSocialWidgets.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookEvent.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/instagramFeedWebWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function loadLocalPage()
+{
+
+}
+
+var articleContext = {
+  searchHeaders : [ "Id", "Object Type", "Type", "Category", "Name", "Description", "Short Description", "Start Date", "End Date", "On Sale Date", "Sales Status", "Availability", "Available Number", "Keywords", "Additional Info", "Group", "Image 1", "Image 2", "Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9", "Data 10", "Data 11", "Data 12", "Data 13", "Data 14", "Data 15", "Data 16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "Organization Short Description", "Sales Type", "Options", "Street", "City", "Province / State", "Postal Code", "Country", "Longitude", "Latitude", "Venue ID", "Venue Name", "Venue Description", "Venue Short Description", "Venue Group", "Venue Data 1", "Venue Data 2", "Venue Data 3", "Venue Data 4", "Venue Data 5", "Venue Data 6", "Venue Data 7", "Venue Data 8", "Venue Data 9", "Venue Data 10", "Venue Data 11", "Venue Data 12", "Series Name", "Minimum Price", "Maximum Price", "Upsell Article", "Add-on Article", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "Venue Organization Id", "Meta Description", "" ],
+  searchNames : [ "id", "object_type", "type", "category", "name", "description", "short_description", "start_date", "end_date", "on_sale_date", "sales_status", "availability_status", "availability_num", "keywords", "additional_info", "group", "image1", "image2", "data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10", "data11", "data12", "data13", "data14", "data15", "data16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "organization_short_description", "sales_type", "options", "street", "city", "state", "zip", "country", "longitude", "latitude", "venue_id", "venue_name", "venue_description", "venue_short_description", "venue_group", "venue_data1", "venue_data2", "venue_data3", "venue_data4", "venue_data5", "venue_data6", "venue_data7", "venue_data8", "venue_data9", "venue_data10", "venue_data11", "venue_data12", "series_name", "min_price", "max_price", "upsell_article_id", "addon_article_id", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "organization_id", "meta_description", "" ],
+  searchResults : [ 
+    [ "7B4FCB43-F984-4D26-A8A1-6E76B198DE99", "P", "", "", "48419-2018-06-08T11:01:19.273-Registration Appoint", "<a href=\"https://onestop.crk.umn.edu/academics/registration-times\">https://onestop.crk.umn.edu/academics/registration-times<\/a><br />\n<br />\nFeb 27 - 28, 2019<br />\nMarch 4 - 7, 2019<br />\nMarch 11 - 14, 2019", "Registration Appointments for Summer & Fall 2019 (Feb 27-28 and Mar 4-7 & 11-14)", "Wednesday, February 27, 2019 12:00 AM", "Thu, March 14, 2019 11:59 PM", "", "S", "U", "-1", "academicaffairs,agnatr,businessdept,faculty,lae,mst,online,registrar,students", "article/event_b/7B4FCB43-F984-4D26-A8A1-6E76B198DE99", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/registration-appointments.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "", "", "", "", "Office of the Registrar", [], ["1","3"], "2900 University Ave", "Crookston", "MN", "56716", "USA", "-96.60689630000002", "47.8022321", "B86D7672-B88D-4E80-9F28-C8C6153D0007", "48419-2016-12-20T15:04:25.915-Office of the Regist-2016-12-21T12:46:59.543-University of Minnesota C", "", "University of Minnesota Crookston", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "D7F9FCA0-D660-445B-8DE8-D05C523DC492", "", "" ],
+    [ "7EA58191-8B57-4BBB-A937-85FBDA98CAB7", "P", "", "", "48419-2019-01-25T09:39:46.469-UMC Baseball Games i", "<p>See the full schedule and results, visit:<br />\n<a href=\"https://goldeneaglesports.com/schedule.aspx?path=baseball\">https://goldeneaglesports.com/schedule.aspx?path=baseball<\/a><br />\n<br />\n<strong>March 3<\/strong><br />\n4:00 pm, CST<br />\nEmbry-Riddle University (Fla.)<br />\n<br />\n<strong>March 4<\/strong><br />\n8:45 am, CST<br />\nWalsh University (Ohio)<br />\n<br />\n<strong>March 5<\/strong><br />\n11:00 am, CST<br />\nGrand Valley State University<br />\n<br />\n<strong>March 5<\/strong><br />\n2:30 pm, CST<br />\nCedarville University<br />\n<br />\n<strong>March 7<\/strong><br />\n2:30 pm, CST<br />\nUniversity of the Sciences<br />\n<br />\n<strong>March 8<\/strong><br />\n11:45 am, CST<br />\nNew York Institute of Technology<br />\n<br />\n<strong>March 9<\/strong><br />\n8:15 am, CST<br />\nWest Virginia Wesleyan College<br />\n<em>(game played in Auburndale, FL)<\/em><br />\n<br />\n<strong>March 10<\/strong><br />\n8:15 am, CST<br />\nNew York Institute of Technology<\/p>", "UMC Baseball Games in Florida (March 3-10)", "Sunday, March 03, 2019 08:00 AM", "Sun, March 10, 2019 10:00 PM", "", "S", "U", "-1", "athletics", "article/event_b/7EA58191-8B57-4BBB-A937-85FBDA98CAB7", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/baseballl.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "Athletics, Sports, and Recreation", "", "", "Athletic Event", "Golden Eagle Athletics", [], ["1","3"], "", "Kissimmee", "FL", "34741", "USA - United States", "-81.42240400000003", "28.3040861", "CC4ECD36-D74A-474C-826F-598E876DFF50", "48419-2016-12-20T15:05:45.456-Golden Eagle Athleti-2018-02-08T09:29:23.996-Kissimmee, FL", "", "Kissimmee, FL", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "3DE274A4-8C70-4F07-B7DA-CBB892C45022", "", "" ],
+    [ "52A417AC-6A5E-45E4-9607-203F4F79CCDF", "P", "", "", "48419-2019-03-08T11:51:42.103-Women\'s History Mont", "Women in Athletics Display - March 1 - 31 - Daily - Sports and Wellness Centers<br />\n<br />\nSports was and remains a way for women to achieve positive life skills, ensure physical health, and rebel against oppression. (\"The Significance of Women in Sports\" The Public 2009)", "Women\'s History Month: Women in Athletics Display (March 1 - 31)", "Friday, March 08, 2019 12:00 AM", "Sun, March 31, 2019 11:59 PM", "", "S", "U", "-1", "athletics,diversity,faculty,staff,students", "article/event_b/52A417AC-6A5E-45E4-9607-203F4F79CCDF", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/whm-2019.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "", "", "", "", "University of Minnesota Crookston", [], ["1","3"], "2900 University Ave", "Crookston", "MN", "56716", "USA", "-96.60689630000002", "47.8022321", "1BA8C08F-6622-466D-90F9-30E6B457241F", "207-2016-12-20T15:13:40.638-University of Minnes-2016-12-20T21:32:37.927-Wellness Center", "", "Wellness Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "5167ACC8-772B-4C4C-B130-37FD9DD5E564", "", "" ],
+    [ "07BC2118-50BB-4E82-BCBE-F17EFAF570F0", "P", "", "", "48419-2019-02-20T11:03:46.713-UMC Women\'s Tennis v", "See full schedule and results: <a href=\"https://goldeneaglesports.com/schedule.aspx?path=wten\" target=\"_blank\">https://goldeneaglesports.com/schedule.aspx?path=wten<\/a>", "UMC Women\'s Tennis vs Roosevelt University (Orlando, FL)", "Sunday, March 10, 2019 12:00 AM", "Sun, March 10, 2019 11:59 PM", "", "S", "U", "-1", "athletics", "article/event_b/07BC2118-50BB-4E82-BCBE-F17EFAF570F0", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/womens-tennis.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "Athletics, Sports, and Recreation", "", "", "", "Golden Eagle Athletics", [], ["1","3"], "", "Orlando", "FL", "32801", "USA - United States", "-81.37568620000002", "28.5416658", "AE50443F-B074-4760-B014-B97581EA2F1D", "48419-2016-12-20T15:05:45.456-Golden Eagle Athleti-2017-05-30T09:57:46.433-Orlando, FL", "", "Orlando, FL", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "3DE274A4-8C70-4F07-B7DA-CBB892C45022", "", "" ],
+    [ "419523BC-F118-4D61-8697-3B4668515F07", "P", "", "", "48819-2019-03-06T15:19:53.968-St. Paddy\'s Day Triv", "Stop by the information desk and try your luck at some trivia about St. Patricks Day!<br />\n<br />\nMarch 11th - March 15th&nbsp;<br />\n<br />\n1st place: $100 Amazon Gift Card<br />\n2nd&nbsp; place: $50 Walmart Gift Card<br />\n3rd place: $20 UMC Bookstore Gift Card<br />\n<br />\n**Winners will be awarded Monday after spring break&nbsp;<br />\n&nbsp;", "St. Paddy\'s Day Trivia", "Monday, March 11, 2019 09:00 AM", "Fri, March 15, 2019 8:00 PM", "", "S", "U", "-1", "", "article/event_b/419523BC-F118-4D61-8697-3B4668515F07", "", "/content/images/7C591113-19B4-424C-ACCA-EDE072FDD38E/stpatricksdaytrivia.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "", "", "", "", "Student Activities", [], ["1","3"], "", "Crookston", "MN", "56716", "USA - United States", "-96.60939109999998", "47.7745617", "AC00CD9A-6C1A-48C1-B90B-240BC1D2A0BD", "48419-2016-12-20T15:07:30.362-Student Activities/S-2018-10-12T10:21:30.787-Information Desk", "", "Information Desk", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "5126995D-0E74-4B73-A574-034E8300A03A", "", "" ],
+    [ "17B20C4A-AA32-47BB-A627-6265507A29A5", "P", "", "", "48819-2019-03-06T13:21:57.395-Spring Break Spectac", "Join Golden Eagle Entertainment on Monday March 11th from 11:30 a.m.-1:00 p.m.. in the Northern Lights Lounge for crafting H2O To Go bottles to stay hydrated over spring break! Mocktails included.", "Spring Break Spectacular : Crafting and Mocktails", "Monday, March 11, 2019 11:30 AM", "", "", "S", "U", "-1", "", "article/event_b/17B20C4A-AA32-47BB-A627-6265507A29A5", "", "/content/images/7C591113-19B4-424C-ACCA-EDE072FDD38E/Spring Break.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "", "", "", "", "Student Activities", [], ["1","3"], "2900 University Ave", "Crookston", "MN", "56716", "USA", "-96.61142910000001", "47.8022821", "BB02FDB6-7FCA-4BCA-A69D-045C27B9199F", "48419-2016-12-20T15:07:30.362-Student Activities/S-2016-12-21T13:21:07.797-Ed Widseth Field", "", "Game Room - Sargeant Student Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "5126995D-0E74-4B73-A574-034E8300A03A", "", "" ],
+    [ "7078DFC8-DEE5-456F-8059-D229A5026AE5", "P", "", "", "48419-2018-09-24T13:52:15.646-Knitting Monday\'s", "Come and learn how to sping and knit or just work on your own projects in our new Sustainability Lounge (109 Hill Hall) on Mondays from 2:30 - 5:00 pm.<br />\n<br />\nNew knitters as well as seasoned fiber workers are welcome! If you don\'t have the supplies, contact Katy Chapman - <a href=\"mailto:katys@crk.umn.edu\">katys@crk.umn.edu<\/a>.<br />\n<br />\nSponsored by Crookston Students for Sustainable Development (CSSD).", "Knitting Monday\'s", "Monday, March 11, 2019 02:30 PM", "Mon, March 11, 2019 5:00 PM", "", "S", "U", "-1", "faculty,staff,studentact,students,sustainability", "article/event_b/7078DFC8-DEE5-456F-8059-D229A5026AE5", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/knitting-mondays2.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "Student Groups", "Student Life", "", "", "", "Student Clubs & Organizations", [], ["1","3"], "", "Crookston", "MN", "56716", "USA - United States", "-96.58377180000002", "47.772808", "93ECFBE2-5C33-43D6-8285-9CE0A7ED8C40", "207-2016-12-20T15:13:02.841-Student Clubs & Orga-2018-01-09T16:06:39.987-109 Hill Hall", "", "109 Hill Hall", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "6F2E0FCA-5032-44E2-A2B3-402DA1DB74A5", "", "" ],
+    [ "D8A1209A-79A6-41CB-9932-FC3338E26E3F", "P", "", "", "48419-2019-02-20T12:10:06.511-International Dinner", "<p>UMN Crookston proudly presents the annual International Dinner Series 2019.<br />\n<br />\n<strong>Featuring<\/strong><br />\nDerefaa Henry Ayokunle Cline of Nigeria<br />\n\"A Birthplace of Greatness\"<br />\nMarch 11, 2019<br />\n6:00 pm - Bede Ballroom<br />\n<br />\n<strong>Menu<\/strong><br />\nAppetizer: Salad and Meat Pie<br />\nMain Course: Fufu, Pepper Soup &amp; Efo<br />\nDessert: Puff Puff<br />\n<br />\n<a href=\"https://www.tickets.umn.edu/CRK/Online/article/IntlDinners2019\">Purchase tickets online<\/a> or contact Rae French - <a href=\"mailto:rfrench@crk.umn.edu\">rfrench@crk.umn.edu<\/a> or 218-289-0444.<br />\n<br />\n<strong>Costs<\/strong><br />\nAdults - $20<br />\nUMC Students - Swipe or $10<br />\n18 and Under - $15<br />\n<br />\nAdult Series - $75<br />\n18 and Under Series - $65<\/p>", "International Dinner Series: Nigeria \"A Birthplace of Greatness\" - open to the public", "Monday, March 11, 2019 06:00 PM", "Mon, March 11, 2019 8:00 PM", "", "S", "U", "-1", "faculty,international,public,staff,students", "article/event_b/D8A1209A-79A6-41CB-9932-FC3338E26E3F", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/intl-dinner-2019-nigeria.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "Diversity and Multicultural", "", "", "", "International Programs", [], ["1","3"], "Sargeant Student Center, 2900 University Ave", "Crookston", "MN", "56716", "USA", "-96.60729939999999", "47.8026194", "83220EEB-00BE-43FD-AB6E-69DFD4FFED7D", "48419-2016-12-20T15:18:14.695-International Progra-2016-12-21T13:41:31.053-Bede Ballroom", "", "Bede Ballroom", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "E2D32F3F-59DE-4DE4-B382-92D80C48D7F4", "", "" ],
+    [ "A5CE089E-444E-4211-8AA6-3E9E46C7A920", "P", "", "", "48419-2019-01-25T10:51:44.814-UMC Women\'s Golf at", "See the full schedule and results, visit:<br />\n<a href=\"https://goldeneaglesports.com/schedule.aspx?path=wgolf\">https://goldeneaglesports.com/schedule.aspx?path=wgolf<\/a>", "UMC Women\'s Golf at Winona State University Women\'s Invitational (March 12 - 13)", "Tuesday, March 12, 2019 08:00 AM", "Wed, March 13, 2019 7:00 PM", "", "S", "U", "-1", "athletics", "article/event_b/A5CE089E-444E-4211-8AA6-3E9E46C7A920", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/golf-womens.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "Athletics, Sports, and Recreation", "", "", "", "Golden Eagle Athletics", [], ["1","3"], "", "Las Vegas", "NV", "88901", "USA - United States", "-115.13999999999999", "36.18", "E1B62122-DEFB-4778-97E5-31C59AADEB93", "48419-2016-12-20T15:05:45.456-Golden Eagle Athleti-2018-02-08T16:25:29.602-Las Vegas, NV", "", "Las Vegas, NV", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "3DE274A4-8C70-4F07-B7DA-CBB892C45022", "", "" ],
+    [ "BAE2974D-64D1-44E7-928C-7AC2D5966C04", "P", "", "", "48419-2019-01-25T10:48:30.548-UMC Men\'s Golf at Wi", "See the full schedule and results, visit:<br />\n<a href=\"https://goldeneaglesports.com/schedule.aspx?path=mgolf\">https://goldeneaglesports.com/schedule.aspx?path=mgolf<\/a>", "UMC Men\'s Golf at Winona State University Men\'s Invitational (March 12 - 13)", "Tuesday, March 12, 2019 08:00 AM", "Wed, March 13, 2019 11:00 PM", "", "S", "U", "-1", "athletics", "article/event_b/BAE2974D-64D1-44E7-928C-7AC2D5966C04", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/golf-mens.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "Athletics, Sports, and Recreation", "", "", "", "Golden Eagle Athletics", [], ["1","3"], "", "Las Vegas", "NV", "88901", "USA - United States", "-115.13999999999999", "36.18", "E1B62122-DEFB-4778-97E5-31C59AADEB93", "48419-2016-12-20T15:05:45.456-Golden Eagle Athleti-2018-02-08T16:25:29.602-Las Vegas, NV", "", "Las Vegas, NV", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "3DE274A4-8C70-4F07-B7DA-CBB892C45022", "", "" ],
+    [ "2CCA3CA1-6FE6-4A16-827B-8E5F34733C0B", "P", "", "", "48419-2017-10-16T10:29:22.794-Polk County Public H", "Polk County Public Health will be on campus the second and fourth Tuesday of every month, from 11:15 am - 12:30 pm, providing family planning services for students. &nbsp;Services include pap smears, STI testing, pregnancy testing, birth control pills, emergency contraceptives, and Nexplanon insertion. &nbsp;Contact Stacey Grunewald, RN, <a href=\"mailto:sgrunewa@crk.umn.edu\">sgrunewa@crk.umn.edu<\/a> or 218-281-8512 to make an appointment.<br />\n<br />\nServices are provided free or at a reduced rate depending upon your income.<br />\n<br />\nSTI testing, pregnancy testing and emergency contraception can also be obtained through UMC Student Health during normal office hours, 8:30 am - 4:00 pm.", "Polk County Public Health Family Planning & STI Testing", "Tuesday, March 12, 2019 11:15 AM", "Tue, March 12, 2019 12:30 PM", "", "S", "U", "-1", "healthserv,students", "article/event_b/2CCA3CA1-6FE6-4A16-827B-8E5F34733C0B", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/family-planning.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "Crookston - Health Services", "", "", "", "", "Health, Wellness, and Personal Development", "", "", "", "Health Services", [], ["1","3"], "", "Crookston", "MN", "56716", "USA", "-96.58377180000002", "47.772808", "0341BE07-24CF-47CE-A22A-402911E013C4", "207-2016-12-20T15:14:21.747-Health Services-2017-01-13T15:34:53.457-145F Sargeant Student Center", "", "145F Sargeant Student Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "E982049F-C86B-4A3A-B3C1-77F40FE1A04E", "", "" ],
+    [ "DA662643-EB9E-4495-BC96-7EE9E11FA56D", "P", "", "", "48419-2017-02-22T10:54:43.510-NACTA Car Wash Fundr", "NACTA is once again holding car washes as a fundraiser on Tuesday, Wednesday and Thursday afternoons January 15 - April 4. All proceeds will go to fund student trips to Murray Kentucky to compete in NACTA competitions for the National Sweepstakes Title!<br />\n<br />\nFull exterior and interior detailing with wax<br />\n$30<br />\nKiser Building<br />\n<br />\nTo schedule a wash, contact one of the following:<br />\nRyan Greenwalt - <a href=\"mailto:gree2172@crk.umn.edu\">gree2172@crk.umn.edu<\/a><br />\nNeka Davis - <a href=\"mailto:davi2905@crk.umn.edu\">davi2905@crk.umn.edu<\/a><br />\nHanna Ruckheim - <a href=\"mailto:ruckh005@crk.umn.edu\">ruckh005@crk.umn.edu<\/a>", "NACTA Car Wash Fundraiser Appointments (Afternoons March 12 - 14) - open to the public", "Tuesday, March 12, 2019 12:00 PM", "Thu, March 14, 2019 5:00 PM", "", "S", "U", "-1", "agnatr,faculty,public,staff,studentact,students", "article/event_b/DA662643-EB9E-4495-BC96-7EE9E11FA56D", "", "/content/images/1F693231-8EA1-42B4-A37D-354E2286DF15/nacta-car-wash2.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Crookston", "", "", "", "", "", "", "", "", "Fundraiser", "Student Clubs & Organizations", [], ["1","3"], "2900 University Ave", "Crookston", "MN", "56716", "USA", "-96.60689630000002", "47.8022321", "C7BA292D-7548-4FB0-BEE2-E90BC9759BE9", "207-2016-12-20T15:13:02.841-Student Clubs & Orga-2016-12-20T21:10:48.066-University of Minnesota Cro", "", "University of Minnesota Crookston", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "6F2E0FCA-5032-44E2-A2B3-402DA1DB74A5", "", "" ]
+  ],
+  searchFilters : [ 
+    { name : "object_type_filter", label : "Type Filter", className : "objectTypeFilterList", clearFilterLabel : "Clear Type Filter", selectedValue : "", values : [  ]  },
+    { name : "month_filter", label : "Month Filter", className : "monthFilterList", clearFilterLabel : "Clear Month Filter", selectedValue : "", values : [  ]  },
+    { name : "city_filter", label : "City Filter", className : "cityFilterList", clearFilterLabel : "Clear City Filter", selectedValue : "", values : [  ]  },
+    { name : "venue_filter", label : "Venue Filter", className : "venueFilterList", clearFilterLabel : "Clear Venue Filter", selectedValue : "", values : [  ]  },
+    { name : "category_filter", label : "Category Filter", className : "categoryFilterList", clearFilterLabel : "Clear Category Filter", selectedValue : "", values : [  ]  },
+    { name : "organization_short_description_filter", label : "Organization Filter", className : "organizationShortDescriptionFilterList", clearFilterLabel : "Clear Organization Filter", selectedValue : "", values : [  ]  },
+    { name : "filter1", label : "Campus", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [ ["Crookston", "Crookston"],["Duluth", "Duluth"],["Morris", "Morris"],["Rochester", "Rochester"],["Twin Cities", "Twin Cities"] ]  },
+    { name : "filter2", label : "Faculty", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter3", label : "Department", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter4", label : "Season", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent1", label : "Event Genre", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent2", label : "Event Category", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter1", label : "Event Type", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter2", label : "Presentation Type", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  }
+  ],
+  searchLabels: { performances: "Events", date: "Date", unavailable_message: "Registration / Tickets may be required for this event. See \"About this event\" for details.", sold_out_message: "Registration / Tickets may be required for this event. See \"About this event\" for details.", on_sale_message: "", to_be_determined_message: "", next: "»", previous: "«", avail_excellent: "", avail_good: "", avail_limited: "", avail_sold_out: "", promo_item: "This item is available with a promocode", buy_seats_message: "Register", buy_bundle_message: "Buy", buy_item_message: "Buy", buy_gift_message: "Donate", buy_storedvalueitem_message: "Buy", view_article_message: "View", upsell_seats_message: "Upgrade", upsell_bundle_message: "Upgrade", upsell_item_message: "Upgrade", upsell_gift_message: "Upgrade", upsell_storedvalueitem_message: "Upgrade", upsell_popup_title: "Interested in Upgrading?", addon_seats_message: "Select", addon_bundle_message: "Select", addon_item_message: "Select", addon_gift_message: "Select", addon_storedvalueitem_message: "Select", price_title: "Price", availability_title: "", active_promo_codes: "Active promotions:", promo_code_item_title: "This item is available with a promocode", has_promo_code: "false", brand_path: "../../content/images/branding/" }, 
+  searchSUMO: { availability_access: "true", mapSelect_access: "true" }, 
+  pagination: { current_page: "1", page_size: "12", total_pages: "9" },
+  loginLabels: { pageTarget: "maintainAccount.asp", loginBoxClass: "login-required", forgotPassword: "true", formLoginName: "", accountLogin: "true" }, 
+  contextId: "", 
+  articleId: "37B9A033-79D1-4950-8000-CEBDC1163DFB", 
+  articleSearchId: "", 
+  salesType: "P",
+  sToken: "1,37258cf2,5c84b800,00D50F65-23B4-4213-911C-71E86EF685A5,SeVljnuq3VEu6Pnh2/HA3I4iyRU="
+ };
+
+createSearchMapping(articleContext);
+
+tsAddLoadEvent(function() {
+    setCalendarWidgetDisplayMonth();
+    drawWidgets(articleContext);
+    insertToken(articleContext);
+});
+
+function setCalendarWidgetDisplayMonth()
+{
+    // If a date has been selected from the calendar widget, we will receive a 'search_from' parameter.
+    // Pass this back to the widget so that it redisplays the month that was previously visible
+    
+}
+  </script>
+  <script type="text/javascript">
+   function doGAClicks(selectedItem) {
+        _gaq.push(['_trackEvent', selectedItem, 'Clicked']);
+    };
+
+    function gaTrackEvent(category, action) {
+        _gaq.push(['_trackEvent', category, action]);
+    };
+  </script>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+    _gaq.push(['obj0._setAccount', 'UA-33500778-1']);
+_gaq.push(['obj0._setAllowHash', false]);
+_gaq.push(['obj0._setDomainName', 'none']);
+_gaq.push(['obj0._setAllowLinker',true]);
+_gaq.push(['obj0._trackPageview']);
+  </script>
+  <script type="text/javascript">
+   (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+ </head>
+ <body lang="en" onload='startList();loadLocalPage(); displayMessage(""); displayOnOfferTimeout();' onunload="closeChildren()">
+  <div class="spinner" id="spinner">
+  </div>
+  <script>
+   var spinnerDelayTimeout;
+    
+    var showSpinner = function(){};
+    var spinnerElement = document.querySelector('body')
+
+
+
+    var spinnerDelay = 3;
+    
+
+    function stopSpinner() {
+        spinnerElement.classList.remove('show-spinner');
+        cancelSpinnerTimeouts();
+        expandSpinner();
+    }
+
+    function startSpinner() {
+        expandSpinner();
+        spinnerElement.classList.add('show-spinner');
+    }
+    
+    
+    function cancelSpinnerTimeouts() {
+        clearTimeout(spinnerDelayTimeout);
+    }
+    
+    function expandSpinner() {
+        spinnerElement.classList.remove('minimize-spinner');
+    }
+    
+    function minimizeSpinner() {
+        spinnerElement.classList.add('minimize-spinner');
+    }
+    
+    // stop spinner if a JS error occurred
+    window.addEventListener('error', stopSpinner);
+    
+    // Mimimize spinner if clicked
+    spinnerElement.addEventListener('click', minimizeSpinner);
+
+    // Shows the spinner if page takes long to load
+    (showSpinner = function() {
+        if (!document.querySelector('#popupDiv')) {
+            spinnerDelayTimeout = setTimeout(startSpinner, spinnerDelay*1000);
+        }
+    })();
+  </script>
+  <div id="fb-root">
+  </div>
+  <script>
+   var FBAppID = '194912094014765'
+    var FBVersion = 'v2.8';
+    
+    window.fbAsyncInit = function () {
+
+        
+        FB.init({
+            appId: FBAppID,
+            status: true,
+            cookie: true,
+            frictionlessRequests: true,
+            xfbml: true,
+            oauth: true,
+            version: FBVersion
+        });
+        FB.Canvas.setAutoGrow();
+        FB.Canvas.getPageInfo(function (info) {
+	        FB.Canvas.scrollTo(0, 0);
+	    });
+        fbinit();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.defer = true;
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+
+    function fblogin(thisForm, callback) {
+        // check if callback is defined and a function
+        var callback = callback && typeof callback === 'function' ? callback : function() {};
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                callback(thisForm, response);
+                thisForm.submit();
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        callback(thisForm);
+                        thisForm.submit();
+                    }
+                }, { scope: 'rsvp_event,user_friends' });
+            }
+        });
+
+        return false;
+    }
+  </script>
+  <script>
+   var events = new Array();
+    var eventCounter = 0;
+
+    function fbinit() {
+        for (evnt in events) {
+            setRSVPButtonsLogin(events[evnt]);
+        }
+    };
+  </script>
+  <div id="header">
+   <div class="header-content container">
+    <div class="header-online-wrapper" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <a href="http://crk.umn.edu/" shape="rect">
+      <img alt="" src="/content/Images/umn/M_UMCwdmk220_D2D_gold-wh.png" style="width: 391px; height: 38px;"/>
+     </a>
+    </div>
+   </div>
+   <a class="menu-toggle menu-button btn btn-default">
+    <span class="glyphicon glyphicon-align-justify">
+    </span>
+   </a>
+   <a class="menu-toggle sidebar-button btn btn-default">
+    <span class="glyphicon glyphicon-shopping-cart">
+    </span>
+   </a>
+  </div>
+  <div class="content-wrapper">
+   <div id="menu">
+    <div class="menuContainer main-nav">
+     <ul class="nav clearfix" id="menuTop">
+      <li class="menuTopItem " id="menuTopItem0">
+       <a class="menu_item menu-link" href="default.asp?menu_id=7B3B1DB5-078B-4B2B-B912-74C6C14C30D0" tabindex="1" title="Featured Events">
+        <span class="menu-label">
+         Featured Events
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem1">
+       <a class="menu_item menu-link" href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=8130E734-8D09-4623-9251-D3C74780A130&amp;menu_id=CF4E7085-EE91-4F3A-B0FE-9266E57FB104" tabindex="2" title="All Events">
+        <span class="menu-label">
+         All Events
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem2">
+       <a class="menu_item menu-link" href="/app/eventmgmt/events/new?menu_id=4DDFAF38-50F0-4A3B-9C52-2CB103BA0AE7" tabindex="3" title="Create an Event">
+        <span class="menu-label">
+         Create an Event
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem3">
+       <a class="menu_item menu-link" href="maintainAccount.asp?menu_id=B65FFA77-5B6A-4603-B411-5953C5DC6162" tabindex="4" title="My Account">
+        <span class="menu-label">
+         My Account
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem4">
+       <a class="menu_item menu-link" href="feedSearch.asp?menu_id=F1BF1E19-14F0-4458-A3A9-16AF46D6E0CD" tabindex="5" title="RSS Feed">
+        <span class="menu-label">
+         RSS Feed
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem" id="menuTopItem-help">
+       <a class="menu_item menu-link" href="javascript:var jsPop=new showInformationPopup( 'Help', 'loadArticle.asp?BOparam::WScontent::loadArticle::article_id=F8103D8C-7EA0-4B4B-A37E-9DE398B93107' )" tabindex="6" title="Help">
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- customer/order information -->
+   <div class="customer-options" id="customer-utilities">
+    <!--ORDER DETAILS BOX-->
+    <div id="orderInfo">
+     <div id="customer-order-info">
+      <div class="customer-greeting">
+       <span class="greeting-message">
+        Order for
+       </span>
+       <span class="greeting-name">
+        Guest
+       </span>
+      </div>
+      <div class="customer-order shopping-cart-details order-message ">
+       <span id="orderInfoEmptyMessage">
+        Your shopping cart is empty.
+       </span>
+      </div>
+      <div class="customer-buttons">
+       <div class="cart-callout">
+        <a class="shopping-cart-link btn btn-default" href="shoppingCart.asp?sToken=1%2C37258cf2%2C5c84b800%2C00D50F65-23B4-4213-911C-71E86EF685A5%2CSeVljnuq3VEu6Pnh2%2FHA3I4iyRU%3D" id="orderInfoCartLink" tabindex="7" title="Shopping Cart">
+         <span>
+          Shopping Cart
+         </span>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menuContainer utility-nav">
+     <ul class="nav" id="utility-menu">
+      <li class="utility-menu-item" id="utility-menu-item-login">
+       <a class="menu_item" href="login.asp" tabindex="8" title="Log in">
+        Log in
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- CONTENT START -->
+   <div id="content">
+    <div class="container">
+     <div class="bodyDetails" id="default">
+      <div class="search-box" id="searchBox">
+       <form action="default.asp" class="form-inline" id="searchItems" method="post">
+        <input class="form-inline" name="sToken" type="hidden" value="1,37258cf2,5c84b800,00D50F65-23B4-4213-911C-71E86EF685A5,SeVljnuq3VEu6Pnh2/HA3I4iyRU="/>
+        <input name="BOset::WScontent::SearchCriteria::venue_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::city_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::month_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::object_type_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::category_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_from" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_to" type="hidden" value=""/>
+        <input name="doWork::WScontent::search" type="hidden" value="1"/>
+        <input name="BOparam::WScontent::search::article_search_id" type="hidden" value="E1C56B3A-495D-42EB-B934-86A05B5BDB63"/>
+        <ul class="list-unstyled">
+         <li class="item-search-keyword">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Search Events
+           </span>
+           <input class="form-control" id="BOset::WScontent::SearchCriteria::search_criteria" name="BOset::WScontent::SearchCriteria::search_criteria" tabindex="9" title="Search Events" type="text" value=""/>
+          </label>
+         </li>
+         <li class="item-search-start-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Event Dates
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_from::0" name="BOset::WScontent::SearchCriteria::search_from" tabindex="10" title="Event Dates" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_from::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_from::0", "0", "true", "sToken", "1,37258cf2,5c84b800,00D50F65-23B4-4213-911C-71E86EF685A5,SeVljnuq3VEu6Pnh2/HA3I4iyRU=");' title="Show date picker" type="button">
+             </button>
+            </div>
+            <span class="input-group-btn">
+             <button class="btn-unstyled warningIcon" data-placement="right" data-toggle="tooltip" id="BOset::WScontent::SearchCriteria::search_from::0::warning" style="display:none" title="" type="button">
+             </button>
+            </span>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-end-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            to
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_to::0" name="BOset::WScontent::SearchCriteria::search_to" tabindex="11" title="to" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_to::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_to::0", "0", "true", "sToken", "1,37258cf2,5c84b800,00D50F65-23B4-4213-911C-71E86EF685A5,SeVljnuq3VEu6Pnh2/HA3I4iyRU=");' title="Show date picker" type="button">
+             </button>
+            </div>
+            <span class="input-group-btn">
+             <button class="btn-unstyled warningIcon" data-placement="right" data-toggle="tooltip" id="BOset::WScontent::SearchCriteria::search_to::0::warning" style="display:none" title="" type="button">
+             </button>
+            </span>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-submit">
+          <input class="btn btn-default" name="Go" onclick="doGAClicks('Search')" tabindex="12" type="submit" value="Go"/>
+         </li>
+        </ul>
+       </form>
+      </div>
+      <div class="articles has-secondary-features">
+       <!-- top scrolling features included -->
+       <div class="article-body-container">
+        <div class="article-container main-article-body">
+         <div class="main-page-wrapper" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+          <h1>
+           All Events
+          </h1>
+          <div id="avWidget_37B9A033-79D1-4950-8000-CEBDC1163DFB_ID2EGH1SRAI54IN52RI5U4MUY22KW2BG1LFEHBN4BBLSIZMLW0MYVG" name="avWidget" xmlns="" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+           <script type="text/javascript">
+            registerWidget( "SearchWebWidget3", "avWidget_37B9A033-79D1-4950-8000-CEBDC1163DFB_ID2EGH1SRAI54IN52RI5U4MUY22KW2BG1LFEHBN4BBLSIZMLW0MYVG", {
+  "SearchWebWidget3": "", 
+  
+  "css_class": "", 
+  
+  "css_id": "", 
+  
+  "css_style": "", 
+  
+  "showLegend": "false", 
+  
+  "showNoResults": "true", 
+  
+  "showPrice": "true", 
+  
+  "title": "", 
+   "1": "1"});
+           </script>
+          </div>
+          <br clear="none"/>
+         </div>
+        </div>
+        <div class="article-container secondary-linked-features">
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-0">
+          <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=8130E734-8D09-4623-9251-D3C74780A130" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <img alt="See All Events - Filter by Category" src="/content/Images/umn/event-cal-type.jpg" style="width: 282px; height: 117px;"/>
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-1">
+          <div class="side-links" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <h2>
+            Related Links
+           </h2>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+          </div>
+          <a href="" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+          </a>
+          <a href="https://www.crk.umn.edu/today" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           UMC Today
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="https://www.crk.umn.edu/news" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           News Releases
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="https://www.crk.umn.edu/units/university-relations/campus-e-update" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           Campus E-Update
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="https://www.crk.umn.edu/units/university-relations/insight-radio" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           Insight Radio
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="https://www.crk.umn.edu/units/media-services" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           Live Events
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="http://www.umcrookston.edu/photogallery" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           Photo Gallery
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="https://www.crk.umn.edu/awards" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           UMC Awards
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="https://www.crk.umn.edu/units/university-relations" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           Experts List
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <a href="http://policy.umn.edu/crookston/emergencyclosing-crookston" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           Emergency Closing Info
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-2">
+          <div class="side-links" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <h2>
+            More Calendars
+           </h2>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+           <a href="" shape="rect">
+           </a>
+           <ul class="list-unstyled">
+            <li>
+             <a href="https://www.crk.umn.edu/units/office-registrar/official-academic-calendar" shape="rect">
+              Official Academic Calendar
+             </a>
+            </li>
+            <li>
+             <a href="http://onestop.crk.umn.edu/academics/final-exam-times" shape="rect">
+              Final Exam Times
+             </a>
+            </li>
+            <li>
+             <a href="http://onestop.crk.umn.edu/dates-and-deadlines" shape="rect">
+              Refund, Cancel/Add Schedule
+             </a>
+            </li>
+            <li>
+             <a href="http://www.umcrookston.edu/diningmenu" shape="rect">
+              Dining Services Menu
+             </a>
+            </li>
+           </ul>
+          </div>
+          <a href="" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-3">
+          <div class="social-media" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <div class="social-media-header">
+            <h2>
+             Follow UMCRK
+            </h2>
+           </div>
+           <div class="social-media-info">
+            <ul>
+             <li>
+              <a href="https://www.facebook.com/umcrookston" shape="rect">
+               <img alt="facebook" class="nmfsrydjiujybeycrtkn" src="/ArticleMedia/Images/umn/UMN-social-FACEBOOK-dark_64x64.png"/>
+              </a>
+             </li>
+             <li>
+              <a href="https://twitter.com/umncrookston" shape="rect">
+               <img alt="Twitter" src="/ArticleMedia/Images/umn/UMN-social-TWITTER_64x64.png"/>
+              </a>
+             </li>
+             <li>
+              <a href="https://instagram.com/umncrookston" shape="rect">
+               <img alt="" src="/ArticleMedia/Images/umn/instagram64.jpg" style="width: 64px; height: 64px;"/>
+              </a>
+             </li>
+             <li>
+              <a href="https://www.youtube.com/user/UofMCrookston" shape="rect">
+               <img alt="" src="/ArticleMedia/Images/umn/youtube64.jpg" style="width: 64px; height: 64px;"/>
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-4">
+          <div class="campus-locations" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <div class="campus-locations-header">
+            <h2>
+             Campus Calendars
+            </h2>
+           </div>
+           <div class="campus-locations-info">
+            <ul class="list-unstyled">
+             <li>
+              <a href="https://events.crk.umn.edu/" shape="rect">
+               Crookston
+              </a>
+             </li>
+             <li>
+              <a href="https://events.d.umn.edu/" shape="rect">
+               Duluth
+              </a>
+             </li>
+             <li>
+              <a href="http://www.morris.umn.edu/newsevents/" shape="rect">
+               Morris
+              </a>
+             </li>
+             <li>
+              <a href="https://events.r.umn.edu/" shape="rect">
+               Rochester
+              </a>
+             </li>
+             <li>
+              <a href="https://events.umn.edu" shape="rect">
+               Twin Cities
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!--\\ .bodyDetails -->
+   </div>
+   <!--\\ .container -->
+  </div>
+  <!--\\ #content -->
+  <div id="footer">
+   <div class="footer-content container">
+    <div class="row footer-copy" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <div id="google_translate_element">
+     </div>
+     <ul class="span2 unstyled">
+      <li class="footer-heading">
+       Terms &amp; Conditions
+      </li>
+      <li>
+       Terms of Service:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=E72097D3-596F-4E8C-8343-DA9CE270408C" shape="rect">
+        Ticket Buyers
+       </a>
+      </li>
+      <li>
+       Terms of Service:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=3A7BBCE4-A7E1-4A20-9D4C-EF3D06AC4BB3" shape="rect">
+        Event Owners
+       </a>
+      </li>
+      <li>
+       Privacy:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=D1D2067D-493A-4F5C-8961-A15B38197BF2" shape="rect">
+        Privacy Policy
+       </a>
+      </li>
+      <li>
+       Site Accessibility:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=99033AB5-E5F0-41EB-8C22-BECEC14BAF16" shape="rect">
+        Accessibility
+       </a>
+      </li>
+     </ul>
+     <ul class="span2 unstyled">
+      <li class="footer-heading">
+       Helpdesk
+      </li>
+      <li>
+       <a href="" shape="rect">
+        Support Team
+       </a>
+      </li>
+      <li>
+       <a href="https://docs.google.com/document/d/1NuOgOr3EW5D-JOdOeFPr38F4ZKb5JzVs5Tezd7hN2Wk/edit#heading=h.dhtol4fce8f" shape="rect" title="link to Google doc for Q and A directed for Event Attendees">
+        Q &amp; A for Event Attendees
+       </a>
+      </li>
+      <li>
+       <a href="https://docs.google.com/document/d/1m0dJdK_Q1KLqDiTodrX_Mvg8Hoo--yfBYytH7a5t-NA/edit" shape="rect" title="link to Google doc for Q and A directed for Event Owners">
+        Q &amp; A for Event Owners
+       </a>
+      </li>
+     </ul>
+     <ul class="span2 unstyled">
+      <li class="footer-heading">
+       Crookston
+      </li>
+      <li>
+       <a href="http://www.crk.umn.edu/today" shape="rect">
+        UMC Today
+       </a>
+      </li>
+      <li>
+       <a href="https://www.crk.umn.edu/maps-and-buildings" shape="rect">
+        Maps, Directions &amp; Parking
+       </a>
+      </li>
+      <li>
+       <a href="https://www.crk.umn.edu/campus-directory" shape="rect">
+        Directories
+       </a>
+      </li>
+     </ul>
+     <ul class="span4 unstyled">
+      <li>
+       © 2011–2017 Regents of the University of Minnesota. All rights reserved.
+      </li>
+      <li>
+       The University of Minnesota is an equal opportunity educator and employer.
+      </li>
+     </ul>
+    </div>
+    <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+   </div>
+  </div>
+  <!--\\ .content-wrapper -->
+  <div class="black_overlay" id="fade">
+  </div>
+  <script type="text/javascript">
+   function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Defines the configuration options, these must be set before you load
+        // the plusone.js file.
+        
+        window.___gcfg = {
+            parsetags: 'explicit'
+        };
+
+        (function () {
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+  </script>
+  <script defer="defer" id="twitter-wjs" src="https://platform.twitter.com/widgets.js" type="text/javascript">
+  </script>
+  <!-- inclusion of bootstrap.js and jquery -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <script src="/lib/jquery/jquery.min.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js?_=7.20.0" type="text/javascript">
+  </script>
+  <!-- end of bootstrap.js and jquery -->
+  <!-- contains bootstrap specific function declarations -->
+  <script src="/lib/bootstrap/js/bootstrap-functions.js?_=7.20.0" type="text/javascript">
+  </script>
+  <!-- Logout Handler -->
+  <script>
+   $(document).ready(function() {
+    var body = $("body");
+    
+    body
+    .on("logged-out", function(e) {
+        var targetPage = "default.asp?";
+        window.location.assign("login.asp?targetPage="+encodeURIComponent(targetPage));
+    });
+    
+    // on pressing Enter key on an anchor trigger click
+    $("a").keypress(function(e){
+      if(e.keyCode == 13){
+        $(this).trigger("click");
+      }
+    });
+    
+    // When page is loaded make sure the Page Load Spinner is not shown
+    if (spinnerDelayTimeout) {
+        cancelSpinnerTimeouts();
+    }
+    
+    body.removeClass("show-spinner");
+    
+    // Show spinner when form submitted or link clicked
+    $("form").submit(function(e) {
+      showSpinner();
+    });
+    
+    $("a").click(function(e) {
+      var href = $(this).attr("href") || "";
+      var target = $(this).attr("target") || "";
+      
+      if ((target == "" || /^(_self|_top|_parent)/.test(href)) && href != "" && !/^(#|javascript:|mailto:|file:)/.test(href))
+        showSpinner();
+    });
+    
+    
+});
+  </script>
+  <!-- CONTENT END -->
+  <script type="text/javascript">
+   (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+ </body>
+</html>
+<script>
+ $(function(){
+
+    // "Continue Shopping" and "Look for other events" buttons to redirect back to Brochure page user came from
+    $("a[name=continue-shopping], a[name=continueShopping], input[name=startOver], a[name=error-StartOver], input[name=error-StartOver]").on("click", function(e) {
+      var returnTo = getCookie('returnTo');
+      if(returnTo){
+        e.preventDefault();
+        deleteCookie('returnTo');
+        window.location.href = returnTo;
+      }
+    })
+
+    // "New Order" button to redirect to EIF home page
+    $("input.new-order,input[name=cancel-order]").on("click", function(e){
+         var returnTo = getCookie('returnTo');
+          if(returnTo){
+            e.preventDefault();
+            $("#popupDiv_okayButton").on("click", function(e){
+               $.ajax({
+                 url: 'clearOrder.asp',
+                 complete: function() {
+                    deleteCookie('returnTo');
+                    window.location.href = returnTo;           
+                 }
+                });
+               
+             });
+          }
+    })
+  });
+
+//adding the returnTo to the cookie
+  var returnTo = "";
+
+  if (returnTo) {
+      var reffA = document.createElement('a');
+      reffA.href = returnTo;
+
+    if(reffA.host != window.location.host) {
+      setCookie("returnTo", returnTo, 1);
+    }
+  }
+
+  /*
+    *****************************************************
+    Cookie methods
+    *****************************************************
+  */
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function deleteCookie(cname) {
+      setCookie(cname, "", -1);
+  }
+</script>

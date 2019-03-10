@@ -1,0 +1,2144 @@
+https://www.oadi.cornell.edu/
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   OADI - Home
+  </title>
+  <!-- webfonts -->
+  <link href="https://oadi.cornell.edu/style/MyFontsWebfontsKit.css" rel="stylesheet" type="text/css"/>
+  <!-- stylesheet -->
+  <link href="https://oadi.cornell.edu/style/main.css" rel="stylesheet" type="text/css"/>
+  <link href="https://oadi.cornell.edu/style/responsive.css" rel="stylesheet" type="text/css"/>
+  <!--<link rel="stylesheet" href="script/responsivemobilemenu/rmm-css/responsivemobilemenu.css" type="text/css"/>-->
+  <!-- javascript code -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js">
+  </script>
+  <script src="https://oadi.cornell.edu/script/main.js">
+  </script>
+  <!-- accordion plugin -->
+  <script src="https://oadi.cornell.edu/script/jquery-vertical-accordion-menu/js/jquery.cookie.js">
+  </script>
+  <script src="https://oadi.cornell.edu/script/jquery-vertical-accordion-menu/js/jquery.hoverIntent.minified.js">
+  </script>
+  <script src="https://oadi.cornell.edu/script/jquery-vertical-accordion-menu/js/jquery.dcjqaccordion.2.7.min.js">
+  </script>
+  <script src="https://oadi.cornell.edu/script/jquery.jcarousel.js">
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics | ADDED 07/23/18 -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-36954622-1">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-36954622-1');
+  </script>
+  <script>
+   $(document).ready(function(){
+            //click action
+            $(".btn-menu").click(function(){
+                if( $("#menu-state").val() == 'open'){
+                    $(".body").css("left", "0px");
+                    $(".body").css("position", "relative");
+
+                    $(".body").css("-webkit-transition", "all .5s ease-in-out");
+                    $(".body").css("-moz-transition", "all .5s ease-in-out");
+                    $(".body").css("-o-transition", "all .5s ease-in-out");
+                    $(".body").css("transition", "all .5s ease-in-out");
+
+                    $(".mobile_menu").delay(400).fadeOut();
+                    $("#menu-state").val('closed');
+                }else{
+                    $(".body").css("position", "relative");
+                    $(".body").css("-webkit-transition", "all .5s ease-in-out");
+                    $(".body").css("-moz-transition", "all .5s ease-in-out");
+                    $(".body").css("-o-transition", "all .5s ease-in-out");
+                    $(".body").css("transition", "all .5s ease-in-out");
+                    $(".mobile_menu").show();
+                    $( ".body" ).animate({ "left": "-=250px" }, "fast" );
+                    $("#menu-state").val('open');
+
+                }
+
+                //resize mobile menu to match the .body height
+                $(".mobile_menu").css("height", $(document).height() + "px");
+
+            });
+
+            //resize action
+            $(window).resize(function(){
+                if( $(window).width() > 768){
+                    //automatically close menu on resize on large browsers
+                    $("#menu-state").val('closed');
+                    $(".body").css("left", "0px");
+                }else{
+                    //resize mobile menu to match the .body height
+                    //$(".mobile_menu").css("height", $(document).height() + "px");
+                }
+            });
+
+//fix mobile caption
+            $(document).ready(function(){
+                if( $(window).width() <= 768){
+                    var mypadding = 28;
+                    var myheight = $(".heading_secondary h1").height();
+
+                    myheight = myheight - mypadding;
+
+                    $('.heading_secondary h1').css( 'top', '-'+ myheight + 'px' );
+
+                }
+
+
+                $(window).resize(function(){
+                    if( $(window).width() <= 768){
+                        var mypadding = 28;
+                        var myheight = $(".heading_secondary h1").height();
+
+                        myheight = myheight - mypadding;
+
+                        $('.heading_secondary h1').css( 'top', '-'+ myheight + 'px' );
+
+                    }
+                });
+            });
+
+
+
+            //mobile menu accordion
+            $('#mobile_menu').dcAccordion({
+                eventType: 'click', // Event for activating menu - options are "click" or "hover"
+                autoClose: true, // If set to "true" only one sub-menu open at any time
+                saveState: false,/*saveState: true,*/
+                disableLink: false,
+                speed: 'fast',
+                showCount: false, //count
+                autoExpand: true,// If set to "true" all sub-menus of parent tags with class 'classExpand' will expand on page load
+                cookie	: 'dcjq-accordion-1',
+                classExpand	 : 'dcjq-current-parent'
+            });
+        });
+
+
+
+        //carousel
+
+        function EventListInit(carousel) {
+            jQuery('.jcarousel-control a').bind('click', function() {
+                carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+                return false;
+            });
+
+            jQuery('.jcarousel-scroll select').bind('change', function() {
+                carousel.options.scroll = jQuery.jcarousel.intval(this.options[this.selectedIndex].value);
+                return false;
+            });
+
+            jQuery('#upcoming-event-next').bind('click', function() {
+                carousel.next();
+                return false;
+            });
+
+            jQuery('#upcoming-event-prev').bind('click', function() {
+                carousel.prev();
+                return false;
+            });
+        };
+        jQuery(document).ready(function() {
+            jQuery('#upcoming-events-list').jcarousel({
+                scroll: 1,
+                initCallback: EventListInit,
+                buttonNextHTML: null,
+                buttonPrevHTML: null
+            });
+        });
+  </script>
+  <!--<script src="script/responsivemobilemenu/rmm-js/responsivemobilemenu.js"></script>-->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+ </head>
+ <body>
+  <main>
+   <nav role="off-canvas">
+    <ul class="mobile_menu" id="mobile_menu">
+     <li>
+      <a aria-label="mobile link for About" href="javascript:void(0);">
+       About
+      </a>
+      <ul>
+       <li>
+        <a href="https://oadi.cornell.edu/about.html">
+         About Home
+        </a>
+        <li>
+         <a aria-label="mobile sub menu link for Quick Facts under About parent link" href="https://oadi.cornell.edu/about/quick-facts.html">
+          Quick Facts
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for News Blast under About parent link" href="https://oadi.cornell.edu/about/news-blast.html">
+          News Blast
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Student Spotlights under About parent link" href="https://oadi.cornell.edu/about/student-spotlights.html">
+          Student Spotlights
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Support OADI under About parent link" href="https://oadi.cornell.edu/about/support-oadi.html">
+          Support OADI
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Newsletter under About parent link" href="https://oadi.cornell.edu/about/newsletter.html">
+          Newsletter
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Mission and Vision under About parent link" href="https://oadi.cornell.edu/about/mission-vision.html">
+          Mission and Vision
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Staff under About parent link" href="javascript:void(0);">
+          Staff
+         </a>
+         <ul>
+          <li>
+           <a href="https://oadi.cornell.edu/about/oadi-staff.html">
+            Staff Home
+           </a>
+           <li>
+            <a aria-label="mobile sub menu link for Graduate Student Staff under Staff parent link" href="https://oadi.cornell.edu/about/oadi-staff/graduate-student-staff.html">
+             Graduate Student Staff
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Professional Staff under Staff parent link" href="https://oadi.cornell.edu/about/oadi-staff/professional-staff.html">
+             Professional Staff
+            </a>
+           </li>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Contact Info under About parent link" href="https://oadi.cornell.edu/about/contact-info.html">
+          Contact Info
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Categories under About parent link" href="https://oadi.cornell.edu/about/categories.html">
+          Categories
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for OADI In The News under About parent link" href="https://oadi.cornell.edu/about/oadi-in-the-news.html">
+          OADI In The News
+         </a>
+        </li>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a aria-label="mobile link for Events" href="javascript:void(0);">
+       Events
+      </a>
+      <ul>
+       <li>
+        <a href="https://oadi.cornell.edu/oadi-events.html">
+         Events Home
+        </a>
+        <li>
+         <a aria-label="mobile sub menu link for Series Events  under Events parent link" href="javascript:void(0);">
+          Series Events
+         </a>
+         <ul>
+          <li>
+           <a href="https://oadi.cornell.edu/oadi-events/series-events.html">
+            Series Events  Home
+           </a>
+           <li>
+            <a aria-label="mobile sub menu link for Tuesday Lunch Engagement under Series Events  parent link" href="https://oadi.cornell.edu/oadi-events/series-events/tuesday-lunch-engagement.html">
+             Tuesday Lunch Engagement
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for The Method: Student Success Workshops under Series Events  parent link" href="https://oadi.cornell.edu/oadi-events/series-events/the-method.html">
+             The Method: Student Success Workshops
+            </a>
+           </li>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Annual Events under Events parent link" href="javascript:void(0);">
+          Annual Events
+         </a>
+         <ul>
+          <li>
+           <a href="https://oadi.cornell.edu/oadi-events/oadi-annual-events.html">
+            Annual Events Home
+           </a>
+           <li>
+            <a aria-label="mobile sub menu link for Posse Plus Retreat under Annual Events parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/posse-plus-retreat.html">
+             Posse Plus Retreat
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for OADI Honors under Annual Events parent link" href="javascript:void(0);">
+             OADI Honors
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors.html">
+               OADI Honors Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for OADI Honors Alumni Award under OADI Honors parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors/oadi-honors-alumni-award.html">
+                OADI Honors Alumni Award
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for OADI Honors Faculty Award under OADI Honors parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors/oadi-honors-faculty-award.html">
+                OADI Honors Faculty Award
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for OADI Honors Graduate Mentor Award under OADI Honors parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors/oadi-honors-graduate-mentor-award.html">
+                OADI Honors Graduate Mentor Award
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for OADI Honors Staff Award under OADI Honors parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors/oadi-honors-staff-award.html">
+                OADI Honors Staff Award
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for OADI Honors Undergraduate Student Organization Award under OADI Honors parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors/oadi-honors-undergraduate-student-organization-award.html">
+                OADI Honors Undergraduate Student Organization Award
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for OADI Honors Undergraduate Awards under OADI Honors parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/oadi honors/oadi-honors-undergraduate-awards.html">
+                OADI Honors Undergraduate Awards
+               </a>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Posse April Visit under Annual Events parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/posse-april-visit.html">
+             Posse April Visit
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Dr. Martin Luther King, Jr. Day of Commemoration under Annual Events parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/dr-martin-luther-king.html">
+             Dr. Martin Luther King, Jr. Day of Commemoration
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Diversity in Scholarship and Engagement Symposium under Annual Events parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/diversity-scholarship-engagement-symposium.html">
+             Diversity in Scholarship and Engagement Symposium
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Senior Celebration under Annual Events parent link" href="https://oadi.cornell.edu/oadi-events/oadi-annual-events/senior-celebration.html">
+             Senior Celebration
+            </a>
+           </li>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Calendar of Events under Events parent link" href="https://oadi.cornell.edu/oadi-events/calendar-of-events.html">
+          Calendar of Events
+         </a>
+        </li>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a aria-label="mobile link for Programs" href="javascript:void(0);">
+       Programs
+      </a>
+      <ul>
+       <li>
+        <a href="https://oadi.cornell.edu/programs.html">
+         Programs Home
+        </a>
+        <li>
+         <a aria-label="mobile sub menu link for Student Opportunity Programs under Programs parent link" href="javascript:void(0);">
+          Student Opportunity Programs
+         </a>
+         <ul>
+          <li>
+           <a href="https://oadi.cornell.edu/programs/student-opportunity-programs.html">
+            Student Opportunity Programs Home
+           </a>
+           <li>
+            <a aria-label="mobile sub menu link for Arthur O. Eve Opportunity Programs EOP/HEOP under Student Opportunity Programs parent link" href="javascript:void(0);">
+             Arthur O. Eve Opportunity Programs EOP/HEOP
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve.html">
+               Arthur O. Eve Opportunity Programs EOP/HEOP Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for EOP/HEOP Frequently Asked Questions under Arthur O. Eve Opportunity Programs EOP/HEOP parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/eop-heop-faq.html">
+                EOP/HEOP Frequently Asked Questions
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for Family and Friends under Arthur O. Eve Opportunity Programs EOP/HEOP parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/family-friends.html">
+                Family and Friends
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for About EOP/HEOP under Arthur O. Eve Opportunity Programs EOP/HEOP parent link" href="javascript:void(0);">
+                About EOP/HEOP
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/about-eop-heop.html">
+                  About EOP/HEOP Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for Who is Arthur O. Eve under About EOP/HEOP parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve-opportunity-programs/about-eop-heop/who-is-arthur-oeve.html">
+                   Who is Arthur O. Eve
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for EOP/HEOP Ambassadors under About EOP/HEOP parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/about-eop-heop/eop/heop-ambassadors.html">
+                   EOP/HEOP Ambassadors
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for How to Apply under Arthur O. Eve Opportunity Programs EOP/HEOP parent link" href="javascript:void(0);">
+                How to Apply
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/how-to-apply.html">
+                  How to Apply Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for Financial Aid Review Documentation under How to Apply parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/how-to-apply/financial-aid-review-documentation.html">
+                   Financial Aid Review Documentation
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for EOP/HEOP Eligibility Questionnaire under How to Apply parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/how-to-apply/eop-heop-eligibility-questionnaire.html">
+                   EOP/HEOP Eligibility Questionnaire
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for EOP/HEOP Student Awards under Arthur O. Eve Opportunity Programs EOP/HEOP parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/eop/heop-student-awards.html">
+                EOP/HEOP Student Awards
+               </a>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Posse Program under Student Opportunity Programs parent link" href="javascript:void(0);">
+             Posse Program
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program.html">
+               Posse Program Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for Posse Scholars under Posse Program parent link" href="javascript:void(0);">
+                Posse Scholars
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-scholars.html">
+                  Posse Scholars Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for Posse One under Posse Scholars parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-scholars/posse-one.html">
+                   Posse One
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for Posse Two under Posse Scholars parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-scholars/posse-two.html">
+                   Posse Two
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for Posse Three under Posse Scholars parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-scholars/posse-three.html">
+                   Posse Three
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for Posse Four under Posse Scholars parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-scholars/posse-four.html">
+                   Posse Four
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for Posse Five under Posse Scholars parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-scholars/posse-five.html">
+                   Posse Five
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for Benefits of the Posse Program at Cornell under Posse Program parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/benefits-posse-cornell.html">
+                Benefits of the Posse Program at Cornell
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for Posse Plus Retreat under Posse Program parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-plus-retreat.html">
+                Posse Plus Retreat
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for Posse Frequently Asked Questions under Posse Program parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-faq.html">
+                Posse Frequently Asked Questions
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for Posse April Visit under Posse Program parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/posse-program/posse-april-visit.html">
+                Posse April Visit
+               </a>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Gates Millennium Scholars under Student Opportunity Programs parent link" href="https://oadi.cornell.edu/programs/student-opportunity-programs/gates-millennium-scholars.html">
+             Gates Millennium Scholars
+            </a>
+           </li>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Student Success Programs under Programs parent link" href="javascript:void(0);">
+          Student Success Programs
+         </a>
+         <ul>
+          <li>
+           <a href="https://oadi.cornell.edu/programs/student-success-programs.html">
+            Student Success Programs Home
+           </a>
+           <li>
+            <a aria-label="mobile sub menu link for Pre Professional Programs under Student Success Programs parent link" href="javascript:void(0);">
+             Pre Professional Programs
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs.html">
+               Pre Professional Programs Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for P3 Member Programs under Pre Professional Programs parent link" href="javascript:void(0);">
+                P3 Member Programs
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/p3-member programs.html">
+                  P3 Member Programs Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for Shadow Program under P3 Member Programs parent link" href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/p3-member programs/shadow program.html">
+                   Shadow Program
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for WISER under P3 Member Programs parent link" href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/p3-member programs/wiser.html">
+                   WISER
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for P3 Eligibility and Application under Pre Professional Programs parent link" href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/eligibility-application.html">
+                P3 Eligibility and Application
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for P3 Funding Information under Pre Professional Programs parent link" href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/p3 funding information.html">
+                P3 Funding Information
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for About P3 under Pre Professional Programs parent link" href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/about-p3.html">
+                About P3
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for Graduate Students Mentoring Undergraduates (GSMU) under Pre Professional Programs parent link" href="javascript:void(0);">
+                Graduate Students Mentoring Undergraduates (GSMU)
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/graduate students mentoring undergraduates (gsmu).html">
+                  Graduate Students Mentoring Undergraduates (GSMU) Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for Meet our 2017-2018 GSMU Mentors! under Graduate Students Mentoring Undergraduates (GSMU) parent link" href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs/graduate students mentoring undergraduates (gsmu)/meet our 2017-2018 gsmu mentors!.html">
+                   Meet our 2017-2018 GSMU Mentors!
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Community Development and Social Justice Program under Student Success Programs parent link" href="javascript:void(0);">
+             Community Development and Social Justice Program
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/programs/student-success-programs/cdsjp.html">
+               Community Development and Social Justice Program Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for Non-Traditional Student Resources under Community Development and Social Justice Program parent link" href="javascript:void(0);">
+                Non-Traditional Student Resources
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-success-programs/cdsjp/non-traditional-student-resources.html">
+                  Non-Traditional Student Resources Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for Trailblazers under Non-Traditional Student Resources parent link" href="https://oadi.cornell.edu/programs/student-success-programs/cdsjp/non-traditional-student-resources/trailblazers.html">
+                   Trailblazers
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for First-in-Class Program under Non-Traditional Student Resources parent link" href="https://oadi.cornell.edu/programs/student-success-programs/cdsjp/non-traditional-student-resources/first-in-class.html">
+                   First-in-Class Program
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for Undocumented-DACAmented Students at Cornell under Non-Traditional Student Resources parent link" href="https://oadi.cornell.edu/programs/student-success-programs/cdsjp/non-traditional-student-resources/undocumented-dacamented students at cornell.html">
+                   Undocumented-DACAmented Students at Cornell
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for OADI Research Scholars under Student Success Programs parent link" href="javascript:void(0);">
+             OADI Research Scholars
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/programs/student-success-programs/oadi-research-scholars.html">
+               OADI Research Scholars Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for ORSP Participant Information under OADI Research Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/oadi-research-scholars/orsp-participant-information.html">
+                ORSP Participant Information
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for ORSP Application Information under OADI Research Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/oadi-research-scholars/orsp-application-information.html">
+                ORSP Application Information
+               </a>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for Ronald E. McNair Post-Baccalaureate Achievement Program under Student Success Programs parent link" href="javascript:void(0);">
+             Ronald E. McNair Post-Baccalaureate Achievement Program
+            </a>
+            <ul>
+             <li>
+              <a href="https://oadi.cornell.edu/programs/student-success-programs/mcnair.html">
+               Ronald E. McNair Post-Baccalaureate Achievement Program Home
+              </a>
+              <li>
+               <a aria-label="mobile sub menu link for McNair Application and Recommendation under Ronald E. McNair Post-Baccalaureate Achievement Program parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/application-recommendation.html">
+                McNair Application and Recommendation
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for McNair Faculty Advisory Board under Ronald E. McNair Post-Baccalaureate Achievement Program parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/faculty-advisory-board.html">
+                McNair Faculty Advisory Board
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for McNair Faculty Mentors under Ronald E. McNair Post-Baccalaureate Achievement Program parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/faculty-mentors.html">
+                McNair Faculty Mentors
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for McNair in the News under Ronald E. McNair Post-Baccalaureate Achievement Program parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/in-the-news.html">
+                McNair in the News
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for About McNair under Ronald E. McNair Post-Baccalaureate Achievement Program parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/about.html">
+                About McNair
+               </a>
+              </li>
+              <li>
+               <a aria-label="mobile sub menu link for McNair Scholars under Ronald E. McNair Post-Baccalaureate Achievement Program parent link" href="javascript:void(0);">
+                McNair Scholars
+               </a>
+               <ul>
+                <li>
+                 <a href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars.html">
+                  McNair Scholars Home
+                 </a>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2013-2014 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair-scholars-2013-2014.html">
+                   McNair Scholars 2013-2014 Cohort
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2012-2013 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair-scholars-2012-2013.html">
+                   McNair Scholars 2012-2013 Cohort
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2014-2015 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair-scholars-2014-2015.html">
+                   McNair Scholars 2014-2015 Cohort
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2015-2016 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair-scholars-2015-2016-cohort.html">
+                   McNair Scholars 2015-2016 Cohort
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2016-2017 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair scholars 2016-2017 cohort.html">
+                   McNair Scholars 2016-2017 Cohort
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2017-2018 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair scholars 2017-2018 cohort.html">
+                   McNair Scholars 2017-2018 Cohort
+                  </a>
+                 </li>
+                 <li>
+                  <a aria-label="mobile sub menu link for McNair Scholars 2018-2019 Cohort under McNair Scholars parent link" href="https://oadi.cornell.edu/programs/student-success-programs/mcnair/mcnair-scholars/mcnair scholars 2018-2019 cohort.html">
+                   McNair Scholars 2018-2019 Cohort
+                  </a>
+                 </li>
+                </li>
+               </ul>
+              </li>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for OADI Research Compendium under Student Success Programs parent link" href="https://oadi.cornell.edu/programs/student-success-programs/oadi-research-compendium.html">
+             OADI Research Compendium
+            </a>
+           </li>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Chi Alpha Epsilon Honor Society under Programs parent link" href="javascript:void(0);">
+          Chi Alpha Epsilon Honor Society
+         </a>
+         <ul>
+          <li>
+           <a href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society.html">
+            Chi Alpha Epsilon Honor Society Home
+           </a>
+           <li>
+            <a aria-label="mobile sub menu link for 2014 Spring Charter Induction under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2014-spring-charter-induction.html">
+             2014 Spring Charter Induction
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2015 Spring Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2015-spring-induction-class.html">
+             2015 Spring Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2014 Fall Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2014-fall-induction-class.html">
+             2014 Fall Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2015 Fall Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2015-fall-induction-class.html">
+             2015 Fall Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2017 Fall Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2017-fall-induction-class.html">
+             2017 Fall Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2016 Fall Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2016-fall-induction-class.html">
+             2016 Fall Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2017 Spring Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2017-spring-induction-class.html">
+             2017 Spring Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2018 Fall Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2018-fall-induction-class.html">
+             2018 Fall Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2018 Spring Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2018-spring-induction-class.html">
+             2018 Spring Induction Class
+            </a>
+           </li>
+           <li>
+            <a aria-label="mobile sub menu link for 2019 Spring Induction Class under Chi Alpha Epsilon Honor Society parent link" href="https://oadi.cornell.edu/programs/chi-alpha-epsilon-honor-society/2019 spring induction class.html">
+             2019 Spring Induction Class
+            </a>
+           </li>
+          </li>
+         </ul>
+        </li>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a aria-label="mobile link for Resources &amp; Services" href="https://oadi.cornell.edu/resources and services/scholarship and internship database.html">
+       Resources &amp; Services
+      </a>
+     </li>
+     <li>
+      <a aria-label="mobile link for Funding &amp; Student Employment" href="javascript:void(0);">
+       Funding &amp; Student Employment
+      </a>
+      <ul>
+       <li>
+        <a href="https://oadi.cornell.edu/funding and student employment.html">
+         Funding &amp; Student Employment Home
+        </a>
+        <li>
+         <a aria-label="mobile sub menu link for Student Employment under Funding &amp; Student Employment parent link" href="https://oadi.cornell.edu/funding and student employment/student-employment.html">
+          Student Employment
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Individual Student Funding under Funding &amp; Student Employment parent link" href="https://oadi.cornell.edu/funding and student employment/individual-student-funding.html">
+          Individual Student Funding
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Student Organization/Dept. Funding under Funding &amp; Student Employment parent link" href="https://oadi.cornell.edu/funding and student employment/student-organization-dept-funding.html">
+          Student Organization/Dept. Funding
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for View Jobs under Funding &amp; Student Employment parent link" href="https://oadi.cornell.edu/funding and student employment/view jobs.html">
+          View Jobs
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Sponsorship under Funding &amp; Student Employment parent link" href="https://oadi.cornell.edu/funding and student employment/sponsorship.html">
+          Sponsorship
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Placement under Funding &amp; Student Employment parent link" href="https://oadi.cornell.edu/funding and student employment/placement.html">
+          Placement
+         </a>
+        </li>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a aria-label="mobile link for Partners &amp; Links" href="javascript:void(0);">
+       Partners &amp; Links
+      </a>
+      <ul>
+       <li>
+        <a href="https://oadi.cornell.edu/partners and links.html">
+         Partners &amp; Links Home
+        </a>
+        <li>
+         <a aria-label="mobile sub menu link for Alumni under Partners &amp; Links parent link" href="https://oadi.cornell.edu/partners and links/alumni.html">
+          Alumni
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Campus Partners under Partners &amp; Links parent link" href="https://oadi.cornell.edu/partners and links/campus-partners.html">
+          Campus Partners
+         </a>
+        </li>
+        <li>
+         <a aria-label="mobile sub menu link for Community Partners under Partners &amp; Links parent link" href="https://oadi.cornell.edu/partners and links/community-partners.html">
+          Community Partners
+         </a>
+        </li>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </nav>
+   <div class="body">
+    <a name="top">
+    </a>
+    <header>
+     <div class="header" id="header">
+      <div class="header_cornell">
+       <div class="content">
+        <div class="cornell_search" id="cornell_search">
+         <form action="http://www.cornell.edu/search" method="GET" name="gs">
+          <div class="cornell_search_field">
+           <input aria-labelledby="search" class="txtbox" id="search-form-query" name="q" onblur="this.value = this.value || this.defaultValue;" onfocus="this.value == this.defaultValue &amp;&amp; (this.value =''); this.select()" type="text" value="Search"/>
+          </div>
+          <input class="cornell_search_submit" id="search" name="Search" type="submit" value="Search">
+           <!--<input type="hidden" name="target" value="unit">-->
+           <input name="as_sitesearch" type="hidden" value="https://www.oadi.cornell.edu"/>
+          </input>
+         </form>
+        </div>
+        <a class="btn_mobile_menu" href="#" id="btn_mobile_menu">
+         Menu
+        </a>
+        <a class="btn_mobile_search" href="#" id="btn_mobile_search">
+         Search
+        </a>
+        <a class="logo_cornell" href="http://www.cornell.edu" target="_blank" title="Cornell University">
+         Cornell University
+        </a>
+        <input id="menu-state" type="hidden"/>
+        <a class="btn-menu" href="#">
+         ☰
+        </a>
+        <div class="clear">
+        </div>
+       </div>
+       <!--content-->
+      </div>
+      <!--header_cornell-->
+      <div class="header_home_bg header_bg_home flexslider">
+       <link href="script/woothemes-FlexSlider/flexslider.css" media="screen" rel="stylesheet" type="text/css"/>
+       <script src="script/woothemes-FlexSlider/jquery.flexslider.js">
+       </script>
+       <script type="text/javascript">
+        $(function(){
+            //SyntaxHighlighter.all();
+        });
+
+        $(window).load(function(){
+            $captions = $('.captions');
+            $('.flexslider').flexslider({
+
+                animation: "slide",
+
+                /*controlsContainer:".hp_caption_control",*/
+
+                start: function(slider){
+
+                    $('body').removeClass('loading');
+
+
+
+                    $activecaption = $('.flex-active-slide .flex-caption');
+
+                    $captions.html($activecaption.text());
+
+                }
+
+                ,after: function() {
+
+                    $activecaption = $('.flex-active-slide .flex-caption');
+
+                    $captions.html($activecaption.text());
+
+                }
+
+
+
+
+
+            });
+
+        });
+       </script>
+       <ul class="slides" id="slides">
+       </ul>
+       <style type="text/css">
+        .flex-caption{display:none;}
+       </style>
+       <script>
+        //detect screen width if mobile of not..
+
+        var screenwidth = window.innerWidth;
+
+        //console.log(screenwidth);
+
+
+
+        if(screenwidth <= 670){ //mobile slideshow
+            document.getElementById("slides").innerHTML = '<li><img src="slideshow/mobile/HOME SLIDESHOW_mobile_0003_DigNity.jpg" alt="Students working at EOP/HEOP Service Day creating DigâNity Gardens" /><p class="flex-caption">Students working at EOP/HEOP Service Day creating DigâNity Gardens</p></li> <li><img src="slideshow/mobile/HOME SLIDESHOW_mobile_0002_IvyG Conf.jpg" alt="First-Generation Students network at IvyG Conference" /><p class="flex-caption">First-Generation Students network at IvyG Conference</p></li> <li><img src="slideshow/mobile/HOME SLIDESHOW_mobile_0000_McNair Washington.jpg" alt="McNair Scholars attend Advocacy Day in Washington" /><p class="flex-caption">McNair Scholars attend Advocacy Day in Washington</p></li> <li><img src="slideshow/mobile/HOME SLIDESHOW_mobile_0005_Southside.jpg" alt="Students working at EOP/HEOP Service Day supporting South Side Community Center" /><p class="flex-caption">Students working at EOP/HEOP Service Day supporting South Side Community Center</p></li> <li><img src="slideshow/mobile/HOME SLIDESHOW_mobile_0001_OpenHouse.jpg" alt="Student Staff provide program information at OADI Open House" /><p class="flex-caption">Student Staff provide program information at OADI Open House</p></li> <li><img src="slideshow/mobile/HOME SLIDESHOW_mobile_0004_XAE induction.jpg" alt="Students and Staff get inducted into XAE" /><p class="flex-caption">Students and Staff get inducted into XAE</p></li>';
+        }else{
+
+            document.getElementById("slides").innerHTML = '<li><img src="slideshow/HOME SLIDESHOW_0009_DigNity Gardens.jpg" alt="Students working at EOP/HEOP Service Day creating DigâNity Gardens" /><p class="flex-caption">Students working at EOP/HEOP Service Day creating DigâNity Gardens</p></li> <li><img src="slideshow/HOME SLIDESHOW_0008_IvyG Conference.jpg" alt="First-Generation Students network at IvyG Conference" /><p class="flex-caption">First-Generation Students network at IvyG Conference</p></li>	<li><img src="slideshow/HOME SLIDESHOW_0006_McNair Washington.jpg" alt="McNair Scholars attend Advocacy Day in Washington" /><p class="flex-caption">McNair Scholars attend Advocacy Day in Washington</p></li> <li><img src="slideshow/HOME SLIDESHOW_0010_SouthSide Ithaca.jpg" alt="Students working at EOP/HEOP Service Day supporting South Side Community Center" /><p class="flex-caption">Students working at EOP/HEOP Service Day supporting South Side Community Center</p></li>	<li><img src="slideshow/HOME SLIDESHOW_0007_OADI Openhouse.jpg" alt="Student Staff provide program information at OADI Open House" /><p class="flex-caption">Student Staff provide program information at OADI Open House</p></li> <li><img src="slideshow/HOME SLIDESHOW_0005_XAE Induction.jpg" alt="Students and Staff get inducted into XAE" /><p class="flex-caption">Students and Staff get inducted into XAE</p></li>';
+
+        }
+       </script>
+       <div class="header_stripe header_stripe_pink">
+       </div>
+       <!--header_stripe-->
+       <div class="header_main">
+        <div class="content position_relative">
+         <ul class="social_networking_icons">
+          <!-- <li class="ico_flickr"><a href="#">Flickr</a></li> -->
+          <li class="ico_facebook">
+           <a href="https://www.facebook.com/OADICornell" target="_blank">
+            Facebook
+           </a>
+          </li>
+          <li class="ico_twitter">
+           <a href="https://www.twitter.com/oadi_cornell" target="_blank">
+            Twitter
+           </a>
+          </li>
+         </ul>
+         <h1 class="header_title">
+          <a href="https://oadi.cornell.edu/">
+           Office of Academic Diversity Initiatives
+          </a>
+         </h1>
+         <div class="nav" id="nav">
+          <ul>
+           <li>
+            <a href="/about.html">
+             About
+            </a>
+           </li>
+           <li>
+            <a href="/oadi-events.html">
+             Events
+            </a>
+           </li>
+           <li>
+            <a href="/programs.html">
+             Programs
+            </a>
+           </li>
+           <li>
+            <a href="/resources and services.html">
+             Resources &amp; Services
+            </a>
+           </li>
+           <li>
+            <a href="/funding and student employment.html">
+             Funding &amp; Student Employment
+            </a>
+           </li>
+           <li>
+            <a href="/partners and links.html">
+             Partners &amp; Links
+            </a>
+           </li>
+          </ul>
+         </div>
+         <!--nav-->
+        </div>
+        <!--content-->
+       </div>
+       <!--header_main-->
+       <div class="content slidecaption">
+        <div class="hp_slide_caption">
+         <div class="hp_caption_content">
+          <p class="captions">
+           Lorem ipsom
+
+                    dolar ipsum et
+
+                    tuo dolar seti
+
+                    ipsum la boom
+
+                    friunte ta.
+          </p>
+         </div>
+         <!--<div class="hp_caption_controls">
+
+            	<div class="hp_caption_controls_mobile">
+
+                	<a class="hp_caption_controls_mobile_prev" href="#">Previous</a>
+
+                	<a class="hp_caption_controls_mobile_next" href="#">Next</a>
+
+                </div>
+
+                <div class="hp_caption_control"></div>
+
+
+
+                <a href="#" class="btn_hp_more float_right">Find out more</a>
+
+            </div>-->
+        </div>
+       </div>
+      </div>
+      <!--header_bg-->
+     </div>
+     <!-- header here --->
+    </header>
+    <div class="homepage-adjust" id="container">
+     <div class="content">
+      <div class="breadcrumbs">
+       <a href="/">
+        Home
+       </a>
+       &gt;
+       <!--<a href="#">Home</a> > About-->
+      </div>
+      <!--breadcrumbs-->
+      <div class="clear">
+      </div>
+      <div class="main_content main_content_wide">
+       <div class="home_heading">
+        <div class="home_widget_factoid" id="factoid1">
+         <h1 class="title">
+          QUICK FACTS
+         </h1>
+         <h3>
+          Co-Funding
+         </h3>
+         <p>
+          OADI provides
+          <a href="https://oadi-prod.hosting.cornell.edu/funding%20and%20student%20employment.html">
+           co-funding
+          </a>
+          for student research experiences on campus.
+         </p>
+        </div>
+        <div class="home_widget_qf">
+         The Office of Academic Diversity Initiatives-OADI-is focused on inclusion and achievement across the Cornell campus so students of all backgrounds excel at their academic goals. OADI programs especially support low-income students, those who are the first in their families to achieve a college degree, and under-represented students of color.
+        </div>
+        <div class="box_home_popupnotice">
+         <div class="box_home_popupnotice_title">
+          <span>
+           Notice
+          </span>
+         </div>
+         <!--box_home_popupnotice_title-->
+         <div class="box_home_popupnotice_body">
+          <div class="box_home_popupnotice_body_content">
+           <p>
+            Interested in applying to EOP/HEOP for admissions?  Please click the link below for more details on the process.
+           </p>
+           <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve/how-to-apply.html">
+            Find out more  &gt;&gt;
+           </a>
+          </div>
+          <!--box_home_popupnotice_body_content-->
+         </div>
+         <!--box_home_popupnotice_body-->
+        </div>
+        <!--box_home_popupnotice-->
+        <div class="clear">
+        </div>
+       </div>
+       <!--home_heading-->
+       <div class="clear">
+       </div>
+       <div class="box_home_find_more_about">
+        <div class="box_home_find_more_about_label">
+         Find out more about:
+        </div>
+        <form action="https://oadi.cornell.edu/about/categories.html" method="get" name="form_category_home">
+         <select class="box_home_select" name="category_id" onchange="javascript:document.form_category_home.submit();">
+          <option value="">
+           -Select Category-
+          </option>
+          <option value="5">
+           Arthur O. Eve EOP/HEOP
+          </option>
+          <option value="9">
+           Community Development and Social Justice
+          </option>
+          <option value="11">
+           Events
+          </option>
+          <option value="14">
+           How to get involved
+          </option>
+          <option value="8">
+           McNair Scholars Program
+          </option>
+          <option value="13">
+           Non-Traditional Student Support
+          </option>
+          <option value="10">
+           OADI Research Scholars Program
+          </option>
+          <option value="6">
+           Posse
+          </option>
+          <option value="7">
+           Pre Professional Programs (P3)
+          </option>
+          <option value="2">
+           Research Opportunities
+          </option>
+          <option value="4">
+           Student Employment
+          </option>
+          <option value="3">
+           Student Funding
+          </option>
+          <option value="15">
+           Undocumented Student Support
+          </option>
+         </select>
+         <button name="submit" style="visibility: hidden;margin: 0;padding: 0;width: 0;height: 0;display: inline;float: left;">
+         </button>
+        </form>
+        <div class="box_home_find_more_about_text">
+         Click on one of the categories to learn more about the programs and opportunities available at the OADI office.
+        </div>
+       </div>
+       <!--home_find_more_about-->
+       <div class="home_widget_factoid" id="factoid2">
+        <h1 class="title">
+         OADI UPDATE
+        </h1>
+        <h3>
+         New OADI Hours
+        </h3>
+        <p>
+         <span>
+          The OADI lounge and computer lab hours are
+         </span>
+         <br/>
+         <span>
+          Monday - Friday 8:00 am - 4:30 pm
+         </span>
+        </p>
+       </div>
+       <div class="clear">
+       </div>
+       <div class="widget_oadi_events">
+        <div class="tab_oadi_events">
+         OADI Events
+        </div>
+        <!--tab_oadi_events-->
+        <div class="widget_content_oadi_events">
+         <a class="widget_control_prev" href="#" id="upcoming-event-prev">
+          Previous
+         </a>
+         <a class="widget_control_next" href="#" id="upcoming-event-next">
+          Next
+         </a>
+         <div class="hp_oadi_events_container" id="hp_oadi_events_container">
+          <!-- this is the mask-->
+          <ul class="widget_box_oadi_events" id="upcoming-events-list">
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.11.19
+             <span class="separator">
+              |
+             </span>
+             4:30 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/857.html">
+              ORSP Cohort Dinner #6
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.12.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/884.html">
+              Tuesday Lunch Engagement- Study Skills Workshop
+             </a>
+            </h2>
+            <p>
+             Study Skills Workshop: Le...
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.13.19
+             <span class="separator">
+              |
+             </span>
+             4:30 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/858.html">
+              GSMU Dinner #4
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.14.19
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/859.html">
+              McNair Spring Conference
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.18.19
+             <span class="separator">
+              |
+             </span>
+             5:00 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/860.html">
+              EOP HEOP Family Dinner
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.19.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/885.html">
+              Tuesday Lunch Engagement- Scholar Presentations
+             </a>
+            </h2>
+            <p>
+             OADI Funding Awardees
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.19.19
+             <span class="separator">
+              |
+             </span>
+             4:00 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/861.html">
+              McNair Junior Meeting #3
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.21.19
+             <span class="separator">
+              |
+             </span>
+             5:30 pm-7:30 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/862.html">
+              P3 Dining Etiquette Dinner
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.24.19
+             <span class="separator">
+              |
+             </span>
+             12:00 pm-3:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/863.html">
+              XAE Inductions
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             3.26.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/886.html">
+              Tuesday Lunch Engagement- Method Series
+             </a>
+            </h2>
+            <p>
+             Farm Credit East &amp; Je...
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.8.19
+             <span class="separator">
+              |
+             </span>
+             4:00 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/866.html">
+              McNair Sophomoe Meeting #3
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.9.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/887.html">
+              Tuesday Lunch Engagement- Method Series
+             </a>
+            </h2>
+            <p>
+             TBD
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.9.19
+             <span class="separator">
+              |
+             </span>
+             4:00 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/865.html">
+              McNair Junior Meeting #4
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.10.19
+             <span class="separator">
+              |
+             </span>
+             4:30 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/867.html">
+              GSMU Dinner #5
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.10.19
+             <span class="separator">
+              |
+             </span>
+             4:30 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/868.html">
+              GSMU Dinner #5
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.12.19
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/869.html">
+              CSTEP Conference
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.12.19
+             <span class="separator">
+              |
+             </span>
+             12:00 pm-3:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/870.html">
+              McNair Scholars Induction Ceremony
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.16.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/888.html">
+              Tuesday Lunch Engagement- Scholar Presentations
+             </a>
+            </h2>
+            <p>
+             OADI Funding Awardees
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.22.19
+             <span class="separator">
+              |
+             </span>
+             4:30 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/872.html">
+              ORSP Cohort Dinner #7
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.23.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/889.html">
+              Tuesday Lunch Engagement
+             </a>
+            </h2>
+            <p>
+             TBD
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.23.19
+             <span class="separator">
+              |
+             </span>
+             4:00 pm-6:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/873.html">
+              McNair Junior Meeting #5
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.27.19
+             <span class="separator">
+              |
+             </span>
+             11:30 am-2:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/874.html">
+              EOP HEOP End of Year Event
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.28.19
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/871.html">
+              Gates Senior Send Off
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             4.30.19
+             <span class="separator">
+              |
+             </span>
+             11:45 am-12:45 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/890.html">
+              Tuesday Lunch Engagement- Method Series
+             </a>
+            </h2>
+            <p>
+             TBD
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             5.3.19
+             <span class="separator">
+              |
+             </span>
+             6:00 pm-8:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/876.html">
+              OADI Honors Event
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             5.8.19
+             <span class="separator">
+              |
+             </span>
+             6:00 pm-8:00 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/877.html">
+              GSMU Mentor Debreif
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+           <li>
+            <div class="widget_box_oadi_events_heading">
+             5.23.19
+             <span class="separator">
+              |
+             </span>
+             2:00 pm-4:30 pm
+            </div>
+            <!--widget_box_oadi_events_heading-->
+            <h2>
+             <a href="https://oadi.cornell.edu/oadi-events/calendar-detail/878.html">
+              McNair Senior Celebration Luncheon and Stole Ceremony
+             </a>
+            </h2>
+            <p>
+            </p>
+           </li>
+          </ul>
+         </div>
+         <!--hp_oadi_events_container-->
+        </div>
+        <!--widget_content_oadi_events-->
+       </div>
+       <!--widget_oadi_events-->
+       <div class="widget_student_spotlights">
+        <div class="widget_student_spotlights_top">
+         Student Spotlights
+        </div>
+        <!--widget_student_spotlights_top-->
+        <div class="widget_student_spotlights_mid">
+         <a href="https://oadi.cornell.edu/about/student-profile/22.html">
+          <img alt="Klaudio Haxhillari profile photo." class="widget_student_spotlights_img" src="https://oadi.cornell.edu/user_uploads/student_photos/Klaudio_Haxhillari.png"/>
+         </a>
+        </div>
+        <!--widget_student_spotlights_mid-->
+        <div class="widget_student_spotlights_bottom">
+         Klaudio Haxhillari '19
+        </div>
+        <!--widget_student_spotlights_bottom-->
+       </div>
+       <!--widget_student_spotlights-->
+       <div class="clear">
+       </div>
+       <div class="widget_oadi_home_ads">
+        <ul class="home_ads">
+         <li>
+          <a href="https://oadi.cornell.edu/about/oadi-in-the-news.html" title="">
+           <h3 class="text_home_ads_title_wide">
+            OADI
+            <br/>
+            In The News
+           </h3>
+           <h3 class="text_home_ads_title_mobile">
+            OADI In The News
+           </h3>
+           <div class="icon_home_ad ico_home_ad_news">
+           </div>
+          </a>
+         </li>
+         <li>
+          <a href="https://securelb.imodules.com/s/1717/alumni/index.aspx?sid=1717&amp;gid=2&amp;pgid=403&amp;cid=1031&amp;dids=307&amp;sort=1&amp;bledit=1" target="_blank" title="">
+           <h3 class="text_home_ads_title_wide">
+            Support
+            <br/>
+            OADI
+           </h3>
+           <h3 class="text_home_ads_title_mobile">
+            Support OADI
+           </h3>
+           <div class="icon_home_ad ico_home_ad_support">
+           </div>
+          </a>
+         </li>
+         <li>
+          <a href="https://oadi.cornell.edu/about/newsletter.html" title="">
+           <h3 class="text_home_ads_title_wide">
+            OADI
+            <br/>
+            Newsletter
+           </h3>
+           <h3 class="text_home_ads_title_mobile">
+            OADI Newsletter
+           </h3>
+           <div class="icon_home_ad ico_home_ad_newsletter">
+           </div>
+          </a>
+         </li>
+         <li class="widget_cdi">
+          <a href="http://diversity.cornell.edu/" target="_blank">
+           <span>
+            See Cornell's
+           </span>
+           <h3>
+            Commitment to Diversity and Inclusion
+           </h3>
+           <div class="icon_home_ad ico_home_ad_cdi">
+           </div>
+          </a>
+         </li>
+         <!--widget_cdi-->
+        </ul>
+        <!--home_ads-->
+       </div>
+       <!--widget_oadi_home_ads-->
+      </div>
+      <!--main_content-->
+      <div class="clear">
+      </div>
+     </div>
+     <!--content-->
+     <script charset="utf-8" type="text/javascript">
+      window.liveSiteAsyncInit = function() {
+        LiveSite.init({
+            id : 'WI-XQYFZX5ASZMYRCCDH82E'
+        });
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0],
+            p = (('https:' == d.location.protocol) ? 'https://' : 'http://'),
+            r = Math.floor(new Date().getTime() / 1000000);
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = p + "www.vcita.com/assets/livesite.js?" + r;
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'livesite-jssdk'));
+     </script>
+     <div class="scroll-link content">
+      <a href="#top">
+       <span>
+        Scroll to Top
+       </span>
+      </a>
+     </div>
+    </div>
+    <!-- container -->
+    <footer class="footer" id="footer">
+     <div id="footer_mobile">
+      <div class="content">
+       <ul class="mobile_footer_links_top">
+        <li>
+         <a href="https://oadi.cornell.edu/about.html">
+          ABOUT
+         </a>
+        </li>
+        <li>
+         <a href="https://oadi.cornell.edu/oadi-events.html">
+          EVENTS
+         </a>
+        </li>
+        <li>
+         <a href="https://oadi.cornell.edu/programs.html">
+          PROGRAMS
+         </a>
+        </li>
+        <li>
+         <a href="https://oadi.cornell.edu/resources%20and%20services.html">
+          RESOURCES/SERVICES
+         </a>
+        </li>
+        <li>
+         <a href="https://oadi.cornell.edu/funding%20and%20student%20employment.html">
+          FUNDING AND STUDENT EMPLOYMENT
+         </a>
+        </li>
+        <li>
+         <a href="https://oadi.cornell.edu/partners%20and%20links.html">
+          PARTNERS AND LINKS
+         </a>
+        </li>
+        <li>
+         <a class="btn_report_bias" href="https://www.hr.cornell.edu/diversity/reporting/bias_response.html" target="_blank">
+          REPORT BIAS
+         </a>
+        </li>
+       </ul>
+       <div class="clear">
+       </div>
+       <ul class="social_networking_icons">
+        <!-- <li class="ico_flickr"><a href="#">Flickr</a></li> -->
+        <li class="ico_facebook">
+         <a href="https://www.facebook.com/OADICornell">
+          Facebook
+         </a>
+        </li>
+        <li class="ico_twitter">
+         <a href="https://www.twitter.com/oadi_cornell">
+          Twitter
+         </a>
+        </li>
+       </ul>
+       <div class="clear">
+       </div>
+       <div class="copyright_mobile">
+        © 2015 Cornell University
+       </div>
+       <div class="clear">
+       </div>
+       <ul class="mobile_footer_links_bottom">
+        <li>
+         <a href="https://oadi.cornell.edu/">
+          HOME
+         </a>
+        </li>
+        <li>
+         <a href="https://oadi.cornell.edu/about/contact-info.html">
+          CONTACT US
+         </a>
+        </li>
+       </ul>
+      </div>
+      <!--content-->
+     </div>
+     <!--footer_mobile-->
+     <div class="content" id="footer_wide">
+      <div class="col_one">
+       <div class="col_left">
+        <h3>
+         ABOUT
+        </h3>
+        <ul>
+         <li>
+          <a href="https://oadi.cornell.edu/about/oadi-staff/professional-staff.html">
+           Staff
+          </a>
+         </li>
+         <li>
+          <a href="https://oadi.cornell.edu/about/contact-info.html">
+           Contact Info
+          </a>
+         </li>
+         <li>
+          <a href="https://oadi.cornell.edu/about/quick-facts.html">
+           Quick Facts
+          </a>
+         </li>
+        </ul>
+        <p>
+        </p>
+        <h3>
+         EVENTS
+        </h3>
+        <ul>
+         <li>
+          <a href="https://oadi.cornell.edu/oadi-events/oadi-annual-events.html">
+           Annual Events
+          </a>
+         </li>
+         <li>
+          <a href="https://oadi.cornell.edu/oadi-events/series-events.html">
+           Series Events
+          </a>
+         </li>
+         <li>
+          <a href="https://oadi.cornell.edu/oadi-events/calendar-of-events.html">
+           Calendar of Events
+          </a>
+         </li>
+         <!-- <li><a href="https://oadi.cornell.edu/oadi-events/special-events.html">Special Events</a></li> -->
+        </ul>
+        <div class="clear">
+        </div>
+       </div>
+       <!--col_one_left-->
+       <div class="col_right">
+        <h3>
+         PROGRAMS
+        </h3>
+        <ul>
+         <li>
+          <a href="https://oadi.cornell.edu/programs/student-opportunity-programs.html">
+           Student Opportunity Programs
+          </a>
+          <ul>
+           <li>
+            <a href="https://oadi.cornell.edu/programs/student-opportunity-programs/arthur-o-eve.html">
+             Arthur O. Eve EOP/HEOP
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </main>
+ </body>
+</html>
+<li>
+ <a href="https://oadi.cornell.edu/programs/student-success-programs.html">
+  Student Success Programs
+ </a>
+ <ul>
+  <li>
+   <a href="https://oadi.cornell.edu/programs/student-success-programs/pre-professional-programs.html">
+    Pre Professional Programs
+   </a>
+  </li>
+  <li>
+   <a href="https://oadi.cornell.edu/programs/student-success-programs/oadi-research-scholars.html">
+    OADI Research Scholars
+   </a>
+  </li>
+  <li>
+   <a href="https://oadi.cornell.edu/programs/student-success-programs/mcnair.html">
+    McNair Program
+   </a>
+  </li>
+ </ul>
+</li>
+<div class="clear">
+</div>
+<!--col_one_right-->
+<div class="clear">
+</div>
+<!--col_one-->
+<div class="col_two">
+ <div class="col_left">
+  <h3>
+   RESOURCES/SERVICES
+  </h3>
+  <ul>
+   <li>
+    <a href="https://oadi.cornell.edu/resources%20and%20services/advising-and-tutoring.html">
+     Advising and Tutoring
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/resources%20and%20services/scholarship%20and%20internship%20database.html">
+     Scholarship and Internship Database
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/programs/student-success-programs/cdsjp/non-traditional-student-resources.html">
+     Non-Traditional Student Resources
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/resources%20and%20services/oadi-resources.html">
+     OADI Resources
+    </a>
+   </li>
+  </ul>
+  <p>
+  </p>
+  <h3>
+   FUNDING AND STUDENT EMPLOYMENT
+  </h3>
+  <ul>
+   <li>
+    <a href="https://oadi.cornell.edu/funding%20and%20student%20employment/student-organization-dept-funding.html">
+     Student Organization/Dept. Funding
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/funding%20and%20student%20employment/individual-student-funding.html">
+     Individual Student Funding
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/funding%20and%20student%20employment/student-employment.html">
+     Student Employment
+    </a>
+   </li>
+  </ul>
+  <div class="clear">
+  </div>
+ </div>
+ <!--col_one_left-->
+ <div class="col_right">
+  <h3>
+   PARTNERS AND LINKS
+  </h3>
+  <ul>
+   <li>
+    <a href="https://oadi.cornell.edu/partners%20and%20links/campus-partners.html">
+     Campus Partners
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/partners%20and%20links/community-partners.html">
+     Community Partners
+    </a>
+   </li>
+   <li>
+    <a href="http://www.cornell.edu/about/ithaca.cfm" target="_blank">
+     Learn About Ithaca
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/partners%20and%20links/alumni.html">
+     Alumni
+    </a>
+   </li>
+  </ul>
+  <div class="clear">
+  </div>
+  <a class="btn_report_bias" href="https://www.hr.cornell.edu/diversity/reporting/bias_response.html" target="_blank">
+   REPORT BIAS
+  </a>
+  <div class="clear">
+  </div>
+  <ul class="footer_links_bottom">
+   <li>
+    <a href="https://oadi.cornell.edu/">
+     HOME
+    </a>
+   </li>
+   <li>
+    <a href="https://oadi.cornell.edu/about/contact-info.html">
+     CONTACT US
+    </a>
+   </li>
+  </ul>
+  <div class="clear">
+  </div>
+  <p>
+   Suite 200 Computing &amp; Communications Center (CCC)
+   <br/>
+   235 Garden Ave.
+   <br/>
+   Ithaca, NY 14853
+   <br/>
+   (P) 607.255.3841
+   <br/>
+   (P) 607.255.6384
+   <br/>
+   (F) 607.255.9963
+   <br/>
+   <br/>
+   Monday-Friday 8:00am-4:30pm
+   <br/>
+   <br/>
+   © 2019 Cornell University
+  </p>
+  <div class="clear">
+  </div>
+ </div>
+ <!--col_one_right-->
+ <div class="clear">
+ </div>
+</div>
+<!--col_two-->
+<div class="clear">
+</div>
+<!--content-->
+<div class="clear">
+</div>
+<div class="footer_stripe">
+</div>
+<!--footer_stripe-->
+<!--- footer here --->
+<!--body-->
+

@@ -1,0 +1,1109 @@
+http://experts.uark.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>
+   Faculty Experts | University of Arkansas
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+   <link href="//www.uark.edu/_resources/php/combine.php?t=css&amp;f=bootstrap-3.min.css,uark-style.css" rel="stylesheet"/>
+   <link href="/Content/css?v=0Y7uai36N8drAc2G7YdQwsEJZ9L9Fb6TB-R5yyvZjDs1" rel="stylesheet">
+    <script src="/bundles/jquery?v=D74xBryE0xyv-mkSxb096xWOar3NUyrSOzWcAgoy27c1">
+    </script>
+    <script async="async" src="//www.uark.edu/_resources/php/combine.php?t=js&amp;f=bootstrap.min.js,oucampus.js">
+    </script>
+    <script>
+     var current_path = "";
+    </script>
+    <style type="text/css">
+     #searchAuto .list-group-item { border-bottom: 1px solid #ddd !important; }
+        #searchAuto .list-group-item:last-child { border-bottom: 0 !important; }
+        #searchAuto .list-group-item:last-child, #searchAuto .list-group-item:first-child { border-top-right-radius: 0; border-top-left-radius: 0; border-bottom-right-radius: 0 !important; border-bottom-left-radius: 0 !important; }
+        #searchAuto .ui-menu-item { position: relative; margin: 0; padding: 5px 10px; cursor: pointer; min-height: 0; }
+        #searchAuto { border: 1px #ccc solid; }
+        #searchAuto .list-group-item { border: 0; }
+        #searchAuto li:hover { background-color: #f8f5f5; }
+        #searchAuto .ui-menu-item a { text-decoration: none; font-size: 13px; font-family: Roboto,Arial,sans-serif; color: #333; }
+        .ui-autocomplete-loading { background: white url("content/images/ui-anim_basic_16x16.gif") right center no-repeat; }
+        @media only screen and (max-width: 480px) { #search-stack { top: 0 !important; display: table !important; margin-top: 25px !important; } nav { margin-top: -20px !important; } #site-heading-parent { text-align: center !important; } }
+    </style>
+    <script type="text/javascript">
+     $(function () {
+            $("#searchbyKeywords").autocomplete({
+                open: function (e, ui) {
+                    var acData = $(this).data('ui-autocomplete');
+                    acData
+                    .menu
+                    .element
+                    .find('li')
+                    .each(function () {
+                        var me = $(this);
+                        var keywords = acData.term.split(' ').join('|');
+                        me.html(me.text().replace(new RegExp("(" + keywords + ")", "gi"), '<b style="color: #9D2235;">$1</b>'));
+                    });
+                },
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Experts/_SearchKeywords',
+                        data: "{ 'text': '" + request.term + "' }",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (keywords) {
+                            response($.map(keywords, function (item) {
+                                return { label: item.keyword, value: item.keywords, id: item.id };
+                            }))
+                        },
+                        error: function (xmlHttpRequest, textStatus, errorThrown) {
+                            console.log('some error occured', textStatus, errorThrown);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $('#searchbyKeywords').val(ui.item.value);
+                    window.location = '/experts/search?keyword=' + ui.item.value;
+                },
+                minLength: 3
+            });
+
+            $('.ui-autocomplete.ui-menu').attr('id', 'searchAuto');
+
+            $("#searchbyKeywords").bind("autocompleteopen", function (event, ui) {
+                $("#searchAuto").addClass("list-group");
+                $("#searchAuto .ui-menu-item").addClass("list-group-item");
+                $("#searchAuto").removeClass("ui-widget-content");
+            });
+
+            $("#search-keyword").on("click", function (e) {
+                e.preventDefault();
+                if ($("#searchbyKeywords").val() != "") {
+                    var q = $("#searchbyKeywords").val();
+                    //q = q.split(' ').join('-');
+                    window.location = '/experts/search?keyword=' + q;
+
+                } else {
+                    return false;
+                }
+            });
+
+            $('#deptId').change(function () {
+                $('#dadvanced').submit();
+            });
+        });
+    </script>
+    <script>
+     $(function () {
+           //console.log('System.Collections.Generic.List`1[ExpertsV2.Models.Experts]');
+       });
+    </script>
+   </link>
+  </link>
+ </head>
+ <body class="landing">
+  <div id="header-bg">
+  </div>
+  <div class="container" id="opener" role="banner">
+   <a class="brand" href="//www.uark.edu/">
+    University of Arkansas
+   </a>
+   <h1 id="site-heading-parent">
+    <a href="/" title="Campus Directory">
+     Campus Experts
+    </a>
+   </h1>
+   <div id="search-stack">
+    <div class="form-group" role="search">
+     <form action="https://search.uark.edu/s/search.html" class="form-search" id="site-search" method="get" name="gsa">
+      <!-- funnelback 'global' uark collection repo -->
+      <input name="collection" type="hidden" value="uark-search"/>
+      <input class="input-medium search-query" name="query" placeholder="search" title="Site Search" type="text"/>
+      <button class="searchButton" id="searchButton" name="sa" title="Go" type="submit" value="Search">
+      </button>
+     </form>
+    </div>
+    <div id="global-dropdown">
+     <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Links to important University of Arkansas pages">
+      <span class="hidden">
+       Links to important University of Arkansas pages
+      </span>
+      <i class="fa fa-bars">
+      </i>
+     </a>
+     <ul class="dropdown-menu">
+      <li class="nav-header">
+       University of Arkansas
+      </li>
+      <li>
+       <a href="//www.uark.edu/a-to-z.php" onclick="_sz.push(['event', 'global-dropdown', 'click', 'A-Z Index']);">
+        A-Z Index
+       </a>
+      </li>
+      <li>
+       <a href="//learn.uark.edu" onclick="_sz.push(['event', 'global-dropdown', 'click', 'Bb Learn']);">
+        Bb Learn
+       </a>
+      </li>
+      <li>
+       <a href="//campusmaps.uark.edu/" onclick="_sz.push(['event', 'global-dropdown', 'click', 'Campus Map']);">
+        Campus Map
+       </a>
+      </li>
+      <li>
+       <a href="//uaconnect.uark.edu" onclick="_sz.push(['event', 'global-dropdown', 'click', 'UAConnect']);">
+        UAConnect
+       </a>
+      </li>
+      <li>
+       <a href="//directory.uark.edu/" onclick="_sz.push(['event', 'global-dropdown', 'click', 'Directory']);">
+        Directory
+       </a>
+      </li>
+      <li>
+       <a href="//email.uark.edu/" onclick="_sz.push(['event', 'global-dropdown', 'click', 'UARK Gmail']);">
+        UARK Gmail
+       </a>
+      </li>
+      <li>
+       <a href="//exchange.uark.edu/" onclick="_sz.push(['event', 'global-dropdown', 'click', 'Exchange Mail']);">
+        Exchange Mail
+       </a>
+      </li>
+      <li>
+       <a href="//webbasis.uark.edu/" onclick="_sz.push(['event', 'global-dropdown', 'click', 'webBASIS']);">
+        webBASIS
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <nav class="navbar navbar-default">
+   <div class="container">
+    <div class="pull-right" style="font-size: 15px; margin-top:15px; font-weight:bold;">
+     For help, please call 479-575-5555
+    </div>
+   </div>
+  </nav>
+  <div id="main-container" role="main">
+   <section>
+    <div class="container">
+     <div class="row" id="listPO">
+      <div class="col-md-6">
+       <form id="searchbox_keywords">
+        <div class="input-group">
+         <input aria-label="Search" autocomplete="off" class="form-control" id="searchbyKeywords" name="searchbyKeywords" placeholder="Search Experts" title="Search by keywords"/>
+         <span class="input-group-btn">
+          <button class="btn btn-default" id="search-keyword">
+           <i aria-hidden="true" class="fa fa-search" style="color:#6e6e6e;">
+           </i>
+           Search
+          </button>
+         </span>
+        </div>
+       </form>
+      </div>
+      <div class="col-md-6 searchbar">
+       <form action="/experts/search" id="dadvanced" method="post">
+        <select class="form-control" id="deptId" name="deptId" title="Department list">
+         <option value="">
+         </option>
+         <option value="">
+         </option>
+         <option value="1">
+          Academic Affairs
+         </option>
+         <option value="27">
+          Arkansas Archeological Survey
+         </option>
+         <option value="2">
+          College of Education and Health Professions
+         </option>
+         <option value="3">
+          College of Engineering
+         </option>
+         <option value="4">
+          Dale Bumpers College of Agricultural, Food &amp; Life Sciences
+         </option>
+         <option value="28">
+          Division of Agriculture
+         </option>
+         <option value="6">
+          Enrollment Services and Admissions
+         </option>
+         <option value="">
+         </option>
+         <option value="23">
+          Global Campus
+         </option>
+         <option value="11">
+          Honors College
+         </option>
+         <option value="13">
+          J. William Fulbright College of Arts &amp; Sciences
+         </option>
+         <option value="16">
+          Research and Economic Development
+         </option>
+         <option value="17">
+          Sam M. Walton College of Business
+         </option>
+         <option value="19">
+          School of Law
+         </option>
+         <option value="20">
+          Student Affairs and Dean of Students
+         </option>
+         <option value="21">
+          University Advancement
+         </option>
+         <option value="22">
+          University Libraries
+         </option>
+         <option value="65">
+          Vice Chancellor for Economic Development
+         </option>
+         <option value="64">
+          Vice Chancellor for Student Affairs
+         </option>
+        </select>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section>
+    <div class="container">
+     <h2>
+      Experts of Trending Topics
+     </h2>
+     <div class="row">
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <div class="well well-sm">
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Mars" itemprop="keywords">
+            Mars
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <div class="well well-sm">
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=State%20and%20local%20economy" itemprop="keywords">
+            State and local economy
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <div class="well well-sm">
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Environmental%20economics" itemprop="keywords">
+            Environmental economics
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <div class="well well-sm">
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Immigration%20politics" itemprop="keywords">
+            Immigration politics
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/5938/vincent-chevrier">
+         <img alt="Vincent Chevrier" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/vchevrie.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/5938/vincent-chevrier">
+          Vincent Francois Chevrier
+         </a>
+        </h4>
+        <a href="mailto:vchevrie@uark.edu">
+         vchevrie@uark.edu
+        </a>
+        <p>
+         479-575-7778
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Mars" itemprop="keywords">
+            Mars
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Venus" itemprop="keywords">
+            Venus
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Pluto" itemprop="keywords">
+            Pluto
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=NASA" itemprop="keywords">
+            NASA
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Planetary%20science" itemprop="keywords">
+            Planetary science
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Titan" itemprop="keywords">
+            Titan
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/4740/mervin-jebaraj">
+         <img alt="Mervin Jebaraj" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/mjebara.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/4740/mervin-jebaraj">
+          Mervin Jebaraj
+         </a>
+        </h4>
+        <a href="mailto:mjebara@uark.edu">
+         mjebara@uark.edu
+        </a>
+        <p>
+         479-575-4927
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Economic%20development" itemprop="keywords">
+            Economic development
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=State%20and%20local%20economy" itemprop="keywords">
+            State and local economy
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Business%20and%20economic%20research" itemprop="keywords">
+            Business and economic research
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/3879/jennie-popp">
+         <img alt="Jennie Popp" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/jhpopp.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/3879/jennie-popp">
+          Jennie Popp
+         </a>
+        </h4>
+        <a href="mailto:jhpopp@uark.edu">
+         jhpopp@uark.edu
+        </a>
+        <p>
+         479-575-7381
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Natural%20resource%20management" itemprop="keywords">
+            Natural resource management
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Sustainability" itemprop="keywords">
+            Sustainability
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Production%20economics" itemprop="keywords">
+            Production economics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Natural%20resource%20economics" itemprop="keywords">
+            Natural resource economics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Agricultural%20sustainability" itemprop="keywords">
+            Agricultural sustainability
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Agribusiness%20analysis" itemprop="keywords">
+            Agribusiness analysis
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Agribusiness" itemprop="keywords">
+            Agribusiness
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Undergraduate%20research" itemprop="keywords">
+            Undergraduate research
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Interdisciplinary%20curriculum" itemprop="keywords">
+            Interdisciplinary curriculum
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Honors%20education" itemprop="keywords">
+            Honors education
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Environmental%20economics" itemprop="keywords">
+            Environmental economics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Service%20learning" itemprop="keywords">
+            Service learning
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Study%20abroad" itemprop="keywords">
+            Study abroad
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Agricultural%20policy" itemprop="keywords">
+            Agricultural policy
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Environmental%20policy" itemprop="keywords">
+            Environmental policy
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Agricultural%20economics" itemprop="keywords">
+            Agricultural economics
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/6879/xavier-medina">
+         <img alt="Xavier Medina" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/dxmedina.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/6879/xavier-medina">
+          Xavier Medina Vidal Medina
+         </a>
+        </h4>
+        <a href="mailto:dxmedina@uark.edu">
+         dxmedina@uark.edu
+        </a>
+        <p>
+         479-575-7389
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a href="/experts/search?keyword=Diversity" itemprop="keywords">
+            Diversity
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=U.S.%20politics" itemprop="keywords">
+            U.S. politics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Immigration%20politics" itemprop="keywords">
+            Immigration politics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Mexican%20politics" itemprop="keywords">
+            Mexican politics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Latino%2FHispanic%20politics" itemprop="keywords">
+            Latino/Hispanic politics
+           </a>
+          </li>
+          <li>
+           <a href="/experts/search?keyword=Race%20and%20ethnic%20politics" itemprop="keywords">
+            Race and ethnic politics
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="gray" id="grayContainer">
+    <div class="container">
+     <h2>
+      Other Experts
+     </h2>
+     <p class="desc">
+      These experts are randomly selected from our database to help you get exposure to the wealth of knowledgeable individuals that work on our campus.
+     </p>
+     <div class="row">
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/1251/brent-smith">
+         <img alt="Brent Smith" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/bls.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/1251/brent-smith">
+          Brent Lamar Smith
+         </a>
+        </h4>
+        <p>
+         <a href="mailto:bls@uark.edu">
+          bls@uark.edu
+         </a>
+        </p>
+        <p>
+         479-575-3206
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a class="list" href="/experts/search?keyword=social-movements-and-terroristic-activities" itemprop="keywords">
+            Social movements and terroristic activities
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=terrorism-prediction" itemprop="keywords">
+            Terrorism prediction
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=response-to-terroristic-events" itemprop="keywords">
+            Response to terroristic events
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/680/brent-williams">
+         <img alt="Brent Williams" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/btwilli.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/680/brent-williams">
+          Brent Thomas Williams
+         </a>
+        </h4>
+        <p>
+         <a href="mailto:btwilli@uark.edu">
+          btwilli@uark.edu
+         </a>
+        </p>
+        <p>
+         479-575-8696
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a class="list" href="/experts/search?keyword=autism-spectrum-disorders" itemprop="keywords">
+            Autism spectrum disorders
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=societal-and-political-aspects-of-disability" itemprop="keywords">
+            Societal and political aspects of disability
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=evaluation-and-assessment-of-learning-disabilities-and-developmental-delays" itemprop="keywords">
+            Evaluation and assessment of learning disabilities and developmental delays
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/98/brian-haggard">
+         <img alt="Brian Haggard" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/haggard.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/98/brian-haggard">
+          Brian Haggard
+         </a>
+        </h4>
+        <p>
+         <a href="mailto:haggard@uark.edu">
+          haggard@uark.edu
+         </a>
+        </p>
+        <p>
+         479-575-2879
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a class="list" href="/experts/search?keyword=ground-water-and-stream-water-quality" itemprop="keywords">
+            Ground water and stream water quality
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=water-quality" itemprop="keywords">
+            Water quality
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=water-resources-management" itemprop="keywords">
+            Water resources management
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-3 xs-col-6">
+       <div class="expertBlock">
+        <a href="/experts/2520/brian-gallini">
+         <img alt="Brian Gallini" class="img-responsive img-rounded" src="https://campusdata.uark.edu/resources/images/FacultyStaffProfile/bgallini.jpg?width=250&amp;slimmage=true&amp;quality=80" width="100%"/>
+        </a>
+        <h4>
+         <a href="/experts/2520/brian-gallini">
+          Brian R. Gallini
+         </a>
+        </h4>
+        <p>
+         <a href="mailto:bgallini@uark.edu">
+          bgallini@uark.edu
+         </a>
+        </p>
+        <p>
+         479-575-6973
+        </p>
+        <div class="well well-sm">
+         <p>
+          Find others with this expertise
+         </p>
+         <ul class="nav">
+          <li>
+           <a class="list" href="/experts/search?keyword=criminal-law" itemprop="keywords">
+            Criminal law
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=special-prosecutor" itemprop="keywords">
+            Special prosecutor
+           </a>
+          </li>
+          <li>
+           <a class="list" href="/experts/search?keyword=capital-punishment" itemprop="keywords">
+            Capital punishment
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <div class="clear">
+   </div>
+  </div>
+  <!-- Begin Footer -->
+  <section class="gray" id="prefooter">
+   <div class="container">
+    <div class="row">
+     <div class="col-md-3 col-xs-6">
+      <h4>
+       University Relations
+      </h4>
+      <ul class="list-unstyled">
+       <li>
+        Davis Hall
+        <br/>
+        University of Arkansas
+        <br/>
+        Fayetteville, Arkansas 72701
+       </li>
+       <li>
+        P 479-575-5555
+       </li>
+       <li>
+        <i aria-hidden="true" class="fa fa-envelope" style="color:#6e6e6e; margin-right: 10px;">
+        </i>
+        <a href="/contactus">
+         Email us
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-md-3 col-xs-6">
+      <h4>
+       News and Information
+      </h4>
+      <ul class="list-unstyled social-media-prefooter">
+       <li>
+        <a href="https://news.uark.edu/Newsroom">
+         Newsroom
+        </a>
+       </li>
+       <li>
+        <a href="https://news.uark.edu">
+         News homepage
+        </a>
+       </li>
+       <li>
+        <a href="https://researchfrontiers.uark.edu/ ">
+         Research frontiers
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-md-3 col-xs-6">
+     </div>
+     <div class="col-md-3 col-xs-6">
+     </div>
+    </div>
+   </div>
+  </section>
+  <footer>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-9">
+      <h3 id="footer-logo">
+       <a href="//uark.edu">
+        UNIVERSITY OF ARKANSAS
+       </a>
+      </h3>
+     </div>
+    </div>
+    <div class="row">
+     <div class="col-md-8">
+      <ul class="list-unstyled" id="footer-global-links">
+       <li>
+        <a href="//www.uark.edu/admissions/index.php">
+         Admissions
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/academics/index.php">
+         Academics
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/campus-life/index.php">
+         Campus Life
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/research/index.php">
+         Research
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/athletics/index.php">
+         Athletics
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/about/index.php">
+         About
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-md-4">
+      <ul class="nav clearfix list-unstyled" id="social-stack">
+       <li>
+        <a href="//www.facebook.com/UofArkansas">
+         <i class="fa fa-facebook">
+         </i>
+         <span class="sr-only">
+          Like us on Facebook
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//twitter.com/uarkansas">
+         <i class="fa fa-twitter">
+         </i>
+         <span class="sr-only">
+          Follow us on Twitter
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//www.youtube.com/user/UniversityArkansas">
+         <i class="fa fa-youtube">
+         </i>
+         <span class="sr-only">
+          Watch us on YouTube
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//instagram.com/uarkansas">
+         <i class="fa fa-instagram">
+         </i>
+         <span class="sr-only">
+          See us on Instagram
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//plus.google.com/104159281704656057709" rel="publisher">
+         <i class="fa fa-google-plus">
+         </i>
+         <span class="sr-only">
+          Connect with us on Google+
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//pinterest.com/uofaadmissions/">
+         <i class="fa fa-pinterest">
+         </i>
+         <span class="sr-only">
+          Join us on Pinterest
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//www.linkedin.com/company/university-of-arkansas">
+         <i class="fa fa-linkedin">
+         </i>
+         <span class="sr-only">
+          Connect with us on LinkedIn
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="//foursquare.com/uarkansas">
+         <i class="fa fa-foursquare">
+         </i>
+         <span class="sr-only">
+          Find us on FourSquare
+         </span>
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <hr/>
+    <div class="row">
+     <div class="col-md-3">
+      <i class="fa fa-map-marker fa-lg pull-left">
+      </i>
+      <address>
+       1 University of Arkansas
+       <br>
+        Fayetteville, AR 72701
+        <br>
+         479-575-2000
+        </br>
+       </br>
+      </address>
+      <a href="//campusmaps.uark.edu/" title="View Campus Maps">
+       <img alt="Map of University of Arkansas Campus" class="img-responsive" src="//www.uark.edu/_resources/img/map.png" style="width: 100%; margin-bottom: 20px;"/>
+      </a>
+     </div>
+     <div class="col-md-3 footer-news">
+      <h4>
+       <a href="//news.uark.edu/" title="Arkansas Newswire">
+        NEWS
+       </a>
+      </h4>
+      <ul id="newsFooter">
+      </ul>
+      <script>
+       $(function () {
+                        parseNews('//campusdata.uark.edu/apiv2/articles/articlesCommon?$orderby=publishDate+desc&$filter=Commons/any%28c:+c/id+eq+1%29&$top=3');
+                    });
+
+                    function parseNews(url) {
+                        $.ajax({
+                            url: url,
+                            data: {},
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'jsonp',
+                            async: "true",
+                            cache: "true",
+                            success: function (articles) {
+                                var list_data = '';
+                                $.each(articles, function (key, a) {
+                                    var headline = a.headline;
+                                    headline = headline.replace("â€˜", "'").replace("â€™", "'").replace("â€œ", "\"").replace("â€", "\"");
+                                    list_data += "<li><a href='//news.uark.edu/articles/" + a.id + "'>" + headline + "</a></li>";
+                                })
+                                $(list_data).appendTo("#newsFooter");
+                            }
+                        });
+
+                    }
+      </script>
+     </div>
+     <div class="col-sm-3 footer-events">
+      <h4>
+       <a href="//calendars.uark.edu/" title="Calendar Events">
+        EVENTS
+       </a>
+      </h4>
+      <script type="text/javascript">
+       $(function () {
+                        $.ajax({
+                            url: 'https://calendars.uark.edu/RSSSyndicator.aspx?type=N&amp;category=32-0&amp;numdays=7&amp;binary=Y&amp;rssid=25',
+                            data: {},
+                            contentType: 'application/xml',
+                            cache: 'true',
+                            success: function (data) {
+                                var list_data = '';
+
+                                var $xml = $(data).find('item:lt(3)');
+                                $xml.each(function () {
+                                    var $this = $(this); var headline = $this.find('title').text();
+                                    var link = $this.find('link').text();
+                                    list_data += '<li><a href="' + link + '">' + headline + '</a></li>';
+
+                                });
+
+                                $(list_data).appendTo("#events-Footer");
+                            }
+                        });
+                    });
+      </script>
+      <ul id="events-Footer">
+      </ul>
+     </div>
+     <div class="col-md-3 footer-buttons">
+      <a class="btn btn-default btn-lg" href="//application.uark.edu">
+       <i class="fa fa-check-square-o fa-lg">
+       </i>
+       <strong>
+        APPLY
+       </strong>
+       Online
+      </a>
+      <a class="btn btn-default btn-lg" href="http://visit.uark.edu/">
+       <i class="fa fa-calendar fa-lg">
+       </i>
+       Schedule a
+       <strong>
+        VISIT
+       </strong>
+      </a>
+      <a class="btn btn-default btn-lg" href="https://onlinegiving.uark.edu/">
+       <i class="fa fa-gift fa-lg">
+       </i>
+       Make a
+       <strong>
+        GIFT
+       </strong>
+      </a>
+     </div>
+    </div>
+    <hr/>
+    <div class="row">
+     <div class="col-md-12">
+      <ul class="centered-nav vertical-divide list-unstyled footer-disclaimer">
+       <li>
+        <a href="//emergency.uark.edu/">
+         Emergency Information
+        </a>
+       </li>
+       <li>
+        <a href="//vcfa.uark.edu/2525.php">
+         Fraud Prevention
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/contact-us.php">
+         Contact Us
+        </a>
+       </li>
+       <li>
+        <a href="//m.uark.edu">
+         Mobile
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script src="//www.uark.edu/_resources/includes/universal-www-google-analytics.inc" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   globalSecondaryGoogleAnalytics('UA-75143705-39');
+  </script>
+  <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet"/>
+  <script src="/bundles/jqueryui?v=Ymzm0aK2YLdxoM4xdPfrvsTFs4Bm24oRa-Yh4PCHd3Y1">
+  </script>
+ </body>
+</html>

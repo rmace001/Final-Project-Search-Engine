@@ -1,0 +1,1052 @@
+https://m.iu.edu
+<!DOCTYPE html>
+<html data-ng-app="taskStore" data-ng-controller="TaskStoreBaseController" data-ng-strict-di="" lang="en-us">
+ <head>
+  <title>
+   One.IU | All IU Campuses
+  </title>
+  <meta content="Search, Click, Done! Bringing an app store experience to IU services" name="description"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="initial-scale=1, width=device-width" name="viewport">
+   <link href="/favicon.ico" rel="shortcut icon"/>
+   <link href="/app/vendor/css/fontello.css?ver=20" rel="stylesheet" type="text/css"/>
+   <link href="/app/vendor/css/ie10.responsive-fix.css?ver=20" rel="stylesheet" type="text/css"/>
+   <link href="/app/vendor/css/lightslider.min.css?ver=20" rel="stylesheet" type="text/css"/>
+   <link href="/res/main.css?ver=34" rel="stylesheet" type="text/css"/>
+   <link href="/css/tenant/1000?ver=18" rel="stylesheet" type="text/css"/>
+   <script type="text/javascript">
+    var contextPath = '';
+var htmlTemplateVersion = '34';
+   </script>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-57x57" rel="apple-touch-icon" sizes="57x57"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-114x114" rel="apple-touch-icon" sizes="114x114"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-72x72" rel="apple-touch-icon" sizes="72x72"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-144x144" rel="apple-touch-icon" sizes="144x144"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-60x60" rel="apple-touch-icon" sizes="60x60"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-120x120" rel="apple-touch-icon" sizes="120x120"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-76x76" rel="apple-touch-icon" sizes="76x76"/>
+   <link href="/favicon/APPLE-TOUCH-ICON-IMAGE-152x152" rel="apple-touch-icon" sizes="152x152"/>
+   <link href="/favicon/FAVICON-IMAGE-196x196" rel="icon" sizes="196x196" type="image/png"/>
+   <link href="/favicon/FAVICON-IMAGE-160x160" rel="icon" sizes="160x160" type="image/png"/>
+   <link href="/favicon/FAVICON-IMAGE-96x96" rel="icon" sizes="96x96" type="image/png"/>
+   <link href="/favicon/FAVICON-IMAGE-16x16" rel="icon" sizes="16x16" type="image/png"/>
+   <link href="/favicon/FAVICON-IMAGE-32x32" rel="icon" sizes="32x32" type="image/png"/>
+   <meta content="/browserconfig.xml" name="msapplication-config"/>
+   <meta content="/favicon/MS-TILE-IMAGE-70x70" name="msapplication-square70x70logo"/>
+   <meta content="/favicon/MS-TILE-IMAGE-144x144" name="msapplication-TileImage"/>
+   <meta content="/favicon/MS-TILE-IMAGE-150x150" name="msapplication-square150x150logo"/>
+   <meta content="/favicon/MS-TILE-IMAGE-310x150" name="msapplication-wide310x150logo"/>
+   <meta content="/favicon/MS-TILE-IMAGE-310x310" name="msapplication-square310x310logo"/>
+   <meta content="#df1e34" name="msapplication-TileColor"/>
+   <meta content="One.IU" name="application-name"/>
+   <meta content="One.IU" name="apple-mobile-web-app-title"/>
+   <script type="text/javascript">
+    var htmlTemplateVersion = '34';
+var marketLabel = 'Campus';
+var marketsLabel = 'IU Campuses';
+var taskLabel = 'Task';
+var tasksLabel = 'Tasks';
+var taskCenterLabel = 'Task Center';
+var taskCentersLabel = 'Task Centers';
+   </script>
+   <script src="/app/wro/min/taskstore.js?ver=34" type="text/javascript">
+   </script>
+   <script id="announcementBlock.html" type="text/ng-template">
+    <div id="announcementBlock">
+<div class="ng-hide" id="announcement" data-ng-show="(modal && !dismissed) || announcements.length > 0 || hasMoreAnnouncements" data-ng-style="{'margin-bottom':modal?'0':'30px'}">
+<div class="sd-modal announcement">
+<div class="col-md-1 col-xs-height sd-modal-visual text-center"><i class="icon-warning"></i></div>
+<div class="col-md-11 col-xs-height col-full-height sd-modal-content">
+<div class="category">
+<div class="row">
+<div class="col-sm-7">
+<h3>
+<span data-ng-if="::dismissed">Dismissed</span>
+Announcements (<span data-ng-bind="totalAnnouncements"></span>)
+</h3>
+</div>
+<div class="col-sm-5">
+<button data-ng-click="manageAnnouncementsLogin()" id="manageAnnouncements" type="button" class="btn btn-default btn-xs hidden-xs"> Manage Announcements </button>
+<button data-ng-click="manageAnnouncementsLogin()" id="manageAnnouncementsMobile" type="button" class="btn btn-default btn-xs visible-xs"> Manage Announcements </button>
+</div>
+</div>
+</div>
+<div data-ng-show="::totalAnnouncements == 0">
+<h4>All announcements have been dismissed.</h4>
+</div>
+<div id="announcementList">
+<div class="announcement-dismissed fade-animation ng-hide" data-ng-show="showDismissedMessage" id="dismiss-message"> -- Announcements Dismissed --</div>
+<div class="announcement-block" data-ng-repeat="announcement in announcements" id="announcement_{{::announcement.announcementId}}">
+<h4 data-ng-bind="::announcement.title"></h4>
+<div class="announcement-body" readmore>
+<p data-ng-bind-html="::announcement.description"></p>
+</div>
+</div>
+<button type="button" class="btn btn-default btn-more" data-ng-show="hasMoreAnnouncements" data-ng-click="getAnnouncements()">Load More</button>
+</div>
+<div class="announcement-footer" data-ng-if="modal">
+<span class="pull-right">
+<button type="button" class="btn btn-default btn-sm" data-ng-click="cancel()">Close</button>
+<a data-ng-if="::launchUrl != null && launchUrl.length > 0"
+data-ng-href="{{::launchUrl}}" target="{{::newWindow == 'true' ? '_blank' : '_self'}}"
+data-ng-click="prelaunchUrlActions()"
+class="btn btn-success btn-sm">
+<div data-ng-show="taskCenterId != null && taskCenterId.length > 0">Open Task Center</div>
+<div data-ng-show="!(taskCenterId != null && taskCenterId.length > 0)">Start</div>
+</a>
+</span>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
+</div>
+<span class="sr-only" data-ng-if="announcements.length == 0">No Announcements</span>
+</div>
+   </script>
+   <script id="announcementMessageList.html" type="text/ng-template">
+    <div>
+<ul class="list-unstyled">
+<li ng-repeat="announcement in announcements" id="announcement_{{announcement.announcementId}}">
+<div class="message">
+<div class="row message-header">
+<div class="col-xs-12 col-sm-8 message-title">{{::announcement.title}}</div>
+<div class="col-xs-12 col-sm-4 message-meta"> <small class="message-date">{{::announcement.lastUpdateDate | date : 'mediumDate'}}</small> </div>
+</div>
+<div class="message-content">
+<p readmore="96" ng-bind-html="::announcement.description"></p>
+</div>
+</div>
+</li>
+<li ng-if="announcements.length == 0" class="announcements-nonew">
+<div class="message">
+<div class="message-content">
+<p class="lead text-muted message-empty">There are no {{dismissed ? 'dismissed' : 'new'}} Announcements.</p>
+</div>
+</div>
+</li>
+</ul>
+<div pager="pageNumber" total-pages="totalPages" change-page="getPage(pageNum)"></div>
+<div>
+   </script>
+   <script id="announcementTabs.html" type="text/ng-template">
+    <div class="col-xs-12 col-sm-12 col-md-12 panel-main js-fr-tabsA">
+<div class="panel-actionheader">
+<h3 class="pull-left">Announcements</h3>
+<div class="panel-controls pull-right">
+<button ng-click="manageAnnouncementsLogin()" id="manageAnnouncements" type="button" class="btn btn-default btn-xs">
+Manage Announcements
+</button>
+</div>
+<div class="clearfix"></div>
+</div>
+<ul class="nav nav-pills js-fr-tabs__tablistA" role="tablist">
+<li role="presentation" class="active">
+<a href="#new_announcements" aria-controls="new_announcements" role="tab" data-toggle="tab" ng-focus="activateTab($event)">New</a>
+</li>
+<li role="presentation">
+<a href="#dismissed_announcements" aria-controls="dismissed_announcements" role="tab" data-toggle="tab" ng-click="fetchDismissed = true" ng-focus="activateTab($event)">Dismissed</a>
+</li>
+</ul>
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane fade in active js-fr-tabs__panelA" id="new_announcements">
+<div announcements-message-list fetch-data="fetchData" unread-count="unreadCount" task-uid="{{taskUid}}" task-center-id="{{taskCenterId}}"></div>
+</div>
+<div role="tabpanel" class="tab-pane fade js-fr-tabs__panelA" id="dismissed_announcements">
+<div announcements-message-list fetch-data="fetchDismissed" dismissed="true" task-uid="{{taskUid}}" task-center-id="{{taskCenterId}}"></div>
+</div>
+</div>
+<div class="clearfix"></div>
+<div>
+   </script>
+   <script id="globalAnnouncement.html" type="text/ng-template">
+    <div class="global-announcement">
+<div class="ga-header ga-color-{{announcement.titleBarColorIndex}}">
+<span ng-bind="::announcement.title" title="{{::announcement.title}}"></span>
+<button class="btn btn-link close" ng-click="dismiss()" ng-hide="dismissed"
+data-on="click" data-event-category="Store" data-event-action="Announcements" data-event-label="dismiss {{announcement.title}}">
+<i class="icon-cancel-1"></i>
+<span class="sr-only">dismiss this announcement</span>
+</button>
+</div>
+<div class="ga-body">
+<div dotdotdot="dotdotdotCallback(isTruncated)" height="69">
+<span ng-bind-html="::announcement.description"></span>
+</div>
+<button class="btn btn-link readmore" ng-click="viewMore()" style="display: none;"><em>view more&hellip;</em></button>
+</div>
+</div>
+   </script>
+   <script id="globalAnnouncements.html" type="text/ng-template">
+    <section class="global-announcements collapse-animation" ng-show="open">
+<div class="container">
+<ul class="globalAnnouncementSliderList" ng-class="{single: announcements.length == 1}">
+<li class="col-xs-4" ng-repeat="announcement in announcements">
+<global-announcement announcement="announcement"></global-announcement>
+</li>
+</ul>
+<a href="/announcements" class="view-all">view all</a>
+<div class="lead text-muted message-empty" ng-if="announcements.length == 0">You have no new announcements.</div>
+</div>
+</section>
+   </script>
+   <script id="globalAnnouncementDialog.html" type="text/ng-template">
+    <div id="globalAnnouncementModal">
+<div class="modal-header ga-color-{{announcement.titleBarColorIndex}}">
+<h1 class="h4 modal-title" id="globalAnnouncementLabel" ng-bind="announcement.title"></h1>
+</div>
+<div class="modal-body" ng-bind-html="announcement.description"></div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" ng-click="close()">Close</button>
+</div>
+</div>
+   </script>
+   <script id="review.html" type="text/ng-template">
+    <div id="reviewModal" data-review-rate-label=" User Reviews
+">
+<div id="review">
+<div class="sd-modal informational">
+<div>
+<div class="col-md-1 col-xs-height sd-modal-visual text-center"><i class="icon-edit-2"></i></div>
+<div class="col-md-11 col-xs-height col-full-height sd-modal-content">
+<button type="button" class="close" ng-click="cancel()" aria-hidden="true">
+<i class="icon-cancel-3"></i>
+<span class="sr-only" aria-hidden="true">Close window</span>
+</button>
+<h4 class="category" id="reviews">
+Write a Review
+</h4>
+<form name="reviewForm">
+<div class="form-group">
+<label class="control-label">Review For</label>
+<p class="form-control-static">{{taskTitle}}</p>
+</div>
+<div class="form-group" ng-class="{'has-error': reviewForm.userAlias.$invalid}">
+<label for="userAlias" class="control-label">Your Name</label>
+<input type="text" class="form-control" name="userAlias" id="userAlias" ng-model="review.reviewUserAlias" required ng-maxlength="100" countdown>
+<p ng-if="reviewForm.userAlias.$error.required" class="text-danger">This is required</p>
+<p ng-if="reviewForm.userAlias.$error.maxlength" class="text-danger">No more than 100 characters</p>
+</div>
+<div class="form-group" ng-class="{'has-error': reviewForm.title.$invalid}">
+<label for="title" class="control-label">Title</label>
+<input id="title" ng-model="review.reviewTitle" required name="title" type="text" class="form-control" ng-maxlength="100" countdown/>
+<p ng-if="reviewForm.title.$error.required" class="text-danger">This is required</p>
+<p ng-if="reviewForm.title.$error.maxlength" class="text-danger">No more than 100 characters</p>
+</div>
+<div class="form-group" ng-class="{'has-error': reviewForm.reviewText.$invalid}">
+<label for="reviewText" class="control-label">Your Review</label>
+<textarea id="reviewText" ng-model="review.reviewText" name="reviewText" class="form-control" required ng-maxlength="2000" rows="3" countdown></textarea>
+<p ng-if="reviewForm.reviewText.$error.required" class="text-danger">A Review is required</p>
+<p ng-if="reviewForm.reviewText.$error.maxlength" class="text-danger">No more than 2000 characters</p>
+</div>
+<div class="form-group" ng-class="{'has-error': !rating}">
+<label class="control-label">Your Rating</label>
+<p tabindex="0" ng-keypress="rateTaskWithKeyboard($event)">
+<span class="sr-only">Use the number keys 1 - 5 to select a rating. Current rating is {{rating}}.</span>
+<span uib-rating name="rating" id="rating" ng-model="rating" enable-reset="false" max="5" class="user-rating small" required></span>
+<p ng-if="!rating" class="text-danger">A rating is required</p>
+</p>
+</div>
+</form>
+<div class="announcement-footer">
+<div class="row">
+<div class="col-md-6"> </div>
+<div class="col-md-6 text-right">
+<button type="button" class="btn btn-default btn-sm" ng-click="cancel()">Cancel</button>
+<button ng-disabled="reviewForm.$invalid || !rating || reviewSubmissionPending" type="button" class="btn btn-primary btn-sm" ng-click="submitReview()" data-on="click" data-event-action=" User Reviews
+" data-event-category="Store" data-event-label="submit">Submit</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+   </script>
+   <script type="text/javascript">
+    taskStoreModule
+.value('settings.googleAnalyticsId', 'UA-39645822-3')
+.value('settings.googleAnalyticsRollupId', '')
+.run(['$rootScope', function($rootScope) {
+$rootScope.contextPath = '';
+$rootScope.isUserAuthenticated = false;
+$rootScope.settings = {
+announcementTimeout: 500,
+activeContentDelay: 5000,
+favoritesEnabled: true,
+ratingsEnabled: true,
+reviewsEnabled: true,
+taskLabel: 'Task',
+tasksLabel: 'Tasks',
+marketLabel: 'Campus',
+marketsLabel: 'IU Campuses',
+taskCenterLabel: 'Task Center',
+taskCentersLabel: 'Task Centers',
+searchResultsLabel: 'Search Results',
+mobileFriendlyEnabled: true,
+globalAnnouncementsEnabled: true,
+hasMarkets: true,
+hasRoles: true,
+allMarketsKey: 'iu',
+userPreferences: {
+openInNewWindow: null,
+hideFeatured: null,
+hideActiveContent: null
+}
+};
+$rootScope.page = {
+taskUniqueKey: '',
+taskMarketUniqueKey: 'iu',
+taskCenterUniqueKey: '',
+taskCenterTitle: '',
+taskCenterMarketKey: 'iu'
+};
+}]);
+   </script>
+  </meta>
+ </head>
+ <body class="gray-bg" data-greeting-name="" data-market-key="" data-market-name="All IU Campuses" data-ng-controller="TaskStoreController" data-task-collection="" favorite-collection="" id="top" ondragstart="return false;" ondrop="return false;">
+  <div class="wrapper">
+   <div class="" id="skipNav">
+    <a accesskey="s" class="sr-only" href="#search-field" onclick="$('#search-field:visible').focus();return false;" title="jump to search">
+     jump to search
+    </a>
+    <a accesskey="m" class="sr-only" href="#main-content" onclick="$('#main-content').focus()" title="jump to main content">
+     jump to main content
+    </a>
+   </div>
+   <div id="custom_header">
+    <div aria-labelledby="iu-campus" class="hidden-xs hidden-sm" id="branding-bar" itemscope="itemscope" itemtype="http://schema.org/CollegeOrUniversity" role="complementary">
+     <div class="container">
+      <div class="row pad">
+       <img alt="Indiana University Home Page" src="https://sd-prd-images.s3.amazonaws.com/prd/test-uisapp2/20150702T0521167633961_trident-large.png"/>
+       <p id="iu-campus">
+        <a href="http://www.iu.edu" title="Indiana University">
+         <span itemprop="name">
+          Indiana University
+         </span>
+        </a>
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+   <sr-announcements>
+   </sr-announcements>
+   <div data-ng-controller="HeaderController">
+    <div class="menu-overlay visible-xs visible-sm" ng-click="closeMenu()">
+    </div>
+    <div class="menu visible-xs visible-sm container" data-ng-controller="SessionController" id="sidebar_menu">
+     <div class="row menu-actions">
+      <div class="col-xs-9 greeting">
+       <div data-ng-if="::userGreetingName != null">
+        <span class="greetingname" data-ng-bind="::userGreetingName">
+        </span>
+       </div>
+       <button class="btn btn-success btn-block" data-ng-click="login()" data-ng-disabled="disableLoginButton" data-ng-if="::userGreetingName == null" type="button">
+        Sign In
+       </button>
+      </div>
+      <div class="col-xs-3" style="height: 40px;">
+       <button class="btn btn-danger" data-ng-click="toggleMenu(false)" id="menuCloseButton" tabindex="0" title="Close" type="button">
+        <i class="icon-cancel-3">
+        </i>
+       </button>
+      </div>
+     </div>
+     <hr data-ng-if="::userGreetingName != null"/>
+     <div class="row" data-ng-if="::userGreetingName != null">
+      <div class="col-xs-12">
+       <button class="btn btn-success btn-block" data-ng-click="login()" data-ng-disabled="disableLoginButton" type="button">
+        Sign In
+       </button>
+      </div>
+     </div>
+     <hr class="double-border"/>
+     <div class="menu-row" data-ng-if="pageData.categories.length">
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapseCategories">
+         Browse Categories
+        </a>
+       </div>
+       <div class="panel-collapse collapse" id="collapseCategories" style="height: 0px;">
+        <div class="panel-body">
+         <ul class="list-unstyled" role="menu">
+          <li data-ng-repeat="category in pageData.categories" role="menuitem">
+           <i class="pull-right icon-check-1" data-ng-show="filter.categoryUniqueKey == category.uniqueKey" role="presentation">
+           </i>
+           <a data-event-action="Category" data-event-category="Store" data-event-label="{{::category.name}}" data-ng-click="setCategory(category.uniqueKey, true)" data-on="click" href="">
+            <span data-ng-bind="::category.name">
+            </span>
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <hr data-ng-if="::pageData.roles.length || pageData.markets.length"/>
+     <div class="menu-row" data-ng-if="::pageData.roles.length">
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapseRole">
+         Roles
+        </a>
+       </div>
+       <div class="panel-collapse collapse" id="collapseRole" style="height: 0px;">
+        <div class="panel-body">
+         <ul class="list-unstyled">
+          <li data-ng-repeat="role in ::pageData.roles">
+           <a data-ng-click="toggleRole(role.uniqueKey, $event)" href="">
+            <i class="pull-right icon-check-1" data-ng-show="roleIsSelected(role.uniqueKey)" role="presentation">
+            </i>
+            <span data-ng-bind="::role.name">
+            </span>
+           </a>
+          </li>
+          <li class="text-center">
+           <button class="btn btn-xs btn-primary" ng-click="applyRoles()" ng-disabled="!haveRolesChanged()" style="padding-left:5px;">
+            Apply Changes
+           </button>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="menu-row" data-ng-if="::pageData.markets.length">
+      <div class="panel panel-default">
+       <div class="panel-heading">
+        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapseMarket">
+         IU Campuses
+        </a>
+       </div>
+       <div class="panel-collapse collapse" id="collapseMarket" style="height: 0px;">
+        <div class="panel-body">
+         <ul class="list-unstyled">
+          <li>
+           <a data-ng-click="selectMarket()" href="">
+            All IU Campuses
+            <i class="pull-right icon-check-1" data-ng-show="filter.marketUniqueKey == null" role="presentation">
+            </i>
+           </a>
+          </li>
+          <li data-ng-repeat="market in ::pageData.markets">
+           <a data-ng-click="selectMarket(market)" href="#">
+            <i class="pull-right icon-check-1" data-ng-show="filter.marketUniqueKey == market.uniqueKey" role="presentation">
+            </i>
+            <span data-ng-bind="::market.name">
+            </span>
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <hr class="double-border" data-ng-if="pageData.categories.length || pageData.roles.length || pageData.markets.length"/>
+     <div class="menu-row">
+      <a class="btn btn-usercontrols btn-block" href="/favorites">
+       <i class="icon-heart">
+       </i>
+       My Favorites
+      </a>
+      <button class="btn btn-usercontrols btn-block" data-event-action="Preferences" data-event-category="Store" data-event-label="view" data-ng-click="showPreferencesDialog()" data-on="click" id="mobilePreferencesButton" type="button">
+       <i class="icon-cog">
+       </i>
+       Preferences
+      </button>
+      <hr/>
+      <button class="btn btn-usercontrols btn-block" data-event-action="Send Feedback" data-event-category="Store" data-event-label="open form" data-ng-click="showFeedbackDialog()" data-on="click" id="mobileFeedbackButton" type="button">
+       <i class="icon-comment-empty">
+       </i>
+       Send Feedback
+      </button>
+      <button class="btn btn-usercontrols btn-block" data-event-action="Help" data-event-category="Store" data-event-label="view" data-ng-click="restartIntro()" data-on="click" type="button">
+       <i class="icon-info-circled-1">
+       </i>
+       <span class="sr-only">
+        Display
+       </span>
+       Help
+      </button>
+      <hr data-ng-if="::userGreetingName != null || false">
+       <button class="btn btn-usercontrols btn-block" data-ng-click="logout()" data-ng-disabled="disableLoginButton" data-ng-if="::userGreetingName != null">
+        <i class="icon-logout">
+        </i>
+        Not
+        <span data-ng-bind="::userGreetingName">
+        </span>
+        ?
+       </button>
+      </hr>
+     </div>
+    </div>
+    <header>
+     <div class="container app-header" id="contain2">
+      <div class="row">
+       <div class="col-xs-8 col-sm-10 col-md-4 col-lg-3 brand">
+        <a class="logo" data-ng-click="clearSearch(false)" href="/store" id="sidebar_logo">
+         <img alt="clear all search filters and return to the home page" class="visible-xs visible-sm" src="https://sd-prd-images.s3.amazonaws.com/prd/test-uisapp2/20151015T0508146032_1444900087321_1442254611807_oneiu-logo-mobile.png"/>
+         <img alt="clear all search filters and return to the home page" class="hidden-sm hidden-xs" src="https://sd-prd-images.s3.amazonaws.com/prd/test-uisapp2/20151015T0508141371_1444900083600_oneiu-logo.png"/>
+         <h1>
+          <span class="sr-only">
+           One.IU
+          </span>
+         </h1>
+        </a>
+       </div>
+       <div class="col-xs-4 col-sm-2 hidden-md hidden-lg">
+        <div class="pull-right">
+         <a class="btn btn-link bell" href="#" ng-click="toggleGlobalAnnouncements()">
+          <i class="icon-bell-3">
+          </i>
+          <span class="sr-only">
+           View Announcements
+          </span>
+         </a>
+         <button class="btn btn-signin pull-right" data-ng-click="toggleMenu()" id="menu_button" tabindex="0" type="button">
+          <span class="sr-only">
+           Toggle menu
+          </span>
+          <i class="icon-menu">
+          </i>
+         </button>
+        </div>
+       </div>
+       <div class="col-xs-12 col-md-8 col-lg-9 search">
+        <div class="well well-sm" ng-class="{open:browseCategories.showBrowseCategories}">
+         <form action="javascript:void(0);" class="input-group mainsearch">
+          <label class="sr-only" for="search-field" ng-bind="!filter.filterCategory ? 'Search for Tasks' : 'Search ' + categoryMap[filter.categoryUniqueKey]">
+          </label>
+          <input autocomplete="off" class="form-control hidden-xs hidden-sm" data-limit="5" data-ng-enter="doSearch()" data-ng-model="search.terms" data-typeahead="searchSuggest" id="search-field" name="search-field" ng-bind-attrs="{placeholder: !filter.filterCategory ? 'What would you like to do?' : 'Search ' + categoryMap[filter.categoryUniqueKey]}" type="search"/>
+          <input autocomplete="off" class="form-control visible-xs visible-sm" data-ng-enter="doSearch()" data-ng-model="search.terms" id="search-field" name="search-field" ng-bind-attrs="{placeholder: !filter.filterCategory ? 'What would you like to do?' : 'Search ' + categoryMap[filter.categoryUniqueKey]}" type="search"/>
+          <div aria-label="Clear search" data-ng-click="clearSearchTerms()" id="cleartext" ng-show="search.terms.length">
+           <i class="icon-cancel-squared">
+           </i>
+          </div>
+          <span class="input-group-btn">
+           <button class="btn-mainsearch" data-ng-click="doSearch()" type="button">
+            <i class="icon-search-3">
+            </i>
+            <span class="sr-only">
+             search submit
+            </span>
+           </button>
+          </span>
+         </form>
+         <div class="row hidden-xs hidden-sm">
+          <div class="col-xs-3">
+           <div class="browsecat ng-hide" ng-show="::pageData.categories.length">
+            <a aria-haspopup="true" href="#" ng-click="browseCategories.showBrowseCategories = !browseCategories.showBrowseCategories" ng-init="browseCategories.showBrowseCategories = false" role="button">
+             <span>
+              Browse Categories
+             </span>
+             <span class="caret">
+             </span>
+            </a>
+            <div class="browsecat-panel collapse-animation" ng-show="browseCategories.showBrowseCategories">
+             <ul class="list-unstyled" role="menu">
+              <li class="col-lg-3 col-md-4 col-sm-4 col-xs-12" data-ng-repeat="category in pageData.categories" role="presentation">
+               <a data-event-action="Category" data-event-category="Store" data-event-label="{{::category.name}}" data-ng-click="setCategory(category.uniqueKey, true)" data-on="click" href="" role="menuitem" tabindex="-1">
+                <i data-ng-class="::category.fontIcon ? 'icon-' + category.fontIcon : 'icon-dot'">
+                </i>
+                <span data-ng-bind="::category.name">
+                </span>
+               </a>
+              </li>
+             </ul>
+            </div>
+           </div>
+          </div>
+          <div class="col-xs-9 text-right">
+           <div class="dropdown" id="market_select" ng-show="pageData.markets.length">
+            <a aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="" role="button">
+             All IU Campuses
+             <span class="caret">
+             </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+             <li role="presentation">
+              <a data-ng-click="selectMarket()" href="#" role="menuitem" tabindex="-1">
+               All IU Campuses
+              </a>
+             </li>
+             <li data-ng-repeat="market in ::pageData.markets" role="presentation">
+              <a data-ng-bind="::market.name" data-ng-click="selectMarket(market)" href="#" role="menuitem" tabindex="-1">
+              </a>
+             </li>
+            </ul>
+           </div>
+           <div class="dropdown" id="role_select" ng-show="pageData.roles.length">
+            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+             <span class="sr-only">
+              multiselectable menu. Filter by role:
+             </span>
+             <span data-ng-if="filter.roleUniqueKeys.length == 0 || filter.roleUniqueKeys.length == pageData.roles.length">
+              All Roles
+             </span>
+             <span data-ng-bind="roleMap[filter.roleUniqueKeys[0]]" data-ng-if="filter.roleUniqueKeys.length == 1 &amp;&amp; filter.roleUniqueKeys.length != pageData.roles.length">
+             </span>
+             <span data-ng-if="filter.roleUniqueKeys.length &gt; 1 &amp;&amp; filter.roleUniqueKeys.length != pageData.roles.length">
+              <span ng-bind="filter.roleUniqueKeys.length + ' roles'">
+              </span>
+              <span class="sr-only">
+               selected.
+              </span>
+             </span>
+             <span class="caret">
+             </span>
+            </a>
+            <ul aria-multiselectable="true" class="dropdown-menu dropdown-menu-right checked-list" role="listbox">
+             <li data-ng-repeat="role in ::pageData.roles" role="presentation">
+              <a aria-label="{{role.name}}{{roleIsSelected(role.uniqueKey) ? ' selected' : ''}}" aria-posinset="{{$index + 1}}" aria-selected="{{roleIsSelected(role.uniqueKey) ? 'true' : 'false'}}" aria-setsize="{{pageData.roles.length}}" data-ng-click="toggleRole(role.uniqueKey, $event)" href="#" role="option" tabindex="-1">
+               <i class="pull-right icon-ok" data-ng-show="roleIsSelected(role.uniqueKey)" role="presentation">
+               </i>
+               <span data-ng-bind="::role.name">
+               </span>
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <section class="utilities-bar">
+     <div class="container">
+      <nav class="navbar navbar-default">
+       <div class="row">
+        <div class="col-md-8 col-lg-9 col-sm-12">
+         <div breadcrumbs="" dynamic="true">
+         </div>
+        </div>
+        <div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
+         <ul class="nav navbar-nav navbar-right">
+          <li>
+           <a class="bell" href="#" ng-class="{'open':globalAnnouncements.showGlobalAnnouncements}" ng-click="toggleGlobalAnnouncements()">
+            <i class="icon-bell-3">
+            </i>
+            <span class="sr-only">
+             View Announcements
+            </span>
+           </a>
+          </li>
+          <li class="dropdown" id="headerMenuDropdown">
+           <a aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="" role="button">
+            <i class="icon-user-3">
+            </i>
+            <span class="userName">
+             <span data-ng-if="::userGreetingName != null">
+              Sign In,
+              <span data-ng-bind="::userGreetingName">
+              </span>
+             </span>
+             <span data-ng-if="::userGreetingName == null">
+              Hello. Sign In
+             </span>
+            </span>
+            <span class="caret">
+            </span>
+           </a>
+           <ul class="dropdown-menu" data-ng-controller="SessionController" role="menu">
+            <li class="signon" role="presentation">
+             <a class="btn btn-signon btn-block" data-ng-click="login()" data-ng-disabled="disableLoginButton" href="" role="menuitem" tabindex="-1">
+              Sign In
+             </a>
+            </li>
+            <li class="divider" role="presentation">
+            </li>
+            <li role="presentation">
+             <a href="/favorites" role="menuitem" tabindex="-1">
+              <i class="icon-heart">
+              </i>
+              My Favorites
+             </a>
+            </li>
+            <li role="presentation">
+             <a data-event-action="Preferences" data-event-category="Store" data-event-label="view" data-ng-click="showPreferencesDialog()" data-on="click" href="" id="preferencesButton" role="menuitem" tabindex="-1">
+              <i class="icon-cog">
+              </i>
+              Preferences
+             </a>
+            </li>
+            <li class="divider" role="presentation">
+            </li>
+            <li role="presentation">
+             <a data-event-action="Send Feedback" data-event-category="Store" data-event-label="open form" data-ng-click="showFeedbackDialog()" data-on="click" href="" id="feedbackButton" role="menuitem" tabindex="-1">
+              <i class="icon-comment-empty">
+              </i>
+              Send Feedback
+             </a>
+            </li>
+            <li role="presentation">
+             <a data-event-action="Help" data-event-category="Store" data-event-label="view" data-ng-click="restartIntro()" data-on="click" href="" role="menuitem" tabindex="-1">
+              <i class="icon-info-circled-1">
+              </i>
+              Help
+             </a>
+            </li>
+            <li class="divider" data-ng-if="userGreetingName != null || false" role="presentation">
+            </li>
+            <li data-ng-if="::userGreetingName != null" role="presentation">
+             <a data-ng-click="logout()" data-ng-disabled="disableLoginButton" href="" role="menuitem" tabindex="-1">
+              <i class="icon-logout">
+              </i>
+              Not
+              <span data-ng-bind="::userGreetingName">
+              </span>
+              ?
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </nav>
+     </div>
+    </section>
+    <global-announcements dismiss-function="dismissAnnouncement(announcementId)" open="globalAnnouncements.showGlobalAnnouncements">
+    </global-announcements>
+   </div>
+   <noscript>
+    <div class="alert alert-danger no-margin">
+     JavaScript is required for this site to function. Please enable JavaScript.
+    </div>
+   </noscript>
+   <div class="main-content container ng-cloak" id="main-content" role="main">
+    <div data-alerts="">
+    </div>
+    <div data-ng-if="!settings.userPreferences.hideFeatured &amp;&amp; store.tasks.featuredTasks.length &gt; 0 &amp;&amp; showCarousel">
+     <h2 class="sr-only" id="featured-header">
+      {{::featuredLabel}}
+     </h2>
+     <carousel get-task-launch-url="getTaskLaunchUrl(task)" id="carousel-featured" interval="5000" items="store.tasks.featuredTasks">
+     </carousel>
+    </div>
+    <div>
+     <h2 class="sr-only">
+      Tasks
+     </h2>
+     <div class="task-collection" data-ng-repeat="taskCollection in store.tasks.taskCollections">
+      <div class="category">
+       <h3 data-ng-bind="::taskCollection.name" tabindex="0">
+       </h3>
+       <span class="pull-right">
+        <button class="btn btn-default btn-sm ng-cloak" data-ng-click="clearSearch(true)" data-ng-if="::!(isViewingHome() || isEditing() || isViewingSearchCollection() || isViewingFavoriteCollection() || isViewingCategoryCollection()) &amp;&amp; $index == 0">
+         <strong>
+          Back
+         </strong>
+         <span class="sr-only">
+          Home
+         </span>
+        </button>
+        <button class="btn btn-default btn-sm ng-cloak" data-ng-click="backToSearchCollections()" data-ng-if="::isViewingSearchCollection()">
+         <strong>
+          Back
+         </strong>
+         <span class="sr-only">
+          to all search results
+         </span>
+        </button>
+        <button class="btn btn-default btn-sm ng-cloak" data-ng-click="backToCategoryCollections()" data-ng-if="::isViewingCategoryCollection()">
+         <strong>
+          Back
+         </strong>
+         <span class="sr-only">
+          to category
+         </span>
+        </button>
+        <button class="btn btn-default btn-sm ng-cloak" ng-click="backToFavorites()" ng-if="::isViewingFavoriteCollection()">
+         <strong>
+          Back
+         </strong>
+         <span class="sr-only">
+          to favorites
+         </span>
+        </button>
+        <span class="ng-cloak" data-ng-if="::editingMostRecent &amp;&amp; taskCollection.uniqueKey == '_recentlyUsed_'">
+         <button class="btn btn-success btn-sm" data-event-action="{{::taskCollection.name}}" data-event-category="Store" data-event-label="save" data-ng-click="saveMostRecent(taskCollection)" data-ng-disabled="saveMostRecentPending" data-ng-show="::editingMostRecent" data-on="click">
+          Save
+         </button>
+         <button class="btn btn-danger btn-sm" data-event-action="{{::taskCollection.name}}" data-event-category="Store" data-event-label="cancel" data-ng-click="selectTaskCollection(taskCollection.uniqueKey)" data-ng-disabled="saveFavoritesPending || saveMostRecentPending" data-on="click">
+          Cancel
+         </button>
+        </span>
+       </span>
+       <a class="btn btn-danger btn-xs ng-cloak" data-ng-if="::taskCollection.tiles.length &gt; 0 &amp;&amp; taskCollection.uniqueKey == '_favorite_'" href="/favorites/edit">
+        Edit
+        <span class="sr-only">
+         Favorites
+        </span>
+       </a>
+       <button class="btn btn-danger btn-xs ng-cloak" data-event-action="{{::taskCollection.name}}" data-event-category="Store" data-event-label="edit" data-ng-click="editMostRecent(taskCollection.uniqueKey)" data-ng-if="::!editingMostRecent &amp;&amp; taskCollection.tiles.length &gt; 0 &amp;&amp; taskCollection.uniqueKey == '_recentlyUsed_'" data-on="click">
+        Edit
+        <span class="sr-only">
+         History
+        </span>
+       </button>
+       <div class="clearfix">
+       </div>
+      </div>
+      <div class="collection" data-ng-if="::store.tasks.taskCollections.length != 1 || !editingMostRecent" id="{{::taskCollection.uniqueKey}}">
+       <span class="ng-cloak search-empty" data-ng-if="::taskCollection.tiles.length == 0">
+        No tasks meet your search criteria.
+       </span>
+       <div data-add-favorite-function="addSingleFavorite(taskUid, taskCenterId, callback)" data-details-url-function="getTileDetailsUrl(tile, taskCenterId, includeFilterParams)" data-filter="filter" data-launch-url-function="getTileLaunchUrl(tile, taskCenterId, includeFilterParams)" data-market-map="::marketMap" data-remove-favorite-function="removeSingleFavorite(taskUid, taskCenterId, callback)" data-sd-tiles="taskCollection.tiles" data-show-write-review-function="showWriteReviewDialog(taskUid, taskId)" data-user-name="">
+       </div>
+       <button class="btn btn-default btn-more see-more-button" data-event-action="See More" data-event-category="Store" data-event-label="Tasks in {{taskCollection.name}}" data-ng-click="selectTaskCollection(taskCollection.uniqueKey, false, taskCollection.secondaryKey)" data-ng-show="::taskCollection.hasMore &amp;&amp; (isViewingHome() || isViewingSearchCollections() || isViewingCategoryCollections())" data-on="click" type="button">
+        <strong>
+         See More
+        </strong>
+        <span class="sr-only" data-ng-bind="::' ' + taskCollection.name">
+        </span>
+       </button>
+       <div class="text-center" data-ng-show="::!isViewingHome() &amp;&amp; !isViewingSearchCollections() &amp;&amp; !isViewingCategoryCollections()">
+        <p data-ng-bind="'Showing ' + getTaskCountMessage(taskCollection) + ' of ' + taskCollection.totalSize">
+        </p>
+        <button class="btn btn-default btn-more ng-cloak" data-event-action="See More" data-event-category="Store" data-event-label="Tasks in {{taskCollection.name}}" data-ng-click="loadNextPage(taskCollection)" data-ng-show="taskCollection.hasMore" data-on="click" type="button">
+         See More
+        </button>
+       </div>
+      </div>
+      <!-- /taskList -->
+      <div class="taskList collection" data-ng-if="store.tasks.taskCollections.length == 1 &amp;&amp; editingMostRecent">
+       <div data-filter="filter" data-market-map="::marketMap" data-remove-function="removeTask(taskCollection, tile)" data-sd-tiles="taskCollection.tiles" data-task-collection="::taskCollection">
+       </div>
+      </div>
+      <!-- /taskList -->
+     </div>
+     <!-- /task-collection -->
+     <span class="ng-cloak search-empty" data-ng-show="store.tasks.taskCollections.length == 0">
+      No tasks meet your search criteria.
+     </span>
+    </div>
+   </div>
+   <div class="clearfix">
+   </div>
+   <footer role="contentinfo">
+    <div class="container">
+     <div class="row pad">
+      <p class="tagline">
+       Fulfilling
+       <span>
+        the
+       </span>
+       Promise
+      </p>
+      <img alt="Indiana University" src="https://sd-prd-images.s3.amazonaws.com/prd/test-uisapp2/20150702T0521168403962_trident-small.png"/>
+      <p class="copyright">
+       <a href="http://www.iu.edu/copyright/index.shtml" title="Copyright">
+        Copyright
+       </a>
+       © 2017
+       <span class="line-break">
+        The Trustees of
+        <a href="http://www.iu.edu/" itemprop="url" title="Indiana University">
+         <span itemprop="name">
+          Indiana University
+         </span>
+        </a>
+       </span>
+      </p>
+     </div>
+    </div>
+   </footer>
+  </div>
+ </body>
+</html>
+<p class="privacy">
+ <a href="https://www.iu.edu/~espd/one/privacyStatement.html" id="privacy-policy-link" target="_blank" title="Privacy Policy">
+  Privacy Notice
+ </a>
+</p>
+<a class="btn btn-sm btn-primary" href="#top" id="scrollTop">
+ <i class="icon-up">
+ </i>
+ Back to top
+</a>
+<div aria-hidden="true" aria-labelledby="feedbackModalLabel" class="modal fade" id="feedbackModal" role="dialog" tabindex="-1">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+     <i class="icon-cancel">
+     </i>
+     <span class="sr-only">
+      Close feedback.
+     </span>
+    </button>
+    <h1 class="h4 modal-title" id="feedbackModalLabel">
+     Send Feedback
+    </h1>
+   </div>
+   <div class="modal-body">
+    <form name="storeFeedbackForm">
+     <div class="form-group" data-ng-class="{'has-error': storeFeedbackForm.concernType.$invalid}">
+      <label class="control-label" for="feedbackConcernType">
+       Concern
+      </label>
+      <select class="form-control" data-ng-model="feedbackValues.concernType" data-ng-options="key as value for (key, value) in ::pageData.feedbackTypes" id="feedbackConcernType" name="concernType" required="">
+       <option value="">
+        Choose One
+       </option>
+      </select>
+     </div>
+     <div class="form-group" data-ng-class="{'has-error': storeFeedbackForm.comments.$invalid}">
+      <label class="control-label" for="feedbackComments">
+       Comments
+      </label>
+      <textarea class="form-control" data-ng-maxlength="2000" data-ng-model="feedbackValues.comments" id="feedbackComments" name="comments" required="" rows="3"></textarea>
+      <span class="label pull-right" data-ng-bind="2000-feedbackValues.comments.length" data-ng-class="{'label-primary':feedbackValues.comments.length&lt;1900, 'label-warning':feedbackValues.comments.length&gt;=1900 &amp;&amp; feedbackValues.comments.length&lt;2000, 'label-danger': feedbackValues.comments.length&gt;=2000}">
+      </span>
+     </div>
+     <div class="form-group" data-ng-class="{'has-error': storeFeedbackForm.replyTo.$invalid}">
+      <label class="control-label" for="replyTo">
+       Email Address
+      </label>
+      <input class="form-control" data-ng-init="feedbackValues.replyEmail=''" data-ng-max-length="100" data-ng-model="feedbackValues.replyEmail" id="replyTo" name="replyTo" required="" type="email"/>
+      <span class="label pull-right" data-ng-bind="100-feedbackValues.replyEmail.length" data-ng-class="{'label-primary':feedbackValues.replyEmail.length&lt;90, 'label-warning':feedbackValues.replyEmail.length&gt;=90 &amp;&amp; feedbackValues.replyEmail.length&lt;100, 'label-danger': feedbackValues.replyEmail.length&gt;=100}">
+      </span>
+     </div>
+    </form>
+   </div>
+   <div class="modal-footer">
+    <button class="btn btn-primary" data-event-action="Send Feedback" data-event-category="Store" data-event-label="submit" data-ng-click="submitFeedback()" data-ng-disabled="storeFeedbackForm.$invalid || disableFeedbackSubmit" data-on="click" type="button">
+     Submit
+    </button>
+    <button class="btn btn-default" data-dismiss="modal" type="button">
+     Cancel
+    </button>
+   </div>
+  </div>
+  <!-- /.modal-content -->
+ </div>
+ <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div aria-hidden="true" aria-labelledby="preferencesModalLabel" class="modal fade" id="preferencesModal" role="dialog" tabindex="-1">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+     <i class="icon-cancel">
+     </i>
+     <span aria-hidden="true" class="sr-only">
+      Close preferences.
+     </span>
+    </button>
+    <h1 class="h4 modal-title" id="preferencesModalLabel">
+     Preferences
+    </h1>
+   </div>
+   <div class="modal-body">
+    <form data-validate="preferenceErrors" name="storePreferencesForm">
+     <div class="form-group" data-ng-repeat="preference in pageData.userPreferences" data-ng-switch="preference.uiType">
+      <div ng-if="pageData.markets.length &gt; 0 || (pageData.markets.length == 0 &amp;&amp; preference.uniqueKey != 'DEFAULT-MARKET')">
+       <div data-ng-switch-when="0">
+        <label data-ng-bind="::evaluateStringWithBindings(preference.label)" for="preference_{{::preference.uniqueKey}}">
+        </label>
+        <div class="checkbox">
+         <input data-ng-false-value="'no'" data-ng-model="preference.userPreferenceValues[0].value" data-ng-true-value="'yes'" id="preference_{{::preference.uniqueKey}}" name="{{::preference.uniqueKey}}" type="checkbox"/>
+         <span class="help-block" data-ng-bind="::evaluateStringWithBindings(preference.directions)">
+         </span>
+        </div>
+        <p class="text-danger" data-ng-bind="message" data-ng-repeat="message in storePreferencesForm.$serverError[preference.uniqueKey].messages">
+        </p>
+       </div>
+       <div data-ng-switch-when="1">
+        <label data-ng-bind="::evaluateStringWithBindings(preference.label)" for="{{::preference.uniqueKey}}">
+        </label>
+        <input class="form-control" data-ng-model="preference.userPreferenceValues[0].value" id="{{::preference.uniqueKey}}" name="{{::preference.uniqueKey}}" type="text"/>
+        <p class="help-block" data-ng-bind="::evaluateStringWithBindings(preference.directions)">
+        </p>
+        <p class="text-danger" data-ng-bind="message" data-ng-repeat="message in storePreferencesForm.$serverError[preference.uniqueKey].messages">
+        </p>
+       </div>
+       <div data-ng-switch-when="2">
+        <label data-ng-bind="::evaluateStringWithBindings(preference.label)" for="{{::preference.uniqueKey}}">
+        </label>
+        <select class="form-control" data-ng-model="preference.userPreferenceValues[0].value" data-ng-options="value as evaluateStringWithBindings(key) for (key, value) in ::preference.selectOptions" id="{{::preference.uniqueKey}}" name="{{::preference.uniqueKey}}">
+        </select>
+        <p class="help-block" data-ng-bind="::evaluateStringWithBindings(preference.directions)">
+        </p>
+        <p class="text-danger" data-ng-bind="message" data-ng-repeat="message in storePreferencesForm.$serverError[preference.uniqueKey].messages">
+        </p>
+       </div>
+       <div data-ng-switch-when="3">
+       </div>
+      </div>
+     </div>
+    </form>
+   </div>
+   <div class="modal-footer">
+    <button class="btn btn-success" data-event-action="Preferences" data-event-category="Store" data-event-label="save" data-ng-click="savePreferences()" data-ng-disabled="storePreferencesForm.$invalid || disablePreferencesSubmit" data-on="click" type="button">
+     Save
+    </button>
+    <button class="btn btn-danger" data-dismiss="modal" type="button">
+     Cancel
+    </button>
+   </div>
+  </div>
+  <!-- /.modal-content -->
+ </div>
+ <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div aria-hidden="true" aria-labelledby="aliasModalLabel" class="modal fade" id="aliasModal" role="dialog" tabindex="-1">
+ <div class="modal-dialog" data-ng-controller="UserAliasController">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+     <i class="icon-cancel">
+     </i>
+     <span class="sr-only">
+      Close
+     </span>
+    </button>
+    <h1 class="h4 modal-title" id="aliasModalLabel">
+     Become User
+    </h1>
+   </div>
+   <div class="modal-body">
+    <form name="aliasForm">
+     <div class="form-group" data-ng-class="{'has-error': aliasForm.alias.$invalid}">
+      <label class="control-label" for="alias">
+       User
+      </label>
+      <input class="form-control" data-ng-enter="submitAlias(alias)" data-ng-init="alias = ''" data-ng-maxlength="100" data-ng-model="alias" id="alias" name="alias" required=""/>
+     </div>
+    </form>
+   </div>
+   <div class="modal-footer">
+    <button class="btn btn-primary" data-ng-click="submitAlias(alias)" data-ng-disabled="alias == null || alias == ''" type="button">
+     Submit
+    </button>
+    <button class="btn btn-default" data-dismiss="modal" type="button">
+     Cancel
+    </button>
+   </div>
+  </div>
+  <!-- /.modal-content -->
+ </div>
+ <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script>
+ window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-39645822-3', 'auto');
+ga('require', 'eventTracker', {attributePrefix: 'data-', events: ['click']});
+ga('send', 'pageview');
+</script>
+<script async="" src="https://www.google-analytics.com/analytics.js">
+</script>
+<script async="" src="/app/vendor/js/autotrack.min.js">
+</script>
+

@@ -1,0 +1,3833 @@
+http://calendar.ega.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
+ <head id="Head1">
+  <title>
+   East Georgia State College - Grid View
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <script src="PopupWindows.js?v=20161129" type="text/javascript">
+  </script>
+  <script src="QuickTip.js" type="text/javascript">
+  </script>
+  <script src="jquery.min.js" type="text/javascript">
+  </script>
+  <script src="multiSelect.js" type="text/javascript">
+  </script>
+  <style type="text/css">
+   .modallayer {
+            background-color: #C0C0C0;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+        }
+
+        .divlayer {
+            position: absolute;
+            display: none;
+        }
+
+        .divlayerborder {
+            border: solid 2px #214380;
+        }
+
+        .divlayerbackground {
+            background-color: #FFFFFF;
+        }
+
+        .divlayerpadding {
+            margin: 5px;
+            border: solid 1px #214380;
+        }
+
+        .divlayerclosebar {
+        }
+
+        .divlayercloseaction {
+            float: right;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+
+        .divlayerallaction {
+            float: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .divlayernoneaction {
+            float: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .divlayersaveaction {
+            float: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .adx_wcag_header {
+            font-size: 1em;
+            font-weight: normal;
+            color: #000000;
+            line-height: normal;
+            margin: 0px;
+        }
+
+        .adx_wcag_hidden {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+  </style>
+  <script type="text/javascript">
+   function openCategorySelector() {
+            var lAutoOpen = "Disable";
+            if (lAutoOpen == "Enable") {
+                var new_window = window.open('CategorySubCategorySelect.aspx', '', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=380,height=400,left=212,top=50');
+                new_window.focus();
+            }
+        }
+
+        function displayKeywordWindow() {
+            // Bug #2897: I enclosed the url for the keyword window in double quotes so that single quotes in the keywords don't allow for script injection;  We also do the encoding server-side now.
+            var new_window = window.open("KeywordList.aspx?keywords=" , 'Category\SubCategory', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=380,height=228,left=212,top=50');
+                    new_window.focus();
+                    document.Form1.dlstCategory.selectedIndex = 0;
+                }
+
+                function displaySelectedLocationsWindow() {
+                    var new_window = window.open('SelectedLocationList.aspx?locs=&lFormat=Location', 'Category\SubCategory', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=380,height=228,left=212,top=50');
+                    new_window.focus();
+                    document.Form1.dlstCategory.selectedIndex = 0;
+                }
+
+        function changeMonth(event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            if ($("#dlstMonth option:selected") != null && $("#dlstMonth option:selected").index() != 0) {
+                __doPostBack('dlstMonth','');
+            }
+            return false;
+        }
+
+        function changeView(event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            if ($("#dlstView option:selected") != null && $("#dlstView option:selected").index() != 0) {
+                __doPostBack('dlstView','');
+            }
+            return false;
+        }
+
+        function changeCategory(event) {
+            // Added this for Bug 4949 (TFS) because Firefox was executing this for both change and blur when the popup was opened
+            $("#dlstCategory").off("change blur");
+
+            // Don't postback when either the default option or the multi-select option is clicked
+            if ($("#dlstCategory option:selected").index() == 0 || $("#dlstCategory option:selected").index() == 2) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            displayMultipleCategoryWindow();
+
+            // Bug 4949:  Reactivate the events after we're done so future dropdown actions work
+            $("#dlstCategory").on("change blur", changeCategory);
+        }
+
+        function changeLocation(event) {
+            // Added this for Bug 4949 (TFS) because Firefox was executing this for both change and blur when the popup was opened
+            $("#dlstLocation").off("change blur");
+
+            if ($("#dlstLocation option:selected").index() == 0 || $("#dlstLocation option:selected").index() == 2) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            displayMultipleLocationWindow();
+
+            // Bug 4949:  Reactivate the events after we're done so future dropdown actions work
+            $("#dlstLocation").on("change blur", changeLocation);
+        }
+
+        function dropdownKeyAction(event) {
+
+            // Key code
+            var keyCode = event.which || event.keyCode;
+
+	        // Count the number of dropdown items
+	        var num_items = $(this).children("option").length;
+
+	        // Selected index
+	        var curr_idx = $(this).children("option:selected").index();
+
+	        event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+	        if(keyCode == 13) { // User hit enter
+		        $(this).trigger('change'); // Do postback, as normal
+	        } else if (keyCode == 38) { // Up Arrow
+		        $(this).prop('selectedIndex', (curr_idx - 1) % num_items);
+	        } else if (keyCode == 40) { // Down Arrow
+		        $(this).prop('selectedIndex', (curr_idx + 1) % num_items);
+	        }
+
+            return false;
+        }
+
+                $(document).ready(function () {
+                    $("#dlstView").prop('selectedIndex', 0);
+                    $("#dlstView").blur();
+
+                    $(".url").hover(
+                            function (e) {
+                                var dataurl = $(this).attr("data-url");
+                                var data = $(this).attr("data");
+                                initQuickTip(dataurl, data, e);
+                            },
+                            function (e) {
+                                removeTimouts();
+                                startexitingQuickTip();
+                            }
+                         );
+
+                    /*******************************************************************
+                     * BUG # 2862: 508 COMPLIANCE DROPDOWN FUNCTIONALITY MODIFICATION  *
+                     *******************************************************************/
+
+                    $("#dlstCategory").change(changeCategory).keydown(dropdownKeyAction).blur(changeCategory);
+                    $("#dlstLocation").change(changeLocation).keydown(dropdownKeyAction).blur(changeLocation);
+                    $("#dlstMonth").change(changeMonth).keydown(dropdownKeyAction).blur(changeMonth);
+                    $("#dlstView").change(changeView).keydown(dropdownKeyAction).blur(changeView);
+
+                    /*******************************************************************/
+
+                    /************** From/To Error Message Tweaks ***********************/
+
+                    // When the text in the date range boxes changes, hide the server-side error labels so that the client-side ones don't duplicate them
+                    $("#txtStartDateSearch").change(function () {
+                        $("#lblStartDateError").hide();
+                        $("#lblError").hide();
+                    });
+
+                    // This clears existing errors when the enter key is pressed
+                    $("#txtStartDateSearch").keypress(function (event) {
+                        if (event.keyCode == 13) {
+                            $("#lblStartDateError").hide();
+                            $("#lblError").hide();
+                        }
+                    });
+
+                    $("#txtEndDateSearch").change(function () {
+                        $("#lblEndDateError").hide();
+                        $("#lblError").hide();
+                    });
+
+                    $("#txtEndDateSearch").keypress(function (event) {
+                        if (event.keyCode == 13) {
+                            $("#lblEndDateError").hide();
+                            $("#lblError").hide();
+                        }
+                    });
+
+                    // Allow the client-side labels to wrap and remove its color restriction
+                    $("[controltovalidate='txtStartDateSearch'],[controltovalidate='txtEndDateSearch']").css("white-space", "normal").css("color", "");
+
+
+                    /*******************************************************************/
+
+			    });
+  </script>
+  <link href="Calendar.css" rel="stylesheet" type="text/css"/>
+  <style type="text/css">
+  </style>
+ </head>
+ <body>
+  <div style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;">
+   <a href="#skip" title="Skip to content">
+    Skip to content
+   </a>
+  </div>
+  <!DOCTYPE html>
+  <!--[if lt IE 7]> <html lang="en" class="ie6"> <![endif]-->
+  <!--[if IE 7]> <html lang="en" class="ie7"> <![endif]-->
+  <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <html lang="en">
+   <!--<![endif]-->
+   <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="A State College of the University System of Georgia, East Georgia State College is a great place to begin and complete your studies!" name="description"/>
+    <meta content="East Georgia State College, University System of Georgia, USG State College, Swainsboro Georgia, Augusta Georgia, Statesboro Georgia, access school" name="keywords"/>
+    <meta content="East Georgia State College: University System of Georgia" name="author"/>
+    <title>
+     Home - East Georgia State College: University System of Georgia
+    </title>
+    <!-- CSS -->
+    <link href="http://www.ega.edu/css/calendar.css" media="all" rel="stylesheet" type="text/css"/>
+    <!-- Javascript -->
+    <!--[if lt IE 9]>
+	<script src="http://www.ega.edu/js/modernizr.egsc.js" type="text/javascript"></script>
+	<![endif]-->
+    <link href="http://www.ega.edu/favicon.png" rel="icon"/>
+    <link href="http://www.ega.edu/apple-touch-icon-152x152-precomposed.png" rel="apple-touch-icon-precomposed"/>
+   </head>
+   <body class="inner">
+    <div id="wrapper">
+     <div id="searchWrap">
+      <div class="search">
+       <form action="http://www.ega.edu/" method="post">
+        <div class="hiddenFields">
+         <input name="ACT" type="hidden" value="11"/>
+         <input name="XID" type="hidden" value="2b5633b06a68ea4f0df510d51f87cc3bb6a75f68"/>
+         <input name="RES" type="hidden" value=""/>
+         <input name="meta" type="hidden" value="/NXj9tvf2rBzpTRt/b7nxpKy6HkcXKFIrjYkw4tkW+VNpBxl+4JCXJTLkmvqSbJlAekdRmavVtR6N3jDrJUuX2KFsezOguLee++Su9fWu1aHmODGxn04ON7kGB2gMdKb8xRb0iIXZUl2gTPQleMfeO4AnHnlyRCz31e+R8f0JnsYSyArNGsSoCHxOrcjg93RHOSxmkCw8pyHhKC+Mr8P42l8YlKNldorH0jv5KLZdvp5iIY1e8EXhob1+L4z+QqCtE4diwbzcbxjnOpbYW2GOVIJL0uWM8lpyw70mUg2rqj1o0UDqlG9GNE/vRFdbEY5gPbHn17KLlp2Oo/hv8DtcqU+6f44KaTzAcKqoa/uTQj/OHL6hziAXIBkCQvsdqBUlEX/2Jo10yKWiqc7Xr+itTES/uTA6ekGIRn6msZwGEQ="/>
+         <input name="site_id" type="hidden" value="1"/>
+        </div>
+        <p>
+         <input class="searchText" id="keywords" maxlength="100" name="keywords" size="18" type="text" value=""/>
+         <input class="submit" height="32" src="http://www.ega.edu/images/submitBtn.gif" type="image" value="submit"/>
+         <br class="clear"/>
+        </p>
+        <p>
+         <a href="http://www.ega.edu/search">
+          Advanced Search
+         </a>
+        </p>
+       </form>
+       <p id="searchClose">
+        <a class="close" href="#">
+         Close
+         <span>
+          X
+         </span>
+        </a>
+       </p>
+      </div>
+      <!--/search-->
+     </div>
+     <!--/searchWrap-->
+     <div id="searchOpen">
+      <a class="open" href="#">
+       Search
+      </a>
+     </div>
+     <!--/searchOpen-->
+     <header id="bannerWrap">
+      <div class="container_24" id="banner">
+       <div class="socialMedia2">
+        <a href="http://instagram.com/eastgeorgiastatecollege">
+         <img alt="Instagram" src="http://www.ega.edu/images/uploads/instagram-25x.png" title="Instagram"/>
+        </a>
+        <a href="http://www.flickr.com/photos/egcpr/sets/">
+         <img alt="Flickr" src="http://www.ega.edu/images/flickr-25.png" title="Flickr"/>
+        </a>
+        <a href="http://pinterest.com/egsc/college-campus/">
+         <img alt="Pinterest" src="http://www.ega.edu/images/pinterest-25.png" title="Pinterest"/>
+        </a>
+        <a href="http://www.youtube.com/user/EastGaCollege">
+         <img alt="YouTube" src="http://www.ega.edu/images/youtube-25.png" title="YouTube"/>
+        </a>
+        <a href="http://twitter.com/EastGaCollege">
+         <img alt="Twitter" src="http://www.ega.edu/images/twitter-25.png" title="Twitter"/>
+        </a>
+        <a href="https://www.facebook.com/EastGeorgiaStateCollege">
+         <img alt="Facebook" src="http://www.ega.edu/images/fb-25.png" title="Facebook"/>
+        </a>
+        <h3>
+         <a href="https://employment.ega.edu/">
+          Jobs
+         </a>
+        </h3>
+        <h3>
+         <a href="http://www.ega.edu/directory">
+          Directory
+         </a>
+        </h3>
+       </div>
+       <h1 class="home" tabindex="1">
+        <a href="http://www.ega.edu/">
+         East Georgia State College: A State College of the University System of Georgia
+        </a>
+       </h1>
+       <nav class="topNav">
+        <ul class="active" id="main_nav">
+         <li class="level1 selected">
+          <a href="http://www.ega.edu">
+           Home
+          </a>
+         </li>
+         <li class="level1 ">
+          <a href="http://www.ega.edu/admissions">
+           Admissions
+          </a>
+          <ul>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/admissions_start_here">
+             Admissions: Start Here
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/freshman">
+               Freshman
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/non-traditional_student">
+               Non-Traditional Student
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/transfer_student">
+               Transfer Student
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/transient_student">
+               Transient Student
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/homeschool_student_non_accredited_high_school_student">
+               Homeschool Student/Non-Accredited High School Student
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/dual_enrolled_accel_student">
+               Dual Enrolled/Accel Student
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/international_student">
+               International Student
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/non-degree_seeking_student">
+               Non-Degree Seeking Student
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/admissions/admissions_start_here/auditors">
+               Auditors
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/admissions_deadlines">
+             Admissions Deadlines
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/admissions_egsc_statesboro">
+             Admissions: EGSC Statesboro
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/augusta">
+             Admissions: EGSC Augusta
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/admissions_forms">
+             Admissions Forms
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/apply_online">
+             Apply Online
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="https://bweb.ega.edu:7443/pls/BANWEB/bwwkadst.P_GetID">
+             Check Your Admissions Status
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://calendar.ega.edu/default.aspx?type=&amp;view=Grid&amp;category=7-0%2c7-6%2c12-0">
+             Academic Calendar
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/registrars_office/final_exam_schedule">
+             Final Exam Schedule
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/compass_test">
+             COMPASS Test
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/academics/academic_center_for_excellence/compass_review_sessions">
+               COMPASS Review Sessions
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/academics/academic_center_for_Excellence/Compass_Practice_Links">
+               Compass Practice Links
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/faq/admissions_faq">
+             Frequently Asked Questions (FAQ)
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/tuition_and_fees">
+             Tuition and Fees
+            </a>
+            <ul>
+             <li class="level3 last">
+              <a href="http://www.usg.edu/student_affairs/students/tuition_and_financial_aid/">
+               What Is My Tuition Rate?
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/meet_the_admissions_staff">
+             Meet The Admissions Staff
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/ht/admissions/open_house">
+             Open House
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/admissions/orientation">
+             Orientation
+            </a>
+           </li>
+           <li class="level2 last">
+            <a href="https://www.eventbrite.com/e/swainsboro-campus-tours-2014-registration-10531898191">
+             Sign Up For A Campus Tour
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="level1 ">
+          <a href="http://www.ega.edu/offices/student_affairs/financial_aid">
+           Financial Aid
+          </a>
+          <ul>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/forms/ask_egsc">
+             Contact Financial Aid
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="https://bweb.ega.edu:7443/pls/BANWEB/bwwkadst.P_GetID">
+             Check Your Financial Aid Status
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/direct_loan_information">
+             Direct Loan Information
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/financial_aid_disbursement">
+             Financial Aid Disbursement and Fees
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/financial_aid_forms">
+             Financial Aid Forms
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/financial_aid_policies">
+             Financial Aid Policies
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/programs">
+             Financial Aid Programs
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/financial_aid_satisfactory_academic_progress_policy">
+             Financial Aid Satisfactory Academic Progress Policy (SAP)
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/financial_aid_tv">
+             Financial Aid TV
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/hope_programs">
+             HOPE Programs
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/how_to_apply_for_financial_aid">
+             How To Apply For Financial Aid
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/npcalc/">
+             Net Price Calculator
+            </a>
+           </li>
+           <li class="level2 last">
+            <a href="http://www.ega.edu/offices/student_affairs/financial_aid/professional_judgment_dependency_override">
+             Professional Judgment/Dependency Override
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="level1 parent_active">
+          <a href="http://www.ega.edu/academics">
+           Academics
+          </a>
+          <ul>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/programs_of_study">
+             Programs of Study
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/agriculture">
+               Agriculture
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/art">
+               Art
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/biology">
+               Biology
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/bachelor_of_science_in_biology">
+               Bachelor of Science in Biology
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/business_administration_and_economics">
+               Business Administration and Economics
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/business_education">
+               Business Education
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/chemistry">
+               Chemistry
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/computer_science">
+               Computer Science
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/criminal_justice">
+               Criminal Justice
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/english">
+               English
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/exercise_and_health_sciences">
+               Exercise and Health Sciences
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/foreign_language">
+               Foreign Language
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/forestry">
+               Forestry
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/general_studies">
+               General Studies
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/geology">
+               Geology
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/history">
+               History
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/mathematics">
+               Mathematics
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/nursing">
+               Nursing
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/political_science">
+               Political Science
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/pre_professional_programs">
+               Pre-Professional Programs
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/psychology">
+               Psychology
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/programs/sociology">
+               Sociology
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/programs/teacher_education">
+               Teacher Education
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/academic_advising">
+             Academic Advising
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://calendar.ega.edu/default.aspx?type=&amp;view=Grid&amp;category=7-0%2c7-6%2c12-0">
+             Academic Calendar
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/academic_center_for_excellence">
+             Academic Center for Excellence (ACE)
+            </a>
+            <ul>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/academics/academic_center_for_excellence/compass_review_sessions">
+               COMPASS Review Sessions
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://faculty.ega.edu/catsch">
+             Course Schedule
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/critical_thinking">
+             Critical Thinking
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/academics/critical_thinking/Critical_Thinking_Resources">
+               Critical Thinking Resources
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/pages/general-pages/critical_thinking_activities">
+               Critical Thinking Activities
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/connections">
+               Connections 2: A Conference of Critical Thinking
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/augusta">
+             EGSC Augusta
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/augusta/about">
+               About EGSC Augusta
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/augusta/message_from_the_director">
+               Message from the Director
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/augusta/two_year_rotation_schedule">
+               Two Year Rotation Schedule
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/augusta/newsletter">
+               EGSC Augusta Newsletter
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/augusta/faqs">
+               FAQ's
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/images/uploads/augusta-textbooks-spring-2014.pdf">
+               Textbooks
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/statesboro">
+             EGSC Statesboro
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/statesboro/courses_offered">
+               Courses Offered
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/statesboro/student_services">
+               Student Services
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/statesboro/academics">
+               Academics
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/statesboro/parking_transportation">
+               Parking &amp; Transportation
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/images/uploads/EGSCS_ROTC_Approval.pdf">
+               ROTC Approval
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/statesboro/student_services_links">
+               Student Services Links
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/statesboro/transient_transfer">
+               Transient &amp; Transfer
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/statesboro/who_we_are">
+               Who We Are
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 parent_active">
+            <a href="http://www.ega.edu/academics/library">
+             Library
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/academics/library/about_the_library">
+               About the Library
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/academics/library/find_articles">
+               Find Articles
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/academics/library/find_books">
+               Find Books
+              </a>
+             </li>
+             <li class="level3 parent_active">
+              <a href="http://www.ega.edu/academics/library/research_help">
+               Research Help
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/academics/library/how_to">
+               How To...
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/academics/library/contacts">
+               Contacts
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs/registrars_office">
+             Registrar's Office
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/textbooks">
+             Textbooks
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/summer-jump-start-academy">
+             Summer Jump Start Academy
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/academics/study-abroad-program">
+             Study Abroad Program
+            </a>
+            <ul>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/academics/study_abroad_program/costa-rica">
+               Costa Rica
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 last">
+            <a href="http://www.ega.edu/gpa">
+             Georgia Philological Association
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/gpa/about">
+               About
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/gpa/call_for_papers">
+               Call for Papers
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/gpa/membership">
+               Membership
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/gpa/jgpa">
+               Journal
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/gpa/contact">
+               Contact
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/gpa/links">
+               Links
+              </a>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </li>
+         <li class="level1 ">
+          <a href="http://www.ega.edu/athletics">
+           Athletics
+          </a>
+          <ul>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/athletics/sports">
+             Sports
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/athletics/sports/baseball">
+               Baseball
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/athletics/sports/mens_basketball">
+               Men's Basketball
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/athletics/sports/womens_basketball">
+               Women's Basketball
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/athletics/sports/softball">
+               Softball
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/athletics/sports/sports_education_complex">
+               Sports &amp; Education Complex
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/athletics/fans">
+             Fans
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/athletics/support_egsc_athletics">
+             Support EGSC Athletics
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/athletics/recruits">
+             Recruits
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://calendar.ega.edu/default.aspx?type=&amp;view=Grid&amp;category=1-0">
+             Schedule
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/athletics/staff_directory">
+             Staff Directory
+            </a>
+           </li>
+           <li class="level2 last">
+            <a href="http://www.ega.edu/athletics/athletics_facilities">
+             Athletics Facilities
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="level1 ">
+          <a href="http://www.ega.edu/offices">
+           Offices
+          </a>
+          <ul>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/academic_affairs">
+             Academic Affairs
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/academic_affairs/humanities">
+               Humanities
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/academic_affairs/math_science">
+               Math &amp; Science
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/academic_affairs/social_sciences">
+               Social Science
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/business_affairs">
+             Business Affairs
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/business_affairs/human_resources">
+               Human Resources
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/business_affairs/auxiliary_services">
+               Auxiliary Services
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/business_affairs/business_services">
+               Business Services
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/business_affairs/career_services">
+               Career Services
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/chief_of_staff">
+             Chief of Staff and Legal Counsel
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/statesboro">
+             EGSC Statesboro
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/external_affairs">
+             External Affairs
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/marketing_and_community_relations">
+               Marketing and Community Relations
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/egsc_foundation">
+               EGSC Foundation
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/sudie_a_fulford_community_learning_center">
+               Sudie A. Fulford Community Learning Center
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/georgia_open_records_act">
+               Georgia Open Records Act
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/public_information">
+               Public Information
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/vision_series">
+               Vision Series
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/alumni_friends">
+               Alumni &amp; Friends
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/contact_external_affairs">
+               Contact Us
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/art_explosion_on_campus">
+               Art Explosion on Campus
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/external_affairs/september_2013_celebration">
+               September 2013 Celebration
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/facilities_scheduling_usage">
+             Facilities
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/facilities/plant_operations">
+               Plant Operations
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/facilities/fitness_center">
+               Fitness Center
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/facilities/campus_scheduling">
+               Campus Scheduling
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/directory">
+             Faculty/Staff Directory
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/institutional_support_offices/information_technology">
+             Information Technology
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/information_technology/student_email_accounts">
+               Student Email Accounts
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/policies_and_procedures_of_the_college#Section11">
+               IT Policies
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/information_technology/rules_for_computer_labs">
+               Rules for Computer Labs
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/information_technology/tips_and_tutorials">
+               Tips and Tutorials
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/information_technology/information_technology_faq">
+               FAQ
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/information_technology/copyright_and_p2p_file_sharing_requirements_heoa">
+               Copyright and P2P File Sharing Requirements (HEOA)
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/information_technology/egsc_wireless_access">
+               EGSC Wireless Access
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/pages/general-pages/online_courses_and_d2l">
+               Online Courses and D2L
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/institutional_research_planning">
+             Institutional Research And Planning
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/institutional_research_planning/fast_facts">
+               Fast Facts
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/institutional_research_planning/surveys">
+               Surveys
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/institutional_research_planning/plans">
+               Plans
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/institutional_research_planning/assessment_resources">
+               Assessment Resources
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/institutional_research_planning/sacscoc_reaccreditation">
+               SACSCOC Accreditation
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/internal_audit">
+             Internal Audit
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="https://ega.alertline.com/gcs/welcome">
+               Ethics and Compliance Reporting Hotline
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.usg.edu/audit">
+               USG Office of Internal Audit and Compliance
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href=" http://www.acua.org/movie">
+               Video: Understand the Value of Internal Auditing in Just 3 Minutes!
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/presidents_office">
+             President's Office
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/the_president">
+               The President
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/institutional_research_planning/fast_facts">
+               About the College
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/annual_reports">
+               Annual Reports
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/external_affairs/egsc_foundation">
+               EGSC Foundation
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/executive_staff">
+               Executive Staff
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/faculty_senate">
+               Faculty Senate
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/history_of_egsc">
+               History of the College
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/internal_audit">
+               Internal Audit
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/institutional_initiatives">
+               Institutional Initiatives
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/links_and_resources">
+               Links and Resources
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/mission_vision_strategic_plan">
+               Mission, Vision, Accreditation, Strategic Plan
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/policies_and_procedures_of_the_college#section2">
+               Organizational Structure
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/policies_and_procedures_of_the_college">
+               Policies and Procedures of the College
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/presentations_by_the_president">
+               Presentations by the President
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/presidents_cabinet">
+               President's Cabinet
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/presidents_Updates">
+               President's Updates
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/senior_administrative_staff">
+               Senior Administrative Staff
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/standing_committees">
+               Standing Committees
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/presidents_office/staff_council">
+               Staff Council
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/policy/egsc-statutes.pdf">
+               Statutes of the College
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/public_safety">
+             Public Safety
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/public_safety/emergency_response">
+               Emergency Response
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/public_safety/parking_and_transportation">
+               Parking and Transportation
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/public_safety/clery_annual_security_report">
+               Clery Annual Security Report
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/public_safety/federal_trafficking_penalties_marijana">
+               Federal Trafficking Penalties: Marijuana
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/public_safety/federal_trafficking_penalties_other_drugs">
+               Federal Trafficking Penalties: Other Drugs
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://gbi.georgia.gov/georgia-sex-offender-registry">
+               GBI Sex Offender Registry
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/public_safety/public_safety_handbook">
+               Public Safety Handbook
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/public_safety/state_drug_law_summary">
+               State Drug Law Summary
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/student_affairs">
+             Student Affairs
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/student_affairs/admissions_office">
+               Admissions Office
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/student_affairs/financial_aid">
+               Financial Aid
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/student_affairs/registrars_office">
+               Registrar's Office
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/student_affairs/counseling_and_disability_services">
+               Counseling and Disability Services
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/student_affairs/housing">
+               Housing
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/student_affairs/office_of_student_conduct_welcome">
+               Student Conduct
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/student_life">
+               Student Life
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/offices/office_directory_and_map">
+             Office Directory and Map
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/office_directory_and_map/campus_map">
+               Campus Map
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/offices/office_directory_and_map/room_locations">
+               Room Locations
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/offices/office_directory_and_map/driving_directions">
+               Driving Directions
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 last">
+            <a href="http://www.ega.edu/augusta">
+             EGSC Augusta
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="level1 last">
+          <a href="http://www.ega.edu/student_life">
+           Student Life
+          </a>
+          <ul>
+           <li class="level2 ">
+            <a href="http://calendar.ega.edu/default.aspx?type=&amp;view=Grid&amp;category=12-0%2c6-5%2c5-0">
+             Student Activities Calendar
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/clubs">
+             Clubs
+            </a>
+            <ul>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/student_life/clubs/clubs_organizational_process">
+               Clubs: Organizational Process
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/student_handbook">
+             Student Handbook
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/recreation_and_game_room">
+             Recreation and Game Room
+            </a>
+            <ul>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/student_life/recreation_and_game_room/game_room_rules">
+               Game Room Rules
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/student_life_feedback">
+             Student Life Feedback
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/sga">
+             Student Government Association (SGA)
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/student_life/sga/current_sga">
+               Current SGA
+              </a>
+             </li>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/pages/general-pages/sga_constitution">
+               SGA Constitution
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/pages/general-pages/sga_petition">
+               SGA Petition
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/student_publications">
+             Student Publications
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/student_life/student_publications/wiregrass">
+               Wiregrass
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/student_life/student_publications/hoopee_bird">
+               Hoopee Bird
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/intramural_sports">
+             Intramural Sports
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/connected">
+             ConnectEd
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/ambassadors">
+             Ambassadors
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/student_life/ambassadors/activities">
+               Activities
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/student_life/ambassadors/application">
+               Application
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/miss_east_georgia_state_college">
+             Miss East Georgia State College
+            </a>
+            <ul>
+             <li class="level3 ">
+              <a href="http://www.ega.edu/student_life/miss_east_georgia_state_college/application_miss_egsc">
+               Application: Miss EGSC
+              </a>
+             </li>
+             <li class="level3 last">
+              <a href="http://www.ega.edu/student_life/miss_east_georgia_state_college/meet_austin_carruth">
+               Meet Austin Carruth
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/cheerleading">
+             Cheerleading
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/student_life/disc_golf_club">
+             Disc Golf
+            </a>
+           </li>
+           <li class="level2 ">
+            <a href="http://www.ega.edu/pages/general-pages/cat_card_special_offers_and_bobcat_bucks">
+             Cat Card Special Offers and BobCat Bucks
+            </a>
+           </li>
+           <li class="level2 last">
+            <a href="http://www.ega.edu/student_life/rha">
+             Residence Hall Association
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </nav>
+      </div>
+     </header>
+    </div>
+    <h2 class="largeTitle" tabindex="2">
+     EGSC Calendar
+    </h2>
+    <ul class="breadCrumbs">
+     <li tabindex="3">
+      <a href="http://www.ega.edu/">
+       Home
+      </a>
+     </li>
+     <li>
+      <span>
+       »
+      </span>
+      <a href="http://calendar.ega.edu">
+       Calendar
+      </a>
+     </li>
+     <li class="last">
+      <span>
+       »
+      </span>
+     </li>
+    </ul>
+    <!--/breadCrumbs-->
+    <div class="container_24" id="container">
+     <section class="contentWide alpha prefix_1 grid_22">
+      <div id="calendar">
+       <table cellspacing="0" id="outerCal">
+        <!-- This table row and cell will hold the calendar. -->
+        <tr>
+         <td>
+          <form action="/CalendarNOW.aspx?fromdate%3d3%2f1%2f2019%26todate%3d3%2f31%2f2019%26display%3dMonth%26more%3d1%2f1%2f0001" id="Form1" method="post" name="Form1">
+           <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUINjQxMTI1MDEPFigeB0VuZFRpbWVlHghGcm9tRGF0ZQUIMy8xLzIwMTkeC1JTU0ltYWdlQWx0BSZTdWJzY3JpYmUgdG8gUlNTIGZlZWQgb2YgY3VycmVudCB2aWV3Lh4EVmlldwUER3JpZB4QUHJldmlvdXNJbWFnZUFsdAURUHJldmlvdXMgSW50ZXJ2YWweBFR5cGUFBnB1YmxpYx4QR3JpZEhlbHBGaWxlUGF0aAUZQ2FsZW5kYXJHcmlkVmlld0hlbHAuYXNweB4ZcF9Qcm94aW1pdHlTZWFyY2hJbmNsdWRlZGgeB1JTU0xpbmsFWVJTU1N5bmRpY2F0b3IuYXNweD9jYXRlZ29yeT0mbG9jYXRpb249JnR5cGU9TiZzdGFydGluZz0zLzEvMjAxOSZlbmRpbmc9My8zMS8yMDE5JmJpbmFyeT1ZHgZUb0RhdGUFCTMvMzEvMjAxOR4VcF9Mb2NhdGlvblNlYXJjaEZpZWxkBQhMb2NhdGlvbh4OUlNTTGlua09uZ29pbmcFNlJTU1N5bmRpY2F0b3IuYXNweD9jYXRlZ29yeT0mbG9jYXRpb249JnR5cGU9TiZiaW5hcnk9WR4MTmV4dEltYWdlQWx0BQ1OZXh0IEludGVydmFsHglQYWdlVGl0bGUFJkVhc3QgR2VvcmdpYSBTdGF0ZSBDb2xsZWdlIC0gR3JpZCBWaWV3HglTdGFydFRpbWVlHgxDbGlja1RvUHJpbnQFE0NsaWNrIGhlcmUgdG8gUHJpbnQeBE1vcmUFBE1vcmUeFkV2ZW50c0NhbGVuZGFyTGFuZ3VhZ2UFD0V2ZW50cyBDYWxlbmRhch4LR3JpZERpc3BsYXkFBU1vbnRoHgtGb3JMYW5ndWFnZQUDZm9yFgICAQ9kFgRmD2QWGgIBDw8WAh4EVGV4dAUPRXhwYW5kIEFsbCBHcmlkZGQCAw8PFgIfFAUOQWxsIENhdGVnb3JpZXNkZAIFDw8WBh4HVG9vbFRpcAUiR28gdG8gYWRtaW5pc3RyYXRpdmUgbG9naW4gc2NyZWVuLh8UBQ1TdWJtaXQgRXZlbnRzHgdWaXNpYmxlaGRkAgcPZBYGAgEPZBYIAgEPDxYCHxQFD0Rpc3BsYXkgT3B0aW9uc2RkAgMPZBYEZg9kFgICAQ8PFgIfFAUPRGlzcGxheSBGb3JtYXQ6ZGQCAQ9kFgICAQ8QZBAVBQZTZWxlY3QNQ2F0ZWdvcnkgVmlldw5EYXRlL1RpbWUgVmlldwxTdW1tYXJ5IFZpZXcNTG9jYXRpb24gVmlldxUFBlNlbGVjdA1DYXRlZ29yeSBWaWV3DkRhdGUvVGltZSBWaWV3DFN1bW1hcnkgVmlldw1Mb2NhdGlvbiBWaWV3FCsDBWdnZ2dnFgFmZAIFDw8WAh8UBQ5EaXNwbGF5IE1vbnRoOmRkAgcPEGQPFg1mAgECAgIDAgQCBQIGAgcCCAIJAgoCCwIMFg0QBQZTZWxlY3QFBlNlbGVjdGcQBQdKYW51YXJ5BQdKYW51YXJ5ZxAFCEZlYnJ1YXJ5BQhGZWJydWFyeWcQBQVNYXJjaAUFTWFyY2hnEAUFQXByaWwFBUFwcmlsZxAFA01heQUDTWF5ZxAFBEp1bmUFBEp1bmVnEAUESnVseQUESnVseWcQBQZBdWd1c3QFBkF1Z3VzdGcQBQlTZXB0ZW1iZXIFCVNlcHRlbWJlcmcQBQdPY3RvYmVyBQdPY3RvYmVyZxAFCE5vdmVtYmVyBQhOb3ZlbWJlcmcQBQhEZWNlbWJlcgUIRGVjZW1iZXJnFgFmZAIDD2QWBgIBDw8WAh8UBQZTZWFyY2hkZAIDDw8WAh8UBTE8c3BhbiBzdHlsZT0iZm9udC1zaXplOjAuOGVtIj4oTmV3IFNlYXJjaCk8L3NwYW4+ZGQCBQ9kFghmD2QWBGYPZBYCAgEPDxYCHxQFBUZyb206ZGQCAQ9kFgQCAw8PFggeAlRUBQgzLzEvMjAxOR4CVFYFAVYeAlRFBQFFHgJUUgUBKmRkAgcPDxYCHxZoZGQCAQ9kFgRmD2QWAgIBDw8WAh8UBQNUbzpkZAIBD2QWBAIDDw8WCB8XBQkzLzMxLzIwMTkfGAUBVh8ZBQFFHxoFASpkZAIHDw8WAh8WaGRkAgIPFgIfFmgWBGYPZBYCAgEPDxYCHxQFC0RhdGUgUmFuZ2U6ZGQCAQ9kFgICAQ8QZA8WEGYCAQICAgMCBAIFAgYCBwIIAgkCCgILAgwCDQIOAg8WEBAFBlNlbGVjdAUGU2VsZWN0ZxAFBVRvZGF5BQV0b2RheWcQBQhUb21vcnJvdwUIdG9tb3Jyb3dnEAUMQ3VycmVudCBXZWVrBQtjdXJyZW50d2Vla2cQBQ1DdXJyZW50IE1vbnRoBQxjdXJyZW50bW9udGhnEAUMQ3VycmVudCBZZWFyBQtjdXJyZW50eWVhcmcQBQtOZXh0IDcgRGF5cwUFbmV4dDdnEAUMTmV4dCAxNCBEYXlzBQZuZXh0MTRnEAUMTmV4dCAzMCBEYXlzBQZuZXh0MzBnEAUJTmV4dCBXZWVrBQhuZXh0d2Vla2cQBQpOZXh0IE1vbnRoBQluZXh0bW9udGhnEAUMTmV4dCA0NSBEYXlzBQZuZXh0NDVnEAUMTmV4dCA2MCBEYXlzBQZuZXh0NjBnEAUMTmV4dCA5MCBEYXlzBQZuZXh0OTBnEAUNTmV4dCAzNjUgRGF5cwUHbmV4dDM2NWcQBQlOZXh0IFllYXIFCG5leHR5ZWFyZxYBZmQCAw8WAh8WaBYEZg9kFgICAQ8PFgIfFAULVGltZSBSYW5nZTpkZAIBD2QWAgIBDxBkDxYFZgIBAgICAwIEFgUQBQZTZWxlY3QFBlNlbGVjdGcQBRFNaWRuaWdodCDigJMgNSBhbQUTMTI6MDA6MDEgQU0sNTowMCBBTWcQBQ01IGFtIOKAkyBOb29uBRA1OjAwIEFNLDEyOjAwIFBNZxAFDE5vb24gdG8gNSBwbQUQMTI6MDAgUE0sNTowMCBQTWcQBQ41cG0gLSBNaWRuaWdodAUTNTowMCBQTSwxMTo1OTo1OSBQTWcWAWZkAgUPZBYIAgEPZBYQZg9kFgRmD2QWAgIBDw8WAh8UBQxDYXRlZ29yeShzKTpkZAIBD2QWAgIBDxAPZBYEHgVzdHlsZQUMd2lkdGg6MjQwcHg7Hg1kYXRhLWRpc2FibGVkZQ8WD2YCAQICAgMCBAIFAgYCBwIIAgkCCgILAgwCDQIOFg8QBQZTZWxlY3QFBlNlbGVjdGcQBQpTZWxlY3QgQWxsBQpTZWxlY3QgQWxsZxAFD1NlbGVjdCBNdWx0aXBsZQUPU2VsZWN0IE11bHRpcGxlZxAFCEFjYWRlbWljBQM3LTBnEAUdwqDCoMKgTmV3IFN0dWRlbnQgT3JpZW50YXRpb24FAzctNmcQBQlBdGhsZXRpY3MFAzEtMGcQBQ7CoMKgwqBCYXNlYmFsbAUDMS0xZxAFFsKgwqDCoE1lbidzIEJhc2tldGJhbGwFAzEtMmcQBQ7CoMKgwqBTb2Z0YmFsbAUDMS00ZxAFGMKgwqDCoFdvbWVuJ3MgQmFza2V0YmFsbAUDMS0zZxAFCEhvbGlkYXlzBQQxMi0wZxAFDU1pc2NlbGxhbmVvdXMFBDE2LTBnEAUNUHVibGljIEV2ZW50cwUDNi0wZxAFE8KgwqDCoFZpc2lvbiBTZXJpZXMFAzYtNWcQBQ5TdHVkZW50IEV2ZW50cwUDNS0wZ2RkAgEPZBYEZg9kFgICAQ8PFgIfFAUMTG9jYXRpb24ocyk6ZGQCAQ9kFgICAQ8QD2QWAh8bBQx3aWR0aDoyNDBweDsPFgZmAgECAgIDAgQCBRYGEAUGU2VsZWN0BQZTZWxlY3RnEAUKU2VsZWN0IEFsbAUKU2VsZWN0IEFsbGcQBQ9TZWxlY3QgTXVsdGlwbGUFD1NlbGVjdCBNdWx0aXBsZWcQBQdBdWd1c3RhBQE2ZxAFClN0YXRlc2Jvcm8FATVnEAUKU3dhaW5zYm9ybwUBNGdkZAICDxYCHxZoFgICAQ9kFgQCAQ8QZGQWAGQCAw8PFgIfFAUGKFZpZXcpFgIfGwUNZGlzcGxheTogbm9uZWQCAw8WAh8WaBYCAgEPZBYEAgEPEGRkFgBkAgMPDxYCHxQFBihWaWV3KRYCHxsFDWRpc3BsYXk6IG5vbmVkAgQPFgIfFmgWAgIBD2QWBAIBDxBkZBYAZAIDDw8WAh8UBQYoVmlldykWAh8bBQ1kaXNwbGF5OiBub25lZAIFDxYCHxZoFgICAQ9kFgQCAQ8QZGQWAGQCAw8PFgIfFAUGKFZpZXcpFgIfGwUNZGlzcGxheTogbm9uZWQCBg8WAh8WaGQCBw9kFgRmD2QWAgIBDw8WAh8UBQtLZXl3b3JkKHMpOmRkAgEPZBYCAgEPDxYCHxUFOENvbW1hIGRlbGltaXRlZCBsaXN0IG9mIHdvcmRzIHVzZWQgdG8gc2VhcmNoIGZvciBldmVudHMuFgIfGwULd2lkdGg6MTAwJTtkAgUPFgIfFmgWCGYPZBYCZg9kFgICAQ8PFgIfFAUITG9jYXRpb25kZAICD2QWAgIBD2QWAgIBDxAPFgIeC18hRGF0YUJvdW5kZ2QQFTUGU2VsZWN0AkFLAkFMAkFSAkFaAkNBAkNPAkNUAkRDAkRFAkZMAkdBAkhJAklBAklEAklMAklOAktTAktZAkxBAk1BAk1EAk1FAk1JAk1OAk1PAk1TAk1UAk5DAk5EAk5FAk5IAk5KAk5NAk5WAk5ZAk9IAk9LAk9SAlBBAlBSAlJJAlNDAlNEAlROAlRYAlVUAlZBAlZUAldBAldJAldWAldZFTUAAkFLAkFMAkFSAkFaAkNBAkNPAkNUAkRDAkRFAkZMAkdBAkhJAklBAklEAklMAklOAktTAktZAkxBAk1BAk1EAk1FAk1JAk1OAk1PAk1TAk1UAk5DAk5EAk5FAk5IAk5KAk5NAk5WAk5ZAk9IAk9LAk9SAlBBAlBSAlJJAlNDAlNEAlROAlRYAlVUAlZBAlZUAldBAldJAldWAldZFCsDNWdnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnFgFmZAIDD2QWAgIBD2QWAgIBDxBkZBYAZAIEDxYCHxZoFgJmD2QWAgIDDxAPFgIfHWdkEBULBlNlbGVjdAE1AjEwAjE1AjIwAjI1AjMwAjM1AjQwAjQ1AjUwFQsBMAE1AjEwAjE1AjIwAjI1AjMwAjM1AjQwAjQ1AjUwFCsDC2dnZ2dnZ2dnZ2dnFgFmZAIHDw8WBB8UBQZTdWJtaXQfFQUiU2VhcmNoIHRvIG5hcnJvdyB0aGUgZXZlbnRzIHNob3duLmRkAgkPDxYCHxZoZGQCCQ8PFgQeCEltYWdlVXJsBQ5pbWFnZXMvRGF5LmdpZh4NQWx0ZXJuYXRlVGV4dAUhRGlzcGxheSBhbGwgdGhlIGV2ZW50cyBmb3IgdG9kYXkuZGQCCw8PFgQfHgUPaW1hZ2VzL1dlZWsuZ2lmHx8FLERpc3BsYXkgYWxsIHRoZSBldmVudHMgZm9yIHRoZSBjdXJyZW50IHdlZWsuZGQCDQ8PFgQfHgUQaW1hZ2VzL01vbnRoLmdpZh8fBS1EaXNwbGF5IGFsbCB0aGUgZXZlbnRzIGZvciB0aGUgY3VycmVudCBtb250aC5kZAIPDw8WBB8eBQ9pbWFnZXMvWWVhci5naWYfHwUsRGlzcGxheSBhbGwgdGhlIGV2ZW50cyBmb3IgdGhlIGN1cnJlbnQgeWVhci5kZAIRDxYCHxQF0QE8VEFCTEUgd2lkdGg9JzgwJScgaWQ9J2NhbGVuZGFydGV4dHRhYmxlJyBjZWxsU3BhY2luZz0nMCcgY2VsbFBhZGRpbmc9JzAnIGJvcmRlcj0nMCcgYWxpZ249J2NlbnRlcic+PFRSPjxURCBhbGlnbj0nY2VudGVyJz48Zm9udCBmYWNlPSdUYWhvbWEnIHN0eWxlPSdjb2xvcjpCbGFjaztmb250LXNpemU6MWVtOyc+Jm5ic3A7PC9mb250PjwvVEQ+PC9UUj48L1RBQkxFPmQCEw8PFgofHgUUaW1hZ2VzL3N1YnNjcmliZS5naWYfFQUxQ2xpY2sgdG8gc3Vic2NyaWJlIHRvIHRoZSBjdXJyZW50IHZpZXcgb2YgZXZlbnRzLh8UBTFDbGljayB0byBzdWJzY3JpYmUgdG8gdGhlIGN1cnJlbnQgdmlldyBvZiBldmVudHMuHgtOYXZpZ2F0ZVVybAUBIx8WaBYCHgdvbmNsaWNrBRdjYWxlbmRhclN1YnNjcmlwdGlvbigpO2QCFQ8PFgofHgUTaW1hZ2VzL2Rvd25sb2FkLmdpZh8VBTpDbGljayB0byBkb3dubG9hZCBldmVudHMgc2hvd24gaW4gQ1NWLCBpQ0FMIG9yIFhNTCBmb3JtYXQuHxQFOkNsaWNrIHRvIGRvd25sb2FkIGV2ZW50cyBzaG93biBpbiBDU1YsIGlDQUwgb3IgWE1MIGZvcm1hdC4fIAUBIx8WaBYCHyEFgQFkb3dubG9hZFR5cGUoJ2Rvd25sb2FkdHlwZS5hc3B4P2Zyb21kYXRlPTMvMS8yMDE5JnRvZGF0ZT0zLzMxLzIwMTkmZGlzcGxheT1Nb250aCZ2aWV3PUdyaWQmdHlwZT1wdWJsaWMmZG93bmxvYWQ9ZG93bmxvYWQnLGV2ZW50KTtkAhcPDxYIHx4FD2ltYWdlcy9oZWxwLmdpZh8VBSpDbGljayBmb3IgaGVscCBpbiB1c2luZyBjYWxlbmRhciBkaXNwbGF5cy4fFAUqQ2xpY2sgZm9yIGhlbHAgaW4gdXNpbmcgY2FsZW5kYXIgZGlzcGxheXMuHyAFJUNhbGVuZGFyR3JpZFZpZXdIZWxwLmFzcHg/dHlwZT1wdWJsaWNkZAIZDw8WCh4GVGFyZ2V0BQZfYmxhbmsfHgUQaW1hZ2VzL3ByaW50LmdpZh8VBSlQcmludCB0aGUgY29udGVudHMgb2YgdGhlIGN1cnJlbnQgc2NyZWVuLh8UBSlQcmludCB0aGUgY29udGVudHMgb2YgdGhlIGN1cnJlbnQgc2NyZWVuLh8gBWNDYWxlbmRhck5PVy5hc3B4P2Zyb21kYXRlPTMvMS8yMDE5JnRvZGF0ZT0zLzMxLzIwMTkmZGlzcGxheT1Nb250aCZ2aWV3PUdyaWQmdHlwZT1wdWJsaWMmcHJpbnQ9cHJpbnRkZAIDD2QWAmYPZBYCZg9kFgJmDw8WAh8UBVg8YSBocmVmPSJodHRwOi8vd3d3LmFjdGl2ZWNhbGVuZGFyLmNvbS8iPkNhbGVuZGFyIFNvZnR3YXJlIHBvd2VyZWQgYnkgRHVkZSBTb2x1dGlvbnM8L2E+ZGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFggFB2lidG5EYXkFCGlidG5XZWVrBQlpYnRuTW9udGgFCGlidG5ZZWFyBRJjYmxDdXN0b21GaWVsZF8xJDAFEmNibEN1c3RvbUZpZWxkXzIkMAUSY2JsQ3VzdG9tRmllbGRfMyQwBRJjYmxDdXN0b21GaWVsZF80JDBI4QwDEwFZQJNeaoGQcH8Tze8LgA=="/>
+           <script src="/PopCalendar2008/PopCalendarAjaxNet.js" type="text/javascript">
+           </script>
+           <script src="/PopCalendar2008/PopCalendarFunctionsAjaxNet.js" type="text/javascript">
+           </script>
+           <script type="text/javascript">
+            var PopCal_enUS_DaysShort=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+           </script>
+           <script type="text/javascript">
+            var PopCal_enUS_MonthsShort=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];var PopCal_enUS_MonthsFull=['January','February','March','April','May','June','July','August','September','October','November','December'];
+           </script>
+           <div class="calendarnowdiv">
+            <input id="p_LocationColumnField" name="p_LocationColumnField" type="hidden" value="Location"/>
+            <div id="pnlHide">
+             <table align="center" border="0" cellpadding="5" cellspacing="0" width="100%">
+              <tr>
+               <td valign="top" width="20%">
+                <a class="bodycopy" href="javascript:__doPostBack('lbtnExpandAll','')" id="lbtnExpandAll">
+                 <b>
+                  Expand All Grid
+                 </b>
+                </a>
+                <!-- Section 508 Qick Nav Links -->
+                <a href="#search">
+                 <img alt="Search events." border="0" height="1" id="search_link" src="images/transparent.gif" width="1"/>
+                </a>
+                <a href="#events">
+                 <img alt="View events." border="0" height="1" id="events_link" src="images/transparent.gif" width="1"/>
+                </a>
+               </td>
+               <td align="center" valign="top" width="60%">
+                <h2 class="adx_wcag_header">
+                 <span class="title" id="lblCategoryHeading">
+                  All Categories
+                 </span>
+                </h2>
+               </td>
+               <td align="right" nowrap="nowrap" valign="top" width="20%">
+               </td>
+              </tr>
+             </table>
+             <div id="pnlSearch">
+              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+               <tr>
+                <td id="cellDisplayOptions" style="padding-left: 5px; width: 25%;" valign="top">
+                 <table border="0" cellpadding="1" cellspacing="0">
+                  <tr>
+                   <td colspan="2" style="height: 24px;" valign="middle">
+                    <h3 class="adx_wcag_header">
+                     <span class="bodycopy" id="lblDisplayOptions">
+                      <b>
+                       Display Options
+                      </b>
+                     </span>
+                    </h3>
+                   </td>
+                  </tr>
+                  <tr id="rowViewsSelectable">
+                   <td nowrap="nowrap">
+                    <label class="bodycopy" for="dlstView" id="lblDisplayFormat">
+                     Display Format:
+                    </label>
+                   </td>
+                   <td nowrap="nowrap">
+                    <select class="bodycopy" id="dlstView" name="dlstView">
+                     <option selected="selected" value="Select">
+                      Select
+                     </option>
+                     <option value="Category View">
+                      Category View
+                     </option>
+                     <option value="Date/Time View">
+                      Date/Time View
+                     </option>
+                     <option value="Summary View">
+                      Summary View
+                     </option>
+                     <option value="Location View">
+                      Location View
+                     </option>
+                    </select>
+                   </td>
+                  </tr>
+                  <tr>
+                   <td nowrap="nowrap">
+                    <label class="bodycopy" for="dlstMonth" id="lblDisplayMonth">
+                     Display Month:
+                    </label>
+                   </td>
+                   <td>
+                    <select class="bodycopy" id="dlstMonth" name="dlstMonth">
+                     <option selected="selected" value="Select">
+                      Select
+                     </option>
+                     <option value="January">
+                      January
+                     </option>
+                     <option value="February">
+                      February
+                     </option>
+                     <option value="March">
+                      March
+                     </option>
+                     <option value="April">
+                      April
+                     </option>
+                     <option value="May">
+                      May
+                     </option>
+                     <option value="June">
+                      June
+                     </option>
+                     <option value="July">
+                      July
+                     </option>
+                     <option value="August">
+                      August
+                     </option>
+                     <option value="September">
+                      September
+                     </option>
+                     <option value="October">
+                      October
+                     </option>
+                     <option value="November">
+                      November
+                     </option>
+                     <option value="December">
+                      December
+                     </option>
+                    </select>
+                   </td>
+                  </tr>
+                 </table>
+                </td>
+                <td align="center" id="cellDateSearching" style="width: 35%" valign="top">
+                 <a id="search" name="search">
+                 </a>
+                 <!-- Bug #2695: Moved search label and new search link out of table since they are separate from the
+                                    date search fields in Gantt view.  Doing this ensures consistent placement and alignment of them. -->
+                 <table>
+                  <tr>
+                   <td colspan="2" style="height: 24px;" valign="middle">
+                    <table border="0" cellpadding="0" cellspacing="0" style="border-spacing: 5px;" width="100%">
+                     <tr>
+                      <td>
+                       <h3 class="adx_wcag_header">
+                        <span class="bodycopy" id="lblAdvancedSearch">
+                         <b>
+                          Search
+                         </b>
+                        </span>
+                       </h3>
+                      </td>
+                      <td align="right">
+                       <a class="bodycopy" href="javascript:__doPostBack('lbtnNewSearch','')" id="lbtnNewSearch">
+                        <span style="font-size:0.8em">
+                         (New Search)
+                        </span>
+                       </a>
+                      </td>
+                     </tr>
+                    </table>
+                   </td>
+                  </tr>
+                 </table>
+                 <table border="0" cellpadding="1" cellspacing="0" id="tblDateRange">
+                  <tr id="rowSearchDate1">
+                   <td nowrap="nowrap" style="text-align: left;" valign="top">
+                    <label class="bodycopy" for="txtStartDateSearch" id="lblFrom">
+                     From:
+                    </label>
+                   </td>
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <input autocomplete="off" calendar="calStartDateSearch" class="textboxcopy" dir="ltr" format="m/d/yyyy" id="txtStartDateSearch" invaliddatemessage="Invalid date was entered." name="txtStartDateSearch" onfocus="__PopCalSetFocus(this, event);" type="text" value="3/1/2019"/>
+                    <span assembly="RJS.Web.WebControl.PopCalendar.Net.2008.dll" assemblyversion="8.1.3125.36581" id="calStartDateSearch" popcalendarfunctionsjsversion="1.0.0" popcalendarjsversion="1.0.1" style="display:none">
+                    </span>
+                    <span id="calStartDateSearch_Control" onclick='__PopCalShowCalendar("txtStartDateSearch",this)' style="cursor:pointer;" title="From:">
+                     <img align="absmiddle" alt="From:" border="0" src="/PopCalendar2008/Calendar.gif"/>
+                    </span>
+                    <link href="/PopCalendar2008/CSS/ADXPublic.css" rel="stylesheet" type="text/css">
+                     <div style="padding: 2px 0;">
+                      <span class="errormessagetext" clientvalidationfunction="__PopCalValidateOnSubmit" controltovalidate="txtStartDateSearch" dir="ltr" evaluationfunction="__PopCalCustomValidatorEvaluateIsValid" id="calStartDateSearch_MessageError" messagealignment="MessageContainer" style="visibility:hidden;white-space:nowrap;z-index:+1000;color:red;" validationgroup="RJS.PopCalendars">
+                      </span>
+                     </div>
+                    </link>
+                   </td>
+                  </tr>
+                  <tr id="rowSearchDate2" valign="top">
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <label class="bodycopy" for="txtEndDateSearch" id="lblTo">
+                     To:
+                    </label>
+                   </td>
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <input autocomplete="off" calendar="calEndDateSearch" class="textboxcopy" dir="ltr" format="m/d/yyyy" id="txtEndDateSearch" invaliddatemessage="Invalid date was entered." name="txtEndDateSearch" onfocus="__PopCalSetFocus(this, event);" type="text" value="3/31/2019"/>
+                    <span assembly="RJS.Web.WebControl.PopCalendar.Net.2008.dll" assemblyversion="8.1.3125.36581" id="calEndDateSearch" popcalendarfunctionsjsversion="1.0.0" popcalendarjsversion="1.0.1" style="display:none">
+                    </span>
+                    <span id="calEndDateSearch_Control" onclick='__PopCalShowCalendar("txtEndDateSearch",this)' style="cursor:pointer;" title="To:">
+                     <img align="absmiddle" alt="To:" border="0" src="/PopCalendar2008/Calendar.gif"/>
+                    </span>
+                    <link href="/PopCalendar2008/CSS/ADXPublic.css" rel="stylesheet" type="text/css">
+                     <div style="padding: 2px 0;">
+                      <span class="errormessagetext" clientvalidationfunction="__PopCalValidateOnSubmit" controltovalidate="txtEndDateSearch" dir="ltr" evaluationfunction="__PopCalCustomValidatorEvaluateIsValid" id="calEndDateSearch_MessageError" messagealignment="MessageContainer" style="visibility:hidden;white-space:nowrap;z-index:+1000;color:red;" validationgroup="RJS.PopCalendars">
+                      </span>
+                     </div>
+                    </link>
+                   </td>
+                  </tr>
+                 </table>
+                </td>
+                <td align="right" id="cellAdvancedSearching" nowrap="nowrap" style="padding-right: 5px; width: 40%;" valign="top">
+                 <table border="0" cellpadding="1" cellspacing="0" id="tblAdditonalSearch" width="100%">
+                  <tr id="rowSearchByCategory">
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <label class="bodycopy" for="dlstCategory" id="lblCategorys">
+                     Category(s):
+                    </label>
+                   </td>
+                   <td id="cellCategoryDropdown" nowrap="nowrap" style="text-align: left;">
+                    <select class="bodycopy" data-disabled="" id="dlstCategory" name="dlstCategory" onclick="openCategorySelector();" style="width:240px;">
+                     <option value="Select">
+                      Select
+                     </option>
+                     <option value="Select All">
+                      Select All
+                     </option>
+                     <option value="Select Multiple">
+                      Select Multiple
+                     </option>
+                     <option value="7-0">
+                      Academic
+                     </option>
+                     <option value="7-6">
+                      New Student Orientation
+                     </option>
+                     <option value="1-0">
+                      Athletics
+                     </option>
+                     <option value="1-1">
+                      Baseball
+                     </option>
+                     <option value="1-2">
+                      Men's Basketball
+                     </option>
+                     <option value="1-4">
+                      Softball
+                     </option>
+                     <option value="1-3">
+                      Women's Basketball
+                     </option>
+                     <option value="12-0">
+                      Holidays
+                     </option>
+                     <option value="16-0">
+                      Miscellaneous
+                     </option>
+                     <option value="6-0">
+                      Public Events
+                     </option>
+                     <option value="6-5">
+                      Vision Series
+                     </option>
+                     <option value="5-0">
+                      Student Events
+                     </option>
+                    </select>
+                    <br/>
+                   </td>
+                  </tr>
+                  <tr id="rowSearchByLocation">
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <label class="bodycopy" for="dlstLocation" id="lblLocations">
+                     Location(s):
+                    </label>
+                   </td>
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <select class="bodycopy" id="dlstLocation" name="dlstLocation" style="width:240px;">
+                     <option value="Select">
+                      Select
+                     </option>
+                     <option value="Select All">
+                      Select All
+                     </option>
+                     <option value="Select Multiple">
+                      Select Multiple
+                     </option>
+                     <option value="6">
+                      Augusta
+                     </option>
+                     <option value="5">
+                      Statesboro
+                     </option>
+                     <option value="4">
+                      Swainsboro
+                     </option>
+                    </select>
+                    <br/>
+                   </td>
+                  </tr>
+                  <tr id="rowSearchByKeyword">
+                   <td nowrap="nowrap" style="text-align: left;">
+                    <label class="bodycopy" for="txtKeyword" id="lblKeywords">
+                     Keyword(s):
+                    </label>
+                   </td>
+                   <td id="cellKeywordTextfield" nowrap="nowrap" style="text-align: left;">
+                    <input class="textboxcopy" id="txtKeyword" maxlength="50" name="txtKeyword" style="width:100%;" title="Comma delimited list of words used to search for events." type="text"/>
+                    <br/>
+                   </td>
+                  </tr>
+                 </table>
+                 <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                  <tr>
+                   <td align="right">
+                    <a class="bodycopy" href="javascript:__doPostBack('lbtnSearch','')" id="lbtnSearch" title="Search to narrow the events shown.">
+                     <b>
+                      Submit
+                     </b>
+                    </a>
+                   </td>
+                  </tr>
+                 </table>
+                </td>
+               </tr>
+              </table>
+             </div>
+             <table border="0" cellpadding="0" cellspacing="0" style="PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-TOP: 5px; BORDER-BOTTOM: #c1c1c1 1px solid" width="100%">
+              <tr>
+               <td align="left" nowrap="nowrap" valign="bottom" width="20%">
+                <table border="0" cellpadding="0" cellspacing="0">
+                 <tr>
+                  <td valign="bottom">
+                   <label for="ibtnDay" style="display: none">
+                    Day View
+                   </label>
+                   <input alt="Display all the events for today." border="0" id="ibtnDay" name="ibtnDay" src="images/Day.gif" type="image"/>
+                  </td>
+                  <td valign="bottom">
+                   <label for="ibtnWeek" style="display: none">
+                    Week View
+                   </label>
+                   <input alt="Display all the events for the current week." border="0" id="ibtnWeek" name="ibtnWeek" src="images/Week.gif" type="image"/>
+                  </td>
+                  <td valign="bottom">
+                   <label for="ibtnMonth" style="display: none">
+                    Month View
+                   </label>
+                   <input alt="Display all the events for the current month." border="0" id="ibtnMonth" name="ibtnMonth" src="images/Month.gif" type="image"/>
+                  </td>
+                  <td valign="bottom">
+                   <label for="ibtnYear" style="display: none">
+                    Year View
+                   </label>
+                   <input alt="Display all the events for the current year." border="0" id="ibtnYear" name="ibtnYear" src="images/Year.gif" type="image"/>
+                  </td>
+                 </tr>
+                </table>
+               </td>
+               <td align="center">
+                <h1 class="adx_wcag_header">
+                 <table align="center" border="0" cellpadding="0" cellspacing="0" id="calendartexttable" width="80%">
+                  <tr>
+                   <td align="center">
+                    <font face="Tahoma" style="color:Black;font-size:1em;">
+                    </font>
+                   </td>
+                  </tr>
+                 </table>
+                </h1>
+               </td>
+               <td align="right" nowrap="nowrap" valign="bottom" width="20%">
+                <a href="CalendarGridViewHelp.aspx?type=public" id="linkHelp" style="display:inline-block;" target="_blank" title="Click for help in using calendar displays.">
+                 <img alt="Click for help in using calendar displays." border="0" src="images/help.gif" title="Click for help in using calendar displays."/>
+                </a>
+                <a href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;view=Grid&amp;type=public&amp;print=print" id="linkPrint" style="display:inline-block;" target="_blank" title="Print the contents of the current screen.">
+                 <img alt="Print the contents of the current screen." border="0" src="images/print.gif" title="Print the contents of the current screen."/>
+                </a>
+               </td>
+              </tr>
+             </table>
+            </div>
+            <div id="divContent" style="POSITION: relative">
+             <a id="events" name="events">
+             </a>
+             <div id="CalendarPanel">
+              <table border="0" cellpadding="2" cellspacing="1" id="Calendar1" style="border-color:White;border-width:1px;border-style:solid;" width="100%">
+               <tr>
+                <td colspan="7">
+                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                   <td align="left">
+                    <a href="javascript:__doPostBack('lbtnADXCalenderPrevious','')" id="lbtnADXCalenderPrevious">
+                     <img alt="Previous Interval" border="0" src="images/leftarrow.gif"/>
+                    </a>
+                   </td>
+                   <td align="center" nowrap="nowrap">
+                    <h2 class="adx_wcag_header title">
+                     March 2019
+                     <a href="#" onclick="rssType();">
+                      <img alt="Subscribe to RSS feed of current view." border="0" src="images/rss_new.gif"/>
+                     </a>
+                     <input id="hdnRssStatic" type="hidden" value="RSSSyndicator.aspx?category=&amp;location=&amp;type=N&amp;starting=3/1/2019&amp;ending=3/31/2019&amp;binary=Y"/>
+                     <input id="hdnRssOngoing" type="hidden" value="RSSSyndicator.aspx?category=&amp;location=&amp;type=N&amp;binary=Y"/>
+                    </h2>
+                   </td>
+                   <td align="right">
+                    <a href="javascript:__doPostBack('lbtnADXCalenderNext','')" id="lbtnADXCalenderNext">
+                     <img alt="Next Interval" border="0" src="images/rightarrow.gif"/>
+                     <a name="skip">
+                     </a>
+                    </a>
+                   </td>
+                  </tr>
+                 </table>
+                </td>
+               </tr>
+               <tr>
+                <th align="center" class="dayheader" scope="col">
+                 Sunday
+                </th>
+                <th align="center" class="dayheader" scope="col">
+                 Monday
+                </th>
+                <th align="center" class="dayheader" scope="col">
+                 Tuesday
+                </th>
+                <th align="center" class="dayheader" scope="col">
+                 Wednesday
+                </th>
+                <th align="center" class="dayheader" scope="col">
+                 Thursday
+                </th>
+                <th align="center" class="dayheader" scope="col">
+                 Friday
+                </th>
+                <th align="center" class="dayheader" scope="col">
+                 Saturday
+                </th>
+               </tr>
+               <tr>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=2/24/2019&amp;todate=2/24/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="2/24/2019">
+                  24
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Sunday, February 24, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=2/25/2019&amp;todate=2/25/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="2/25/2019">
+                  25
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Monday, February 25, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=2/26/2019&amp;todate=2/26/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="2/26/2019">
+                  26
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Tuesday, February 26, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=2/27/2019&amp;todate=2/27/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="2/27/2019">
+                  27
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Wednesday, February 27, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=2/28/2019&amp;todate=2/28/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="2/28/2019">
+                  28
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Thursday, February 28, 2019
+                 </h3>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/1/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/1/2019">
+                  1
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Friday, March 01, 2019
+                 </h3>
+                 <a class="url" data="25994" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7364&amp;view=EventDetails&amp;information_id=25994" target="_self" title="Session II Augusta Begins">
+                  <b>
+                   All Day
+                  </b>
+                  <br/>
+                  Session II Augusta Begins
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18390" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2374&amp;view=EventDetails&amp;information_id=18390" target="_self" title="Financial Aid Priority Deadline Summer Semester">
+                  <b>
+                   7:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Financial Aid Priority Deadline Summer Semester
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26258" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6239&amp;view=EventDetails&amp;information_id=26258" target="_self" title="Read Across America Day &amp; Dr. Seuss Birthday">
+                  <b>
+                   9:00 AM - 11:00 AM
+                  </b>
+                  <br/>
+                  Read Across America Day &amp; Dr. Seuss Birthday
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27144" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27144" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/1/2019&amp;display=Month&amp;type=public" target="_self">
+                  2 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/2/2019&amp;todate=3/2/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/2/2019">
+                  2
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Saturday, March 02, 2019
+                 </h3>
+                 <a class="url" data="26660" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7557&amp;view=EventDetails&amp;information_id=26660" target="_self" title="Lady Bobcats Softball Game">
+                  <b>
+                   1:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Lady Bobcats Softball Game
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26060" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7373&amp;view=EventDetails&amp;information_id=26060" target="_self" title="EGSC Baseball vs. Georgia Highlands">
+                  <b>
+                   3:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  EGSC Baseball vs. Georgia Highlands
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="24739" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6955&amp;view=EventDetails&amp;information_id=24739" target="_self" title="EGSC Men's Basketball vs. S. Georgia Tech">
+                  <b>
+                   6:00 PM - 8:00 PM
+                  </b>
+                  <br/>
+                  EGSC Men's Basketball vs. S. Georgia Tech
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+               </tr>
+               <tr>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/3/2019&amp;todate=3/3/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/3/2019">
+                  3
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Sunday, March 03, 2019
+                 </h3>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/4/2019&amp;todate=3/4/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/4/2019">
+                  4
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Monday, March 04, 2019
+                 </h3>
+                 <a class="url" data="27268" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7727&amp;view=EventDetails&amp;information_id=27268" target="_self" title="GISA Region 4AA Spring Literary Meet">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  GISA Region 4AA Spring Literary Meet
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27146" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27146" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26904" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7603&amp;view=EventDetails&amp;information_id=26904" target="_self" title="Baptist Collegiate Ministries (BCM)">
+                  <b>
+                   1:30 PM - 2:45 PM
+                  </b>
+                  <br/>
+                  Baptist Collegiate Ministries (BCM)
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/5/2019&amp;todate=3/5/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/5/2019">
+                  5
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Tuesday, March 05, 2019
+                 </h3>
+                 <a class="url" data="24834" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6975&amp;view=EventDetails&amp;information_id=24834" target="_self" title="EGSC Softball vs. ABAC">
+                  <b>
+                   2:00 PM - 4:00 PM
+                  </b>
+                  <br/>
+                  EGSC Softball vs. ABAC
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26598" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7531&amp;view=EventDetails&amp;information_id=26598" target="_self" title="Bobcat Buddies">
+                  <b>
+                   3:30 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Bobcat Buddies
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="24836" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6976&amp;view=EventDetails&amp;information_id=24836" target="_self" title="EGSC Softball vs. ABAC">
+                  <b>
+                   4:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  EGSC Softball vs. ABAC
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26535" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7509&amp;view=EventDetails&amp;information_id=26535" target="_self" title="SHS Tennis Match vs. Bacon County High School">
+                  <b>
+                   4:00 PM - 7:00 PM
+                  </b>
+                  <br/>
+                  SHS Tennis Match vs. Bacon County High School
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/5/2019&amp;display=Month&amp;type=public" target="_self">
+                  3 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/6/2019&amp;todate=3/6/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/6/2019">
+                  6
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Wednesday, March 06, 2019
+                 </h3>
+                 <a class="url" data="18164" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2558&amp;view=EventDetails&amp;information_id=18164" target="_self" title="Last Day to Withdraw Without Academic Penalty">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Last Day to Withdraw Without Academic Penalty
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18202" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5244&amp;view=EventDetails&amp;information_id=18202" target="_self">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Session I (Swainsboro/State...
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27099" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7680&amp;view=EventDetails&amp;information_id=27099" target="_self" title="21st Century Leaders Meeting">
+                  <b>
+                   10:00 AM - 1:30 PM
+                  </b>
+                  <br/>
+                  21st Century Leaders Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="25968" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7353&amp;view=EventDetails&amp;information_id=25968" target="_self" title="EGSC Baseball vs. Andrew">
+                  <b>
+                   3:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  EGSC Baseball vs. Andrew
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/6/2019&amp;display=Month&amp;type=public" target="_self">
+                  2 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/7/2019&amp;todate=3/7/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/7/2019">
+                  7
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Thursday, March 07, 2019
+                 </h3>
+                 <a class="url" data="18391" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=3481&amp;view=EventDetails&amp;information_id=18391" target="_self" title="Augusta Spring Pause">
+                  <b>
+                   8:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Augusta Spring Pause
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18203" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5245&amp;view=EventDetails&amp;information_id=18203" target="_self">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Session I (Swainsboro/State...
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26640" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7550&amp;view=EventDetails&amp;information_id=26640" target="_self" title="Treutlen County 4th Grade Planetarium Visit">
+                  <b>
+                   9:00 AM - 1:00 PM
+                  </b>
+                  <br/>
+                  Treutlen County 4th Grade Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27468" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7526&amp;view=EventDetails&amp;information_id=27468" target="_self" title="CATS Library Instruction">
+                  <b>
+                   11:00 AM - 12:00 PM
+                  </b>
+                  <br/>
+                  <b>
+                   (Cancelled)
+                  </b>
+                  CATS Library Instruction
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/7/2019&amp;display=Month&amp;type=public" target="_self">
+                  2 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/8/2019&amp;todate=3/8/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/8/2019">
+                  8
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Friday, March 08, 2019
+                 </h3>
+                 <a class="url" data="18392" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=3481&amp;view=EventDetails&amp;information_id=18392" target="_self" title="Augusta Spring Pause">
+                  <b>
+                   8:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Augusta Spring Pause
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18204" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5246&amp;view=EventDetails&amp;information_id=18204" target="_self">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Session II (Swainsboro/State...
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27440" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7778&amp;view=EventDetails&amp;information_id=27440" target="_self" title="Student Leadership Development">
+                  <b>
+                   1:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Student Leadership Development
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27034" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7653&amp;view=EventDetails&amp;information_id=27034" target="_self" title="Bobcat Baseball Game">
+                  <b>
+                   2:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  Bobcat Baseball Game
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/8/2019&amp;display=Month&amp;type=public" target="_self">
+                  2 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/9/2019&amp;todate=3/9/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/9/2019">
+                  9
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Saturday, March 09, 2019
+                 </h3>
+                 <a class="url" data="22288" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6147&amp;view=EventDetails&amp;information_id=22288" target="_self" title="National SAT">
+                  <b>
+                   7:00 AM - 2:00 PM
+                  </b>
+                  <br/>
+                  National SAT
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27572" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7452&amp;view=EventDetails&amp;information_id=27572" target="_self" title="12th District Democratic Regional Meeting">
+                  <b>
+                   10:00 AM - 2:00 PM
+                  </b>
+                  <br/>
+                  12th District Democratic Regional Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27036" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7654&amp;view=EventDetails&amp;information_id=27036" target="_self" title="Bobcat Baseball Game">
+                  <b>
+                   12:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  Bobcat Baseball Game
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27469" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7787&amp;view=EventDetails&amp;information_id=27469" target="_self" title="Mary Bragg Concert">
+                  <b>
+                   7:00 PM - 10:00 PM
+                  </b>
+                  <br/>
+                  Mary Bragg Concert
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+               </tr>
+               <tr>
+                <td align="left" class="calendarcellhilite" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/10/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/10/2019">
+                  10
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Sunday, March 10, 2019
+                 </h3>
+                 <a class="url" data="26664" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7559&amp;view=EventDetails&amp;information_id=26664" target="_self" title="Lady Bobcats Softball Game">
+                  <b>
+                   2:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  Lady Bobcats Softball Game
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/11/2019&amp;todate=3/11/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/11/2019">
+                  11
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Monday, March 11, 2019
+                 </h3>
+                 <a class="url" data="24564" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6917&amp;view=EventDetails&amp;information_id=24564" target="_self" title="Glad Garden Club Meeting">
+                  <b>
+                   10:00 AM - 11:30 AM
+                  </b>
+                  <br/>
+                  Glad Garden Club Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27347" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7756&amp;view=EventDetails&amp;information_id=27347" target="_self" title="Sunshine House Committee Meeting">
+                  <b>
+                   1:00 PM - 2:30 PM
+                  </b>
+                  <br/>
+                  Sunshine House Committee Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26905" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7603&amp;view=EventDetails&amp;information_id=26905" target="_self" title="Baptist Collegiate Ministries (BCM)">
+                  <b>
+                   1:30 PM - 2:45 PM
+                  </b>
+                  <br/>
+                  Baptist Collegiate Ministries (BCM)
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27101" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7681&amp;view=EventDetails&amp;information_id=27101" target="_self" title="Swainsboro Methodist Church Planetarium Visit">
+                  <b>
+                   9:30 PM - 10:45 PM
+                  </b>
+                  <br/>
+                  Swainsboro Methodist Church Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/12/2019&amp;todate=3/12/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/12/2019">
+                  12
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Tuesday, March 12, 2019
+                 </h3>
+                 <a class="url" data="27147" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27147" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26882" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7526&amp;view=EventDetails&amp;information_id=26882" target="_self" title="CATS Library Instruction">
+                  <b>
+                   11:00 AM - 12:00 PM
+                  </b>
+                  <br/>
+                  <b>
+                   (Cancelled)
+                  </b>
+                  CATS Library Instruction
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27196" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7715&amp;view=EventDetails&amp;information_id=27196" target="_self" title="Transfer Tuesdays">
+                  <b>
+                   11:00 AM - 2:00 PM
+                  </b>
+                  <br/>
+                  Transfer Tuesdays
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26334" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7474&amp;view=EventDetails&amp;information_id=26334" target="_self" title="EGSC Baseball vs. South Georgia">
+                  <b>
+                   3:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  EGSC Baseball vs. South Georgia
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/12/2019&amp;display=Month&amp;type=public" target="_self">
+                  3 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/13/2019&amp;todate=3/13/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/13/2019">
+                  13
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Wednesday, March 13, 2019
+                 </h3>
+                 <a class="url" data="26832" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7589&amp;view=EventDetails&amp;information_id=26832" target="_self" title="USG/CVIOG Regional Qlik Workshop">
+                  <b>
+                   1:00 PM - 4:00 PM
+                  </b>
+                  <br/>
+                  USG/CVIOG Regional Qlik Workshop
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27175" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7712&amp;view=EventDetails&amp;information_id=27175" target="_self" title="AAU Presents Apollo Night">
+                  <b>
+                   7:00 PM - 9:00 PM
+                  </b>
+                  <br/>
+                  AAU Presents Apollo Night
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/14/2019&amp;todate=3/14/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/14/2019">
+                  14
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Thursday, March 14, 2019
+                 </h3>
+                 <a class="url" data="26979" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7628&amp;view=EventDetails&amp;information_id=26979" target="_self" title="Fulford Center Advisory Board Meeting">
+                  <b>
+                   12:00 PM - 2:00 PM
+                  </b>
+                  <br/>
+                  Fulford Center Advisory Board Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27292" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7733&amp;view=EventDetails&amp;information_id=27292" target="_self" title="David Emanuel Academy Tennis Match">
+                  <b>
+                   2:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  David Emanuel Academy Tennis Match
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="24302" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6859&amp;view=EventDetails&amp;information_id=24302" target="_self" title="Gov. David Emanuel-Adam Brinson DAR Meeting">
+                  <b>
+                   2:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Gov. David Emanuel-Adam Brinson DAR Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27038" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7655&amp;view=EventDetails&amp;information_id=27038" target="_self" title="Bobcat Baseball Game">
+                  <b>
+                   3:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  Bobcat Baseball Game
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/14/2019&amp;display=Month&amp;type=public" target="_self">
+                  4 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/15/2019&amp;todate=3/15/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/15/2019">
+                  15
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Friday, March 15, 2019
+                 </h3>
+                 <a class="url" data="18393" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=3382&amp;view=EventDetails&amp;information_id=18393" target="_self" title="Last Day to Submit Loan Applications">
+                  <b>
+                   8:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Last Day to Submit Loan Applications
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27086" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7676&amp;view=EventDetails&amp;information_id=27086" target="_self" title="SGA Meeting">
+                  <b>
+                   12:00 PM - 2:00 PM
+                  </b>
+                  <br/>
+                  SGA Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/16/2019&amp;todate=3/16/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/16/2019">
+                  16
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Saturday, March 16, 2019
+                 </h3>
+                 <a class="url" data="27040" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7656&amp;view=EventDetails&amp;information_id=27040" target="_self" title="Bobcat Baseball Game">
+                  <b>
+                   1:00 PM - 7:00 PM
+                  </b>
+                  <br/>
+                  Bobcat Baseball Game
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+               </tr>
+               <tr>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/17/2019&amp;todate=3/17/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/17/2019">
+                  17
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Sunday, March 17, 2019
+                 </h3>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/18/2019&amp;todate=3/18/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/18/2019">
+                  18
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Monday, March 18, 2019
+                 </h3>
+                 <a class="url" data="27278" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7728&amp;view=EventDetails&amp;information_id=27278" target="_self" title="Dual Enrollment App and Testing Days">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Dual Enrollment App and Testing Days
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18394" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2325&amp;view=EventDetails&amp;information_id=18394" target="_self" title="Spring Break Swainsboro &amp; Statesboro Students">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Spring Break Swainsboro &amp; Statesboro Students
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27148" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27148" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26906" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7603&amp;view=EventDetails&amp;information_id=26906" target="_self" title="Baptist Collegiate Ministries (BCM)">
+                  <b>
+                   1:30 PM - 2:45 PM
+                  </b>
+                  <br/>
+                  Baptist Collegiate Ministries (BCM)
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/19/2019&amp;todate=3/19/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/19/2019">
+                  19
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Tuesday, March 19, 2019
+                 </h3>
+                 <a class="url" data="27280" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7728&amp;view=EventDetails&amp;information_id=27280" target="_self" title="Dual Enrollment App and Testing Days">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Dual Enrollment App and Testing Days
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18395" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2325&amp;view=EventDetails&amp;information_id=18395" target="_self" title="Spring Break Swainsboro &amp; Statesboro Students">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Spring Break Swainsboro &amp; Statesboro Students
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27149" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27149" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27042" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7657&amp;view=EventDetails&amp;information_id=27042" target="_self" title="Bobcat Baseball Game">
+                  <b>
+                   1:00 PM - 7:00 PM
+                  </b>
+                  <br/>
+                  Bobcat Baseball Game
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/19/2019&amp;display=Month&amp;type=public" target="_self">
+                  1 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/20/2019&amp;todate=3/20/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/20/2019">
+                  20
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Wednesday, March 20, 2019
+                 </h3>
+                 <a class="url" data="26923" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7608&amp;view=EventDetails&amp;information_id=26923" target="_self" title="ServSafe Training">
+                  <b>
+                   8:00 AM - 4:00 PM
+                  </b>
+                  <br/>
+                  ServSafe Training
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18396" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2325&amp;view=EventDetails&amp;information_id=18396" target="_self" title="Spring Break Swainsboro &amp; Statesboro Students">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Spring Break Swainsboro &amp; Statesboro Students
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27150" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27150" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27337" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7751&amp;view=EventDetails&amp;information_id=27337" target="_self" title="Dual Enrollment App/Testing - Statesboro">
+                  <b>
+                   1:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Dual Enrollment App/Testing - Statesboro
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/21/2019&amp;todate=3/21/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/21/2019">
+                  21
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Thursday, March 21, 2019
+                 </h3>
+                 <a class="url" data="27281" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7728&amp;view=EventDetails&amp;information_id=27281" target="_self" title="Dual Enrollment App and Testing Days">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Dual Enrollment App and Testing Days
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18397" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2325&amp;view=EventDetails&amp;information_id=18397" target="_self" title="Spring Break Swainsboro &amp; Statesboro Students">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Spring Break Swainsboro &amp; Statesboro Students
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27598" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7526&amp;view=EventDetails&amp;information_id=27598" target="_self" title="CATS Library Instruction">
+                  <b>
+                   11:00 AM - 12:00 PM
+                  </b>
+                  <br/>
+                  <b>
+                   (Cancelled)
+                  </b>
+                  CATS Library Instruction
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="23652" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6649&amp;view=EventDetails&amp;information_id=23652" target="_self" title="Emanuel County Family Connection Collaborative Mtg">
+                  <b>
+                   12:00 PM - 1:30 PM
+                  </b>
+                  <br/>
+                  Emanuel County Family Connection Collaborative Mtg
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/21/2019&amp;display=Month&amp;type=public" target="_self">
+                  4 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/22/2019&amp;todate=3/22/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/22/2019">
+                  22
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Friday, March 22, 2019
+                 </h3>
+                 <a class="url" data="27282" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7728&amp;view=EventDetails&amp;information_id=27282" target="_self" title="Dual Enrollment App and Testing Days">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Dual Enrollment App and Testing Days
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="18398" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=2325&amp;view=EventDetails&amp;information_id=18398" target="_self" title="Spring Break Swainsboro &amp; Statesboro Students">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Spring Break Swainsboro &amp; Statesboro Students
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/23/2019&amp;todate=3/23/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/23/2019">
+                  23
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Saturday, March 23, 2019
+                 </h3>
+                 <a class="url" data="26666" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7560&amp;view=EventDetails&amp;information_id=26666" target="_self" title="Lady Bobcats Softball Game">
+                  <b>
+                   1:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Lady Bobcats Softball Game
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+               </tr>
+               <tr>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/24/2019&amp;todate=3/24/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/24/2019">
+                  24
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Sunday, March 24, 2019
+                 </h3>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/25/2019&amp;todate=3/25/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/25/2019">
+                  25
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Monday, March 25, 2019
+                 </h3>
+                 <a class="url" data="18399" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5274&amp;view=EventDetails&amp;information_id=18399" target="_self" title="Summer &amp; Fall 2019 Open Registration">
+                  <b>
+                   2:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Summer &amp; Fall 2019 Open Registration
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27197" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7718&amp;view=EventDetails&amp;information_id=27197" target="_self" title="Registration Event">
+                  <b>
+                   10:00 AM - 1:00 PM
+                  </b>
+                  <br/>
+                  Registration Event
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="26907" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7603&amp;view=EventDetails&amp;information_id=26907" target="_self" title="Baptist Collegiate Ministries (BCM)">
+                  <b>
+                   1:30 PM - 2:45 PM
+                  </b>
+                  <br/>
+                  Baptist Collegiate Ministries (BCM)
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27324" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7746&amp;view=EventDetails&amp;information_id=27324" target="_self" title="Returning Dual Enrollment Student Registration">
+                  <b>
+                   3:30 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  Returning Dual Enrollment Student Registration
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/26/2019&amp;todate=3/26/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/26/2019">
+                  26
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Tuesday, March 26, 2019
+                 </h3>
+                 <a class="url" data="18401" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5274&amp;view=EventDetails&amp;information_id=18401" target="_self" title="Summer &amp; Fall 2019 Open Registration">
+                  <b>
+                   2:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Summer &amp; Fall 2019 Open Registration
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27151" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27151" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27393" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7526&amp;view=EventDetails&amp;information_id=27393" target="_self" title="CATS Library Instruction">
+                  <b>
+                   11:00 AM - 12:00 PM
+                  </b>
+                  <br/>
+                  <b>
+                   (Cancelled)
+                  </b>
+                  CATS Library Instruction
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="24846" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6981&amp;view=EventDetails&amp;information_id=24846" target="_self" title="EGSC Softball vs. Brewton Parker JV">
+                  <b>
+                   1:00 PM - 3:00 PM
+                  </b>
+                  <br/>
+                  EGSC Softball vs. Brewton Parker JV
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/26/2019&amp;display=Month&amp;type=public" target="_self">
+                  6 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/27/2019&amp;todate=3/27/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/27/2019">
+                  27
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Wednesday, March 27, 2019
+                 </h3>
+                 <a class="url" data="18402" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5274&amp;view=EventDetails&amp;information_id=18402" target="_self" title="Summer &amp; Fall 2019 Open Registration">
+                  <b>
+                   2:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Summer &amp; Fall 2019 Open Registration
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27073" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7672&amp;view=EventDetails&amp;information_id=27073" target="_self" title="GA Dept. of Behavioral Health Region Meeting">
+                  <b>
+                   10:00 AM - 12:00 PM
+                  </b>
+                  <br/>
+                  GA Dept. of Behavioral Health Region Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="23932" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6755&amp;view=EventDetails&amp;information_id=23932" target="_self" title="Spring Kickback">
+                  <b>
+                   11:00 AM - 2:00 PM
+                  </b>
+                  <br/>
+                  Spring Kickback
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="24069" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6789&amp;view=EventDetails&amp;information_id=24069" target="_self" title="Fake the Funk!">
+                  <b>
+                   6:30 PM - 8:30 PM
+                  </b>
+                  <br/>
+                  <b>
+                   (Cancelled)
+                  </b>
+                  Fake the Funk!
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/28/2019&amp;todate=3/28/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/28/2019">
+                  28
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Thursday, March 28, 2019
+                 </h3>
+                 <a class="url" data="18403" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5274&amp;view=EventDetails&amp;information_id=18403" target="_self" title="Summer &amp; Fall 2019 Open Registration">
+                  <b>
+                   2:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Summer &amp; Fall 2019 Open Registration
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27152" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7702&amp;view=EventDetails&amp;information_id=27152" target="_self" title="J. D. Dickerson Primary School Planetarium Visit">
+                  <b>
+                   9:30 AM - 11:15 AM
+                  </b>
+                  <br/>
+                  J. D. Dickerson Primary School Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="24710" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=6941&amp;view=EventDetails&amp;information_id=24710" target="_self" title="Staff Leadership Development Program Meeting">
+                  <b>
+                   12:00 PM - 5:00 PM
+                  </b>
+                  <br/>
+                  Staff Leadership Development Program Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27295" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7733&amp;view=EventDetails&amp;information_id=27295" target="_self" title="David Emanuel Academy Tennis Match">
+                  <b>
+                   2:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  David Emanuel Academy Tennis Match
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/28/2019&amp;display=Month&amp;type=public" target="_self">
+                  4 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/29/2019&amp;todate=3/29/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/29/2019">
+                  29
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Friday, March 29, 2019
+                 </h3>
+                 <a class="url" data="18277" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5068&amp;view=EventDetails&amp;information_id=18277" target="_self" title="Registration Closed">
+                  <b>
+                   8:00 AM - 5:00 PM
+                  </b>
+                  <br/>
+                  Registration Closed
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27312" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7742&amp;view=EventDetails&amp;information_id=27312" target="_self" title="Returning Dual Enrollment Registration Statesboro">
+                  <b>
+                   9:00 AM - 12:00 PM
+                  </b>
+                  <br/>
+                  Returning Dual Enrollment Registration Statesboro
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27103" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7682&amp;view=EventDetails&amp;information_id=27103" target="_self" title="Swainsboro Head Start Planetarium Visit">
+                  <b>
+                   9:00 AM - 10:30 AM
+                  </b>
+                  <br/>
+                  Swainsboro Head Start Planetarium Visit
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27087" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7676&amp;view=EventDetails&amp;information_id=27087" target="_self" title="SGA Meeting">
+                  <b>
+                   12:00 PM - 2:00 PM
+                  </b>
+                  <br/>
+                  SGA Meeting
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="calendartext" href="CalendarNOW.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;more=3/29/2019&amp;display=Month&amp;type=public" target="_self">
+                  2 More...
+                 </a>
+                </td>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/30/2019&amp;todate=3/30/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/30/2019">
+                  30
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Saturday, March 30, 2019
+                 </h3>
+                 <a class="url" data="18404" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5275&amp;view=EventDetails&amp;information_id=18404" target="_self" title="Summer &amp; Fall 2019 Open Registration">
+                  <b>
+                   2:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Summer &amp; Fall 2019 Open Registration
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="27290" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7732&amp;view=EventDetails&amp;information_id=27290" target="_self" title="Open House">
+                  <b>
+                   8:00 AM - 3:00 PM
+                  </b>
+                  <br/>
+                  Open House
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="25739" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7262&amp;view=EventDetails&amp;information_id=25739" target="_self" title="EGSC Baseball vs. Gordon">
+                  <b>
+                   1:00 PM - 3:00 PM
+                  </b>
+                  <br/>
+                  EGSC Baseball vs. Gordon
+                 </a>
+                 <br/>
+                 <br/>
+                 <a class="url" data="25745" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=7265&amp;view=EventDetails&amp;information_id=25745" target="_self" title="EGSC Baseball vs. Gordon">
+                  <b>
+                   4:00 PM - 6:00 PM
+                  </b>
+                  <br/>
+                  EGSC Baseball vs. Gordon
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+               </tr>
+               <tr>
+                <td align="left" class="calendarcell" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=3/31/2019&amp;todate=3/31/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="3/31/2019">
+                  31
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Sunday, March 31, 2019
+                 </h3>
+                 <a class="url" data="18406" data-url="http://calendar.ega.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/31/2019&amp;display=Month&amp;type=public&amp;eventidn=5275&amp;view=EventDetails&amp;information_id=18406" target="_self" title="Summer &amp; Fall 2019 Open Registration">
+                  <b>
+                   2:00 AM - 11:00 PM
+                  </b>
+                  <br/>
+                  Summer &amp; Fall 2019 Open Registration
+                 </a>
+                 <br/>
+                 <br/>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=4/1/2019&amp;todate=4/1/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="4/1/2019">
+                  1
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Monday, April 01, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=4/2/2019&amp;todate=4/2/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="4/2/2019">
+                  2
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Tuesday, April 02, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=4/3/2019&amp;todate=4/3/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="4/3/2019">
+                  3
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Wednesday, April 03, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=4/4/2019&amp;todate=4/4/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="4/4/2019">
+                  4
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Thursday, April 04, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=4/5/2019&amp;todate=4/5/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="4/5/2019">
+                  5
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Friday, April 05, 2019
+                 </h3>
+                </td>
+                <td align="left" class="otherday" style="border-color:White;border-width:1px;border-style:solid;height:150px;width:14%;" valign="top">
+                 <a href="EventList.aspx?fromdate=4/6/2019&amp;todate=4/6/2019&amp;view=DateTime&amp;display=Day&amp;type=public" title="4/6/2019">
+                  6
+                 </a>
+                 <br/>
+                 <h3 class="adx_wcag_hidden">
+                  Saturday, April 06, 2019
+                 </h3>
+                </td>
+               </tr>
+              </table>
+             </div>
+            </div>
+            <table border="0" cellpadding="0" cellspacing="0" id="tblPoweredByADE" style="padding-right: 5px; padding-left: 5px; padding-top: 5px; border-top: solid 1px #c1c1c1;" width="100%">
+             <tr>
+              <td align="right">
+               <span id="lblPoweredByADE">
+                <a href="http://www.activecalendar.com/">
+                 Calendar Software powered by Dude Solutions
+                </a>
+               </span>
+              </td>
+             </tr>
+            </table>
+           </div>
+           <div id="pnlModalPopupSection">
+            <div class="divlayer divlayerborder divlayerbackground" id="divlayer1">
+             <div>
+              <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+               <span id="lblWTS_1" style="font-weight: bold;">
+                Select item(s) to Search
+               </span>
+               <div class="divCF_1" id="divCF_1">
+               </div>
+              </div>
+              <div class="divlayerclosebar" style="width: 355px;">
+               <div>
+                <input id="hfSelectedItems1" name="hfSelectedItems1" type="hidden"/>
+                <a class="divlayercloseaction" href="javascript:closeLayer('divlayer1');" style="text-decoration: none;">
+                 Close
+                </a>
+                <a class="divlayernoneaction" href="javascript:selectNone('1');" style="text-decoration: none;">
+                 Select None
+                </a>
+                <a class="divlayerallaction" href="javascript:selectAll('1');" style="text-decoration: none;">
+                 Select All
+                </a>
+                <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF1');" style="text-decoration: none;">
+                 Save
+                </a>
+               </div>
+              </div>
+             </div>
+            </div>
+            <div class="divlayer divlayerborder divlayerbackground" id="divlayer2">
+             <div>
+              <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+               <span id="lblWTS_2" style="font-weight: bold;">
+                Select item(s) to Search
+               </span>
+               <div class="divCF_2" id="divCF_2">
+               </div>
+              </div>
+              <div class="divlayerclosebar" style="width: 355px;">
+               <div>
+                <input id="hfSelectedItems2" name="hfSelectedItems2" type="hidden"/>
+                <a class="divlayercloseaction" href="javascript:closeLayer('divlayer2');" style="text-decoration: none;">
+                 Close
+                </a>
+                <a class="divlayernoneaction" href="javascript:selectNone('2');" style="text-decoration: none;">
+                 Select None
+                </a>
+                <a class="divlayerallaction" href="javascript:selectAll('2');" style="text-decoration: none;">
+                 Select All
+                </a>
+                <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF2');" style="text-decoration: none;">
+                 Save
+                </a>
+               </div>
+              </div>
+             </div>
+            </div>
+            <div class="divlayer divlayerborder divlayerbackground" id="divlayer3">
+             <div>
+              <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+               <span id="lblWTS_3" style="font-weight: bold;">
+                Select item(s) to Search
+               </span>
+               <div class="divCF_3" id="divCF_3">
+               </div>
+              </div>
+              <div class="divlayerclosebar" style="width: 355px;">
+               <div>
+                <input id="hfSelectedItems3" name="hfSelectedItems3" type="hidden"/>
+                <a class="divlayercloseaction" href="javascript:closeLayer('divlayer3');" style="text-decoration: none;">
+                 Close
+                </a>
+                <a class="divlayernoneaction" href="javascript:selectNone('3');" style="text-decoration: none;">
+                 Select None
+                </a>
+                <a class="divlayerallaction" href="javascript:selectAll('3');" style="text-decoration: none;">
+                 Select All
+                </a>
+                <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF3');" style="text-decoration: none;">
+                 Save
+                </a>
+               </div>
+              </div>
+             </div>
+            </div>
+            <div class="divlayer divlayerborder divlayerbackground" id="divlayer4">
+             <div>
+              <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+               <span id="lblWTS_4" style="font-weight: bold;">
+                Select item(s) to Search
+               </span>
+               <div class="divCF_4" id="divCF_4">
+               </div>
+              </div>
+              <div class="divlayerclosebar" style="width: 355px;">
+               <div>
+                <input id="hfSelectedItems4" name="hfSelectedItems4" type="hidden"/>
+                <a class="divlayercloseaction" href="javascript:closeLayer('divlayer4');" style="text-decoration: none;">
+                 Close
+                </a>
+                <a class="divlayernoneaction" href="javascript:selectNone('4');" style="text-decoration: none;">
+                 Select None
+                </a>
+                <a class="divlayerallaction" href="javascript:selectAll('4');" style="text-decoration: none;">
+                 Select All
+                </a>
+                <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF4');" style="text-decoration: none;">
+                 Save
+                </a>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+           <script type="text/javascript">
+            <!--if((typeof(PopCalendar)=='undefined')||(PopCalendar.majorVersion==null)||(PopCalendar.minorVersion==null))    alert('Unable to find script library "/PopCalendar2008/PopCalendarAjaxNet.js".\n\nTry placing this file manually');else if((PopCalendar.majorVersion<1)||((PopCalendar.majorVersion=1)&&(PopCalendar.minorVersion<0.1)))    alert('This page uses an incorrect version of PopCalendarAjaxNet.js.\n\nThe page expects version 1.0.1 or greater. The script library is ' + PopCalendar.majorVersion + '.' + PopCalendar.minorVersion + '.');else if((typeof(PopCalendarFunctions)=='undefined')||(PopCalendarFunctions.majorVersion==null)||(PopCalendarFunctions.minorVersion==null))    alert('Unable to find script library "/PopCalendar2008/PopCalendarFunctionsAjaxNet.js".\n\nTry placing this file manually');else if((PopCalendarFunctions.majorVersion<1)||((PopCalendarFunctions.majorVersion=1)&&(PopCalendarFunctions.minorVersion<0)))    alert('This page uses an incorrect version of PopCalendarFunctionsjaxNet.js.\n\nThe page expects version 1.0.0 or greater. The script library is ' + PopCalendarFunctions.majorVersion + '.' + PopCalendarFunctions.minorVersion + '.');// -->
+           </script>
+           <script type="text/javascript">
+            var calStartDateSearch=PopCalendar.newCalendar('calStartDateSearch');calStartDateSearch.imgDir='/PopCalendar2008/CSS/ADXPublic_Images/';calStartDateSearch.CssClass='ADXPublicStyle';calStartDateSearch.startAt=0;calStartDateSearch.todayString='Today is Sunday, March 10, 2019';calStartDateSearch.selectDateMessage='[Date]';calStartDateSearch.showWeekend=1;calStartDateSearch.centuryLimit=40;calStartDateSearch.forcedToday('2019-03-10','yyyy-mm-dd');calStartDateSearch.dayName=PopCal_enUS_DaysShort;calStartDateSearch.monthName=PopCal_enUS_MonthsFull;calStartDateSearch.monthNameShort=PopCal_enUS_MonthsShort;calStartDateSearch.initCalendar();__PopCalAddCalendarRange('txtStartDateSearch','2014-01-01',0,'','2029-12-31',0,'');
+           </script>
+           <script type="text/javascript">
+            var calEndDateSearch=PopCalendar.newCalendar('calEndDateSearch');calEndDateSearch.imgDir='/PopCalendar2008/CSS/ADXPublic_Images/';calEndDateSearch.CssClass='ADXPublicStyle';calEndDateSearch.startAt=0;calEndDateSearch.todayString='Today is Sunday, March 10, 2019';calEndDateSearch.selectDateMessage='[Date]';calEndDateSearch.showWeekend=1;calEndDateSearch.centuryLimit=40;calEndDateSearch.forcedToday('2019-03-10','yyyy-mm-dd');calEndDateSearch.dayName=PopCal_enUS_DaysShort;calEndDateSearch.monthName=PopCal_enUS_MonthsFull;calEndDateSearch.monthNameShort=PopCal_enUS_MonthsShort;calEndDateSearch.initCalendar();__PopCalAddCalendarRange('txtEndDateSearch','C:txtStartDateSearch',0,'','2029-12-31',0,'');
+           </script>
+          </form>
+          <!-- This is opened in the header and closed here. -->
+         </td>
+        </tr>
+       </table>
+      </div>
+      <!--/calendar-->
+     </section>
+     <!--/contentLeft-->
+     <hr class="clear"/>
+    </div>
+    <!--/container-->
+    <footer>
+     <div class="container_24" id="footer">
+      <nav class="alpha grid_17 omega suffix_1">
+       <ul class="active" id="footNav">
+        <li class="grid_4 level1 ">
+         <a href="#">
+          Campus Resources
+         </a>
+         <ul>
+          <li class="grid_4 level2 ">
+           <a href="https://myegsc.ega.edu">
+            Login to MyEGSC
+           </a>
+          </li>
+          <li class="grid_4 level2 ">
+           <a href="http://calendar.ega.edu/default.aspx?type=&amp;view=Grid&amp;category=7-0%2c7-6%2c12-0">
+            Academic Calendars
+           </a>
+          </li>
+          <li class="grid_4 level2 ">
+           <a href="http://www.ega.edu/offices/business_affairs/auxiliary_services/bookstore">
+            EGSC Bookstore
+           </a>
+          </li>
+          <li class="grid_4 level2 ">
+           <a href="http://calendar.ega.edu/default.aspx?type=&amp;view=Grid&amp;category=12-0%2c6-5%2c5-0">
+            Student Life Calendar
+           </a>
+          </li>
+          <li class="grid_4 level2 ">
+           <a href="http://www.ega.edu/offices/institutional_support_offices/information_technology">
+            Information Technology
+           </a>
+          </li>
+          <li class="grid_4 level2 ">
+           <a href="http://www.ega.edu/academics/library">
+            Library
+           </a>
+          </li>
+          <li class="grid_4 level2 ">
+           <a href="https://portal.adp.com/">
+            ADP Self-Service
+           </a>
+          </li>
+          <li class="grid_4 level2 last">
+           <a href="http://wwi.ega.edu">
+            EGSC Intranet
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li class="grid_4 level1 ">
+         <a href="http://www.ega.edu/forms/ask_the_webmaster">
+          Contact the EGSC Webmaster
+         </a>
+        </li>
+        <li class="grid_4 level1 ">
+         <a href="https://myegsc.ega.edu/web/mycampus/bobcat_bucks">
+          BobCat Bucks
+         </a>
+        </li>
+        <li class="grid_4 level1 ">
+         <a href="http://www.ega.edu/pages/general-pages/frequently_asked_questions_faq">
+          Frequently Asked Questions (FAQ)
+         </a>
+        </li>
+        <li class="grid_4 level1 ">
+         <a href="http://www.ega.edu/mission_accreditation">
+          Mission &amp; Accreditation
+         </a>
+        </li>
+        <li class="grid_4 level1 ">
+         <a href="http://www.ega.edu/offices/business_affairs/career_services">
+          Career Services
+         </a>
+        </li>
+        <li class="grid_4 level1 last">
+         <a href="http://www.ega.edu/pages/general-pages/student_forms">
+          Student Forms
+         </a>
+        </li>
+       </ul>
+      </nav>
+      <ul class="alpha grid_6 omega" id="footIcons">
+       <li class="qep">
+        <a href="http://www.ega.edu/academics/critical_thinking" title="Critical Thinking at East Georgia State College">
+         Critical Thinking at East Georgia State College
+        </a>
+       </li>
+       <li class="donate">
+        <a href="https://interland3.donorperfect.net/weblink/weblink.aspx?name=egacollege&amp;id=1" title="Make an online donation to East Georgia State College">
+         Make an Online Donation to East Georgia State College
+        </a>
+       </li>
+      </ul>
+      <hr class="break"/>
+      <div class="alpha grid_11 suffix_1" id="mission">
+       <h2 class="logo grid_7 alpha">
+        <a href="http://www.ega.edu/">
+         East Georgia State College
+        </a>
+       </h2>
+       <p class="contact grid_4 omega">
+        131 College Circle
+        <br>
+         Swainsboro, GA 30401
+         <strong>
+          Phone:
+         </strong>
+         (478) 289-2000
+         <br>
+          <a href="http://www.ega.edu/forms/ask_egsc">
+           Click here to email us
+          </a>
+         </br>
+        </br>
+       </p>
+       <hr class="clear"/>
+       <p>
+        © 2014 East Georgia State College, all rights reserved
+       </p>
+       <p>
+        <strong>
+         East Georgia State College is a part of the
+         <a href="http://www.usg.edu" target="_blank">
+          University System of Georgia
+         </a>
+        </strong>
+       </p>
+       <p>
+        <strong>
+         Business Hours:
+        </strong>
+        Monday-Friday, 8:00 a.m.-5:00 p.m.
+        <br>
+         <strong>
+          Student Affairs:
+         </strong>
+         (478) 289-2169
+         <br>
+          <strong>
+           Public Safety:
+          </strong>
+          (478) 289-2090
+         </br>
+        </br>
+       </p>
+       <p>
+        Hearing Impaired callers may access our campus phone numbers by utilizing your state relay service (such as the Georgia Relay Service) or by utilizing Video Remote Services.
+       </p>
+       <p>
+        <strong>
+         East Georgia State College - Statesboro:
+        </strong>
+        <br>
+         10449 US Highway 301 South, Statesboro, GA 30458
+        </br>
+       </p>
+       <p>
+        <strong>
+         East Georgia State College: Augusta:
+        </strong>
+        <br>
+         Physical Address: GRU Summerville Campus, 2500 Walton Way, Augusta, GA 30904
+         <br>
+          Mailing Address: Payne Hall, 1120 15th St., Augusta, GA 30912
+         </br>
+        </br>
+       </p>
+       <p>
+        <a href="http://www.ega.edu/mission_accreditation">
+         East Georgia State College Mission &amp; Accreditation
+        </a>
+       </p>
+       <p>
+        <a href="https://ega.alertline.com/gcs/welcome">
+         Ethics Hotline Notice
+        </a>
+        |
+        <a href="http://www.ega.edu/policy/NoticeOfNondiscrimination.pdf">
+         Notice of Nondiscrimination
+        </a>
+       </p>
+       <p>
+        For technical issues concerning this web site send email to the
+        <a href="http://www.ega.edu/forms/ask_the_webmaster">
+         webmaster
+        </a>
+       </p>
+      </div>
+      <!--/mission-->
+      <div class="grid_12 omega" id="map">
+       <iframe frameborder="0" height="400" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=east+georgia+state+college&amp;aq=&amp;sll=32.573086,-82.334096&amp;sspn=0.217279,0.41851&amp;ie=UTF8&amp;hq=&amp;hnear=&amp;t=h&amp;ll=32.595257,-82.307467&amp;spn=0.007231,0.009634&amp;z=16&amp;output=embed" width="450">
+       </iframe>
+       <br>
+        <small>
+         <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=east+georgia+state+college&amp;aq=&amp;sll=32.573086,-82.334096&amp;sspn=0.217279,0.41851&amp;ie=UTF8&amp;hq=&amp;hnear=&amp;t=h&amp;ll=32.595257,-82.307467&amp;spn=0.007231,0.009634&amp;z=16" style="color:#0000FF;text-align:left">
+          View Larger Map
+         </a>
+        </small>
+       </br>
+      </div>
+      <!--map-->
+      <hr class="clear"/>
+     </div>
+     <!--/footerdiv-->
+    </footer>
+    <!--<p class="top"><a href="#" title="Back To Top">Top</a></p>-->
+   </body>
+  </html>
+ </body>
+</html>
+<!--/wrapper-->
+<!--JQuery-->
+<script src="http://www.ega.edu/minimee/53368e533940252aeaeb5f64880445ac0409322f.1334520892.js">
+</script>
+<!--Masonry-->
+<script type="text/javascript">
+ $('#main_nav li.level1 ul').masonry({
+		itemselector: '#main_nav li.level2',
+//		columnWidth: 180,
+		containerStyle: { position: 'absolute'}
+	});
+</script>
+<script type="text/javascript">
+ $('#footNav').masonry({
+			itemselector: '#footNav li.level1 ul',
+	//		columnWidth: 180,
+		});
+</script>
+<!--Suckerfish-->
+<script type="text/javascript">
+ sfHover = function() {
+		var sfEls = document.getElementById("main_nav").getElementsByTagName("LI");
+		for (var i=0; i<sfEls.length; i++) {
+			sfEls[i].onmouseover=function() {
+				this.className+=" sfhover";
+			}
+			sfEls[i].onmouseout=function() {
+				this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+			}
+		}
+	}
+	if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>
+<!-- JCycle-->
+<script type="text/javascript">
+ $('#slideshow').cycle({ 
+			fx:    'fade', 
+			timeout: 12000,
+			speed: 500,
+			nowrap: 0
+			});
+</script>
+<!--Show/Hide Search-->
+<script type="text/javascript">
+ $('#searchWrap').hide();
+						$('a.open').click(function() {
+							$('#searchWrap').slideDown('fast');
+							return false;
+						});
+						$('a.close').click(function() {
+							$('#searchWrap').slideUp('fast');
+							return false;
+							});
+</script>
+<!--TableStripe-->
+<script type="text/javascript">
+ $('tr:odd').addClass('odd');
+</script>
+<script type="text/javascript">
+ var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-22889621-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+</script>
+<script type="text/javascript">
+ /*<![CDATA[*/
+(function() {
+var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+sz.src = '//us1.siteimprove.com/js/siteanalyze_60233.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+})();
+/*]]>*/
+</script>
+

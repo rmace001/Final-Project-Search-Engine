@@ -1,0 +1,2571 @@
+http://research.unl.edu/
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+ <head>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js">
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <!--
+    Membership and regular participation in the UNL Web Developer Network is required to use the UNLedu Web Framework. Visit the WDN site at http://wdn.unl.edu/. Register for our mailing list and add your site or server to UNLwebaudit.
+    All framework code is the property of the UNL Web Developer Network. The code seen in a source code view is not, and may not be used as, a template. You may not use this code, a reverse-engineered version of this code, or its associated visual presentation in whole or in part to create a derivative work.
+    This message may not be removed from any pages based on the UNLedu Web Framework.
+
+    $Id: php.fixed.dwt.php | a03db17131d7c303753ec20159d4349cf5c4c758 | Mon Nov 12 13:39:40 2018 -0600 | Jeff Sturek  $
+  -->
+  <!-- InstanceBeginEditable name="doctitle" -->
+  <title>
+   UNL | Office of Research &amp; Economic Development
+  </title>
+  <!-- InstanceEndEditable -->
+  <style id="wdn-critical-styles">
+   @charset "UTF-8";html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;font-family:Mercury SSm A,Mercury SSm B,Georgia,serif;font-style:normal;font-weight:400}h1{margin:.67em 0}svg:not(:root){overflow:hidden}button,figure,input,optgroup,select,textarea{margin:0}button{overflow:visible;text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}dialog:not([open]),template{display:none}[hidden]{display:none!important}*,:after,:before{-webkit-box-sizing:border-box;box-sizing:border-box}:root{font-size:1em;line-height:1.5}@media screen and (min-width:31.5692916987em){:root{font-size:calc(.92783em + .22861vw)}}@media screen and (min-width:177.376980252em){:root{font-size:1.333333333em}}a,a:link{color:#d00000}body{background-color:#fefdfa;color:#424240;margin:0;overflow-x:hidden}button,input[type=button],input[type=submit]{display:inline-block;font-family:inherit;font-size:1em;line-height:1.5;padding:.5625000003em 1em;text-align:center}h1{font-size:1.9999999995em}h2{font-size:1.7777777769em}h3{font-size:1.5em}h1,h2,h3{color:#242423;line-height:1.1250000003;margin-bottom:1rem;margin-top:0}h1+h2,h2+h2,h2+h3,h3+h3,h3+h4,ol+h2,ol+h3,p:not(.dcf-subhead)+h2,p:not(.dcf-subhead)+h3,p:not(.dcf-subhead)+h4,p:not(.dcf-subhead)+h5,p:not(.dcf-subhead)+h6,ul+h2,ul+h3{margin-top:1.333333333em}img{height:auto;max-width:100%}ol,ul{padding-left:1.7777777769em}dl,ol,ul{margin-bottom:1em;margin-top:0}main{display:block}p{margin-bottom:1rem;margin-top:0}body:lang(en){quotes:"“" "”" "‘" "’" "“" "”" "‘" "’"}q:before{content:open-quote}q:after{content:close-quote}small{font-size:1rem}.dcf-bleed{left:50%;margin-left:-50vw;margin-right:-50vw;position:relative;right:50%;width:100vw}.dcf-wrapper{padding-left:5.6186556843vw;padding-right:5.6186556843vw}.dcf-breadcrumbs li{-webkit-box-align:center;align-items:center;display:-webkit-box;display:flex}.dcf-btn{-webkit-appearance:none;-moz-appearance:none;appearance:none;display:inline-block;text-align:center}.dcf-header a,.dcf-header a:link,a.dcf-btn-primary,a.dcf-btn-secondary{text-decoration:none}.unl .dcf-breadcrumbs{font-size:.6328125005em;font-family:Gotham SSm A,Gotham SSm B,Verdana,sans-serif}.unl .dcf-breadcrumbs ol{display:-webkit-box;display:flex;flex-wrap:nowrap;list-style:none;padding-left:5.6186556843vw}.unl .dcf-breadcrumbs li{margin-bottom:0}.unl .dcf-breadcrumbs li:last-child{padding-right:5.6186556843vw}.unl .dcf-breadcrumbs li:not(:last-child){margin-right:.5625000003em}.unl .dcf-breadcrumbs li:not(:last-child):after{border-bottom:.3164062503em solid transparent;border-left:.3164062503em solid #c7c8ca;border-top:.3164062503em solid transparent;content:"";margin-left:.5625000003em}.unl .dcf-btn{border-radius:0;border-style:solid;border-width:2px;font-family:Gotham SSm A,Gotham SSm B,Verdana,sans-serif;font-size:.7500000002em;font-weight:700;letter-spacing:.1em;padding:.7500000002em 1.333333333em;text-transform:uppercase}.unl .dcf-btn-inverse-secondary,.unl .dcf-btn-inverse-tertiary,.unl .dcf-btn-secondary,.unl .dcf-btn-tertiary{background-color:transparent}.unl .dcf-btn-inverse-secondary,.unl .dcf-btn-secondary{border-color:currentColor}.unl .dcf-btn-inverse-tertiary,.unl .dcf-btn-tertiary{border-color:transparent;text-decoration:underline}.unl .dcf-btn-primary{background-color:#d00000;border-color:#d00000;color:#fff}.unl .dcf-btn-secondary,.unl .dcf-btn-tertiary{color:#d00000}.unl a.dcf-btn-inverse-primary,.unl a.dcf-btn-inverse-secondary{text-decoration:none}.unl .dcf-btn-inverse-primary{background-color:#fefdfa;border-color:#fefdfa}.unl .dcf-btn-inverse-secondary,.unl .dcf-btn-inverse-tertiary{color:#fefdfa}.unl-institution-title-ls{letter-spacing:.3164062503em}.unl .dcf-site-group{min-height:3.160493824em}.unl .dcf-site-affiliation a{display:inline-block;padding-bottom:.4218750003em}.unl .dcf-site-affiliation a,.unl .dcf-site-title a{color:#242423}.unl h1,.unl h2,.unl h3{font-family:Gotham SSm A,Gotham SSm B,Verdana,sans-serif;font-weight:700;letter-spacing:-.03em;margin-left:-.03em}.unl h1 a,.unl h2 a,.unl h3 a{text-decoration:none}.unl .dcf-subhead{font-weight:400;font-size:.7500000002rem;letter-spacing:.1em;line-height:1.333333333;margin-bottom:.7500000002em;text-transform:uppercase}.unl .dcf-hero-default .dcf-page-title{padding-left:5.6186556843vw;padding-right:5.6186556843vw;padding-top:1.7777777769em}.unl .dcf-page-title h1{margin-top:0}.unl .dcf-page-title h1,.unl .dcf-page-title h1+.dcf-subhead{margin-bottom:0}.unl .dcf-page-title h1+.dcf-subhead{margin-top:1rem}.unl .dcf-nav-local{z-index:998}.unl .dcf-nav-local a:link{color:#fefdfa}.unl .dcf-nav-local>ul{display:-webkit-box;display:flex}.unl .dcf-nav-menu ul{list-style:none;margin-bottom:0;padding-left:0}.unl .dcf-nav-menu li{margin-bottom:0}.unl .dcf-nav-menu-child a,.unl .dcf-nav-menu-child button{color:#fefdfa;display:block;line-height:1.333333333;padding:1em 1rem}.unl .dcf-nav-menu-child>ul>li>a,.unl .dcf-nav-menu-child button{font-weight:700}.unl .dcf-nav-toggle-btn{-webkit-appearance:none;-moz-appearance:none;appearance:none}.unl.app .dcf-app-controls button{background-color:transparent;border:0}.dcf-bg-transparent{background-color:transparent!important}.dcf-circle{border-radius:50%!important}.dcf-b-solid{border-style:solid!important}.dcf-bt-solid{border-top-style:solid!important}.dcf-b-0{border-width:0!important}.dcf-b-1{border-width:1px!important}.dcf-bt-2{border-top-width:2px!important}.dcf-bt-3{border-top-width:3px!important}.dcf-ai-flex-end{-webkit-box-align:end!important;align-items:flex-end!important}.dcf-ai-center{-webkit-box-align:center!important;align-items:center!important}.dcf-jc-flex-end{-webkit-box-pack:end!important;justify-content:flex-end!important}.dcf-jc-center{-webkit-box-pack:center!important;justify-content:center!important}.dcf-jc-between{-webkit-box-pack:justify!important;justify-content:space-between!important}.dcf-d-none{display:none!important}.dcf-d-block{display:block!important}.dcf-d-flex{display:-webkit-box!important;display:flex!important}.dcf-flex-col{-webkit-box-orient:vertical!important;flex-direction:column!important}.dcf-flex-col,.dcf-flex-row{-webkit-box-direction:normal!important}.dcf-flex-row{-webkit-box-orient:horizontal!important;flex-direction:row!important}.dcf-flex-wrap{flex-wrap:wrap!important}.dcf-flex-nowrap{flex-wrap:nowrap!important}.dcf-flex-grow-1{-webkit-box-flex:1!important;flex-grow:1!important}.dcf-flex-shrink-0{flex-shrink:0!important}.dcf-h-4{height:1em!important}.dcf-h-5{height:1.333333333em!important}.dcf-h-6{height:1.7777777769em!important}.dcf-h-8{height:3.160493824em!important}.dcf-h-9{height:4.2139917643em!important}.dcf-h-100\%{height:100%!important}.dcf-w-4{width:1em!important}.dcf-w-5{width:1.333333333em!important}.dcf-w-6{width:1.7777777769em!important}.dcf-w-8{width:3.160493824em!important}.dcf-w-100\%{width:100%!important}.dcf-w-min-0{min-width:0!important}.dcf-mt-1{margin-top:.4218750003em!important}.dcf-mr-3{margin-right:.7500000002em!important}.dcf-mr-4{margin-right:1em!important}.dcf-mb-1{margin-bottom:.4218750003em!important}.dcf-mb-6{margin-bottom:1.7777777769em!important}.dcf-obj-fit-contain{font-family:"object-fit:contain"!important;object-fit:contain!important}.dcf-obj-fit-contain,.dcf-obj-fit-cover{height:100%!important;width:100%!important}.dcf-obj-fit-cover{font-family:"object-fit:cover"!important;object-fit:cover!important}.dcf-overflow-hidden{overflow:hidden!important}.dcf-p-0{padding:0!important}.dcf-pt-3{padding-top:.7500000002em!important}.dcf-pb-3{padding-bottom:.7500000002em!important}.dcf-relative{position:relative!important}.dcf-fixed{position:fixed!important}.dcf-pin-bottom{bottom:0!important}.dcf-fill-current{fill:currentColor!important}.dcf-txt-left{text-align:left!important}.dcf-italic{font-style:italic!important}.dcf-bold{font-weight:700!important}.dcf-lh-2{line-height:1.1250000003!important}.dcf-lh-3{line-height:1.333333333!important}.dcf-uppercase{text-transform:uppercase!important}.dcf-txt-vertical-lr{-webkit-transform:translateY(-100%) rotate(90deg);transform:translateY(-100%) rotate(90deg);-webkit-transform-origin:0 100%;transform-origin:0 100%}@supports ((-webkit-writing-mode:vertical-lr) or (writing-mode:vertical-lr)){.dcf-txt-vertical-lr{-webkit-transform:none;transform:none;-webkit-writing-mode:vertical-lr;-ms-writing-mode:tb-lr;writing-mode:vertical-lr}}.dcf-show-on-focus:not(:focus):not(:active),.dcf-sr-only{clip:rect(0 0 0 0)!important;-webkit-clip-path:inset(50%)!important;clip-path:inset(50%)!important;height:1px!important;overflow:hidden!important;position:absolute!important;width:1px!important;white-space:nowrap!important}.unl-bg-cream{background-color:#fefdfa!important}.unl-b-scarlet{border-color:#d00000!important}.unl-bt-scarlet{border-top-color:#d00000!important}.unl-scarlet,a.unl-scarlet,a.unl-scarlet:link{color:#d00000!important}.unl-cream,a.unl-cream,a.unl-cream:link{color:#fefdfa!important}.unl-font-sans{font-family:Gotham SSm A,Gotham SSm B,Verdana,sans-serif!important}.unl .dcf-txt-3xs{font-size:.5625000003em!important}.unl .dcf-txt-2xs{font-size:.6328125005em!important}.unl .dcf-txt-xs{font-size:.7500000002em!important}.unl .dcf-txt-sm{font-size:.8437500004em!important}.unl .dcf-txt-h6{font-size:1em!important}.unl .dcf-txt-h5{font-size:1.1250000003em!important}.unl .dcf-txt-h1{font-size:1.9999999995em!important}.unl-ls-1{letter-spacing:.01em!important}.unl-ls-2{letter-spacing:.1em!important}@media only screen and (max-width:56.123125em){.unl .dcf-breadcrumbs{height:4.2139917643em;overflow:hidden}.unl .dcf-breadcrumbs ol{padding-bottom:4.2139917643em;overflow-x:auto;overflow-y:hidden}.unl .dcf-breadcrumbs li{flex-shrink:0}.unl .dcf-logo-lockup{padding-bottom:1em;padding-top:1.333333333em}.unl-site-title a{font-size:1em}.unl .dcf-idm-login{-webkit-box-orient:vertical;-webkit-box-direction:normal;flex-direction:column}.unl .dcf-nav-toggle-group{display:-webkit-box;display:flex;z-index:100150}.unl .dcf-nav-toggle-btn{flex-basis:25%}.unl .dcf-header .dcf-institution-title,.unl .dcf-idm-toggle,.unl .dcf-nav-menu,.unl .dcf-search-toggle-wrapper{display:none}}@media only screen and (min-width:56.123125em){h1{font-size:2.3703703686em}h2{font-size:1.9999999995em}h3{font-size:1.7777777769em}.unl .dcf-breadcrumbs li:first-child,.unl .dcf-breadcrumbs li:last-child{flex-shrink:0}.unl .dcf-breadcrumbs li:not(:first-child),.unl .dcf-breadcrumbs li:not(:last-child){min-width:0}.unl .dcf-breadcrumbs li a{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.unl .dcf-header-global{border-bottom:1px solid #e3e3e2;padding-top:.1779785159em}.unl .dcf-nav-global{-webkit-box-flex:3;flex-grow:3}.unl .dcf-header-global-item{margin-left:3.160493824vw}.unl .dcf-logo-lockup{padding-bottom:1.1250000003em;padding-top:1.333333333em}.unl .dcf-idm-login{-webkit-box-orient:horizontal;-webkit-box-direction:reverse;flex-direction:row-reverse}.unl .dcf-idm-img{fill:#e3e3e2}.unl .dcf-nav-local>ul{overflow:hidden;width:100%}.unl .dcf-nav-local>ul>li{flex-basis:16.66667%}.unl .dcf-nav-local li:not(:last-child){margin-right:0}.unl .dcf-nav-local>ul>li>a{border-left:1px solid #a00000;height:100%}.unl .dcf-nav-toggle-btn-menu~.dcf-nav-local ul ul{position:absolute;visibility:hidden}.unl .dcf-nav-menu{background-color:#d00000;display:-webkit-box;display:flex;flex-wrap:nowrap;padding-left:5.6186556843vw;padding-right:5.6186556843vw}.unl .dcf-nav-menu a,.unl .dcf-nav-menu button{font-size:.7500000002em}.unl .dcf-nav-toggle-group{display:none}.unl .dcf-nav-toggle-btn-menu{z-index:998}.unl .dcf-search{max-width:13.3182949454em}.unl .dcf-idm-toggle,.unl .dcf-nav-menu .dcf-nav-toggle-btn-menu,.unl .dcf-search-toggle-wrapper{display:-webkit-box;display:flex}.unl .dcf-search-toggle{background-image:-webkit-gradient(linear,right top,left top,color-stop(2.3703703686em,#fefdfa),color-stop(2.3703703686em,rgba(254,253,250,0)));background-image:-webkit-linear-gradient(right,#fefdfa 2.3703703686em,rgba(254,253,250,0) 0);background-image:-webkit-gradient(linear,right top,left top,color-stop(2.3703703686em,#fefdfa),color-stop(0,rgba(254,253,250,0)));background-image:linear-gradient(270deg,#fefdfa 2.3703703686em,rgba(254,253,250,0) 0)}.unl .dcf-search-toggle-label{padding:.4218750003em 3.160493824em .4218750003em .7500000002em}.unl .dcf-txt-h6{font-size:1.1250000003em!important}.unl .dcf-txt-h5{font-size:1.333333333em!important}.unl .dcf-txt-h1{font-size:2.3703703686em!important}}.unl .dcf-modal-overlay{display:none}
+  </style>
+  <link as="style" href="https://unlcms.unl.edu/wdn/templates_5.0/css/core.css?dep=5.0.6" id="core-css" onload="this.onload=null;this.rel='stylesheet';" rel="preload"/>
+  <link as="style" href="https://cloud.typography.com/7717652/6968572/css/fonts.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+  <link as="style" href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css?dep=5.0.6" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+  <noscript>
+   <link href="https://unlcms.unl.edu/wdn/templates_5.0/css/core.css?dep=5.0.6" rel="stylesheet"/>
+   <link href="https://cloud.typography.com/7717652/6968572/css/fonts.css" rel="stylesheet"/>
+   <link href="https://unlcms.unl.edu/wdn/templates_5.0/css/deprecated.css?dep=5.0.6" rel="stylesheet"/>
+  </noscript>
+  <link href="https://unlcms.unl.edu/wdn/templates_5.0/css/print.css?dep=5.0.6" media="print" rel="stylesheet"/>
+  <script>
+   !function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){function e(){t.media=a}var a=t.media||"all";t.addEventListener?t.addEventListener("load",e):t.attachEvent&&t.attachEvent("onload",e),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(e,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+  //# sourceMappingURL=cssrelpreload.js.map
+  function onloadCSS(n,a){function t(){!d&&a&&(d=!0,a.call(n))}var d;n.addEventListener&&n.addEventListener("load",t),n.attachEvent&&n.attachEvent("onload",t),"isApplicationInstalled"in navigator&&"onloadcssdefined"in n&&n.onloadcssdefined(t)}
+  //# sourceMappingURL=onloadCSS.js.map
+  !function(){var e=function(){el=document.getElementById("wdn-critical-styles"),el.parentNode.removeChild(el)},n=document.getElementById("core-css");onloadCSS(n,function(){e()})}();
+  //# sourceMappingURL=clearCriticalCSS.js.map
+  </script>
+  <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-57x57.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="57x57">
+   <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-60x60.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="60x60">
+    <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-72x72.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="72x72">
+     <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-76x76.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="76x76">
+      <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-114x114.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="114x114">
+       <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-120x120.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="120x120">
+        <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-144x144.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="144x144">
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-152x152.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="152x152"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/apple-touch-icon-180x180.png?v=m223gpjb0w" rel="apple-touch-icon" sizes="180x180"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/favicon-32x32.png?v=m223gpjb0w" rel="icon" sizes="32x32" type="image/png"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/favicon-194x194.png?v=m223gpjb0w" rel="icon" sizes="194x194" type="image/png"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/favicon-96x96.png?v=m223gpjb0w" rel="icon" sizes="96x96" type="image/png"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/android-chrome-192x192.png?v=m223gpjb0w" rel="icon" sizes="192x192" type="image/png"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/favicon-16x16.png?v=m223gpjb0w" rel="icon" sizes="16x16" type="image/png"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/manifest.json?v=m223gpjb0w" rel="manifest"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/safari-pinned-tab.svg?v=m223gpjb0w" rel="mask-icon"/>
+         <link href="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/favicon.ico?v=m223gpjb0w" rel="shortcut icon"/>
+         <meta content="#fefdfa" name="msapplication-TileColor">
+          <meta content="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/mstile-144x144.png?v=m223gpjb0w" name="msapplication-TileImage">
+           <meta content="https://unlcms.unl.edu/wdn/templates_5.0/includes/global/favicon/browserconfig.xml?v=m223gpjb0w" name="msapplication-config">
+            <meta content="#fefdfa" name="theme-color"/>
+            <!-- InstanceBeginEditable name="head" -->
+            <link href="https://research.unl.edu" rel="home"/>
+            <link href="https://research.unl.edu/wp-content/themes/UNL5.0/style.css" media="all" rel="stylesheet" type="text/css"/>
+            <link href="/sharedcode/font-awesome-4.5.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+            <meta content="https://research.unl.edu/" property="og:url"/>
+            <meta content="article" property="og:type"/>
+            <meta content="Home" property="og:title"/>
+            <meta content="" property="og:description"/>
+            <meta content="" property="og:image">
+             <meta content="summary_large_image" name="twitter:card"/>
+             <meta content="@UNLResearch" name="twitter:site"/>
+             <meta content="@UNLResearch" name="twitter:creator"/>
+             <meta content="Home" name="twitter:title"/>
+             <meta content="" name="twitter:text:description"/>
+             <meta content="" name="twitter:image"/>
+             <script type="text/javascript">
+              var navl2Links = 0; //Default navline2 links to display (zero based counting)
+             </script>
+             <script src="/javascripts/jquery/jquery-1.11.1.min.js" type="text/javascript">
+             </script>
+             <script src="https://research.unl.edu/javascripts/research.js" type="text/javascript">
+             </script>
+             <script>
+              $(document).ready(function()
+	{
+		if( $('.oREDPageTitle').html() != null )
+		{
+			$('#pagetitle h1').html($('.oREDPageTitle').html());
+		}
+		$('.oREDPageTitle').hide();
+	});
+             </script>
+             <script>
+              var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6139715-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+             </script>
+             <!-- InstanceEndEditable -->
+             <!-- TemplateParam name="class" type="text" value="" -->
+            </meta>
+           </meta>
+          </meta>
+         </meta>
+        </link>
+       </link>
+      </link>
+     </link>
+    </link>
+   </link>
+  </link>
+ </head>
+ <body class="home page-template page-template-ORED page-template-home page-template-OREDhome-php page page-id-2 blog-id-1 @@(_document['class'])@@ unl" data-version="5.0">
+  <!-- this is handled with the skipto.js plugin -->
+  <header class="dcf-header" id="dcf-header" role="banner">
+   <div class="dcf-header-global dcf-wrapper dcf-d-flex dcf-flex-row dcf-flex-nowrap dcf-ai-center dcf-jc-between dcf-relative dcf-bt-solid dcf-bt-3 unl-bt-scarlet">
+    <a class="dcf-institution-title dcf-flex-shrink-0 dcf-pt-3 dcf-pb-3 dcf-txt-xs unl-ls-2" href="https://www.unl.edu/" id="dcf-institution-title">
+     <span class="dcf-uppercase">
+      University
+     </span>
+     <span class="dcf-italic">
+      of
+     </span>
+     <span class="unl-institution-title-ls">
+     </span>
+     <span class="dcf-uppercase">
+      Nebraska–Lincoln
+     </span>
+    </a>
+    <nav aria-label="User Navigation" class="dcf-idm dcf-flex-grow-1 dcf-d-flex dcf-jc-flex-end dcf-h-100% dcf-w-min-0 dcf-d-none@print" id="dcf-idm" role="navigation">
+     <div class="dcf-idm-status-logged-out dcf-idm-toggle dcf-ai-center dcf-relative dcf-header-global-item dcf-w-min-0">
+      <a class="dcf-idm-login dcf-d-flex dcf-ai-center dcf-jc-center dcf-h-100% dcf-w-100% unl-font-sans" href="https://shib.unl.edu/idp/profile/cas/login?service=https%3A%2F%2Fwww.unl.edu%2F">
+       <svg aria-hidden="true" class="dcf-idm-img dcf-txt-sm dcf-h-6 dcf-w-6 dcf-circle unl-bg-cream" focusable="false" height="16" viewbox="0 0 48 48" width="16">
+        <path d="M47.9 24C47.9 10.8 37.2.1 24 .1S.1 10.8.1 24c0 6.3 2.5 12.3 6.9 16.8 4.5 4.6 10.6 7.1 17 7.1s12.5-2.5 17-7.1c4.5-4.5 6.9-10.5 6.9-16.8zm-45 0C2.9 12.4 12.4 2.9 24 2.9c11.6 0 21.1 9.5 21.1 21.1 0 5.2-1.9 10.1-5.3 14-2.1-1.2-5-2.2-8.2-3.4-.7-.3-1.5-.5-2.2-.8v-3.1c1.1-.7 2.6-2.4 2.9-5.7.8-.6 1.2-1.6 1.2-2.9 0-1.1-.4-2.1-1-2.7.5-1.6 1.3-4.2.7-6.5-.7-3-4.6-4-7.7-4-2.7 0-5.9.8-7.2 2.8-1.2 0-2 .5-2.4 1-1.6 1.7-.8 4.8-.3 6.6-.6.6-1 1.6-1 2.7 0 1.3.5 2.3 1.2 2.9.3 3.4 1.8 5 2.9 5.7v3.1c-.7.2-1.4.5-2 .7-3.1 1.1-6.2 2.2-8.4 3.5-3.5-3.7-5.4-8.7-5.4-13.9zm7.5 16.1c2-1 4.6-2 7.2-2.9 1-.4 2-.7 3-1.1.5-.2.9-.7.9-1.3v-4.9c0-.6-.4-1.1-.9-1.3-.1 0-2-.8-2-4.5 0-.7-.5-1.2-1.1-1.4-.1-.3-.1-.9 0-1.2.6-.1 1.1-.7 1.1-1.4 0-.3-.1-.6-.2-1.2-.9-3.2-.7-4-.4-4.3.1-.1.4-.1 1 0 .7.1 1.5-.3 1.6-1 .3-1 2.5-1.9 5-1.9s4.7.8 5 1.9c.4 1.7-.4 4.1-.7 5.2-.2.6-.3.9-.3 1.3 0 .7.5 1.2 1.1 1.4.1.3.1.9 0 1.2-.6.1-1.1.7-1.1 1.4 0 3.7-1.9 4.5-2 4.5-.6.2-1 .7-1 1.3v4.9c0 .6.4 1.1.9 1.3 1.1.4 2.1.8 3.2 1.2 2.7 1 5.2 1.9 7.1 2.8-3.8 3.3-8.6 5-13.7 5-5.2 0-9.9-1.8-13.7-5z">
+        </path>
+       </svg>
+       <span class="dcf-idm-label dcf-mr-3 dcf-txt-2xs">
+        Log In
+       </span>
+      </a>
+     </div>
+     <div class="dcf-idm-status-logged-in dcf-idm-toggle dcf-ai-center dcf-relative dcf-header-global-item dcf-w-min-0">
+     </div>
+    </nav>
+    <div class="dcf-search dcf-header-global-item dcf-flex-grow-1 dcf-d-flex dcf-jc-flex-end dcf-modal-parent dcf-d-none@print" id="dcf-search" role="search">
+     <div class="dcf-search-toggle-wrapper dcf-ai-center dcf-w-100%">
+      <button aria-expanded="false" aria-haspopup="true" aria-label="open search" class="dcf-nav-toggle-btn dcf-nav-toggle-btn-search dcf-search-toggle dcf-d-flex dcf-ai-center dcf-jc-between dcf-w-100% dcf-p-0 dcf-txt-2xs dcf-bg-transparent dcf-b-1 dcf-b-solid unl-b-scarlet unl-font-sans unl-scarlet" id="dcf-search-toggle">
+       <span class="dcf-search-toggle-label dcf-flex-grow-1 dcf-txt-left">
+        Search
+       </span>
+       <span class="dcf-d-flex dcf-ai-center dcf-jc-center dcf-w-8 dcf-pt-3 dcf-pb-3 unl-bg-scarlet unl-cream">
+        <svg aria-hidden="true" class="dcf-h-4 dcf-w-4 dcf-fill-current" focusable="false" height="16" viewbox="0 0 48 48" width="16">
+         <path d="M18 36a17.9 17.9 0 0 0 11.27-4l15.31 15.41a2 2 0 0 0 2.84-2.82L32.08 29.18A18 18 0 1 0 18 36zm0-32A14 14 0 1 1 4 18 14 14 0 0 1 18 4z">
+         </path>
+        </svg>
+       </span>
+      </button>
+     </div>
+     <div aria-hidden="true" class="dcf-modal-overlay dcf-mobile-toolbar-modal dcf-bg-overlay-light dcf-p-0" id="dcf-search-results">
+      <div class="dcf-d-flex dcf-flex-col dcf-flex-nowrap dcf-h-100% dcf-w-100%" role="document" tabindex="-1">
+       <div class="dcf-bleed unl-search-bg">
+        <form action="https://search.unl.edu/" class="dcf-wrapper dcf-search-form dcf-input-group-form dcf-d-flex dcf-ai-center dcf-pt-8 dcf-pb-8" id="dcf-search-form" method="get">
+         <label class="dcf-label dcf-mr-4 dcf-inverse" for="dcf-search_query">
+          Search
+         </label>
+         <div class="dcf-input-group">
+          <input class="dcf-input-text dcf-search-input dcf-bg-transparent dcf-inverse" id="dcf-search_query" name="q" required="" type="search"/>
+          <button class="dcf-btn dcf-btn-inverse-primary unl-scarlet" type="submit">
+           <svg aria-hidden="true" class="dcf-d-block dcf-h-5 dcf-w-5 dcf-fill-current" focusable="false" height="16" viewbox="0 0 48 48" width="16">
+            <path d="M18 36a17.9 17.9 0 0 0 11.27-4l15.31 15.41a2 2 0 0 0 2.84-2.82L32.08 29.18A18 18 0 1 0 18 36zm0-32A14 14 0 1 1 4 18 14 14 0 0 1 18 4z">
+            </path>
+           </svg>
+           <span class="dcf-sr-only">
+            Submit
+           </span>
+          </button>
+         </div>
+        </form>
+       </div>
+       <div class="dcf-h-100% dcf-w-100% dcf-overflow-y-auto">
+        <div class="dcf-search-results-wrapper dcf-h-100% dcf-w-100%" id="dcf-search-results-wrapper">
+        </div>
+        <!-- end Search Results Wrapper -->
+       </div>
+       <button class="dcf-absolute dcf-pin-top dcf-pin-right dcf-mt-3 dcf-mr-3 dcf-btn dcf-btn-inverse-tertiary" id="dcf-close-search" type="button">
+        Close
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="dcf-logo-lockup dcf-wrapper dcf-d-flex dcf-ai-flex-end dcf-relative dcf-overflow-hidden">
+    <a aria-label="Go to University of Nebraska–Lincoln home page" class="dcf-header-logo dcf-mr-4 dcf-flex-shrink-0" href="https://www.unl.edu/" id="dcf-header-logo">
+     <svg class="dcf-d-block dcf-h-8 dcf-w-8" focusable="false" height="76" viewbox="0 0 152 152" width="76">
+      <defs>
+       <style>
+        #n153,
+          #n57 {
+            display: none;
+          }
+          @media (min-width: 56px) {
+            #n45 { display: none; }
+            #n57 { display: block; }
+          }
+          @media (min-width: 152px) {
+            #n57 { display: none; }
+            #n153{ display: block; }
+          }
+       </style>
+      </defs>
+      <g id="n153">
+       <path d="M147,1H90V42h10V75.673L53.532,2.393,52.648,1H2V42H12v66H2v41H62V108H52V74.336l46.467,73.271L99.351,149H150V108H140V42h10V1ZM59,111v35H5V111H15V39H5V4H51l52,82V39H93V4h54V39H137v72h10v35H101L49,64v47Z" fill="#fff">
+       </path>
+       <path d="M147,0H88V45H98V69.8L55.2,2.3,53.8,0H0V45H10v62H0v45H64V107H54V82.2l42.8,67.5,1.5,2.3H152V107H142V45h10V0Zm3,5V43H140v66h10v41H99.4l-.9-1.4L52,75.3V109H62v41H2V109H12V43H2V2H52.6l.9,1.4L100,76.7V43H90V2h60ZM103,87,51,5H5V40H15v72H5v35H59V112H49V65l52,82h46V112H137V40h10V5H93V40h10Z" fill="currentColor">
+       </path>
+      </g>
+      <g id="n57">
+       <path d="M89.571,2.714V43.429h10.857V76L51.571,2.714H2.714V43.429H13.571v65.143H2.714v40.714H62.429V108.571H51.571V76l47.5,73.286h50.214V108.571H138.429V43.429h10.857V2.714ZM59.714,111.286v35.286H5.429V111.286H16.286V40.714H5.429V5.429H50.214l52.929,81.429V40.714H92.286V5.429h54.286V40.714H135.714v70.571h10.857v35.286H100.429L48.857,65.143v46.143Z" fill="#fff">
+       </path>
+       <path d="M147.006,0H86.857V46.143H97.714V67.857L54.286,0H0V46.143H10.857v59.714H0V152H65.143V105.857H54.286V84.143L97.714,152H152V105.857H141.143V46.143H152V0Zm2.28,43.429H138.429v65.143h10.857v40.714H99.071L51.571,76v32.571H62.429v40.714H2.714V108.571H13.571V43.429H2.714V2.714H51.571L100.429,76V43.429H89.571V2.714h59.714ZM103.143,86.857,50.214,5.429H5.429V40.714H16.286v70.571H5.429v35.286H59.714V111.286H48.857V65.143l51.571,81.429h46.143V111.286H135.714V40.714h10.857V5.429H92.286V40.714h10.857Z" fill="currentColor">
+       </path>
+      </g>
+      <g id="n45">
+       <path d="M89.818,3.455v38h10.364V76L53.545,3.455H3.455v38H13.818v69.091H3.455v38H62.182v-38H51.818V76l46.636,72.545h50.091v-38H138.182V41.455h10.364v-38ZM58.727,114v31.091H6.909V114H17.273V38H6.909V6.909H51.818l51.818,79.455V38H93.273V6.909h51.818V38H134.727v76h10.364v31.091H100.182L48.364,65.636V114Z" fill="#fff">
+       </path>
+       <path d="M147.008,0H86.364V44.909H96.727V65.636L55.273,0H0V44.909H10.364v62.182H0V152H65.636V107.091H55.273V86.364L96.727,152H152V107.091H141.636V44.909H152V0Zm1.537,41.455H138.182v69.091h10.364v38H98.455L51.818,76v34.545H62.182v38H3.455v-38H13.818V41.455H3.455v-38H53.545L100.182,76V41.455H89.818v-38h58.727ZM103.636,86.364,51.818,6.909H6.909V38H17.273v76H6.909v31.091H58.727V114H48.364V65.636l51.818,79.455h44.909V114H134.727V38h10.364V6.909H93.273V38h10.364Z" fill="currentColor">
+       </path>
+      </g>
+     </svg>
+    </a>
+    <div class="dcf-site-group dcf-d-flex dcf-flex-col dcf-jc-center unl-font-sans">
+     <div class="dcf-site-affiliation dcf-lh-3 dcf-txt-2xs" id="dcf-site-affiliation">
+      <!-- InstanceBeginEditable name="affiliation" -->
+      <!-- InstanceEndEditable -->
+     </div>
+     <div class="dcf-site-title dcf-bold dcf-lh-2 dcf-uppercase unl-ls-1" id="dcf-site-title">
+      <!-- InstanceBeginEditable name="titlegraphic" -->
+      Office of Research &amp; Economic Development
+      <!-- InstanceEndEditable -->
+     </div>
+    </div>
+   </div>
+   <nav aria-label="Navigate, search, or log in" class="dcf-nav-toggle-group dcf-pin-bottom dcf-fixed dcf-w-100% dcf-bt-solid dcf-bt-2 unl-bt-scarlet unl-bg-cream unl-font-sans hrjs dcf-d-none@print" id="dcf-nav-toggle-group" role="navigation">
+    <button aria-expanded="false" aria-haspopup="true" aria-label="open menu" class="dcf-nav-toggle-btn dcf-nav-toggle-btn-menu dcf-d-flex dcf-flex-col dcf-ai-center dcf-flex-grow-1 dcf-jc-center dcf-h-9 dcf-p-0 dcf-b-0 dcf-bg-transparent unl-scarlet" id="dcf-mobile-toggle-menu">
+     <svg aria-hidden="true" class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current" focusable="false" height="16" viewbox="0 0 24 24" width="16">
+      <g class="" id="dcf-nav-toggle-icon-open-menu">
+       <path d="M23.5 12.5H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5zM23.5 4.5H.5C.2 4.5 0 4.3 0 4s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5zM23.5 20.5H.5c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h23c.3 0 .5.2.5.5s-.2.5-.5.5z">
+       </path>
+      </g>
+      <g class="dcf-d-none" id="dcf-nav-toggle-icon-close-menu">
+       <path d="M20.5 4.2L4.2 20.5c-.2.2-.5.2-.7 0-.2-.2-.2-.5 0-.7L19.8 3.5c.2-.2.5-.2.7 0 .2.2.2.5 0 .7z">
+       </path>
+       <path d="M3.5 4.2l16.3 16.3c.2.2.5.2.7 0s.2-.5 0-.7L4.2 3.5c-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7z">
+       </path>
+      </g>
+     </svg>
+     <span class="dcf-nav-toggle-label-menu dcf-mt-1 dcf-txt-2xs">
+      Menu
+     </span>
+    </button>
+    <button aria-expanded="false" aria-haspopup="true" aria-label="open search" class="dcf-nav-toggle-btn dcf-nav-toggle-btn-search dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-flex-grow-1 dcf-h-9 dcf-p-0 dcf-b-0 dcf-bg-transparent unl-scarlet" id="dcf-mobile-toggle-search">
+     <svg aria-hidden="true" class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current" focusable="false" height="16" viewbox="0 0 24 24" width="16">
+      <g class="" id="dcf-nav-toggle-icon-open-search">
+       <path d="M22.5 21.8L15 14.3c1.2-1.4 2-3.3 2-5.3 0-4.4-3.6-8-8-8S1 4.6 1 9s3.6 8 8 8c2 0 3.9-.8 5.3-2l7.5 7.5c.2.2.5.2.7 0 .2-.2.2-.5 0-.7zM9 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7z">
+       </path>
+      </g>
+      <g class="dcf-d-none" id="dcf-nav-toggle-icon-close-search">
+       <path d="M20.5 4.2L4.2 20.5c-.2.2-.5.2-.7 0-.2-.2-.2-.5 0-.7L19.8 3.5c.2-.2.5-.2.7 0 .2.2.2.5 0 .7z">
+       </path>
+       <path d="M3.5 4.2l16.3 16.3c.2.2.5.2.7 0s.2-.5 0-.7L4.2 3.5c-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7z">
+       </path>
+      </g>
+     </svg>
+     <span class="dcf-nav-toggle-label-search dcf-mt-1 dcf-txt-2xs">
+      Search
+     </span>
+    </button>
+    <div class="dcf-nav-toggle-btn dcf-nav-toggle-btn-idm dcf-idm dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-flex-grow-1 dcf-h-9">
+     <div class="dcf-idm-status-logged-out dcf-h-100% dcf-w-100%">
+      <a class="dcf-d-flex dcf-flex-col dcf-ai-center dcf-jc-center dcf-h-100% dcf-w-100%" href="https://shib.unl.edu/idp/profile/cas/login?service=https%3A%2F%2Fwww.unl.edu%2F">
+       <svg aria-hidden="true" class="dcf-txt-sm dcf-h-6 dcf-w-6 dcf-fill-current" focusable="false" height="16" viewbox="0 0 24 24" width="16">
+        <path d="M12 0C5.4 0 0 5.4 0 12c0 6.2 5 12 12 12 3.2 0 6.3-1.3 8.5-3.6S24 15.1 24 12c0-6.6-5.4-12-12-12zM4.7 20.2c1-.6 2.5-1.1 4-1.6l1.5-.6c.2-.1.3-.3.3-.5V15c0-.2-.1-.4-.3-.5 0 0-1.2-.5-1.2-2.5 0-.3-.2-.5-.5-.5 0 0-.1-.2-.1-.5s.1-.5.1-.5c.3 0 .5-.2.5-.5 0-.1 0-.3-.1-.5-.2-.5-.6-2-.2-2.4.1-.2.5-.2.7-.1.3 0 .5-.1.6-.4.2-.6 1.3-1.1 2.8-1.1s2.6.5 2.8 1.1c.2.9-.2 2.2-.4 2.8-.2.3-.2.5-.2.6 0 .3.2.5.5.5 0 0 .1.2.1.5s-.1.5-.1.5c-.3 0-.5.2-.5.5 0 2.1-1.1 2.5-1.2 2.5-.2.1-.3.3-.3.5v2.5c0 .2.1.4.3.5.5.2 1.1.4 1.6.6 1.5.5 2.9 1.1 3.9 1.6-2 1.8-4.5 2.8-7.3 2.8-2.7 0-5.3-1-7.3-2.8zm15.4-.8c-1-.6-2.6-1.2-4.3-1.8-.4-.2-.8-.3-1.3-.5v-1.8c.5-.3 1.4-1.1 1.5-2.9.4-.2.6-.7.6-1.4 0-.6-.2-1-.5-1.3.2-.8.7-2.1.4-3.3-.3-1.4-2.2-1.9-3.7-1.9-1.3 0-3 .4-3.6 1.5-.5-.1-.9.1-1.2.4-.8.8-.3 2.4-.1 3.3-.3.2-.5.7-.5 1.3 0 .6.2 1.1.6 1.4.1 1.8 1 2.6 1.5 2.9v1.8c-.4.1-.8.3-1.2.4-1.6.6-3.3 1.2-4.4 1.9C2 17.4 1 14.8 1 12 1 5.9 5.9 1 12 1s11 4.9 11 11c0 2.8-1 5.4-2.9 7.4z">
+        </path>
+       </svg>
+       <span class="dcf-mt-1 dcf-txt-2xs">
+        Log In
+       </span>
+      </a>
+     </div>
+     <div class="dcf-idm-status-logged-in dcf-relative dcf-h-100% dcf-w-100%" hidden="">
+     </div>
+    </div>
+   </nav>
+   <nav aria-label="local navigation" class="dcf-nav-menu dcf-modal-parent unl-font-sans dcf-d-none@print" id="dcf-navigation" role="navigation">
+    <button aria-expanded="false" aria-label="Show menu" class="dcf-nav-toggle-btn dcf-nav-toggle-btn-menu dcf-flex-shrink-0 dcf-ai-center dcf-w-9 dcf-p-0 dcf-b-0 dcf-bg-transparent dcf-txt-xs unl-cream" id="dcf-menu-toggle">
+     <svg aria-hidden="true" class="dcf-h-5 dcf-w-5 dcf-fill-current" focusable="false" height="16" viewbox="0 0 48 48" width="16">
+      <path d="M45.5 22.5h-43c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h43c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5zM45.5 7.5h-43C1.7 7.5 1 8.2 1 9s.7 1.5 1.5 1.5h43c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5zM45.5 37.5h-43c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5h43c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5z">
+      </path>
+     </svg>
+     <svg aria-hidden="true" class="dcf-mb-1 dcf-h-6 dcf-w-6 dcf-fill-current dcf-d-none" focusable="false" height="16" viewbox="0 0 48 48" width="16">
+      <path d="M38.1 7.7L7.7 38.1c-.6.6-.6 1.5 0 2.1.6.6 1.5.6 2.1 0L40.3 9.9c.6-.6.6-1.5 0-2.1-.6-.6-1.6-.6-2.2-.1z">
+      </path>
+      <path d="M7.7 7.7c-.6.6-.6 1.5 0 2.1l30.4 30.4c.6.6 1.5.6 2.1 0 .6-.6.6-1.5 0-2.1L9.9 7.7c-.6-.5-1.6-.5-2.2 0z">
+      </path>
+     </svg>
+     <!--         <span class="dcf-sr-only">Show </span><span class="dcf-nav-toggle-label dcf-txt-3xs dcf-bold dcf-uppercase unl-ls-2">Menu</span> -->
+    </button>
+    <div class="dcf-nav-menu-child dcf-nav-local dcf-w-100%" id="dcf-nav-menu-child">
+     <!-- InstanceBeginEditable name="navlinks" -->
+     <ul class="menu" id="menu-main-menu">
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2 current_page_item menu-item-has-children menu-item-14" id="menu-item-14">
+       <a href="https://research.unl.edu/">
+        Office of Research
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8697" id="menu-item-8697">
+         <a href="https://research.unl.edu/prem/">
+          Remembering Vice Chancellor Prem S. Paul
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-322" id="menu-item-322">
+         <a href="https://research.unl.edu/staff-directory/">
+          Staff Directory
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-861" id="menu-item-861">
+         <a href="https://research.unl.edu/research-policies-procedures/">
+          Research Policies &amp; Procedures
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7725" id="menu-item-7725">
+         <a href="http://research.unl.edu/for-researchers/#trainingDev">
+          Initiatives &amp; Reports
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17" id="menu-item-17">
+         <a href="http://research.unl.edu/proposaldevelopment/">
+          Proposal Development
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18" id="menu-item-18">
+         <a href="http://research.unl.edu/sponsoredprograms/">
+          Sponsored Programs
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19" id="menu-item-19">
+         <a href="http://research.unl.edu/orr/">
+          Research Responsibility
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7726" id="menu-item-7726">
+         <a href="http://research.unl.edu/industryrelations/">
+          Industry Relations
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7727" id="menu-item-7727">
+         <a href="http://www.nutechventures.org/">
+          NUtech Ventures
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7728" id="menu-item-7728">
+         <a href="http://innovate.unl.edu/">
+          Nebraska Innovation Campus
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31" id="menu-item-31">
+       <a href="https://research.unl.edu/for-researchers/">
+        For Researchers
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33" id="menu-item-33">
+         <a href="http://nugrant.unl.edu">
+          NUgrant
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7729" id="menu-item-7729">
+         <a href="http://research.unl.edu/for-researchers/#fundingOpps">
+          Find Funding
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7730" id="menu-item-7730">
+         <a href="http://research.unl.edu/for-researchers/#trainingDev">
+          Training
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-61" id="menu-item-61">
+         <a href="/proposaldevelopment/core-facilities/">
+          Core/Shared Facilities
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7731" id="menu-item-7731">
+         <a href="http://research.unl.edu/for-researchers/#trainingDev">
+          Initiatives &amp; Reports
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7732" id="menu-item-7732">
+         <a href="http://research.unl.edu/for-researchers/#alerts">
+          Other Resources
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39" id="menu-item-39">
+         <a href="https://research.unl.edu/esearch-nebraska-expertise-directory/">
+          Research Nebraska expertise directory
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24" id="menu-item-24">
+         <a href="https://research.unl.edu/research-economic-development-growth-initiative-2012-17/">
+          REDGI
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1269" id="menu-item-1269">
+         <a href="http://researchfair.unl.edu">
+          Research Fair
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10760" id="menu-item-10760">
+         <a href="http://research.unl.edu/facultyawards/">
+          National Faculty Recognition and Awards
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-20" id="menu-item-20">
+       <a href="https://research.unl.edu/for-businesses/">
+        For Businesses
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-40" id="menu-item-40">
+         <a href="http://research.unl.edu/industryrelations/">
+          Partner with UNL
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41" id="menu-item-41">
+         <a href="http://www.nutechventures.org/">
+          Commercialize Technology
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-43" id="menu-item-43">
+         <a href="http://innovate.unl.edu/">
+          Become a NIC Partner
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-62" id="menu-item-62">
+         <a href="http://research.unl.edu/facultyresources/coreFacilities.php">
+          Use UNL Core/Shared Facilities
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-50" id="menu-item-50">
+       <a href="https://research.unl.edu/news-information/">
+        News &amp; Information
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-54" id="menu-item-54">
+         <a href="https://research.unl.edu/news-information/">
+          Stories
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9379" id="menu-item-9379">
+         <a href="https://research.unl.edu/research-news/">
+          News for Researchers
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7733" id="menu-item-7733">
+         <a href="http://research.unl.edu/annualreport/">
+          Annual Research Report
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-59" id="menu-item-59">
+         <a href="https://research.unl.edu/publications/">
+          Other Publications
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-67" id="menu-item-67">
+         <a href="https://research.unl.edu/research_videos/">
+          Videos
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-825" id="menu-item-825">
+         <a href="https://research.unl.edu/journal-covers-gallery/">
+          Journal Covers Gallery
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-359" id="menu-item-359">
+         <a href="http://research.unl.edu/nebraskalectures">
+          Nebraska Lectures
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+     <!-- InstanceEndEditable -->
+    </div>
+   </nav>
+  </header>
+  <main class="dcf-main" id="dcf-main" role="main" tabindex="-1">
+   <!-- InstanceBeginEditable name="hero" -->
+   <div class="dcf-hero dcf-hero-default">
+    <!-- InstanceEndEditable -->
+    <div class="dcf-hero-group-1">
+     <nav aria-label="breadcrumbs" class="dcf-breadcrumbs" id="dcf-breadcrumbs" role="navigation">
+      <!-- InstanceBeginEditable name="breadcrumbs" -->
+      <ol>
+       <li>
+        <a href="http://www.unl.edu/" title="Nebraska">
+         Nebraska
+        </a>
+       </li>
+       <li>
+        <a href="https://research.unl.edu">
+         Office of Research &amp; Economic Development
+        </a>
+       </li>
+       <li>
+       </li>
+      </ol>
+      <!-- InstanceEndEditable -->
+     </nav>
+     <header class="dcf-page-title" id="dcf-page-title">
+      <!-- InstanceBeginEditable name="pagetitle" -->
+      <!-- InstanceEndEditable -->
+     </header>
+     <!-- InstanceBeginEditable name="herogroup1" -->
+     <!-- InstanceEndEditable -->
+    </div>
+    <!-- InstanceBeginEditable name="herogroup2" -->
+    <div class="dcf-hero-group-2">
+    </div>
+    <!-- InstanceEndEditable -->
+   </div>
+   <div class="dcf-main-content dcf-wrapper">
+    <!-- styles specific for this page -->
+    <style type="text/css">
+     #featuredHomeBuilding {
+		filter: contrast(.8);
+	}
+
+	.newsFeaturedImage{
+		height: 490px;
+	}
+	
+	.firstColumn{
+		float: left;
+		padding-right: 3%;
+		width: 73%;
+		margin: 50px 0;
+	}
+	
+	.firstColumn .redBorder{
+		margin-left: 0px;	
+	}
+	
+ 	.secondColumn{
+		border-left: 1px solid #D4D4D4;
+		padding-left: 3%;
+		float: left;
+		width: 27%;
+		margin: 50px 0;
+	}
+
+	.secondColumn h5 {
+		font-size: 1em;
+	}
+	
+	.splash-feature-grid-heading .splash-feature-banner {
+		display: inline-block;
+		padding: 0.254em 0.75em;
+		background-color: #D00000;
+	}
+	
+	.splash-feature-grid-heading {
+		color: #FFF;
+		text-transform: uppercase;
+		font-weight: 400;
+	}
+	
+	.splash-feature-grid {
+		position: relative;
+		text-align: center;
+	}
+	
+	.splash-feature-grid-heading {
+		position: absolute;
+		top: -1.777em;
+		left: 0px;
+		width: 100%;
+		z-index: 1;
+		color: #FFF;
+		text-transform: uppercase;
+		font-weight: 400;
+	}
+		
+	.splash-feature-grid .splash-feature-block {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 0px;
+		overflow: hidden;
+		padding-bottom: 100%;
+	}
+	
+	.socialBlock{
+		background-color: transparent;
+		background: -webkit-radial-gradient(transparent, rgba(0,0,0,.3));
+		background: -o-radial-gradient(transparent, rgba(0,0,0,.3));
+		background: -moz-radial-gradient(transparent, rgba(0,0,0,.3));
+		background: radial-gradient(transparent, rgba(0,0,0,.3));		
+			
+		display: table;
+		height: 400px;
+		color: #ffffff !important;
+		
+		font-family: "Gotham SSm A","Gotham SSm B",Verdana,"Verdana Ref",Geneva,Tahoma,"Lucida Grande","Lucida Sans Unicode","Lucida Sans","DejaVu Sans","Bitstream Vera Sans","Liberation Sans",sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		line-height: 1.333;
+		letter-spacing: 0.02em;
+		background-size: cover;
+		background-position: center center;
+		width: 100%;
+	}
+
+	a.socialBlock {
+		text-decoration: none;
+	}
+	
+	.socialBlock.FEFDFA{
+		color: #333333 !important;
+	}
+	
+	.socialBlock:hover{
+		color: #ffffff;
+	}
+	
+	.socialBlock .td{
+		display: table-cell;
+		vertical-align: middle;	
+		padding: 25px;
+	}
+	
+	.socialBlock.hasImage .socialContent{
+		display: none;
+	}
+	
+	.socialBlock.hasImage .td{
+		vertical-align: bottom;
+		background-color: rgba(0,0,0,0);
+		
+		background: -webkit-linear-gradient(transparent, transparent, rgba(0,0,0,.5));
+		background: -o-linear-gradient(transparent, transparent, rgba(0,0,0,.5));
+		background: -moz-linear-gradient(transparent, transparent, rgba(0,0,0,.5));
+		background: linear-gradient(transparent, transparent, rgba(0,0,0,.5));
+		
+		-webkit-transition: vertical-align 1s, background-color .5s;
+		transition: vertical-align 1s, background-color .5s;
+  	}
+	
+	.socialBlock.hasImage:hover .socialContent{
+		display: inline;
+	}
+	
+	.socialBlock.hasImage:hover .td{
+		vertical-align: middle;	
+		background-color: rgba(0,0,0,0.6);
+	}
+	
+	.socialBlock .newspaper-o .socialContent{
+		font-family: "Tungsten A","Tungsten B",HelveticaNeueCondensed,HelveticaNeue-Condensed,"Helvetica Neue Condensed",HelveticaNeueRomanCondensed,HelveticaNeue-Roman-Condensed,"Helvetica Neue Roman Condensed","Arial Narrow",HelveticaNeue,"Helvetica Neue",HelveticaNeueRoman,HelveticaNeue-Roman,"Helvetica Neue Roman",Helvetica,Tahoma,Geneva,Arial,sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 2.5em;
+		line-height: 1em;
+	}
+			
+	.splash-feature-grid .wdn-col {
+		padding: 0px;
+	}
+	
+	.socialHandle{
+		display: block;
+		padding-top: 30px;	
+	}
+	
+	#socialMedia{
+		padding: 100px 0;	
+	}
+	
+	#socialMedia a{
+		font-size: 2em;
+		margin: 10px;
+		color: #ffffff;
+		background-color: #d00000;
+		border-radius: 100px;
+		display: inline-table;
+		width: 60px;
+		height: 60px;
+		border: 0px solid #d00000;
+		border-width: 0px;
+		-webkit-transition: background-color .5s, color .5s, border-width .5s;
+		transition: background-color .5s, color .5s, border-width .5s;
+		text-decoration: none;
+	}
+
+	#socialMedia a:hover{
+		border:4px solid #d00000;
+		border-width: 4px;
+		background-color: transparent;
+		color: #d00000;
+	}
+
+	#socialMedia a.circle i {
+		display: table-cell;
+		vertical-align: middle;
+		text-align:center;
+	}
+	
+	.more-events{
+		display: none;	
+	}
+
+	.unl .dcf-hero-default {
+		margin-bottom: 0px;	
+	}
+		
+	@media (max-width: 960px)
+	{
+		.featuredHomeLinks img, .featuredHomeLinks svg{
+			height: 26px;
+			margin: 13px auto;
+		}
+		
+		#innovationCampus{
+			clear: both;	
+		}
+			
+	}
+	
+	@media (max-width: 720px)
+	{
+		.firstColumn, .secondColumn, .thirdColumn{
+			width: 100%;
+			padding: 10px 0;
+			border: none;	
+			min-height: auto !important;
+		}
+	}
+	
+	@media (max-width: 480px)
+	{
+		.featuredHomeLinks img, .featuredHomeLinks svg{
+			display: inline;
+			height: 15px;
+			margin: 3px auto;
+			vertical-align: middle;
+		}
+		
+		.featuredHomeLink {
+			text-align: left;
+		}
+		
+		.riBoxNav {
+			padding-top: 14px	
+		}
+		
+		.newsFeaturedImage {
+			height: 300px;
+		}
+	}
+	
+	#pId13902 .newsFeaturedImage{
+   background-position: 45% 19%;
+   background-size: cover;
+}
+
+#pId13902 .smallFeatureStoryImage{
+   background-position: 45% 19%;
+   background-size: cover;
+}
+
+#pId13902.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 45% 19%;
+   background-size: cover;	
+}
+
+#pId13902 .featuredHeaderImage{
+   background-position: 45% 19%;
+   background-size: cover;	
+}
+
+#pId13902 .newsFeaturedImage.short{
+   background-position: 45% 19%;
+   background-size: cover;	
+}
+
+
+
+
+
+
+
+
+#pId13830 .newsFeaturedImage{
+   background-position: 75% 70%;
+   background-size: cover;
+}
+
+#pId13830 .smallFeatureStoryImage{
+   background-position: 75% 70%;
+   background-size: cover;
+}
+
+#pId13830.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 75% 70%;
+   background-size: cover;	
+}
+
+#pId13830 .featuredHeaderImage{
+   background-position: 75% 70%;
+   background-size: cover;	
+}
+
+#pId13830 .newsFeaturedImage.short{
+   background-position: 75% 70%;
+   background-size: cover;	
+}
+
+
+
+
+#pId13810 .newsFeaturedImage{
+   background-position: 73% 19%;
+   background-size: cover;
+}
+
+#pId13810 .smallFeatureStoryImage{
+   background-position: 73% 19%;
+   background-size: cover;
+}
+
+#pId13810.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 73% 19%;
+   background-size: cover;	
+}
+
+#pId13810 .featuredHeaderImage{
+   background-position: 73% 19%;
+   background-size: cover;	
+}
+
+#pId13810 .newsFeaturedImage.short{
+   background-position: 73% 19%;
+   background-size: cover;	
+}
+
+
+#pId13803 .newsFeaturedImage{
+   background-position: 41% 71%;
+   background-size: cover;
+}
+
+#pId13803 .smallFeatureStoryImage{
+   background-position: 41% 71%;
+   background-size: cover;
+}
+
+#pId13803.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 41% 71%;
+   background-size: cover;	
+}
+
+#pId13803 .featuredHeaderImage{
+   background-position: 41% 71%;
+   background-size: cover;	
+}
+
+#pId13803 .newsFeaturedImage.short{
+   background-position: 41% 71%;
+   background-size: cover;	
+}
+
+
+#pId13790 .newsFeaturedImage{
+   background-position: 23% 36%;
+   background-size: cover;
+}
+
+#pId13790 .smallFeatureStoryImage{
+   background-position: 23% 36%;
+   background-size: cover;
+}
+
+#pId13790.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 23% 36%;
+   background-size: cover;	
+}
+
+#pId13790 .featuredHeaderImage{
+   background-position: 23% 36%;
+   background-size: cover;	
+}
+
+#pId13790 .newsFeaturedImage.short{
+   background-position: 23% 36%;
+   background-size: cover;	
+}
+
+
+
+
+#pId13769 .newsFeaturedImage{
+   background-position: 50% 70%;
+   background-size: cover;
+}
+
+#pId13769 .smallFeatureStoryImage{
+   background-position: 50% 70%;
+   background-size: cover;
+}
+
+#pId13769.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 50% 70%;
+   background-size: cover;	
+}
+
+#pId13769 .featuredHeaderImage{
+   background-position: 50% 70%;
+   background-size: cover;	
+}
+
+#pId13769 .newsFeaturedImage.short{
+   background-position: 50% 70%;
+   background-size: cover;	
+}
+
+
+
+
+#pId13755 .newsFeaturedImage{
+   background-position: 66% 24%;
+   background-size: cover;
+}
+
+#pId13755 .smallFeatureStoryImage{
+   background-position: 66% 24%;
+   background-size: cover;
+}
+
+#pId13755.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 66% 24%;
+   background-size: cover;	
+}
+
+#pId13755 .featuredHeaderImage{
+   background-position: 66% 24%;
+   background-size: cover;	
+}
+
+#pId13755 .newsFeaturedImage.short{
+   background-position: 66% 24%;
+   background-size: cover;	
+}
+
+
+
+
+#pId13691 .newsFeaturedImage{
+   background-position: 77% 54%;
+   background-size: cover;
+}
+
+#pId13691 .smallFeatureStoryImage{
+   background-position: 77% 54%;
+   background-size: cover;
+}
+
+#pId13691.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 77% 54%;
+   background-size: cover;	
+}
+
+#pId13691 .featuredHeaderImage{
+   background-position: 77% 54%;
+   background-size: cover;	
+}
+
+#pId13691 .newsFeaturedImage.short{
+   background-position: 77% 54%;
+   background-size: cover;	
+}
+
+
+#pId13681 .newsFeaturedImage{
+   background-position: 62% 20%;
+   background-size: cover;
+}
+
+#pId13681 .smallFeatureStoryImage{
+   background-position: 62% 20%;
+   background-size: cover;
+}
+
+#pId13681.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 62% 20%;
+   background-size: cover;	
+}
+
+#pId13681 .featuredHeaderImage{
+   background-position: 62% 20%;
+   background-size: cover;	
+}
+
+#pId13681 .newsFeaturedImage.short{
+   background-position: 62% 20%;
+   background-size: cover;	
+}
+
+
+#pId13676 .newsFeaturedImage{
+   background-position: 53% 29%;
+   background-size: cover;
+}
+
+#pId13676 .smallFeatureStoryImage{
+   background-position: 53% 29%;
+   background-size: cover;
+}
+
+#pId13676.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 53% 29%;
+   background-size: cover;	
+}
+
+#pId13676 .featuredHeaderImage{
+   background-position: 53% 29%;
+   background-size: cover;	
+}
+
+#pId13676 .newsFeaturedImage.short{
+   background-position: 53% 29%;
+   background-size: cover;	
+}
+
+
+#pId13668 .newsFeaturedImage{
+   background-position: 61% 34%;
+   background-size: cover;
+}
+
+#pId13668 .smallFeatureStoryImage{
+   background-position: 61% 34%;
+   background-size: cover;
+}
+
+#pId13668.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 61% 34%;
+   background-size: cover;	
+}
+
+#pId13668 .featuredHeaderImage{
+   background-position: 61% 34%;
+   background-size: cover;	
+}
+
+#pId13668 .newsFeaturedImage.short{
+   background-position: 61% 34%;
+   background-size: cover;	
+}
+
+
+#pId13633 .newsFeaturedImage{
+   background-position: 60% 55%;
+   background-size: cover;
+}
+
+#pId13633 .smallFeatureStoryImage{
+   background-position: 60% 55%;
+   background-size: cover;
+}
+
+#pId13633.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 60% 55%;
+   background-size: cover;	
+}
+
+#pId13633 .featuredHeaderImage{
+   background-position: 60% 55%;
+   background-size: cover;	
+}
+
+#pId13633 .newsFeaturedImage.short{
+   background-position: 60% 55%;
+   background-size: cover;	
+}
+
+
+#pId13656 .newsFeaturedImage{
+   background-position: 45% 46%;
+   background-size: cover;
+}
+
+#pId13656 .smallFeatureStoryImage{
+   background-position: 45% 46%;
+   background-size: cover;
+}
+
+#pId13656.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 45% 46%;
+   background-size: cover;	
+}
+
+#pId13656 .featuredHeaderImage{
+   background-position: 45% 46%;
+   background-size: cover;	
+}
+
+#pId13656 .newsFeaturedImage.short{
+   background-position: 45% 46%;
+   background-size: cover;	
+}
+
+
+#pId13647 .newsFeaturedImage{
+   background-position: 60% 15%;
+   background-size: cover;
+}
+
+#pId13647 .smallFeatureStoryImage{
+   background-position: 60% 15%;
+   background-size: cover;
+}
+
+#pId13647.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 60% 15%;
+   background-size: cover;	
+}
+
+#pId13647 .featuredHeaderImage{
+   background-position: 60% 15%;
+   background-size: cover;	
+}
+
+#pId13647 .newsFeaturedImage.short{
+   background-position: 60% 15%;
+   background-size: cover;	
+}
+
+
+#pId13614 .newsFeaturedImage{
+   background-position: 47% 30%;
+   background-size: cover;
+}
+
+#pId13614 .smallFeatureStoryImage{
+   background-position: 47% 30%;
+   background-size: cover;
+}
+
+#pId13614.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 47% 30%;
+   background-size: cover;	
+}
+
+#pId13614 .featuredHeaderImage{
+   background-position: 47% 30%;
+   background-size: cover;	
+}
+
+#pId13614 .newsFeaturedImage.short{
+   background-position: 47% 30%;
+   background-size: cover;	
+}
+
+
+#pId13598 .newsFeaturedImage{
+   background-position: 0% 47%;
+   background-size: 100% auto;
+}
+
+#pId13598 .smallFeatureStoryImage{
+   background-position: 0% 47%;
+   background-size: 100% auto;
+}
+
+#pId13598.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 0% 47%;
+   background-size: 100% auto;	
+}
+
+#pId13598 .featuredHeaderImage{
+   background-position: 0% 47%;
+   background-size: 100% auto;	
+}
+
+#pId13598 .newsFeaturedImage.short{
+   background-position: 0% 47%;
+   background-size: 100% auto;	
+}
+
+
+
+
+#pId13565 .newsFeaturedImage{
+   background-position: 51% 46%;
+   background-size: cover;
+}
+
+#pId13565 .smallFeatureStoryImage{
+   background-position: 51% 46%;
+   background-size: cover;
+}
+
+#pId13565.bp1-wdn-col-one-third .newsFeaturedImage{
+   background-position: 51% 46%;
+   background-size: cover;	
+}
+
+#pId13565 .featuredHeaderImage{
+   background-position: 51% 46%;
+   background-size: cover;	
+}
+
+#pId13565 .newsFeaturedImage.short{
+   background-position: 51% 46%;
+   background-size: cover;	
+}
+    </style>
+    <!-- begin AR header -->
+    <!-- ----------------------------------- for the rotating front page images-------------------------------------------- -->
+    <script>
+     $(document).ready(function(){
+//rotating image code
+		
+		var items = $('.randomImageBox .randomImage').toArray();
+		//var i = Math.floor(Math.random()*items.length);
+		var i = 0;
+		var timerIsOn = 1;
+					
+		function autoRotate() 
+		{
+			if( timerIsOn == 1)
+				i = incrementI(Math.floor(Math.random()*items.length), items);
+			
+			window.setTimeout(function() {autoRotate()},10000)
+		}
+
+		autoRotate();
+		
+		for ( var j = 0; j < items.length; j++ )
+		{
+			$('#randomImageIndex').append('<div class="randomImageIndexButtons" id="rotate'+j+'">&bull;</div>');
+		}
+		$('#rotate'+i).addClass('randomImageIndexButtonsOn');
+		
+		$('.randomImageIndexButtons').click(function()
+		{
+			timerIsOn = 0;
+			$('#playPause').find('img').attr('src', '/graphics/play.gif');
+			
+			$('.randomImage').removeClass('on');		
+			$('.randomImageIndexButtons').removeClass('randomImageIndexButtonsOn')
+			
+			t = $(this).attr('id').substring(6);		
+			
+			$(items[t]).addClass('on');
+			$('#rotate'+t).addClass('randomImageIndexButtonsOn')
+			
+			i = t;
+		});
+		$(window.parent.document).blur(function()
+		{
+				timerIsOn = 0;
+				$('#playPause').find('img').attr('src', '/graphics/play.gif');
+		});
+		
+		$('#playPause').click(function()
+		{
+			if( timerIsOn == 1 )
+			{
+				timerIsOn = 0;
+				$('#playPause').find('img').attr('src', '/graphics/play.gif');
+			}
+			else
+			{
+				timerIsOn = 1;
+				$('#playPause').find('img').attr('src', '/graphics/pause.gif');
+			}
+		});
+		
+		$('#nextButton').click(function()
+		{
+			i = incrementI(i, items);
+			timerIsOn = 0;
+			$('#playPause').find('img').attr('src', '/graphics/play.gif');
+
+		});
+
+		$('#previousButton').click(function()
+		{
+			i = decrementI(i, items);
+			timerIsOn = 0;
+			$('#playPause').find('img').attr('src', '/graphics/play.gif');
+		});
+
+		function setSLide(index, itemList) {
+
+		}
+	
+		function incrementI(index, itemList)
+		{
+			$('.randomImage').removeClass('on');		
+			$('.randomImageIndexButtons').removeClass('randomImageIndexButtonsOn')
+			
+			if ( index < itemList.length-1 )
+				index++;
+			else
+				index = 0;	
+			
+			$(itemList[index]).addClass('on');
+			$('#rotate'+index).addClass('randomImageIndexButtonsOn')
+			
+			return index;
+		}
+	
+		function decrementI(index, itemList)
+		{
+			$('.randomImage').removeClass('on');		
+			$('.randomImageIndexButtons').removeClass('randomImageIndexButtonsOn')
+
+			if ( index > 0 )
+				index--;
+			else
+				index = itemList.length-1;	
+			
+			$(itemList[index]).addClass('on');
+			$('#rotate'+index).addClass('randomImageIndexButtonsOn')
+			$('#readMore').attr('href', $(itemList[index]).find('a').attr('href'));
+
+			return index;
+		}
+});
+    </script>
+    <style>
+     /* -------------------------------- code for random image -------------------------------- */
+
+	.randomImageBox {
+		position: relative;
+		overflow: hidden;
+	}
+		
+	.randomImageButton{
+		color:#707070;
+		float:left;	
+		padding:3px 10px;
+		cursor:pointer;
+	}
+	
+	.randomImageButton:hover{
+		color:#555555;	
+	}
+	
+	.randomImageButton a{
+		font-style:italic;			
+	}
+				
+	.randomImageBox .randomImage{
+		background-color: #ebebea;
+		left: -150vw;
+		position: absolute;
+		display: grid;
+		width: 100vw;
+		grid-template-columns: 40% 60%;
+		min-height: 60vh;
+		opacity: 0;
+	}
+	
+	.randomImageBox .randomImage.on{
+		left: 0px;
+		position: relative;
+		opacity: 1;
+	}
+	
+	#randomImageIndex{
+		float:left;
+		padding:3px 10px;
+		width:430px;
+		overflow:hidden;
+	}
+	
+	.randomImageIndexButtons{
+		color:#707070;
+		padding:3px 5px;
+		cursor:pointer;
+		display:inline;
+	}
+	
+	.randomImageIndexButtons:hover, .randomImageIndexButtonsOn{
+		color:#dd0000;	
+	}
+				
+	.textBlock {
+		color: #333333;
+	}
+	
+	.wdn-hero-text {
+		width: 100%;
+	}
+		
+	.randomImage .hero-picture {
+		background-size: cover;
+		background-position: center center;
+		position: relative;
+		right: 0px;
+		transition: all .2s cubic-bezier(.53,.58,.96,1.13);
+		opacity: .5;
+		right: -25vw;
+	}
+
+	.randomImage.on .hero-picture {
+		opacity: 1;
+		right: 0px;
+	}
+	
+	.wdn-hero-heading {
+		color: #333333;
+	}
+	
+	.wdn-hero-impact-line, .wdn-hero-initial-line {
+		text-shadow: none;
+	}
+
+	.randomImage .hero-text-container {
+		padding: 35px;
+		position: relative;
+		left: -25vw;
+		opacity: .5;
+		transition: all .2s cubic-bezier(.53,.58,.96,1.13);
+		padding-left: 14%;
+		display: flex;
+		align-items: center;
+	}
+
+	.randomImage.on .hero-text-container {
+		left: 0px;
+		opacity: 1;
+	}
+
+	#coverSlide {
+		display: block;
+	}
+
+	#coverSlide .hero-text-container {
+		z-index: 1;
+		top: 46vh;
+		text-align: center;
+		padding: 0px;
+	}
+
+	#coverSlide .hero-picture{
+		width: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		height: 60vh;
+	}
+
+	#curbing-rural-drug-abuse .hero-picture {
+		background-position: center top;
+	}
+
+	#helping-families-cope-with-zika-syndrome .hero-picture {
+		background-position: center 7%;
+	}
+
+	#stealth-drilling-drone-could-help-military .hero-picture {
+		background-position: center 27%;
+	}
+
+	#film-exposes-pain-of-slave-trade .hero-picture {
+		background-position: center 10%;
+	}
+
+	#treating-pain-without-opioids .hero-picture {
+		background-position: center 27%;
+	}
+	
+	@media (max-width: 1000px){	
+		.randomImageBox .randomImage {
+			grid-template-columns: 100%;
+			min-height: auto;	
+		}
+
+		.randomImage .hero-text-container {
+			padding-left: 35px;
+		}
+
+		.randomImage .hero-picture {
+			grid-row-start: 1;
+			height: 40vh;
+		}
+
+		#coverSlide .hero-text-container {
+			height: 60vh;
+		}
+	}
+			
+	/* end styles for the front page rotating box */	
+
+	#pagetitle{
+		display: none;	
+	}
+    </style>
+    <div class="wdn-band">
+     <!--
+		   {  
+			  "permalink":"http:\/\/research.unl.edu\/annualreport\/2016\/giving-every-child-the-best-chance-to-succeed\/",
+			  "bgImage":"http:\/\/research.unl.edu\/annualreport\/2016\/wp-content\/uploads\/2016\/09\/160114_CYFS_172.jpg",
+			  "title":"Closing Achievement Gap for Kids",
+			  "content":"Families, schools and communities play a key role in building the framework for children\'s academic success. Nebraska researchers are investigating how these groups can improve learning outcomes for disadvantaged children. Their results could impact national policies for early childhood education.",
+			  "linkText":"Read more about this early childhood education initiative"
+		   },
+-->
+     <div class="randomImageBox">
+      <div class="randomImage on" id="coverSlide">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <!-- <h2 class="wdn-hero-heading"><span class="wdn-hero-initial-line">Research at</span> <span class="wdn-hero-impact-line">Nebraska</span></h2>
+                     <div class="textBlock">
+                         The 2014-2015 UNL Research Report features some of the diverse research, scholarship and creative activity at the heart of UNL’s research enterprise. This website includes stories, photos, videos and additional resources.
+                     </div>
+					 -->
+         <a class="wdn-button wdn-button-brand" href="/annualReport/2018/home">
+          Read the 2017-2018 Research Report
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image: url('https://research.unl.edu/annualreport/2018/images/oredSocialHeaderTemplate.jpg')">
+        <!-- <img src="http://research.unl.edu/annualreport/2017/image/oredBck.jpg" alt=""> -->
+       </div>
+      </div>
+      <div class="randomImage" id="resilience-training-tackles-food-water-energy-issues">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Tackling food, water, energy issues
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           Increasing water demands threaten the Platte River Basin, which feeds some of the world’s most productive agricultural land. Future leaders are coming to Nebraska to learn about resilience and develop new approaches to natural resources management.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/resilience-training-tackles-food-water-energy-issues/">
+          Read more about the graduate training program
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/180720_Allen_027-1200x800.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="protecting-crops-in-a-warmer-world">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Protecting crops in a warmer world
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           Climate change is causing higher nighttime temperatures, placing extra stress on crops and decreasing yields worldwide. Nebraska plant pathologist Harkamal Walia is identifying rice and wheat genes that may help increase crops’ heat tolerance.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/protecting-crops-in-a-warmer-world/">
+          Read more about agricultural innovation
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/09/180626_Walia_013-1200x804.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="curbing-rural-drug-abuse">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Curbing rural drug use
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           The opioid crisis is devastating rural communities in the Midwest. Nebraska sociologist Kirk Dombrowski leads a research effort to understand the unique nuances of rural drug use, which could lead to more effective treatments and prevention strategies.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/curbing-rural-drug-abuse/">
+          Read more about why social networks matter
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/180627_Dombrowski_189-1200x800.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="celebrating-pioneering-virologist">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Celebrating pioneering virologist
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           Myron Brakke, a pioneering plant virologist and Nebraska’s first National Academy of Sciences member, revolutionized the centrifuge. To honor his legacy, Nebraska faculty and students combined their talents to create a permanent exhibit for the prototype of Brakke’s swinging-bucket rotor.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/celebrating-pioneering-virologist/">
+          Read more about the exhibit
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/180418_virology_137-1200x800.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="helping-families-cope-with-zika-syndrome">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Helping families cope with Zika syndrome
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           Children living with congenital Zika syndrome, often contracted during a mother’s pregnancy, face significant cognitive and physical disabilities. Early childhood researcher Natalie Williams is partnering with Brazilian researchers to design support programs for the children’s families and caregivers.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/helping-families-cope-with-zika-syndrome/">
+          Read more about Nebraska’s international reach
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/180627_Williams_083-SM-1200x877.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="controlling-elasticity-with-magnetism">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Controlling elasticity with magnetism
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           Nebraska physicist Christian Binek discovered that, under certain conditions, magnetism of some materials predicts the relationship between their temperature and elasticity. His findings could lead to breakthroughs in engineering design.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/controlling-elasticity-with-magnetism/">
+          Read more about Nebraska’s strength in materials science
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/Binek_OR-2018_017.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="stealth-drilling-drone-could-help-military">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Stealth drilling drone could help military
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           When delivering drones to remote locations, failure isn’t an option. Nebraska computer scientists are developing a drone system capable of placing sensors underground, with the goal of improving surveillance in hostile territory while reducing risks to U.S. soldiers.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/stealth-drilling-drone-could-help-military/">
+          Read more about leading defense research
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/Detweiler_OR-2018_024.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="film-exposes-pain-of-slave-trade">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Film exposes pain of slave trade
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           A Nebraska team brought ideas from history, film and ethnic studies to create an emotionally complex film that illuminates the problems of American slavery and its effect on familial relationships. “Anna” won the Best Animation award at the 2018 New Media Film Festival.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/film-exposes-pain-of-slave-trade/">
+          Read more about the film
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/180613_Anna_022A-SM.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="treating-pain-without-opioids">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Treating pain without opioids
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           Opioid painkillers are highly effective – and addictive, since they affect the whole nervous system. Motivated to solve that issue, Nebraska biologist Paul Blum and his team created a drug that targets pain at its source. Years of research led to the launch of a biotechnology company to further develop it.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/treating-pain-without-opioids/">
+          Read more about how the drug works
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/Blum_OR-2018_038-SM.jpg');">
+       </div>
+      </div>
+      <div class="randomImage" id="nebraskas-innovation-hub-fuels-growth">
+       <div class="hero-text-container">
+        <div class="wdn-hero-text">
+         <h2 class="wdn-hero-heading">
+          <span class="wdn-hero-initial-line">
+           Research at Nebraska
+          </span>
+          <span class="wdn-hero-impact-line">
+           Nebraska’s innovation hub fuels growth
+          </span>
+         </h2>
+         <div class="textBlock">
+          <p>
+           From supporting startups’ expansion to becoming a community destination and offering facilities that attract international attention, Nebraska Innovation Campus is fueling growth.
+          </p>
+         </div>
+         <a class="wdn-button wdn-button-brand" href="http://research.unl.edu/annualreport/2018/nebraskas-innovation-hub-fuels-growth/">
+          Read more about economic development
+         </a>
+        </div>
+       </div>
+       <div class="hero-picture" style="background-image:url('http://research.unl.edu/annualreport/2018/wp-content/uploads/2018/10/180411_Incision_027-SM.jpg');">
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="riBoxNav wdn-subhead">
+     <div class="randomImageButton" id="playPause">
+      <img alt="play/pause" src="/graphics/pause.gif"/>
+     </div>
+     <div class="randomImageButton" id="previousButton">
+      <i class="fa fa-angle-left">
+      </i>
+      previous
+     </div>
+     <div class="randomImageButton" id="nextButton">
+      next
+      <i class="fa fa-angle-right">
+      </i>
+     </div>
+     <div class="dcf-txt-center" id="randomImageIndex">
+     </div>
+     <div style="clear:both;  height:10px">
+     </div>
+    </div>
+    <!-- end AR header -->
+    <div class="container">
+     <section class="wdn-grid-set-halves bp1-wdn-grid-set-thirds bp3-wdn-grid-set-sixths featuredHomeLinks">
+      <div class="wdn-col featuredHomeLink">
+       <a class="wdn-subhead" href="https://nugrant.unl.edu">
+        <img alt="" src="/graphics/computer.svg"/>
+        NUgrant
+       </a>
+      </div>
+      <div class="wdn-col featuredHomeLink">
+       <a class="wdn-subhead" href="http://research.unl.edu/proposaldevelopment/funding.php">
+        <img alt="" src="/graphics/tasks.svg"/>
+        Funding Announcements
+       </a>
+      </div>
+      <div class="wdn-col featuredHomeLink">
+       <a class="wdn-subhead" href="http://research.unl.edu/for-researchers/">
+        <img alt="" src="/graphics/folder.svg"/>
+        Faculty Resources
+       </a>
+      </div>
+      <div class="wdn-col featuredHomeLink">
+       <a class="wdn-subhead" href="http://research.unl.edu/nuramp">
+        <img alt="" src="/graphics/gears.svg"/>
+        NUramp Training
+       </a>
+      </div>
+      <div class="wdn-col featuredHomeLink">
+       <a class="wdn-subhead" href="http://research.unl.edu/for-businesses/">
+        <img alt="" id="featuredHomeBuilding" src="/graphics/building.svg"/>
+        Private/Public Partnerships
+       </a>
+      </div>
+      <div class="wdn-col featuredHomeLink">
+       <a class="wdn-subhead" href="http://research.unl.edu/news-information/">
+        <img alt="" src="/graphics/newspaper.svg"/>
+        News &amp; Information
+       </a>
+      </div>
+     </section>
+     <br class="clear"/>
+     <div class="firstColumn setSameHeightForSelectorMinHeight" data-child-selector-to-set=".secondColumn">
+      <div class="redBorder">
+       <h4 class="wdn-brand sectionHeader sectionHeader dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3">
+        Latest Stories
+       </h4>
+       <div id="pId13902">
+        <div class="newsFeaturedImage" style="background-image: url('https://research.unl.edu/wp-content/uploads/2019/03/Roston-CAREER-1024x603.jpg');">
+        </div>
+        <div class="featuredStory">
+         <a class="oredButton wdn-button wdn-button-triad newsButton" href="/blog/tag/career/?category=news-information">
+          CAREER
+         </a>
+         <h5 class="newsInfo">
+          <a href="https://research.unl.edu/blog/award-boosts-rostons-work-to-pave-the-way-for-freeze-tolerant-crops/">
+           Award boosts Roston’s work to pave the way for freeze-tolerant crops
+          </a>
+         </h5>
+         <div class="newsInfoDate">
+          March 7, 2019
+         </div>
+         <p>
+          With a five-year, nearly $850,000 Faculty Early Career Development Program award from the National Science Foundation, the University of Nebraska-Lincoln’s Rebecca Roston is working to identify the properties and pathways underlying some plants’ ability to thwart ice-cold temperatures, with the long-term goal of enabling scientists to engineer freeze-tolerant crops.
+         </p>
+         <a class="wdn-subhead moreLink" href="https://research.unl.edu/blog/award-boosts-rostons-work-to-pave-the-way-for-freeze-tolerant-crops/">
+          More
+         </a>
+        </div>
+        <br class="clear"/>
+       </div>
+       <hr/>
+       <br/>
+       <div class="wdn-cols" id="pId13897">
+        <div class="bp1-wdn-col-one-third">
+         <div class="smallFeatureStoryImage sameHeightAsID" data-useheight="newsStory2" style="background-image:url('https://news.unl.edu/sites/default/files/styles/large_aspect/public/media/Hero_21.jpg?itok=3GBLcvsS');">
+         </div>
+        </div>
+        <div class="bp1-wdn-col-two-thirds" id="newsStory2">
+         <a class="oredButton wdn-button wdn-button-triad newsButton" href="/blog/tag/plant-science/?category=news-information">
+          Plant Science
+         </a>
+         <h5 class="newsInfo">
+          <a href="https://research.unl.edu/blog/sequenced-genome-of-ancient-crop-could-raise-yields/">
+           Sequenced genome of ancient crop could raise yields
+          </a>
+         </h5>
+         <div class="newsInfoDate">
+          March 4, 2019
+         </div>
+         <p>
+          An international team led by the University of Nebraska-Lincoln’s James Schnable has sequenced and mapped the genome of proso millet, which is essential to raising yields of the drought-resistant crop in the Nebraska Panhandle and semiarid regions where population booms foreshadow food shortages.
+         </p>
+         <a class="wdn-subhead moreLink" href="https://research.unl.edu/blog/sequenced-genome-of-ancient-crop-could-raise-yields/">
+          More
+         </a>
+        </div>
+       </div>
+       <br class="clear"/>
+       <hr/>
+       <br/>
+       <div class="wdn-cols" id="pId13864">
+        <div class="bp1-wdn-col-one-third">
+         <div class="smallFeatureStoryImage sameHeightAsID" data-useheight="newsStory3" style="background-image:url('https://news.unl.edu/sites/default/files/styles/large_aspect/public/media/181101_Vets_NIC_021.JPG?itok=8vopF1V4');">
+         </div>
+        </div>
+        <div class="bp1-wdn-col-two-thirds" id="newsStory3">
+         <a class="oredButton wdn-button wdn-button-triad newsButton" href="/blog/tag/makerspaces/?category=news-information">
+          Makerspaces
+         </a>
+         <h5 class="newsInfo">
+          <a href="https://research.unl.edu/blog/nebraska-innovation-studio-provides-a-haven-for-veterans-2/">
+           Nebraska Innovation Studio provides a haven for veterans
+          </a>
+         </h5>
+         <div class="newsInfoDate">
+          February 28, 2019
+         </div>
+         <p>
+          Every Thursday afternoon, the Nebraska Innovation Studio machine shop lathes are circled by a group of veterans learning and honing their woodturning skills. The hands-on lessons also double as therapy sessions.
+         </p>
+         <a class="wdn-subhead moreLink" href="https://research.unl.edu/blog/nebraska-innovation-studio-provides-a-haven-for-veterans-2/">
+          More
+         </a>
+        </div>
+       </div>
+       <br class="clear"/>
+       <hr/>
+       <a class="wdn-subhead moreLink" href="/news-information/">
+        <i class="fa fa-newspaper-o">
+        </i>
+        More News and Information
+       </a>
+      </div>
+     </div>
+     <div class="secondColumn">
+      <div class="redBorder">
+       <h4 class="wdn-brand sectionHeader dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3">
+        News for Researchers
+       </h4>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/accolades-february-2019/">
+         Accolades, February 2019
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        March 1, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/top-awards-from-public-sponsors-january-2019/">
+         Top Awards from Public Sponsors, January 2019
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 28, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/nebraska-innovation-studio-provides-a-haven-for-veterans-2/">
+         Nebraska Innovation Studio provides a haven for veterans
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 28, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/build-science-communication-skills-at-march-7-workshop/">
+         Build science communication skills at March 7 workshop
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 28, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/u-s-issued-patents-nov-2018-jan-2019/">
+         U.S.-Issued Patents, Nov. 2018-Jan. 2019
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 28, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/research-listening-sessions-wrap-up-march-8/">
+         Research listening sessions wrap up March 8
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 28, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/disclosure-is-first-step-in-moving-research-from-the-lab-to-the-marketplace/">
+         Disclosure is first step in moving research from the lab to the marketplace
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 28, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/nuramp-training-series-launches-feb-20/">
+         NURAMP training series in progress
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 13, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/nebraskalectures/building-nebraska-u-the-saga-of-university-hall-and-the-origins-of-the-modern-university/">
+         Watch webstream of Logan-Peters’ Nebraska Lecture
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 12, 2019
+       </div>
+       <h5 class="newsInfo">
+        <a href="https://research.unl.edu/blog/wilhelm-imagine-a-bold-future-for-nebraska-research/">
+         Wilhelm: Imagine a bold future for Nebraska research
+        </a>
+       </h5>
+       <div class="newsInfoDate">
+        February 4, 2019
+       </div>
+       <a class="wdn-subhead moreLink" href="/research-news/">
+        More News for Researchers
+       </a>
+       <hr/>
+       <h4 class="wdn-brand sectionHeader dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3">
+        Events
+       </h4>
+       <div id="wdn_calendarDisplay">
+       </div>
+       <script>
+        $(document).ready(function() { WDN.initializePlugin('events', {url: 'https://events.unl.edu/research/', limit: 5}); });
+       </script>
+      </div>
+     </div>
+    </div>
+    <br class="clear"/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="wdn-band splash-feature-grid">
+     <h2 class="splash-feature-grid-heading">
+      <span class="splash-feature-banner">
+       Connect with @UNLresearch
+      </span>
+     </h2>
+     <div class="bp1-wdn-grid-set-halves bp3-wdn-grid-set-fourths">
+      <div class="wdn-col">
+       <a class="socialBlock hasImage D4440B" href="https://twitter.com/NebEngineering/status/1091011886915584000" style="background-image: url('https://pbs.twimg.com/media/DyQNh1yXgAAtFVt.jpg:large'); background-color: #D4440B" target="_blank">
+        <span class="td twitter">
+         <span class="socialContent">
+          A #NebEngineerint team - led by Ruiguo Yang and Jung Yul Lim - is hoping cell-stretching research will lead to new understandings of how cells communicate and lead to pathways that might someday aid in fighting cancer and healing wounds. #InOurGritOurGlory https://t.co/zXhLjjpruD
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-twitter">
+          </i>
+          @NebEngineering
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage D00000" href="https://twitter.com/NIC_Innovates/status/1095041050178215936" style="background-image: url('https://pbs.twimg.com/media/DzJeCCVX4AI0lrT.jpg:large'); background-color: #D00000" target="_blank">
+        <span class="td instagram">
+         <span class="socialContent">
+          Thanks Nathan Duffy for sharing your work happening here at NIC! "Canola research going on at GIC! Canola is a cool-season crop, so winter is a great time to grow it indoors as we only need to keep the greenhouse at 65 degrees! (As opposed to growing corn or soy at 85)"
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-instagram">
+          </i>
+          @NIC_Innovates
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage D00000" href="https://twitter.com/UNLresearch/status/1096491923395760129" style="background-image: url('https://pbs.twimg.com/media/DzeFl0UWwAEWvBf.jpg:large'); background-color: #D00000" target="_blank">
+        <span class="td twitter">
+         <span class="socialContent">
+          Nebraska faculty and staff were treated to a sneak peak of @MorrillHallUNL's fourth-floor expansion today. The space opens to the public tomorrow, offering visitors 11,000 square feet of exhibits and hands-on displays. #UNL
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-twitter">
+          </i>
+          @UNLresearch
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage D00000" href="https://twitter.com/NebEngineering/status/1086288108868550660" style="background-image: url('https://pbs.twimg.com/media/DxNFRx9XcAUVS2r.jpg:large'); background-color: #D00000" target="_blank">
+        <span class="td twitter">
+         <span class="socialContent">
+          A four-year, $472,887 grant from @USDA is helping a Nebraska research team, led by BSE assistant professor @SantoshPitla, bring tractor testing into the modern era. #InOurGritOurGlory Check out the @UNLresearch video at https://t.co/odMiYoYwou
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-twitter">
+          </i>
+          @NebEngineering
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage D00000" href="https://twitter.com/Unl_CoJMC/status/1103758491485986816" style="background-image: url('https://pbs.twimg.com/media/D1FWfvrXcAYgvYz.jpg:large'); background-color: #D00000" target="_blank">
+        <span class="td twitter">
+         <span class="socialContent">
+          The Storytelling with Sensors pop-up class, taught by Matt Waite, recently concluded. The class created sound sensors and after some coding and calibration field-tested them. The class also discussed how to incorporate sensors and data into the stories they make.
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-twitter">
+          </i>
+          @Unl_CoJMC
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage 137CBD" href="https://www.instagram.com/p/BuQvYQrgcEw/" style="background-image: url('https://instagram.flnk1-1.fna.fbcdn.net/vp/8fdb17cdb157e235a4c9577fc8af0a3d/5D13756B/t51.2885-15/e35/51363291_118551985915421_143728867968182807_n.jpg?_nc_ht=instagram.flnk1-1.fna.fbcdn.net'); background-color: #137CBD" target="_blank">
+        <span class="td instagram">
+         <span class="socialContent">
+          37 Likes, 0 Comments - Water For Food (@waterforfood) on Instagram: Richard Ferguson, vice chancellor of the Rwanda Institute for Conservation Agriculture (RICA),
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-instagram">
+          </i>
+          @waterforfood
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage 008A2C" href="https://twitter.com/UNL_IANR/status/1101498602545922048" style="background-image: url('https://pbs.twimg.com/media/D0lPI_PXcAAmLK6.jpg:large'); background-color: #008A2C" target="_blank">
+        <span class="td twitter">
+         <span class="socialContent">
+          Nebraska researchers combining education and technology to help improve childhood eating behaviors. https://t.co/MVcijXCLsk #UNL #NUforNE @DiptiDev7
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-twitter">
+          </i>
+          @UNL_IANR
+         </span>
+        </span>
+       </a>
+      </div>
+      <div class="wdn-col">
+       <a class="socialBlock hasImage 008A2C" href="https://twitter.com/ssheridan2/status/1098638192255922177" style="background-image: url('https://pbs.twimg.com/media/Dz8lnEsWoAQNy4n.jpg:large'); background-color: #008A2C" target="_blank">
+        <span class="td twitter">
+         <span class="socialContent">
+          Dr. Amanda Witte shares #TAPP research and practice nuggets at #APBS2019 Ignite Session. Great to see @UNL_CYFS @UNLresearch family-school partnership research showcased in such an exciting venue!
+         </span>
+         <span class="socialHandle">
+          <i class="fa fa-twitter">
+          </i>
+          @ssheridan2
+         </span>
+        </span>
+       </a>
+      </div>
+     </div>
+    </section>
+    <div class="wdn-inner-wrapper dcf-txt-center" id="socialMedia">
+     <p class="clear-top wdn-subhead">
+      Follow the Office of Research and Economic Development
+     </p>
+     <a class="circle" href="https://twitter.com/UNLresearch" title="Follow the Office of Research and Economic Development on twitter">
+      <i class="fa fa-twitter">
+      </i>
+     </a>
+     <a class="circle" href="https://facebook.com/UNLresearch" title="Follow the Office of Research and Economic Development on facebook">
+      <i class="fa fa-facebook">
+      </i>
+     </a>
+     <a class="circle" href="https://youtube.com/UNLresearch" title="Follow the Office of Research and Economic Development on youtube">
+      <i class="fa fa-youtube-play">
+      </i>
+     </a>
+    </div>
+    <!-- InstanceEndEditable -->
+   </div>
+  </main>
+  <div class="wdn-band wdn-footer-local oredOfficeFooter unl-font-sans">
+   <div class="wdn-inner-wrapper">
+    <h3>
+     Research and Economic Development
+    </h3>
+    <section class="wdn-grid-set-halves bp3-wdn-grid-set-sixths oredOffices">
+     <div class="wdn-col oredOffice">
+      <a aria-hidden="true" href="http://research.unl.edu/proposaldevelopment/">
+       <img alt="" src="/graphics/pencil.svg"/>
+      </a>
+      <h4 class="dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3 unl-cream">
+       <a href="http://research.unl.edu/proposaldevelopment/">
+        Proposal Development
+       </a>
+      </h4>
+      Assistance preparing proposal narratives
+     </div>
+     <div class="wdn-col oredOffice">
+      <a aria-hidden="true" href="http://research.unl.edu/sponsoredprograms/">
+       <img alt="" src="/graphics/certificate.svg"/>
+      </a>
+      <h4 class="dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3 unl-cream">
+       <a href="http://research.unl.edu/sponsoredprograms/">
+        Sponsored Programs
+       </a>
+      </h4>
+      Proposal submission and award management
+     </div>
+     <div class="wdn-col oredOffice">
+      <a aria-hidden="true" href="http://research.unl.edu/researchresponsibility/">
+       <img alt="" src="/graphics/orr.svg"/>
+      </a>
+      <h4 class="dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3 unl-cream">
+       <a href="http://research.unl.edu/researchresponsibility/">
+        Research Responsibility
+       </a>
+      </h4>
+      <a href="http://research.unl.edu/researchcompliance/">
+       Research Compliance Services
+      </a>
+      <br/>
+      <a href="http://research.unl.edu/researchresponsibility/research-involving-animals/">
+       Institutional Animal Care Program
+      </a>
+      <br>
+       <a href="http://research.unl.edu/researchresponsibility/research-safety/">
+        Research Safety
+       </a>
+      </br>
+     </div>
+     <div class="wdn-col oredOffice" id="industryRelations">
+      <a aria-hidden="true" href="http://research.unl.edu/industryrelations/">
+       <img alt="" src="/graphics/building.svg"/>
+      </a>
+      <h4 class="dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3 unl-cream">
+       <a href="http://research.unl.edu/industryrelations/">
+        Industry Relations
+       </a>
+      </h4>
+      Advancing university-industry partnerships
+     </div>
+     <div class="wdn-col oredOffice" id="innovationCampus">
+      <a aria-hidden="true" href="http://innovate.unl.edu/">
+       <img alt="" src="/graphics/NIC_logo.svg"/>
+      </a>
+      <h4 class="dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3 unl-cream">
+       <a href="http://innovate.unl.edu/">
+        Nebraska Innovation Campus
+       </a>
+      </h4>
+      Developing a premier private/public-sector sustainable research campus
+     </div>
+     <div class="wdn-col oredOffice">
+      <a aria-hidden="true" href="http://www.nutechventures.org/">
+       <img alt="" src="/graphics/NUtech.svg"/>
+      </a>
+      <h4 class="dcf-txt-md dcf-bold dcf-uppercase unl-ls-2 dcf-lh-3 unl-cream">
+       <a href="http://www.nutechventures.org/">
+        NUtech Ventures
+       </a>
+      </h4>
+      Intellectual Property Commercialization
+     </div>
+    </section>
+   </div>
+  </div>
+  <footer class="dcf-footer" id="dcf-footer" role="contentinfo">
+   <div class="dcf-footer-stripe dcf-relative">
+    <div class="dcf-wrapper dcf-pt-10 dcf-txt-xs">
+     <div class="dcf-d-flex dcf-flex-wrap dcf-jc-between dcf-ai-center">
+      <div class="dcf-d-flex dcf-ai-center dcf-mb-7 dcf-mr-7">
+       <a aria-label="University of Nebraska–Lincoln" class="unl-footer-logo" href="https://www.unl.edu/" id="unl-footer-n">
+        <svg class="dcf-d-block dcf-h-9 dcf-w-9" focusable="false" height="76" viewbox="0 0 152 152" width="76">
+         <defs>
+          <style>
+           #n152,
+                #n56 {
+                  display: none;
+                }
+                @media (min-width: 56px) {
+                  #n44 { display: none; }
+                  #n56 { display: block; }
+                }
+                @media (min-width: 152px) {
+                  #n56 { display: none; }
+                  #n152{ display: block; }
+                }
+          </style>
+         </defs>
+         <g id="n152">
+          <path d="M147,1H90V42h10V75.673L53.532,2.393,52.648,1H2V42H12v66H2v41H62V108H52V74.336l46.467,73.271L99.351,149H150V108H140V42h10V1ZM59,111v35H5V111H15V39H5V4H51l52,82V39H93V4h54V39H137v72h10v35H101L49,64v47Z" fill="none">
+          </path>
+          <path d="M147,0H88V45H98V69.8L55.2,2.3,53.8,0H0V45H10v62H0v45H64V107H54V82.2l42.8,67.5,1.5,2.3H152V107H142V45h10V0Zm3,5V43H140v66h10v41H99.4l-.9-1.4L52,75.3V109H62v41H2V109H12V43H2V2H52.6l.9,1.4L100,76.7V43H90V2h60ZM103,87,51,5H5V40H15v72H5v35H59V112H49V65l52,82h46V112H137V40h10V5H93V40h10Z" fill="currentcolor">
+          </path>
+         </g>
+         <g id="n56">
+          <path d="M89.571,2.714V43.429h10.857V76L51.571,2.714H2.714V43.429H13.571v65.143H2.714v40.714H62.429V108.571H51.571V76l47.5,73.286h50.214V108.571H138.429V43.429h10.857V2.714ZM59.714,111.286v35.286H5.429V111.286H16.286V40.714H5.429V5.429H50.214l52.929,81.429V40.714H92.286V5.429h54.286V40.714H135.714v70.571h10.857v35.286H100.429L48.857,65.143v46.143Z" fill="none">
+          </path>
+          <path d="M147.006,0H86.857V46.143H97.714V67.857L54.286,0H0V46.143H10.857v59.714H0V152H65.143V105.857H54.286V84.143L97.714,152H152V105.857H141.143V46.143H152V0Zm2.28,43.429H138.429v65.143h10.857v40.714H99.071L51.571,76v32.571H62.429v40.714H2.714V108.571H13.571V43.429H2.714V2.714H51.571L100.429,76V43.429H89.571V2.714h59.714ZM103.143,86.857,50.214,5.429H5.429V40.714H16.286v70.571H5.429v35.286H59.714V111.286H48.857V65.143l51.571,81.429h46.143V111.286H135.714V40.714h10.857V5.429H92.286V40.714h10.857Z" fill="currentcolor">
+          </path>
+         </g>
+         <g id="n44">
+          <path d="M89.818,3.455v38h10.364V76L53.545,3.455H3.455v38H13.818v69.091H3.455v38H62.182v-38H51.818V76l46.636,72.545h50.091v-38H138.182V41.455h10.364v-38ZM58.727,114v31.091H6.909V114H17.273V38H6.909V6.909H51.818l51.818,79.455V38H93.273V6.909h51.818V38H134.727v76h10.364v31.091H100.182L48.364,65.636V114Z" fill="none">
+          </path>
+          <path d="M147.008,0H86.364V44.909H96.727V65.636L55.273,0H0V44.909H10.364v62.182H0V152H65.636V107.091H55.273V86.364L96.727,152H152V107.091H141.636V44.909H152V0Zm1.537,41.455H138.182v69.091h10.364v38H98.455L51.818,76v34.545H62.182v38H3.455v-38H13.818V41.455H3.455v-38H53.545L100.182,76V41.455H89.818v-38h58.727ZM103.636,86.364,51.818,6.909H6.909V38H17.273v76H6.909v31.091H58.727V114H48.364V65.636l51.818,79.455h44.909V114H134.727V38h10.364V6.909H93.273V38h10.364Z" fill="currentcolor">
+          </path>
+         </g>
+        </svg>
+       </a>
+       <div class="dcf-ml-5 dcf-pl-4 dcf-bl-solid dcf-bl-1 unl-bl-cream">
+        <a aria-label="N 150" class="unl-footer-logo" href="https://n150.unl.edu/" id="unl-footer-150">
+         <svg class="dcf-d-block dcf-fill-current unl-n150" focusable="false" height="76" viewbox="0 0 292 180" width="76">
+          <path d="M94.9 115.1c1.2-1.4 1.7-2.9 1.7-4.4 0-1.7-.6-3.2-1.7-4.5-1.2-1.3-2.8-2-5-2H64.7V14.6c0-1.9-.7-3.4-2-4.6-1.3-1.2-2.8-1.9-4.5-1.9-.3 0-1.8.1-2.1.2-3.2 1.1-6.5 2-9.7 2.8-3.2.8-6.5 1.5-9.7 2.1-3.2.6-6.5 1-9.7 1.3-3.2.2-6.4.4-9.5.4h-4.4c-1.4 0-2.8-.1-4.2-.2h-1c-2 0-3.5.6-4.6 1.7-1.1 1.2-1.7 2.4-1.9 3.8v.7c0 1.5.5 3 1.5 4.4 1 1.4 2.6 2.2 4.7 2.3 1.5.2 3.1.3 4.6.4H17c3.7 0 7.4-.2 11.1-.6 3.7-.4 7.4-.9 11.1-1.5v78.3H12.4c-2.3 0-4.1.7-5.2 2-1.2 1.3-1.7 2.8-1.7 4.5 0 1.5.6 3 1.7 4.4 1.2 1.4 2.9 2.1 5.2 2.1H90c2.1 0 3.8-.7 4.9-2.1z">
+          </path>
+          <path d="M161.1 84.9c-5.4-5.7-11.8-10-19.3-12.8-7.4-2.8-15.1-4.3-23-4.4h-2.1c-4.2 0-8.3.3-12.3.8s-7.9 1.4-11.6 2.7l1.4-31.4H145l-.2.7c-.3.6-.6 1.2-.8 1.9-.2.6-.3 1.2-.3 1.9 0 1.2.3 2.3.9 3.3.6.9 1.4 1.7 2.3 2.3.6.3 1.2.5 1.7.7 1.9.5 3.9.1 5.5-1 .8-.5 1.5-1.4 2.1-2.4 1.9-3.3 12.5-21.6 16-27.5 4-6.6 7-11.7 4.4-15.5-1.8-2.8-5.6-3.6-8.4-1.8-1 .6-1.9 1.5-2.7 2.8l-6.3 10.9H88.4c-1.5 0-3 .6-4.4 1.9-1.4 1.2-2.1 2.7-2.1 4.4L79.3 83c-.2 2 .3 3.4 1.3 4.2 1 .8 2.1 1.2 3.4 1.2.6 0 1.2 0 1.7-.1l1.5-.3c2.6-.5 5.3-.9 7.9-1.2 2.6-.3 5.3-.5 8.1-.5 9.8 0 18.8 2.2 27.3 6.5 8.4 4.3 13.7 12 15.7 23 .2.8.3 1.5.5 2.2.2.7.2 1.4.2 2.2.2.8.2 1.5.2 2.3v5.1c-.3 6-1.8 11.9-4.4 17.4-1.5 3.3-3.5 6.1-6 8.7-3.3 3.4-7.4 5.8-11.8 7.6-2.6 1-5.2 1.9-7.9 2.5-4.9 1.2-9.9 1.7-15 1.7-5.4 0-10.8-.6-16.1-1.9-5.3-1.2-10.3-3.1-15-5.6-.6-.3-1.2-.5-1.7-.7-.5-.2-1.1-.2-1.7-.2-1.2 0-2.4.3-3.4.9-1 .6-1.7 1.5-2.2 2.6l-.6 1.5c-.2.5-.3 1.1-.3 1.7 0 1.1.3 2.1.9 3.1.6 1 1.5 1.9 2.8 2.7 5.6 3.1 11.5 5.4 17.8 6.9 6.3 1.5 12.6 2.2 18.9 2.2 8.2 0 16.2-1.2 24-3.7 7.8-2.5 15-6.2 21.5-11.2 7.1-5.4 13-12.2 17.8-20.5 4.5-7.8 7.1-15.8 7.9-24.2 0-.8.1-2 .1-2.8v-1.6c0-5.3-.9-10.5-2.8-15.6-1.8-4.9-4.8-9.7-8.8-14.2z">
+          </path>
+          <path d="M253.9 4.5c-1.5-.6-3.1-1.1-4.6-1.5-1.5-.4-3-.8-4.4-1-1.5-.2-3.1-.3-4.6-.5-1.5-.2-3.1-.2-4.6-.2-12.5 0-24 3.9-34.4 11.6-10.4 7.7-17.9 17.6-22.3 29.6-1.2 3.4-2.2 6.9-2.9 10.7-.7 3.7-1 7.4-1 11.1 0 11.9 3.2 23 9.6 33.5 6.4 10.4 15.5 17.7 27.2 21.9 1.5.6 3.1 1.1 4.6 1.5 1.5.4 3.1.7 4.6 1 1.4.2 2.9.3 4.4.5 1.5.2 3.1.2 4.6.2 12.5 0 24-3.8 34.5-11.5 10.5-7.6 17.9-17.5 22.2-29.5.9-2.3 1.7-4.7 2.2-7.1.5-2.4.9-4.8 1-7.3.2-1.2.3-2.4.4-3.6.1-1.2.1-2.4.1-3.6 0-11.9-3.1-23.1-9.4-33.6-6.2-10.5-15.3-17.9-27.2-22.2zM265 69.1c-.3 2.5-.8 4.9-1.4 7.4-1.9 7.9-5.3 15.1-10.4 21.5-5.1 6.5-11.9 9.7-20.4 9.7-8.5 0-15.3-3.2-20.4-9.7-5.1-6.5-8.6-13.7-10.7-21.5-.6-2.5-1.1-4.9-1.4-7.4-.3-2.5-.5-4.8-.5-6.9 0-2.2.2-4.5.5-6.9.3-2.5.8-4.9 1.4-7.4 2-7.9 5.6-15.1 10.7-21.5 5.1-6.5 11.9-9.7 20.4-9.7 8.5 0 15.3 3.2 20.4 9.7 5.1 6.5 8.6 13.7 10.4 21.5.6 2.5 1.1 4.9 1.4 7.4.3 2.5.5 4.8.5 6.9 0 2.1-.2 4.4-.5 6.9z">
+          </path>
+         </svg>
+        </a>
+       </div>
+      </div>
+      <div class="unl-footer-logos dcf-d-flex dcf-ai-center dcf-mb-7">
+       <a aria-label="In Our Grit, Our Glory" class="unl-footer-logo dcf-mr-5" href="https://inourgritourglory.unl.edu/welcome" id="unl-footer-grit-glory">
+        <svg class="dcf-d-block dcf-h-7 dcf-w-auto dcf-fill-current" focusable="false" height="30" viewbox="0 0 88 30" width="88">
+         <path d="M1.2 12.93a.2.2 0 0 1-.2-.24L3 1.24A.3.3 0 0 1 3.3 1h2a.19.19 0 0 1 .2.24l-2 11.45a.31.31 0 0 1-.28.24zM10.35 12.93a.29.29 0 0 1-.26-.24L9 7l-1 5.69a.33.33 0 0 1-.28.24h-2a.2.2 0 0 1-.2-.24l2-11.45A.28.28 0 0 1 7.86 1h2.45c.12 0 .19.09.21.24l1.07 6.56.05.19 1.19-6.75a.3.3 0 0 1 .28-.24h2a.19.19 0 0 1 .19.24l-2 11.45a.3.3 0 0 1-.27.24zM24.51 12.74a.66.66 0 0 1-.42.19H19.7a.45.45 0 0 1-.4-.19l-.78-1a.5.5 0 0 1-.1-.44L20 2.59a.79.79 0 0 1 .26-.44l1.11-1A.72.72 0 0 1 21.8 1h4.34c.19 0 .24 0 .41.19l.79 1a.5.5 0 0 1 .09.44l-1.54 8.75a.84.84 0 0 1-.25.44zm-.94-2.56a.22.22 0 0 0 .07-.12L24.71 4a.13.13 0 0 0 0-.13l-.23-.28a.11.11 0 0 0-.1-.05h-1.66s-.07 0-.12.05l-.34.28a.17.17 0 0 0-.07.13l-1.07 6.09v.12l.19.23h1.95zM34 12.74a.66.66 0 0 1-.48.19h-4.38a.49.49 0 0 1-.41-.17l-.77-1a.49.49 0 0 1-.11-.44l1.79-10.1a.29.29 0 0 1 .27-.22h2a.19.19 0 0 1 .2.24l-1.56 8.82v.12l.2.23h1.95l.27-.23c.06-.06.09-.09.1-.14l1.55-8.8a.28.28 0 0 1 .31-.24h2a.19.19 0 0 1 .19.24l-1.78 10.1a.77.77 0 0 1-.24.44zM42.28 12.93a.28.28 0 0 1-.26-.24l-.92-4.17h-.77l-.74 4.17a.3.3 0 0 1-.27.24h-2a.21.21 0 0 1-.19-.24l2-11.45a.3.3 0 0 1 .29-.24h5.35a.5.5 0 0 1 .4.17l.79 1a.43.43 0 0 1 .08.47l-.76 4.31a.56.56 0 0 1-.24.44l-1.19 1 1 4.31a.19.19 0 0 1-.21.24zM43 5.7a.23.23 0 0 0 .07-.14L43.33 4v-.17l-.21-.26a.23.23 0 0 0-.21-.07h-1.7L40.77 6h1.76a.17.17 0 0 0 .13 0zM55.38 12.74a.72.72 0 0 1-.47.19h-4.36a.51.51 0 0 1-.4-.19l-.77-1a.4.4 0 0 1-.11-.44l1.54-8.75a.69.69 0 0 1 .26-.44l1.12-1a.59.59 0 0 1 .47-.11H57a.44.44 0 0 1 .41.19l.77 1a.47.47 0 0 1 .11.44L58 4.42a.32.32 0 0 1-.29.24h-2a.2.2 0 0 1-.19-.24l.06-.42v-.12l-.23-.29a.11.11 0 0 0-.11-.05h-1.66a.17.17 0 0 0-.13.05l-.32.29A.37.37 0 0 0 53 4l-1 6a.16.16 0 0 0 0 .14l.18.23h2l.28-.23a.57.57 0 0 0 .07-.12l.26-1.51h-1.13a.2.2 0 0 1-.19-.24l.36-2a.28.28 0 0 1 .28-.27h3.33a.2.2 0 0 1 .21.24l-.91 5.16a.63.63 0 0 1-.25.34zM63.67 12.93a.3.3 0 0 1-.26-.24l-.91-4.17h-.77L61 12.69a.3.3 0 0 1-.28.24h-2a.2.2 0 0 1-.19-.24l2-11.45a.3.3 0 0 1 .29-.24h5.34a.52.52 0 0 1 .41.17l.79 1a.46.46 0 0 1 .08.47l-.76 4.31a.62.62 0 0 1-.24.44l-1.19 1 1 4.31a.2.2 0 0 1-.22.24zm.71-7.23a.23.23 0 0 0 .07-.14L64.72 4v-.17l-.2-.26a.24.24 0 0 0-.21-.07h-1.7L62.17 6h1.76a.17.17 0 0 0 .13 0zM67.83 12.93a.19.19 0 0 1-.19-.24l2-11.45a.3.3 0 0 1 .29-.24h2a.19.19 0 0 1 .2.24l-2 11.45a.3.3 0 0 1-.28.24zM74.2 12.93a.19.19 0 0 1-.2-.21l1.63-9.21h-2.14a.2.2 0 0 1-.21-.24l.36-2a.32.32 0 0 1 .3-.26h6.72a.22.22 0 0 1 .21.26l-.36 2a.3.3 0 0 1-.29.24h-2.14l-1.62 9.21a.28.28 0 0 1-.27.21zM78.57 14.62c-.22.08-.32 0-.3-.14l.72-4.1a.31.31 0 0 1 .3-.24h2a.19.19 0 0 1 .2.24l-.57 3.18c0 .12-.09.19-.26.26zM16.24 28.81a.59.59 0 0 1-.42.19h-4.39a.44.44 0 0 1-.4-.19l-.77-1a.5.5 0 0 1-.11-.44l1.54-8.75a.91.91 0 0 1 .27-.44l1.11-1a.7.7 0 0 1 .47-.19h4.34a.38.38 0 0 1 .4.19l.79 1a.5.5 0 0 1 .09.44l-1.54 8.75a.8.8 0 0 1-.25.44zm-.94-2.56a.15.15 0 0 0 .07-.12l1.07-6.08a.15.15 0 0 0 0-.14l-.22-.27a.12.12 0 0 0-.11-.05h-1.65a.2.2 0 0 0-.13.05l-.33.27a.23.23 0 0 0-.08.14l-1.07 6.08a.15.15 0 0 0 0 .12l.19.24H15zM25.7 28.81a.62.62 0 0 1-.47.19h-4.36a.46.46 0 0 1-.41-.17l-.77-1a.48.48 0 0 1-.1-.44l1.78-10.1a.31.31 0 0 1 .28-.24h2a.19.19 0 0 1 .19.24l-1.55 8.82v.12l.19.24h1.95l.28-.24a.22.22 0 0 0 .09-.14l1.55-8.8a.29.29 0 0 1 .28-.24h2a.2.2 0 0 1 .2.24l-1.78 10.1a.79.79 0 0 1-.25.44zM34 29a.29.29 0 0 1-.26-.24l-.91-4.17h-.78l-.73 4.17a.31.31 0 0 1-.28.24h-2a.21.21 0 0 1-.2-.24l2-11.45a.32.32 0 0 1 .28-.24h5.38a.57.57 0 0 1 .41.17l.78 1a.48.48 0 0 1 .09.48L37 23a.64.64 0 0 1-.25.45l-1.19 1 1 4.3a.19.19 0 0 1-.21.24zm.7-7.23a.22.22 0 0 0 .08-.13l.27-1.56v-.17l-.21-.26a.23.23 0 0 0-.2-.06h-1.7l-.44 2.51h1.77a.16.16 0 0 0 .12-.05zM47.11 28.81a.66.66 0 0 1-.47.19h-4.35a.53.53 0 0 1-.41-.19l-.77-1a.4.4 0 0 1-.11-.44l1.54-8.75a.69.69 0 0 1 .27-.44l1.11-1a.62.62 0 0 1 .47-.19h4.36a.44.44 0 0 1 .4.19l.77 1a.48.48 0 0 1 .11.44l-.32 1.83a.32.32 0 0 1-.3.24h-2a.2.2 0 0 1-.2-.24l.08-.44a.11.11 0 0 0 0-.12l-.23-.29a.11.11 0 0 0-.11-.05h-1.64a.17.17 0 0 0-.13.05l-.32.29a.31.31 0 0 0-.09.15l-1.07 6a.16.16 0 0 0 0 .14l.17.24h2l.28-.24a.4.4 0 0 0 .07-.12l.27-1.5H45.4a.2.2 0 0 1-.2-.24l.36-2a.29.29 0 0 1 .28-.24h3.33a.21.21 0 0 1 .21.24l-.91 5.16a.63.63 0 0 1-.25.34zM50.46 29a.2.2 0 0 1-.21-.24l2-11.5a.31.31 0 0 1 .28-.19h2c.12 0 .22.09.2.19l-1.63 9.23h4.51a.21.21 0 0 1 .21.24l-.36 2a.3.3 0 0 1-.29.24zM65.26 28.81a.61.61 0 0 1-.42.19h-4.39a.43.43 0 0 1-.4-.19l-.77-1a.5.5 0 0 1-.11-.44l1.54-8.75a1 1 0 0 1 .26-.44l1.12-1a.68.68 0 0 1 .47-.19h4.34c.18 0 .23 0 .4.19l.79 1a.5.5 0 0 1 .09.44l-1.54 8.75a.8.8 0 0 1-.25.44zm-.94-2.56a.19.19 0 0 0 .07-.12l1.07-6.08a.15.15 0 0 0 0-.14l-.22-.27a.12.12 0 0 0-.11-.05h-1.65a.2.2 0 0 0-.13.05l-.34.27a.26.26 0 0 0-.07.14l-1.07 6.08a.15.15 0 0 0 0 .12l.19.24h2zM73.57 29a.3.3 0 0 1-.26-.24l-.91-4.17h-.77l-.74 4.17a.3.3 0 0 1-.28.24h-2a.2.2 0 0 1-.19-.24l2-11.45a.31.31 0 0 1 .28-.24h5.34a.55.55 0 0 1 .41.17l.79 1a.47.47 0 0 1 .08.48L76.58 23a.67.67 0 0 1-.24.45l-1.19 1 1 4.3a.19.19 0 0 1-.21.24zm.71-7.23a.21.21 0 0 0 .07-.13l.27-1.56v-.17l-.2-.26a.25.25 0 0 0-.21-.06h-1.7l-.44 2.51h1.76a.17.17 0 0 0 .13-.05zM79.72 29a.2.2 0 0 1-.2-.24l.93-5.24-2-6.12a.26.26 0 0 1 .27-.33h2.17a.29.29 0 0 1 .26.24l1.09 3.39 2.28-3.39a.46.46 0 0 1 .34-.24H87c.2 0 .27.17.16.33l-4.2 6.12-.96 5.24a.3.3 0 0 1-.28.24zM84.15 29l.28-1.6H84v-.18h1.08v.18h-.41l-.29 1.6zM86.31 29l.19-1.15-.59 1.15a.08.08 0 0 1-.06 0h-.14l-.18-1.2-.28 1.2H85l.39-1.8h.19l.15 1.18v.27l.11-.27.56-1.18h.19l-.06 1.8z">
+         </path>
+        </svg>
+       </a>
+       <a aria-label="About the Big Ten Conference" class="unl-footer-logo dcf-mr-5" href="https://www.unl.edu/about/academic-partnerships/" id="unl-footer-global-b1g">
+        <svg class="dcf-d-block dcf-h-7 dcf-w-auto dcf-fill-current" focusable="false" height="30" viewbox="0 0 144 60" width="72">
+         <path d="M34 25H23V15h11c1 0 2 1 2 2v6c0 1-1 2-2 2zm-9-2h9v-6h-9v6zm9 21H23V33h11c1 0 2 1 2 2v7c0 1-1 2-2 2zm0-2v-7h-9v7h9zm47 1V2H57v14h6v27h-6v14h30V43h-6zm62.92-27.29C143.92 8.03 137.5 2 130 2h-27c-7.52 0-14 6.32-14 14v27c0 7.5 6.5 14 14 14h27c8 0 14-6.32 14-14V24h-23v10h5v7.5c0 1-.5 1.5-1.5 1.5h-16c-1 0-1.5-.5-1.5-1.5v-24c0-1 .5-1.5 1.5-1.5h16c1 0 1.5.5 1.5 1.5V20h18l-.08-4.29zM38 4c10 0 13 7 13 12 0 7-4.52 10.49-10 12v1s12 2.5 12 13c0 7-5 13-13 13H2V45h6V14H2V4m36-2H0v14h6v27H0v14h41c8 0 14-6.05 14-14 0-7-4-12.75-10-14.5 7-3 10.25-11.25 7-18.5-2.25-4.75-6.08-8-14-8z">
+         </path>
+        </svg>
+       </a>
+       <a aria-label="University of Nebraska system" class="unl-footer-logo" href="https://nebraska.edu/" id="unl-footer-global-wordmark">
+        <svg class="dcf-d-block dcf-h-6 dcf-w-auto dcf-fill-current" focusable="false" height="26" viewbox="0 0 96 26" width="96">
+         <path d="M36.7 2.6v3.1c0 .8 0 1 .2 1.2.2.3.5.5.9.5s.8-.2 1-.6c.1-.4.1-.7.1-1.1V2.6h.6v3c.1.5 0 1-.3 1.5s-.8.8-1.4.8c-.7.1-1.3-.3-1.5-1-.1-.4-.2-.8-.1-1.3v-3h.5zm7.2 5.1h-.6l-2.4-4.2v4.2h-.6V2.6h.6l2.4 4.2V2.6h.6v5.1zm1-5.1h.6v5.2h-.6V2.6zm3.2 4.1l1.5-4.1h.5l-1.9 5.1h-.3l-1.7-5.1h.6l1.3 4.1zM53 4.9v.4h-1.5v2h1.8v.4H51V2.6h2V3h-1.5v1.8c-.1.1 1.5.1 1.5.1zm1.6 0V3h.6c.4 0 .6.3.6.8 0 .3-.1.6-.3.8-.2.1-.4.2-.6.2 0 .1-.3.1-.3.1zM54 7.7h.6V5.4h.5l1.3 2.3h.6l-1.3-2.5c.2-.1.3-.2.4-.3.3-.3.4-.7.4-1.1 0-.4-.2-.9-.5-1.1-.3-.1-.6-.2-.9-.1H54v5.1zm5.3-4.1c0-.3-.3-.6-.7-.6-.4 0-.7.4-.6.7v.1c0 .4.1.6.7 1l.8.6c.2.3.3.6.3.9.1.8-.5 1.4-1.3 1.5h-.1c-.5 0-1-.3-1.2-.8l.4-.5c.1.5.4.8.8.9.5 0 .8-.4.8-.9v-.1c0-.2-.1-.5-.3-.6l-.5-.4c-.6-.3-1-.9-1-1.5-.1-.7.4-1.3 1.1-1.4h.1c.5 0 .9.3 1.1.7l-.4.4zm1.4-1h.6v5.2h-.6V2.6zm3.4 5.1h-.6V3h-1.3v-.4h3V3H64v4.7zm5.2-5.1l-1.4 2.9v2.3h-.6V5.5l-1.5-2.9h.6l1.1 2.2 1.1-2.2h.7zm9.9.4c.9 0 1.4.8 1.4 2.2s-.5 2.2-1.4 2.2c-.9 0-1.4-.8-1.4-2.2S78.3 3 79.2 3zm0-.5c-1.3 0-2 1-2 2.7-.1.8.2 1.5.6 2.1.4.4.9.7 1.5.6.5 0 1.1-.2 1.4-.6.5-.6.7-1.3.6-2.1-.1-1.7-.8-2.7-2.1-2.7zm5.1 2.4v.5h-1.4v2.3h-.6V2.6h2.1V3h-1.5v1.8l1.4.1zm-71-2.7v.7h.4c1.9.4 2.2.4 2.2 2.7v13.3c-.5-.9-10-16.7-10-16.7H.8v.7h.5c2 .1 2.3.1 2.3 2.4v16.6c0 2-.3 2-2 2.3l-.7.1v.8h7v-.8l-.8-.1c-1.7-.3-2-.3-2-2.3v-14L16 25.1h1.5V5.4c0-2 .3-2 1.8-2.5h.3v-.7h-6.3zm24.2 7.4c-1.5 0-2.9.7-3.8 1.9V.5h-.2l-4.2 1.7V3h.8c.6 0 .9.3.9 1.8V19c0 3-.2 4.2-.9 6v.1l.8.4 1.9-2.2c.8 1.5 2.3 2.3 4 2.3 3.5 0 6.2-3.7 6.2-8.4s-2.2-7.6-5.5-7.6zm-1 14.4c-2.2 0-2.8-1.2-2.8-5.3v-5.3c1-1.1 1.7-1.5 2.6-1.5 2.3 0 4.1 2.8 4.1 6.5S38.9 24 36.5 24zm59.4-1.5l-.1.1c-.4.6-.6.6-.9.6-.3 0-.6-.6-.6-1.4v-7c0-1.9-.3-2.7-1.3-3.6-1.8-1.5-4-2.2-6.3-2.1-2.7 0-9.4 3.9-11.2 8.4V.6l-4.3 1.6V3h.8c.5 0 .8.3.8 1.6v19.6l-1.6.2v.9H77v-.9l-1.6-.2c0-3.4.2-4.3 2-6.9l3.7 6.9-1.5.2v.9H86c.5.2 1.1.3 1.7.3 1.7-.1 3.3-1 4.1-2.5.1 1.7.9 2.5 2.2 2.5 1.3 0 1.7-.8 2.7-2.1v-.1l-.8-.9zm-12.2-1c0 .9.3 1.9.9 2.6h-.4l-5-9.1c.9-1.1 3.2-3 5-3.3.5-.1.8-.1.9 0 .3.3.7.5 1.1.4.2 0 1.1.1 2-1.2.1-.2.3-.2.5-.2 2.1 0 2.9 2.4 3 4-3.1 1.1-8 2.8-8 6.8zm7.9.1c-.9 1.1-1.9 1.7-2.8 1.7-1.3 0-2.4-1.1-2.4-2.5v-.1c0-2.8 2.8-3.7 5.1-4.5h.1v5.4zm-62.3-.8v.1c-1.2 1.8-2.2 2.4-3.6 2.4s-4.1-2-4.6-5l9.2-2.5v-.1c-.4-3.8-2.6-6.1-5.7-6.1s-6.3 3.9-6.3 8.6 2.7 7.4 6.5 7.4c2.5 0 4.2-1.3 5.5-4v-.1l-1-.7zm-4.8-9.7c1.5 0 2.4 1.1 2.4 2.8s-.3 1.3-1.9 1.8l-4.1 1c0-3.5 1.4-5.6 3.6-5.6zM68.3 16c-3.3-1.5-3.6-1.7-3.6-3 .1-1.1 1-1.9 2.1-1.9 0 0 1-.1 1.1.4.2.9 1.2 1.4 2 1.1.6-.1 1-.7 1-1.3.1-.9-1.1-1.8-2.7-1.8-3.4 0-5.9 2-5.9 4.6s2 3.4 3.9 4.3c1.9.9 3.3 1.5 3.3 3.2-.1 1.4-1.3 2.5-2.7 2.5-1.5 0-2-.8-2.1-1.8-.1-1.1-1-1.3-1.7-1.4-.8 0-1.5.7-1.5 1.5v.1c0 .2 0 .3.1.4-.1.3-.4.4-.6.4-.3 0-.6-.6-.6-1.4v-7c0-1.9-.3-2.7-1.3-3.6-2.1-1.7-4.9-2.5-7.6-2-1.5.3-3.9 2.2-5.1 5.2-.1-2.4-.3-3.4-1.1-5l-3 1.4v.6h.5c.9 0 1.3 1.1 1.3 3.7v9l-1.6.3v.8h6v-.8l-1.7-.3c0-.3.1-3.5.1-3.5.4-7.3 2-8.1 2.7-8.5.4-.3 1-.4 1.5-.3.3.3.7.5 1.1.4.2 0 1.1.1 2-1.2.1-.2.3-.2.5-.2 2.1 0 2.9 2.4 3 4h.1c-3 1-8 2.6-8 6.7-.1 2.2 1.6 4 3.8 4.1h.3c1.7-.1 3.3-1 4.1-2.5.1 1.7.9 2.5 2.2 2.5 1.3 0 1.4-.5 2.2-1.5.8 1 2.4 1.5 4.3 1.5 3 0 5.4-2.1 5.4-4.8S70.7 17 68.3 16zm-10.6 5.7c-.9 1.1-1.9 1.7-2.8 1.7-1.3 0-2.4-1.1-2.4-2.5v-.1c0-2.8 2.8-3.7 5.1-4.5h.1v5.4z">
+         </path>
+        </svg>
+       </a>
+      </div>
+     </div>
+     <div class="dcf-grid-halves@sm dcf-grid-fourths@md dcf-col-gap-vw dcf-row-gap-8 dcf-pb-7 dcf-lh-3 unl-font-sans">
+      <!-- InstanceBeginEditable name="contactinfo" -->
+      <section class="wdn-grid-set">
+       <div class="bp2-wdn-col-one-half">
+        <h2>
+         Contact Information
+        </h2>
+        <p>
+         <strong>
+          Office of Research &amp; Economic Development
+         </strong>
+         <br/>
+         301 Canfield PO Box 880433 | Lincoln, NE 68588-0433
+        </p>
+        <p>
+         (402) 472-3123 |
+         <a href="mailto:unlresearch@unl.edu">
+          unlresearch@unl.edu
+         </a>
+        </p>
+       </div>
+       <div class="bp2-wdn-col-one-half">
+        <h2>
+         Related Links
+        </h2>
+        <ul>
+         <li>
+          <a href="http://research.unl.edu/researchcouncil/">
+           Research Council
+          </a>
+         </li>
+         <li>
+          <a href="http://www.nebraskapress.unl.edu" target="_blank" title="University of Nebraska Press ">
+           NU Press
+          </a>
+         </li>
+         <li>
+          <a href="http://www-museum.unl.edu" target="_blank" title="State Museum">
+           State Museum
+          </a>
+         </li>
+         <li>
+          <a href="http://www.unl.edu/postdoc/" title="Postdoctoral Studies">
+           Postdoctoral Studies
+          </a>
+         </li>
+        </ul>
+       </div>
+      </section>
+      <!-- InstanceEndEditable -->
+      <nav aria-labelledby="dcf-footer-group-3" role="navigation">
+       <h2 id="dcf-footer-group-3">
+        Campus Links
+       </h2>
+       <ul>
+        <li>
+         <a href="https://directory.unl.edu/">
+          Directory
+         </a>
+        </li>
+        <li>
+         <a href="https://employment.unl.edu/">
+          Employment
+         </a>
+        </li>
+        <li>
+         <a href="https://events.unl.edu/">
+          Events
+         </a>
+        </li>
+        <li>
+         <a href="https://libraries.unl.edu/">
+          Libraries
+         </a>
+        </li>
+        <li>
+         <a href="https://maps.unl.edu/">
+          Maps
+         </a>
+        </li>
+        <li>
+         <a href="https://news.unl.edu/newsrooms/today/">
+          News
+         </a>
+        </li>
+        <li>
+         <a href="https://www.unl.edu/chancellor/">
+          Office of the Chancellor
+         </a>
+        </li>
+        <li>
+         <a href="https://www.unl.edu/tips-incident-reporting-system/">
+          Report an Incident
+          <br/>
+          <svg aria-hidden="true" class="dcf-d-block dcf-mt-1 dcf-h-7 dcf-w-10" focusable="false" height="48" viewbox="0 0 111.001 47.448" width="112">
+           <path d="M20.716 30.964a3.46 3.46 0 0 0-.793.063v2.505a2.923 2.923 0 0 0 .642.05 1.41 1.41 0 0 0 1.65-1.372 1.26 1.26 0 0 0-1.5-1.246zm59.433.013a4.068 4.068 0 0 0-.87.076V36.6a3.58 3.58 0 0 0 .66.038 2.644 2.644 0 0 0 2.9-2.97 2.424 2.424 0 0 0-2.7-2.69zm-50.81-.025c-1.33 0-2.07 1.284-2.07 2.87s.77 2.845 2.05 2.845h.01c1.3 0 2.04-1.22 2.04-2.883 0-1.523-.72-2.832-2.04-2.832zM5.97 30.94a3.806 3.806 0 0 0-.87.06v2.33h.756a1.29 1.29 0 0 0 1.522-1.22 1.182 1.182 0 0 0-1.41-1.17zm31.787 0a3.79 3.79 0 0 0-.868.062v2.33h.75a1.29 1.29 0 0 0 1.52-1.222 1.183 1.183 0 0 0-1.41-1.17zm64.275-7.88H92.87a8.528 8.528 0 0 0 2.022-5.518V8.574A8.583 8.583 0 0 0 86.32 0h-2.452a8.583 8.583 0 0 0-8.573 8.574v8.968a8.53 8.53 0 0 0 2.023 5.52h-4.33a8.527 8.527 0 0 0 2.022-5.52V8.574A8.583 8.583 0 0 0 66.436 0h-2.45a8.58 8.58 0 0 0-8.572 8.574v8.968a8.53 8.53 0 0 0 2.022 5.52h-4.33a8.533 8.533 0 0 0 2.023-5.52V8.574A8.583 8.583 0 0 0 46.55 0H44.1a8.585 8.585 0 0 0-8.575 8.574v8.968a8.53 8.53 0 0 0 2.023 5.52h-4.324a8.532 8.532 0 0 0 2.023-5.52V8.574A8.583 8.583 0 0 0 26.673 0h-2.45a8.583 8.583 0 0 0-8.575 8.574v8.968a8.53 8.53 0 0 0 2.023 5.52h-8.7C4.02 23.06 0 27.6 0 33.19s4.014 10.13 8.965 10.13h93.072c4.95 0 8.964-4.535 8.964-10.13s-4.01-10.13-8.96-10.13zM77.295 8.575A6.58 6.58 0 0 1 83.865 2h2.45a6.58 6.58 0 0 1 6.577 6.574v8.968a6.58 6.58 0 0 1-6.57 6.573H83.87a6.58 6.58 0 0 1-6.574-6.573V8.574zm-19.882 0A6.58 6.58 0 0 1 63.985 2h2.452a6.58 6.58 0 0 1 6.573 6.574v8.968a6.58 6.58 0 0 1-6.574 6.573h-2.45a6.58 6.58 0 0 1-6.573-6.573V8.574zm-19.883 0A6.58 6.58 0 0 1 44.1 2h2.45a6.583 6.583 0 0 1 6.575 6.574v8.968a6.58 6.58 0 0 1-6.574 6.573H44.1a6.58 6.58 0 0 1-6.574-6.573V8.574zm-19.88 0A6.58 6.58 0 0 1 24.22 2h2.45a6.583 6.583 0 0 1 6.575 6.574v8.968a6.58 6.58 0 0 1-6.574 6.573h-2.45a6.58 6.58 0 0 1-6.57-6.573V8.574zm-10 29.478a10.976 10.976 0 0 1-.58-1.976c-.24-1.07-.6-1.347-1.4-1.36H5.1v3.336H3.2v-8.36a15.082 15.082 0 0 1 2.56-.192 4.245 4.245 0 0 1 2.743.68 2.128 2.128 0 0 1 .797 1.78 2.247 2.247 0 0 1-1.5 2.08v.04a2.115 2.115 0 0 1 1.133 1.58c.264.97.516 2.08.68 2.4H7.648zm8.748 0H11v-8.485h5.225v1.574H12.91v1.76h3.122v1.56H12.91v2.015h3.49v1.573zm6.95-3.89a4.026 4.026 0 0 1-2.77.894 3.34 3.34 0 0 1-.654-.05v3.047h-1.9V29.68a15.684 15.684 0 0 1 2.593-.176 4.035 4.035 0 0 1 2.606.692 2.428 2.428 0 0 1 .894 1.95 2.668 2.668 0 0 1-.77 2.016zm5.917 4.028h-.014c-2.5 0-3.99-1.9-3.99-4.31a4.115 4.115 0 0 1 4.13-4.44c2.61 0 4.03 1.95 4.03 4.3 0 2.8-1.67 4.47-4.15 4.47zm10.172-.13a10.98 10.98 0 0 1-.58-1.97c-.238-1.07-.6-1.34-1.4-1.36h-.563v3.34h-1.9V29.7a15.082 15.082 0 0 1 2.555-.19 4.25 4.25 0 0 1 2.74.68 2.128 2.128 0 0 1 .79 1.776 2.247 2.247 0 0 1-1.5 2.077v.036a2.115 2.115 0 0 1 1.13 1.57c.26.97.51 2.07.68 2.4h-1.96zm9.128-6.87h-2.318v6.88h-1.913v-6.88h-2.29v-1.61h6.52v1.61zm6.117 6.88h-1.915v-8.49h1.914v8.49zm9 0h-2.014l-1.813-3.27a30.065 30.065 0 0 1-1.473-3h-.05a66.55 66.55 0 0 1 .088 3.72v2.56h-1.763V29.6H58.9l1.763 3.11a26.617 26.617 0 0 1 1.385 2.905h.025a35.1 35.1 0 0 1-.15-3.55v-2.47h1.76v8.486zm6.307-1.46a4.553 4.553 0 0 0 1.61-.27l.27 1.51a5.627 5.627 0 0 1-2.17.37c-2.94 0-4.45-1.83-4.45-4.26a4.315 4.315 0 0 1 4.63-4.5 5.006 5.006 0 0 1 2.09.38l-.4 1.51a4.038 4.038 0 0 0-1.61-.32 2.553 2.553 0 0 0-2.7 2.82 2.53 2.53 0 0 0 2.7 2.77zm5.4 1.46h-1.92v-8.49h1.91v8.49zm8.08-1a6.13 6.13 0 0 1-3.93 1.1 16.447 16.447 0 0 1-2.18-.12V29.7a15.442 15.442 0 0 1 2.58-.19 5.456 5.456 0 0 1 3.49.88 3.79 3.79 0 0 1 1.43 3.224 4.335 4.335 0 0 1-1.4 3.433zm8.38 1.01h-5.4v-8.49h5.22v1.57h-3.31v1.76h3.12v1.56h-3.12v2.02h3.48v1.58zm8.65 0h-2.01l-1.81-3.28a30.052 30.052 0 0 1-1.48-3h-.05c.06 1.14.09 2.33.09 3.72v2.55h-1.76v-8.48h2.24l1.76 3.11a26.617 26.617 0 0 1 1.38 2.91h.02a35.1 35.1 0 0 1-.15-3.55v-2.47h1.76v8.49zm5.54-6.87v6.87h-1.92V31.2h-2.29v-1.61h6.52v1.61h-2.32zM23.83 8.53h-3.98v-2.8h11.326v2.8H27.15v11.94h-3.32V8.52zm56.675 8.67a8.422 8.422 0 0 0 3.695.918c1.532 0 2.34-.634 2.34-1.618 0-.9-.7-1.443-2.47-2.055-2.45-.875-4.067-2.23-4.067-4.4 0-2.514 2.12-4.417 5.575-4.417a8.625 8.625 0 0 1 3.76.743l-.743 2.68a6.894 6.894 0 0 0-3.06-.7c-1.444 0-2.144.68-2.144 1.42 0 .94.81 1.36 2.74 2.1 2.6.97 3.81 2.32 3.81 4.42 0 2.47-1.88 4.57-5.92 4.57a9.617 9.617 0 0 1-4.17-.92zM60.55 6.372a27.268 27.268 0 0 1 4.5-.306 7 7 0 0 1 4.525 1.2 4.215 4.215 0 0 1 1.552 3.39 4.63 4.63 0 0 1-1.333 3.5 7 7 0 0 1-4.81 1.55 5.686 5.686 0 0 1-1.138-.087v5.29h-3.3V6.37zm3.3 6.69a5.07 5.07 0 0 0 1.114.087c1.77 0 2.864-.9 2.864-2.39 0-1.36-.92-2.17-2.6-2.17a6.07 6.07 0 0 0-1.377.11v4.35zm-16.524-7.42V20.38H44V5.643h3.323zm26.613 41.73l.3-1.605.08-.544h.24l-.04.29a.672.672 0 0 1 .55-.322.484.484 0 0 1 .46.56.99.99 0 0 1-.89 1.04.68.68 0 0 1-.33-.07h-.01l-.13.66h-.26zm.42-.878a.467.467 0 0 0 .29.085.78.78 0 0 0 .61-.82.306.306 0 0 0-.3-.36.7.7 0 0 0-.54.66zm1.99.29a.582.582 0 0 1-.6-.627.91.91 0 0 1 .84-.967.582.582 0 0 1 .6.633.915.915 0 0 1-.85.96zm.03-.208a.707.707 0 0 0 .54-.753.377.377 0 0 0-.36-.425.693.693 0 0 0-.55.75.377.377 0 0 0 .35.43zm1.34-1.35l.05.856v.41h.01l.16-.382.45-.885h.23l.09.87.02.4h.01l.14-.388.41-.88h.26l-.76 1.525h-.24l-.1-.828-.03-.406h-.01l-.18.4-.44.838h-.24l-.14-1.524h.26zm2.94 1.438a1.09 1.09 0 0 1-.5.12.552.552 0 0 1-.58-.614.944.944 0 0 1 .83-.98.4.4 0 0 1 .45.394c0 .4-.46.5-1.02.494a.638.638 0 0 0 .03.29.342.342 0 0 0 .34.205.852.852 0 0 0 .41-.1zm-.06-1.076a.2.2 0 0 0-.23-.192.585.585 0 0 0-.5.482c.41.007.73-.05.73-.286zm.38 1.16l.18-.982c.04-.2.06-.4.07-.54h.23l-.04.33h.01a.554.554 0 0 1 .46-.365l.07.01-.05.26h-.08a.668.668 0 0 0-.49.63l-.13.68H81zm2.08-.084a1.086 1.086 0 0 1-.5.12.552.552 0 0 1-.59-.614.944.944 0 0 1 .83-.98.4.4 0 0 1 .45.394c0 .4-.45.5-1.02.494a.624.624 0 0 0 .03.29.342.342 0 0 0 .34.205.86.86 0 0 0 .41-.1zM83 45.588a.2.2 0 0 0-.23-.192.584.584 0 0 0-.5.482c.41.007.73-.05.73-.286zm2.008-1.074l-.336 1.754a4.46 4.46 0 0 0-.064.482h-.24l.04-.3h-.006a.65.65 0 0 1-.55.337.482.482 0 0 1-.46-.554 1 1 0 0 1 .945-1.04.684.684 0 0 1 .27.055l.133-.73H85zm-.44.95a.43.43 0 0 0-.25-.065.75.75 0 0 0-.65.8.31.31 0 0 0 .29.37.644.644 0 0 0 .51-.58zm1.72-.95l-.2.99h.004a.64.64 0 0 1 .536-.313.477.477 0 0 1 .46.55 1.008 1.008 0 0 1-.946 1.05.393.393 0 0 1-.47-.39l.03-.24.325-1.64h.26zm-.33 1.647l-.02.2a.21.21 0 0 0 .243.23.775.775 0 0 0 .63-.81.308.308 0 0 0-.29-.36.655.655 0 0 0-.53.59zm1.61-.93l.15.82.07.4h.005l.164-.37.39-.84h.277l-.57 1.16a2.888 2.888 0 0 1-.526.8.98.98 0 0 1-.44.26l-.062-.22a1 1 0 0 0 .28-.15 1.128 1.128 0 0 0 .3-.35l.003-.07-.31-1.43h.27zm2.067.86l-.338.67h-.28l1.1-2.12h.304l.29 2.13h-.27l-.08-.67h-.73zm.713-.2l-.085-.61-.03-.39h-.01l-.175.39-.316.62h.616zm.91-.64l.05.86.007.41h.01l.164-.38.45-.88h.23l.09.87.03.4.14-.38.41-.88h.26l-.75 1.52h-.24l-.1-.83-.02-.4-.18.4-.44.84h-.25L91 45.24h.26zm2.845 1.53l.04-.39h-.01a.665.665 0 0 1-.59.43.45.45 0 0 1-.44-.5 1.062 1.062 0 0 1 1.052-1.09 1.522 1.522 0 0 1 .41.06l-.15.8a3.493 3.493 0 0 0-.064.71h-.24zm.17-1.33l-.18-.02a.81.81 0 0 0-.715.84.28.28 0 0 0 .257.34.75.75 0 0 0 .55-.69zm.465 1.33l.185-.98c.04-.2.06-.4.077-.54h.23l-.04.33h.01a.554.554 0 0 1 .464-.36l.07.01-.05.26h-.07a.668.668 0 0 0-.49.63l-.13.68h-.26zm2.083-.08a1.086 1.086 0 0 1-.5.12.552.552 0 0 1-.58-.61.944.944 0 0 1 .83-.98.4.4 0 0 1 .45.4c0 .4-.45.5-1.01.5a.624.624 0 0 0 .04.29.342.342 0 0 0 .34.21.86.86 0 0 0 .41-.1zm-.05-1.07a.2.2 0 0 0-.23-.19.587.587 0 0 0-.5.48c.41.01.73-.05.73-.29zm.38 1.16l.29-1.52h.26l-.29 1.53h-.26zm.49-1.8a.157.157 0 0 1-.15-.17.185.185 0 0 1 .18-.19.16.16 0 0 1 .17.17.183.183 0 0 1-.18.19zm.91-.09l-.07.37h.37l-.04.21h-.37l-.14.75-.03.24a.13.13 0 0 0 .14.15l.13-.01-.01.21-.2.03a.283.283 0 0 1-.32-.3l.04-.28.15-.77h-.21l.04-.21h.22l.06-.28.28-.08zm.69.37l.15.82.07.4h.01l.17-.37.39-.85h.27l-.57 1.16a2.91 2.91 0 0 1-.52.8.98.98 0 0 1-.44.26l-.06-.21a1.013 1.013 0 0 0 .28-.15 1.128 1.128 0 0 0 .3-.35l.01-.07-.3-1.43h.27zm.7 1.92a5.034 5.034 0 0 0 .31-.75l.31-.03a4.51 4.51 0 0 1-.42.77zm1.95-2.51l-.4 2.13h-.26l.4-2.12h.26zm.07 2.12l.2-1.08.07-.44h.24l-.04.3h.01a.675.675 0 0 1 .57-.33.374.374 0 0 1 .38.42l-.03.25-.17.89h-.25l.17-.88.02-.2a.224.224 0 0 0-.24-.26.67.67 0 0 0-.52.6l-.13.74h-.26zm2.72-.06a1 1 0 0 1-.44.1.548.548 0 0 1-.59-.59.97.97 0 0 1 .93-1 .723.723 0 0 1 .32.07l-.07.21a.583.583 0 0 0-.26-.06.71.71 0 0 0-.65.75.36.36 0 0 0 .38.41.788.788 0 0 0 .35-.08zm.41.1a.174.174 0 0 1-.17-.18.2.2 0 0 1 .2-.21.176.176 0 0 1 .18.19.2.2 0 0 1-.2.21z" fill="currentcolor">
+           </path>
+          </svg>
+         </a>
+        </li>
+       </ul>
+      </nav>
+      <nav aria-labelledby="dcf-footer-group-4" role="navigation">
+       <h2 id="dcf-footer-group-4">
+        Policies &amp; Reports
+       </h2>
+       <ul>
+        <li>
+         <a href="https://emergency.unl.edu/">
+          Emergency Planning and Preparedness
+         </a>
+        </li>
+        <li>
+         <a href="https://www.unl.edu/equity/">
+          Institutional Equity and Compliance
+         </a>
+        </li>
+        <li>
+         <a href="https://www.unl.edu/equity/notice-nondiscrimination">
+          Notice of Nondiscrimination
+         </a>
+        </li>
+        <li>
+         <a href="https://its.unl.edu/unlprivacypolicy">
+          Privacy Policy
+         </a>
+        </li>
+        <li>
+         <a href="https://police.unl.edu/safety-reports-and-statistics#annual-report">
+          Security and Fire Safety Report
+         </a>
+        </li>
+        <li>
+         <a href="https://heoa.unl.edu/">
+          Student Information Disclosures
+         </a>
+        </li>
+       </ul>
+      </nav>
+     </div>
+    </div>
+    <div class="dcf-wrapper dcf-pb-7">
+     <div class="unl-wdn-qa dcf-pb-4 dcf-txt-2xs unl-font-sans unl-cream">
+      UNL web framework and quality assurance provided by the
+      <a href="https://wdn.unl.edu/">
+       Web Developer Network
+      </a>
+      ·
+      <a href="https://webaudit.unl.edu/qa-test/">
+       QA Test
+      </a>
+     </div>
+     <div class="dcf-grid-halves@sm dcf-col-gap-vw dcf-pt-4 dcf-txt-xs dcf-bt-1 dcf-bt-solid unl-bt-cream">
+      <div class="unl-footer-unl">
+       <a class="dcf-institution-title dcf-d-inline-block unl-ls-2" href="https://www.unl.edu/">
+        <span class="dcf-uppercase">
+         University
+        </span>
+        <span class="dcf-italic">
+         of
+        </span>
+        <span class="unl-institution-title-ls">
+        </span>
+        <span class="dcf-uppercase">
+         Nebraska–Lincoln
+        </span>
+       </a>
+      </div>
+      <div>
+       Established 1869 · Copyright 2019
+      </div>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <noscript>
+   <div id="dcf-noscript">
+    <p>
+     Some parts of this site work best with JavaScript enabled.
+    </p>
+   </div>
+  </noscript>
+  <script id="wdn_dependents" src="https://unlcms.unl.edu/wdn/templates_5.0/js/compressed/all.js?dep=5.0.6">
+  </script>
+  <!-- InstanceBeginEditable name="jsbody" -->
+  <!-- Start of StatCounter Code for Default Guide -->
+  <script type="text/javascript">
+   var sc_project=5293574; 
+		var sc_invisible=1; 
+		var sc_security="ccdd6ad6";
+  </script>
+  <script src="https://www.statcounter.com/counter/counter.js" type="text/javascript">
+  </script>
+  <noscript>
+   <div class="statcounter">
+    <a href="http://statcounter.com/" target="_blank" title="web analytics">
+     <img alt="web analytics" class="statcounter" src="https://c.statcounter.com/5293574/0/ccdd6ad6/1/"/>
+    </a>
+   </div>
+  </noscript>
+  <!-- End of StatCounter Code for Default Guide -->
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6139715-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+  <!-- InstanceEndEditable -->
+ </body>
+</html>
+

@@ -1,0 +1,431 @@
+https://csr.d2l.arizona.edu
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   CSR - D2L Course Site Request
+  </title>
+  <link href="CSR3.css" rel="stylesheet"/>
+  <script src="Scripts/CSR3.js">
+  </script>
+  <script src="Scripts/jquery-1.11.2.min.js">
+  </script>
+  <script src="Scripts/jquery-ui.js">
+  </script>
+  <link href="Scripts/jquery-ui-csr3.css" rel="stylesheet"/>
+  <style type="text/css">
+   #nav {
+            display: none;
+        }
+
+        #top {
+            /*height: 132px;*/
+        }
+
+        #main {
+            height: 200px;
+        }
+  </style>
+  <script type="text/javascript">
+   var LogoutTimer = null;
+        var ImpersonateUserSearch = null;
+
+        $(document).ready(
+            function () {
+                // Set window display.
+                var $win = $(window);
+                $win.scroll(function () { ResizeElements(); });
+
+                // Set initial loader size.
+                $('#loader').css({
+                    width: GetDocWidth(),
+                    height: GetDocHeight()
+                });
+
+                $('#loaderTemplate').css({
+                    marginLeft: (window.innerWidth / 2) - 70,
+                    marginTop: (window.innerHeight / 2) - 40
+                });
+
+                // Add tooltip.
+                $("#lblUserFullName1").tooltip({
+                    content: function () {
+                        return $(this).prop('title');
+                    },
+                    position: {
+                        my: "center top",
+                        at: "center bottom+10"
+                    },
+                    tooltipClass: "bottomM",
+                    disabled: false
+                });
+
+                //$("#imgLogo").tooltip({
+                //    content: function () {
+                //        return $(this).prop('title');
+                //    },
+                //    position: {
+                //        my: "left center+5",
+                //        at: "right+10 center"
+                //    },
+                //    tooltipClass: "rightM",
+                //    disabled: false
+                //});
+
+                // Begin impersonation on Enter key.
+                $("#txtUANetID").on("keypress", function (e)
+                {
+                    if (e.keyCode == 13)
+                    {
+                        return impersonateUser();
+                    }
+                });
+            }
+        );
+
+        // Begin impersonation.
+        function impersonateUser() {
+            var txt = $("#txtUANetID");
+            var value = Trim(txt.val());
+
+            // Require NetID.
+            if (value == "") {
+                txt.css("border-color", "red");
+                txt.focus();
+                return false;
+            }
+
+            $("#btnImpersonateUser").click();
+        }
+
+        //Displays prompt and logs user out of application and webAuth when selected.
+        function logoutUser(prompt, buttonId, timerId, dialogId) {
+            if (prompt == true) {
+                //Reset seconds
+                $("#" + timerId).html("60");
+
+                //Show dialog
+                if (dialogId) { popup(dialogId); }
+
+                //Start logout timer
+                LogoutTimer = setInterval(function () {
+                    var sec = parseInt($("#" + timerId).html());
+                    $("#" + timerId).html(sec - 1);
+                    if ($("#" + timerId).html() == "0") $("#" + buttonId).click();
+                }, 1000);
+            } else {
+                $("#" + buttonId).click();
+            }
+        }
+
+        // Prompts user then launches screen reader view.
+        function launchScreenReaderVersion() {
+            //Prompt user 
+            if (!confirm("Launch the Keyboard Friendly Version? You will need to log out to end this setting.\nDo you want to proceed?")) {
+                return;
+            }
+
+            $("#btnScreenReader").click();
+        }
+  </script>
+  <style type="text/css">
+   .endImpersonationLink{
+            color: #ab0520;
+            font: bold 10pt sans-serif;
+            margin: 0 5px 0 5px;
+            display: inline-block;
+           vertical-align: top;
+        }
+
+        /* User tooltip */
+        .userInfo {
+            min-height: 50px;
+            background: url('Images/user_large.gif') no-repeat 5px 5px;
+            padding: 10px 0 0 65px;
+        }
+
+        #chkWebAuth {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Override Tooltip Styles */
+        .ui-tooltip {
+            border: 1px solid #d6d6d6;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .ui-tooltip-content {
+            position: relative;
+            padding: 3px;
+            color: #333333;
+        }
+
+            .ui-tooltip-content::after {
+                content: '';
+                position: absolute;
+                border-style: solid;
+                display: block;
+                width: 0;
+            }
+
+        /* Custom Tooltips */
+        .bottomM .ui-tooltip-content::after {
+            display: none;
+        }
+
+        .rightM .ui-tooltip-content::after {
+            display: none;
+            top: 16px;
+            left: -12px;
+            border-color: transparent #776;
+            border-width: 10px 10px 10px 0;
+        }
+  </style>
+ </head>
+ <body onresize="ResizeElements()" onscroll="$('#txtBodyScrollTop').val($(this).scrollTop());">
+  <form action="./Default.aspx" id="form1" method="post">
+   <div class="aspNetHidden">
+    <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+    <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="vVd9sL0gonRg/KfRJmg/8rzqV2LJgWrk0jZLoGoSA0YMUknFd6G4NbfXhfy8RrXSG+AlZy2NiHt9TeaFfI9jSOjqogdlue8ysXzcxBgdn381auYv1jzjlZh1N2kksks3kIVQcDqBtPiUfOmJ/szoV99M1onLjLMkIaEdKAh3sZaQcLaxpTPtwJ6X3HyPFSwIoQfbz+mlXF1ds0mXFKM2h2IGUrzev8r4O6mFsHTHGfyHaHU6Gkccz38NV3eIjLkp3HW/7eobsA9GHaP7dv/wummVZTFSrMcFkckGCQTbRQk0E0yXsF5nnk5Xf++k445dix6ce7YoXc1b8EDwBrMoO22OXDgKgWnqPRvbJbSYTDRXvAErl6vziAxkjlVB/zy5OhO0Q3xvz/P1NFqoAO8mYvqiICFm9DDPikbM5U3IduMs+yG2+AMcOx1ca6rvCgybdSE/khUVQ4gw4lUowtoOBp+TpE2OTShaN5CZEIy8OZVc6BB8Gwo/LPTTcm7ZFX7qWJmhE0X3ETZ9fZgv6WqvU3/2SxpuGbdTMZn07CKAtGDOR8CLVUOfrRfJQTnv22Fo4yFEmkxA03YQoOrgbQ4B9Mnr72Xs5j5j4tKx76qwDcb8SKLvsELblC0CdJEJLdVEUSUGxjfJwHrIHFR9+t8IqBJZU41dHNRP+fmVBGNihmCIpdOVr6C3GPwZNrMXnts8hkD9H+k2C6J+Ta6x/GJ86XGHOC2yxjVqqUVPMJISSkgBfdKZj6rAaLcugRvKQPuBnfpGXwbONO3f64eVxM5aa51kk0TjEmOoBaV5jrLkF9INwHHYFzDSmB5g3urhNfeclQAjiivta7bHXe+aoaW0qkhwY/yQzALbgKMnKen5l+6tut9J"/>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+   </script>
+   <script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZJRzXwEqACOxbn0DfHDpJGNcrWPUo7KdTbXCYqh2zMUUDlgofw2&amp;t=636765464300000000" type="text/javascript">
+   </script>
+   <script src="/ScriptResource.axd?d=uHIkleVeDJf4xS50Krz-yHsuR2TLCbJrcAKndLVGyRvfTyXTnifHsitVeMn2775gukJdp24GNcdPeAsQ5A5Qy_vnZJvZY6diEK37eCaaX-ECi0kkd-vEkRATHDuRPKxuUfADkXwqLO1dWBhm2DkYEd-Ush41&amp;t=ffffffff999c3159" type="text/javascript">
+   </script>
+   <script src="/ScriptResource.axd?d=Jw6tUGWnA15YEa3ai3FadInQ60hGxzp3JmjOfkk_mOsXNd_PzAHQV6wgrK5ayYmtI3HjcnAL7Nc_pB-rWjcDi92Kd8O5LELjYMOuk4TmFEai4H22tsABytmXDrCrLh4bawZaw3ox6jNaZ3EgRqN_Ukh2jBk1&amp;t=ffffffff999c3159" type="text/javascript">
+   </script>
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+    <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="n1STWODSooEx1xTqmn06gmCqf3h3hkczqA/qLhJRrsrcxn5fFfa7ZVOIezq7Unuxyah1ixkG912Xw8wTmwx7FqC/sYUP/UCjf2d5sSD8ycnl7gBvHueBfWXXD6BZMiwxyCdjYAhrN+fg+FmzNrEqqXdYLjRPkziZTBdFnoFuUws3QOA990FfbfG6CKurp00AHUhOvQ=="/>
+   </div>
+   <!-- Script Manager -->
+   <script type="text/javascript">
+    //<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['tctl00$UpdatePanel1','UpdatePanel1'], [], [], 7200, 'ctl00');
+//]]>
+   </script>
+   <!-- Update Progress -->
+   <div id="UpdateProgress1" style="display:none;">
+    <div class="loader" id="loader">
+     <div class="loaderTemplate" id="loaderTemplate">
+      <table style="width: 100%; height: 100%;">
+       <tr>
+        <td style="text-align: center; color: #333333;">
+         Processing...
+        </td>
+       </tr>
+      </table>
+     </div>
+    </div>
+   </div>
+   <!-- Blanket -->
+   <div class="blanket" id="blanket">
+   </div>
+   <div id="top">
+    <!-- Banner -->
+    <div id="uabanner">
+     <div style="display: table; width: 100%;">
+      <div style="display: table-row; ">
+       <div style="display: table-cell">
+        <a href="http://arizona.edu" style="border:0;" target="_blank" title="Click here to go to arizona.edu">
+         <img id="uabanner_img" src="images/UA-banner-42-white.png"/>
+        </a>
+       </div>
+       <div id="divBanner">
+        <!-- User -->
+        <!-- Impersonate User -->
+       </div>
+      </div>
+     </div>
+     <span id="lblVersion" style="display: none">
+     </span>
+    </div>
+    <!-- Header -->
+    <div id="header">
+     <img id="imgLogo" src="images/logo2.png" title="D2L Course Site Request"/>
+    </div>
+    <!-- Default Navigation -->
+    <!-- Admin Navigation -->
+    <!-- Department Instructor -->
+    <!-- Impersonation Control -->
+    <div id="netIDSearch">
+    </div>
+   </div>
+   <!-- Main -->
+   <div id="main">
+    <div id="UpdatePanel1">
+     <!-- Content -->
+     <!-- Left -->
+     <div id="default_left_col">
+      <h3>
+       D2L CSR Login
+      </h3>
+      <input id="ContentPlaceHolder1_btnLogin" name="ctl00$ContentPlaceHolder1$btnLogin" style="height:32px;" type="submit" value="UA NetID Login"/>
+      <p style="margin-top: 10px;">
+       To log in please click on the UA NetID Login button.
+      </p>
+      <p style="margin-bottom: 30px;">
+       Don't remember your UA NetID and/or password?
+       <br/>
+       Go to the
+       <a href="https://netid.arizona.edu/" target="_blank">
+        UA NetID site
+       </a>
+       .
+      </p>
+      <h3>
+       D2L CSR Help
+      </h3>
+      <ul>
+       <li>
+        <a href="http://help.d2l.arizona.edu/content/how-request-d2l-course-site" id="ContentPlaceHolder1_hlRequestCourseSite" style="color:Blue;text-decoration:underline;" target="_blank">
+         How to request a D2L Course Site
+        </a>
+       </li>
+       <li>
+        <a href="http://help.d2l.arizona.edu/content/instructor-csr-troubleshooting" id="ContentPlaceHolder1_hlLoginTrouble" style="color:Blue;text-decoration:underline;" target="_blank">
+         Trouble logging into CSR
+        </a>
+       </li>
+       <li>
+        <a href="http://help.d2l.arizona.edu/form/instructor-contact-us" id="ContentPlaceHolder1_hlReportProblem" style="color:Blue;text-decoration:underline;" target="_blank">
+         Submit a problem Report
+        </a>
+       </li>
+      </ul>
+     </div>
+     <!-- Center -->
+     <div id="default_mainContent">
+      <!-- No Access Message -->
+      <!-- No Enrollment Message -->
+      <!-- Database Error Message -->
+      <!-- Default Message -->
+      <h2 style="margin-top: 5px;">
+       Please Note:
+      </h2>
+      <p>
+       To log in and request a D2L course site, you must be listed as a
+       <b>
+        Primary Instructor
+       </b>
+       in
+       <a class="link" href="http://uaccess.arizona.edu/" id="ContentPlaceHolder1_hlinkUaccess" target="_blank">
+        UAccess
+       </a>
+       If you are not currently listed in UAccess as a Primary Instructor, please contact the person in your department responsible for scheduling courses.
+      </p>
+      <p>
+       A new D2L course site must be requested
+       <strong>
+        every semester
+       </strong>
+       for
+       <strong>
+        each course.
+       </strong>
+       .
+      </p>
+     </div>
+    </div>
+    <!-- Confirm Logout Dialog -->
+    <div class="alert" id="divLogoutDialog">
+     <div class="confirmHeader">
+      D2L Course Site Request Logout
+     </div>
+     <div style=" padding: 30px 20px 0 15px;float: left;">
+      <img src="Images/alert.png"/>
+     </div>
+     <div style="margin: 20px 0px 0 30px;text-align: left;">
+      <div style="padding: 0px 0px 10px 0px;">
+       <div style="font-weight: normal; font-size: 12pt; margin: 0 0 10px 0">
+        Are you sure you want to logout from
+        <br/>
+        D2L Course Site Request?
+       </div>
+      </div>
+     </div>
+     <!-- Dialog Controls -->
+     <div style="text-align: left; padding: 10px 0 0px 0px;">
+      <input class="button_dialog_cancel" id="btnCancelLogout" onclick="clearInterval(LogoutTimer); LogoutTimer = null; popup('divLogoutDialog');" style="margin: 0 20px 0 0" title="Click here to cancel." type="button" value="Cancel"/>
+      <input class="button_dialog" id="btnConfirmLogout" onclick="popup('divLogoutDialog'); logoutUser(false, 'btnLogout');" title="Click here to logout." type="button" value="Confirm"/>
+     </div>
+     <div style="text-align: center; font: normal 10pt sans-serif; margin: 15px 0 0 0;">
+      Auto logout will occur in
+      <span id="spanSeconds" style="font-weight: bold;">
+       60
+      </span>
+      seconds.
+     </div>
+    </div>
+   </div>
+   <!-- Hidden Controls -->
+   <div style="display:none">
+    <input id="txtBodyScrollTop" name="ctl00$txtBodyScrollTop" type="text" value="0"/>
+    <input id="btnImpersonateUser" name="ctl00$btnImpersonateUser" type="submit" value="Go"/>
+    <input id="btnLogout" name="ctl00$btnLogout" style="color:graytext;background-color:LightGrey;" title="Do not click!" type="submit" value="Log Out"/>
+   </div>
+   <!-- Footer -->
+   <div class="footer">
+    <p class="leftside">
+     The Office of Instruction and Assessment (
+     <a href="https://www.google.com/maps/place/Manuel+Pacheco+Integrated+Learning+Center/@32.2318836,-110.9493343,18z/data=!4m2!3m1!1s0x86d671aa1edf610f:0x49168a758eaab509" id="hlMap" target="_blank" title="Click here to view the map.">
+      Map
+     </a>
+     )
+     <br/>
+     in the Manuel Pacheco Integrated Learning Center
+     <br/>
+     1500 E. University Blvd., Bldg. 70
+     <br/>
+     University of Arizona
+     <br/>
+     Tucson, AZ 85721
+     <br/>
+     <input id="btnScreenReader" name="ctl00$btnScreenReader" style="display: none;" type="submit" value="Screen Reader"/>
+    </p>
+    <p class="rightside">
+     Hours: Monday - Friday, 8 am - 5 pm
+     <br/>
+     <a href="http://help.d2l.arizona.edu/form/instructor-contact-us" id="hlD2LSupport" target="_blank" title="Click here to contact the &lt;%= SupportTeam %&gt;.">
+      Contact the D2L Support Team
+     </a>
+    </p>
+    <p class="copywrite">
+     All contents copyright Â©
+     <span id="lblCopyRightYear">
+      2019
+     </span>
+     . Arizona Board of Regents. All rights reserved
+    </p>
+    <p>
+    </p>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":null,"displayAfter":400,"dynamicLayout":true}, null, null, $get("UpdateProgress1"));
+});
+//]]>
+   </script>
+  </form>
+ </body>
+</html>
+

@@ -1,0 +1,471 @@
+http://directory.hsc.wvu.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=9, IE=Edge, chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <title>
+    Home Page - Health Sciences Directory | West Virginia University
+   </title>
+   <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+   <link href="https://fast.fonts.net/cssapi/36d8cd92-7cc7-499b-b169-0eed9d670283.css" rel="stylesheet"/>
+   <link href="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/font/css/iconic-glyphs.min.css" rel="stylesheet">
+    <link href="https://cdn.hsc.wvu.edu/CustomDesigns/PublicDirectory/_Common/Styles/Styles.min.css?1182018" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">
+    </script>
+   </link>
+  </meta>
+ </head>
+ <body>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-93668260-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+  <header class="header has-top-navigation" role="banner">
+   <div class="wvu-header">
+    <div class="wvu-header-layout-container">
+     <a class="wvu-header-logo" href="/">
+      <span class="wvu-logo">
+       <!--[if IE 9]>
+                    <img src="_Common/Images/wvu-logo-white.png" alt="West Virginia University Logo" />
+                    <![endif]-->
+       <!--[if gt IE 9]><!-->
+       <img alt="West Virginia University Logo" src="//cdn.hsc.wvu.edu/CustomDesigns/PublicDirectory/_Common/Images/wvu-logo-white.svg"/>
+       <!--<![endif]-->
+      </span>
+      <span class="wvu-header-sub-brand-name">
+       Health Sciences Directory
+      </span>
+     </a>
+    </div>
+   </div>
+  </header>
+  <input data-val="true" data-val-number="The field Take must be a number." id="DeptTake" name="DepartmentResult.Take" type="hidden" value=""/>
+  <input data-val="true" data-val-number="The field Take must be a number." id="UserTake" name="UserResult.Take" type="hidden" value=""/>
+  <div class="search">
+   <div class="search-form__container">
+    <div class="layout-container">
+     <div class="search-form">
+      <button class="search-form__submit js-search-form-submit-button">
+       <!--[if IE 9]>
+                    <span class="iconic iconic-md" data-glyph="magnifying-glass" title="magnifying glass" aria-hidden="true"></span>
+                    <![endif]-->
+       <!--[if gt IE 9]><!-->
+       <img alt="magnifying-glass" class="iconic iconic-fluid" data-src="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/svg/magnifying-glass.svg"/>
+       <!--<![endif]-->
+      </button>
+      <label class="search-form__label" for="search-form-input">
+       Search
+      </label>
+      <input class="search-form__input js-search-form-input" id="search-form-input" placeholder="Search" type="text"/>
+      <button class="search-form__clear js-search-form-clear-button">
+       <!--[if IE 9]>
+                    <span class="iconic iconic-sm" data-glyph="circle-x" title="circle x" aria-hidden="true"></span>
+                    <![endif]-->
+       <!--[if gt IE 9]><!-->
+       <img alt="circle-x" class="iconic iconic-sm" data-src="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/svg/circle-x.svg"/>
+       <!--<![endif]-->
+      </button>
+     </div>
+    </div>
+   </div>
+   <div class="autocomplete js-search-autocomplete">
+    <div class="layout-container">
+     <div class="autocomplete__container js-search-autocomplete-container">
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+   $(function () {
+        var enterKey = 13;
+        //var itemIndex;
+
+        $('.js-search-form-submit-button').on('click', function () {
+            $.get('/Home/Search', { searchTerms: $('.js-search-form-input').val() }, function (html) {
+                $('.js-search-autocomplete').removeClass('is-visible');
+                $('.results-target').html(html);
+                $('.js-loading-indicator').removeClass('is-loading');
+                bindSearchMore();
+                updateIcons();
+            });
+            $('.js-loading-indicator').addClass('is-loading');
+        });
+
+        // Clear search input and hide autocomplete
+        $('.js-search-form-clear-button').on('click', function () {
+            $('.js-search-form-input').val('');
+            $('.js-search-autocomplete').removeClass('is-visible');
+            $(this).removeClass('is-visible');
+        });
+
+        function bindAutoMore() {
+            $('.js-more-autosearch-user-input').on('click', function () {
+
+                //var itemIndex = $('.js-more-autosearch-user-input').parent().index();
+                //console.log(itemIndex);
+
+                var userTake = $('#UserTakeAuto');
+                if (userTake.length === 0) {
+                    userTake = $('#UserTake');
+                }
+
+                var deptTake = $('#DeptTakeAuto');
+                if (deptTake.length === 0) {
+                    deptTake = $('#DeptTake');
+                }
+
+                $.get('/Home/AutoSearch', { searchTerms: $('.js-search-form-input').val(), nUsers: parseInt(userTake.val()) + 5, nDepts: deptTake.val() }, function (html) {
+                    $('.js-search-autocomplete-container').html(html);
+                    bindAutoMore();
+
+                    //$('.autocomplete__item').eq(itemIndex - 1).find('a').focus();
+                });
+
+                return false;
+
+            });
+            $('.js-more-autosearch-dept-input').on('click', function () {
+
+                //var itemIndex = $('.js-more-autosearch-dept-input').parent().index();
+                //console.log(itemIndex);
+
+                var userTake = $('#UserTakeAuto');
+                if (userTake.length === 0) {
+                    userTake = $('#UserTake');
+                }
+
+                var deptTake = $('#DeptTakeAuto');
+                if (deptTake.length === 0) {
+                    deptTake = $('#DeptTake');
+                }
+
+                $.get('/Home/AutoSearch', { searchTerms: $('.js-search-form-input').val(), nUsers: userTake.val(), nDepts: parseInt(deptTake.val()) + 5 }, function (html) {
+                    $('.js-search-autocomplete-container').html(html);
+                    bindAutoMore();
+
+                    //$('.autocomplete__item').eq(itemIndex).find('a').focus();
+                });
+
+                return false;
+
+            });
+        }
+
+        function bindSearchMore() {
+            $('.js-more-search-user-input').on('click', function () {
+                $.get('/Home/Search', { searchTerms: $('.js-search-form-input').val(), nUsers: 2147483647, nDepts: $('#DeptTake').val() }, function (html) {
+                    $('.js-search-autocomplete').removeClass('is-visible');
+                    $('.results-target').html(html);
+                    $('.js-loading-indicator').removeClass('is-loading');
+                    bindSearchMore();
+                    updateIcons();
+                });
+                $('.js-loading-indicator').addClass('is-loading');
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                return false;
+            });
+            $('.js-more-search-dept-input').on('click', function () {
+                $.get('/Home/Search', { searchTerms: $('.js-search-form-input').val(), nUsers: $('#UserTake').val(), nDepts: 2147483647, deptTab: true }, function (html) {
+                    $('.js-search-autocomplete').removeClass('is-visible');
+                    $('.results-target').html(html);
+                    $('.js-loading-indicator').removeClass('is-loading');
+                    bindSearchMore();
+                    updateIcons();
+                });
+                $('.js-loading-indicator').addClass('is-loading');
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                return false;
+            });
+            $('.js-more-search-all-input').on('click', function () {
+                $.get('/Home/Search', { searchTerms: $('.js-search-form-input').val(), nUsers: 2147483647, nDepts: 2147483647, allTab: true }, function(html) {
+                    $('.js-search-autocomplete').removeClass('is-visible');
+                    $('.results-target').html(html);
+                    $('.js-loading-indicator').removeClass('is-loading');
+                    bindSearchMore();
+                    updateIcons();
+                });
+                $('.js-loading-indicator').addClass('is-loading');
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                return false;
+            });
+        }
+
+        var currentAutocompleteRequest;
+        var autocompleteTimout;
+
+        $('.js-search-form-input').keyup(function(event) {
+
+            if (autocompleteTimout != null) clearTimeout(autocompleteTimout);
+
+            autocompleteTimout = setTimeout(
+                function() {
+                    if (event.keyCode !== enterKey && $('.js-search-form-input').val().length > 2) {
+
+                        if (currentAutocompleteRequest != null) currentAutocompleteRequest.abort();
+
+                        currentAutocompleteRequest = $.get('/Home/AutoSearch', { searchTerms: $('.js-search-form-input').val() }, function (html) {
+                            $('.js-search-autocomplete-container').html(html);
+                            bindAutoMore();
+                            $('.js-search-autocomplete').addClass('is-visible');
+                        });
+                    } else {
+                        $('.js-search-autocomplete').removeClass('is-visible');
+                    }
+
+                    if ($('.js-search-form-input').val().length > 0) {
+                        $('.js-search-form-clear-button').addClass('is-visible');
+                    } else {
+                        $('.js-search-form-clear-button').removeClass('is-visible');
+                    }
+                },
+            300);
+        });
+
+        $('.js-search-form-input').keydown(function (event) {
+            if (event.keyCode === enterKey) {
+                $.get('/Home/Search', { searchTerms: $('.js-search-form-input').val() }, function (html) {
+                    $('.js-search-autocomplete').removeClass('is-visible');
+                    $('.results-target').html(html);
+                    $('.js-loading-indicator').removeClass('is-loading');
+                    bindSearchMore();
+                    updateIcons();
+                });
+                $('.js-loading-indicator').addClass('is-loading');
+            }
+        });
+
+        function updateIcons() {
+            // Update all icons
+            var iconic = IconicJS();
+            iconic.inject('.iconic', {
+                each: function (svg) {
+                    // For each SVG injected
+                }
+            }, function (count) {
+                // Injection complete
+                iconic.update();
+            });
+        }
+
+        // Auto search whatever is in the box
+        $('.js-search-form-submit-button').click();
+        $('.js-search-form-input').focus();
+
+    });
+
+    //$(document).keydown(
+    //    function (e) {
+    //        // Down key
+    //        if (e.keyCode == 40) {
+    //            if ($(".js-dir-search-form-input").is(":focus")) {
+    //                $('.autocomplete__item').first().find('a').focus();
+    //            } else {
+    //                $(".autocomplete__item a:focus, .autocomplete__item button:focus").parent().nextAll('.autocomplete__item').first().find('a, button').focus();
+    //            }
+    //        }
+
+    //        // Up key
+    //        if (e.keyCode == 38) {
+    //            if ($(".autocomplete__item:nth-child(2) a:focus").is(":focus")) {
+    //                $(".js-dir-search-form-input").focus();
+    //            } else {
+    //                $(".autocomplete__item a:focus, .autocomplete__item button:focus").parent().prevAll('.autocomplete__item').first().find('a, button').focus();
+    //            }
+    //        }
+    //    }
+    //);
+  </script>
+  <div class="results-target">
+   <div class="layout-container">
+    <div class="call-to-action">
+     <span class="call-to-action__icon">
+      <!--[if IE 9]>
+                        <span class="iconic" data-glyph="person-genderless" title="person genderless" aria-hidden="true"></span>
+                    <![endif]-->
+      <!--[if gt IE 9]><!-->
+      <img alt="person" class="iconic iconic-fluid" data-gender="genderless" data-src="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/svg/person.svg">
+       <!--<![endif]-->
+      </img>
+     </span>
+     <p class="call-to-action__text">
+      Are you looking for me? Start typing into the box above to search for people and departments.
+     </p>
+    </div>
+   </div>
+  </div>
+  <section class="layout-container card card--organizations">
+   <h2 class="card__heading">
+    Organizations
+   </h2>
+   <div class="card__content">
+    <ul class="inline-list organizations">
+     <li class="organization">
+      <a href="/organization/Charleston-Campus">
+       Charleston Campus
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/Eastern-Campus">
+       Eastern Campus
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/Health-Sciences-Center">
+       Health Sciences Center
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/School-of-Dentistry">
+       School of Dentistry
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/School-of-Medicine">
+       School of Medicine
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/School-of-Nursing">
+       School of Nursing
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/School-of-Pharmacy">
+       School of Pharmacy
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/School-of-Public-Health">
+       School of Public Health
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/WVU-Cancer-Institute">
+       WVU Cancer Institute
+      </a>
+     </li>
+     <li class="organization">
+      <a href="/organization/WVU-Physicians-of-Charleston">
+       WVU Physicians of Charleston
+      </a>
+     </li>
+    </ul>
+   </div>
+  </section>
+  <footer class="wvu-footer" role="contentinfo">
+   <div class="wvu-footer-layout-container">
+    <div class="wvu-footer-right">
+     <nav class="wvu-footer-navigation" role="navigation">
+      <ul class="wvu-footer-nav-items">
+       <li class="wvu-footer-nav-item">
+        <a href="https://portal.wvu.edu/" target="_blank">
+         WVU Portal
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://careerservices.wvu.edu/students/mountaineertraklogins" target="_blank">
+         MountaineerTRAK
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://alert.wvu.edu/" target="_blank">
+         WVU Alert
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://wvutoday.wvu.edu" target="_blank">
+         WVU Today
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://mix.wvu.edu/" target="_blank">
+         MIX
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://office365.hsc.wvu.edu/" target="_blank">
+         Office 365
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://sole.hsc.wvu.edu/" target="_blank">
+         SOLE
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://intranet.hsc.wvu.edu/" target="_blank">
+         Intranet
+        </a>
+       </li>
+      </ul>
+     </nav>
+     <div class="wvu-footer-social-buttons">
+      <a class="wvu-footer-social-button wvu-footer-facebook-button" href="https://www.facebook.com/WVUHealth/" target="_blank">
+       <!--[if IE 9]>
+                    <span class="iconic iconic-sm" data-glyph="social-facebook" title="social facebook" aria-hidden="true"></span>
+                    <![endif]-->
+       <!--[if gt IE 9]><!-->
+       <img alt="facebook" class="iconic iconic-sm" data-src="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/svg/social.svg" data-type="facebook">
+        <!--<![endif]-->
+       </img>
+      </a>
+      <a class="wvu-footer-social-button wvu-footer-twitter-button" href="https://twitter.com/WVUHealth" target="_blank">
+       <!--[if IE 9]>
+                    <span class="iconic iconic-sm" data-glyph="social-twitter" title="social twitter" aria-hidden="true"></span>
+                    <![endif]-->
+       <!--[if gt IE 9]><!-->
+       <img alt="twitter" class="iconic iconic-sm" data-src="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/svg/social.svg"/>
+       <!--<![endif]-->
+      </a>
+      <a class="wvu-footer-social-button wvu-footer-youtube-button" href="https://www.youtube.com/channel/UCZ293cVKyxqlLHBVTMixhpQ" target="_blank">
+       <!--[if IE 9]>
+                    <img src="https://cdn.hsc.wvu.edu/Resources/iconic-add-ons/youtube.png" class="iconic iconic-sm" data-type="youtube" alt="social" style="visibility: visible; width: 16px;" />
+                    <![endif]-->
+       <!--[if gt IE 9]><!-->
+       <img alt="youtube" class="iconic iconic-sm" data-src="https://cdn.hsc.wvu.edu/Resources/iconic-add-ons/youtube.svg" data-type="youtube">
+        <!--<![endif]-->
+       </img>
+      </a>
+     </div>
+    </div>
+    <div class="wvu-footer-left">
+     <nav class="wvu-footer-navigation" role="navigation">
+      <ul class="wvu-footer-nav-items">
+       <li class="wvu-footer-nav-item">
+        <a href="https://about.wvu.edu/wvu-facts" target="_blank">
+         Accreditations
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="https://brand.wvu.edu/web-standards" target="_blank">
+         Web Standards
+        </a>
+       </li>
+       <li class="wvu-footer-nav-item">
+        <a href="mailto:cmsdesk@hsc.wvu.edu">
+         Questions or Comments?
+        </a>
+       </li>
+      </ul>
+     </nav>
+     <p class="wvu-footer-copyright">
+      © 2019
+      <a href="http://www.wvu.edu/">
+       West Virginia University
+      </a>
+      . WVU is an EEO/Affirmative Action employer — Minority/Female/Disability/Veteran.
+     </p>
+    </div>
+   </div>
+  </footer>
+  <script src="https://cdn.hsc.wvu.edu/Resources/iconic.1.9.0/js/iconic.min.js">
+  </script>
+ </body>
+</html>

@@ -1,0 +1,157 @@
+https://sso.fvsu.edu
+<!DOCTYPE html>
+<html ng-app="qlTenantApp">
+ <head>
+  <meta content="IE=Edge, chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="0" http-equiv="Expires"/>
+  <script src="/resources/js/jquery-1.12.4.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/jquery-ui-1.10.3.min.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/jquery.blockUI.js" type="text/javascript">
+  </script>
+  <!-- Bootstrap -->
+  <script src="/resources/js/bootstrap.min.js" type="text/javascript">
+  </script>
+  <!-- Angular JS -->
+  <script src="/resources/js/angular.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/angular-route.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/angular-animate.min.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/angular-block-ui.min.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/angular-sanitize.js" type="text/javascript">
+  </script>
+  <script src="/resources/js/ngDraggable.js">
+  </script>
+  <script src="/resources/js/notify.min.js">
+  </script>
+  <script src="/resources/js/ui-bootstrap-tpls-0.11.0.js">
+  </script>
+  <!-- Session Inactivity Impl. -->
+  <script src="/resources/js/angular-idle.js">
+  </script>
+  <!-- QL Thrid Party JS -->
+  <script src="/resources/js/client.js?v=5.13" type="text/javascript">
+  </script>
+  <!-- Google Feeds API -->
+  <script src="https://www.google.com/jsapi" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   google.load("feeds", "1");
+  </script>
+  <!-- QL CSS -->
+  <link href="/resources/css/ql.css?v=5.13" rel="stylesheet" type="text/css"/>
+  <link href="/resources/css/angular-block-ui.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/resources/css/ng-animation.css" rel="stylesheet" type="text/css"/>
+  <!-- bootstrap 3.0.2 -->
+  <link href="/resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <!-- font Awesome -->
+  <link href="/resources/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+  <!-- Ionicons -->
+  <link href="/resources/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+  <!-- Angular Templates -->
+  <!-- Session Inactivity: Warning dialog message -->
+  <script id="warning-dialog.html" type="text/ng-template">
+   <div class="modal-new">
+  <div class="modal-header" ng-style="{'background-color':tenantPreference.headerColor, 'color': tenantPreference.formTextColor}" ng-if="sessionTimeoutTitleMsg != null && sessionTimeoutTitleMsg != '' ">
+   <h4 class="mrg-A0">{{sessionTimeoutTitleMsg}}</h4>
+
+  </div>
+  <div class="modal-header" ng-style="{'background-color':tenantPreference.headerColor, 'color': tenantPreference.formTextColor}" ng-if="sessionTimeoutTitleMsg === null || sessionTimeoutTitleMsg === '' ">
+   <h4 class="mrg-A0">Session Timeout Warning</h4>
+  </div>
+  <div idle-countdown="countdown" class="modal-body text-center" ng-if="SessionInactivityWarningMsg != null && SessionInactivityWarningMsg != '' ">
+	<p class="mrg-B0"><b>{{countdown | secondsToTime}}</b> seconds(s)<br>{{SessionInactivityWarningMsg}} </p>
+  </div>
+ <div idle-countdown="countdown" class="modal-body text-center" ng-if="SessionInactivityWarningMsg === null || SessionInactivityWarningMsg === '' ">
+	<p class="mrg-B0"><b>{{countdown | secondsToTime}}</b> seconds(s)<br> Your session will expire soon. Click "Continue" to keep working.</p>
+  </div>
+ 
+  <div class="modal-footer text-center pad-T0">
+	 <a class="btn btn-blue" ng-click="extendSession()" ng-style="{'background-color':tenantPreference.formButtonColor,'border-color':tenantPreference.headerColor, 'color': tenantPreference.formButtonTextColor}">Continue</a>
+  </div>
+</div>
+  </script>
+  <style>
+   .mrg-A0 {margin: 0;}
+	.mrg-B0 {margin-bottom: 0;}
+	.pad-T0,.ng-binding{padding-top: 0;}
+	.modal-header {border-top-left-radius:6px;border-top-right-radius:6px;}
+	.btn-blue{padding: 7px 22px; border-radius: 50px;text-transform: uppercase; font-size: 12px;}
+	.modal{margin-top: 5%;}
+  </style>
+  <title>
+   QuickLaunchSSO Login
+  </title>
+  <link ng-href="/resources/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500" rel="stylesheet" type="text/css"/>
+ </head>
+ <style>
+  .blue-head{background-color:#0090eb;}
+.outer-container h2{color:#0090eb; text-align:left;}
+.outer-container .submit, .btn-xs{background: #ff940a; border-color: #ef8700; font-size: 16px; padding: 5px 20px; text-shadow: 1px 1px 1px #282828;}
+.ql-logo{ padding:15px 15px 0 15px;}
+.ql-logo img{width:auto;}
+ </style>
+ <body class="tenant">
+  <div ng-controller="selectTenant" ng-show="tenantNotFound">
+   <div class="page-header header-div blue-head">
+    <div class="ql-logo">
+     <img alt="" src="/resources/images/is-logo.png"/>
+    </div>
+   </div>
+   <div class="container form">
+    <div class="row">
+     <div class="col col-md-6 qlform">
+      <div class="outer-container">
+       <h2>
+        Sign on to QuickLaunch SSO
+       </h2>
+       <p>
+        Please enter your company name post which you will be redirected to your login page to access your configured applications.
+       </p>
+       <p>
+        <strong>
+         Your Company Name
+        </strong>
+       </p>
+       <div class="alert alert-danger" ng-show="showTenantNotFoundMessage" role="alert">
+        Invalid Company Name.
+       </div>
+       <input class="search" ng-model="selectedTenant" placeholder="Company name" type="text"/>
+       <button class="submit" id="tenantSelectedButton" ng-click="checkTenantAndRedirect()">
+        Submit
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<script type="text/javascript">
+ $(document).ready(function() {
+    	$.blockUI(
+                {
+                    message : '<h1><img src="/admin/resources/img/Loading.gif" width="100px" height="100px"> <br>  Loading  </h1>',
+                    css: {
+                        border: 'none'
+                        /*padding: '15px',
+                        backgroundColor: '#000',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',*/
+                        //backgroundImage : url("contextPath+'/resources/images/loading.gif'"),
+                        //opacity: .5
+                        //color: '#fff'
+                    } });
+    	    	setTimeout($.unblockUI, 2000);
+    });
+</script>
+

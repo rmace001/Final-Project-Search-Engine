@@ -1,0 +1,198 @@
+http://workwest.westga.edu/
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   WSO2 Identity Server
+  </title>
+  <link href="images/favicon.png" rel="icon" type="image/x-icon"/>
+  <link href="libs/bootstrap_3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/Roboto.css" rel="stylesheet"/>
+  <link href="css/custom-common.css" rel="stylesheet"/>
+  <!--[if lt IE 9]>
+        <script src="js/html5shiv.min.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+  <script>
+   function checkSessionKey() {
+                        $.ajax({
+                            type: "GET",
+                            url: "../logincontext?sessionDataKey=" + getParameterByName("sessionDataKey") + "&relyingParty=" + getParameterByName("relyingParty") + "&tenantDomain=" + getParameterByName("tenantDomain"),
+                            success: function (data) {
+                                if (data && data.status == 'redirect' && data.redirectUrl && data.redirectUrl.length > 0) {
+                                    window.location.href = data.redirectUrl;
+                                }
+                            }
+                        });
+                    }
+
+
+            function getParameterByName(name, url) {
+                     if (!url) {
+                        url = window.location.href;
+                     }
+                     name = name.replace(/[\[\]]/g, '\\$&');
+                     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                     results = regex.exec(url);
+                     if (!results) return null;
+                     if (!results[2]) return "";
+                     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                 }
+  </script>
+ </head>
+ <body onload="checkSessionKey()">
+  <!-- header -->
+  <header class="header header-default">
+   <div class="container-fluid">
+    <br/>
+   </div>
+   <div class="container-fluid">
+    <div class="pull-left brand float-remove-xs text-center-xs">
+     <a href="#">
+      <img alt="University of West Georgia" class="logo" src="images/mainLogo.svg" title="University of West Georgia"/>
+      <h1>
+       <em>
+        Identity Server
+       </em>
+      </h1>
+     </a>
+    </div>
+   </div>
+  </header>
+  <!-- page content -->
+  <div class="container-fluid body-wrapper">
+   <div class="row">
+    <div class="col-md-12">
+     <!-- content -->
+     <div class="container col-xs-10 col-sm-6 col-md-6 col-lg-3 col-centered wr-content wr-login col-centered">
+      <div>
+       <h2 class="wr-title uppercase blue-bg padding-double white boarder-bottom-blue margin-none">
+        Sign In
+       </h2>
+      </div>
+      <div class="boarder-all ">
+       <div class="clearfix">
+       </div>
+       <div class="padding-double login-form">
+        <form action="../samlsso" id="loginForm" method="post">
+         <input id="tocommonauth" name="tocommonauth" type="hidden" value="true"/>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+          <label class="form__label" for="username">
+           Username
+          </label>
+          <input class="form-control" id="username" name="username" placeholder="User Name" tabindex="0" type="text"/>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+          <label class="form__label" for="password">
+           Password
+          </label>
+          <input autocomplete="off" class="form-control" id="password" name="password" placeholder="Password" type="password"/>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+          <input name="sessionDataKey" type="hidden" value="34c56216-3af4-4829-aa08-dc868aea064c">
+          </input>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+          <div class="checkbox">
+           <label>
+            <input id="chkRemember" name="chkRemember" type="checkbox"/>
+            Remember me on this computer
+           </label>
+          </div>
+          <br/>
+          <div class="form-actions">
+           <button class="wr-btn grey-bg col-xs-12 col-md-12 col-lg-12 uppercase font-extra-large" type="submit">
+            Sign In
+           </button>
+          </div>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+          <br>
+          </br>
+         </div>
+         <div class="clearfix">
+         </div>
+        </form>
+        <div class="clearfix">
+        </div>
+       </div>
+      </div>
+      <!-- /content -->
+     </div>
+    </div>
+    <!-- /content/body -->
+   </div>
+  </div>
+  <!-- footer -->
+  <footer class="footer">
+   <div class="container-fluid">
+    <p>
+     WSO2 Identity Server | ©
+     <script>
+      document.write(new Date().getFullYear());
+     </script>
+     <a href="http://wso2.com/" target="_blank">
+      <i class="icon fw fw-wso2">
+      </i>
+      Inc
+     </a>
+     . All Rights Reserved.
+    </p>
+   </div>
+  </footer>
+  <script src="libs/jquery_1.11.3/jquery-1.11.3.js">
+  </script>
+  <script src="libs/bootstrap_3.3.5/js/bootstrap.min.js">
+  </script>
+  <script>
+   $(document).ready(function () {
+            $('.main-link').click(function () {
+                $('.main-link').next().hide();
+                $(this).next().toggle('fast');
+                var w = $(document).width();
+                var h = $(document).height();
+                $('.overlay').css("width", w + "px").css("height", h + "px").show();
+            });
+            $('[data-toggle="popover"]').popover();
+            $('.overlay').click(function () {
+                $(this).hide();
+                $('.main-link').next().hide();
+            });
+
+            
+        });
+        function myFunction(key, value, name) {
+            var object = document.getElementById(name);
+            var domain = object.value;
+
+
+            if (domain != "") {
+                document.location = "../commonauth?idp=" + key + "&authenticator=" + value +
+                        "&sessionDataKey=34c56216-3af4-4829-aa08-dc868aea064c&domain=" +
+                        domain;
+            } else {
+                document.location = "../commonauth?idp=" + key + "&authenticator=" + value +
+                        "&sessionDataKey=34c56216-3af4-4829-aa08-dc868aea064c";
+            }
+        }
+
+        function handleNoDomain(key, value) {
+            document.location = "../commonauth?idp=" + key + "&authenticator=" + value +
+                    "&sessionDataKey=34c56216-3af4-4829-aa08-dc868aea064c";
+        }
+
+        $('#popover').popover({
+            html: true,
+            title: function () {
+                return $("#popover-head").html();
+            },
+            content: function () {
+                return $("#popover-content").html();
+            }
+        });
+        window.onunload = function(){};
+  </script>
+ </body>
+</html>
+

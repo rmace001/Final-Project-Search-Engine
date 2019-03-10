@@ -1,0 +1,468 @@
+http://gtid-lookup.gatech.edu
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+ <script language="JavaScript">
+  function goto_help() {
+	window.open("gtid_ind_lookup_help.cfm","","width=575,height=420,menubar=0,location=0,statusbar=0,resizable=1,scrollbars,");
+  }
+
+  function setFocus() {
+	document.gtid_ind_lookup_par_form.lname.focus();
+  }
+
+  var isNN = (navigator.appName.indexOf("Netscape")!=-1);
+  function autoTab(input,len, e) {
+	var keyCode = (isNN) ? e.which : e.keyCode; 
+	var filter = (isNN) ? [0,8,9] : [0,8,9,16,17,18,37,38,39,40,46];
+	if(input.value.length >= len && !containsElement(filter,keyCode)) {
+	  input.value = input.value.slice(0, len);
+	  input.form[(getIndex(input)+1) % input.form.length].focus();
+	}
+	function containsElement(arr, ele) {
+	  var found = false, index = 0;
+	  while(!found && index < arr.length)
+		if(arr[index] == ele)
+		  found = true;
+		else
+		  index++;
+		return found;
+	}
+
+	function getIndex(input) {
+	  var index = -1, i = 0, found = false;
+	  while (i < input.form.length && index == -1)
+		if (input.form[i] == input)index = i;
+		else i++;
+	  return index;
+	}
+	return true;
+  }
+  function showMB(mbox) { 
+	ColdFusion.MessageBox.show(mbox); 
+  }
+ </script>
+ <head>
+  <script type="text/javascript">
+   /* <![CDATA[ */_cf_loadingtexthtml="<img alt=' ' src='/cf_scripts/scripts/ajax/resources/cf/images/loading.gif'/>";
+_cf_contextpath="";
+_cf_ajaxscriptsrc="/cf_scripts/scripts/ajax";
+_cf_jsonprefix='//';
+_cf_websocket_port=8579;
+_cf_flash_policy_port=1243;
+_cf_clientid='AAE4A48249DB6650978672CE373F4D93';/* ]]> */
+  </script>
+  <script src="/cf_scripts/scripts/ajax/yui/yahoo-dom-event/yahoo-dom-event.js" type="text/javascript">
+  </script>
+  <script src="/cf_scripts/scripts/ajax/messages/cfmessage.js" type="text/javascript">
+  </script>
+  <script src="/cf_scripts/scripts/ajax/package/cfajax.js" type="text/javascript">
+  </script>
+  <script src="/cf_scripts/scripts/ajax/yui/animation/animation-min.js" type="text/javascript">
+  </script>
+  <script src="/cf_scripts/scripts/ajax/ext/ext-all.js" type="text/javascript">
+  </script>
+  <script src="/cf_scripts/scripts/ajax/package/cfmessagebox.js" type="text/javascript">
+  </script>
+  <link href="/cf_scripts/scripts/ajax/resources/ext/css/ext-all.css" rel="stylesheet" type="text/css"/>
+  <link href="/cf_scripts/scripts/ajax/resources/cf/cf.css" rel="stylesheet" type="text/css"/>
+  <title>
+   gtID##/GT Account Lookup, Parameter Page
+  </title>
+  <meta content="0" http-equiv="expires"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+	ColdFusion.Ajax.importTag('CFMESSAGEBOX');
+/* ]]> */
+  </script>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+	var _cf_messagebox_init_187393236273882=function()
+	{
+		var _cf_messagebox=ColdFusion.MessageBox.init('captchamb','alert','Incorrect CAPTCHA. Please try again.',null,null,null,null,null,false,true,null,null,null,null,null,null,null);
+	};ColdFusion.Event.registerOnLoad(_cf_messagebox_init_187393236273882);
+/* ]]> */
+  </script>
+ </head>
+ <body bgcolor="white" onload="setFocus()" text="black">
+  <!DOCTYPE html>
+  <!--[if lt IE 9]><html class="lt-ie9" lang="en" dir="ltr"><![endif]-->
+  <!--[if IE 9]><html class="ie9" lang="en" dir="ltr"><![endif]-->
+  <!--[if (gt IE 9)|(gt IEMobile 7)|!(IE)]<!-->
+  <html dir="ltr" lang="en">
+   <!--<![endif]-->
+   <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+     <link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+     <title>
+      &gt;gtID##/GT Account Lookup Display
+     </title>
+     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+     <link href="includes/css/reset.css" rel="stylesheet" type="text/css"/>
+     <link href="includes/css/default.css" rel="stylesheet" type="text/css"/>
+     <link href="includes/css/static.css" rel="stylesheet" type="text/css"/>
+     <link href="includes/css/fonts.css" rel="stylesheet" type="text/css"/>
+     <link href="includes/css/typography.css" rel="stylesheet" type="text/css"/>
+     <link href="includes/css/layout1.css" rel="stylesheet" type="text/css"/>
+     <link href="includes/css/blocks.css" rel="stylesheet" type="text/css"/>
+     <style media="print" type="text/css">
+      @import url("includes/css/print.css");
+     </style>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+     </script>
+     <script src="includes/js/html5shiv.js" type="text/javascript">
+     </script>
+     <script src="includes/js/base.js" type="text/javascript">
+     </script>
+    </meta>
+   </head>
+   <body class="front">
+    <p id="skip-links">
+     <a class="element-invisible element-focusable" href="#main">
+      Skip to content
+     </a>
+    </p>
+    <div id="page">
+     <header id="masthead">
+      <section class="clearfix" id="identity">
+       <div id="identity-wrapper">
+        <h1 id="gt-logo">
+         <a href="/" rel="home" title="Georgia Tech">
+          <img alt="Georgia Tech" src="includes/images/logos/logo-gt.png"/>
+         </a>
+        </h1>
+       </div>
+      </section>
+      <!-- /#identity -->
+      <section id="primary-menus">
+       <div class="clearfix" id="primary-menus-wrapper">
+        <a class="hide-for-desktop" id="primary-menus-toggle">
+         <span>
+          Menu
+         </span>
+        </a>
+        <div class="off-canvas" id="primary-menus-off-canvas">
+         <a class="hide-for-desktop" id="primary-menus-close">
+          <span>
+           Close
+          </span>
+         </a>
+         <nav>
+          <div id="main-menu-wrapper">
+           <ul class="menu">
+           </ul>
+          </div>
+          <div id="action-items-wrapper">
+           <ul id="action-items">
+           </ul>
+          </div>
+         </nav>
+         <div id="utility">
+          <div class="row clearfix">
+           <nav id="utility-links">
+            <!-- utility-links -->
+            <ul class="menu">
+             <li class="mothership ulink">
+              <a href="http://www.gatech.edu">
+               Georgia Tech Home
+              </a>
+             </li>
+             <li class="campus-map ulink">
+              <a href="http://www.map.gatech.edu">
+               Map
+              </a>
+             </li>
+             <li class="directories ulink">
+              <a href="http://www.gatech.edu/directory">
+               Directory
+              </a>
+             </li>
+             <li class="offices ulink">
+              <a href="http://www.gatech.edu/departments">
+               Offices
+              </a>
+             </li>
+            </ul>
+           </nav>
+           <div id="social-media-links-wrapper">
+            <ul id="social-media-links">
+             <li class="first">
+              <a class="facebook" href="https://www.facebook.com/georgiatech" title="Facebook">
+               Facebook
+              </a>
+             </li>
+             <li>
+              <a class="flickr" href="http://www.flickr.com/photos/georgiatech" title="Flickr">
+               Flickr
+              </a>
+             </li>
+             <li>
+              <a class="googleplus" href="https://plus.google.com/+georgiatech/posts" title="Google Plus">
+               Google Plus
+              </a>
+             </li>
+             <li>
+              <a class="linkedin" href="http://www.linkedin.com/company/3558" title="LinkedIn">
+               LinkedIn
+              </a>
+             </li>
+             <li>
+              <a class="pinterest" href="http://pinterest.com/georgiatech/" title="Pinterest">
+               Pinterest
+              </a>
+             </li>
+             <li>
+              <a class="rss" href="http://gatech.edu/rss" title="RSS">
+               RSS
+              </a>
+             </li>
+             <li>
+              <a class="twitter" href="https://twitter.com/georgiatech" title="Twitter">
+               Twitter
+              </a>
+             </li>
+             <li class="last">
+              <a class="youtube" href="http://www.youtube.com/georgiatech" title="YouTube">
+               YouTube
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+         </div>
+         <!-- /#utility -->
+        </div>
+        <div id="site-search">
+         <div id="site-search-container">
+          <div id="search-gt">
+           <input class="form-text" id="q" name="q" type="text" value=""/>
+           <input name="site" type="hidden" value="default_collection"/>
+           <input name="client" type="hidden" value="default_frontend"/>
+           <input name="output" type="hidden" value="xml_no_dtd"/>
+           <input name="proxystylesheet" type="hidden" value="default_frontend"/>
+           <input name="proxyreload" type="hidden" value="1"/>
+          </div>
+         </div>
+        </div>
+       </div>
+      </section>
+     </header>
+    </div>
+   </body>
+  </html>
+ </body>
+</html>
+<!-- /#primary-menus-wrapper -->
+<!-- /#breadcrumb -->
+<!-- /#primary-menus -->
+<!-- /#masthead -->
+<font face="verdana">
+ <center>
+  For security reasons, in the spring of 2003, Georgia Tech began using a generated number as an identifier, replacing the social security number. All students (current and former), faculty, staff and affiliates have been assigned a gtID#.
+  <br/>
+  <br/>
+  <b>
+   For best results, use last name, first name, and birth date ONLY.
+  </b>
+  <br/>
+  <br/>
+  Enter last name
+  <br/>
+  Enter first name
+  <br/>
+  Enter birth date
+  <br/>
+  Select "Continue"
+  <br/>
+  <br/>
+ </center>
+</font>
+<hr/>
+<br/>
+<form id="gtid_ind_lookup_par_form" method="post" name="gtid_ind_lookup_par_form" target="_blank">
+ <table align="center">
+  <tr valign="top">
+   <td colspan="2">
+    <h3>
+     Last Name*
+    </h3>
+   </td>
+   <td colspan="5">
+    <input maxlength="60" name="lname" required="" size="30"/>
+   </td>
+  </tr>
+  <tr valign="top">
+   <td colspan="2">
+    <h3>
+     First Name*
+    </h3>
+   </td>
+   <td colspan="5">
+    <input maxlength="15" name="fname" required="" size="15"/>
+   </td>
+  </tr>
+  <tr valign="top">
+   <td colspan="2">
+    <h3>
+     Middle Name
+    </h3>
+   </td>
+   <td colspan="5">
+    <input maxlength="15" name="mname" size="15"/>
+   </td>
+  </tr>
+  <tr valign="top">
+   <td>
+    <h3>
+     Birth Date*
+    </h3>
+   </td>
+   <td>
+    (mm/dd/yyyy)
+   </td>
+   <td>
+    <input maxlength="2" name="bmonth" onkeyup="return autoTab(this, 2, event);" pattern="(0[1-9]|1[012])" required="" size="2" title="Two digit month"/>
+   </td>
+   <td>
+    <h2>
+     /
+    </h2>
+   </td>
+   <td>
+    <input maxlength="2" name="bday" onkeyup="return autoTab(this, 2, event);" pattern="(0[1-9]|[12][0-9]|3[01])" required="" size="2" title="Two digit day"/>
+   </td>
+   <td>
+    <h2>
+     /
+    </h2>
+   </td>
+   <td>
+    <input maxlength="4" name="byear" pattern="(19|20)\d\d" required="" size="4" title="Four digit year"/>
+   </td>
+  </tr>
+ </table>
+ <table align="center">
+  <tr>
+   <td>
+    <img alt="" src="/CFFileServlet/_cf_image/_cfimg5596201722720784214.PNG"/>
+   </td>
+  </tr>
+  <tr>
+   <td>
+    Please type what you see:
+   </td>
+  </tr>
+  <tr>
+   <td>
+    <input maxlength="6" name="userInput" required="" type="text"/>
+   </td>
+  </tr>
+ </table>
+</form>
+<br/>
+<table align="center">
+ <td>
+  <input onclick="setFocus()" type="Reset"/>
+ </td>
+ <td>
+  <input name="submit" type="Submit" value="Continue"/>
+ </td>
+ <td>
+  <button onclick="goto_help()" type="button">
+   Help
+  </button>
+ </td>
+</table>
+<br/>
+<p align="center">
+ <b>
+  If you are an applicant and cannot find your information, please contact
+  <br/>
+  <i>
+   <a href="mailto:gradinfo@mail.gatech.edu">
+    gradinfo@mail.gatech.edu
+   </a>
+  </i>
+  if you applied to Graduate Studies
+  <br/>
+  or
+  <i>
+   <a href="mailto:admission@gatech.edu">
+    admission@gatech.edu
+   </a>
+  </i>
+  if you applied to Undergraduate Admissions.
+ </b>
+ <br/>
+ <br/>
+ <b>
+  I agree to adhere to the
+  <br/>
+  <a href="http://policylibrary.gatech.edu/data-access">
+   GT Data Access Policy
+  </a>
+  and
+  <a href="http://policylibrary.gatech.edu/computer-and-network-usage-and-security">
+   Computer and Network Usage Policy
+  </a>
+  <br/>
+  as well as all other GT policies governing the appropriate use of Institute Resources.
+ </b>
+</p>
+<footer id="footer">
+ <div class="row clearfix">
+  <div id="footer-utility-links">
+   <ul class="menu gt-footer-utility-links">
+    <li class="first">
+     <a class="active" href="/" title="">
+      About This Site
+     </a>
+    </li>
+    <li class="last">
+     <a class="active" href="/" title="">
+      Contact Us
+     </a>
+    </li>
+   </ul>
+   <ul class="menu custom-links-included">
+    <li>
+     <a href="http://www.gatech.edu/emergency/">
+      Emergency Information
+     </a>
+    </li>
+    <li>
+     <a href="http://www.gatech.edu/legal/">
+      Legal &amp; Privacy Information
+     </a>
+    </li>
+    <li>
+     <a href="http://www.gatech.edu/accountability/">
+      Accountability
+     </a>
+    </li>
+    <li>
+     <a href="http://www.careers.gatech.edu">
+      Employment
+     </a>
+    </li>
+    <li class="site-login last">
+     <a href="/user">
+      Login
+     </a>
+    </li>
+   </ul>
+  </div>
+  <div id="footer-logo">
+   <a href="http://www.gatech.edu/">
+    <img alt="Georgia Tech" src="includes/images/logos/gt-logo-footer.png"/>
+   </a>
+   <p>
+    © 2013 Georgia Institute of Technology
+   </p>
+  </div>
+ </div>
+</footer>
+<!-- /footer -->
+

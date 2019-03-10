@@ -1,0 +1,3126 @@
+http://mymsuhealth.hc.msu.edu
+<!--This was generated using Mustache.-->
+<!--Rendered with new migrated layout-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   Patient Portal
+  </title>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <link href="/home/portal/favicon.ico" rel="shortcut icon" type="image/png"/>
+  <script src="https://static.athenanet.athenahealth.com/1/20/static/build/js-communicator-portal-20190221120746-J5WwdGCCVpRO8QCP15v2CA-min.js" type="text/javascript">
+  </script>
+  <script language="javascript" src="/patient_toolkit.js?shost=static_20190308">
+  </script>
+  <link href="/home/css.php?userid=1&amp;quickpayportallogin=0&amp;shost=static_20190308" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+			var spinImage = "/usr/local/athena/prod/htdocs/static_20190308/portal/images/newnav/loading_anim.gif";
+				var plainprint = false;
+			var highlighted_menu = '';
+				var website = 'https://www.healthteam.msu.edu/';
+				var primary_department = null;
+				var req_loc = 't';
+				var requestLoc = '';
+				var logged_in = 'f';
+			var sessionTimeout = 1552200923;
+				var timeout = 550000; //almost 10 minutes mil secs
+				var googleAnalyticsUA = 'UA-16660062-1'; //prod Google Analytics account
+				var selfcheckintimeout = false;
+var ie7 = false;
+  </script>
+  <!--[if lte IE 7]>
+<script language="javascript">
+	var ua = navigator.userAgent.toLowerCase();
+	var isIE = /msie/.test(ua);
+	var trident = ua.match(/trident\/(\d\.\d)/);
+	var tridentversion = 0;
+
+	if (jQuery.isArray(trident)) {
+		tridentversion = trident[1];
+	}
+	if (isIE && tridentversion < 4) {
+		ie7 = true;
+	}
+
+	function compatibilityalert() {
+		$("#ieCompatibilityPopup").dialog('open');
+	};
+</script>
+<![endif]-->
+  <!--[if lte IE 8]>
+<script language="javascript">
+
+	$(document).ready(function() {
+		$('.btn').css({"behavior":"none"}, {"position":""});
+	});
+</script>
+<![endif]-->
+  <link href="https://static.athenanet.athenahealth.com/1/20/static/build/css-portal-landing-20180823130830-WZ82gSA_WUusJ84JtyxGvw-min.css" rel="stylesheet" type="text/css">
+   <link href="https://static.athenanet.athenahealth.com/1/20/static/build/css-portal-header-footer-20180823130830-44gaMRnmmAT_4lVBL9LPUg-min.css" rel="stylesheet" type="text/css"/>
+   <script>
+    //this file does nothing, will be removed in later tasks
+		$(function() {
+			return; //adding as a part of not tracking old events.
+			analyticslogger.init();
+
+			athenaanalytics.track(
+				"page hit"
+			);
+
+		});
+   </script>
+   <script>
+   </script>
+  </link>
+ </head>
+ <body onload="InitializeBoxes ();if (ie7) {compatibilityalert();}">
+  <input id="sourcebutton" name="sourcebutton" type="hidden"/>
+  <script language="javascript">
+   var hitflag = 0;
+	$(document).ready(function() {
+		$('#email-login-button, #makepayment').click(function(event) {
+			if(hitflag == 0) {
+				$("#sourcebutton").val('#' + event.target.id);
+				event.preventDefault();
+				$("#browserUpdatePopup").dialog('open');
+				hitflag = 1;
+			}
+		});
+	});
+	function closeDialog() {
+		$('#browserUpdatePopup').dialog('close');
+		var button = $('#sourcebutton').val();
+		$(button).click();
+	}
+  </script>
+  <div class="browser_alert_bar dontprint">
+   <span class="alert_bar_font">
+    The Patient Portal does not support your current browser.
+    <br/>
+    Please
+    <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">
+     update your browser
+    </a>
+    to continue using our site securely.
+   </span>
+  </div>
+  <div class="container_12 header dontprint" id="brand">
+   <img alt="Michigan State University HealthTeam" src="https://athenanet.athenahealth.com/13693/20/portal/portallogo.esp?CONTEXTID=13693&amp;FILENAME=%2F1%2Fmymsuhealth%2Epng&amp;MAXHEIGHT=144&amp;MAXWIDTH=&amp;TYPE=PORTALLOGO"/>
+  </div>
+  <div class=" landing_header_width landing_selfcheckin_header" id="header" style="behavior:url(/usr/local/athena/prod/htdocs/static_20190308/portal/pie/PIE.php);
+		">
+   <span id="nineoneone">
+    Dial 911 in the case of a medical emergency
+   </span>
+  </div>
+  <div class="reg_header_background reg_emaillogin_border reg_header_width ">
+   <script>
+    // Shorthand for document.ready
+$(function() {
+	// I'd like to put this in the global scope so it affects everything,
+	// but it would likely throw errors in the rest of the js on this page
+	"use strict";
+	triggerConfirmationAnalytics();
+});
+
+
+/*
+ * triggerConfirmationAnalytics
+ * Tracks events for appointment confirmation emails. Will only trigger
+ * if the confirmation email elements appear, indicating that we've performed
+ * a confirmation
+ */
+function triggerConfirmationAnalytics() {
+	"use strict";
+	if ($('#appt-confirmation-status').length > 0){
+		var $confirmationstatus = $('#appt-confirmation-status .message');
+		athenaanalytics.track('Appt. Conf. Via Email', {
+			status: $confirmationstatus.data('analyticstatus')
+		});
+	}
+}
+
+
+// 
+// 
+var readyforsubmit = false;
+	$(document).ready(function() {
+		// Go straight to sign in section of faq
+		$('.learn-about-signup').click(function() {
+			$(document.body).data('faqAnchor', 'signInWithPIN');
+			$('#loginFaq').dialog('open');
+			athenaanalytics.track("link click",{"link name" : $(this).html()});
+		});
+
+		// check for valid email/password
+		$('#email-login-button').click(function() {
+			// Remove whitespace from both sides of email and store it back 
+			// in email input field which will be used on submit
+			$email = $('#login-email');
+			$email.val($email.val().trim());
+			$('.login-form-error').hide();
+			$('#statement-id-error').hide();
+			if (!EmailIsValid($email.val())) {
+				$('#email-address-invalid').show();
+				athenaanalytics.track("button click",{
+					"button id" : $(this).attr("id"),
+					"button name" : $(this).html(),
+					error: "email invalid"
+				});
+				return false;
+			}
+			else if (!$('#login-password').val().length) {
+				$('#password-invalid').show();
+				athenaanalytics.track("button click",{
+					"button id" : $(this).attr("id"),
+					"button name" : $(this).html(),
+					error: "password empty"
+				});
+				return false;
+			}
+		});
+
+
+		//Loads the normal singnin page
+		$('#return-to-sign-in').click(function() {
+			$('#password-reset-email').val('');
+			$('#password-reset-form').hide();
+			$('#statement-id-error').hide();
+			$('#return-to-sign-in').hide();
+			$('#email-login-form').show();
+			athenaanalytics.track("link click",{"link name" : $(this).text()});
+			return false;
+		});
+
+		//Shows password reset form and hides normal signin form
+		$('#forgot-password-link').click(function() {
+			$('.alerty-error').hide();
+			$('#login-email, #login-password').val('');
+			$('#email-login-form').hide();
+			$('#password-reset-form').show();
+			$('#return-to-sign-in').show();
+			athenaanalytics.track("link click",{"link name" : $(this).html()});
+			return false;
+		});
+
+		//Handler for thirdpartyuser login submission
+		$('#third-party-user-login').submit(function() {
+			$('.alerty-error').hide();
+			var input = $('#user-id-login').val();
+			// check to see if it's an email address or ID -- if neither, it's an error
+			if (!(EmailIsValid(input) || parseInt(input) == input)) {
+				$('#invalid-third-party-credential').show();
+				return false;
+			}
+		});
+
+		//Submits a request t reset password
+		var $passwordresetform = $('#password-reset-form');
+		$passwordresetform.submit(function() {
+			athenaanalytics.track("form submit", {"form name":"password reset"});
+			$('#invalid-email-address').hide();
+			// validate email
+			if (!EmailIsValid($('#password-reset-email').val())) {
+				$('#invalid-email-address').show();
+			}
+			else {
+				var xhr = $.post(
+					'./?section=passwordreset&sub=lookup_email',
+					$passwordresetform.serialize(),
+					function(data) {
+						$('#login-email, #login-password').val('');
+						$('#return-to-sign-in').hide();
+						$('#password-reset-form').hide();
+						$('#email-login-form').show();
+						$('#email-sent-address').html($('#password-reset-email').val());
+						$('#email-sent').show();
+						$('#password-reset-email').val('');
+					},
+					'json'
+				)
+				.fail(function() {
+					$('#login-email, #login-password').val('');
+					$('#return-to-sign-in').hide();
+					$('#password-reset-form').hide();
+					$('#email-login-form').show();
+					$('#email-sent-address').html($('#user-email').val());
+					$('#email-sent').show();
+				});
+			}
+
+			return false;
+		});
+
+
+		// Install tracking handlers
+		athenaanalytics.track_forms('#email-login-form', "form submit",{"form name": "login"});
+		athenaanalytics.track_links(".start-account-creation", "link click", {"link name":"account creation"});
+		athenaanalytics.track_links(".start-account-migration", "link click", {"link name":"account migration"});
+
+		$(".feature").click(function () {
+			athenaanalytics.track("dead feature click",{"feature name" : $(this).find("span").first().html()});
+		});
+		// Finally, focus login field
+		$('#login-email').focus();
+	});
+
+
+/* Not used anywhere.Can be removed
+function stripchars(i) {
+	t = i;
+	t = t.replace(/[\(\)\-\s+]/gi, "");
+	return t;
+}
+*/
+
+//Cookie Detection for login and register sections of landing on the portal
+function setCookie(name, value, day) {
+	var exp;
+	if (day) {
+		var date = new Date();
+		date.setTime(date.getTime() + (day * 24 * 60 * 60 * 1000));
+		exp = ";exp=" + date.toGMTString();
+	}
+	else {
+		exp = "";
+	}
+	document.cookie = name + "=" + value + exp + "; path=/";
+}
+
+//Reads the cookie from browser
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var cd = document.cookie.split(';');
+	for (var i = 0; i < cd.length; i++) {
+		var Cookie = cd[i];
+		while (Cookie.charAt(0) == ' ') {
+			Cookie = Cookie.substring(1, Cookie.length);
+		}
+		if (Cookie.indexOf(nameEQ) == 0) {
+			return Cookie.substring(nameEQ.length, Cookie.length);
+		}
+	}
+	return null;
+}
+
+//Deletes the cookie it just created for cookie testing
+function deleteCookie(name) {
+	setCookie(name, "", -1);
+}
+
+
+//A Function which sets a temp cookie to check if cookie is enabled else throws a warning
+function areCookiesEnabled() {
+	var r = false;
+	setCookie("testing", "Hello", 1);
+	if (readCookie("testing") != null) {
+		r = true;
+		deleteCookie("testing");
+	}
+	else {
+		alert ("Cookies must be enabled.");
+	}
+}
+// 
+//scrollToBottom
+function scrollToBottom() {
+	$('html, body').animate({scrollTop:$(document).height()}, 'slow');
+}
+//scrollToTop
+function scrollToTop() {
+	$('html, body').animate({scrollTop:0}, 'slow');
+}
+$(document).ready(function() {
+	// We sometimes want to jump to a specific place in the faq. Do that here.
+	$('#loginFaq').on('dialogopen', function() {
+		var faqAnchor = $(document.body).data('faqAnchor');
+		if (faqAnchor) {
+			$('a[href="#' + faqAnchor + '"]')[0].click();
+			$(document.body).data('faqAnchor', null);
+		}
+	});
+
+	// There are places where terms and privacy policy appear in a popup. Setup
+	// generic class-based handlers for elements that should display the popups
+	// when clicked.
+	$('.showTermsPopup').click(function(e) {
+		e.preventDefault();
+		$('#termsPopup').dialog('open');
+	});
+
+	$('.showPrivacyPopup').click(function(e) {
+		e.preventDefault();
+		$('#privacyPopup').dialog('open');
+	});
+
+	$('#patient-picker > div.current').click(function() {
+		var $this = $(this);
+		var removeBorder = false;
+		if (!$this.hasClass('expanded')) {
+			$this.addClass('expanded');
+		}
+		else {
+			removeBorder = true;
+		}
+		$('#patient-picker-menu').slideToggle(200, function() {
+			if (removeBorder) {
+				$this.removeClass('expanded');
+			}
+		});
+		return false;
+	});
+
+	$('#patient-picker-menu > li.user-only').click(function(e) {
+		csrf_redirect('./?section=account');
+	});
+
+	$('#patient-picker-menu > li.option').click(function(e) {
+		if ($(e.currentTarget).hasClass('option')) {
+			switchUser($('#patient-picker-menu > li.option').index(e.currentTarget));
+		}
+
+		return false;
+	});
+	$('#header-nav-inbox').click(function(e) {
+		athenaanalytics.track("link click",{"link name" : "header navigation inbox"});
+		csrf_redirect('./?section=messages&fromheadernav=t');
+	});
+	$('#header-nav-compose').click(function(e) {
+		athenaanalytics.track("link click",{"link name" : "header navigation compose"});
+		csrf_redirect('./?section=messages&sub=compose&fromheadernav=t');
+	});
+
+
+});
+
+$(document).ready(function() {
+
+	var $nav = $('#nav');
+
+	$nav.on('click', 'li:not(".customnavitem, .no-list-item-style")', function() {
+		// get the anchor href
+		var $liTarget = $(this);
+		var liAnchor = $liTarget.find('a:first');
+		if (liAnchor.attr("href")) {
+			var parentUl = $liTarget.parent('ul');
+			var navclick = '';
+			if (parentUl) {
+				if (parentUl.attr('id').search("-sub") > 0) {
+					// Item is subsection.  Concat it with section name on the ul
+					navclick = "&navkey=" + encodeURIComponent(parentUl.data('navsection') + "_" + liAnchor.text());
+
+				}
+				else {
+					// Item is top level nav item
+					navclick = "&navkey=" + encodeURIComponent(liAnchor.text());
+				}
+			}
+			csrf_redirect(liAnchor.attr("href") + navclick);
+		}
+	});
+
+	$nav.on('click', 'li.customnavitem', function() {
+		var $liTarget = $(this);
+		if ($liTarget.hasClass('openinnewtaborwindow')) {
+			window.open($liTarget.data('url'));
+		}
+		else {
+			csrf_redirect($liTarget.data('url'));
+		}
+	});
+
+});
+
+var DONOTRELOADONTIMEOUT = true;
+   </script>
+   <div class="password-reset-info" id="email-sent">
+    A link to reset your Patient Portal password has been sent to
+    <span id="email-sent-address">
+    </span>
+    . Please allow 5-10 minutes for the email to arrive. If you do not receive an email, please call (517) 353-3000.
+   </div>
+   <div id="email-login-page">
+    <h1>
+     Welcome to the Michigan State University HealthTeam Patient Portal
+    </h1>
+    <a href="#forgot-password-link" id="skip-links">
+     Skip to content
+    </a>
+    <div class="pane logincenter" id="loginpane">
+     <form action="./?section=login" id="email-login-form" method="post">
+      <div class="landing-header">
+       Sign In to Your Account
+      </div>
+      <label for="login-email" id="login-email-lobel">
+       Email address
+      </label>
+      <input id="login-email" name="email" type="text"/>
+      <label for="login-password" id="login-password-label">
+       Password
+      </label>
+      <input id="login-password" name="password" type="password"/>
+      <div class="hide alerty alerty-error login-form-error" id="email-address-invalid">
+       Email address is invalid
+      </div>
+      <div class="hide alerty alerty-error login-form-error" id="password-invalid">
+       Password cannot be empty
+      </div>
+      <div>
+       <a class="forgotpassword" href="#" id="forgot-password-link">
+        Forgot your password?
+       </a>
+       <button class="signinbtn btn" id="email-login-button" type="submit">
+        Sign In
+       </button>
+      </div>
+      <!-- if quickpay then have PIN and signup text below login section otherwise put it after signin block so it's expanded to full size of page -->
+     </form>
+     <form class="hide password-reset" id="password-reset-form">
+      <div class="landing-header">
+       Sign In to Your Account
+      </div>
+      <div class="password-reset-note" id="password-reset">
+       To reset your password, enter your email address, then click
+       <strong>
+        Email Me
+       </strong>
+       .
+      </div>
+      <label for="password-reset-email">
+       Email Address
+      </label>
+      <input id="password-reset-email" name="email" type="text"/>
+      <div class="hide alerty alerty-error" id="invalid-email-address">
+       Email address is invalid
+      </div>
+      <div class="resetwrapper">
+       <button class="btn signinbtn" type="submit">
+        Email Me
+       </button>
+       <span id="return-to-sign-in">
+        <a href="./">
+         Cancel
+        </a>
+       </span>
+      </div>
+      <div class="clear-both">
+      </div>
+      <!-- if quickpay then have PIN and signup text below login section otherwise put it after signin block so it's expanded to full size of page -->
+     </form>
+    </div>
+    <div class="alternatesigninwrapper">
+     <div class="full-line">
+     </div>
+    </div>
+    <div>
+     <div>
+      <strong>
+       Don't have a Patient Portal account?
+      </strong>
+     </div>
+     <div>
+      <a class="start-account-creation" href="./?section=landing&amp;sub=registration_wizard">
+       Sign up today
+      </a>
+      to stay connected to your health care.
+     </div>
+    </div>
+    <div class="clear">
+    </div>
+   </div>
+  </div>
+  <div class=" width_720px footer_border footer_location ">
+   <div class="align_left" id="footer-athena">
+    <img alt="athenaHealth Logo" src="/usr/local/athena/prod/htdocs/static_20190308/portal/images/2012/sprites/athena.png"/>
+   </div>
+   <ul class="align_right" id="footer-links">
+    <li>
+     <a onclick="$('#loginFaq').dialog('open'); return false;">
+      FAQ
+     </a>
+    </li>
+    <li>
+     <a href="#" onclick="$('#privacyPopup').dialog('open'); return false;">
+      Privacy Practice
+     </a>
+    </li>
+    <li>
+     <a href="#" onclick="$('#websiteprivacy').dialog('open'); return false;">
+      Website Privacy
+     </a>
+    </li>
+   </ul>
+  </div>
+  <div class="printonly" id="patient_note">
+   <br/>
+   <br/>
+   <br/>
+   <hr class="printhr"/>
+   Note: Patients are solely responsible for maintaining the privacy and security of all information printed from the Patient Portal.
+   <hr class="printhr"/>
+  </div>
+  <div class="modal_general" id="modal_general">
+   <div class="modal_general_window" id="modal_general_window">
+    <table id="modal_general_table">
+     <thead>
+      <tr>
+       <td class="table_header modal_general_header" colspan="2">
+        <table class="full_width">
+         <tr>
+          <td id="modal_general_title">
+          </td>
+          <td>
+           <span id="close_modal_general">
+            X
+           </span>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr id="modal_spacer_row">
+       <td colspan="2" id="modal_general_spacer">
+       </td>
+      </tr>
+     </thead>
+     <tbody id="modal_general_body">
+      <tr>
+      </tr>
+     </tbody>
+     <tfoot>
+     </tfoot>
+    </table>
+   </div>
+   <div class="modal_general_shadow" id="modal_general_shadow">
+   </div>
+  </div>
+  <div class="lightbox_general" id="lightbox_general">
+   <div class="lightbox_general_window" id="lightbox_general_window">
+    <table id="lightbox_general_table">
+     <thead>
+      <tr>
+       <td class="table_header lightbox_general_header" colspan="2">
+        <table>
+         <tr>
+          <td id="lightbox_general_title">
+          </td>
+          <td>
+           <span id="close_lightbox_general">
+            close X
+           </span>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td class="align_text_center" colspan="2">
+       </td>
+      </tr>
+     </thead>
+     <tbody id="lightbox_general_body">
+      <tr>
+      </tr>
+     </tbody>
+     <tfoot>
+     </tfoot>
+    </table>
+   </div>
+   <div class="lightbox_general_shadow" id="lightbox_general_shadow">
+   </div>
+  </div>
+  <span id="branding">
+  </span>
+  <span id="menu_height">
+  </span>
+  <span id="page_height">
+  </span>
+  <div class="none-display" id="termsPopup" title="Terms and Conditions">
+   <div id="termstext">
+    <style type="text/css">
+     <!--{cke_protected}{C}%3C!%2D%2D%0D%0A.style2%20%7Bfont-size%3A%2016px%7D%0D%0A.style5%20%7Bcolor%3A%20%23FF0000%7D%0D%0A%2D%2D%3E-->
+    </style>
+    <h1 align="center">
+     Michigan State University HealthTeam
+    </h1>
+    <h2 align="center">
+     Patient Portal Terms and Conditions
+    </h2>
+    <blockquote>
+     <p align="justify">
+      <br>
+       <span class="style2">
+        These terms and conditions constitute a binding agreement between you and Michigan State University HealthTeam ("we," "us," or "our").
+        <br>
+         <br>
+          The Patient Portal is an Internet service that allows our patients to: communicate with us; access their health records; request or reschedule appointments; view and update personal information; request prescriptions; receive test results; read patient educational material; view statements; pay bills; and access related services and content.
+          <br>
+           <br/>
+           The Patient Portal is provided on behalf us and our physicians, employees, managers, officers, directors, agents, and representatives and powered by athenahealth, Inc. (all of the foregoing, collectively, the "Practice Entities"). The Practice Entities are intended third-party beneficiaries of this agreement and entitled to enforce all terms and conditions of this agreement.
+           <br/>
+           <br/>
+           By accessing or using the Patient Portal, you confirm that you agree to these terms and conditions. If you don't agree, don't use the Patient Portal.  By agreeing to these terms and conditions, you acknowledge that you are at least 18 years of age, or legally emancipated, and that you are requesting access to Patient Portal. You acknowledge that Patient Portal is offered as a courtesy to our patients and agree that we may limit or discontinue your use of Patient Portal at any time for any reason.
+          </br>
+         </br>
+        </br>
+       </span>
+      </br>
+     </p>
+    </blockquote>
+    <h3>
+     Minimum Requirements and Security
+    </h3>
+    <ul>
+     <li class="style2">
+      This website uses encryption software. In order to use Patient Portal, you must have:
+      <ul>
+       <li>
+        a personal computer equipped with an Internet browser that has 128-bit encryption enabled and configured to accept cookies (e.g., Internet Explorer 7 or 8, Safari, or Firefox; Internet Explorer 6 may not allow you to view some materials, such as test results);
+        <br/>
+        <br/>
+       </li>
+       <li>
+        Internet access, a valid email account, software to receive and read email messages, and spam filters set to accept email from our domain; and
+        <br/>
+        <br/>
+       </li>
+       <li>
+        Adobe Reader installed (to download a copy of Adobe Reader, please go to
+        <a href="http://www.adobe.com/products/acrobat/readstep2.html">
+         http://www.adobe.com/products/acrobat/readstep2.html
+        </a>
+        ).
+        <br/>
+        <br/>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <span class="style2 style2">
+       While we use state-of-the-art security, no system can guard against risks of intentional intrusion or inadvertent disclosure of information.
+       <strong>
+        When using Patient Portal, information may be transmitted over media that are beyond the control of the Practice Entities and their contractors and subcontractors and that may not be secure.
+       </strong>
+       For example, you may receive email, text, or telephone communications in connection with your use of Patient Portal, all of which are inherently unsecure and subject to disclosure to or access by third parties (e.g., if your phone is used by someone else, you do not keep your phone or email information up to date on Patient Portal and communications are misdirected, or the network or systems of a telecommunications provider are hacked).
+       <strong>
+        Furthermore, electronic services such as those provided by the Practice Entities, their contractors and subcontractors, and any telecommunications providers involved in the transmission of data are all inherently subject to failure and none of the foregoing can guarantee that their services will be provided without error or interruption at all times that you may wish to use those services. YOU HEREBY EXPRESSLY ASSUME THE RISK OF ANY UNAUTHORIZED DISCLOSURE OR INTENTIONAL INTRUSION, OR OF ANY DELAY, FAILURE, INTERRUPTION, OR CORRUPTION OF DATA OR OTHER INFORMATION TRANSMITTED IN CONNECTION WITH THE USE OF ANY SERVICE RELATED TO PATIENT PORTAL.
+       </strong>
+       Once information is received by us, your medical information will be treated as confidential and given the same protection that all of our other medical records are given.
+      </span>
+     </li>
+    </ul>
+    <h3>
+     Security, Confidentiality, and Usage Guidelines for Patient Portal
+    </h3>
+    <ul>
+     <li>
+      <strong>
+       YOU MUST NOT SEND ANY MESSAGES REQUIRING URGENT ATTENTION USING PATIENT PORTAL.
+      </strong>
+      Doing so may create a delay in your receiving necessary medical treatment and could result in loss of life, permanent injury, or significant deterioration in your health. If you believe that you have an urgent medical matter, you should call 911 immediately or proceed to the nearest emergency room. If the matter is not urgent but you need a response in less than two business days, please contact your clinician's office directly by telephone during our regular business hours, which you may find on the log-in screen for Patient Portal.
+      <br/>
+      <h2 class="style5">
+       FOR ALL MEDICAL EMERGENCIES, IMMEDIATELY CALL 911
+      </h2>
+      <br/>
+     </li>
+     <li>
+      Patient portal is designed as a secure Internet-based environment through which you may receive confidential medical information about yourself. When you initially enroll to use the Patient Portal, you will need to confirm your identity via two unique workflows, as well as establish an email and a confidential password for login credentials. Please
+      <strong>
+       DO NOT SHARE YOUR PASSWORD
+      </strong>
+      with anyone. Anyone with access to your password will be able to view your medical and financial information and communicate with your health care team as if that person were you. Thus, when you give someone your password, you are authorizing that person to access your account, and you are responsible for all transactions that person performs while using your service. It is your responsibility to prevent disclosure of your password and to change your password if you feel that your security has been compromised. If you believe that your password has become known to an unauthorized person and want verification of any changes that may have been made to your account, please contact us for assistance. You can change your password in the Patient Portal at any time by clicking the "Security Settings" link under "My Profile."
+      <br/>
+      <br/>
+     </li>
+     <li>
+      You may request a Patient Portal account for yourself. You may not request or access a Patient Portal account for anyone else, except that a parent or guardian may request and access an account on behalf of a minor child. By accepting these terms and conditions, you certify that you are authorized to open or access the account you are requesting and that all information you have provided to us is true and correct to the best of your knowledge.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      Once you have activated your Patient Portal account, the Patient Portal Inbox will become the primary vehicle to receive important messages from your participating provider(s) and other personal medical information.
+      <strong>
+       You MUST provide us with your email address when activating your Patient Portal account and keep your email address current via the My Profile link
+      </strong>
+      , to ensure that you receive notification of newly released information in a timely manner. You may continue to receive communications via the United States Postal Service or other means from us.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      We keep track of the pages our patients visit within Patient Portal, in order to determine what services are the most popular. This data is used to deliver customized content within Patient Portal to patients whose behavior indicates that they are interested in a particular subject area.
+     </li>
+     <li>
+      We secure your personal information from unauthorized access, use or disclosure. The personally identifiable information you provide is maintained by us on computer servers in a controlled, secure environment, protected from unauthorized access, use or disclosure. When personal information is transmitted from your PC and/or mobile devices to Patient Portal, it is protected through the use of encryption, such as the Secure Socket Layer (SSL) protocol. As a user of Patient Portal you hereby agree that you (and not the Practice Entities) are solely liable for viruses, worms, Trojan horses, cancel bots, and other electronic mechanisms designed to destroy or impair the functioning of computer systems already residing on your PC and/or mobile device.
+     </li>
+     <li>
+      When you use the Patient Portal, we collect personally identifiable information, such as your email address, name, home address, telephone number, ZIP code, age, gender, contact preferences, access times, and account activity. This information is used by us for the operation of the service, to maintain quality of the service, and to provide general statistics regarding use of Patient Portal. We may share data with business associates working on our behalf to help us perform statistical analysis, send you email or postal mail, provide customer support, or arrange for deliveries. We encourage you to review the Privacy Statement for further information regarding how your personal information may be used.
+     </li>
+     <li>
+      Cookies are used for system performance functionality. You have the ability to accept or decline cookies. Most Web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. If you choose to decline cookies, you may not be able to fully experience the interactive features of the Patient Portal services.
+     </li>
+    </ul>
+    <h3>
+     How We Protect Your Personal Health Information
+    </h3>
+    <ul>
+     <li>
+      We consider the privacy of your health information to be one of the most important elements in our relationship with you and one we take very seriously. By accessing or using Patient Portal, you acknowledge that you have received and read a copy of our Notice of Privacy Practices, which can be found in paper copy at our office locations or through your Patient Portal account under the "Forms" link.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      We are committed to protecting the privacy of the information you send and receive through Patient Portal, and will only collect and use such information as permitted under the Patient Portal Privacy Statement, which can be found online within Patient Portal. By using Patient Portal, you also consent to all of the terms and conditions described in the Privacy Statement.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      All communications between you and our health care team using Patient Portal are carried over a secure, encrypted connection directly into our electronic medical record. While you may receive email messages notifying you of new messages in your Patient Portal Inbox, these emails will not contain any personal health information. It is your responsibility to login to your Patient Portal account and read the messages promptly.
+     </li>
+    </ul>
+    <h3>
+     Your Responsibilities
+    </h3>
+    <ul>
+     <li>
+      Patient Portal is a communication service offered as a convenience to our patients. We reserve the right to change the terms, conditions, and notices under which Patient Portal is offered. By accessing or using Patient Portal, you further agree that any and all such modifications are effective and binding upon you immediately upon posting of the modified version. We reserve the right in the future to charge a fee for the use of Patient Portal. You will be notified in advance of any such change and asked to re-apply if you agree to the fee and wish to continue with the Patient Portal service.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      You understand that by accepting the terms and conditions of this Agreement you are agreeing to receive your patient balance statements delivered electronically to your Patient Portal account. You have the option at any time to revert back to receiving your patient balance statements as paper statements sent to you via U.S. Mail. You may exercise that option by checking the appropriate checkbox located at the bottom of the Billing Tab in Patient Portal under "Patient Preferences."
+      <br/>
+      <br/>
+     </li>
+     <li>
+      You acknowledge that by entering your home and/or mobile telephone number into Patient Portal you are providing written consent for the Practice Entities to send automated, prerecorded, or artificial voice telephone calls to all provided numbers. You may opt-out of receiving these calls on the "Contact Preferences" page, located under the My Profile tab.
+     </li>
+     <li>
+      You understand that Patient Portal provides you with online access to some clinical information about you. You are solely responsible for any sharing of Patient Portal content that you intentionally or unintentionally communicate to others.
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Patient Portal Messaging
+    </h3>
+    <ul>
+     <li>
+      By using Patient Portal, you acknowledge and agree that this messaging service is intended to facilitate dialogue regarding personal health matters. You agree not to use Patient Portal to post or send or post any illicit or offensive material.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      You understand that messages will be routed to the appropriate department as necessary for handling, and therefore our employees other than your physician, nurse practitioner, or physician's assistant may be involved in addressing your request. If your physician is out of the office or unavailable to respond, messages sent via Patient Portal may be routed to other authorized healthcare providers within our practice to facilitate a timely response to your request. Therefore, use of Patient Portal may not be appropriate if there is sensitive information that you want to discuss directly with your healthcare provider.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      You understand that your health care team may send you messages, test results, and other communications via Patient Portal as authorized in the sole discretion of your physician. These messages may contain information important to your health and medical care. It is your responsibility to monitor these messages. By entering your valid and functional email address at registration, you have enabled us to notify you of messages sent to your Patient Portal Inbox.
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Discontinuing Use of Patient Portal
+    </h3>
+    <ul>
+     <li>
+      You may discontinue your use of Patient Portal at any time by sending a secure message to your primary care provider's office requesting this change.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      We reserve the right, in our sole discretion, to limit or discontinue your use of Patient Portal at any time and for any reason, including, but not limited to, your use of Patient Portal on behalf of another person.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      Your Patient Portal service will be discontinued if you no longer have a primary care provider who participates in Patient Portal at your practice.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      You will be notified if your Patient Portal service is discontinued.
+      <br/>
+      <br/>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Your Clinical Information
+    </h3>
+    <ul>
+     <li>
+      As we provide your health care, we are required to maintain documentation of your medical history, current conditions, treatment plan, and all treatments given, including the results of all tests, procedures, and therapies. Patient Portal is an Internet application that enables a patient to have secure web-based access to personal clinical information, as released by the treating physician, and allows secure electronic messaging with our participating physicians. By using Patient Portal, you understand that not all of your medical record with us will be accessible through your Patient Portal account. Posting of information to your Patient Portal account is at the sole discretion of your individual physician(s).
+      <br/>
+      <br/>
+     </li>
+     <li>
+      Messages you send or receive via Patient Portal may become part of your permanent medical record at the sole discretion of your physician. If such messages are made part of your permanent medical record, they will be accessible to our current and future staff members who are involved with your care.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      All of our electronic medical records are subject to state and federal regulations governing the security and confidentiality of medical records.
+      <br/>
+      <br/>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Copyright and Trademarks
+    </h3>
+    <p>
+     All content included in Patient Portal and on all of our, including, but not limited to, text, photographs, graphics, button icons, images, artwork, names, logos, trademarks, service marks, and data ("Content"), in any form, are protected by U.S. and international copyright and trademark law and conventions. The Content includes both Content owned or controlled by one or more of the Practice Entities, as well as Content owned or controlled by third parties and licensed to one or more of the Practice Entities, and no right, title, or interest is granted to you in or to any Content other than the right to use such content in connection with your use of Patient Portal. Reproduction of any Content, in whole or in part, by any means, is prohibited without our express written consent.
+     <br/>
+    </p>
+    <p>
+    </p>
+    <h3>
+     Site Access and Licenses
+    </h3>
+    <ul>
+     <li>
+      We grant to you a non-assignable, non-sublicensable, terminable, limited license to make personal use of our website, Patient Portal, and the associated services in accordance with these terms and conditions. This license expressly excludes, without limitation, any reproduction, duplication, sale, resale, or other commercial use of the website, Patient Portal, or any of the associated services; making any derivative of the website, Patient Portal, or any of the associated services; and the collection and use of user email addresses or other user information (including, without limitation, health information or any data extraction or data mining whatsoever).
+      <br/>
+      <br/>
+     </li>
+     <li>
+      Failure to comply with any of the terms and conditions contained herein may result in revocation of your license and cancellation of your Patient Portal account, including the right to access information through Patient Portal. We reserve the right to report violations of law to appropriate law enforcement agencies and to pursue all other rights and remedies available to it under civil or criminal law.
+      <br/>
+      <br/>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Links to Third-Party Websites
+    </h3>
+    <p>
+     This website and Patient Portal contain links to websites operated by other parties. The Practice Entities do not sponsor, operate, control, or endorse any of these sites, nor the information, products, or services provided by third parties through the Internet, nor do the Practice Entities make any guarantee, warranty, or representation regarding the accuracy of the information contained on the websites. The Practice Entities have no control over the security or privacy practices of these external websites. Use of other sites is strictly at your own risk including, but not limited to, any risks associated with destructive viruses. You are responsible for viewing and abiding by the terms and conditions of use and the privacy statements of the other websites.
+     <br/>
+    </p>
+    <p>
+    </p>
+    <h3>
+     No Warranties
+    </h3>
+    <p>
+     This Patient Portal and all other sites hosted by any of the Practice Entities and the content contained herein and therein are provided by the Practice Entities on an "As Is" basis.
+     <strong>
+      THE PRACTICE ENTITIES MAKE NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF ITS SITES, OR THE CONTENT, PRODUCTS, OR SERVICES INCLUDED THEREIN. TO THE FULLEST EXTENT PERMISSIBLE BY APPLICABLE LAW, THE PRACTICE ENTITIES DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND INFRINGEMENT.
+     </strong>
+     <br/>
+    </p>
+    <p>
+    </p>
+    <h3>
+     Limitation of Liability
+    </h3>
+    <ul>
+     <li>
+      Some of the material on our website and in Patient Portal is provided by third parties, and the Practice Entities shall not be held responsible for any such third-party material. The Practice Entities disclaim any responsibility for, or liability related to, such third-party material. Any questions, complaints, or claims related to any product should be directed to the appropriate third party.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      None of the Practice Entities or any of their contractors or subcontractors shall be liable for any loss, injury, illness, damages, or claims of any kind resulting from your failure to timely read messages you may receive through Patient Portal.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      If you have any basis for recovering damages from the Practice Entities or its affiliates or vendors, you can only recover direct damages up to $10. You cannot recover any other damages, including consequential, lost profits, special, indirect, incidental, or punitive damages.
+      <br/>
+      <br/>
+     </li>
+     <li>
+      Some or all of these limitations or exclusions may not apply to you if your state, province, or country does not allow the exclusion or limitation of incidental, consequential, or other damages.
+      <br/>
+      <br/>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     General
+    </h3>
+    <p>
+     By using our website (including, but not limited to, Patient Portal), you agree that the laws of the Commonwealth of Massachusetts, without regard to principles of conflict of laws, will govern these terms and conditions and any dispute that might arise between you and any of the Practice Entities. You expressly agree that exclusive jurisdiction for any dispute with any of the Practice Entities resides in the courts of Middlesex County, Massachusetts, and you further agree and expressly consent to the exercise of personal jurisdiction in the courts of Middlesex County, Massachusetts, in connection with any claim involving any of the Practice Entities. Use of our website is unauthorized in any jurisdiction that does not give effect to the terms and conditions set forth herein.
+    </p>
+   </div>
+   <div class="position_relative clearfix">
+    <a class="btn" onclick="$('#termsPopup').dialog('close');">
+     Close
+    </a>
+   </div>
+  </div>
+  <div class="none-display" id="privacyPopup" title="Privacy Policy">
+   <div id="privacytext">
+    <p>
+     This notice describes how medical information about you may be used and disclosed and how you can get access to this information.
+     <strong>
+      Please review it carefully.
+     </strong>
+     <br/>
+    </p>
+    <h3>
+     Your Rights
+    </h3>
+    <p>
+     You have the right to:
+    </p>
+    <ul>
+     <li>
+      <a href="#copy_of_electronic_medical_record">
+       Get a copy of your paper or electronic medical record
+      </a>
+     </li>
+     <li>
+      <a href="#correct_your_medical_record">
+       Correct your paper or electronic medical record
+      </a>
+     </li>
+     <li>
+      <a href="#request_confidential_communications">
+       Request confidential communication
+      </a>
+     </li>
+     <li>
+      <a href="#ask_us_to_limit">
+       Ask us to limit the information we share
+      </a>
+     </li>
+     <li>
+      <a href="#get_a_list">
+       Get a list of those with whom we've shared your information
+      </a>
+     </li>
+     <li>
+      <a href="#copy_of_privacy_notice">
+       Get a copy of this privacy notice
+      </a>
+     </li>
+     <li>
+      <a href="#choose_someone">
+       Choose someone to act for you
+      </a>
+     </li>
+     <li>
+      <a href="#file_a_complaint">
+       File a complaint if you believe your privacy rights have been violated
+      </a>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Your Choices
+    </h3>
+    <p>
+     You have some choices in the way that we use and share information as we:
+    </p>
+    <p>
+    </p>
+    <ul>
+     <li>
+      <a href="#your_choices_health_information">
+       Tell family and friends about your condition
+      </a>
+     </li>
+     <li>
+      <a href="#your_choices_health_information">
+       Provide disaster relief
+      </a>
+     </li>
+     <li>
+      <a href="#your_choices_health_information">
+       Include you in a hospital directory
+      </a>
+     </li>
+     <li>
+      <a href="#we_never_share_your_information">
+       Provide mental health care
+      </a>
+     </li>
+     <li>
+      <a href="#we_never_share_your_information">
+       Market our services and sell your information
+      </a>
+     </li>
+     <li>
+      <a href="#case_of_fundraising">
+       Raise funds
+      </a>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Our Uses and Disclosures
+    </h3>
+    <p>
+     We may use and share your information as we:
+    </p>
+    <p>
+    </p>
+    <ul>
+     <li>
+      <a href="#treat_you">
+       Treat you
+      </a>
+     </li>
+     <li>
+      <a href="#run_our_organization">
+       Run our organization
+      </a>
+     </li>
+     <li>
+      <a href="#bill_for_your_services">
+       Bill for your services
+      </a>
+     </li>
+     <li>
+      <a href="#help_with_public_health">
+       Help with public health and safety issues
+      </a>
+     </li>
+     <li>
+      <a href="#do_research">
+       Do research
+      </a>
+     </li>
+     <li>
+      <a href="#comply_with_the_law">
+       Comply with the law
+      </a>
+     </li>
+     <li>
+      <a href="#respond_to_organ_donation">
+       Respond to organ and tissue donation requests
+      </a>
+     </li>
+     <li>
+      <a href="#work_with_a_medical_examiner">
+       Work with a medical examiner or funeral director
+      </a>
+     </li>
+     <li>
+      <a href="#address_workers_compensation">
+       Address workers' compensation, law enforcement, and other government requests
+      </a>
+     </li>
+     <li>
+      <a href="#respond_to_lawsuits">
+       Respond to lawsuits and legal actions
+      </a>
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Your Rights
+    </h3>
+    <p>
+     <strong>
+      When it comes to your health information, you have certain rights.
+     </strong>
+     This section explains your rights and some of our responsibilities to help you.
+     <br/>
+     <br/>
+     <strong>
+      Get an electronic or paper copy of your medical record
+     </strong>
+    </p>
+    <p>
+    </p>
+    <ul>
+     <li>
+      You can ask to see or get an electronic or paper copy of your medical record and other health information we have about you. Ask us how to do this.
+     </li>
+     <li>
+      We will provide a copy or a summary of your health information, usually within 30 days of your request. We may charge a reasonable, cost-based fee.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     <strong>
+      Ask us to correct your medical record
+     </strong>
+    </p>
+    <ul>
+     <li>
+      You can ask us to correct health information about you that you think is incorrect or incomplete. Ask us how to do this.
+     </li>
+     <li>
+      We may say "no" to your request, but we'll tell you why in writing within 60 days.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     <strong>
+      Request confidential communications
+     </strong>
+    </p>
+    <ul>
+     <li>
+      You can ask us to contact you in a specific way (for example, home or office phone) or to send mail to a different address.
+     </li>
+     <li>
+      We will say "yes" to all reasonable requests.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     <strong>
+      Ask us to limit what we use or share
+     </strong>
+    </p>
+    <ul>
+     <li>
+      You can ask us not to use or share certain health information for treatment, payment, or our operations. We are not required to agree to your request, and we may say "no" if it would affect your care.
+     </li>
+     <li>
+      If you pay for a service or health care item out-of-pocket in full, you can ask us not to share that information for the purpose of payment or our operations with your health insurer. We will say "yes" unless a law requires us to share that information.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     <strong>
+      Get a list of those with whom we've shared information
+     </strong>
+    </p>
+    <ul>
+     <li>
+      You can ask for a list (accounting) of the times we've shared your health information for six years prior to the date you ask, who we shared it with, and why.
+     </li>
+     <li>
+      We will include all the disclosures except for those about treatment, payment, and health care operations, and certain other disclosures (such as any you asked us to make). We'll provide one accounting a year for free but will charge a reasonable, cost-based fee if you ask for another one within 12 months.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     <strong>
+      Get a copy of this privacy notice
+     </strong>
+     <br/>
+     You can ask for a paper copy of this notice at any time, even if you have agreed to receive the notice electronically. We will provide you with a paper copy promptly.
+     <br/>
+     <br/>
+     <strong>
+      Choose someone to act for you
+     </strong>
+    </p>
+    <ul>
+     <li>
+      If you have given someone medical power of attorney or if someone is your legal guardian, that person can exercise your rights and make choices about your health information.
+     </li>
+     <li>
+      We will make sure the person has this authority and can act for you before we take any action.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     <strong>
+      File a complaint if you feel your rights are violated
+     </strong>
+    </p>
+    <ul>
+     <li>
+      You can complain if you feel we have violated your rights by contacting us using the information on page 1.
+     </li>
+     <li>
+      You can file a complaint with the U.S. Department of Health and Human Services Office for Civil Rights by sending a letter to 200 Independence Avenue, S.W., Washington, D.C. 20201, calling 1-877-696-6775, or visiting
+      <a href="http://www.hhs.gov/ocr/privacy/hipaa/complaints/">
+       www.hhs.gov/ocr/privacy/hipaa/complaints/
+      </a>
+      .
+     </li>
+     <li>
+      We will not retaliate against you for filing a complaint.
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Your Choices
+    </h3>
+    <p>
+     <strong>
+      For certain health information, you can tell us your choices about what we share.
+     </strong>
+     If you have a clear preference for how we share your information in the situations described below, talk to us. Tell us what you want us to do, and we will follow your instructions.
+     <br/>
+     In these cases, you have both the right and choice to tell us to:
+    </p>
+    <p>
+    </p>
+    <ul>
+     <li>
+      Share information with your family, close friends, or others involved in your care
+     </li>
+     <li>
+      Share information in a disaster relief situation
+     </li>
+     <li>
+      Include your information in a hospital directory
+     </li>
+    </ul>
+    <div>
+     If you are not able to tell us your preference, for example if you are unconscious, we may go ahead and share your information if we believe it is in your best interest. We may also share your information when needed to lessen a serious and imminent threat to health or safety.
+    </div>
+    <p>
+     <br/>
+     In these cases we never share your information unless you give us written permission:
+    </p>
+    <ul>
+     <li>
+      Marketing purposes
+     </li>
+     <li>
+      Sale of your information
+     </li>
+     <li>
+      Most sharing of psychotherapy notes
+     </li>
+    </ul>
+    <p>
+     In the case of fundraising:
+    </p>
+    <ul>
+     <li>
+      We may contact you for fundraising efforts, but you can tell us not to contact you again.
+     </li>
+    </ul>
+    <p>
+    </p>
+    <h3>
+     Our Uses and Disclosures
+    </h3>
+    <p>
+    </p>
+    <p>
+     <strong>
+      How do we typically use or share your health information?
+     </strong>
+    </p>
+    <p>
+     We typically use or share your health information in the following ways.
+    </p>
+    <p>
+     <strong>
+      Treat you
+     </strong>
+    </p>
+    <div>
+     We can use your health information and share it with other professionals who are treating you.
+     <div>
+      Example: A doctor treating you for an injury asks another doctor about your overall health condition.
+     </div>
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Run our organization
+     </strong>
+    </p>
+    <div>
+     We can use and share your health information to run our practice, improve your care, and contact you when necessary.
+     <div>
+      Example: We use health information about you to manage your treatment and services.
+     </div>
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Bill for your services
+     </strong>
+    </p>
+    <div>
+     We can use and share your health information to bill and get payment from health plans or other entities.
+     <div>
+      Example: We give information about you to your health insurance plan so it will pay for your services.
+     </div>
+    </div>
+    <p>
+     <br/>
+     <strong>
+      How else can we use or share your health information?
+     </strong>
+    </p>
+    <p>
+    </p>
+    <div>
+     We are allowed or required to share your information in other ways . usually in ways that contribute to the public good, such as public health and research. We have to meet many conditions in the law before we can share your information for these purposes. For more information see:
+     <a href="http://www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/index.html">
+      www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/index.html
+     </a>
+     .
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Help with public health and safety issues
+     </strong>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+    <div>
+     We can share health information about you for certain situations such as:
+     <ul>
+      <li>
+       Preventing disease
+      </li>
+      <li>
+       Helping with product recalls
+      </li>
+      <li>
+       Reporting adverse reactions to medications
+      </li>
+      <li>
+       Reporting suspected abuse, neglect, or domestic violence
+      </li>
+      <li>
+       Preventing or reducing a serious threat to anyone's health or safety
+      </li>
+     </ul>
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Do research
+     </strong>
+    </p>
+    <p>
+    </p>
+    <div>
+     We can use or share your information for health research.
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Comply with the law
+     </strong>
+    </p>
+    <div>
+     We will share information about you if state or federal laws require it, including with the Department of Health and Human Services if it wants to see that we're complying with federal privacy law.
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Respond to organ and tissue donation requests
+     </strong>
+    </p>
+    <p>
+    </p>
+    <div>
+     We can share health information about you with organ procurement organizations.
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Work with a medical examiner or funeral director
+     </strong>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+    <div>
+     We can share health information with a coroner, medical examiner, or funeral director when an individual dies.
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Address workers' compensation, law enforcement, and other government requests
+     </strong>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+    <div>
+     We can use or share health information about you:
+     <ul>
+      <li>
+       For workers' compensation claims
+      </li>
+      <li>
+       For law enforcement purposes or with a law enforcement official
+      </li>
+      <li>
+       With health oversight agencies for activities authorized by law
+      </li>
+      <li>
+       For special government functions such as military, national security, and presidential protective services
+      </li>
+     </ul>
+    </div>
+    <p>
+     <br/>
+     <strong>
+      Respond to lawsuits and legal actions
+     </strong>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+    <div>
+     We can share health information about you in response to a court or administrative order, or in response to a subpoena.
+    </div>
+    <p>
+    </p>
+    <p>
+    </p>
+    <h3>
+     Our Responsibilities
+    </h3>
+    <p>
+    </p>
+    <ul>
+     <li>
+      We are required by law to maintain the privacy and security of your protected health information.
+     </li>
+     <li>
+      We will let you know promptly if a breach occurs that may have compromised the privacy or security of your information.
+     </li>
+     <li>
+      We must follow the duties and privacy practices described in this notice and give you a copy of it.
+     </li>
+     <li>
+      We will not use or share your information other than as described here unless you tell us we can in writing. If you tell us we can, you may change your mind at any time. Let us know in writing if you change your mind.
+     </li>
+    </ul>
+    <p>
+     <br/>
+     For more information see:
+     <a href="http://www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/noticepp.html">
+      www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/noticepp.html
+     </a>
+     .
+     <br/>
+     <br/>
+     <strong>
+      Changes to the Terms of this Notice
+     </strong>
+     <br/>
+     We can change the terms of this notice, and the changes will apply to all information we have about you. The new notice will be available upon request.
+     <br/>
+    </p>
+   </div>
+   <div class="position_relative clearfix">
+    <a class="btn" onclick="$('#privacyPopup').dialog('close');">
+     Close
+    </a>
+   </div>
+  </div>
+  <div class="none-display" id="websiteprivacy" title="Website Privacy Policy">
+   <div id="websiteprivacytext">
+    <h3 class="align_text_center" id="website_privacy_top">
+     Patient Portal - Privacy Policy: Your Privacy Rights
+    </h3>
+    <h3 class="style3 align_text_left">
+     Table of Contents
+    </h3>
+    <ol>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#scope_and_purpose_of_this_policy">
+       Scope and purpose of this policy
+      </a>
+     </li>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#what_information_do_we_collect">
+       What information do we collect?
+      </a>
+     </li>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#how_do_we_use_your_information">
+       How do we use your information?
+      </a>
+     </li>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#sharing_your_information">
+       Sharing your information
+      </a>
+     </li>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#updates_to_this_privacy_policy">
+       Updates to this Privacy Policy
+      </a>
+     </li>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#our_data_protection_security_policy">
+       Our data protection and security policy
+      </a>
+     </li>
+     <li class="privacylist">
+      <a data-ajax="false" data-role="none" href="#website_privacy_key_terms">
+       Key terms
+      </a>
+     </li>
+    </ol>
+    <div class="align_text_center">
+     <strong>
+      This policy is effective as of February 2015
+     </strong>
+    </div>
+    <h3 class="style3 align_text_left" id="scope_and_purpose_of_this_policy">
+     <br/>
+     Scope and purpose of this policy
+    </h3>
+    <p>
+     This privacy policy (the "Policy") describes the practices of the Patient Portal (the "Portal") with regard to information about you that we obtain through your use of the Portal.  The Portal is an Internet service, powered by athenahealth, Inc. ("athenahealth," "us," or "we") which allows patients and other authorized users to coordinate and manage their medical care with their providers through electronic communications, increased access to health records, appointment scheduling, prescription requests, and bill payment processes.
+    </p>
+    <p>
+     This Policy applies to
+     <a data-ajax="false" data-role="none" href="#what_information_do_we_collect">
+      information we collect through the Portal
+     </a>
+     and how it is used.
+    </p>
+    <p>
+     Please note that while the Portal is powered by athenahealth, this Policy does not apply to other athenahealth platforms (e.g., athenaCollector, athenaClinicals, athenaCoordinator), other athenahealth product offerings (e.g., athenaText), or to our website,
+     <a href="http://www.athenahealth.com">
+      www.athenahealth.com
+     </a>
+     .  This Policy also does not apply to the data sharing and privacy practices of your provider.  Additionally, this Policy does not apply to information collected by us offline or through any other means, including on any other website operated by us or any third party, including our affiliates and subsidiaries.
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+    <h3 class="style3 align_text_left" id="what_information_do_we_collect">
+     <br/>
+     What information do we collect?
+    </h3>
+    <p>
+     <ul>
+      <li class="privacylist">
+       Information you provide us:
+       <ul>
+        <li class="privacylist">
+         When you register for the Portal, we may ask you to provide the following information:
+         <ul>
+          <li class="privacylist">
+           Patient first name, patient last name, date of birth, gender, email address, ResultsCall PIN, and phone number
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </li>
+      <li class="privacylist">
+       Information we collect from your use of our services:
+       <ul>
+        <li class="privacylist">
+         We access
+         <a data-ajax="false" data-role="none" href="#website_privacy_cookie">
+          cookie
+         </a>
+         technologies on your computer to improve Portal users' experience, including but not limited to: storing user session IDs and enabling "remember me" functionalities for simplified log-in procedures on trusted devices.
+        </li>
+        <li class="privacylist">
+         We may automatically collect and store information in our server logs regarding your use of our services and the content you viewed.  This information may include: your
+         <a data-ajax="false" data-role="none" href="#website_privacy_ip">
+          IP address
+         </a>
+         ; device specific information about the device you used to access the Portal; the patterns of searching and browsing that preceded access to the Portal; and the patterns of searching and browsing on the Portal in order to improve our services and for security purposes.
+        </li>
+        <li class="privacylist">
+         The Portal does not respond to web browsers' Do Not Track signals.
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+    <h3 class="style3 align_text_left" id="how_do_we_use_your_information">
+     <br/>
+     How do we use your information:
+    </h3>
+    <p>
+     <ul>
+      <li class="privacylist">
+       We may use your information for the following purposes, including but not limited to:
+       <ul>
+        <li class="privacylist">
+         To respond to your inquiries and fulfill your requests;
+        </li>
+        <li class="privacylist">
+         To inform you about relevant and important information about the Portal, other services or offerings from your provider for which you are eligible and may be interested in applying, updates to terms, conditions, and policies, and other relevant administrative changes and information relating to the Portal;
+        </li>
+        <li class="privacylist">
+         To deliver relevant marketing information;
+        </li>
+        <li class="privacylist">
+         For business purposes including but not limited to, developing and implementing new products and services from athenahealth, enhancing the functionality of the Portal, data analysis, audits, and to comply with all laws, regulations, and law enforcement requirements;
+        </li>
+        <li class="privacylist">
+         To pull requisite data to adhere to government incentive programs, including but not limited to, your provider's achievement of Meaningful Use standards;
+        </li>
+        <li class="privacylist">
+         To inform you of the opportunity to participate in online surveys, other forms of market research, sweepstakes, contests, and other similar promotions, and to administer these activities;
+        </li>
+        <li class="privacylist">
+         To plan risk control measures, like fraud and abuse detection and prevention.
+        </li>
+       </ul>
+      </li>
+      <li class="privacylist">
+       We may de-identify and aggregate your data - meaning this data cannot be used to identify or contact you - for our business purposes, including but not limited to analyzing data trends, research, or offering new products and services.
+      </li>
+      <li class="privacylist">
+       We track the number of visitors using certain portions and features of the Portal to make any necessary changes to improve the functionality of the Portal.
+      </li>
+      <li class="privacylist">
+       We track the popularity of features of the Portal to guide the development of new ones.
+      </li>
+     </ul>
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+    <h3 class="style3 align_text_left" id="sharing_your_information">
+     <br/>
+     Sharing your information:
+    </h3>
+    <p>
+     <ul>
+      <li class="privacylist">
+       We have business relationships with third-party vendors that deliver certain services and content for the Portal. The use and collection of information by these third-party vendors is governed by their respective privacy statements and is not covered by this Policy.
+      </li>
+      <li class="privacylist">
+       We can disclose your health information to third party vendors in accordance with HIPAA requirements and your providers' internal privacy practices. For further details regarding these requirements, refer to the HIPAA Privacy Rule at 45 C.F.R. section 164.506.
+      </li>
+      <li class="privacylist">
+       We also use the following vendors:
+       <ul>
+        <li class="privacylist">
+         We use
+         <strong>
+          Google Analytics
+         </strong>
+         for tracking queries submitted to their search engines. We also use Google's DoubleClick technology for tracking our advertisements, enabling "tell-a-friend" social media functionality, and providing us with the contact information of users who submit a request for additional information about our services via click-through advertisements.
+         <a href="http://www.google.com/policies/privacy/">
+          View Google's privacy policy
+         </a>
+         .
+        </li>
+        <li class="privacylist">
+         We use
+         <strong>
+          MixPanel
+         </strong>
+         in a similar manner as we use Google Analytics to conduct web analytics investigations about users' online activities.
+         <a href="https://mixpanel.com/privacy/">
+          View MixPanel's privacy policy
+         </a>
+         .
+        </li>
+       </ul>
+      </li>
+      <li class="privacylist">
+       Unless otherwise provided in this Policy, we will not disclose your personal information except when:
+       <ul>
+        <li class="privacylist">
+         You have given us your consent to share or use information about you;
+        </li>
+        <li class="privacylist">
+         We believe that we need to share information about you to provide a service that you have requested from us or from others;
+        </li>
+        <li class="privacylist">
+         We are required by law to disclose information; or
+        </li>
+        <li class="privacylist">
+         We believe it is necessary to protect our rights or to avoid liability or violations of the law.
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+    <h3 class="style3 align_text_left" id="updates_to_this_privacy_policy">
+     <br/>
+     Updates to this privacy policy:
+    </h3>
+    <p>
+     <ul>
+      <li class="privacylist">
+       athenahealth reserves the right to make periodic updates and revisions to this Policy. Any updates will be posted on this page. 
+			Please check this page to review whether any changes have been made to the Policy.
+       <br/>
+       athenahealth values the protection of sensitive health information. If you have any specific questions about the Patient Portal website privacy policy, 
+			please contact us at portalprivacypolicy@athenahealth.com. Patient Portal support requests (e.g. trouble logging in, password assistance, 
+			access to family members information etc.) or general questions about the portal should be directed to your medical provider or their office 
+			staff by signing into the Patient Portal and sending a secure message or calling your medical provider's office. athenahealth is unable to 
+			respond to general support inquiries sent to this email address.
+      </li>
+     </ul>
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+    <h3 class="style3 align_text_left" id="our_data_protection_security_policy">
+     <br>
+      Our data protection and security policy:
+     </br>
+    </h3>
+    <p>
+     <ul>
+      <li class="privacylist">
+       athenahealth takes the security and privacy of protected health information very seriously.  We have implemented technical, administrative, and physical safeguards, which are designed to protect your information from unauthorized use and access.  These safeguards are intended to ensure that our system is secure and that it meets our obligations under the HIPAA Security Standards Final Rule, as well as CCHIT Meaningful Use Security Requirements to specifically protect all electronic health information created or maintained by our certified Electronic Health Record technology.  Prudent security practices dictate that some of our procedures cannot be disclosed in detail.  However, certain information regarding our security features can be provided upon request by you to the contact information detailed above.
+      </li>
+     </ul>
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+    <h3 class="align_text_left style3" id="website_privacy_key_terms">
+     <br/>
+     Key Terms:
+    </h3>
+    <p>
+     <ul>
+      <li class="privacylist" id="website_privacy_cookie">
+       <strong>
+        COOKIES
+       </strong>
+       : Cookies are small amounts of text files that are sent from a website to your computer's browser when you visit the site. These cookies are then stored in files within your computer's browser. Web sites can access only the cookies that they have stored on your computer. For example, if the Acme Computer Company stores a cookie on your browser, Acme may access its own cookie to improve the user's online experience, but it could not access any cookies belonging to another company. For every future time you access the website, your browser sends the cookie back to the server, which notifies the website of the user's previous activities on the website. Thus, cookies serve several useful purposes, like letting you navigate between pages more efficiently, saving your preferences, and enhancing your user experience with the website.
+      </li>
+      <li class="privacylist" id="website_privacy_ip">
+       <strong>
+        INTERNET PROTOCOL (IP) ADDRESS
+       </strong>
+       : An IP Address is a numerical label separated by periods that identifies every device (e.g., computer, printer) that participates in a network. IP addresses allow these devices to communicate with one another and transmit relevant information.
+      </li>
+     </ul>
+    </p>
+    <p>
+     <a data-ajax="false" data-role="none" href="#website_privacy_top">
+      Return to top
+     </a>
+    </p>
+   </div>
+   <div class="position_relative clearfix">
+    <a class="btn" onclick="$('#websiteprivacy').dialog('close');">
+     Close
+    </a>
+   </div>
+  </div>
+  <div class="none-display" id="ieCompatibilityPopup" title="Alert">
+   You are using an outdated browser that is not supported on the Patient Portal.
+   <br/>
+   <br/>
+   Please
+   <a href="http://www.microsoft.com/en-in/download/internet-explorer-8-details.aspx">
+    upgrade your browser
+   </a>
+   before signing in.
+   <hr/>
+   <a class="btn gray left_170px" onclick="$('#ieCompatibilityPopup').dialog('close');" title="Ok Button for ie7 alert">
+    Ok
+   </a>
+  </div>
+  <div class="hide" id="browserUpdatePopup" title="Alert">
+   <div class="alert_icon">
+    <img alt="update browser alert icon" height="50" src="/usr/local/athena/prod/htdocs/static_20190308/portal/images/2012/sprites/alert_icon.png" width="50">
+    </img>
+   </div>
+   <div class="unsupported_browser_message">
+    The Patient Portal does not support your current browser and will prevent you from using the full site. Please update your browser to continue using our site securely.
+   </div>
+   <div class="unsupported_browser_lower_div">
+    <div class="unsupported_browser_update_button_div">
+     <button class="unsupported_browser_update_button" onclick="window.location.href='https://www.google.com/chrome/browser/desktop/index.html'">
+      Update Browser
+     </button>
+    </div>
+    <div class="unsupported_browser_not_now_link">
+     <a onclick="closeDialog()">
+      Not Now
+     </a>
+    </div>
+   </div>
+  </div>
+  <div class="none-display" id="sending" title="Sending">
+   Your message is being sent.
+  </div>
+  <div class="none-display" id="warnTimeout" title="Timeout Warning">
+   <div>
+    For your safety and security, your session is about to be logged off due to inactivity.
+   </div>
+   <div class="timeout_ok">
+    Please click OK to continue your session.
+   </div>
+   <a class="timeout_ok_btn btn center-button" onclick="$('#warnTimeout').dialog('close');timeoutController.reset();" title="Ok Button for session timeout">
+    OK
+   </a>
+  </div>
+  <div class="none-display" id="loginFaq" title="Frequently Asked Questions">
+   <div id="faqtext">
+    <p>
+     Below you will find answers to commonly asked questions concerning the website. For technical issues with this website during normal business hours, please contact our office.
+    </p>
+    <p>
+     <a name="faq_top">
+     </a>
+    </p>
+    <div class="faq_questions">
+     <h3>
+      What is the Patient Portal?
+     </h3>
+     <a href="#qgeneral_0">
+      What is the Patient Portal?
+     </a>
+     <a href="#qgeneral_1">
+      Who can use the Patient Portal?
+     </a>
+     <h3>
+      Security
+     </h3>
+     <a href="#qsecurity_0">
+      How secure is the Patient Portal?
+     </a>
+     <a href="#qsecurity_1">
+      What if my password is stolen?
+     </a>
+     <a href="#qsecurity_2">
+      What if I forget my password?
+     </a>
+     <a href="#qsecurity_3">
+      How do I change my Test Results PIN?
+     </a>
+     <a href="#qsecurity_4">
+      What if I'm unable to access the Patient Portal?
+     </a>
+     <a href="#qsecurity_5">
+      How do I sign out?
+     </a>
+     <h3>
+      Signing Up
+     </h3>
+     <a href="#signup">
+      What do I need to access the Patient Portal?
+     </a>
+     <a href="#qsignup_1">
+      How do I register for the Patient Portal?
+     </a>
+     <a href="#qsignup_2">
+      How do I sign in to the Patient Portal?
+     </a>
+     <h3>
+      My Profile
+     </h3>
+     <a href="#qmyprofile_0">
+      How do I edit my profile information?
+     </a>
+     <a href="#qmyprofile_1">
+      How do I edit how my contact preferences for different types of notifications?
+     </a>
+     <a href="#qmyprofile_2">
+      How do I view my insurance information?
+     </a>
+     <h3>
+      Appointments
+     </h3>
+     <a href="#qappointments_1">
+      How do I reschedule an appointment?
+     </a>
+     <a href="#qappointments_2">
+      How do I request an appointment?
+     </a>
+     <a href="#qappointments_3">
+      How do I view upcoming appointments?
+     </a>
+     <a href="#qappointments_5">
+      Where can I fill out medical forms before my appointment?
+     </a>
+     <a href="#qappointments_6">
+      Why doesn't anything happen when I click on a medical form?
+     </a>
+     <a href="#qappointments_7">
+      How do I view past appointments?
+     </a>
+     <h3>
+      Messages
+     </h3>
+     <div class="font_10px">
+      <strong>
+       Note:
+      </strong>
+      The availability of this feature is at the discretion of your practice.
+     </div>
+     <a href="#qmessages_0">
+      How do I ask my provider a question?
+     </a>
+     <a href="#qmessages_1">
+      How soon can I expect a response from my provider?
+     </a>
+     <a href="#qmessages_2">
+      How do I view messages and/or responses from my provider?
+     </a>
+     <a href="#qmessages_3">
+      Why can't I delete my sent and archived messages?
+     </a>
+     <h3>
+      Billing
+     </h3>
+     <div class="font_10px">
+      <strong>
+       Note:
+      </strong>
+      The availability of this feature is at the discretion of your practice.
+     </div>
+     <a href="#qbilling_0">
+      How do I view my account balance?
+     </a>
+     <a href="#qbilling_1">
+      How do I ask a question about my account balance?
+     </a>
+     <a href="#qbilling_2">
+      How do I make a payment?
+     </a>
+     <a href="#qbilling_3">
+      How do I view my payment history?
+     </a>
+     <a href="#qbilling_4">
+      How do I view my account statements?
+     </a>
+     <a href="#qbilling_5">
+      How do I manage my saved credit and debit cards?
+     </a>
+     <a href="#qbilling_6">
+      Why doesn't anything happen when I click "View Detail" or "View Receipt?"
+     </a>
+     <h3>
+      My Health
+     </h3>
+     <a href="#qmyhealth_0">
+      Why can't I view my test results?
+     </a>
+     <a href="#qmyhealth_1">
+      How do I request a prescription?
+     </a>
+     <a href="#qmyhealth_2">
+      How do I search for medical information?
+     </a>
+    </div>
+    <br/>
+    <div class="faq_answers">
+     <h3>
+      What is the Patient Portal?
+     </h3>
+     <h4>
+      <a name="qgeneral_0">
+      </a>
+      What is the Patient Portal?
+     </h4>
+     <div>
+      The Patient Portal is an online service that provides patients secure access to their health information. Various features may be available on the portal at your practice's discretion, including the ability to send messages to your health care providers, schedule appointments, and pay bills online.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qgeneral_1">
+      </a>
+      Who can use the Patient Portal?
+     </h4>
+     <div>
+      Any active patient may be eligible to register for and use the Patient Portal. If you are authorized, a family access account can be created that will allow you to access selected family members' health information.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      Security
+     </h3>
+     <h4>
+      <a name="qsecurity_0">
+      </a>
+      How secure is the Patient Portal?
+     </h4>
+     <div>
+      All communications between you and your provider's office are carried over a secure, encrypted connection. This secure connection utilizes industry standard Secure Socket Layer (SSL) encryption to ensure secure data transmission as well as server-side digital certificate authentication. To prohibit unauthorized access, all medical information is stored behind our firewall in our electronic medical record system.
+      <br>
+       <br/>
+       You should always make sure that the email address on file for your account is accurate, as notifications from the portal are sent to the email address on file. Make sure to sign out of your account each time you are finished using the portal.
+       <a class="top" href="#faq_top">
+        top
+       </a>
+      </br>
+     </div>
+     <h4>
+      <a name="qsecurity_1">
+      </a>
+      What if my password is stolen?
+     </h4>
+     <div>
+      Change your password immediately by completing one of the following options:
+      <ul>
+       <li>
+        Sign in to the Patient Portal, go to
+        <strong>
+         Security Settings
+        </strong>
+        , and reset your password.
+       </li>
+       <li>
+        Click
+        <strong>
+         Forgot your password
+        </strong>
+        on the sign-in page and enter your email address to request a password reset email.
+       </li>
+       <li>
+        Contact your provider's office and request a password reset email.
+       </li>
+      </ul>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsecurity_2">
+      </a>
+      What if I forget my password?
+     </h4>
+     <div>
+      On the sign-in page, click
+      <strong>
+       Forgot your password
+      </strong>
+      and enter your email address to request a password reset email.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsecurity_3">
+      </a>
+      How do I change my Test Results PIN?
+     </h4>
+     <div>
+      Your test results PIN is required to retrieve your test results over the phone. You may ask the office to reset your PIN, or you may follow these steps:
+      <ol>
+       <li>
+        Click the
+        <strong>
+         My Profile
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Test Results PIN
+        </strong>
+        .
+       </li>
+       <li>
+        Type in your new PIN.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Save
+        </strong>
+        button.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsecurity_4">
+      </a>
+      What if I'm unable to access the Patient Portal?
+     </h4>
+     <div>
+      Please contact your provider's office to register or to verify your information.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsecurity_5">
+      </a>
+      How do I sign out?
+     </h4>
+     <div>
+      Click the
+      <strong>
+       Sign Out
+      </strong>
+      link at the top right of the screen. Alternatively, if your keyboard remains idle for 10 minutes or more, you will receive a pop-up window asking if you are still actively using the portal. If you do not click the
+      <strong>
+       OK
+      </strong>
+      button, you will be signed out automatically. Any information you have typed and not saved or sent will be lost.
+      <div class="font_10px">
+       <strong>
+        Note:
+       </strong>
+       Do not use a public computer to access your health information.
+      </div>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      Signing Up
+     </h3>
+     <h4>
+      <a name="signup">
+      </a>
+      What do I need to access the Patient Portal?
+     </h4>
+     <div>
+      <ul>
+       <li>
+        an email address
+       </li>
+       <li>
+        access to a computer and the internet
+       </li>
+      </ul>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsignup_1">
+      </a>
+      How do I register for the Patient Portal?
+     </h4>
+     <div>
+      To register for the Patient Portal, click the
+      <strong>
+       Sign up today
+      </strong>
+      link on the sign-in page, then enter your information.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsignup_2">
+      </a>
+      How do I sign in to the Patient Portal?
+     </h4>
+     <div>
+      To sign in to the Patient Portal, enter your email address and password on the sign-in page, then click the
+      <strong>
+       Sign in
+      </strong>
+      button.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qsignup_3">
+      </a>
+      I have a PIN instead of a password. How do I sign in to the Patient Portal?
+     </h4>
+     <div>
+      We have made our sign-in process easier. If you have been signing in with a PIN, date of birth, and phone number, you will now be able to sign in with just an email address and password. To do this, you must create a password for your account by clicking the
+      <strong>
+       Use your PIN to create a password
+      </strong>
+      link on the Patient Portal sign-in page, and following the instructions.  This is a one-time only change; going forward you will simply need to enter your email address and password to sign in.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      My Profile
+     </h3>
+     <h4>
+      <a name="qmyprofile_0">
+      </a>
+      How do I edit my profile information?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         My Profile
+        </strong>
+        tab.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Edit
+        </strong>
+        link.
+       </li>
+       <li>
+        Update your information as required.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Submit
+        </strong>
+        button.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmyprofile_1">
+      </a>
+      How do I edit how my contact preferences for different types of notifications?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click on the
+        <strong>
+         My Profile
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         My Notifications.
+        </strong>
+       </li>
+       <li>
+        Indicate your contact preferences for different types of notifications.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Save
+        </strong>
+        button.
+       </li>
+      </ol>
+      <div class="font_10px">
+       <strong>
+        Note:
+       </strong>
+       Portal users cannot deactivate email notifications, as at least one method of communication is required.
+      </div>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmyprofile_2">
+      </a>
+      How do I view my insurance information?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         My Profile
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Insurance.
+        </strong>
+       </li>
+      </ol>
+      <div class="font_10px">
+       <strong>
+        Note:
+       </strong>
+       If your insurance information has changed, please contact your provider's office.
+      </div>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      Appointments
+     </h3>
+     <h4>
+      <a name="qappointments_1">
+      </a>
+      How do I reschedule an appointment?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Appointments
+        </strong>
+        tab. Your scheduled appointments will appear listed under
+        <strong>
+         Upcoming Appointments
+        </strong>
+        .
+       </li>
+       <li>
+        Click the
+        <strong>
+         Reschedule
+        </strong>
+        link that appears beneath the date of your appointment.
+       </li>
+       <li>
+        Select an available appointment from the calendar.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Reschedule Appointment
+        </strong>
+        button.
+       </li>
+      </ol>
+      <div class="font_10px">
+       <strong>
+        Note:
+       </strong>
+       The availability of this feature is at the discretion of your practice.
+      </div>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qappointments_2">
+      </a>
+      How do I request an appointment?
+     </h4>
+     <div>
+      It is at your practice's discretion to allow online appointment scheduling. If your practice does not allow online appointment scheduling, you can request an appointment by sending a message to your provider. To do so:
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Messages
+        </strong>
+        tab.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Compose Message
+        </strong>
+        button.
+       </li>
+       <li>
+        Select the
+        <strong>
+         Appointments and scheduling
+        </strong>
+        option from the message type dropdown menu.
+       </li>
+       <li>
+        Select your provider, office location, and your preferred time of day and days of week.
+       </li>
+       <li>
+        Type your subject and message.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Send
+        </strong>
+        button.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qappointments_3">
+      </a>
+      How do I view upcoming appointments?
+     </h4>
+     <div>
+      Click the
+      <strong>
+       Appointments
+      </strong>
+      tab. Your scheduled appointments will appear listed under
+      <strong>
+       Upcoming Appointments
+      </strong>
+      .
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qappointments_5">
+      </a>
+      Where can I fill out medical forms before my appointment?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Appointments
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Medical Forms
+        </strong>
+        .
+       </li>
+       <li>
+        Click the desired form. Forms with a computer icon can be completed and submitted online, while forms with a printer icon can be printed out, completed, and brought with you to your appointment.
+       </li>
+      </ol>
+      <div class="font_10px">
+       <strong>
+        Note:
+       </strong>
+       The availability of this feature is at the discretion of your practice.
+      </div>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qappointments_6">
+      </a>
+      Why doesn't anything happen when I click on a medical form?
+     </h4>
+     <div>
+      Adobe Acrobat is required to view and print forms on the portal. On the Medical Forms page, you will see a note indicating this requirement, along with a link to download this program for free.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qappointments_7">
+      </a>
+      How do I view past appointments?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Appointments
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Past
+        </strong>
+        .
+       </li>
+       <li>
+        Select the desired timeframe from the
+        <strong>
+         Past Appointments
+        </strong>
+        dropdown menu.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      Messages
+     </h3>
+     <div class="font_10px">
+      <strong>
+       Note:
+      </strong>
+      The availability of this feature is at the discretion of your practice.
+     </div>
+     <h4>
+      <a name="qmessages_0">
+      </a>
+      How do I ask my provider a question?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Messages
+        </strong>
+        tab.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Compose Message
+        </strong>
+        button.
+       </li>
+       <li>
+        Select the message type from the dropdown options based on the topic of your question.
+       </li>
+       <li>
+        Select your provider and office location.
+       </li>
+       <li>
+        Type your subject and message.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Send
+        </strong>
+        button
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmessages_1">
+      </a>
+      How soon can I expect a response from my provider?
+     </h4>
+     <div>
+      Your provider's office will make every effort to respond to your messages within a timely manner. Please do not expect a response on weekends or holidays. If you need to speak with the office sooner, please call the office directly. Urgent matters should not be dealt with via the Patient Portal.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmessages_2">
+      </a>
+      How do I view messages and/or responses from my provider?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Messages
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Inbox
+        </strong>
+        .
+       </li>
+       <li>
+        Click the desired message in your inbox to read the message.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmessages_3">
+      </a>
+      Why can't I delete my sent and archived messages?
+     </h4>
+     <div>
+      You cannot permanently delete sent or archived messages. This is because all messages that you send and receive in the Patient Portal are part of your medical record.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      Billing
+     </h3>
+     <div class="font_10px">
+      <strong>
+       Note:
+      </strong>
+      The availability of this feature is at the discretion of your practice.
+     </div>
+     <h4>
+      <a name="qbilling_0">
+      </a>
+      How do I view my account balance?
+     </h4>
+     <div>
+      Click the
+      <strong>
+       Billing
+      </strong>
+      tab. Your list of charges will be listed by date of visit, followed by your account balance, under
+      <strong>
+       Recent Charges Payable Online
+      </strong>
+      .
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qbilling_1">
+      </a>
+      How do I ask a question about my account balance?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Messages
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select Compose
+        <strong>
+         Message
+        </strong>
+        .
+       </li>
+       <li>
+        Select the
+        <strong>
+         Billing and Payments
+        </strong>
+        option from the message type dropdown menu.
+       </li>
+       <li>
+        Select your provider and office location.
+       </li>
+       <li>
+        Type your subject and message.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Send
+        </strong>
+        button.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qbilling_3">
+      </a>
+      How do I view my payment history?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Billing
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Payments
+        </strong>
+        .
+       </li>
+       <li>
+        Select the payment you would like to view.
+       </li>
+       <li>
+        Click the
+        <strong>
+         View detail
+        </strong>
+        link.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qbilling_4">
+      </a>
+      How do I view my account statements?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Billing
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Statements
+        </strong>
+        .
+       </li>
+       <li>
+        Select the patient statement you would like to view.
+       </li>
+       <li>
+        Click the
+        <strong>
+         View detail
+        </strong>
+        link
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qbilling_5">
+      </a>
+      How do I manage my saved credit and debit cards?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Billing
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Payment Methods
+        </strong>
+        .
+       </li>
+       <li>
+        From here you can:
+       </li>
+       <li class="no-list-item-style">
+        <ol type="a">
+         <li>
+          Click
+          <strong>
+           Add a Credit Card
+          </strong>
+          to save a new card for future payments.
+         </li>
+         <li>
+          Click
+          <strong>
+           Make Default
+          </strong>
+          to set a saved card as your default payment method.
+         </li>
+         <li>
+          Click the
+          <strong>
+           Delete
+          </strong>
+          link to remove a saved card from the portal.
+         </li>
+        </ol>
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qbilling_6">
+      </a>
+      Why doesn't anything happen when I click "View Detail" or "View Receipt?"
+     </h4>
+     <div>
+      Adobe Acrobat is required to view and print statements and forms on the Patient Portal. When you click the
+      <strong>
+       Billing
+      </strong>
+      tab, you will see a note indicating this requirement, along with a link to download this program for free.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h3>
+      My Health
+     </h3>
+     <h4>
+      <a name="qmyhealth_0">
+      </a>
+      Why can't I view my test results?
+     </h4>
+     <div>
+      It is at your provider's discretion to make test results available. Your provider must authorize the release of your test results in order for them to post to your Patient Portal account. Only test results which are considered appropriate for release will be accessible through the Patient Portal.
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmyhealth_1">
+      </a>
+      How do I request a prescription?
+     </h4>
+     <div>
+      <ol>
+       <li>
+        Click the
+        <strong>
+         Messages
+        </strong>
+        tab.
+       </li>
+       <li>
+        Select
+        <strong>
+         Compose Message
+        </strong>
+        .
+       </li>
+       <li>
+        Select
+        <strong>
+         Prescriptions and refills
+        </strong>
+        from the message type dropdown menu.
+       </li>
+       <li>
+        Select your provider and office location.
+       </li>
+       <li>
+        Type your subject and message.
+       </li>
+       <li>
+        Click the
+        <strong>
+         Send
+        </strong>
+        button.
+       </li>
+      </ol>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+     <h4>
+      <a name="qmyhealth_2">
+      </a>
+      How do I search for medical information?
+     </h4>
+     <div>
+      Click on the
+      <strong>
+       Search
+      </strong>
+      input field in the
+      <strong>
+       Health &amp; Wellness
+      </strong>
+      search box at the bottom of the main menu on the left. You can search by keyword, health topic, or symptom for health information that includes:
+      <ul>
+       <li>
+        Interactive tools with quizzes that rate your health and fitness levels, lifestyle choices, and more.
+       </li>
+       <li>
+        Learning centers with specific medical topics organized by category.
+       </li>
+       <li>
+        A symptom checker to evaluate specific symptoms you or someone else may be experiencing.
+       </li>
+       <li>
+        Quick links to search for information on medications, medical tests, support groups, and symptoms.
+       </li>
+      </ul>
+      <a class="top" href="#faq_top">
+       top
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="none-display" id="messageSent" title="Success">
+   <span id="messageBlock">
+   </span>
+  </div>
+  <div class="none-display" id="formSaveModal" title="Error">
+   <span id="formSaveModalText">
+    We were unable to save your data. Please try again later.
+   </span>
+   <br/>
+   <br/>
+   <br/>
+   <a class="btn" href="#" onclick="$('#formSaveModal').dialog('close'); return false;">
+    Continue
+   </a>
+   <a class="btn" href="#" onclick="csrf_redirect('./?section=welcome'); $('#formSaveModal').dialog('close');">
+    Go Home
+   </a>
+  </div>
+  <div id="savenotification">
+   Saving...
+  </div>
+ </body>
+</html>
+<div class="none-display statement-id" id="statement-id">
+ <div class="content">
+  <div class="message">
+   Use the images below to locate the code on your patient statement.
+  </div>
+  <img alt="Sample Statement" class="full_width" src="/usr/local/athena/prod/htdocs/static_20190308/portal/images/2012/sprites/qpr1.jpg"/>
+  <div class="divider">
+   - OR -
+  </div>
+  <img alt="Sample Statement" class="full_width" src="/usr/local/athena/prod/htdocs/static_20190308/portal/images/2012/sprites/qpr2.jpg"/>
+  <div class="divider">
+   - OR -
+  </div>
+  <img alt="Sample Statement" class="full_width" src="/usr/local/athena/prod/htdocs/static_20190308/portal/images/2012/sprites/qpe1.jpg"/>
+  <div class="second">
+   If you do not have your patient statement, sign in to the Patient Portal to review your balance.
+  </div>
+ </div>
+</div>
+<div class="none-display" id="accountLocked">
+ Your account has been locked due to too many incorrect login attempts.  Please
+ <a href="./?section=landing&amp;sub=enroll">
+  click here to re-register
+ </a>
+ and re-activate your account.
+</div>
+<div class="none-display" id="howToRegisterFamily" title="Create a family account">
+ <br/>
+ <div class="align_right">
+  <span class="sprite-print">
+  </span>
+  <span class="padding_howToRegisterFamily spanlink" onclick="$('#contentDiv').addClass('dontprint');window.print();$('#contentDiv').removeClass('dontprint');">
+   Print
+  </span>
+ </div>
+ <p>
+  You can create a family or guarantor login account that will allow you to access selected family members' health information within the same login account. "Family" access gives you the same access to patient information and actions as you do with your own patient web portal account. "Guarantor" access gives you the ability to view contact and billing information and make payments on the patients' behalf.
+ </p>
+ <ol>
+  <li>
+   In order to setup an account of this nature, the patient to which you are requesting access will need to log in to their patient web portal account and grant access using the following steps. If you know the login information for this patient, such as your child, log into their web portal account.
+  </li>
+  <li>
+   Go to the "My Profile" tab and click on "Family/Guarantor Access."
+  </li>
+  <li>
+   Enter the e-mail address of the family member and click on "Go."
+  </li>
+  <li>
+   Select an Account Type of "Family" or "Guarantor", fill in the required fields, and click on "Submit."
+  </li>
+  <li>
+   A temporary password will appear in a pop up screen. Write this password down and forward it to the family member, as it will not be available after clicking on "ok."
+  </li>
+  <li>
+   The family member's name will then be listed under the "Family" or "Guarantor" section at the top of the screen.
+  </li>
+  <li>
+   To edit or remove this family member's access, click on the family member's name at the top of the screen.
+  </li>
+  <li>
+   To sign into this family or guarantor account, check the "Sign in to your family or guarantor account" box on the Sign In screen, type in your email address and password, then click Sign In. Once singed in, you must change your password and accept the terms and conditions to view the account.
+  </li>
+ </ol>
+</div>
+<div class="none-display" id="awaitingConfirmation" title="Phone Verification">
+ Please wait while we initiate a call to you...
+</div>
+<div class="none-display" id="enrollmentConfirmCode" title="Phone Verification">
+ You should receive a call
+ <strong>
+  within 60 seconds.
+ </strong>
+ <br/>
+ <br/>
+ <span>
+  <strong>
+   Status:
+  </strong>
+ </span>
+ <span class="span_enrollmentConfirmCode" id="call_status_cell">
+ </span>
+ <br/>
+ <br/>
+ When prompted, please supply the following verification code using your telephone key pad:
+ <br/>
+ <br/>
+ <div class="confirm_code_div align_text_center" id="confirm_code_div">
+  <span id="confirm_code">
+  </span>
+  #
+ </div>
+ <br/>
+ <br/>
+ <a class="btn cancelCall_enrollmentConfirmCode" onclick="cancelCall();">
+  Cancel
+ </a>
+</div>
+<div class="none-display" id="smsTermsPopup" title="SMS Terms and Conditions">
+ The "Michigan State University HealthTeam" alerts program offers appointment, billing, lab result, and general announcements via SMS on your cell phone. Message and data rates may apply. Text
+ <strong>
+  STOP
+ </strong>
+ to 28309 in order to cancel your participation in the program at any time. Text
+ <strong>
+  HELP
+ </strong>
+ to 28309 for support needs. Alerts 1 message per request.
+ <strong>
+  As the program will involve the transmission and use of your personal information, it is subject to Michigan State University HealthTeam's Privacy Policy, which is available
+  <a class="showPrivacyPopup" href="#">
+   HERE
+  </a>
+  , and to Patient Portal Terms and Conditions, which are available
+  <a class="showTermsPopup" href="#">
+   HERE
+  </a>
+  .
+ </strong>
+ Service is available on ACS Wireless, AT&amp;T, Alltel, Appalachian Wireless, Bell Mobility, Bluegrass Cellular, Boost (iDEN), Boos Unlimited (CDMA), Cellcom, Cellular One from Dobson, Cellular One of East Central Illinois, Cellular South, Centennial Wireless, Cincinnati Bell, Cricket Communications, Fido, GCI Communications, Golden State Cellular, Illinois Valley Cellular, Immix Wireless, Inland Cellular, MTS Mobility, MetroPCS, Nex-Tech Wireless, Rogers Wirless, SaskTel Mobility, Sprint, T-Mobile, Telux Mobility, Thumb Cellular, U.S. Cellular, Unicel, United Wireless, Verizon Wirless, Viaero Wireless, Virgin Mobile, Virgin Mobile USA, West Central Wirless, and nTelos Wirless and is subject to their terms of service. Michigan State University HealthTeam alerts may change or end the program at its discrection.
+ <div class="clearfix position_relative">
+  <a class="btn" onclick="$('#smsTermsPopup').dialog('close');">
+   Close
+  </a>
+ </div>
+</div>
+

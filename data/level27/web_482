@@ -1,0 +1,187 @@
+https://remote.uwgb.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="text/javascript" http-equiv="Content-Script-Type"/>
+  <meta content="HOB RD VPN, Windows Terminal Server, Terminal Emulation, 3270, 5250, Unix" name="description"/>
+  <meta content="software, Windows, Terminal Server, /390, /370, host, 3270, 5250, VT525, Siemens, 97801, 9750, BS2000, HP700, Java, GDDM, emulation" name="keywords"/>
+  <title>
+   HOB RD VPN Login
+  </title>
+  <link href="i/favicon.ico" rel="shortcut icon"/>
+  <link href="i/apple-touch-icon-precomposed.png" rel="apple-touch-icon-precomposed"/>
+  <link href="i/css/hobrdvpn.css" rel="stylesheet"/>
+  <script>
+   if(top != self){
+top.location.href= location.href;
+}
+
+function setFocus(variable){
+if(variable == ""){document.access.username.focus();}
+else{document.access.password.focus();}
+}
+var msgL="HOB RD VPN Login";
+var msgH="Enter your Username and Password to login now.";
+var msgU="Username:";
+var msgP="Password:";
+var imglogin="login_en.png";
+var imgloginClick="loginClick_en.png";
+var imgloginOver="loginOver_en.png";
+
+function loadresource(){
+var agt=navigator.userAgent.toLowerCase();
+var is_major=parseInt(navigator.appVersion);
+var is_ie=(agt.indexOf("msie") != -1);
+var is_ie4up=(is_ie && (is_major >= 4));
+if(is_ie4up)
+lang=navigator.userLanguage;
+else
+lang=navigator.language;
+if(lang == null)
+lang="en";
+if(lang.indexOf("de") != -1){
+msgL="HOB RD VPN Anmeldung";
+msgH="Geben Sie Ihren Benutzernamen und Ihr Passwort ein, um sich jetzt anzumelden.";
+msgU="Benutzername:";
+msgP="Passwort:";
+imglogin="login_de.png";
+imgloginClick="loginClick_de.png";
+imgloginOver="loginOver_de.png";
+}
+else if(lang.indexOf("fr") != -1){
+msgL="Login de HOB RD VPN";
+msgH="Saisissez votre nom d'utilisateur et votre mot de passe pour vous connecter maintenant.";
+msgU="Nom d'utilisateur:";
+msgP="Mot de passe:";
+imglogin="login_en.png";
+imgloginClick="loginClick_en.png";
+imgloginOver="loginOver_en.png";
+}
+else if(lang.indexOf("es") != -1){
+msgL="Acceso de Entrada a HOB RD VPN";
+msgH="Para accesar ahora, inserte su Nombre de Usuario y contraseña.";
+msgU="Nombre de Usuario:";
+msgP="Contraseña:";
+imglogin="login_en.png";
+imgloginClick="loginClick_en.png";
+imgloginOver="loginOver_en.png";
+}
+else if(lang.indexOf("zh") != -1){
+msgL="登录HOB RD VPN";
+msgH="请输入用户名和密码以便登录。";
+msgU="用户名:";
+msgP="密码:";
+imglogin="login_zh.png";
+imgloginClick="loginClick_zh.png";
+imgloginOver="loginOver_zh.png";
+}}
+  </script>
+ </head>
+ <body>
+  <script>
+   loadresource();
+  </script>
+  <div id="pagearea">
+   <div id="header">
+    <div class="pageinner" id="logo">
+     <img alt="HOB RD VPN" class="hob" src="i/banner_rdvpn.jpg"/>
+    </div>
+   </div>
+   <div class="pageinner" id="logon">
+    <div class="active" id="rdvpn">
+     <div class="box">
+      <div class="boxtop">
+       <span>
+       </span>
+      </div>
+      <div class="boxinner">
+       <div class="login">
+        <form action="login.html" autocomplete="off" id="access" method="post" name="access">
+         <br/>
+         <h3>
+          <script>
+           document.write(msgL);
+          </script>
+         </h3>
+         <noscript>
+          Your browser is not capable of running HOB RD VPN. You must have a JavaScript-enabled web browser.
+          <br/>
+          <br/>
+          HOB RD VPN kann nicht ausgeführt werden, da Ihr Browser kein JavaScript unterstützt.
+          <br/>
+          <br/>
+          Votre navigateur n'est pas capable de lancer HOB RD VPN. Il vous faut un navigateur qui supporte JavaScript.
+          <br/>
+          <br/>
+          Su Navegador de Internet no es capaz de ejecutar HOB RD VPN. Usted debe de tener habilitado el soporte de JavaScript en el navegador.
+          <br/>
+          <br/>
+          您的浏览器不能运行HOB RD VPN, 请使用一个支持JavaScript的浏览器。
+          <br/>
+          <br/>
+         </noscript>
+         <br>
+          <script>
+           document.write(msgH);
+          </script>
+          <div class="err_msg">
+           <br>
+            <br/>
+           </br>
+          </div>
+          <ul>
+           <br>
+            <li>
+             <label for="username">
+              <script>
+               document.write(msgU);
+              </script>
+             </label>
+             <input id="username" maxlength="80" name="username" size="30" type="text" value=""/>
+            </li>
+            <li>
+             <label for="password">
+              <script>
+               document.write(msgP);
+              </script>
+             </label>
+             <input id="password" maxlength="80" name="password" size="30" type="password"/>
+            </li>
+            <li>
+             <label for="userlogin">
+             </label>
+             <script>
+              text="<input name=\"userlogin\" type=\"image\" id=\"userlogin\" src=\"i/" +
+  imglogin+ "\""+
+  " alt=\"login\""+
+  " onMouseover=\"this.src='i/"+imgloginOver+"';\""+
+  " onMousedown=\"this.src='i/"+imgloginClick+"';\""+
+  " onMouseup=\"this.src='i/"+imgloginOver+"';\""+
+  " onMouseout=\"this.src='i/"+imglogin+"';\">";
+document.write(text);
+             </script>
+            </li>
+           </br>
+          </ul>
+          <input maxlength="250" name="state" size="20" type="hidden"/>
+          <input maxlength="250" name="destination" size="20" type="hidden" value=""/>
+         </br>
+        </form>
+       </div>
+      </div>
+      <div class="boxbottom">
+       <span>
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div id="footer">
+   </div>
+  </div>
+ </body>
+ <script>
+  setFocus(document.access.username.value);
+ </script>
+</html>

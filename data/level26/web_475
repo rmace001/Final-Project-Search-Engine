@@ -1,0 +1,1598 @@
+http://kicp.uchicago.edu
+<html>
+ <head>
+  <title>
+   Kavli Institute for Cosmological Physics at the University of Chicago | KICP
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <!-- style.css -->
+  <link href="home.css" media="screen" rel="stylesheet" rev="stylesheet"/>
+  <script language="javascript" src="preload.js">
+  </script>
+  <link href="images/favicon.ico" rel="icon" type="image/x-icon">
+   <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+   <script language="javascript">
+    var isID = 0;
+var isAll = 0;
+var isLayers = 0;
+var isDHTML = 0;
+
+var domSMenu= null;
+var oldDomSMenu= null;
+
+var t=0;
+var lCount = 0;
+var lDelay = 3;
+var pause = 500;
+
+var evt = null;
+
+if (document.getElementById && !document.all){isID = 1; isDHTML = 1;}
+else 
+{
+  if (document.all){isAll = 1; isDHTML = 1;}
+  else 
+  {
+    if (document.layers){isLayers = 1; isDHTML = 1;}
+  }
+}
+
+//alert(isDHTML);
+
+// return the correct address for object for user browser
+function findDOM(objectID, withStyle)
+{
+  if (withStyle ==1)
+  {
+    if (isID){return (document.getElementById(objectID).style);}
+    else 
+    {
+      if (isAll){return (document.all[objectID].style);}
+      else 
+      {
+	if (isLayers){return (document.layers[objectID]);}
+      }
+    }
+  }
+  else
+  {
+    if (isID){return (document.getElementById(objectID));}
+    else 
+    {
+      if (isAll){return (document.all[objectID]);}
+      else 
+      {
+	if (isLayers){return (document.layers[objectID]);}
+      }
+    }
+  }
+}
+
+// returns LEFT Object coordinate
+function getLeft(object_ID)
+{
+  dom = findDOM(object_ID,0);
+  domStyle = findDOM(object_ID,1);
+
+  left_value = 0;
+  if (domStyle.pixelLeft){left_value = domStyle.pixelLeft;}
+  else 
+  {
+    if (dom.offsetLeft){left_value = dom.offsetLeft;}
+    else { if (domStyle.left) {left_value = domStyle.left;}}
+  }
+  return left_value;
+}
+// returns TOP Object coordinate
+
+function getTop(object_ID)
+{
+  dom = findDOM(object_ID,0);
+  domStyle = findDOM(object_ID,1);
+
+  top_value = 0;
+  if (domStyle.pixelTop){top_value = domStyle.pixelTop;}
+  else 
+  {
+    if (dom.offsetTop){top_value = dom.offsetTop;}
+    else { if (domStyle.top) {top_value = domStyle.top;}}
+  }
+  return top_value;
+}
+
+function findLivePageWidth()
+{
+  var canvas = 'canvas';
+  var elemLeft;
+  var elemWidth = 1;
+  var w;
+
+  elemLeft = getLeft(canvas);
+  //alert(canvasLeft);
+
+  dom = findDOM(canvas,0);
+  domStyle = findDOM(canvas,1);
+  //alert(dom);
+
+  if (dom.offsetWidth) {elemWidth=dom.offsetWidth;}
+  else
+  {
+    if (dom.clip.width) {elemWidth=dom.clip.width;}
+  }
+  //alert(elemWidth);
+
+  if (elemWidth==1){return null;}
+
+  w = elemLeft + elemWidth ;
+  //alert(w);
+  
+  return w;
+}
+
+
+function findPageWidth()
+{
+  var w;
+  if (window.innerWidth != null)
+  {
+    w=window.innerWidth;
+    //alert(w);
+    return w;
+  }
+  if (document.body.clientWidth != null)
+  {
+    w=document.body.clientWidth;
+    //alert(w);
+    return w;
+  }
+  return (null);
+}
+
+function getImageTop(ObjectID,e)
+{
+  var anchorTop = 0;
+  if (document.images[ObjectID].y)  // NS
+  {
+    anchorTop = document.images[ObjectID].y;
+    //alert(anchorTop);
+  }
+  else
+  {
+    if (!e) {e = window.event;}
+    myTarget = e.currentTarget;
+  
+    if (!myTarget) {myTarget = e.srcElement;}
+    else if (myTarget == "undefined") {myTarget = e.srcElement;}
+    //alert("myTarget => " + myTarget);
+
+    while (myTarget != document.body)
+    {
+      anchorTop += myTarget.offsetTop;
+      myTarget = myTarget.offsetParent;
+    }
+  }
+  //alert("anchorTop: " + anchorTop);
+  return anchorTop;
+}
+
+function getImageLeft(ObjectID,e)
+{
+  var anchorLeft = 0;
+  if (document.images[ObjectID].x)  // NS
+  {
+    anchorLeft = document.images[ObjectID].x;
+    //alert("anchorLeft: " + anchorLeft);
+  }
+  else
+  {
+    if (!e) {e = window.event;}
+    myTarget = e.currentTarget;
+  
+    if (!myTarget) {myTarget = e.srcElement;}
+    else if (myTarget == "undefined") {myTarget = e.srcElement;}
+    //alert("myTarget => " + myTarget);
+
+    while (myTarget != document.body)
+    {
+      anchorLeft += myTarget.offsetLeft;
+      myTarget = myTarget.offsetParent;
+    }
+  }
+  //alert("anchorLeft: " + anchorLeft);
+  return anchorLeft;
+}
+
+
+function delayShowContent_Image(evt,objectID,imageID,top_shift,left_shift,left_offset)
+{
+  if(isDHTML)
+  {
+    //alert(isDHTML);
+    var elemWidth = 1;
+    var livePageWidth = findLivePageWidth();
+    //alert(livePageWidth);    
+
+    var Left = getImageLeft(imageID,evt);
+    //alert(Left);
+
+    var Top = getImageTop(imageID,evt);
+    //alert(Top);
+
+    var left_value = 0;
+    var top_value = 0;
+    var left_v = 0
+    var top_v =0;
+
+    t=2;
+
+    dom = findDOM(objectID,0);
+    //alert(objectID);
+    //alert(dom);
+
+    domStyle = findDOM(objectID,1);
+
+    if(oldDomSMenu)
+    {
+      lCount = 0;
+      oldDomSMenu.visibility = 'hidden';
+      left_value = oldDomSMenu.left;
+      top_value = oldDomSMenu.top;
+    }
+    //alert("Left => " + Left +  " ; Top => " + Top);
+
+    if (dom.offsetWidth) 
+    {
+      //alert("dom.offsetWidth");  
+      elemWidth=dom.offsetWidth;
+      //alert(" elemWidth => " + elemWidth);
+    }
+    else
+    {
+      //alert("dom.clip.width");  
+      if (dom.clip.width) {elemWidth=dom.clip.width;}
+    }
+   
+    left_value = Left + left_shift;
+    top_value = Top + top_shift;
+
+    //alert("left_value => " + left_value +  " ; top_value => " + top_value);
+
+
+    //alert("left_value => " + left_value +  " ; elemWidth => " + elemWidth);
+    if ((left_value + elemWidth) > livePageWidth)
+    {
+      left_value = Left + left_offset - elemWidth;
+    }
+
+    //alert("left_value => " + left_value +  " ; top_value => " + top_value);
+    
+    domStyle.top = top_value;
+    domStyle.left = left_value;
+    oldDomSMenu = domStyle;
+
+    left_v = getLeft(objectID);
+    top_v = getTop(objectID);
+    //alert("top: " + top_v);
+
+
+    if (top_v >= 1 && left_v >= 1)
+    {
+      //alert("top: " + top_v);
+      domStyle.visibility= 'visible';
+      domStyle.zIndex = 100;
+
+      //alert("visibility: " + domStyle.visibility);
+    }
+  }
+  else {return null;}
+}
+
+function delayHideContent()
+{
+  //alert("start: t= " +t);
+  if((oldDomSMenu) && (t == 0))
+  {
+    oldDomSMenu.visibility= 'hidden';
+    oldDomSMenu.zIndex= '0';
+    oldDomSMenu = null;
+    lCount =0;
+    // alert("t=0: t= " + t + "lCount= " + lCount);
+    return false;
+  }
+  if (t == 2) {lCount =0; return false;}
+  if (t == 1)
+  {
+    //alert("t=1: t= " +t);
+    lCount =  lCount + 1;
+    //alert("t=1: t= " + t + "lCount= " + lCount);
+    if ( lDelay <=  lCount){t = 0;}
+    if ( lDelay >=  lCount){setTimeout('delayHideContent('+t+')',pause);}
+  }
+}
+   </script>
+  </link>
+ </head>
+ <body>
+  <center>
+   <div id="canvas">
+    <!-- header  starts -->
+    <div id="header">
+     <div class="logo">
+      <a href="index.php">
+       <img alt="Kavli Institute for Cosmological Physics at the University of Chicago" height="73" new_window="0" src="images/logo-kicp.png" width="215"/>
+      </a>
+     </div>
+     <div class="title">
+      <a href="index.php">
+       <img alt="Kavli Institute for Cosmological Physics at the University of Chicago" height="61" new_window="0" src="images/kicp-title-8.png" width="540"/>
+      </a>
+     </div>
+     <div class="search">
+      <form action="search.php" method="post">
+       <input class="searchfield" id="allsearch" name="allsearch" onblur="if(this.value=='')value='Search KICP site';" onfocus="if(this.value=='Search KICP site')value='';" size="15" type="text" value="Search KICP site"/>
+       <input alt="Go" src="images/search-left20.png" type="image" width="20"/>
+      </form>
+     </div>
+     <br style="clear:both;"/>
+     <center>
+      <div class="up_note">
+       The KICP hosts the
+       <b>
+        <a href="http://cosmos.uchicago.edu/" target="_blank">
+         NSF Physics Frontier Center: Pushing Cosmology to the Edge
+        </a>
+       </b>
+      </div>
+     </center>
+    </div>
+   </div>
+  </center>
+ </body>
+</html>
+<!-- header ends -->
+<!-- navigation starts -->
+<!-- <div id="navigation"> -->
+<table class="topmenutable">
+ <tr>
+  <td class="left">
+   <a href="index.php" onmouseout="t=1; delayHideContent();" onmouseover="delayShowContent_Image(event,'main_menu_home','home',22,0,56)">
+    <img border="0" id="home" name="home" src="images/top-home_on.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="about/" onmouseout="document.about.src='images/top-about_out.png';t=1; delayHideContent();" onmouseover="document.about.src='images/top-about_on.png';delayShowContent_Image(event,'main_menu_about','about',22,0,55)">
+    <img border="0" id="about" name="about" src="images/top-about_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="research/" onmouseout="document.research.src='images/top-research_out.png';t=1; delayHideContent();" onmouseover="document.research.src='images/top-research_on.png';delayShowContent_Image(event,'main_menu_research','research',22,0,76)">
+    <img border="0" id="research" name="research" src="images/top-research_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="people/" onmouseout="document.people.src='images/top-people_out.png';t=1; delayHideContent();" onmouseover="document.people.src='images/top-people_on.png';delayShowContent_Image(event,'main_menu_people','people',22,0,59)">
+    <img border="0" id="people" name="people" src="images/top-people_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="education/schedule.html" onmouseout="document.education.src='images/top-outreach_out.png';t=1; delayHideContent();" onmouseover="document.education.src='images/top-outreach_on.png';delayShowContent_Image(event,'main_menu_education','education',22,0,160)">
+    <img border="0" id="education" name="education" src="images/top-outreach_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="news/" onmouseout="document.news.src='images/top-news_out.png';t=1; delayHideContent();" onmouseover="document.news.src='images/top-news_on.png';delayShowContent_Image(event,'main_menu_news','news',22,0,48)">
+    <img border="0" id="news" name="news" src="images/top-news_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="seminars/" onmouseout="document.seminars.src='images/top-seminars_out.png';t=1; delayHideContent();" onmouseover="document.seminars.src='images/top-seminars_on.png';delayShowContent_Image(event,'main_menu_seminars','seminars',22,0,75)">
+    <img border="0" id="seminars" name="seminars" src="images/top-seminars_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="events/" onmouseout="document.events.src='images/top-events_out.png';t=1; delayHideContent();" onmouseover="document.events.src='images/top-events_on.png';delayShowContent_Image(event,'main_menu_events','events',22,0,152)">
+    <img border="0" id="events" name="events" src="images/top-events_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="community/" onmouseout="document.community.src='images/top-community_out.png';t=1; delayHideContent();" onmouseover="document.community.src='images/top-community_on.png';delayShowContent_Image(event,'main_menu_community','community',22,0,88)">
+    <img border="0" id="community" name="community" src="images/top-community_out.png"/>
+   </a>
+  </td>
+  <td class="center">
+   <a href="friends/" onmouseout="document.friends.src='images/top-friends_out.png';t=1; delayHideContent();" onmouseover="document.friends.src='images/top-friends_on.png';delayShowContent_Image(event,'main_menu_friends','friends',22,0,61)">
+    <img border="0" id="friends" name="friends" src="images/top-friends_out.png"/>
+   </a>
+  </td>
+  <td class="right">
+   <a href="info/" onmouseout="document.local.src='images/top-local_out.png';t=1; delayHideContent();" onmouseover="document.local.src='images/top-local_on.png';delayShowContent_Image(event,'main_menu_local','local',22,0,54)">
+    <img border="0" id="local" name="local" src="images/top-local_out.png"/>
+   </a>
+  </td>
+ </tr>
+</table>
+<!-- </div> -->
+<!-- navigation ends -->
+<!-- front content starts -->
+<div id="front">
+ <div id="spotlight">
+  <div id="spotimage">
+   <img height="250" src="depot/images/kicp-2019-04-09-brinson.png" width="560">
+    <div id="spotnumber">
+     <ul class="no_style">
+      <li>
+       <a href="index.php?feature=1">
+        <img height="21" src="images/feature-previous.png" width="10"/>
+       </a>
+      </li>
+      <li>
+       <a href="index.php?feature=1">
+        <img height="21" src="images/feature-1_out.png" width="21"/>
+       </a>
+      </li>
+      <li>
+       <img height="21" src="images/feature-2_on.png" width="21"/>
+      </li>
+      <li>
+       <a href="index.php?feature=3">
+        <img height="21" src="images/feature-3_out.png" width="21"/>
+       </a>
+      </li>
+      <li>
+       <a href="index.php?feature=4">
+        <img height="21" src="images/feature-4_out.png" width="21"/>
+       </a>
+      </li>
+      <li>
+       <a href="index.php?feature=3">
+        <img height="21" src="images/feature-next.png" width="10"/>
+       </a>
+      </li>
+     </ul>
+    </div>
+   </img>
+  </div>
+  <div id="spotnote">
+   <div class="spottitle">
+    Sara Seager, "Exoplanets and the Search for Habitable Worlds"
+    <br/>
+    2019 Brinson Lecture: April 9 @ 6 PM, SAIC
+   </div>
+   <div class="spottext">
+    For thousands of years people have wondered, "Are there planets like Earth?" "Are such planets common?" "Do any have signs of life?" Today astronomers are poised to answer these ancient questions, having recently found thousands of planets that orbit nearby Sun-like stars, called "exoplanets". Professor Sara Seager will share the latest advances in this revolutionary field.
+   </div>
+   <div id="spotmore">
+    <a href="http://kicp.uchicago.edu/events/other-2019.html#id_1078">
+     Read more &gt;&gt;
+    </a>
+   </div>
+  </div>
+ </div>
+ <div id="current">
+  <table class="fronttable">
+   <tr>
+    <td>
+     <div class="column">
+      <div class="coltitle">
+       Upcoming Events
+      </div>
+      <ul>
+       <li>
+        <b>
+         March 13, 2019   3:30 PM
+        </b>
+        <br/>
+        <a class="front" href="seminars/index.html#astro_937">
+         <i>
+          Astronomy Colloquium
+         </i>
+         : Mark Vogelsberger, Simulating Galaxy Formation: Illustris, IllustrisTNG and Beyond
+        </a>
+       </li>
+       <li>
+        <b>
+         April 9, 2019   6:00 PM
+        </b>
+        <br/>
+        <a class="front" href="events/other-2019.html#id_1078">
+         Brinson lecture: Sara Seager, "Exoplanets and the Search for Habitable Worlds"
+        </a>
+       </li>
+       <li>
+        <b>
+         October 5 - 8, 2019
+        </b>
+        <br/>
+        <a class="front" href="http://kicp.uchicago.edu/cosmocon" target="_blank">
+         Conference: Cosmic Controversies
+        </a>
+       </li>
+      </ul>
+     </div>
+    </td>
+    <td>
+     <div class="column">
+      <div class="coltitle">
+       Latest News
+      </div>
+      <ul>
+       <li>
+        <a class="front" href="https://www.nytimes.com/2019/02/25/science/cosmos-hubble-dark-energy.html" target="_blank">
+         Have Dark Forces Been Messing With the Cosmos?
+         <br/>
+         <i>
+          February 27, 2019 | The New York Times
+         </i>
+        </a>
+       </li>
+       <li>
+        <a class="front" href="http://news.uchicago.edu/story/edward-rocky-kolb-direct-kavli-institute-cosmological-physics" target="_blank">
+         Edward 'Rocky' Kolb to direct Kavli Institute for Cosmological Physics
+         <br/>
+         <i>
+          February 27, 2019 | UChicago News
+         </i>
+        </a>
+       </li>
+       <li>
+        <a class="front" href="https://gizmodo.com/whats-at-the-edge-of-the-universe-1832646812" target="_blank">
+         What's at the Edge of the Universe?
+         <br/>
+         <i>
+          February 21, 2019 | Gizmodo
+         </i>
+        </a>
+       </li>
+       <li>
+        <a class="front" href="https://news.uchicago.edu/podcasts/big-brains/studying-universe-through-space-time-ripples-daniel-holz" target="_blank">
+         Big Brains podcast: "What Ripples in Space-Time Tell Us About the Universe with Daniel Holz"
+         <br/>
+         <i>
+          January 24, 2019 | UChicago News
+         </i>
+        </a>
+       </li>
+       <li>
+        <a class="front" href="https://news.uchicago.edu/story/after-mapping-millions-galaxies-dark-energy-survey-finishes-data-collection" target="_blank">
+         After mapping millions of galaxies, Dark Energy Survey finishes data collection
+         <br/>
+         <i>
+          January 15, 2019 | UChicago News
+         </i>
+        </a>
+       </li>
+       <li>
+        <a class="front" href="news/index.html#_639">
+         Donald York has been awarded the Royal Astronomical Society Service Award for Astronomy
+         <br/>
+         <i>
+          January 13, 2019 | KICP News
+         </i>
+        </a>
+       </li>
+      </ul>
+     </div>
+    </td>
+    <td>
+     <div class="column">
+      <div class="coltitle">
+       Research Projects
+      </div>
+      <ul>
+       <li>
+        <a class="front" href="research/projects/anita.html">
+         Antarctic Impulsive Transient Antenna
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/bicep2the-keck-arraybicep3.html">
+         BICEP2/The Keck Array/BICEP3
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/cogent.html">
+         Coherent Germanium Neutrino Technology
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/coupppico.html">
+         COUPP/PICO
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/des.html">
+         Dark Energy Survey
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/damic.html">
+         Dark Matter in CCDs
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/gmt.html">
+         Giant Magellan Telescope
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/lsst.html">
+         Large Synoptic Survey Telescope
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/ligo.html">
+         Laser Interferometer Gravitational-wave Observatory
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/auger.html">
+         Pierre Auger Observatory
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/spt.html">
+         South Pole Telescope
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/veritas.html">
+         Very Energetic Radiation Imaging Telescope Array System
+        </a>
+       </li>
+       <li>
+        <a class="front" href="research/projects/xenon1t.html">
+         XENON1T
+        </a>
+       </li>
+      </ul>
+     </div>
+    </td>
+   </tr>
+  </table>
+ </div>
+</div>
+<tr>
+ <td>
+  <div class="column">
+   <div class="coltitle">
+    Programs @ KICP
+   </div>
+   <ul>
+    <li>
+     <a class="front" href="visitors/">
+      Visitor program
+     </a>
+    </li>
+    <li>
+     <a class="front" href="events/kicp_workshops.html">
+      Workshops &amp; Symposia
+     </a>
+    </li>
+    <li>
+     <a class="front" href="about/jobs.html#Postdoctoral">
+      Fellowship program
+     </a>
+    </li>
+    <li>
+     <a class="front" href="events/kicp_phd.html">
+      PhD program
+     </a>
+    </li>
+    <li>
+     <a class="front" href="events/kicp_courses.html">
+      Cosmology Short Courses
+     </a>
+    </li>
+    <li>
+     <a class="front" href="events/kicp_yerkes.html">
+      Space Explorers
+     </a>
+    </li>
+   </ul>
+   <br/>
+  </div>
+ </td>
+ <td>
+  <div class="column">
+   <div class="coltitle">
+    The University of Chicago
+   </div>
+   <ul>
+    <li>
+     <a class="front" href="http://www.uchicago.edu/" target="_blank">
+      Website
+     </a>
+     |
+     <a class="front" href="http://directory.uchicago.edu/" target="_blank">
+      Directories
+     </a>
+     |
+     <a class="front" href="http://maps.uchicago.edu/index.shtml" target="_blank">
+      Maps
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://astro.uchicago.edu/" target="_blank">
+      UChicago Department of Astronomy &amp; Astrophysics
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://physics.uchicago.edu/" target="_blank">
+      UChicago Department of Physics
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://efi.uchicago.edu/" target="_blank">
+      Enrico Fermi Institute
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://psd.uchicago.edu/" target="_blank">
+      Physical Sciences Division
+     </a>
+    </li>
+   </ul>
+   <br/>
+  </div>
+ </td>
+ <td>
+  <div class="column">
+   <div class="coltitle">
+    The Kavli Foundation
+   </div>
+   <ul>
+    <li>
+     <a class="front" href="http://www.kavlifoundation.org/" target="_blank">
+      Kavli Foundation Website
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://www.kavlifoundation.org/astrophysics" target="_blank">
+      Kavli Astrophysics Institutes
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://www.kavlifoundation.org/programs/" target="_blank">
+      Kavli Programs
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://www.kavlifoundation.org/kavli-prize" target="_blank">
+      Kavli Prize
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://www.kavlifoundation.org/kavli-news/" target="_blank">
+      Kavli News
+     </a>
+    </li>
+    <li>
+     <a class="front" href="http://www.kavlifoundation.org/newsletter-archive/" target="_blank">
+      Kavli Newsletters
+     </a>
+    </li>
+   </ul>
+   <br/>
+  </div>
+ </td>
+</tr>
+<!-- front content ends -->
+<!-- footer starts -->
+<div id="footer">
+ <div class="pseudotable">
+  <div class="footer_3">
+   <a href="http://www.nsf.gov/" target="_blank">
+    <img alt="National Science Foundation" height="59" name="nsf" new_window="1" src="images/logo-nsf-title.png" width="250"/>
+   </a>
+  </div>
+  <div class="footer_3">
+   <a href="http://www.uchicago.edu/" target="_blank">
+    <img alt="The University of Chicago" height="60" name="uchicago" new_window="1" src="images/logo-uchicago-title.png" width="208"/>
+   </a>
+  </div>
+  <div class="footer_3">
+   <a href="http://www.kavlifoundation.org/" target="_blank">
+    <img alt="Kavli Foundation" height="60" name="kavli" new_window="1" src="images/logo-kavli-title.png" width="200"/>
+   </a>
+  </div>
+  <div style="clear:both">
+  </div>
+ </div>
+</div>
+<!-- footer ends -->
+<div class="divelem" id="main_menu_home" onmouseout="t=1; delayHideContent();" onmouseover="t=2;">
+</div>
+<div class="divelem" id="main_menu_about" onmouseout="document.about.src='images/top-about_out.png';t=1; delayHideContent();" onmouseover="document.about.src='images/top-about_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/" onmouseout="document.about_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_0" src=" images/arrow_out.gif"/>
+         Overview
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/message.html" onmouseout="document.about_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_1" src=" images/arrow_out.gif"/>
+         Directors message
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/diversity.html" onmouseout="document.about_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_2" src=" images/arrow_out.gif"/>
+         Diversity @ KICP
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/location.html" onmouseout="document.about_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_3" src=" images/arrow_out.gif"/>
+         Location
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/jobs.html" onmouseout="document.about_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_4" src=" images/arrow_out.gif"/>
+         Jobs &amp; Opportunities
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/committees.html" onmouseout="document.about_arrow_5.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_5.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_5" src=" images/arrow_out.gif"/>
+         Committees
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/contact.html" onmouseout="document.about_arrow_6.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.about_arrow_6.src='images/arrow_active.gif';t=2">
+         <img border="0" name="about_arrow_6" src=" images/arrow_out.gif"/>
+         Contact KICP
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_research" onmouseout="document.research.src='images/top-research_out.png';t=1; delayHideContent();" onmouseover="document.research.src='images/top-research_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" research/" onmouseout="document.research_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_0" src=" images/arrow_out.gif"/>
+         Major Activities of the 2011 PFC
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" research/projects/" onmouseout="document.research_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_1" src=" images/arrow_out.gif"/>
+         Research Projects
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" research/publications/" onmouseout="document.research_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_2" src=" images/arrow_out.gif"/>
+         Publications
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" research/highlights/" onmouseout="document.research_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_3" src=" images/arrow_out.gif"/>
+         Research Highlights
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_phd.html" onmouseout="document.research_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_4" src=" images/arrow_out.gif"/>
+         PhD Theses
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/group-meetings.html" onmouseout="document.research_arrow_5.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_5.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_5" src=" images/arrow_out.gif"/>
+         Research Group Meetings
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" research/pfc_2001-2011.html" onmouseout="document.research_arrow_6.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.research_arrow_6.src='images/arrow_active.gif';t=2">
+         <img border="0" name="research_arrow_6" src=" images/arrow_out.gif"/>
+         Major Research Components of the 2001-2011 PFC
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_people" onmouseout="document.people.src='images/top-people_out.png';t=1; delayHideContent();" onmouseover="document.people.src='images/top-people_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#senior-members" onmouseout="document.people_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_0" src=" images/arrow_out.gif"/>
+         Senior Members
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#senior-researchers" onmouseout="document.people_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_1" src=" images/arrow_out.gif"/>
+         Senior Researchers
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#kicp-fellows" onmouseout="document.people_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_2" src=" images/arrow_out.gif"/>
+         KICP Fellows
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#associate-fellows" onmouseout="document.people_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_3" src=" images/arrow_out.gif"/>
+         Associate Fellows
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#staff" onmouseout="document.people_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_4" src=" images/arrow_out.gif"/>
+         Staff
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#graduate-students" onmouseout="document.people_arrow_5.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_5.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_5" src=" images/arrow_out.gif"/>
+         Graduate Students
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/index.html#undergraduate-students" onmouseout="document.people_arrow_6.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_6.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_6" src=" images/arrow_out.gif"/>
+         Undergraduate Students
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/associates.html#pfc-key-collaborators" onmouseout="document.people_arrow_7.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_7.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_7" src=" images/arrow_out.gif"/>
+         PFC key collaborators
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/associates.html#senior-associates" onmouseout="document.people_arrow_8.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_8.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_8" src=" images/arrow_out.gif"/>
+         Senior Associates
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" visitors/visitors.html" onmouseout="document.people_arrow_9.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_9.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_9" src=" images/arrow_out.gif"/>
+         KICP Visitors
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" people/alumni.html" onmouseout="document.people_arrow_10.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.people_arrow_10.src='images/arrow_active.gif';t=2">
+         <img border="0" name="people_arrow_10" src=" images/arrow_out.gif"/>
+         KICP Alumni
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_education" onmouseout="document.education.src='images/top-outreach_out.png';t=1; delayHideContent();" onmouseover="document.education.src='images/top-outreach_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" education/index.html" onmouseout="document.education_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.education_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="education_arrow_0" src=" images/arrow_out.gif"/>
+         Overview
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" education/courses/" onmouseout="document.education_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.education_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="education_arrow_1" src=" images/arrow_out.gif"/>
+         Cosmology Short Courses
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" education/partnerships/" onmouseout="document.education_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.education_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="education_arrow_2" src=" images/arrow_out.gif"/>
+         Museum Partnerships
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" education/explorers/" onmouseout="document.education_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.education_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="education_arrow_3" src=" images/arrow_out.gif"/>
+         Space Explorers
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" education/schedule.html" onmouseout="document.education_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.education_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="education_arrow_4" src=" images/arrow_out.gif"/>
+         Events, News &amp; Highlights
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_news" onmouseout="document.news.src='images/top-news_out.png';t=1; delayHideContent();" onmouseover="document.news.src='images/top-news_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" news/" onmouseout="document.news_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.news_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="news_arrow_0" src=" images/arrow_out.gif"/>
+         KICP News
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" news/innews/" onmouseout="document.news_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.news_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="news_arrow_1" src=" images/arrow_out.gif"/>
+         KICP in the News
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_seminars" onmouseout="document.seminars.src='images/top-seminars_out.png';t=1; delayHideContent();" onmouseover="document.seminars.src='images/top-seminars_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" seminars/index.html#colloquia" onmouseout="document.seminars_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="seminars_arrow_0" src=" images/arrow_out.gif"/>
+         Colloquia
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" seminars/index.html#friday-noon-seminars" onmouseout="document.seminars_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="seminars_arrow_1" src=" images/arrow_out.gif"/>
+         Friday Seminars
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" seminars/index.html#special-seminars" onmouseout="document.seminars_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="seminars_arrow_2" src=" images/arrow_out.gif"/>
+         Special Seminars
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" seminars/index.html#open-group-seminars" onmouseout="document.seminars_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="seminars_arrow_3" src=" images/arrow_out.gif"/>
+         Open Group Seminars
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" seminars/index.html#astronomy-tuesday-seminars" onmouseout="document.seminars_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="seminars_arrow_4" src=" images/arrow_out.gif"/>
+         Astronomy Tuesday Seminars
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" seminars/index.html#astronomy-special-seminars" onmouseout="document.seminars_arrow_5.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_5.src='images/arrow_active.gif';t=2">
+         <img border="0" name="seminars_arrow_5" src=" images/arrow_out.gif"/>
+         Astronomy Special Seminars
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" http://chicago-kicp.voxcharta.org/" onmouseout="document.seminars_arrow_6.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.seminars_arrow_6.src='images/arrow_active.gif';t=2" target="_blank">
+         <img border="0" name="seminars_arrow_6" src=" images/arrow_out.gif"/>
+         Thursday Lunch Discussions
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_events" onmouseout="document.events.src='images/top-events_out.png';t=1; delayHideContent();" onmouseover="document.events.src='images/top-events_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/index.html" onmouseout="document.events_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_0" src=" images/arrow_out.gif"/>
+         Workshops&amp;Events Schedule
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_workshops.html" onmouseout="document.events_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_1" src=" images/arrow_out.gif"/>
+         KICP Workshops
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_phd.html" onmouseout="document.events_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_2" src=" images/arrow_out.gif"/>
+         PhD Thesis Defenses
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_postdocs.html" onmouseout="document.events_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_3" src=" images/arrow_out.gif"/>
+         KICP Postdocs Symposia
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_courses.html" onmouseout="document.events_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_4" src=" images/arrow_out.gif"/>
+         KICP Cosmology Courses
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_schools.html" onmouseout="document.events_arrow_5.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_5.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_5" src=" images/arrow_out.gif"/>
+         KICP Summer Schools
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_yerkes.html" onmouseout="document.events_arrow_6.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_6.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_6" src=" images/arrow_out.gif"/>
+         Space Explorers
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/kicp_events.html" onmouseout="document.events_arrow_7.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_7.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_7" src=" images/arrow_out.gif"/>
+         KICP Talks &amp; Lectures
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/other.html" onmouseout="document.events_arrow_8.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_8.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_8" src=" images/arrow_out.gif"/>
+         Other Events
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/group-meetings.html" onmouseout="document.events_arrow_9.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_9.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_9" src=" images/arrow_out.gif"/>
+         Research Group Meetings &amp; Other Weekly events
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" events/worldwide.html" onmouseout="document.events_arrow_10.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.events_arrow_10.src='images/arrow_active.gif';t=2">
+         <img border="0" name="events_arrow_10" src=" images/arrow_out.gif"/>
+         WorldWide Conferences &amp; Workshops
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_community" onmouseout="document.community.src='images/top-community_out.png';t=1; delayHideContent();" onmouseover="document.community.src='images/top-community_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" community/" onmouseout="document.community_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_0" src=" images/arrow_out.gif"/>
+         For the Community
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" visitors/" onmouseout="document.community_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_1" src=" images/arrow_out.gif"/>
+         Visit Us
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" community/workshop3091.php" onmouseout="document.community_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_2" src=" images/arrow_out.gif"/>
+         Propose a Workshop
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" community/input3091.php" onmouseout="document.community_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_3" src=" images/arrow_out.gif"/>
+         Contact Us
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/location.html" onmouseout="document.community_arrow_4.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_4.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_4" src=" images/arrow_out.gif"/>
+         Location
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" about/jobs.html" onmouseout="document.community_arrow_5.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_5.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_5" src=" images/arrow_out.gif"/>
+         Jobs &amp; Opportunities
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" community/job/" onmouseout="document.community_arrow_6.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.community_arrow_6.src='images/arrow_active.gif';t=2">
+         <img border="0" name="community_arrow_6" src=" images/arrow_out.gif"/>
+         External Job Announcements
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_friends" onmouseout="document.friends.src='images/top-friends_out.png';t=1; delayHideContent();" onmouseover="document.friends.src='images/top-friends_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" friends/" onmouseout="document.friends_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.friends_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="friends_arrow_0" src=" images/arrow_out.gif"/>
+         Friends of the KICP
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" friends/events.html" onmouseout="document.friends_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.friends_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="friends_arrow_1" src=" images/arrow_out.gif"/>
+         Events of Interest
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" friends/seminars.html" onmouseout="document.friends_arrow_2.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.friends_arrow_2.src='images/arrow_active.gif';t=2">
+         <img border="0" name="friends_arrow_2" src=" images/arrow_out.gif"/>
+         Colloquia and Seminars
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" friends/give.html" onmouseout="document.friends_arrow_3.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.friends_arrow_3.src='images/arrow_active.gif';t=2">
+         <img border="0" name="friends_arrow_3" src=" images/arrow_out.gif"/>
+         How to Give
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+<div class="divelem" id="main_menu_local" onmouseout="document.local.src='images/top-local_out.png';t=1; delayHideContent();" onmouseover="document.local.src='images/top-local_on.png';t=2;">
+ <table class="divtable">
+  <tr>
+   <td>
+    <table bgcolor="#bbbbbb" border="0" cellpadding="2" cellspacing="1" width="100%">
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" info/" onmouseout="document.local_arrow_0.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.local_arrow_0.src='images/arrow_active.gif';t=2">
+         <img border="0" name="local_arrow_0" src=" images/arrow_out.gif"/>
+         Local Information (unprotected)
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+     <tr>
+      <td bgcolor="#ffffff">
+       <nobr>
+        <a class="menu" href=" https://localkicp.uchicago.edu/" onmouseout="document.local_arrow_1.src='images/arrow_out.gif'; t=1; delayHideContent()" onmouseover="document.local_arrow_1.src='images/arrow_active.gif';t=2">
+         <img border="0" name="local_arrow_1" src=" images/arrow_out.gif"/>
+         Local pages (passwd-protected)
+         <img border="0" src="images/arrow_out.gif"/>
+        </a>
+       </nobr>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</div>
+

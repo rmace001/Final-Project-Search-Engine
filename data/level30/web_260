@@ -1,0 +1,700 @@
+http://library.cumc.columbia.edu/
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+  </script>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+  <meta content="Drupal 7 (https://www.drupal.org)" name="generator"/>
+  <link href="https://library.cumc.columbia.edu/" rel="canonical"/>
+  <link href="https://library.cumc.columbia.edu/" rel="shortlink"/>
+  <title>
+   Augustus C. Long Health Sciences Library |
+  </title>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/css/css_vZ_wrMQ9Og-YPPxa1q4us3N7DsZMJa-14jShHgRoRNo.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/css/css_bcjq_9WjU2AoCOTsSZP8SniFxSLxiwq6mqtbvWS6bWo.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/css/css_5JNy_kp4AdX4qiDxbJguKRdS2RKc7gcBt_ed4HYYqq8.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/css/css_6IR1Sp98uM_BjqsQF4f7SddKAfcDfXYAixgb_sL0WpE.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://library.cumc.columbia.edu/sites/default/files/css/css_1pZTwxQXjho7SRyQ4Na0aYbsrsQoR9Uxj2lSGYEXa3Y.css" media="print" rel="stylesheet" type="text/css"/>
+  <style media="all" type="text/css">
+   <!--/*--><![CDATA[/*><!--*/
+div.container{width:960px;}
+
+/*]]>*/-->
+  </style>
+  <script src="https://library.cumc.columbia.edu/sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js" type="text/javascript">
+  </script>
+  <script src="https://library.cumc.columbia.edu/sites/default/files/js/js_lboD8mxHbiFYKzdGkJi9JvFQWJGyCslzWjcNjvVR3X0.js" type="text/javascript">
+  </script>
+  <script src="https://library.cumc.columbia.edu/sites/default/files/js/js__rzoUrBCHoolnPhoZml24C4RV-k90iVErD9Z80zR97E.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   <!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://library.cumc.columbia.edu/sites/default/files/googleanalytics/analytics.js?plwl11","ga");ga("create", "UA-21814020-1", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+  </script>
+  <script type="text/javascript">
+   <!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"mock_at","theme_token":"35j_SLK0w3fBlmodDolILJSXKD76kXwjqVxdmUxpwRc","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/library.cumc.columbia.edu\/modules\/views_slideshow\/js\/views_slideshow.js":1,"sites\/library.cumc.columbia.edu\/modules\/custom_search\/js\/custom_search.js":1,"sites\/library.cumc.columbia.edu\/libraries\/jquery.cycle\/jquery.cycle.all.js":1,"sites\/library.cumc.columbia.edu\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/js\/views_slideshow_cycle.js":1,"sites\/library.cumc.columbia.edu\/modules\/google_analytics\/googleanalytics.js":1,"0":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/library.cumc.columbia.edu\/modules\/views_slideshow\/views_slideshow.css":1,"sites\/library.cumc.columbia.edu\/modules\/date\/date_api\/date.css":1,"sites\/library.cumc.columbia.edu\/modules\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"sites\/library.cumc.columbia.edu\/modules\/mollom\/mollom.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/library.cumc.columbia.edu\/modules\/views\/css\/views.css":1,"sites\/library.cumc.columbia.edu\/modules\/ckeditor\/css\/ckeditor.css":1,"sites\/library.cumc.columbia.edu\/modules\/ctools\/css\/ctools.css":1,"sites\/library.cumc.columbia.edu\/modules\/panels\/css\/panels.css":1,"sites\/default\/modules\/panels\/plugins\/layouts\/flexible\/flexible.css":1,"sites\/library.cumc.columbia.edu\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/views_slideshow_cycle.css":1,"public:\/\/ctools\/css\/9cd05359f64fa9a75dc3236eeb39fb3e.css":1,"sites\/library.cumc.columbia.edu\/modules\/custom_search\/custom_search.css":1,"sites\/library.cumc.columbia.edu\/themes\/adaptivetheme\/adaptivetheme\/css\/base.css":1,"sites\/library.cumc.columbia.edu\/themes\/adaptivetheme\/adaptivetheme\/css\/edit-links.css":1,"sites\/library.cumc.columbia.edu\/themes\/adaptivetheme\/adaptivetheme\/css\/layout.css":1,"sites\/library.cumc.columbia.edu\/themes\/adaptivetheme\/adaptivetheme\/css\/messages.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/html-elements.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/forms.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/tables.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/page.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/articles.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/comments.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/fields.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/blocks.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/navigation.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/skins.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/views.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/panel-panes.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/feedback.css":1,"sites\/library.cumc.columbia.edu\/themes\/mock_at\/css\/print.css":1,"0":1}},"custom_search":{"form_target":"_self","solr":0},"viewsSlideshow":{"featured_resource-page_1":{"methods":{"goToSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"nextSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"pause":["viewsSlideshowControls","viewsSlideshowCycle"],"play":["viewsSlideshowControls","viewsSlideshowCycle"],"previousSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"transitionBegin":["viewsSlideshowPager","viewsSlideshowSlideCounter"],"transitionEnd":[]},"paused":0}},"viewsSlideshowCycle":{"#views_slideshow_cycle_main_featured_resource-page_1":{"num_divs":1,"id_prefix":"#views_slideshow_cycle_main_","div_prefix":"#views_slideshow_cycle_div_","vss_id":"featured_resource-page_1","effect":"fade","transition_advanced":1,"timeout":7000,"speed":700,"delay":0,"sync":1,"random":0,"pause":1,"pause_on_click":0,"play_on_hover":0,"action_advanced":0,"start_paused":0,"remember_slide":0,"remember_slide_days":1,"pause_in_middle":0,"pause_when_hidden":0,"pause_when_hidden_type":"full","amount_allowed_visible":"","nowrap":0,"pause_after_slideshow":0,"fixed_height":1,"items_per_slide":1,"wait_for_image_load":1,"wait_for_image_load_timeout":3000,"cleartype":0,"cleartypenobg":0,"advanced_options":"{}"}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/":true}});
+//--><!]]>
+  </script>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+ </head>
+ <body class="html front not-logged-in no-sidebars page-node page-node- page-node-61 page-type-panel">
+  <div id="skip-link">
+   <a class="element-invisible element-focusable" href="#main-content">
+    Skip to main content
+   </a>
+  </div>
+  <div id="page-wrapper">
+   <div id="page">
+    <div id="container">
+     <div id="header-wrapper">
+      <div class="container clearfix">
+       <header class="clearfix">
+        <div id="logo">
+         <a class="active" href="/" rel="home" title="Home page">
+          <img alt="Augustus C. Long Health Sciences Library logo" src="https://library.cumc.columbia.edu/sites/default/files/logostripe5a.png"/>
+         </a>
+        </div>
+        <hgroup class="element-invisible">
+         <h1 class="element-invisible" id="site-name">
+          <a class="active" href="/" rel="home" title="Home page">
+           Augustus C. Long Health Sciences Library
+          </a>
+         </h1>
+        </hgroup>
+        <div id="nav-wrapper">
+         <div class="container clearfix">
+          <div class="nav" id="primary-menu-bar">
+           <nav>
+            <h2 class="element-invisible">
+             Primary navigation
+            </h2>
+            <ul class="menu primary-menu clearfix">
+             <li>
+              <a href="/books-articles-more">
+               Books, Articles &amp; More
+              </a>
+             </li>
+             <li>
+              <a href="/computing-study-tools">
+               Computing &amp; Study Tools
+              </a>
+             </li>
+             <li>
+              <a href="/library-classes-assistance">
+               Library Classes &amp; Assistance
+              </a>
+             </li>
+             <li>
+              <a href="/about-library">
+               About the Library
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </div>
+         </div>
+        </div>
+        <div class="region region-header">
+         <nav class="block block-menu" id="block-menu-menu-my-accounts" role="navigation">
+          <div class="block-inner clearfix">
+           <div class="block-content">
+            <ul class="menu clearfix">
+             <li class="first last leaf">
+              <a href="/my-accounts" title="">
+               My Accounts
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+         </nav>
+         <div class="block block-custom-search-blocks" id="block-custom-search-blocks-1">
+          <div class="block-inner clearfix">
+           <div class="block-content">
+            <form accept-charset="UTF-8" action="/" class="search-form" id="custom-search-blocks-form-1" method="post" role="search">
+             <div>
+              <div class="form-item form-type-textfield form-item-custom-search-blocks-form-1">
+               <input class="custom-search-box form-text" id="edit-custom-search-blocks-form-1--2" maxlength="128" name="custom_search_blocks_form_1" placeholder="Search this site" size="25" title="Enter the terms you wish to search for." type="text" value=""/>
+              </div>
+              <input name="delta" type="hidden" value="1"/>
+              <input name="form_build_id" type="hidden" value="form-EqexTQJ9NxymuXbvPw3iZmuz1-ipgYLregd4nPSnTog"/>
+              <input name="form_id" type="hidden" value="custom_search_blocks_form_1"/>
+              <div class="form-actions form-wrapper" id="edit-actions">
+               <span class="button edit-submit">
+                <input class="form-submit" id="edit-submit" name="op" type="submit" value="Go"/>
+               </span>
+              </div>
+             </div>
+            </form>
+           </div>
+          </div>
+         </div>
+        </div>
+       </header>
+      </div>
+     </div>
+     <div id="content-wrapper">
+      <div class="container">
+       <div id="columns">
+        <div class="columns-inner clearfix">
+         <div id="content-column">
+          <div class="content-inner">
+           <section id="main-content">
+            <header>
+            </header>
+            <div id="content">
+             <div class="region region-content">
+              <div class="block block-system" id="block-system-main" role="main">
+               <div class="block-inner clearfix">
+                <div class="block-content">
+                 <article class="article article-type-panel clearfix" id="article-61" role="article">
+                  <div class="article-content">
+                   <div class="panel-flexible panels-flexible-1 clearfix">
+                    <div class="panel-flexible-inside panels-flexible-1-inside">
+                     <div class="panels-flexible-column panels-flexible-column-1-4 panels-flexible-column-first ">
+                      <div class="inside panels-flexible-column-inside panels-flexible-column-1-4-inside panels-flexible-column-inside-first">
+                       <div class="panels-flexible-row panels-flexible-row-1-6 panels-flexible-row-first clearfix ">
+                        <div class="inside panels-flexible-row-inside panels-flexible-row-1-6-inside panels-flexible-row-inside-first clearfix">
+                         <div class="panels-flexible-region panels-flexible-region-1-left_ panels-flexible-region-first ">
+                          <div class="inside panels-flexible-region-inside panels-flexible-region-1-left_-inside panels-flexible-region-inside-first">
+                           <div class="panel-pane pane-node">
+                            <h2 class="pane-title">
+                             Ask a Question
+                            </h2>
+                            <div class="pane-content">
+                             <article class="article article-type-page clearfix" id="article-54" role="article">
+                              <div class="article-content">
+                               <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+                                <div class="field-item even">
+                                 <ul>
+                                  <li>
+                                   <a href="http://library.cumc.columbia.edu/contact-knowledge-center">
+                                    Get an email response
+                                   </a>
+                                  </li>
+                                  <li>
+                                   <a href="informationist-availability">
+                                    Reserve time with an informationist
+                                   </a>
+                                  </li>
+                                 </ul>
+                                </div>
+                               </div>
+                              </div>
+                             </article>
+                            </div>
+                           </div>
+                           <div class="panel-separator">
+                           </div>
+                           <div class="panel-pane pane-node">
+                            <h2 class="pane-title">
+                             Book a Group Study Space
+                            </h2>
+                            <div class="pane-content">
+                             <article class="article article-type-page clearfix" id="article-53" role="article">
+                              <div class="article-content">
+                               <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+                                <div class="field-item even">
+                                 <ul>
+                                  <li>
+                                   <a href="http://cumc.columbia.libcal.com/booking/group-study-rooms" target="_blank">
+                                    Book a Group Study Room (LL1)
+                                   </a>
+                                  </li>
+                                  <li>
+                                   <a href="https://cumc.columbia.libcal.com/booking/teamwork" target="_blank">
+                                    Book a Teamwork Hub (Knowledge Center)
+                                   </a>
+                                  </li>
+                                 </ul>
+                                </div>
+                               </div>
+                              </div>
+                             </article>
+                            </div>
+                           </div>
+                          </div>
+                         </div>
+                         <div class="panels-flexible-region panels-flexible-region-1-center__ panels-flexible-region-last ">
+                          <div class="inside panels-flexible-region-inside panels-flexible-region-1-center__-inside panels-flexible-region-inside-last">
+                           <div class="panel-pane pane-block pane-hslhours-form">
+                            <h2 class="pane-title">
+                             Service Desk Hours
+                            </h2>
+                            <div class="pane-content">
+                             <div>
+                              <p>
+                               Open today from 12 pm to 8 pm.
+                              </p>
+                             </div>
+                             <div class="clearfix">
+                              <p class="more-link">
+                               <a href="hours">
+                                more hours
+                               </a>
+                              </p>
+                             </div>
+                            </div>
+                           </div>
+                           <div class="panel-separator">
+                           </div>
+                           <div class="panel-pane pane-block pane-hsllibcal-hsllibcal-upcoming-events">
+                            <h2 class="pane-title">
+                             Upcoming Library Classes
+                            </h2>
+                            <div class="pane-content">
+                             <ul>
+                              <li>
+                               <a href="https://cumc.columbia.libcal.com/event/4970620?hs=a" target="_blank">
+                                So You Want to Do a Systematic Review?
+                               </a>
+                               <br/>
+                               <span>
+                                Wednesday, March 13 - 12:00pm
+                               </span>
+                              </li>
+                              <li>
+                               <a href="https://cumc.columbia.libcal.com/event/5037004?hs=a" target="_blank">
+                                Systematic Review Consultation
+                               </a>
+                               <br/>
+                               <span>
+                                Friday, March 22 - 10:00am
+                               </span>
+                              </li>
+                             </ul>
+                             <div class="more-link">
+                              <a href="/classes">
+                               more classes
+                              </a>
+                             </div>
+                            </div>
+                           </div>
+                          </div>
+                         </div>
+                        </div>
+                       </div>
+                       <div class="panels-flexible-row panels-flexible-row-1-7 panels-flexible-row-last clearfix ">
+                        <div class="inside panels-flexible-row-inside panels-flexible-row-1-7-inside panels-flexible-row-inside-last clearfix">
+                         <div class="panels-flexible-region panels-flexible-region-1-bottom panels-flexible-region-first panels-flexible-region-last ">
+                          <div class="inside panels-flexible-region-inside panels-flexible-region-1-bottom-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                           <div class="panel-pane pane-views pane-featured-resource">
+                            <div class="pane-content">
+                             <div class="view view-featured-resource view-id-featured_resource view-display-id-page view-dom-id-c6dcd860fc1a38dadd923220d899024c">
+                              <div class="view-content">
+                               <div class="skin-default">
+                                <div class="views_slideshow_cycle_main views_slideshow_main" id="views_slideshow_cycle_main_featured_resource-page_1">
+                                 <div class="views-slideshow-cycle-main-frame views_slideshow_cycle_teaser_section" id="views_slideshow_cycle_teaser_section_featured_resource-page_1">
+                                  <div class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-1 views-row-first views-row-odd" id="views_slideshow_cycle_div_featured_resource-page_1_0">
+                                   <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-odd views-row-first">
+                                    <div class="views-field views-field-field-image">
+                                     <div class="field-content">
+                                      <a href="https://library.cumc.columbia.edu/pubmed-labs ">
+                                       <img alt="" height="344" src="https://library.cumc.columbia.edu/sites/default/files/styles/featured_resource_two_columns/public/featuredresources/Explore%20PubMed%202.0.png?itok=7OzL8F-K" width="588"/>
+                                      </a>
+                                     </div>
+                                    </div>
+                                   </div>
+                                  </div>
+                                 </div>
+                                </div>
+                               </div>
+                              </div>
+                             </div>
+                            </div>
+                           </div>
+                           <div class="panel-separator">
+                           </div>
+                           <div class="panel-pane pane-views pane-announcements">
+                            <h2 class="pane-title">
+                             Library Announcements
+                            </h2>
+                            <div class="pane-content">
+                             <div class="view view-announcements view-id-announcements view-display-id-block_1 view-dom-id-a7f0da671cb6e1de3c207cab39e63e25">
+                              <div class="view-header">
+                               <div style="clear:both">
+                                <div style="float:right">
+                                 <a class="feed-icon" href="announcements/feed" title="Subscribe to Library Announcements">
+                                  <img alt="Subscribe to Announcements" src="misc/feed.png" typeof="foaf:Image"/>
+                                 </a>
+                                </div>
+                               </div>
+                              </div>
+                              <div class="view-content">
+                               <div class="views-row views-row-1 views-row-odd views-row-first">
+                                <div class="views-field views-field-title">
+                                 <h3 class="field-content">
+                                  <a href="/history-health-sciences-lecture-dr-randi-epstein">
+                                   History of the Health Sciences Lecture: Dr. Randi Epstein
+                                  </a>
+                                 </h3>
+                                </div>
+                                <div class="views-field views-field-body">
+                                 <div class="field-content">
+                                  <p>
+                                   AROUSED: The History of Hormones and How They Control Just About Everything
+                                  </p>
+                                 </div>
+                                </div>
+                               </div>
+                               <div class="views-row views-row-2 views-row-even views-row-last">
+                                <div class="views-field views-field-title">
+                                 <h3 class="field-content">
+                                  <a href="/medical-center-former-homes-cuimc-constituents-exhibit">
+                                   Before the Medical Center: Former Homes of CUIMC Constituents  An Exhibit
+                                  </a>
+                                 </h3>
+                                </div>
+                                <div class="views-field views-field-body">
+                                 <div class="field-content">
+                                  <p>
+                                   Before the Medical Center: Former Homes of CUIMC Constituents, displays vintage photographs of the earlier homes of these institutions including P&amp;S, Presbyterian Hospital, Babies Hospital , the Neurological Institute of New York, and other schools and hospitals.
+                                  </p>
+                                 </div>
+                                </div>
+                               </div>
+                              </div>
+                              <div class="more-link">
+                               <a href="/announcements">
+                                more announcements
+                               </a>
+                              </div>
+                             </div>
+                            </div>
+                           </div>
+                          </div>
+                         </div>
+                        </div>
+                       </div>
+                      </div>
+                     </div>
+                     <div class="panels-flexible-column panels-flexible-column-1-5 panels-flexible-column-last ">
+                      <div class="inside panels-flexible-column-inside panels-flexible-column-1-5-inside panels-flexible-column-inside-last">
+                       <div class="panels-flexible-region panels-flexible-region-1-right__ panels-flexible-region-first panels-flexible-region-last ">
+                        <div class="inside panels-flexible-region-inside panels-flexible-region-1-right__-inside panels-flexible-region-inside-first panels-flexible-region-inside-last">
+                         <div class="panel-pane pane-node">
+                          <h2 class="pane-title">
+                           Top Resources
+                          </h2>
+                          <div class="pane-content">
+                           <article class="article article-type-page clearfix" id="article-63" role="article">
+                            <div class="article-content">
+                             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+                              <div class="field-item even">
+                               <ul>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio10274917">
+                                  AccessMedicine
+                                 </a>
+                                 <span class="caption">
+                                  (Includes Harrison's)
+                                 </span>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio6981250">
+                                  CINAHL
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio12810165" target="_blank">
+                                  ClinicalKey
+                                 </a>
+                                 <span class="caption">
+                                  (includes Goldman-Cecil)
+                                 </span>
+                                </li>
+                                <li>
+                                 <a href="http://clio.columbia.edu/catalog">
+                                  CLIO (Library Catalog)
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio5312117">
+                                  Cochrane Library
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://search.ebscohost.com/login.aspx?authtype=uid&amp;user=columbia&amp;password=med&amp;profile=dmp">
+                                  DynaMed Plus
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://blogs.cuit.columbia.edu/healthscienceslibrary/">
+                                  eBook Database
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?lweb0142">
+                                  eJournals
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio10876993">
+                                  Embase
+                                 </a>
+                                 <span class="caption">
+                                 </span>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio10932714" target="_blank">
+                                  LWW Health Library
+                                 </a>
+                                 <span class="caption">
+                                  (includes Bates)
+                                 </span>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio4066287">
+                                  Ovid MEDLINE
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio4373446">
+                                  PubMed
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?ALD2284">
+                                  PsycINFO
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio7326584">
+                                  StatRef
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio4178336">
+                                  UpToDate
+                                 </a>
+                                 <a href="https://secure.cumc.columbia.edu/cumcit/secure/howto/vpn/index.html">
+                                  <span class="caption">
+                                   (Columbia Network)
+                                  </span>
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://library.cumc.columbia.edu/date-campus-access">
+                                  UpToDate
+                                 </a>
+                                 <span class="caption">
+                                  (Non Columbia Network)
+                                 </span>
+                                </li>
+                                <li>
+                                 <a href="http://www.columbia.edu/cgi-bin/cul/resolve?clio2054244">
+                                  Web of Science
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="select-databases">
+                                  More Health Sciences databases
+                                 </a>
+                                </li>
+                               </ul>
+                               <p class="more-link">
+                                <a href="find-books-articles-more">
+                                 more resources
+                                </a>
+                               </p>
+                              </div>
+                             </div>
+                            </div>
+                           </article>
+                          </div>
+                         </div>
+                         <div class="panel-separator">
+                         </div>
+                         <div class="panel-pane pane-node">
+                          <h2 class="pane-title">
+                           Assistance for...
+                          </h2>
+                          <div class="pane-content">
+                           <article class="article article-type-page clearfix" id="article-138" role="article">
+                            <div class="article-content">
+                             <div class="field field-name-body field-type-text-with-summary field-label-hidden">
+                              <div class="field-item even">
+                               <ul>
+                                <li>
+                                 <a href="http://library.cumc.columbia.edu/navigate-knowledge-center">
+                                  Navigate the Knowledge Center
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="faculty-and-instructors">
+                                  Faculty and Instructors
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="medical-students-3rd-year-rotations">
+                                  Medical students on clinical rotations
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://library.cumc.columbia.edu/sites/default/files/page/Nursing%20Resources%20and%20Tutorials_1.pdf" target="_blank">
+                                  Nursing students
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://library.cumc.columbia.edu/tutorials-select-discipline">
+                                  Tutorials by Select Discipline
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="alumni">
+                                  Alumni
+                                 </a>
+                                </li>
+                                <li>
+                                 <a href="http://library.cumc.columbia.edu/learning-your-pace-tutorials" target="_blank">
+                                  Learning at your own pace (Tutorials)
+                                 </a>
+                                </li>
+                               </ul>
+                               <p class="more-link">
+                                <a href="/library-classes-assistance">
+                                 more ways we can help
+                                </a>
+                               </p>
+                              </div>
+                             </div>
+                            </div>
+                           </article>
+                          </div>
+                         </div>
+                         <div class="panel-separator">
+                         </div>
+                         <div class="panel-pane pane-node">
+                          <h2 class="pane-title">
+                           Archives and Special Collections
+                          </h2>
+                          <div class="pane-content">
+                           <article class="article article-featured-resource clearfix" id="article-272" role="article">
+                            <div class="article-content">
+                             <div class="field field-name-field-image field-type-image field-label-hidden">
+                              <div class="field-item even">
+                               <img alt="" height="232" src="https://library.cumc.columbia.edu/sites/default/files/styles/for_small_columns/public/featuredresources/p12stearns.jpg?itok=MavCrdfc" title="Doctor with Child" width="276"/>
+                              </div>
+                             </div>
+                            </div>
+                           </article>
+                          </div>
+                         </div>
+                         <div class="panel-separator">
+                         </div>
+                         <div class="panel-pane pane-custom pane-1">
+                          <div class="pane-content">
+                           <p>
+                            Interested in historical research?
+                            <a href="archives">
+                             Visit the Archives!
+                            </a>
+                           </p>
+                           <p class="more-link">
+                            <a href="archives">
+                             more information
+                            </a>
+                           </p>
+                          </div>
+                         </div>
+                        </div>
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </article>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="push">
+     </div>
+    </div>
+    <div id="footer-wrapper">
+     <div class="container clearfix">
+      <footer class="clearfix">
+       <div class="region region-footer">
+        <div class="block block-block" id="block-block-1">
+         <div class="block-inner clearfix">
+          <div class="block-content">
+           <p>
+            <a href="https://www.cuimc.columbia.edu">
+             <img alt="" src="https://library.cumc.columbia.edu/sites/default/files/page/logotest.png" style="height:62px; width:328px"/>
+            </a>
+           </p>
+          </div>
+         </div>
+        </div>
+        <nav class="block block-menu" id="block-menu-menu-university-links" role="navigation">
+         <div class="block-inner clearfix">
+          <div class="block-content">
+           <ul class="menu clearfix">
+            <li class="first leaf">
+             <a href="http://www.columbia.edu/" title="">
+              Columbia University
+             </a>
+            </li>
+            <li class="leaf">
+             <a href="http://www.cumc.columbia.edu/" title="">
+              Columbia University Irving Medical Center
+             </a>
+            </li>
+            <li class="last leaf">
+             <a href="http://library.columbia.edu/" title="">
+              Columbia University Libraries
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </nav>
+        <nav class="block block-menu" id="block-menu-menu-footer" role="navigation">
+         <div class="block-inner clearfix">
+          <div class="block-content">
+           <ul class="menu clearfix">
+            <li class="first leaf">
+             <a href="/site-map" title="">
+              Site Map
+             </a>
+            </li>
+            <li class="leaf">
+             <a href="/staff-view" title="">
+              Staff View
+             </a>
+            </li>
+            <li class="last leaf">
+             <a href="/contact-us" title="">
+              Contact Us
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </nav>
+       </div>
+      </footer>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"0bc74a14bf","applicationID":"6430015","transactionName":"ZlEENRRWDRJRB0EMDV8bJwISXgwPHwpaAQduRAcGA2gVCFUT","queueTime":0,"applicationTime":776,"atts":"ShYHQ1xMHhw=","errorBeacon":"bam.nr-data.net","agent":""}
+  </script>
+ </body>
+</html>

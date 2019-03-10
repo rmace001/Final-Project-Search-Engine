@@ -1,0 +1,598 @@
+http://netid.arizona.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta charset="utf-8"/>
+  <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   UA NetID Management
+  </title>
+  <!--[if lt IE 9]>
+      		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    	<![endif]-->
+  <script src="/js/jquery-1.10.1.js" type="text/javascript">
+  </script>
+  <link href="/css/twitter/bootstrap3/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/js/twitter/bootstrap3/bootstrap.min.js" type="text/javascript">
+  </script>
+  <link href="/css/bootstrap-netid.css" rel="stylesheet" type="text/css"/>
+ </head>
+ <script>
+  <!-- this variable must be set for pwordgen.js -->
+		var netidappbase = '';
+		<!-- this variableis for making sure submit buttons are not double-clicked -->
+		var running = false;
+ </script>
+ <style>
+  body {
+		font-family:MiloWeb, Verdana, Geneva, sans-serif;
+	}
+	.btn {
+		color:white;
+	}
+	.btn:hover {
+		color:white;
+	}
+	.btn-default {
+		color:black;
+	}
+	.btn-default:hover {
+		color:black;
+	}
+	h5{
+		font-family: MiloWeb, Verdana, Geneva, sans-serif;
+	}
+	.page-wrapper {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 1200px;
+	}
+	.brand {
+		padding:15px;
+	}
+	h2 {
+		color:#036;
+	}
+	#ajaxMenu li {
+		list-style:none;
+	}
+	#sidemenu li {
+		list-style:circle;
+		margin-left: -30px;
+	}
+	.invisible {
+		display:none;
+	}
+	#progressBorder {
+	background-color: white;
+	border: 1px solid grey;
+	height: 22px;
+	margin: 0;
+	padding: 0;
+	width: 100px;
+	}
+	.alert	{
+		color:black;
+		
+	}
+	#flashMessage{
+		/*width:88%;*/
+		width:99%;
+	}
+	.help-block{
+		color:#444444;
+	}
+	#progressText {
+		-webkit-border-horizontal-spacing: 2px;
+		-webkit-border-vertical-spacing: 2px;
+		background-color: transparent;
+		border-bottom-color: black;
+		border-collapse: separate;
+		border-left-color: black;
+		border-right-color: black;
+		border-top-color: black;
+		display: block;
+		font-family: Arial, Avenir, 'Lucida Grande', Verdana, Helvetica,
+			sans-serif;
+		font-size: 10px;
+		font-weight: bold;
+		height: 11px;
+		margin-bottom: 0px;
+		margin-left: 4px;
+		margin-right: 0px;
+		margin-top: 0px;
+		padding-bottom: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+		padding-top: 0px;
+		width: 200px;
+	}
+	
+	#progressBar {
+		-webkit-border-horizontal-spacing: 2px;
+		-webkit-border-image: none;
+		-webkit-border-vertical-spacing: 2px;
+		background-color: ##ffffff;
+		border: 1px solid white;
+		display: block;
+		font-family: Arial, Avenir, 'Lucida Grande', Verdana, Helvetica,
+			sans-serif;
+		font-size: 1px;
+		height: 20px;
+		margin: 0px;
+		padding: 0px;
+		width: 100px;
+	}
+	#footer {
+		text-align:center;
+	}
+	#footer li {
+		list-style:none;
+	}
+	.bold-alert {
+		border:1px solid black;
+		font-weight:bold;
+	}
+	.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+	background-color: #dfdfdf;
+	}
+ </style>
+ <script>
+  function formFieldValid(id){
+		id.parent().parent().removeClass('has-error');
+		id.parent().parent().removeClass('has-warning');
+		id.parent().parent().addClass('has-success');
+		id.parent().find("span").removeClass('text-success');
+		id.parent().next().find( "span" ).addClass('glyphicon-ok');
+		id.parent().next().find( "span" ).removeClass('glyphicon-warning-sign');
+		id.parent().next().find( "span" ).removeClass('glyphicon-remove');
+	}
+	function formFieldInvalid(id){
+		id.parent().parent().removeClass('has-error');
+		id.parent().parent().removeClass('has-success');
+		id.parent().parent().addClass('has-warning');
+		id.parent().next().find( "span" ).removeClass('glyphicon-ok');
+		id.parent().next().find( "span" ).removeClass('glyphicon-remove');
+		id.parent().next().find( "span" ).addClass('glyphicon-warning-sign');
+		$("#submit").attr('disabled',true);
+	}
+	
+	function guid() {
+	    function _p8(s) {
+    	    var p = (Math.random().toString(16)+"000000000").substr(2,8);
+			return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+    	}
+		return _p8() + _p8(true) + _p8(true) + _p8();
+	}
+ </script>
+ <body>
+  <div style="margin:0px;padding:20px;background:#AB0520;width:100%;height:18px;">
+   <div class="page-wrapper">
+    <a class="brand" href="http://arizona.edu" target="_blank">
+     <img alt="The University of Arizona" class="header__logo-image" src="/img/a-reversed.png" style="margin-top:-22px;margin-left:8px;"/>
+    </a>
+    <!--a class="ua-home asdf" href="http://arizona.edu/" title="The University of Arizona" target="_blank">
+			      <p>The University of Arizona</p>
+			    </a-->
+   </div>
+  </div>
+  <header class="headerua page-wrapper" id="header" role="banner" style="padding:12px;">
+   <a class="brand" data-toggle="tooltip" href="#" id="uanetid" style="color:#036;" width="240px">
+    <img alt="" src="/img/netID-logo.gif" width="100px;"/>
+   </a>
+   <script>
+    $("#uanetid").popover({html:true,placement:'right',title:'<span class=\'close\' style=\'float:right;margin-top:-6px;\' onclick="$(\'#uanetid\').popover(\'hide\');">&times;</span>UA NetID',content:'This website allows you to create and manage your NetID.'});
+   </script>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-10" style="max-width:900px">
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <style>
+      #leftrow {
+
+}
+#centerrow {
+
+}
+#rightrow {
+
+}
+.netidrow {
+	margin-left:5px;
+	margin-right:5px;
+	margin-bottom:10px;
+	min-width:250px;
+	height:360px;
+	padding-top:15px;
+	background:#eee;
+	border:2px solid #036;
+
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	text-align:center;
+
+}
+.netidrowhelp {
+
+	background-image: url('/img/lock5.png');
+	background-repeat:no-repeat;
+	background-position: right bottom; }
+.netidrowmanage {
+
+	background-image: url('/img/manage.png');
+	background-repeat:no-repeat;
+	background-position: right bottom;
+}
+.netidrowsignup {
+	background-image: url('/img/pen2.png');
+	background-repeat:no-repeat;
+	background-position: right bottom;
+
+}
+
+.netidrow p{
+	font-size:1.3em;
+	color:#036;
+	font-weight:bolder;
+	font-family:  Lucida Grande, Lucida Sans Unicode, sans-serif;
+}
+h3{
+	margin-top:0px;
+}
+#menucontainer{
+text-align:center;
+
+}
+a {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:none;
+}
+
+.netidrow ul {
+	margin-left:0;
+}
+.netidrow li {
+	list-style:none;
+	margin-left:0;
+}
+.fat-btn {
+	width:90%;
+}
+.strong-btn {
+	border:1px solid black;
+	font-weight:bold;
+	 text-shadow:
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+     </style>
+     <div class="container" style="margin-top:8px;">
+      <div class="row">
+       <div class="col-md-4 col-sm-4">
+        <div class="netidrow netidrowsignup">
+         <h2>
+          Don't have a UA NetID?
+         </h2>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<p>
+</p>
+<p>
+</p>
+<p>
+ <a class="btn btn-mini btn-success fat-btn strong-btn" href="/NetIdCreate/">
+  Create UA NetID
+ </a>
+</p>
+<button class="btn btn-primary btn-mini fat-btn" data-target="#guidelines" data-toggle="modal">
+ NetID selection
+ <br/>
+ guidelines
+</button>
+<div class="col-md-4 col-sm-4">
+ <div class="netidrow netidrowmanage">
+  <h2>
+   Manage account settings
+  </h2>
+  <p>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn strong-btn" href="/NetIdPassword/">
+    Change  Password
+   </a>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn" href="/NetIdPasscode/">
+    Manage  Passcode Setting
+   </a>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn" href="/NetIdSecretHint/">
+    Manage  Secret Hint
+   </a>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn" href="/WebAuthPreferences/" title="Change WebAuth Single Sign-On Settings: enable/disable Single Sign-On or change your timeout period">
+    WebAuth Preferences
+   </a>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn" href="https://webauth.arizona.edu/netid-plus" title="Manage NetID+ Two-Factor Authentication Settings">
+    Manage NetID+
+   </a>
+  </p>
+ </div>
+</div>
+<div class="col-md-4 col-sm-4">
+ <div class="netidrow netidrowhelp">
+  <h2>
+   Problems accessing account?
+  </h2>
+  <p>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn strong-btn" href="/NetIdPasswordReset/?">
+    Reset Forgotten/Expired Password
+   </a>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn" href="/CatMailPasswordReset/">
+    Reset Secondary
+    <br/>
+    (CatMail)  Password
+   </a>
+  </p>
+  <p>
+   <a class="btn btn-mini btn-success fat-btn" href="/NetIdUnlock/">
+    Unlock   NetID
+   </a>
+  </p>
+ </div>
+</div>
+<hr/>
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-md-9">
+   <div style="-moz-border-radius: 15px; border-radius: 15px; border-width: 3px; border-color: #003366; border-style: solid; padding: 10px;">
+    <span style="font-size: 1.25em; font-weight: bold;">
+     ** Protect Your
+
+			Account, Enroll in NetID+ – a second layer of security.
+     <a href="http://uits.arizona.edu/services/netidplus">
+      Learn more…
+     </a>
+    </span>
+    <br/>
+    <br/>
+    <span style="font-size: 1.25em; font-weight: bold;">
+     ** CatNet Lockout
+
+			Grace Period for NetID Password Changes.
+     <a href="http://uits.arizona.edu/services/passwords">
+      Learn more…
+     </a>
+    </span>
+   </div>
+   <br/>
+   <h3>
+    What is a UA NetID?
+   </h3>
+   <p>
+    Your UA NetID is your
+    <b>
+     personal identifier
+    </b>
+    for a number of
+				online services at the University of Arizona. Some of the services
+				requiring a NetID include:
+   </p>
+   <ul>
+    <li>
+     E-mail and UITS computing accounts (CatMail, UAConnect, HPC)
+    </li>
+    <li>
+     UAccess applications (Student, Employee, Analytics, etc.)
+    </li>
+    <li>
+     D2L – a web-based course management system used in 700+
+								courses on campus
+    </li>
+    <li>
+     New Employee Resources and Benefits Enrollment
+    </li>
+    <li>
+     University site-licensed software
+    </li>
+    <li>
+     OSCR computer labs
+    </li>
+   </ul>
+   <p>
+    <font color="#990000">
+     <em>
+      <b>
+       NOTE!
+      </b>
+     </em>
+    </font>
+    Once
+				you have your NetID and password, you may use the
+    <a href="https://account.arizona.edu">
+     Account Program
+    </a>
+    to create a
+				U-System, HPC, or qualifying DCC email account.
+   </p>
+   <h3>
+    Why is the UA NetID necessary?
+   </h3>
+   <p>
+    The UA NetID verifies identity when it is used for online services
+				the University of Arizona provides. It consolidates the disparate
+				authentication mechanisms of various UA online services and helps
+				ensure the privacy of personal information and restrict the use of
+				resources to those for whom they are intended.
+   </p>
+  </div>
+  <div class="col-md-3 " id="sidemenu">
+   <p style="margin-top:15px;margin-bottom:8px;">
+    <strong>
+     Related Links
+    </strong>
+   </p>
+   <ul>
+    <li>
+     <a href="https://webauth.arizona.edu/netid-plus">
+      Manage NetID+ Settings
+     </a>
+    </li>
+    <li>
+     <a href="https://account.arizona.edu">
+      Create or Change Computer Accounts
+     </a>
+    </li>
+    <li>
+     <a href="http://uits.arizona.edu/policies/">
+      Computing Guidelines &amp; Policies
+     </a>
+    </li>
+    <li>
+     <a href="http://uits.arizona.edu/services/">
+      Central computing services
+     </a>
+    </li>
+   </ul>
+  </div>
+ </div>
+</div>
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="guidelines" role="dialog" tabindex="-1">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button class="close" data-dismiss="modal" type="button">
+     <span aria-hidden="true">
+      ×
+     </span>
+     <span class="sr-only">
+      Close
+     </span>
+    </button>
+    <h4 class="modal-title">
+     Selecting a UA NetID
+    </h4>
+   </div>
+   <div class="modal-body">
+    <ul>
+     <li>
+      You may either select one of the system-generated NetIDs or provide
+				your own.
+     </li>
+     <li>
+      NetIDs must be between 3-16 characters in length, may contain only
+				alphanumeric characters (i.e., letters and digits), and should
+				represent the identity of the holder.
+     </li>
+     <li>
+      Your NetID will also be your University email address
+				(yournetid@email.arizona.edu).
+     </li>
+     <li>
+      The use of obscene, vulgar, or otherwise offensive, NetIDs may
+				result in account suspension or termination.
+     </li>
+     <li>
+      Deliberate misrepresentation of identity, with the intention of
+				committing fraud, will result in immediate account termination and the
+				initiation of appropriate disciplinary actions.
+     </li>
+     <li>
+      Consult the following guide for choosing an appropriate UA NetID password:
+      <a href="http://www.security.arizona.edu/files/ISG701.pdf" target="_new">
+       University of Arizona Guidelines for Password/Passphrase
+				Construction and Management
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div class="modal-footer">
+    <button class="btn btn-default" data-dismiss="modal" type="button">
+     Close
+    </button>
+   </div>
+  </div>
+  <!-- /.modal-content -->
+ </div>
+ <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<style>
+ .sidemenu{
+min-width:120px;
+}
+</style>
+<footer id="footer">
+ <ul class="footer_help">
+  <li>
+   Problems? Contact the 24/7 IT Support Center at
+				520-626-TECH(8324) or submit a support request to
+   <a href="https://uaservice.arizona.edu" target="_new">
+    UAService
+   </a>
+   | New
+				Student ID or PIN issues? Contact the Next Steps Center at
+				520-621-5293
+  </li>
+ </ul>
+ <ul class="footer_help">
+  <li class="no_bor">
+   Use of the UA NetID is subject to the policies and
+				guidelines detailed in the
+   <a href="http://policy.arizona.edu/information-technology/acceptable-use-computers-and-networks" target="_new">
+    UA Computers and Networks Acceptable Use
+   </a>
+   and the
+   <a href="http://www.arizona.edu/information-security-privacy" target="_new">
+    UA
+					Privacy Statement
+   </a>
+   documents.
+  </li>
+ </ul>
+ <ul class="footer_links">
+  <li>
+   <a href="http://www.arizona.edu" target="_new">
+    The University of
+					Arizona
+   </a>
+   |
+   <a href="http://uits.arizona.edu/index.php?id=1130" target="_new">
+    University Information Technology Services (UITS)
+   </a>
+  </li>
+ </ul>
+ <ul class="footer_copyright">
+  <li>
+   All contents copyright © 2019. Arizona Board of Regents.
+  </li>
+ </ul>
+</footer>
+

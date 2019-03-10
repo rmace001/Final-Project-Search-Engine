@@ -1,0 +1,821 @@
+http://servicedesk.caes.uga.edu/
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script src="/TDPortal/Content/Scripts/jquery/1.11.2/jquery.min.js?v=20190309030821" type="text/javascript">
+  </script>
+  <script src="/TDPortal/Content/Scripts/jquery-migrate/1.2.1/jquery-migrate.min.js?v=20190309030821" type="text/javascript">
+  </script>
+  <script src="/TDPortal/Content/Scripts/jquery-ui/1.11.4/jquery-ui-1.11.4.custom.timepicker.min.js?v=20190309030820" type="text/javascript">
+  </script>
+  <link href="/TDPortal/Content/Styles/jquery-ui/1.11.4/jquery-ui.compiled.min.css?v=20190309030819" rel="stylesheet" type="text/css"/>
+  <link href="/TDPortal/Content/bootstrap/3.3.7/dist/css/bootstrap.min.css?v=20190309030825" id="lnkBootstrapCSS" rel="stylesheet" type="text/css"/>
+  <script src="/TDPortal/Content/bootstrap/3.3.7/dist/js/bootstrap.min.js?v=20190309030825" type="text/javascript">
+  </script>
+  <link href="/TDPortal/Content/Styles/font-awesome.min.css?v=20190309030819" id="lnkFontAwesome" rel="stylesheet" type="text/css"/>
+  <script src="/TDClient/Scripts/json2.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/underscore-min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/TDJSFramework.compiled.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/tdajax.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/clientOS.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/collapseMe.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/tdsearchfilter.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script src="/TDClient/Scripts/SiteSearch.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <link href="/TDClient/Styles/bootstrap_custom.min.css?v=20190309030805" rel="stylesheet" type="text/css"/>
+  <link href="/TDClient/Styles/TDStyles.min.css?v=20190309030805" rel="stylesheet" type="text/css"/>
+  <link href="https://uga.teamdynamix.com/TDPortal/BE/Style/175/TDClient?v=20171025204309" rel="stylesheet" type="text/css"/>
+  <link href="https://uga.teamdynamix.com/TDPortal/BE/Icon/175" id="ctl00_ctl00_lnkFavicon" rel="shortcut icon"/>
+  <script type="text/javascript">
+   $(function () {
+      var masterUi = MasterUI({
+        isPostback: false,
+        baseUrl: '/TDClient/',
+        beGoogleAnalyticsId: 'UA-68168289-1',
+        beCookieDomain: 'uga.teamdynamix.com',
+        isTdGoogleAnalyticsEnabled: true,      
+        isAuthenticated: false
+      });
+
+      $('#collapseMe').collapseMe({
+        toggleVisibilitySelector: '.navbar-toggle'
+      });
+     
+    });
+
+    // The sub-nav menu uses padding-top to position itself below the header bar and main navigation sections. When the
+    // window is resized, there is a chance that the content of these header or nav sections wraps, causing the height
+    // to change, potentially covering the sub-nav menu, which is obviously a big usability problem. This function 
+    // listens for when the window size or orientation is changing (and also when the window first loads), and adjusts
+    // the padding so that the sub-nav menu appears in the correct location.
+    $(window).bind('load ready resize orientationchange', function() {
+      var headerHeight = $('#divMstrHeader').height();
+      $('#navShim').css({
+        "padding-top": headerHeight
+      });
+
+      $('#content').css({
+        "padding-top": headerHeight,
+        "margin-top":  headerHeight * -1
+      });
+    });
+  </script>
+  <style type="text/css">
+   .test a span {
+      width: 1.5em;
+      text-align: center;
+    }
+  </style>
+  <script src="/TDClient/Scripts/jquery.dotdotdot.min.js?v=20190309030805" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function ReloadList() {
+      window.location.href = window.location.href;
+    }
+
+    // Adds ellipsis for long descriptions with long titles
+    $(function() {
+      $('.category-box').tdEllipsis();
+
+      var kbEllipsis = document.querySelectorAll('.kb-ellipse');
+      Array.prototype.forEach.call(kbEllipsis, function (kb) {
+        var smallTag = kb.querySelector('small');
+        var kbHeight = kb.clientHeight;
+        while(smallTag.offsetHeight > kbHeight) {
+          smallTag.textContent = smallTag.textContent.replace(/\W*\s(\S)*$/, '...');
+        }
+      });
+    });
+  </script>
+  <meta content="College of Agricultural &amp; Environmental Sciences IT" property="og:title"/>
+  <meta content="website" property="og:type"/>
+  <meta content="https://uga.teamdynamix.com/TDClient/Requests/ServiceCatalog?CategoryID=3478" property="og:url"/>
+  <meta content="https://uga.teamdynamix.com/TDPortal/BE/Logo/175" property="og:image"/>
+  <meta content="The College of Agricultural and Environmental Sciences Service Catalog lists the technology services that are available to our College. From these listed categories, submit your request – ex. If you have a problem with your printer, choose the category for Hardware/Software &amp; Security and then ch..." property="og:description"/>
+  <meta content="University of Georgia - Services" property="og:site_name"/>
+  <title>
+   Service Catalog - College of Agricultural &amp; Environmental Sciences IT
+  </title>
+ </head>
+ <body>
+  <form action="./ServiceCatalog?CategoryID=3478" id="aspnetForm" method="post">
+   <div class="aspNetHidden">
+    <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+    <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+    <input id="__LASTFOCUS" name="__LASTFOCUS" type="hidden" value=""/>
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="VwSPahSAJDUauCwpyLKzkoQhr+baYIauQtzvYsmTuBfFZqNZ5fA4wSB3xvtDRXRiuEa6/1S1nuC7izmT31EXUgBRhXaE3gpSiwlKnqtM9idEXheOSBB055/5a5g/QMwFHz8QHO5uPpUj2z91Fz9SIHp1TLCQEjTRWkvv7/4l0MHavX+F6hD2xYZEre7GZqX5sadsKsDbxBQgesWG5EK+NX9yLRzbyzVkOL8ZcdVzD74EmM4pfajqmVH/Q7lTAhExZUvg7gyrQnHqHocKgYSHgdfLbPSXgyUf9KsHD6ssGLQIXXOoCtiA20jz+IAWevt9TYWeHEKzMse1BI+hiC+8D8++DrQs5uYYtClwdYrUmOV4Qyqsl5jXLOeiVKceCkGqWwsGfyw1XwFy9xGkp+lG4HGAHFi/cv3lO7X0XD8btrbBNwlTLd1vNxFFRN+XLKWKiPPrlpbryAlVWN8g2Lboy1fA4bc5m4kYf7XT12D3CRHeke+s+5qRIRy9mj9BTUfYOtq6v4/O+1SDzAxRAKXDH307x58mLsdlYOYCUJPNHoZpegWn09OuuV2xUUg1bzZXjQ4/RgKjSt8NmSLYOrVPplfoXGeAdNCN4TIxYTwSAvuoV4PbWPdfOksSbbcNb2J73ifucVg4V0lNqOKRY5ZvXAVeQVaJOJ1lakZSDJhPAOHseWveD1ikSO8jxshpIdhK5h0p8rpaQANzcxSwFWDngH12V5QdkVg4UWIhYkl/UW45v+YN0rwq1biwA/DX/YVSo0cx1+aoqwQ3zL2byRoT7CDT04YzKK7QMKWJY/MIhhCqy+AJvDiJjqO6soWP752dEAbihG9QV90F4unq6D1p3cG9miA2qhBIk6HUAXX8EoMzivpxTDSGEoH+ttWlQMI03BSo3ujjt2c+f/koDzOHSuqlwzsyLocQlSbPLM4BImjJgLcMDH55ukd+ZIskY2ky8iXPqr5rPEvI4jnSaxtfG+fvGAVbYbPRyK14a2FEGFvhKehFqWNYKCd2IItOSazYmy+z5xTm0QJJJNAX1C1rQUi6+vYJoPZVxtzlOaiB7Z04vSGcFefE19ywG4p1EQGd9mjpLGtyHa8hLyr0zU63hufP7ACjQ5GxUkP+npKhO9YsJBEB1tuaG8nZp3rJgywLvqGGW9EAQi2VckOwB2meEm7gNIlnvc+H8AgFFVvr0yL+SJ+RgGO9kCry6N+SkXr7EaJqEBuvXpAqQTKN6JL/AMSyECs="/>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+   </script>
+   <script src="/TDClient/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZMSMQxVWLi4fik2rw1_u_hZsCNzwv5c621ov6_ZX_wzTt5vh-g2&amp;t=636681460740000000" type="text/javascript">
+   </script>
+   <script src="/TDClient/ScriptResource.axd?d=uHIkleVeDJf4xS50Krz-yArHVu97Uhbr7lONLdlK8nM4hDm6eoCZL2ERm6CtQHpj0CFhj4gKB63PbU5MchdrYzCrvWcqKHfZ22AL6w6WAtiv7CEAlAymwJmkI1Qtw0TEMJ-slq_CRHIG4Ui-Rx1fciBsC1g1&amp;t=545ba255" type="text/javascript">
+   </script>
+   <script src="/TDClient/ScriptResource.axd?d=Jw6tUGWnA15YEa3ai3FadFjGkzgoY6ZU4-ppjgDJsxnkOcw7mw7zcSvXUEE0Hk6CWSjHJumr1Wxw2cK1DVvIf1SlrE0DUJ8tMy2Ow7bc52aomV451Lt2SegKlk2pQmP0mPHiEM23PvgSWdLcKSm6ZD3lLyI1&amp;t=545ba255" type="text/javascript">
+   </script>
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="5C261F79"/>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ctl00$smMain', 'aspnetForm', ['fctl00$ctl00$cpContent$cpContent$UpdatePanel1','','fctl00$ctl00$cpContent$cpContent$UpdatePanel2','','tctl00$ctl00$cpContent$cpContent$lblResults$ctl00',''], ['ctl00$ctl00$cpContent$cpContent$chkShowInactiveRoot','','ctl00$ctl00$cpContent$cpContent$chkShowInactive',''], [], 90, 'ctl00$ctl00');
+//]]>
+   </script>
+   <div id="ctl00_ctl00_upMain" style="display:none;">
+    <div id="ctl00_ctl00_pbMain" style="position: fixed; top: 50%; left: 0px; width: 100%; height: 1px; overflow: visible; z-index: 2000; display: block;">
+     <div style="margin-left: -125px; position: fixed; top: 50%; left: 50%; width: 250px; height: 90px;">
+      <div class="well shadow">
+       <h2 class="h4 gutter-top-none">
+        Updating...
+       </h2>
+       <div class="progress" style="margin-bottom: 0;">
+        <div aria-valuemax="100" aria-valuemin="0" class="progress-bar progress-bar-striped active" role="progressbar" style="width: 100%">
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <header>
+    <div class="master-header NoPrint" id="divMstrHeader" style="background-color: #fff;">
+     <div class="logo-header-full hidden-xs">
+      <div class="pull-left">
+       <a class="sr-only sr-only-focusable" href="#content">
+        Skip to main content
+       </a>
+      </div>
+      <div class="container logo-header clearfix" id="ctl00_ctl00_divPageHeader" style="padding: 5px;">
+       <div class="pull-left logo-container" id="divLogo">
+        <a href="http://eitshelpdesk.uga.edu/" target="_blank">
+         <img alt="University of Georgia Logo" class="js-logo img-responsive" src="/TDPortal/BE/Logo/175"/>
+        </a>
+       </div>
+       <div class="master-header-right pull-right padding-top padding-bottom">
+        <div class="pull-left topLevelSearch input-group">
+         <div class="gutter-bottom input-group site-search" id="SiteSearch-99ea7f3b4c514b20b250ca790e576d94" style="max-width: 400px;">
+          <div class="input-group-btn" id="SiteSearch-dropdown-99ea7f3b4c514b20b250ca790e576d94">
+           <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-component="all" data-toggle="dropdown" id="SiteSearch-filter-99ea7f3b4c514b20b250ca790e576d94" title="Filter your search by categories" type="button">
+            <span class="fa fa-globe">
+            </span>
+            <span aria-hidden="true" class="fa fa-caret-down">
+            </span>
+            <span class="sr-only">
+             Filter your search by categories
+            </span>
+           </button>
+           <ul class="dropdown-menu">
+            <li>
+             <a data-component="all" data-component-icon="fa-globe" href="javascript:void(0);" title="Search all areas">
+              <span aria-hidden="true" class="fa fa-globe">
+              </span>
+              All
+             </a>
+            </li>
+            <li class="divider" role="separator">
+            </li>
+            <li>
+             <a data-component="sc" data-component-icon="fa-compass" href="javascript:void(0);" title="Search Service Catalog">
+              <span aria-hidden="true" class="fa fa-compass">
+              </span>
+              Service Catalog
+             </a>
+            </li>
+           </ul>
+          </div>
+          <label class="sr-only" for="SiteSearch-text-99ea7f3b4c514b20b250ca790e576d94">
+           To search for items with a specific tag, enter the # symbol followed by the name of the tag
+          </label>
+          <input autocomplete="off" class="form-control" id="SiteSearch-text-99ea7f3b4c514b20b250ca790e576d94" placeholder="Search the client portal" title="To search for items with a specific tag, enter the # symbol followed by the name of the tag." type="text"/>
+          <span class="input-group-btn">
+           <button class="btn btn-default" id="SiteSearch-button-99ea7f3b4c514b20b250ca790e576d94" title="Search" type="button">
+            <span aria-hidden="true" class="fa fa-search">
+            </span>
+            <span class="sr-only">
+             Search
+            </span>
+           </button>
+          </span>
+         </div>
+         <script type="text/javascript">
+          $(function() {
+    var siteSearch = new TeamDynamix.SiteSearch({
+      searchUrl: "/TDClient/Shared/Search",
+      tagLookupServiceUrl: "/TDClient/WebServices/JSON/TagLookupService.asmx/GetItems",
+      searchTextBoxSelector: '#SiteSearch-text-99ea7f3b4c514b20b250ca790e576d94',
+      searchComponentFilterButtonSelector: '#SiteSearch-filter-99ea7f3b4c514b20b250ca790e576d94',
+      searchButtonSelector: '#SiteSearch-button-99ea7f3b4c514b20b250ca790e576d94',
+      searchFilterDropdownSelector: '#SiteSearch-dropdown-99ea7f3b4c514b20b250ca790e576d94',
+      showKnowledgeBaseOption: false,
+      showServicesOption: true,
+      showForumsOption: false,
+      autoFocusSearch: false
+    });
+  });
+         </script>
+        </div>
+        <div class="pull-right gutter-top-sm" title="Sign In">
+         <a href="/TDClient/Login.aspx?ReturnUrl=%2fTDClient%2fRequests%2fServiceCatalog%3fCategoryID%3d3478">
+          Sign In
+         </a>
+        </div>
+       </div>
+      </div>
+     </div>
+     <nav class="navbar navbar-default themed tdbar" id="ctl00_ctl00_mainNav">
+      <div class="container" id="navContainer">
+       <div class="navbar-header">
+        <button class="pull-left navbar-toggle collapsed themed tdbar-button-anchored tdbar-toggle gutter-left" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+         <span class="tdbar-button-anchored icon-bar">
+         </span>
+         <span class="tdbar-button-anchored icon-bar">
+         </span>
+         <span class="tdbar-button-anchored icon-bar">
+         </span>
+         <span class="sr-only">
+          Show Applications Menu
+         </span>
+        </button>
+        <a class="navbar-brand hidden-sm hidden-md hidden-lg themed tdbar-button-anchored truncate-be" href="#">
+         University of Georgia
+        </a>
+       </div>
+       <div class="collapse navbar-collapse" id="td-navbar-collapse">
+        <ul class="nav navbar-nav nav-collapsing" id="collapseMe">
+         <li class="themed tdbar-button-anchored hidden-sm hidden-md hidden-lg">
+          <a href="/TDClient/Login.aspx?ReturnUrl=%2fTDClient%2fRequests%2fServiceCatalog%3fCategoryID%3d3478">
+           Sign In
+          </a>
+         </li>
+         <li class="themed tdbar-button-anchored hidden-sm hidden-md hidden-lg" id="divSearch">
+          <a href="/TDClient/Shared/Search" title="search">
+           Search
+          </a>
+         </li>
+         <li class="themed tdbar-button-anchored" id="divDesktop4cc473c9-445e-4d9e-9290-5266e2e90032">
+          <a href="/TDClient/Home/">
+           Home
+          </a>
+         </li>
+         <li class="themed tdbar-button-anchored" id="divDesktop241d7968-26fa-47e7-ad11-5bbaaa270a9f">
+          <a href="/TDClient/Home/?ID=241d7968-26fa-47e7-ad11-5bbaaa270a9f">
+           IT Help Desks
+          </a>
+         </li>
+         <li class="themed tdbar-button-anchored sr-focusable" id="divTDRequests">
+          <a href="/TDClient/Requests/ServiceCatalog">
+           Services
+          </a>
+         </li>
+         <li class="themed tdbar-button-anchored hidden-xs more-items-button" id="moreMenu">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="More Applications">
+           <span class="sr-only">
+            More Applications
+           </span>
+           <span aria-hidden="true" class="fa fa-ellipsis-h">
+           </span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right themed tdbar" id="collapsed">
+          </ul>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </nav>
+    </div>
+   </header>
+   <div class="hidden-xs hidden-sm" id="navShim">
+   </div>
+   <div id="content" tabindex="-1">
+    <nav class="tdbar-sub NoPrint hidden-xs navbar-subnav" id="divTabHeader">
+     <a class="sr-only sr-only-focusable" href="#servicesContent">
+      Skip to Services content
+     </a>
+     <div class="container clearfix">
+      <ul class="nav navbar-nav js-submenu" id="servicesSubMenu" style="margin-left: -15px;">
+       <li>
+        <a href="/TDClient/Requests/ServicesAtoZ">
+         Services A-Z
+        </a>
+       </li>
+       <li>
+        <a href="/TDClient/Requests/ServiceCatalogSearch">
+         Search
+         <span class="sr-only">
+          Services
+         </span>
+        </a>
+       </li>
+      </ul>
+     </div>
+    </nav>
+    <div class="container gutter-top">
+     <div id="servicesContent" style="outline:none;" tabindex="-1">
+      <span aria-atomic="true" aria-live="polite" id="ctl00_ctl00_cpContent_cpContent_lblResults_ctl00">
+       <span class="red" id="ctl00_ctl00_cpContent_cpContent_lblResults_lblResults-label">
+       </span>
+      </span>
+      <div class="gutter-bottom">
+       <div>
+        <ol class="breadcrumb">
+         <li>
+          <a href="ServiceCatalog">
+           Service Catalog
+          </a>
+         </li>
+         <li>
+          <a href="ServiceCatalog?CategoryID=3442">
+           UGA College Specific Services
+          </a>
+         </li>
+         <li class="active">
+          <a href="ServiceCatalog?CategoryID=3478">
+           College of Agricultural &amp; Environmental Sciences IT
+          </a>
+         </li>
+        </ol>
+       </div>
+       <h1>
+        <span id="ctl00_ctl00_cpContent_cpContent_lblCategoryName">
+         College of Agricultural &amp; Environmental Sciences IT
+        </span>
+       </h1>
+      </div>
+      <div class="row">
+       <div class="col-md-8" id="divCats">
+        <div class="well" id="ctl00_ctl00_cpContent_cpContent_divCategoryDescription">
+         The College of Agricultural and Environmental Sciences Service Catalog lists the technology services that are available to our College. From these listed categories, submit your request – ex. If you have a problem with your printer, choose the category for Hardware/Software &amp; Security and then choose Printer Troubleshooting from the services listed on that page.
+         <br/>
+         <br/>
+         If you are unsure of what service your issue falls under, feel free to use the General Support Request at the bottom of this page.
+        </div>
+        <h2>
+         Categories (10)
+        </h2>
+        <div class="gutter-bottom">
+         <div class="media media-doubled border ellipsis category-box" title="General Support Request">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=8519">
+             General Support Request
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Account Creation/ID Management">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6002">
+             Account Creation/ID Management
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Qualtrics, Zoom, Active Directory, New/Exiting Employee Setup, Crashplan Backup Services, Adobe Creative Cloud, Matlab, Kaltura
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Hardware/Software &amp; Security">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6003">
+             Hardware/Software &amp; Security
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Software/Hardware Installation/Troubleshooting, Printer Troubleshooting, Virus Removal
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Network, Internet, Wireless Access">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6004">
+             Network, Internet, Wireless Access
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Network Troubleshooting/Request
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Event &amp; Meetings">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6005">
+             Event &amp; Meetings
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Meeting and Conference Support
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Classroom">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6006">
+             Classroom
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Classroom Computer Troubleshooting, AV Support/Quote
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Training">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6007">
+             Training
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Zoom Tutorial, Lynda.com
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Communication">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6009">
+             Communication
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Listserv Support, Email Support
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="Business Services">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=8336">
+             Business Services
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+            </small>
+           </div>
+          </div>
+         </div>
+         <div class="media media-doubled border ellipsis category-box" title="CAES &amp; Extension Website Support">
+          <div class="media-left">
+           <span aria-hidden="true" class="gutter-top-sm media-object gray fa fa-4x fa-fw">
+            
+           </span>
+          </div>
+          <div class="media-body">
+           <h3 class="category-title">
+            <a href="/TDClient/Requests/ServiceCatalog?CategoryID=6010">
+             CAES &amp; Extension Website Support
+            </a>
+           </h3>
+           <div class="kb-ellipse">
+            <small class="gray">
+             Login Problems, Content Manager Support, Web Application Support, New Websites, Advice and Consultation
+            </small>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div aria-atomic="true" aria-live="polite" id="ctl00_ctl00_cpContent_cpContent_UpdatePanel1">
+         <div id="ctl00_ctl00_cpContent_cpContent_divServices">
+         </div>
+        </div>
+        <span aria-atomic="true" aria-live="polite" id="ctl00_ctl00_cpContent_cpContent_UpdatePanel2">
+        </span>
+       </div>
+       <div class="col-md-4" id="divCatsSidebar">
+        <h2 class="sr-only">
+         Additional Resources
+        </h2>
+        <div class="panel panel-default" id="ctl00_ctl00_cpContent_cpContent_divPopServices" style="overflow-wrap: break-word;">
+         <div class="panel-heading">
+          <h3 class="panel-title" title="Most popular services based upon views">
+           Popular Services
+          </h3>
+         </div>
+         <div class="panel-body">
+          <ul class="panel-list">
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=9858">
+             EITS Help Desk Support Request
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=13358">
+             MyID Account Request
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=30906">
+             Combo Code Request
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=24972">
+             OneSource Service Desk
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=32313">
+             Retro Payroll Request
+            </a>
+           </li>
+          </ul>
+         </div>
+         <div class="panel-footer clearfix">
+          <a class="pull-right" href="/TDClient/Requests/PopularServices">
+           View All Popular Services
+           <span aria-hidden="true" class="fa fa-chevron-right">
+           </span>
+          </a>
+         </div>
+        </div>
+        <div class="panel panel-default" id="ctl00_ctl00_cpContent_cpContent_divRecentServices" style="overflow-wrap: break-word;">
+         <div class="panel-heading">
+          <h3 class="panel-title" title="Most recently visited services">
+           My Recently Visited Services
+          </h3>
+         </div>
+         <div class="panel-body">
+          <ul class="panel-list">
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=9858">
+             EITS Help Desk Support Request
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=10032">
+             Cabling or Wireless Installation Request
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=30597">
+             Test MyID Checkout System
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=9882">
+             IDM Data Access Request
+            </a>
+           </li>
+           <li class="gutter-bottom">
+            <a href="/TDClient/Requests/ServiceDet?ID=32937">
+             Budget Development Access Request
+            </a>
+           </li>
+          </ul>
+         </div>
+         <div class="panel-footer clearfix">
+          <a class="pull-right" href="/TDClient/Requests/RecentServices">
+           View All Recently Visited Services
+           <span aria-hidden="true" class="fa fa-chevron-right">
+           </span>
+          </a>
+         </div>
+        </div>
+        <div class="panel panel-default tag-list">
+         <div class="panel-heading">
+          <h3 class="panel-title">
+           Popular Tags
+           <span aria-hidden="true" class="fa fa-tags">
+           </span>
+          </h3>
+         </div>
+         <div class="panel-body">
+          <ul class="panel-list" id="ctl00_ctl00_cpContent_cpContent_tags_ulTags">
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23matlab" rel="nofollow">
+             matlab
+            </a>
+            (2)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23Qualtrics" rel="nofollow">
+             Qualtrics
+            </a>
+            (2)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23advisement" rel="nofollow">
+             advisement
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23Banner" rel="nofollow">
+             Banner
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23ComputerLab" rel="nofollow">
+             ComputerLab
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23Dynamix" rel="nofollow">
+             Dynamix
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23Housing" rel="nofollow">
+             Housing
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23onesource" rel="nofollow">
+             onesource
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23onesource-support" rel="nofollow">
+             onesource-support
+            </a>
+            (1)
+           </li>
+           <li class="gutter-bottom-sm">
+            <a href="/TDClient/Requests/ServiceCatalogSearch?SearchText=%23port" rel="nofollow">
+             port
+            </a>
+            (1)
+           </li>
+          </ul>
+         </div>
+         <div class="panel-footer clearfix">
+          <div class="pull-right">
+           <a href="/TDClient/Shared/BrowseTags?ItemID=0&amp;ComponentID=47">
+            View All Tags
+            <span aria-hidden="true" class="fa fa-chevron-right">
+            </span>
+           </a>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+setNavPosition('TDRequests');Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":null,"displayAfter":500,"dynamicLayout":true}, null, null, $get("ctl00_ctl00_upMain"));
+});
+//]]>
+   </script>
+  </form>
+  <footer>
+   <div class="master-footer">
+    <nav class="text-center">
+     <p>
+     </p>
+     <div style="text-align: center">
+      <span style="font-size: 14px">
+       This site is operated by
+       <a href="http://eits.uga.edu/" target="_blank">
+        Enterprise Information Technology Services (EITS)
+       </a>
+       at the University of Georgia.
+      </span>
+      <span style="font-size: 14px">
+      </span>
+     </div>
+     <p style="text-align: center">
+      <span style="font-size: 14px">
+      </span>
+      <a href="http://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">
+       Privacy
+      </a>
+      |
+      <a href="http://www.amacusg.gatech.edu/wag/Main_Page">
+       Accessibility
+      </a>
+      |
+      <a href="mailto:helpdesk@uga.edu?subject=Team Dynamix Feedback">
+       Website Feedback
+      </a>
+     </p>
+     <p>
+     </p>
+    </nav>
+   </div>
+  </footer>
+  <script type="text/javascript">
+   // inject the Google Analytics isogram. this must happen here because it
+    // cannot be injected through an external javascript library.
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    
+    
+    // Per Incident #6707155. Need to focus on img. pseudo-class :focus-within is not supported in IE
+    (function($){
+      var $anchor = $('#divLogo a');
+      var $beLogo = $('#divLogo a img');
+
+      $anchor.focus(function() {
+        $beLogo.addClass('accessibility-focus-on-logo');
+      })
+      .blur(function() {
+        $beLogo.removeClass('accessibility-focus-on-logo');
+      })
+    })(jQuery);
+  </script>
+ </body>
+</html>
+

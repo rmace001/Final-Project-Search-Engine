@@ -1,0 +1,263 @@
+http://accountinfo.unca.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <title>
+   UNC Asheville Password Change Utility
+  </title>
+  <meta content="" name="keywords"/>
+  <meta content="" name="description"/>
+  <link href="style.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script language="JavaScript" type="text/javascript">
+   <!--
+function Form_Validator(theForm)
+{
+  if (theForm.username.value == "")
+  {
+    alert("Please enter your UNCA Username.");
+    theForm.username.focus();
+    return (false);
+  }
+  
+  if (theForm.username.value == "" || theForm.username.value.length < 2 || theForm.username.value.length > 30)
+  {
+    alert("The UNCA Username you entered does not appear to be in the correct format.\nPlease enter your UNCA Username again.");
+    theForm.username.select();
+    return (false);
+  }
+
+  var checkOK = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_";
+  var checkStr = theForm.username.value;
+  var allValid = true;
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+  }
+  if (!allValid)
+  {
+    alert("The UNCA Username you entered does not appear to be in the correct format.\nPlease enter your UNCA Username again.");
+    theForm.username.select();
+    return (false);
+  }
+
+  if (theForm.sid.value == "")
+  {
+    alert("Please enter your UNCA ID Number.");
+    theForm.sid.focus();
+    return (false);
+  }
+
+  if (theForm.sid.value.length < 9 || theForm.sid.value.length > 9)
+  {
+    alert("The UNCA ID Number you entered does not appear to be in the correct format. Please enter your UNCA ID Number again.");
+    theForm.sid.select();
+    return (false);
+  }
+  
+  if (theForm.sid.value.substring(0, 6) == "SECURE"){
+	  // Skip checking to see if it is fully numeric.
+  }
+  else{
+	  var checkOK = "0123456789";
+	  var checkStr = theForm.sid.value;
+	  var allValid = true;
+	  var decPoints = 0;
+	  var allNum = "";
+	  for (i = 0;  i < checkStr.length;  i++)
+	  {
+		ch = checkStr.charAt(i);
+		for (j = 0;  j < checkOK.length;  j++)
+		  if (ch == checkOK.charAt(j))
+			break;
+		if (j == checkOK.length)
+		{
+		  allValid = false;
+		  break;
+		}
+		allNum += ch;
+	  }
+	  if (!allValid)
+	  {
+		alert("The UNCA ID Number you entered does not appear to be in the correct format. Please enter your UNCA ID Number again.");
+		theForm.sid.select();
+		return (false);
+	  }
+  }
+
+  if (theForm.dob.value == "")
+  {
+    alert("Please enter your Birth Date in YYYYMMDD format.");
+    theForm.dob.focus();
+    return (false);
+  }
+
+  if (theForm.dob.value.length < 8 || theForm.dob.value.length > 8)
+  {
+    alert("The Birth Date you entered does not appear to be in the correct format.\nPlease enter your Birth Date again in YYYYMMDD format.");
+    theForm.dob.select();
+    return (false);
+  }
+
+  var checkOK = "0123456789";
+  var checkStr = theForm.dob.value;
+  var allValid = true;
+  var decPoints = 0;
+  var allNum = "";
+  for (i = 0;  i < checkStr.length;  i++)
+  {
+    ch = checkStr.charAt(i);
+    for (j = 0;  j < checkOK.length;  j++)
+      if (ch == checkOK.charAt(j))
+        break;
+    if (j == checkOK.length)
+    {
+      allValid = false;
+      break;
+    }
+    allNum += ch;
+  }
+  if (!allValid)
+  {
+    alert("The Birth Date you entered does not appear to be in the correct format.\nPlease enter your Birth Date again in YYYYMMDD format.");
+    theForm.dob.select();
+    return (false);
+  }
+
+  var chkVal = allNum;
+  var prsVal = parseInt(allNum);
+  if (chkVal != "" && !(prsVal > "19000101" && prsVal < "20201231"))
+  {
+    alert("The Birth Date you entered does not appear to be in the correct format.\nPlease enter your Birth Date again in YYYYMMDD format.");
+    theForm.dob.select();
+    return (false);
+  }
+  return (true);
+}
+//-->
+  </script>
+ </head>
+ <body>
+  <div id="wrapper">
+   <div id="wrapper2">
+    <div id="header">
+     <div id="menu">
+      <ul>
+       <li>
+        <a href="http://www.unca.edu">
+         UNC Asheville Home
+        </a>
+       </li>
+       <li>
+        <a href="http://www.unca.edu/its">
+         ITS Home
+        </a>
+       </li>
+       <li>
+        <a href="http://oneport.unca.edu">
+         OnePort
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <!-- end #header -->
+    <div id="page">
+     <div id="content2">
+      <div class="post">
+       <h2 class="title">
+        <br/>
+        UNC Asheville Password Change Utility
+       </h2>
+       <div id="colA">
+        <p>
+         UNC Asheville has multiple computer systems which provide services like 
+							OnePort, Moodle, and Wireless Internet Access. This utility will allow 
+							you to change your password for these services.
+         <br/>
+         <br/>
+         <h4 style="border:none;text-align:center">
+          You must change your password every 90 days.
+         </h4>
+        </p>
+       </div>
+       <div id="colB" style="border-left: solid #e2e2e2;border-width: 1px">
+        <form action="select.asp" id="login" method="post" name="change_form" onsubmit="return Form_Validator(this)">
+         <table align="center" class="tbl_login" id="login" width="100%">
+          <tr>
+           <td align="right">
+            <b>
+             UNCA Username:
+            </b>
+           </td>
+           <td>
+            <input maxlength="30" name="username" size="20" type="text"/>
+           </td>
+          </tr>
+          <tr>
+           <td align="right">
+            <b>
+             UNCA ID Number:
+            </b>
+           </td>
+           <td>
+            <input maxlength="9" name="sid" size="20" type="password"/>
+           </td>
+          </tr>
+          <tr>
+           <td align="right">
+            <b>
+             Birth Date:
+            </b>
+           </td>
+           <td>
+            <input maxlength="8" name="dob" size="20" type="password"/>
+           </td>
+          </tr>
+          <tr>
+           <td align="right">
+           </td>
+           <td align="center" style="padding-bottom:5px">
+            (In YYYYMMDD format)
+           </td>
+          </tr>
+          <tr>
+           <td>
+           </td>
+           <td id="search">
+            <input name="submit" type="submit" value="Submit"/>
+            <input name="Reset" type="reset" value="Clear"/>
+           </td>
+          </tr>
+         </table>
+        </form>
+       </div>
+      </div>
+     </div>
+     <!-- end #content -->
+     <div style="clear: both;">
+     </div>
+    </div>
+    <!-- end #page -->
+   </div>
+   <!-- end #wrapper2 -->
+   <div id="footer">
+    <p>
+     <a href="http://www.unca.edu/copyright/" target="_blank">
+      Copyright © 2009 UNC Asheville
+     </a>
+     - UNCA Administrative Information Systems
+    </p>
+   </div>
+  </div>
+  <!-- end #wrapper -->
+ </body>
+</html>

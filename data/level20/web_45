@@ -1,0 +1,145 @@
+http://helpdesk.franklin.uga.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   CAS – Central Authentication Service
+  </title>
+  <link href="/cas/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="/cas/css/cas.css" rel="stylesheet"/>
+  <link href="/cas/images/favicon.png" rel="icon" type="image/png"/>
+  <!--[if lt IE 9]>
+    <script src="/cas/js/html5shiv.js" type="text/javascript"></script>
+  <![endif]-->
+ </head>
+ <body id="cas">
+  <div id="container">
+   <div id="content">
+    <div class="errors" id="cookiesDisabled" style="display:none;">
+     <h2>
+      Browser cookies disabled
+     </h2>
+     <p>
+      Your browser does not accept cookies. Single Sign On WILL NOT WORK.
+     </p>
+    </div>
+    <p>
+    </p>
+    <div class="box" id="login">
+     <form action="/cas/login?service=https%3A%2F%2Fwebapps.franklin.uga.edu%2Fsaimiri%2Flogin.php" class="fm-v clearfix" id="fm1" method="post" onsubmit="return prepareSubmit(this);">
+      <img alt="University of Georgia Logo" src="./images/Screen-GEORGIA-V-FC.png" style="max-width:125px"/>
+      <h1>
+       Central Authentication Service
+      </h1>
+      <section class="row">
+       <label for="username">
+        <span class="accesskey">
+         U
+        </span>
+        sername:
+       </label>
+       <input accesskey="u" autocomplete="off" class="required" id="username" name="username" size="25" tabindex="1" type="text" value=""/>
+      </section>
+      <section class="row">
+       <label for="password">
+        <span class="accesskey">
+         P
+        </span>
+        assword:
+       </label>
+       <input accesskey="p" autocomplete="off" class="required" id="password" name="password" size="25" tabindex="2" type="password" value=""/>
+       <span id="capslock-on" style="display:none;">
+        <p>
+         <img alt="exclamation point graphic" src="images/warning.png" valign="top"/>
+         CAPSLOCK key is turned on!
+        </p>
+       </span>
+      </section>
+      <!--
+        <section class="row check">
+        <p>
+        <input id="warn" name="warn" value="true" tabindex="3" accesskey="w" type="checkbox" />
+        <label for="warn"><span class="accesskey">W</span>arn me before logging me into other sites.</label>
+        <br/>
+        <input id="publicWorkstation" name="publicWorkstation" value="false" tabindex="4" type="checkbox" />
+        <label for="publicWorkstation">I am at a public workstation.</label>
+        <br/>
+        <input type="checkbox" name="rememberMe" id="rememberMe" value="true" tabindex="5"  />
+        <label for="rememberMe">Remember Me</label>
+        </p>
+        </section>
+        -->
+      <section class="row btn-row">
+       <input name="lt" type="hidden" value="LT-64094-cF9W1dveZ0kOcrKdfVKsSgZ9cZjWqg"/>
+       <input name="execution" type="hidden" value="99eb6cb9-ee56-4e6d-abfb-8893b1026167_ZXlKaGJHY2lPaUpJVXpVeE1pSjkuZWk5elRubEdUV0ZUVWxoamFYaHlaalJIVW5WWFYyMXlkMlkxWW1GVmQzaGlTSEl3UWtSNGNGWmFWV0pEY2xwT1kyeEpVamRUVEc5eGN6VkJTMVJZVURSd04yRnlOa012TmsxTGFWRmtVMVJaVVc1WFRuWkRhMWxNYldkNU4zSmxZbE5JYms0d056SktOVFJ3YUVkM09GcGpiREZUUWpaTVJFOXJkM2RyWkhSMmVqRmtUVFYzWTBSdFdYcDBObEpqUzBNMU5tTkRhVmREYVZOcGNrNTNiVEZQVm1FM05UZE5iVFV6TkZaR05qbFFhMWh3Ym5kTFlqWndMemx3UnpoYVkyMVVZazlMU0dGQlVGQnJUWFpPYm1VeVprUjZiMWx6VkZwaWIwMTZlamt6YldSTVJTdFFRMHRxWWpabVUxSmhlVFlyVUU1MWR6WjZaRGxTZVVJNGVURjJja2hEVmt4VFMyaHZUMjlLV2xjNFRtbFpOekJaYWtOd1RraFVOMUpSUVRCQ2NGTjFLMU50VEdjM2RIaGFRbEp5VTB4NmNUbEdLMWg0YldSWVdqRmFUVEpMVGtGWVVHRjJNMWRLVlhSTUszSjBibXRFZFZsbloxUXlkelpOTDJvNEwxVTJNM0J3VlhsMFVXTnRLMWR3YzBjelYxZDJVRmhoYkRWaFFXMW1OVFl6VURKTldsTjJXR2xyTkdwWmIxbHVXRzR3UzBKWEwzaFZNRW93WkVnMWFYaGtRa1J4ZVZZeFIxRkhlblo1UTBKWFdXNHZSSEkwZUM5YVRtODBjVmt6WkhCeGRWbHJlRFpKZDFjMWNEZE9kMWMwYkcxbldIUXhSbmx4YTI0NE5UWlFZMmhGYTJSVGIzZFJZa1ZQVWxKemIwRk1hVTlIZUN0aE5FVlZWVWh6YXpCVGNsZHlkVmhKU0Zab1N6TlpSSHBUT1Uxak5XaHpNRFZWWlZSNmNFdG5iakpNVjBSemMwOXVOVUUxVEVaWE5VMU5VMVZUWXpNeWREWldTalpCTjI1NFFYZGxhM2t2VkZWc2JsaGpVbk4xYlhVNU1UaFBWVlIzY0hKcVQySXpNRzV0VjFaMFRuVTBiRVJIYzI5NlRFVkZMemxYVVdzeGNFZ3lWbkJrUmxWU1ZtaElWREJDWW5SS04xVjFTakJoT0hvcmMzTmpWWHBFUkhOalMzQlZTMWx6YUhseGFIVlBXbGRvVUN0R04zTXZVR2R3VVVGT2RHdGxjbmxHY1hRMVlVUkNjVkpYYjNoRFEzZHVNVGgzZW1WeUt6RlJPVEJqVUNzNFQybzVUSEZMVkc5ME1WbEZlVTVwVWpGNE9FazVibXBVSzFKallYZzNRVFphU0U4MU15c3lTVGd3TURsQ1ZrOUViM1ZCWVhRNFRFWmhkbE01UVVnM2NWQnZTV1ZyUVVKTGJucDVLMUp0VXpsbWJWRmpUalI2Unpkd2NHNWtaMFZhYkhSamRrTnFVR2xEZG5KNk9IRXlLMHRDVDFobGFYVk1LME5qZG1OT01rcEdaSFUyVVZOd1luaDZSVzVqUTFONWVVaHNRVkZYYmswclVGUTJLMDVCWW1aVVdsVlJjRlpJU25CdmQzTnJjVUV5WnpaTVlXRk1kRUY1YjA5MVZrbzFOMDlhUld0a1pXTXpabTVLTkVvMU9UWXhUM2RJZVRkUU5VTllRa2hQU0RoTlJ5OUhXWE51V0ZGT1FrRmxkM0pVT0cxRmNFTlhNRWQ1U2tJd2MzWlVaWEpoY0RCQ00xZDZUbWhzUVhObmQyUkJSVm94VFhsU1FqQkpaazF1U1d3MFFVdGlUVkJEU1RNck1UWnZPVXhUY2tWbFpqQlNTVTlGU1VKS1NuVTVOMHhIVUhWRGMwUjRjU3Q2TnpjdlpsbEtaR3RPVW5seE9XSm1kbFpVYkVWdGFITkhabXhQYzA5cFIxTjZMMGd5UzFCUE9IbFNlaTlKZDJSRVZIcFdMMUpzYUZGdGVTOVJibE5KYldOMFRXWm1hMGRMV1V4aFZ6QlZNSEp3U0RRNWFrOVplRzlFY0habEswTTJTRE5qU2xoRWFHTnhXbTAyVUhZME5XdFBlakZaVm1ablowTlJURVpPZUVOblpsUTVibEZFVmtWcGRYTnNVemxtUTA5T1N5OVVXRzFIZUhkcWJVVlNjRFJ1UzFWRFUydzJSbU5yZW5NNVExWjNMelpyT1RJeEswVldjMU5ZTldaVGQzUjVWVTlHVjFSTlFURXdaaTl4V0ZaNlpVOXRTM2t2V1ZCTmQwZ3hXbGxVVG1wWmEyWTFLMVV5ZUZwNU1sSXJXbFZ4TldGQlZGcDJhSGw2U0VFME1DOXdNbnBxVUhJNVZFbEVRM0ZEYm1NM2FIbDFaSFZIT1RSSFoxaDNia1o2VWs5V2VYVkhORTFRUVRKcFIwUnFWM2x3ZUVkbFJXSktaVFJKVmt0Q2JVeEZUVU5oU3pOVmJuWlJRV0V5YkZGbGFTdHhkRkYyU2pjeGVEbFlaMHhqV0dvMmFUTkRka3BCWkVsemMzcEphbFZYVG14b2JqWjZTRXhITjFKVFdrZENRbWRwYmxFeGVsRm1ZVFp2ZEV0cGNVSm5hMmRMV0ZOd1MwaEtPWFJvY2tONGFXNUJRV1JuV2s0dmN6QTNWRUZIVkdWSk9VNHZTelZsVWtGamJqTkNRbXBKU1VSUFpsRmhRalUzUm5GVmVIZGtTaTlUYjNWUlVYRlhja053TXpKaVVtdHRNbkZrUlRCTVRraFRSRFJWYjFGUVIzSldkelkwVlhCU2IyZ3JVRTFRY1dsS1QwTkhVbTFZUTFBek5FcDJPVkZRSzBWVVJGaGtZMW8xZWt4UFEwOHZaMHRXWkZSMWQyMWlkblpZTkcxR0szWkNhVEpIZEVJMVVXcFVVakV6V2tsQlNFUnJWMEZFYUdGMlUxVnFSMVJSZEZCQk5WZzNPWGN2ZG1SMmExTlFSRzV0SzFWbVRUaEJhV00yV2xSbFdrNVdTSHBUYm14bmJVVXhaalptUVdZelRtd3hTeXRFYW1FdlpVWkVkSGQyVEdsQlQwcDFNRVV3UXpWRGNUZFJZVUl5UjBOcGJWSXZaSEZKWVRCSFFrSnhiVlJuWWxsYVVtcFBhMFpGUkRCcFlUUlhUMEZLVWxWNmRIZHpjMlkzVEZoWWRGSjJUbVpVY1V0UmNXOHJjbU52ZFdGbFFpdHJUSGRYTTNwbU5saFdaRlYxWWpsb2JHaFRSVUZGWmtjeU1VMUpTMHd6V1hGTmNscExNbkkyYXk4MVFXdElVa00xZEhSdk5XVllSMll6VWpaM1RGUjNhV00xTjAxUWRtUlpOWGRhUm5wbGMzRTBVU3RrYTFkcmFtMHhhRFkyT0dwUEwwVmlRVXhXY0dabVdrZGlkMFJGZGpOeldqVnJTR3REZDFCaFMwWnJVREZpUm5Gb1NtaHJabmRKY1haWE5UaFZVM280ZEhoMVRtMTRaRGMwY0dkdVEwMDVaVWRvVlVNM1JrdzRNa0YwTlhBNVMyZHRhMjFLWTNBelJWY3djMWN4UWxNdlZWUnFNbGxpYURKcGVrZGxjV2x4UjFReEx6ZFRiVlpOVFdsTWEzZFdUV3N2VkRNeGVHbG9TMnRWWVdkVGFub3hiWEY0YTNWVVdVUmtTM1ZXYmk5bFdGbHJkMkZVV1U4MlZtbFhhRVl4ZEZVelVtUXhaMHhEYW5aQlRuaDFlR3h3UjBaUmRrVkZWM0Z6ZVZOMFREVk9RMEZGVW5BdkswSlZUVXR2SzNrMFNISXZlRXBHVmxNMVlUQnBjRVJEUzA0eGJHNUxaM2x2V25aVlRWbG1UamxNZFZRNVNWUjRlbWwzTXpScE9XZG5PQ3RNYWt0UGNXUXpZamRxZWxOd1FVSTRORXRXT0dVNWIwSm9RbTByT1dsRmVuRkVZMFYzWldsRmJVa3lURWQzZDNaWFpDOUVkMUZuVjFvd2RqRmthWFl6VkhwTlZYQmlibXRxTnpaeVYxSk5PWEZUVGxvNE1HZE5hbXBVVkU0MVJ6aHpPSGQzTUdGcmNHdDNTV1pVWlZaVmQwODNhRTFISzBSV1N6WkZOM3BEZVVsWE5HNW5TRzVZWTFSRmEzUXdSMFk1WkhZMU5qZGpjVzVEYVZJdlRVTkhNazQ0ZFdGNVEyTmtjR2x5ZVROdVZpOUtjbWhQV21oblZHaHVORVZhVFZWM1JtaFBhVTg0WjBWTk5IUkVPSEZuTmxsVlJrZDBWbkI0UWxKb1JXSjJkMVZPZVVGNk0zVTBhMGxGT0dVek9UaFZibUZuZW5OSk5WWnFSWGtyWkRNMFR6bHhVV1k1TVc5a1J6aHRkbTVvY21zMlNYZDFSbmxHUkV0RlluVmxaR294TVVSclZITktTREpRUm1KMVNWSlBSa2czWW1KWVJIcDVVa0pXZG5Jd1JGSlFjVFpFYTFwaFVHaDNLM0F4ZWxRd1JXSjRkM1JKTWxGMWFWVkJZbG96U2tGSWQxQXpURzlTV1hJMmVUQjNhRzUwU25OVVpVNXpZazlCZWxoUFVVZDROakZXUkZVd1ZHTnplVE5EY2tSRFJWWlBiVzk2UjJOT1VEWkpWVWsyY0VkNk5rbFFLMWgwWlN0VWJpOXFZa0pqU0hWVk5GSlJWWHBzWkRKb1VtMU5lRW9yU21wWVZYSnpWMGQ2ZGtSb1FYTnZkRmd4SzJkVlJWUjVTVEpsTVZjelExRm1OVWhrV2tsRlBRLjJfbUcwVGhNcWt2alpfQUZfSzhRejQxRkJjcEJGZGpZSFdNaE9LZlZkeVl3c1ZUZlh6V0Z2SUp2MnVFWkNjRFZHWGJZM2k2VWJSckVyU19hTlBOYTl3"/>
+       <input name="_eventId" type="hidden" value="submit"/>
+       <input accesskey="l" class="btn-submit" name="submit" tabindex="6" type="submit" value="LOGIN"/>
+       <input accesskey="c" class="btn-reset" name="reset" tabindex="7" type="reset" value="CLEAR"/>
+      </section>
+      <hr/>
+      <h2>
+       <a href="https://eits.uga.edu/access_and_security/new_cas/trouble_logging_in/" target="_blank">
+        Trouble logging in?
+       </a>
+      </h2>
+      <div class="row">
+       <div class="col-sm-5">
+        <h2>
+         <a href="https://eits.uga.edu/access_and_security/new_cas/what_is_cas/" target="_blank">
+          About CAS
+         </a>
+        </h2>
+       </div>
+       <div class="col-sm-2">
+        <img alt="line divider" src="./images/red_column.png" style="max-height:40px"/>
+       </div>
+       <div class="col-sm-5">
+        <h2>
+         <a href="https://eits.uga.edu/access_and_security/new_cas/about_eits/" target="_blank">
+          About Us
+         </a>
+        </h2>
+       </div>
+      </div>
+      <div>
+      </div>
+     </form>
+    </div>
+   </div>
+   <!-- END #content -->
+   <footer>
+    <div id="copyright">
+     <p>
+      This site is operated by
+      <a href="https://eits.uga.edu/">
+       Enterprise Information Technology Services
+      </a>
+      .
+     </p>
+     <p>
+      <a href="https://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">
+       Privacy Policy
+      </a>
+     </p>
+    </div>
+   </footer>
+  </div>
+  <!-- END #container -->
+  <script src="/cas/js/head.min.js">
+  </script>
+  <script src="/cas/js/cas.js" type="text/javascript">
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104638117-8', 'auto');
+  ga('send', 'pageview');
+  </script>
+ </body>
+</html>
+

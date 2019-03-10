@@ -1,0 +1,448 @@
+https://mybuff.wtamu.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Login - WTAMU – Single Sign-On
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="/cas/css/font-awesome.min.css" rel="stylesheet"/>
+  <!--<link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>-->
+  <!--<link rel="stylesheet" th:href="@{${#themes.code('standard.custom.css.file')}}"/>-->
+  <link href="/cas/css/wtamu-cas.css" rel="stylesheet"/>
+  <link href="/cas/favicon.ico" rel="icon" type="image/x-icon"/>
+  <script src="/cas/js/zxcvbn.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/jquery-ui.min.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/jquery.cookie.min.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/bootstrap.min.js">
+  </script>
+  <script>
+   /*<![CDATA[*/
+
+        var trackGeoLocation = false;
+
+        var googleAnalyticsTrackingId = null;
+
+        if (googleAnalyticsTrackingId != null && googleAnalyticsTrackingId != '') {
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', googleAnalyticsTrackingId, 'auto');
+            ga('send', 'pageview');
+        }
+
+        function trimVal(str) { return str.replace(/\s/g,"") } 
+
+        /*]]>*/
+  </script>
+ </head>
+ <body class="login" id="cas">
+  <div class="flc-screenNavigator-view-container" id="wtamu_gradient_container">
+   <div class="fl-screenNavigator-view">
+    <div id="wtamu_fixed_width">
+     <!--<div id="container" class="container flc-screenNavigator-view-container">-->
+     <!--<div id="wtamu_fixed_width">-->
+     <header>
+      <div class="flc-screenNavigator-navbar fl-navbar fl-table" id="header">
+       <!--added for WTAMU upper right navigation element-->
+       <div id="portalPageBar">
+        <div id="portalPageBarLinks">
+         <span id="portalPageBarHome">
+          <a href="http://www.wtamu.edu/" title="Go to Home Tab">
+           <span>
+            Home
+           </span>
+          </a>
+          <span class="portal-pipe">
+           |
+          </span>
+         </span>
+         <span id="portalPageBarLogin">
+          <a href="https://login.wtamu.edu/cas/login?service=https://mybuff.wtamu.edu/uPortal/Login" title="Log in to SSO">
+           <span>
+            Login
+           </span>
+          </a>
+          <span class="portal-pipe">
+           |
+          </span>
+         </span>
+         <span id="portalPageBarLogout">
+          <a href="https://login.wtamu.edu/cas/logout?url=https://mybuff.wtamu.edu/uPortal/Login" title="Log out of SSO">
+           <span>
+            Logout
+           </span>
+          </a>
+         </span>
+        </div>
+       </div>
+       <h1 class="fl-table-cell" id="app-name">
+        WTAMU Single Sign-On
+       </h1>
+      </div>
+     </header>
+     <div>
+      <div class="fl-screenNavigator-scroll-container" id="content">
+       <form class="fm-v clearfix" id="fm1" method="post">
+        <div class="wtamu_login_top">
+         <div class="wtamu_login_top_inner1">
+          <div class="wtamu_login_top_inner2">
+           <h2>
+            WTAMU Login
+           </h2>
+          </div>
+         </div>
+        </div>
+        <div class="box fl-panel" id="login">
+         <div class="wtamu_login_inner">
+          <div class="wtamu_login_content">
+           <div class="row fl-controls-left">
+            <label class="fl-label" for="username">
+             <span class="accesskey">
+              W
+             </span>
+             TAMU User Name:
+            </label>
+            <div>
+             <input accesskey="u" autocomplete="off" class="required" id="username" name="username" onblur="this.value=trimVal(this.value)" size="25" tabindex="1" type="text" value=""/>
+            </div>
+           </div>
+           <div class="row fl-controls-left">
+            <label class="fl-label" for="password">
+             <span class="accesskey">
+              P
+             </span>
+             assword:
+            </label>
+            <input accesskey="p" autocomplete="off" class="required" id="password" name="password" size="25" tabindex="2" type="password" value=""/>
+           </div>
+           <div class="row check">
+            <input accesskey="a" id="warn" name="warn" tabindex="3" type="checkbox" value="true"/>
+            <label for="warn">
+             W
+             <span class="accesskey">
+              a
+             </span>
+             rn me before logging me into other sites.
+            </label>
+            <div class="wtamu_helper_links">
+             <a href="https://apps.wtamu.edu/pwdreset/forgot.php">
+              Forgot Password
+             </a>
+             <a href="https://apps.wtamu.edu/pwdreset/chpass.php">
+              Change Password
+             </a>
+            </div>
+           </div>
+           <div class="row btn-row">
+            <input name="execution" type="hidden" value="e4bb15d0-7f0c-474c-927e-cfc41a962a61_ZXlKaGJHY2lPaUpJVXpVeE1pSjkuYWZWMGFoNEJmZ1A5VXRURjlrTFpyODlyMnExK1hPM1lGaEVpQVRvRnE3TmVmM2x1c085OUwwdlI5N0JEcUpKS3R4SzN6TXdIWDZDMEkwTzYyUkI2STF2Q0E1bDlFR05wWjBjWGVIcEJ0R1JUemdGQUtFclY5WEtRMDQ4MVQzTXIrQUxvRTZCUTNMcEhzMmZXdkIvQ2I2ZXZwcXQ5Qll4a0luYkRjTkRHTGU5bmgvWWQ4QkpXYVVnclZMdUhhbkFBb1IyNDZiL0FyNGNNTEVCaVVFNENvTnV5Z2MzQkt2eVludXVBVjgyRE9UcmNOMEZqNzVBUjFhbG1uNDFmenRUVkEydDNYTngyYXNHT1VDWmJxVElNRW1qNEllUXZUd3JVK3c0aWRjb2ZHVUVnVzJtSGtJdk1TL1BncVRLSjMrQU5aQStnaGxEUzVveTV6MTN0RVQwZ2YzcE95d0NCVXVrcnVxdDA0bzAzb1hid0s5KytoUTQ2MVVJZGttZFJwRUFINzg0ZFJjODJheEVLTEZjT3owWmpkUzU0eEpXL1NWMG5ob0hGZytEWUVwUTFLUitlTUtCOXh1dEFINU04TjI2c0xJWVB6TzhEVi9TNWVCeTZyV1VNQVFsT29EcTExY3hES013bnFGbFZPc1BySFBlWFlBeDUxdnFtNFBZLzJ6OXBxUmtLUUEveXZITVl2SDFiSkpweFNuRU0zbVlObUhuUmRyK2NjbWMvV3I5amFaV2EwVmhzLzM0S1JPYWpBVFdCYXg2YllRdWtBQU1tSDhiQU1ZZlRnNnFlTE9NWGFiSXM3Rm1QN2Z1Y2N3QVk4eDduOUVEank2ZlNVNFgrVi81U3ZTYXhTUVIzTE9IbWcvT2NIajRob2ZIcGhGU3pIYjNnR093ZmZtL3pJQzhvczFuZ1RRb2l3bFREWmhUaGx4U3pQTlk1VVFlUGtUQ2t4VGREemROREc2d0UyZDdOZU9PSXM5dUNTR3J3UUtBSlA5K05pYzI5UXluVXBaWGtVZDRTZjZDaXdjT0JmNWpQWnpGRzExY21HVGpFL01Hb2Nqd3ZtbXplUlUrVW1Hb1lUYzVSSmUvMjhuWU8wSHk2akk1Z2FDeHZyZ2N4dVBHWlUzOVM2dGZsVWtsaHNnV09sVE9FeHJJeGNPd1BhQnpyTnB2UUZLNUtXdHFRanFWenNIdjhFRVVQc3JEaW9rNjhDMTVnRGRVM1Uyd1lkcERmZS9qKzJOeFpsQXdyY3RoZ0hqT1Ric1BnQ25Ieit4QmZscUdWNFoxZUE3VzhFRWR2cFVBNFdtMUtORXRJWXEvWUlPdnFzWXlMVW5ubHFpQmtoWlJ0VDh1S2tzbncvbGZWcENLcWZuNk9ZdTdJWlJMQm4vMHRBeUFOSlgwM2MxM0k5TUdSQlNjZzVMOFhEeVhSaW85cHB1NTF1RC9OUWJ1QndDUVZHUlY0eHdiN2djMG9obC9UVkQ1U1JRU1NZcW0vUkJCVXhyMk9vQ2IvaVRJeFNRV2Z4bEhGcjBvWjdPWU95MEFUUXUwQ2NtN0F4Vnd6Nmp0cVFEOUJyd0svVjFjSXBhQzN4OXRsTkZLckhnamFsaDRFNGt5UHQ1amNsaGl1cDExRWhJM1YrNnljVC85Wk5PbHYrVGtXbjcyaC9nckJXRDJnVXRpdGRyUnh4eW16cHpsWkR5bWlhZEkyTmJZenRSTHE3Z2ZqSEU3MXhBeHJqUFRwY1VLdUVKMlRhcnJadnVNOFVlNWJ3WmMzamtGQ091V3pTWXc4NW9vZVNtY2UyNkROUHlHbytPTmtOUzd1aFpPUWVraVp5djRDUkxORk5oRG44cGNYWWRIVkpTbkRzaDNpYlJOMTFoai9VYVNXTVp6Q2prWHNORGl3bWFFRGlkWU0rUEYxV00weXhZUDJ0R2ZnbmVFWFVQUlNWbW5RUkx4K1pJajdqdWJya1U1NE9kQUMzdUQ5aWVPbmxaWkp1NmdNTnNFSWtOS3JFRVdkWVhNdFpPb0krTlIyemMyeFhUTndpclFNWGxGRm83L2NteUtPU3NUMEJYMWI5ZzdxUDJpeDNrU0lhTlBhdFl6ZUpvT0RWK1NLbVFYODJYTTRpUVNLeWhqSnlJcDYvdWJlM1h4VFNJdkY2V1g1akt3ZytJUFo1Vis2a0FrSUorUUFqN3RmNzhWbUlJbXl1Y0pEdWFtRzFCNFNVOVB5Sys4ekplNTBlVUdLVEJvMi9PQkFuVzZDcVAvNlNNRm1EL0ovRFhrT1h4UmN0Z0pEMWNyRWRwaTJqbjBpUktya01wQWtieWJjTng0MlFRbzc4YkRyeVF6NlloVjFHZ2ZYNjFkV0xpcHh0aUhTdmRpeWtudGVzNWtLUUNtcjZTZGM2T0N5S24xM1NKTEQ0MlJuVElUVTlmM2d4UGp2OTU3Zk1WdlJNcnF5RDJHY2pmU3JTOFBhWDVHYzVxcmk0cEUwbEhzZzY0aEY5RUNKVnRaQXhhVlBURXBOT29UdCtRd3NWc1dIdkVHNUMxa2dqRzRhTVliSWYyaEpsWDMrR0U2WW80RllHWGIwNjFKL2pLeDBUblUrS3UxS2pQTXptekRPcWgrbS9Mci9ITkV6dWpDbmlyNHhnaGZ5OVRXM29KSE82SFpvVm5FRFM2bEJZV2hDVGVWVENpUFMzNGlWZkFmSTlZejFPQXpBYVVHczB4UWdMNnRzMVVnVWdBSlBFQzNMRlUzMm9FTUVWQ2hNUHViY1Vhb3JlV2lDSzhRdFY0amR2OE9DOHdZcmZ5WG9jUzBud0NjRVBBRXQxWXRkY3E5NDZsVjBqZ2ZKSld2RTdNSncydWRKL2kzZFV2enFqVnl5dkdUcmM5QjFkaW9RVWIyejBYNHVjdmh4RGx1aUpJZTBZR0xmUEVOS25PZTJzZG54YnhZZ2h1K0NWQ1ZDc0I2MU93VjZTRDg3ZGx6bWlNNEE0MjdYV2NmamU1ZkNzV1V2VGE5RDl0WGsycHdJdGdXcG43aHY5ZkE1RTNQY253aHlMRC9mQzRFOExobEV0SXkrdWRYWVZRSXBaWXdWWU9aR2h4QldOSDFlWUtvYmpLWmtLbW5rQml1RjB4dk1uY3pNaTVIcmE3dGdMbXV5Q0tCYkFWT3g2YzNieHVueGpzV2lEZllmWnl1MHZqMVdYZXZ0M2JadFFYdzAwaFg1d3RYcS9USzh3aVFTelg5blQ1Vlo5WjgxN2JETXFmNFZPemYxc3lLYnpmL3hSdkthcUhRdXMycFZHUUVjMXByREQ3NUpsemRYRWRHU0ZTNlVtOU5HVkNEMCs1WkhHaWFxNW5Ub1JtMGhKaEFyaC9EalRndm9oekJXUFRxQWZDUVJld29NS2pmZW9hQkF0cW45QWRiOTdiT3psNU8vbmZ5U0svMlFxQ2V4UC9kaWZGM24xbjM0L2VmZWdudFZCN3JJNnNVb2tZb3htNCt0bHA1VU5ZZXhZbklhdFkxbjh2ekFPMEJHcEFRUUNPckdiem9Xd0pXaUdJWEhpenk1WWdzcmNLd2J5NmtSODNWVUljcndWZTlkMHJha1BMclZtWmMwN2kva2ZRNy9iTldac0ozNlVwWGRteTlxZFJXNDZROXEwUkwzTnYzWUNXMEVDMk5uUjhsUnozTHJkMzhIT1N1VTNGZVcydWMreG9sSWVzdGhiQ1JFN2NudXFyZFppa1hIMVZrNFhrNGVqcE9ra1ozamNnc0RCc0dKb1Q4ekhLWGhoTUp0bWhtSXkram5INVlpczU4UGNrdVRybmxvdXVaL1loMlBES0FDaFN5K0ErTnMvRzltTlcvam1qcXMzRzA3OHRhMTVMUjl6YXlGbVRuM1lIUmcvMGFxcDBFc1Ira2JGQTBZMnp3blhkNlVvRVYrU0YweGpnMVdqZnlpelg1cXJHOXZ2MzRER1hCOGVHMkpUeml4RzBzeWhvL3dxdkM4YkxBdTlkTjFZYVRRRWdPRE9nRkdOOEhBanJSaXkvY3JPTkovREFOS0JJSG5LRFRFRWEzUjJqeEFwSU5lTzAxd3NTeE5rN2FqRktnNG42VXppT0d5U1pJPS5ObWQ5TmE2bjFWTEcwdEh6eVl1dVZPTjUxSzZCeTRDbm1iWks0Nmp0SjRtcVR3LXp0OGlXZ3lmSGl1TUYwN1NlaWZMOElfaVM4b0lobFY5QkJacnJsQQ==">
+             <input name="_eventId" type="hidden" value="submit"/>
+             <input name="geolocation" type="hidden"/>
+             <input accesskey="l" class="btn btn-submit" name="submit" tabindex="4" type="submit" value="Sign In"/>
+             <input accesskey="c" class="btn-reset" name="reset" tabindex="5" type="reset" value="CLEAR"/>
+            </input>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="wtamu_login_bottom">
+         <div class="wtamu_login_bottom_inner1">
+          <div class="wtamu_login_bottom_inner2">
+          </div>
+         </div>
+        </div>
+       </form>
+       <div id="sidebar">
+        <!--additions made for WTAMU information list-->
+        <h2 id="wtamu_info_list">
+         Please Remember
+        </h2>
+        <ul>
+         <li>
+          <p>
+           Never share your WTAMU passwords with anyone via email, including us!
+          </p>
+          <p>
+           <a href="http://en.wikipedia.org/wiki/Phishing" target="_blank">
+            More about
+                phishing...
+           </a>
+          </p>
+         </li>
+         <li>
+          <p>
+           Always verify that the address bar appears as below before you login.
+          </p>
+          <p class="wtamu_address_bar">
+           <span>
+            Picture of address bar with https://login.wtamu.edu/cas/login
+           </span>
+          </p>
+         </li>
+         <li>
+          <p class="fl-panel fl-note fl-bevel-white fl-font-size-80">
+           For security reasons, please Log
+                Out and Exit your web browser when you are done accessing services that require
+                authentication!
+          </p>
+         </li>
+         <li>
+          <p>
+           If you need assistance, please contact the Information Technology Service Center (Help
+                Desk) at: 806-651-4357 or
+           <a href="mailto:itsc@wtamu.edu">
+            itsc@wtamu.edu
+           </a>
+           ; in case of
+                emergency or network outage, please call the IT after hours support number at:
+                806-316-9037.
+          </p>
+         </li>
+        </ul>
+        <div class="fl-panel" id="list-languages">
+         <h3>
+          Languages:
+         </h3>
+         <ul>
+          <li class="first">
+           <a href="https://login.wtamu.edu/cas/login?locale=en">
+            English
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=es">
+            Spanish
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=fr">
+            French
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=ru">
+            Russian
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=nl">
+            Nederlands
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=sv">
+            Svenskt
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=it">
+            Italiano
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=ur">
+            Urdu
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=zh_CN">
+            Chinese (Simplified)
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=de">
+            Deutsch
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=ja">
+            Japanese
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=hr">
+            Croatian
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=cs">
+            Czech
+           </a>
+          </li>
+          <li>
+           <a href="https://login.wtamu.edu/cas/login?locale=sl">
+            Slovenian
+           </a>
+          </li>
+          <li class="last">
+           <a href="https://login.wtamu.edu/cas/login?locale=pl">
+            Polish
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div id="wtamu_technology_message">
+        <div class="wtamu_tech_top">
+         <div class="wtamu_tech_top_inner1">
+          <div class="wtamu_tech_top_inner2">
+          </div>
+         </div>
+        </div>
+        <div class="wtamu_tech_content">
+         <div class="wtamu_tech_content_inner1">
+          <p class="wtamu_tech_p">
+           INFORMATION RESOURCES ACCESS POLICY. This
+                            computer system is the property of West Texas A&amp;M University. Only
+                            authorized users may login to this computer system. All unauthorized use
+                            is strictly prohibited and subject to local, state, and/or federal
+                            laws. Therefore, this system is subject to security testing and
+                            monitoring. Misuse is subject to criminal prosecution.
+           <br/>
+           <br/>
+           If you proceed to log
+                            into this system, you acknowledge compliance with
+           <em>
+            University Rule 24.99.99.W1 .
+                            Security of Electronic Information Resources
+           </em>
+           and all related University security
+                            polices located at
+           <a href="https://www.wtamu.edu/rules" target="_new">
+            https://www.wtamu.edu/rules
+           </a>
+           and
+           <em>
+            University Rule 33.04.99.W1 . Rules for Responsible Information Technology
+                            Usage
+           </em>
+           . There should be no expectation of privacy except as otherwise provided by
+                            applicable privacy laws.
+           <br/>
+           <br/>
+           <a href="https://www.wtamu.edu/webres/File/Student%20Life/Code-of-Student-Life.pdf" target="_new">
+            CODE OF STUDENT LIFE
+           </a>
+           : Students agree to abide by the standards,
+                            rules and/or policies set forth in the
+           <em>
+            Code of Student Life
+           </em>
+           , the Undergraduate
+                            Catalog and other official University publications, as well as the
+           <em>
+            Texas Education
+                            Code
+           </em>
+           . Student organizations also agree to follow these standards, rules, and/or
+                            policies.
+           <br/>
+           <br/>
+           <a href="https://www.wtamu.edu/administration/family-educational-rights-and-privacy-act-ferpa.aspx" target="_new">
+            FERPA
+           </a>
+           : Pursuant to the
+           <em>
+            Family Educational Rights and Privacy
+                            Act
+           </em>
+           (FERPA), West Texas A&amp;M University has established procedures
+                            relating to the accessibility of student information in the custody of
+                            the University.
+           <br/>
+           <br/>
+           <a href="https://www.wtamu.edu/webres/File/Information%20Technology/University%20SAPs/August%202011%20Review/Information%20Resources%20-%20Acceptable%20Use.pdf" target="_new">
+            Acceptable Use Policy
+           </a>
+           :
+                            The purpose of the implementation of this Standard Administrative
+                            Procedure is to provide a set of measures that will mitigate information
+                            security risks and misuse associated with acceptable use of University
+                            information resources.
+           <br/>
+          </p>
+         </div>
+        </div>
+        <div class="wtamu_tech_bottom">
+         <div class="wtamu_tech_bottom_inner1">
+          <div class="wtamu_tech_bottom_inner2">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <footer id="footer">
+      <div id="casPageFooter">
+       <div id="casPageFooterInner">
+        <div id="casPageFooterLinks">
+         <ul>
+          <li>
+           <span class="wtamu_first_link">
+            © West Texas A&amp;M University
+           </span>
+          </li>
+          <li>
+           <span>
+            All Rights Reserved
+           </span>
+          </li>
+          <li>
+           <span>
+            Canyon, TX 79016
+           </span>
+          </li>
+          <li>
+           <span class="wtamu_link_last">
+            806-651-0000
+           </span>
+          </li>
+         </ul>
+         <ul>
+          <li>
+           <a class="wtamu_first_link" href="http://www.wtamu.edu/" target="_blank" title="wtamu.edu">
+            WTAMU
+           </a>
+          </li>
+          <li>
+           <a href="http://www.wtamu.edu/about/privacy-statement.aspx" target="_blank" title="WTAMU privacy statement">
+            University Privacy Statement
+           </a>
+          </li>
+          <li>
+           <a href="http://www.wtamu.edu/about/contact-us.aspx" target="_blank" title="Contact WTAMU">
+            Contact Us
+           </a>
+          </li>
+          <li>
+           <a class="wtamu_link_last" href="http://www.wtamu.edu/about/web-accessibility.aspx" target="_blank" title="University Accessibility">
+            University Accessibility
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </footer>
+     <!--</div>-->
+     <!--</div>-->
+    </div>
+   </div>
+  </div>
+  <div>
+   <script src="/cas/js/head.min.js">
+   </script>
+   <script src="/cas/js/cas.js" type="text/javascript">
+   </script>
+  </div>
+ </body>
+</html>
+

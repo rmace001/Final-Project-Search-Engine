@@ -1,0 +1,989 @@
+http://rooms.lib.uchicago.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <!-- iid: 482 -->
+  <meta charset="utf-8"/>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+   <link href="/css170/LibCal_public.min.css" rel="stylesheet"/>
+   <link href="/css170/print.min.css" media="print" rel="stylesheet"/>
+   <title>
+    Book a Room
+   </title>
+   <link href="/css170/fullcalendar.min.css" rel="stylesheet">
+    <style>
+     .bootstrap-select.btn-group .btn .filter-option { font-size: 90%;}
+    </style>
+    <script src="/js170/LibCal_public.min.js">
+    </script>
+    <script>
+     var springLang  = { Ge_Next: "Next", Ge_Prev: "Previous", eq_js_add_cart_btn: "Add to Cart", eq_js_add_cc_btn: "Add to Cart & Checkout", eq_js_add_eq_btn: "Add Equipment", eq_js_add_start: "All additional items must have a starting time of", eq_js_add_to_cart: "Add Item to Cart", eq_js_booking_summary_title: "Thank you!", eq_js_cart_tt: "Create a shopping cart with these space bookings, and go to equipment booking page to add more items to the cart.", eq_js_close: "Close", eq_js_date: "Change Return Date", eq_js_det_return: "Determining return time", eq_js_from: "From:", eq_js_from_det: "from", eq_js_go_to_date: "Go To Date", eq_js_isRequired: "is required!", eq_js_rem_pending: "Remove Pending Booking", eq_js_spacew_forb_multi: "Use the drop down menu below to select a different end time.", eq_js_spacew_forb_single: "Forbidden from booking different resources in a single booking.", eq_js_to: "To:", eq_js_until_det: "until...", eq_start_over: "Make Another Booking", eq_unavail: "Unavailable", eq_your_book: "Your Booking" };
+    </script>
+    <script src="/js170/fullcalendar.min.js" type="text/javascript">
+    </script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="//identity.uchicago.edu/c/fonts/proximanova.css" rel="stylesheet"/>
+    <link href="http://www.lib.uchicago.edu/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+     <link href="https://www.lib.uchicago.edu/e/kzadrozny/web/lg-overrides.css" rel="stylesheet"/>
+     <style>
+      #s-lc-public-skiplink {
+    top: -50px;
+}
+
+.s-lc-eq-checkout, .label-eq-unavailable, .lc_rm_u {
+    background-image: repeating-linear-gradient(45deg, gray, gray 4px, black 4px, black 8px);
+    border-left: 1px solid white;
+    border-color: black!important;
+}
+     </style>
+     <script>
+      function getAlert(){
+   var api = 'https://www.lib.uchicago.edu/api/v2/pages/?type=alerts.AlertPage&fields=title,banner_message,more_info,alert_level,url&order=alert_level&format=json';
+   json = $.getJSON(api, function(data) {
+       var pages = data.items;
+       $.each(pages, function(key){
+           var page = pages[key];
+           var level = page.alert_level;
+           var msg = page.banner_message;
+           var url = page.url;
+           var html = '';
+           var more = false;
+           if (msg) {
+               html += '<div class="alert '+ level + '" role="alert">' + msg;
+               if (page.more_info.length) {
+                   html += '<a href="' + url + '">More info...</a>';
+               }
+               html += '</div>';
+               $('.navbar').before(html);
+               return false;
+           }
+       });
+   });
+}
+$(document).ready(function() {
+   getAlert();
+});
+     </script>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="s-lc-public s-lc-public-page-1" id="index_php">
+  <div class="sr-only" title="Information for Screen Reader Users">
+  </div>
+  <a class="alert-info" href="#s-lc-page-maincontent" id="s-lc-public-skiplink">
+   Skip to Main Content
+  </a>
+  <div id="s-lc-public-cust-header" role="banner">
+   <nav class="navbar navbar-default lglive">
+    <!-- Navwrapper -->
+    <!-- Mobile top right nav -->
+    <div class="mobile-topnav visible-xs visible-sm">
+     <a href="https://www.lib.uchicago.edu/libraries/libraries-hours/">
+      <i class="fa fa-clock-o fa-lg" title="Library Hours">
+       <span class="sr-only">
+        Library Hours
+       </span>
+      </i>
+     </a>
+     |
+     <a href="https://www.lib.uchicago.edu/research/help/ask-librarian/">
+      <i class="fa fa-comment fa-lg" title="Ask a Librarian">
+       <span class="sr-only">
+        Ask a Librarian
+       </span>
+      </i>
+     </a>
+     |
+     <a href="https://www.lib.uchicago.edu/about/thelibrary/supportus/">
+      <i class="fa fa-gift fa-lg" title="Support the Library">
+       <span class="sr-only">
+        Support the Library
+       </span>
+      </i>
+     </a>
+     |
+     <a href="https://www.lib.uchicago.edu/borrow/borrowing/my-accounts/">
+      <i class="fa fa-user fa-lg" title="My Account">
+       <span class="sr-only">
+        My Account
+       </span>
+      </i>
+     </a>
+    </div>
+    <!-- // Mobile top right nav -->
+    <div class="container-fluid fluid-top">
+     <!-- Nav Wrapper / Fluid Top -->
+     <!-- Mobile + Menu Toggle  -->
+     <div class="navbar-header">
+      <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#global-navbar" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+      </button>
+      <span itemscope="" itemtype="http://schema.org/Organization">
+       <span class="hidden" itemprop="name">
+        The University of Chicago Library
+       </span>
+       <a class="navbar-brand" href="https://www.lib.uchicago.edu" itemprop="url">
+        <img alt="library logo" class="img-responsive" itemprop="logo" src="https://www.lib.uchicago.edu/e/kzadrozny/web/color-logo.png"/>
+       </a>
+      </span>
+     </div>
+     <!-- // end navbar-header -->
+     <!-- // Mobile + Menu Toggle  -->
+     <!-- Top right nav -->
+     <!-- Hidden XS + SM -->
+     <ul class="nav navbar-nav hidden-xs hidden-sm navbar-right" id="navbar-right">
+      <li>
+       <a href="https://www.lib.uchicago.edu/research/help/ask-librarian/">
+        <i class="fa fa-comment fa-lg ask-icon active">
+        </i>
+        Ask a Librarian
+       </a>
+      </li>
+      <li>
+       <a href="https://www.lib.uchicago.edu/libraries/libraries-hours/">
+        <i class="fa fa-clock-o">
+        </i>
+        Library Hours
+       </a>
+      </li>
+      <li>
+       <a href="https://www.lib.uchicago.edu/about/thelibrary/supportus/">
+        <i class="fa fa-gift">
+        </i>
+        Support the Library
+       </a>
+      </li>
+      <li>
+       <a href="https://www.lib.uchicago.edu/borrow/borrowing/my-accounts/">
+        <i class="fa fa-user">
+        </i>
+        My Accounts
+       </a>
+      </li>
+     </ul>
+     <!-- // Top right nav -->
+     <!-- Main Navigation (In Toggle) -->
+     <div class="collapse navbar-collapse" id="global-navbar">
+      <!-- Global Navbar -->
+      <ul class="nav navbar-nav">
+       <!-- Dropdown Nav -->
+       <!-- Search Dropdown -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         Search
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu twocol-drop">
+         <li>
+          <ul class="list-unstyled col-sm-6 ul-left">
+           <li class="twocol-head">
+            Catalogs
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/h/3">
+             Library Catalog
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/h/ub">
+             UBorrow
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/h/borrowdirect">
+             BorrowDirect
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/h/worldcat">
+             WorldCat
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/search/catalogs/other">
+             Other Catalogs
+            </a>
+           </li>
+          </ul>
+          <ul class="list-unstyled col-sm-6">
+           <li class="twocol-head">
+            Other Search Tools
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/h/articlesplus">
+             Articles Plus
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/h/atoz">
+             Database Finder
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/search/tools/database-trials/">
+             Database Trials
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/ejournals">
+             EJournals
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/#websitesearch">
+             Website Search
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <!-- // Search Dropdown -->
+       <!-- Borrow/Request Dropdown -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         Borrow
+         <span class="hidden-sm hidden-md">
+          &amp; Request
+         </span>
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu twocol-drop">
+         <li>
+          <ul class="list-unstyled col-sm-6 ul-left">
+           <li class="twocol-head">
+            Borrow
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/borrowing/">
+             Renewing &amp; Returning
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/borrowing/due-dates-and-loan-periods/">
+             Due Dates &amp; Loan Periods
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/borrowing/fines-and-lost-items/">
+             Fines &amp; Lost Items
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/borrowing/course-reserves">
+             Course Reserves
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Checkout UChicago
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/borrowing/my-accounts/">
+             My Accounts
+            </a>
+            <p class="hidden-xs" style="padding-bottom:8em">
+            </p>
+           </li>
+          </ul>
+          <ul class="list-unstyled col-sm-6">
+           <li class="twocol-head">
+            Request
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/requesting/interlibrary-loan/">
+             Interlibrary Loan
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/requesting/scan-deliver/">
+             Scan &amp; Deliver
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/requesting/suggest-purchase/">
+             Suggest a Purchase
+            </a>
+            <br/>
+           </li>
+           <li class="hidden-xs">
+            <hr style="border:0; border-top: 1px solid #767676;"/>
+           </li>
+           <li class="twocol-head">
+            Access &amp; Privileges
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/access-privileges/uchicago-faculty-students-and-staff/">
+             Faculty, Students, and Staff
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/access-privileges/alumni-university-chicago/">
+             Alumni &amp; Other Researchers
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/borrow/access-privileges/privileges-other-libraries/">
+             Privileges at Other Libraries
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/help/offcampus">
+             Proxy &amp; Off-Campus Access
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <!-- // Borrow/Request Dropdown -->
+       <!-- Research Dropdown -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         Research
+         <span class="hidden-sm">
+          &amp; Teaching
+         </span>
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu twocol-drop">
+         <li>
+          <ul class="list-unstyled col-sm-5 ul-left">
+           <li class="twocol-head">
+            Research Help &amp; Tools
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/help/ask-librarian/">
+             Ask a Librarian
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/directory/?view=staff&amp;subject=All+Subject+Specialists">
+             Subject Specialists
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="http://guides.lib.uchicago.edu/citation_management">
+             Citation Management
+            </a>
+           </li>
+           <li>
+            <a href="http://guides.lib.uchicago.edu/subjectguides/helpguides">
+             Help Guides
+            </a>
+           </li>
+           <li>
+            <a href="http://guides.lib.uchicago.edu/subjectguides">
+             Subject Guides
+            </a>
+            <p class="hidden-xs" style="padding-bottom:8em">
+            </p>
+           </li>
+          </ul>
+          <ul class="list-unstyled col-sm-7">
+           <li class="twocol-head">
+            Teaching Support
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="http://guides.lib.uchicago.edu/coursereserves">
+             Course Reserves Setup
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/teaching/research-instruction-courses/">
+             Instruction for Courses
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/teaching/">
+             Teaching &amp; Learning Services
+            </a>
+           </li>
+           <li class="hidden-xs">
+            <hr style="border:0; border-top: 1px solid #767676;"/>
+           </li>
+           <li class="twocol-head">
+            Scholarly Communication &amp; Publishing
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/scholar/phd">
+             Dissertation Office
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/scholar/digitalscholarship">
+             Digital Scholarship
+            </a>
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/copyrightinfo/">
+             Copyright Info
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <!-- // Research Dropdown -->
+       <!-- Collection/Exhibits Dropdown -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         Collections
+         <span class="hidden-sm">
+          &amp; Exhibits
+         </span>
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu twocol-drop">
+         <li>
+          <ul class="list-unstyled col-sm-6 ul-left">
+           <li class="twocol-head">
+            Collections
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/collex/">
+             Notable Collections
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/collex/?digital=on&amp;view=collections">
+             Digital Collections
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/collex/?view=subjects">
+             Collecting Areas by Subject
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Other Local Collections
+            </a>
+           </li>
+           <li class="hidden-xs">
+            <hr style="border:0; border-top: 1px solid #767676;"/>
+           </li>
+           <li class="twocol-head">
+            Exhibits
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/collex/?view=exhibits">
+             All Exhibits
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/collex/?digital=on&amp;view=exhibits">
+             Web Exhibits
+            </a>
+           </li>
+          </ul>
+          <ul class="list-unstyled col-sm-6">
+           <li class="twocol-head">
+            Research Centers
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/directory/departments/eastasia/">
+             East Asian Collection
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/directory/departments/map-collection/">
+             Maps Collection
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/directory/departments/southasia/">
+             Southern Asia Collection
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/scrc">
+             Special Collections
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <!-- // Collection/Exhibits Dropdown -->
+       <!-- Spaces  Dropdown  -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         Spaces
+         <span class="hidden-sm hidden-md">
+          &amp; Services
+         </span>
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right onecol-drop">
+         <li class="twocol-head">
+          Using Our Spaces
+         </li>
+         <li class="divider visible-xs" role="separator">
+         </li>
+         <li>
+          <a data-ga-tracked="on" href="https://rooms.lib.uchicago.edu/allspaces">
+           Book a Room
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/spaces/">
+           Places to Study
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/thelibrary/all-night-study/">
+           All Night Study
+          </a>
+         </li>
+         <li>
+          <a data-ga-tracked="on" href="https://printing.uchicago.edu/">
+           Copy, Print, Scan
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/thelibrary/computers-and-wireless/">
+           Computers and Wireless
+          </a>
+         </li>
+         <li>
+          <a data-ga-tracked="on" href="https://www.lib.uchicago.edu/thelibrary/techbar/">
+           TECHB@R
+          </a>
+         </li>
+        </ul>
+       </li>
+       <!-- // Spaces Dropdown -->
+       <!-- Locations  Dropdown  -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         Libraries
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right onecol-drop">
+         <li class="twocol-head">
+          Our Locations
+         </li>
+         <li class="divider visible-xs" role="separator">
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/crerar/">
+           Crerar
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/law/">
+           D'Angelo Law
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/eck/">
+           Eckhart
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/mansueto/">
+           Mansueto
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/reg/">
+           Regenstein
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/scrc/">
+           Special Collections
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/ssa/">
+           SSA
+          </a>
+         </li>
+         <li>
+          <a href="https://www.lib.uchicago.edu/libraries/libraries-hours/">
+           Hours
+          </a>
+         </li>
+        </ul>
+       </li>
+       <!-- // Locations Dropdown -->
+       <!-- About Mega Dropdown -->
+       <li class="dropdown">
+        <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+         About
+         <span class="caret">
+         </span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right twocol-drop">
+         <li>
+          <ul class="list-unstyled col-sm-6 ul-left">
+           <li class="twocol-head">
+            The Library
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/">
+             About the Library
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/research/help/infofor/information-visitors/">
+             Visiting the Library
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/mission/">
+             Mission &amp; Strategic Plan
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/directory/">
+             Departments &amp; Staff
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/employment/">
+             Employment
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/policies/">
+             Library Policies
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/surveys/">
+             Library Surveys &amp; Reports
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/committees/">
+             Library Boards &amp; Committees
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/thelibrary/supportus/">
+             Support the Library
+            </a>
+           </li>
+          </ul>
+          <ul class="list-unstyled col-sm-6">
+           <li class="twocol-head">
+            News &amp; Events
+           </li>
+           <li class="divider visible-xs" role="separator">
+           </li>
+           <li>
+            <a data-ga-tracked="on" href="http://news.lib.uchicago.edu/">
+             News
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/news-events/workshops">
+             Workshops &amp; Events
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/conferences">
+             Conferences
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/news-events/libra">
+             Libra Newsletter
+            </a>
+           </li>
+           <li>
+            <a href="https://www.lib.uchicago.edu/about/news-events/social-media/">
+             Social Media Directory
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <!-- // About Dropdown -->
+      </ul>
+      <!-- // Dropdown Nav -->
+     </div>
+     <!-- // Global Navbar -->
+    </div>
+    <!-- // Nav Wrapper / Fluid Top  -->
+   </nav>
+  </div>
+  <div class="container">
+   <div class="row" id="s-lc-public-bc">
+    <div class="col-md-12">
+     <ol class="breadcrumb">
+      <li>
+       <a href="http://www.lib.uchicago.edu">
+        UChicago Library
+       </a>
+      </li>
+      <li class="active">
+       Book a Room
+      </li>
+     </ol>
+    </div>
+   </div>
+   <noscript>
+    <div class="alert alert-danger" id="noscript">
+     Your browser has javascript disabled. Without javascript some functions will not work.
+    </div>
+   </noscript>
+   <div id="s-lc-page-maincontent" role="main">
+    <div class="s-lc-row row">
+     <div class="s-lc-column-top col-md-12" id="s-lc-page-column-0">
+     </div>
+    </div>
+    <div class="s-lc-row row">
+     <div class="s-lc-page-column col-md-12" id="s-lc-page-column-1">
+      <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-3431-container">
+       <div class="s-lc-box s-lc-box-html" id="s-lc-box-3431">
+        <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+         <h2>
+          Book a Room
+         </h2>
+        </div>
+        <div class="s-lc-box-content clearfix">
+         <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-2133">
+          <p style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+           Browse available rooms by category:
+          </p>
+          <ul>
+           <li style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+            <a href="https://rooms.lib.uchicago.edu/reserve/crerar">
+             Group Studies in Crerar
+            </a>
+           </li>
+           <li style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+            <a href="https://rooms.lib.uchicago.edu/reserve/regensteingroupstudies">
+             Group Studies in Regenstein
+            </a>
+           </li>
+           <li style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+            <a href="https://rooms.lib.uchicago.edu/reserve/classrooms">
+             Library Classrooms in Regenstein
+            </a>
+           </li>
+           <li style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+            <a href="https://rooms.lib.uchicago.edu/reserve/onebuttonstudio">
+             OneButton Studio (IT Services)
+            </a>
+           </li>
+          </ul>
+          <p style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+           Or
+           <a href="https://rooms.lib.uchicago.edu/allspaces">
+            view all available rooms
+           </a>
+           .
+          </p>
+         </div>
+         <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-2134">
+          <p style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+           Visit
+           <a href="https://www.lib.uchicago.edu/thelibrary/how-book-room/">
+            How to Book a Room
+           </a>
+           for detailed instructions.
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-3429-container">
+       <div class="s-lc-box s-lc-box-html" id="s-lc-box-3429">
+        <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+         <h2>
+          Room Use Policies
+         </h2>
+        </div>
+        <div class="s-lc-box-content clearfix">
+         <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-2132">
+          <ul style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+           <li>
+            Only current University of Chicago students, faculty, and staff may book rooms.
+            <em>
+             Other groups may use group studies and library classrooms on a first come, first served basis only and must vacate a room when requested by a group that has booked the room.
+            </em>
+           </li>
+           <li>
+            Group Studies and Library Classrooms may only be used by groups of 2 or more users.
+            <em>
+             Individual users are not permitted to use group studies and library classrooms.
+            </em>
+           </li>
+           <li>
+            Groups can book group studies and library classrooms up to 7 days in advance for up to 3 hours per day.
+            <em>
+             This 3 hour limit applies to the group as a whole, not to individuals within the group.
+            </em>
+           </li>
+           <li>
+            Groups may book Library Classrooms outside of regular teaching hours only.
+            <em>
+             <span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 15.6000003814697px;">
+              Groups may use library classrooms on a first come, first served basis during regular teaching hours when the rooms are not needed for an instruction session.
+             </span>
+            </em>
+           </li>
+           <li>
+            The OneButton Studio may be booked by individuals or small groups up to 16 weeks in advance for up to 2 hours per day.
+           </li>
+          </ul>
+          <p style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; -webkit-tap-highlight-color: rgba(26, 26, 26, 0.294118);">
+           See the Library's
+           <a href="https://www.lib.uchicago.edu/about/thelibrary/policies/rooms/">
+            Policies on Room Use
+           </a>
+           and its policies for
+           <a href="https://www.lib.uchicago.edu/about/thelibrary/policies/conduct/">
+            Maintaining a Scholarly Environment in the Library
+           </a>
+           for a complete list of policies.
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-3513-container">
+       <div class="s-lc-box s-lc-box-html" id="s-lc-box-3513">
+        <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+         <h2>
+          Other Library Spaces
+         </h2>
+        </div>
+        <div class="s-lc-box-content clearfix">
+         <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-2131">
+          <p>
+           <span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+            The Library also offers other spaces to study, teach, and for events that cannot be booked using the room booking system. See
+            <a href="https://www.lib.uchicago.edu/spaces/">
+             Library Spaces
+            </a>
+            for more information.
+           </span>
+           <span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;">
+           </span>
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="s-lc-row row">
+     <div class="s-lc-column-bottom col-md-12" id="s-lc-page-column-4">
+     </div>
+    </div>
+   </div>
+   <div class="s-lc-public-footer row" id="s-lc-public-footer" role="contentinfo">
+    <div id="s-lc-public-footer-brand">
+     <span title="libcal-1">
+      Powered by
+     </span>
+     <a href="https://www.springshare.com">
+      Springshare
+     </a>
+     .
+    </div>
+    <div id="s-lc-public-footer-rights">
+     All rights reserved.
+    </div>
+    <div id="s-lc-footer-support-link">
+     <a href="https://www.lib.uchicago.edu/thelibrary/room-help/">
+      Contact us with comments or questions about Book a Room.
+     </a>
+    </div>
+    <div id="s-lc-public-footer-admin-links">
+     <a href="https://uchicago.libapps.com/libapps/login.php?site_id=2757&amp;target=" id="s-lc-sign-in">
+      Login to LibApps
+     </a>
+    </div>
+   </div>
+   <script src="//www.lib.uchicago.edu/static/base/js/ga.public.js">
+   </script>
+  </div>
+  <div id="s-lc-public-cust-footer">
+   <div class="container" style="text-align: center;">
+    <div class="row">
+     <div class="col-md-12" style="padding-top:15px;">
+      <p>
+       <a href="https://www.lib.uchicago.edu/about/thelibrary/contact/">
+        Contact Us
+       </a>
+       |
+       <a href="https://www.lib.uchicago.edu/about/thelibrary/policies/privacy/">
+        Privacy Statement
+       </a>
+       |
+       <a href="http://www.uchicago.edu/">
+        University Homepage
+       </a>
+      </p>
+      <p>
+       The University of Chicago Library
+       <br/>
+       1100 East 57th Street, Chicago, Illinois 60637
+       <br/>
+      </p>
+     </div>
+     <!--/col-md-12-->
+    </div>
+    <!--/row-->
+   </div>
+   <!--/container-->
+  </div>
+  <script>
+   jQuery('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+						jQuery(".s-lc-calcon").fullCalendar("render");
+					});
+  </script>
+  <script>
+   hit('482','home','r');
+  </script>
+ </body>
+</html>

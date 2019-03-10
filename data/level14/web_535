@@ -1,0 +1,99 @@
+https://maps.ncsu.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   NC State Campus Map
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <meta content="autoRotate:disabled" http-equiv="ScreenOrientation"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+   <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+   <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+   <!-- NC State Bootstrap CSS -->
+   <link href="https://cdn.ncsu.edu/brand-assets/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="//js.arcgis.com/4.6/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css">
+     <link href="//js.arcgis.com/4.6/esri/css/main.css" rel="stylesheet" type="text/css">
+      <link href="Styles/Global.css" rel="stylesheet" type="text/css"/>
+      <link href="Styles/Responsive.css" rel="stylesheet" type="text/css"/>
+      <!-- Including jQuery for modal -->
+      <!-- jQuery 2.1.0 -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js">
+      </script>
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.ncsu.edu/brand-assets/bootstrap/js/bootstrap.min.js">
+      </script>
+      <script src="//use.fontawesome.com/c40b2277d6.js">
+      </script>
+      <script>
+       var dojoConfig = {
+            async: true,
+            packages: [
+                { name: 'Content', location: location.pathname.replace(/\/[^/]*$/, '') + '/Modules/Content' },
+                { name: 'bootstrap', location: '//rawgit.com/xsokev/Dojo-Bootstrap/master' }
+            ]
+        };
+      </script>
+     </link>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="claro">
+  <div id="container">
+  </div>
+  <!-- Including the ESRI JavaScript -->
+  <script src="//js.arcgis.com/4.6/" type="text/javascript">
+  </script>
+  <!--<script type="text/javascript" src="//localhost/arcgis_js_api/library/4.3/4.3/init.js"></script>-->
+  <script>
+   require(['dojo/dom', 'esri/request', 'Content/Layout', 'Content/MapControl', 'dojo/domReady!'], function (dom, esriRequest, Layout, MapControl) {
+            esriRequest('config.json', { responseType: 'json' }).then(function (response) {
+                cfg = response.data;
+                Module_Layout = new Layout({}).placeAt(dom.byId('container'));
+                Module_Layout.startup();
+                Module_Layout.render();
+            });
+        });
+  </script>
+  <script>
+   // Accesses the parking toggle function without the need to create a dojo checkbox element
+        function togglePark(clickType) {
+            require(['Content/MapControl'],
+                function (MapControl) {
+                    if (clickType == "btn") {
+                        if ($("#parkingBtn").hasClass("btn-default")) {
+                            $("#parkingBtn").removeClass("btn-default");
+                            $("#parkingBtn").addClass("btn-primary");
+                            $("#parkingCheck").prop("checked",true);
+                        } else {
+                            $("#parkingBtn").removeClass("btn-primary");
+                            $("#parkingBtn").addClass("btn-default");
+                            $("#parkingCheck").removeProp("checked");
+                            $("#parkingCheck").prop("checked", false);
+                        }
+                    } else {
+                        if ($("#parkingCheck").prop("checked")==true) {
+                            $("#parkingBtn").removeClass("btn-default");
+                            $("#parkingBtn").addClass("btn-primary");
+                        } else {
+                            $("#parkingBtn").removeClass("btn-primary");
+                            $("#parkingBtn").addClass("btn-default");
+                        }
+                    }
+                    this.Module_Layout.toggleParking();
+                });
+        }
+
+        function toggleBus() {
+            require(['Content/MapControl'],
+            function (MapControl) {
+                this.Module_Layout.toggleBusInfo();
+            });
+        }
+  </script>
+ </body>
+</html>

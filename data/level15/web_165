@@ -1,0 +1,1387 @@
+http://beckercat.wustl.edu
+<!DOCTYPE html>
+<!-- TEMPLATE FILE: opac-main.tt -->
+<html class="no-js" lang="en">
+ <head>
+  <title>
+   Washington University Medical Center Libraries catalog
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="Koha 18.0508000" name="generator"/>
+  <!-- leave this for stats -->
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="http://beckercat.wustl.edu/~washu/images/bml_favicon.png" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/opac-tmpl/bootstrap/lib/bootstrap/css/bootstrap.min_18.0508000.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/lib/jquery/jquery-ui_18.0508000.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/css/opac_18.0508000.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/css/colors.css" rel="stylesheet" type="text/css">
+   <link href="/opac-tmpl/bootstrap/css/print_18.0508000.css" media="print" rel="stylesheet" type="text/css"/>
+   <style>
+    body {
+  background-color: #F6F6ED;
+  background-image: url("https://becker.wustl.edu/koha_bootstrap/cream_dust/cream_dust_fill.png");
+}
+body, input, button, select, textarea {
+  font-family: 'Open Sans', sans-serif;
+}
+body#opac-main ul.breadcrumb {
+  display: none;
+}
+body#opac-main div.main {
+  padding: 30px;
+}
+body#opac-main div.main h2 {
+  text-decoration: underline;
+}
+.breadcrumb {
+  margin: 20px;
+}
+#logo {
+  display: none;
+}
+.navbar-inverse .navbar-inner {
+/*background-color: #990000;*/
+background-color: #333;
+background-image: none;
+filter: none;
+border-top:3px solid;
+}
+.navbar-inverse .divider-vertical {
+  border: none;
+}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a,
+#members a,
+#members a.logout
+{
+color: #f7f7f7;
+}
+#opacheader {
+    background-color: transparent;
+}
+#opacheader #becker-logotype {
+    width: 260px;
+    height: 53px;
+    float: left;
+    margin: 1.25em .75em;
+}
+#becker-logotype img {
+  width: 100%;
+  height: 100%;
+}
+#customnav {
+  clear: both;
+  font-weight: 600;
+  line-height: 0;
+}
+#customnav ul {
+  display: inline-block;
+  margin: 0;
+/*  padding: 0 1em;*/
+  background: #990000;
+  border-radius: 7px 7px 0 0;
+}
+#customnav ul li {
+  float:left;
+/*  margin: 0 1em 0 0;*/
+  padding: .5em 1em;
+  list-style: none;
+}
+#customnav a {
+  color: #FFF;
+}
+#customnav a:hover {
+  text-decoration: none;
+}
+#customnav li:hover {
+  background-color: #720000;
+}
+#customnav li.firstnav {
+  border-radius: 7px 0 0 0;
+  padding-left: 1.5em;
+}
+#customnav li.lastnav {
+  border-radius: 0 7px 0 0;
+  padding-right: 1.5em;
+}
+#mobilenav {
+  display: none;
+  color: #FFF;
+  font-weight: 600;
+  background-color: #990000;
+  height: 40px;
+  overflow: hidden;
+}
+#mobilenav span#mobilemenu {
+  display: block;
+  padding: 10px;
+  border-bottom: 2px solid #FFF;
+}
+#mobilenav ul {
+  margin: 0;
+}
+#mobilenav ul li {
+  list-style-type: none;
+  padding: .5em .5em .5em 1em;
+  border-bottom: 1px solid #f7f7f7;
+  background-color: #990000;
+}
+#mobilenav ul li:hover {
+  background-color: #720000;
+}
+#mobilenav ul li a {
+  color: #FFF;
+}
+#hours-contact {
+  float: right;
+  font-weight: 600;
+  margin: 1em .75em 0 .75em;
+}
+#hours-contact ul {
+  margin-left: 0;
+}
+#hours-contact a {
+  color:#333;
+}
+#hours-contact i, #mobile-hours-contact i {
+  margin-right:.5em;
+}
+#mobile-hours-contact {
+  background: #333;
+  padding: 1em;
+  border-bottom: 2px solid #FFF;
+}
+#mobile-hours-contact span {
+  display: block;
+  margin-left: 3em;
+}
+#mobile-hours-contact a {
+  color: #FFF;
+  text-decoration: none;
+}
+.mastheadsearch {
+  -webkit-border-radius: 0 7px 7px 7px;
+  -moz-border-radius: 0 7px 7px 7px;
+  border-radius: 0 7px 7px 7px;
+  padding: .8em;
+  /*margin: .5em 0;*/
+  margin:0 0 .5em;
+  background: #333333; /* Old browsers */
+  background: -moz-linear-gradient(top,  #333333 0%, #454545 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#333333), color-stop(100%,#454545)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #333333 0%,#454545 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #333333 0%,#454545 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #333333 0%,#454545 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #333333 0%,#454545 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#454545',GradientType=0 ); /* IE6-9 */
+
+  /* background: #c7c7c1;
+  background: -moz-linear-gradient(top, #c7c7c1 38%, #a7a7a2 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(38%, #c7c7c1), color-stop(100%, #a7a7a2));
+  background: -webkit-linear-gradient(top, #c7c7c1 38%, #a7a7a2 100%);
+  background: -o-linear-gradient(top, #c7c7c1 38%, #a7a7a2 100%);
+  background: -ms-linear-gradient(top, #c7c7c1 38%, #a7a7a2 100%);
+  background: linear-gradient(to bottom, #c7c7c1 38%, #a7a7a2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c7c7c1', endColorstr='#a7a7a2', GradientType=0);
+*/
+} 
+.mastheadsearch label {
+color: #f7f7f7;
+}
+#opaccredits {
+  /*background: #dedede;*/
+}
+#opaccredits-inner {
+  margin: 1em 0;
+}
+#opaccredits-wusm {
+  float:left;
+  width: 300px
+}
+#opaccredits-wusm img {
+  width:100%;
+}
+#opaccredits-address {
+  float: right;
+  text-align: right;
+  line-height: 1.3em;
+  font-weight: 600;
+}
+#opaccredits-copy {
+  clear: both;
+  text-align: center;
+  padding-top: 1em;
+  margin: 0 2em;
+}
+@media only screen and (min-width: 0px) and (max-width: 390px){
+/* Screens bewteen 0 and 390 pixels wide */
+/* Add custom CSS here */
+  #opacheader #becker-logotype {
+    float: none;
+    margin: 1.25em auto;
+  }
+  #hours-contact {
+    width: 180px;
+    height: 60px;
+    float: none;
+    margin: 1em auto;
+    display: none;
+  }
+  #hours-contact ul {
+    margin-left: 0;
+  }
+  #hours-contact ul li {
+    float: left;
+    margin: 0;
+  }
+  #opaccredits-wusm {
+  float:none;
+  width: 280px;
+  margin: 1em auto;
+  }
+  #opaccredits-wusm img {
+    width:100%;
+  }
+  #opaccredits-address {
+    float: none;
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 726px) {
+  #customnav {
+    display: none;
+  }
+  #mobilenav {
+    display: block;
+    clear: both;
+  }
+  .mastheadsearch {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+
+}
+@media only screen and (min-width: 342px) and (max-width: 479px) {
+/* Screens bewteen 342 and 479 pixels wide */
+/* Add custom CSS here */
+}
+@media only screen and (min-width: 480px) and (max-width: 608px) {
+/* Screens between 480 and 608 pixels wide */
+/* Add custom CSS here */
+}
+@media only screen and (min-width: 608px) and (max-width: 767px) {
+/* Screens between 608 and 767 pixels wide */
+/* Add custom CSS here */
+}
+@media only screen and (min-width: 768px) and (max-width: 984px) {
+/* Screens between 768 and 984 pixels wide */
+/* Add custom CSS here */
+}
+@media only screen and (min-width: 984px) {
+/* Screens above 969 pixels wide */
+/* Add custom CSS here */
+}
+   </style>
+   <link href="http://beckercat.wustl.edu/cgi-bin/koha/unapi" rel="unapi-server" title="unAPI" type="application/xml">
+    <!-- Respond.js brings responsive layout behavior to IE < v.9 -->
+    <!--[if lt IE 9]>
+    <script src="/opac-tmpl/bootstrap/lib/respond.min.js"></script>
+<![endif]-->
+    <script>
+     function _(s) { return s } // dummy function for gettext
+    </script>
+    <script src="/opac-tmpl/bootstrap/lib/modernizr.min_18.0508000.js">
+    </script>
+    <link href="/opac-tmpl/bootstrap/lib/font-awesome/css/font-awesome.min_18.0508000.css" rel="stylesheet" type="text/css"/>
+   </link>
+  </link>
+ </head>
+ <body class="branch-default" id="opac-main">
+  <div id="wrap">
+   <div class="noprint" id="header-region">
+    <div class="navbar navbar-inverse navbar-static-top">
+     <div class="navbar-inner">
+      <div class="container-fluid">
+       <h1 id="logo">
+        <a class="brand" href="/cgi-bin/koha/opac-main.pl">
+         Washington University Medical Center Libraries
+        </a>
+       </h1>
+       <div class="cart-message" id="cartDetails">
+        Your cart is empty.
+       </div>
+       <ul class="nav">
+        <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="cartmenulink" role="button" title="Collect items you are interested in">
+          <i class="icon-shopping-cart icon-white" id="carticon">
+          </i>
+          <span class="cartlabel">
+           Cart
+          </span>
+          <span id="basketcount">
+          </span>
+          <b class="caret">
+          </b>
+         </a>
+         <ul aria-labelledby="cartmenulink" class="dropdown-menu" role="menu">
+          <li role="presentation">
+           <a class="cart-message" href="#" id="cartmenuitem" role="menuitem" tabindex="-1">
+            Your cart is empty.
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li class="divider-vertical">
+        </li>
+        <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="listsmenu" role="button" title="Show lists">
+          <i class="icon-list icon-white">
+          </i>
+          <span class="listslabel">
+           Lists
+          </span>
+          <b class="caret">
+          </b>
+         </a>
+         <ul aria-labelledby="listsmenu" class="dropdown-menu" role="menu">
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;category=2" role="menuitem" tabindex="-1">
+            <strong>
+             Public lists
+            </strong>
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=564&amp;sortfield=title" role="menuitem" tabindex="-1">
+            Space Rehab
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=563&amp;sortfield=title" role="menuitem" tabindex="-1">
+            NEW BOOK FEBRUARY 8
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=559&amp;sortfield=title" role="menuitem" tabindex="-1">
+            new books Dec 14
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=557&amp;sortfield=title" role="menuitem" tabindex="-1">
+            New Books December 7
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=556&amp;sortfield=title" role="menuitem" tabindex="-1">
+            NEW BOOKS November 30
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=550&amp;sortfield=title" role="menuitem" tabindex="-1">
+            NEW BOOKS NOV 9
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=549&amp;sortfield=title" role="menuitem" tabindex="-1">
+            NEW BOOKS NOV 2
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=55&amp;sortfield=title" role="menuitem" tabindex="-1">
+            Oncology
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=489&amp;sortfield=title" role="menuitem" tabindex="-1">
+            * Top 10 Journals
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=460&amp;sortfield=title" role="menuitem" tabindex="-1">
+            Patient Care and New Year's Resolutions
+           </a>
+          </li>
+          <li role="presentation">
+           <a class="listmenulink" href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;category=2" role="menuitem" tabindex="-1">
+            View All
+           </a>
+          </li>
+          <li class="divider" role="presentation">
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;category=1" role="menuitem" tabindex="-1">
+            <strong>
+             Your lists
+            </strong>
+           </a>
+          </li>
+          <li role="presentation">
+           <a class="menu-inactive loginModal-trigger" href="/cgi-bin/koha/opac-user.pl" role="menuitem" tabindex="-1">
+            Log in to create your own lists
+           </a>
+          </li>
+         </ul>
+         <!-- / .dropdown-menu -->
+        </li>
+        <!-- / .dropdown -->
+       </ul>
+       <!-- / .nav -->
+       <div id="listsDetails">
+       </div>
+       <a class="pull-right" href="#" id="user-menu-trigger">
+        <i class="icon-user">
+        </i>
+        <span class="caret">
+        </span>
+       </a>
+       <div id="members">
+        <ul class="nav pull-right">
+         <li>
+          <a class="login-link loginModal-trigger" data-toggle="modal" href="/cgi-bin/koha/opac-user.pl" role="button">
+           Log in to your account
+          </a>
+         </li>
+        </ul>
+       </div>
+       <!-- /members -->
+      </div>
+      <!-- /container-fluid -->
+     </div>
+     <!-- /navbar-inner -->
+    </div>
+    <!-- /navbar -->
+    <div class="container-fluid">
+     <div class="row-fluid">
+      <div id="opacheader">
+       <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'> -->
+       <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+       <div id="becker-logotype">
+        <a href="/">
+         <img alt="Becker Medical Library logotype" src="https://becker.wustl.edu/koha_bootstrap/becker-header-logo-tagline_black.png"/>
+        </a>
+       </div>
+       <div id="hours-contact">
+        <ul class="fa-ul">
+         <li>
+          <i class="fa fa-clock-o fa-fw">
+          </i>
+          <a href="https://becker.wustl.edu/using-the-library/hours-and-access/" target="_blank">
+           Library Hours
+          </a>
+         </li>
+         <li>
+          <i class="fa fa-phone fa-fw">
+          </i>
+          (314) 362-7080
+         </li>
+         <li>
+          <i class="fa fa-paper-plane fa-fw">
+          </i>
+          <a href="mailto:askbecker@wustl.edu">
+           askbecker@wustl.edu
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div id="customnav">
+        <ul>
+         <li class="firstnav">
+          <a href="/">
+           Catalog Home
+          </a>
+         </li>
+         <li>
+          <a href="https://becker.wustl.edu" target="_blank">
+           Library Website
+          </a>
+         </li>
+         <li>
+          <a href="http://fq5np7af6j.search.serialssolutions.com/" target="_blank">
+           Electronic Books &amp; Journals
+          </a>
+         </li>
+         <li>
+          <a href="http://beckerguides.wustl.edu/az.php" target="_blank">
+           Database Directory
+          </a>
+         </li>
+         <li class="lastnav">
+          <a href="https://becker.wustl.edu/using-the-library/help/" target="_blank">
+           Help
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div id="mobilenav">
+        <span id="mobilemenu">
+         <i class="fa fa-bars">
+         </i>
+         Library Quicklinks &amp; Information
+        </span>
+        <ul>
+         <li>
+          <a href="/">
+           Catalog Home
+          </a>
+         </li>
+         <li>
+          <a href="https://becker.wustl.edu" target="_blank">
+           Library Website
+          </a>
+         </li>
+         <li>
+          <a href="http://fq5np7af6j.search.serialssolutions.com/" target="_blank">
+           Electronic Books &amp; Journals
+          </a>
+         </li>
+         <li>
+          <a href="http://beckerguides.wustl.edu/az.php" target="_blank">
+           Database Directory
+          </a>
+         </li>
+         <li>
+          <a href="https://becker.wustl.edu/using-the-library/help/" target="_blank">
+           Help
+          </a>
+         </li>
+        </ul>
+        <div id="mobile-hours-contact">
+         <span>
+          <i class="fa fa-clock-o fa-fw">
+          </i>
+          <a href="https://becker.wustl.edu/using-the-library/hours-and-access/" target="_blank">
+           Library Hours
+          </a>
+         </span>
+         <span>
+          <i class="fa fa-phone fa-fw">
+          </i>
+          (314) 362-7080
+         </span>
+         <span>
+          <i class="fa fa-paper-plane fa-fw">
+          </i>
+          <a href="mailto:askbecker@wustl.edu">
+           askbecker@wustl.edu
+          </a>
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- / header-region -->
+   <div class="container-fluid">
+    <div class="row-fluid">
+     <div id="opac-main-search">
+      <div class="span12">
+       <div class="mastheadsearch librarypulldown">
+        <form action="/cgi-bin/koha/opac-search.pl" class="form-inline" id="searchform" method="get" name="searchform">
+         <label for="masthead_search">
+          Search
+         </label>
+         <select id="masthead_search" name="idx">
+          <option value="">
+           Library catalog
+          </option>
+          <option value="ti">
+           Title
+          </option>
+          <option value="au">
+           Author
+          </option>
+          <option value="su">
+           Subject
+          </option>
+          <option value="nb">
+           ISBN
+          </option>
+          <option value="se">
+           Series
+          </option>
+          <option value="callnum">
+           Call number
+          </option>
+         </select>
+         <input class="transl1" id="translControl1" name="q" title="Type search term" type="text"/>
+         <span id="translControl">
+         </span>
+         <div class="input-append">
+          <select id="select_library" name="branch_group_limit">
+           <option value="">
+            All libraries
+           </option>
+           <option value="branch:BBML">
+            Becker Medical Library
+           </option>
+           <option value="branch:FRC">
+            Family Resource Center - SLCH
+           </option>
+           <option value="branch:SLCHL">
+            SLCH Medical Library
+           </option>
+          </select>
+          <button class="btn btn-primary" id="searchsubmit" type="submit">
+           Go
+          </button>
+         </div>
+        </form>
+       </div>
+       <!-- / .mastheadsearch -->
+       <div class="row-fluid">
+        <div id="moresearches">
+         <ul>
+          <li>
+           <a href="/cgi-bin/koha/opac-search.pl">
+            Advanced search
+           </a>
+          </li>
+          <li>
+           <a href="/cgi-bin/koha/opac-tags_subject.pl">
+            Subject cloud
+           </a>
+          </li>
+         </ul>
+        </div>
+        <!-- /#moresearches -->
+       </div>
+       <!-- /.row-fluid -->
+      </div>
+      <!-- /.span10 -->
+     </div>
+     <!-- /.opac-main-search -->
+    </div>
+    <!-- / .row-fluid -->
+   </div>
+   <!-- /.container-fluid -->
+   <!-- Login form hidden by default, used for modal window -->
+   <div aria-hidden="true" aria-labelledby="modalLoginLabel" class="modal hide" id="loginModal" role="dialog" tabindex="-1">
+    <div class="modal-header">
+     <button aria-hidden="true" class="closebtn" data-dismiss="modal" type="button">
+      ×
+     </button>
+     <h3 id="modalLoginLabel">
+      Log in to your account
+     </h3>
+    </div>
+    <form action="/cgi-bin/koha/opac-user.pl" id="modalAuth" method="post" name="auth">
+     <div class="modal-body">
+      <input name="koha_login_context" type="hidden" value="opac"/>
+      <fieldset class="brief">
+       <label for="muserid">
+        Login:
+       </label>
+       <input id="muserid" name="userid" type="text"/>
+       <label for="mpassword">
+        Password:
+       </label>
+       <input id="mpassword" name="password" type="password"/>
+       <div class="forgotpassword" id="forgotpassword-modal">
+        <p>
+         <a href="/cgi-bin/koha/opac-password-recovery.pl">
+          Forgot your password?
+         </a>
+        </p>
+       </div>
+      </fieldset>
+     </div>
+     <div class="modal-footer">
+      <input class="btn btn-primary" type="submit" value="Log in"/>
+      <a aria-hidden="true" class="cancel" data-dismiss="modal" href="#">
+       Cancel
+      </a>
+     </div>
+    </form>
+    <!-- /#auth -->
+   </div>
+   <!-- /#modalAuth  -->
+   <div class="main">
+    <ul class="breadcrumb">
+     <li>
+      <a href="#">
+       Home
+      </a>
+     </li>
+    </ul>
+    <div class="container-fluid" id="notloggedin">
+     <div class="row-fluid">
+      <div class="span9">
+       <div id="opacmainuserblock">
+        <!-- added by Robert on 2/13/2017 due to NetScaler issue
+<div class="alert alert-danger center">
+<p><strong>Some users are experiencing intermittent access issues to various Becker Medical Library websites. Washington University IT is aware of the issue and is working on a resolution. <br>We apologize for any inconvenience.</strong></p>
+Here are some commonly accessed resources:
+<ul>
+<li><a href="http://fq5np7af6j.search.serialssolutions.com/" target="_blank">Electronic Books & Journals</a></li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pubmed?holding=wustlmlib" target="_blank">PubMed@Becker</a></li>
+</ul>
+</div>
+end NetScaler alert -->
+        <!-- Lists link added by Betsy 8-26-2011-->
+        <h2>
+         <b>
+          <u>
+           Quick Access to Popular Journals and New Books
+          </u>
+         </b>
+        </h2>
+        <p>
+         Click
+         <a href="http://beckercat.wustl.edu/cgi-bin/koha/opac-shelves.pl?display=publicshelves" target="_blank">
+          <strong>
+           HERE
+          </strong>
+         </a>
+         to quickly scan for popular journals and new books
+        </p>
+        <p>
+        </p>
+        <p>
+        </p>
+        <h2>
+         <b>
+          <u>
+           To Search:
+          </u>
+         </b>
+        </h2>
+        <p>
+         <font color="#990000">
+          <strong>
+           Logging in is not required.
+          </strong>
+         </font>
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+Simply enter an author, title, or whatever else you are looking for in the search box above.
+<p>
+ If you only wish to see electronic books and journals, click on the
+ <b>
+  E-Books &amp; E-Journals
+ </b>
+ link above or use the advanced search option to limit your results to Books Electronic and Journals Electronic.
+</p>
+<p>
+</p>
+<h2>
+ <b>
+  <u>
+   To Manage Your Library Borrower’s Account:
+  </u>
+ </b>
+</h2>
+<p>
+ You can manage the information in your library borrower’s account by logging in with your personal user ID and password.
+</p>
+<p>
+</p>
+<h2>
+ <b>
+  <u>
+   To Get Help:
+  </u>
+ </b>
+</h2>
+<ul>
+ <li>
+  Becker Library:
+  <a href="mailto:AskBecker@wustl.edu">
+   AskBecker@wustl.edu
+  </a>
+  (314.362.7080)
+ </li>
+ <li>
+  SLCH Medical Library:
+  <a href="mailto:gallahere@wustl.edu">
+   Emily Gallaher
+  </a>
+  (314.454.2768)
+ </li>
+ <li>
+  SLCH Family Resource Center:
+  <a href="mailto:judy.hansen@wustl.edu">
+   Judy Hansen
+  </a>
+  (314.454.2350)
+ </li>
+</ul>
+<p>
+</p>
+<div class="SS_ToolLabels">
+ <h2>
+  <b>
+   <u>
+    Browse E-Journals by title:
+   </u>
+  </b>
+ </h2>
+</div>
+<br/>
+<div align="left">
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=0" target="_blank">
+  0-9
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=A" target="_blank">
+  A
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=B" target="_blank">
+  B
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=C" target="_blank">
+  C
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=D" target="_blank">
+  D
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=E" target="_blank">
+  E
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=F" target="_blank">
+  F
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=G" target="_blank">
+  G
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=H" target="_blank">
+  H
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=I" target="_blank">
+  I
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=J" target="_blank">
+  J
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=K" target="_blank">
+  K
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=L" target="_blank">
+  L
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=M" target="_blank">
+  M
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=N" target="_blank">
+  N
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=O" target="_blank">
+  O
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=P" target="_blank">
+  P
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=Q" target="_blank">
+  Q
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=R" target="_blank">
+  R
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=S" target="_blank">
+  S
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=T" target="_blank">
+  T
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=U" target="_blank">
+  U
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=V" target="_blank">
+  V
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=W" target="_blank">
+  W
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=X" target="_blank">
+  X
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=Y" target="_blank">
+  Y
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=Z" target="_blank">
+  Z
+ </a>
+ <a href="http://fq5np7af6j.search.serialssolutions.com/?L=FQ5NP7AF6J&amp;V=1.0&amp;tab=JOURNALS&amp;N=100&amp;S=T_AZ&amp;C=Other" target="_blank">
+  Other
+ </a>
+</div>
+<p>
+</p>
+<!-- / .span 7/9 -->
+<div class="span3">
+ <div id="login">
+  <form action="/cgi-bin/koha/opac-user.pl" autocomplete="off" id="auth" method="post" name="auth">
+   <input name="koha_login_context" type="hidden" value="opac"/>
+   <fieldset class="brief">
+    <legend>
+     Log in to your account:
+    </legend>
+    <label for="userid">
+     Login:
+    </label>
+    <input id="userid" name="userid" type="text"/>
+    <label for="password">
+     Password:
+    </label>
+    <input id="password" name="password" type="password"/>
+    <fieldset class="action">
+     <input class="btn" type="submit" value="Log in"/>
+    </fieldset>
+    <div class="forgotpassword" id="forgotpassword-main">
+     <p>
+      <a href="/cgi-bin/koha/opac-password-recovery.pl">
+       Forgot your password?
+      </a>
+     </p>
+    </div>
+   </fieldset>
+  </form>
+ </div>
+ <!-- /#login -->
+</div>
+<!-- / .span3 -->
+<!-- /.container-fluid -->
+<!-- /.row-fluid -->
+<!-- /.main -->
+<div class="container-fluid">
+ <div class="row-fluid">
+  <div class="span12">
+   <div class="noprint" id="opaccredits">
+    <div id="opaccredits-inner">
+     <div id="opaccredits-wusm">
+      <a href="http://medicine.wustl.edu" target="_blank">
+       <img src="https://becker.wustl.edu/koha_bootstrap/Med-1line-4color-pos.png" width="280px;"/>
+      </a>
+     </div>
+     <div id="opaccredits-address">
+      BERNARD BECKER MEDICAL LIBRARY
+      <br/>
+      660 S. Euclid Ave., Campus Box 8132
+      <br/>
+      St. Louis, MO 63110
+     </div>
+     <div id="opaccredits-copy">
+      ©
+      <script>
+       document.write(new Date().getFullYear());
+      </script>
+      Washington University School of Medicine in St. Louis
+     </div>
+    </div>
+    <!--
+<div  id="washu_becker">
+	<img style="margin: 10px 0px 0px 10px; float: left;" src="http://67.23.27.107/~washu/images/washu_logotype.png">
+	<div style="float: right; text-align: right; margin: 0 10px 0pt 0pt; font-family: Arial,Helvetica,sans-serif;">
+		<p>
+			<b>BERNARD BECKER MEDICAL LIBRARY</b><br>
+			<span style="font-size: 10px;">660 S. Euclid Ave., Campus Box 8132, St. Louis MO 63110<br>
+			Phone: 314.362.7080 Fax: 314.454.6606</span></p>
+           </div>
+
+</div>
+<div id="footer-copyright">
+	©2011-2013 Washington University School of Medicine, St. Louis, Missouri<br />Powered by ByWater Solutions, Inc</div>
+-->
+    <!-- Google Analytics Code -->
+    <script type="text/javascript">
+     var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-23484198-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+    </script>
+    <!-- FEDERAL SURVEY CODE BEGIN
+<link rel="stylesheet" href="https://becker.wustl.edu/sites/all/themes/bml_theme2/federal-survey-files/colorbox/colorbox.css" /> 
+<link rel="stylesheet" href="https://becker.wustl.edu/sites/all/themes/bml_theme2/federal-survey-files/form-survey-style.css" /> 
+<script type="text/javascript" src="https://becker.wustl.edu/sites/all/themes/bml_theme2/federal-survey-files/colorbox/jquery.colorbox-min.js"></script> 
+<script type="text/javascript" src="https://becker.wustl.edu/sites/all/themes/bml_theme2/federal-survey-files/jquery.validate.min.js"></script> 
+<script type="text/javascript" src="https://becker.wustl.edu/sites/all/themes/bml_theme2/federal-survey-files/form-script.js"></script>
+FEDERAL SURVEY CODE END -->
+   </div>
+  </div>
+ </div>
+</div>
+<!-- / #wrap in masthead.inc -->
+<!-- JavaScript includes -->
+<script src="/opac-tmpl/bootstrap/lib/jquery/jquery_18.0508000.js">
+</script>
+<script src="/opac-tmpl/bootstrap/lib/jquery/jquery-ui_18.0508000.js">
+</script>
+<script>
+ // Resolve name collision between jQuery UI and Twitter Bootstrap
+$.widget.bridge('uitooltip', $.ui.tooltip);
+</script>
+<script src="/opac-tmpl/bootstrap/lib/bootstrap/js/bootstrap.min_18.0508000.js">
+</script>
+<script src="/opac-tmpl/bootstrap/js/global_18.0508000.js">
+</script>
+<script>
+ Modernizr.load([
+        // Test need for polyfill
+        {
+            test: window.matchMedia,
+            nope: "/opac-tmpl/bootstrap/lib/media.match.min_18.0508000.js"
+        },
+        // and then load enquire
+        "/opac-tmpl/bootstrap/lib/enquire.min_18.0508000.js",
+        "/opac-tmpl/bootstrap/js/script_18.0508000.js",
+    ]);
+
+    // Fix for datepicker in a modal
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+</script>
+<script src="/opac-tmpl/lib/emoji-picker/js/config_18.0508000.js">
+</script>
+<script src="/opac-tmpl/lib/emoji-picker/js/util_18.0508000.js">
+</script>
+<script src="/opac-tmpl/lib/emoji-picker/js/jquery.emojiarea_18.0508000.js">
+</script>
+<script src="/opac-tmpl/lib/emoji-picker/js/emoji-picker_18.0508000.js">
+</script>
+<script>
+ //<![CDATA[
+    var MSG_CONFIRM_AGAIN = _("Warning: Cannot be undone. Please confirm once again")
+    var MSG_DELETE_SEARCH_HISTORY = _("Are you sure you want to delete your search history?");
+    var MSG_NO_SUGGESTION_SELECTED = _("No suggestion was selected");
+    var MSG_SEARCHING = _("Searching %s...");
+    var MSG_ERROR_SEARCHING_COLLECTION = _("Error searching %s collection");
+    var MSG_NO_RESULTS_FOUND_IN_COLLECTION = _("No results found in the library's %s collection");
+    var MSG_RESULTS_FOUND_IN_COLLECTION = _("Found %s results in the library's %s collection");
+    var MSG_BY = _("by");
+    var MSG_TYPE = _("Type");
+    var MSG_NEXT = _("Next");
+    var MSG_PREVIOUS = _("Previous");
+    var MSG_CHECKOUTS = _("Checkouts");
+    var MSG_NO_CHECKOUTS = _("No checkouts");
+    var MSG_CHECK_OUT = _("Check out");
+    var MSG_CHECK_OUT_CONFIRM = _("Are you sure you want to checkout this item?");
+    var MSG_CHECKED_OUT_UNTIL = _("Checked out until %s");
+    var MSG_CHECK_IN = _("Check in");
+    var MSG_CHECK_IN_CONFIRM = _("Are you sure you want to return this item?");
+    var MSG_NO_CHECKOUTS = _("No checkouts");
+    var MSG_DOWNLOAD = _("Download");
+    var MSG_HOLDS = _("Holds");
+    var MSG_NO_HOLDS = _("No holds");
+    var MSG_PLACE_HOLD = _("Place hold");
+    var MSG_CANCEL_HOLD = _("Cancel");
+    var MSG_CANCEL_HOLD_CONFIRM = _("Are you sure you want to cancel this hold?");
+    var MSG_ON_HOLD = _("On hold");
+    
+        var MSG_BASKET_EMPTY = _("Your cart is currently empty");
+        var MSG_RECORD_IN_BASKET = _("The item is already in your cart");
+        var MSG_RECORD_ADDED = _("The item has been added to your cart");
+        var MSG_RECORD_REMOVED = _("The item has been removed from your cart");
+        var MSG_NRECORDS_ADDED = _(" item(s) added to your cart");
+        var MSG_NRECORDS_IN_BASKET = _("already in your cart");
+        var MSG_NO_RECORD_SELECTED = _("No item was selected");
+        var MSG_NO_RECORD_ADDED = _("No item was added to your cart");
+        var MSG_CONFIRM_DEL_BASKET = _("Are you sure you want to empty your cart?");
+        var MSG_CONFIRM_DEL_RECORDS = _("Are you sure you want to remove the selected items?");
+        var MSG_ITEM_IN_CART = _("In your cart");
+        var MSG_IN_YOUR_CART = _("Items in your cart: ");
+        var MSG_ITEM_NOT_IN_CART = _("Add to your cart");
+    
+    
+    
+    $(".print-large").on("click",function(){
+        window.print();
+        return false;
+    });
+    $("#ulactioncontainer > ul > li > a.addtoshelf").on("click",function(){
+        Dopop('opac-addbybiblionumber.pl?biblionumber=');
+        return false;
+    });
+    $("body").on("click", ".addtocart", function(e){
+        e.preventDefault();
+        var biblionumber = $(this).data("biblionumber");
+        addRecord( biblionumber );
+    });
+    $("body").on("click", ".cartRemove", function(e){
+        e.preventDefault();
+        var biblionumber = $(this).data("biblionumber");
+        delSingleRecord( biblionumber );
+    });
+    $(".clearsh").on("click", function(e){
+        e.preventDefault();
+        return confirmDelete(MSG_DELETE_SEARCH_HISTORY);
+    });
+    //]]>
+</script>
+<script src="/opac-tmpl/bootstrap/js/basket_18.0508000.js">
+</script>
+<script src="/opac-tmpl/bootstrap/js/google-jackets_18.0508000.js">
+</script>
+<script>
+ //<![CDATA[
+        var NO_GOOGLE_JACKET = _("No cover image available");
+        //]]>
+</script>
+<script src="/opac-tmpl/bootstrap/lib/jquery/plugins/jquery.cookie.min_18.0508000.js">
+</script>
+<script>
+ $(document).ready(function() {
+    if($('#searchsubmit').length) {
+        $(document).on("click", '#searchsubmit', function(e) {
+            jQuery.removeCookie("form_serialized", { path: '/'});
+            jQuery.removeCookie("form_serialized_limits", { path: '/'});
+            jQuery.removeCookie("num_paragraph", { path: '/'});
+            jQuery.removeCookie("search_path_code", { path: '/'});
+        });
+    }
+
+    window.emojiPicker = new EmojiPicker({
+      emojiable_selector: '[data-emojiable=true]',
+      assetsPath: '/opac-tmpl/lib/emoji-picker/img/',
+      popupButtonClasses: 'fa fa-smile-o'
+    });
+    window.emojiPicker.discover();
+});
+</script>
+<script>
+ //<![CDATA[
+        $(document).ready(function(){
+
+  var currentPage = window.location;
+  
+  if (currentPage == 'http://beckercat.wustl.edu/?branch=frc') {
+      // alert(currentPage);
+      $("select[name='branch_group_limit']").val("branch:FRC");
+  } 
+
+ $("#searchsubmit").val(' ');
+
+//changes Library catalog to Keyword, adds Journal to basic search
+//Add this: <option value='journal-title,wrdl'>Journal</option> after .append(" when 949j is populated -BK 4-12-11
+$("select[name='idx'] option:contains('Library catalog')").text("Keyword");
+//$("select[name='idx']").append("<option value=journal-title,wrdl>Journal</option><option value='provenance,wrdl'>Provenance</option>");
+
+$("#filters span:contains('Library catalog')").text("Keyword");
+$("#filters ul li a:contains('Library catalog')").text("Keyword");
+
+
+//changes item not for loan message
+$(".available b:contains('reference')").text("If available in print, one or more copies may only be used in: ");
+
+
+
+// ADD LINK TO SERIAL SOLUTIONS ON SEARCH BAR
+$("#moresearches").html('<a href="/cgi-bin/koha/opac-search.pl">Advanced Search</a><span class="pipe"> | </span><a href="http://fq5np7af6j.search.serialssolutions.com/" target="_blank">E-Journals and E-Books</a>');
+
+
+
+// REPLACE "LOG IN TO YOUR ACCOUNT"
+$("#members ul li a:contains('Log in to your account')").text("Log in to Your Borrower's Account");
+
+$("#login legend:contains('Log in to your account')").text("Log in to Your Borrower's Account");
+
+// MAKE ONLINE LINKS MORE VISIBLE
+$("span.results_summary span.label:contains('Online')").each(function(){
+$(this).css("font-weight","bold");
+$(this).next().css({'font-weight' : 'bold' ,'color' :  '#990000'});
+});
+
+$("#mobilenav").click(function() {
+var mobilenavHeight = $(this).css("height") == '40px' ? '320px' : '40px';
+$(this).animate({'height': mobilenavHeight}, 150);
+});
+
+// CHANGE "CLEAR ALL" TO "UNCHECK ALL" FOR BOOKBAG
+$("#basket #CheckNone").text("Uncheck All");
+
+
+
+$("#userupdatecontainer label[for='phone']").html("Primary Phone :");
+$("#userupdatecontainer label[for='city']").html("City [Skip if using WU or BJC dept address]:");
+$("#userupdatecontainer label[for='state']").html("State [Skip if using WU or BJC dept address]:");
+$("#userupdatecontainer label[for='zipcode']").html("Zipcode [Skip if using WU or BJC dept address]:");
+
+$("#userupdatecontainer label[for='mobile']").html("Pager :");
+$("#userupdatecontainer label[for='phonepro']").html("Alternate Phone :");
+$("#userupdatecontainer label[for='emailpro']").html("Alternate Email :");
+
+$("#userupdatecontainer label[for='phone']").html("Primary Phone :");
+
+
+$("#userupdate legend:contains('Alternate Contact Information')").parent().hide();
+
+
+$("#userupdate  label[for='dob']").parent().remove();
+$("#userupdate  label[for='sex']").parent().remove();
+
+
+// Begin Aeon Integration Code
+
+// Aeon URL to Monograph request form. If we had to deal with multiple types of requests, the URL could be broken down further.
+var aeonBase = "https://becker-aeon.wustl.edu/logon/?Action=10&Form=20&Value=GenericRequestMonograph";
+
+// Base item information retrieved from the upper portion of the catalog records
+var itemTitle     = $("#catalogue_detail_biblio h1.title").text();
+var itemAuthor    = $("#catalogue_detail_biblio h5.author span[property='author']").text();
+
+// Accomodate non-RDA catalog records where publisher information is in th 260 field.
+if ($("#catalogue_detail_biblio span.publisher").length > 0) {
+  console.log("this is a 260 field record.");
+  var publisherInfo = [];
+  // publisherInfo["place"]     = $(this).find("span[property='location']").text();
+  // publisherInfo["publisher"] = $(this).find("span[property='name']").text();
+  // publisherInfo["year"]      = $(this).find("span[property='datePublished']").text();
+  publisherInfo["place"]     = $(this + "span[property='location']").text();
+  publisherInfo["publisher"] = $(this + "span[property='name']").text();
+  publisherInfo["year"]      = $(this + "span[property='datePublished']").text();
+}
+// If the tags that indicate the publisher data was in the 260 field, treat as 264.
+else {
+  console.log("264 record. will attempt to parse");
+  var publisherInfo = $("#catalogue_detail_biblio span[class='results_summary']:first").text();
+
+  // Send the publisher information to the parsing function. Will return an associative array.
+  publisherInfo = pubParse(publisherInfo);
+}
+console.log(publisherInfo);
+// The showAeonColumn boolean will be used to control the visiblity of the "Request Item" column of the holdings table.
+var showAeonColumn = false;
+
+// The following arrays contain lists of various item types, collections, and locations for which we want to generate Aeon request links.
+var validItemTypes   = ["ARB Reference", "Archives and Manuscripts", "Book Rare"];
+var validCollections = ["Archival Serials", "Rare Medical Periodicals"];
+var validLocations   = ["Archives and Rare Books Microform - Level 7"];
+
+// The aeonItems array will hold the list of items[] for each row of the holdings table.
+var aeonItems = [];
+
+// store the holdings table data (for the items) in an object.
+// pass this data to a function to do the following:
+  // iterate through the table object and add table row item data to an item array - along with an index key.
+  // At this point there are a couple of options. One would be to write to the dom directly from the function, the other would be to target the specific row with the aeonItems
+  // index key.
+
+var holdingsTableRows = $("table#holdingst tbody tr");
+var tr = $(holdingsTableRows).eq(0).text();
+console.log(holdingsTableRows);
+$("table#holdingst thead tr").append('<th class="aeonlink">Schedule a Viewing</th>');
+$("table#holdingst tbody tr").each(function(j) {
+  var item = [];
+
+  item["itemtype"]   = $(this).find("td.itype").text().trim();
+  item["Location"]   = $(this).find("td.location").text().replace(/(Becker Medical Library)|\n/g, '').trim();
+  item["CallNumber"] = ($(this).find("td.call_no").length > 0) ? $(this).find("td.call_no").text().replace(/\(Browse shelf\)|\n/g, '').trim() : "";
+  item["ItemIssue"]  = ($(this).find("td.copynumber").length > 0) ? $(this).find("td.copynumber").text() : "";
+  item["ItemVolume"] = ($(this).find("td.vol_info").length > 0) ? $(this).find("td.vol_info").text() : "";
+  item["ItemNumber"] = ($(this).find("td.barcode").length > 0) ? $(this).find("td.barcode").text() : "";
+  item["collection"] = $(this).find("td.collection").text();
+
+  var aeonRequestLink = aeonBase + "&ItemNumber=" + encodeURIComponent(item["ItemNumber"]) + "&ItemTitle=" + encodeURIComponent(itemTitle) + "&ItemAuthor=" + encodeURIComponent(itemAuthor) + "&ItemPlace=" + encodeURIComponent(publisherInfo["place"]) + "&ItemPublisher=" + encodeURIComponent(publisherInfo["publisher"]) + "&ItemDate=" + encodeURIComponent(publisherInfo["year"]) + "&Location=" + encodeURIComponent(item["Location"]) + "&CallNumber=" + encodeURIComponent(item["CallNumber"]) + "&ItemVolume=" + encodeURIComponent(item["ItemVolume"]) + "&ItemIssue=" + encodeURIComponent(item["ItemIssue"]);
+
+  console.log(aeonRequestLink);
+
+  aeonItems[j] = item;
+  if ((validItemTypes.indexOf(item["itemtype"]) > -1) || (validCollections.indexOf(item["collection"]) > -1) || (validLocations.indexOf(item["Location"]) > -1)) {
+    console.log("Item is valid aeon type.");
+    showAeonColumn = true;
+    $(this).append('<td class="aeonlink"><a href="' + aeonRequestLink + '" target="_blank">Request this Item</td>');
+  }
+  else {
+    console.log("Item is NOT a valid aeon type.");
+    $(this).append('<td class="aeonlink"></td>');
+  }
+
+})
+console.log(aeonItems);
+console.log(showAeonColumn);
+if (showAeonColumn == false) {
+  $(".aeonlink").css("display","none");
+}
+
+
+// A function to parse the publisher information from the catalog. If the element is empty it will be handled by the default condition.
+function pubParse(publine) {
+  // New array to hold information about the pub data that we will return at the end of the function.
+  // Defaults are coded and overwritten as needed.
+  var pubData = [];
+  pubData["place"] = "";
+  pubData["publisher"] = "No publisher information provided in catalog.";
+  pubData["year"] = "";
+
+  // Split the publine at colons.
+  var pubInfo = publine.split(":");
+
+  // if the length of pubInfo == 3, we can proceed to the next step. Otherwise, we need to do some alternative handling.
+  if (pubInfo.length == 3) {
+    var publisherAndYear = pubInfo[2].split(",");
+    // If the length of publisherAndYear == 2, we can be somewhat confident that the publisher and year can be accurately split.
+    // Otherwise, leave pubInfo[2] intact and send pubData["publisher"].
+    if (publisherAndYear.length == 2) {
+      pubData["place"] = pubInfo[1].trim();
+      pubData["publisher"] = publisherAndYear[0].trim();
+      pubData["year"] = publisherAndYear[1].trim();
+    }
+    else {
+      pubData["place"] = pubInfo[1].trim();
+      pubData["publisher"] = pubInfo[2].trim();
+    }
+  }
+
+  // If the length of the pubInfo == 2, we know publisher information exists that we cannot accurately parse. Just pass to pubData["publisher"].
+  else if (pubInfo.length == 2) {
+    pubData["publisher"] = pubInfo[1].trim();
+    return pubData;
+  }
+
+  // In the unlikely case that the length pubInfo > 3, we know publisher information exists. Combine everything and pass to pubData["publisher"].
+  else if (pubInfo.length > 3) {
+    pubInfo.shift();
+    pubData["publisher"] = pubInfo.join().trim();
+    return pubData;
+  }
+
+  // This is the return for cases when all publisher information can be parsed completely or when it does not exist at all.
+  return pubData;
+}
+
+
+// Encode request components and assemble into query string.
+// This is non-functional, but could implemented in the future.
+function buildQueryString(rcomponent) {
+
+  var query = [];
+
+  for (var i in rcomponent) {
+    if (rcomponent[i] && (rcomponent[i] !== '')) {
+      query.push(i + '=' + encodeURIComponent(rcomponent[i]));
+    }
+  }
+
+  var queryString = query.join('&');
+
+  return queryString;
+
+}
+
+// End Aeon Integration Code
+
+});
+
+/*Google Cover Fix RT 52235. 08.15.18. LG*/
+$(window).load(function() {
+$( ".coverimages, #bookcover" ).each(function() {
+  if ($(this).find('img').length) {
+	var oldSource = $(this).find('img').attr("src");
+  var newSource = oldSource.replace("zoom=5" , "zoom=1");
+    $(this).find('img').attr("src" , newSource);
+    $(".google-books-preview").hide();
+  }
+});
+});
+        //]]>
+</script>
+

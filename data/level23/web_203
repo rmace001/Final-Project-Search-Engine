@@ -1,0 +1,1193 @@
+http://regents.wsu.edu/
+<!DOCTYPE HTML>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="WSU Mobile Apps Team" name="Author"/>
+  <meta content="Washington State University" name="copyright"/>
+  <meta content="index, follow" name="robots"/>
+  <meta content="WSU Board of Regents." name="description"/>
+  <meta content="Washington State University, WSU Regents, WSU Pullman, WSU Spokane, WSU Tri-Cities, WSU Vancouver, WSU Global Campus, WSU Everett, WSU Extension" name="keywords"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Board of Regents | Washington State University
+  </title>
+  <!-- RESPONSIVE -->
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"/>
+  <!-- FAVICON -->
+  <!--<link rel="shortcut icon" href="wsu.ico" title="Washington State University" />-->
+  <!-- CSS -->
+  <link href="/css/fonts.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/reset.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/main.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/home.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/custom.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/colors.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/animate.css?4" rel="stylesheet" type="text/css"/>
+  <link href="/css/override.less?4" rel="stylesheet" type="text/css"/>
+  <!-- COMPATIBILITY -->
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <!-- for formtool -->
+  <style>
+   .radiolistcontainer{
+        font: 300 16px/26px /*16px/30px*/ "Roboto", Helvetica, Arial, san-serif;
+      }
+  </style>
+ </head>
+ <body class="viewportwidth index section_" ng-app="PresidentsTemplateApp" ng-controller="templateController">
+  <!-- Progress Bar -->
+  <div class="progressbar">
+  </div>
+  <div class="slideoutwrapper menu-slideout-closed" menu-slideout="" ng-class="{'menu-slideout-closed':!menuIsVisible, 'menu-slideout-open': menuIsVisible}" ng-controller="regentsController">
+   <!-- START -->
+   <div class="wrapper" ng-click="closemenu($event);">
+    <!-- HEADER (WSU Alert) -->
+    <header class="wsualert initiallyhidden" ng-show="showtopalert">
+     <div class="close" ng-click="closeAlert();">
+      <a>
+      </a>
+     </div>
+     <div class="alertlogo">
+      <a>
+      </a>
+     </div>
+     <h1>
+      <a href="http://alert.wsu.edu" ng-bind-html="topalert.Message | unsafe">
+      </a>
+     </h1>
+    </header>
+    <!-- HEADER (Global Bar) -->
+    <header class="global">
+     <h1>
+      <a href="http://www.wsu.edu">
+       Washington State University
+      </a>
+     </h1>
+     <!-- Search -->
+     <div class="search" ng-class="{active:currentlyShowingGlobalSearch}">
+      <a ng-click="showGlobalSearch()">
+      </a>
+     </div>
+     <!-- Add class to change active state (active) -->
+     <!-- Tools -->
+     <div class="tools">
+      <a ng-click="toggletoolsmenu()">
+      </a>
+     </div>
+     <!-- Add .active to .tools (Changes active state) -->
+     <!-- Tools Dropdown Menu (Mobile) -->
+     <div class="toolsmenu initiallyhidden" ng-class="{hide: !showtoolsmenu}">
+      <ul>
+       <li>
+        <a href="http://index.wsu.edu">
+         A-Z Index
+        </a>
+       </li>
+       <li>
+        <a href="http://about.wsu.edu/about/statewide.aspx">
+         Statewide
+        </a>
+        <li>
+         <a href="http://my.wsu.edu">
+          myWSU
+         </a>
+        </li>
+        <li>
+         <a href="http://foundation.wsu.edu">
+          Give
+         </a>
+        </li>
+       </li>
+      </ul>
+     </div>
+     <nav>
+      <ul>
+       <li>
+        <a href="http://index.wsu.edu">
+         A-Z Index
+        </a>
+       </li>
+       <li>
+        <a href="http://about.wsu.edu/about/statewide.aspx">
+         Statewide
+        </a>
+        <ul class="hide">
+         <li>
+          <a href="http://www.wsu.edu/">
+           WSU Pullman
+          </a>
+         </li>
+         <li>
+          <a href="http://spokane.wsu.edu/">
+           WSU Spokane
+          </a>
+         </li>
+         <li>
+          <a href="http://tricity.wsu.edu/">
+           WSU Tri-Cities
+          </a>
+         </li>
+         <li>
+          <a href="http://vancouver.wsu.edu/">
+           WSU Vancouver
+          </a>
+         </li>
+         <li>
+          <a href="http://globalcampus.wsu.edu/">
+           WSU Global Campus
+          </a>
+         </li>
+         <li>
+          <a href="http://everett.wsu.edu/">
+           WSU Everett
+          </a>
+         </li>
+         <li>
+          <a href="http://ext.wsu.edu/">
+           WSU Extension
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li>
+        <a href="http://my.wsu.edu">
+         myWSU
+        </a>
+       </li>
+       <li>
+        <a href="http://foundation.wsu.edu">
+         Give
+        </a>
+       </li>
+      </ul>
+     </nav>
+    </header>
+    <!-- HEADER (Site ID) -->
+    <header class="siteid">
+     <div class="wsulogo">
+      <a href="http://www.wsu.edu">
+      </a>
+     </div>
+     <h1>
+      <a href="/index.html">
+       Board of Regents
+      </a>
+     </h1>
+     <div class="menu" ng-class="{active:menuIsVisible}">
+      <a ng-click="showmenu()">
+      </a>
+     </div>
+     <!-- Add class to change active state (active) -->
+    </header>
+    <div class="siteidplaceholder">
+    </div>
+    <!-- WSU Search -->
+    <div class="wsusearch initiallyhidden" ng-class="{hide:!currentlyShowingGlobalSearch}">
+     <header class="siteid">
+      <div class="wsulogo">
+       <a href="http://www.wsu.edu">
+       </a>
+      </div>
+      <div class="wsusearchwrap">
+       <form action="https://search.wsu.edu/Default.aspx">
+        <input name="cx" type="hidden" value="013644890599324097824:kbqgwamjoxq"/>
+        <input name="cof" type="hidden" value="FORID:11"/>
+        <input name="sa" type="hidden" value="Search"/>
+        <input name="fp" type="hidden" value="true"/>
+        <input class="wsusearchbar" name="q" onblur="if(this.value == ''){this.value='Search WSU';}" onfocus="if(this.value == 'Search WSU'){this.value = '';}" type="text" value="Search WSU"/>
+       </form>
+      </div>
+     </header>
+    </div>
+    <!-- SECTION // INTRO -->
+    <section class="history disablemenu">
+     <!-- ARTICLE -->
+     <article>
+      <!-- Slider -->
+      <div class="slider" ng-cloak="" ng-swipe-left="nextRegent()" ng-swipe-right="prevRegent()">
+       <!--
+<div class="regent barbieri" ng-class="{active:currentregentindex==0}" ng-click="setRegentLocation(0);">
+<div class="photo"></div>
+<h3>Donald K. Barbieri</h3>
+<h4>Member</h4>
+<p class="learnmore"><a class="btnclr" href="/regent-profiles/barbieri.html">Read More</a></p>
+</div>
+-->
+       <div class="regent baseler" ng-class="{active:currentregentindex==0}" ng-click="setRegentLocation(0);">
+        <div class="photo">
+        </div>
+        <h3>
+         Theodor P. Baseler
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/baseler.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent blankenship" ng-class="{active:currentregentindex==1}" ng-click="setRegentLocation(1);">
+        <div class="photo">
+        </div>
+        <h3>
+         Brett Blankenship
+        </h3>
+        <h4>
+         Vice Chair
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/blankenship.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent carson" ng-class="{active:currentregentindex==2}" ng-click="setRegentLocation(2);">
+        <div class="photo">
+        </div>
+        <h3>
+         Scott E. Carson
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/carson.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent dickinson" ng-class="{active:currentregentindex==3}" ng-click="setRegentLocation(3);">
+        <div class="photo">
+        </div>
+        <h3>
+         Marty Dickinson
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/dickinson.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <!-- Pagination -->
+       <div class="arrow pagarrow-lft" ng-click="prevRegent();">
+        <a>
+        </a>
+       </div>
+       <div class="regent sims" ng-class="{active:currentregentindex==4}" ng-click="setRegentLocation(4);">
+        <div class="photo">
+        </div>
+        <h3>
+         Ron Sims
+        </h3>
+        <h4>
+         Chair
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/sims.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="arrow pagarrow-rht" ng-click="nextRegent()">
+        <a>
+        </a>
+       </div>
+       <!-- Pagination -->
+       <div class="regent frost" ng-class="{active:currentregentindex==5}" ng-click="setRegentLocation(5);">
+        <div class="photo">
+        </div>
+        <h3>
+         Jordan Frost
+        </h3>
+        <h4>
+         Student Regent
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/frost.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent powell" ng-class="{active:currentregentindex==6}" ng-click="setRegentLocation(6);">
+        <div class="photo">
+        </div>
+        <h3>
+         Lura J. Powell
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/powell.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent redman" ng-class="{active:currentregentindex==7}" ng-click="setRegentLocation(7);">
+        <div class="photo">
+        </div>
+        <h3>
+         Heather Redman
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/redman.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent schauer" ng-class="{active:currentregentindex==8}" ng-click="setRegentLocation(7);">
+        <div class="photo">
+        </div>
+        <h3>
+         Lisa K. Schauer
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/schauer.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="regent worthy" ng-class="{active:currentregentindex==9}" ng-click="setRegentLocation(8);">
+        <div class="photo">
+        </div>
+        <h3>
+         Mike Worthy
+        </h3>
+        <h4>
+         Member
+        </h4>
+        <p class="learnmore">
+         <a class="btnclr" href="/regent-profiles/worthy.html">
+          Read More
+         </a>
+        </p>
+       </div>
+       <div class="pagination">
+        <ul>
+         <li>
+          <a ng-class="{active: currentregentindex== 0}" ng-click="setRegentLocation(0)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 1}" ng-click="setRegentLocation(1)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 2}" ng-click="setRegentLocation(2)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 3}" ng-click="setRegentLocation(3)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 4}" ng-click="setRegentLocation(4)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 5}" ng-click="setRegentLocation(5)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 6}" ng-click="setRegentLocation(6)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 7}" ng-click="setRegentLocation(7)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 8}" ng-click="setRegentLocation(8)">
+          </a>
+         </li>
+         <li>
+          <a ng-class="{active: currentregentindex== 9}" ng-click="setRegentLocation(9)">
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="clear">
+       </div>
+      </div>
+     </article>
+    </section>
+    <nav class="bar sticky">
+     <ul class="nav homelink">
+      <li>
+       <a class="home" href="/">
+        -
+       </a>
+      </li>
+      <li>
+       <a href="/meeting-dates/">
+        Meeting Dates
+       </a>
+      </li>
+      <li>
+       <a href="/meeting-minutes/">
+        Meeting Minutes
+       </a>
+      </li>
+      <li>
+       <a href="/regents-committees/">
+        Regents Committees
+       </a>
+      </li>
+      <li>
+       <a href="/request-for-public-comment.html">
+        Request For Public Comment
+       </a>
+      </li>
+      <li>
+       <a href="/student-regent-application/index.html">
+        Student Regent Application
+       </a>
+       <ul>
+        <li>
+         <a href="/student-regent-application/index.html">
+          Student Regent Application
+         </a>
+         <li>
+          <a href="/student-regent-application/frequently-asked-questions.html">
+           Student Regent FAQs
+          </a>
+         </li>
+         <li>
+          <a href="/student-regent-application/committee-timelines-contacts.html">
+           Timelines, Committees, Contacts
+          </a>
+         </li>
+         <li>
+          <a href="/formtool/Signup/index.castle?formid=1">
+           Online Application
+          </a>
+         </li>
+         <li>
+          <a href="/student-regent-application/Student-Regent-Application.pdf">
+           Student Regent Application PDF
+          </a>
+         </li>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a href="/distinguished-alumni/index.html">
+        Regents' Distinguished Alumnus/a Award
+       </a>
+       <ul>
+        <li>
+         <a href="/distinguished-alumni/index.html">
+          Regents' Distinguished Alumnus/a Award
+         </a>
+        </li>
+        <li>
+         <a href="/distinguished-alumni/about.html">
+          About the Award
+         </a>
+        </li>
+        <li>
+         <a href="/distinguished-alumni/recipients/index.html">
+          Recipients
+         </a>
+         <ul>
+          <li>
+           <a href="/distinguished-alumni/recipients/schweitzer.html">
+            Edmund Schweitzer
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/gillett.html">
+            Nancy A. Gillett
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/pettit.html">
+            George R. Pettit
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/olerud.html">
+            John E. Olerud
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/brinson.html">
+            Gary P. Brinson
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/damon.html">
+            Dwight H. Damon
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/mcclellan.html">
+            Roger O. McClellan
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/millerhull.html">
+            David Miller and Robert Hull
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/campbell.html">
+            Phyllis J. Campbell
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/rose.html">
+            Irwin Rose
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/abelson.html">
+            John N. Abelson
+           </a>
+          </li>
+          <li>
+           <a href="/distinguished-alumni/recipients/alexie.html">
+            Sherman J. Alexie Jr.
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a href="/formtool/Signup/index.castle?formid=3">
+          Nomination Form
+         </a>
+        </li>
+        <li>
+         <a href="/formtool/Signup/index.castle?formid=5">
+          Registration
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a href="/regent-profiles/index.html">
+        Regent Profiles
+       </a>
+       <ul>
+        <li>
+         <a href="/regent-profiles/index.html">
+          Regent Profiles
+         </a>
+        </li>
+        <li>
+         <a href="/regent-profiles/former-regents.html">
+          Former Regents
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a href="/contact-us/index.html">
+        Contact Us
+       </a>
+      </li>
+      <li>
+       <a href="/general-powers/index.html">
+        General Powers
+       </a>
+      </li>
+      <li>
+       <a href="/bylaws/index.html">
+        Bylaws
+       </a>
+       <ul>
+        <li>
+         <a href="/bylaws/index.html">
+          Bylaws
+         </a>
+         <li>
+          <a href="/bylaws/4.html">
+           Article I: Officers of the Board
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article2.html">
+           Article II: Meetings of the Board
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article3.html">
+           Article III: Committees of the Board
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article4.html">
+           Article IV: Officers of the University
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article5.html">
+           Article V: Faculty, Staff, Students, Alumni, and Foundation Representatives
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article6.html">
+           Article VI: Exercise of Powers
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article7.html">
+           Article VII: Amendments
+          </a>
+         </li>
+         <li>
+          <a href="/bylaws/article8.html">
+           Article VIII: Special Provisions Relating to Regents
+          </a>
+         </li>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="more">
+        More +
+       </a>
+       <ul class="overflow">
+       </ul>
+      </li>
+     </ul>
+    </nav>
+    <div class="horiznavplaceholder">
+    </div>
+    <!-- SECTION // CONTENT -->
+    <section class="resizable">
+     <article>
+      <!-- Breadcrumbs Navigation -->
+      <div class="breadcrumbs">
+      </div>
+      <div class="about">
+       <h3>
+        The Washington State University Board of Regents is the University's governing body whose broad responsibilities are to supervise, coordinate, manage and regulate the WSU system, as provided by state statute. The Board of Regents consists of 10 members, one of whom is a student.
+       </h3>
+      </div>
+      <div class="resources">
+       <ul>
+        <li>
+         <a data-mce-href="http://president.wsu.edu/" href="http://president.wsu.edu/">
+          Office of the President
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://aswsu.wsu.edu/" href="http://aswsu.wsu.edu/">
+          ASWSU
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://www.wsu.edu/" href="http://www.wsu.edu/">
+          WSU Pullman
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://www.spokane.wsu.edu/" href="http://www.spokane.wsu.edu/">
+          WSU Spokane
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://www.tricity.wsu.edu/" href="http://www.tricity.wsu.edu/">
+          WSU Tri-Cities
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://www.vancouver.wsu.edu/" href="http://www.vancouver.wsu.edu/">
+          WSU Vancouver
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://globalcampus.wsu.edu/" href="http://globalcampus.wsu.edu/">
+          Global Campus
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://everett.wsu.edu/" href="http://everett.wsu.edu/">
+          WSU Everett
+         </a>
+        </li>
+        <li>
+         <a data-mce-href="http://ext.wsu.edu/" href="http://ext.wsu.edu/">
+          WSU Extension
+         </a>
+        </li>
+       </ul>
+      </div>
+      <!-- Share -->
+      <div class="share">
+       <div class="twitter">
+        <a class="tooltips" href="https://twitter.com/share">
+         <div class="tip">
+          Share
+         </div>
+        </a>
+       </div>
+       <div class="facebook">
+        <a class="tooltips" href="http://www.facebook.com/sharer.php?u=https://regents.wsu.edu/index.html">
+         <div class="tip">
+          Share
+         </div>
+        </a>
+       </div>
+       <div class="linkedin">
+        <a class="tooltips" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://regents.wsu.edu/index.html">
+         <div class="tip">
+          Share
+         </div>
+        </a>
+       </div>
+       <div class="google">
+        <a class="tooltips" href="https://plus.google.com/share?url=https://regents.wsu.edu/index.html">
+         <div class="tip">
+          Share
+         </div>
+        </a>
+       </div>
+       <div class="email">
+        <a class="tooltips" href="mailto:someone?subject=Please look at https://regents.wsu.edu/index.html">
+         <div class="tip">
+          Email
+         </div>
+        </a>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+     </article>
+    </section>
+    <section class="meetings">
+     <article class="leftalign">
+      <h3>
+       Meeting Updates
+      </h3>
+      <p>
+       The next Regular Meeting of the Board is scheduled for March 8, 2019 in Everett, Washington. The agenda and materials will be available Friday, March 1, 2019.
+      </p>
+      <div class="divider">
+       <br/>
+      </div>
+      <p>
+       The Regents will provide a public comment period at each regular meeting of the Board. Sign up using the
+       <a data-mce-href="/formtool/Signup/index.castle?formid=2" href="/formtool/Signup/index.castle?formid=2">
+        on-line Request to Provide Public Comment form
+       </a>
+       , available at noon on Friday, March 1, 2019.
+      </p>
+     </article>
+    </section>
+    <section class="announcements">
+     <article class="fadein leftalign" data-mce-style="opacity: 1;" style="opacity: 1;">
+      <h3>
+       Announcements
+      </h3>
+      <h4>
+       Mar 01, 2019
+      </h4>
+      <h5>
+       <strong>
+        <a href="https://news.wsu.edu/2019/03/01/march-7-8-regents-hold-regular-meeting-everett-campus/">
+         March 7‑8: Regents hold regular meeting on Everett campus
+        </a>
+       </strong>
+      </h5>
+      <p>
+       <p>
+        The Board of Regents will hold its regularly scheduled meeting March 7‑8 at WSU Everett.
+       </p>
+       <p>
+        The post
+        <a href="https://news.wsu.edu/2019/03/01/march-7-8-regents-hold-regular-meeting-everett-campus/" rel="nofollow">
+         March 7‑8: Regents [...]
+        </a>
+       </p>
+       <div class="divider">
+       </div>
+       <h4>
+        Jan 18, 2019
+       </h4>
+       <h5>
+        <strong>
+         <a href="https://news.wsu.edu/2019/01/18/jan-24-25-wsu-regents-hold-retreat-seatac/">
+          Jan. 24‑25: WSU Regents hold retreat in SeaTac
+         </a>
+        </strong>
+       </h5>
+       <p>
+        <p>
+         Agenda includes Pullman Baseball Clubhouse and Cosmic Crisp apple.
+        </p>
+        <p>
+         The post
+         <a href="https://news.wsu.edu/2019/01/18/jan-24-25-wsu-regents-hold-retreat-seatac/" rel="nofollow">
+          Jan. 24‑25: WSU Regents hold retreat in SeaTac
+         </a>
+         appeared [...]
+        </p>
+        <div class="divider">
+        </div>
+        <h4>
+         Nov 09, 2018
+        </h4>
+        <h5>
+         <strong>
+          <a href="https://news.wsu.edu/2018/11/09/wsu-regents-hold-regular-meeting-pullman-campus-nov-15-16/">
+           Nov. 15‑16: Regents hold regular meeting on Pullman campus
+          </a>
+         </strong>
+        </h5>
+        <p>
+         <p>
+          November Board of Regents meeting set for Pullman campus.
+         </p>
+         <p>
+          The post
+          <a href="https://news.wsu.edu/2018/11/09/wsu-regents-hold-regular-meeting-pullman-campus-nov-15-16/" rel="nofollow">
+           Nov. 15‑16: Regents hold regular meeting on Pullman campus
+          </a>
+          appeared [...]
+         </p>
+        </p>
+       </p>
+      </p>
+     </article>
+    </section>
+    <section class="break hide">
+    </section>
+    <!-- FOOTER -->
+    <footer>
+     <div class="footwrap">
+      <!-- Weather -->
+      <div class="weather">
+       <div class="forecast" ng-class="weathericon">
+       </div>
+       <ul>
+        <li>
+         Today {{temperature}}
+        </li>
+        <li>
+         {{citytoshow}}
+        </li>
+       </ul>
+      </div>
+      <!-- Legal -->
+      <div class="legal">
+       <div class="policies">
+        <a href="http://policies.wsu.edu">
+        </a>
+       </div>
+       <div class="accessibility">
+        <a href="http://access.wsu.edu">
+        </a>
+       </div>
+       <div class="copyright">
+        <a href="http://copyright.wsu.edu">
+        </a>
+       </div>
+       <ul>
+        <li>
+         <a href="http://copyright.wsu.edu">
+          © Copyright
+         </a>
+        </li>
+        <li>
+         <a href="http://access.wsu.edu">
+          Accessibility
+         </a>
+        </li>
+        <li>
+         <a href="http://policies.wsu.edu">
+          Policies
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </footer>
+   </div>
+   <!-- END -->
+   <!-- Mobile (Slideout) Navigation -->
+   <nav class="mobile viewportheight initiallyhidden" id="mobilenav" ng-iscroll="mobilenav" ng-iscroll-refresher="mobilenav">
+    <!-- Add class to change theme color (theme1) or (theme2) -->
+    <div class="mobilenavwrapper ">
+     <div class="wsulogo">
+     </div>
+     <ul class="nav homelink">
+      <li>
+       <a href="/">
+        Home
+       </a>
+      </li>
+      <li>
+       <a class="" href="/meeting-dates/index.html">
+        Meeting Dates
+       </a>
+      </li>
+      <li>
+       <a class="" href="/meeting-minutes/">
+        Meeting Minutes
+       </a>
+      </li>
+      <li>
+       <a class="" href="/regents-committees/">
+        Regents Committees
+       </a>
+      </li>
+      <li>
+       <a class="" href="/request-for-public-comment.html">
+        Request For Public Comment
+       </a>
+      </li>
+      <li>
+       <a class="" href="/student-regent-application/index.html">
+        Student Regent Application
+       </a>
+       <ul>
+        <li>
+         <a class="" href="/student-regent-application/frequently-asked-questions.html">
+          Student Regent FAQs
+         </a>
+        </li>
+        <li>
+         <a class="" href="/student-regent-application/committee-timelines-contacts.html">
+          Timelines, Committees, Contacts
+         </a>
+        </li>
+        <li>
+         <a class="" href="/formtool/Signup/index.castle?formid=1">
+          Online Application
+         </a>
+        </li>
+        <li>
+         <a class="" href="/student-regent-application/Student-Regent-Application.pdf">
+          Student Regent Application PDF
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="" href="/distinguished-alumni/index.html">
+        Regents' Distinguished Alumnus/a Award
+       </a>
+       <ul>
+        <li>
+         <a class="" href="/distinguished-alumni/about.html">
+          About the Award
+         </a>
+        </li>
+        <li>
+         <a class="" href="/distinguished-alumni/recipients/index.html">
+          Recipients
+         </a>
+         <ul>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/schweitzer.html">
+            Edmund Schweitzer
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/gillett.html">
+            Nancy A. Gillett
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/pettit.html">
+            George R. Pettit
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/olerud.html">
+            John E. Olerud
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/brinson.html">
+            Gary P. Brinson
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/damon.html">
+            Dwight H. Damon
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/mcclellan.html">
+            Roger O. McClellan
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/millerhull.html">
+            David Miller and Robert Hull
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/campbell.html">
+            Phyllis J. Campbell
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/rose.html">
+            Irwin Rose
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/abelson.html">
+            John N. Abelson
+           </a>
+          </li>
+          <li>
+           <a class="" href="/distinguished-alumni/recipients/alexie.html">
+            Sherman J. Alexie Jr.
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li>
+         <a class="" href="/formtool/Signup/index.castle?formid=3">
+          Nomination Form
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="" href="/regent-profiles/index.html">
+        Regent Profiles
+       </a>
+       <ul>
+        <li>
+         <a class="" href="/regent-profiles/former-regents.html">
+          Former Regents
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="" href="/contact-us/index.html">
+        Contact Us
+       </a>
+      </li>
+      <li>
+       <a class="" href="/general-powers/index.html">
+        General Powers
+       </a>
+      </li>
+      <li>
+       <a class="" href="/bylaws/index.html">
+        Bylaws
+       </a>
+       <ul>
+        <li>
+         <a class="" href="/bylaws/4.html">
+          Article I: Officers of the Board
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article2.html">
+          Article II: Meetings of the Board
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article3.html">
+          Article III: Committees of the Board
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article4.html">
+          Article IV: Officers of the University
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article5.html">
+          Article V: Faculty, Staff, Students, Alumni, and Foundation Representatives
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article6.html">
+          Article VI: Exercise of Powers
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article7.html">
+          Article VII: Board of Regents Policies
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article8.html">
+          Article VIII: Amendments
+         </a>
+        </li>
+        <li>
+         <a class="" href="/bylaws/article9.html">
+          Article IX: Special Provisions Relating to Regents
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </div>
+   </nav>
+  </div>
+  <!-- Popup -->
+  <div class="popupwrap hide" ng-class="{hide:!currentlysearchinglocal}" ng-click="closeLocalSearch($event);">
+   <div class="popup" ng-animate="'modal'" ng-show="currentlysearchinglocal">
+    <div class="close lht">
+     <a ng-click="closeLocalSearch()">
+     </a>
+    </div>
+    <div class="clear">
+    </div>
+    <!-- Local Search -->
+    <div class="localsearchwrap">
+     <form ng-submit="gotoSearchPage()">
+      <input class="localsearchbar" id="name" ng-model="localsearchterm" placeholder="Search regents.wsu.edu" type="text"/>
+     </form>
+    </div>
+    <div class="loaderspin lht" ng-show="gettingsearchresults">
+    </div>
+   </div>
+  </div>
+  <!-- JS -->
+  <script type="text/javascript">
+   if (!window.jQuery || (window.jQuery && /[1-9]\.[1-7].[1-9]/.test(jQuery.fn.jquery))) {document.write(unescape("%3Cscript src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));}
+  </script>
+  <script src="/js/jquery.transit.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-route.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-animate.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-touch.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-cookies.js">
+  </script>
+  <script src="/js/modernizr.js">
+  </script>
+  <script src="/js/angular-menu-slideout.js">
+  </script>
+  <script src="/js/iscroll.js">
+  </script>
+  <script src="/js/ng-iscroll.js">
+  </script>
+  <script src="/js/waypoints.min.js">
+  </script>
+  <script src="/js/angular-local-storage.js">
+  </script>
+  <script src="/js/PresidentsTemplateApp.js?4">
+  </script>
+  <script src="/js/progressbar.js">
+  </script>
+ </body>
+</html>

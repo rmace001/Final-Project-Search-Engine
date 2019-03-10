@@ -1,0 +1,2028 @@
+http://maps.duke.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="IE=EDGE" http-equiv="X-UA-Compatible"/>
+  <meta content="text/html; charset=utf-8" http-equiv="content-Type"/>
+  <meta content="no-cache" http-equiv="cache-control"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <!-- Page title -->
+  <title>
+   Duke University Maps
+  </title>
+  <!-- Initial tiny javascript load -->
+  <script type="text/javascript">
+   var isCms = function () {
+    return Number(0);
+  };
+
+  var ac = {"version":"3.0.1rc11-hf1","debug":false,"showMaintenance":false,"minify":true,"mapType":"google","nfeDomain":"https:\/\/map.concept3d.com","nfeRedirect":true,"mapboxAccessToken":"pk.eyJ1IjoiY29uY2VwdDNkIiwiYSI6ImNpd2ducXF1czAwd3Yyb2tpcGthbThvNXkifQ.MeSor7axjgtk3P06O2C-5w","defaultTileStyleId":"cjfjt9m0e0bpc2stjppee1zom","googleBusiness":true,"cmsUrl":"https:\/\/www.myatlascms.com\/","cdnApi":false,"cdnUrl":"http:\/\/prod.concept3dinc.netdna-cdn.com\/","cdnUrlSecure":"https:\/\/prod-concept3dinc.netdna-ssl.com\/","cdnAssets":true,"cdnAssetsUrl":"http:\/\/d1gntqhqj0rbcs.cloudfront.net\/","cdnAssetsUrlSecure":"https:\/\/d1gntqhqj0rbcs.cloudfront.net\/","mailHost":"email-smtp.us-west-2.amazonaws.com","mailPort":587,"mailUser":"AKIAJ2SRFEA2TTK7KAQQ","mailPassword":"Akr51FGr9WBqfGOgpekB6TAMEmPgoqpBfaezLE7\/kMaG","mailFrom":"admin@concept3d.com","mailFromTitle":"Concept3d","assetsDir":"\/mnt\/efs\/assets\/","imageCacheDir":"\/mnt\/cache\/","imagePrintDir":"\/mnt\/printmaps"};
+
+  var mapConfig = {"map_type_satellite":"true","map_type_default":"Map","map_type_map":"true","sidebarFooter":"<div>\r\n<p><a title=\"Maps\" href=\"http:\/\/about.duke.edu\/maps\" target=\"_blank\">About the Map<\/a>&nbsp;|&nbsp;<a title=\"Mail\" href=\"mailto:mapsteam@duke.edu\" target=\"_blank\">Feedback<\/a>&nbsp;|&nbsp;<a title=\"Home\" href=\"http:\/\/www.Duke.edu\" target=\"_blank\">Duke University<\/a><\/p>\r\n<p>&copy;&nbsp;2017 Durham, NC 27708 (919) 684-8111<\/p>\r\n<\/div>","sidebarHeader":"","ga_id":"","minimap":0,"gps_prompt":0,"printBtnName":"","printBtn":0,"printUrl":"","printType":"default","balloonType":"sidebar","select_all":0,"tiltAngle":0,"markerClustering":0,"getThisView":0,"lsPosition":"bottom-right","solrAnd":0,"searchText":"","searchBarDisplay":"close","default_media":"image","mobileMenu":"drilldown","sidebarMenu":"drilldown","default_tab":"locations","mblpos":"","altitude":1500,"longitude":-78.933441,"latitude":36.002499,"mapId":21,"centerAlt":1500,"centerLat":36.002499,"centerLng":-78.933441,"pano_label":"1","pano_zoom":"15","google_streetview":"1","wayfinding":false,"frontend_wayfinding":false,"walking_directions":false,"level_selector":false,"frontend_walking_directions":false,"frontend_level_selector":false,"minLevel":0,"maxLevel":0,"default_level":0,"level_data":"","user_favorites":false,"custom_fields":false,"schedule":true,"print_rendering":true,"print_map":false,"print_map_frontend":false,"authentication":null,"search_description":true,"auto_zoom":true,"idp":"","map_branding":"campusbird","bus":false,"panoramas":false,"google_font":null,"visittrack":false,"tour_vt":true,"popups":false,"search_geocode":false,"advanced_search":false,"collections":false,"collections_data":{"default":{"icon":"\/assets\/library\/icons\/default\/marker-star.png","list_icon":"\/assets\/library\/icons\/default\/list-star.png"}},"parking":"","per_page":50,"map_tile_style_id":"","mapspacer":false,"mapbox_token":"pk.eyJ1IjoiY29uY2VwdDNkIiwiYSI6ImNqbXRxaDMwZjI5dmkzcHFjaHRzNXo0YjAifQ.2GBBw4txAOlXz3AuVhvlwQ","edit_marker":false};
+  if (!isCms() && mapConfig.wayfinding && !mapConfig.frontend_wayfinding) {
+    mapConfig.wayfinding = false;
+  }
+
+  // override default token with client-specific one
+  ac.mapboxAccessToken = mapConfig.mapbox_token || ac.mapboxAccessToken;
+
+  // disable popups in CMS
+  if (isCms()) {
+    // if we want to edit we'd like to know if popups are on
+    // that's why we are saving the data before disabling them
+    mapConfig.popups_original = mapConfig.popups;
+    mapConfig.popups = false;
+    /*
+      Leaflet draw chrome touch detection issue
+      disable touch support for cms
+      necessary for leaflet draw as cross-browsers detection of touch screens devices is flawed at the moment
+    */
+    // L_NO_TOUCH = true;
+  }
+
+      ac.gk = false;
+  </script>
+  <script src="minified/preloader.js?3.0.1rc11-hf1">
+  </script>
+  <script>
+   var mapId = 21;
+    var accId = 21;
+    var cdnGet = h.paramsGet().cdn;
+    if (cdnGet && Number(cdnGet) === 0) {
+      ac.cdnapi = false;
+    }
+    var ap = AtlasPreloader();
+    ap.init();
+  </script>
+  <!-- specify -->
+  <script type="text/javascript">
+   window.mapProvider = "google";
+
+        window.feeds = {};
+          feeds[''] = true;
+      
+  var GETem = 0;
+  </script>
+  <!-- three.js -->
+  <script src="lib/threejs/three.min.64.js" type="text/javascript">
+  </script>
+  <script src="lib/threejs/swfobject.js" type="text/javascript">
+  </script>
+  <!-- load frameworks. -->
+  <script src="https://maps.googleapis.com/maps/api/js?client=gme-concept3dinc&amp;channel=21&amp;v=3.27&amp;libraries=places,drawing,geometry">
+  </script>
+  <!-- Pass variables to Javascript -->
+  <script type="text/javascript">
+   // This should be deleted after PanoBuilder is live :murad
+    // to show it set it as true
+    var showPanoBuilder = true;
+
+
+		var mapCenter = {};
+		mapCenter.lat = 36.002499;
+		mapCenter.lng = -78.933441;
+		mapCenter.alt = 1500;
+		mapCenter.zoom = 15;
+		mapConfig['map_views']  = [{"id":4,"map":21,"name":"West","url":"","lat":36.002575,"lng":-78.939812,"zoom":16,"weight":20,"deleted":0},{"id":5,"map":21,"name":"Central","url":"","lat":36.004139,"lng":-78.92939,"zoom":16,"weight":30,"deleted":0},{"id":6,"map":21,"name":"East","url":"","lat":36.007267,"lng":-78.917091,"zoom":16,"weight":40,"deleted":0},{"id":7,"map":21,"name":"Medical","url":"","lat":36.005951,"lng":-78.938873,"zoom":16,"weight":50,"deleted":0}];
+		var mapStyle = {"all_hueColor":"#dbbaba","all_gammaValue":0,"administrative_gammaValue":0,"administrative_country_gammaValue":0,"administrative_province_gammaValue":0,"administrative_locality_gammaValue":0,"administrative_neighborhood_gammaValue":0,"administrative_land_parcel_gammaValue":0,"landscape_gammaValue":0,"landscape_man_made_gammaValue":0,"landscape_natural_gammaValue":0,"poi_gammaValue":0,"poi_attraction_gammaValue":0,"poi_business_gammaValue":0,"poi_government_gammaValue":0,"poi_medical_gammaValue":0,"poi_park_gammaValue":0,"poi_place_of_worship_gammaValue":0,"poi_school_gammaValue":0,"poi_sports_complex_gammaValue":0,"road_hueColor":"#2b338f","road_gammaValue":0,"road_highway_gammaValue":0,"road_highway_controlled_access_gammaValue":0,"road_arterial_gammaValue":0,"road_local_gammaValue":0,"transit_gammaValue":0,"transit_line_gammaValue":0,"transit_station_gammaValue":0,"transit_station_airport_gammaValue":0,"transit_station_bus_gammaValue":0,"transit_station_rail_gammaValue":0,"water_gammaValue":0};
+    mapConfig.buttonPos = mapConfig.buttonPos || 'iframe';
+    mapConfig.defaultMarkerIcon = '//' + location.host
+      + '/assets/library/icons/default/default.png';
+
+    mapConfig.google_streetview = mapConfig.google_streetview === '1';
+    mapConfig.maxZoom = 21;
+    mapConfig.nfe = 0;
+  </script>
+  <!-- Panoramas -->
+  <script type="text/javascript">
+   window.panoData = [];
+  </script>
+  <!-- Load extension files -->
+  <script type="text/javascript">
+   var extFacebook = true;var extFoursquare = true;var extShare = true;
+  </script>
+  <!-- Prefetching -->
+  <link href="//dev.concept3dinc.netdna-cdn.com/" rel="dns-prefetch"/>
+  <link href="//connect.facebook.net" rel="dns-prefetch"/>
+  <link href="//fonts.googleapis.com" rel="dns-prefetch"/>
+  <link href="//www.google-analytics.com" rel="dns-prefetch"/>
+  <link href="//themes.googleusercontent.com" rel="dns-prefetch"/>
+  <link href="//api.tiles.mapbox.com" rel="dns-prefetch"/>
+  <link href="lib/jquery/jquery-ui-resizeble.css" rel="stylesheet"/>
+  <script src="minified/google.js?3.0.1rc11-hf1">
+  </script>
+  <!-- Custom Javascript -->
+  <!-- load options -->
+  <script type="text/javascript">
+   var mapType = "map";
+  </script>
+  <!-- Google Fonts -->
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,600" rel="stylesheet" type="text/css"/>
+  <!-- load css. -->
+  <link href="stylesheets/base.css?3.0.1rc11-hf1" rel="stylesheet" type="text/css">
+   <!-- Clearfix -->
+   <style type="text/css">
+    .clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+   </style>
+   <!--[if IE]><style type="text/css">.clearfix { zoom: 1; display: block; }</style><![endif]-->
+   <link href="lib/jquery/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+    <!-- <link type="text/css" rel="stylesheet" href="themes/default/default.default.theme.css?3.0.1rc11-hf1" media="screen" /> -->
+    <!-- <link type="text/css" rel="stylesheet" href="themes/default/default.balloon.print.theme.css?3.0.1rc11-hf1" media="print" /> -->
+    <link href="stylesheets/desktop.css?3.0.1rc11-hf1" rel="stylesheet">
+     <!-- load style css -->
+     <style type="text/css">
+      #infowindow-wrapper .description, #balloon-wrapper .description { font-family: Arial, sans-serif; }    #search input,
+    #infowindow-wrapper .description,
+    #balloon-wrapper .description {
+      line-height: 17px;
+      font-size: 12px
+    }div#footer-content { color: #363636; }#balloon-wrapper .description { color: #262626; }#tour-wrapper #tour-list { color: #262626; }#tour-wrapper #tour-list { background-color: ; }.menu-hover, .button.custom { color: #ffffff; }.srTxtBgHvr:hover {background-color: #ffffff}.srTxtHvr:hover {color: #ffffff}.srTxtBg {background-color: #ffffff}.srTxt {color: #ffffff}.srBgHvr:hover h3 {color: #ffffff}.menu-hover.hover, .button.custom:hover, .button.custom.active, #print:hover, #help:hover { color: #ffffff; }.menu-hover, .button.custom, #content-bar-toggle, #content-bar-toggle.open { background-color: #001A57; }.srBgHvr:hover {background-color: #001A57}.srBgTxtHvr:hover {color: #001A57}.srBg {background-color: #001A57}.srBgTxt {color: #001A57}.srBgHvr h3 {color: #001A57}.menu-hover { background-image: url('assets/img/arrow-light.png'); background-repeat: no-repeat; background-position: 90% 50%; }.slideshow-enlarge { background-image: url('assets/img/expand-light.png'); background-repeat: no-repeat; }.map-view-buttons-home { background-image: url('assets/img/zoom-all-white.png'); background-repeat: no-repeat; background-position: 50% 50%; }.menu-hover.hover, .button.custom:hover, .button.custom.active, #content-bar-toggle:hover, #print:hover, #help:hover, #autocomplete-results .result:hover, .infowindow-tools.active { background-color: #c2c2c2; }#print:hover { background-image: url('assets/img/print.png'); }#help:hover { background-image: url('assets/img/help.png'); }.menu-hover.hover { background-image: url('assets/img/arrow-down-dark.png'); background-repeat: no-repeat; background-position: 90% 50%; }.slideshow-enlarge:hover { background-image: url('assets/img/expand-dark.png'); }.map-view-buttons-home:hover { background-image: url('assets/img/zoom-all-black.png'); background-repeat: no-repeat; background-position: 50% 50%; }#button-wrapper-mapType .button.custom{color:#fff; background-color:#979797;}#button-wrapper-mapType .button.custom:hover{color:#979797; background-color:#fff;}#button-wrapper-mapType .button.custom.active{color:#979797; background-color:#fff;}#button-wrapper-mapType .map-type-buttons-left{border-top-left-radius:2px; border-bottom-left-radius:2px;}#button-wrapper-mapType .map-type-buttons-right{border-top-right-radius:2px; border-bottom-right-radius:2px;}#button-wrapper-home .button.custom{border-radius:2px; color:#979797; background-color:#fff; background-image: url("assets/img/home-dark.png");}#button-wrapper-home .button.custom:hover{border-radius:2px; color:#fff; background-color:#979797; background-image: url("assets/img/home-light.png");}#user-content-wrapper { background-color: white; }.content-bar-pane { background-color: #e5e5e5; }#menu-bar, #print, #menu-bar #menu-bar-right #gpm, #help, #load-screen { background-color: #001A57; }#print { background-image: url('assets/img/print-hover.png'); background-repeat: no-repeat; background-position: 2px 4px; }#help { background-image: url('assets/img/help-hover.png'); background-repeat: no-repeat; background-position: 2px 4px; }#print, #menu-bar #menu-bar-right #gpm, #help { color: #ffffff; }
+.map-view-buttons.button.custom, .map-view-buttons.button.custom a {
+  background: none;
+  color: #fff;
+}
+
+.map-view-buttons.button.custom:hover, .map-view-buttons.button.custom:hover a, .map-view-buttons.button.custom a:hover {
+  color: #001A57;
+  background-color: #fff;
+}
+#logo { padding: 20px 0 10px; }#search input[type="text"], #autocomplete-results { color: #363636; }#search input[type="text"], #autocomplete-results { background-color: #F6EAB8; }.triangle {border-top-color: #F6EAB8}#search input[type="text"] { border: 1px solid #B5B5B5; }#search input[type=text]:focus, #search input[type=text]:active, #autocomplete-results { border: 1px solid #363636; }.content-bar-title .toggle-inner, .content-bar-title .toggle.on .toggle-inner { background-color: #B5B5B5; }.content-bar-title .toggle.on .toggle-inner { background-image: url('assets/img/checkbox-checked.png'); background-repeat: no-repeat; }.content-bar-title .toggle.mixed .toggle-inner { background-image: url('assets/img/checkbox-mixed.png'); background-repeat: no-repeat; }.content-bar-pane .content-bar-title.content-bar-title-root { font-family: Arial, sans-serif; }.content-bar-pane .content-bar-title.content-bar-title-root { font-size: 12px; }.content-bar-pane .content-bar-title.level-1 .content-bar-wrapper { color: #000000; }.content-bar-pane .content-bar-title.level-2 .content-bar-wrapper { color: #000000; }.content-bar-pane .content-bar-title.level-3 .content-bar-wrapper { color: #000000; }.content-bar-pane .content-bar-title.level-4 .content-bar-wrapper { color: #000000; }.content-bar-pane .content-bar-title.level-5 .content-bar-wrapper { color: #000000; }#content-bar .list-only .content-bar-wrapper:hover { color: #000000; }.content-bar-pane .content-bar-title .content-bar-wrapper:hover { color: #363636; }.content-bar-pane ul .content-bar-title{ background-color: #f0f0f0; }.content-bar-pane ul .content-bar-title-hover .content-bar-wrapper { background:url('assets/img/arrow-down-dark.png') no-repeat 20px 15px;}.content-bar-pane ul .content-bar-title-hover .content-bar-wrapper-down { background:url('assets/img/arrow-up-dark.png') no-repeat 20px 15px;}.content-bar-pane ul .content-bar-title-hover:hover { background-color: #aeafb0; }.content-bar-pane ul .content-bar-title-hover .content-bar-wrapper:hover { background:url('assets/img/arrow-down-dark.png') no-repeat 20px 15px;}.content-bar-pane ul .content-bar-title-hover .content-bar-wrapper-down:hover { background:url('assets/img/arrow-up-dark.png') no-repeat 20px 15px;}.content-bar-title.content-bar-title-root { font-family: Arial, sans-serif; }.content-bar-title.content-bar-title-root { font-size: 12px; }.content-bar-title.content-bar-title-root .content-bar-wrapper{ color: #000000; }.content-bar-title-hover.content-bar-title-root .content-bar-wrapper:hover { color: #363636; }.content-bar-title.content-bar-title-root { background-color: white; }.content-bar-title-hover.content-bar-title-root .content-bar-wrapper { background:url('assets/img/arrow-down-dark.png') no-repeat 20px 15px;}.content-bar-title-hover.content-bar-title-root .content-bar-wrapper-down { background:url('assets/img/arrow-up-dark.png') no-repeat 20px 15px;}.content-bar-title-hover.content-bar-title-root:hover { background-color: #e5e5e5; }.content-bar-title-hover.content-bar-title-root .content-bar-wrapper:hover { background:url('assets/img/arrow-down-dark.png') no-repeat 20px 15px;}.content-bar-title-hover.content-bar-title-root .content-bar-wrapper-down:hover { background:url('assets/img/arrow-up-dark.png') no-repeat 20px 15px;}.content-bar-pane ul li { color: #262626; }.content-bar-pane ul li:hover { color: #ffffff; }.content-bar-pane, .content-bar-pane ul li { background-color: #e5e5e5; }.content-bar-pane ul li:hover { background-color: #aeafb0; }#balloon-wrapper .balloon-header .title td { font-family: Arial, sans-serif; }#balloon-wrapper .balloon-header .title td { font-size: 14px; }#balloon-wrapper .balloon-header .title td { color: #000000; }#sidebar-header a:link, #sidebar-header a:visited, #balloon-wrapper .description a:link, #balloon-wrapper .description a:visited, div#footer-content p a:link, div#footer-content p a:visited, .marker-link { color: #0736a4; }#sidebar-header a:hover, .balloon-wrapper .description a:hover, div#footer-content p a:hover, .marker-link:hover { color: #0736a4; }#balloon-wrapper .media{ background-color: #e5e5e5; }.tiptool { color: #363636; }.tiptool { border: 1px solid #f5f5f5; }.infowindow-close { color: #000000; }#spinner-inner {background-position-x: 140px;}
+     </style>
+     <script type="text/javascript">
+      var styles = {"genFontFamily":"Arial, sans-serif","genFontSize":"12px","defTxtColor":"#262626","defTxtBgColor":"","defLinkColor":"#0736a4","defLinkRollColor":"#0736a4","defLinkBgColor":"","defLinkRollBgColor":"","buttonColor":"#ffffff","buttonRollColor":"#ffffff","buttonBgColor":"#001A57","buttonRollBgColor":"#c2c2c2","logoLinkURL":"http:\/\/www.duke.edu","logoBgColor":"","sideBgColor":"","sideExpBgColor":"#e5e5e5","searchTxtColor":"#363636","searchBgColor":"#F6EAB8","searchBorderColor":"#B5B5B5","searchActiveBorderColor":"#363636","pctFontFamily":"Arial, sans-serif","pctFontSize":"12px","rootCategoryColor":"#000000","rootCategoryRollColor":"#363636","rootCategoryBgColor":"white","rootCategoryRollBgColor":"#e5e5e5","gctFontFamily":"Arial, sans-serif","gctFontSize":"12px","categoryColor":"#000000","categoryRollColor":"#363636","categoryBgColor":"#f0f0f0","categoryRollBgColor":"#aeafb0","categoryItemColor":"#262626","categoryItemRollColor":"#ffffff","categoryItemBgColor":"#e5e5e5","categoryItemRollBgColor":"#aeafb0","checkBgColor":"#B5B5B5","ftrTxtColor":"#363636","ftrBgColor":"","topBarBgColor":"#001A57","balloonBgColor":"","balloonBorderColor":"","balloonBorderThickness":0,"bltFontFamily":"Arial, sans-serif","bltFontSize":"14px","defTxtHeadColor":"#000000","defTxtBgHeadColor":"","mediaBgColor":"#e5e5e5","labelTxtColor":"#363636","labelBgColor":"","labelBorderColor":"#f5f5f5","logoUrl":"mapheader1_1.png","bannerUrl":"","balloonUrl":"balloonheader.jpg","faviconUrl":"favicon0.png","mobileLoadScreenUrl":"","ctiBulletUrl":""};
+     </script>
+     <link href="/assets/21/favicon0.png" rel="shortcut icon">
+      <script src="lib/google/tiptool.js">
+      </script>
+      <script src="lib/google/HtmlMarker.js">
+      </script>
+      <meta content="http://maps.duke.edu/assets/21/mapheader1_1.png" property="og:image">
+       <script id="balloon-wrapper-template" type="text/x-handlebars-template">
+        <div id="content-bar-balloon-wrapper" class="cb-type-{{balloonType}}">
+    <div id="content-bar-balloon">{{content}}</div>
+  </div>
+       </script>
+       <script id="search-results-template" type="text/x-handlebars-template">
+        <ul id="mbl-search-list">
+  {{#each markers}}
+    <li id="sm-{{id}}">{{{name}}}</li>
+  {{/each}}
+  </ul>
+       </script>
+       <script id="print-template" type="text/x-handlebars-template">
+        <div id="printMapContainer">
+
+{{#unless cms}}
+  <div id="close-pg" title="Close Print Map Generator">&times;</div>
+{{/unless}}
+
+<form id="formPrintPdf" method="get" target="down" action="pdf-map/">
+
+<input type="hidden" name="mapId" id="mapId" value="" />
+<div>&nbsp;</div>
+<div>
+  <div class="print-circle">1</div>
+  <div>Select your page size and orientation.</div>  
+</div>
+
+
+<div>&nbsp;</div>
+<div style="padding-top:15px;" class="multi-options">
+    Page size: <select name="page_size" id="page_size" class="right">
+         <option data-ratio_p="1/1.29" data-ratio_l="1.29/1"  value="letter">Letter</option>
+         <option data-ratio_p="1/1.64" data-ratio_l="1.64/1" value="legal">Legal</option>
+         <option data-ratio_p="1/1.41" data-ratio_l="1.41/1" value="a4">A4</option>
+         </select>
+
+    <p>&nbsp;</p>
+    Orientation: <select name="orientation" id="orientation" class="right">
+         <option value="L">Landscape</option>
+         <option value="P">Portrait</option>
+         </select>
+    <div id="sortByAlphabet_wrapper">
+        <label>Sort legend alphabetically <input type="checkbox" value="1" name="sortByAlphabet" id="sortByAlphabet" /></label>
+    </div>
+</div>
+
+<div>&nbsp;</div>
+
+
+<div>
+  <div class="print-circle">2</div>
+  <div>Select the categories and locations you would like to include.</div>
+</div>
+
+
+<div style="margin-top:20px">&nbsp;</div>
+    <div id="show_locations_btn" class="active_gpm_btn">
+        <p>Locations</p>
+    </div>
+    <div id="show_tours_btn">
+        <p>Tours</p>
+    </div>
+    <div style="clear:both"></div>
+  <div id="show-print">
+    <div class="multi-options" id="print-category-list">
+      <ul id="catTree" class="treeview">
+      {{#each categories}}
+          <li class="catChild" id="licat-{{catId}}">
+            <div class="ddArrow ddIcon"></div>
+            <div class="ddArrow catToggle firstCat" id="trcat-{{catId}}">  {{name}}</div>
+            <input type="checkbox" name="catIds[]" class="nested_checkbox checkbox_category topCategory" value="{{{catId}}}" />
+            {{#if children}}
+              {{>printCategory}}
+            {{/if}}
+            {{#if markers}}
+            <ul class="markers_{{catId}}">
+              {{#each markers}}
+                <li>
+                    <input type="checkbox" name="" class="nested_checkbox checkbox_marker" value="{{this.id}}" /> {{{name}}}
+                </li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </li>
+      {{/each}}
+      </ul>
+      <div id="show_tours">
+        <ul id="all_tours">
+        </ul>
+      </div>
+    </div>
+  </div>
+<div>&nbsp;</div>
+
+
+<div>
+  <div class="print-circle">3</div>
+  <div>Select your view by panning and zooming the map to the right.</div>
+</div>
+<div>&nbsp;</div>
+
+
+<div>
+  <div class="print-circle">4</div>
+  <div>Select print options.</div>
+</div>
+<div>&nbsp;</div>
+<div class="multi-options">
+
+File type: <select name="output_type" id="output_type" class="right">
+         <option value="pdf">PDF</option>
+         <option value="png">PNG</option>
+         </select>
+<p>&nbsp;</p>
+Grid lines: <select name="grid_lines" id="grid_lines" class="right">
+         <option value="yes">Yes</option>
+         <option value="no">No</option>
+         </select>
+<p>&nbsp;</p>
+Legend Colors: <select name="colors" id="colors" class="right">
+         <option value="map">Use map colors</option>
+         <option value="bw">Black and white</option>
+         </select>
+
+<p>&nbsp;</p>
+
+<p>
+	Print title: &nbsp;<input type="text" name="print_title" style="width: 100%" value="" />
+</p>
+
+{{#if isLeaflet}}
+    <div id="generatePrintMap-turnOffStreetMap_wrapper">
+        <label>Turn off Open Street Maps <input type="checkbox" id="generatePrintMap-hidelabels" /></label>
+    </div>
+    <div id="generatePrintMap-unrender_wrapper">
+        <label>Turn Off Renderings <input type="checkbox" id="generatePrintMap-unrender" /></label>
+    </div>
+{{else}}
+    <div id="generatePrintMap-hidelabels_wrapper">
+        <label>Turn Off Google Maps<input type="checkbox" id="generatePrintMap-hidelabels" value="on" /></label>
+    </div>
+    <div id="generatePrintMap-unrender_wrapper">
+        <label>Turn Off Renderings <input type="checkbox" id="generatePrintMap-unrender" /></label>
+    </div>
+{{/if}}
+
+<div>&nbsp;</div>
+
+<div><div class="print-circle">5</div> When you're ready,<br /> generate your print map!</div>
+
+
+{{#unless printMapAuthenticated}}
+  <div>&nbsp;</div>
+  <div>&nbsp;</div>
+  <div class="print-circle print-circle-red">!</div><div style="margin-left: 62px;">You're using the trial version of this feature, which will have a watermark.<br/><br/>To unlock the full version and remove the watermark, please contact us at <a href="support@concept3d.com?subject=Concept3D Print Map Feature" target="_blank">support@concept3d.com</a>. In the mean time, feel free to generate as many maps as you'd like to try out the feature. <strong>We're sure you'll like it!</strong></div>
+{{/unless}}
+
+<div>&nbsp;</div>
+ <div id="be_patient" class="right"><img src="./pdf-map/loading.gif" width="24" align="absmiddle" border="0" />&nbsp;&nbsp;Please be patient, it can take up to a minute!</div>
+
+<div id="png-too-many" class="df-hidden">Please note, PNGs will only print on one page. If your legend exceeds one page it will not be printed.</div>
+
+<div>&nbsp;</div>
+<input class="button blue tt-processed right" type="button" name="printButton" id="printButton" value="GENERATE PRINT MAP" />
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+ <input type="hidden" name="lat" id="lat" value="" />
+ <input type="hidden" name="lng" id="lng" value="" />
+ <input type="hidden" name="zoom" id="zoom" value="" />
+ <input type="hidden" name="mWidth" id="mWidth" value="" />
+ <input type="hidden" name="mHeight" id="mHeight" value="" />
+ <input type="hidden" name="legendWidth" id="legendWidth" value="" />
+ <input type="hidden" name="carry" id="carry" value="" />
+ <input type="hidden" name="markers" id="markers" value="" />
+ <input type="hidden" name="tourId" id="tourId" value="" />
+ <input type="hidden" name="offLabels" id="offLabels" value="" />
+ <input type="hidden" name="offRenderings" id="offRenderings" value="" />
+ <input type="hidden" name="checkMarkersNumber" id="checkMarkersNumber" value="" />
+ <input type="hidden" name="level" id="level" value="0" />
+
+
+</form>
+</div>
+<iframe style="display:none;" id="down" name="down"></iframe>
+       </script>
+       <script id="print-category-partial" type="text/x-handlebars-template">
+        <ul class="markers_{{catId}} catParent">
+    {{#each children}}
+    <li class="catChild" id="licat-{{catId}}">
+    <div class="ddArrow2 ddIcon2"></div>
+    <div class="ddArrow2 catToggle" id="trcat-{{catId}}"> {{name}}</div>
+    <input type="checkbox" name="catIds[]" class="nested_checkbox checkbox_category catParentCheckbox" value="{{catId}}" />         
+    {{#if children}}
+    {{>printCategory}}
+    {{/if}}
+    {{#if markers}}
+    <ul class="subcateg markers_{{catId}} ">
+    {{#each markers}}
+    <li>
+    <input type="checkbox" name="" class="nested_checkbox checkbox_marker" value="{{this.id}}" /> {{{name}}}
+    </li>
+    {{/each}}
+    </ul>
+
+    {{/if}}
+
+    </li>
+    {{/each}}
+    </ul>
+       </script>
+       <script id="balloon-template" type="text/x-handlebars-template">
+        <div id="infowindow-header" class="clearfix"></div>
+  <div id="balloon-wrapper" class="regular-balloon">
+
+    {{>header}}
+
+    {{#if hasMedia}}
+      {{> media}}
+    {{/if}}
+
+    {{#if description}}
+      <div class="description">{{{ description }}}</div>
+    {{/if}}
+
+    {{#if marker_feed}}
+      <div id="marker-feed-description"></div>
+    {{/if}}
+
+    {{#if feed_description}}
+      <div id="feed-description">{{{feed_description}}}</div>
+    {{/if}}
+
+    {{#unless popup_url}}
+      {{#if popup}}
+        <div id="marker-ad">{{{ popup }}}</div>
+      {{/if}}
+    {{else}}
+        <div id="marker-ad"></div>
+    {{/unless}}
+
+    {{#if cf}}
+      {{>customFields}}
+    {{/if}}
+
+
+    <div id="ext-content"></div>
+
+  </div><!--/balloon-wrapper-->
+  <div id="infowindow-footer"></div>
+
+  <!--
+  {{#if hasAudio}}
+    {{>audio}}
+  {{/if}}
+  -->
+       </script>
+       <script id="balloon-mls-template" type="text/x-handlebars-template">
+        <div id="infowindow-header" class="clearfix"></div>
+  <div id="balloon-wrapper" class="mls-balloon">
+
+    {{>header}}
+
+    {{#if hasMedia}}
+      {{> media}}
+    {{/if}}
+
+    {{#if description}}
+      <div class="description">{{{ description }}}</div>
+    {{/if}}
+
+
+    {{#if cf}}
+      {{>customMls}}
+    {{/if}}
+  </div><!--/balloon-wrapper-->
+  <div id="infowindow-footer"></div>
+       </script>
+       <script id="balloon-foursquare-template" type="text/x-handlebars-template">
+        <div id="infowindow-header" class="clearfix"></div>
+  <div id="balloon-wrapper" class="foursquare-balloon">
+
+    {{>header}}
+
+    {{#if hasMedia}}
+      {{> media}}
+    {{/if}}
+
+    {{#if hasAudio}}
+      {{>audio}}
+    {{/if}}
+
+    {{#ifeq feed "regular"}}
+      {{#if description}}
+        <div class="description">{{{ description }}}</div>
+      {{/if}}
+    {{/ifeq}}
+
+    {{#if cf}}
+      {{#ifeq feed "mls"}}
+        {{>customMls}}
+      {{/ifeq}}
+      {{#ifeq feed "foursquare"}}
+        {{>customFoursquare}}
+      {{/ifeq}}
+    {{/if}}
+  </div><!--/balloon-wrapper-->
+  <div id="infowindow-footer"></div>
+       </script>
+       <script id="header-partial" type="text/x-handlebars-template">
+        {{#if description}}
+  <div class="balloon-header">
+  {{else}}
+  <div class="balloon-header title-only">
+  {{/if}}
+    <div class="title">
+      <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          {{#if balloonUrl}}
+            <td id="image-cell">
+              <img src="{{pathOrigin}}/assets/{{mapId}}/{{balloonUrl}}" class="title-image" />
+            </td>
+          {{else}}
+            <td id="image-cell"></td>
+          {{/if}}
+
+          <td id="name-cell">{{{ name }}}</td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+       </script>
+       <script id="custom-fields" type="text/x-handlebars-template">
+        {{#each cf}}
+    <div class="description"><b>{{title}}:</b> {{value}}</div>
+  {{/each}}
+       </script>
+       <script id="custom-mls" type="text/x-handlebars-template">
+        <div class="call-to-action">
+    <a href="http://www.google.com" target="_blank" class="button blue custom ">Contact an Agent</a>
+  </div>
+  {{#each cf}}
+    <div class="description"><b>{{title}}:</b> {{value}}</div>
+  {{/each}}
+       </script>
+       <script id="custom-foursquare" type="text/x-handlebars-template">
+        {{#if description}}
+    <div class="description">{{{ description }}}</div>
+  {{/if}}
+  {{#each cf.comments}}
+    <div class="description"><b>{{user}}:</b> {{comment}}</div>
+  {{/each}}
+       </script>
+       <script id="marker-feed-iframe" type="text/x-handlebars-template">
+        {{#if iframeUrl}}
+    <div class="marker-feed-wrapper">
+      {{{ iframeMarkup }}}
+    </div>
+  {{/if}}
+       </script>
+       <script id="audio-partial" type="text/x-handlebars-template">
+        <div class="tour-audio-wrapper">
+    <div class="tour-audio">
+      <div id="jp-progress">
+        <div id="audio-title">Listen</div>
+        <div id="audio-time">
+          <span id="audio-length"></span>
+        </div>
+      </div>
+      <div id="jp-progress-bar" class="progress-radial progress-0">
+        <div class="overlay"><div class="jplayer-control control play"><div></div></div></div>
+      </div>
+      <div class="jplayer" data-mrkid="{{id}}"></div>
+    </div>
+  </div>
+       </script>
+       <script id="media-partial" type="text/x-handlebars-template">
+        <div class="media">
+    <div class="media-wrapper">
+      <div class="media-slideshow" style="width: {{slideWidth}}px; visibility: visible">
+        {{#each media }}
+
+          <div id="msp-{{@index}}" class="media-slide enlargeable" style="height: {{../height}}px; line-height: {{../height}}px;">
+          {{#if isImage }}
+            <div data-type="image" class="colorbox-enlarge">
+              {{#if ../../isSidebar}}
+              <a rel="marker-group" class="colorbox-image" href="{{../../../path}}lib/image-cache/i.php?mapId={{../../../mapId}}&amp;image={{url}}&amp;w={{../../../largeWidth}}&amp;h={{../../../largeHeight}}&amp;r={{../../../isRetina}}" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isInfowindow}}
+                <a class="infowindow-gallery-button" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isDesktop}}
+                <div class="colorbox-enlarge-button"></div>
+              {{/if}}
+              </a>
+            </div>
+            <img src="{{../../path}}lib/image-cache/i.php?mapId={{../../mapId}}&amp;image={{url}}&amp;w={{../../width}}&amp;h={{../../height}}&amp;r={{../../isRetina}}">
+          {{/if}}
+
+          {{#if isFlash }}
+            <div data-type="flash" class="colorbox-enlarge">
+              {{#if ../../isSidebar}}
+              <a rel="marker-group" class="colorbox-swf" href="{{../../pathOrigin}}/assets/{{../../mapId}}/{{url}}" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isInfowindow}}
+                <a class="infowindow-gallery-button" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isDesktop}}
+                <div class="colorbox-enlarge-button"></div>
+              {{/if}}
+              </a>
+            </div>
+            <embed src="{{../../pathOrigin}}/assets/{{../../mapId}}/{{url}}" type="application/x-shockwave-flash" wmode="transparent" allowscriptaccess="always" allowfullscreen="true" width="{{../../width}}" height="{{../../height}}">
+          {{/if}}
+
+          {{#if isVimeo }}
+            <div data-type="vimeo" class="colorbox-enlarge">
+              {{#if ../../isSidebar}}
+              <a rel="marker-group" class="colorbox-video" href="{{url}}" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isInfowindow}}
+                <a class="infowindow-gallery-button" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isDesktop}}
+                <div class="colorbox-enlarge-button"></div>
+              {{/if}}
+              </a>
+            </div>
+            <iframe width="{{../../width}}" height="{{../../height}}" frameborder="0" src="{{url}}?title=0&amp;byline=0&amp;portrait=0&amp;color=ff0179"></iframe>
+          {{/if}}
+
+          {{#if isYoutube }}
+            <div data-type="youtube" class="colorbox-enlarge">
+              {{#if ../../isSidebar}}
+              <a rel="marker-group" class="colorbox-video" href="//www.youtube.com/embed/{{ytId url}}" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isInfowindow}}
+                <a class="infowindow-gallery-button" id="cb-{{@index}}">
+              {{/if}}
+              {{#if ../../isDesktop}}
+                <div class="colorbox-enlarge-button"></div>
+              {{/if}}
+              </a>
+            </div>
+            {{#if ../../isDesktop}}
+            <iframe id="youtube{{@index}}" width="{{../../../width}}" height="{{../../../height}}" frameborder="0" src="//www.youtube.com/embed/{{ytId url}}?wmode=transparent&amp;rel=0&amp;html5=1" wmode="opaque" allowfullscreen></iframe>
+            {{else}}
+            <iframe width="{{../../../width}}" height="{{../../../height}}" frameborder="0" src="//www.youtube.com/embed/{{ytId url}}?enablejsapi=1&amp;html5=1" allowfullscreen></iframe>
+            {{/if}}
+          {{/if}}
+          </div>
+
+        {{/each}}
+        {{#if isInfowindow}}
+          <div class="colorbox-infowindow" style="display: none">
+          {{#each media}}
+            {{#if isImage}}
+              <a class="colorbox-image" id="cl-{{@index}}" href="{{../../../path}}lib/image-cache/i.php?mapId={{../../../mapId}}&amp;image={{url}}&amp;w={{../../../largeWidth}}&amp;h={{../../../largeHeight}}&amp;r={{../../../isRetina}}" rel="marker=group"></a>
+            {{/if}}
+            {{#if isVideo}}
+              <a class="colorbox-video" id="cl-{{@index}}" href="{{url}}?enablejsapi=1&amp;html5=1" rel="marker=group"></a>
+            {{/if}}
+            {{#if isFlash}}
+              <a class="colorbox-swf" id="cl-{{@index}}" href="{{../../pathOrigin}}/assets/{{../../mapId}}/{{url}}" rel="marker=group"></a>
+            {{/if}}
+          {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+    {{#unless singleFile}}
+      <div class="button custom slideshow-prev"><div class="slideshow-middle">&lsaquo;</div></div>
+      <div class="button custom slideshow-next"><div class="slideshow-middle">&rsaquo;</div></div>
+    {{/unless}}
+  </div>
+       </script>
+       <script id="parking-template" type="text/x-handlebars-template">
+        <div id="parking-wrapper">
+  {{#each lots}}
+    <div class="parking-lot">
+      <h4 id="pl-{{id}}">{{name}}</h4>
+      {{{description}}}
+    </div>
+  {{/each}}
+  </div>
+       </script>
+       <script id="list-template" type="text/x-handlebars-template">
+        {{#if categories}}
+    {{#each categories}}
+      {{#unless isPrivate}}
+        {{#unless type}}
+        <div id="{{catId}}" class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-{{../../../level}}" tabindex="0">
+        {{else}}
+        <div id="{{catId}}" class="content-bar-title content-bar-title-root content-bar-title-toggle-on list-only off level-{{../../../level}}" tabindex="0">
+        {{/unless}}
+          <div class="content-bar-wrapper clearfix">
+            <div class="image-wrapper">
+              {{#if isUserFavs }}
+                <img class="image" alt="{{{name}}} Icon" src="{{list_icon}}">
+              {{else}}
+                {{#if list_icon}}
+                  <img class="image" alt="{{{name}}} Icon" src="{{imgCacheList list_icon 1 22 22}}">
+                {{else}}
+                  {{#if icon}}
+                    <img class="image" alt="{{{name}}} Icon" src="{{imgCacheList icon 1 22 22}}">
+                  {{else}}
+                    <img class="image" alt="{{{name}}} Icon" src="/assets/library/icons/default/default_sidebar.png" />
+                  {{/if}}
+                {{/if}}
+              {{/if}}
+            </div>
+            <div class="text-wrapper">
+              <span id="catId-{{catId}}" data-catiid="{{catIid}}" class="name">{{{name}}}</span>
+            </div>
+
+            {{#unless single_select}}
+              <div id="toggle-{{catId}}" class="toggle {{toggleClass}}">
+                <div class="toggle-inner"></div>
+              </div>
+            {{/unless}}
+
+            {{#if ../../isCms }}
+              <div class="info-icons">
+              {{#if ../../can }}
+                <div id="ec-{{catId}}-{{catIid}}" class="edit-category button blue">
+                  <span class="editCatList cms-txt-subheading">Edit</span>
+                </div>
+              {{/if}}
+              {{#if default_state }}
+                <div class="i-icon">Default</div>
+              {{/if}}
+              {{#unless visible }}
+                <div class="i-icon"><img src="assets/img/invisible.png">&nbsp;Invisible</div>
+              {{/unless}}
+              {{#if schedule }}
+                <div class="i-icon">Scheduled</div>
+              {{/if}}
+              {{#ifeq private 1}}
+                <div class="i-icon"><img src="assets/img/private.png">&nbsp;Private</div>
+              {{/ifeq}}
+              {{#ifeq hidden 1}}
+                <div class="i-icon">Hidden</div>
+              {{/ifeq}}
+              {{#ifeq type 'toggle'}}
+                <div class="i-icon">List None</div>
+              {{/ifeq}}
+              </div>
+            {{/if}}
+
+            {{#if isUserFavs }}
+              <div id="share-uf" class="button blue">
+                <span class="cms-txt-subheading">Share</span>
+              </div>
+            {{/if}}
+
+          </div>
+        </div>
+      {{/unless}}
+    {{/each}}
+  {{/if}}
+  {{#unless type}}
+    {{#if markers}}
+      {{#each markers}}
+        {{#unless isPrivate}}
+          <li id="{{id}}-{{../../prtCatId}}" class="list-content-bar-marker level-{{../../level}}" tabindex="0">
+            <table cellspacing="0" cellpadding="0" border="0">
+              <tbody>
+                <tr>
+                  <td class="bullet-wrapper"><div class="bullet"></div></td>
+                  <td class="content-bar-marker" id="mrkId-{{id}}">{{{name}}}
+                    {{#if ../../isCms }}
+                      {{#ifeq feed "regular" }}
+                        <div class="info-icons">
+                        {{#canEditLocation id}}
+                          <div id="em-{{id}}" class="cms-edit-edit button blue">
+                            <span class="editLocList cms-txt-subheading">Edit</span>
+                          </div>
+                        {{/canEditLocation}}
+                        {{#ifeq visible 0}}
+                          <div class="i-icon"><img src="assets/img/invisible.png">&nbsp;Invisible</div>
+                        {{/ifeq}}
+                        {{#if schedule }}
+                          <div class="i-icon">Scheduled</div>
+                        {{/if}}
+                        {{#ifeq private 1}}
+                          <div class="i-icon"><img src="assets/img/private.png">&nbsp;Private</div>
+                        {{/ifeq}}
+                        </div>
+                      {{/ifeq}}
+                    {{/if}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        {{/unless}}
+      {{/each}}
+    {{/if}}
+  {{/unless}}
+       </script>
+       <script id="uf-marker" type="text/x-handlebars-template">
+        <li id="{{id}}-userfavs" class="list-content-bar-marker level-0" tabindex="0">
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+        <tr>
+          <td class="bullet-wrapper"><div class="bullet"></div></td>
+          <td class="content-bar-marker" id="mrkId-{{id}}">{{{name}}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+       </script>
+       <script id="list-pane" type="text/x-handlebars-template">
+        <div class="content-bar-pane" id="pane-{{catId}}" style="display:none">
+    <ul></ul>
+  </div>
+       </script>
+       <script id="regular-search" type="text/x-handlebars-template">
+        {{#each markers}}
+  <div id="m{{id}}" class="sr-item srBgHvr srTxtHvr">
+    {{#unless ../s}}
+      {{#if image}}
+        <div class="sr-image">
+          <img src="{{image}}" />
+        </div>
+      {{/if}}
+    {{/unless}}
+    <div class="sr-body">
+      <h3>{{{title}}}</h3>
+      <p class="sr-category">{{{catName}}}</p>
+      {{#unless ../s}}
+        <div class="sr-description">{{{description}}}</div>
+      {{/unless}}
+    </div>
+  </div>
+  {{/each}}
+       </script>
+       <script id="search-pagination" type="text/x-handlebars-template">
+        {{#each pages}}
+      <span id="page-{{this}}">{{this}}</span>
+    {{/each}}
+       </script>
+       <script id="advanced-search" type="text/x-handlebars-template">
+        this is advanced search
+       </script>
+       <script id="directions-markup" type="text/x-handlebars-template">
+        <div class="directions-pane pane">
+    <div class="extension-title">Directions to this Location</div>
+    <div class="balloon-directions-form">
+      <div class="balloon-directions-from">
+        <form class="directions-form" method="post" action="">
+          <div id="transit-modes" class="btn-wrapper-full">
+            <p class="directions-label">Transit type</p>
+            <ul id="route-types" class="hz-menu">
+              <li id="driving" class="active">Driving</li>
+              <li id="bicycling">Bicycling</li>
+              <li id="transit">Transit</li>
+              <li id="walking">Walking</li>
+            </ul>
+          </div>
+          <div class="btn-wrapper-full">
+            <p class="directions-label">Directions from</p>
+            <input class="helpText directions-from helpTextActive" id="directions-from" title="Address, City, State, Zip" type="text" placeholder="Address, City, State, Zip"/>
+          </div>
+          <div class="btn-wrapper-full">
+            <span class="directions-submit button custom">Get Directions</span>
+            {{#if showMyLocation }}
+              <span id="balloon-directions-from-my-location" class="button custom">From My Location</span>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+			<div id="direction-buttons" class="df-hidden">
+        <span class="button directions-full-view">Show Entire Route</span>
+        <span class="button dir-print" id="directions-print">Print</span>
+        <span class="button directions-start-over">Start Over</span>
+      </div>
+      <div id="directions-label" class="df-hidden">
+        Directions to: <span>{{markerName}}</span>
+      </div>
+      <div class="dir-warning" id="dir-message"></div>
+      <div id="balloon-directions"></div>
+    </div>
+	</div>
+       </script>
+       <script id="gk-login-template" type="text/x-handlebars-template">
+        <div class="gk-wrapper">
+    <div id="gk-header">
+      {{#if logo }}
+      <div id="gk-logo">
+        <img src="{{logo}}" />
+      </div>
+      {{/if}}
+      {{#if title }}
+      <h3>{{title}}</h3>
+      {{/if}}
+      {{#if description }}
+      <div class="description">{{{description}}}</div>
+      {{/if}}
+    </div>
+    <div id="error-wrapper">
+      <p id="fill">Please, fill all fields</p>
+      <p id="email">Email doesn't seem like correct one</p>
+      <p id="wrong">Your data is wrong</p>
+    </div>
+    <form id="gk-login-form">
+      <div class="field-wrapper">
+        <label>Email</label>
+        <input type="email" name="email" />
+      </div>
+      {{#if password }}
+      <div class="field-wrapper">
+        <label>Password</label>
+        <input type="password" name="password" />
+      </div>
+      {{/if}}
+      <div id="gk-login-submit" class="gk-btn">Sign In</div>
+    </form> 
+
+    <div id="gk-footer">
+      <img alt="Concept3D" src="/assets/img/concept3d-logo.png">
+    </div>
+  </div>
+       </script>
+       <script id="gk-cta-template" type="text/x-handlebars-template">
+        <div id="gk-cta-wrapper">
+    {{#if cta}}
+      <div>{{{cta}}}</div>
+    {{/if}}
+    <div id="gk-register" class="blue button">Please, register!</div>
+    <div id="gk-login" class="link">Already registered?</div>
+  </div>
+       </script>
+       <script id="gk-register-template" type="text/x-handlebars-template">
+        <div class="gk-wrapper">
+    <div id="gk-header">
+      {{#if logo }}
+      <div id="gk-logo">
+        <img src="{{logo}}" />
+      </div>
+      {{/if}}
+      {{#if title }}
+      <h3>{{title}}</h3>
+      {{/if}}
+      {{#if description }}
+      <div class="description">{{{description}}}</div>
+      {{/if}}
+    </div>
+    <div id="error-wrapper">
+      <p id="fill">Please, fill all fields</p>
+      <p id="required">Please, fill all required fields</p>
+      <p id="email">Email doesn't seem like correct one</p>
+      <p id="failed">Email is already taken</p>
+    </div>
+    <form id="gk-form">
+      {{#each fields }}
+        <div class="field-wrapper">
+          {{#if required }}
+            <label class="required">{{label}}</label>
+          {{else}}
+            <label>{{label}}</label>
+          {{/if}}
+          {{#ifeq type "text" }}
+            <input type="text" name="{{name}}" />
+          {{/ifeq}}
+          {{#ifeq type "password" }}
+            <input type="password" name="password" />
+          {{/ifeq}}
+          {{#ifeq type "email" }}
+            <input type="email" name="email" />
+          {{/ifeq}}
+          {{#ifeq type "textarea" }}
+            <textarea name="{{name}}" rows="5"></textarea>
+          {{/ifeq}}
+          {{#ifeq type "list" }}
+            <select name="{{name}}">
+              <option value="">Please, choose</option>
+              {{#each options}}
+              <option value="{{value}}">{{label}}</option>
+              {{/each}}
+            </select>
+          {{/ifeq}}
+        </div>
+      {{/each}}
+      {{#if submit }}
+        <div id="gk-submit" class="gk-btn">{{submit}}</div>
+      {{ else }}
+        <div id="gk-submit" class="gk-btn">Submit</div>
+      {{/if}}
+    </form>
+
+    <div id="gk-footer">
+      <img alt="Concept3D" src="/assets/img/concept3d-logo.png">
+    </div>
+  </div>
+       </script>
+       <script id="tvt-template" type="text/x-handlebars-template">
+        <style>
+
+    #tvt-wrapper {
+      width: 400px;
+      position: relative;
+      background-color: #fff;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      border-radius: 6px;
+      float: left;
+      overflow: hidden;
+    }
+
+    #tvt-close {
+      margin-top: -24px;
+      float: right;
+      cursor: pointer;
+    }
+
+    #tvt-header {
+      text-align: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #tvt-logo img {
+      margin-bottom: 24px;
+    }
+
+    #tvt-logo img {
+      margin: 0 auto;
+    }
+
+    #tvt-fields {
+      width: 100%;
+      float: left;
+      margin-top: 10px;
+    }
+
+    .tvt-error {
+      display: none;
+      color: #ff0000;
+      margin-left: 33%;
+      width: 60%;
+      float: left;
+      clear: both;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .tvt-or {
+      width: 100%;
+      float: left;
+      clear: both;
+      padding: 8px 0;
+      margin-top: 10px;
+      background-color: #ddd;
+      text-align: center;
+    }
+
+    #tvt-wrapper h1 {
+      font-size: 22px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #tvt-wrapper p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tvt-field {
+      width: 100%;
+      float: left;
+      clear: both;
+      margin: 4px 0;
+    }
+
+    .tvt-field label {
+      float: left;
+      width: 30%;
+      text-align: right;
+      margin-right: 3%;
+      font-weight: bold;
+      line-height: 28px;
+    }
+
+    .tvt-field input {
+      width: 40%;
+      float: left;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 2px;
+      font-size: 15px;
+      line-height: 22px;
+      height: 22px;
+    }
+
+    .tvt-field.error input {
+      border-color: #f00;
+    }
+
+    .tvt-btn {
+      width: 18%;
+      height: 24px;
+      line-height: 24px;
+      margin: 0 0 0 3%;
+      text-align: center;
+      background-color: #fff;
+      color: #630;
+      border-radius: 4px;
+      border: 1px solid #630;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+
+    .tvt-btn:hover {
+      background-color: #630;
+      color: #fff;
+    }
+
+    #btn-register {
+      margin-top: 8px;
+    }
+
+    #tvt-login {
+      width: 100%;
+      float: left;
+      clear: both;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 4px 0;
+      text-align: center;
+    }
+
+    #tvt-footer {
+      text-align: center;
+      height: 26px;
+      margin-top: 10px;
+      padding: 4px 10px;
+      width: 100%;
+      float: left;
+      border-top: 1px solid #ddd;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      background-color: #f5f5f5;
+    }
+
+    #tvt-footer img {
+      margin: 0 auto;
+    }
+
+    #header-text-success, #header-text-failure {
+      display: none;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    #tvt-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    #tvt-video-wrapper iframe, #tvt-video-wrapper object, #tvt-video-wrapper embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgb(54,  25, 25);
+      background-color: rgba(54,  25, 25, .1);
+      background-image: url(assets/img/spinner.gif);
+      background-position: center center;
+      background-repeat: no-repeat;
+      display: none;
+    }
+
+		.tvt-enrollment {
+			clear: both;
+		}
+		.tvt-enrollment select {
+			display: block;
+			height: 29px;
+			padding: 6px 10px;
+			font-size: 12px;
+			line-height: 1.42857143;
+			color: #555;
+			background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+			-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+			-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+			transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+			float: left;
+		}
+		#enrollment_date_season {
+			width: 102px;
+			margin-right: 9px;
+		}
+
+  </style>
+  <div id="tvt-wrapper">
+
+    <div id="loading"></div>
+
+    <div id="tvt-header">
+      <!--<div id="tvt-close">Close</div>-->
+      {{#if logo }}
+      <div id="tvt-logo">
+        <img src="{{logo}}" />
+      </div>
+      {{/if}}
+
+      <div class="tvt-header-text" id="header-text">
+        <h1>{{vt_title}}</h1>
+        <p>{{vt_description}}</p>
+      </div>
+
+      <div class="tvt-header-text" id="header-text-success">
+        <h1>Registration Successful</h1>
+      </div>
+
+      <div class="tvt-header-text" id="header-text-failure">
+        <h1>Registration Failed</h1>
+        <p>Please, refresh your browser and try again.</p>
+      </div>
+
+    </div>
+
+    {{#if vt_video}}
+    <div id="tvt-video-wrapper">
+      {{#if isVimeo }}
+        <iframe frameborder="0" src="{{url}}?title=0&amp;byline=0&amp;portrait=0&amp;color=ff0179"></iframe>
+      {{/if}}
+
+      {{#if isYoutube }}
+        <iframe frameborder="0" src="//www.youtube.com/embed/{{ytId url}}?enablejsapi=1" allowfullscreen></iframe>
+      {{/if}}
+    </div>
+    {{/if}}
+
+    <div id="tvt-fields">
+      <form id="tvt-form">
+        <div id="tvt-errors">
+          <span class="tvt-error" id="err-fill">Please, fill all fields</span>
+        </div>
+        <div class="tvt-field">
+          <label>Email</label>
+          <input type="text" name="email" id="email" />
+          <span class="tvt-error" id="err-email">Email doesn't seem like correct one</span>
+          <span class="tvt-error" id="err-taken">Email is already taken</span>
+        </div>
+        {{#if fb.isNameField}}
+        <div class="tvt-field">
+          <label>Name</label>
+          <input type="text" name="name" id="name" />
+        </div>
+        {{/if}}
+        {{#if fb.isAgeField}}
+        <div class="tvt-field">
+          <label>Age</label>
+          <input type="text" name="age" id="age" />
+					<span class="tvt-error" id="err-age">Age must be a numeric value</span>
+        </div>
+        {{/if}}
+				{{#if fb.isPhoneNumberField}}
+					<div class="tvt-field">
+						<label for="phone_number">Phone Number</label>
+						<input type="text" name="phone_number" id="phone_number" />
+					</div>
+				{{/if}}
+				{{#if fb.isZipCodeField}}
+					<div class="tvt-field">
+						<label>Zip Code</label>
+						<input type="text" name="zip_code" id="zip_code" />
+					</div>
+				{{/if}}
+				{{#if fb.isCountryField}}
+					<div class="tvt-field">
+						<label>Country</label>
+						<input type="text" name="country" id="country" />
+					</div>
+				{{/if}}
+				{{#if fb.isHighSchoolField}}
+					<div class="tvt-field">
+						<label>High School</label>
+						<input type="text" name="high_school" id="high_school" />
+					</div>
+				{{/if}}
+				{{#if fb.isMajorField}}
+					<div class="tvt-field">
+						<label>Major</label>
+						<input type="text" name="major" id="major" />
+					</div>
+				{{/if}}
+				{{#if fb.isEnrollmentDateField}}
+					<div class="tvt-field tvt-enrollment">
+						<label>Enrollment Date</label>
+						<select name="enrollment_date_season" id="enrollment_date_season">
+							<option value="Spring">Spring</option>
+							<option value="Summer">Summer</option>
+							<option value="Fall">Fall</option>
+							<option value="Winter">Winter</option>
+						</select>
+						<select name="enrollment_date_year" id="enrollment_date_year">
+							{{#each years}}
+								<option value="{{this}}">{{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+				{{/if}}
+				{{#if fb.isCustomDropdownField}}
+					<input type="hidden" name="custom_field_name" id="custom_field_name" value="{{custom_field_name}}">
+					<div class="tvt-field tvt-custom">
+						<label>{{custom_field_name}}</label>
+            {{#if custom_dropdown_fields}}
+              <select name="custom_dropdown" id="custom_dropdown">
+                {{#each custom_dropdown_fields}}
+                  {{#if this}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/if}}
+                {{/each}}
+              </select>
+            {{else}}
+              <input id="cf-value" name="custom_field_value" type="text" />
+            {{/if}}
+					</div>
+				{{/if}}
+
+      </form>
+      <div class="clear"></div>
+      <div class="tvt-btn" id="btn-register">Submit</div>
+    </div>
+
+    <div id="tvt-footer">
+      <img alt="CampusBird" src="{{logo_text}}">
+    </div>
+
+  </div>
+       </script>
+       <script id="tour-template" type="text/x-handlebars-template">
+        {{#if canAddTour}}
+    <div id="tour-group-add" class="blue button">+ New Group</div>
+  {{/if}}
+  <ol id="tours-wrapper" class="tour-wrapper frn normal">
+    {{#if hasTours }}
+      {{#each tours}}
+        {{>tour}}
+      {{/each}}
+    {{/if}}
+  </ol>
+  {{#if canAddTour}}
+    <div id="tour-btns">
+      <div id="tour-add" class="blue button">+ New Map Tour</div>
+      <div id="tour-sort" class="blue button">Sort Map Tours</div>
+      <div id="tour-sort-cancel" class="grey button sort-save">Cancel</div>
+      <div id="tour-sort-save" class="blue button sort-save">Save</div>
+    </div>
+  {{/if}}
+       </script>
+       <script id="tour-partial" type="text/x-handlebars-template">
+        {{#ifeq type "group"}}
+    <li class="tw-group {{itemClass}}" id="t-{{id}}" data-type="group">
+      <div class="tour group clearfix expand" id="tec-{{id}}">
+        <h4 id="t-title-{{id}}">{{name}}</h4>
+      </div>
+      {{#if cms}}
+      <div class="tour-sort-placeholder" id="tsp-{{id}}">
+        <div class="overlay" id="o-{{id}}"></div>
+        <div class="tg-btns">
+          <p id="edit" data-id="{{id}}" class="blue button">Edit</p>
+          <p id="delete" data-id="{{id}}" class="grey button">Delete</p>
+        </div>
+      </div>
+      {{/if}}
+      {{#if children}}
+        <ol>
+          {{#each children}}
+            {{>tour}}
+          {{/each}}
+        </ol>
+      {{/if}}
+    </li>
+  {{ else }}
+    {{#unless isPrivate}}
+    {{#if vt_required}}
+    <li class="tw vt {{itemClass}}" id="t-{{id}}" data-type="tour">
+    {{else}}
+    <li class="tw {{itemClass}}" id="t-{{id}}" data-type="tour">
+    {{/if}}
+      <div class="tour clearfix">
+        <div id="torid-{{id}}" class="tour-box">
+          <div class="image">
+            {{#if image}}
+              <img src="{{imgCache image 1 60 60}}">
+            {{/if}}
+          </div>
+          <div class="copy">
+            <div class="name">{{{name}}}</div>
+            <div class="description">{{{description}}}</div>
+          </div>
+          <div class="hover-background"></div>
+          {{#if stops}}
+            <div class="play play-off">
+              <div></div>
+            </div>
+          {{/if}}
+        </div>
+        {{#if canEditTour}}
+          <div id="te-{{tourId}}" class="tour-edit blue button">Edit</div>
+        {{/if}}
+      </div>
+      {{#if cms}}
+        <div class="tour-sort-placeholder" id="tsp-{{id}}">
+          <div class="overlay" id="o-{{id}}">
+            <div class="no-sorting">Only published tours can be sorted</div>
+          </div>
+        </div>
+        <div class="info-icons">
+        {{#unless visible }}
+          <div class="i-icon"><img src="assets/img/invisible.png">&nbsp;Invisible</div>
+        {{/unless}}
+        {{#if vt_fields }}
+          <div class="i-icon">Form</div>
+        {{/if}}
+        {{#if schedule }}
+          <div class="i-icon">Scheduled</div>
+        {{/if}}
+        {{#ifeq private 1}}
+          <div class="i-icon"><img src="assets/img/private.png">&nbsp;Private</div>
+        {{/ifeq}}
+        </div>
+      {{/if}}
+    </li>
+    {{/unless}}
+  {{/ifeq}}
+       </script>
+       <script id="tour-group-template" type="text/x-handlebars-template">
+        <li class="tw-group published df-hidden" id="t-{{id}}" data-type="group">
+    <div class="tour group clearfix">
+      <div id="tg-save-tools">
+        <input type="text" class="tg-title" id="tt-{{id}}" />
+        <div id="save" class="blue button">Save</div>
+      </div>
+      <h4 id="t-title-{{id}}"></h4>
+    </div>
+    <div class="tour-sort-placeholder" id="tsp-{{id}}">
+      <div class="overlay" id="o-{{id}}"></div>
+      <div class="tg-btns">
+        <p id="edit" data-id="{{id}}" class="blue button">Edit</p>
+        <p id="delete" data-id="{{id}}" class="grey button">Delete</p>
+      </div>
+    </div>
+    <ol></ol>
+  </li>
+       </script>
+       <script id="tg-edit-template" type="text/x-handlebars-template">
+        <div id="tg-save-tools">
+    <input type="text" class="tg-title" id="tt-{{id}}" />
+    <div id="cancel" class="grey button">Cancel</div>
+    <div id="save" class="blue button">Save</div>
+  </div>
+       </script>
+       <script id="tg-delete-template" type="text/x-handlebars-template">
+        <div id="tg-delete-tools">
+    Are you sure?
+    <div id="no" class="grey button">No</div>
+    <div id="yes" class="blue button">Yes</div>
+  </div>
+       </script>
+       <script id="tour-audio" type="text/x-handlebars-template">
+        <div class="tour-audio-wrapper">
+    <div class="tour-audio">
+      <div id="jp-progress">
+        <div id="audio-title">Listen</div>
+        <div id="audio-time">
+          <span id="audio-length"></span>
+        </div>
+      </div>
+      <div id="jp-progress-bar" class="progress-radial progress-0">
+        <div class="overlay"><div class="jplayer-control control play"><div></div></div></div>
+      </div>
+      <div class="jplayer" data-mrkid="{{id}}"></div>
+    </div>
+  </div>
+       </script>
+       <script id="tournav" type="text/x-handlebars-template">
+        <div id="tourbar" class="tour-nav">
+    <div class="tour-prev">&lt;</div>
+    <div class="tour-name">{{name}}</div>
+    <div class="tour-stop-thumb-wrapper">
+      <div style="width: {{wrapperWidth}}px; left: 436px;" class="tour-stop-thumb-inner-wrapper">
+        <div class="tour-stop-thumb-slider">
+
+          {{#if stops}}
+            {{#each stops}}
+            <div class="tour-stop-thumb tour-stop-{{id}} active" data-point="{{point}}">
+              <img src="{{thumbnail}}">
+              <div class="tour-stop-thumb-number">{{point}}</div>
+            </div>
+            {{/each}}
+          {{/if}}
+
+        </div>
+      </div>
+    </div>
+    <div class="tour-next">&gt;</div>
+  </div>
+       </script>
+       <script id="buses-template" type="text/x-handlebars-template">
+        <div id="br-header">
+  </div>
+  <div id="br-list" class="clearfix">
+
+  </div>
+       </script>
+       <script id="kba-template" type="text/x-handlebars-template">
+        <div class="kba-wrapper">
+
+    <div class="kba-header">
+      <h1>Skip to Locations/Categories</h1>
+    </div>
+    <div class="kba-content">
+      <ul>
+        <li>Pressing <strong>TAB</strong> will enable keyboard accessibility.</li>
+        <li>Pressing <strong>ENTER</strong> will enable keyboard accessibility and will take you to the categories list.</li>
+        <li><strong>ANY OTHER ACTION</strong> will disable keyboard accessibility. You will still bennefit of basic kayboard accessibility support.</li>
+      </ul>
+    </div>
+
+    <div class="kba-footer">
+      <img alt="Concept3D" src="/assets/img/concept3d-logo.png">
+    </div>
+
+  </div>
+       </script>
+       <script type="text/javascript">
+        $(document).on('click', "#gpm", function (e) {
+      var pg = hash.getParsed().pg, action;
+      action = pg === undefined ? 'add' : 'remove';
+      hash.act(action, 'pg');
+      e.stopPropagation();
+      return false;
+    });
+
+
+    $(document).on('click', "#close-pg", function (e) {
+      hash.act('remove', 'pg');
+      e.stopPropagation();
+      return false;
+    });
+       </script>
+       <script type="text/javascript">
+        // google analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-26917100-1', 'auto');  // Replace with your property ID.
+    ga('send', 'pageview');
+    if (mapConfig.ga_id) {
+      ga('create', mapConfig.ga_id, 'auto', {'name': 'secondTracker'});
+      ga('secondTracker.send', 'pageview');
+    }
+       </script>
+      </meta>
+     </link>
+    </link>
+   </link>
+  </link>
+ </head>
+ <body class="body-regular sf-extra google" id="body-21">
+  <div id="spinner">
+   <div id="spinner-inner">
+   </div>
+  </div>
+  <div id="extension-pane">
+   <div class="extension-close">
+    Close
+   </div>
+  </div>
+  <div id="map">
+   <div id="frameOverMapContainer">
+    <div id="frameParent">
+     <div id="frameOverMap" style="display:none;">
+     </div>
+    </div>
+   </div>
+   <div id="sv-wrapper">
+   </div>
+   <div id="my-location">
+    ¤
+   </div>
+   <div id="canvasContainer">
+    <div id="flashContainer">
+     <div id="flash">
+     </div>
+    </div>
+    <div id="CSS3Container">
+    </div>
+    <div class="pano-top pano-right">
+     <div class="pano-control-zoom pano-bar pano-control">
+      <a class="pano-control-zoom-in" href="#" title="Zoom in">
+       +
+      </a>
+      <a class="pano-control-zoom-out" href="#" title="Zoom out">
+       -
+      </a>
+     </div>
+    </div>
+    <div id="pano-header-center">
+     <div class="pano-title" id="pano-header-title">
+     </div>
+    </div>
+    <canvas id="canvasID">
+    </canvas>
+    <div id="pano-arrow">
+    </div>
+   </div>
+   <div id="notificationContainer">
+    <p>
+    </p>
+    <div style="margin:0 auto;width: 160px;margin-top: 10px;">
+     <button id="notification_yes_btn">
+      Yes
+     </button>
+     <button id="notification_no_btn">
+      No
+     </button>
+    </div>
+   </div>
+  </div>
+  <div id="user-content-wrapper">
+   <div id="search-result-button">
+    <p>
+     R
+    </p>
+    <p>
+     E
+    </p>
+    <p>
+     S
+    </p>
+    <p>
+     U
+    </p>
+    <p>
+     L
+    </p>
+    <p>
+     T
+    </p>
+    <p>
+     S
+    </p>
+   </div>
+   <div id="map-bar">
+    <div id="map-add-marker">
+     <div class="map-search" id="map-search">
+      <input id="mapSearchForm" name="mapSearchForm" style="width:250px;" type="text"/>
+     </div>
+     <div id="map-search-add-pin">
+      <img alt="Marker" src="//www.google.com/mapfiles/marker.png"/>
+     </div>
+     <div style="clear:both;height:1px;">
+     </div>
+    </div>
+    <div id="pano-buttons">
+     <div class="df-hidden pano-share" id="share-pano">
+      Share
+     </div>
+     <div class="df-hidden" id="pano-conceal">
+      &lt; Back To Map
+     </div>
+    </div>
+   </div>
+   <!--/map-bar-->
+   <div id="uc-content">
+    <!-- Theme CSS -->
+    <script src="themes/default/default.theme.js" type="text/javascript">
+    </script>
+    <div id="sidebar-header">
+     <div id="logo">
+      <a href="http://www.duke.edu" target="_blank">
+       <img alt="Duke University Maps" src="/assets/21/mapheader1_1.png" title="Duke University Maps"/>
+      </a>
+      <a href="accessible.php?id=21" style="display: none" title="Text-Only Directory">
+       Text-Only Directory
+      </a>
+     </div>
+     <div id="header-content">
+     </div>
+     <div id="search-wrapper">
+      <form action="" class="desktop-search " id="search" method="post">
+       <div class="search-field" id="main-search-key">
+        <input class="text" id="search-key" name="key" title="Search" type="text" value="Search..."/>
+        <p class="text no-search-result" id="search-failed">
+         No results
+        </p>
+        <p class="text no-search-result" id="search-geo">
+         Found address
+        </p>
+       </div>
+       <div class="button custom" id="search-button">
+        Search
+       </div>
+      </form>
+      <div class="srBgTxt" id="sr-min-btn">
+       view search results
+      </div>
+     </div>
+     <div id="content-bar-subcontent">
+      <div id="content-bar-subcontent-close">
+       ×
+      </div>
+      <div id="content-bar-subcontent-search-term">
+      </div>
+      <span id="content-bar-subcontent-inner">
+      </span>
+     </div>
+    </div>
+    <div id="mobile-logo">
+     <img alt="Duke University Maps" src="/assets/21/mapheader1_1.png" title="Duke University Maps"/>
+    </div>
+    <div id="content-bar-wrapper">
+     <div id="sidebar-toggle-buttons">
+      <div class="st-button" id="st-locations">
+       <div class="inner">
+        Locations
+       </div>
+      </div>
+      <div class="st-button df-hidden inactive" id="st-tours">
+       <div class="inner">
+        Tours
+       </div>
+      </div>
+      <div class="st-button df-hidden" id="st-buses">
+       <div class="inner">
+        Transit
+       </div>
+      </div>
+     </div>
+     <div id="buses">
+     </div>
+     <div id="tours">
+     </div>
+     <div id="tour-edit-wrapper">
+     </div>
+     <div id="content-bar-inner-wrapper">
+      <div id="content-bar">
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="179" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Academic &amp; Administrative Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/AcaAdm1key.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="178" id="catId-179">
+           Academic &amp; Administrative
+          </span>
+         </div>
+         <div class="toggle" id="toggle-179">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="189" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="ADA Accessibility Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/DUc14.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="187" id="catId-189">
+           ADA Accessibility
+          </span>
+         </div>
+         <div class="toggle" id="toggle-189">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="183" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Art &amp; Performance Venues Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/ArtPerf1key.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="182" id="catId-183">
+           Art &amp; Performance Venues
+          </span>
+         </div>
+         <div class="toggle" id="toggle-183">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="182" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Athletics Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/Athletic1key.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="181" id="catId-182">
+           Athletics
+          </span>
+         </div>
+         <div class="toggle" id="toggle-182">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="7202" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Construction Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/construction.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="7224" id="catId-7202">
+           Construction
+          </span>
+         </div>
+         <div class="toggle" id="toggle-7202">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="325" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Dining Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/Diningkey.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="317" id="catId-325">
+           Dining
+          </span>
+         </div>
+         <div class="toggle" id="toggle-325">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="5002" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Housing &amp; Residence Life Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/ResHalls1Key_8.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="4997" id="catId-5002">
+           Housing &amp; Residence Life
+          </span>
+         </div>
+         <div class="toggle" id="toggle-5002">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="5021" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Interests &amp; Services Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/student_services_list.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="5041" id="catId-5021">
+           Interests &amp; Services
+          </span>
+         </div>
+         <div class="toggle" id="toggle-5021">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="349" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Libraries Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/LibraryKey.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="332" id="catId-349">
+           Libraries
+          </span>
+         </div>
+         <div class="toggle" id="toggle-349">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="329" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Medical Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/Med2Key.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="319" id="catId-329">
+           Medical
+          </span>
+         </div>
+         <div class="toggle" id="toggle-329">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="186" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Parking Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/Park2Key.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="184" id="catId-186">
+           Parking
+          </span>
+         </div>
+         <div class="toggle" id="toggle-186">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="content-bar-title content-bar-title-root content-bar-title-hover content-bar-title-toggle-off off level-0" id="342" tabindex="0">
+        <div class="content-bar-wrapper clearfix" style="overflow: hidden;">
+         <div class="image-wrapper">
+          <img alt="Transportation Icon" class="image" src="/map/lib/image-cache/i.php?mapId=21&amp;image=21/DUc20.png&amp;w=22&amp;h=22&amp;t=1&amp;r=1"/>
+         </div>
+         <div class="text-wrapper">
+          <span class="name" data-catiid="326" id="catId-342">
+           Transportation
+          </span>
+         </div>
+         <div class="toggle" id="toggle-342">
+          <div class="toggle-inner">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="df-hidden" id="ad-wrapper">
+     <p id="ad-close">
+      ×
+     </p>
+     <div id="ad-content">
+     </div>
+    </div>
+    <div id="footer">
+     <div id="footer-content">
+      <div>
+       <p>
+        <a href="http://about.duke.edu/maps" target="_blank" title="Maps">
+         About the Map
+        </a>
+        |
+        <a href="mailto:mapsteam@duke.edu" target="_blank" title="Mail">
+         Feedback
+        </a>
+        |
+        <a href="http://www.Duke.edu" target="_blank" title="Home">
+         Duke University
+        </a>
+       </p>
+       <p>
+        © 2017 Durham, NC 27708 (919) 684-8111
+       </p>
+      </div>
+     </div>
+     <div id="footer-logo">
+      <a href="http://www.concept3d.com/" target="_blank">
+       <img alt="Concept3D" src="assets/img/concept3d-logo.png"/>
+      </a>
+      <a href="/map/Privacy-Policy-07122018.pdf" id="privacy-policy" target="_blank">
+       privacy policy
+      </a>
+      <a href="/map/end-user-agreement.html" id="tos" target="_blank">
+       terms of service
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="menu-bar">
+   <div id="menu-bar-right">
+    <div class="button" id="print">
+     Print
+    </div>
+   </div>
+  </div>
+  <div id="modal">
+   <p id="modal-close">
+    ×
+   </p>
+   <div id="modal-content">
+   </div>
+  </div>
+  <!--/modal-->
+  <div id="content-bar-balloon-wrapper">
+   <div id="content-bar-balloon">
+   </div>
+  </div>
+  <div id="search-results-wrapper">
+   <div class="srBg srTxt" id="sr-header">
+    <span class="triangle" id="sr-triangle">
+    </span>
+    <span id="sr-title">
+     Search Results
+    </span>
+    <div class="df-hidden" id="search-pages">
+    </div>
+    <span class="srTxtBgHvr srBgTxtHvr" id="sr-close" title="Close">
+     ×
+    </span>
+    <span class="srTxtBgHvr srBgTxtHvr" id="sr-minimize" title="Minimize">
+     _
+    </span>
+    <span id="sr-count">
+    </span>
+   </div>
+   <div id="search-results">
+   </div>
+  </div>
+  <div class="df-hidden" id="mbl-search-results">
+  </div>
+  <div id="unminimize-infowindow" style="display: none;">
+   Back To Marker
+  </div>
+  <div class="df-hidden" id="vt-popup">
+   <p id="vt-close">
+    ×
+   </p>
+   <div id="vt-content">
+   </div>
+  </div>
+  <div id="mobile-fullscreen">
+   <div id="mf-close">
+    ×
+   </div>
+   <div id="mf-content">
+   </div>
+  </div>
+ </body>
+</html>
+

@@ -1,0 +1,129 @@
+http://ecommons.med.harvard.edu/
+<html>
+ <head>
+  <meta content="0" http-equiv="Expires"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="Private" http-equiv="Cache-Control"/>
+  <title>
+   eCommons
+  </title>
+  <script>
+   thepbutton = "";
+function openwin(theType,theURL) {
+  focusURL = "focus.asp?theurl=" + escape(theURL);
+  focusURL = theURL;
+  windowName = Math.round(Math.random()*99999999);
+  if (theType == "ec") {
+    //eCommonsWindow = window.open(focusURL,"eCommonsWindow","resizable=yes,width=680,height=400,scrollbars,menubar,toolbar,location,status");
+    window.open(theURL,windowName,"resizable=yes,width=680,height=400,scrollbars,menubar,toolbar,location,status");
+  }
+  if (theType == "res") {
+    window.open(theURL,windowName,get90percent() + ",resizable=yes,scrollbars,menubar,toolbar,location,status");
+  }
+  if (theType == "help") {
+    helpWindow = window.open(focusURL,"helpWindow","width=400,height=350,menubar,scrollbars,resizable,copyhistory=no");
+  }
+  if (theType == "vtperson") {
+    vtPersonWindow = window.open(focusURL,"vtPersonWindow","width=400,height=300,scrollbars,resizable,copyhistory=no");
+  }
+  if (theType == "mail") {
+    mailWindow = window.open(focusURL,"mailWindow","width=500,height=450,menubar,scrollbars,resizable,copyhistory=no");
+  }
+  if (theType == "present") {
+    presentWindow = window.open(focusURL,"presentWindow","width=1224,height=780,menubar,scrollbars,resizable,copyhistory=no");
+  }
+  if (theType == "flashcard") {
+    flashcardWindow = window.open(focusURL,"flashcardWindow","width=520,height=450,scrollbars,resizable,copyhistory=no");
+  }
+  if (theType == "support") {
+    supportEditWindow = window.open(focusURL,"supportEditWindow","width=740,height=560,scrollbars,resizable,copyhistory=no");
+  }
+  if (theType == "dwDownload") {
+    dwDownloadWindow = window.open(focusURL,"dwDownloadWindow","width=350,height=200");
+  }
+  if (theType == "simple") {
+    window.open(theURL,windowName,get90percent() + ",resizable=yes,scrollbars");
+  }
+  if (theType == "docwriter") {
+    window.open(theURL,windowName,get90percent() + ",resizable=yes,scrollbars,status");
+  }
+  if (theType == "wizard") {
+    wizardWindow = window.open(focusURL,"wizardWindow",get90percent() + ",resizable=yes,scrollbars");
+  }
+  if (theType == "menuonly") {
+    window.open(theURL,windowName,get90percent() + ",resizable=yes,scrollbars,menubar");
+  }
+  if (theType == "tasks") {
+    window.open(theURL,"taskWindow",get90percent() + ",resizable=yes,scrollbars,menubar,status");
+  }
+  if (theType == "") {
+    window.open(theURL,windowName,get90percent() + ",resizable=yes,scrollbars,menubar,toolbar,location,status");
+  }
+}
+function get90percent() {
+  isNS = (navigator.appName == "Netscape");
+  if (isNS) {
+    theWidth = Math.round(window.innerWidth * 0.9);
+    theHeight = Math.round(window.innerHeight * 0.9);
+    theXOffset = Math.round((screen.availWidth - theWidth)/2);
+    theYOffset = Math.round((screen.availHeight - theHeight - 100)/2);
+    return "width=" + theWidth + ",height=" + theHeight + ",screenX=" + theXOffset + ",screenY=" + theYOffset;
+  } else {
+    theWidth = Math.round(document.body.clientWidth * 0.9);
+    theHeight = Math.round(document.body.clientHeight * 0.9);
+    theXOffset = Math.round((screen.availWidth - theWidth)/2);
+    theYOffset = Math.round((screen.availHeight - theHeight - 100)/2);
+    return "width=" + theWidth + ",height=" + theHeight + ",left=" + theXOffset + ",top=" + theYOffset;
+  }
+}
+function autologoutstop() {
+  refreshframe.location = "refresh.asp?autologout=N";
+}
+function autologoutstart() {
+  refreshframe.location = "refresh.asp";
+}
+function closetaskswindow() {
+  foundIt = 0;
+  tempLoc = mainframe.document.URL;
+  if (tempLoc.indexOf('myportal.asp') > -1) {foundIt = 1;}
+  if (tempLoc.indexOf('course.asp') > -1) {foundIt = 1;}
+  if (tempLoc.indexOf('vtasks.asp') > -1) {foundIt = 1;}
+  if (foundIt > 0) {
+    tempPos = tempLoc.indexOf('rand=');
+    if (tempPos < 0) {
+      if (tempLoc.indexOf('?') > -1) {
+        tempLoc = tempLoc + "&rand=";
+      } else {
+        tempLoc = tempLoc + "?rand=";
+      }
+      tempPos = tempLoc.indexOf('rand=');
+    }
+    tempLoc = tempLoc.substr(0,tempPos+5) + Math.floor(1000000*Math.random());
+    mainframe.document.location = tempLoc;
+  }
+  //if (foundIt > 0) {mainframe.document.location.reload(true);}
+}
+  </script>
+ </head>
+ <frameset border="0" frameborder="0" rows="50,*">
+  <frame marginheight="0" marginwidth="0" name="navframe" noresize="" scrolling="no" src="Edc_Nav.html"/>
+  <frameset border="0" frameborder="0" rows="87,*">
+   <frame marginheight="0" marginwidth="0" name="topframe" noresize="" scrolling="no" src="top.asp"/>
+   <frameset border="0" cols="119,*" frameborder="0">
+    <frameset border="0" frameborder="0" rows="99%,1%">
+     <frame marginheight="0" marginwidth="0" name="sideframe" noresize="" scrolling="auto" src="side.asp"/>
+     <frame marginheight="0" marginwidth="0" name="refreshframe" noresize="" scrolling="no" src="refresh.asp"/>
+    </frameset>
+    <frame marginheight="0" marginwidth="0" name="mainframe" noresize="" scrolling="auto" src="login.asp"/>
+   </frameset>
+  </frameset>
+ </frameset>
+ <noframes>
+  <body bgcolor="FFFFFF">
+   <center>
+    Sorry, MyCourses requires frames.
+   </center>
+  </body>
+ </noframes>
+</html>
+

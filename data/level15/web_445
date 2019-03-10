@@ -1,0 +1,142 @@
+https://ymessage.byu.edu
+<html>
+ <head>
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <script src="js/jquery-1.9.1.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function saastaIsLoggedIn()
+		{
+			webRequest = new XMLHttpRequest();
+			webRequest.open("GET","https://saasta.byu.edu/auth/util/loggedIn.php", false);
+			try { webRequest.send(); } catch(err) { console.log(err); }
+			return (webRequest.responseText == "Logged In");
+		}
+
+		$(document).ready(function()
+		{
+			if(saastaIsLoggedIn())
+			{
+				login();
+			}
+		});
+  </script>
+  <script type="text/javascript">
+   function login()
+	{
+		location.href = "https://saasta.byu.edu/auth/ymessage/student";
+	}
+
+	function createAccount()
+	{
+		window.open("https://y.byu.edu/ae/prod/person/cgi/createNetId.cgi?profile=coned2");
+	}
+
+	function goToNoauth()
+	{
+		location.href = "https://saasta.byu.edu/noauth/ymessage";
+	}
+  </script>
+ </head>
+ <body>
+  <div id="bar">
+   <div id="byu-bar">
+   </div>
+  </div>
+  <div id="wrapper1">
+   <div id="logo">
+    <img src="img/logo.png" style="width:80px"/>
+   </div>
+   <div id="loginText">
+    Log in to
+    <span style="font-family:sans-serif;font-style:normal;font-weight:600;">
+     YMESSAGE
+    </span>
+   </div>
+   <div id="loginDiv">
+    <table id="loginTable">
+     <tr>
+      <td>
+       <div class="loginLabel" style="font-weight:600">
+        My Account
+       </div>
+       <div class="actionBtn" onclick="login()" style="background:#346795">
+        Log in
+       </div>
+       <div class="btnLabel">
+        Use your BYU Net ID and Password
+       </div>
+      </td>
+      <td>
+       <div class="loginLabel" style="color:#777">
+        No BYU Account?
+       </div>
+       <div class="actionBtn" onclick="createAccount()">
+        Create an Account
+       </div>
+       <div class="btnLabel">
+        For those with a BYU student or employee record
+       </div>
+       <div class="actionBtn" onclick="goToNoauth()">
+        Send a One-Time Message
+       </div>
+       <div class="btnLabel">
+        For third parties or general questions
+       </div>
+      </td>
+     </tr>
+    </table>
+   </div>
+  </div>
+  <div id="wrapper2">
+   <div id="allHereText">
+    It's all here!
+   </div>
+   <div id="itemIcons">
+    <img src="img/item_icons.png"/>
+   </div>
+   <table class="wide" id="secureTable">
+    <tr>
+     <td id="whyText">
+      <div style="font-family:Rockwell;font-style:italic;font-size:3em;margin-bottom:50px;">
+       Why YMessage?
+      </div>
+      <div style="font-size:1.3em;letter-spacing:2px;margin-bottom:5px;">
+       IN ORDER TO PROTECT
+      </div>
+      <div style="margin-bottom:20px;line-height:25px">
+       your senstive and personal information, we require you to sign in to YMessage to retrieve information about your student record.
+      </div>
+      <div style="line-height:25px">
+       Other common methods of communication such as your personal e-mail service, text messaging, etc. are less secure.
+      </div>
+     </td>
+     <td id="locker">
+      <img src="img/locker.png"/>
+     </td>
+    </tr>
+   </table>
+   <div id="whenText">
+    When will I use YMessage?
+   </div>
+   <div style="text-align:center;margin-top:30px;color:#1B2751;font-size:1.5em">
+    YMESSAGE IS THE PLACE
+   </div>
+   <div style="text-align:center">
+    to go regarding service inquiries across campus.
+   </div>
+   <div style="text-align:center;margin-top:15px;">
+    YMessage can address topics regarding
+   </div>
+   <div style="text-align:center;margin-top:20px;">
+    <img src="img/topic_icons.png"/>
+   </div>
+  </div>
+  <div id="wrapper3">
+   <span style="visibility:hidden">
+    .
+   </span>
+  </div>
+ </body>
+</html>
+

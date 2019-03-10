@@ -1,0 +1,309 @@
+http://mycourses.med.harvard.edu/
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="IE=9" http-equiv="X-UA-Compatible"/>
+  <meta content="width=1200" name="viewport"/>
+  <meta content="MyCourses Online Course Management Software for Harvard Medical School Students" name="description"/>
+  <title>
+   MyCourses Online Course Management Software
+  </title>
+  <link href="/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/main.css" rel="stylesheet" type="text/css"/>
+  <!--[if IE]><link href="../css/ie.css" type="text/css" rel="stylesheet"/><![endif]-->
+  <link href="/css/reset.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/jquery.jscrollpane.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/easytabs-plugin.css" rel="stylesheet" type="text/css"/>
+  <link href="/Css/mycourses.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/jquery.1.8.2.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.cookie.js" type="text/javascript">
+  </script>
+  <script src="/scripts/mondernizr.js" type="text/javascript">
+  </script>
+  <!--[if IE]><script>document.documentElement.className += " ie ie" + parseInt(navigator.appVersion.split("MSIE")[1]);</script><![endif]-->
+  <!--[if IE 7]><script src="../scripts/ie.js"></script><![endif]-->
+  <script src="/scripts/jquery.jtruncate.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.easytabs.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.hashchange.min.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery-easing.js" type="text/javascript">
+  </script>
+  <script src="/scripts/retina.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery-ui-1.9.1.custom.min.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.sort.children.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.fancybox.pack.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.notclick.js" type="text/javascript">
+  </script>
+  <script src="/scripts/lib.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.jscrollpane.js" type="text/javascript">
+  </script>
+  <script src="/scripts/jquery.mousewheel.js" type="text/javascript">
+  </script>
+  <script src="/scripts/main-scripts.js" type="text/javascript">
+  </script>
+  <script src="/Scripts/mycourses.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function () {
+
+        $('#Yes_Link').live('click', function () {
+            //if the checkbox is set create the cookie
+                if ($('#CheckboxRemember').attr('checked') == 'checked') {
+                    WriteHMSGoToMobileCookie('HMSGoToMobile', 'Y');
+                }
+                parent.document.location = mobileSiteUrl;
+            })
+
+            $('#No_Link').live('click', function () {
+                //if the checkbox is set create the cookie
+                if ($('#CheckboxRemember').attr('checked') == 'checked') {
+                    WriteHMSGoToMobileCookie('HMSGoToMobile', 'N');
+                }
+
+                //Send to MyCourses Login
+                parent.document.location = myCoursesLogin;
+            })
+
+            function WriteHMSGoToMobileCookie(strCookieName, strYN) {
+                //if the checkbox is set create the cookie
+                if ($('#CheckboxRemember').attr('checked') == 'checked') {
+
+                    //set cookie that expires 30 years from today
+                    $.cookie(strCookieName, strYN, { expires: 10950 });
+                    //document.cookie = strCookie;
+                }
+            }
+    }) 
+
+    //********************************************************************************************************************
+    //NOTE:
+    //********************************************************************************************************************
+    //All this code is rendered in the header, so it can run before the page loads, causing a 
+    //flicker while the logic runs and redirects appropriately to mobile site or to mycourses login.
+    //The stuff that is in the $(document).ready section runs after the page is loaded.  This is so the controls that are
+    //referenced are available to the jquery.
+    var mobileSiteUrl;
+    var myCoursesLogin;
+    
+    //By default hide the mobile prompt window
+    $('#login-box-wrapper').hide();
+
+    //set defaults
+    mobileSiteUrl = 'https://mycourses.med.harvard.edu/mobile/login.aspx';
+
+
+    function getQuerystring(key, default_) {
+    	if (default_ == null) default_ = "";
+    	key = key.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    	var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");
+    	var qs = regex.exec(window.location.href);
+    	if (qs == null)
+    		return default_;
+    	else
+    		return qs[1];
+    }
+
+    var redirect = getQuerystring("redirect");
+    // Don't start internal on login page
+    if (redirect.toUpperCase().indexOf('ACCOUNT/LOGIN') > -1 || redirect.toUpperCase().indexOf('LOGIN/START') > -1)
+    	myCoursesLogin = '/Account/Login';
+    else
+    	myCoursesLogin = '/Account/Login?redirect=' + redirect;
+
+    //Get the mobile cookie if there is one set
+    var results = document.cookie.match('(^|;) ?' + 'HMSGoToMobile' + '=([^;]*)(;|$)');
+
+    //if there is a cookie
+    if (results) {
+
+        //and it is set to go to mycourses, skip mobile choice page
+        if (unescape(results[2]) == 'N') {
+            parent.document.location = myCoursesLogin;
+        }
+        else {
+            //otherwise send the user to the mobile site
+            parent.document.location = mobileSiteUrl;
+        } //ends else
+   
+    }
+    else {
+        //NO Cookie set
+
+        //alert('IsOnMOBILE = ' + IsOnMobileDevice());
+        //Call function IsOnMobileDevice() from mycourses.js file
+        if (IsOnMobileDevice('iphone|android|blackberry', '480', '480'))
+        {
+            //Show the mobile prompt
+            $('#login-box-wrapper').show();
+        }
+        else {
+            //skip prompt and send to MyCourses Login
+            parent.document.location = myCoursesLogin;
+        }
+
+    } //ends else No Cookie Set
+  </script>
+ </head>
+ <body class="login">
+  <header>
+   <div class="header-interior">
+    <!-- .page-header-top includes logo and top-most links -->
+    <div class="page-header-top">
+     <div class="header-topleft">
+      <div class="hms-header-logo">
+       <img alt="logo" src="/images/layout/hms-logo.png"/>
+      </div>
+     </div>
+     <div class="header-topright">
+      <div class="top-links">
+       <ul>
+        <li class="about-mycourses">
+         <a href="https://collaborate.hms.harvard.edu/pages/viewpage.action?pageId=11567201" target="_blank">
+          About myCourses
+         </a>
+        </li>
+        <li class="obtaining-an-account">
+         <a href="/Home/Support">
+          Help
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="myCourses-logo-container">
+       <div class="myCourses-logo">
+        <img alt="myCourses logo" src="/images/layout/myCourses-logo.png"/>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <!-- END HEADER -->
+  <!-- END HEADER -->
+  <div class="main-wrapper">
+   <img class="background-image" src="/images/login-bg.jpg"/>
+   <section>
+    <div class="mobilechoice">
+     <div class="login-box-wrapper">
+      <h2>
+       Go To Mobile Website?
+      </h2>
+      <div class="login-box">
+       <p class="enter-name" style="padding:10px;">
+        We have detected that you are using a mobile device.
+        <br/>
+        <br/>
+        Would you like to go to the mobile website now?
+       </p>
+       <br/>
+       <a class="brown-button" href="#" id="Yes_Link">
+        Yes
+       </a>
+       <a class="brown-button" href="#" id="No_Link">
+        No
+       </a>
+       <div>
+        <input checked="" class="CheckboxRemember" id="CheckboxRemember" type="checkbox"/>
+        Remember this next time
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </div>
+  <!-- END MAIN WRAPPER -->
+  <footer>
+   <div class="page-footer">
+    <div class="footer-logo">
+     <img alt="footer logo" src="/images/layout/footer-logo_r2_c4.png"/>
+    </div>
+    <div class="list-navigate" style="visibility:hidden;">
+     <p>
+      Navigate
+     </p>
+     <ul>
+      <li>
+       <a>
+        Dashboard
+       </a>
+      </li>
+      <li>
+       <a>
+        Courses
+       </a>
+      </li>
+      <li>
+       <a>
+        Faculty Resources
+       </a>
+      </li>
+      <li>
+       <a>
+        Tools
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="list-find" style="visibility:hidden;">
+     <p>
+      Find
+     </p>
+     <ul>
+      <li>
+       <a>
+        Browse Courses
+       </a>
+      </li>
+      <li>
+       <a>
+        Recent Courses Viewed
+       </a>
+      </li>
+      <li>
+       <a>
+        Manage Courses List
+       </a>
+      </li>
+      <li>
+       <a>
+        Email
+       </a>
+      </li>
+      <li>
+       <a>
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div style="clear:both">
+    </div>
+    <div class="footer-copyright">
+     <p>
+      © Copyright 2019 by the President and Fellows of Harvard College (version v2.24.10.0).
+     </p>
+    </div>
+   </div>
+  </footer>
+  <!-- END FOOTER -->
+  <script type="text/javascript">
+   //<![CDATA[
+(function() {
+var _analytics_scr = document.createElement('script');
+_analytics_scr.type = 'text/javascript'; _analytics_scr.async = true; _analytics_scr.src = '/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=2&cb=1605109709';
+var _analytics_elem = document.getElementsByTagName('script')[0]; _analytics_elem.parentNode.insertBefore(_analytics_scr, _analytics_elem);
+})();
+// ]]>
+  </script>
+ </body>
+</html>
+

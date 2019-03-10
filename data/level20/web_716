@@ -1,0 +1,1685 @@
+http://www.prepare.uga.edu/
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+   <link href="https://gmpg.org/xfn/11" rel="profile"/>
+   <title>
+    UGA Emergency Preparedness – Emergency Preparedness is Everyone's Responsibility
+   </title>
+   <link href="//fonts.googleapis.com" rel="dns-prefetch">
+    <link href="//s.w.org" rel="dns-prefetch"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://www.prepare.uga.edu/feed/" rel="alternate" title="UGA Emergency Preparedness » Feed" type="application/rss+xml"/>
+    <link href="https://www.prepare.uga.edu/comments/feed/" rel="alternate" title="UGA Emergency Preparedness » Comments Feed" type="application/rss+xml"/>
+    <link href="https://www.prepare.uga.edu/home/feed/" rel="alternate" title="UGA Emergency Preparedness » Home Comments Feed" type="application/rss+xml"/>
+    <script type="text/javascript">
+     window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/www.prepare.uga.edu\/wp-includes\/js\/wp-emoji.js?ver=5.1","twemoji":"https:\/\/www.prepare.uga.edu\/wp-includes\/js\/twemoji.js?ver=5.1"}};
+			/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 55356, 56826, 55356, 56819 ],
+					[ 55356, 56826, 8203, 55356, 56819 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447 ],
+					[ 55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447 ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * She's the hero Emoji deserves, but not the one it needs right now.
+				 *
+				 * To test for support, try to render a new emoji (female superhero),
+				 * then compare it to how it would look if the browser doesn't render it correctly
+				 * (superhero + female sign) .
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[55358, 56760, 9792, 65039],
+					[55358, 56760, 8203, 9792, 65039]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+    </script>
+    <style type="text/css">
+     img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+    </style>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/content-views-query-and-display-post-page/public/assets/css/cv.css?ver=2.1.3.2" id="pt-cv-public-style-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Merriweather+Sans:300,300italic,regular,italic,700,700italic,800,800italic" id="generate-fonts-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-includes/css/dashicons.css?ver=5.1" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/menu-icons.old/vendor/codeinwp/icon-picker/css/types/elusive.css?ver=2.0" id="elusive-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/menu-icons.old/vendor/codeinwp/icon-picker/css/types/font-awesome.css?ver=4.7.0" id="font-awesome-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/menu-icons.old/vendor/codeinwp/icon-picker/css/types/foundation-icons.css?ver=3.0" id="foundation-icons-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/menu-icons.old/vendor/codeinwp/icon-picker/css/types/genericons.css?ver=3.4" id="genericons-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/menu-icons.old/css/extra.css?ver=0.11.4" id="menu-icons-extra-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-includes/css/dist/block-library/style.css?ver=5.1" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/category-post-list-widget/css/main.css?ver=5.1" id="main-style-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/category-post-list-widget/css/slick.css?ver=5.1" id="slick-style-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/plugins/category-post-list-widget/css/slick-theme.css?ver=5.1" id="slick-theme-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/uploads/maxmegamenu/style.css?ver=57daf9" id="megamenu-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/themes/generatepress/css/unsemantic-grid.css?ver=2.2.2" id="generate-style-grid-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/wp-content/themes/generatepress/style.css?ver=2.2.2" id="generate-style-css" media="all" rel="stylesheet" type="text/css"/>
+    <style id="generate-style-inline-css" type="text/css">
+     body{background-color:#efefef;color:#3a3a3a;}a, a:visited{color:#00a3ad;}a:visited{color:#008e87;}a:hover, a:focus, a:active{color:#e4002b;}body .grid-container{max-width:2000px;}body, button, input, select, textarea{font-family:"Merriweather Sans", sans-serif;font-size:15px;}.entry-content > [class*="wp-block-"]:not(:last-child){margin-bottom:1.5em;}.main-navigation .main-nav ul ul li a{font-size:14px;}@media (max-width:768px){.main-title{font-size:30px;}h1{font-size:30px;}h2{font-size:25px;}}.top-bar{background-color:#636363;color:#ffffff;}.top-bar a,.top-bar a:visited{color:#ffffff;}.top-bar a:hover{color:#303030;}.site-header{background-color:#ffffff;color:#3a3a3a;}.site-header a,.site-header a:visited{color:#3a3a3a;}.main-title a,.main-title a:hover,.main-title a:visited{color:#222222;}.site-description{color:#757575;}.main-navigation,.main-navigation ul ul{background-color:#222222;}.main-navigation .main-nav ul li a,.menu-toggle{color:#ffffff;}.main-navigation .main-nav ul li:hover > a,.main-navigation .main-nav ul li:focus > a, .main-navigation .main-nav ul li.sfHover > a{color:#ffffff;background-color:#3f3f3f;}button.menu-toggle:hover,button.menu-toggle:focus,.main-navigation .mobile-bar-items a,.main-navigation .mobile-bar-items a:hover,.main-navigation .mobile-bar-items a:focus{color:#ffffff;}.main-navigation .main-nav ul li[class*="current-menu-"] > a{color:#ffffff;background-color:#3f3f3f;}.main-navigation .main-nav ul li[class*="current-menu-"] > a:hover,.main-navigation .main-nav ul li[class*="current-menu-"].sfHover > a{color:#ffffff;background-color:#3f3f3f;}.navigation-search input[type="search"],.navigation-search input[type="search"]:active{color:#3f3f3f;background-color:#3f3f3f;}.navigation-search input[type="search"]:focus{color:#ffffff;background-color:#3f3f3f;}.main-navigation ul ul{background-color:#3f3f3f;}.main-navigation .main-nav ul ul li a{color:#ffffff;}.main-navigation .main-nav ul ul li:hover > a,.main-navigation .main-nav ul ul li:focus > a,.main-navigation .main-nav ul ul li.sfHover > a{color:#ffffff;background-color:#4f4f4f;}.main-navigation .main-nav ul ul li[class*="current-menu-"] > a{color:#ffffff;background-color:#4f4f4f;}.main-navigation .main-nav ul ul li[class*="current-menu-"] > a:hover,.main-navigation .main-nav ul ul li[class*="current-menu-"].sfHover > a{color:#ffffff;background-color:#4f4f4f;}.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .one-container .container, .separate-containers .paging-navigation, .inside-page-header{background-color:#ffffff;}.entry-meta{color:#595959;}.entry-meta a,.entry-meta a:visited{color:#595959;}.entry-meta a:hover{color:#1e73be;}.sidebar .widget{background-color:#ffffff;}.sidebar .widget .widget-title{color:#000000;}.footer-widgets{background-color:#ffffff;}.footer-widgets .widget-title{color:#000000;}.site-info{color:#ffffff;background-color:#222222;}.site-info a,.site-info a:visited{color:#ffffff;}.site-info a:hover{color:#606060;}.footer-bar .widget_nav_menu .current-menu-item a{color:#606060;}input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"],input[type="tel"],input[type="number"],textarea,select{color:#666666;background-color:#fafafa;border-color:#cccccc;}input[type="text"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="number"]:focus,textarea:focus,select:focus{color:#666666;background-color:#ffffff;border-color:#bfbfbf;}button,html input[type="button"],input[type="reset"],input[type="submit"],a.button,a.button:visited,a.wp-block-button__link:not(.has-background){color:#ffffff;background-color:#666666;}button:hover,html input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,a.button:hover,button:focus,html input[type="button"]:focus,input[type="reset"]:focus,input[type="submit"]:focus,a.button:focus,a.wp-block-button__link:not(.has-background):active,a.wp-block-button__link:not(.has-background):focus,a.wp-block-button__link:not(.has-background):hover{color:#ffffff;background-color:#3f3f3f;}.generate-back-to-top,.generate-back-to-top:visited{background-color:rgba( 0,0,0,0.4 );color:#ffffff;}.generate-back-to-top:hover,.generate-back-to-top:focus{background-color:rgba( 0,0,0,0.6 );color:#ffffff;}.entry-content .alignwide, body:not(.no-sidebar) .entry-content .alignfull{margin-left:-40px;width:calc(100% + 80px);max-width:calc(100% + 80px);}@media (max-width:768px){.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content, .inside-page-header{padding:30px;}.entry-content .alignwide, body:not(.no-sidebar) .entry-content .alignfull{margin-left:-30px;width:calc(100% + 60px);max-width:calc(100% + 60px);}}.rtl .menu-item-has-children .dropdown-menu-toggle{padding-left:20px;}.rtl .main-navigation .main-nav ul li.menu-item-has-children > a{padding-right:20px;}.one-container .sidebar .widget{padding:0px;}/* End cached CSS */
+    </style>
+    <link href="https://www.prepare.uga.edu/wp-content/themes/generatepress/css/mobile.css?ver=2.2.2" id="generate-mobile-style-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.prepare.uga.edu/?sccss=1&amp;ver=5.1" id="sccss_style-css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="https://www.prepare.uga.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript">
+    </script>
+    <script src="https://www.prepare.uga.edu/wp-includes/js/jquery/jquery-migrate.js?ver=1.4.1" type="text/javascript">
+    </script>
+    <script src="https://www.prepare.uga.edu/wp-content/plugins/category-post-list-widget/js/slick.min.js?ver=5.1" type="text/javascript">
+    </script>
+    <link href="https://www.prepare.uga.edu/wp-json/" rel="https://api.w.org/"/>
+    <link href="https://www.prepare.uga.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+    <link href="https://www.prepare.uga.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+    <meta content="WordPress 5.1" name="generator"/>
+    <link href="https://www.prepare.uga.edu/" rel="canonical"/>
+    <link href="https://www.prepare.uga.edu/" rel="shortlink"/>
+    <link href="https://www.prepare.uga.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.prepare.uga.edu%2F" rel="alternate" type="application/json+oembed"/>
+    <link href="https://www.prepare.uga.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.prepare.uga.edu%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+    <style media="screen" type="text/css">
+     div.printfriendly a, div.printfriendly a:link, div.printfriendly a:hover, div.printfriendly a:visited, div.printfriendly a:focus {
+        text-decoration: none;
+        border: none;
+        -webkit-box-shadow:none!important;
+        box-shadow:none!important;
+      }
+    </style>
+    <style media="screen" type="text/css">
+     div.printfriendly {
+            margin: 12px 12px 12px 12px;
+            position: relative;
+            z-index: 1000;
+          }
+          div.printfriendly a, div.printfriendly a:link, div.printfriendly a:visited {
+            font-size: 12px;
+            color: #747474;
+            vertical-align: bottom;
+          }
+          .printfriendly a {
+            box-shadow:none;
+          }
+          .printfriendly a:hover {
+            cursor: pointer;
+          }
+          .printfriendly a img  {
+            border: none;
+            padding:0;
+            margin-right: 6px;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+          }
+          .printfriendly a span{
+            vertical-align: bottom;
+          }
+          .pf-alignleft {
+            float: left;
+          }
+          .pf-alignright {
+            float: right;
+          }
+          div.pf-aligncenter {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+          }
+    </style>
+    <style media="print" type="text/css">
+     .printfriendly {
+            display: none;
+          }
+    </style>
+    <script type="text/javascript">
+     (function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		if (window.wfLogHumanRan) { return; }
+		window.wfLogHumanRan = true;
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//www.prepare.uga.edu/?wordfence_lh=1&hid=9D25EAD3817E896C544EA143F32678C5');
+    </script>
+    <link href="https://www.prepare.uga.edu/xmlrpc.php" rel="pingback"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://www.prepare.uga.edu/wp-content/uploads/cropped-favicon-32x32.png" rel="icon" sizes="32x32">
+     <link href="https://www.prepare.uga.edu/wp-content/uploads/cropped-favicon-192x192.png" rel="icon" sizes="192x192"/>
+     <link href="https://www.prepare.uga.edu/wp-content/uploads/cropped-favicon-180x180.png" rel="apple-touch-icon-precomposed"/>
+     <meta content="https://www.prepare.uga.edu/wp-content/uploads/cropped-favicon-270x270.png" name="msapplication-TileImage">
+      <style id="wp-custom-css" type="text/css">
+       /*
+Welcome to Custom CSS!
+
+To learn how this works, see http://wp.me/PEmnE-Bt
+*/
+.btn-success {
+	background-color: #fff;
+	border-color: #fff;
+	color: #747474;
+}
+.menu-item a, .menu-item a:visited {text-decoration: none;}
+a, a:visited {text-decoration: underline;}
+main-navigation {background-color: #9ea2a2;
+box-shadow: 0px 0px 15px #000000;}
+.top-bar {background-color: #000000}
+h1.entry-title {display:none;}
+.widget-area .widget {padding:10px;}
+.footer-widgets {
+    padding: 0px;
+}
+      </style>
+      <style type="text/css">
+       /** Mega Menu CSS: fs **/
+      </style>
+     </meta>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="home page-template-default page page-id-118 wp-custom-logo wp-embed-responsive mega-menu-primary both-sidebars nav-below-header fluid-header separate-containers active-footer-widgets-1 nav-aligned-center header-aligned-left dropdown-hover elementor-default" itemscope="" itemtype="https://schema.org/WebPage">
+  <a class="screen-reader-text skip-link" href="#content" title="Skip to content">
+   Skip to content
+  </a>
+  <div class="top-bar top-bar-align-right">
+   <div class="inside-top-bar grid-container grid-parent">
+    <aside class="widget inner-padding widget_nav_menu" id="nav_menu-14">
+     <div class="menu-top-bar-container">
+      <ul class="menu" id="menu-top-bar">
+       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-44333" id="menu-item-44333">
+        <a href="http://www.uga.edu">
+         UGA Home
+        </a>
+       </li>
+      </ul>
+     </div>
+    </aside>
+   </div>
+  </div>
+  <header class="site-header" id="masthead" itemscope="" itemtype="https://schema.org/WPHeader">
+   <div class="inside-header grid-container grid-parent">
+    <div class="header-widget">
+     <aside class="widget inner-padding widget_text" id="text-2">
+      <h2 class="widget-title">
+       For Emergencies – Call 911
+      </h2>
+      <div class="textwidget">
+      </div>
+     </aside>
+     <aside class="widget_text widget inner-padding widget_custom_html" id="custom_html-8">
+      <div class="textwidget custom-html-widget">
+       <head>
+        <meta charset="utf-8"/>
+        <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+        <title>
+         UGA Global Footer
+        </title>
+        <meta content="" name="description"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta contet="noindex, nofollow" name="robots"/>
+        <link href="/wp-includes/widgets/_assets/css/uga-footer.css" rel="stylesheet"/>
+       </head>
+      </div>
+     </aside>
+    </div>
+    <div class="site-logo">
+     <a href="https://www.prepare.uga.edu/" rel="home" title="UGA Emergency Preparedness">
+      <img alt="UGA Emergency Preparedness" class="header-image" src="https://www.prepare.uga.edu/wp-content/uploads/Emergency-Web-logo-530x148.png" title="UGA Emergency Preparedness"/>
+     </a>
+    </div>
+   </div>
+   <!-- .inside-header -->
+  </header>
+  <!-- #masthead -->
+  <nav class="main-navigation" id="site-navigation" itemscope="" itemtype="https://schema.org/SiteNavigationElement">
+   <div class="inside-navigation grid-container grid-parent">
+    <button aria-controls="primary-menu" aria-expanded="false" class="menu-toggle">
+     <span class="mobile-menu">
+      Menu
+     </span>
+    </button>
+    <div class="mega-menu-wrap" id="mega-menu-wrap-primary">
+     <div class="mega-menu-toggle" tabindex="0">
+      <div class="mega-toggle-blocks-left">
+      </div>
+      <div class="mega-toggle-blocks-center">
+      </div>
+      <div class="mega-toggle-blocks-right">
+       <div class="mega-toggle-block mega-menu-toggle-block mega-toggle-block-1" id="mega-toggle-block-1">
+        <span class="mega-toggle-label">
+         <span class="mega-toggle-label-closed">
+          MENU
+         </span>
+         <span class="mega-toggle-label-open">
+          MENU
+         </span>
+        </span>
+       </div>
+      </div>
+     </div>
+     <ul class="mega-menu max-mega-menu mega-menu-horizontal mega-no-js" data-breakpoint="600" data-document-click="collapse" data-effect="fade_up" data-effect-mobile="disabled" data-effect-speed="400" data-effect-speed-mobile="200" data-event="hover_intent" data-mobile-force-width="false" data-second-click="close" data-unbind="true" data-vertical-behaviour="accordion" id="mega-menu-primary">
+      <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-home mega-current-menu-item mega-page_item mega-page-item-118 mega-current_page_item mega-align-bottom-left mega-menu-flyout mega-menu-item-5631" id="mega-menu-item-5631">
+       <a class="mega-menu-link" href="https://www.prepare.uga.edu/" tabindex="0">
+        Home
+       </a>
+      </li>
+      <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-grid mega-menu-item-5641" id="mega-menu-item-5641">
+       <a aria-haspopup="true" class="mega-menu-link" href="https://www.prepare.uga.edu/campus-emergency-plans/" tabindex="0">
+        Campus Emergency Plans
+        <span class="mega-indicator">
+        </span>
+       </a>
+       <ul class="mega-sub-menu">
+        <li class="mega-menu-row" id="mega-menu-5641-0">
+         <ul class="mega-sub-menu">
+          <li class="mega-menu-column mega-menu-columns-3-of-12" id="mega-menu-5641-0-0">
+           <ul class="mega-sub-menu">
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44182" id="mega-menu-item-44182">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/emergency-operations-plan/">
+              Campus Emergency Management Plan
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44184" id="mega-menu-item-44184">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/national-incident-management-system-nims/">
+              National Incident Management System (NIMS)
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44185" id="mega-menu-item-44185">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/pandemic-flu-plan/">
+              Pandemic Flu Plan
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44186" id="mega-menu-item-44186">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/pre-disaster-hazard-mitigation-plan/">
+              Pre-Disaster Hazard Mitigation Plan
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </li>
+      <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-grid mega-menu-item-5651" id="mega-menu-item-5651">
+       <a aria-haspopup="true" class="mega-menu-link" href="https://www.prepare.uga.edu/emergency-what-to-do/" tabindex="0">
+        Emergency – What to do
+        <span class="mega-indicator">
+        </span>
+       </a>
+       <ul class="mega-sub-menu">
+        <li class="mega-menu-row" id="mega-menu-5651-0">
+         <ul class="mega-sub-menu">
+          <li class="mega-menu-column mega-menu-columns-3-of-12" id="mega-menu-5651-0-0">
+           <ul class="mega-sub-menu">
+            <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-post_tag mega-menu-item-44180" id="mega-menu-item-44180">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/tag/ugaalert/">
+              UGAAlert
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44181" id="mega-menu-item-44181">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/emergency-preparedness-in-10-minutes/">
+              Emergency Preparedness in 10 Minutes
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44187" id="mega-menu-item-44187">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/preparing-for-emergencies/">
+              Preparing for Emergencies
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44183" id="mega-menu-item-44183">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/active-shooter-active-threat/">
+              Active Shooter – Active Threat
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44194" id="mega-menu-item-44194">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/automated-external-defibrillator-aeds/">
+              Automated External Defibrillator- AEDs
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44195" id="mega-menu-item-44195">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/bomb-threat/">
+              Bomb Threat
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44196" id="mega-menu-item-44196">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/chemical-spill/">
+              Chemical Spill
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44197" id="mega-menu-item-44197">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/civil-disturbance-demonstration/">
+              Civil Disturbance/ Demonstration
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44207" id="mega-menu-item-44207">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/uga-emergency-notification-systems/">
+              Emergency Notification
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="mega-menu-column mega-menu-columns-4-of-12" id="mega-menu-5651-0-1">
+           <ul class="mega-sub-menu">
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44198" id="mega-menu-item-44198">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/earthquake/">
+              Earthquake
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44199" id="mega-menu-item-44199">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/emergency-contacts/">
+              Emergency Contacts
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44202" id="mega-menu-item-44202">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/emergency-procedures-disabilities/">
+              Emergency Procedures – Disabilities
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44203" id="mega-menu-item-44203">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/fire/">
+              Fire
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44204" id="mega-menu-item-44204">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/medical-emergency/">
+              Medical Emergency
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44206" id="mega-menu-item-44206">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/stop-the-bleed/">
+              Stop the Bleed
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44188" id="mega-menu-item-44188">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/student-crisis-response/">
+              Student Crisis Response
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44189" id="mega-menu-item-44189">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/suspicious-package/">
+              Suspicious Package
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="mega-menu-column mega-menu-columns-4-of-12" id="mega-menu-5651-0-2">
+           <ul class="mega-sub-menu">
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44190" id="mega-menu-item-44190">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/tornado-safety/">
+              Tornado Safety
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44191" id="mega-menu-item-44191">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/travel-safety/">
+              Travel Safety
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44192" id="mega-menu-item-44192">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/utility-failure/">
+              Utility Failure
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-post mega-menu-item-44193" id="mega-menu-item-44193">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/winter-storm/">
+              Winter Storm
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </li>
+      <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-grid mega-menu-item-5661" id="mega-menu-item-5661">
+       <a aria-haspopup="true" class="mega-menu-link" href="https://www.prepare.uga.edu/resources/" tabindex="0">
+        Resources
+        <span class="mega-indicator">
+        </span>
+       </a>
+       <ul class="mega-sub-menu">
+        <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-post_tag mega-menu-item-has-children mega-menu-item-44157" id="mega-menu-item-44157">
+         <a aria-haspopup="true" class="mega-menu-link" href="https://www.prepare.uga.edu/tag/students/">
+          Students
+          <span class="mega-indicator">
+          </span>
+         </a>
+         <ul class="mega-sub-menu">
+          <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-44391" id="mega-menu-item-44391">
+           <a class="mega-menu-link" href="//www.prepare.uga.edu/resources/ambassador-program/">
+            Ambassador Program
+           </a>
+          </li>
+         </ul>
+        </li>
+        <li class="mega-menu-row" id="mega-menu-5661-0">
+         <ul class="mega-sub-menu">
+          <li class="mega-menu-column mega-menu-columns-3-of-12" id="mega-menu-5661-0-0">
+           <ul class="mega-sub-menu">
+            <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-item-44388" id="mega-menu-item-44388">
+             <a aria-haspopup="true" class="mega-menu-link" href="//www.prepare.uga.edu/resources/training/">
+              Training
+              <span class="mega-indicator">
+              </span>
+             </a>
+             <ul class="mega-sub-menu">
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-44389" id="mega-menu-item-44389">
+               <a class="mega-menu-link" href="//www.prepare.uga.edu/resources/cert/">
+                Community Emergency Response Team (CERT)
+               </a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-44390" id="mega-menu-item-44390">
+               <a class="mega-menu-link" href="//www.prepare.uga.edu/resources/mrc/">
+                Medical Reserve Corps (MRC)
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-post_tag mega-menu-item-44159" id="mega-menu-item-44159">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/tag/staff/">
+              Faculty/Staff
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-taxonomy mega-menu-item-object-post_tag mega-menu-item-44158" id="mega-menu-item-44158">
+             <a class="mega-menu-link" href="https://www.prepare.uga.edu/tag/ugaparents/">
+              UGA Parents
+             </a>
+            </li>
+            <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-44387" id="mega-menu-item-44387">
+             <a class="mega-menu-link" href="//www.prepare.uga.edu/livesafe/">
+              LiveSafe
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="mega-menu-column mega-menu-columns-4-of-12" id="mega-menu-5661-0-1">
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </li>
+      <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-5671" id="mega-menu-item-5671">
+       <a class="mega-menu-link" href="http://www.ugaalert.uga.edu" tabindex="0">
+        UGAAlert
+       </a>
+      </li>
+      <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-44582" id="mega-menu-item-44582">
+       <a class="mega-menu-link" href="http://busfin.uga.edu/insurance/" tabindex="0">
+        Insurance and Claims Management
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- .inside-navigation -->
+  </nav>
+  <!-- #site-navigation -->
+  <div class="hfeed site grid-container container grid-parent" id="page">
+   <div class="site-content" id="content">
+    <div class="content-area grid-parent mobile-grid-100 push-25 grid-50 tablet-push-25 tablet-grid-50" id="primary">
+     <main class="site-main" id="main">
+      <article class="post-118 page type-page status-publish" id="post-118" itemscope="" itemtype="https://schema.org/CreativeWork">
+       <div class="inside-article">
+        <header class="entry-header">
+         <h1 class="entry-title" itemprop="headline">
+          Home
+         </h1>
+        </header>
+        <!-- .entry-header -->
+        <div class="entry-content" itemprop="text">
+         <div class="pf-content">
+          <div class="pt-cv-wrapper">
+           <div class="pt-cv-view pt-cv-grid pt-cv-colsys" id="pt-cv-view-345ad4600f">
+            <div class="pt-cv-page" data-cvc="1" data-id="pt-cv-page-1">
+             <div class="col-md-12 col-sm-6 col-xs-12 pt-cv-content-item pt-cv-2-col">
+              <div class="pt-cv-ifield">
+               <a class="_self pt-cv-href-thumbnail pt-cv-thumb-left" href="https://www.prepare.uga.edu/ambassador-program/" target="_self">
+               </a>
+               <h4 class="pt-cv-title">
+                <a class="_self" href="https://www.prepare.uga.edu/ambassador-program/" target="_self">
+                 Prepared Dawgs Ambassador Program
+                </a>
+               </h4>
+               <div class="pt-cv-content">
+                <div class="pf-content">
+                 <p>
+                  If you are interested in being a member of the Prepared Dawgs Ambassador program, please complete the
+                  <a href="https://www.prepare.uga.edu/wp-content/uploads/Ambassador-Application-2019-2020.pdf">
+                   Ambassador Application 2019-2020
+                  </a>
+                  . The deadline is March 31, 2019.
+                 </p>
+                 <h3 style="border-bottom: 2px solid #cc0000;">
+                  <strong>
+                   Mission Statement
+                  </strong>
+                 </h3>
+                 <p>
+                  The mission of the UGA OEP Ambassador Program is to promote a healthy, safe, and prepared campus community through student-to-student coordination and outreach.
+                 </p>
+                 <h3 style="border-bottom: 2px solid #cc0000;">
+                  <strong>
+                   Program Description
+                  </strong>
+                 </h3>
+                 <p>
+                  OEP Ambassadors will act as the spokespeople for the Office of Emergency Preparedness to their organizations, respective colleges, and UGA in general.
+                 </p>
+                 <p>
+                  The intention of the OEP Student Ambassador Program is not to monopolize the time of students involved, rather, it is formatted to educate the selected students so that they may relay provided information to their organizations. Through this strategy, it is OEP’s hope that the majority of UGA students will have a thorough understanding of emergency procedures and feel prepared for any emergency situation.
+                 </p>
+                 <p>
+                  Students selected for this program should consider it an honor and a responsibility, as they will be communicating information that could potentially save lives. Ambassadors will meet monthly to discuss emergency procedures and protocol while also taking an in-depth look at recent events regarding emergency safety. Through analyzing the events that take place on other campuses or communities, the OEP Ambassadors will be able to better prepare themselves and their organizations for situations through the application of real-world examples.
+                  <br/>
+                  OEP Student Ambassadors will fulfill a crucial role on UGA’s campus. These students will provide an essential connection between the student body and the professionals working at the Office of Emergency Preparedness. This program is one of the many steps that UGA is taking in order to better prepare our campus for emergencies, and selected OEP Ambassadors should feel proud of their involvement in such an important cause.
+                 </p>
+                 <p>
+                  <a href="https://www.prepare.uga.edu/resources/ambassador-program/">
+                   Read More…
+                  </a>
+                 </p>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="col-md-12 col-sm-6 col-xs-12 pt-cv-content-item pt-cv-2-col">
+              <div class="pt-cv-ifield">
+               <a class="_self pt-cv-href-thumbnail pt-cv-thumb-left" href="https://www.prepare.uga.edu/livesafeapp/" target="_self">
+               </a>
+               <h4 class="pt-cv-title">
+                <a class="_self" href="https://www.prepare.uga.edu/livesafeapp/" target="_self">
+                 Stay Connected with LiveSafe
+                </a>
+               </h4>
+               <div class="pt-cv-content">
+                <div class="pf-content">
+                 The University of Georgia Office of Emergency Preparedness in collaboration with the University of Georgia Police are providing all students, faculty, and staff with the LiveSafe app.
+                 <p>
+                  <strong>
+                   Steps to Download LiveSafe
+                  </strong>
+                 </p>
+                 <ol>
+                  <li>
+                   Download
+                   <strong>
+                    “LiveSafe”
+                   </strong>
+                   from the
+                   <a href="https://itunes.apple.com/us/app/livesafe/id653666211?mt=8">
+                    App Store
+                   </a>
+                   or
+                   <a href="https://play.google.com/store/apps/details?id=com.livesafe.activities&amp;hl=en">
+                    Google Play
+                   </a>
+                   (Enable location services and push notifications when prompted).
+                  </li>
+                  <li>
+                   Sign up using your mobile phone number, email or Facebook account.
+                  </li>
+                  <li>
+                   Create a password and fill in your name.
+                  </li>
+                  <li>
+                   Search for
+                   <strong>
+                    “University of Georgia”
+                   </strong>
+                   to connect with the organization.
+                  </li>
+                  <li>
+                   Add your email to your profile (Left Menu &gt; Settings &gt; Profile).
+                  </li>
+                 </ol>
+                 <p>
+                  <strong>
+                   What is LiveSafe?
+                  </strong>
+                 </p>
+                 <p>
+                  LiveSafe is a personal safety mobile app that provides a quick, convenient, and discreet way to communicate directly with University of Georgia safety officials, enhancing your overall safety and allowing University of Georgia Police to better protect you.
+                 </p>
+                 <p>
+                  <strong>
+                   LiveSafe Goals: A Mobile Solution to Increase Overall Safety
+                  </strong>
+                 </p>
+                 <ul>
+                  <li>
+                   <strong>
+                    Communication:
+                   </strong>
+                   To increase communication between the University of Georgia community and safety officials in order to increase safety and awareness.
+                  </li>
+                  <li>
+                   <strong>
+                    Prevention:
+                   </strong>
+                   To be a preventative measure in stopping crimes and incidents before they occur.
+                  </li>
+                  <li>
+                   <strong>
+                    Collaboration:
+                   </strong>
+                   To leverage the community’s eyes and ears in helping keep campus safe.
+                  </li>
+                 </ul>
+                 <p>
+                  <strong>
+                  </strong>
+                  <strong>
+                   Explaining the Main Features of the LiveSafe App:
+                  </strong>
+                 </p>
+                 <ul>
+                  <li>
+                   <strong>
+                    Report Tips:
+                   </strong>
+                   The “Report Tips” feature allows you to send text, picture, video, and audio directly to University of Georgia Police in real-time, and anonymously if you prefer. You can share information about any safety incidents or concerns, such as suspicious activity, theft, harassment, and more. You can also engage in a live chat with a safety official.
+                  </li>
+                  <li>
+                   <strong>
+                    Emergency Options:
+                   </strong>
+                   By calling 911, calling University of Georgia Police, or Messaging University of Georgia Police from the “Emergency Options” screen, you will initiate location tracking, allowing safety officials to see where you are and respond to you more quickly in an emergency situation. You can easily stop location tracking at any time after the call is placed.
+                  </li>
+                  <li>
+                   <strong>
+                    SafeWalk:
+                   </strong>
+                   Get from place to place safely by using SafeWalk to invite your contacts to “virtually escort” you, allowing them to follow your location on a map as they chat with you. You can request to virtually escort others as well.
+                  </li>
+                  <li>
+                   <strong>
+                    Resources
+                   </strong>
+                   : Access important safety information such as emergency procedures, health &amp; wellness resources, sexual assault assistance resources, and more.
+                  </li>
+                 </ul>
+                 <p>
+                  <strong>
+                   Best Practices to Download and Start Using the LiveSafe App
+                  </strong>
+                 </p>
+                 <ul>
+                  <li>
+                   <strong>
+                    Complete your profile:
+                   </strong>
+                   To gain the maximum benefit of the LiveSafe app, make sure to complete your user profile with your mobile phone number. This University of Georgia better respond to reports you send in.
+                  </li>
+                  <li>
+                   <strong>
+                    Enable Push Notifications:
+                   </strong>
+                   Allow “Push Notifications” to be enabled in your Settings. University of Georgia Police Department will respond to messages sent through the app.  You will not be spammed.
+                  </li>
+                  <li>
+                   <strong>
+                    Enable Location Services:
+                   </strong>
+                   Be sure to enable location services. Safety officials rely on GPS data to better serve and protect you. When you report an incident or make an emergency call through the app, University of Georgia will see your location so they can respond quickly. Don’t worry! You are not being actively tracked, and can stop location tracking (when used during emergencies) any time you want.
+                  </li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="col-md-12 col-sm-6 col-xs-12 pt-cv-content-item pt-cv-2-col">
+              <div class="pt-cv-ifield">
+               <a class="_self pt-cv-href-thumbnail pt-cv-thumb-left" href="https://www.prepare.uga.edu/five-steps/" target="_self">
+               </a>
+               <h4 class="pt-cv-title">
+                <a class="_self" href="https://www.prepare.uga.edu/five-steps/" target="_self">
+                 Five steps to emergency preparedness for students
+                </a>
+               </h4>
+               <div class="pt-cv-content">
+                <div class="pf-content">
+                 Step 1 – Update your emergency information in UGA
+                 <em>
+                  Alert
+                 </em>
+                 ,
+                 <a href="http://www.ugaalert.uga.edu" rel="noopener" target="_blank">
+                  www.ugaalert.uga.edu
+                 </a>
+                 . UGA
+                 <em>
+                  Alert
+                 </em>
+                 is the emergency notification system at UGA. Your personal information should be updated twice per year.
+                 <p>
+                  Step 2 – Install the
+                  <a href="//www.prepare.uga.edu/livesafeapp/" rel="noopener" target="_blank">
+                   LiveSafe safety app
+                  </a>
+                  on your phone. LifeSafe provides location sharing for emergencies, a virtual safe walk and safe drive feature, and many safety resources at your fingertips.
+                 </p>
+                 <p>
+                  Step 3 – Create an emergency kit. Emergency kits should include a first aid kit and enough supplies to last you for 72 hours.
+                 </p>
+                 <p>
+                  Step 4 – Complete the
+                  <a href="//www.prepare.uga.edu/emergency-preparedness-in-10-minutes/" rel="noopener" target="_blank">
+                   Emergency Preparedness Module
+                  </a>
+                  . By completing the module you will learn about emergency notification and response, crime prevention and additional emergency resources.
+                 </p>
+                 <p>
+                  Step 5 – Volunteer with
+                  <a href="//www.prepare.uga.edu/resources/cert/" rel="noopener" target="_blank">
+                   CERT
+                  </a>
+                  and
+                  <a href="//www.prepare.uga.edu/resources/mrc/" rel="noopener" target="_blank">
+                   MRC
+                  </a>
+                  . Receive free emergency preparedness training by volunteering with the UGA Community Emergency Response Team or the Medical Reserve Corps.
+                 </p>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="col-md-12 col-sm-6 col-xs-12 pt-cv-content-item pt-cv-2-col">
+              <div class="pt-cv-ifield">
+               <a class="_self pt-cv-href-thumbnail pt-cv-thumb-left" href="https://www.prepare.uga.edu/five-steps-for-emergency-preparedness-for-uga-faculty-and-staff/" target="_self">
+               </a>
+               <h4 class="pt-cv-title">
+                <a class="_self" href="https://www.prepare.uga.edu/five-steps-for-emergency-preparedness-for-uga-faculty-and-staff/" target="_self">
+                 Five steps for emergency preparedness for UGA faculty and staff
+                </a>
+               </h4>
+               <div class="pt-cv-content">
+                <div class="pf-content">
+                 The summer in Athens is a great time to take a brief break and make sure that you are prepared for emergencies. Remember, emergency preparedness is everyone’s responsibility. Here are a few things that you can do to be better prepared.
+                 <p>
+                  Step 1 – Check/update your information in UGA
+                  <em>
+                   Alert
+                  </em>
+                  at
+                  <a class="x_OWAAutoLink" href="http://www.ugaalert.uga.edu/" id="LPlnk537267" rel="noopener noreferrer" target="_blank">
+                   www.ugaalert.uga.edu
+                  </a>
+                  and download UGA
+                  <em>
+                   Alert
+                  </em>
+                  Desktop to receive alerts to your computer screen at
+                  <a href="https://eits.uga.edu/hardware_and_software/software/" rel="noopener" target="_blank">
+                   https://eits.uga.edu/hardware_and_software/software/
+                  </a>
+                  .
+                 </p>
+                 <p>
+                  Step 2 – Install the
+                  <a href="//www.prepare.uga.edu/livesafeapp/" rel="noopener" target="_blank">
+                   LiveSafe mobile safety app
+                  </a>
+                  on your phone – it features a campus map to help you locate AEDs, emergency plan information, a safe walk feature and other resources
+                 </p>
+                 <p>
+                  Step 3 – Take a free
+                  <a href="//www.prepare.uga.edu/resources/training/" rel="noopener" target="_blank">
+                   training class
+                  </a>
+                  – be an emergency preparedness leader. OEP offers many useful classes that will help you respond better in an emergency.
+                 </p>
+                 <p>
+                  Step 4 – Take a moment to create a
+                  <a href="//www.prepare.uga.edu/family-emergency-preparedness-kit/" rel="noopener" target="_blank">
+                   small emergency kit
+                  </a>
+                  for your office, home and/or car.
+                 </p>
+                 <p>
+                  Step 5 – Check out all of the available volunteer opportunities, resources and the Emergency Preparedness in 10-minute online training at
+                  <a class="x_OWAAutoLink" href="//www.prepare.uga.edu/" id="LPlnk879166" rel="noopener noreferrer" target="_blank">
+                   www.prepare.uga.edu
+                  </a>
+                 </p>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- .entry-content -->
+       </div>
+       <!-- .inside-article -->
+      </article>
+      <!-- #post-## -->
+     </main>
+     <!-- #main -->
+    </div>
+    <!-- #primary -->
+    <div class="widget-area grid-25 tablet-grid-25 mobile-grid-100 grid-parent sidebar pull-50 tablet-pull-50" id="left-sidebar" itemscope="" itemtype="https://schema.org/WPSideBar">
+     <div class="inside-left-sidebar">
+      <aside class="widget inner-padding widget_media_image" id="media_image-5">
+       <img alt="StormReady University logo" class="image wp-image-27411 aligncenter attachment-full size-full" height="302" sizes="(max-width: 825px) 100vw, 825px" src="https://www.prepare.uga.edu/wp-content/uploads/StormReady-trademark-university2-825x3021.png" srcset="https://www.prepare.uga.edu/wp-content/uploads/StormReady-trademark-university2-825x3021.png 825w, https://www.prepare.uga.edu/wp-content/uploads/StormReady-trademark-university2-825x3021-300x110.png 300w" style="max-width: 100%; height: auto;" width="825"/>
+      </aside>
+      <aside class="widget inner-padding widget_media_image" id="media_image-6">
+       <a href="//www.prepare.uga.edu/resources/emergency-preparedness-in-10-minutes/">
+        <img alt="Link to Emergency Module" class="image wp-image-24691 aligncenter attachment-full size-full" height="174" src="https://www.prepare.uga.edu/wp-content/uploads/oepOnlineModulegraphic11.png" style="max-width: 100%; height: auto;" width="248"/>
+       </a>
+      </aside>
+      <aside class="widget inner-padding widget_nav_menu" id="nav_menu-11">
+       <div class="menu-emergency-container">
+        <ul class="menu" id="menu-emergency">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5681" id="menu-item-5681">
+          <a href="//www.prepare.uga.edu/emergency/active-shooter-active-threat/">
+           <img alt="icon active shooter" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Police-badge-icon-web11.png" width="72"/>
+           <span>
+            Active Shooter
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5691" id="menu-item-5691">
+          <a href="//www.prepare.uga.edu/emergency/bomb-threat/">
+           <img alt="" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Bomb-icon-web12.png" width="72"/>
+           <span>
+            Bomb Threat
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5701" id="menu-item-5701">
+          <a href="//www.prepare.uga.edu/emergency/chemical-spill/">
+           <img alt="icon for chemical spill" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Hazard-icon-web11.png" width="72"/>
+           <span>
+            Chemical/ Hazardous Spill
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5711" id="menu-item-5711">
+          <a href="//www.prepare.uga.edu/emergency/fire/">
+           <img alt="icon for fire evacuation" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Fire-Evac-icon-web11.png" width="72"/>
+           <span>
+            Fire/ Evacuation
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5721" id="menu-item-5721">
+          <a href="//www.prepare.uga.edu/emergency/medical-emergency/">
+           <img alt="icon for medical emergency" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Medical-icon-web11.png" width="72"/>
+           <span>
+            Medical Emergency
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5731" id="menu-item-5731">
+          <a href="//www.prepare.uga.edu/emergency/severe-weather/">
+           <img alt="icon for severe weather" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Tornado-icon-web11.png" width="72"/>
+           <span>
+            Severe Weather
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget inner-padding widget_nav_menu" id="nav_menu-12">
+       <div class="menu-ugaalert-container">
+        <ul class="menu" id="menu-ugaalert">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-43883" id="menu-item-43883">
+          <a href="//www.prepare.uga.edu/plans/ugaalert/">
+           <img alt="" aria-hidden="true" class="_mi _before _image" height="77" src="https://www.prepare.uga.edu/wp-content/uploads/UGA-Alert-Logo-215x100-pixel.jpg" width="215"/>
+           <span>
+            UGAAlert
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39051" id="menu-item-39051">
+          <a href="http://###">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right" style="vertical-align:text-top;">
+           </i>
+           <span>
+            Have you programmed the UGAAlert number, 706-542-0111, into your cell phone?
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39061" id="menu-item-39061">
+          <a href="http://###">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right" style="vertical-align:text-top;">
+           </i>
+           <span>
+            Did you know the UGAAlert messages are also posted to four Twitter feeds (@ugaalert, @UGAEVENTS, @universityofga, @UGAOEP) and to OEP’s Facebook page?
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39071" id="menu-item-39071">
+          <a href="http://###">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right" style="vertical-align:text-top;">
+           </i>
+           <span>
+            You can also Fast Follow @ugaalert. Text “Follow @ugaalert” to 40404. This will allow you to receive the alerts from the UGAAlert Twitter feed directly to you phone like a text message. You must have a Twitter account.
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget_text widget inner-padding widget_custom_html" id="custom_html-2">
+       <div class="textwidget custom-html-widget">
+        <!DOCTYPE html>
+        <html>
+         <head>
+          <title>
+           The temperature
+          </title>
+          <!-- JQuery is required for the WeatherSTEM component to work -->
+          <script src="//code.jquery.com/jquery-latest.min.js">
+          </script>
+          <!-- WeatherSTEM API component must be included AFTER JQuery include -->
+          <script src="//static.weatherstem.com/api.min.js">
+          </script>
+          <!-- You must include your API key -->
+          <meta content="lt9rmb2p" name="WeatherSTEM-api-key">
+           <!-- This sets the station scope for the page -->
+           <meta content="athensclarke/uga" name="WeatherSTEM-station">
+           </meta>
+          </meta>
+         </head>
+         <body>
+          <!-- data-sensor can be the value of any supported sensor -->
+          The current temperature is
+          <span data-sensor="Thermometer">
+          </span>
+          ° F.
+          <br/>
+          The rainfall total is
+          <span data-sensor="Rain Gauge">
+          </span>
+          inches.
+          <br/>
+         </body>
+        </html>
+       </div>
+      </aside>
+     </div>
+     <!-- .inside-left-sidebar -->
+    </div>
+    <!-- #secondary -->
+    <div class="widget-area grid-25 tablet-grid-25 grid-parent sidebar" id="right-sidebar" itemscope="" itemtype="https://schema.org/WPSideBar">
+     <div class="inside-right-sidebar">
+      <aside class="widget inner-padding widget_search" id="search-2">
+       <form action="https://www.prepare.uga.edu/" class="search-form" method="get">
+        <label>
+         <span class="screen-reader-text">
+          Search for:
+         </span>
+         <input class="search-field" name="s" placeholder="Search …" title="Search for:" type="search" value=""/>
+        </label>
+        <input class="search-submit" type="submit" value="Search"/>
+       </form>
+      </aside>
+      <aside class="widget inner-padding widget_nav_menu" id="nav_menu-2">
+       <div class="menu-maps-container">
+        <ul class="menu" id="menu-maps">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5741" id="menu-item-5741">
+          <a href="https://www.google.com/maps/d/embed?mid=1zcaCBM2F0YrbJQ6SLJpDNAOUp6s&amp;hl=en">
+           <img alt="icon for AED" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/AED-icon-web12.png" width="72"/>
+           <span>
+            Map of AEDs
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5751" id="menu-item-5751">
+          <a href="https://www.google.com/maps/d/embed?mid=1985RTsa-PzKMfG2zgENxvmRugJ0&amp;hl=en">
+           <img alt="" aria-hidden="true" class="_mi _before _image" height="72" src="https://www.prepare.uga.edu/wp-content/uploads/Evac-Chair-icon-web12.png" width="72"/>
+           <span>
+            Map of Evacuation Chairs
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget inner-padding widget_nav_menu" id="nav_menu-10">
+       <div class="menu-volunteer-container">
+        <ul class="menu" id="menu-volunteer">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5841" id="menu-item-5841">
+          <a href="//www.prepare.uga.edu/resources/mrc">
+           <img alt="" aria-hidden="true" class="_mi _image" height="103" src="https://www.prepare.uga.edu/wp-content/uploads/MRCUGA-logo-web1.png" width="142"/>
+           <span class="visuallyhidden">
+            MRC
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5851" id="menu-item-5851">
+          <a href="//www.prepare.uga.edu/resources/cert">
+           <img alt="CAMPUS-CERT-logo-resized" aria-hidden="true" class="_mi _image" height="109" src="https://www.prepare.uga.edu/wp-content/uploads/CAMPUS-CERT-logo-resized2.jpg" width="142"/>
+           <span class="visuallyhidden">
+            CERT
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget inner-padding widget_nav_menu" id="nav_menu-8">
+       <div class="menu-quicklinks-container">
+        <ul class="menu" id="menu-quicklinks">
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36251" id="menu-item-36251">
+          <a href="https://www.prepare.uga.edu/resources/ambassador-program/">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right">
+           </i>
+           <span>
+            Ambassador Program
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5771" id="menu-item-5771">
+          <a href="https://www.prepare.uga.edu/campus-emergency-plans/bssrs/">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right">
+           </i>
+           <span>
+            Building Emergency Plans (BSSRs)
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5781" id="menu-item-5781">
+          <a href="https://www.prepare.uga.edu/campus-emergency-plans/business-continuity-planning/">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right">
+           </i>
+           <span>
+            Business Continuity Planning
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5761" id="menu-item-5761">
+          <a href="https://www.prepare.uga.edu/campus-emergency-plans/aedevacuation-chair-guidelines/">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right">
+           </i>
+           <span>
+            AED/Evacuation Chair Guidelines
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-43973" id="menu-item-43973">
+          <a href="https://emer.prepare.uga.edu/osepforms/building_list.html">
+           <i aria-hidden="true" class="_mi _before fa fa-chevron-circle-right">
+           </i>
+           <span>
+            Who is My BSSR? Where do I shelter? And what do I do during a fire?
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget inner-padding widget_nav_menu" id="nav_menu-9">
+       <div class="menu-submenu-container">
+        <ul class="menu" id="menu-submenu">
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5801" id="menu-item-5801">
+          <a href="https://www.prepare.uga.edu/kassinger-scholarship/">
+           <i aria-hidden="true" class="_mi _before fa fa-graduation-cap">
+           </i>
+           <span>
+            Kassinger Scholarship
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5811" id="menu-item-5811">
+          <a href="https://twitter.com/ugaoep">
+           <i aria-hidden="true" class="_mi _before fa fa-twitter">
+           </i>
+           <span>
+            Twitter
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5821" id="menu-item-5821">
+          <a href="https://www.facebook.com/osepuga">
+           <i aria-hidden="true" class="_mi _before fa fa-facebook-square">
+           </i>
+           <span>
+            Facebook
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5831" id="menu-item-5831">
+          <a href="https://www.listserv.uga.edu/cgi-bin/wa?A0=OEP-NEWS-L">
+           <i aria-hidden="true" class="_mi _before fa fa-envelope-o">
+           </i>
+           <span>
+            Listserv
+           </span>
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5791" id="menu-item-5791">
+          <a href="https://www.prepare.uga.edu/about-us/">
+           <i aria-hidden="true" class="_mi _before fa fa-users">
+           </i>
+           <span>
+            About Us
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget_text widget inner-padding widget_custom_html" id="custom_html-4">
+       <h2 class="widget-title">
+        Upcoming Events
+       </h2>
+       <div class="textwidget custom-html-widget">
+        <script src="https://calendar.uga.edu/widget/view?schools=uga&amp;groups=office_of_emergency_preparedness&amp;days=60&amp;num=50&amp;target_blank=1&amp;template=modern" type="text/javascript">
+        </script>
+        <div id="lclst_widget_footer">
+         <a href="https://calendar.uga.edu/group/office_of_emergency_preparedness" style="margin-left:auto;margin-right:auto;display:block;width:81px;margin-top:10px;" title="UGA Emergency Preparedness Calendar">
+          <img alt="Localist Online Calendar Software" height="23" src="//d3e1o4bcbhmj8g.cloudfront.net/assets/platforms/default/about/widget_footer.png" style="vertical-align: middle;" width="81"/>
+         </a>
+        </div>
+       </div>
+      </aside>
+     </div>
+     <!-- .inside-right-sidebar -->
+    </div>
+    <!-- #secondary -->
+   </div>
+   <!-- #content -->
+  </div>
+  <!-- #page -->
+  <div class="site-footer footer-bar-active footer-bar-align-right">
+   <div class="site footer-widgets" id="footer-widgets">
+    <div class="footer-widgets-container">
+     <div class="inside-footer-widgets">
+      <div class="footer-widget-1 grid-parent grid-100 tablet-grid-50 mobile-grid-100">
+       <aside class="widget_text widget inner-padding widget_custom_html" id="custom_html-10">
+        <div class="textwidget custom-html-widget">
+         <!-- 
+			/* Footer Options
+			 * By default, footer includes a 4px red top-border.
+			 *
+			 * Apply options by including class on .ugafooter object:
+			 * 
+			 * white border â€”Â `ugafooter--border-white`
+			 * grey border â€” `ugafooter--border-grey`
+			 * no border â€” `ugafooter--no-border`
+		 -->
+         <footer class="ugafooter">
+          <div class="ugafooter__container">
+           <div class="ugafooter__row ugafooter__row--primary">
+            <div class="ugafooter__logo">
+             <a class="ugafooter__logo-link" href="https://www.uga.edu/">
+              University of Georgia
+             </a>
+            </div>
+            <nav class="ugafooter__links">
+             <ul class="ugafooter__links-list">
+              <li class="ugafooter__links-list-item">
+               <a class="ugafooter__links-list-link" href="https://www.uga.edu/a-z/schools/">
+                Schools and Colleges
+               </a>
+              </li>
+              <li class="ugafooter__links-list-item">
+               <a class="ugafooter__links-list-link" href="https://peoplesearch.uga.edu/">
+                Directory
+               </a>
+              </li>
+              <li class="ugafooter__links-list-item">
+               <a class="ugafooter__links-list-link" href="https://my.uga.edu/">
+                MyUGA
+               </a>
+              </li>
+              <li class="ugafooter__links-list-item">
+               <a class="ugafooter__links-list-link" href="http://hr.uga.edu/applicants/">
+                Employment Opportunities
+               </a>
+              </li>
+              <li class="ugafooter__links-list-item">
+               <a class="ugafooter__links-list-link" href="https://mc.uga.edu/policy/trademark">
+                Copyright and Trademarks
+               </a>
+              </li>
+              <li class="ugafooter__links-list-item">
+               <a class="ugafooter__links-list-link" href="https://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">
+                Privacy
+               </a>
+              </li>
+             </ul>
+            </nav>
+           </div>
+           <div class="ugafooter__row ugafooter__row--secondary">
+            <nav class="ugafooter__social">
+             <span class="ugafooter__social-label">
+              #UGA on
+             </span>
+             <a aria-label="UGA on Facebook" class="ugafooter__social-link" href="https://www.facebook.com/universityofga/">
+              <i aria-hidden="" class="fab fa-fw fa-facebook-f" title="Facebook">
+              </i>
+             </a>
+             <a aria-label="UGA on Twitter" class="ugafooter__social-link" href="https://twitter.com/universityofga">
+              <i aria-hidden="" class="fab fa-fw fa-twitter" title="Twitter">
+              </i>
+             </a>
+             <a aria-label="UGA on Instagram" class="ugafooter__social-link" href="https://www.instagram.com/universityofga/">
+              <i aria-hidden="" class="fab fa-fw fa-instagram" title="Instagram">
+              </i>
+             </a>
+             <a aria-label="UGA on Snapchat" class="ugafooter__social-link" href="https://www.snapchat.com/add/university-ga">
+              <i aria-hidden="" class="fab fa-fw fa-snapchat-ghost" title="Snapchat">
+              </i>
+             </a>
+             <a aria-label="UGA on YouTube" class="ugafooter__social-link" href="https://www.youtube.com/user/UniversityOfGeorgia">
+              <i aria-hidden="" class="fab fa-fw fa-youtube" title="YouTube">
+              </i>
+             </a>
+             <a aria-label="UGA on LinkedIn" class="ugafooter__social-link" href="https://www.linkedin.com/school/university-of-georgia/">
+              <i aria-hidden="" class="fab fa-fw fa-linkedin-in" title="LinkedIn">
+              </i>
+             </a>
+            </nav>
+            <div class="ugafooter__address">
+             © University of Georgia, Athens, GA 30602
+             <br/>
+             706‑542‑3000
+            </div>
+           </div>
+          </div>
+         </footer>
+         <script src="/wp-includes/widgets/_assets/js/uga-footer.js">
+         </script>
+        </div>
+       </aside>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer class="site-info" itemscope="" itemtype="https://schema.org/WPFooter">
+    <div class="inside-site-info ">
+     <div class="footer-bar">
+      <aside class="widget_text widget inner-padding widget_custom_html" id="custom_html-6">
+       <h2 class="widget-title">
+        UGA Footer
+       </h2>
+       <div class="textwidget custom-html-widget">
+        <!-- 
+			/* Footer Options
+			 * By default, footer includes a 4px red top-border.
+			 *
+			 * Apply options by including class on .ugafooter object:
+			 * 
+			 * white border â€”Â `ugafooter--border-white`
+			 * grey border â€” `ugafooter--border-grey`
+			 * no border â€” `ugafooter--no-border`
+		 -->
+        <footer class="ugafooter">
+         <div class="ugafooter__container">
+          <div class="ugafooter__row ugafooter__row--primary">
+           <div class="ugafooter__logo">
+            <a class="ugafooter__logo-link" href="https://www.uga.edu/">
+             University of Georgia
+            </a>
+           </div>
+           <nav class="ugafooter__links">
+            <ul class="ugafooter__links-list">
+             <li class="ugafooter__links-list-item">
+              <a class="ugafooter__links-list-link" href="https://www.uga.edu/a-z/schools/">
+               Schools and Colleges
+              </a>
+             </li>
+             <li class="ugafooter__links-list-item">
+              <a class="ugafooter__links-list-link" href="https://peoplesearch.uga.edu/">
+               Directory
+              </a>
+             </li>
+             <li class="ugafooter__links-list-item">
+              <a class="ugafooter__links-list-link" href="https://my.uga.edu/">
+               MyUGA
+              </a>
+             </li>
+             <li class="ugafooter__links-list-item">
+              <a class="ugafooter__links-list-link" href="http://hr.uga.edu/applicants/">
+               Employment Opportunities
+              </a>
+             </li>
+             <li class="ugafooter__links-list-item">
+              <a class="ugafooter__links-list-link" href="https://mc.uga.edu/policy/trademark">
+               Copyright and Trademarks
+              </a>
+             </li>
+             <li class="ugafooter__links-list-item">
+              <a class="ugafooter__links-list-link" href="https://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">
+               Privacy
+              </a>
+             </li>
+            </ul>
+           </nav>
+          </div>
+          <div class="ugafooter__row ugafooter__row--secondary">
+           <nav class="ugafooter__social">
+            <span class="ugafooter__social-label">
+             #UGA on
+            </span>
+            <a aria-label="UGA on Facebook" class="ugafooter__social-link" href="https://www.facebook.com/universityofga/">
+             <i aria-hidden="" class="fab fa-fw fa-facebook-f" title="Facebook">
+             </i>
+            </a>
+            <a aria-label="UGA on Twitter" class="ugafooter__social-link" href="https://twitter.com/universityofga">
+             <i aria-hidden="" class="fab fa-fw fa-twitter" title="Twitter">
+             </i>
+            </a>
+            <a aria-label="UGA on Instagram" class="ugafooter__social-link" href="https://www.instagram.com/universityofga/">
+             <i aria-hidden="" class="fab fa-fw fa-instagram" title="Instagram">
+             </i>
+            </a>
+            <a aria-label="UGA on Snapchat" class="ugafooter__social-link" href="https://www.snapchat.com/add/university-ga">
+             <i aria-hidden="" class="fab fa-fw fa-snapchat-ghost" title="Snapchat">
+             </i>
+            </a>
+            <a aria-label="UGA on YouTube" class="ugafooter__social-link" href="https://www.youtube.com/user/UniversityOfGeorgia">
+             <i aria-hidden="" class="fab fa-fw fa-youtube" title="YouTube">
+             </i>
+            </a>
+            <a aria-label="UGA on LinkedIn" class="ugafooter__social-link" href="https://www.linkedin.com/school/university-of-georgia/">
+             <i aria-hidden="" class="fab fa-fw fa-linkedin-in" title="LinkedIn">
+             </i>
+            </a>
+           </nav>
+           <div class="ugafooter__address">
+            © University of Georgia, Athens, GA 30602
+            <br/>
+            706‑542‑3000
+           </div>
+          </div>
+         </div>
+        </footer>
+        <script src="/wp-includes/widgets/_assets/js/uga-footer.js">
+        </script>
+       </div>
+      </aside>
+     </div>
+     <div class="copyright-bar">
+      <span class="copyright">
+       © 2019 UGA Emergency Preparedness
+      </span>
+      • Powered by
+      <a href="https://generatepress.com" itemprop="url">
+       GeneratePress
+      </a>
+     </div>
+    </div>
+   </footer>
+   <!-- .site-info -->
+  </div>
+  <!-- .site-footer -->
+  <a class="generate-back-to-top" data-scroll-speed="400" data-start-scroll="300" href="#" rel="nofollow" style="opacity:0;visibility:hidden;" title="Scroll back to top">
+   <span class="screen-reader-text">
+    Scroll back to top
+   </span>
+  </a>
+  <script type="text/javascript">
+   var pfHeaderImgUrl = '//www.prepare.uga.edu/wp-content/uploads/EMERGENCY-H-1CB-e1478182890683.png';
+          var pfHeaderTagline = '';
+          var pfdisableClickToDel = '0';
+          var pfImagesSize = 'full-size';
+          var pfImageDisplayStyle = 'left';
+          var pfDisableEmail = '0';
+          var pfDisablePDF = '0';
+          var pfDisablePrint = '0';
+          var pfCustomCSS = '';
+          var pfPlatform = 'Wordpress';
+      (function() {
+            var e = document.createElement('script'); e.type="text/javascript";
+            e.src = 'https://cdn.printfriendly.com/printfriendly.js';
+            document.getElementsByTagName('head')[0].appendChild(e);
+        })();
+  </script>
+  <link href="https://www.prepare.uga.edu/wp-content/plugins/wpforms-lite/assets/css/wpforms-full.css?ver=1.5.1.1" id="wpforms-full-css" media="all" rel="stylesheet" type="text/css">
+   <script type="text/javascript">
+    /* <![CDATA[ */
+var PT_CV_PUBLIC = {"_prefix":"pt-cv-","page_to_show":"5","_nonce":"ace483f151","is_admin":"","is_mobile":"","ajaxurl":"https:\/\/www.prepare.uga.edu\/wp-admin\/admin-ajax.php","lang":"","loading_image_src":"data:image\/gif;base64,R0lGODlhDwAPALMPAMrKygwMDJOTkz09PZWVla+vr3p6euTk5M7OzuXl5TMzMwAAAJmZmWZmZszMzP\/\/\/yH\/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgAPACwAAAAADwAPAAAEQvDJaZaZOIcV8iQK8VRX4iTYoAwZ4iCYoAjZ4RxejhVNoT+mRGP4cyF4Pp0N98sBGIBMEMOotl6YZ3S61Bmbkm4mAgAh+QQFCgAPACwAAAAADQANAAAENPDJSRSZeA418itN8QiK8BiLITVsFiyBBIoYqnoewAD4xPw9iY4XLGYSjkQR4UAUD45DLwIAIfkEBQoADwAsAAAAAA8ACQAABC\/wyVlamTi3nSdgwFNdhEJgTJoNyoB9ISYoQmdjiZPcj7EYCAeCF1gEDo4Dz2eIAAAh+QQFCgAPACwCAAAADQANAAAEM\/DJBxiYeLKdX3IJZT1FU0iIg2RNKx3OkZVnZ98ToRD4MyiDnkAh6BkNC0MvsAj0kMpHBAAh+QQFCgAPACwGAAAACQAPAAAEMDC59KpFDll73HkAA2wVY5KgiK5b0RRoI6MuzG6EQqCDMlSGheEhUAgqgUUAFRySIgAh+QQFCgAPACwCAAIADQANAAAEM\/DJKZNLND\/kkKaHc3xk+QAMYDKsiaqmZCxGVjSFFCxB1vwy2oOgIDxuucxAMTAJFAJNBAAh+QQFCgAPACwAAAYADwAJAAAEMNAs86q1yaWwwv2Ig0jUZx3OYa4XoRAfwADXoAwfo1+CIjyFRuEho60aSNYlOPxEAAAh+QQFCgAPACwAAAIADQANAAAENPA9s4y8+IUVcqaWJ4qEQozSoAzoIyhCK2NFU2SJk0hNnyEOhKR2AzAAj4Pj4GE4W0bkJQIAOw=="};
+var PT_CV_PAGINATION = {"first":"\u00ab","prev":"\u2039","next":"\u203a","last":"\u00bb","goto_first":"Go to first page","goto_prev":"Go to previous page","goto_next":"Go to next page","goto_last":"Go to last page","current_page":"Current page is","goto_page":"Go to page"};
+/* ]]> */
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-content/plugins/content-views-query-and-display-post-page/public/assets/js/cv.js?ver=2.1.3.2" type="text/javascript">
+   </script>
+   <!--[if lte IE 11]>
+<script type='text/javascript' src='https://www.prepare.uga.edu/wp-content/themes/generatepress/js/classList.js?ver=2.2.2'></script>
+<![endif]-->
+   <script src="https://www.prepare.uga.edu/wp-content/themes/generatepress/js/menu.js?ver=2.2.2" type="text/javascript">
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-content/themes/generatepress/js/a11y.js?ver=2.2.2" type="text/javascript">
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-content/themes/generatepress/js/back-to-top.js?ver=2.2.2" type="text/javascript">
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-includes/js/hoverIntent.js?ver=1.8.1" type="text/javascript">
+   </script>
+   <script type="text/javascript">
+    /* <![CDATA[ */
+var megamenu = {"timeout":"300","interval":"100"};
+/* ]]> */
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-content/plugins/megamenu/js/maxmegamenu.js?ver=2.5.3.2" type="text/javascript">
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-includes/js/wp-embed.js?ver=5.1" type="text/javascript">
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-content/plugins/wpforms-lite/assets/js/jquery.validate.min.js?ver=1.15.1" type="text/javascript">
+   </script>
+   <script src="https://www.prepare.uga.edu/wp-content/plugins/wpforms-lite/assets/js/wpforms.js?ver=1.5.1.1" type="text/javascript">
+   </script>
+   <script type="text/javascript">
+    /* <![CDATA[ */
+var wpforms_settings = {"val_required":"This field is required.","val_url":"Please enter a valid URL.","val_email":"Please enter a valid email address.","val_number":"Please enter a valid number.","val_confirm":"Field values do not match.","val_fileextension":"File type is not allowed.","val_filesize":"File exceeds max size allowed.","val_time12h":"Please enter time in 12-hour AM\/PM format (eg 8:45 AM).","val_time24h":"Please enter time in 24-hour format (eg 22:45).","val_requiredpayment":"Payment is required.","val_creditcard":"Please enter a valid credit card number.","uuid_cookie":"","locale":"en"}
+/* ]]> */
+   </script>
+  </link>
+ </body>
+</html>
+

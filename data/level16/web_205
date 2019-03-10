@@ -1,0 +1,1400 @@
+http://map.arizona.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta charset="utf-8">
+   <meta content="yes" name="apple-mobile-web-app-capable"/>
+   <meta content="initial-scale=1, maximum-scale=1,user-scalable=no" name="viewport"/>
+   <title>
+    Campus Map | University of Arizona
+   </title>
+   <link href="https://redbar.arizona.edu/sites/default/files/ua-banner/ua-web-branding/css/ua-web-branding.css" media="all" rel="stylesheet"/>
+   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet" type="text/css"/>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+   <link href="css/bootstrap.css" media="screen" rel="stylesheet"/>
+   <link href="https://js.arcgis.com/3.26/dijit/themes/claro/claro.css" rel="stylesheet"/>
+   <link href="https://js.arcgis.com/3.26/esri/css/esri.css" rel="stylesheet"/>
+   <link href="chosen/chosen.css" media="all" rel="stylesheet"/>
+   <link href="css/map.css" media="all" rel="stylesheet" type="text/css">
+    <link href="ss-social/webfonts/ss-social.css" rel="stylesheet">
+     <link href="css/style.css" rel="stylesheet">
+      <link href="css/styleToMenu.css" rel="stylesheet">
+       <script src="https://code.jquery.com/jquery-latest.min.js">
+       </script>
+       <script src="js/plugins.js">
+       </script>
+       <script src="clipboard/dist/clipboard.min.js">
+       </script>
+       <script src="https://js.arcgis.com/3.26/">
+       </script>
+       <link href="autocomplete/easy-autocomplete.min.css" rel="stylesheet"/>
+       <link href="autocomplete/easy-autocomplete.themes.min.css" rel="stylesheet"/>
+       <script>
+        $(document).ready(function() {
+        toc_init();
+      });
+      //Making the page responsive.
+      function resizeElementHeight(element) {
+        var element=document.getElementById('rightSideFilters');
+        var height = 0;
+        var body = window.document.body;
+        if (window.innerHeight) {
+          height = window.innerHeight;
+          } else if (body.parentElement.clientHeight) {
+          height = body.parentElement.clientHeight;
+          } else if (body && body.clientHeight) {
+          height = body.clientHeight;
+        }
+        //console.log("Width :: "+window.innerWidth);
+        if(window.innerWidth > 500){
+          element.style.height = ((height - element.offsetTop - 49) + 'px');
+        }
+      }
+      window.onresize=resizeElementHeight;
+      onload=resizeElementHeight;
+       </script>
+      </link>
+     </link>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="claro">
+  <div class="ua-wrapper bgDark red" id="ua-web-branding-banner-v1">
+   <a class="ua-home asdf" href="https://arizona.edu" title="The University of Arizona">
+    <p>
+     The University of Arizona
+    </p>
+   </a>
+   <div class="roomBanner">
+    Tap here to search buildings and rooms
+   </div>
+  </div>
+  <div class="ua-wrapper bgDark red" id="ua-web-branding-tag-v1">
+   <a class="ua-home asdf" href="https://arizona.edu" title="The University of Arizona">
+    <p>
+     The University of Arizona
+    </p>
+   </a>
+  </div>
+  <div id="map-wrapper">
+   <div id="toctop">
+    <div class="layer-controls-wrapper" id="toctop_items">
+     <div class="layer-controls-container">
+      <div class="layer-controls-toggle" style="text-align:center;">
+       <div class="grippy layers ico-ua-horizontal-menu">
+       </div>
+      </div>
+      <div class="layer-controls-surface">
+       <div class="layer-controls-table">
+        <!-- Default -->
+        <div class="defaultTOC">
+         <p>
+          Welcome to the University of Arizona Map
+          <p>
+          </p>
+         </p>
+        </div>
+        <!-- Accessibility -->
+        <div class="accessibilityTOC cf">
+         <div class="toc-controls cf">
+          <input class="checkbox toctop_checkbox" id="layerCheck-1" name="layer-controls" type="checkbox" value="classrooms1"/>
+          <label class="button-tag" for="layerCheck-1">
+           <span class="arizona-btn first-child">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-audible-device">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Audible Device Classrooms
+           </div>
+          </label>
+          <input class="checkbox toctop_checkbox" id="chkAccessibilityElevators" name="accessibility" type="checkbox" value="elevators1"/>
+          <label class="button-tag" for="chkAccessibilityElevators">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-elevator">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Elevators
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkAccessibilityParking" name="accessibility" type="checkbox" value="disabledParking1"/>
+          <label class="button-tag" for="chkAccessibilityParking">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-disabled-parking enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Disabled Parking
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkAccessibilityEntrances" name="accessibility" type="checkbox" value="entrances1"/>
+          <label class="button-tag" for="chkAccessibilityEntrances">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-accessible-entrance enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Accessible Entrances
+           </div>
+          </label>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-accesibility" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Athletics  -->
+        <div class="athleticsTOC cf">
+         <div class="toc-controls cf">
+          <div class="button-tag zoomToLayer" id="athleticsOffCampus" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Off Campus
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="athleticsOnCampus" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-contract" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            On Campus
+           </div>
+          </div>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-athletics" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Museums -->
+        <div class="museumsTOC cf">
+         <div class="toc-controls cf">
+          <div class="button-tag zoomToLayer" id="museums" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Museums &amp; Art Venues
+           </div>
+          </div>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-museum" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Health and Safety -->
+        <div class="safetyTOC cf">
+         <div class="toc-controls cf">
+          <!-- Restrooms -->
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkAllGen" name="safety" type="checkbox" value="allGens1"/>
+          <label class="button-tag" for="chkAllGen">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon restroom-icon ico-ua-allGenRes enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            All Gender Restrooms
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkWomenRes" name="safety" type="checkbox" value="womenRes1"/>
+          <label class="button-tag" for="chkWomenRes">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon restroom-icon ico-ua-womenRes enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Women's Restrooms
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkMenRes" name="safety" type="checkbox" value="MenRes1"/>
+          <label class="button-tag" for="chkMenRes">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon restroom-icon ico-ua-menRes enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Men's Restrooms
+           </div>
+          </label>
+          <!-- End Restrooms -->
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkAEDS" name="safety" type="checkbox" value="aeds1"/>
+          <label class="button-tag" for="chkAEDS">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-aed enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            AED Devices
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkEmergencyPhones" name="safety" type="checkbox" value="emergencyPhones1"/>
+          <label class="button-tag" for="chkEmergencyPhones">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-blue-light enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Emergency Phones
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkFitnessPaths" name="safety" type="checkbox" value="fitnessPaths"/>
+          <label class="button-tag" for="chkFitnessPaths">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-fitness-path enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Fitness Paths
+           </div>
+          </label>
+          <div class="button-tag zoomToLayer" id="campusRec" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Campus Rec
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="hospital" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Hospital
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="campusHealth" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Campus Health
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="police" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            UA Police
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="safeRide" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Safe Ride
+           </div>
+          </div>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-safety" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Parking -->
+        <div class="parkingTOC cf">
+         <div class="toc-controls cf">
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkParkingLots" name="parking" type="checkbox" value="parkingLots"/>
+          <label class="button-tag w-hidden-btn" for="chkParkingLots">
+           <span class="arizona-btn first-child hidden">
+            <div class="checkbox-square w-icon toc-keys">
+             <div class="checkbox-status w-icon">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            <div class="parking-lots-garages toc-key">
+            </div>
+            Parking Lots &amp; Garages
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkParkingVisitor" name="parking" type="checkbox" value="parkingVisitors"/>
+          <label class="button-tag" for="chkParkingVisitor">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon toc-keys">
+             <div class="checkbox-status w-icon ico-ua-visitor-parking enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            <div class="visitor-parking-key toc-key">
+            </div>
+            Visitor
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkParkingDisabled" name="parking" type="checkbox" value="disabledParking1"/>
+          <label class="button-tag" for="chkParkingDisabled">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-disabled-parking enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Disabled Parking
+           </div>
+          </label>
+          <input class="checkbox toctop_checkbox" id="chkParkingMotorcycle" name="parking" type="checkbox" value="motorcycle1"/>
+          <label class="button-tag" for="chkParkingMotorcycle">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-motorbike-parking">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Motorcycle
+           </div>
+          </label>
+          <input class="checkbox toctop_checkbox" id="chkParkingBicycle" name="parking" type="checkbox" value="bicycle1"/>
+          <label class="button-tag" for="chkParkingBicycle" id="tour3">
+           <span class="arizona-btn child-last">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-bicycle-parking">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Bicycle
+           </div>
+          </label>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-parking" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Transportation -->
+        <div class="transportationTOC cf">
+         <div class="toc-controls cf">
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkCatTranShuttle" name="transportation" type="checkbox" value="catTran,shuttleStops"/>
+          <label class="button-tag" for="chkCatTranShuttle">
+           <span class="arizona-btn first-child">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-cat-tran enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Cat Tran Shuttle
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkSunLinkStreetCar" name="transportation" type="checkbox" value="sunLinkStreetCarTracks,sunLinkStreetCarStops1"/>
+          <label class="button-tag" for="chkSunLinkStreetCar">
+           <span class="arizona-btn first-child">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-sun-link enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Sun Link Street Car
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkSunTranStops" name="transportation" type="checkbox" value="sunTranStops1"/>
+          <label class="button-tag" for="chkSunTranStops">
+           <span class="arizona-btn first-child">
+            <div class="checkbox-square w-icon">
+             <div class="checkbox-status w-icon ico-ua-sun-tran enabled">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Sun Tran Stops
+           </div>
+          </label>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkBikeRoutes" name="transportation" type="checkbox" value="bikeRoutes"/>
+          <label class="button-tag" for="chkBikeRoutes">
+           <span class="arizona-btn first-child hidden">
+            <div class="checkbox-square">
+             <div class="checkbox-status w-icon toc-keys">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            <div class="bike-routes toc-key">
+            </div>
+            Bike Routes
+           </div>
+          </label>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-transportation" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Eateries -->
+        <div class="eateriesTOC cf">
+         <div class="toc-controls cf">
+          <div class="button-tag zoomToLayer" id="eateriesSUMC" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Student Union
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="eateriesPSU" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Park Student Union
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="eateriesAll" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Zoom to All Eateries
+           </div>
+          </div>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-eatery" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Student Housing -->
+        <div class="housingTOC cf">
+         <div class="toc-controls cf">
+          <div class="toc-keys">
+           <div>
+           </div>
+           Legend:
+          </div>
+          <div class="toc-keys key-greek">
+           <div class="toc-key">
+           </div>
+           Greek life
+          </div>
+          <div class="toc-keys key-dorms">
+           <div class="toc-key">
+           </div>
+           UA Dorms
+          </div>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-housing" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Libraries -->
+        <div class="librariesTOC cf">
+         <div class="toc-controls cf">
+          <div class="button-tag zoomToLayer" id="libraries" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Libraries
+           </div>
+          </div>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-library" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- Attractions -->
+        <div class="attractionsTOC cf">
+         <div class="toc-controls cf">
+          <div class="button-tag zoomToLayer" id="oldMain" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Old Main
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="visitorCenter" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Visitor Center
+           </div>
+          </div>
+          <div class="button-tag zoomToLayer" id="offCampusLandmarks" title="Zoom To Layer">
+           <span class="arizona-btn">
+            <div class="glyph ">
+             <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+             </div>
+            </div>
+           </span>
+           <div class="label">
+            Off Campus Landmarks
+           </div>
+          </div>
+          <input checked="checked" class="checkbox toctop_checkbox" id="chkHistoricBuildings" name="attractions" type="checkbox" value="historicBuildingsMuseums"/>
+          <label class="button-tag w-hidden-btn" for="chkHistoricBuildings">
+           <span class="arizona-btn first-child hidden">
+            <div class="checkbox-square w-icon toc-keys">
+             <div class="checkbox-status w-icon">
+             </div>
+            </div>
+           </span>
+           <div class="label span2">
+            <div class="historic-bldg-mus toc-key">
+            </div>
+            Historic Buildings and Museums
+           </div>
+          </label>
+         </div>
+         <div class="toc-tiein">
+          <div class="glyph">
+           <div aria-hidden="true" class="fs1 ico-ua-landmark" data-ico="">
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- <div class="layer-controls-toggle brillant"style="text-align:center;">?</div>
+          -->
+    </div>
+   </div>
+   <!-- Right Side Tools Starts Here -->
+   <div class="right-side-tools visible">
+    <div class="right-side-overflow-hidden">
+     <div class="arizona-btn-group vertical-arizona" id="rightSideFilters">
+      <!-- tabs-->
+      <div class="tabset">
+       <!-- Tab 1 -->
+       <input aria-controls="marzen" checked="" id="tab1" name="tabset" type="radio"/>
+       <label for="tab1" id="lblTab1">
+        <i class="tabImgs">
+         layers
+        </i>
+        Layers
+       </label>
+       <!-- Tab 2 -->
+       <input aria-controls="rauchbier" id="tab2" name="tabset" type="radio"/>
+       <label for="tab2" id="lblTab2">
+        <i class="tabImgs">
+         search
+        </i>
+        Buildings / Rooms
+       </label>
+       <div class="tab-panels">
+        <section class="tab-panel" id="marzen">
+         <!-- tab ends-->
+         <!-- Accessibility -->
+         <input class="radio" id="rbtAccessibility" name="layer" tabindex="-1" type="radio" value="Accessibility"/>
+         <label class="button-tag accessible" for="rbtAccessibility">
+          <button class="arizona-btn">
+           <div class="glyph ">
+            <div aria-hidden="true" class="fs1 ico-ua-accesibility" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Accessibility
+          </div>
+          <div class="layer-controls-table">
+           <input class="checkbox toctop_checkbox" id="layerCheck-1" name="layer-controls" tabindex="-1" type="checkbox" value="classrooms1"/>
+           <label class="button-tag" for="layerCheck-1">
+            <button class="arizona-btn first-child">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-audible-device">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Audible Device Classrooms
+            </div>
+           </label>
+           <input class="checkbox toctop_checkbox" id="chkAccessibilityElevators" name="accessibility" type="checkbox" value="elevators1"/>
+           <label class="button-tag" for="chkAccessibilityElevators">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-elevator">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Elevators
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkAccessibilityParking" name="accessibility" type="checkbox" value="disabledParking1"/>
+           <label class="button-tag" for="chkAccessibilityParking">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-disabled-parking enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Disabled Parking
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkAccessibilityEntrances" name="accessibility" type="checkbox" value="entrances1"/>
+           <label class="button-tag" for="chkAccessibilityEntrances">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-accessible-entrance enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Accessible Entrances
+            </div>
+           </label>
+          </div>
+         </label>
+         <!-- Athletics -->
+         <input class="radio" id="rbtAthletics" name="layer" type="radio" value="Athletics"/>
+         <label class="button-tag athletics" for="rbtAthletics">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-athletics" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Athletics
+          </div>
+          <div class="layer-controls-table">
+           <div class="button-tag zoomToLayer" id="athleticsOffCampus" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Off Campus
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="athleticsOnCampus" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-contract" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             On Campus
+            </div>
+           </div>
+          </div>
+         </label>
+         <!-- Museums -->
+         <input class="radio" id="rbtMuseums" name="layer" type="radio" value="Museums &amp; Art Venues"/>
+         <label class="button-tag museums-arts" for="rbtMuseums">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-museum" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Museums &amp; Art Venues
+          </div>
+          <div class="layer-controls-table">
+           <div class="button-tag zoomToLayer" id="museums" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Museums &amp; Art Venues
+            </div>
+           </div>
+          </div>
+         </label>
+         <input class="radio" id="rbtSafety" name="layer" type="radio" value="Health &amp; Safety"/>
+         <label class="button-tag health-safety" for="rbtSafety">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-safety" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Health &amp; Safety
+          </div>
+          <div class="layer-controls-table">
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkAEDS" name="safety" type="checkbox" value="aeds1"/>
+           <label class="button-tag" for="chkAEDS">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-aed enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             AED Devices
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkEmergencyPhones" name="safety" type="checkbox" value="emergencyPhones1"/>
+           <label class="button-tag" for="chkEmergencyPhones">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-blue-light enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Emergency Phones
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkFitnessPaths" name="safety" type="checkbox" value="fitnessPaths"/>
+           <label class="button-tag" for="chkFitnessPaths">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-fitness-path enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Fitness Paths
+            </div>
+           </label>
+           <div class="button-tag zoomToLayer" id="rgt-campusRec" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Campus Rec
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="rgt-hospital" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Hospital
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="rgt-campusHealth" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Campus Health
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="rgt-police" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             UA Police
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="rgt-safeRide" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Safe Ride
+            </div>
+           </div>
+          </div>
+         </label>
+         <input class="radio" id="rbtLibraries" name="layer" type="radio" value="Libraries"/>
+         <label class="button-tag libraries" for="rbtLibraries">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-library" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Libraries
+          </div>
+          <div class="layer-controls-table">
+           <div class="button-tag zoomToLayer" id="rgt-libraries" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Libraries
+            </div>
+           </div>
+          </div>
+         </label>
+         <input class="radio" id="rbtParking" name="layer" type="radio" value="Parking"/>
+         <label class="button-tag parking" for="rbtParking" id="tour2">
+          <button class="arizona-btn ">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-parking" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Parking
+          </div>
+          <div class="layer-controls-table">
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkParkingLots" name="parking" type="checkbox" value="parkingLots"/>
+           <label class="button-tag w-hidden-btn" for="chkParkingLots">
+            <button class="arizona-btn first-child hidden">
+             <div class="checkbox-square w-icon toc-keys">
+              <div class="checkbox-status w-icon">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             <div class="parking-lots-garages toc-key">
+             </div>
+             Parking Lots &amp; Garages
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkParkingVisitor" name="parking" type="checkbox" value="parkingVisitors"/>
+           <label class="button-tag" for="chkParkingVisitor">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon toc-keys">
+              <div class="checkbox-status w-icon ico-ua-visitor-parking enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             <div class="visitor-parking-key toc-key">
+             </div>
+             Visitor
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkParkingDisabled" name="parking" type="checkbox" value="disabledParking1"/>
+           <label class="button-tag" for="chkParkingDisabled">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-disabled-parking enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Disabled Parking
+            </div>
+           </label>
+           <input class="checkbox toctop_checkbox" id="chkParkingMotorcycle" name="parking" type="checkbox" value="motorcycle1"/>
+           <label class="button-tag" for="chkParkingMotorcycle">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-motorbike-parking">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Motorcycle
+            </div>
+           </label>
+           <input class="checkbox toctop_checkbox" id="chkParkingBicycle" name="parking" type="checkbox" value="bicycle1"/>
+           <label class="button-tag" for="chkParkingBicycle">
+            <button class="arizona-btn child-last">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-bicycle-parking">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Bicycle
+            </div>
+           </label>
+          </div>
+         </label>
+         <input class="radio" id="rbtEateries" name="layer" type="radio" value="Places To Eat"/>
+         <label class="button-tag food" for="rbtEateries">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-eatery" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Places To Eat
+          </div>
+          <div class="layer-controls-table">
+           <div class="button-tag zoomToLayer" id="rgt-eateries3" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Places to Eat
+            </div>
+           </div>
+          </div>
+         </label>
+         <input class="radio" id="rbtHousing" name="layer" type="radio" value="Student Housing"/>
+         <label class="button-tag housing-students" for="rbtHousing">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-housing" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Student Housing
+          </div>
+          <div class="layer-controls-table">
+           <div class="toc-keys">
+            <div>
+            </div>
+            Legend:
+           </div>
+           <div class="toc-keys key-greek">
+            <div class="toc-key">
+            </div>
+            Greek life
+           </div>
+           <div class="toc-keys key-dorms">
+            <div class="toc-key">
+            </div>
+            UA Dorms
+           </div>
+          </div>
+         </label>
+         <input class="radio" id="rbtTransportation" name="layer" type="radio" value="Transportation"/>
+         <label class="button-tag transportation" for="rbtTransportation">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-transportation" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Transportation
+          </div>
+          <div class="layer-controls-table">
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkCatTranShuttle" name="transportation" type="checkbox" value="catTran,shuttleStops"/>
+           <label class="button-tag" for="chkCatTranShuttle">
+            <button class="arizona-btn first-child">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-cat-tran enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Cat Tran Shuttle
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkSunLinkStreetCar" name="transportation" type="checkbox" value="sunLinkStreetCarTracks,sunLinkStreetCarStops1"/>
+           <label class="button-tag" for="chkSunLinkStreetCar">
+            <button class="arizona-btn first-child">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-sun-link enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Sun Link Street Car
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkSunTranStops" name="transportation" type="checkbox" value="sunTranStops1"/>
+           <label class="button-tag" for="chkSunTranStops">
+            <button class="arizona-btn first-child">
+             <div class="checkbox-square w-icon">
+              <div class="checkbox-status w-icon ico-ua-sun-tran enabled">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Sun Tran Stops
+            </div>
+           </label>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkBikeRoutes" name="transportation" type="checkbox" value="bikeRoutes"/>
+           <label class="button-tag" for="chkBikeRoutes">
+            <button class="arizona-btn first-child hidden">
+             <div class="checkbox-square">
+              <div class="checkbox-status w-icon toc-keys">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             <div class="bike-routes toc-key">
+             </div>
+             Bike Routes
+            </div>
+           </label>
+          </div>
+         </label>
+         <input class="radio" id="rbtAttractions" name="layer" type="radio" value="UA Attractions &amp; Landmarks"/>
+         <label class="button-tag attractions" for="rbtAttractions">
+          <button class="arizona-btn">
+           <div class="glyph">
+            <div aria-hidden="true" class="fs1 ico-ua-landmark" data-ico="">
+            </div>
+           </div>
+          </button>
+          <div class="label">
+           Attractions &amp; Landmarks
+          </div>
+          <div class="layer-controls-table">
+           <div class="button-tag zoomToLayer" id="oldMain" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Old Main
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="visitorCenter" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Visitor Center
+            </div>
+           </div>
+           <div class="button-tag zoomToLayer" id="offCampusLandmarks" title="Zoom To Layer">
+            <button class="arizona-btn">
+             <div class="glyph ">
+              <div aria-hidden="true" class="fs1 ico-ua-expand" data-ico="">
+              </div>
+             </div>
+            </button>
+            <div class="label">
+             Off Campus Landmarks
+            </div>
+           </div>
+           <input checked="checked" class="checkbox toctop_checkbox" id="chkHistoricBuildings" name="attractions" type="checkbox" value="historicBuildingsMuseums"/>
+           <label class="button-tag w-hidden-btn" for="chkHistoricBuildings">
+            <button class="arizona-btn first-child hidden">
+             <div class="checkbox-square w-icon toc-keys">
+              <div class="checkbox-status w-icon">
+              </div>
+             </div>
+            </button>
+            <div class="label span2">
+             <div class="historic-bldg-mus toc-key">
+             </div>
+             Historic Buildings and Museums
+            </div>
+           </label>
+          </div>
+         </label>
+         <input class="checkbox" id="chkImagery" name="imagery" type="checkbox" value="Imagery"/>
+         <div class="candy-bar cf">
+          <div class="more-resources" id="tour5">
+           <a href="#" onclick="getMoreResources()">
+            More Resources
+            <i class="ico-ua-link">
+            </i>
+           </a>
+          </div>
+         </div>
+         <div class="candy-bar" id="candyBar">
+          <a alt="Take the Tour" class="tour-link" data-tour="tour1" href="#" id="tourstart">
+           <div>
+            Map Help
+           </div>
+          </a>
+          <a alt="Share" class="link" href="#" id="link" name="link" onclick="getLink()">
+           <div class="arizona-btn">
+            <div aria-hidden="true" class="fs1 ico-ua_social" data-ico="" data-original-title="Share" data-placement="top" data-toggle="tooltip" title="">
+            </div>
+           </div>
+          </a>
+          <a alt="Send Feedback" class="help" href="http://www.arizona.edu/website/map-feedback" name="help" target="_blank">
+           <div class="arizona-btn">
+            <div class="glyph">
+             <div aria-hidden="true" class="fs1 ico-ua_info" data-ico="" data-original-title="Send Feedback" data-placement="top" data-toggle="tooltip" title="">
+             </div>
+            </div>
+           </div>
+          </a>
+          <a alt="Print" class="print" href="#" id="print" name="print" onclick="getPrint()">
+           <div class="arizona-btn">
+            <div class="glyph">
+             <div aria-hidden="true" class="fs1 ico-ua-print" data-ico="" data-original-title="Print" data-placement="top" data-toggle="tooltip" title="">
+             </div>
+            </div>
+           </div>
+          </a>
+         </div>
+         <!--tabs -->
+        </section>
+        <!-- tab2 contents -->
+        <section class="tab-panel" id="rauchbier">
+         <div class="">
+          <div class="search-Section">
+           <div class="labeltext">
+            <div class="label-search">
+             Select Building
+            </div>
+           </div>
+           <input class="buildinginput w-input label-search" data-name="buildinginput" id="BuildingDD" maxlength="256" name="buildinginput" placeholder="Enter # or Name" required="" type="text"/>
+           <div class="labeltext">
+            <div class="label-search">
+             Select Room
+            </div>
+           </div>
+           <input class="buildinginput w-input label-search" disabled="" id="roominput" maxlength="256" name="roominput" placeholder="  Enter room number" required="" style="width: 183px;font-size: 0.8em;" type="text"/>
+           <!--
+                          <select id="dropDownRooms" disabled name="field-2" class="label-search"><option value="">Select Room</option></select>
+                        -->
+           <div class="candy-bar" id="candyBar">
+            <div class="label-search" id="flrNum">
+             <div id="searchMsg">
+              Please note that rooms search is not available for Residence Halls
+             </div>
+            </div>
+            <a alt="Clear Inter" href="#" id="btnClearFP">
+             <div>
+              Clear Interiors
+             </div>
+            </a>
+           </div>
+          </div>
+         </div>
+         <!--
+                  <div class="search-cell" id="tour1">
+                      <form class="form-search" id="searchTour">
+                        <select id="searchbox" data-placeholder="Search Buildings" tabindex="1">
+                          <option value=""></option>
+                        </select>
+                      </form>
+                    </div>
+                -->
+        </section>
+       </div>
+      </div>
+      <!-- tabs end-->
+     </div>
+     <div class="button-hide-sub">
+     </div>
+     <div class="button-hide" id="right-side-tool-tab">
+      <div class="grippy">
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- Right Side Tools Ends Here -->
+   <div class="modal-box-wrapper moreInfo">
+    <div class="modal-box-container">
+     <div class="modal-box-surface">
+      <div class="rowfluid">
+       <div class="span12">
+        <h4>
+         More Resources
+        </h4>
+       </div>
+      </div>
+      <div class="rowfluid">
+       <p>
+        <a href="https://parking.arizona.edu/parking/maps/" target="_blank">
+         Parking Map
+        </a>
+       </p>
+       <p>
+        <a href="http://maps.arizona.edu" target="_blank">
+         Additional UA Maps
+        </a>
+       </p>
+       <p>
+        <a href="http://buildingthefuture.arizona.edu/" target="_blank">
+         Planning, Design &amp; Construction Projects
+        </a>
+       </p>
+       <p>
+        <a href="http://www.arizona.edu/apps" target="_blank">
+         Mobile Maps for Android and Apple
+        </a>
+       </p>
+       <p>
+        <a href="http://gis.pima.gov/maps/mapguide" target="_blank">
+         Pima County
+        </a>
+       </p>
+       <p>
+        <a href="https://www.tucsonaz.gov/gis/map-resources" target="_blank">
+         City of Tucson
+        </a>
+       </p>
+       <h4>
+        Directions to Campus
+       </h4>
+       <p>
+        <a href="http://www.arizona.edu/about/directions-ua" target="_blank">
+         from Nogales / I-19 to campus
+        </a>
+       </p>
+       <p>
+        <a href="http://www.arizona.edu/about/directions-ua" target="_blank">
+         from Phoenix / I-10 / N-W to campus
+        </a>
+       </p>
+       <p>
+        <a href="http://www.arizona.edu/about/directions-ua" target="_blank">
+         from New Mexico / I-10  /  East to campus
+        </a>
+       </p>
+      </div>
+      <div class="modal-box-close-button">
+       <a name="close" onclick="getMoreResources()">
+        <div class="close">
+        </div>
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="copyright">
+    <p>
+     Copyright 2013 © Arizona Board of Regents. The University of Arizona, Tucson, Arizona
+    </p>
+   </div>
+   <div id="map">
+    <img id="loadingImg" src="img/mapUpdate_2.gif" style="position:absolute; right:50%; top:50%; z-index:100;"/>
+   </div>
+  </div>
+  <div class="my-location-wrapper loc-off">
+   <div class="my-location-surface">
+    <div class="my-location ico-location">
+    </div>
+   </div>
+  </div>
+  <div class="share-overlay-container">
+   <div class="share-overlay">
+    <div class="share-close enabled ico-ua-x">
+    </div>
+    <div class="share-background">
+    </div>
+   </div>
+   <div id="share-link">
+   </div>
+  </div>
+  <form data-ajax="false" id="customError" method="post" name="customError">
+   <input id="errorMessage" name="errorMessage" type="hidden" value="Default custom error message">
+   </input>
+  </form>
+  <script src="autocomplete/jquery.easy-autocomplete.min.js">
+  </script>
+  <script src="js/ua-toc.js">
+  </script>
+  <script src="js/ua-map.js">
+  </script>
+  <script src="js/ua-toc-layers.js">
+  </script>
+  <script src="js/ua-search.js">
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-3897372-17', 'arizona.edu');
+      ga('send', 'pageview');
+  </script>
+ </body>
+</html>
+

@@ -1,0 +1,613 @@
+http://climate.atmos.colostate.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Colorado Climate Center
+  </title>
+  <link href="//fonts.googleapis.com/css?family=Ranga:700|Shrikhand|Nunito" rel="stylesheet"/>
+  <link href="//static.colostate.edu/fonts/factoria/factoria.css" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="/stylesheets/parallaxslider.css" rel="stylesheet" type="text/css">
+   <link href="/stylesheets/ddsmoothmenu.css" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/ddsmoothmenu-v.css" rel="stylesheet" type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript">
+    </script>
+    <script src="/scripts/ddsmoothmenu.js" type="text/javascript">
+     /***********************************************
+* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* Please keep this notice intact
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+    </script>
+    <script type="text/javascript">
+     ddsmoothmenu.init({
+	mainmenuid: "smoothmenu-ajax", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: ["smoothcontainer","/smoothmenu.htm"] //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+ddsmoothmenu.init({
+	mainmenuid: "smoothmenu2", //Menu DIV id
+	orientation: 'v', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu-v', //class added to menu's outer DIV
+	method: 'toggle', // set to 'hover' (default) or 'toggle'
+	arrowswap: true, // enable rollover effect on menu arrow images?
+	//customtheme: ["#804000", "#482400"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+    </script>
+    <script type="text/javascript">
+     /***********************************************
+* Ajax Includes script- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* Please keep this notice intact
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+//To include a page, invoke ajaxinclude("afile.htm") in the BODY of page
+//Included file MUST be from the same domain as the page displaying it.
+
+var rootdomain="//"+window.location.hostname
+
+function ajaxinclude(url) {
+var page_request = false
+if (window.XMLHttpRequest) // if Mozilla, Safari etc
+page_request = new XMLHttpRequest()
+else if (window.ActiveXObject){ // if IE
+try {
+page_request = new ActiveXObject("Msxml2.XMLHTTP")
+} 
+catch (e){
+try{
+page_request = new ActiveXObject("Microsoft.XMLHTTP")
+}
+catch (e){}
+}
+}
+else
+return false
+page_request.open('GET', url, false) //get page synchronously 
+page_request.send(null)
+writecontent(page_request)
+}
+
+function writecontent(page_request){
+if (window.location.href.indexOf("http")==-1 || page_request.status==200)
+document.write(page_request.responseText)
+}
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+    </script>
+    <script src="/scripts/jquery.velocity.min.js">
+    </script>
+    <script src="/scripts/jquery.touchSwipe.min.js" type="text/javascript">
+    </script>
+    <script src="/scripts/parallaxslider.js" type="text/javascript">
+     /***********************************************
+* Parallax Slider- (c) Dynamic Drive (www.dynamicdrive.com)
+* Please keep this notice intact
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+    </script>
+    <script type="text/javascript">
+     var firstparallaxslider=new parallaxSlider({
+	wrapperid: 'myparallaxslider', //ID of DIV on page to house slider
+	displaymode: {type:'auto', pause:3000, cycles:0, stoponclick:true, pauseonmouseover:true},
+	delaybtwdesc:  500, // delay in milliseconds between the revealing of each description layer inside a slide
+	navbuttons: ['/images/left.png', '/images/right.png', '/images/up.png', '/images/down.png'], // path to nav images
+	activeslideclass: 'selectedslide', // CSS class that gets added to currently shown DIV slide
+	orientation: 'h', //Valid values: "h" or "v"
+	persist: true, //remember last viewed slide and recall within same session?
+	slideduration: 1000 //transition duration (milliseconds)
+})
+    </script>
+    <script>
+     var url_site;
+
+function loadUrl() {
+	url_site = "CO/Fort_Collins";
+	
+	postResults(url_site);
+}
+
+function getObs() {
+	var x = document.getElementById("zip");
+	url_site = x.value;
+	
+	postResults(url_site);
+}
+
+function postResults(url_site) {  
+  $.ajax({
+  url : "//api.wunderground.com/api/b1e0bfc6023c480d/geolookup/conditions/q/" + url_site + ".json",
+  dataType : "jsonp",
+  success : function(parsed_json) {
+  var location = parsed_json['current_observation']['display_location']['full'];
+  var temp_f = parsed_json['current_observation']['temp_f'];
+  var icon_url = parsed_json['current_observation']['icon_url'];
+  	  icon_url = icon_url.substr(5);
+  var wind = parsed_json['current_observation']['wind_string'];
+  var dewpoint = parsed_json['current_observation']['dewpoint_f'];
+  var rh = parsed_json['current_observation']['relative_humidity'];
+  var obs_time = parsed_json['current_observation']['observation_time'];
+  
+  var lineout = "<tr><th colspan=2>" + location + "</th></tr>";
+  lineout = lineout + "<tr><td width=90px><img id=\"wx_img\" src=" + icon_url + "></td>";
+  lineout = lineout + "<td><font size=+3>" + temp_f + "&deg;F</font><br>";
+  lineout = lineout + "<font size=-2>" + obs_time + "</font></td></tr>";
+  lineout = lineout + "<tr><td colspan=2>Wind: " + wind + "</td></tr>";
+  lineout = lineout + "<tr><td>Dewpoint: " + dewpoint + "&deg;F<br>Humidity: " + rh + "</td>";
+  lineout = lineout + "<td><a href=\"//www.wunderground.com\" target=\"_blank\"><img id=\"wu_img\" src=\"/images/wu_logo.png\"></a></td></tr>";
+  
+  $('#currconditions').html(lineout);
+
+  }
+  });
+};
+
+window.addEventListener ? 
+window.addEventListener("load",loadUrl,false) : 
+window.attachEvent && window.attachEvent("onload",loadUrl);
+    </script>
+    <link href="/stylesheets/climate-center-styles.css" rel="stylesheet"/>
+    <style>
+     html{-ms-overflow-style: scrollbar;}
+    </style>
+    <style type="text/css">
+     body .main .container, body .main .container-fluid { background: none; }
+
+	h2 { font-family: 'Nunito', sans-serif; font-size: 14px; }
+
+.image-cropper {
+	position: relative;
+	width: 290px;
+	height: 250px;
+	overflow: hidden;
+	border: 1px grey solid;
+}
+
+	.center1 {
+	position: absolute;
+	right: -7%;
+	bottom: -9%;
+}
+
+.feat-header {
+color: white;
+font-family: 'Nunito', sans-serif;
+font-size: 30px;
+padding-left: 50px;
+}
+
+.top-box {
+    height: 30px;
+}
+
+.featmenu-header {
+background-color: #696969;
+border: 1px solid black;
+color: white;
+font-family: 'Nunito', sans-serif;
+font-size: 18px;
+width: 100%;
+padding: 5px;
+}
+
+.floating-box {
+    display: inline-block;
+    border: 2px solid #738782;
+    width: 80%;
+    min-width: 400px;
+    margin: 2px;
+    margin-left: 30px;
+    padding: 5px;
+    background-color: white;
+}
+
+.floating-box1 {
+    display: inline-block;
+    vertical-align: top;
+    background-color: white;
+    border: solid 1px black;
+    width: 300px;
+    height: 800px;
+    overflow: auto;
+    margin: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+}
+
+.after-box {
+    height: 50px;
+}
+
+#currconditions {
+	width: 270px;
+	border: 1px solid grey;
+	margin-left: 15px;
+}
+
+#currconditions th {
+	font-family: 'Nunito', sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+#currconditions #wx_img {
+	margin-left: 10px;
+	width: 75px;
+}
+
+#currconditions #wu_img {
+	width: 107px;
+	margin-left: 25px;
+}
+
+h2.newsheading {
+	font-size: 14px;
+	text-decoration: underline;
+	margin-bottom: 1px;
+}
+
+h2.dateheading {
+	font-size: 10px;
+	font-style: italic;
+	margin-top: 0px;
+}
+    </style>
+   </link>
+  </link>
+ </head>
+ <body>
+  <div class="wrap">
+   <script type="text/javascript">
+    ajaxinclude("header.htm")
+   </script>
+   <div id="smoothcontainer">
+   </div>
+   <a class="animateddrawer" href="#" id="ddsmoothmenu-mobiletoggle">
+    <span>
+    </span>
+   </a>
+   <div id="contentmain">
+    <div class="top-box">
+    </div>
+    <div class="floating-box">
+     <!--   PAGE CONTENT HERE    -->
+     <div class="parallaxslider" id="myparallaxslider">
+      <div class="slide">
+       <div class="bgoverlay" data-bgimage="/images/foco_stn.png">
+       </div>
+       <div class="desc">
+        <div style="position:absolute; top:15px; left:50px; width:250px; background:#745B08; font-family: 'Nunito', sans-serif; padding:10px; border-radius:10px; line-height:1.4em;">
+         <p>
+          Read the latest monthly summary from the Fort Collins Campus Weather Station:
+         </p>
+         <p>
+          <a href="/pdfs/Wx_Stn_Monthly_Summary_Form_February_2019.pdf">
+           February 2019 Summary
+          </a>
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="slide">
+       <div class="bgoverlay" data-bgimage="/images/IRI_ENSOimpactsmap_lrg.png">
+       </div>
+       <div class="desc">
+        <div style="position:absolute; bottom:30px; left:50px; width:300px; background:#745B08; font-family: 'Nunito', sans-serif; padding:10px; border-radius:10px; line-height:1.4em;">
+         Get the latest
+         <a href="co_enso.html">
+          ENSO Info and Updates
+         </a>
+         ! The Climate Prediction 
+		Center has issued an El Niño Advisory, and El Niño is expected to 
+		continue at weak-to-moderate strength through the spring. What does it mean for 
+		Colorado?
+        </div>
+       </div>
+      </div>
+      <div class="slide">
+       <div class="bgoverlay" data-bgimage="/images/dryground.jpg">
+       </div>
+       <div class="desc">
+        <div style="position:absolute; top:100px; left: 120px; width:70%; background:#745B08; font-family: 'Nunito', sans-serif; padding:10px; border-radius:10px; line-height:1.4em;">
+         With an excellent snowpack season, and spring snowmelt and runoff just around the corner, 
+		keep up-to-date with fast changing and improving drought conditions! Our drought information 
+		page provides the latest U.S. Drought Monitor map for our state, links to our 
+		Intermountain West weekly assessments, registration 
+		to our webinars, drought headlines, and more.
+         <a href="/drought_info.html">
+          Get drought resources...
+         </a>
+        </div>
+       </div>
+      </div>
+      <div class="slide">
+       <div class="bgoverlay" data-bgimage="/images/img_0884_trim.png">
+       </div>
+       <div class="desc">
+        <div style="position:absolute; bottom:10px; right:80px; width: 300px; background:#754B08; font-family: 'Nunito', sans-serif; padding:5px; border: 2px solid black; border-radius:5px">
+         We know how much precipitation has accumulated water-year-to-date. But what is the 
+		likelihood that a station will end the water year with near average, above average, 
+		or below average precipitation? Check out  
+		our
+         <a href="/precip_proj.html">
+          Precipitation Projection Graphs
+         </a>
+         to find out.
+        </div>
+       </div>
+      </div>
+      <div class="slide">
+       <div class="bgoverlay" data-bgimage="/images/ctz01_station.jpg">
+       </div>
+       <div class="desc">
+        <div style="position:absolute; top:50px; left:100px; width: 250px; background:#754B08; font-family: 'Nunito', sans-serif; padding:10px; border: 2px solid black; border-radius:5px">
+         <h2>
+          <a href="//erams.com/coagmet/" target="_blank">
+           CoAgMET Weather Map
+          </a>
+         </h2>
+         View current weather at our 75 CoAgMET stations across the state with this interactive mapping system from eRAMS.
+        </div>
+       </div>
+      </div>
+      <div class="slide">
+       <div class="bgoverlay" data-bgimage="/oldsite/images/ColoradoPhotos/IMG_4978.jpg">
+       </div>
+       <div class="desc">
+        <div style="position:absolute; top:20px; right:100px; width: 350px; background:#754B08; font-family: 'Nunito', sans-serif; padding:5px; border: 2px solid black; border-radius:5px">
+         Instantly access
+         <a href="/wy_data.html">
+          Water Year Precipitation
+         </a>
+         data. Pick a 
+		water year and location to see each month's precipitation (and comparison to average) 
+		for many of Colorado's long-term stations.  Select Water Year 2018 to see how our last 
+		water year wrapped up.
+        </div>
+       </div>
+      </div>
+     </div>
+     <b>
+      <a href="javascript:firstparallaxslider.navigate('back')">
+       Previous
+      </a>
+      |
+      <a href="javascript:firstparallaxslider.navigate('forth')">
+       Next
+      </a>
+     </b>
+     <p>
+      <div class="floating-box1">
+       <div class="featmenu-header">
+        Current Conditions
+       </div>
+       <table id="currconditions">
+       </table>
+       <center>
+        <form style="margin-top:0px;">
+         <input id="zip" maxlength="5" name="zip" placeholder="Zip Code" size="8" type="text"/>
+         <input onclick="getObs()" type="button" value="Local Conditions"/>
+        </form>
+       </center>
+       <b>
+        <h2 style="padding:10px;">
+         <a href="//climate.colostate.edu/~autowx/fclwx_current.php">
+          Fort Collins Weather Station
+          <br/>
+          Current conditions
+         </a>
+        </h2>
+       </b>
+       <h2>
+        <b>
+         Colorado Radar
+        </b>
+       </h2>
+       <center>
+        <div class="image-cropper" title="Colorado Radar">
+         <a href="//radar.weather.gov/ridge/Conus/northrockies_loop.php" target="_blank">
+          <img class="center1" height="600" src="//radar.weather.gov/Conus/Loop/northrockies_loop.gif" width="550"/>
+         </a>
+        </div>
+        <img src="/images/radarLegend.png" style="width:290px;"/>
+       </center>
+       <h2>
+        <b>
+         CoCoRaHS Daily Precipitation
+        </b>
+       </h2>
+       <center>
+        <a href="//cocorahs.org/Maps/ViewMap.aspx?state=co" target="_blank">
+         <img alt="Colorado CoCoRaHS Precipitation" src="//cocorahs.org/Maps/GetMap.aspx?state=co&amp;size=sm
+" width="270"/>
+        </a>
+       </center>
+      </div>
+      <div class="floating-box1">
+       <div class="featmenu-header">
+        CCC News Feed
+       </div>
+       <div style="padding-left: 8px; padding-right: 8px;">
+        <h2 class="newsheading">
+         <a href="https://www.thefencepost.com/news/may-be-headed-for-a-wetter-than-normal-spring-in-some-areas/" target="_blank">
+          May be headed for a wetter-than-normal spring in some areas
+          <img src="/images/off01_prcp.gif" style="width:95%; border: 1px solid black;"/>
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         February 28, 2019
+        </h2>
+        The Fence Post talked with Becky Bolinger about what the winter brought and what 
+		we can expect for this spring.
+        <h2 class="newsheading">
+         <a href="https://www.coloradoindependent.com/2019/01/24/colorado-snowpack-climate-change/?fbclid=IwAR1BgoPH39j0wQZixbES-HrkGhFCLXCKLmyxVBZjsoDiZxqrKX9G9Xyg2kk" target="_blank">
+          Four seasons: Colorado water in a changing climate
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         January 24, 2019
+        </h2>
+        An interesting piece on the changes Colorado has experienced due to a warming climate, 
+		particularly how snow is changing. A lengthy article, but a good read, with 
+		contributions from Peter Goble.
+        <h2 class="newsheading">
+         <a href="https://koanewsradio.iheart.com/featured/colorado-s-morning-news/content/2019-01-08-concern-over-denver-snow-totals/?fbclid=IwAR369lLFNK9NiUcKdliRYaxblapaEOQm9wUMk02Q4fjvbJvUqTl9OU_PaD8" target="_blank">
+          Concern over Denver snow totals?
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         January 8, 2019
+        </h2>
+        Russ Schumacher explains to KOA Radio why Denver hasn't seen much snow this season, and 
+		what's causing the warm January days.
+        <h2 class="newsheading">
+         <a href="https://www.cpr.org/news/story/colorado-can-expect-more-of-the-same-weather-it-saw-in-2018" target="_blank">
+          Colorado can expect more of the same weather it saw in 2018
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         January 2, 2019
+        </h2>
+        Becky Bolinger chatted with Colorado Public Radio, recapping the notable weather events of 
+		2018 and what we can expect in 2019.
+        <h2 class="newsheading">
+         <a href="https://www.thefencepost.com/news/mountain-snowpack-is-off-to-promising-start-after-last-years-snow-drought/" target="_blank">
+          Mountain snowpack is off to promising start after last year's snow drought
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         November 21, 2018
+        </h2>
+        The Fence Post highlights the drought in the southwest, recent improvements, and what's 
+		to come, with quotes from Becky Bolinger.
+        <h2 class="newsheading">
+         <a href="https://www.9news.com/article/weather/weather-colorado/were-hoping-for-an-epic-colorado-winter-to-break-our-drought/73-610479599?fbclid=IwAR2AyWE3FYn2SOIgpC8Lsp1k6mAWuJn6mR_8LpjXM463nB0Pk6eKSjyK6kw" target="_blank">
+          We're hoping for an epic Colorado winter to break our drought
+          <img src="/images/drought_nov2018.jpg" style="width:95%; border: 1px solid black;"/>
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         November 1, 2018
+        </h2>
+        Peter Goble chatted with 9News about why drought remains, despite a decent October, and 
+		what it would take to end the drought.
+        <h2 class="newsheading">
+         Recap of Colorado Water Year 2018
+        </h2>
+        <h2 class="dateheading">
+         October 10, 2018
+        </h2>
+        <a href="/pdfs/CO_wateryear2018.pdf" target="_blank">
+         <img src="/images/wy2018_rank.png" style="width:95%;border: 1px solid black;"/>
+         <br/>
+         <b>
+          Click for more Water Year 2018 stats!
+         </b>
+        </a>
+        <h2 class="newsheading">
+         <a href="https://www.gjsentinel.com/news/western_colorado/as-fall-is-nigh-drought-persists/article_4d202108-bd5d-11e8-a228-10604b9f1ff4.html" target="_blank">
+          As fall is nigh, drought persists
+         </a>
+        </h2>
+        <h2 class="dateheading">
+         September 21, 2018
+        </h2>
+        The Grand Junction Daily Sentinel talked with Becky Bolinger about recent drought expansion 
+		in western CO and the "wait and see" mode for what the next snow season will bring.
+        <h2 class="newsheading">
+         <a href="/ccc_news.html">
+          Read more news...
+         </a>
+        </h2>
+       </div>
+      </div>
+      <div class="floating-box1">
+       <div class="featmenu-header">
+        Social Media
+       </div>
+       <p>
+        <iframe allowtransparency="true" frameborder="0" height="350" scrolling="no" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FColoradoClimateCenter%2F&amp;tabs=timeline&amp;width=290&amp;height=350&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=true&amp;show_facepile=false&amp;appId" style="border:none;margin-left:5px;overflow:hidden" width="290">
+        </iframe>
+       </p>
+       <p style="padding-left:5px">
+        <a class="twitter-timeline" data-height="350" data-link-color="#2B7BB9" data-theme="dark" data-width="290" href="https://twitter.com/ColoradoClimate">
+         Tweets by ColoradoClimate
+        </a>
+        <script async="" charset="utf-8" src="//platform.twitter.com/widgets.js">
+        </script>
+       </p>
+      </div>
+      <div class="floating-box1">
+       <div class="featmenu-header">
+        Quick Links
+       </div>
+       <table width="100%">
+        <tr>
+         <td style="width:160px;padding:3px;">
+          <a href="//coagmet.colostate.edu" target="_blank">
+           <img src="/images/coagmet.png" style="width:150px;"/>
+          </a>
+         </td>
+         <td style="padding:3px;">
+          <h2>
+           <a href="//coagmet.colostate.edu" target="_blank">
+            CoAgMET
+           </a>
+          </h2>
+          The Colorado Agricultural Meteorological nETwork provides live-updated
+		    meteorological conditions at agriculture sites across Colorado.
+         </td>
+        </tr>
+        <tr>
+         <td style="width:160px;padding:3px;">
+          <a href="//cocorahs.org/" target="_blank">
+           <img src="//cocorahs.org/Maps/GetMap.aspx?state=usa" style="width:150px;"/>
+          </a>
+         </td>
+         <td style="padding:3px;">
+          <h2>
+           <a href="//cocorahs.org/" target="_blank">
+            CoCoRaHS
+           </a>
+          </h2>
+          The Community Collaborative Rain Hail and Snow network provides daily precipitation
+		    data from around the country, recorded by citizens.
+         </td>
+        </tr>
+        <tr>
+         <td style="width:160px;padding:3px;">
+          <a href="//climate.colostate.edu/~drought" target="_blank">
+           <img src="/images/NIDIS_logo.png" style="width:150px;"/>
+          </a>
+         </td>
+         <td style="padding:3px;">
+          <h2>
+           <a href="//climate.colostate.edu/~drought" target="_blank">
+            Drought
+           </a>
+          </h2>
+          View our weekly updated drought summary for the NIDIS Intermountain West Region's
+		    Drought Early Warning System.
+         </td>
+        </tr>
+       </table>
+      </div>
+     </p>
+    </div>
+    <div class="after-box">
+    </div>
+   </div>
+   <div id="contentfoot">
+    <script type="text/javascript">
+     ajaxinclude("footer.htm")
+    </script>
+   </div>
+  </div>
+ </body>
+</html>

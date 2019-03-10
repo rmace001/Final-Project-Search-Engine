@@ -1,0 +1,528 @@
+http://www.bulletin.uga.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head id="Head1">
+  <title>
+   Bulletin - Home
+  </title>
+  <link href="Styles/Bulletin_home.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="Styles/printstyle.css" media="print" rel="stylesheet" type="text/css"/>
+  <link href="Styles/cse_top.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script language="JavaScript" type="text/javascript">
+   <!--
+        function MM_findObj(n, d) { //v4.01
+            var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+                d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+            }
+            if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+            for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+            if (!x && d.getElementById) x = d.getElementById(n); return x;
+        }
+        // Switched order of these two functions around because MM_swapImage() will first restore before swapping to prevent a wierd nav bug
+        function MM_swapImgRestore() { //v3.0
+            var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+        }
+
+        function MM_swapImage() { //v3.0
+            MM_swapImgRestore();
+            var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+                if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+        }
+
+        function MM_preloadImages() { //v3.0
+            var d = document; if (d.images) {
+                if (!d.MM_p) d.MM_p = new Array();
+                var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                    if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+            }
+        }
+//-->
+  </script>
+  <script language="JavaScript" type="text/javascript">
+   <!--
+
+    if (document.images) {
+        preload_image_object = new Image();
+        // set image url
+        image_url = new Array();
+        image_url[0] = "images/home/main/bulletin_mainimage_01.jpg";
+        image_url[1] = "images/home/main/bulletin_mainimage_02.jpg";
+        image_url[2] = "images/home/main/bulletin_mainimage_03.jpg";
+        image_url[3] = "images/home/main/bulletin_mainimage_04.jpg";
+        image_url[4] = "images/home/main/bulletin_mainimage_05.jpg";
+        image_url[5] = "images/home/main/bulletin_mainimage_06.jpg";
+        image_url[6] = "images/home/main/bulletin_mainimage_07.jpg";
+        image_url[7] = "images/home/main/bulletin_mainimage_08.jpg";
+        image_url[8] = "images/home/main/bulletin_mainimage_09.jpg";
+        var i = 0;
+        for (i = 0; i <= 3; i++)
+            preload_image_object.src = image_url[i];
+    }
+
+    //-->
+  </script>
+  <script type="text/javascript">
+   /***********************************************
+    * Ultimate Fade-In Slideshow (v1.51): © Dynamic Drive (http://www.dynamicdrive.com)
+    * This notice MUST stay intact for legal use
+    * Visit http://www.dynamicdrive.com/ for this script and 100s more.
+    ***********************************************/
+
+    var fadeimages = new Array()
+    //SET IMAGE PATHS. Extend or contract array as needed
+    fadeimages[0] = ["images/home/main/bulletin_mainimage_01.jpg", "", ""] //plain image syntax
+    fadeimages[1] = ["images/home/main/bulletin_mainimage_02.jpg", "", ""]
+    fadeimages[2] = ["images/home/main/bulletin_mainimage_03.jpg", "", ""]
+    fadeimages[3] = ["images/home/main/bulletin_mainimage_04.jpg", "", ""]
+    fadeimages[4] = ["images/home/main/bulletin_mainimage_05.jpg", "", ""]
+    fadeimages[5] = ["images/home/main/bulletin_mainimage_06.jpg", "", ""]
+    fadeimages[6] = ["images/home/main/bulletin_mainimage_07.jpg", "", ""]
+    fadeimages[7] = ["images/home/main/bulletin_mainimage_08.jpg", "", ""]
+    fadeimages[8] = ["images/home/main/bulletin_mainimage_09.jpg", "", ""]
+
+    var fadebgcolor = "black"
+
+    ////NO need to edit beyond here/////////////
+
+    var fadearray = new Array() //array to cache fadeshow instances
+    var fadeclear = new Array() //array to cache corresponding clearinterval pointers
+
+    var dom = (document.getElementById) //modern dom browsers
+    var iebrowser = document.all
+
+    function fadeshow(theimages, fadewidth, fadeheight, borderwidth, delay, pause, displayorder) {
+        this.pausecheck = pause
+        this.mouseovercheck = 0
+        this.delay = delay
+        this.degree = 10 //initial opacity degree (10%)
+        this.curimageindex = 0
+        this.nextimageindex = 1
+        fadearray[fadearray.length] = this
+        this.slideshowid = fadearray.length - 1
+        this.canvasbase = "canvas" + this.slideshowid
+        this.curcanvas = this.canvasbase + "_0"
+        if (typeof displayorder != "undefined")
+            theimages.sort(function () { return 0.5 - Math.random(); })
+        this.theimages = theimages
+        this.imageborder = parseInt(borderwidth)
+        this.postimages = new Array() //preload images
+        for (p = 0; p < theimages.length; p++) {
+            this.postimages[p] = new Image()
+            this.postimages[p].src = theimages[p][0]
+        }
+
+        var fadewidth = fadewidth + this.imageborder * 2
+        var fadeheight = fadeheight + this.imageborder * 2
+
+        if (iebrowser && dom || dom) //if IE5+ or modern browsers (ie: Firefox)
+            document.write('<div id="caption"><br><br><h1>Welcome to the Spring 2019 UGA Bulletin</h1>The official University of Georgia resource for majors, courses, and academic information</div><div id="master' + this.slideshowid + '" style="position:relative;width:' + fadewidth + 'px;height:' + fadeheight + 'px;overflow:hidden;"><div id="' + this.canvasbase + '_0" style="position:absolute;width:' + fadewidth + 'px;height:' + fadeheight + 'px;top:0;left:0;filter:progid:DXImageTransform.Microsoft.alpha(opacity=10);opacity:0.1;-moz-opacity:0.1;-khtml-opacity:0.1;background-color:' + fadebgcolor + '"></div><div id="' + this.canvasbase + '_1" style="position:absolute;width:' + fadewidth + 'px;height:' + fadeheight + 'px;top:0;left:0;filter:progid:DXImageTransform.Microsoft.alpha(opacity=10);opacity:0.1;-moz-opacity:0.1;-khtml-opacity:0.1;background-color:' + fadebgcolor + '"></div></div>')
+        else
+            document.write('<div><img name="defaultslide' + this.slideshowid + '" src="' + this.postimages[0].src + '"></div>')
+
+        if (iebrowser && dom || dom) //if IE5+ or modern browsers such as Firefox
+            this.startit()
+        else {
+            this.curimageindex++
+            setInterval("fadearray[" + this.slideshowid + "].rotateimage()", this.delay)
+        }
+    }
+
+    function fadepic(obj) {
+        if (obj.degree < 100) {
+            obj.degree += 10
+            if (obj.tempobj.filters && obj.tempobj.filters[0]) {
+                if (typeof obj.tempobj.filters[0].opacity == "number") //if IE6+
+                    obj.tempobj.filters[0].opacity = obj.degree
+                else //else if IE5.5-
+                    obj.tempobj.style.filter = "alpha(opacity=" + obj.degree + ")"
+            }
+            else if (obj.tempobj.style.MozOpacity)
+                obj.tempobj.style.MozOpacity = obj.degree / 101
+            else if (obj.tempobj.style.KhtmlOpacity)
+                obj.tempobj.style.KhtmlOpacity = obj.degree / 100
+            else if (obj.tempobj.style.opacity && !obj.tempobj.filters)
+                obj.tempobj.style.opacity = obj.degree / 101
+        }
+        else {
+            clearInterval(fadeclear[obj.slideshowid])
+            obj.nextcanvas = (obj.curcanvas == obj.canvasbase + "_0") ? obj.canvasbase + "_0" : obj.canvasbase + "_1"
+            obj.tempobj = iebrowser ? iebrowser[obj.nextcanvas] : document.getElementById(obj.nextcanvas)
+            obj.populateslide(obj.tempobj, obj.nextimageindex)
+            obj.nextimageindex = (obj.nextimageindex < obj.postimages.length - 1) ? obj.nextimageindex + 1 : 0
+            setTimeout("fadearray[" + obj.slideshowid + "].rotateimage()", obj.delay)
+        }
+    }
+
+    fadeshow.prototype.populateslide = function (picobj, picindex) {
+        var slideHTML = ""
+        if (this.theimages[picindex][1] != "") //if associated link exists for image
+            slideHTML = '<a href="' + this.theimages[picindex][1] + '" target="' + this.theimages[picindex][2] + '">'
+        slideHTML += '<img src="' + this.postimages[picindex].src + '" border="' + this.imageborder + 'px">'
+        if (this.theimages[picindex][1] != "") //if associated link exists for image
+            slideHTML += '</a>'
+        picobj.innerHTML = slideHTML
+    }
+
+
+    fadeshow.prototype.rotateimage = function () {
+        if (this.pausecheck == 1) //if pause onMouseover enabled, cache object
+            var cacheobj = this
+        if (this.mouseovercheck == 1)
+            setTimeout(function () { cacheobj.rotateimage() }, 100)
+        else if (iebrowser && dom || dom) {
+            this.resetit()
+            var crossobj = this.tempobj = iebrowser ? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+            crossobj.style.zIndex++
+            fadeclear[this.slideshowid] = setInterval("fadepic(fadearray[" + this.slideshowid + "])", 50)
+            this.curcanvas = (this.curcanvas == this.canvasbase + "_0") ? this.canvasbase + "_1" : this.canvasbase + "_0"
+        }
+        else {
+            var ns4imgobj = document.images['defaultslide' + this.slideshowid]
+            ns4imgobj.src = this.postimages[this.curimageindex].src
+        }
+        this.curimageindex = (this.curimageindex < this.postimages.length - 1) ? this.curimageindex + 1 : 0
+    }
+
+    fadeshow.prototype.resetit = function () {
+        this.degree = 10
+        var crossobj = iebrowser ? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+        if (crossobj.filters && crossobj.filters[0]) {
+            if (typeof crossobj.filters[0].opacity == "number") //if IE6+
+                crossobj.filters(0).opacity = this.degree
+            else //else if IE5.5-
+                crossobj.style.filter = "alpha(opacity=" + this.degree + ")"
+        }
+        else if (crossobj.style.MozOpacity)
+            crossobj.style.MozOpacity = this.degree / 101
+        else if (crossobj.style.KhtmlOpacity)
+            crossobj.style.KhtmlOpacity = this.degree / 100
+        else if (crossobj.style.opacity && !crossobj.filters)
+            crossobj.style.opacity = this.degree / 101
+    }
+
+
+    fadeshow.prototype.startit = function () {
+        var crossobj = iebrowser ? iebrowser[this.curcanvas] : document.getElementById(this.curcanvas)
+        this.populateslide(crossobj, this.curimageindex)
+        if (this.pausecheck == 1) { //IF SLIDESHOW SHOULD PAUSE ONMOUSEOVER
+            var cacheobj = this
+            var crossobjcontainer = iebrowser ? iebrowser["master" + this.slideshowid] : document.getElementById("master" + this.slideshowid)
+            crossobjcontainer.onmouseover = function () { cacheobj.mouseovercheck = 1 }
+            crossobjcontainer.onmouseout = function () { cacheobj.mouseovercheck = 0 }
+        }
+        this.rotateimage()
+    }
+  </script>
+  <script>
+   (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-56984926-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+ </head>
+ <body>
+  <form action="./" id="form1" method="post">
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUKMTE5MDEwMTE5MWRkTpHrYeJ6t17sIBI7HhnPOnxsUAj5qBS09SMofYhXbes="/>
+   </div>
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="90059987"/>
+   </div>
+   <div id="container">
+    <div id="leftside">
+    </div>
+    <div id="mid_container">
+     <div id="header">
+      <div id="topnav">
+       <a href="index.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('bulletin','','images/logo_on.jpg',1);">
+        <img align="left" alt="UGA Bulletin" border="0" class="logo" height="48" name="bulletin" src="images/logo_off.jpg" width="259"/>
+       </a>
+       <a href="MajorsHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('majors','','images/home/but_majors_on.jpg',1);">
+        <img align="left" alt="Majors" border="0" class="navbutton" height="30" name="majors" src="images/home/but_majors_hp_off.jpg" width="107"/>
+       </a>
+       <a href="CoursesHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('courses','','images/home/but_courses_on.jpg',1);">
+        <img align="left" alt="Courses" border="0" class="navbutton" height="30" name="courses" src="images/home/but_courses_hp_off.jpg" width="118"/>
+       </a>
+       <a href="UniversityInfoHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('univinfo','','images/home/but_univinfo_on.jpg',1);">
+        <img align="left" alt="University Information" border="0" class="navbutton" height="30" name="univinfo" src="images/home/but_univinfo_hp_off.jpg" width="245"/>
+       </a>
+      </div>
+     </div>
+     <div id="maincontent">
+      <table border="0" cellpadding="0" cellspacing="0" class="hometable" width="733">
+       <tr>
+        <td align="left" colspan="2" height="10" valign="top" width="370">
+        </td>
+        <td align="left" colspan="2" height="10" valign="top" width="363">
+         <script>
+          (function () {
+			        var cx = '009449350018199713962:est7m18askq';
+			        var gcse = document.createElement('script');
+			        gcse.type = 'text/javascript';
+			        gcse.async = true;
+			        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					'//cse.google.com/cse.js?cx=' + cx;
+			        var s = document.getElementsByTagName('script')[0];
+			        s.parentNode.insertBefore(gcse, s);
+			    })();
+         </script>
+         <gcse:searchbox-only enableautocomplete="true">
+         </gcse:searchbox-only>
+        </td>
+       </tr>
+       <tr>
+        <td align="left" colspan="3" height="266" valign="top" width="555">
+         <script type="text/javascript">
+          //new fadeshow(IMAGES_ARRAY_NAME, slideshow_width, slideshow_height, borderwidth, delay, pause (0=no, 1=yes), optionalRandomOrder)
+		    new fadeshow(fadeimages, 555, 266, 0, 5000, 0, "R")
+         </script>
+        </td>
+        <td align="left" class="newsblock" height="266" valign="top" width="178">
+         <div class="newstext">
+          <img align="left" alt="" border="0" height="18" src="images/uga_redarrow.gif" width="26"/>
+          <h1>
+           News
+          </h1>
+          <p>
+           <a href="mailto:bulletin@uga.edu?subject=UGA%20Bulletin%20Website%20Feedback">
+            Let us know what you think of the UGA Bulletin
+           </a>
+          </p>
+          <p>
+           <a href="GenEdCore.html" target="_blank">
+            General Education Core Curriculum - Effective Fall 2008
+           </a>
+          </p>
+          <p>
+           <a href="https://curriculumsystems.uga.edu/bulletin/" target="_blank">
+            Bulletin Help Videos
+           </a>
+          </p>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td align="left" colspan="4" height="33" valign="top" width="733">
+        </td>
+       </tr>
+       <tr>
+        <td align="left" height="21" valign="top" width="185">
+         <a href="MajorsHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('explore','','images/home/explore_but_on.jpg',1);">
+          <img alt="Explore" border="0" height="38" hspace="0" name="explore" src="images/home/explore_but_off.jpg" vspace="0" width="185"/>
+         </a>
+        </td>
+        <td align="left" height="21" valign="top" width="185">
+         <a href="CoursesHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('search','','images/home/search_but_on.jpg',1);">
+          <img alt="Search" border="0" height="38" hspace="0" name="search" src="images/home/search_but_off.jpg" vspace="0" width="185"/>
+         </a>
+        </td>
+        <td align="left" height="21" valign="top" width="185">
+         <a href="MajorsCompare.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('compare','','images/home/compare_but_on.jpg',1);">
+          <img alt="Compare" border="0" height="38" hspace="0" name="compare" src="images/home/compare_but_off.jpg" vspace="0" width="185"/>
+         </a>
+        </td>
+        <td align="left" class="quicklinksblock" height="226" rowspan="4" valign="top" width="178">
+         <div class="quicklinkstext">
+          <p>
+           <a href="Bulletin_Files/Univ/calendar_Link.html">
+            Academic Calendar
+           </a>
+          </p>
+          <p>
+           <a href="http://www.admissions.uga.edu/" target="_blank">
+            Admissions
+           </a>
+          </p>
+          <p>
+           <a href="Bulletin_Files/archive.html" target="_blank">
+            Bulletin Archives
+           </a>
+          </p>
+          <p>
+           <a href="https://curriculumsystems.uga.edu/bulletin/" target="_blank">
+            Bulletin Deadlines
+           </a>
+          </p>
+          <!--<p>
+<a href="Bulletin_Files/BulletinUpdates.doc" target="_blank">Bulletin Updates</a>
+</p>-->
+          <p>
+           <a href="http://www.architects.uga.edu/maps/current" target="_blank">
+            Campus Map
+           </a>
+          </p>
+          <p>
+           <a href="Bulletin_Files/Daily_class_schedule.html" target="_blank">
+            Daily Class Schedule
+           </a>
+          </p>
+          <p>
+           <a href="https://curriculumsystems.uga.edu/curriculum/finalExamConflicts/" target="_blank">
+            Final Exam Conflicts
+           </a>
+          </p>
+          <p>
+           <a href="bulletin/ind/index_listing.html">
+            Site Index
+           </a>
+          </p>
+          <p>
+           <a href="https://sis-ssb-prod.uga.edu/PROD/twbkwbis.P_GenMenu?name=homepage" target="_blank">
+            Athena
+           </a>
+          </p>
+          <p>
+           <a href="https://www.admissions.uga.edu/transferequiv/" target="_blank">
+            Transfer Equivalency Search
+           </a>
+          </p>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td align="left" height="175" valign="top" width="185">
+         <div class="entrypoint">
+          <h1>
+           Explore Majors
+          </h1>
+          <p>
+           With so many options, how do you choose? 
+Learn more about the many
+           <a href="MajorsHome.aspx">
+            majors, minors and certificates
+           </a>
+           offered at UGA 
+to make the decision that is right for you.
+          </p>
+         </div>
+        </td>
+        <td align="left" height="175" valign="top" width="185">
+         <div class="entrypoint">
+          <h1>
+           Search Courses
+          </h1>
+          <p>
+           You can search for a specific course or select a prefix to view all the courses in a subject area.
+          </p>
+         </div>
+        </td>
+        <td align="left" height="175" valign="top" width="185">
+         <div class="entrypoint">
+          <h1>
+           Compare Majors
+          </h1>
+          <p>
+           It's easy to compare up to three majors side by side. If you can't decide on a major, this is a great place to start.
+          </p>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td align="left" height="21" valign="top" width="185">
+         <a href="MajorsHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('start1','','images/home/but_start_on.jpg',1);">
+          <img alt="" border="0" height="21" hspace="0" name="start1" src="images/home/but_start_off.jpg" vspace="0" width="75"/>
+         </a>
+        </td>
+        <td align="left" height="21" valign="top" width="185">
+         <a href="CoursesHome.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('start2','','images/home/but_start_on.jpg',1);">
+          <img alt="" border="0" height="21" hspace="0" name="start2" src="images/home/but_start_off.jpg" vspace="0" width="75"/>
+         </a>
+        </td>
+        <td align="left" height="21" valign="top" width="185">
+         <a href="MajorsCompare.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('start3','','images/home/but_start_on.jpg',1);">
+          <img alt="" border="0" height="21" hspace="0" name="start3" src="images/home/but_start_off.jpg" vspace="0" width="75"/>
+         </a>
+        </td>
+       </tr>
+       <tr>
+        <td align="left" colspan="3" height="30" valign="top" width="185">
+        </td>
+       </tr>
+      </table>
+     </div>
+     <br/>
+     <table border="0" id="footer" width="733">
+      <tr>
+       <td align="left" colspan="3" height="50" valign="bottom">
+        <img alt="greybar" class="dividerline" height="2" src="images/greybar726.jpg" width="726"/>
+       </td>
+      </tr>
+      <tr>
+       <td align="left" height="50" valign="top">
+        <div class="footlogo">
+         <a href="index.aspx" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('footlogo','','images/bulletin_footlogo_on.jpg',1);">
+          <img align="left" alt="UGA Bulletin" border="0" height="15" name="footlogo" src="images/bulletin_footlogo_off.jpg" width="96"/>
+         </a>
+        </div>
+       </td>
+       <td align="left" height="50" valign="top">
+        <div class="contactus">
+         Contact Us:
+        </div>
+        <div class="contactinfo">
+         Office of Instruction
+         <br/>
+         <a href="mailto:bulletin@uga.edu">
+          bulletin@uga.edu
+         </a>
+         or 706-542-6358
+        </div>
+        <br clear="all"/>
+        <div class="contactus">
+         Site Design:
+        </div>
+        <div class="contactinfo">
+         <a href="http://www.theadsmith.com/" target="_blank">
+          The Adsmith
+         </a>
+        </div>
+       </td>
+       <td align="left" height="50" valign="top">
+        <div class="updated">
+         This site was last updated on January 2, 2019.
+         <br/>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td align="left" colspan="3" height="50" valign="bottom">
+        <img alt="greybar" class="dividerline" height="2" src="images/greybar726.jpg" width="726"/>
+       </td>
+      </tr>
+      <tr>
+       <td align="left" colspan="3" height="50" valign="bottom">
+        <div class="termstext">
+         <br/>
+         <a href="https://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">
+          Privacy
+         </a>
+         <br/>
+         <p>
+          <b>
+           TERMS &amp; CONDITIONS:
+          </b>
+          This site is managed by the Office of Instruction.
+          <br>
+           This is the official publication for academic matters of the University of Georgia. The statements set forth in this Bulletin are for information purposes only and should not be construed as the basis of a contract between a student and the institution.
+          </br>
+         </p>
+        </div>
+       </td>
+      </tr>
+     </table>
+    </div>
+   </div>
+  </form>
+ </body>
+</html>
+<p>
+ While provisions of this Bulletin will ordinarily be applied as stated, the University of Georgia reserves the right to change any provision listed in this Bulletin, including but not limited to academic requirements for graduation, without actual notice to individual students. Every effort will be made to keep students advised of any such changes. Information on changes will be available in the Curriculum Systems Office of the Office of the Vice President for Instruction, 319 New College. It is especially important that each student note that it is his/her responsibility to keep himself/herself apprised of current graduation requirements for his/her particular degree program.
+</p>
+<div id="rightside">
+</div>
+

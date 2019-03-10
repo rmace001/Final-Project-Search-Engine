@@ -1,0 +1,3176 @@
+http://events.sjsu.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us" xml:lang="en-us" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema">
+ <head id="head1">
+  <title>
+   SJSU Events Calendar - Date/Time View
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta id="title1" name="title"/>
+  <meta id="description1" name="description"/>
+  <link href="Calendar.css" rel="stylesheet" type="text/css"/>
+  <script src="jquery.min.js" type="text/javascript">
+  </script>
+  <script src="multiSelect.js" type="text/javascript">
+  </script>
+  <script src="PopupWindows.js?v=20161129" type="text/javascript">
+  </script>
+  <script src="QuickTip.js" type="text/javascript">
+  </script>
+  <script src="JSFunctions.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function displayKeywordWindow() {
+            // Bug #2897: I enclosed the url for the keyword window in double quotes so that single quotes in the keywords don't allow for script injection;  We also do the encoding server-side now.
+            var new_window = window.open("KeywordList.aspx?keywords=", 'Category\SubCategory', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=380,height=228,left=212,top=50');
+            new_window.focus();
+            document.Form1.dlstCategory.selectedIndex = 0;
+        }
+
+        function displaySelectedLocationsWindow() {
+            var new_window = window.open('SelectedLocationList.aspx?locs=&lFormat=Building', 'Category\SubCategory', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=380,height=228,left=212,top=50');
+            new_window.focus();
+            document.Form1.dlstCategory.selectedIndex = 0;
+        }
+
+        function changeMonth(event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            if ($("#dlstMonth option:selected") != null && $("#dlstMonth option:selected").index() != 0) {
+                __doPostBack('dlstMonth','');
+            }
+            return false;
+        }
+
+        function changeView(event) {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            if ($("#dlstView option:selected") != null && $("#dlstView option:selected").index() != 0) {
+                __doPostBack('dlstView','');
+            }
+            return false;
+        }
+
+        function changeCategory(event) {
+
+            // Added this for Bug 4949 (TFS) because Firefox was executing this for both change and blur when the popup was opened
+            $("#dlstCategory").off("change blur");
+
+            // Don't postback when either the default option or the multi-select option is clicked
+            if ($("#dlstCategory option:selected").index() == 0 || $("#dlstCategory option:selected").index() == 2) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+            }
+            
+            displayMultipleCategoryWindow();
+
+            // Bug 4949:  Reactivate the events after we're done so future dropdown actions work
+            $("#dlstCategory").on("change blur", changeCategory);
+            
+        }
+
+        function changeLocation(event) {
+
+            // Added this for Bug 4949 (TFS) because Firefox was executing this for both change and blur when the popup was opened
+            $("#dlstLocation").off("change blur");
+
+            if ($("#dlstLocation option:selected").index() == 0 || $("#dlstLocation option:selected").index() == 2) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+            }
+            
+            displayMultipleLocationWindow();
+
+            // Bug 4949:  Reactivate the events after we're done so future dropdown actions work
+            $("#dlstLocation").on("change blur", changeLocation);
+            
+        }
+
+        function dropdownKeyAction(event) {
+
+            // Key code
+            var keyCode = event.which || event.keyCode;
+
+	        // Count the number of dropdown items
+	        var num_items = $(this).children("option").length;
+
+	        // Selected index
+	        var curr_idx = $(this).children("option:selected").index();
+
+	        event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+	        if(keyCode == 13) { // User hit enter
+		        $(this).trigger('change'); // Do postback, as normal
+	        } else if (keyCode == 38) { // Up Arrow
+		        $(this).prop('selectedIndex', (curr_idx - 1) % num_items);
+	        } else if (keyCode == 40) { // Down Arrow
+		        $(this).prop('selectedIndex', (curr_idx + 1) % num_items);
+	        }
+
+            return false;
+        }
+
+        $(document).ready(function () {
+            $(".expander").css("cursor", "pointer").click(function () {
+                if ($(this).html() == "+") {
+                    $(this).html("-");
+                    $("#" + $(this)[0].id.replace("a", "d")).toggle();
+                }
+                else {
+                    $(this).html("+");
+                    $("#" + $(this)[0].id.replace("a", "d")).toggle();
+                }
+            });
+
+
+            $(".url").hover(
+                   function (e) {
+                       var dataurl = $(this).attr("data-url");
+                       var data = $(this).attr("data");
+                       initQuickTip(dataurl, data, e);
+                   },
+                   function (e) {
+                       removeTimouts();
+                       startexitingQuickTip();
+                   }
+                );
+
+            $("#dlstView").prop('selectedIndex', 0);
+            $("#dlstView").blur();
+
+            $(".openInternetBrowser").click(function (e) {
+                e.stopPropagation();
+                var dataurl = $(this).attr("data-url");
+                openInternetBrowser(dataurl);
+            });
+
+            /*******************************************************************
+             * BUG # 2862: 508 COMPLIANCE DROPDOWN FUNCTIONALITY MODIFICATION  *
+             *******************************************************************/
+
+            $("#linkSubscribe").click(function () {
+                calendarSubscription();
+            });
+
+            $("#dlstCategory").change(changeCategory).keydown(dropdownKeyAction).blur(changeCategory);
+            $("#dlstLocation").change(changeLocation).keydown(dropdownKeyAction).blur(changeLocation);
+            $("#dlstMonth").change(changeMonth).keydown(dropdownKeyAction).blur(changeMonth);
+            $("#dlstView").change(changeView).keydown(dropdownKeyAction).blur(changeView);
+
+            /*******************************************************************/
+
+            /************** From/To Error Message Tweaks ***********************/
+
+            // When the text in the date range boxes changes, hide the server-side error labels so that the client-side ones don't duplicate them
+            $("#txtStartDateSearch").change(function () {
+                $("#lblStartDateError").hide();
+                $("#lblError").hide();
+            });
+
+            // This clears existing errors when the enter key is pressed
+            $("#txtStartDateSearch").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    $("#lblStartDateError").hide();
+                    $("#lblError").hide();
+                }
+            });
+
+            $("#txtEndDateSearch").change(function () {
+                $("#lblEndDateError").hide();
+                $("#lblError").hide();
+            });
+
+            $("#txtEndDateSearch").keypress(function (event) {
+                if (event.keyCode == 13) {
+                    $("#lblEndDateError").hide();
+                    $("#lblError").hide();
+                }
+            });
+
+            // Allow the client-side labels to wrap and remove its color restriction
+            $("[controltovalidate='txtStartDateSearch'],[controltovalidate='txtEndDateSearch']").css("white-space", "normal").css("color", "");
+
+
+            /*******************************************************************/
+
+        });
+
+        function checkBoxSelector(toggle) {
+            $("#cellCBlock input:checkbox").attr("checked", toggle);
+        }
+
+        function openCategorySelector() {
+            var lAutoOpen = "Enable";
+            if (lAutoOpen == "Enable") {
+                var new_window = window.open('CategorySubCategorySelect.aspx', '', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=380,height=400,left=212,top=50');
+                new_window.focus();
+            }
+        }
+  </script>
+  <style type="text/css">
+   .modallayer {
+            background-color: #C0C0C0;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+        }
+
+        .divlayer {
+            position: absolute;
+            display: none;
+        }
+
+        .divlayerborder {
+            border: solid 2px #214380;
+        }
+
+        .divlayerbackground {
+            background-color: #FFFFFF;
+        }
+
+        .divlayerpadding {
+            margin: 5px;
+            border: solid 1px #214380;
+        }
+
+        .divlayerclosebar {
+        }
+
+        .divlayercloseaction {
+            float: right;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+
+        .divlayerallaction {
+            float: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .divlayernoneaction {
+            float: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .divlayersaveaction {
+            float: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+        .adx_wcag_header {
+            font-size: 1em;
+            font-weight: normal;
+            color: #000000;
+            line-height: normal;
+            margin: 0px;
+        }
+        .adx_wcag_hidden {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+  </style>
+  <link href="suggestedcategories.css" rel="Stylesheet" type="text/css"/>
+  <style type="text/css">
+  </style>
+ </head>
+ <body>
+  <div style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;">
+   <a href="#skip" title="Skip to content">
+    Skip to content
+   </a>
+  </div>
+  <!-- begin header include -->
+  <!-- start style -->
+  <style type="text/css">
+   .hidden {margin-left:-999em;}
+
+.primary_top
+{
+  padding:20px 0;
+  margin:5px 0 20px;
+  border-top:1px solid #c1c1c1;
+  border-bottom:1px solid #c1c1c1;
+  width:950px;
+  float: left;
+}
+
+.primary_top ul
+{
+
+  margin: 0 0 0 40px;
+  padding: 0;
+  float: left;
+    text-align: left;
+}
+
+.primary_top ul.lead
+{
+  margin: 0;
+}
+
+.primary_top li
+{
+  list-style: none;
+  list-style-image: none; 
+  display:block;
+  line-height:2;
+  font-size:125%;
+}
+
+.primary_top a
+{
+  padding: 5px 10px;
+  color:#005a8b;
+  text-decoration: none;
+}
+
+.primary_top li.current a
+{
+  font-weight:bold;
+  color:#fff;
+  background-color:#005a8b;
+}
+
+.primary_top a:hover, .primary_top a:active, .primary_top a:focus
+{
+  color:#c79900;
+}
+
+
+/* <RESKIN> */
+
+#one_column_wrapper_home_cal {clear:both;}
+
+html {background-color:#e6e6e0;}
+
+body {
+  background:url(https://www.sjsu.edu/sjsuhome/assets/images/bg-pattern-sjsu-02.png) no-repeat top right;
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #222;
+  margin: 0px;
+  padding: 0px;
+  margin: 0 auto;
+  text-align: center;
+  background-color:#e6e6e0;
+}
+
+#bg {
+  width:985px;
+  margin:0 auto;
+  padding-left:15px;
+  background:none;
+  /*overflow: hidden;*/
+  overflow: visible;
+  display: table;
+}
+#container {
+  position: relative;
+  display: block;
+  float: left;
+  width:960px;
+  min-height:100%;
+  background:url(https://www.sjsu.edu/sjsuhome/assets/images/bg-left-sjsu-02.png) top left no-repeat #fff;
+  padding-left:65px;
+  /*overflow: hidden;*/
+  overflow: visible;
+  display: table-row;
+}
+
+.boxWrapper {width:500px; margin-left:180px;}
+
+#sjsuhomelink {
+  position: absolute;
+  left: 0; top: 0;
+  width: 30px;
+  height: 160px; /* 2012-02-08 cjo */
+  border: none; /* 2011-12-09 cjo */
+}
+
+.pageTitle {
+font-size: 250%;
+margin:10px 0;
+padding: 0;
+font-weight: normal;
+font-family: Georgia,Times,"Times New Roman",serif;
+color: rgb(0,90,139);
+text-align: left;}
+
+.footerAddress {
+  clear:both;
+    margin:12px 0;
+    text-align: left;
+}
+.footerAddress h3 {font-size:87.5%; margin:0 0 4px; color:#000;}
+.footerAddress p {font-size: 87.5%; margin:0 0 4px; line-height:1.2;}
+.footerAddress img {float:left; margin-right:40px;}
+.footerAddress span {font-size:75%; color:#666;}
+
+
+
+/* end primary_top */
+
+/* </RESKIN> */
+  </style>
+  <!-- <BGDIVS> -->
+  <!-- background image divs, closed in footer include -->
+  <div id="bg">
+   <div id="container">
+    <a href="http://www.sjsu.edu" id="sjsuhomelink">
+    </a>
+    <!-- </BGDIVS> -->
+    <h1 class="pageTitle">
+     SJSU Events Calendar
+    </h1>
+    <!-- start primary navigation -->
+    <div id="wrapper_nav_980">
+     <div class="primary_top">
+      <ul class="lead">
+       <li class="current">
+        <a href="http://events.sjsu.edu/default.aspx">
+         All Events
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=20-0">
+         Campus Events
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=29-0">
+         Community Engagement
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=41-0">
+         Diversity
+        </a>
+       </li>
+      </ul>
+      <ul>
+       <li>
+        <a href="http://www.sjsu.edu/provost/services/academic_calendars/">
+         Academic Calendar
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=25-0">
+         Students
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=9-0">
+         Future Students
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=22-0">
+         Faculty/Staff
+        </a>
+       </li>
+      </ul>
+      <ul>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=8-0">
+         Alumni
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=21-0">
+         Continuing Studies
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=23-0">
+         Lectures/Seminars
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=18-0">
+         Arts/Culture
+        </a>
+       </li>
+      </ul>
+      <ul>
+       <li>
+        <a href="http://www.sjsuspartans.com/calendar/events/">
+         Athletics
+        </a>
+       </li>
+       <li>
+        <a href="http://events.sjsu.edu/default.aspx?category=24-0">
+         Sports, Recreation &amp; Fitness
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <!-- end primary navigation -->
+    <!-- start main content -->
+    <h1 class="hidden">
+     Main Content
+    </h1>
+    <a name="maincontent">
+    </a>
+    <div id="one_column_wrapper_home_cal">
+     <!-- end header include -->
+     <form action="/EventList.aspx?fromdate=3%2f10%2f2019&amp;todate=3%2f16%2f2019&amp;display=Week&amp;view=DateTime" enctype="application/x-www-form-urlencoded" id="Form1" method="post" name="Form1">
+      <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUKLTk2OTk1NDc5NQ8WLB4YRXZlbnREZXRhaWxzSGVscEZpbGVQYXRoBSFDYWxlbmRhckV2ZW50RGV0YWlsc1ZpZXdIZWxwLmFzcHgeFkV2ZW50c0NhbGVuZGFyTGFuZ3VhZ2UFD0V2ZW50cyBDYWxlbmRhch4SU2VsZWN0V2Vla0ltYWdlQWx0BQ5TZWxlY3QgYSB3ZWVrLh4LUlNTSW1hZ2VBbHQFJlN1YnNjcmliZSB0byBSU1MgZmVlZCBvZiBjdXJyZW50IHZpZXcuHg5BbGxEYXlMYW5ndWFnZQUHQWxsIERheR4UTG9jYXRpb25IZWxwRmlsZVBhdGgFHUNhbGVuZGFyTG9jYXRpb25WaWV3SGVscC5hc3B4HglTdGFydFRpbWVlHg9MaXN0Vmlld0hlYWRpbmcFUTxzcGFuIGNsYXNzPSJsaXN0dGFibGVoZWFkZXJ0ZXh0IiBzdHlsZT0iZm9udC13ZWlnaHQ6Ym9sZDsiPkRhdGUvVGltZSBWaWV3PC9zcGFuPh4EVHlwZQUGcHVibGljHgRWaWV3BQhEYXRlVGltZR4GVG9EYXRlBQkzLzE2LzIwMTkeB0VuZFRpbWVlHhRDYXRlZ29yeUhlbHBGaWxlUGF0aAUdQ2FsZW5kYXJDYXRlZ29yeVZpZXdIZWxwLmFzcHgeDE5leHRJbWFnZUFsdAUETmV4dB4QRGF0ZUhlbHBGaWxlUGF0aAUZQ2FsZW5kYXJEYXRlVmlld0hlbHAuYXNweB4JUGFnZVRpdGxlBSBTSlNVIEV2ZW50cyBDYWxlbmRhciAtIEdyaWQgVmlldx4MQ2xpY2tUb1ByaW50BRNDbGljayBoZXJlIHRvIFByaW50HhNTdW1tYXJ5SGVscEZpbGVQYXRoBRxDYWxlbmRhclN1bW1hcnlMaXN0Vmlldy5hc3B4HhBQcmV2aW91c0ltYWdlQWx0BQhQcmV2aW91cx4LR3JpZERpc3BsYXkFBFdlZWseC0Zvckxhbmd1YWdlBQNmb3IeCEZyb21EYXRlBQkzLzEwLzIwMTkWAgIBD2QWCgIBD2QWGmYPDxYCHgRUZXh0BQ9EaXNwbGF5IEZvcm1hdDpkZAIBDxAPFgIeB1Zpc2libGVoZBAVAgZTZWxlY3QNQ2F0ZWdvcnkgVmlldxUCBlNlbGVjdA1DYXRlZ29yeSBWaWV3FCsDAmdnFgFmZAICDw8WAh8WBQ5BbGwgQ2F0ZWdvcmllc2RkAgMPDxYGHgdUb29sVGlwBSJHbyB0byBhZG1pbmlzdHJhdGl2ZSBsb2dpbiBzY3JlZW4uHxYFDVN1Ym1pdCBFdmVudHMfF2dkZAIEDw8WBB4ISW1hZ2VVcmwFDmltYWdlcy9EYXkuZ2lmHg1BbHRlcm5hdGVUZXh0BSFEaXNwbGF5IGFsbCB0aGUgZXZlbnRzIGZvciB0b2RheS5kZAIFDw8WBB8ZBQ9pbWFnZXMvV2Vlay5naWYfGgUsRGlzcGxheSBhbGwgdGhlIGV2ZW50cyBmb3IgdGhlIGN1cnJlbnQgd2Vlay4WAh4Fc3R5bGUFXUJPUkRFUi1UT1A6ICNDMUMxQzEgMXB4IHNvbGlkO0JPUkRFUi1MRUZUOiAjQzFDMUMxIDFweCBzb2xpZDtCT1JERVItUklHSFQ6ICNDMUMxQzEgMXB4IHNvbGlkO2QCBg8PFgQfGQUQaW1hZ2VzL01vbnRoLmdpZh8aBS1EaXNwbGF5IGFsbCB0aGUgZXZlbnRzIGZvciB0aGUgY3VycmVudCBtb250aC5kZAIHDw8WBB8ZBQ9pbWFnZXMvWWVhci5naWYfGgUsRGlzcGxheSBhbGwgdGhlIGV2ZW50cyBmb3IgdGhlIGN1cnJlbnQgeWVhci5kZAIIDxYCHxYFQTxzcGFuIGNsYXNzPSJib2R5Y29weSIgc3R5bGU9ImZvbnQtc2l6ZToyLjBlbTsiPjxici8+PC9zcGFuPjwvdGQ+ZAIJDw8WCh8ZBRRpbWFnZXMvc3Vic2NyaWJlLmdpZh8YBTFDbGljayB0byBzdWJzY3JpYmUgdG8gdGhlIGN1cnJlbnQgdmlldyBvZiBldmVudHMuHxYFMUNsaWNrIHRvIHN1YnNjcmliZSB0byB0aGUgY3VycmVudCB2aWV3IG9mIGV2ZW50cy4eC05hdmlnYXRlVXJsBQEjHxdnZGQCCg8PFgofGQUTaW1hZ2VzL2Rvd25sb2FkLmdpZh8YBTpDbGljayB0byBkb3dubG9hZCBldmVudHMgc2hvd24gaW4gQ1NWLCBpQ0FMIG9yIFhNTCBmb3JtYXQuHxYFOkNsaWNrIHRvIGRvd25sb2FkIGV2ZW50cyBzaG93biBpbiBDU1YsIGlDQUwgb3IgWE1MIGZvcm1hdC4fHAUBIx8XZxYCHgdvbmNsaWNrBYUBZG93bmxvYWRUeXBlKCdkb3dubG9hZHR5cGUuYXNweD9mcm9tZGF0ZT0zLzEwLzIwMTkmdG9kYXRlPTMvMTYvMjAxOSZkaXNwbGF5PVdlZWsmdmlldz1EYXRlVGltZSZ0eXBlPXB1YmxpYyZkb3dubG9hZD1kb3dubG9hZCcsZXZlbnQpO2QCCw8PFggfGQUPaW1hZ2VzL2hlbHAuZ2lmHxgFKkNsaWNrIGZvciBoZWxwIGluIHVzaW5nIGNhbGVuZGFyIGRpc3BsYXlzLh8WBSpDbGljayBmb3IgaGVscCBpbiB1c2luZyBjYWxlbmRhciBkaXNwbGF5cy4fHAUlQ2FsZW5kYXJEYXRlVmlld0hlbHAuYXNweD90eXBlPXB1YmxpY2RkAgwPDxYKHxkFEGltYWdlcy9wcmludC5naWYfGAUpUHJpbnQgdGhlIGNvbnRlbnRzIG9mIHRoZSBjdXJyZW50IHNjcmVlbi4fFgUpUHJpbnQgdGhlIGNvbnRlbnRzIG9mIHRoZSBjdXJyZW50IHNjcmVlbi4fHAVlRXZlbnRMaXN0LmFzcHg/ZnJvbWRhdGU9My8xMC8yMDE5JnRvZGF0ZT0zLzE2LzIwMTkmZGlzcGxheT1XZWVrJnZpZXc9RGF0ZVRpbWUmdHlwZT1wdWJsaWMmcHJpbnQ9cHJpbnQfF2dkZAICD2QWOgIBDw8WAh8WBQ5EaXNwbGF5IE1vbnRoOmRkAgIPEGQPFg1mAgECAgIDAgQCBQIGAgcCCAIJAgoCCwIMFg0QBQZTZWxlY3QFBlNlbGVjdGcQBQdKYW51YXJ5BQdKYW51YXJ5ZxAFCEZlYnJ1YXJ5BQhGZWJydWFyeWcQBQVNYXJjaAUFTWFyY2hnEAUFQXByaWwFBUFwcmlsZxAFA01heQUDTWF5ZxAFBEp1bmUFBEp1bmVnEAUESnVseQUESnVseWcQBQZBdWd1c3QFBkF1Z3VzdGcQBQlTZXB0ZW1iZXIFCVNlcHRlbWJlcmcQBQdPY3RvYmVyBQdPY3RvYmVyZxAFCE5vdmVtYmVyBQhOb3ZlbWJlcmcQBQhEZWNlbWJlcgUIRGVjZW1iZXJnFgFmZAIDDw8WAh8WBQ9BZHZhbmNlZCBTZWFyY2hkZAIEDw8WAh8WBTE8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ZW1lbnQFBTIwLTM3ZxAFEcKgwqDCoENvbmZlcmVuY2VzBQUyMC0zNWcQBQ/CoMKgwqBEaXZlcnNpdHkFBjIwLTExNGcQBRLCoMKgwqBFdmVudCBDZW50ZXIFBTIwLTM5ZxAFFsKgwqDCoEhlYWx0aCAmIEZpdG5lc3MFBTIwLTQwZxAFEMKgwqDCoEhvbWVjb21pbmcFBTIwLTM2ZxAFDcKgwqDCoFBhcmtpbmcFBjIwLTE2OWcQBRTCoMKgwqBTcGVha2VyIFNlcmllcwUFMjAtMzhnEAUUwqDCoMKgU3VzdGFpbmFiaWxpdHkFBjIwLTEwN2cQBRNDb2xsZWdlIG9mIEJ1c2luZXNzBQQxNS0wZxAFHMKgwqDCoEFjY291bnRpbmcgYW5kIEZpbmFuY2UFBTE1LTk2ZxAFJ8KgwqDCoEJheSBBcmVhIFJldGFpbCBMZWFkZXJzaGlwIENlbnRlcgUGMTUtMTAwZxAFKMKgwqDCoEJ1c2luZXNzIFN0dWRlbnQgQWR2aXNlbWVudCBDZW50ZXIFBTE1LTkwZxAFLsKgwqDCoENvbGxlZ2Ugb2YgQnVzaW5lc3MgU3R1ZHkgYWJyb2FkIFByb2dyYW0FBTE1LTkyZxAFIsKgwqDCoEdhcnkgSi4gU2JvbmEgSG9ub3JzIFByb2dyYW0FBTE1LTkxZxAFKsKgwqDCoEdsb2JhbCBMZWFkZXJzaGlwIEFkdmFuY2VtZW50IENlbnRlcgUFMTUtOThnEAUnwqDCoMKgTHVjYXMgR3JhZHVhdGUgU2Nob29sIG9mIEJ1c2luZXNzBQUxNS04OWcQBSTCoMKgwqBNYW5hZ2VtZW50IEluZm9ybWF0aW9uIFN5c3RlbXMFBTE1LTkzZxAFJcKgwqDCoE1hcmtldGluZyBhbmQgRGVjaXNpb24gU2NpZW5jZXMFBTE1LTk0ZxAFIcKgwqDCoE9yZ2FuaXphdGlvbiBhbmQgTWFuYWdlbWVudAUFMTUtOTVnEAUxwqDCoMKgU2VydmljZSBTY2llbmNlLCBNYW5hZ2VtZW50IGFuZCBFbmdpbmVlcmluZwUGMTUtMTAyZxAFK8KgwqDCoFNpbGljb24gVmFsbGV5IEJ1c2luZXNzIFN0YXJzIFByb2dyYW0FBjE1LTEwM2cQBTDCoMKgwqBTaWxpY29uIFZhbGxleSBDZW50ZXIgZm9yIEVudHJlcHJlbmV1cnNoaXAFBTE1LTk5ZxAFMcKgwqDCoFNpbGljb24gVmFsbGV5IE9wZW4gU291cmNlIFJlc2VhcmNoIFByb2plY3QFBjE1LTEwNGcQBTPCoMKgwqBUaGUgQ2VudGVyIGZvciBCYW5raW5nIGFuZCBGaW5hbmNpYWwgU2VydmljZXMFBjE1LTEwMWcQBSfCoMKgwqBUaGUgSGlnaCBUZWNobm9sb2d5IFRheCBJbnN0aXR1dGUFBTE1LTk3ZxAFIENvbGxlZ2Ugb2YgSHVtYW5pdGllcyAmIHRoZSBBcnRzBQQ0Ni0wZxAFF8KgwqDCoEFydCAmIEFydCBIaXN0b3J5BQY0Ni0yMDNnEAU3wqDCoMKgQ29sbGVnZSBvZiBIdW1hbml0aWVzIGFuZCB0aGUgQXJ0cyBEZWFucydzIE9mZmljZQUGNDYtMjAyZxAFDMKgwqDCoERlc2lnbgUGNDYtMjA0ZxAFJsKgwqDCoEVuZ2xpc2ggJiBDb21wYXJhdGl2ZSBMaXRlcmF0dXJlBQY0Ni0yMDVnEAUWwqDCoMKgRmlsbSBhbmQgVGhlYXRyZQUGNDYtMjA2ZxAFEMKgwqDCoEh1bWFuaXRpZXMFBjQ2LTIwN2cQBSjCoMKgwqBMaW5ndWlzdGljcyAmIExhbmd1YWdlIERldmVsb3BtZW50BQY0Ni0yMDhnEAUQwqDCoMKgUGhpbG9zb3BoeQUGNDYtMjEwZxAFH8KgwqDCoFNjaG9vbCBvZiBNdXNpYyBhbmQgRGFuY2UFBjQ2LTIwOWcQBSXCoMKgwqBXb3JsZCBMYW5ndWFnZXMgYW5kIExpdGVyYXR1cmVzBQY0Ni0yMTFnEAUSQ29sbGVnZSBvZiBTY2llbmNlBQQzMC0wZxAFGcKgwqDCoEJpb2xvZ2ljYWwgU2NpZW5jZXMFBjMwLTE1N2cQBQ/CoMKgwqBDaGVtaXN0cnkFBjMwLTE1OGcQBRbCoMKgwqBDb21wdXRlciBTY2llbmNlBQYzMC0xNTlnEAUNwqDCoMKgR2VvbG9neQUGMzAtMTYwZxAFJ8KgwqDCoEpheSBQaW5zb24gU1RFTSBFZHVjYXRpb24gUHJvZ3JhbQUGMzAtMTc2ZxAFIMKgwqDCoE1hdGhlbWF0aWNzIGFuZCBTdGF0aXN0aWNzBQYzMC0xNjFnEAUlwqDCoMKgTWV0ZW9yb2xvZ3kgYW5kIENsaW1hdGUgU2NpZW5jZQUGMzAtMTYyZxAFHsKgwqDCoE1vc3MgTGFuZGluZyBNYXJpbmUgTGFicwUGMzAtMTYzZxAFG8KgwqDCoFBoeXNpY3MgYW5kIEFzdHJvbm9teQUGMzAtMTY0ZxAFF8KgwqDCoFNjaWVuY2UgRWR1Y2F0aW9uBQYzMC0xNjVnEAUUQ29tbXVuaXR5IEVuZ2FnZW1lbnQFBDI5LTBnEAUSQ29udGludWluZyBTdHVkaWVzBQQyMS0wZxAFJsKgwqDCoEludGVybmF0aW9uYWwgJiBFeHRlbmRlZCBTdHVkaWVzBQUyMS00MWcQBR7CoMKgwqBPcGVuIFVuaXZlcnNpdHkgKENyZWRpdCkFBTIxLTQyZxAFI8KgwqDCoFNKU1UgUHJvZmVzc2lvbmFsIERldmVsb3BtZW50BQUyMS00NWcQBSFEZXBhcnRtZW50IG9mIEFydCBhbmQgQXJ0IEhpc3RvcnkFBDM3LTBnEAUiRGVwYXJ0bWVudCBvZiBPY2N1cGF0aW9uYWwgVGhlcmFweQUENDItMGcQBQlEaXZlcnNpdHkFBDQxLTBnEAUbRGl2aXNpb24gb2YgU3R1ZGVudCBBZmZhaXJzBQQzMy0wZxAFEcKgwqDCoENhbXB1cyBMaWZlBQYzMy0xNTBnEAUcwqDCoMKgRGl2aXNpb24gV2lkZSBNZWV0aW5ncwUGMzMtMTUzZxAFGcKgwqDCoEVucm9sbG1lbnQgU2VydmljZXMFBjMzLTE1MmcQBSLCoMKgwqBJbml0aWF0aXZlcyBhbmQgUGFydG5lcnNoaXBzBQYzMy0xNTRnEAUewqDCoMKgUHJvZmVzc2lvbmFsIERldmVsb3BtZW50BQYzMy0xNTVnEAUWwqDCoMKgU2lnbmF0dXJlIEV2ZW50cwUGMzMtMTc3ZxAFFsKgwqDCoFN0dWRlbnQgU2VydmljZXMFBjMzLTE1MWcQBQxFdmVudCBDZW50ZXIFBDI2LTBnEAUNRmFjdWx0eS9TdGFmZgUEMjItMGcQBRPCoMKgwqBBY2Nlc3NpYmlsaXR5BQYyMi0xMDZnEAUkwqDCoMKgQ2VudGVyIGZvciBGYWN1bHR5IERldmVsb3BtZW50BQUyMi00NmcQBQ/CoMKg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BQM3LTlnEAUOQXF1YXRpYyBDZW50ZXIFBDctMTBnEAUMQXJ0IEJ1aWxkaW5nBQQ3LTExZxAFCEFydCBRdWFkBQQ3LTEyZxAFLEFzc29jaWF0ZWQgU3R1ZGVudHMgQ2hpbGQgRGV2ZWxvcG1lbnQgQ2VudGVyBQM2LTdnEAUZQXNzb2NpYXRlZCBTdHVkZW50cyBIb3VzZQUENy0xM2cQBRpCQlEgUGl0IChOZXh0IHRvIEFTIEhvdXNlKQUENy0xNWcQBRBCZWFjaCBWb2xsZXliYWxsBQU1LTEwMGcQBRBCZWxsIFJvc2UgR2FyZGVuBQQ3LTE2ZxAFGEJvY2NhcmRvIEJ1c2luZXNzIENlbnRlcgUENy0xN2cQBQtCdWlsZGluZyBCQgUENy0xOGcQBQ5CdXNpbmVzcyBUb3dlcgUENy0xOWcQBRBDYW1wdXMgVmlsbGFnZSAyBQQ3LTkzZxAFEENhbXB1cyBWaWxsYWdlIEEFBDctMjBnEAUQQ2FtcHVzIFZpbGxhZ2UgQgUENy0yMWcQBRBDYW1wdXMgVmlsbGFnZSBDBQQ3LTIyZxAFE0NhbXB1cyBWaWxsYWdlIFF1YWQFBDctMjNnEAUNQ2FyZWVyIENlbnRlcgUENy0yNGcQBQtDYXJldCBQbGF6YQUENy0yNWcQBQ1DRUZDVSBTdGFkaXVtBQQ1LTk3ZxAFGkNlbnRyYWwgQ2xhc3Nyb29tIEJ1aWxkaW5nBQQ3LTI2ZxAFGUNoYXZleiBQbGF6YSAoN3RoIFN0cmVldCkFBDctMjdnEAUKQ2xhcmsgSGFsbAUENy03M2cQBSBDb2xsZWdlIG9mIEVuZ2luZWVyaW5nIENvdXJ0eWFyZAUENy04MGcQBRREdWRsZXkgTW9vcmhlYWQgSGFsbAUENy0yOGcQBQtEdW5jYW4gSGFsbAUENy0yOWcQBRVEdW5jYW4gSGFsbCBCcmVlemV3YXkFBDctODNnEAUSRHdpZ2h0IEJlbnRlbCBIYWxsBQQ3LTMwZxAFLkVsIFBhc2VvIERlIENlc2FyIEUuIENoYXZleiAoN3RoIFN0cmVldCBQbGF6YSkFBDctNzRnEAUURW5naW5lZXJpbmcgQnVpbGRpbmcFBDctMzFnEAUMRXZlbnQgQ2VudGVyBQQ3LTMyZxAFLUZhbiBGaWVzdGEgdGFpbGdhdGluZyBhcmVhIGF0IFNwYXJ0YW4gU3RhZGl1bQUENS04NGcQBRlGb290YmFsbCBQcmFjdGljZSBGaWVsZCAxBQQ1LTY0ZxAFGUZvb3RiYWxsIFByYWN0aWNlIEZpZWxkIDIFBDUtNjVnEAUYR2xvYmFsIFN0dWRpZXMgSW5zdGl0dXRlBQQ2LTY3ZxAFH0dvdmVybm1lbnRhbCAmIEV4dGVybmFsIEFmZmFpcnMFBDYtNjhnEAUOSGFtbWVyIFRoZWF0cmUFBDYtOTJnEAUPSGVhbHRoIEJ1aWxkaW5nBQQ3LTMzZxAFC0hvb3ZlciBIYWxsBQQ3LTM0ZxAFEEhvb3ZlciBIYWxsIExhd24FBDctODFnEAUHSG91c2luZwUENy03OWcQBRBIdWdoIEdpbGxpcyBIYWxsBQQ3LTM1ZxAFG0luZHVzdHJpYWwgU3R1ZGllcyBCdWlsZGluZwUENy0zNmcQBR1JbnN0cnVjdGlvbmFsIFJlc291cmNlIENlbnRlcgUENy0zN2cQBSJJbnRlcm5hdGlvbmFsIGFuZCBFeHRlbmRlZCBTdHVkaWVzBQQ2LTY5ZxAFDUpvZSBXZXN0IEhhbGwFBDctMzhnEAUMS2luZyBMaWJyYXJ5BQQ3LTQxZxAFHktvcmV0IEF0aGxldGljIFRyYWluaW5nIENlbnRlcgUENS04OGcQBRZMdWNhcyBCdXNpbmVzcyBDb21wbGV4BQQ2LTg1ZxAFD01hY1F1YXJyaWUgSGFsbAUENy00MGcQBRxNZW4gJiBXb21lbidzIFNvY2NlciBDb21wbGV4BQQ1LTk0ZxAFH01pbmV0YSBUcmFuc3BvcnRhdGlvbiBJbnN0aXR1dGUFBDYtNzBnEAUFTW9kIEEFBDctNzdnEAUFTW9kIEIFBDctOTBnEAUYTW9ycmlzIERhaWxleSBBdWRpdG9yaXVtBQQ3LTQyZxAFEU11bmljaXBhbCBTdGFkaXVtBQQ1LTk4ZxAFDk11c2ljIEJ1aWxkaW5nBQQ3LTQzZxAFGVByb2Nlc3NlZCBGb29kcyBJbnN0aXR1dGUFBDYtNzFnEAUKUm95Y2UgSGFsbAUENy03OGcQBSxTYW4gQ2FybG9zIFBsYXphICg3dGggU3RyZWV0IGFuZCBTYW4gQ2FybG9zKQUENy03NmcQBRBTY2llbmNlIEJ1aWxkaW5nBQQ3LTQ0ZxAFDFNjaWVuY2UgTGF3bgUENy00NWcQBRtTaW1wa2lucyBBdGhsZXRpY3MgQnVpbGRpbmcFBDUtNjJnEAUPU2ltcGtpbnMgQ2VudGVyBQQ1LTYzZxAFHFNpbXBraW5zIEludGVybmF0aW9uYWwgSG91c2UFBDYtNjZnEAUYU0pTVSBSZXNlYXJjaCBGb3VuZGF0aW9uBQQ2LTcyZxAFEVNtaXRoL0NhcmxvcyBMYXduBQQ3LTQ2ZxAFEFNvZnRiYWxsIENvbXBsZXgFBDUtOTZnEAUVU3BhcnRhbiBDb21wbGV4IChTUFgpBQQ3LTQ3ZxAFEFNwYXJ0YW4gTWVtb3JpYWwFBDctNDhnEAUUU3BhcnRhbiBTb2NjZXIgRmllbGQFBDUtODZnEAUPU3BhcnRhbiBTdGFkaXVtBQQ1LTYxZxAFF1N0dWRlbnQgU2VydmljZXMgQ2VudGVyBQQ3LTQ5ZxAFDVN0dWRlbnQgVW5pb24FBDctNTBnEAUaU3R1ZGVudCBVbmlvbiBBbXBoaXRoZWF0ZXIFBDctNTFnEAUXU3R1ZGVudCBXZWxsbmVzcyBDZW50ZXIFBDctODlnEAUMU3dlZW5leSBIYWxsBQQ3LTUyZxAFE1N3ZWVuZXkgSGFsbCBBdHJpdW0FBDctNTNnEAUOVGVubmlzIENvbXBsZXgFBDUtOTVnEAUOVGltcGFueSBDZW50ZXIFBDYtODdnEAUKVG93ZXIgSGFsbAUENy01NGcQBQpUb3dlciBMYXduBQQ3LTU1ZxAFC1VjaGlkYSBIYWxsBQQ3LTU2ZxAFEVVuaXZlcnNpdHkgUG9saWNlBQQ3LTc1ZxAFD1VuaXZlcnNpdHkgUm9vbQUENy01N2cQBRJVbml2ZXJzaXR5IFRoZWF0ZXIFBDctNThnEAUcV2FzaGluZ3RvbiBTcXVhcmUgSGFsbCAoV1NRKQUENy01OWcQBQ5YQ291bnRyeS9UcmFjawUENS05OWcQBRtZb3NoaWhpcm8gVWNoaWRhIEhhbGwgKFlVSCkFBDctNjBnEAUienogS29yZXQgQ2VudGVyIGlzIGluIFNvdXRoIENhbXB1cwUENy0zOWdkZAIlDxYCHglpbm5lcmh0bWwFBihWaWV3KWQCKA8PFgIfFgUGKFZpZXcpFgIfGwUNZGlzcGxheTogbm9uZWQCKw8PFgIfFgUGKFZpZXcpFgIfGwUNZGlzcGxheTogbm9uZWQCLg8PFgIfFgUGKFZpZXcpFgIfGwUNZGlzcGxheTogbm9uZWQCMQ8PFgIfFgUGKFZpZXcpFgIfGwUNZGlzcGxheTogbm9uZWQCMg8PFgIfFgULS2V5d29yZChzKTpkZAIzDw8WAh8YBThDb21tYSBkZWxpbWl0ZWQgbGlzdCBvZiB3b3JkcyB1c2VkIHRvIHNlYXJjaCBmb3IgZXZlbnRzLhYCHxsFDHdpZHRoOjE3MnB4O2QCNA8WAh8lBQYoVmlldylkAjUPDxYCHxdoZGQCNg8PFgIfF2hkZAI3Dw8WBh8YBSJTZWFyY2ggdG8gbmFycm93IHRoZSBldmVudHMgc2hvd24uHxYFDVNlYXJjaCBFdmVudHMfF2dkZAIDD2QWBgIBDxYCHxYF4gM8c3BhbiBjbGFzcz0ibGlzdHRhYmxlaGVhZGVydGV4dCIgc3R5bGU9ImZvbnQtd2VpZ2h0OmJvbGQ7Ij5EYXRlL1RpbWUgVmlldzwvc3Bhbj4mbmJzcDsmbmJzcDs8YSBocmVmPSIjIiBvbmNsaWNrPSJyc3NUeXBlKCk7Ij48aW1nIHNyYz0iaW1hZ2VzL3Jzc19uZXcuZ2lmIiBib3JkZXI9IjAiIGFsdD0iU3Vic2NyaWJlIHRvIFJTUyBmZWVkIG9mIGN1cnJlbnQgdmlldy4iLz48L2E+PGlucHV0IHR5cGU9ImhpZGRlbiIgdmFsdWU9IlJTU1N5bmRpY2F0b3IuYXNweD9jYXRlZ29yeT0mbG9jYXRpb249JnR5cGU9TiZzdGFydGluZz0zLzEwLzIwMTkmZW5kaW5nPTMvMTYvMjAxOSZiaW5hcnk9WSZrZXl3b3Jkcz0iIGlkPSJoZG5Sc3NTdGF0aWMiIC8+PGlucHV0IHR5cGU9ImhpZGRlbiIgdmFsdWU9IlJTU1N5bmRpY2F0b3IuYXNweD9jYXRlZ29yeT0mbG9jYXRpb249JnR5cGU9TiZiaW5hcnk9WSZrZXl3b3Jkcz0iIGlkPSJoZG5Sc3NPbmdvaW5nIiAvPmQCAw8WAh8WBVo8c3BhbiBjbGFzcz0ibGlzdHRhYmxlaGVhZGVydGV4dCIgc3R5bGU9ImZvbnQtd2VpZ2h0OmJvbGQ7Ij5NYXJjaCAxMCAtIDE2LCAyMDE5PC9zcGFuPjxicj5kAgUPDxYEHxZlHxdoZGQCBw8PFgIfF2hkZAIIDw8WAh8XaGQWAmYPZBYCZg9kFgJmDw8WAh8WZWRkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYIBQdpYnRuRGF5BQhpYnRuV2VlawUJaWJ0bk1vbnRoBQhpYnRuWWVhcgUSY2JsQ3VzdG9tRmllbGRfMSQwBRJjYmxDdXN0b21GaWVsZF8yJDAFEmNibEN1c3RvbUZpZWxkXzMkMAUSY2JsQ3VzdG9tRmllbGRfNCQw5CRx9ZgGpVU35lyIz5ZMlR1neGc="/>
+      <script src="/PopCalendar2008/PopCalendarAjaxNet.js" type="text/javascript">
+      </script>
+      <script src="/PopCalendar2008/PopCalendarFunctionsAjaxNet.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+       var PopCal_enUS_DaysShort=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      </script>
+      <script type="text/javascript">
+       var PopCal_enUS_MonthsShort=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];var PopCal_enUS_MonthsFull=['January','February','March','April','May','June','July','August','September','October','November','December'];
+      </script>
+      <div class="eventlistdiv">
+       <input id="p_LocationColumnField" name="p_LocationColumnField" type="hidden" value="Building"/>
+       <div id="pnlHideHead">
+        <!-- Section 508 Qick Nav Links -->
+        <a href="#search">
+         <img alt="Search events." height="1" id="search_link" src="images/transparent.gif" style="border: 0px; width: 1px;"/>
+        </a>
+        <a href="#events">
+         <img alt="View events." height="1" id="events_link" src="images/transparent.gif" style="border: 0px; width: 1px;"/>
+        </a>
+        <table align="center" border="0" cellpadding="5" cellspacing="0" id="Table3" width="100%">
+         <tr>
+          <td align="left" style="white-space: nowrap; width: 30%;" valign="top">
+           <!-- The is done to maintain table formatting. -->
+          </td>
+          <td align="center" style="width: 40%;" valign="top">
+           <h2 class="adx_wcag_header">
+            <span class="title" id="lblCategoryHeading">
+             All Categories
+            </span>
+           </h2>
+          </td>
+          <td align="right" style="white-space: nowrap; width: 30%;" valign="top">
+           <a class="bodycopy" href="javascript:__doPostBack('lbtnSubmitEvents','')" id="lbtnSubmitEvents" title="Go to administrative login screen.">
+            <b>
+             Submit Events
+            </b>
+           </a>
+          </td>
+         </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" style="padding-right: 5px; padding-left: 5px; padding-top: 5px; border-bottom: solid 1px #c1c1c1;" width="100%">
+         <tr>
+          <td align="left" style="white-space: nowrap; width: 20%;" valign="bottom">
+           <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+             <td valign="bottom">
+              <label for="ibtnDay" style="display: none">
+               Day
+              </label>
+              <input alt="Display all the events for today." border="0" id="ibtnDay" name="ibtnDay" src="images/Day.gif" type="image"/>
+             </td>
+             <td valign="bottom">
+              <label for="ibtnWeek" style="display: none">
+               Week
+              </label>
+              <input alt="Display all the events for the current week." border="0" id="ibtnWeek" name="ibtnWeek" src="images/Week.gif" style="BORDER-TOP: #C1C1C1 1px solid;BORDER-LEFT: #C1C1C1 1px solid;BORDER-RIGHT: #C1C1C1 1px solid;" type="image"/>
+             </td>
+             <td valign="bottom">
+              <label for="ibtnMonth" style="display: none">
+               Month
+              </label>
+              <input alt="Display all the events for the current month." border="0" id="ibtnMonth" name="ibtnMonth" src="images/Month.gif" type="image"/>
+             </td>
+             <td valign="bottom">
+              <label for="ibtnYear" style="display: none">
+               Year
+              </label>
+              <input alt="Display all the events for the current year." border="0" id="ibtnYear" name="ibtnYear" src="images/Year.gif" type="image"/>
+             </td>
+            </tr>
+           </table>
+          </td>
+          <td align="center">
+           <div style="width: 80%; text-align: center;">
+            <h1 class="adx_wcag_header">
+             <span class="bodycopy" style="font-size:2.0em;">
+              <br/>
+             </span>
+            </h1>
+           </div>
+          </td>
+         </tr>
+        </table>
+       </div>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<td align="right" style="white-space: nowrap;" valign="bottom" width="20%">
+ <a href="#" id="linkSubscribe" title="Click to subscribe to the current view of events.">
+  <img alt="Click to subscribe to the current view of events." border="0" src="images/subscribe.gif" title="Click to subscribe to the current view of events."/>
+ </a>
+ <a href="#" id="linkDownload" onclick="downloadType('downloadtype.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;view=DateTime&amp;type=public&amp;download=download',event);" title="Click to download events shown in CSV, iCAL or XML format.">
+  <img alt="Click to download events shown in CSV, iCAL or XML format." border="0" src="images/download.gif" title="Click to download events shown in CSV, iCAL or XML format."/>
+ </a>
+ <a href="CalendarDateViewHelp.aspx?type=public" id="linkHelp" target="_blank" title="Click for help in using calendar displays.">
+  <img alt="Click for help in using calendar displays." border="0" src="images/help.gif" title="Click for help in using calendar displays."/>
+ </a>
+ <a href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;view=DateTime&amp;type=public&amp;print=print" id="linkPrint" target="_blank" title="Print the contents of the current screen.">
+  <img alt="Print the contents of the current screen." border="0" src="images/print.gif" title="Print the contents of the current screen."/>
+ </a>
+</td>
+<table border="0" cellpadding="5" cellspacing="0" id="PageTable" width="100%">
+ <tr>
+  <td valign="top">
+   <div id="pnlHideSearch">
+    <table border="0" cellpadding="0" cellspacing="0" id="Table2">
+     <tr>
+      <td colspan="2">
+       <div id="CalendarPanel">
+        <table border="0" cellpadding="2" cellspacing="0" id="CalendarGrid1" style="border-collapse:collapse;" width="100%">
+         <tr>
+          <td>
+          </td>
+          <td colspan="7">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+             <td align="left">
+              <a href="javascript:__doPostBack('lbtnADXCalenderPrevious','')" id="lbtnADXCalenderPrevious">
+               <img alt="Previous" border="0" src="images/largearrow_left_transparent.gif"/>
+              </a>
+             </td>
+             <td align="center" class="titleSmallGrid" nowrap="nowrap">
+              March 2019
+             </td>
+             <td align="right">
+              <a href="javascript:__doPostBack('lbtnADXCalenderNext','')" id="lbtnADXCalenderNext">
+               <img alt="Next" border="0" src="images/largearrow_right_transparent.gif"/>
+              </a>
+             </td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+         <tr>
+          <td>
+          </td>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           Su
+          </th>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           Mo
+          </th>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           Tu
+          </th>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           We
+          </th>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           Th
+          </th>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           Fr
+          </th>
+          <th align="center" class="dayheaderSmallGrid" scope="col">
+           Sa
+          </th>
+         </tr>
+         <tr>
+          <td>
+           <a href="javascript:__doPostBack('2/24/2019_3/2/2019','')" id="2/24/2019_3/2/2019">
+            <img alt="Select a week." border="0" src="images/smallarrow_right_transparent.gif"/>
+           </a>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Sunday, February 24, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=2/24/2019&amp;todate=2/24/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            24
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Monday, February 25, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=2/25/2019&amp;todate=2/25/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            25
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Tuesday, February 26, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=2/26/2019&amp;todate=2/26/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            26
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Wednesday, February 27, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=2/27/2019&amp;todate=2/27/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            27
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Thursday, February 28, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=2/28/2019&amp;todate=2/28/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            28
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Friday, March 01, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/1/2019&amp;todate=3/1/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            1
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Saturday, March 02, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/2/2019&amp;todate=3/2/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            2
+           </a>
+           <br/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <a href="javascript:__doPostBack('3/3/2019_3/9/2019','')" id="3/3/2019_3/9/2019">
+            <img alt="Select a week." border="0" src="images/smallarrow_right_transparent.gif"/>
+           </a>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Sunday, March 03, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/3/2019&amp;todate=3/3/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            3
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Monday, March 04, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/4/2019&amp;todate=3/4/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            4
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Tuesday, March 05, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/5/2019&amp;todate=3/5/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            5
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Wednesday, March 06, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/6/2019&amp;todate=3/6/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            6
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Thursday, March 07, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/7/2019&amp;todate=3/7/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            7
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Friday, March 08, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/8/2019&amp;todate=3/8/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            8
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Saturday, March 09, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/9/2019&amp;todate=3/9/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            9
+           </a>
+           <br/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <a href="javascript:__doPostBack('3/10/2019_3/16/2019','')" id="3/10/2019_3/16/2019">
+            <img alt="Select a week." border="0" src="images/smallarrow_right_transparent.gif"/>
+           </a>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Sunday, March 10, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/10/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            10
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Monday, March 11, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/11/2019&amp;todate=3/11/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            11
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Tuesday, March 12, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/12/2019&amp;todate=3/12/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            12
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Wednesday, March 13, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/13/2019&amp;todate=3/13/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            13
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Thursday, March 14, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/14/2019&amp;todate=3/14/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            14
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Friday, March 15, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/15/2019&amp;todate=3/15/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            15
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellhiliteSmallGrid" title="Saturday, March 16, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/16/2019&amp;todate=3/16/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            16
+           </a>
+           <br/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <a href="javascript:__doPostBack('3/17/2019_3/23/2019','')" id="3/17/2019_3/23/2019">
+            <img alt="Select a week." border="0" src="images/smallarrow_right_transparent.gif"/>
+           </a>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Sunday, March 17, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/17/2019&amp;todate=3/17/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            17
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Monday, March 18, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/18/2019&amp;todate=3/18/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            18
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Tuesday, March 19, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/19/2019&amp;todate=3/19/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            19
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Wednesday, March 20, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/20/2019&amp;todate=3/20/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            20
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Thursday, March 21, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/21/2019&amp;todate=3/21/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            21
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Friday, March 22, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/22/2019&amp;todate=3/22/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            22
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Saturday, March 23, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/23/2019&amp;todate=3/23/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            23
+           </a>
+           <br/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <a href="javascript:__doPostBack('3/24/2019_3/30/2019','')" id="3/24/2019_3/30/2019">
+            <img alt="Select a week." border="0" src="images/smallarrow_right_transparent.gif"/>
+           </a>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Sunday, March 24, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/24/2019&amp;todate=3/24/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            24
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Monday, March 25, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/25/2019&amp;todate=3/25/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            25
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Tuesday, March 26, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/26/2019&amp;todate=3/26/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            26
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Wednesday, March 27, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/27/2019&amp;todate=3/27/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            27
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Thursday, March 28, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/28/2019&amp;todate=3/28/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            28
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Friday, March 29, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/29/2019&amp;todate=3/29/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            29
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Saturday, March 30, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/30/2019&amp;todate=3/30/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            30
+           </a>
+           <br/>
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <a href="javascript:__doPostBack('3/31/2019_4/6/2019','')" id="3/31/2019_4/6/2019">
+            <img alt="Select a week." border="0" src="images/smallarrow_right_transparent.gif"/>
+           </a>
+          </td>
+          <td align="center" class="calendarcellSmallGrid" onmouseout="this.className='calendarcellSmallGrid';" onmouseover="this.className='calendarcellhiliteSmallGrid';" title="Sunday, March 31, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=3/31/2019&amp;todate=3/31/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            31
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Monday, April 01, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=4/1/2019&amp;todate=4/1/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            1
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Tuesday, April 02, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=4/2/2019&amp;todate=4/2/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            2
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Wednesday, April 03, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=4/3/2019&amp;todate=4/3/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            3
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Thursday, April 04, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=4/4/2019&amp;todate=4/4/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            4
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Friday, April 05, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=4/5/2019&amp;todate=4/5/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            5
+           </a>
+           <br/>
+          </td>
+          <td align="center" class="otherdaySmallGrid" title="Saturday, April 06, 2019" valign="top">
+           <a href="EventList.aspx?fromdate=4/6/2019&amp;todate=4/6/2019&amp;view=DateTime&amp;display=Day&amp;type=public">
+            6
+           </a>
+           <br/>
+          </td>
+         </tr>
+        </table>
+       </div>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="PADDING-TOP: 5px; white-space: nowrap;">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+         <td>
+          <label class="bodycopy" for="dlstMonth" id="lblDisplayMonth">
+           Display Month:
+          </label>
+         </td>
+         <td align="right">
+          <select class="bodycopy" id="dlstMonth" name="dlstMonth">
+           <option selected="selected" value="Select">
+            Select
+           </option>
+           <option value="January">
+            January
+           </option>
+           <option value="February">
+            February
+           </option>
+           <option value="March">
+            March
+           </option>
+           <option value="April">
+            April
+           </option>
+           <option value="May">
+            May
+           </option>
+           <option value="June">
+            June
+           </option>
+           <option value="July">
+            July
+           </option>
+           <option value="August">
+            August
+           </option>
+           <option value="September">
+            September
+           </option>
+           <option value="October">
+            October
+           </option>
+           <option value="November">
+            November
+           </option>
+           <option value="December">
+            December
+           </option>
+          </select>
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2">
+       <hr size="1" style="color: Black;" width="100%"/>
+       <a id="search">
+       </a>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="white-space: nowrap;">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+         <td>
+          <h3 class="adx_wcag_header">
+           <span class="bodycopy" id="lblAdvancedSearch">
+            <b>
+             Advanced Search
+            </b>
+           </span>
+          </h3>
+         </td>
+         <td align="right">
+          <a class="bodycopy" href="javascript:__doPostBack('lbtnNewSearch','')" id="lbtnNewSearch">
+           <span style="font-size:0.8em">
+            (New Search)
+           </span>
+          </a>
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td style="white-space: nowrap;">
+       <label class="bodycopy" for="txtStartDateSearch" id="lblFrom">
+        From:
+       </label>
+      </td>
+      <td style="white-space: nowrap;">
+       <input autocomplete="off" calendar="calStartDateSearch" class="textboxcopy" dir="ltr" format="m/d/yyyy" id="txtStartDateSearch" invaliddatemessage="Invalid date was entered." name="txtStartDateSearch" onfocus="__PopCalSetFocus(this, event);" type="text" value="3/10/2019"/>
+       <span assembly="RJS.Web.WebControl.PopCalendar.Net.2008.dll" assemblyversion="8.1.3125.36581" id="calStartDateSearch" popcalendarfunctionsjsversion="1.0.0" popcalendarjsversion="1.0.1" style="display:none">
+       </span>
+       <span id="calStartDateSearch_Control" onclick='__PopCalShowCalendar("txtStartDateSearch",this)' style="cursor:pointer;" title="From:">
+        <img align="absmiddle" alt="From:" border="0" src="/PopCalendar2008/Calendar.gif"/>
+       </span>
+       <link href="/PopCalendar2008/CSS/ADXPublic.css" rel="stylesheet" type="text/css"/>
+       <br>
+       </br>
+      </td>
+     </tr>
+     <tr>
+      <td>
+      </td>
+      <td>
+       <span class="errormessagetext" clientvalidationfunction="__PopCalValidateOnSubmit" controltovalidate="txtStartDateSearch" dir="ltr" evaluationfunction="__PopCalCustomValidatorEvaluateIsValid" id="calStartDateSearch_MessageError" messagealignment="MessageContainer" style="visibility:hidden;white-space:nowrap;z-index:+1000;color:red;" validationgroup="RJS.PopCalendars">
+       </span>
+      </td>
+     </tr>
+     <tr>
+      <td style="white-space: nowrap;">
+       <label class="bodycopy" for="txtEndDateSearch" id="lblTo">
+        To:
+       </label>
+      </td>
+      <td style="white-space: nowrap;">
+       <input autocomplete="off" calendar="calEndDateSearch" class="textboxcopy" dir="ltr" format="m/d/yyyy" id="txtEndDateSearch" invaliddatemessage="Invalid date was entered." name="txtEndDateSearch" onfocus="__PopCalSetFocus(this, event);" type="text" value="3/16/2019"/>
+       <span assembly="RJS.Web.WebControl.PopCalendar.Net.2008.dll" assemblyversion="8.1.3125.36581" id="calEndDateSearch" popcalendarfunctionsjsversion="1.0.0" popcalendarjsversion="1.0.1" style="display:none">
+       </span>
+       <span id="calEndDateSearch_Control" onclick='__PopCalShowCalendar("txtEndDateSearch",this)' style="cursor:pointer;" title="To:">
+        <img align="absmiddle" alt="To:" border="0" src="/PopCalendar2008/Calendar.gif"/>
+       </span>
+       <link href="/PopCalendar2008/CSS/ADXPublic.css" rel="stylesheet" type="text/css"/>
+       <br>
+       </br>
+      </td>
+     </tr>
+     <tr>
+      <td>
+      </td>
+      <td>
+       <span class="errormessagetext" clientvalidationfunction="__PopCalValidateOnSubmit" controltovalidate="txtEndDateSearch" dir="ltr" evaluationfunction="__PopCalCustomValidatorEvaluateIsValid" id="calEndDateSearch_MessageError" messagealignment="MessageContainer" style="visibility:hidden;white-space:nowrap;z-index:+1000;color:red;" validationgroup="RJS.PopCalendars">
+       </span>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2">
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="PADDING-TOP: 2px; white-space: nowrap;">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+         <td>
+          <label class="bodycopy" for="dlstCategory" id="lblCategorys">
+           Category(s):
+          </label>
+         </td>
+         <td align="right">
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="white-space: nowrap;">
+       <select class="bodycopy" data-disabled="" id="dlstCategory" name="dlstCategory" onclick="openCategorySelector();" style="width:172px;">
+        <option value="Select">
+         Select
+        </option>
+        <option value="Select All">
+         Select All
+        </option>
+        <option value="Select Multiple">
+         Select Multiple
+        </option>
+        <option value="17-0">
+         Academic Calendar
+        </option>
+        <option value="8-0">
+         Alumni
+        </option>
+        <option value="18-0">
+         Arts/Culture
+        </option>
+        <option value="18-18">
+         Event Center
+        </option>
+        <option value="18-15">
+         Literature
+        </option>
+        <option value="18-16">
+         Performing Arts - Dance/Music/Theatre
+        </option>
+        <option value="18-17">
+         Visual Arts/Exhibits
+        </option>
+        <option value="19-0">
+         Athletics
+        </option>
+        <option value="19-19">
+         Baseball
+        </option>
+        <option value="19-20">
+         Basketball (Men)
+        </option>
+        <option value="19-21">
+         Basketball (Women)
+        </option>
+        <option value="19-22">
+         Cross Country (Men)
+        </option>
+        <option value="19-23">
+         Cross Country (Women)
+        </option>
+        <option value="19-24">
+         Football
+        </option>
+        <option value="19-25">
+         Golf (Men)
+        </option>
+        <option value="19-26">
+         Golf (Women)
+        </option>
+        <option value="19-27">
+         Gymnastics (Women)
+        </option>
+        <option value="19-28">
+         Soccer (Men)
+        </option>
+        <option value="19-29">
+         Soccer (Women)
+        </option>
+        <option value="19-30">
+         Softball
+        </option>
+        <option value="19-31">
+         Swimming/Diving (Women)
+        </option>
+        <option value="19-32">
+         Tennis (Women)
+        </option>
+        <option value="19-33">
+         Volleyball (Women)
+        </option>
+        <option value="19-34">
+         Water Polo (Women)
+        </option>
+        <option value="27-0">
+         Beethoven Center
+        </option>
+        <option value="20-0">
+         Campus Events
+        </option>
+        <option value="20-37">
+         Commencement
+        </option>
+        <option value="20-35">
+         Conferences
+        </option>
+        <option value="20-114">
+         Diversity
+        </option>
+        <option value="20-39">
+         Event Center
+        </option>
+        <option value="20-40">
+         Health &amp; Fitness
+        </option>
+        <option value="20-36">
+         Homecoming
+        </option>
+        <option value="20-169">
+         Parking
+        </option>
+        <option value="20-38">
+         Speaker Series
+        </option>
+        <option value="20-107">
+         Sustainability
+        </option>
+        <option value="15-0">
+         College of Business
+        </option>
+        <option value="15-96">
+         Accounting and Finance
+        </option>
+        <option value="15-100">
+         Bay Area Retail Leadership Center
+        </option>
+        <option value="15-90">
+         Business Student Advisement Center
+        </option>
+        <option value="15-92">
+         College of Business Study abroad Program
+        </option>
+        <option value="15-91">
+         Gary J. Sbona Honors Program
+        </option>
+        <option value="15-98">
+         Global Leadership Advancement Center
+        </option>
+        <option value="15-89">
+         Lucas Graduate School of Business
+        </option>
+        <option value="15-93">
+         Management Information Systems
+        </option>
+        <option value="15-94">
+         Marketing and Decision Sciences
+        </option>
+        <option value="15-95">
+         Organization and Management
+        </option>
+        <option value="15-102">
+         Service Science, Management and Engineering
+        </option>
+        <option value="15-103">
+         Silicon Valley Business Stars Program
+        </option>
+        <option value="15-99">
+         Silicon Valley Center for Entrepreneurship
+        </option>
+        <option value="15-104">
+         Silicon Valley Open Source Research Project
+        </option>
+        <option value="15-101">
+         The Center for Banking and Financial Services
+        </option>
+        <option value="15-97">
+         The High Technology Tax Institute
+        </option>
+        <option value="46-0">
+         College of Humanities &amp; the Arts
+        </option>
+        <option value="46-203">
+         Art &amp; Art History
+        </option>
+        <option value="46-202">
+         College of Humanities and the Arts Deans's Office
+        </option>
+        <option value="46-204">
+         Design
+        </option>
+        <option value="46-205">
+         English &amp; Comparative Literature
+        </option>
+        <option value="46-206">
+         Film and Theatre
+        </option>
+        <option value="46-207">
+         Humanities
+        </option>
+        <option value="46-208">
+         Linguistics &amp; Language Development
+        </option>
+        <option value="46-210">
+         Philosophy
+        </option>
+        <option value="46-209">
+         School of Music and Dance
+        </option>
+        <option value="46-211">
+         World Languages and Literatures
+        </option>
+        <option value="30-0">
+         College of Science
+        </option>
+        <option value="30-157">
+         Biological Sciences
+        </option>
+        <option value="30-158">
+         Chemistry
+        </option>
+        <option value="30-159">
+         Computer Science
+        </option>
+        <option value="30-160">
+         Geology
+        </option>
+        <option value="30-176">
+         Jay Pinson STEM Education Program
+        </option>
+        <option value="30-161">
+         Mathematics and Statistics
+        </option>
+        <option value="30-162">
+         Meteorology and Climate Science
+        </option>
+        <option value="30-163">
+         Moss Landing Marine Labs
+        </option>
+        <option value="30-164">
+         Physics and Astronomy
+        </option>
+        <option value="30-165">
+         Science Education
+        </option>
+        <option value="29-0">
+         Community Engagement
+        </option>
+        <option value="21-0">
+         Continuing Studies
+        </option>
+        <option value="21-41">
+         International &amp; Extended Studies
+        </option>
+        <option value="21-42">
+         Open University (Credit)
+        </option>
+        <option value="21-45">
+         SJSU Professional Development
+        </option>
+        <option value="37-0">
+         Department of Art and Art History
+        </option>
+        <option value="42-0">
+         Department of Occupational Therapy
+        </option>
+        <option value="41-0">
+         Diversity
+        </option>
+        <option value="33-0">
+         Division of Student Affairs
+        </option>
+        <option value="33-150">
+         Campus Life
+        </option>
+        <option value="33-153">
+         Division Wide Meetings
+        </option>
+        <option value="33-152">
+         Enrollment Services
+        </option>
+        <option value="33-154">
+         Initiatives and Partnerships
+        </option>
+        <option value="33-155">
+         Professional Development
+        </option>
+        <option value="33-177">
+         Signature Events
+        </option>
+        <option value="33-151">
+         Student Services
+        </option>
+        <option value="26-0">
+         Event Center
+        </option>
+        <option value="22-0">
+         Faculty/Staff
+        </option>
+        <option value="22-106">
+         Accessibility
+        </option>
+        <option value="22-46">
+         Center for Faculty Development
+        </option>
+        <option value="22-115">
+         Diversity
+        </option>
+        <option value="22-109">
+         eCampus
+        </option>
+        <option value="22-47">
+         Health &amp; Fitness
+        </option>
+        <option value="22-49">
+         SJSU Professional Development
+        </option>
+        <option value="22-48">
+         University Personnel
+        </option>
+        <option value="9-0">
+         Future Students
+        </option>
+        <option value="9-50">
+         Admissions
+        </option>
+        <option value="9-51">
+         Advising
+        </option>
+        <option value="9-52">
+         Clubs &amp; Organizations
+        </option>
+        <option value="9-116">
+         Diversity
+        </option>
+        <option value="9-53">
+         Financial Aid, Scholarships
+        </option>
+        <option value="9-54">
+         Orientation
+        </option>
+        <option value="9-55">
+         Testing
+        </option>
+        <option value="9-56">
+         Tours
+        </option>
+        <option value="34-0">
+         Information Technology Services (ITS)
+        </option>
+        <option value="34-174">
+         Accessibility
+        </option>
+        <option value="34-195">
+         Digital Signage
+        </option>
+        <option value="34-197">
+         Faculty Website Open Lab
+        </option>
+        <option value="34-196">
+         Faculty Website Training
+        </option>
+        <option value="34-173">
+         Google Apps
+        </option>
+        <option value="34-178">
+         Open Forum
+        </option>
+        <option value="34-191">
+         OU Campus 1A: Content Editing
+        </option>
+        <option value="34-192">
+         OU Campus 1B: Site Management &amp; Page Creation
+        </option>
+        <option value="34-182">
+         OU Campus 2A: Reusable Content &amp; Special Templates
+        </option>
+        <option value="34-172">
+         OU Campus Open Lab
+        </option>
+        <option value="34-184">
+         OU Campus v10 Orientation
+        </option>
+        <option value="44-0">
+         King Library
+        </option>
+        <option value="44-199">
+         Events
+        </option>
+        <option value="44-200">
+         Exhibitions
+        </option>
+        <option value="44-198">
+         Training
+        </option>
+        <option value="23-0">
+         Lectures/Seminars
+        </option>
+        <option value="23-117">
+         Diversity
+        </option>
+        <option value="24-0">
+         Sports, Recreation &amp; Fitness
+        </option>
+        <option value="24-105">
+         Adventure/Trips
+        </option>
+        <option value="24-57">
+         Badminton
+        </option>
+        <option value="24-58">
+         Bowling
+        </option>
+        <option value="24-59">
+         Boxing
+        </option>
+        <option value="24-77">
+         Campus Recreation
+        </option>
+        <option value="24-60">
+         Ice Hockey (Men)
+        </option>
+        <option value="24-76">
+         Intramural Sports
+        </option>
+        <option value="24-61">
+         Judo
+        </option>
+        <option value="24-62">
+         Kendo &amp; Naginata
+        </option>
+        <option value="24-63">
+         Lacrosse (Men)
+        </option>
+        <option value="24-64">
+         Lacrosse (Women)
+        </option>
+        <option value="24-65">
+         Racquetball
+        </option>
+        <option value="24-66">
+         Roller Hockey
+        </option>
+        <option value="24-67">
+         Rugby (Men)
+        </option>
+        <option value="24-68">
+         Rugby (Women)
+        </option>
+        <option value="24-69">
+         Sailing
+        </option>
+        <option value="24-70">
+         Tennis
+        </option>
+        <option value="24-71">
+         Track &amp; Field
+        </option>
+        <option value="24-73">
+         Volleyball (Men)
+        </option>
+        <option value="24-74">
+         Volleyball (Women)
+        </option>
+        <option value="24-72">
+         Water Polo (Men)
+        </option>
+        <option value="24-75">
+         Wrestling
+        </option>
+        <option value="25-0">
+         Students
+        </option>
+        <option value="25-108">
+         Accessibility
+        </option>
+        <option value="25-78">
+         Advising
+        </option>
+        <option value="25-79">
+         Associated Students
+        </option>
+        <option value="25-80">
+         Campus Recreation
+        </option>
+        <option value="25-82">
+         Career Events
+        </option>
+        <option value="25-201">
+         Chican@/Latin@
+        </option>
+        <option value="25-83">
+         Club Sports
+        </option>
+        <option value="25-84">
+         Clubs &amp; Organizations
+        </option>
+        <option value="25-118">
+         Diversity
+        </option>
+        <option value="25-85">
+         Financial Aid, Scholarships
+        </option>
+        <option value="25-81">
+         Fitness
+        </option>
+        <option value="25-87">
+         International Students/ Study Abroad
+        </option>
+        <option value="25-88">
+         Internships/Service Learning
+        </option>
+        <option value="25-86">
+         Intramural Sports
+        </option>
+        <option value="25-168">
+         Testing
+        </option>
+        <option value="45-0">
+         Title IX
+        </option>
+       </select>
+       <br>
+       </br>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="PADDING-TOP: 2px; white-space: nowrap;">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+         <td>
+          <label class="bodycopy" for="dlstLocation" id="lblLocations">
+           Location(s):
+          </label>
+         </td>
+         <td align="right">
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="white-space: nowrap;">
+       <select class="bodycopy" id="dlstLocation" name="dlstLocation" style="width:172px;">
+        <option value="Select">
+         Select
+        </option>
+        <option value="Select All">
+         Select All
+        </option>
+        <option value="Select Multiple">
+         Select Multiple
+        </option>
+        <option value="7-8">
+         9th Street Plaza
+        </option>
+        <option value="7-91">
+         A. S. Rec Lawn
+        </option>
+        <option value="7-9">
+         Administration Building
+        </option>
+        <option value="7-10">
+         Aquatic Center
+        </option>
+        <option value="7-11">
+         Art Building
+        </option>
+        <option value="7-12">
+         Art Quad
+        </option>
+        <option value="6-7">
+         Associated Students Child Development Center
+        </option>
+        <option value="7-13">
+         Associated Students House
+        </option>
+        <option value="7-15">
+         BBQ Pit (Next to AS House)
+        </option>
+        <option value="5-100">
+         Beach Volleyball
+        </option>
+        <option value="7-16">
+         Bell Rose Garden
+        </option>
+        <option value="7-17">
+         Boccardo Business Center
+        </option>
+        <option value="7-18">
+         Building BB
+        </option>
+        <option value="7-19">
+         Business Tower
+        </option>
+        <option value="7-93">
+         Campus Village 2
+        </option>
+        <option value="7-20">
+         Campus Village A
+        </option>
+        <option value="7-21">
+         Campus Village B
+        </option>
+        <option value="7-22">
+         Campus Village C
+        </option>
+        <option value="7-23">
+         Campus Village Quad
+        </option>
+        <option value="7-24">
+         Career Center
+        </option>
+        <option value="7-25">
+         Caret Plaza
+        </option>
+        <option value="5-97">
+         CEFCU Stadium
+        </option>
+        <option value="7-26">
+         Central Classroom Building
+        </option>
+        <option value="7-27">
+         Chavez Plaza (7th Street)
+        </option>
+        <option value="7-73">
+         Clark Hall
+        </option>
+        <option value="7-80">
+         College of Engineering Courtyard
+        </option>
+        <option value="7-28">
+         Dudley Moorhead Hall
+        </option>
+        <option value="7-29">
+         Duncan Hall
+        </option>
+        <option value="7-83">
+         Duncan Hall Breezeway
+        </option>
+        <option value="7-30">
+         Dwight Bentel Hall
+        </option>
+        <option value="7-74">
+         El Paseo De Cesar E. Chavez (7th Street Plaza)
+        </option>
+        <option value="7-31">
+         Engineering Building
+        </option>
+        <option value="7-32">
+         Event Center
+        </option>
+        <option value="5-84">
+         Fan Fiesta tailgating area at Spartan Stadium
+        </option>
+        <option value="5-64">
+         Football Practice Field 1
+        </option>
+        <option value="5-65">
+         Football Practice Field 2
+        </option>
+        <option value="6-67">
+         Global Studies Institute
+        </option>
+        <option value="6-68">
+         Governmental &amp; External Affairs
+        </option>
+        <option value="6-92">
+         Hammer Theatre
+        </option>
+        <option value="7-33">
+         Health Building
+        </option>
+        <option value="7-34">
+         Hoover Hall
+        </option>
+        <option value="7-81">
+         Hoover Hall Lawn
+        </option>
+        <option value="7-79">
+         Housing
+        </option>
+        <option value="7-35">
+         Hugh Gillis Hall
+        </option>
+        <option value="7-36">
+         Industrial Studies Building
+        </option>
+        <option value="7-37">
+         Instructional Resource Center
+        </option>
+        <option value="6-69">
+         International and Extended Studies
+        </option>
+        <option value="7-38">
+         Joe West Hall
+        </option>
+        <option value="7-41">
+         King Library
+        </option>
+        <option value="5-88">
+         Koret Athletic Training Center
+        </option>
+        <option value="6-85">
+         Lucas Business Complex
+        </option>
+        <option value="7-40">
+         MacQuarrie Hall
+        </option>
+        <option value="5-94">
+         Men &amp; Women's Soccer Complex
+        </option>
+        <option value="6-70">
+         Mineta Transportation Institute
+        </option>
+        <option value="7-77">
+         Mod A
+        </option>
+        <option value="7-90">
+         Mod B
+        </option>
+        <option value="7-42">
+         Morris Dailey Auditorium
+        </option>
+        <option value="5-98">
+         Municipal Stadium
+        </option>
+        <option value="7-43">
+         Music Building
+        </option>
+        <option value="6-71">
+         Processed Foods Institute
+        </option>
+        <option value="7-78">
+         Royce Hall
+        </option>
+        <option value="7-76">
+         San Carlos Plaza (7th Street and San Carlos)
+        </option>
+        <option value="7-44">
+         Science Building
+        </option>
+        <option value="7-45">
+         Science Lawn
+        </option>
+        <option value="5-62">
+         Simpkins Athletics Building
+        </option>
+        <option value="5-63">
+         Simpkins Center
+        </option>
+        <option value="6-66">
+         Simpkins International House
+        </option>
+        <option value="6-72">
+         SJSU Research Foundation
+        </option>
+        <option value="7-46">
+         Smith/Carlos Lawn
+        </option>
+        <option value="5-96">
+         Softball Complex
+        </option>
+        <option value="7-47">
+         Spartan Complex (SPX)
+        </option>
+        <option value="7-48">
+         Spartan Memorial
+        </option>
+        <option value="5-86">
+         Spartan Soccer Field
+        </option>
+        <option value="5-61">
+         Spartan Stadium
+        </option>
+        <option value="7-49">
+         Student Services Center
+        </option>
+        <option value="7-50">
+         Student Union
+        </option>
+        <option value="7-51">
+         Student Union Amphitheater
+        </option>
+        <option value="7-89">
+         Student Wellness Center
+        </option>
+        <option value="7-52">
+         Sweeney Hall
+        </option>
+        <option value="7-53">
+         Sweeney Hall Atrium
+        </option>
+        <option value="5-95">
+         Tennis Complex
+        </option>
+        <option value="6-87">
+         Timpany Center
+        </option>
+        <option value="7-54">
+         Tower Hall
+        </option>
+        <option value="7-55">
+         Tower Lawn
+        </option>
+        <option value="7-56">
+         Uchida Hall
+        </option>
+        <option value="7-75">
+         University Police
+        </option>
+        <option value="7-57">
+         University Room
+        </option>
+        <option value="7-58">
+         University Theater
+        </option>
+        <option value="7-59">
+         Washington Square Hall (WSQ)
+        </option>
+        <option value="5-99">
+         XCountry/Track
+        </option>
+        <option value="7-60">
+         Yoshihiro Uchida Hall (YUH)
+        </option>
+        <option value="7-39">
+         zz Koret Center is in South Campus
+        </option>
+       </select>
+       <br>
+       </br>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="PADDING-TOP: 2px; white-space: nowrap;">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+         <td>
+          <label class="bodycopy" for="txtKeyword" id="lblKeywords">
+           Keyword(s):
+          </label>
+         </td>
+         <td align="right">
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="white-space: nowrap;">
+       <input class="textboxcopy" id="txtKeyword" maxlength="50" name="txtKeyword" style="width:172px;" title="Comma delimited list of words used to search for events." type="text"/>
+       <br>
+       </br>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2">
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style="PADDING-TOP: 2px; white-space: nowrap;">
+       <a class="bodycopy" href="javascript:__doPostBack('lbtnSearch','')" id="lbtnSearch" title="Search to narrow the events shown.">
+        <b>
+         Search Events
+        </b>
+       </a>
+      </td>
+     </tr>
+    </table>
+   </div>
+  </td>
+  <td align="left" valign="top" width="100%">
+   <a id="events">
+   </a>
+   <a name="skip">
+   </a>
+   <div id="pnlListviewHeading">
+    <table border="0" cellpadding="1" cellspacing="0" width="100%">
+     <tr>
+      <td>
+       <h2 class="adx_wcag_header">
+        <span class="listtableheadertext" style="font-weight:bold;">
+         Date/Time View
+        </span>
+        <a href="#" onclick="rssType();">
+         <img alt="Subscribe to RSS feed of current view." border="0" src="images/rss_new.gif"/>
+        </a>
+        <input id="hdnRssStatic" type="hidden" value="RSSSyndicator.aspx?category=&amp;location=&amp;type=N&amp;starting=3/10/2019&amp;ending=3/16/2019&amp;binary=Y&amp;keywords="/>
+        <input id="hdnRssOngoing" type="hidden" value="RSSSyndicator.aspx?category=&amp;location=&amp;type=N&amp;binary=Y&amp;keywords="/>
+       </h2>
+      </td>
+      <td align="right">
+       <h2 class="adx_wcag_header">
+        <span class="listtableheadertext" style="font-weight:bold;">
+         March 10 - 16, 2019
+        </span>
+        <br/>
+       </h2>
+      </td>
+     </tr>
+     <tr>
+      <td>
+      </td>
+     </tr>
+    </table>
+   </div>
+   <div id="divTableEvents">
+    <table border="0" cellpadding="1" cellspacing="1" id="tblEvents" width="100%">
+     <tr>
+      <th align="left" class="listcolumnheadtext" colspan="1" scope="col" width="30%">
+       Start Date and Time
+      </th>
+      <th align="left" class="listcolumnheadtext" colspan="1" scope="col" width="40%">
+       Event Details
+      </th>
+      <td align="left" class="listcolumnheadtext" colspan="1" width="30%">
+       Event Type
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Sunday, March 10, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        9:00 AM - 11:00 AM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44444" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26763&amp;view=EventDetails&amp;information_id=44444" target="_self">
+         Softball vs Weber State
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 3:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44336" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26713&amp;view=EventDetails&amp;information_id=44336" target="_self">
+         Baseball vs Air Force
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 3:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44376" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26733&amp;view=EventDetails&amp;information_id=44376" target="_self">
+         Tennis vs Grand Canyon
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Monday, March 11, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 1:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44593" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26832&amp;view=EventDetails&amp;information_id=44593" target="_self">
+         Teaching with Clickers
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        4:00 PM - 5:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44524" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26802&amp;view=EventDetails&amp;information_id=44524" target="_self">
+         Grad Slam Infromation Session
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+       <li>
+        Information Session
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Tuesday, March 12, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 1:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44164" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26630&amp;view=EventDetails&amp;information_id=44164" target="_self">
+         Getting Started with Adobe Spark
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        1:00 PM - 3:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44532" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26804&amp;view=EventDetails&amp;information_id=44532" target="_self">
+         OU Campus Basic Training
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+       <li>
+        Training
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        7:15 PM - 9:15 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44446" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26764&amp;view=EventDetails&amp;information_id=44446" target="_self">
+         Softball vs Bucknell University
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Wednesday, March 13, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 1:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44587" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26829&amp;view=EventDetails&amp;information_id=44587" target="_self">
+         Adobe Audition for Podcasting
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 1:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44488" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26785&amp;view=EventDetails&amp;information_id=44488" target="_self">
+         Lunch &amp; Learn:  CommUnivercity
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+       <li>
+        Deadline
+       </li>
+       <li>
+        Free Food
+       </li>
+       <li>
+        Information Session
+       </li>
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        3:00 PM - 4:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44661" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26864&amp;view=EventDetails&amp;information_id=44661" target="_self">
+         Math Colloquium: Dr. Kazuo Yamazaki
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Seminar
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Thursday, March 14, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        10:00 AM - 11:30 AM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44551" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26811&amp;view=EventDetails&amp;information_id=44551" target="_self">
+         Brunch &amp; Learn: Global Opportunities for Your Students
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Deadline
+       </li>
+       <li>
+        Free Food
+       </li>
+       <li>
+        Information Session
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        3:00 PM - 4:30 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44266" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26680&amp;view=EventDetails&amp;information_id=44266" target="_self">
+         Basic ArcGIS Workshop: An Introduction to Maps and Geographic Information
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        4:30 PM - 7:30 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44298" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26696&amp;view=EventDetails&amp;information_id=44298" target="_self">
+         Data Science for All Seminar Series: Exploring Graphs in Neo4j - Scott Jensen
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Networking
+       </li>
+       <li>
+        Professional Development
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        6:00 PM - 8:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44448" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26765&amp;view=EventDetails&amp;information_id=44448" target="_self">
+         Softball vs University of Massachusetts
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Friday, March 15, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        10:00 AM - 11:30 AM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44510" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26796&amp;view=EventDetails&amp;information_id=44510" target="_self">
+         Google Tour Creator for Faculty and Staff
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Information Session
+       </li>
+       <li>
+        Networking
+       </li>
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        11:30 AM - 12:30 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43915" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26517&amp;view=EventDetails&amp;information_id=43915" target="_self">
+         Canvas Advanced: Offer Differentiated Instruction with Mastery Paths!
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 2:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44450" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26766&amp;view=EventDetails&amp;information_id=44450" target="_self">
+         Softball vs University of Massachusetts
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 3:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44378" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26734&amp;view=EventDetails&amp;information_id=44378" target="_self">
+         Tennis vs Saint Mary's
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        1:00 PM - 3:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44533" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26804&amp;view=EventDetails&amp;information_id=44533" target="_self">
+         OU Campus Basic Training
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <li>
+        Training
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        1:30 PM - 2:30 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43962" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26530&amp;view=EventDetails&amp;information_id=43962" target="_self">
+         Using Google Docs/Forms in the Classroom or at Work (for Faculty and Staff only)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+       <li>
+        Professional Development
+       </li>
+       <li>
+        Training
+       </li>
+       <li>
+        Workshop
+       </li>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        2:00 PM - 4:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44452" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26767&amp;view=EventDetails&amp;information_id=44452" target="_self">
+         Softball vs Iona College
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        6:00 PM - 9:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44338" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26714&amp;view=EventDetails&amp;information_id=44338" target="_self">
+         Baseball vs UNLV
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listheadtext" colspan="3" width="100%">
+       <h4 class="adx_wcag_header">
+        <span class="listheadtext">
+         Saturday, March 16, 2019
+        </span>
+       </h4>
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43937" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26528&amp;view=EventDetails&amp;information_id=43937" target="_self">
+         Lowrider Photography by Suzanne Lopez (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43929" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26524&amp;view=EventDetails&amp;information_id=43929" target="_self">
+         Story and King: San José's Lowrider Culture (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        All Day
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44250" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26672&amp;view=EventDetails&amp;information_id=44250" target="_self">
+         Exhibit (Multi-Day Event)
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        12:00 PM - 3:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44380" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26735&amp;view=EventDetails&amp;information_id=44380" target="_self">
+         Tennis vs Marquette University
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        2:00 PM - 5:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44340" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26715&amp;view=EventDetails&amp;information_id=44340" target="_self">
+         Baseball vs UNLV
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        2:30 PM - 4:30 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44454" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26768&amp;view=EventDetails&amp;information_id=44454" target="_self">
+         Softball vs University of the Pacific
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        3:00 PM - 5:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytext" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="43935" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26527&amp;view=EventDetails&amp;information_id=43935" target="_self">
+         Low &amp; Slow: The Future of Lowriding in San José
+        </a>
+       </div>
+      </td>
+      <td class="listbodytext" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+     <tr>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="30%">
+       <a class="listtext">
+        5:00 PM - 7:00 PM
+       </a>
+      </td>
+      <td align="left" class="listbodytextalt" colspan="1" valign="top" width="40%">
+       <div class="vevent">
+        <a class="url summary" data="44456" data-url="http://events.sjsu.edu/QuickTip.aspx?Iid" href="EventList.aspx?fromdate=3/10/2019&amp;todate=3/16/2019&amp;display=Week&amp;type=public&amp;eventidn=26769&amp;view=EventDetails&amp;information_id=44456" target="_self">
+         Softball vs Iona College
+        </a>
+       </div>
+      </td>
+      <td class="listbodytextalt" colspan="1" valign="top" width="40%">
+      </td>
+     </tr>
+    </table>
+   </div>
+   <br>
+   </br>
+  </td>
+ </tr>
+</table>
+<div id="pnlModalPopupSection">
+ <div class="divlayer divlayerborder divlayerbackground" id="divlayer1">
+  <div>
+   <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+    <span id="lblWTS_1" style="font-weight: bold;">
+     Select item(s) to Search
+    </span>
+    <div class="divCF_1" id="divCF_1">
+    </div>
+   </div>
+   <div class="divlayerclosebar" style="width: 355px;">
+    <div>
+     <input id="hfSelectedItems1" name="hfSelectedItems1" type="hidden"/>
+     <a class="divlayercloseaction" href="javascript:closeLayer('divlayer1');" style="text-decoration: none;">
+      Close
+     </a>
+     <a class="divlayernoneaction" href="javascript:selectNone('1');" style="text-decoration: none;">
+      Select None
+     </a>
+     <a class="divlayerallaction" href="javascript:selectAll('1');" style="text-decoration: none;">
+      Select All
+     </a>
+     <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF1');" style="text-decoration: none;">
+      Save
+     </a>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="divlayer divlayerborder divlayerbackground" id="divlayer2">
+  <div>
+   <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+    <span id="lblWTS_2" style="font-weight: bold;">
+     Select item(s) to Search
+    </span>
+    <div class="divCF_2" id="divCF_2">
+    </div>
+   </div>
+   <div class="divlayerclosebar" style="width: 355px;">
+    <div>
+     <input id="hfSelectedItems2" name="hfSelectedItems2" type="hidden"/>
+     <a class="divlayercloseaction" href="javascript:closeLayer('divlayer2');" style="text-decoration: none;">
+      Close
+     </a>
+     <a class="divlayernoneaction" href="javascript:selectNone('2');" style="text-decoration: none;">
+      Select None
+     </a>
+     <a class="divlayerallaction" href="javascript:selectAll('2');" style="text-decoration: none;">
+      Select All
+     </a>
+     <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF2');" style="text-decoration: none;">
+      Save
+     </a>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="divlayer divlayerborder divlayerbackground" id="divlayer3">
+  <div>
+   <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+    <span id="lblWTS_3" style="font-weight: bold;">
+     Select item(s) to Search
+    </span>
+    <div class="divCF_3" id="divCF_3">
+    </div>
+   </div>
+   <div class="divlayerclosebar" style="width: 355px;">
+    <div>
+     <input id="hfSelectedItems3" name="hfSelectedItems3" type="hidden"/>
+     <a class="divlayercloseaction" href="javascript:closeLayer('divlayer3');" style="text-decoration: none;">
+      Close
+     </a>
+     <a class="divlayernoneaction" href="javascript:selectNone('3');" style="text-decoration: none;">
+      Select None
+     </a>
+     <a class="divlayerallaction" href="javascript:selectAll('3');" style="text-decoration: none;">
+      Select All
+     </a>
+     <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF3');" style="text-decoration: none;">
+      Save
+     </a>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="divlayer divlayerborder divlayerbackground" id="divlayer4">
+  <div>
+   <div style="height: 200px; width: 355px; overflow: scroll; background-color: #F5F5F5;">
+    <span id="lblWTS_4" style="font-weight: bold;">
+     Select item(s) to Search
+    </span>
+    <div class="divCF_4" id="divCF_4">
+    </div>
+   </div>
+   <div class="divlayerclosebar" style="width: 355px;">
+    <div>
+     <input id="hfSelectedItems4" name="hfSelectedItems4" type="hidden"/>
+     <a class="divlayercloseaction" href="javascript:closeLayer('divlayer4');" style="text-decoration: none;">
+      Close
+     </a>
+     <a class="divlayernoneaction" href="javascript:selectNone('4');" style="text-decoration: none;">
+      Select None
+     </a>
+     <a class="divlayerallaction" href="javascript:selectAll('4');" style="text-decoration: none;">
+      Select All
+     </a>
+     <a class="divlayersaveaction" href="javascript:saveSelectionToSession('CF4');" style="text-decoration: none;">
+      Save
+     </a>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<script type="text/javascript">
+ <!--if((typeof(PopCalendar)=='undefined')||(PopCalendar.majorVersion==null)||(PopCalendar.minorVersion==null))    alert('Unable to find script library "/PopCalendar2008/PopCalendarAjaxNet.js".\n\nTry placing this file manually');else if((PopCalendar.majorVersion<1)||((PopCalendar.majorVersion=1)&&(PopCalendar.minorVersion<0.1)))    alert('This page uses an incorrect version of PopCalendarAjaxNet.js.\n\nThe page expects version 1.0.1 or greater. The script library is ' + PopCalendar.majorVersion + '.' + PopCalendar.minorVersion + '.');else if((typeof(PopCalendarFunctions)=='undefined')||(PopCalendarFunctions.majorVersion==null)||(PopCalendarFunctions.minorVersion==null))    alert('Unable to find script library "/PopCalendar2008/PopCalendarFunctionsAjaxNet.js".\n\nTry placing this file manually');else if((PopCalendarFunctions.majorVersion<1)||((PopCalendarFunctions.majorVersion=1)&&(PopCalendarFunctions.minorVersion<0)))    alert('This page uses an incorrect version of PopCalendarFunctionsjaxNet.js.\n\nThe page expects version 1.0.0 or greater. The script library is ' + PopCalendarFunctions.majorVersion + '.' + PopCalendarFunctions.minorVersion + '.');// -->
+</script>
+<script type="text/javascript">
+ var calStartDateSearch=PopCalendar.newCalendar('calStartDateSearch');calStartDateSearch.imgDir='/PopCalendar2008/CSS/ADXPublic_Images/';calStartDateSearch.CssClass='ADXPublicStyle';calStartDateSearch.startAt=0;calStartDateSearch.todayString='Today is Sunday, March 10, 2019';calStartDateSearch.selectDateMessage='[Date]';calStartDateSearch.showWeekend=1;calStartDateSearch.centuryLimit=40;calStartDateSearch.forcedToday('2019-03-10','yyyy-mm-dd');calStartDateSearch.dayName=PopCal_enUS_DaysShort;calStartDateSearch.monthName=PopCal_enUS_MonthsFull;calStartDateSearch.monthNameShort=PopCal_enUS_MonthsShort;calStartDateSearch.initCalendar();__PopCalAddCalendarRange('txtStartDateSearch','2018-01-01',0,'','2020-12-31',0,'');
+</script>
+<script type="text/javascript">
+ var calEndDateSearch=PopCalendar.newCalendar('calEndDateSearch');calEndDateSearch.imgDir='/PopCalendar2008/CSS/ADXPublic_Images/';calEndDateSearch.CssClass='ADXPublicStyle';calEndDateSearch.startAt=0;calEndDateSearch.todayString='Today is Sunday, March 10, 2019';calEndDateSearch.selectDateMessage='[Date]';calEndDateSearch.showWeekend=1;calEndDateSearch.centuryLimit=40;calEndDateSearch.forcedToday('2019-03-10','yyyy-mm-dd');calEndDateSearch.dayName=PopCal_enUS_DaysShort;calEndDateSearch.monthName=PopCal_enUS_MonthsFull;calEndDateSearch.monthNameShort=PopCal_enUS_MonthsShort;calEndDateSearch.initCalendar();__PopCalAddCalendarRange('txtEndDateSearch','C:txtStartDateSearch',0,'','2020-12-31',0,'');
+</script>
+<!-- start footer include -->
+<!-- end column one -->
+<!-- end main content -->
+<div class="footerAddress">
+ <img src="https://www.sjsu.edu/sjsuhome/assets/images/btn_logo_footer_02_17.png">
+  <h3>
+   San Jose State University
+  </h3>
+  <p>
+   <a href="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=San+Jose+State+University,+San+Jose,+CA&amp;sll=37.0625,-95.677068&amp;sspn=51.04407,85.341797&amp;ie=UTF8&amp;hq=San+Jose+State+University&amp;hnear=San+Jose+State+University,+San+Jose,+Santa+Clara,+California+95112&amp;z=15&amp;iwloc=A">
+    One Washington Square, San Jose, CA 95192
+   </a>
+   , 408-924-1000
+  </p>
+  <p>
+   <a href="https://events.sjsu.edu/login.aspx">
+    Login
+   </a>
+  </p>
+ </img>
+</div>
+<!-- background image divs, opened in header -->
+<!-- <BGDIVS> -->
+<!-- /#container -->
+<!-- /#bg -->
+<!-- </BGDIVS> -->
+<!-- stop footer include -->
+

@@ -1,0 +1,573 @@
+http://ecology.wisc.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   Wisconsin Ecology
+  </title>
+  <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+  <link href="css/sf.css" rel="stylesheet" type="text/css"/>
+  <script src="js/jquery-1.7.2.min.js" type="text/javascript">
+  </script>
+  <script src="js/sf.js" type="text/javascript">
+  </script>
+  <script src="js/slides.jquery.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   //force the footer so chrome and other stupid browsers display correctly
+	$(window).bind("load", function() { 
+       
+	    var footerHeight = 0,
+    	    footerTop = 0,
+        	$footer = $("#indexFooter");
+           
+	    positionFooter();
+       
+    	function positionFooter() {
+	    	footerHeight = $footer.height();
+    	    footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
+       
+        	if ( (860) < $(window).height()) {
+        		$footer.css({position: "absolute", top: footerTop})
+	        } else {
+				$footer.css({position: "static"})
+        	}
+		}
+
+	    $(window).scroll(positionFooter).resize(positionFooter)
+		});
+
+	var currentheadline=1;
+	var eventtimer= setInterval(events,5000);
+		
+	$(document).ready(function() {
+		$("#0").css('display','block');
+		hideEvents();
+	});
+
+	// initialise plugins
+	jQuery(function(){
+		jQuery('ul.sf-menu').superfish({
+			autoArrows: false,
+			dropShadows: false
+		});
+			
+		$('#slides').slides({
+			preload: true,
+			play: 7000,
+			fadeSpeed: 200,
+			effect: 'fade',
+			pause: 5000,
+			hoverPause: true
+		});
+	});
+	
+	function events() {
+		//alert (document.getElementById("eventlink").href);
+		$('#headline'+currentheadline).fadeOut('fast', function() {
+			
+			currentheadline++;
+			
+			if (currentheadline>$("#headlines > div").size()) {
+				currentheadline=1;
+			}
+			
+			$('#headline'+currentheadline).fadeIn();
+			var showthis=$('#headline'+currentheadline).find('a').attr('href');
+			document.getElementById("eventlink").href=showthis;
+		});
+	}
+	
+	function hideEvents() {
+		var ct = $("#headlines > div").size()
+		
+		for (i=1;i<=ct;i++) {
+			$('#headline'+i).hide();
+		}
+		
+		$('#headline1').show();
+	}
+  </script>
+ </head>
+ <body>
+  <div id="page">
+   <div id="header">
+    <a href="http://www.wisc.edu/search/search.php" title="Search University of Wisconsin web pages">
+     <abbr title="University of Wisconsin">
+      UW
+     </abbr>
+     Search
+    </a>
+    |
+    <a href="https://login.wisc.edu/" title="Personal University of Wisconsin portal">
+     My
+     <abbr title="University of Wisconsin">
+      UW
+     </abbr>
+    </a>
+    |
+    <a href="http://www.today.wisc.edu/" title="University Calendar Events">
+     Calendar
+    </a>
+    |
+    <a href="http://map.wisc.edu/" title="University Campus Map">
+     Map
+    </a>
+    <div id="header-crest">
+     <a href="http://www.wisc.edu">
+      <img alt="UW Crest" height="46" src="/images/uw_crest.png" width="31"/>
+     </a>
+    </div>
+   </div>
+   <!-- close header -->
+   <div id="logo">
+    <a href="http://www.ecology.wisc.edu">
+     <img alt="Wisconsin Ecology Logo" height="98" src="/images/logo.png" width="639"/>
+    </a>
+   </div>
+   <div id="topNav">
+    <ul class="sf-menu">
+     <li>
+      <a href="/about/" title="About">
+       About
+      </a>
+      <ul>
+       <li>
+        <a href="/about/campus-partners.php">
+         Campus Partners
+        </a>
+       </li>
+       <li>
+        <a href="/about/get-involved.php">
+         Get Involved
+        </a>
+       </li>
+       <li>
+        <a href="/about/top-10-reasons-to-study-ecology-at-uw.php">
+         Top 10 Reasons to Study Ecology @ UW
+        </a>
+       </li>
+       <li>
+        <a href="/about/visiting-uw-madison.php">
+         Visiting UW-Madison
+        </a>
+       </li>
+       <li>
+        <a href="/about/contact.php">
+         Contact
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/faculty/" title="People">
+       People
+      </a>
+      <ul>
+       <li>
+        <a href="/faculty/index.php">
+         Faculty
+        </a>
+       </li>
+       <li>
+        <a href="/people/executive-committee.php">
+         Executive Committee
+        </a>
+       </li>
+       <li>
+        <a href="/people/graduate-students.php">
+         Graduate Students
+        </a>
+       </li>
+       <li>
+        <a href="/people/postdoc.php">
+         Postdocs and Research Staff
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/education/" title="Education">
+       Education
+      </a>
+      <ul>
+       <li>
+        <a href="/education/prospective-grad-students.php">
+         Prospective Grad Students
+        </a>
+       </li>
+       <!--<li><a href="/education/graduate-certificate.php">Graduate Certificate</a></li>-->
+       <li>
+        <a href="/education/courses.php">
+         Courses
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/news/" title="News &amp; Events">
+       News &amp; Events
+      </a>
+      <ul>
+       <li>
+        <a href="/news/index.php">
+         News
+        </a>
+       </li>
+       <li>
+        <a href="/events/index.php">
+         Events
+        </a>
+       </li>
+       <li>
+        <a href="/facultydinner/index.php">
+         Faculty Dinner
+        </a>
+       </li>
+       <li>
+        <a href="/jobfair/index.php">
+         Job Fair
+        </a>
+       </li>
+       <li>
+        <a href="/postersession/index.php">
+         Poster Session
+        </a>
+       </li>
+       <li>
+        <a href="/symposium/index.php">
+         Symposium
+        </a>
+       </li>
+       <li>
+        <a href="/symposium/archive.php">
+         Symposium Archive
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/jobs/index.php" title="Resources">
+       Resources
+      </a>
+      <ul>
+       <li>
+        <a href="/jobs/index.php">
+         Jobs
+        </a>
+       </li>
+       <!-- <li><a href="/announcements/index.php">Announcements</a></li> -->
+       <!-- <li><a href="/merchandise/index.php">Merchandise</a></li> -->
+      </ul>
+     </li>
+    </ul>
+   </div>
+   <div id="storyBox">
+    <ul class="pagination">
+    </ul>
+    <br/>
+    <div id="stories">
+     <div id="0">
+      <div class="caption">
+       <h1>
+        <a href="https://news.wisc.edu/driftless-reading-echoes-wisconsins-past-present-future/" target="_blank">
+         'Driftless' reading echoes Wisconsin's past, present, and future
+        </a>
+       </h1>
+       <p>
+        The geography and culture of Wisconsin's Driftless area were celebrated recently through the words of writers known and unknown, brought together by UW-Madison adjunct professor Curt Meine and Ph.D. student Keefe Keeley.
+       </p>
+      </div>
+      <div class="fullstory">
+       <a href="https://news.wisc.edu/driftless-reading-echoes-wisconsins-past-present-future/" target="_blank">
+        Full story
+       </a>
+      </div>
+     </div>
+     <div id="1">
+      <div class="caption">
+       <h1>
+        <a href="http://news.wisc.edu/uw-geographer-leads-initiative-against-sexual-harassment/" target="_blank">
+         UW geographer leads initiative against sexual harassment
+        </a>
+       </h1>
+       <p>
+        UW-Madison associate professor Erika Marín-Spiotta is partnering with scientific societies and geoscience faculty colleagues from institutions across the country to develop sexual harassment bystander intervention training for the earth, space and environmental sciences.
+       </p>
+      </div>
+      <div class="fullstory">
+       <a href="http://news.wisc.edu/uw-geographer-leads-initiative-against-sexual-harassment/" target="_blank">
+        Full story
+       </a>
+      </div>
+     </div>
+     <div id="2">
+      <div class="caption">
+       <h1>
+        <a href="http://news.wisc.edu/cultural-value-of-natural-world-doesnt-depend-only-on-species-diversity/" target="_blank">
+         Cultural value of natural world doesn't depend only on species diversity
+        </a>
+       </h1>
+       <p>
+        The natural world might most often be counted and measured through the resources we extract from it, or the intrinsic worth of biodiversity itself. But UW-Madison zoology Ph.D. student Rose Graves has focused her research on uncovering a hidden value - people's cultural ties to the land.
+       </p>
+      </div>
+      <div class="fullstory">
+       <a href="http://news.wisc.edu/cultural-value-of-natural-world-doesnt-depend-only-on-species-diversity/" target="_blank">
+        Full story
+       </a>
+      </div>
+     </div>
+     <div id="3">
+      <div class="caption">
+       <h1>
+        <a href="http://onwisconsin.uwalumni.com/features/the-disease-detective/" target="_blank">
+         The Disease Detective: UW researcher Tony Goldberg is on the hunt for deadly viruses
+        </a>
+       </h1>
+       <p>
+        If you are Tony Goldberg, the unknown agents of disease are right under your nose. Sometimes they are even in your nose. For Goldberg, the ever-lurking emissaries of infectious disease are the epidemiological...
+       </p>
+      </div>
+      <div class="fullstory">
+       <a href="http://onwisconsin.uwalumni.com/features/the-disease-detective/" target="_blank">
+        Full story
+       </a>
+      </div>
+     </div>
+     <div id="4">
+      <div class="caption">
+       <h1>
+        <a href="http://news.wisc.edu/uw-botanist-leads-petition-to-give-venus-flytrap-endangered-species-protection/" target="_blank">
+         UW botanist leads petition to give Venus flytrap endangered species protection
+        </a>
+       </h1>
+       <p>
+        UW-Madison ecologists have played a key role in a petition filed with the U.S. Fish and Wildlife Service Friday seeking emergency Endangered Species Act protection for the Venus flytrap.
+       </p>
+      </div>
+      <div class="fullstory">
+       <a href="http://news.wisc.edu/uw-botanist-leads-petition-to-give-venus-flytrap-endangered-species-protection/" target="_blank">
+        Full story
+       </a>
+      </div>
+     </div>
+     <div id="5">
+      <div class="caption">
+       <h1>
+        <a href="http://ls.wisc.edu/news/lake-mendota-a-scientific-biography" target="_blank">
+         Lake Mendota: a scientific biography
+        </a>
+       </h1>
+       <p>
+        From the window of his second-story office overlooking Lake Mendota, Steve Carpenter can see the UW rowing team running drills. On a warmer day, he might glimpse yellow-hulled "tech" boats, piloted by amateur sailors, lurching around the buoys. Like all lakes, this one holds the past, present and even the future in its depths.
+       </p>
+      </div>
+      <div class="fullstory">
+       <a href="http://ls.wisc.edu/news/lake-mendota-a-scientific-biography" target="_blank">
+        Full story
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- close stories -->
+   </div>
+   <!-- close storybox -->
+   <div id="slides">
+    <div class="slides_container">
+     <div>
+      <img height="300" src="images/index/driftless.jpg" width="1000"/>
+     </div>
+     <div>
+      <img height="300" src="images/index/1040-22.jpg" width="1000"/>
+     </div>
+     <div>
+      <img height="300" src="images/index/balsam.jpg" width="1000"/>
+     </div>
+     <div>
+      <img height="300" src="images/index/disease-detective.jpg" width="1000"/>
+     </div>
+     <div>
+      <img height="300" src="images/index/venus.jpg" width="1000"/>
+     </div>
+     <div>
+      <img height="300" src="images/index/carpenter3352.jpg" width="1000"/>
+     </div>
+    </div>
+    <!-- close slides_container-->
+   </div>
+   <!-- close slides -->
+   <img alt="shadow" height="50" src="images/shadow.png" width="1000">
+    <br/>
+    <div id="indexLeftBox">
+     <p class="boxTitle">
+      prospective students
+     </p>
+     <div class="boxText">
+      <p>
+       Interested in doing ecological research? You've come to the right place. UW-Madison offers a strong network ecological expertise.
+       <!--<div id="headlines">
+                    	
+                    </div><!-- close headlines -->
+      </p>
+     </div>
+     <!-- close boxtext -->
+     <p class="boxFooter">
+      <a href="education/index.php">
+       more info
+      </a>
+      <!--<p class="boxFooter"><a href="/news/details.php?e=" id="eventlink">Details</a></p>-->
+     </p>
+    </div>
+    <!-- close left box -->
+    <div id="indexMidBox">
+     <p class="boxTitle">
+      Wisconsin Ecology
+     </p>
+     <div class="boxText">
+      <p>
+       <img alt="People standing in water" height="91" src="images/photo.jpg" style="float: right; padding: 0 0 7px 7px;" width="143">
+        Wisconsin Ecology is the umbrella organization for all ecologists at UW-Madison. Our goal is to facilitate the work of ecologists at the university, and to represent their interests.
+       </img>
+      </p>
+     </div>
+     <!-- close box text -->
+     <p class="boxFooter">
+      <a href="about/index.php">
+       About Wisconsin Ecology
+      </a>
+     </p>
+    </div>
+    <!-- close indexmidbox -->
+    <div id="indexRightBox">
+     <p class="boxTitle">
+      Get Involved
+     </p>
+     <div class="boxText">
+      <p>
+       <a href="http://wisc.us2.list-manage.com/subscribe?u=43b4bdd797437f52a1070555d&amp;id=abe2c1b3c0" target="_blank">
+        Sign up
+       </a>
+       to receive weekly updates during the academic year with information on ecology related events and opportunities.
+      </p>
+     </div>
+     <p class="boxFooter">
+      <a href="about/get-involved.php" target="_blank">
+       learn more
+      </a>
+     </p>
+    </div>
+    <!-- close rightbox -->
+    <div id="push">
+    </div>
+   </img>
+  </div>
+  <!-- close page -->
+  <div id="indexFooter">
+   <div id="footerContainer">
+    <div id="footerNelson">
+     <h2>
+      Supported by
+     </h2>
+     <a href="http://nelson.wisc.edu">
+      <img alt="Nelson Institute Logo" height="62" src="/images/nelson.png" width="150"/>
+     </a>
+    </div>
+    <div class="footerOther">
+     <h2>
+      Contact Wisconsin Ecology
+     </h2>
+     <p>
+      40 Science Hall
+      <br/>
+      550 North Park Street
+      <br/>
+      Madison, WI 53706
+      <br/>
+      <a href="mailto:wisconsinecology@mailplus.wisc.edu">
+       wisconsinecology@mailplus.wisc.edu
+      </a>
+      <br/>
+      <br/>
+      <a href="http://www.facebook.com/pages/Wisconsin-Ecology/157791897588726?ref=stream" target="_blank">
+       <img alt="Visit our Facebook page" height="18" src="/images/fb.png" width="18"/>
+      </a>
+      <a href="https://twitter.com/WiscEcology" target="_blank">
+       <img alt="Visit our Twitter page" height="18" src="/images/twitter.png" width="18"/>
+      </a>
+     </p>
+    </div>
+    <div class="footerOther">
+     <h2>
+      Join Our Email List
+     </h2>
+     <p>
+      Want to know about all events,
+      <br/>
+      new courses, funding opportunities
+      <br/>
+      and upcoming conferences?
+      <br/>
+      <a href="http://wisc.us2.list-manage.com/subscribe?u=43b4bdd797437f52a1070555d&amp;id=abe2c1b3c0" target="blank">
+       Sign up for our weekly ecology email
+      </a>
+      .
+     </p>
+    </div>
+    <div class="footerOther">
+     <h2>
+      Get Your Ecology Attire
+     </h2>
+     <p>
+      Support Wisconsin Ecology and
+      <br/>
+      update your wardrobe with
+      <br/>
+      hats, tees and totes from the
+      <br/>
+      <a href="/merchandise/index.php">
+       Wisconsin Ecology store
+      </a>
+      .
+     </p>
+    </div>
+    <div class="footerOther">
+     <h2>
+      UW-Madison
+     </h2>
+     <p>
+      <a href="http://www.wisc.edu/">
+       University of Wisconsin-Madison
+      </a>
+      <br/>
+      <a href="http://wiscmail.wisc.edu/">
+       WiscMail
+      </a>
+      <br/>
+      <a href="http://www.today.wisc.edu/">
+       Calendar
+      </a>
+      <br/>
+      <a href="http://www.map.wisc.edu/">
+       Map
+      </a>
+      <br/>
+      <a href="http://my.wisc.edu/">
+       MyUW
+      </a>
+      <br/>
+      <a href="http://www.wisc.edu/search/search.php">
+       UW Search
+      </a>
+     </p>
+    </div>
+   </div>
+   <br style="clear: both;"/>
+   <p class="copyright">
+    Copyright © 2012 Board of Regents of the University of Wisconsin System
+   </p>
+  </div>
+  <!-- close footer -->
+ </body>
+</html>

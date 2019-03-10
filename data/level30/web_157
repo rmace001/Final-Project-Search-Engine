@@ -1,0 +1,803 @@
+http://libcal.library.upenn.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <!-- iid: 335 -->
+  <meta charset="utf-8"/>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+   <link href="/css170/LibCal_public.min.css" rel="stylesheet"/>
+   <link href="/css170/print.min.css" media="print" rel="stylesheet"/>
+   <title>
+    LibCal
+   </title>
+   <link href="/css170/fullcalendar.min.css" rel="stylesheet">
+    <style>
+     .bootstrap-select.btn-group .btn .filter-option { font-size: 90%;}
+    </style>
+    <script src="/js170/LibCal_public.min.js">
+    </script>
+    <script>
+     var springLang  = { Ge_Next: "Next", Ge_Prev: "Previous", eq_js_add_cart_btn: "Add to Cart", eq_js_add_cc_btn: "Add to Cart & Checkout", eq_js_add_eq_btn: "Add Equipment", eq_js_add_start: "All additional items must have a starting time of", eq_js_add_to_cart: "Add Item to Cart", eq_js_booking_summary_title: "Thank you!", eq_js_cart_tt: "Create a shopping cart with these space bookings, and go to equipment booking page to add more items to the cart.", eq_js_close: "Close", eq_js_date: "Change Return Date", eq_js_det_return: "Determining return time", eq_js_from: "From:", eq_js_from_det: "from", eq_js_go_to_date: "Go To Date", eq_js_isRequired: "is required!", eq_js_rem_pending: "Remove Pending Booking", eq_js_spacew_forb_multi: "Forbidden from booking same resource multiple times in a single booking.<br><br>Please only select sequential checkboxes.", eq_js_spacew_forb_single: "Forbidden from booking different resources in a single booking.", eq_js_to: "To:", eq_js_until_det: "until...", eq_start_over: "Make Another Booking", eq_unavail: "Unavailable/Padding", eq_your_book: "Your Booking" };
+    </script>
+    <script src="/js170/fullcalendar.min.js" type="text/javascript">
+    </script>
+    <script src="//use.typekit.net/afx1vrb.js">
+    </script>
+    <style>
+     #index_php {
+font-size: 14px;
+line-height: 150%;
+}
+#index_php.s-lc-public .s-lc-box-content h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+#index_php.s-lc-public .s-lc-box-content h4 {
+    font-size: 15px;
+    font-weight: bold;
+font-style:oblique;
+letter-spacing: .03em;
+margin-top: 1.8em;
+margin-bottom: .4em;
+}
+#pageheader {
+	background-color: #031b51;
+        background-image: url(//www.library.upenn.edu/images/libcal/caltop.png);
+	background-repeat:no-repeat;
+	height: 70px;
+	background-position: 141px 0;	
+  
+} 
+
+#s-lc-public-skiplink {
+       top: -400px;
+}
+#logo {
+	display: block;
+       position: relative;
+	z-index:3;
+	top:7px;
+	left: 2%;	
+	width: 107px;
+	height:39px;
+	 background-image: url("//www.library.upenn.edu/images/libcal/calpennlogo.png");
+	background-repeat:no-repeat;
+}
+.phone #logo {
+background-size: 80px auto;
+}
+#sitename {
+    color: #fff;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 1.3em;
+    font-style: oblique;
+    font-weight: normal;
+    left: 140px;
+    margin: 0.05em 0 0;
+    position: relative;
+    text-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    top: -0.33em;
+    width: 140px;
+    z-index: 30;
+}
+
+
+@media screen and (min-width: 500px) {
+    #sitename {
+    font-size: 2.3em;
+    left: 207px;
+    width: 270px;
+    }
+}
+
+
+.container {
+    width: auto;
+}
+#s-lc-public-bc .breadcrumb {
+    background-color: #e7e7e7;
+margin: 0 -15px;
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius:0;
+height: 29px;
+padding: 8px 15px 0 15px;
+background-image: url(//www.library.upenn.edu/images/libcal/calbreadcrumbs.png);
+	background-repeat:no-repeat;
+	background-position: 141px 0;	
+}
+/*new*/
+.lc_rm_b, .lc_rm_a, .lc_rm_t, .lc_rm_u {
+    height: 25px;
+}
+.s-lc-rm-rn {
+    height: 26px;
+    line-height: 25px;
+}
+.s-lc-rm-rntd {
+    height: 20px;
+}
+div#s-lc-rm-time-grid div#s-lc-rm-tg-cont.s-lc-rm-box table#s-lc-rm-tg-tb tbody tr td div#s-lc-rm-tg-scroll {
+	margin-left: .33em;}
+tr.s-lc-rm-cap-l-1 td div.s-lc-rm-ttip{
+	padding:0 .17em;font-size: 1.25em;margin-top:-3px;opacity:.8;
+}
+.lc_rm_t /*gold*/ {
+    background-image: url("http://www.library.upenn.edu/images/common/checktentativeborder.png"); 
+}
+.lc_rm_u, .lc_rm_b {
+     background-image: url("//www.library.upenn.edu/images/common/xbookedborder.png");   
+}
+.lc_rm_t,.lc_rm_u, .lc_rm_b {
+	background-repeat: no-repeat;
+	background-position: top right;
+}
+
+body .r-conf-showedup,
+body .s-lc-eq-r-conf-showedup,
+body .s-lc-eq-e-conf, 
+body .s-lc-eq-r-conf, 
+body .e-conf, 
+body .r-conf,
+body .s-lc-eq-checkout, 
+body .label-eq-unavailable,
+body  .s-lc-eq-period-booked {
+    background-color: #f00 !important;
+    border-color: #f00 !important;
+    background-image: url('https://libapps.s3.amazonaws.com/customers/220/images/libcal-x.png') !important;
+    background-repeat:no-repeat;
+}
+body .s-lc-eq-pending, 
+body .label-eq-pending, 
+body .s-lc-eq-period-pending {
+    background-color: #f6c94e !important;
+    border-color: #f6c94e !important;
+    background-image: url('https://libapps.s3.amazonaws.com/customers/220/images/libcal-check.png') !important;
+    background-repeat:no-repeat;
+}
+body .fc-content,
+body .fc-title {
+    background: transparent !important;
+ }
+
+.nav-tabs a.active, 
+.nav-tabs li.active > a, 
+.nav-tabs li:hover > a, 
+.nav-tabs li.active:hover > a, 
+.nav-tabs li > a:hover {
+    background: #6facd5;
+    
+    background: -moz-linear-gradient(top, #6facd5 0%, #5393c5 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6facd5), color-stop(100%,#5393c5));
+    background: -webkit-linear-gradient(top, #6facd5 0%,#5393c5 100%);
+    background: -o-linear-gradient(top, #6facd5 0%,#5393c5 100%);
+    background: -ms-linear-gradient(top, #6facd5 0%,#5393c5 100%);
+    background: linear-gradient(to bottom, #6facd5 0%,#5393c5 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6facd5', endColorstr='#5393c5',GradientType=0 );
+    border: 1px solid #2373a5;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(35, 115, 165);
+    color: #fff;
+    font-weight: normal;
+    text-decoration: none;
+    text-shadow: 0 1px 1px #3373a5;
+}
+.nav-tabs > li > a, 
+.nav-tabs > li > a {
+    border: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
+    padding: 6px 15px 5px;
+    color: #000;
+    letter-spacing: .02em;
+    background: #f2f2f2;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.4);
+    font-weight: normal;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border-bottom-color: transparent;
+    cursor: pointer;
+}
+.s-lc-box-title {
+    padding: 10px;
+    border: solid 1px #ccc;
+    border-bottom-style: solid;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.s-lc-color-bars-border {
+    border-color: #ccc;
+}
+.s-lc-color-bars {
+    background-image: none;
+    background-color: #e1e1e1;
+}
+.s-lc-box-title h2 {
+    font-size: 14px;
+    margin: 0;
+    line-height: normal;
+    color: #000!important;
+    font-weight: bold !important;
+}
+.s-lc-content-text ul{
+    margin-left:7px; 
+    padding-left: 8px
+}
+a, a:visited {
+    color: #0782c1;
+}
+
+#s-lc-box-2350-container {
+  display: block;
+}
+
+#s-lc-box-2352-container {
+  display: block;
+}
+
+#s-lc-box-28929-container {
+  display: none;
+}
+
+#s-lc-box-28930-container {
+  display: none;
+}
+
+#s-lc-box-2351-container {
+  display: none;
+}
+a#btn-new[href^="/reserve/dental"], a#btn-new[href^="/reserve/spaces/dental"] {
+    display:none;
+}
+    </style>
+    <script src="//libapps.s3.amazonaws.com/sites/231/include/titleModifier.js?v=1" type="text/javascript">
+    </script>
+    <script src="//libapps.s3.amazonaws.com/sites/231/include/libcalTabSwitcher.js" type="text/javascript">
+    </script>
+   </link>
+  </meta>
+ </head>
+ <body class="s-lc-public s-lc-public-page-1" id="index_php">
+  <div class="sr-only" title="Information for Screenreader Users">
+  </div>
+  <a class="alert-info" href="#s-lc-page-maincontent" id="s-lc-public-skiplink">
+   Skip to Main Content
+  </a>
+  <div id="s-lc-public-cust-header" role="banner">
+   <header id="pageheader">
+    <a href="http://www.library.upenn.edu" id="logo">
+    </a>
+    <div id="sitename">
+     Rooms &amp; Events
+    </div>
+    <link href="//www.library.upenn.edu/styles/libcal/libcal2015.css" rel="stylesheet"/>
+   </header>
+  </div>
+ </body>
+</html>
+<div class="container">
+ <div class="row" id="s-lc-public-bc">
+  <div class="col-md-12">
+   <ol class="breadcrumb">
+    <li>
+     <a href="http://www.library.upenn.edu/">
+      Penn Libraries
+     </a>
+    </li>
+    <li class="active">
+     LibCal
+    </li>
+   </ol>
+  </div>
+ </div>
+ <noscript>
+  <div class="alert alert-danger" id="noscript">
+   Your browser has javascript disabled. Without javascript some functions will not work.
+  </div>
+ </noscript>
+ <div class="s-lc-header row clearfix" id="s-lc-public-header">
+  <div class="col-md-12">
+   <div class="s-lc-public-header-text">
+    <h1 id="s-lc-public-header-title">
+     Penn Libraries Room and Event Calendars
+    </h1>
+   </div>
+  </div>
+ </div>
+ <div id="s-lc-page-maincontent" role="main">
+  <div class="s-lc-row row">
+   <div class="s-lc-column-top col-md-12" id="s-lc-page-column-0">
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-borderless s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-2157-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-2157">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        Overview
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-878">
+        <p>
+         Register for an event or reserve a group study space using the links below. Rooms can be reserved by current students, faculty and staff with an active PennKey. Please contact us with any
+         <a href="https://faq.library.upenn.edu/ask" target="_blank">
+          questions or comments
+         </a>
+         .
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-borderless s-lc-box-type-1 s-lc-box-position-2" id="s-lc-box-28924-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-28924">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        tabs
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-34242">
+        <div aria-expanded="true" aria-label="Guide Page Menu" class="tabs in" id="s-lg-guide-tabs" role="navigation">
+         <ul class="nav nav-tabs split-button-nav" role="menu">
+          <li class="active" id="seegroupstudies" onclick="showGroupStudies()" role="menuitem">
+           <a aria-label="Navigate to the page: Book a group study room" class="active" title="">
+            <span>
+             Book a group study room
+            </span>
+           </a>
+          </li>
+          <li id="seeseminars" onclick="showSeminars()" role="menuitem">
+           <a aria-label="Navigate to the page: Request a seminar room or a special use space" title="">
+            <span>
+             Request a seminar room or a special use space
+            </span>
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="s-lc-row row">
+   <div class="s-lc-page-column col-md-6" id="s-lc-page-column-1">
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-2350-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-2350">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        Book a group study room
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-34251">
+        <h3>
+         Biomedical Library
+        </h3>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/biomedlib">
+           Group study rooms
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/biomed">
+           floor plans
+          </a>
+         </li>
+        </ul>
+        <h3>
+         Education Commons
+        </h3>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/ecstudyrooms">
+           Group study rooms
+          </a>
+         </li>
+        </ul>
+        <h3>
+         <a href="https://libcal.library.upenn.edu/reserve/vpdlc">
+          Van Pelt-Dietrich Library Center
+         </a>
+        </h3>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/vpdground">
+           Undergraduate Study Center (ground floor)
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/ground">
+           floor plan
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/vpdthird">
+           3rd floor
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/third">
+           floor plan
+          </a>
+         </li>
+         <li>
+          <a href="http://libcal.library.upenn.edu/reserve/vpdfourth">
+           4th floor
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/fourth">
+           floor plan
+          </a>
+         </li>
+        </ul>
+        <h4>
+         Lippincott Library
+        </h4>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/lippgsr">
+           Group studies
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/fourth">
+           floor plan
+          </a>
+         </li>
+        </ul>
+        <h4>
+         Weigle Information Commons
+        </h4>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/wic">
+           Group study rooms &amp; data diner booths
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/wic">
+           floor plan
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-2351-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-2351">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        Request a seminar room or a special use space
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-1053">
+        <h3>
+         Education Commons
+        </h3>
+        <ul>
+         <li>
+          <a href="http://libcal.library.upenn.edu/booking/educomsem">
+           Seminar room
+          </a>
+         </li>
+         <li>
+          <a href="http://libcal.library.upenn.edu/reserve/ec-data-visualization">
+           Data visualization space
+          </a>
+         </li>
+        </ul>
+        <h3>
+         Fisher Fine Arts Library
+        </h3>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/fisher">
+           Seminar rooms
+          </a>
+         </li>
+        </ul>
+        <h3>
+         Van Pelt-Dietrich Library Center
+        </h3>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/butler">
+           Butler Assistive Technology Room
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/cc">
+           Collaborative Classroom
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/goldstein">
+           Goldstein Electronic Classroom
+          </a>
+         </li>
+         <li>
+          <a href="http://libcal.library.upenn.edu/reserve/glossberg">
+           Glossberg Recording Room
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/vr">
+           Virtual reality-enabled rooms (Oculus Rift or HTC Vive)
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/first">
+           1st floor plan
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/fourth">
+           4th floor plan
+          </a>
+         </li>
+         <li>
+          <a href="http://libcal.library.upenn.edu/reserve/studio">
+           Hechtman Recording Studio
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/third">
+           floor plan
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/areastudies">
+           Area Studies Seminar Rooms
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/third">
+           3rd floor plan
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/fifth">
+           5th floor plan
+          </a>
+         </li>
+        </ul>
+        <h4>
+         Lippincott Library
+        </h4>
+        <ul>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/lippsem">
+           Lippincott Seminar Room (room 242)
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/lippgsr">
+           Group studies
+          </a>
+         </li>
+        </ul>
+        <h4>
+         Weigle Information Commons
+        </h4>
+        <ul>
+         <li>
+          <a href="http://libcal.library.upenn.edu/reserve/wicsem">
+           Class of 1968 Seminar Room
+          </a>
+          |
+          <a href="https://www.library.upenn.edu/about/locations/floor-plans/vp/wic">
+           floor plan
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="s-lc-page-column col-md-6" id="s-lc-page-column-2">
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-2352-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-2352">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        Book the Assistive Technology Room
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-1054">
+        <p>
+         Located on the ground floor of the
+         <a href="http://www.library.upenn.edu/vanpelt/">
+          Van Pelt-Dietrich Library Center
+         </a>
+         and a collaborative effort between the
+         <a href="http://commons.library.upenn.edu/" target="_blank">
+          Weigle Information Commons
+         </a>
+         and the
+         <a href="http://www.vpul.upenn.edu/lrc/" target="_blank">
+          Weingarten Learning Resources Center (VPUL)
+         </a>
+         , the Butler Room has 24-hour access and is
+         <strong>
+          <a href="https://libcal.library.upenn.edu/reserve/butler">
+           reservable online
+          </a>
+          .
+         </strong>
+         After confirming your reservation, you can pick up the room key at the Van Pelt Circulation desk. We'll also consider special requests for recurrent bookings
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-28929-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-28929">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        These rooms can be booked through the Outlook calendar system
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-34252">
+        <p>
+         ...or by
+         <a href="mailto:arthurs2@upenn.edu">
+          emailing the Manager of Meetings &amp; Special Programs
+         </a>
+        </p>
+        <h3>
+         Van Pelt-Dietrich Library
+        </h3>
+        <ul>
+         <li>
+          Class of '55 (room 241)
+         </li>
+         <li>
+          Meyerson Conference Center (room 223)
+         </li>
+         <li>
+          Class of '54 Teaching Seminar Room (room 302) |
+          <a href="https://www.library.upenn.edu/using-libraries/spaces/class-of-1954-teaching-seminar-room">
+           About the room
+          </a>
+         </li>
+         <li>
+          Weigle Teaching Seminar Room (room 402) |
+          <a href="https://www.library.upenn.edu/using-libraries/spaces/weigle-teaching-seminar-room">
+           About the room
+          </a>
+         </li>
+         <li>
+          Film Studies Classroom (room 425)
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="s-lc-box-container s-lc-color-bars-border s-lc-box-type-1 s-lc-box-position-1" id="s-lc-box-28930-container">
+     <div class="s-lc-box s-lc-box-html" id="s-lc-box-28930">
+      <div class="s-lc-box-title s-lc-color-bars s-lc-color-bars-border">
+       <h2>
+        More teaching &amp; resource rooms
+       </h2>
+      </div>
+      <div class="s-lc-box-content clearfix">
+       <div class="s-lc-content-text s-lc-content cf" id="s-lc-content-text-34253">
+        <h3>
+         Biomedical Library
+        </h3>
+        <ul>
+         <li>
+          <a href="https://www.library.upenn.edu/using-libraries/spaces/ground-floor-conference-room">
+           Ground floor conference room
+          </a>
+          <br/>
+          Available for reservations on weeknights after 5pm and on weekends.
+          <br/>
+          For faculty, exceptions for daytime reservations fare possible, depending on room availability. Call
+          <a href="tel:2158984223">
+           215-898-4223
+          </a>
+         </li>
+        </ul>
+        <h3>
+         Van Pelt-Dietrich Library
+        </h3>
+        <h4 id="musicrooms" style="margin-top: .8em;">
+         Music Library
+        </h4>
+        <ul>
+         <li>
+          <a href="https://www.library.upenn.edu/using-libraries/spaces/bodek-seminar-room">
+           Bodek Seminar Room
+          </a>
+          |
+          <a href="mailto:lizavick@upenn.edu">
+           Contact lizavick@upenn.edu
+          </a>
+         </li>
+         <li>
+          <a href="https://www.library.upenn.edu/using-libraries/spaces/marian-anderson-music-study-center">
+           Marian Anderson Music Study Center
+          </a>
+          |
+          <a href="mailto:lizavick@upenn.edu">
+           Contact lizavick@upenn.edu
+          </a>
+         </li>
+         <li>
+          <a href="https://libcal.library.upenn.edu/reserve/glossberg">
+           Glossberg recording room (in the Ormandy Center)
+          </a>
+         </li>
+         <li>
+          <a href="http://libcal.library.upenn.edu/reserve/ormandygsr">
+           Small Group Film Viewing Rooms (in the Ormandy Center)
+          </a>
+         </li>
+        </ul>
+        <style type="text/css">
+         li {margin-top: .9rem;}
+        </style>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="s-lc-row row">
+   <div class="s-lc-column-bottom col-md-12" id="s-lc-page-column-4">
+   </div>
+  </div>
+ </div>
+ <div class="s-lc-public-footer row" id="s-lc-public-footer" role="contentinfo">
+  <div id="s-lc-public-footer-brand">
+   <span title="libcal-2">
+    Powered by
+   </span>
+   <a href="https://www.springshare.com">
+    Springshare
+   </a>
+   .
+  </div>
+  <div id="s-lc-public-footer-rights">
+   All rights reserved.
+  </div>
+  <div id="s-lc-footer-support-link">
+   <a href="mailto:webunit@lists.upenn.edu">
+    Report a tech support issue.
+   </a>
+  </div>
+  <div id="s-lc-public-footer-admin-links">
+   <a href="https://upenn.libapps.com/libapps/login.php?site_id=4153&amp;target=" id="s-lc-sign-in">
+    Login to LibApps
+   </a>
+  </div>
+ </div>
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29113922-3', 'auto');
+  ga('send', 'pageview');
+ </script>
+</div>
+<div id="s-lc-public-cust-footer">
+ <script type="text/javascript">
+  var url_href = window.location.href;
+var url_match = url_href.match(/appointment(s\?|\/+)/g);
+if (url_match!== null){
+    document.getElementById("s-lc-public-pd").style.display = "none";
+};
+ </script>
+</div>
+<script>
+ jQuery('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+						jQuery(".s-lc-calcon").fullCalendar("render");
+					});
+</script>
+<script>
+ hit('335','home','r');
+</script>
+

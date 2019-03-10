@@ -1,0 +1,373 @@
+http://whereis.mit.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta content="initial-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta charset="utf-8"/>
+  <meta content="Interactive map of the MIT campus." name="Description"/>
+  <noscript>
+   <meta content="0; URL=print.html" http-equiv="refresh"/>
+  </noscript>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+        </script><![endif]-->
+  <script type="text/javascript">
+   window.tilerev = "1551246097";
+  </script>
+  <link href="images/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="css/all.css?v=a414b1" rel="stylesheet"/>
+  <link href="css/mit_campus_map.print.css?v=a414b1" media="print" rel="stylesheet" type="text/css"/>
+  <script src="//maps.googleapis.com/maps/api/js?v=3.22&amp;sensor=false&amp;key=AIzaSyDYB1OchVYG-YtvMWRE2AEehuDf-XcgJHY" type="text/javascript">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript">
+  </script>
+  <script>
+   window.jQuery || document.write('<script src="lib/jquery-1.10.2.min.js">\x3C/script>')
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript">
+  </script>
+  <script>
+   window.jQuery.ui || document.write('<script src="lib/jquery-ui-1.9.2.min.js">\x3C/script>')
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.runtime.min.js" type="text/javascript">
+  </script>
+  <script>
+   window.Handlebars || document.write('<script src="lib/handlebars.runtime.min.js">\x3C/script>')
+  </script>
+  <title>
+   MIT Campus Map
+  </title>
+ </head>
+ <body>
+  <div id="container">
+   <nav id="navbar">
+    <div>
+     <span>
+      <a href="about.html" target="_blank">
+       about the map
+      </a>
+     </span>
+     <span>
+      <a href="print.html" target="_blank">
+       printable maps
+      </a>
+     </span>
+     <span>
+      <a href="directions.html" target="_blank">
+       directions to MIT
+      </a>
+     </span>
+     <span>
+      <a href="faq.html" target="_blank">
+       faq
+      </a>
+     </span>
+     <span>
+      <a href="http://web.mit.edu/campus-map/pdf/mit-accessibility-color-current.pdf" target="_blank">
+       accessibility
+      </a>
+     </span>
+     <span class="feedback">
+      <a href="about.html#feedback" id="feedbacklink">
+       feedback
+      </a>
+     </span>
+    </div>
+   </nav>
+   <div id="mainbody">
+    <div id="print_info">
+     For an optimized printout, please click the "print" link in the upper right corner of the map before printing.
+    </div>
+    <div id="title">
+     <header>
+      <h1>
+       <a href="http://web.mit.edu/">
+        <img alt="MIT" height="36" src="images/logo.gif" width="64"/>
+       </a>
+       <a class="title" href=".">
+        campus map
+       </a>
+      </h1>
+      <form action="#" id="searchform">
+       <input disabled="" id="query" type="text"/>
+       <input disabled="" id="submit_button" type="submit" value="Search"/>
+       <input disabled="" id="reset_button" onclick="whereis.reset()" type="reset" value="Reset Map"/>
+      </form>
+     </header>
+     <ul>
+      <li>
+       <a href="" id="printlink" title="Print this map">
+        Print
+       </a>
+      </li>
+      <li>
+       <a href="" id="maillink" title="Email link to this map">
+        Email
+       </a>
+      </li>
+      <li>
+       <a href="" id="sharelink" title="Link to this map">
+        Share
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div id="map_container">
+     <div id="maplink" style="display: none">
+      <div id="maplink_close">
+      </div>
+      <div>
+       Copy and paste link into
+       <strong>
+        email
+       </strong>
+       or
+       <strong>
+        IM
+       </strong>
+       :
+      </div>
+      <div>
+       <input id="maplink_box" readonly=""/>
+      </div>
+     </div>
+     <div id="map">
+      <div id="map_javascript_error">
+       <h1>
+        Please Wait
+       </h1>
+       <h3>
+        the bits are flowing slowly today
+       </h3>
+      </div>
+     </div>
+     <div id="streetview">
+     </div>
+     <div id="map_datasets">
+      <div class="mapsize_control">
+       <a href="#" id="expand" title="Expand map">
+        ⇠ Expand
+       </a>
+       <a href="#" id="collapse" style="display: none" title="Show Results">
+        Show Results ⇢
+       </a>
+      </div>
+      <div>
+       Show:
+      </div>
+      <div>
+       <a class="emergency_phones_toggle" href="">
+        <img alt="Emergency Phones" src="images/empty-ball.png"/>
+        Emergency Phones
+       </a>
+      </div>
+      <div>
+       <a class="public_art_toggle" href="">
+        <img alt="Public Art" src="images/empty-ball.png"/>
+        Public Art
+       </a>
+      </div>
+      <div>
+       <a class="accessible_entrances_toggle" href="">
+        <img alt="Accessible Entrances" height="13" src="images/hc-small-gray.png" width="13"/>
+        Accessible Entrances
+       </a>
+      </div>
+      <div>
+       <a class="bikes_toggle" href="">
+        <img alt="Bike Racks" height="13" src="images/bike-18-gray.png" width="13"/>
+        Bike Racks
+       </a>
+      </div>
+     </div>
+     <div class="search_results" id="search_results">
+      <div class="results_container" id="selr">
+       <div class="rheader">
+        <h4>
+         Selected Markers
+        </h4>
+        <div class="rreset">
+         <a href="">
+          Reset
+         </a>
+        </div>
+        <div style="clear: both">
+        </div>
+       </div>
+       <div id="selrlist">
+       </div>
+      </div>
+      <div class="results_container" id="searchr">
+       <div class="rheader">
+        <h4>
+         Search Results
+        </h4>
+        <div class="rreset">
+         <a href="">
+          Reset
+         </a>
+        </div>
+        <div style="clear: both">
+        </div>
+       </div>
+       <div id="searchrlist">
+       </div>
+      </div>
+      <section id="welcometext">
+       <p>
+        Welcome to the MIT Campus Map.
+        <br/>
+        You can
+        <strong>
+         pan
+        </strong>
+        the map by dragging it with your mouse.
+        <strong>
+         Enlarge
+        </strong>
+        (zoom) the map with the
+        <span class="mono">
+         +
+        </span>
+        and
+        <span class="mono">
+         -
+        </span>
+        controls.
+       </p>
+       <p>
+        Other things you can do:
+       </p>
+       <ul>
+        <li>
+         <strong>
+          Search
+         </strong>
+         the map, e.g.,
+         <div>
+          <a class="internal" href="?q=visitor+center" onclick="$('#query').val('visitor center').submit(); return false">
+           visitor center
+          </a>
+          <br/>
+          <a class="internal" href="?q=food" onclick="$('#query').val('food').submit(); return false">
+           food
+          </a>
+          <br/>
+          <a class="internal" href="?q=hotels" onclick="$('#query').val('hotels').submit(); return false">
+           hotels
+          </a>
+          <br/>
+          <a class="internal" href="?q=kresge+auditorium" onclick="$('#query').val('kresge auditorium').submit(); return false">
+           kresge auditorium
+          </a>
+          <br/>
+          <a class="internal" href="?q=building+46" onclick="$('#query').val('building 46').submit(); return false">
+           building 46
+          </a>
+         </div>
+        </li>
+        <li>
+         <strong>
+          Click
+         </strong>
+         anywhere on the campus to learn more about that location.
+         <strong>
+          <span id="clicktype">
+           Right-
+          </span>
+          click
+         </strong>
+         on the resulting marker to remove it.
+        </li>
+        <li>
+         <strong>
+          Share
+         </strong>
+         (or bookmark) and
+         <strong>
+          print
+         </strong>
+         maps using the links in the upper-right corner.
+        </li>
+        <li>
+         <strong>
+          Show
+         </strong>
+         additional landmarks:
+         <ul class="datasets">
+          <li>
+           <a class="emergency_phones_toggle" href="">
+            <img alt="Emergency Phones" src="images/empty-ball.png"/>
+            Emergency Phones
+           </a>
+          </li>
+          <li>
+           <a class="public_art_toggle" href="">
+            <img alt="Public Art" src="images/empty-ball.png"/>
+            Public Art
+           </a>
+          </li>
+          <li>
+           <a class="accessible_entrances_toggle" href="">
+            <img alt="Accessible Entrances" height="13" src="images/hc-small-gray.png" width="13"/>
+            Accessible Entrances &amp; Ramps
+           </a>
+          </li>
+          <li>
+           <a class="bikes_toggle" href="">
+            <img alt="Bike Racks" height="13" src="images/bike-18-gray.png" width="13"/>
+            Bike Racks
+           </a>
+          </li>
+         </ul>
+        </li>
+       </ul>
+       <br/>
+       Need more help? Read the
+       <a href="faq.html" target="_blank">
+        frequently asked questions
+       </a>
+       .
+      </section>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <div>
+     massachusetts institute of technology   •
+     <a href="/?q=MIT" onclick="$('#query').val('MIT').submit(); return false">
+      77 massachusetts avenue
+     </a>
+     •   cambridge, ma 02139   •   617-253-1000
+    </div>
+   </footer>
+  </div>
+  <div id="feedbackbox">
+   We would be delighted to hear your comments and suggestions. Please contact us at:
+   <br/>
+   <a href="mailto:campus-map@mit.edu">
+    campus-map@mit.edu
+   </a>
+  </div>
+  <div id="loading">
+   Loading...
+  </div>
+  <script src="all.js?v=a414b1">
+  </script>
+  <script type="text/javascript">
+   $(function () {whereis.init(desktopui, mapOptions);});
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-7440685-3', 'auto');
+      ga('create', 'UA-1592615-30', {'name':'mitsitewide'});
+      ga('send', 'pageview');
+      ga('mitsitewide.send', 'pageview');
+  </script>
+ </body>
+</html>
+<!-- MIT Campus Map - whereis.mit.edu - Copyright 2013 MIT -->
+

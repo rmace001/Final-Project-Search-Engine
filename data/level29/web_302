@@ -1,0 +1,980 @@
+https://tickets.dukeperformances.duke.edu
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>
+   Duke Performances
+  </title>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="width=device-width, height=device-height, initial-scale=1.0" name="viewport"/>
+  <meta content="" property="fb:app_id"/>
+  <meta content="Duke Performances" property="og:title"/>
+  <meta content="https://tickets.dukeperformances.duke.edu/Online//default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=7992C768-F68C-4B2B-8912-9643C99FA0CF&amp;BOparam::WScontent::loadArticle::context_id=undefined" property="og:url"/>
+  <meta content="" property="og:description"/>
+  <meta content="SITE 2 - Duke Performances Site" property="og:site_name"/>
+  <meta content="no" http-equiv="Imagetoolbar"/>
+  <link href="/ArticleMedia/Images/favicons/dp_favicon.png?_7.31.1" rel="apple-touch-icon"/>
+  <!-- inclusion of bootstrap specific CSS -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css?_7.31.1" rel="Stylesheet"/>
+  <!-- end of bootstrap specific CSS -->
+  <link href="../../content/images/branding/global.css?_=7.31.1" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../content/images/branding/global_IE.css?_7.31.1" type="text/css">
+<![endif]-->
+  <script language="Javascript">
+  </script>
+  <link href="/ArticleMedia/Files/CSS/SITE2-DP-CSS-08071702.css?_=7.31.1" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Check whether cookies are enabled.
+	document.cookie = "TestCookie=1";
+	var testCookie = document.cookie;
+
+	// Try to retrieve the value we just set.
+	if (testCookie.indexOf("TestCookie=1") == -1)
+	{
+		
+		    document.location = "error.asp?nocookie=";
+		
+    }
+	else
+		document.cookie = "TestCookie=;expires=Thu, 01-Jan-1970 00:00:00 GMT";
+  </script>
+  <script type="text/javascript">
+   function setRSVPButtons(response, eventCode)
+{
+                var url = '/' + eventCode + '/invited?user=' + response.authResponse.userID + '&access_token=' + response.authResponse.accessToken;
+                 FB.api(url, 'get',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred: " + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                        if (response.data[0].rsvp_status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else if (response.data[0].rsvp_status == "unsure")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                    }
+                });
+}
+function setRSVPButtonsLogin(eventCode)
+{
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                setRSVPButtons(response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        setRSVPButtons(response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+
+function rsvpToFBEvent(status, response, eventCode)
+{
+
+                var url = '/' + eventCode + '/' + status + '?access_token=' + response.authResponse.accessToken;
+
+                 FB.api(url, 'post',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred:" + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                      gaTrackEvent('Facebook', 'RSVP to Event Success');
+
+                        if (status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                        else if (status == "maybe")
+                        {
+                            var buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                    }
+                 });
+}
+
+function rsvpToFBEventLogin(status, eventCode) {
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                rsvpToFBEvent(status, response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        rsvpToFBEvent(status, response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+  </script>
+  <script src="../Common/browser_detect.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var genericConfirmationMessage = "Are you sure?";
+  var offerExpired = "Your order has expired.";
+  var admissionsExpired = "An offer on one of your tickets has expired.";
+  var alertHeaderText = "Attention";
+  var termsHeaderText = "Terms and Conditions";
+  var helpHeaderText = "HELP";
+  var sectionHeaderText = "More Information";
+
+  var okayButtonText = "OK";
+  var cancelButtonText = "Cancel";
+  var acceptButtonText = "Accept";
+  var declineButtonText = "Decline";
+  var closeButtonText = "Close";
+
+  var sTokenName = 'sToken';
+  var sToken = '1,0332d362,5c84b927,BB91E040-B0FC-44A3-893C-369D7EF61A91,8sS0eATyxVl68mJUBJqfQx/dBN0=';
+  </script>
+  <script src="../Common/online-jscript.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/online-navigation-jscript.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/widgetParent.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /*
+
+*/
+function displayMessage(onClickEvent)
+{
+
+}
+
+function tsOrderChanged( url )
+{
+  new showConfirmPopup( '', 'The current order has unsaved changes that may be lost. Continue anyway?', function () { document.location = url }, '' );
+}
+
+// Used for drop-down menu in IE 6
+<!--//--><![CDATA[//><!--
+function startList() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("menuTop");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.id=="menuTopItem") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+
+                node.onfocus=function(){
+                    this.className+=" over";
+                }
+
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+
+                node.onblur=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+//--><!]]>
+
+var plusApi_loaded = false;
+var twitterApi_loaded = false;
+var fbApi_loaded = false;
+
+    fbApi_loaded = true;
+
+    plusApi_loaded = true;
+
+    twitterApi_loaded = true;
+  </script>
+  <noscript>
+   <meta content="0; URL=error.asp" http-equiv="refresh"/>
+  </noscript>
+  <script type="text/javascript">
+   var longMonthsOfYear = new Array();
+longMonthsOfYear[ 0 ] = "January";
+longMonthsOfYear[ 1 ] = "February";
+longMonthsOfYear[ 2 ] = "March";
+longMonthsOfYear[ 3 ] = "April";
+longMonthsOfYear[ 4 ] = "May";
+longMonthsOfYear[ 5 ] = "June";
+longMonthsOfYear[ 6 ] = "July";
+longMonthsOfYear[ 7 ] = "August";
+longMonthsOfYear[ 8 ] = "September";
+longMonthsOfYear[ 9 ] = "October";
+longMonthsOfYear[ 10 ] = "November";
+longMonthsOfYear[ 11 ] = "December";
+  </script>
+  <script src="../Common/Widgets/articleWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/TabularSearchResultsWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/SearchFilterWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/LoginWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/VideoWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/Tk3DDVWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/CalendarWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/twitterWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googlePlusOneWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googleMapsWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookSocialWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookEvent.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/instagramFeedWebWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function loadLocalPage()
+{
+
+}
+
+var articleContext = {
+  searchHeaders : [ "Id", "Object Type", "Type", "Category", "Name", "Description", "Short Description", "Start Date", "End Date", "On Sale Date", "Sales Status", "Availability", "Available Number", "Keywords", "Additional Info", "Group", "Image 1", "Image 2", "thumbnail", "Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9", "Data 10", "Data 11", "Data 12", "Data 13", "Data 14", "Data 15", "Data 16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "Organization Short Description", "Sales Type", "Options", "Street", "City", "Province / State", "Postal Code", "Country", "Longitude", "Latitude", "Venue ID", "Venue Name", "Venue Description", "Venue Short Description", "Venue Group", "Venue Data 1", "Venue Data 2", "Venue Data 3", "Venue Data 4", "Venue Data 5", "Venue Data 6", "Venue Data 7", "Venue Data 8", "Venue Data 9", "Venue Data 10", "Venue Data 11", "Venue Data 12", "Series Name", "Minimum Price", "Maximum Price", "Upsell Article", "Add-on Article", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "Venue Organization Id", "Meta Description", "" ],
+  searchNames : [ "id", "object_type", "type", "category", "name", "description", "short_description", "start_date", "end_date", "on_sale_date", "sales_status", "availability_status", "availability_num", "keywords", "additional_info", "group", "image1", "image2", "thumbnail", "data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10", "data11", "data12", "data13", "data14", "data15", "data16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "organization_short_description", "sales_type", "options", "street", "city", "state", "zip", "country", "longitude", "latitude", "venue_id", "venue_name", "venue_description", "venue_short_description", "venue_group", "venue_data1", "venue_data2", "venue_data3", "venue_data4", "venue_data5", "venue_data6", "venue_data7", "venue_data8", "venue_data9", "venue_data10", "venue_data11", "venue_data12", "series_name", "min_price", "max_price", "upsell_article_id", "addon_article_id", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "organization_id", "meta_description", "" ],
+  searchResults : [ 
+    [ "6CF468C2-5E17-4EE4-8692-69C93F7B1986", "B", "normal", "", "Black Atlantic Festival 2019 All-Access Package", "Series Discount Price: $105  |  Regular Price $165 |  Admission to all 6 shows at Motorco & 1 at Baldwin Auditorium", "Black Atlantic Festival 2019 All-Access Package", "", "", "", "S", "", "", "", "https://dukeperformances.duke.edu/event-category/black-atlantic/", "", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BLACKATLANTIC_BUNDLE_2019.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","4","5"], "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+    [ "6F7E5313-2A6A-468A-B4A6-B770116489CF", "P", "General Admission", "", "DP_CT_LucindaWilliamsCharlesLloydTheMarvels_2018_1210_8P", "Presented by Duke Performances", "RESCHEDULED: Charles Lloyd & The Marvels + Lucinda Williams", "Mon, Mar 18, 2019 8:00 PM", "", "", "S", "L", "47", "JZ | DT", "http://dukeperformances.duke.edu/events/in-the-jazz-tradition-lucinda-williams-charles-lloyd-the-marvels-featuring-bill-frisell-greg-leisz-eric-harland-reuben-rogers/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CT_LucindaWilliamsCharlesLloydTheMarvels_FINAL_2018_1210_8P_450x250.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "309 West Morgan Street", "Durham", "NC", "27701", "USA", "", "", "A3D2E446-1323-4FF1-8AF7-F7CEEE543CAB", "Carolina Theatre: Duke Student Tickets", "The Carolina Theatre: Duke Student Tickets", "Carolina Theatre: Duke Student Tickets", "Other", "", "", "500", "", "", "", "", "", "", "", "", "", "1819_DP_CarolinaTheatre_Res_BA", "$10.00", "$10.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "C72B3F21-C2D1-448F-AD0F-88DD94626220", "P", "General Admission", "", "DP_CT_AnoushkaShankar_2019_0321_8P", "Presented by Duke Performances", "Anoushka Shankar", "Thu, Mar 21, 2019 8:00 PM", "", "", "S", "G", "70", "INT", "http://dukeperformances.duke.edu/events/anoushka-shankar/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CT_AnoushkaShankar_2019_0321_8P_450x250.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "309 West Morgan Street", "Durham", "NC", "27701", "USA", "", "", "A3D2E446-1323-4FF1-8AF7-F7CEEE543CAB", "Carolina Theatre: Duke Student Tickets", "The Carolina Theatre: Duke Student Tickets", "Carolina Theatre: Duke Student Tickets", "Other", "", "", "500", "", "", "", "", "", "", "", "", "", "1819_DP_CarolinaTheatre_Res_BA", "$10.00", "$10.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "D8CB73A4-2FB2-4858-86E5-6B2AE9B2CF14", "P", "Reynolds: 1 Tier - No Pit Seating", "", "DP_ManualCinemaNoBlueMemoriesGwendolynBrooks_2019_0322_8P", "Presented by Duke Performances", "Manual Cinema: \'No Blue Memories: The Life of Gwendolyn Brooks\'", "Fri, Mar 22, 2019 8:00 PM", "", "", "S", "E", "385", "DPTH | AIR", "http://dukeperformances.duke.edu/events/manual-cinema-no-blue-memories-the-life-of-gwendolyn-brooks/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_ManualCinemaNoBlueMemoriesGwendolynBrooks_2019_0322_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "\'No Blue Memories\'", "MANUAL CINEMA", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","2","3","4"], "", "", "", "", "", "", "", "CB3D88EB-C2C9-4C8D-A436-BFA4D0EE4751", "Reynolds Industries Theater", "Reynolds Industries Theater", "Reynolds Industries Theater", "R.J. Reynolds Industries Theater", "", "", "", "", "", "", "Reynolds_Pit_1314_Detailed.png", "", "Reynolds_Nopit_1314_Detailed.png", "", "", "", "1819_DP_Reynolds_RES", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "A2BF59DC-F58C-4A76-9090-5F6F2799CCBA", "P", "Baldwin: 1 Tier Subscription Renewals", "", "DP_CAS_BA_EliasStringQuartet_2019_0323_8P", "Presented by Duke Performances", "Elias String Quartet", "Sat, Mar 23, 2019 8:00 PM", "", "", "S", "L", "123", "EC | CLS", "http://dukeperformances.duke.edu/events/elias-string-quartet-2/", "Duke Performances: Chamber Arts", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CAS_BA_EliasStringQuartet_2019_0323_8P_450x250.jpg", "", "", "Duke Performances", "presents", "Chamber Arts Series", "", "Elias String Quartet", "", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","2","3","4"], "", "", "", "", "", "", "", "8CF3009C-6FC7-4CDC-A71F-B71E35C14915", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Baldwin_RES", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "1819ClassicalPerf-bs", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "BB4F5E56-BDB1-405F-A393-89AEFE0E8F7F", "P", "Reynolds: 1 Tier - No Pit Seating", "", "DP_ManualCinemaNoBlueMemoriesGwendolynBrooks_2019_0323_8P", "Presented by Duke Performances", "Manual Cinema: \'No Blue Memories: The Life of Gwendolyn Brooks\'", "Sat, Mar 23, 2019 8:00 PM", "", "", "S", "E", "403", "DPTH | AIR", "http://dukeperformances.duke.edu/events/manual-cinema-no-blue-memories-the-life-of-gwendolyn-brooks/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_ManualCinemaNoBlueMemoriesGwendolynBrooks_2019_0322_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "\'No Blue Memories\'", "MANUAL CINEMA", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","2","3","4"], "", "", "", "", "", "", "", "CB3D88EB-C2C9-4C8D-A436-BFA4D0EE4751", "Reynolds Industries Theater", "Reynolds Industries Theater", "Reynolds Industries Theater", "R.J. Reynolds Industries Theater", "", "", "", "", "", "", "Reynolds_Pit_1314_Detailed.png", "", "Reynolds_Nopit_1314_Detailed.png", "", "", "", "1819_DP_Reynolds_RES", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "B9435AF9-35BE-4E5F-8C55-042BE218F836", "P", "General Admission", "", "DP_BlackAtlanticDerekGripper_2019_0325_8P", "Presented by Duke Performances", "BLACK ATLANTIC: Derek Gripper & Africa Strings", "Mon, Mar 25, 2019 8:00 PM", "", "", "S", "E", "198", "INT", "http://dukeperformances.duke.edu/events/black-atlantic-derek-gripper-africa-strings/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BlackAtlanticDerekGripper_2019_0325_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "DEREK GRIPPER & AFRICA STRINGS", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "723 Rigsbee Avenue", "", "", "", "", "", "", "110DDEB6-8A1C-4C29-BDAD-097CA14D21A2", "Motorco Music Hall", "Motorco Music Hall", "Motorco Music Hall", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Motorco_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "087C4C9B-DDA2-4F10-B149-20101817554C", "P", "General", "", "DP_BlackAtlanticFatoumataDiawara_2019_0326_8P", "Presented by Duke Performances", "BLACK ATLANTIC: Fatoumata Diawara", "Tue, Mar 26, 2019 8:00 PM", "", "", "S", "G", "140", "INT", "http://dukeperformances.duke.edu/events/black-atlantic-fatoumata-diawara/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BlackAtlanticFatoumataDiawara_2019_0326_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "FATOUMATA DIAWARA", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "723 Rigsbee Avenue", "", "", "", "", "", "", "110DDEB6-8A1C-4C29-BDAD-097CA14D21A2", "Motorco Music Hall", "Motorco Music Hall", "Motorco Music Hall", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Motorco_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "0AB0EB4B-D5D2-423A-A648-E2B84DE6ECDD", "P", "General", "", "DP_BlackAtlanticNouraMintSeymali_2019_0327_8P", "Presented by Duke Performances", "BLACK ATLANTIC: Noura Mint Seymali", "Wed, Mar 27, 2019 8:00 PM", "", "", "S", "E", "274", "INT", "http://dukeperformances.duke.edu/events/black-atlantic-noura-mint-seymali/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BlackAtlanticNouraMintSeymali_2019_0327_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "NOURA MINT SEYMALI", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "723 Rigsbee Avenue", "", "", "", "", "", "", "110DDEB6-8A1C-4C29-BDAD-097CA14D21A2", "Motorco Music Hall", "Motorco Music Hall", "Motorco Music Hall", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Motorco_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "DC1DDA70-8EF6-4C5F-AF69-163FAA43D1BF", "P", "General", "", "DP_BlackAtlanticDaymeArocena_2019_0328_8P", "Presented by Duke Performances", "BLACK ATLANTIC: Daymé Arocena", "Thu, Mar 28, 2019 8:00 PM", "", "", "S", "L", "128", "INT", "http://dukeperformances.duke.edu/events/black-atlantic-dayme-arocena/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BlackAtlanticDaymeArocena_2019_0328_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "DAYME AROCENA", "", "*$20.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "723 Rigsbee Avenue", "", "", "", "", "", "", "110DDEB6-8A1C-4C29-BDAD-097CA14D21A2", "Motorco Music Hall", "Motorco Music Hall", "Motorco Music Hall", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Motorco_GA", "$10.00", "$20.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "E2953100-6656-4CAB-B677-C401C771944B", "P", "1 Tier", "", "DP_BlackAtlanticDafnisPrietoBigBand_2019_0329_8P", "Presented by Duke Performances", "BLACK ATLANTIC: Dafnis Prieto Big Band", "Fri, Mar 29, 2019 8:00 PM", "", "", "S", "E", "380", "INT", "http://dukeperformances.duke.edu/events/black-atlantic-dafnis-prieto-big-band/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BlackAtlanticTalNational_2019_0329_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "DAFNIS PRIETO BIG BAND", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","2","3","4"], "", "", "", "", "", "", "", "8CF3009C-6FC7-4CDC-A71F-B71E35C14915", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Baldwin_RES", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "16772194-1D0E-4C3B-AD9C-F95EDEB55233", "P", "General Admission", "", "DP_BlackAtlanticTheCampbellBrothers_2019_0329_8P", "Presented by Duke Performances", "BLACK ATLANTIC: The Campbell Brothers", "Fri, Mar 29, 2019 8:00 PM", "", "", "S", "E", "191", "INT", "https://dukeperformances.duke.edu/events/black-atlantic-the-campbell-brothers/", "Duke Performances", "/content/Images/1819/LOGO1/LOGO1_DP_TheCampbellBrothers_2019_0329_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "THE CAMPBELL BROTHERS", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "723 Rigsbee Avenue", "", "", "", "", "", "", "110DDEB6-8A1C-4C29-BDAD-097CA14D21A2", "Motorco Music Hall", "Motorco Music Hall", "Motorco Music Hall", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Motorco_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "90C972B8-C6C2-491F-85A8-00EF46347954", "P", "General", "", "DP_CiompiQuartetConcertNo2SusanFancherSaxophone_2019_0330_8P", "Presented by Duke Performances", "Ciompi Quartet Concert No. 2 feat. Susan Fancher, Saxophone", "Sat, Mar 30, 2019 8:00 PM", "", "", "S", "E", "542", "CQS", "http://dukeperformances.duke.edu/events/ciompi-quartet-concert-no-2-with-susan-fancher-saxophone/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CiompiQuartetConcertNo2SusanFancherSaxophone_2019_0330_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "Concert No. 2 Feat. Susan Fancher, Saxophone", "THE CIOMPI QUARTET", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "", "", "NC", "", "USA", "", "", "91269B5E-C799-4E2C-BF62-65F7D100035A", "Baldwin Auditorium GA", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Baldwin_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "F5F3F6DF-1E07-49E1-A121-49394956E15B", "P", "General", "", "DP_BlackAtlanticDaniloBrito_2019_0330_8P", "Presented by Duke Performances", "BLACK ATLANTIC: Danilo Brito", "Sat, Mar 30, 2019 8:00 PM", "", "", "S", "E", "258", "INT", "http://dukeperformances.duke.edu/events/black-atlantic-danilo-brito/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_BlackAtlanticDaniloBrito_2019_0330_8P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "BLACK ATLANTIC", "DANILO BRITO", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "723 Rigsbee Avenue", "", "", "", "", "", "", "110DDEB6-8A1C-4C29-BDAD-097CA14D21A2", "Motorco Music Hall", "Motorco Music Hall", "Motorco Music Hall", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Motorco_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "D2F1557D-E9F1-4E7D-AC89-F929ACBB9381", "P", "General", "", "DP_Habibi_2019_0404_8P", "Presented by Duke Performances", "Habibi @ The Pinhook", "Thu, Apr 4, 2019 8:00 PM", "", "", "S", "E", "166", "RPS | INT", "http://dukeperformances.duke.edu/events/habibi-building-bridges-muslims-in-america/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_Habibi_2019_0404_8P_450x250.jpg", "", "", "Duke Performances", "presents", "", "Part of \'Building Bridges: Muslims in America\'", "HABIBI", "", "The Pinhook", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "", "", "", "", "", "", "", "1BC1E979-FE57-4842-8357-83BB97FE504A", "z_*See Title for Venue", "*See Title for Venue", "*See Title for Venue", "Other", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_SeeEventDescription_GA", "$10.00", "$15.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "D019BF16-64E4-4327-A70F-9E292CBE1381", "P", "Baldwin: 1 Tier Subscription Renewals", "", "DP_PRS_BA_PiotrAnderszewski_2019_0406_8P", "Presented by Duke Performances", "Piotr Anderszewski, piano", "Sat, Apr 6, 2019 8:00 PM", "", "", "S", "L", "151", "EC | CLS", "http://dukeperformances.duke.edu/events/piotr-anderszewski-piano-2/", "Duke Performances: Piano Recital", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_PRS_BA_PiotrAnderszewski_2019_0406_8P_450x250.jpg", "", "", "Duke Performances", "presents", "Piano Recital Series", "", "Piotr Anderszewski, piano", "", "", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","2","3","4"], "", "", "", "", "", "", "", "8CF3009C-6FC7-4CDC-A71F-B71E35C14915", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Baldwin_RES", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "1819ClassicalPerf-bs", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "45256216-21EE-4F0B-BC1D-B8DB2280145B", "P", "General", "", "DP_CT_AngeliqueKidjoRemaininLight_2019_0408_8P", "Presented by Duke Performances", "Angélique Kidjo \'Remain in Light\'", "Mon, Apr 8, 2019 8:00 PM", "", "", "S", "L", "51", "INT | RPS", "http://dukeperformances.duke.edu/events/angelique-kidjo-remain-in-light/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CT_AngeliqueKidjoRemaininLight_2019_0408_8P_450x250.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "309 West Morgan Street", "Durham", "NC", "27701", "USA", "", "", "A3D2E446-1323-4FF1-8AF7-F7CEEE543CAB", "Carolina Theatre: Duke Student Tickets", "The Carolina Theatre: Duke Student Tickets", "Carolina Theatre: Duke Student Tickets", "Other", "", "", "500", "", "", "", "", "", "", "", "", "", "1819_DP_CarolinaTheatre_Res_BA", "$10.00", "$10.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "711D2948-2616-4DBB-9DD5-4DC8A0CB5436", "P", "General", "", "DP_CT_TheGloaming_2019_0410_8P", "Presented by Duke Performances", "The Gloaming", "Wed, Apr 10, 2019 8:00 PM", "", "", "S", "L", "75", "INT", "http://dukeperformances.duke.edu/events/the-gloaming-2/", "Duke Performances", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CT_TheGloaming_2019_0410_8P_450x250.jpg", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "309 West Morgan Street", "Durham", "NC", "27701", "USA", "", "", "A3D2E446-1323-4FF1-8AF7-F7CEEE543CAB", "Carolina Theatre: Duke Student Tickets", "The Carolina Theatre: Duke Student Tickets", "Carolina Theatre: Duke Student Tickets", "Other", "", "", "500", "", "", "", "", "", "", "", "", "", "1819_DP_CarolinaTheatre_Res_BA", "$10.00", "$10.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "F3BE553D-BACA-470C-AA86-5D178F0B0B13", "P", "Baldwin: 2 Tier Subscription Renewals", "", "DP_CAS_BA_ArtemisQuartet_2019_0413_8P", "Presented by Duke Performances", "Artemis Quartet", "Sat, Apr 13, 2019 8:00 PM", "", "", "S", "L", "154", "EC | CLS", "http://dukeperformances.duke.edu/events/artemis-quartet-2/", "Duke Performances: Chamber Arts", "/ArticleMedia/Images/1819/LOGO1/LOGO1_DP_CAS_BA_ArtemisQuartet_2019_0413_8P_450x250.jpg", "", "", "Duke Performances", "presents", "Chamber Arts Series", "", "Artemis Quartet", "", "", "*$48.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","2","3","4"], "", "", "", "", "", "", "", "8CF3009C-6FC7-4CDC-A71F-B71E35C14915", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "Baldwin Auditorium", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_Baldwin_RES", "$10.00", "$48.00", "", "", "", "", "", "", "", "", "", "1819ClassicalPerf-bs", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ],
+    [ "47C7CB83-3C92-4DDC-8ED4-8661C2CCF275", "P", "General Admission", "", "DP_JasonMoranandTheBandwagon_2019_0418_8P", "Presented by Duke Performances", "Jason Moran & The Bandwagon", "Thu, Apr 18, 2019 8:00 PM", "", "", "S", "E", "135", "", "http://dukeperformances.duke.edu/events/jason-moran-the-bandwagon/", "Duke Performances", "/content/Images/1819/LOGO1/LOGO1_DP_JasonMoranTheBandwagon_2018_0913_7P_450x250.jpg", "", "", "", "", "Duke Performances", "presents", "JASON MORAN & THE BANDWAGON", "", "Durham Fruit & Produce", "*$25.00*", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duke Performances", [], ["1","3","4"], "", "", "", "", "", "", "", "8D1E204C-D20D-43BC-A451-15B6A38D5892", "zz_*See Title for Venue", "*See Title for Venue", "*See Title for Venue", "Duke Campus Mixed Use Venues", "", "", "", "", "", "", "", "", "", "", "", "", "1819_DP_SeeEventTitle_GA", "$10.00", "$25.00", "", "", "", "", "", "", "", "", "", "", "Public", "EA4D6BD0-42A6-4B2C-84D4-7EF50D266D81", "", "" ]
+  ],
+  searchFilters : [ 
+    { name : "object_type_filter", label : "Type Filter", className : "objectTypeFilterList", clearFilterLabel : "Clear Type Filter", selectedValue : "", values : [  ]  },
+    { name : "month_filter", label : "Month Filter", className : "monthFilterList", clearFilterLabel : "Clear Month Filter", selectedValue : "", values : [  ]  },
+    { name : "city_filter", label : "City Filter", className : "cityFilterList", clearFilterLabel : "Clear City Filter", selectedValue : "", values : [  ]  },
+    { name : "venue_filter", label : "Venue Filter", className : "venueFilterList", clearFilterLabel : "Clear Venue Filter", selectedValue : "", values : [  ]  },
+    { name : "category_filter", label : "Category Filter", className : "categoryFilterList", clearFilterLabel : "Clear Category Filter", selectedValue : "", values : [  ]  },
+    { name : "organization_short_description_filter", label : "Organization Filter", className : "organizationShortDescriptionFilterList", clearFilterLabel : "Clear Organization Filter", selectedValue : "", values : [  ]  },
+    { name : "filter1", label : "Filter 1", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter2", label : "Filter 2", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter3", label : "Filter 3", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter4", label : "Filter 4", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent1", label : "Filter Parent 1", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent2", label : "Filter Parent 2", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter1", label : "Multi Filter 1", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter2", label : "Multi Filter 2", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  }
+  ],
+  searchLabels: { performances: "Events", date: "Date", unavailable_message: "No Tickets Required", sold_out_message: "Sold Out", on_sale_message: "Ticket Sales", to_be_determined_message: "Not Available Online", next: "»", previous: "«", avail_excellent: "Excellent", avail_good: "Good", avail_limited: "Limited", avail_sold_out: "Sold Out", promo_item: "This item is available with a promocode", buy_seats_message: "Buy", buy_bundle_message: "Buy", buy_item_message: "Buy", buy_gift_message: "Donate", buy_storedvalueitem_message: "Buy", view_article_message: "View", upsell_seats_message: "Upgrade", upsell_bundle_message: "Upgrade", upsell_item_message: "Upgrade", upsell_gift_message: "Upgrade", upsell_storedvalueitem_message: "Upgrade", upsell_popup_title: "Interested in Upgrading?", addon_seats_message: "Select", addon_bundle_message: "Select", addon_item_message: "Select", addon_gift_message: "Select", addon_storedvalueitem_message: "Select", price_title: "Price", availability_title: "Availability", active_promo_codes: "Active promotions:", promo_code_item_title: "This item is available with a promocode", has_promo_code: "false", brand_path: "../../content/images/branding/" }, 
+  searchSUMO: { availability_access: "false", mapSelect_access: "true" }, 
+  pagination: { current_page: "1", page_size: "20", total_pages: "4" },
+  loginLabels: { pageTarget: "maintainAccount.asp", loginBoxClass: "login-required", forgotPassword: "true", formLoginName: "", accountLogin: "true" }, 
+  contextId: "", 
+  articleId: "7992C768-F68C-4B2B-8912-9643C99FA0CF", 
+  articleSearchId: "", 
+  salesType: "P",
+  sToken: "1,0332d362,5c84b927,BB91E040-B0FC-44A3-893C-369D7EF61A91,8sS0eATyxVl68mJUBJqfQx/dBN0="
+ };
+
+createSearchMapping(articleContext);
+
+tsAddLoadEvent(function() {
+    setCalendarWidgetDisplayMonth();
+    drawWidgets(articleContext);
+    insertToken(articleContext);
+});
+
+function setCalendarWidgetDisplayMonth()
+{
+    // If a date has been selected from the calendar widget, we will receive a 'search_from' parameter.
+    // Pass this back to the widget so that it redisplays the month that was previously visible
+    
+}
+  </script>
+  <script type="text/javascript">
+   function doGAClicks(selectedItem) {
+        //do nothing
+    };
+
+    function gaTrackEvent(category, action) {
+        //do nothing
+    };
+  </script>
+ </head>
+ <body lang="en" onload='startList();loadLocalPage(); displayMessage(""); displayOnOfferTimeout();' onunload="closeChildren()">
+  <div class="spinner" id="spinner">
+  </div>
+  <script>
+   var spinnerDelayTimeout;
+    
+    var showSpinner = function(){};
+    var spinnerElement = document.querySelector('body')
+
+
+
+    var spinnerDelay = 3;
+    
+
+    function stopSpinner() {
+        spinnerElement.classList.remove('show-spinner');
+        cancelSpinnerTimeouts();
+        expandSpinner();
+    }
+
+    function startSpinner() {
+        expandSpinner();
+        spinnerElement.classList.add('show-spinner');
+    }
+    
+    
+    function cancelSpinnerTimeouts() {
+        clearTimeout(spinnerDelayTimeout);
+    }
+    
+    function expandSpinner() {
+        spinnerElement.classList.remove('minimize-spinner');
+    }
+    
+    function minimizeSpinner() {
+        spinnerElement.classList.add('minimize-spinner');
+    }
+    
+    // stop spinner if a JS error occurred
+    window.addEventListener('error', stopSpinner);
+    
+    // Mimimize spinner if clicked
+    spinnerElement.addEventListener('click', minimizeSpinner);
+
+    // Shows the spinner if page takes long to load
+    (showSpinner = function() {
+        if (!document.querySelector('#popupDiv')) {
+            spinnerDelayTimeout = setTimeout(startSpinner, spinnerDelay*1000);
+        }
+    })();
+  </script>
+  <div id="fb-root">
+  </div>
+  <script>
+   var FBAppID = 'branding/home-screen-icon.png'
+    var FBVersion = 'v2.8';
+    
+    window.fbAsyncInit = function () {
+
+        
+        FB.init({
+            appId: FBAppID,
+            status: true,
+            cookie: true,
+            frictionlessRequests: true,
+            xfbml: true,
+            oauth: true,
+            version: FBVersion
+        });
+        FB.Canvas.setAutoGrow();
+        FB.Canvas.getPageInfo(function (info) {
+	        FB.Canvas.scrollTo(0, 0);
+	    });
+        fbinit();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.defer = true;
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+
+    function fblogin(thisForm, callback) {
+        // check if callback is defined and a function
+        var callback = callback && typeof callback === 'function' ? callback : function() {};
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                callback(thisForm, response);
+                thisForm.submit();
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        callback(thisForm);
+                        thisForm.submit();
+                    }
+                }, { scope: 'rsvp_event,user_friends' });
+            }
+        });
+
+        return false;
+    }
+  </script>
+  <script>
+   var events = new Array();
+    var eventCounter = 0;
+
+    function fbinit() {
+        for (evnt in events) {
+            setRSVPButtonsLogin(events[evnt]);
+        }
+    };
+  </script>
+  <div id="header">
+   <div class="header-content container">
+    <a class="hidden-xs hidden-sm" href="https://tickets.dukeperformances.duke.edu/online/article/dphome" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <img alt="Duke Performances" src="/ArticleMedia/Images/Branding/DPSITE/S2_DP_1819_HEADER.jpg" style="max-width: 1130px; width: 100%; height: auto;"/>
+    </a>
+    <a class="hidden-md hidden-lg" href="https://tickets.dukeperformances.duke.edu/online/article/dpall1718" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <img alt="Duke Performances" src="/ArticleMedia/Images/Branding/DPSITE/S2_DP_1819_HEADER_MOBILE.jpg" style="width: 100; height: 100; margin-top: 15px;"/>
+    </a>
+   </div>
+   <a class="menu-toggle menu-button btn btn-default">
+    <span class="glyphicon glyphicon-align-justify">
+    </span>
+   </a>
+   <a class="menu-toggle sidebar-button btn btn-default">
+    <span class="glyphicon glyphicon-shopping-cart">
+    </span>
+   </a>
+  </div>
+  <div class="content-wrapper">
+   <div id="menu">
+    <div class="menuContainer main-nav">
+     <ul class="nav clearfix" id="menuTop">
+      <li class="menuTopItem " id="menuTopItem0">
+       <a class="menu_item menu-link" href="https://dukeperformances.duke.edu/" tabindex="1" target="_blank" title="HOME">
+        <span class="menu-label">
+         HOME
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem1">
+       <a class="menu_item menu-link" href="https://dukeperformances.duke.edu/calendar/" tabindex="2" target="_blank" title="CALENDAR">
+        <span class="menu-label">
+         CALENDAR
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem2">
+       <a class="menu_item menu-link" href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=3C1CCE14-1204-431B-BFE7-6DE86ED44EB6&amp;menu_id=0EFDA884-533D-4065-A7CE-8EE24758DFF9" tabindex="3" title="PACKAGES">
+        <span class="menu-label">
+         PACKAGES
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem3">
+       <a class="menu_item menu-link" href="https://dukeperformances.duke.edu/venues/" tabindex="4" target="_blank" title="VENUES">
+        <span class="menu-label">
+         VENUES
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem4">
+       <a class="menu_item menu-link" href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=AB3830AE-D261-4366-9FF7-2C3FFDA8F5E4&amp;menu_id=BB32F384-28D2-4C22-A2D5-32B85542B4EA" tabindex="5" title="SUPPORT">
+        <span class="menu-label">
+         SUPPORT
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem5">
+       <a class="menu_item menu-link" href="maintainAccount.asp?menu_id=BBB4C0C2-0B13-4F6C-82FA-AE8E9C655678" tabindex="6" title="MY ACCOUNT">
+        <span class="menu-label">
+         MY ACCOUNT
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem" id="menuTopItem-help">
+       <a class="menu_item menu-link" href="javascript:var jsPop=new showInformationPopup( 'HELP', 'loadArticle.asp?BOparam::WScontent::loadArticle::article_id=F8103D8C-7EA0-4B4B-A37E-9DE398B93107' )" tabindex="7" title="HELP">
+        HELP
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- customer/order information -->
+   <div class="customer-options" id="customer-utilities">
+    <!--ORDER DETAILS BOX-->
+    <div id="orderInfo">
+     <div id="customer-order-info">
+      <div class="customer-greeting">
+       <span class="greeting-message">
+        Order for
+       </span>
+       <span class="greeting-name">
+        Guest
+       </span>
+      </div>
+      <div class="customer-order shopping-cart-details order-message ">
+       <span id="orderInfoEmptyMessage">
+        Your shopping cart is empty.
+       </span>
+      </div>
+      <div class="customer-buttons">
+       <div class="cart-callout">
+        <a class="shopping-cart-link btn btn-default" href="shoppingCart.asp?sToken=1%2C0332d362%2C5c84b927%2CBB91E040-B0FC-44A3-893C-369D7EF61A91%2C8sS0eATyxVl68mJUBJqfQx%2FdBN0%3D" id="orderInfoCartLink" tabindex="8" title="Shopping Cart">
+         <span>
+          Shopping Cart
+         </span>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menuContainer utility-nav">
+     <ul class="nav" id="utility-menu">
+     </ul>
+    </div>
+   </div>
+   <!-- CONTENT START -->
+   <div id="content">
+    <div class="container">
+     <div class="bodyDetails" id="default">
+      <div class="search-box" id="searchBox">
+       <form action="default.asp" class="form-inline" id="searchItems" method="post">
+        <input class="form-inline" name="sToken" type="hidden" value="1,0332d362,5c84b927,BB91E040-B0FC-44A3-893C-369D7EF61A91,8sS0eATyxVl68mJUBJqfQx/dBN0="/>
+        <input name="BOset::WScontent::SearchCriteria::venue_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::city_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::month_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::object_type_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::category_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_from" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_to" type="hidden" value=""/>
+        <input name="doWork::WScontent::search" type="hidden" value="1"/>
+        <input name="BOparam::WScontent::search::article_search_id" type="hidden" value="F0AF7F8F-ADC6-4304-BA8C-CD05127AA603"/>
+        <ul class="list-unstyled">
+         <li class="item-search-keyword">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Search Events
+           </span>
+           <input class="form-control" id="BOset::WScontent::SearchCriteria::search_criteria" name="BOset::WScontent::SearchCriteria::search_criteria" tabindex="9" title="Search Events" type="text" value=""/>
+          </label>
+         </li>
+         <li class="item-search-start-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Event Dates
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_from::0" name="BOset::WScontent::SearchCriteria::search_from" tabindex="10" title="Event Dates" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_from::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_from::0", "0", "true", "sToken", "1,0332d362,5c84b927,BB91E040-B0FC-44A3-893C-369D7EF61A91,8sS0eATyxVl68mJUBJqfQx/dBN0=");' title="Show date picker" type="button">
+             </button>
+            </div>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-end-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            to
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_to::0" name="BOset::WScontent::SearchCriteria::search_to" tabindex="11" title="to" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_to::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_to::0", "0", "true", "sToken", "1,0332d362,5c84b927,BB91E040-B0FC-44A3-893C-369D7EF61A91,8sS0eATyxVl68mJUBJqfQx/dBN0=");' title="Show date picker" type="button">
+             </button>
+            </div>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-submit">
+          <input class="btn btn-default" name="Go" onclick="doGAClicks('Search')" tabindex="12" type="submit" value="Go"/>
+         </li>
+        </ul>
+       </form>
+      </div>
+      <div class="articles ">
+       <!-- top scrolling features included -->
+       <div class="article-body-container">
+        <div class="article-container main-article-body">
+         <!--<h1 style="text-align: center;line-height:36px;">The Duke University Box Office will be closed on Monday, January 21 in observance of Martin Luther King, Jr. Day.<br />
+We will resume normal business hours on Tuesday, January 22 at 11 AM.<br />
+We apologize for any inconvenience.</h1>-->
+         <h1 xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+          UPCOMING EVENTS
+         </h1>
+         <div id="avWidget_7992C768-F68C-4B2B-8912-9643C99FA0CF_IDD4XHXB5HXYDIPQTHUI2PG2N50MLKCD1KKYMK4CYYPH0LTAJFLSC" name="avWidget" xmlns:av="http://www.audienceview.com/xml/email/" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+          <script type="text/javascript">
+           registerWidget( "SearchWebWidget2", "avWidget_7992C768-F68C-4B2B-8912-9643C99FA0CF_IDD4XHXB5HXYDIPQTHUI2PG2N50MLKCD1KKYMK4CYYPH0LTAJFLSC", {
+  "SearchWebWidget2": "",
+  
+  "css_class": "",
+  
+  "css_id": "",
+  
+  "css_style": "",
+  
+  "showPrice": "",
+  
+  "showLegend": "",
+  
+  "title": "",
+  
+  "showNoResults": "true",
+   "1": "1"});
+          </script>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!--\\ .bodyDetails -->
+   </div>
+   <!--\\ .container -->
+  </div>
+  <!--\\ #content -->
+  <div id="footer">
+   <div class="footer-content container">
+    <!--Footer Start-->
+    <div id="footer" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <!-- DP EDITED HTML -->
+     <div class="footer-content container">
+      <div class="footer-top">
+       <h3>
+        In Durham, at Duke, Essential &amp; Extraordinary.
+       </h3>
+      </div>
+      <div class="footer-widgets">
+       <div class="container">
+        <div class="left">
+         <div class="duke-performances">
+          <h3>
+           Duke University Box Office
+          </h3>
+          <a class="tel" href="tel:9196844444" shape="rect">
+           919-684-4444
+          </a>
+          <a href="mailto:TICKETS@DUKE.EDU" shape="rect">
+           TICKETS@DUKE.EDU
+          </a>
+         </div>
+         <div class="address">
+          <p>
+           BRYAN UNIVERSITY CENTER
+           <br clear="none"/>
+           125 SCIENCE DRIVE, BOX 90940
+           <br clear="none"/>
+           DURHAM, NC 27708
+          </p>
+          <a href=" https://goo.gl/maps/HYQ7gtXkqDK2" shape="rect" target="_blank">
+           <span>
+            Google Map
+           </span>
+          </a>
+         </div>
+         <div class="buy-tickets">
+          <a class="button" href="HTTPS://TICKETS.DUKEPERFORMANCES.DUKE.EDU" shape="rect">
+           Buy Tickets
+          </a>
+         </div>
+         <br clear="none"/>
+         <span class="red">
+          <a class="button" href="http://dukeperformances.duke.edu/25" shape="rect" style="text-decoration:none">
+           $25 Tickets
+          </a>
+         </span>
+        </div>
+        <div class="right">
+         <div class="duke-performances">
+          <h3>
+           Duke Performances
+          </h3>
+          <a class="tel" href="tel:9196603356" shape="rect">
+           919-660-3356
+          </a>
+          <a href="mailto:PERFORMANCES@DUKE.EDU" shape="rect">
+           PERFORMANCES@DUKE.EDU
+          </a>
+         </div>
+         <div class="address">
+          <p>
+           2010 CAMPUS DRIVE, BOX 90757
+           <br clear="none"/>
+           DURHAM, NC 27708
+          </p>
+          <a href="https://www.google.com/maps/place/2010+Campus+Dr,+Durham,+NC
+
++27705/@36.0000745,-78.9302076,17z/data=!4m5!3m4!1s0x89ace4029f6d8a41:0xf4ff4491d6503c8d!8m2!
+
+3d36.0002622!4d-78.9286373" shape="rect" target="_blank">
+           <span>
+            Google Map
+           </span>
+          </a>
+         </div>
+         <div class="social-links">
+          <h4>
+           Connect with us:
+          </h4>
+          <ul>
+           <li>
+            <a href="https://www.facebook.com/dukeperformances/" shape="rect">
+             <img alt="Facebook" src="/ArticleMedia/Images/Branding/DPSITE/dp_facebook.jpg"/>
+            </a>
+           </li>
+           <li>
+            <a href="https://twitter.com/dukeperformance" shape="rect">
+             <img alt="twitter" src="/ArticleMedia/Images/Branding/DPSITE/dp_twitter.jpg"/>
+            </a>
+           </li>
+           <li>
+            <a href="https://www.instagram.com/dukeperformance/" shape="rect">
+             <img alt="instagram" src="/ArticleMedia/Images/Branding/DPSITE/dp_instagram.jpg"/>
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="footer-copyrights">
+      <p>
+       Copyright © 2018 Duke Performances
+      </p>
+     </div>
+     <!-- END DP EDITED HTML -->
+    </div>
+    <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+   </div>
+  </div>
+  <!--\\ .content-wrapper -->
+  <div class="black_overlay" id="fade">
+  </div>
+  <script type="text/javascript">
+   // Defines the configuration options, these must be set before you load
+        // the plusone.js file.
+        
+        window.___gcfg = {
+            parsetags: 'explicit'
+        };
+
+        (function () {
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+  </script>
+  <script defer="defer" id="twitter-wjs" src="https://platform.twitter.com/widgets.js" type="text/javascript">
+  </script>
+  <!-- inclusion of bootstrap.js and jquery -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <script src="/lib/jquery/jquery.min.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js?_=7.31.1" type="text/javascript">
+  </script>
+  <!-- end of bootstrap.js and jquery -->
+  <!-- contains bootstrap specific function declarations -->
+  <script src="/lib/bootstrap/js/bootstrap-functions.js?_=7.31.1" type="text/javascript">
+  </script>
+  <!-- Logout Handler -->
+  <script>
+   $(document).ready(function() {
+    var body = $("body");
+    
+    body
+    .on("logged-out", function(e) {
+        var targetPage = "default.asp?";
+        window.location.assign("login.asp?targetPage="+encodeURIComponent(targetPage));
+    });
+    
+    // on pressing Enter key on an anchor trigger click
+    $("a").keypress(function(e){
+      if(e.keyCode == 13){
+        $(this).trigger("click");
+      }
+    });
+    
+    // When page is loaded make sure the Page Load Spinner is not shown
+    if (spinnerDelayTimeout) {
+        cancelSpinnerTimeouts();
+    }
+    
+    body.removeClass("show-spinner");
+    
+    // Show spinner when form submitted or link clicked
+    var onSubmit;
+    $("form").each(
+      //Trigger the spinner after any other onsubmit functions for the form
+      function(index)
+      {
+        onSubmit = $(this).attr("onsubmit");
+        onSubmit && onSubmit != "" ? onSubmit += ";" : onSubmit = "";
+        $(this).attr("onsubmit", onSubmit + "showSpinner()");
+      }
+    );
+    
+    $("a").click(function(e) {
+      var href = $(this).attr("href") || "";
+      var target = $(this).attr("target") || "";
+      
+      if ((target == "" || /^(_self|_top|_parent)/.test(href)) && href != "" && !/^(#|javascript:|mailto:|file:)/.test(href))
+        showSpinner();
+    });
+    
+    
+});
+  </script>
+  <!-- CONTENT END -->
+ </body>
+</html>
+<script>
+ $(function(){
+
+    // "Continue Shopping" and "Look for other events" buttons to redirect back to Brochure page user came from
+    $("a[name=continue-shopping], a[name=continueShopping], input[name=startOver], a[name=error-StartOver], input[name=error-StartOver]").on("click", function(e) {
+      var returnTo = getCookie('returnTo');
+      if(returnTo){
+        e.preventDefault();
+        deleteCookie('returnTo');
+        window.location.href = returnTo;
+      }
+    })
+
+    // "New Order" button to redirect to EIF home page
+    $("input.new-order,input[name=cancel-order]").on("click", function(e){
+         var returnTo = getCookie('returnTo');
+          if(returnTo){
+            e.preventDefault();
+            $("#popupDiv_okayButton").on("click", function(e){
+               $.ajax({
+                 url: 'clearOrder.asp',
+                 complete: function() {
+                    deleteCookie('returnTo');
+                    window.location.href = returnTo;           
+                 }
+                });
+               
+             });
+          }
+    })
+  });
+
+//adding the returnTo to the cookie
+  var returnTo = "";
+
+  if (returnTo) {
+      var reffA = document.createElement('a');
+      reffA.href = returnTo;
+
+    if(reffA.host != window.location.host) {
+      setCookie("returnTo", returnTo, 1);
+    }
+  }
+
+  /*
+    *****************************************************
+    Cookie methods
+    *****************************************************
+  */
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function deleteCookie(cname) {
+      setCookie(cname, "", -1);
+  }
+</script>

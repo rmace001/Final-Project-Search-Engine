@@ -1,0 +1,675 @@
+http://cal.uncg.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+  <title>
+   Web Login Service
+  </title>
+  <link href="/idp/rincuncg/css/lib.min.css" rel="stylesheet" type="text/css"/>
+  <link href="//fast.fonts.com/cssapi/7860d9f9-615c-442e-ab9b-bd4fe7794024.css?ver=3.9.2" media="all" rel="stylesheet" type="text/css"/>
+  <link href="/idp/rincuncg/css/common.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/idp/rincuncg/css/lib.min.css" media="print" rel="stylesheet" type="text/css"/>
+  <link href="/idp/rincuncg/css/horizontal-nav.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/idp/rincuncg/css/print.min.css" media="print" rel="stylesheet" type="text/css"/>
+  <!-- <link href="/idp/css/common.css?v=1.5.2" rel="stylesheet" type="text/css" /> -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="/idp/rincuncg/js/common.min.js" type="text/javascript">
+  </script>
+  <script src="/idp/rincuncg/js/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="/idp/js/common.js?v=1.5.1" type="text/javascript">
+  </script>
+  <!--[if lt IE 9]>
+<script type="text/javascript" src="/idp/rincuncg/js/lt-ie-9.min.js"></script>
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="/idp/rincuncg/css/lt-ie-9.min.css"/>
+<![endif]-->
+  <link href="/idp/css/main.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   $(document).ready(function() {
+
+                if (typeof document.forms['login_form'] !== 'undefined')
+                {
+                    $("form-group").removeClass('has-feedback').removeClass('has-error');
+                }
+                startList();
+            });
+  </script>
+ </head>
+ <body id="home">
+  <ul id="uncgAccessNav">
+   <li>
+    <a href="#startcontent">
+     Skip to Main Content
+    </a>
+   </li>
+  </ul>
+  <div class="header-wrapper gradient " id="header-wrapper">
+   <nav class="navbar container" id="nav-container" role="navigation">
+    <div class="header-subwrapper">
+     <div class="navbar-header row">
+      <div id="header-left">
+       <a class="logo-uncg" href="http://www.uncg.edu/" title="The University of North Carolina at Greensboro">
+        <span class="sr-only">
+         The University of North Carolina at Greensboro
+        </span>
+       </a>
+      </div>
+      <div class="col-xs-12 col-sm-7" id="header-right">
+       <div class="row" id="header-extras">
+        <div class="hidden-xs col-sm-6 col-md-5 col-sm-pull-1 col-md-pull-0" id="searchContainer">
+         <form action="//search.uncg.edu/s/search.html" class="navbar-form navbar-right search-form" id="uncgSearch" method="get">
+          <div class="input-group">
+           <input aria-label="search string" class="form-control input-sm" id="q" name="query" placeholder="Search UNCG" type="text"/>
+           <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" id="searchSub" title="Submit Search" type="submit">
+             Go
+            </button>
+           </span>
+           <input name="collection" type="hidden" value="uncg-search"/>
+          </div>
+          <div aria-labelledby="searchTarget" id="searchInContainer" role="radiogroup">
+           <span class="sr-only" id="searchTarget">
+            Search Target
+           </span>
+           <label>
+            <input aria-checked="true" checked="checked" id="eduSearch" name="scope" type="radio" value="">
+             UNCG.edu
+            </input>
+           </label>
+           <label>
+            <input aria-checked="false" class="hidden" id="siteSearch" name="scope" type="radio" value=""/>
+            this site
+           </label>
+          </div>
+          <div class="col-xs-2 search-control visible-xs">
+           <button class="btn search-submit main-nav" type="submit">
+            <span class="sr-only">
+             Submit Search
+            </span>
+            <span class="glyphicon glyphicon-play">
+            </span>
+           </button>
+          </div>
+         </form>
+        </div>
+        <div class="hidden-xs col-sm-5 col-md-4" id="tools-nav">
+         <ul id="navlist-tools">
+          <li>
+           <a class="icon-iSpartan" href="http://ispartan.uncg.edu/" title="iSpartan Email">
+            <span class="sr-only">
+             iSpartan Email
+            </span>
+           </a>
+          </li>
+          <li>
+           <a class="icon-uncgenie" href="https://ssb.uncg.edu/" title="UNCGenie System">
+            <span class="sr-only">
+             UNCGenie System
+            </span>
+           </a>
+          </li>
+          <li>
+           <a class="icon-directory" href="https://directory.uncg.edu" title="UNCG Directory">
+            <span class="sr-only">
+             UNCG Directory
+            </span>
+           </a>
+          </li>
+          <li>
+           <a class="icon-lms" href="https://uncg.instructure.com/" title="Canvas at UNCG">
+            <span class="sr-only">
+             Canvas &amp;commat UNCG
+            </span>
+           </a>
+          </li>
+         </ul>
+        </div>
+        <div class="col-xs-12" id="mobileToggle">
+         <button class="dropdown-toggle main-nav btn hidden-md hidden-lg" data-toggle="dropdown" id="navMenu1" type="button">
+          <span class="sr-only">
+           Toggle navigation
+          </span>
+          <span class="glyphicon glyphicon-th-list">
+          </span>
+         </button>
+         <button class="navbar-toggle main-nav btn hidden-sm hidden-md hidden-lg" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+          <span class="sr-only">
+           Toggle search
+          </span>
+          <span class="glyphicon glyphicon-search">
+          </span>
+         </button>
+         <ul aria-labelledby="navMenu1" class="dropdown-menu unit-nav hidden-md hidden-lg" role="menu">
+          <li class="hidden-sm">
+           <div class="col-xs-3">
+            <div class="mobileIcons">
+             <a class="icon-iSpartan" href="http://ispartan.uncg.edu/" title="iSpartan Email">
+              <span class="sr-only">
+               iSpartan Email
+              </span>
+             </a>
+            </div>
+           </div>
+           <div class="col-xs-3">
+            <div class="mobileIcons">
+             <a class="icon-uncgenie" href="https://ssb.uncg.edu/" title="UNCGenie System">
+              <span class="sr-only">
+               UNCGenie System
+              </span>
+             </a>
+            </div>
+           </div>
+           <div class="col-xs-3">
+            <div class="mobileIcons">
+             <a class="icon-directory" href="https://directory.uncg.edu" title="UNCG Directory">
+              <span class="sr-only">
+               UNCG Directory
+              </span>
+             </a>
+            </div>
+           </div>
+           <div class="col-xs-3">
+            <div class="mobileIcons">
+             <a class="icon-lms" href="https://uncg.instructure.com/" title="Canvas at UNCG">
+              <span class="sr-only">
+               Canvas &amp;commat UNCG
+              </span>
+             </a>
+            </div>
+           </div>
+          </li>
+          <li class="audience">
+           <a href="http://www.uncg.edu/future-students/">
+            Future Students
+           </a>
+          </li>
+          <li class="audience">
+           <a href="http://www.uncg.edu/current-students/">
+            Current Students
+           </a>
+          </li>
+          <li class="audience">
+           <a href="http://www.uncg.edu/faculty-staff/">
+            Faculty &amp; Staff
+           </a>
+          </li>
+          <li class="audience">
+           <a href="http://alumni.uncg.edu//">
+            Alumni
+           </a>
+          </li>
+          <li class="audience">
+           <a href="http://communityengagement.uncg.edu/">
+            Community &amp; Friends
+           </a>
+          </li>
+          <li class="audience visible-xs visible-sm">
+           <a href="http://www.uncg.edu/campus-links/" id="cllink">
+            CAMPUS LINKS
+           </a>
+          </li>
+          <li class="visible-xs visible-sm" id="site-nav-m">
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="visible-md visible-lg row" id="header-audience-nav">
+        <ul id="navlist-audience">
+         <li>
+          <a href="http://www.uncg.edu/future-students/">
+           Future Students
+          </a>
+         </li>
+         <li>
+          <a href="http://www.uncg.edu/current-students/">
+           Current Students
+          </a>
+         </li>
+         <li>
+          <a href="http://www.uncg.edu/faculty-staff/">
+           Faculty &amp; Staff
+          </a>
+         </li>
+         <li>
+          <a href="http://alumni.uncg.edu/">
+           Alumni
+          </a>
+         </li>
+         <li class="noBorder">
+          <a href="http://communityengagement.uncg.edu/">
+           Community &amp; Friends
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="navbar-collapse collapse col-xs-12">
+       <form action="//search.uncg.edu/s/search.html" class="navbar-form navbar-right search-form visible-xs" method="get" role="search">
+        <div class="form-group search-group">
+         <div class="col-xs-10 search-control">
+          <label class="sr-only" for="bsq">
+           Search UNCG
+          </label>
+          <input name="collection" type="hidden" value="uncg-search"/>
+          <input autofocus="autofocus" class="form-control search-box" id="bsq" name="query" placeholder="Search UNCG" type="text">
+          </input>
+         </div>
+         <div class="col-xs-2 search-control">
+          <button class="btn search-submit main-nav" type="submit">
+           <span class="sr-only">
+            Search Submit
+           </span>
+           <span class="glyphicon glyphicon-play">
+           </span>
+          </button>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+     <div class="row" id="header-bottom">
+      <div class="hidden-xs hidden-sm col-md-12" id="header-yellow-nav">
+       <ul id="navlist-yellow">
+        <li class="noBorder current" id="cl">
+         <a href="http://www.uncg.edu/campus-links/" id="campusLinks">
+          CAMPUS LINKS
+         </a>
+         <ul class="subitems">
+          <li>
+           <a href="http://www.uncg.edu/inside-uncg/" title="Learn About UNCG">
+            Inside
+            <abbr title="The University of North Carolina at Greensboro">
+             UNCG
+            </abbr>
+           </a>
+          </li>
+          <li>
+           <a href="http://www.uncg.edu/academics/">
+            Academics
+           </a>
+          </li>
+          <li>
+           <a href="http://www.uncg.edu/administration/">
+            Administration
+           </a>
+          </li>
+          <li>
+           <a href="http://www.uncg.edu/admissions/">
+            Admissions
+           </a>
+          </li>
+          <li>
+           <a href="http://www.uncg.edu/arts-entertainment/">
+            Arts &amp; Entertainment
+           </a>
+          </li>
+          <li>
+           <a href="http://www.uncg.edu/employment/">
+            Employment
+           </a>
+          </li>
+          <li>
+           <a href="http://diversity-inclusion.uncg.edu/">
+            Equity, Diversity  &amp; Inclusion
+           </a>
+          </li>
+          <li>
+           <a href="http://giving.uncg.edu">
+            Giving to UNCG
+           </a>
+          </li>
+          <li>
+           <a href="http://www.uncg.edu/ipg/" title="International Programs">
+            International Programs
+           </a>
+          </li>
+          <li>
+           <a href="http://library.uncg.edu/" title="Jackson Library">
+            Libraries
+           </a>
+          </li>
+          <li>
+           <a href="http://online.uncg.edu/" title="Online Courses &amp; Degrees">
+            Online Courses &amp; Degrees
+           </a>
+          </li>
+          <li>
+           <a href="http://research.uncg.edu/">
+            Research
+           </a>
+          </li>
+          <li>
+           <a href="http://sa.uncg.edu/">
+            Student Affairs
+           </a>
+          </li>
+          <li>
+           <a href="http://its.uncg.edu/">
+            Technology
+           </a>
+          </li>
+          <li>
+           <a href="http://newsandfeatures.uncg.edu/">
+            University News
+           </a>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </nav>
+  </div>
+  <div class="shadow-box container">
+   <div>
+    <a id="startcontent">
+    </a>
+    <div class="main-content">
+     <div class="content-wrapper">
+      <div class="row">
+       <div class="col-md-12" id="unit-head">
+        <h1 class="site-title">
+         UNCG Authentication
+        </h1>
+       </div>
+      </div>
+      <br/>
+      <div class="row" id="content">
+       <div class="col-md-8 col-sm-7">
+        <div class="row">
+         <div class="col-md-8 col-sm-12">
+          <!-- Login Box -->
+          <div class="panel login-form">
+           <div class="panel-body">
+            <form action="/idp/profile/SAML2/Redirect/SSO;jsessionid=x48cm4xelbq9pu894diookkl?execution=e1s1" class="form-horizontal" id="login_form" method="post" name="login_form" role="form">
+             <fieldset>
+              <span class="row block">
+               <legend>
+                <div class="col-sm-12">
+                 <span class="block pull-left hidden-xs">
+                  <span aria-hidden="true" class="glyphicon glyphicon-lock" style="color:inherit">
+                  </span>
+                 </span>
+                 <span class="block pull-left app-name">
+                  Google Apps
+                  <small>
+                   Secure Login
+                  </small>
+                 </span>
+                </div>
+               </legend>
+               <div aria-live="assertive" class="display-popover hidden-xs hidden-sm" id="wide-bookmark-warning" role="alert">
+                <div class="bookmark-notice popover right fadeInLeft animated">
+                 <!-- Warning -->
+                 <div class="arrow">
+                 </div>
+                 <h3 class="popover-title" style="color: inherit;">
+                  <span>
+                   <span aria-hidden="true" class="glyphicon glyphicon-ban-circle" style="color:inherit">
+                   </span>
+                  </span>
+                  <span>
+                   Do Not Bookmark This Page
+                  </span>
+                 </h3>
+                 <div class="popover-content" style="font-size: 0.95em;">
+                  <p>
+                   If you need a bookmark, set it after you log in.
+                  </p>
+                 </div>
+                </div>
+               </div>
+              </span>
+              <div aria-live="assertive" class="alert alert-danger failed hidden " role="alert">
+               <span>
+                <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign" style="color:inherit">
+                </span>
+               </span>
+               <strong>
+                Warning:
+               </strong>
+               <span class="failed-message">
+               </span>
+              </div>
+              <div class="row headspace">
+              </div>
+              <div class="form-group">
+               <label class="col-sm-5 control-label text-right" for="j_username">
+                Username:
+               </label>
+               <div class="col-sm-7">
+                <input autocapitalize="off" autocorrect="off" autofocus="" class="form-control" id="j_username" name="j_username" placeholder="Username" type="text"/>
+               </div>
+              </div>
+              <div class="form-group">
+               <label class="col-sm-5 control-label text-right" for="j_password">
+                Password:
+               </label>
+               <div class="col-sm-7">
+                <input class="form-control" id="j_password" name="j_password" placeholder="Password" type="password"/>
+               </div>
+              </div>
+              <div class="row">
+               <div class="col-sm-7 col-sm-offset-5">
+                <button class="btn btn-default" name="_eventId_proceed" onclick="return validateForm()" type="submit">
+                 Sign In
+                </button>
+               </div>
+              </div>
+             </fieldset>
+            </form>
+            <br/>
+            <div class="row" id="narrow-bookmark-warning">
+             <div class="col-md-12">
+              <div class="hidden-md hidden-lg">
+               <div class="row">
+                <div class="col-md-8 col-md-offset-4 col-sm-12">
+                 <div aria-live="assertive" class="display-popover" role="alert">
+                  <div class="bookmark-notice popover bottom fadeInDown animated">
+                   <!-- Warning -->
+                   <div class="arrow">
+                   </div>
+                   <h3 class="popover-title" style="color: inherit;">
+                    <span>
+                     <span aria-hidden="true" class="glyphicon glyphicon-ban-circle" style="color:inherit">
+                     </span>
+                    </span>
+                    <span>
+                     Do Not Bookmark This Page
+                    </span>
+                   </h3>
+                   <div class="popover-content" style="font-size: 0.95em;">
+                    <p>
+                     If you need a bookmark, set it after you log in.
+                    </p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <hr/>
+            </div>
+            <div class="row">
+             <div class="col-md-12">
+              <p class="text-info reset">
+               <small>
+                If you are having problems logging in or need to change your password, visit
+                <a href="http://reset.uncg.edu/">
+                 reset.uncg.edu
+                </a>
+                .
+               </small>
+              </p>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="row">
+         <div class="col-sm-12">
+          <!-- Notice -->
+          <div class="ferpa-warning panel">
+           <div class="panel-body">
+            <h3>
+             Notice for Faculty &amp; Staff
+            </h3>
+            <p>
+             Student information, including grades, registration and enrollment status, and other personally identifiable
+    information may not be disclosed to any third party without the student's written permission in compliance with
+    Family Educational Rights &amp; Privacy Act (FERPA) regulations. Violation of FERPA may result in revocation of user access
+    privileges as well as in disciplinary action.
+            </p>
+            <p>
+             For more information regarding FERPA and your responsibilities,
+    please read the
+             <a href="https://its.uncg.edu/Canvas/Ferpa_Warning/">
+              FERPA Warning
+             </a>
+             .
+            </p>
+            <p>
+             Please be aware, you are responsible for the retention of any information that you create via
+    UNCG services in accordance with the University's
+             <a href="http://policy.uncg.edu/university-policies/electronic_records/">
+              Electronic Records Retention Policy
+             </a>
+             and the
+             <a href="http://its.uncg.edu/Records_Management/General_Schedule/">
+              UNC General Records Retention and Disposition Schedule
+             </a>
+             .
+            </p>
+            <p>
+             By proceeding you are acknowledging receipt of this notice and compliance with its contents.
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="col-md-4 feeds col-sm-5">
+        <div class="row">
+         <div class="col-md-12">
+          <!-- ITS News Feed -->
+          <h2>
+           <a href="https://itsnews.uncg.edu" title="Technology News">
+            Technology News
+           </a>
+          </h2>
+          <div id="itsNewsContent">
+          </div>
+         </div>
+        </div>
+        <div class="row">
+         <div class="col-md-12">
+          <!-- Shibb News Feed -->
+          <div class="hidden" id="shibNews">
+           <div id="shibNewsContent">
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <footer class="site-footer col-md-12" id="footer">
+     <div class="row" id="footer-content">
+      <div class="site-footer-inner-left col-xs-12 col-sm-4 col-md-6" id="footer-left">
+       <dl title="UNC Greensboro">
+        <dt>
+         UNC Greensboro
+        </dt>
+        <dd>
+         <strong>
+          Location:
+         </strong>
+         1000 Spring Garden Street Greensboro, NC 27403
+        </dd>
+        <dd>
+         <strong>
+          Mailing Address:
+         </strong>
+         <abbr title="Post Office">
+          PO
+         </abbr>
+         Box 26170, Greensboro,
+         <abbr title="North Carolina">
+          NC
+         </abbr>
+         27402-6170
+        </dd>
+        <dd>
+         <strong>
+          Telephone:
+         </strong>
+         336.334.5000
+        </dd>
+        <dd>
+         <strong>
+          Technical Support:
+         </strong>
+         336.256.TECH (8324)
+        </dd>
+       </dl>
+      </div>
+      <div class="site-footer-inner-right col-md-6 hidden-xs" id="footer-right">
+       <!-- Footer Version 1.6 -->
+       <div class="footer-logo">
+       </div>
+       <div id="footer-nav">
+        <ul id="navlist-footer">
+         <li class="social">
+          <a href="https://www.facebook.com/uncg1891/">
+           <img alt="Facebook" src="/idp/rincuncg/images/FB.svg"/>
+          </a>
+         </li>
+         <li class="social">
+          <a href="https://twitter.com/UNCG">
+           <img alt="Twitter" src="/idp/rincuncg/images/Twitter.svg"/>
+          </a>
+         </li>
+         <li class="social">
+          <a href="https://www.instagram.com/uncg/">
+           <img alt="Instagram" src="/idp/rincuncg/images/Instagram.svg"/>
+          </a>
+         </li>
+         <li class="social">
+          <a href="https://www.linkedin.com/school/uncg/">
+           <img alt="LinkedIn" src="/idp/rincuncg/images/Linkedin.svg"/>
+          </a>
+         </li>
+         <li class="social">
+          <a href="https://www.youtube.com/uncg">
+           <img alt="YouTube" src="/idp/rincuncg/images/YT.svg"/>
+          </a>
+         </li>
+         <li class="social">
+          <a href="https://www.snapchat.com/add/uncgreensboro">
+           <img alt="Snapchat" src="/idp/rincuncg/images/Snapchat.svg"/>
+          </a>
+         </li>
+        </ul>
+        <div id="google_translate_element">
+        </div>
+        <a href="https://www.northcarolina.edu/">
+         <div id="unc-system">
+         </div>
+        </a>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+ </body>
+</html>

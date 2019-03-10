@@ -1,0 +1,929 @@
+http://cinema.library.ucla.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="1800;url=exit.do" http-equiv="refresh"/>
+  <title>
+   UCLA Library Catalog Basic Search
+  </title>
+  <script src="ui/fata/jscripts/ajaxUtils.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var msg;
+            var timeOut;
+            var seconds;
+            function timedMsg(time, grace, txtMsg)
+            {
+              msg = txtMsg;
+              timeOut = (time - grace) * 60000;
+              seconds = grace * 60;
+              //setTimeout("alert(msg)", timeOut);
+              setTimeout("tcc_display_timeout(msg)",timeOut);
+              setTimeout("alert(msg)", timeOut);
+            }
+  </script>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-32672693-1']);
+_gaq.push(['_setDomainName', 'library.ucla.edu']);
+_gaq.push(['_trackPageview']);
+(function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+  </script>
+  <script src="ui/fata/jscripts/pageInputFocus.js" type="text/javascript">
+  </script>
+  <link href="ui/fata/css/frameWork.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="ui/fata/css/header.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="ui/fata/css/quickSearchBar.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="ui/fata/css/pageProperties.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="ui/fata/css/searchPages.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="ui/fata/css/searchBasic.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="ui/fata/css/ucla_style.css" media="all" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 8]><link rel="stylesheet" type="text/css" media="all" href="ui/fata/css/ieFixes.css"><![endif]-->
+  <!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="ui/fata/css/ie7Fixes.css"><![endif]-->
+  <!--[if gt IE 7]><link rel="stylesheet" type="text/css" media="all" href="ui/fata/css/ie8Fixes.css"><![endif]-->
+ </head>
+ <body class="frameWorkUI" onload="setFocus('page.searchBasic');timedMsg(30, 1, 'Your session will end in 1 minute!')">
+  <div id="pageContainer">
+   <a accesskey="1" href="#mainContentLink">
+   </a>
+   <a accesskey="2" href="#searchnavbar">
+   </a>
+   <a accesskey="3" href="#mainNav">
+   </a>
+   <div id="pageHeader">
+    <div id="headerRow">
+     <div id="logo" title="UCLA Library Catalog">
+      <a href="exit.do">
+       <img alt="WebVoyáge" src="ui/fata/images/UCLA_Library_Catalog.gif"/>
+      </a>
+     </div>
+     <div id="fata_logo" title="Film and Television Archive">
+      <a href="http://www.cinema.ucla.edu/">
+       <img alt="Film and Television Archive" border="0" height="35" src="ui/fata/images/FATA.gif" width="188"/>
+      </a>
+     </div>
+     <div id="contact_logo" title="Contact the Archive Research and Study Center">
+      <a href="http://www.cinema.ucla.edu/education/research-archive">
+       <img alt="Contact the Archive Research and Study Center." border="0" height="35" src="ui/fata/images/contact_FATA.gif" width="231"/>
+      </a>
+     </div>
+     <div id="patronCol">
+      <div id="yale_header_links">
+       <a href="exit.do">
+        Exit/logout
+       </a>
+       | 
+Email your questions to
+       <a href="mailto:arsc@cinema.ucla.edu">
+        Archive Research and Study Center
+       </a>
+       |
+       <span>
+        <a href="ui/fata/htdocs/help/searchBasic.html" target="_help">
+         Help
+        </a>
+       </span>
+       |
+       <a href="http://www.library.ucla.edu/about/contact-web-administrator">
+        Feedback
+       </a>
+      </div>
+     </div>
+     <div id="headerTabs" title="Main Navigation Bar">
+      <a name="mainNav">
+      </a>
+      <h2 class="nav">
+       Main Navigation Bar
+      </h2>
+      <ul class="navbar">
+       <li class="on" title="Search the library">
+        <a href="searchBasic" name="page.header.buttons.search.button">
+         <span>
+          New Search
+         </span>
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   <!--this is calling quickSearchBar in xsl/pageTools/frameWork.xsl-->
+   <div id="mainContent">
+    <a name="mainContentLink">
+    </a>
+    <div id="dtrMixingContent">
+     <div id="pageHeadingTitle">
+     </div>
+    </div>
+    <noscript>
+     <h2 class="accessibilityHeader">
+      Notice: This web application times out 30 minute after loading a page.
+     </h2>
+    </noscript>
+    <div id="databaseInfo" title="Currently Connected Database(s).">
+     <span id="dbSelLabel">
+      Collection:
+     </span>
+     <span id="page.search.database.label">
+      Film and Television Archive
+     </span>
+    </div>
+    <a name="searchnavbar">
+    </a>
+    <div id="searchNav">
+     <h2 class="nav">
+      Search Tab Navigation Bar
+     </h2>
+     <ul class="navbar" title="Search Tab Navigation Bar">
+      <li class="on" title="Basic search">
+       <a href="searchBasic" name="page.search.buttons.basic.button">
+        <span>
+         Recommended Searches
+        </span>
+       </a>
+      </li>
+      <li class="off" title="Advanced search">
+       <a href="searchAdvanced" name="page.search.buttons.advanced.button">
+        <span>
+         Advanced
+        </span>
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div id="searchHistoryLink" title="Click to show search history.">
+     <a href="searchHistory">
+      Search History
+     </a>
+    </div>
+    <div id="searchForm">
+     <form accept-charset="UTF-8" action="search" id="searchBasic" method="GET">
+      <div id="searchParams">
+       <div id="searchInputs">
+        <label for="searchArg">
+         Search:
+        </label>
+        <input accesskey="s" class="inputStyle" id="searchArg" name="searchArg" size="51" title="Please enter search term(s)." type="text"/>
+        <label for="searchCode">
+         within
+        </label>
+        <div style="float: right;">
+         <input checked="true" id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="FTIT*"/>
+         <span style="text-weight: bolder;">
+          Title search* (L to R; omit initial articles A, The, etc.)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="KCRD"/>
+         <span style="text-weight: bolder;">
+          Credits search* (first name then last name; no xrefs)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="SUBJ@"/>
+         <span style="text-weight: bolder;">
+          Topic or genre/form search (any words in any order; xrefs)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="GKEY^"/>
+         <span style="text-weight: bolder;">
+          Keyword search* (any words in any order; no xrefs)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="CALL"/>
+         <span style="text-weight: bolder;">
+          Inventory number search
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="FDAT"/>
+         <span style="text-weight: bolder;">
+          Release date search*
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="033F"/>
+         <span style="text-weight: bolder;">
+          Broadcast date search* (L to R YYYYMMDD: 19631122)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="FSPA"/>
+         <span style="text-weight: bolder;">
+          Collection name (SPAC) search* (L to R)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="TITL@"/>
+         <span style="text-weight: bolder;">
+          Title variants search (any words in any order; xrefs)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="NAME@"/>
+         <span style="text-weight: bolder;">
+          Credit variants search (name in any order; xrefs)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="AUTH@"/>
+         <span style="text-weight: bolder;">
+          Pre-existing works search (names and words in any order; xrefs)
+         </span>
+         <br/>
+         <input id="searchCode" name="searchCode" title="Select the index to search." type="radio" value="CMD"/>
+         <span style="text-weight: bolder;">
+          Holdings search (type the command hkey plus any words in any order)
+         </span>
+         <br/>
+        </div>
+       </div>
+       <div id="quickLimits">
+        <label for="setLimit">
+         Quick Limits:
+        </label>
+        <select autocomplete="off" class="" id="setLimit" name="setLimit" title="">
+         <option selected="" value="1">
+          None
+         </option>
+         <option value="2">
+          Study collection (viewable next working day)
+         </option>
+         <option value="3">
+          Research collection (viewable in 14-21 working days)
+         </option>
+         <option value="4">
+          Nitrate
+         </option>
+        </select>
+       </div>
+      </div>
+      <div id="searchRecs" title="">
+       <label for="recCount">
+        Records per page:
+       </label>
+       <select autocomplete="off" class="" id="recCount" name="recCount" title="Select how many records to display per page.">
+        <option value="10">
+         10 records per page
+        </option>
+        <option value="20">
+         20 records per page
+        </option>
+        <option value="25">
+         25 records per page
+        </option>
+        <option value="100">
+         100 records per page
+        </option>
+        <option selected="" value="50">
+         50 records per page
+        </option>
+       </select>
+      </div>
+      <div id="searchLinks">
+       <input name="searchType" type="hidden" value="1"/>
+       <input id="page.search.search.button" name="page.search.search.button" title="Search the library" type="submit" value="Search"/>
+       <span class="formHorizontalSpacer">
+       </span>
+       <input id="page.search.clear.button" type="reset" value="Reset"/>
+      </div>
+     </form>
+    </div>
+    <div class="pageHTMLSnippet">
+     <div class="searchTip">
+      <!--span class="label">Help with Recommended Searches: </span-->
+      <br/>
+      <center>
+       <table bgcolor="#FFFFCC" border="1" cellpadding="5" cellspacing="2" id="JEZEBEL" name="JEZEBEL" width="94%">
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="22%">
+         </td>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="78%">
+          <center>
+           <b>
+            Help with Recommended Searches
+           </b>
+          </center>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="22%">
+          <b>
+           Title search
+          </b>
+         </td>
+         <td align="LEFT" class="t2" valign="TOP" width="78%">
+          Match start of title left to right ('L to R'); omit articles at beginning of title: A, An, The, L', etc.;
+          <br/>
+          <b>
+           body and soul
+          </b>
+          <br/>
+          <b>
+           rebel
+          </b>
+          <br/>
+          <b>
+           rebel with
+          </b>
+          <br/>
+          <b>
+           strada
+          </b>
+          <br/>
+          <b>
+           room 222
+          </b>
+          <br/>
+          <b>
+           gone w
+          </b>
+          <br/>
+          <b>
+           looney tunes
+          </b>
+          <br/>
+          No cross references ('xrefs') from variant titles (use in conjunction with
+          <b>
+           Title variants search
+          </b>
+          for the most comprehensive search of our catalog).
+          <br/>
+          BEWARE! Punctuation is significant; a search on
+          <b>
+           room 222
+          </b>
+          will succeed; a search on
+          <b>
+           room 222 w
+          </b>
+          will fail even though we have episodes of Room 222 with titles that begin with 'w'. A search on
+          <b>
+           room 222. w
+          </b>
+          will succeed.
+          <br/>
+          <b>
+           [ktla news
+          </b>
+          <br/>
+          <b>
+           room 222. w
+          </b>
+          <br/>
+          <b>
+           [gone with the wind
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Credits search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Match first name then last name, left to right
+('L to R'); a phrase search, not a true keyword search:
+          <br/>
+          <b>
+           james stewart
+          </b>
+          will search as phrase, as if in
+quotation marks
+          <br/>
+          <b>
+           marlene dietrich
+          </b>
+          <br/>
+          <b>
+           terry thomas
+          </b>
+          <br/>
+          <b>
+           terry-thomas
+          </b>
+          <br/>
+          <b>
+           eugene oneill
+          </b>
+          <br/>
+          <b>
+           eugene o'neill
+          </b>
+          <br/>
+          <b>
+           metro-goldwyn-mayer
+          </b>
+          <br/>
+          Includes both performance and production credits; includes networks, studios, etc.
+          <br/>
+          No cross references ('xrefs') from variant names a person or corporate body
+may have used (use in conjunction with
+          <b>
+           Credit variants search
+          </b>
+          for the most comprehensive search of
+our catalog).
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Topic or genre/form search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          One or more topic or genre terms in any order
+          <br/>
+          Includes fictitious characters (Sherlock Holmes), geographic headings (Spain), and footage of or documentaries about particular people and corporate bodies:
+          <br/>
+          <b>
+           vietnam war
+          </b>
+          <br/>
+          <b>
+           sherlock holmes
+          </b>
+          <br/>
+          <b>
+           bugs bunny
+          </b>
+          <br/>
+          <b>
+           spain
+          </b>
+          <br/>
+          <b>
+           personal/independent films
+          </b>
+          <br/>
+          <b>
+           gangster films
+          </b>
+          <br/>
+          <b>
+           oona o'neill
+          </b>
+          <br/>
+          <b>
+           oneill oona
+          </b>
+          <br/>
+          <b>
+           cancer drama
+          </b>
+          <br/>
+          <b>
+           (gay or lesbian?)
+          </b>
+          <br/>
+          <b>
+           ktla
+          </b>
+          <br/>
+          Includes cross references ('xrefs').
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Keyword search
+          </b>
+         </td>
+         <td align="LEFT" class="t2" valign="TOP" width="80%">
+          Any words in a record in any order.
+          <br/>
+          Adjacent terms produce implied 'AND:'
+          <br/>
+          <b>
+           dietrich sternberg
+          </b>
+          finds dietrich AND sternberg
+          <br/>
+          Includes credits, titles, subjects, genres, fictitious characters, geographic headings, collection
+names:
+          <br/>
+          <b>
+           silent shorts stanford theatre
+          </b>
+          <br/>
+          <b>
+           afghanistan documentaries
+          </b>
+          <br/>
+          <b>
+           jack benny radio collection
+          </b>
+          <br/>
+          No cross references ('xrefs') from variant names a person or corporate body may have used (use in
+conjunction with
+          <b>
+           Credit variants search
+          </b>
+          for the most comprehensive search for credits in our
+catalog).
+          <br/>
+          Use quotes to search phrases or hyphenated phrases:
+          <br/>
+          <b>
+           "world wide web"
+          </b>
+          <br/>
+          <b>
+           "james stewart" or "jimmy stewart"
+          </b>
+          <br/>
+          <b>
+           "terry-thomas"
+          </b>
+          <br/>
+          <b>
+           "man-made"
+          </b>
+          <br/>
+          Use ? to truncate:
+          <br/>
+          <b>
+           theat?
+          </b>
+          finds either theater or theatre
+          <br/>
+          Add TV or MP to search to limit to the television or the motion picture collection:
+          <br/>
+          <b>
+           westerns TV
+          </b>
+          finds westerns AND TV
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Inventory number search
+          </b>
+         </td>
+         <td align="LEFT" class="t2" valign="TOP" width="80%">
+          Match start of inventory number left to
+right ('L to R')
+          <br/>
+          <b>
+           M32244
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Release date search
+          </b>
+         </td>
+         <td align="LEFT" class="t2" valign="TOP" width="80%">
+          Match start of release date left to right ('L to R').
+          <br/>
+          <b>
+           1933
+          </b>
+          <br/>
+          You can also search on part of a year:
+          <br/>
+          <b>
+           193
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Broadcast date search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Match start of broadcast date
+left to right ('L to R') YYYYMMDD.
+          <br/>
+          <b>
+           19631122
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Collection name (SPAC) search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Match start of collection name left to right ('L to R').
+          <br/>
+          <b>
+           Stanford Theatre Foundation Collection
+          </b>
+          <br/>
+          You can also search on part of a collection name:
+          <br/>
+          <b>
+           Stanford
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Title variants search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          If you didn't find your title, try here before giving up;
+match start of title left to right ('L to R'); omit articles at beginning of title: A, An, The, L', etc.
+          <br/>
+          <b>
+           young and innocent
+          </b>
+          <br/>
+          Includes cross references ('xrefs').
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Credit variant search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Name variants; any names in any order:
+          <br/>
+          <b>
+           stanley richard
+          </b>
+          <br/>
+          <b>
+           charles chaplin
+          </b>
+          <br/>
+          <b>
+           o'neill oona
+          </b>
+          <br/>
+          <b>
+           oneill oona
+          </b>
+          <br/>
+          <b>
+           terry-thomas
+          </b>
+          <br/>
+          <b>
+           terry thomas
+          </b>
+          <br/>
+          <b>
+           FBI
+          </b>
+          <br/>
+          <b>
+           MGM
+          </b>
+          <br/>
+          Search here using:
+          <br/>
+          <b>
+           stewart j
+          </b>
+          ; based on information in display, construct
+          <b>
+           Keyword search
+          </b>
+          above as:
+          <br/>
+          <b>
+           "james stewart" OR "jimmy stewart"
+          </b>
+          <br/>
+          Includes cross references ('xrefs').
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Pre-existing works search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          A search for a pre-existing literary or musical
+work on which a film or program is based. Search using the name of the author and words from the title in any order:
+          <br/>
+          <b>
+           hamlet shakespeare
+          </b>
+          <br/>
+          <b>
+           maugham
+          </b>
+          <br/>
+          <b>
+           mozart
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Holdings search
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Holdings search is a command search which looks for command
+codes in front of search terms.
+          <br/>
+          The command code for searching holdings records (descriptions of copies at the bottom of our records) is HKEY.
+          <br/>
+          The command code for searching bibliographic records (credits for a film or program) is GKEY.
+          <br/>
+          Using these command codes it is possible to search using words from the descriptions of copies at the bottom of our records,
+such as words for format or collection, by themselves, or in combination with credits for a film or program.
+          <br/>
+          WARNING: Do not use this search to search on locations; instead do one of the other searches above that has an asterisk
+indicating that it can be limited by location
+          <br/>
+          <b>
+           hkey "nitrate print"
+          </b>
+          <br/>
+          <b>
+           hkey "16 mm."
+          </b>
+          <br/>
+          <b>
+           hkey stanford
+          </b>
+          <br/>
+          <b>
+           hkey dvd or hkey dvds and hkey tv
+          </b>
+          <br/>
+          <b>
+           hkey "nitrate print" and gkey warner
+          </b>
+          <br/>
+          <b>
+           hkey "nitrate print" and gkey "gone with the wind"
+          </b>
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Quick Limit
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Can only be used with for searches
+marked with
+          <b>
+           *
+          </b>
+          <br/>
+          Limits are retained between searches until "
+          <b>
+           None
+          </b>
+          " is selected by the user.
+          <br/>
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Set Other Search Limits
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          Can only be used with
+searches marked with
+          <b>
+           *
+          </b>
+          .
+          <br/>
+          Use to apply one or more limits to a search.
+          <br/>
+          Can restrict searches to dates, locations, languages and places of production.
+          <br/>
+          Limits are retained between searches until cleared by the user.
+          <br/>
+          To combine a
+          <b>
+           Quick Limit
+          </b>
+          with selections from
+          <b>
+           Set Other Limits
+          </b>
+          , go to
+          <b>
+           Set Other Limits
+          </b>
+          <i>
+           first
+          </i>
+          , make your selections,
+          <i>
+           then
+          </i>
+          go back to the search box and choose a
+          <b>
+           Quick Limit
+          </b>
+          before searching.
+         </td>
+        </tr>
+        <tr>
+         <td align="LEFT" bgcolor="#ffffff" class="t2" valign="TOP" width="20%">
+          <b>
+           Detailed index tables
+          </b>
+         </td>
+         <td align="LEFT" bgcolor="#FFFFCC" class="t2" valign="TOP" width="80%">
+          <a href="http://cinema.library.ucla.edu/OPACindexpg.htm">
+           Detailed index tables
+          </a>
+         </td>
+        </tr>
+       </table>
+      </center>
+      <!--ul>
+            <li>
+enter words relating to your topic, use quotes to search phrases: <span class="example">"world wide web"</span>
+            </li>
+            <li>use + to mark essential terms:  <span class="example">+explorer</span></li>
+            <li>use * to mark important terms:  <span class="example">*internet</span></li>
+            <li>use ? to truncate:  <span class="example">browser?</span></li>
+</ul-->
+     </div>
+    </div>
+   </div>
+   <div class="push">
+   </div>
+  </div>
+  <div id="pageFooter">
+   <div id="footerTabs" title="Footer Navigation Bar">
+    <a name="navFooter">
+    </a>
+    <h2 class="navFooter">
+     Footer Navigation Bar
+    </h2>
+    <ul class="navbar">
+     <li class="on" title="Search the library">
+      <a href="searchBasic" id="page.footer.buttons.search.button" name="page.footer.buttons.search.button">
+       <span>
+        New Search
+       </span>
+      </a>
+     </li>
+     <li class="off" title="">
+      <a href="mySearch" id="page.footer.buttons.mySearches.button" name="page.footer.buttons.mySearches.button">
+       <span>
+       </span>
+      </a>
+     </li>
+     <li class="off" title="">
+      <a href="myList" id="page.footer.buttons.myList.button" name="page.footer.buttons.myList.button">
+       <span>
+       </span>
+      </a>
+     </li>
+     <li class="off" title="">
+      <a href="myAccount" id="page.footer.buttons.myAccount.button" name="page.footer.buttons.myAccount.button">
+       <span>
+       </span>
+      </a>
+     </li>
+     <li class="off" title="Help on searching the library catalog">
+      <a href="ui/fata/htdocs/help/searchBasic.html" id="page.footer.buttons.help.button" name="page.footer.buttons.help.button" target="newWin">
+       <span>
+        Help
+       </span>
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div id="libraryLink">
+    <span>
+     <span id="spanpage.footer.library.link">
+      <a href="http://www.library.ucla.edu" title="UCLA Library">
+       UCLA Library
+      </a>
+     </span>
+    </span>
+   </div>
+   <div id="copyright" title="Copyright">
+    <span>
+     © 2014 Ex Libris Group and UCLA Library. All rights reserved.
+    </span>
+   </div>
+  </div>
+ </body>
+</html>
+

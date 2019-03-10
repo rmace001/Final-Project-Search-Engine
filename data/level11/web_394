@@ -1,0 +1,532 @@
+https://sso.csulb.edu/
+<!DOCTYPE html>
+<!--[if IE 7]><html class="lt-ie10 lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]><html class="lt-ie10"><![endif]-->
+<!--[if gt IE 9]><html><![endif]-->
+<!--[if !IE]><!-->
+<html>
+ <!--<![endif]-->
+ <head>
+  <script>
+   if (typeof module === 'object') {window.module = module; module = undefined;}
+  </script>
+  <script type="text/javascript">
+   window.oktaCdnFailover = (function() {
+    var oktaScriptLoadErrors = [];
+    window.addEventListener('load', function() {
+      if (oktaScriptLoadErrors.length === 0) {
+        return;
+      }
+
+      // Log only if all the scripts failed to load
+      var scripts = document.querySelectorAll('script');
+      var scriptsCount = 0;
+      for (var i = 0; i < scripts.length; i++) {
+        if (scripts[i].src && scripts[i].src.indexOf('mixpanel') === -1) {
+          scriptsCount++;
+        }
+      }
+
+      if (scriptsCount != oktaScriptLoadErrors.length) {
+        return;
+      }
+
+      if (window.localStorage) {
+        window.localStorage.setItem('oktaScriptLoadErrors', oktaScriptLoadErrors.join(','));
+      }
+
+      var errorMessage = 'page:' + window.location.href + '|';
+      errorMessage += oktaScriptLoadErrors.join('|');
+
+      var dataObj = {message: errorMessage, type: 'error'};
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/internal/client-logging/script-load-fail');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(dataObj));
+    });
+    return function(script) {
+      if (script.indexOf('mixpanel') > -1) {
+        return;
+      }
+      oktaScriptLoadErrors.push(script);
+    };
+  })();
+  
+  window.oktaCdnSuccess = (function() {
+    var oktaScriptLoadSuccess = [];
+    window.addEventListener('load', function() {
+      if(oktaScriptLoadSuccess.length === 0) {
+        return;
+      }
+
+      var successMessage = 'page:' + window.location.href + '|';
+      successMessage += oktaScriptLoadSuccess.join('|');
+
+      var dataObj = {message: successMessage, type: 'info'};
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/internal/client-logging/script-load-fail');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(dataObj));
+    });
+    return function(script) {
+      if (!window.localStorage) {
+        return;
+      }
+      var storedScriptErrors = window.localStorage.getItem('oktaScriptLoadErrors');
+      if (!(storedScriptErrors && storedScriptErrors.indexOf(script) > -1)) {
+        return;
+      }
+      oktaScriptLoadSuccess.push(script);
+      var storedScriptErrorsArray = storedScriptErrors.split(',')
+      storedScriptErrorsArray.splice(storedScriptErrorsArray.indexOf(script), 1)
+      window.localStorage.setItem('oktaScriptLoadErrors', storedScriptErrorsArray.join(','));
+    };
+  })();
+  </script>
+  <script crossorigin="anonymous" integrity="sha384-Lhsa8qaDx4gNblcOUQPJSmKlvBQat00JSwBIs9hfhSBfyHikHbioeI+69/7jB5dP" onerror="window.oktaCdnFailover &amp;&amp; window.oktaCdnFailover(this.src);" onload="window.oktaCdnSuccess &amp;&amp; window.oktaCdnSuccess(this.src);" src="https://csulb.okta.com/assets/js/widget/testscript.8b00a0599e8d731970eae85a11c92d4a.js?v=1" type="text/javascript">
+  </script>
+  <title>
+   California State Univ. Long Beach - Sign In
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <meta content="none" name="robots"/>
+   <link href="https://csulb.okta.com/assets/loginpage/css/okta-login-page.min.fef66944a58473ddaecc3dac3be8a820.css" rel="stylesheet" type="text/css"/>
+   <script>
+    var okta = {
+            locale: 'en',
+            deployEnv: 'PROD'
+        };
+   </script>
+   <script>
+    window.okta || (window.okta = {}); okta.cdnUrlHostname = ""; okta.cdnPerformCheck = true; okta.cdnPerformCheckHostname = "//ok3static.oktacdn.com";
+   </script>
+   <script>
+    window.okta || (window.okta = {});window.okta.mixpanel = true;window.okta.mixpanelTrackingSamplingFactors = {"_DEFAULT":1.0};
+   </script>
+   <script>
+    if (window.module) module = window.module;
+   </script>
+  </meta>
+ </head>
+ <body class="auth okta-container">
+  <!--[if gte IE 8]>
+  <![if lte IE 9]>
+
+    <style>
+    .unsupported-browser-banner-wrap {
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #f3fbff;
+    }
+    .unsupported-browser-banner-inner {
+      position: relative;
+      width: 735px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .unsupported-browser-banner-inner .icon {
+      vertical-align: top;
+      margin-right: 20px;
+      display: inline-block;
+      position: static !important;
+    }
+    .unsupported-browser-banner-inner a {
+      text-decoration: underline;
+    }
+    </style>
+
+    <div class="unsupported-browser-banner-wrap">
+      <div class="unsupported-browser-banner-inner">
+        <span class="icon icon-16 icon-only warning-16-yellow"></span>You are using an unsupported browser. For the best experience, update to <a href="https://support.okta.com/help/articles/Knowledge_Article/24532952-Platforms---Browser-and-OS-Support">a supported browser</a>.</div>
+    </div>
+
+  <![endif]>
+<![endif]-->
+  <!--[if IE 8]> <div id="login-bg-image-ie8" class="login-bg-image" data-se="login-bg-image"></div> <![endif]-->
+  <!--[if (gt IE 8)|!(IE)]><!-->
+  <div class="login-bg-image" data-se="login-bg-image" id="login-bg-image">
+  </div>
+  <!--<![endif]-->
+  <!-- hidden form for reposting fromURI for X509 auth -->
+  <form action="/login/cert" id="x509_login" method="post" name="x509_login" style="display:none;">
+   <input class="hide" name="_xsrfToken" type="hidden" value="null"/>
+   <input class="hidden" id="fromURI" name="fromURI" type="hidden" value="/user/notifications"/>
+  </form>
+  <div class="content">
+   <style type="text/css">
+    .noscript-msg {
+        background-color: #fff;
+        border-color: #ddd #ddd #d8d8d8;
+        box-shadow:0 2px 0 rgba(175, 175, 175, 0.12);
+        text-align: center;
+        width: 398px;
+        min-width: 300px;
+        margin: 200px auto;
+        border-radius: 3px;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .noscript-content {
+        padding: 42px;
+    }
+
+    .noscript-content h2 {
+        padding-bottom: 20px;
+    }
+
+    .noscript-content h1 {
+        padding-bottom: 25px;
+    }
+
+    .noscript-content a {
+        background: transparent;
+        box-shadow: none;
+        display: table-cell;
+        vertical-align: middle;
+        width: 314px;
+        height: 50px;
+        line-height: 36px;
+        color: #fff;
+        background: linear-gradient(#007dc1, #0073b2), #007dc1;
+        border: 1px solid;
+        border-color: #004b75;
+        border-bottom-color: #00456a;
+        box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    .noscript-content a:hover {
+        background: #007dc1;
+        cursor: hand;
+        text-decoration: none;
+    }
+   </style>
+   <noscript>
+    <div class="noscript-msg" id="noscript-msg">
+     <div class="noscript-content">
+      <h2>
+       Javascript is required
+      </h2>
+      <h1>
+       Javascript is disabled on your browser.&amp;nbspPlease enable Javascript and refresh this page.
+      </h1>
+      <a href=".">
+       Refresh
+      </a>
+     </div>
+    </div>
+   </noscript>
+   <div id="signin-container">
+   </div>
+   <div class="auth-container main-container" id="okta-sign-in" style="display:none">
+    <div class="unsupported-message" id="unsupported-onedrive" style="display:none">
+     <h2 class="o-form-head">
+      Your OneDrive version is not supported
+     </h2>
+     <p>
+      Upgrade now by installing the OneDrive for Business Next Generation Sync Client to login to Okta
+     </p>
+     <a class="button button-primary" href="https://support.okta.com/help/articles/Knowledge_Article/Upgrading-to-OneDrive-for-Business-Next-Generation-Sync-Client" target="_blank">
+      Learn how to upgrade
+     </a>
+    </div>
+    <div class="unsupported-message" id="unsupported-cookie" style="display:none">
+     <h2 class="o-form-head">
+      Cookies are required
+     </h2>
+     <p>
+      Cookies are disabled on your browser. Please enable Cookies and refresh this page.
+     </p>
+     <a class="button button-primary" href="." target="_blank">
+      Refresh
+     </a>
+    </div>
+   </div>
+  </div>
+  <div class="footer">
+   <div class="footer-container clearfix">
+    <p class="copyright">
+     Powered by
+     <a class="inline-block notranslate" href="http://www.okta.com/">
+      Okta
+     </a>
+    </p>
+    <p class="privacy-policy">
+     <a class="inline-block margin-l-10" href="/privacy" target="_blank">
+      Privacy Policy
+     </a>
+    </p>
+   </div>
+  </div>
+  <script type="text/javascript">
+   function runLoginPage (fn) {var mainScript = document.createElement('script');mainScript.src = 'https://csulb.okta.com/assets/js/mvc/loginpage/initLoginPage.pack.b426f6f7e8f3b3ab3ca1b86b87c2a9b2.js?v=1';mainScript.crossOrigin = 'anonymous';mainScript.integrity = 'sha384-oNVNwXKpscHHVomy1IRTUT7DfucJtPxFoSSOqrE3e6DlnYYQ8qDt66W2lr59839D';mainScript.onerror = function() { window.oktaCdnFailover && window.oktaCdnFailover(this.src) };mainScript.onload = function() { window.oktaCdnSuccess && window.oktaCdnSuccess(this.src) };document.getElementsByTagName('head')[0].appendChild(mainScript);fn && mainScript.addEventListener('load', function () { setTimeout(fn, 1) });}
+  </script>
+  <script type="text/javascript">
+   (function(){
+
+  var baseUrl = 'https\x3A\x2F\x2Fcsulb.okta.com';
+  var suppliedRedirectUri = '';
+  var repost = false;
+  var stateToken = '';
+  var fromUri = '\x2Fuser\x2Fnotifications';
+  var username = '';
+  var rememberMe = true;
+  var smsRecovery = false;
+  var callRecovery = false;
+  var emailRecovery = false;
+  var usernameLabel = 'Campus\x20ID';
+  var usernameInlineLabel = '';
+  var passwordLabel = 'Password';
+  var passwordInlineLabel = '';
+  var signinLabel = 'Single\x20Sign\x2DOn';
+  var forgotpasswordLabel = 'Forgot\x20password\x3F';
+  var unlockaccountLabel = 'Unlock\x20account\x3F';
+  var helpLabel = 'Help';
+  var orgSupportPhoneNumber = '\x28562\x29985\x2D4959';
+  var hideSignOutForMFA = false;
+  var loginPageUrlRedirect = '';
+  var useDeviceFingerprintForSecurityImage = true;
+  var enableUrlFixForEmbeddedBrowsers = false;
+  var footerHelpTitle = 'Need\x20help\x20signing\x20in\x3F';
+  var recoveryFlowPlaceholder = 'Email\x20or\x20Username';
+  var signOutUrl = 'https\x3A\x2F\x2Fits\x2Dshib.its.csulb.edu\x2FLogout.html';
+  var authScheme = 'OAUTH2';
+
+  var securityImage = true;
+  
+      securityImage = false;
+  
+
+  var windowsVerify = false;
+  
+    windowsVerify = true;
+  
+
+  var selfServiceUnlock = false;
+  
+
+  var preventBrowserFromSavingOktaPassword = false;
+  
+
+  var enableMixpanelTracking = false;
+  
+    enableMixpanelTracking = true;
+  
+
+  var redirectByFormSubmit = false;
+  
+  
+  var autoPush = false;
+  
+    autoPush = true;
+  
+
+  var publishToAccountChooser = false;
+  var accountChooserDiscoveryUrl = null;
+  
+    publishToAccountChooser = true;
+    accountChooserDiscoveryUrl = 'https://login.okta.com/discovery/iframe.html';
+  
+
+  // In case of custom app login, the uri is already absolute, so we must not attach baseUrl
+  var redirectUri;
+  if (isAbsoluteUri(fromUri)) {
+      redirectUri = fromUri;
+  } else {
+      redirectUri = baseUrl + fromUri;
+  }
+  
+
+  var customButtons;
+  
+
+  var customLinks = [];
+  
+    customLinks.push({
+      text: 'Activate\x20Account',
+      href: 'https\x3A\x2F\x2Fbeachid.csulb.edu\x2Factivate'
+    });
+  
+
+  var linkParams;
+  
+
+  var stateTokenAllFlows;
+  
+
+  var idpDiscovery;
+  var idpDiscoveryRequestContext;
+  
+
+  var hasPasswordlessPolicy = false;
+  
+
+  var showPasswordToggleOnSignInPage = false;
+  
+
+  var hasOAuth2ConsentFeature = false;
+  var consentFunc;
+  
+
+  var hasMfaAttestationFeature = false;
+  
+
+  var registration = false;
+  
+
+  var webauthn = false;
+  
+
+  var loginPageConfig = {
+    fromUri: fromUri,
+    repost: repost,
+    redirectUri: redirectUri,
+    isMobileClientLogin: false,
+    isMobileSSO: false,
+
+    linkParams: linkParams,
+    hasChromeOSFeature: false,
+    showLinkToAppStore: false,
+    publishToAccountChooser: publishToAccountChooser,
+    accountChooserDiscoveryUrl: accountChooserDiscoveryUrl,
+    preventBrowserFromSavingOktaPassword: preventBrowserFromSavingOktaPassword,
+    enableMixpanelTracking: enableMixpanelTracking,
+    enableUrlFixForEmbeddedBrowsers: enableUrlFixForEmbeddedBrowsers,
+    loginPageUrlRedirect: loginPageUrlRedirect,
+    mfaAttestation: hasMfaAttestationFeature,
+    signIn: {
+      el: '#signin-container',
+      baseUrl: baseUrl,
+      logo: 'https://csulb.okta.com/bc/image/fileStoreRecord?id=fs01arbsot6mgKBCR1d8',
+      logoText: 'California\x20State\x20Univ.\x20Long\x20Beach',
+      helpSupportNumber: orgSupportPhoneNumber,
+      stateToken: stateToken,
+      username: username,
+      signOutLink: signOutUrl,
+      consent: consentFunc,
+      authScheme: authScheme,
+      relayState: fromUri,
+      idpDiscovery: {
+        requestContext: idpDiscoveryRequestContext
+      },
+      features: {
+        router: true,
+        securityImage: securityImage,
+        rememberMe: rememberMe,
+        autoPush: autoPush,
+        webauthn: webauthn,
+        smsRecovery: smsRecovery,
+        callRecovery: callRecovery,
+        emailRecovery: emailRecovery,
+        windowsVerify: windowsVerify,
+        selfServiceUnlock: selfServiceUnlock,
+        multiOptionalFactorEnroll: true,
+        deviceFingerprinting: true,
+        useDeviceFingerprintForSecurityImage: useDeviceFingerprintForSecurityImage,
+        trackTypingPattern: false,
+        hideSignOutLinkInMFA: hideSignOutForMFA,
+        customExpiredPassword: true,
+        idpDiscovery: idpDiscovery,
+        passwordlessAuth: hasPasswordlessPolicy,
+        consent: hasOAuth2ConsentFeature,
+        showPasswordToggleOnSignInPage: showPasswordToggleOnSignInPage,
+        registration: registration,
+        redirectByFormSubmit: redirectByFormSubmit
+      },
+
+      assets: {
+        baseUrl: okta.cdnUrlHostname + '/assets/js/mvc/loginpage/i18n'
+      },
+
+      language: okta.locale,
+      i18n: {},
+
+      customButtons: customButtons,
+
+      helpLinks: {
+        help: 'https\x3A\x2F\x2Fweb.csulb.edu\x2Fdivisions\x2Faa\x2Facademic_technology\x2Fthd\x2F',
+        forgotPassword: 'https\x3A\x2F\x2Fbeachid.csulb.edu\x2FReset\x2FDefault.aspx',
+        unlock: '',
+        custom: customLinks
+      }
+    }
+  };
+
+  loginPageConfig.signIn.i18n[okta.locale] = {
+    
+    'primaryauth.username.placeholder': usernameLabel,
+    'primaryauth.username.tooltip': usernameInlineLabel,
+    'primaryauth.password.placeholder': passwordLabel,
+    'primaryauth.password.tooltip': passwordInlineLabel,
+    'primaryauth.title': signinLabel,
+    'forgotpassword': forgotpasswordLabel,
+    'unlockaccount': unlockaccountLabel,
+    'help': helpLabel,
+    'needhelp': footerHelpTitle,
+    'password.forgot.email.or.username.placeholder': recoveryFlowPlaceholder,
+    'password.forgot.email.or.username.tooltip': recoveryFlowPlaceholder,
+    'account.unlock.email.or.username.placeholder': recoveryFlowPlaceholder,
+    'account.unlock.email.or.username.tooltip': recoveryFlowPlaceholder
+  };
+
+  function isOldWebBrowserControl() {
+    // We no longer support IE7. If we see the MSIE 7.0 browser mode, it's a good signal
+    // that we're in a windows embedded browser.
+    if (navigator.userAgent.indexOf('MSIE 7.0') === -1) {
+      return false;
+    }
+
+    // Because the userAgent is the same across embedded browsers, we use feature
+    // detection to see if we're running on older versions that do not support updating
+    // the documentMode via x-ua-compatible.
+    return document.all && !window.atob;
+  }
+
+  function isAbsoluteUri(uri) {
+    var pat = /^https?:\/\//i;
+    return pat.test(uri);
+  }
+
+  var unsupportedContainer = document.getElementById('okta-sign-in');
+
+  // Old versions of WebBrowser Controls (specifically, OneDrive) render in IE7 browser
+  // mode, with no way to override the documentMode. In this case, inform the user they need
+  // to upgrade.
+  if (isOldWebBrowserControl()) {
+    document.getElementById('unsupported-onedrive').removeAttribute('style');
+    unsupportedContainer.removeAttribute('style');
+  }
+  else if (!navigator.cookieEnabled) {
+    document.getElementById('unsupported-cookie').removeAttribute('style');
+    unsupportedContainer.removeAttribute('style');
+  }
+  else {
+    unsupportedContainer.parentNode.removeChild(unsupportedContainer);
+    runLoginPage(function () {
+      OktaLogin.initLoginPage(loginPageConfig);
+    });
+  }
+
+}());
+  </script>
+  <script>
+   window.addEventListener('load', function(event) {
+    function applyStyle(id, style) {
+      if (style) {
+        var el = document.getElementById(id);
+        if (el) {
+          el.setAttribute('style', style);
+        }
+      }
+    }
+    applyStyle('login-bg-image', "background-image: url('https://csulb.okta.com/bc/fileStoreRecord?id=fs01f73nyslIVI4aD1d8')");
+    applyStyle('login-bg-image-ie8', "filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://csulb.okta.com/bc/fileStoreRecord?id=fs01f73nyslIVI4aD1d8', sizingMethod='scale')");
+  });
+  </script>
+ </body>
+</html>
+

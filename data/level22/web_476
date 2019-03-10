@@ -1,0 +1,535 @@
+https://va.wsu.edu/
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="telephone=no" name="format-detection"/>
+  <meta content="address=no" name="format-detection"/>
+  <meta content="date=no" name="format-detection"/>
+  <meta content="email=no" name="format-detection"/>
+  <title>
+   WSU Office of Veterans Affairs
+  </title>
+  <!-- FAVICON -->
+  <link href="//repo.wsu.edu/spine/2/favicon.ico" rel="shortcut icon"/>
+  <!-- STYLESHEETS -->
+  <link href="/Bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+  <link href="//repo.wsu.edu/spine/2/spine.min.css" rel="stylesheet" type="text/css"/>
+  <!-- RESPOND -->
+  <meta content="width=device-width, user-scalable=yes" name="viewport"/>
+  <!-- SCRIPTS -->
+  <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+  </script>
+  <script src="//repo.wsu.edu/spine/2/spine.min.js">
+  </script>
+  <script src="/scripts/colorbox/jquery.colorbox-min.js" type="text/javascript">
+  </script>
+  <link href="/scripts/colorbox/colorbox.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/fancybox/jquery.fancybox.pack.js" type="text/javascript">
+  </script>
+  <link href="/scripts/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css">
+   <script src="/scripts/Common.js" type="text/javascript">
+   </script>
+   <script src="/Bootstrap/js/bootstrap.js" type="text/javascript">
+   </script>
+   <link href="/scripts/fullcalendar.2.1.1/fullcalendar.css" rel="stylesheet" type="text/css"/>
+   <script src="/scripts/fullcalendar.2.1.1/moment.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/fullcalendar.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/gcal.js" type="text/javascript">
+   </script>
+   <!-- COMPATIBILITY -->
+   <!-- Include an HTML5 compatibility shim for HTML5 -->
+   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+   <!-- Ensure the Spine is displayed fully when no-JS -->
+   <noscript>
+    <style>
+     #spine .spine-sitenav ul ul li {
+        display: block !important;
+      }
+    </style>
+   </noscript>
+   <link href="/css/base.css" rel="stylesheet" type="text/css"/>
+   <!-- ANALYTICS -->
+   <script type="text/javascript">
+    /* <![CDATA[ */
+  var wsu_analytics = {
+    "wsuglobal":{
+      "campus":"all",
+      "unit":"veterans-affairs",
+      "events":[]
+    },
+    "app":{
+      "ga_code":"UA-69906812-1"
+    },
+    "site":{
+      "ga_code":"UA-79150478-7"
+    }
+
+  };
+  /* ]]> */
+   </script>
+   <script id="tracker_agent" src="https://repo.wsu.edu/jtrack/develop/bootstrap/bootstrap.min.js">
+   </script>
+   <link href="/css/SpinePad1.css" rel="stylesheet" type="text/css"/>
+   <script type="text/javascript">
+    $(document).ready(function(){
+      $(".jqbutton").button();
+      $(window).resize(resizeContent);
+      resizeContent();
+      setupRemoteContentLinks();
+    });
+	
+	function resizeContent(){
+      var newHeight = $(window).height();
+      var newWidth = $(window).width();
+      $(".resize-width").css("width", newWidth + "px");
+	}
+	
+	function setupRemoteContentLinks(){
+        $(".remote-content").each(function () {
+            $(this).on('click', function (e) {
+                var href = $(this).attr("href");
+                var title = $(this).attr("title");
+                if (title == undefined || title == null || title == "") {
+                    title = $(this).attr("alt");
+                    if (title == undefined || title == null || title == "") {
+                        title = "Info";
+                    }
+                }
+
+                var contentURL = "https://cms.em.wsu.edu/Ajax?Action=RemoteContent&URL=" + encodeURI(href);
+                var umbracoPageId = $(this).attr("rel");
+                if (umbracoPageId != undefined && umbracoPageId != null && umbracoPageId != "") {
+                    contentURL = "https://cms.em.wsu.edu/Ajax/?Action=RenderPage&PageId=" + umbracoPageId;
+                }
+
+                if (href != undefined && href != null && href != "") {
+                    // Load the remote content
+                    e.preventDefault();
+                    $.ajax({
+                        url: contentURL,
+                        type: 'GET',
+                        success: (data) => {
+                            $("<div>" + data + "</div>").dialog({
+                                height: "auto",
+                                width: "98%",
+                                modal: true,
+                                title: title,
+                                buttons: {
+                                    Close: function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+	}
+   </script>
+  </link>
+ </head>
+ <body>
+  <a class="screen-reader-shortcut" href="#wsu-main-content">
+   Skip to main content
+  </a>
+  <a class="screen-reader-shortcut" href="#spine-navigation">
+   Skip to navigation
+  </a>
+  <!-- WRAPPING -->
+  <div class="" id="jacket">
+   <div class="hybrid" id="binder">
+    <!-- CONTENT -->
+    <main id="wsu-main-content">
+     <header class="main-header" id="main-header" style="display:none;">
+      <div class="header-group hgroup guttered padded-bottom short">
+       <sup class="sup-header">
+        <span class="sup-header-default" id="sup-header">
+        </span>
+       </sup>
+       <sub class="sub-header">
+        <span class="sub-header-default" id="sub-header">
+        </span>
+       </sub>
+      </div>
+     </header>
+     <div class="resize-widths" id="custom-header">
+      <div id="custom-header-title-wrapper">
+       <span id="custom-header-title">
+       </span>
+      </div>
+     </div>
+     <!-- Responsive Sections -->
+     <section class="row sidebar side-right" id="main-content-area">
+      <div class="column one" id="custom-column-1">
+       <article>
+        <form enctype="application/x-www-form-urlencoded" id="UmbracoCMSForm" method="post">
+         <!-- BEGIN UMBRACO MAIN CONTENT -->
+         <h1 class="pagetitle">
+          Veterans Affairs
+         </h1>
+         <div id="Umbraco_Page_Title" style="display:none;">
+          Veterans Affairs
+         </div>
+         <div id="Umbraco_Site_Name" style="display:none;">
+          WSU Office of Veterans Affairs
+         </div>
+         <div class="homeimg">
+          <img alt="VA Memorial" rel="440,350" src="/media/1134/vamemorial.gif"/>
+         </div>
+         <p>
+          <strong>
+           WSU Office of Veterans Affairs
+          </strong>
+          : For all veterans related questions please contact
+          <strong>
+           Blaine Golden at 509-335-1234,
+          </strong>
+          by email at
+          <a href="mailto:veterans@wsu.edu">
+           veterans@wsu.edu,
+          </a>
+          or visit the office in
+          <a href="/media/752432/holland-library-map.pdf" title="Holland Library Map.pdf">
+           <strong>
+            Holland Library, Room 120BA
+           </strong>
+          </a>
+          on the Pullman campus.
+         </p>
+         <p>
+          <strong>
+           ASWSU Student Veterans Committee
+          </strong>
+          : The
+          <a href="https://www.facebook.com/aswsusvc" rel="noopener noreferrer" target="_blank">
+           ASWSU Student Veterans Committee
+          </a>
+          is located in the Veterans Center, Holland Library room 120B. The phone number is 509-335-1857 or email aswsu.svc@wsu.edu. Stop by and say hello!
+         </p>
+         <p>
+          <strong>
+           Reminder
+          </strong>
+          : All veterans and dependents receiving VA Educational Assistance must complete a WSU Enrollment Certification Request each Semester and term that they wish to receive benefits. To access the form go to
+          <a data-id="31862" href="/media/755743/enrollment-certification-request.pdf" rel="noopener noreferrer" target="_blank" title="Enrollment Certification Request (1)">
+           WSU Office of Veterans Affairs
+          </a>
+          . The Enrollment Certification Request informs the WSU VA Office that you wish to use your GI Bill benefits for each academic period.
+          <strong>
+           Failure to submit this form will delay receipt of your monthly GI Bill payments
+          </strong>
+          .
+         </p>
+         <p>
+          <strong>
+           BEEN CALLED TO ACTIVE DUTY?
+          </strong>
+          <a href="/been-recalled/" title="Been Recalled">
+           Click here
+          </a>
+          for more information.
+         </p>
+         <p>
+          <strong>
+           DISCLAIMER:
+          </strong>
+          <br/>
+          <strong>
+           THE WSU VA OFFICE PROVIDES INFORMATION ABOUT BENEFITS AND SERVICES AVAILABLE TO WSU STUDENTS WHO ARE VETERANS OR DEPENDENTS OF VETERANS. ALTHOUGH WE MAKE AN EFFORT TO DISCUSS AND/OR PROVIDE INFORMATION ABOUT ALL AVAILABLE BENEFITS AND SERVICES FOR WHICH A PARTICULAR STUDENT MAY BE ELIGIBLE, WE CANNOT PROMISE THAT ALL STUDENTS WILL BE INFORMED OF ALL BENEFITS AND SERVICES FOR WHICH THEY MAY BE ELIGIBLE. STUDENTS ARE RESPONSIBLE FOR ASKING QUESTIONS AND SEEKING INFORMATION, WHETHER FROM WSU OR FROM ANOTHER STATE OR FEDERAL AGENCY OR OTHER ENTITY, REGARDING AVAILABLE BENEFITS OR SERVICES.
+          </strong>
+         </p>
+         <!-- END UMBRACO MAIN CONTENT -->
+        </form>
+       </article>
+      </div>
+      <div class="column two" id="custom-column-2">
+       <aside>
+        <section>
+         <link href="/scripts/eventCalendar/eventCalendar.css" rel="stylesheet"/>
+         <link href="/scripts/eventCalendar/eventCalendar_theme_responsive.css" rel="stylesheet"/>
+         <script src="/scripts/eventCalendar/moment.js" type="text/javascript">
+         </script>
+         <script src="/scripts/eventCalendar/jquery.eventCalendar.js" type="text/javascript">
+         </script>
+         <style>
+          div.eventsCalendar-list-content .hidden {visibility:visible !important;}
+         </style>
+         <div id="eventCalendar_14013">
+         </div>
+         <script language="javascript">
+          $(function(){
+	$("#eventCalendar_14013").eventCalendar({
+		startWeekOnMonday: false,
+		jsonDateFormat: 'human',
+		dateFormat: 'M/D/YYYY',
+		jsonData: [{ "date":"2019-03-26 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (Mar)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+, { "date":"2019-04-23 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (April)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+, { "date":"2019-05-21 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (May)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+, { "date":"2019-06-25 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (June)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+, { "date":"2019-07-23 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (July)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+, { "date":"2019-08-27 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (Aug)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+, { "date":"2019-09-24 08:00:00", "type":"meeting", "title":"VA Mobile Medical Center on campus (Sept) (1)","description":"This service is provided by appointment only.&#160; Please contact&#160;Bob at 509-991-1356 to schedule.<br><br>Location: Lewis Alumni Center<br><br>Contact: Lena Young at 509-434-7677 or <a href='mailto:lena.young@va.gov'>lena.young@va.gov</a>", "url":"#" }
+]
+	});
+});
+         </script>
+         <p>
+         </p>
+         <h2>
+          Announcements
+         </h2>
+         <div id="news">
+          <div class="newsStoryTitle">
+           "Forever" GI Bill
+          </div>
+          <p>
+           The Harry W. Colmery Veterans Educational Assistance Act - The "Forever GI Bill" - brings significant changes to Veteran's education benefits over the next few years.  Stay informed of these changes and the effects they will have on your college career:
+           <a data-udi="umb://media/af597e8bc22a47fc81ce33a118d3e3df" href="/media/760061/fgibsections.pdf" title="Forever GI Bill fact sheet">
+            Forever GI Bill Fact Sheet
+           </a>
+          </p>
+          <div class="newsStorySeparator">
+          </div>
+          <div class="newsStoryTitle">
+           Enrollment Certification Request
+          </div>
+          <p>
+           Students need to submit an
+           <a data-id="43399" href="/media/756535/enrollment-certification-request-fillable.pdf" title="Enrollment Certification Request">
+            Enrollment Certification Request
+           </a>
+           prior to each semester or term that they wish to use their VA benefit. This form requires the student's academic advisor's signature, so plan ahead! Benefits will not be certified (and stipends will not be paid) until this form is received by the WSU Office of Veterans Affairs.
+          </p>
+          <div class="newsStorySeparator">
+          </div>
+          <div class="newsStoryTitle">
+           Important Numbers
+          </div>
+          <p>
+           VA Education Benefit Hotline:  1-888-442-4551
+          </p>
+          <p>
+           WAVE verification:  1-877-823-2378
+          </p>
+          <p>
+           VA Direct Deposit Enrollment:  1-877-838-2778
+          </p>
+          <p>
+           VA Debt Management Center: 1-800-827-0648
+          </p>
+         </div>
+        </section>
+       </aside>
+      </div>
+     </section>
+    </main>
+    <!-- /CONTENT -->
+    <!-- SPINE -->
+    <div class="spine-column spine-column lightest bleed" id="spine">
+     <div class="spine-glue" id="glue">
+      <header class="spine-header">
+       <a href="http://wsu.edu/" id="wsu-signature">
+        Washington State University
+       </a>
+      </header>
+      <!-- ACTIONS -->
+      <section class="spine-actions" id="wsu-actions">
+       <!-- Tabs -->
+       <ul class="spine-actions-tabs clearfix" id="wsu-actions-tabs">
+        <li class="spine-search-tab closed" id="wsu-search-tab">
+         <button>
+          Search
+         </button>
+        </li>
+        <li class="spine-contact-tab closed" id="wsu-contact-tab">
+         <button>
+          Contact
+         </button>
+        </li>
+        <li class="spine-share-tab closed" id="wsu-share-tab">
+         <button>
+          Share
+         </button>
+        </li>
+        <li class="spine-print-tab closed" id="wsu-print-tab">
+         <button>
+          Print
+         </button>
+        </li>
+       </ul>
+       <!-- Actions generated by spine.js here -->
+      </section>
+      <!--/#wsu-actions-->
+      <section class="spine-navigation" id="spine-navigation">
+       <nav class="spine-sitenav">
+        <!-- Menu Reloaded -->
+        <ul>
+         <li id="nav_menu_home">
+          <a href="/">
+           Site Home
+          </a>
+         </li>
+         <li id="nav_menu_1609">
+          <a href="/apply/">
+           Apply
+          </a>
+         </li>
+         <li id="nav_menu_1610">
+          <a href="/va-benefits/">
+           VA Benefits
+          </a>
+         </li>
+         <li id="nav_menu_1615">
+          <a href="/tuition-waivers/">
+           Tuition Waivers
+          </a>
+         </li>
+         <li id="nav_menu_76286">
+          <a href="/residency/">
+           Residency
+          </a>
+         </li>
+         <li id="nav_menu_1611">
+          <a href="/veterans-corner/">
+           Veterans Corner
+          </a>
+         </li>
+         <li id="nav_menu_1612">
+          <a href="/been-recalled/">
+           Been Recalled
+          </a>
+         </li>
+         <li id="nav_menu_1614">
+          <a href="/downloadable-forms/">
+           Downloadable Forms
+          </a>
+         </li>
+         <li id="nav_menu_1616">
+          <a href="/resources/">
+           Resources
+          </a>
+         </li>
+         <li id="nav_menu_1619">
+          <a href="/helpful-links/">
+           Helpful Links
+          </a>
+         </li>
+         <li id="nav_menu_1620">
+          <a href="/education-benefit-faqs/">
+           Education Benefit FAQs
+          </a>
+         </li>
+         <li id="nav_menu_1618">
+          <a href="/additional-non-educational-benefits/">
+           Additional Non-Educational Benefits
+          </a>
+         </li>
+         <li id="nav_menu_44745">
+          <a href="/our-staff/">
+           Our Staff
+          </a>
+         </li>
+         <li id="nav_menu_47050">
+          <a href="/donate/">
+           Donate
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-offsitenav">
+       </nav>
+      </section>
+      <!-- #navigation -->
+      <!-- Social and Global Links -->
+      <footer class="spine-footer">
+       <nav class="spine-social-channels" id="wsu-social-channels">
+        <ul>
+         <li class="facebook-channel">
+          <a href="https://facebook.com/wsupullman">
+           Facebook
+          </a>
+         </li>
+         <li class="twitter-channel">
+          <a href="https://twitter.com/wsupullman">
+           Twitter
+          </a>
+         </li>
+         <li class="youtube-channel">
+          <a href="https://www.youtube.com/washingtonstateuniv">
+           YouTube
+          </a>
+         </li>
+         <li class="directory-channel">
+          <a href="https://socialmedia.wsu.edu/">
+           Social media at WSU
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-global-links" id="wsu-global-links">
+        <ul>
+         <li class="mywsu-link">
+          <a href="https://my.wsu.edu/">
+           myWSU
+          </a>
+         </li>
+         <li class="access-link">
+          <a href="https://access.wsu.edu/">
+           Access
+          </a>
+         </li>
+         <li class="policies-link">
+          <a href="https://policies.wsu.edu/">
+           Policies
+          </a>
+         </li>
+         <li class="copyright-link">
+          <a href="https://copyright.wsu.edu">
+           ©
+          </a>
+         </li>
+        </ul>
+       </nav>
+      </footer>
+     </div>
+     <!--/glue-->
+    </div>
+    <!--/spine-->
+    <!-- /SPINE -->
+   </div>
+   <!--/cover-->
+  </div>
+  <!--/jacket-->
+  <!-- /WRAPPING -->
+  <!-- SITE CONTACT -->
+  <div itemscope="" itemtype="http://schema.org/Organization">
+   <meta content="" itemprop="department"/>
+   <meta content="Washington State University" itemprop="name"/>
+   <div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+    <meta content="PO Box 641035" itemprop="streetAddress"/>
+    <meta content="Pullman, WA" itemprop="addressLocality"/>
+    <meta content="" itemprop="addressRegion"/>
+    <meta content="99164-1035" itemprop="postalCode"/>
+   </div>
+   <meta content="509-335-1857" itemprop="telephone"/>
+   <meta content="veterans@wsu.edu" itemprop="email"/>
+   <meta content="" itemprop="contactPoint"/>
+  </div>
+  <div id="isMobile" style="display:none;">
+  </div>
+ </body>
+</html>
+

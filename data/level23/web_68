@@ -1,0 +1,763 @@
+http://ivlab.cs.umn.edu/
+<html>
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <base href="http://ivlab.cs.umn.edu/"/>
+  <link href="style.php" rel="stylesheet" type="text/css"/>
+  <!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="IE.css" />
+<![endif]-->
+  <link href="images/favicon.png" rel="icon" type="image/png"/>
+  <title>
+   IV/LAB
+  </title>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29098196-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+ </head>
+ <body id="home" onload="runSlideshow(); runLogo();">
+  <script type="text/javascript">
+   // Image Slideshow Code
+
+var framerate = 60; // frames per sec
+var framesPerSlide = 300;
+var framesForFade = 30;
+
+function setOpacity(i, o) {
+  document.getElementById('slide'+i).style.display = 'inline';
+  document.getElementById('slide'+i).style.opacity = o;
+  document.getElementById('slide'+i).style.MozOpacity = o;
+  document.getElementById('slide'+i).style.KhtmlOpacity = o;
+  document.getElementById('slide'+i).style.filter = 'alpha(opacity=' + (o * 100) + ');';
+}
+
+var frameCount = 0;
+var image1 = 1;
+var opacity1 = 1.0;
+var image2 = 2;
+var opacity2 = 0.0;
+var change = 1;
+
+var circleBlack = '<img src="images/circleblack.gif">';
+var circleWhite = '<img src="images/circlewhite.gif">';
+
+function runSlideshow() {
+  if (inIE==1) {
+    return;
+  }
+  frameCount++;
+  if (opacity2 < opacity1) {
+    change = 1;
+  }
+  if (frameCount < framesPerSlide) {
+    opacity1 = 1.0;
+    opacity2 = 0.0;
+  }
+  else {
+    opacity1 -= 1.0/framesForFade;
+    opacity2 += 1.0/framesForFade;
+  }
+  if (opacity2 < opacity1 && change == 1) {
+    change = 0;
+  }
+
+  var i = 1;
+  var dots = '';
+
+  while (document.getElementById('slide'+i)) {
+    if (i == image1) {
+      setOpacity(image1, opacity1);
+      if (opacity1 > 0.5) {
+        dots += circleBlack;
+      }
+      else {
+        dots += circleWhite;
+      }
+    }
+    else if (i == image2) {
+      setOpacity(image2, opacity2);
+      if (opacity1 <= 0.5) {
+        dots += circleBlack;
+      }
+      else {
+        dots += circleWhite;
+      }
+   }
+    else {
+      setOpacity(i, 0.0);
+      dots += circleWhite;
+    }
+    i++;
+  }
+  if (frameCount < 2 || change == 1)
+    document.getElementById('slidedots').innerHTML = dots;
+
+  change = 0;
+
+  if ((opacity1 <= 0.0) || (opacity2 >= 1.0)) {
+   image1++;
+    if (document.getElementById('slide'+image1) == null) {
+      image1 = 1;
+    }
+    image2++;
+    if (document.getElementById('slide'+image2) == null) {
+      image2 = 1;
+    }
+   frameCount = 0;
+  }
+
+  if (frameCount < 2) {
+    frameCount = framesPerSlide;
+    opacity1 = 1.0;
+    opacity2 = 0.0;
+    setTimeout("runSlideshow()", 1000/framerate * framesPerSlide);
+  } else {
+    setTimeout("runSlideshow()", 1000/framerate);
+  }
+}
+  </script>
+  <div class="maincontent">
+   <!-- This includes the logo and the navigation bar at the top of each page. Must put onLoad="runLogo();" inside the body tag to get the logo to animate. -->
+   <!-- put onLoad="runLogo();" inside the body tag to get this logo script to run -->
+   <script src="lib/raphael.js" type="text/javascript">
+   </script>
+   <script src="lib/jquery.js" type="text/javascript">
+   </script>
+   <!--[if IE]>
+  <script type="text/javascript">
+    var inIE=1;
+  </script>
+<![endif]-->
+   <!--[if !IE]><!-->
+   <script type="text/javascript">
+    var inIE=0;
+   </script>
+   <!--<![endif]-->
+   <script type="text/javascript">
+    // Logo Animation Code
+
+var paper;
+var phases;
+var phase;
+var path;
+var pathString;
+var clockPos;
+var e;
+var animation;
+var mypath;
+var animCounter;
+var animFrameDelay = 10;
+var doneWithArc = 1;
+var doneWithLine = 1;
+// background color picked up from include file
+var bg = 'rgb(255,255,255)';
+var fg;
+var mg;
+var mg2;
+
+function circletoPath(x , y, r) { 
+  var s = "M"; 
+  s = s + "" + (x) + "," + (y-r) + "A"+r+","+r+",0,1,1,"+(x-0.1)+","+(y-r)+"z"; 
+  return s; 
+} 
+
+function startAnimation(data) {
+  phases = data;
+  pathString = "M50,50";
+  path = paper.path(pathString).attr({'stroke-width': 2, stroke: fg});
+  fadeInTriangles();
+}
+
+var triNum = 0;
+function fadeInTriangles() {
+  if (triNum < 8) {
+    triList[triNum].animate({opacity: 1}, 30, fadeInTriangles);
+    triNum++;
+  }
+  else {
+    e.animate({opacity:1}, 20);
+    animation = window.setInterval("animate()", animFrameDelay);
+  }  
+}
+
+function doneAnimatingLine() {
+  doneWithLine = 1;
+}
+
+function animate() {
+  if ((doneWithArc) && (doneWithLine)) {
+    // Move to the next phase if there is one
+    if (phase < Object.keys(phases).length) {
+      var curClockPos = clockPos;
+      clockPos = (clockPos + phases[phase]) % 8;
+      pathString += "L" + pointsList[clockPos][0] + "," + pointsList[clockPos][1];
+      var animTime;
+      if (clockPos > curClockPos) {
+        animTime = animFrameDelay * (clockPathLengths[clockPos] - clockPathLengths[curClockPos]);
+      }
+      else {
+        animTime = animFrameDelay * ((mypath.getTotalLength() - clockPathLengths[curClockPos]) + clockPathLengths[clockPos]);
+      }
+      path.animate({path: pathString}, animTime, doneAnimatingLine);
+      phase++;
+      doneWithArc = 0;
+      doneWithLine = 0;
+    }
+    else {
+      // Animation is complete
+      clearInterval(animation);
+      for (var i=0;i<8;i++) {
+        triList[i].animate({opacity: 0}, 500);  
+      }
+      e.animate({opacity: 0}, 500);
+    }
+  }
+  else if (!doneWithArc) {
+    // advance 1 step around the circle
+    animCounter++;
+    if (animCounter >= mypath.getTotalLength()) {
+      animCounter = 0;
+    }
+    var pos = mypath.getPointAtLength(animCounter);
+    e.attr({cx: pos.x, cy: pos.y});
+    if (animCounter == clockPathLengths[clockPos]) {
+      doneWithArc = 1;
+    }
+  }
+}
+
+
+function runLogo() {
+  if (inIE == 1) {
+    drawLogoWithoutAnimation();
+    return;
+  }
+  clockPos = 0;
+  phase = 0;
+  pause = 0;
+  animCounter = 0;
+  fg = '#fff';
+  mg = '#fff';
+  mg2 = '#000';
+  if (bg == 'rgb(255,255,255)') {
+    fg = '#000';
+    mg = '#ddd';
+    mg2 = '#aaa';
+  }
+  else if (bg == 'rgb(0,0,0)') {
+    mg2 = '#aaa';
+  }
+  paper = Raphael(document.getElementById('logo'), 100, 150);
+  paper.rect(0,0,100,150).attr({fill: bg, stroke: "none"});
+  if (bg == 'rgb(255,255,255)') {
+    paper.image("images/IV_logo_black.png", 0, 103, 100, 30);
+  }
+  else {
+    paper.image("images/IV_logo_white.png", 0, 103, 100, 30);
+  }
+
+  pointsList = new Array();
+  triList = new Array();
+  for (var i=0;i<8;i++) {
+    triList[i] = paper.path("M50,15 l3,0 l-3,6 l-3,-6 l3,0").attr({fill: mg, stroke: "none", opacity: 0});
+    triList[i].rotate(i*45,50,50);
+    pointsList[i] = [triList[i].matrix.x(50,15), triList[i].matrix.y(50,15)];
+  }
+
+  e = paper.circle(50, 15, 3).attr({stroke: "none", fill: mg2, opacity: 0});
+
+  var p = circletoPath(50,50,33);
+  mypath = paper.path(p).attr({opacity: 0});
+
+  clockPathLengths = new Array();
+  clockPathLengths[0] = 0;
+  var l = mypath.getTotalLength();
+  for (var i=1;i<8;i++) {
+    clockPathLengths[i] = clockPathLengths[i-1] + Math.round(l/8); 
+  }
+
+  $.getJSON('test.json', startAnimation);
+}
+
+
+
+function drawLogoFromData(data) {
+  fg = '#fff';
+  mg = '#fff';
+  mg2 = '#000';
+  if (bg == 'rgb(255,255,255)') {
+    fg = '#000';
+    mg = '#ddd';
+    mg2 = '#aaa';
+  }
+  else if (bg == 'rgb(0,0,0)') {
+    mg2 = '#aaa';
+  }
+  paper = Raphael(document.getElementById('logo'), 100, 150);
+  paper.rect(0,0,100,150).attr({fill: bg, stroke: "none"});
+  if (bg == 'rgb(255,255,255)') {
+    paper.image("images/IV_logo_black.png", 0, 103, 100, 30);
+  }
+  else {
+    paper.image("images/IV_logo_white.png", 0, 103, 100, 30);
+  }
+  pointsList = new Array();
+  triList = new Array();
+  for (var i=0;i<8;i++) {
+    triList[i] = paper.path("M50,15 l3,0 l-3,6 l-3,-6 l3,0").attr({opacity: 0});
+    triList[i].rotate(i*45,50,50);
+    pointsList[i] = [triList[i].matrix.x(50,15), triList[i].matrix.y(50,15)];
+  }
+  clockPos = 0;
+  phases = data;
+  pathString = "M50,50";
+  var p=0;
+  while (p in phases) {
+    clockPos = (clockPos + phases[p]) % 8;
+    pathString += "L" + pointsList[clockPos][0] + "," + pointsList[clockPos][1];
+    p++;
+  }
+  path = paper.path(pathString).attr({'stroke-width': 2, stroke: fg});
+}
+
+function drawLogoWithoutAnimation() {
+  $.getJSON('test.json', drawLogoFromData);
+}
+   </script>
+   <!-- 
+WEBSITE MAP:
+
+Home
+  Projects
+    Project X
+    Project Y
+    Project Z
+    ...
+  Publications
+    Auto Generated Pages
+  Downloads
+  Lab (separate page(s), at least for people
+    Facilities
+    People
+  Education (maybe just one page, at least initially)
+    Teaching at U of M
+    Outside Courses/Lectures
+    Outreach Activities (e.g, K-12)
+  Contact
+  News
+
+The NavBar provides shortcuts to the most important pages within the hierarchy, e.g., publications
+
+The BreadCrumbBar shows the full path through the hierarchy even if you took a shortcut to get there
+
+The non-shortcut way to get there is typically via the "How we work" section of the main page, which provides more of a narrative description of our research, lab, and teaching & outreach.
+-->
+   <div class="toptransparentbar">
+    <div class="logocontainer">
+     <a href="aboutthelogo.php">
+      <span>
+       This mark is automatically generated based on current and recent activity in the IV/LAB.
+       <br/>
+       <br/>
+       * The number of lab members who have logged in to our linux machines in the past 24 hours is 1.
+       <br/>
+       * The number of lab members who have logged in to our linux machines this week is 1.
+       <br/>
+       * The current size of the directory for our published research papers is 24331079 KB.
+       <br/>
+       * The lights in the lab are on.
+       <br/>
+      </span>
+      <div id="logo">
+      </div>
+      <div id="logotxt">
+      </div>
+     </a>
+    </div>
+    <div class="nav">
+     <ul>
+      <li>
+       <a href="index.php" id="homenav">
+        Home
+       </a>
+      </li>
+      <li>
+       <a href="projects.php" id="projectsnav">
+        Projects
+       </a>
+      </li>
+      <li>
+       <a href="publications.php" id="publicationsnav">
+        Publications
+       </a>
+      </li>
+      <li>
+       <a href="downloads.php" id="downloadsnav">
+        Downloads
+       </a>
+      </li>
+      <li>
+       <a href="lab.php" id="labnav">
+        Lab
+       </a>
+      </li>
+      <li>
+       <a href="people.php" id="peoplenav">
+        People
+       </a>
+      </li>
+      <li>
+       <a href="education.php" id="educationnav">
+        Education
+       </a>
+      </li>
+      <li>
+       <a href="contact.php" id="contactnav">
+        Contact
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="breadcrumbbar">
+     <ul>
+      <li id="homecrumb">
+       <a href="index.php">
+        Home
+       </a>
+      </li>
+      <li id="projectscrumb">
+       <a href="projects.php">
+        Projects
+       </a>
+      </li>
+      <li id="threedmodelingcrumb">
+       3D Modeling
+      </li>
+      <li id="threeicrumb">
+       Intelligent Interactive Imaging (3I)
+      </li>
+      <li id="threeduicrumb">
+       3D User Interfaces
+      </li>
+      <li id="artviscrumb">
+       Art and Visualization
+      </li>
+      <li id="careercrumb">
+       NSF CAREER Award
+      </li>
+      <li id="meddevcrumb">
+       Virtual Prototyping of Medical Devices
+      </li>
+      <li id="virtclassicscrumb">
+       Visualizing Ancient Greek Rhetoric
+      </li>
+      <li id="vrhardwarecrumb">
+       Virtual Reality Displays
+      </li>
+      <li id="publicationscrumb">
+       <a href="publications.php">
+        Publications
+       </a>
+      </li>
+      <li id="downloadscrumb">
+       <a href="downloads.php">
+        Downloads
+       </a>
+      </li>
+      <li id="labcrumb">
+       <a href="lab.php">
+        Lab
+       </a>
+      </li>
+      <li id="peoplecrumb">
+       <a href="people.php">
+        People
+       </a>
+      </li>
+      <li id="facilitiescrumb">
+       <a href="people.php">
+        Facilities
+       </a>
+      </li>
+      <li id="educationcrumb">
+       <a href="education.php">
+        Education
+       </a>
+      </li>
+      <li id="contactcrumb">
+       <a href="contact.php">
+        Contact
+       </a>
+      </li>
+      <li id="newscrumb">
+       <a href="news.php">
+        News
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="umnivlab">
+     <img src="images/iVLab_logotype.png"/>
+    </div>
+   </div>
+   <div class="topbarshadow" id="contenthr">
+   </div>
+   <div class="bottombar">
+   </div>
+   <!--
+<div class="topbar">
+	<div class="logocontainer"><a href="aboutthelogo.php"><span>This mark is automatically generated based on current and recent activity in the IV/LAB.<br><br>
+* The number of lab members who have logged in to our linux machines in the past 24 hours is 1.<br>
+* The number of lab members who have logged in to our linux machines this week is 1.<br>
+* The current size of the directory for our published research papers is 24331079 KB.<br>
+* The lights in the lab are on.<br>
+</span><div id="logo"></div><div id="logotxt"><img src="images/ivl.png"></div></a></div>
+
+	<div class="nav">
+		<ul>
+			<li><a id="homenav" href="index.php">Home</a></li>
+			<li><a id="projectsnav" href="projects.php">Projects</a></li>
+			<li><a id="publicationsnav" href="publications.php">Publications</a></li>
+			<li><a id="downloadsnav" href="downloads.php">Downloads</a></li>
+			<li><a id="labnav" href="lab.php">Lab</a></li>
+			<li><a id="peoplenav" href="people.php">People</a></li>
+			<li><a id="educationnav" href="education.php">Education</a></li>
+			<li><a id="contactnav" href="contact.php">Contact</a></li>
+		</ul>
+  </div>
+</div>
+
+<div class="breadcrumbbar">
+<ul>
+  <li id="homecrumb"><a href="index.php">Home</a></li>
+  <li id="researchcrumb"><a href="research.php">Research</a></li>
+    <li id="projectscrumb"><a href="projects.php">Projects</a></li>
+      <li id="threedmodelingcrumb">3D Modeling</li>
+      <li id="threeicrumb">Intelligent Interactive Imaging (3I)</li>
+      <li id="threeduicrumb">3D User Interfaces</li>
+      <li id="artviscrumb">Art and Visualization</li>
+      <li id="careercrumb">NSF CAREER Award</li>
+      <li id="meddevcrumb">Virtual Prototyping of Medical Devices</li>
+      <li id="virtclassicscrumb">Visualizing Ancient Greek Rhetoric</li>
+      <li id="vrhardwarecrumb">Virtual Reality Displays</li>
+    <li id="publicationscrumb"><a href="publications.php">Publications</a></li>
+    <li id="downloadscrumb"><a href="downloads.php">Downloads</a></li>
+  <li id="labcrumb"><a href="lab.php">Lab</a></li>
+    <li id="peoplecrumb"><a href="people.php">People</a></li>
+    <li id="facilitiescrumb"><a href="people.php">Facilities</a></li>
+  <li id="educationcrumb"><a href="education.php">Education</a></li>
+  <li id="contactcrumb"><a href="contact.php">Contact</a></li>
+  <li id="newscrumb"><a href="news.php">News</a></li>
+</ul>
+</div>
+
+-->
+   <div id="carousel">
+    <div id="slide2" style="display: none;">
+     <img id="imgleft" src="images/02_left.png"/>
+     <img id="imgright" src="images/02_right.png"/>
+    </div>
+    <div id="slide3" style="display: none;">
+     <img id="imgleft" src="images/03_left.png"/>
+     <img id="imgright" src="images/03_right.png"/>
+    </div>
+    <div id="slide4" style="display: none;">
+     <img id="imgleft" src="images/04_left.png"/>
+     <img id="imgright" src="images/04_right.png"/>
+    </div>
+    <div id="slide5" style="display: none;">
+     <img id="imgleft" src="images/05_left.png"/>
+     <img id="imgright" src="images/05_right.png"/>
+    </div>
+    <div id="slide6" style="display: none;">
+     <img id="imgleft" src="images/06_left.png"/>
+     <img id="imgright" src="images/06_right.png"/>
+    </div>
+    <div id="slide7" style="display: none;">
+     <img id="imgleft" src="images/07_left.png"/>
+     <img id="imgright" src="images/07_right.png"/>
+    </div>
+    <div id="slide1">
+     <img id="imgleft" src="images/01_left.png"/>
+     <img id="imgright" src="images/01_right.png"/>
+    </div>
+    <div id="slidedots">
+    </div>
+   </div>
+   <div class="hr">
+   </div>
+   <!---  not this year... 
+  <div class="leftheading">Students Get Involved</div>
+  <div class="stories">
+    <div class="story1Col">
+      <h1>Summer Research Opportunities for Undergraduate Students</h1>
+      <p>If you are an undergraduate student interested in working with the lab this summer, please email Professor Keefe (keefe@cs.umn.edu) as soon as possible in order to apply for a NSF-sponsored summer research experience for undergraduates!</p>
+    </div>
+  </div>
+  -->
+   <div class="leftheading">
+    Interactive Visualization Lab
+   </div>
+   <div class="stories">
+    <div class="story1Col">
+     <h1>
+      Our Mission
+     </h1>
+     <p>
+      To imagine the future, inventing and creatively employing new computer tools for the benefit of society.  We use interactive computer graphics, data-processing algorithms, and radical new computer input-output technologies to address challenging problems in data understanding, digital design, and art.  We work in an interdisciplinary, collegial, collaborative atmosphere, where outstanding students partner with faculty to conduct research integrated with education.
+     </p>
+     <p>
+      Our vision is a world where all human-computer interactions are created mindfully and where these interactions fundamentally make people better.  To contribute to this vision, we aim to be a leading, internationally recognized academic resource for generating and disseminating new knowledge, specifically new understandings of the complex and interconected relationship between humans and computers.
+     </p>
+    </div>
+   </div>
+   <div class="leftheading">
+    About our research group
+   </div>
+   <div class="stories">
+    <div class="story3Col">
+     <h1>
+      <a href="projects.php">
+       Research
+      </a>
+     </h1>
+     <p>
+      Our research centers on data visualization, computer graphics, and human-computer interaction.  Current projects include visualization of large-scale time-varying data, 3D modeling in virtual reality, and creativity-support tools for complex design tasks.  We are committed to reproducable science.  In addition to traditional publications and presentations, we also release all of the software we develop to the academic community via open source projects. Our work is supported by the National Science Foundation, the National Institutes of Health, the National Academies Keck Futures Initiative, the University of Minnesota, and industry partners.
+     </p>
+     <a href="projects.php">
+      more on research
+     </a>
+    </div>
+    <div class="story3Col">
+     <h1>
+      <a href="lab.php">
+       Lab
+      </a>
+     </h1>
+     <p>
+      Our research group includes about 10 undergraduate and graduate students. Our lab in 2-203 Keller Hall is equipped with high-end graphics workstations that drive a series of innovative visual displays and interactive devices. Major equipment includes a 4-wall CAVE Virtual Reality display; a Multi-Surface, Multi-Touch Virtual Reality Environment; and a 3D Haptic (Force-Feedback) Display.  We also work regularly with the visualization facilities at the Minnesota Supercomputing Institute.
+     </p>
+     <a href="lab.php">
+      more on the lab
+     </a>
+    </div>
+    <div class="story3Col">
+     <h1>
+      <a href="education.php">
+       Education &amp; Outreach
+      </a>
+     </h1>
+     <p>
+      Academic presentations, teaching at the University of Minnesota, and reaching out to the local community are all important ways that we disseminate the results of our research.  Many of our academic talks are available online.  At the U, there are many great ways for students to get involved.  And, in the local community, we work with K-12 schools and organizations, such as the Science Museum of Minnesota and the Minnesota State Fair.
+     </p>
+     <a href="education.php">
+      more on education
+     </a>
+    </div>
+   </div>
+   <div class="clearer">
+   </div>
+   <div class="hr">
+   </div>
+   <div class="leftheading">
+    News
+   </div>
+   <!-- 210x95 -->
+   <div class="stories">
+    <div class="story3Col">
+     <a href="https://youtu.be/dp45Fg8pXns">
+      <img src="images/ResearchSpotlightStill.jpg"/>
+     </a>
+     <h1>
+      Research Spotlight: Bringing art to science with the IV/Lab
+     </h1>
+     <p>
+      September 2018: The IV/LAB is featured in a University video series showcasing several research labs in the College of Science and Engineering.
+     </p>
+     <a href="news.php">
+      More News
+     </a>
+    </div>
+    <div class="story3Col">
+     <img src="images/Dan-Keefe-51.jpg"/>
+     <h1>
+      Interview with Over Coffee® Podcast
+     </h1>
+     <p>
+      March 2018: Professor Keefe was inteviewed by Over Coffee®, a podcast focused on the intersection of art and science. Professor Keefe talks about his own path to becoming an artist and a scientist, and how art and science meet in the IV/LAB.
+     </p>
+     <a href="news.php">
+      More News
+     </a>
+    </div>
+    <div class="story3Col">
+     <img src="images/orbacles1.jpg"/>
+     <h1>
+      Orbacles installed in Minneapolis
+     </h1>
+     <p>
+      June 2017: MINN_LAB, a design collective of architects and computer scientists from the IV/LAB,
+       was awarded a $50,000 grant from the City of Minneapolis for winning the Creative City Challenge 2017.
+       The grant funded the public art installation called, Orbacles, which opened at Northern Spark 2017 in
+       The Commons park in downtown Minneapolis.
+     </p>
+     <a href="news.php">
+      More News
+     </a>
+    </div>
+   </div>
+   <div id="bottomid">
+   </div>
+   <!-- This includes the contact and copyright info for the bottom of the page. -->
+   <div class="clearer">
+   </div>
+   <div class="footer">
+    <!--
+	<div class="stories">
+		<p>IV/LAB Director: Dr. Daniel Keefe</p>
+		Email: keefe (at) cs.umn.edu
+		Phone/Fax: (612) 626-7508
+		Mail: 4-192 Keller Hall, 200 Union St SE, Minneapols MN 55455</p>
+		<p>Some material on this website is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are	those of the author(s) and do not necessarily reflect the views of the National Science Foundation.  The contents of this page have not been reviewed or approved by the University of Minnesota.</p>
+		<p>Copyright Daniel Keefe and the University of Minnesota.</p>
+	</div>
+-->
+    <div class="stories">
+     <div class="story3col">
+      <p>
+       IV/LAB Director: Dr. Daniel Keefe
+       <br/>
+       Email: keefe (at) cs.umn.edu
+       <br/>
+       Phone/Fax: (612) 626-7508
+       <br/>
+       Mail: 4-192 Keller Hall, 200 Union St SE, Minneapols MN 55455
+      </p>
+     </div>
+     <div class="story3col">
+      <p>
+       Some material on this website is based upon work supported by the National Science Foundation. Any opinions, findings, and conclusions or recommendations expressed in this material are	those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+      </p>
+     </div>
+     <div class="story3col">
+      <p>
+       The contents of this page have not been reviewed or approved by the University of Minnesota.
+      </p>
+      <p>
+       Copyright Daniel Keefe and the University of Minnesota.
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+

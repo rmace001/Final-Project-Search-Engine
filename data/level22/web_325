@@ -1,0 +1,391 @@
+http://residency.wsu.edu/
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="telephone=no" name="format-detection"/>
+  <meta content="address=no" name="format-detection"/>
+  <meta content="date=no" name="format-detection"/>
+  <meta content="email=no" name="format-detection"/>
+  <title>
+   Residency Information
+  </title>
+  <!-- FAVICON -->
+  <link href="//repo.wsu.edu/spine/2/favicon.ico" rel="shortcut icon"/>
+  <!-- STYLESHEETS -->
+  <link href="/Bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+  <link href="//repo.wsu.edu/spine/2/spine.min.css" rel="stylesheet" type="text/css"/>
+  <!-- RESPOND -->
+  <meta content="width=device-width, user-scalable=yes" name="viewport"/>
+  <!-- SCRIPTS -->
+  <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+  </script>
+  <script src="//repo.wsu.edu/spine/2/spine.min.js">
+  </script>
+  <script src="/scripts/colorbox/jquery.colorbox-min.js" type="text/javascript">
+  </script>
+  <link href="/scripts/colorbox/colorbox.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/fancybox/jquery.fancybox.pack.js" type="text/javascript">
+  </script>
+  <link href="/scripts/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css">
+   <script src="/scripts/Common.js" type="text/javascript">
+   </script>
+   <script src="/Bootstrap/js/bootstrap.js" type="text/javascript">
+   </script>
+   <link href="/scripts/fullcalendar.2.1.1/fullcalendar.css" rel="stylesheet" type="text/css"/>
+   <script src="/scripts/fullcalendar.2.1.1/moment.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/fullcalendar.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/gcal.js" type="text/javascript">
+   </script>
+   <!-- COMPATIBILITY -->
+   <!-- Include an HTML5 compatibility shim for HTML5 -->
+   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+   <!-- Ensure the Spine is displayed fully when no-JS -->
+   <noscript>
+    <style>
+     #spine .spine-sitenav ul ul li {
+        display: block !important;
+      }
+    </style>
+   </noscript>
+   <link href="/css/base.css" rel="stylesheet" type="text/css"/>
+   <!-- ANALYTICS -->
+   <script type="text/javascript">
+    /* <![CDATA[ */
+  var wsu_analytics = {
+    "wsuglobal":{
+      "campus":"all",
+      "unit":"registrar",
+      "events":[]
+    },
+    "app":{
+      "ga_code":"UA-69906812-1"
+    },
+    "site":{
+      "ga_code":"UA-79150478-4"
+    }
+
+  };
+  /* ]]> */
+   </script>
+   <script id="tracker_agent" src="https://repo.wsu.edu/jtrack/develop/bootstrap/bootstrap.min.js">
+   </script>
+   <link href="/css/SpinePad1.css" rel="stylesheet" type="text/css"/>
+   <script type="text/javascript">
+    $(document).ready(function(){
+      $(".jqbutton").button();
+      $(window).resize(resizeContent);
+      resizeContent();
+      setupRemoteContentLinks();
+    });
+	
+	function resizeContent(){
+      var newHeight = $(window).height();
+      var newWidth = $(window).width();
+      $(".resize-width").css("width", newWidth + "px");
+	}
+	
+	function setupRemoteContentLinks(){
+        $(".remote-content").each(function () {
+            $(this).on('click', function (e) {
+                var href = $(this).attr("href");
+                var title = $(this).attr("title");
+                if (title == undefined || title == null || title == "") {
+                    title = $(this).attr("alt");
+                    if (title == undefined || title == null || title == "") {
+                        title = "Info";
+                    }
+                }
+
+                var contentURL = "https://cms.em.wsu.edu/Ajax?Action=RemoteContent&URL=" + encodeURI(href);
+                var umbracoPageId = $(this).attr("rel");
+                if (umbracoPageId != undefined && umbracoPageId != null && umbracoPageId != "") {
+                    contentURL = "https://cms.em.wsu.edu/Ajax/?Action=RenderPage&PageId=" + umbracoPageId;
+                }
+
+                if (href != undefined && href != null && href != "") {
+                    // Load the remote content
+                    e.preventDefault();
+                    $.ajax({
+                        url: contentURL,
+                        type: 'GET',
+                        success: (data) => {
+                            $("<div>" + data + "</div>").dialog({
+                                height: "auto",
+                                width: "98%",
+                                modal: true,
+                                title: title,
+                                buttons: {
+                                    Close: function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+	}
+   </script>
+  </link>
+ </head>
+ <body>
+  <a class="screen-reader-shortcut" href="#wsu-main-content">
+   Skip to main content
+  </a>
+  <a class="screen-reader-shortcut" href="#spine-navigation">
+   Skip to navigation
+  </a>
+  <!-- WRAPPING -->
+  <div class="" id="jacket">
+   <div class="fluid" id="binder">
+    <!-- CONTENT -->
+    <main id="wsu-main-content">
+     <header class="main-header" id="main-header" style="display:none;">
+      <div class="header-group hgroup guttered padded-bottom short">
+       <sup class="sup-header">
+        <span class="sup-header-default" id="sup-header">
+        </span>
+       </sup>
+       <sub class="sub-header">
+        <span class="sub-header-default" id="sub-header">
+        </span>
+       </sub>
+      </div>
+     </header>
+     <div class="resize-widths" id="custom-header">
+      <div id="custom-header-title-wrapper">
+       <span id="custom-header-title">
+       </span>
+      </div>
+     </div>
+     <!-- Responsive Sections -->
+     <section class="row single" id="main-content-area">
+      <article>
+       <form enctype="application/x-www-form-urlencoded" id="UmbracoCMSForm" method="post">
+        <!-- BEGIN UMBRACO MAIN CONTENT -->
+        <h1 class="pagetitle">
+         State of Washington / WSU Residency Requirements
+        </h1>
+        <div id="Umbraco_Page_Title" style="display:none;">
+         State of Washington / WSU Residency Requirements
+        </div>
+        <div id="Umbraco_Site_Name" style="display:none;">
+         Residency Information
+        </div>
+        <p>
+        </p>
+        <ul>
+         <li>
+          Residency is determined at the time of formal admission to the university on the basis of information included in the university application for admission.
+         </li>
+         <li>
+          Residency policies are set by the State of Washington (RCW 28B.15) and applied uniformly throughout Washington’s public colleges and universities.
+         </li>
+         <li>
+          Students who do not establish residency will be assessed out of state tuition.
+         </li>
+         <li>
+          Students seeking a change in residence classification must file a Residence Questionnaire and evidence of Washington domicile with the University.
+         </li>
+         <li>
+          Residency is determined by several factors in addition to physical presence in the state of Washington and is based on documentary evidence submitted.
+         </li>
+        </ul>
+        <h3>
+         <a href="http://residency.wsu.edu/faqs/">
+          FAQS (many questions can be answered here)
+          <br/>
+         </a>
+        </h3>
+        <h3>
+         <a href="http://residency.wsu.edu/residency-requirements/">
+          General Residency Information (read first)
+         </a>
+        </h3>
+        <!-- END UMBRACO MAIN CONTENT -->
+       </form>
+      </article>
+     </section>
+    </main>
+    <!-- /CONTENT -->
+    <!-- SPINE -->
+    <div class="spine-column spine-column crimson" id="spine">
+     <div class="spine-glue" id="glue">
+      <header class="spine-header">
+       <a href="http://wsu.edu/" id="wsu-signature">
+        Washington State University
+       </a>
+      </header>
+      <!-- ACTIONS -->
+      <section class="spine-actions" id="wsu-actions">
+       <!-- Tabs -->
+       <ul class="spine-actions-tabs clearfix" id="wsu-actions-tabs">
+        <li class="spine-search-tab closed" id="wsu-search-tab">
+         <button>
+          Search
+         </button>
+        </li>
+        <li class="spine-contact-tab closed" id="wsu-contact-tab">
+         <button>
+          Contact
+         </button>
+        </li>
+        <li class="spine-share-tab closed" id="wsu-share-tab">
+         <button>
+          Share
+         </button>
+        </li>
+        <li class="spine-print-tab closed" id="wsu-print-tab">
+         <button>
+          Print
+         </button>
+        </li>
+       </ul>
+       <!-- Actions generated by spine.js here -->
+      </section>
+      <!--/#wsu-actions-->
+      <section class="spine-navigation" id="spine-navigation">
+       <nav class="spine-sitenav">
+        <!-- Menu Reloaded -->
+        <ul>
+         <li id="nav_menu_home">
+          <a href="/">
+           Site Home
+          </a>
+         </li>
+         <li id="nav_menu_2591">
+          <a href="/faqs/">
+           FAQs
+          </a>
+         </li>
+         <li id="nav_menu_2592">
+          <a href="/residency-general-information/">
+           Residency General Information
+          </a>
+          <ul>
+           <li id="nav_menu_2596">
+            <a href="/residency-general-information/independent-student/">
+             Independent Student
+            </a>
+           </li>
+           <li id="nav_menu_2597">
+            <a href="/residency-general-information/dependent-student/">
+             Dependent Student
+            </a>
+           </li>
+           <li id="nav_menu_2598">
+            <a href="/residency-general-information/military-civil-service/">
+             Military / Civil Service
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li id="nav_menu_2593">
+          <a href="/native-american-residency/">
+           Native American Residency
+          </a>
+         </li>
+         <li id="nav_menu_2594">
+          <a href="/non-us-citizens-affidavit-of-residency/">
+           Non-US Citizens Affidavit of Residency
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-offsitenav">
+       </nav>
+      </section>
+      <!-- #navigation -->
+      <!-- Social and Global Links -->
+      <footer class="spine-footer">
+       <nav class="spine-social-channels" id="wsu-social-channels">
+        <ul>
+         <li class="facebook-channel">
+          <a href="https://facebook.com/wsupullman">
+           Facebook
+          </a>
+         </li>
+         <li class="twitter-channel">
+          <a href="https://twitter.com/wsupullman">
+           Twitter
+          </a>
+         </li>
+         <li class="youtube-channel">
+          <a href="https://www.youtube.com/washingtonstateuniv">
+           YouTube
+          </a>
+         </li>
+         <li class="directory-channel">
+          <a href="https://socialmedia.wsu.edu/">
+           Social media at WSU
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-global-links" id="wsu-global-links">
+        <ul>
+         <li class="mywsu-link">
+          <a href="https://my.wsu.edu/">
+           myWSU
+          </a>
+         </li>
+         <li class="access-link">
+          <a href="https://access.wsu.edu/">
+           Access
+          </a>
+         </li>
+         <li class="policies-link">
+          <a href="https://policies.wsu.edu/">
+           Policies
+          </a>
+         </li>
+         <li class="copyright-link">
+          <a href="https://copyright.wsu.edu">
+           ©
+          </a>
+         </li>
+        </ul>
+       </nav>
+      </footer>
+     </div>
+     <!--/glue-->
+    </div>
+    <!--/spine-->
+    <!-- /SPINE -->
+   </div>
+   <!--/cover-->
+  </div>
+  <!--/jacket-->
+  <!-- /WRAPPING -->
+  <!-- SITE CONTACT -->
+  <div itemscope="" itemtype="http://schema.org/Organization">
+   <meta content="Office of the Registrar" itemprop="department"/>
+   <meta content="Washington State University" itemprop="name"/>
+   <div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+    <meta content="PO Box 641035" itemprop="streetAddress"/>
+    <meta content="Pullman, WA" itemprop="addressLocality"/>
+    <meta content="" itemprop="addressRegion"/>
+    <meta content="99164-1035" itemprop="postalCode"/>
+   </div>
+   <meta content="509-335-5346" itemprop="telephone"/>
+   <meta content="residency@wsu.edu" itemprop="email"/>
+   <meta content="" itemprop="contactPoint"/>
+  </div>
+  <div id="isMobile" style="display:none;">
+  </div>
+ </body>
+</html>
+

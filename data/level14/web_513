@@ -1,0 +1,757 @@
+http://library.leadership.illinois.edu
+<!DOCTYPE html>
+<!-- TEMPLATE FILE: opac-main.tt -->
+<html class="no-js" lang="en">
+ <head>
+  <title>
+   Koha online catalog
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="Koha 3.1811000" name="generator"/>
+  <!-- leave this for stats -->
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="https://www.careercenter.illinois.edu/sites/default/files/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/opac-tmpl/bootstrap/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/lib/jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/css/opac.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/css/colors.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/css/ilc.css" rel="stylesheet" type="text/css"/>
+  <link href="/opac-tmpl/bootstrap/css/print.css" media="print" rel="stylesheet" type="text/css"/>
+  <style type="text/css">
+   h2+p {
+  margin: 0 .7em;
+}
+h3+p {
+  margin: .3em .9em;
+}
+h4+p {
+  margin: .3em 1.1em;
+}
+h5+p {
+  margin: .3em 1.3em;
+}
+
+
+#login {
+position : absolute;
+top : 0;
+right : 0;
+padding-top : 4px;
+padding-bottom : 4px;
+width : 350px;
+}
+#auth fieldset,
+#auth fieldset.brief {
+border : none;
+display : inline;
+margin : 0;
+padding : 0;
+}
+#auth input {
+font-size : 1em;
+}
+#auth legend {
+display : none;
+}
+#auth label {
+display : inline;
+font-size : 1em;
+font-weight: bold;
+}
+#auth li,
+#auth ol {
+display : inline;
+}
+#login #userid, #login #password {
+  width:auto;
+  font-weight: bold;
+}
+#auth fieldset.action input {
+margin: 0;
+padding : 0;
+}
+#auth fieldset.action {
+margin-bottom : -5px;
+}
+#opac-main-search {
+margin-top : 1.5em;
+}
+div#opac-main-search {
+  margin-top: 9px;
+}
+.headinglink {
+  text-decoration: none;
+}
+.headinglink a:hover {
+  color: red;
+}
+div#horizmenu ul {
+  display: block;
+  width: 100%;
+}
+div#horizmenu ul li {
+  display: block;
+  width: 100px;
+  padding: 3px;
+  float: left;
+  margin-right: .5em;
+}
+div#nologininstructions {
+  margin-top: 2em;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 60%;
+  border: 1px solid #ccc;
+}
+div.promoright {
+  width: 200px;
+  padding: 1em;
+  border: 1px solid #ccc;
+  float: right;
+}
+div#localmenu {
+  width: 450px;
+  display: block;
+  float: right;
+  color: #fff;
+}
+div#localmenu a{
+  color: #fff;  
+}
+div#localmenu a:hover{
+  color: #ff0;  
+}
+  </style>
+  <link href="http://library.leadership.illinois.edu/cgi-bin/koha/unapi" rel="unapi-server" title="unAPI" type="application/xml"/>
+  <!-- Respond.js brings responsive layout behavior to IE < v.9 -->
+  <!--[if lt IE 9]>
+    <script src="/opac-tmpl/bootstrap/lib/respond.min.js"></script>
+<![endif]-->
+  <script type="text/javascript">
+   function _(s) { return s } // dummy function for gettext
+  </script>
+  <script src="/opac-tmpl/bootstrap/lib/modernizr.min.js" type="text/javascript">
+  </script>
+ </head>
+ <body class="branch-default" id="opac-main">
+  <div id="wrap">
+   <div class="noprint" id="header-region">
+    <div class="navbar navbar-inverse navbar-static-top">
+     <div class="navbar-inner">
+      <div class="container-fluid">
+       <h1 id="logo">
+        <a class="brand" href="/cgi-bin/koha/opac-main.pl">
+         Koha online
+        </a>
+       </h1>
+       <ul class="nav">
+        <li class="dropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="listsmenu" role="button">
+          <i class="icon-list icon-white">
+          </i>
+          <span class="listslabel">
+           Lists
+          </span>
+          <b class="caret">
+          </b>
+         </a>
+         <ul aria-labelledby="listsmenu" class="dropdown-menu" role="menu">
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?display=publicshelves" role="menuitem" tabindex="-1">
+            <strong>
+             Public lists
+            </strong>
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=16&amp;sortfield=" role="menuitem" tabindex="-1">
+            Diversity/Advocacy
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=46&amp;sortfield=" role="menuitem" tabindex="-1">
+            Assessment
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=45&amp;sortfield=" role="menuitem" tabindex="-1">
+            Seminal Leadership Texts
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=31&amp;sortfield=" role="menuitem" tabindex="-1">
+            Self-Knowledge
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=27&amp;sortfield=" role="menuitem" tabindex="-1">
+            Inclusion
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=19&amp;sortfield=" role="menuitem" tabindex="-1">
+            Professional/Career
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=44&amp;sortfield=" role="menuitem" tabindex="-1">
+            Service Minded
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=43&amp;sortfield=" role="menuitem" tabindex="-1">
+            Sustainability
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=42&amp;sortfield=" role="menuitem" tabindex="-1">
+            Global Competence
+           </a>
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?viewshelf=41&amp;sortfield=" role="menuitem" tabindex="-1">
+            Social  Justice
+           </a>
+          </li>
+          <li role="presentation">
+           <a class="listmenulink" href="/cgi-bin/koha/opac-shelves.pl?display=publicshelves" role="menuitem" tabindex="-1">
+            View All
+           </a>
+          </li>
+          <li class="divider" role="presentation">
+          </li>
+          <li role="presentation">
+           <a href="/cgi-bin/koha/opac-shelves.pl?display=privateshelves" role="menuitem" tabindex="-1">
+            <strong>
+             Your lists
+            </strong>
+           </a>
+          </li>
+          <li role="presentation">
+           <a class="menu-inactive loginModal-trigger" href="/cgi-bin/koha/opac-user.pl" role="menuitem" tabindex="-1">
+            Log in to create your own lists
+           </a>
+          </li>
+         </ul>
+         <!-- / .dropdown-menu -->
+        </li>
+        <!-- / .dropdown -->
+       </ul>
+       <!-- / .nav -->
+       <div id="listsDetails">
+       </div>
+       <a class="pull-right" href="#" id="user-menu-trigger">
+        <i class="icon-user">
+        </i>
+        <span class="caret">
+        </span>
+       </a>
+       <div id="members">
+        <ul class="nav pull-right">
+         <li>
+          <a class="loginModal-trigger" data-toggle="modal" href="/cgi-bin/koha/opac-user.pl" role="button">
+           Log in to your account
+          </a>
+         </li>
+        </ul>
+       </div>
+       <!-- /members -->
+      </div>
+      <!-- /container-fluid -->
+     </div>
+     <!-- /navbar-inner -->
+    </div>
+    <!-- /navbar -->
+   </div>
+   <!-- / header-region -->
+   <div class="container-fluid">
+    <div class="row-fluid">
+     <div id="opac-main-search">
+      <!--             <div class="span2">
+        
+            <h1 id="libraryname">
+        
+            <a href="/cgi-bin/koha/opac-main.pl">Koha Online Catalog</a></h1>
+    </div> /.span2 -->
+      <div class="span12">
+       <div class="mastheadsearch librarypulldown">
+        <form action="/cgi-bin/koha/opac-search.pl" class="form-inline" id="searchform" method="get" name="searchform">
+         <label for="masthead_search">
+          Search
+         </label>
+         <select id="masthead_search" name="idx">
+          <option value="">
+           Library catalog
+          </option>
+          <option value="ti">
+           Title
+          </option>
+          <option value="au">
+           Author
+          </option>
+          <option value="su">
+           Subject
+          </option>
+          <option value="nb">
+           ISBN
+          </option>
+          <option value="se">
+           Series
+          </option>
+          <option value="callnum">
+           Call number
+          </option>
+         </select>
+         <input class="transl1" id="translControl1" name="q" title="Type search term" type="text"/>
+         <span id="translControl">
+         </span>
+         <div class="input-append">
+          <select id="select_library" name="branch_group_limit">
+           <option value="">
+            All libraries
+           </option>
+           <optgroup label="Libraries">
+            <option selected="selected" value="branch:ILC">
+             Illinois Leadership Center
+            </option>
+            <option value="branch:TCC">
+             The Career Center
+            </option>
+           </optgroup>
+           <optgroup label="Groups">
+            <option value="multibranchlimit-ALL">
+             TCC and ILC
+            </option>
+           </optgroup>
+          </select>
+          <button class="btn btn-primary" id="searchsubmit" type="submit">
+           Go
+          </button>
+         </div>
+        </form>
+       </div>
+       <!-- / .mastheadsearch -->
+       <div class="row-fluid">
+        <div id="moresearches">
+         <ul>
+          <li>
+           <a href="/cgi-bin/koha/opac-search.pl">
+            Advanced search
+           </a>
+          </li>
+          <li>
+           <a href="/cgi-bin/koha/opac-authorities-home.pl">
+            Authority search
+           </a>
+          </li>
+          <li>
+           <a href="/cgi-bin/koha/opac-showreviews.pl">
+            Recent comments
+           </a>
+          </li>
+          <li>
+           <a href="/cgi-bin/koha/opac-tags.pl">
+            Tag cloud
+           </a>
+          </li>
+          <li>
+           <a href="/cgi-bin/koha/opac-tags_subject.pl">
+            Subject cloud
+           </a>
+          </li>
+         </ul>
+        </div>
+        <!-- /#moresearches -->
+       </div>
+       <!-- /.row-fluid -->
+      </div>
+      <!-- /.span10 -->
+     </div>
+     <!-- /.opac-main-search -->
+    </div>
+    <!-- / .row-fluid -->
+   </div>
+   <!-- /.container-fluid -->
+   <!-- Login form hidden by default, used for modal window -->
+   <div aria-hidden="true" aria-labelledby="modalLoginLabel" class="modal hide" id="loginModal" role="dialog" tabindex="-1">
+    <div class="modal-header">
+     <button aria-hidden="true" class="closebtn" data-dismiss="modal" type="button">
+      ×
+     </button>
+     <h3 id="modalLoginLabel">
+      Log in to your account
+     </h3>
+    </div>
+    <form action="/cgi-bin/koha/opac-user.pl" id="modalAuth" method="post" name="auth">
+     <div class="modal-body">
+      <input name="koha_login_context" type="hidden" value="opac"/>
+      <fieldset class="brief">
+       <label for="muserid">
+        Login:
+       </label>
+       <input id="muserid" name="userid" type="text"/>
+       <label for="mpassword">
+        Password:
+       </label>
+       <input id="mpassword" name="password" type="password"/>
+      </fieldset>
+     </div>
+     <div class="modal-footer">
+      <input class="btn btn-primary" type="submit" value="Log in"/>
+      <a aria-hidden="true" class="cancel" data-dismiss="modal" href="#">
+       Cancel
+      </a>
+     </div>
+    </form>
+    <!-- /#auth -->
+   </div>
+   <!-- /#modalAuth  -->
+   <div class="main">
+    <ul class="breadcrumb">
+     <li>
+      <a href="#">
+       Home
+      </a>
+     </li>
+    </ul>
+    <div class="container-fluid" id="notloggedin">
+     <div class="row-fluid">
+      <div class="span2">
+       <div id="navigation">
+        <div id="opacnav">
+        </div>
+        <div id="opacnavbottom">
+        </div>
+       </div>
+      </div>
+      <div class="span7">
+       <div id="opacmainuserblock">
+        <div id="ilcVisible">
+         <img alt="Students using library photo" height="200" src="http://leadership.illinois.edu/sites/default/files/library.jpg" style="float:right; padding:10px;" width="200"/>
+         <h1 class="title">
+          Welcome to the Illinois Leadership Center’s Cavenaugh Leadership Library catalog!
+         </h1>
+         <p>
+          Looking for a book to read on personal development?  Want to check out materials for a leadership activity?  The Cavenaugh Leadership library consists of a variety of resources related to leadership –including activity materials, academic texts, and popular press books.
+          <span style="font-style: italic">
+          </span>
+         </p>
+         <p>
+          All resources are available free of charge to members of the University of Illinois community with a valid i-card.  Materials can be checked out for up to two weeks.
+         </p>
+         <p>
+          If you are looking for a specific book, enter the title or author in the search field above and it will indicate the item’s availability.  Visit the Illinois Leadership Center at 290 Illini Union to check out your item. If you are looking for recommendations, check out our LibGuides on the Illinois Leadership Competencies here:
+          <ul>
+           <li>
+            <a href="http://guides.library.illinois.edu/leadership/personal/gettingstarted">
+             Personal/Self
+            </a>
+           </li>
+           <li>
+            <a href="http://guides.library.illinois.edu/leadership/interpersonal-team/gettingstarted">
+             Interpersonal/Team
+            </a>
+           </li>
+           <li>
+            <a href="http://guides.library.illinois.edu/leadership/organization/gettingstarted">
+             Organization
+            </a>
+           </li>
+           <li>
+            <a href="http://guides.library.illinois.edu/leadership/community-society/gettingstarted">
+             Community/Society
+            </a>
+           </li>
+          </ul>
+          The Cavenaugh Leadership Library is supported by an endowment from alumni Richard F. Cavenaugh
+         </p>
+        </div>
+        <div id="tccVisible">
+         <img alt="The Career Center Resource Library" height="225" src="https://www.careercenter.illinois.edu/sites/default/files/images/resourcecenter/books1.png" style="float: right; padding-left:20px;" width="168.75"/>
+         <div id="welcome" style="padding-bottom:20px">
+          <h1 class="title">
+           Welcome to The Career Center Resource Library catalog!
+          </h1>
+          <div <p="" style="padding-top:20px padding-bottom:20px">
+           Our resource center library has a range of materials to help you achieve your career goals. Career topics include: career exploration, entrepreneurship, job/internship search, resume and cover letter writing, interview preparation, networking, graduate school applications, health professions, and much more!
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<p>
+ All resources are available free of charge to members of the University of Illinois community with a valid i-card. A maximum of two items can be checked out at a time for up to two weeks.
+</p>
+<div id="featuredbooks" style="padding-bottom:20px">
+ <h2 style="padding-top:20px">
+  Are You Ready for your Job Search?
+ </h2>
+ <div>
+  <p style="padding-bottom:20px">
+   Resume/cover letter writing, company research, interview prep, oh my! Not sure how to begin the job search? Check out these books for job search strategies that will help you get your head (and application materials) in the game.
+  </p>
+ </div>
+ <div id="booktable" style="overflow-x:auto;">
+  <hr color="#C0C0C0" size="4" width="100%"/>
+  <table cellpadding="10" width="100%">
+   <tbody>
+    <tr>
+     <td align="center" border="0" valign="top">
+      <p class="cover">
+       <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=997" target="_self">
+        <img alt="" border="0" height="205" src="https://books.google.com/books/content?id=arlNAhTV-o0C&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;imgtk=AFLRE72FO_-7UJrKu_VP9Voeh9TPSI-kwoKQ-mlgCxr-FXSmQY4mnuSa2ye3V3zkvaqVXGF8tCX-4wcYsiGdy_Un7zs2KIp4clrqD9oAl-HyRdwHfAIDiG-RjDQ4B0dkTQ6sZ56ocuaZ" width="137"/>
+       </a>
+      </p>
+      <br/>
+      <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=997" target="_self">
+       <b>
+        The 2-hour job search
+       </b>
+      </a>
+      <br/>
+     </td>
+     <td align="center" border="0" valign="top">
+      <p class="cover">
+       <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=334" target="_self">
+        <img alt="" border="0" height="205" src="https://books.google.com/books/content?id=RrxoPgAACAAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;imgtk=AFLRE73iOkIs0qBUWI2xoNB8PggbOc4zvDIhF6sGUjWY0OrKj8b_z-ITXbDE1_veYlj-fl7wu_0QN__Prek_yUvMHzR4cZdwbv0FJFl0OTXdUVz_WcLOuxV1t4cfz4RJtFA0W67T-cws" width="137"/>
+       </a>
+      </p>
+      <br/>
+      <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=334" target="_self">
+       <b>
+        The smart new way to get hired
+       </b>
+      </a>
+      <br/>
+     </td>
+     <td align="center" border="0" valign="top">
+      <p class="cover">
+       <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=1491" target="_self">
+        <img alt="" border="0" height="205" src="https://books.google.com/books/content?id=Z8r3ngEACAAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;imgtk=AFLRE706q8a00r4WfqpnGxKBnJ0BpdysXIpkKFmcP8wda610SJSBhVz8RrFsUoeKUomvvqr75IV16r-qwkl8awzxW7hBdIh6glJbByP_AbI9TII1dmIXhVF03AX8vQiJM6ADLg213kPe" width="137"/>
+       </a>
+      </p>
+      <br/>
+      <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=1491" target="_self">
+       <b>
+        Linkedin for college students
+       </b>
+      </a>
+      <br/>
+     </td>
+     <td align="center" border="0" valign="top">
+      <p class="cover">
+       <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=1763" target="_self">
+        <img alt="" border="0" height="205" src="https://books.google.com/books/content?id=cSJB9l-CVlQC&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;imgtk=AFLRE709Ev3ZBjHUQRvlDclMdWApARhAjUdfbj9iMPSp3V5i8g50IVAls9soWVfO5GK5Ijmhf6guCWvwC5L_fPJvuC55eaqzxBTDYlDJtPPeck0E7_vAbsJDRrsmgI-a_dVKaBpWwcqg" width="158"/>
+       </a>
+      </p>
+      <br/>
+      <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=1763" target="_self">
+       <b>
+        Smart moves for liberal arts graduates
+       </b>
+      </a>
+      <br/>
+     </td>
+     <td align="center" border="0" valign="top">
+      <p class="cover">
+       <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=343" target="_self">
+        <img alt="" border="0" height="205" src="https://books.google.com/books/content?id=rDLTfOijurEC&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;imgtk=AFLRE726TobFpmL5Ellt1R87R8O3j70XgTI5CT-YFaQ-xH_cxNAOBK1Lq7K9jw9KWXyq2Axtif8CMR6-aEukCsPwyI0dKv_KCsGvsnQXt-BToc5gKWTi0-i0YqHl5CDZSbw9Y2rgzZU3" width="137"/>
+       </a>
+      </p>
+      <br/>
+      <a border="0" href="/cgi-bin/koha/opac-detail.pl?biblionumber=343" target="_self">
+       <b>
+        How to get any job
+       </b>
+      </a>
+      <br/>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <hr color="#C0C0C0" size="4" width="100%"/>
+ </div>
+</div>
+<!-- / .span 7/9 -->
+<div class="span3">
+ <div id="login">
+  <form action="/cgi-bin/koha/opac-user.pl" id="auth" method="post" name="auth">
+   <input name="koha_login_context" type="hidden" value="opac"/>
+   <fieldset class="brief">
+    <legend>
+     Log in to your account:
+    </legend>
+    <label for="userid">
+     Login:
+    </label>
+    <input id="userid" name="userid" type="text"/>
+    <label for="password">
+     Password:
+    </label>
+    <input id="password" name="password" type="password"/>
+    <fieldset class="action">
+     <input class="btn" type="submit" value="Log in"/>
+    </fieldset>
+   </fieldset>
+  </form>
+ </div>
+ <!-- /#login -->
+</div>
+<!-- / .span3 -->
+<!-- /.container-fluid -->
+<!-- /.row-fluid -->
+<!-- /.main -->
+<div class="container-fluid">
+ <div class="row-fluid">
+  <div class="span12">
+   <div class="noprint" id="opaccredits">
+    <div id="ilcVisible">
+     <div style="width: 982px;margin-right: auto;margin-left: auto;margin-top: 0;margin-bottom: 0;padding: 10px; background-color: #FFFFFF;display: block;border-right-width: 1px;border-left-width: 1px;border-right-style: solid;border-left-style: solid;border-right-color: #999999;border-left-color: #999999;border-top-width: 1px;border-top-style: solid;border-top-color: #999999;
+background: #404040;color: #FFFFFF;">
+      Illinois Leadership Center
+      <div style="float:right;">
+       A partnership between Academic Affairs and Student Affairs
+      </div>
+      <br>
+       290 Illini Union, MC-384
+       <br>
+        ph: 217.333.0604
+        <br>
+         fax: 217.265.8464
+         <br>
+          leadership@illinois.edu
+          <br>
+          </br>
+         </br>
+        </br>
+       </br>
+      </br>
+     </div>
+    </div>
+    <div id="tccVisible">
+     <div style="width: 982px;margin-right: auto;margin-left: auto;margin-top: 0;margin-bottom: 0;padding: 10px; background-color: #ddd ;display: block;border-right-width: 1px;border-left-width: 1px;border-right-style: solid;border-left-style: solid;border-right-color: #999999;border-left-color: #999999;border-top-width: 1px;border-top-style: solid;border-top-color: #999999;background: #2A445B;color: #c4c4c4;">
+      <a href="https://www.careercenter.illinois.edu/" style="color:#c4c4c4;">
+       The Career Center
+      </a>
+      <div style="float:right;">
+       We are one of over twenty Career Services offices on campus.
+      </div>
+      <br>
+       715 S. Wright St
+       <br>
+        Champaign, IL, 61820
+        <br>
+         Hours: 8:30-5:00 M-F
+         <br>
+          ph: 217.333.0604
+          <br>
+          </br>
+         </br>
+        </br>
+       </br>
+      </br>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<!-- / #wrap in masthead.inc -->
+<!-- JavaScript includes -->
+<script src="/opac-tmpl/bootstrap/lib/jquery/jquery.js" type="text/javascript">
+</script>
+<script src="/opac-tmpl/bootstrap/lib/jquery/jquery-ui.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+ // Resolve name collision between jQuery UI and Twitter Bootstrap
+$.widget.bridge('uitooltip', $.ui.tooltip);
+</script>
+<script src="/opac-tmpl/bootstrap/lib/bootstrap/js/bootstrap.min.js" type="text/javascript">
+</script>
+<script src="/opac-tmpl/bootstrap/js/global.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+ Modernizr.load([
+        // Test need for polyfill
+        {
+            test: window.matchMedia,
+            nope: "/opac-tmpl/bootstrap/lib/media.match.min.js"
+        },
+        // and then load enquire
+        "/opac-tmpl/bootstrap/lib/enquire.min.js",
+        "/opac-tmpl/bootstrap/js/script.js"
+    ]);
+</script>
+<script type="text/javascript">
+ //<![CDATA[
+    var MSG_CONFIRM_AGAIN = _("Warning: Cannot be undone. Please confirm once again")
+    var MSG_DELETE_SEARCH_HISTORY = _("Are you sure you want to delete your search history?");
+    var MSG_NO_SUGGESTION_SELECTED = _("No suggestion was selected");
+    
+        var MSG_BASKET_EMPTY = _("Your cart is currently empty");
+        var MSG_RECORD_IN_BASKET = _("The item is already in your cart");
+        var MSG_RECORD_ADDED = _("The item has been added to your cart");
+        var MSG_RECORD_REMOVED = _("The item has been removed from your cart");
+        var MSG_NRECORDS_ADDED = _(" item(s) added to your cart");
+        var MSG_NRECORDS_IN_BASKET = _("already in your cart");
+        var MSG_NO_RECORD_SELECTED = _("No item was selected");
+        var MSG_NO_RECORD_ADDED = _("No item was added to your cart");
+        var MSG_CONFIRM_DEL_BASKET = _("Are you sure you want to empty your cart?");
+        var MSG_CONFIRM_DEL_RECORDS = _("Are you sure you want to remove the selected items?");
+        var MSG_ITEM_IN_CART = _("In your cart");
+        var MSG_IN_YOUR_CART = _("Items in your cart: ");
+        var MSG_ITEM_NOT_IN_CART = _("Add to your cart");
+        var MSG_NO_RECORD_SELECTED = _("No item was selected");
+    
+    
+        var MSG_TAGS_DISABLED = _("Sorry, tags are not enabled on this system.");
+        var MSG_TAG_ALL_BAD = _("Error! Your tag was entirely markup code.  It was NOT added.  Please try again with plain text.");
+        var MSG_ILLEGAL_PARAMETER = _("Error! Illegal parameter");
+        var MSG_TAG_SCRUBBED = _("Note: your tag contained markup code that was removed. The tag was added as ");
+        var MSG_ADD_TAG_FAILED = _("Error! The add_tag operation failed on");
+        var MSG_ADD_TAG_FAILED_NOTE = _("Note: you can only tag an item with a given term once.  Check 'My Tags' to see your current tags.");
+        var MSG_DELETE_TAG_FAILED = _("Error! You cannot delete the tag");
+        var MSG_DELETE_TAG_FAILED_NOTE = _("Note: you can only delete your own tags.")
+        var MSG_LOGIN_REQUIRED = _("You must be logged in to add tags.");
+        var MSG_TAGS_ADDED = _("Tags added: ");
+        var MSG_TAGS_DELETED = _("Tags added: ");
+        var MSG_TAGS_ERRORS = _("Errors: ");
+        var MSG_MULTI_ADD_TAG_FAILED = _("Unable to add one or more tags.");
+        var MSG_NO_TAG_SPECIFIED = _("No tag was specified.");
+    
+    
+    //]]>
+</script>
+<script src="/opac-tmpl/bootstrap/js/basket.js" type="text/javascript">
+</script>
+<script src="/opac-tmpl/bootstrap/js/tags.js" type="text/javascript">
+</script>
+<script src="/opac-tmpl/bootstrap/js/google-jackets.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+ //<![CDATA[
+        var NO_GOOGLE_JACKET = _("No cover image available");
+        //]]>
+</script>
+<script type="text/javascript">
+ //<![CDATA[
+          var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2831657-10']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        //]]>
+</script>
+
