@@ -56,12 +56,14 @@ def main():
                 link_index = item.result()[1]
         total_link_list.clear()
         total_link_list += list(set().union(new_link))
-        print(size(total_memory))
+        #print(size(total_memory))
         if total_memory > MAX_MEMORY :
             not_over_limit = False
+
     #print(total_link_list)
-    
-    print(link_index)
+    with open('total_index' + filename, "w") as f:
+        print(link_index,file = f)
+    #print(link_index)
     print(total_memory)
 
 def search_download (urlpage,level,link_index,page,not_over_limit):
@@ -80,7 +82,7 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
         req = urllib.request.Request(url=urlpage, headers=headers)
         soup = bs(urllib.request.urlopen(req,timeout = 20),'html.parser')
     except urllib.error.URLError as error:
-        print (error)
+        #print (error)
         return list_link, link_index
     except IncompleteRead:
     # Oh well, reconnect and keep trucking
@@ -88,16 +90,18 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
         return list_link, link_index
     except socket.error:
         return list_link, link_index
+    except:
+        return list_link, link_index
 
     html = soup.prettify()
-    filename = "web_" + str(level) + "_" + str(page)
-    with open('data/' + filename, "w") as f:
+    filename = "web_" + str(page)
+    with open('data/'+ 'level' +str(level)+"/" + filename, "w") as f:
         print(html,file = f)
     f.close()
 
-    memory =  os.stat('data/' + filename)
+    memory =  os.stat('data/'+ 'level' +str(level)+"/" + filename)
     total_memory += memory.st_size
-    print("data/" + filename)
+    #print("data_1/" + filename)
     
     if not_over_limit :
         level += 1
@@ -106,14 +110,15 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
             if(link_name):
                 if link_name.startswith("http"):
                     if link_name.endswith(".edu") or link_name.endswith(".edu/"):
-                        if remove(link_name) not in link_index:
+                        s1 = remove(link_name) 
+                        if s1 not in link_index:
                             if link_name.startswith("https//"):
                                 link_name = link_name.replace("https//" , "https://")
                             if link_name.startswith("http//"):
                                 link_name = link_name.replace("http//" , "https://")
 
                             list_link.append(link_name)
-                            link_index[remove(link_name)] = level
+                            link_index[s1] = level
         list_link = list(set().union(list_link))
 
     return list_link, link_index

@@ -46,14 +46,14 @@ def htmlParse(newdirectory, filename, level, page_number):
     data = {}
     data['create'] = { "_index": "webdocs", "_type": "webdoc", "_id": str(page_number)}
     item  = {}
-    item = {"id" : str(page_number), "title" :web_title, "url" :web_url, "level": level, "body": body}
+    item = {"id" : str(page_number), "title" :web_title, "url" :web_url, "level": level,"filename": newdirectory +"/" +filename,  "body": body}
     with open('data.txt', 'a') as file_out:
         json.dump(data,file_out)
         file_out.write("\n")
         json.dump(item,file_out)
         file_out.write("\n")
 
-directory = 'data_1/'
+directory = 'data/'
 count  = 0
 for i in range(1, len(os.listdir(directory))+1):
     newdirectory =  directory + "level" +str(i) 
