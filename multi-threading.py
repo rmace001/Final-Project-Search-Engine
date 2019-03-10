@@ -13,14 +13,14 @@ from http.client import IncompleteRead
 import socket
 
 total_memory = 0
-MAX_MEMORY = 1.5*1024*(10**6) # 1GB 1024*10**6 only 976
+MAX_MEMORY = 1024*(10**6) # 1GB 1024*10**6 only 976
 def remove(urlpage):
     text = re.sub(r'^(http)?s?:?//(www.)? *', '', urlpage, flags=re.MULTILINE) 
     page_name = re.sub(r'.edu/?$', '', text, flags=re.MULTILINE) 
     return page_name
 
 def create_url(page_name):
-    return 'https://' + page_name + ".edu"
+    return 'https://www.' + page_name + ".edu"
 
 def main():
     NUM_WORKERS = 16
@@ -36,6 +36,8 @@ def main():
 
     new_link = [] 
     index = 0
+    os.makedirs('data/'+ 'level' +str(level)+"/")
+    
     for i in range(len(total_link_list)):
         link_item =  total_link_list.pop(0)
         next_level, link_index = search_download(link_item, level, link_index,1,True)
@@ -45,9 +47,10 @@ def main():
     total_link_list += list(set().union(new_link))
     not_over_limit  = True
     while not_over_limit:
-        pass
         new_link.clear()
         level += 1
+        if total_memory < MAX_MEMORY :
+            os.makedirs('data/'+ 'level' +str(level)+"/")
         with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
             futures = {executor.submit(search_download, address, level, link_index,total_link_list.index(address)+1,not_over_limit) for address in total_link_list}
             concurrent.futures.wait(futures)
@@ -56,13 +59,16 @@ def main():
                 link_index = item.result()[1]
         total_link_list.clear()
         total_link_list += list(set().union(new_link))
-        #print(size(total_memory))
+        print("total_memory now is: ", size(total_memory))
         if total_memory > MAX_MEMORY :
             not_over_limit = False
+        print(not_over_limit)
 
     #print(total_link_list)
-    with open('total_index' + filename, "w") as f:
+    """
+    with open('total_index.text', "w") as f:
         print(link_index,file = f)
+    """
     #print(link_index)
     print(total_memory)
 
@@ -81,23 +87,20 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
     try:    
         req = urllib.request.Request(url=urlpage, headers=headers)
         soup = bs(urllib.request.urlopen(req,timeout = 20),'html.parser')
-    except urllib.error.URLError as error:
-        #print (error)
-        return list_link, link_index
-    except IncompleteRead:
-    # Oh well, reconnect and keep trucking
-        #continue 
-        return list_link, link_index
-    except socket.error:
-        return list_link, link_index
     except:
-        return list_link, link_index
-
+        return list_link, link_index   
     html = soup.prettify()
     filename = "web_" + str(page)
-    with open('data/'+ 'level' +str(level)+"/" + filename, "w") as f:
-        print(html,file = f)
-    f.close()
+    try:
+        if not_over_limit :
+            with open('data/'+ 'level' +str(level)+"/" + filename, "w") as f:
+                f.write(urlpage)
+                f.write("\n")
+                print(html,file = f)
+            #print(os.stat(f))
+            f.close()
+    except:
+        return list_link, link_index
 
     memory =  os.stat('data/'+ 'level' +str(level)+"/" + filename)
     total_memory += memory.st_size

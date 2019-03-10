@@ -14,7 +14,7 @@ import operator
 import urllib.request
 import re
 import json
-def htmlParse(newdirectory, filename, level, page_number):
+def htmlParse(newdirectory, filename, level, page_number,find_duplicate):
 
 
     #Start the soup
@@ -24,7 +24,10 @@ def htmlParse(newdirectory, filename, level, page_number):
     file_open =  open(newdirectory+ "/" + filename, 'r') 
     web_url = file_open.readline() 
     web_url = web_url.replace("\n","")
-
+    if web_url in find_duplicate:
+        find_duplicate[web_url] = find_duplicate[web_url] + 1
+    if web_url not in find_duplicate:
+        find_duplicate[web_url] = 1
     #Get title works correctly
     try:
         web_title = soup.find('title').get_text()
@@ -55,13 +58,18 @@ def htmlParse(newdirectory, filename, level, page_number):
 
 directory = 'data/'
 count  = 0
-for i in range(1, len(os.listdir(directory))+1):
+find_duplicate = {}
+for i in range(1, len(os.listdir(directory))):
     newdirectory =  directory + "level" +str(i) 
     for filename in os.listdir(newdirectory):
         count += 1
-        htmlParse(newdirectory, filename, i, count)
+        htmlParse(newdirectory, filename, i, count,find_duplicate)
+with open('find_duplicate.txt', 'a') as file_out:
+        print(find_duplicate, file = file_out)
 
-
+for value, key in find_duplicate:
+    if int(key) > 2:
+        print(value)
 #getFiles()
 
 
