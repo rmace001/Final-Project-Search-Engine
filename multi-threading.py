@@ -8,6 +8,7 @@ import time
 import concurrent.futures
 from urllib import request
 import socket
+import multiprocessing
 total_page = 0
 total_memory = 0
 MAX_MEMORY = 1024*(10**6) # 1GB 1024*10**6 only 976
@@ -23,7 +24,6 @@ def main(limit_bool,limit_level_int,limit_page_int):
     NUM_WORKERS = 16
     global MAX_MEMORY
     global total_memory
-    global total_page
     urlpage = 'https://www.ucr.edu/'
     total_link_list = []
     total_link_list.append(urlpage)
@@ -34,56 +34,58 @@ def main(limit_bool,limit_level_int,limit_page_int):
     new_link = [] 
     index = 0
     os.makedirs('data/'+ 'level' +str(level)+"/")
-    total_page = len(link_index)
-    print("Now total page is ",total_page)
+    #total_page = len(total_link_list)
     for i in range(len(total_link_list)):
         link_item =  total_link_list.pop(0)
-        next_level, link_index = search_download(link_item, level, link_index,1,True)
+        next_level, link_index = search_download(link_item, level, link_index,1,True,limit_page_int)
         new_link += next_level
 
     total_link_list += list(set().union(new_link))
     not_over_limit  = True
-    diff = int(limit_page_int) - total_page 
     #print("diff is ", diff)
-    if diff < len(total_link_list):
-        total_link_list =   total_link_list[:(diff)]
-        print("NOW next level is ", len(total_link_list))
     while not_over_limit:
         new_link.clear()
         level += 1
         if total_memory < MAX_MEMORY :
             os.makedirs('data/'+ 'level' +str(level)+"/")
         with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
-            futures = {executor.submit(search_download, address, level, link_index,total_link_list.index(address)+1,not_over_limit) for address in total_link_list}
-            concurrent.futures.wait(futures)
+            m = multiprocessing.Manager()
+            lock = m.Lock()
+            futures = {executor.submit(search_download, address, level, link_index,total_link_list.index(address)+1,not_over_limit,limit_page_int) for address in total_link_list}
+            concurrent.futures.wait(futures,timeout = 10)
             for item in futures:
                 new_link += item.result()[0]
                 link_index = item.result()[1]
 
-        print("now it is total_page is ", len(link_index))
-        if (limit_bool): # if limit = true check the level to MAX level
-            if (limit_level_int == level):
-                print("LightSABR's web crawling reach level: ", level)
-                not_over_limit = False
-            if total_page == limit_page_int:
-                not_over_limit = False
-        if total_memory > MAX_MEMORY :
-            not_over_limit = False
         if not_over_limit :
             total_link_list.clear()
             total_link_list += list(set().union(new_link))
+        #total_page = (len(link_index) - len(total_link_list))  # total_link_list is next level
+        #print(total_page)
+        if (limit_bool): # if limit = true check the level to MAX level
+            if (limit_level_int == level):
+                not_over_limit = False
+            if total_page > limit_page_int or total_page == limit_page_int:
+                not_over_limit = False
+        if total_memory > MAX_MEMORY :
+            not_over_limit = False
+        
             #print("total_memory now is: ", size(total_memory))
-    print("LightSABR's web crawling reach memory: ", total_memory)
-    print("LightSABR's web crawling reach page: ", total_page)
+    print("LightSABR web crawling reach memory: ", total_memory)
+    print("LightSABR web crawling reach page: ", total_page)
+    print("LightSABR web crawling reach level: ", level)
 
 
-def search_download (urlpage,level,link_index,page,not_over_limit):
+def search_download (urlpage,level,link_index,page,not_over_limit,limit_page):
     global total_memory 
-    list_link = []
     global total_page
+    list_link = []
     # build the header/user-agent to deal with webPAGE 403
     headers = {'User-Agent':'Mozilla/5.0'}
     # check URL error 
+    if total_page > limit_page or total_page == limit_page:
+        #print(total_page)
+        return list_link, link_index  
     if urlpage.startswith("https//"):
         urlpage = urlpage.replace("https//" , "https://")
     if urlpage.startswith("http//"):
@@ -110,6 +112,7 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
     # check memory
     memory =  os.stat('data/'+ 'level' +str(level)+"/" + filename)
     total_memory += memory.st_size
+    total_page+=1
     # end of check memory
     if not_over_limit :
         level += 1
@@ -133,7 +136,7 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
 # main function
 if __name__ == "__main__":
     os.makedirs("data/")
-    print("\n***************************************************************")
+    print("\n==============================================================================\n")
     print("Weclome to LightSABR's web crawling\n")
     print("Default: : if application get the file over 1GB in level K, the application will stop when it finished web crawling in level K")
     print("Do you want to limit the web crawl by page or level ?")
@@ -148,11 +151,14 @@ if __name__ == "__main__":
     if answer == '1':
         limit = True
         print("If you want to limit by level or page, the application wouldn't limit by 1 GB")
-        limit_level = int(input("Please enter MAX ( input must >1 ) level = "))
-        limit_page = int(input("Please enter MAX ( input must >1 ) page = "))
+        limit_level = int(input("Please enter MAX ( input must > 1 ) level = "))
+        limit_page = int(input("Please enter MAX ( input must > 17) page = "))
+        print("Tip: When web crawl reach MAX page, it will stop to load file.")
+        print("Tip: When web crawl reach MAX level before reach MAX page, the application would stop")
         print("\n==============================================================================\n")
     start = time.time()
-    main(limit,limit_level,limit_page)
+    main(limit,limit_level,limit_page-15)
     end = time.time()
-    print("LightSABR's web crawling spend :", end - start)
+    print("LightSABR web crawling spend :", end - start, " sec")
+    #print("total_page ", total_page)
    
