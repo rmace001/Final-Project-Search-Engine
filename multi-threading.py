@@ -4,14 +4,11 @@ import csv
 import os
 from hurry.filesize import size
 import re
-from pyspark import SparkContext
 import time
-import threading
 import concurrent.futures
 from urllib import request
-from http.client import IncompleteRead
 import socket
-
+total_page = 0
 total_memory = 0
 MAX_MEMORY = 1024*(10**6) # 1GB 1024*10**6 only 976
 def remove(urlpage):
@@ -22,11 +19,11 @@ def remove(urlpage):
 def create_url(page_name):
     return 'https://www.' + page_name + ".edu"
 
-def main():
+def main(limit_bool,limit_level_int,limit_page_int):
     NUM_WORKERS = 16
     global MAX_MEMORY
     global total_memory
-
+    global total_page
     urlpage = 'https://www.ucr.edu/'
     total_link_list = []
     total_link_list.append(urlpage)
@@ -37,15 +34,20 @@ def main():
     new_link = [] 
     index = 0
     os.makedirs('data/'+ 'level' +str(level)+"/")
-    
+    total_page = len(link_index)
+    print("Now total page is ",total_page)
     for i in range(len(total_link_list)):
         link_item =  total_link_list.pop(0)
         next_level, link_index = search_download(link_item, level, link_index,1,True)
         new_link += next_level
-    #print(new_link)
-    
+
     total_link_list += list(set().union(new_link))
     not_over_limit  = True
+    diff = int(limit_page_int) - total_page 
+    #print("diff is ", diff)
+    if diff < len(total_link_list):
+        total_link_list =   total_link_list[:(diff)]
+        print("NOW next level is ", len(total_link_list))
     while not_over_limit:
         new_link.clear()
         level += 1
@@ -57,28 +59,30 @@ def main():
             for item in futures:
                 new_link += item.result()[0]
                 link_index = item.result()[1]
-        total_link_list.clear()
-        total_link_list += list(set().union(new_link))
-        print("total_memory now is: ", size(total_memory))
+
+        print("now it is total_page is ", len(link_index))
+        if (limit_bool): # if limit = true check the level to MAX level
+            if (limit_level_int == level):
+                print("LightSABR's web crawling reach level: ", level)
+                not_over_limit = False
+            if total_page == limit_page_int:
+                not_over_limit = False
         if total_memory > MAX_MEMORY :
             not_over_limit = False
-        print(not_over_limit)
+        if not_over_limit :
+            total_link_list.clear()
+            total_link_list += list(set().union(new_link))
+            #print("total_memory now is: ", size(total_memory))
+    print("LightSABR's web crawling reach memory: ", total_memory)
+    print("LightSABR's web crawling reach page: ", total_page)
 
-    #print(total_link_list)
-    """
-    with open('total_index.text', "w") as f:
-        print(link_index,file = f)
-    """
-    #print(link_index)
-    print(total_memory)
 
 def search_download (urlpage,level,link_index,page,not_over_limit):
     global total_memory 
     list_link = []
-
+    global total_page
     # build the header/user-agent to deal with webPAGE 403
     headers = {'User-Agent':'Mozilla/5.0'}
-    
     # check URL error 
     if urlpage.startswith("https//"):
         urlpage = urlpage.replace("https//" , "https://")
@@ -86,9 +90,11 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
         urlpage = urlpage.replace("http//" , "https://")
     try:    
         req = urllib.request.Request(url=urlpage, headers=headers)
-        soup = bs(urllib.request.urlopen(req,timeout = 20),'html.parser')
+        soup = bs(urllib.request.urlopen(req,timeout = 10),'html.parser')
     except:
-        return list_link, link_index   
+        return list_link, link_index  
+    # end of check URL error
+    # load the file  
     html = soup.prettify()
     filename = "web_" + str(page)
     try:
@@ -97,15 +103,14 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
                 f.write(urlpage)
                 f.write("\n")
                 print(html,file = f)
-            #print(os.stat(f))
             f.close()
     except:
         return list_link, link_index
-
+    # end of load file
+    # check memory
     memory =  os.stat('data/'+ 'level' +str(level)+"/" + filename)
     total_memory += memory.st_size
-    #print("data_1/" + filename)
-    
+    # end of check memory
     if not_over_limit :
         level += 1
         for link in soup.find_all('a'):
@@ -126,9 +131,28 @@ def search_download (urlpage,level,link_index,page,not_over_limit):
 
     return list_link, link_index
 # main function
+if __name__ == "__main__":
+    os.makedirs("data/")
+    print("\n***************************************************************")
+    print("Weclome to LightSABR's web crawling\n")
+    print("Default: : if application get the file over 1GB in level K, the application will stop when it finished web crawling in level K")
+    print("Do you want to limit the web crawl by page or level ?")
+    answer = input("1 for yes OR 0 for No : ")
 
-start = time.time()
-main()
-end = time.time()
-print(end - start)
-
+    limit_level = 0
+    limit_page = 0
+    limit_memory = 0
+    limit = True
+    if answer == '0':
+        limit = False
+    if answer == '1':
+        limit = True
+        print("If you want to limit by level or page, the application wouldn't limit by 1 GB")
+        limit_level = int(input("Please enter MAX ( input must >1 ) level = "))
+        limit_page = int(input("Please enter MAX ( input must >1 ) page = "))
+        print("\n==============================================================================\n")
+    start = time.time()
+    main(limit,limit_level,limit_page)
+    end = time.time()
+    print("LightSABR's web crawling spend :", end - start)
+   
