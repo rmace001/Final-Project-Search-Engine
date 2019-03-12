@@ -1,0 +1,134 @@
+https://myaccount.parking.emory.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <noscript>
+   <meta content="15; URL=/cmn/index.aspx" http-equiv="refresh"/>
+  </noscript>
+  <title>
+   Loading Application...
+  </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <script src="../inc/clientResources/scripts/t2.jquery.min.js" type="text/javascript">
+  </script>
+  <script src="../inc/clientResources/scripts/t2.ebusiness.js" type="text/javascript">
+  </script>
+  <link href="../inc/clientResources/images/loading-favicon.gif" rel="icon" type="image/gif"/>
+ </head>
+</html>
+<script type="text/javascript">
+ jQuery(document).ready(function ()
+		{
+			var relative_redir = "%2fcmn%2findex.aspx";
+		    var error_count = 0;
+
+		    // output of error details
+		    var writeErrorDetails = function (errorMessage) {
+		        // increment the error count
+		        error_count++;
+
+		        // change the UI
+		        jQuery("#imageLoading").hide();
+		        jQuery("#imageAlert").show();
+		        jQuery('#loadDetails').text(errorMessage);
+		    };
+
+		    var tryAgain = function(method)
+		    {
+		        var error_limit = 5;
+		        // give up if we've had too many errors
+		        if (error_count < error_limit)
+		        {
+		            jQuery('#loadDetails').append("<p>Automatically retrying (" + error_count + ")...</p>");
+		        }
+		        else
+		        {
+		            jQuery("#imageAlert").removeClass().addClass("ebicon-cancel-circled");
+		            jQuery('#loadDetails').append("<p>Couldn't start the application after " + error_limit + " attempts. Refresh to try again.</p>");
+		            return;
+		        }
+
+		        // otherwise, redirect (with a little 5s delay here to avoid rapid redirects)
+		        window.setTimeout(function ()
+		        {
+		            //window.location.href = decodeURIComponent(relative_redir);
+		            method();
+		        }, 5000);
+		    }
+
+			// some special error handling for this sucker.
+			var errorHandler = function (jqXHR, status, errorThrown)
+			{
+			    t2eb.log(status);
+			    writeErrorDetails(errorThrown);
+
+			    window.setTimeout(function () {
+			        window.location.href = decodeURIComponent(relative_redir);
+			    }, 2000);
+			}
+
+			var successHandler = function(response)
+			{
+			    t2eb.log(response);
+			    if (response.status == 0) {
+			        jQuery('#loadDetails').text("Application Initialized. Redirecting...");
+
+			        jQuery("#imageLoading").hide();
+			        jQuery("#imageAlert").show();
+			        jQuery("#imageAlert").removeClass().addClass("ebicon-ok-circled");
+
+			        t2eb.log("redirecting to " + relative_redir);
+			        // set a little 5s delay here to avoid rapid redirects
+			        window.setTimeout(function () {
+			            window.location.href = decodeURIComponent(relative_redir);
+			        }, 500);
+			    }
+			    else {
+			        writeErrorDetails(response.data);
+			        tryAgain(function () { initialize(); });
+			    }
+			}
+
+			var initialize = function ()
+			{
+			    jQuery.ajax({
+			        url: '../adm/API.aspx?m=do_app_initialize',
+			        data: '',
+			        dataType: 'json',
+			        success: successHandler,
+                    error: errorHandler,
+			        cache: false,
+			        timeout: 120000,	// 120 seconds
+			    });
+			}
+
+			initialize();
+		});
+</script>
+<link href="../inc/clientResources/styles/t2.elements.css" rel="stylesheet" type="text/css"/>
+<link href="../inc/clientResources/fonts/eb-fontello/t2ebicon.css" rel="stylesheet" type="text/css"/>
+<link href="../inc/clientResources/fonts/eb-fontello/animation.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+ html 
+		{
+			height:100%;
+		}
+        i { font-size:3em; }
+</style>
+<body id="appInitialization">
+ <div id="initialize_message">
+  <div id="waitText" style="display:block;margin-bottom:1em;">
+   Application Initializing
+  </div>
+  <div id="waitImage">
+   <i class="ebicon-attention-1" id="imageAlert" style="display:none;">
+   </i>
+   <i class="ebicon-spinner animate-spin" id="imageLoading" style="display:inline-block;">
+   </i>
+  </div>
+  <span id="loadDetails" style="display:block;">
+   Please wait while we load settings and prepare the application.
+  </span>
+ </div>
+</body>
+

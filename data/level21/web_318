@@ -1,0 +1,992 @@
+http://grna.ctegd.uga.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8;NO-CACHE" http-equiv="Content-Type"/>
+  <meta content="KfU1ONPsLTkdGeGZ_OMDKgiIW_DH8_xsQJZ5QcaPOAU" name="google-site-verification"/>
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <title>
+   CRISPR gRNA (guide RNA) Design Tool for Eukaryotic Pathogens
+  </title>
+  <script language="javascript" src="zhuye.js?1013" type="text/javascript">
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58404052-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script src="//code.jquery.com/jquery-1.10.2.js">
+  </script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js">
+  </script>
+  <script>
+   //     $(function() {
+//    $( document ).tooltip(
+//	{
+//	show: {
+				//effect: "slideDown",
+				//delay: 2000
+//			},
+//	hide: {
+				//effect: "explode",
+				//delay: 1500
+//			}
+//	}
+//	);
+ // }); 
+  
+  $(function() {
+    $( "#accordion" ).accordion({heightStyle: "fill"});
+    $( "#accordion" ).accordion({collapsible: true});
+    $( "#accordion" ).accordion({active: 0});
+    $( "#accordion" ).accordion( "option", "active", -1 );
+
+    //$( "#accordion2" ).accordion({heightStyle: "fill"});
+    //$( "#accordion2" ).accordion({collapsible: true});
+    //$( "#accordion2" ).accordion({active: 0});
+    //$( "#accordion2" ).accordion( "option", "active", -1 );
+	$('#accordion2').accordion({ collapsible:true, active:false, autoHeight:false, disabled:true});
+	//$('#accordion2').
+	$('#accordion2 h3.ui-accordion-header').click(function(){
+    var _this = $(this);
+    $('.ui-accordion-header-icon', _this).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
+    _this.next().slideToggle();
+    return false;
+});
+  });
+  </script>
+  <link href="jquery/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+  <script src="jquery/jquery-1.10.2.js">
+  </script>
+  <script src="jquery/jquery-1.10.2.js">
+  </script>
+  <script src="jquery/ui/1.11.2/jquery-ui.js">
+  </script>
+  <!--
+  //code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css
+  //code.jquery.com/jquery-1.10.2.js
+  -->
+  <style>
+   label {
+    display: inline-block;
+    width: 5em;
+  }
+  .ui-dialog > .ui-widget-header {background: #65a9ed;}
+  .ui-dialog .ui-dialog-content { background: #ebeef1; }
+  
+  #accordion2 .ui-accordion-header { background: #99c2ff; }
+  #accordion .ui-accordion-header { background: #b3d9ff; }
+  </style>
+  <style>
+   .wrapper_sam {
+            width: 350px;
+      }
+  </style>
+ </head>
+ <body>
+  <!--
+<div id="maint_alert">
+<p style="opacity: 1;line-height: 200px;  vertical-align: middle;top:100px;text-align:center;color: #CC0000;font-size:30px">EuPaGDT is under maintenance, please check back in a few hours.</p>
+</div>
+-->
+  <!--
+<div id="dialog-modal" title="Help" style="display: none;">Make sure your gene is in the genome you have chosen. The gene copy number is for estimating the number of on-targets, see instructions for details</div>
+-->
+  <div id="dialog-fill-alert" style="display: none;" title="Alert">
+   Please fill out the following fields: job name, sequence
+  </div>
+  <div id="dialog-parameter-alert" style="display: none;" title="Alert">
+   One or more parameter you entered is not within range, guide RNA length should be between 4 and 50, homology arm length should be between 50 and 500, identity should be between 0 and 1 coverage should be between 0 to 1
+  </div>
+  <div id="dialog-PAM-alert" style="display: none;" title="Alert">
+   PAM length should be between 3 and 10, and containing only letters "A", "T", "C", "G", "R", "Y", "S", "W", "K", "M", "B", "D", "H", "V", "N", no space(s).
+  </div>
+  <div id="dialog-file" style="display: none;" title="Upload genome file help">
+   To search guide RNA off-targets in your custom genome, please upload Fasta format genome sequence file, 200MB size limit. Please contact us if you wish to add a frequently used genome to our web-server
+  </div>
+  <div id="dialog-pasteseq" style="display: none;" title="Paste sequence help">
+   please paste your input sequence to search guide RNA in. Plain sequence or FASTA format.
+   <br/>
+   <b>
+    plain sequence example
+   </b>
+   :
+   <br/>
+   ATGAGCGTAGCTGTGTGCATGTCAGTCGATGGGCATGCATGCATGCAT
+   <br/>
+   <b>
+    Fasta formate example:
+   </b>
+   <br/>
+   &gt;Tc00.1047053503403.20-trans-sialidase
+   <br/>
+   ATGCTCTCACGTGTTGATGCTGTCAAGGCACCCCGCACACACAACCGTCGCCGCGTGACCGGATCCAGCGGAAGGAGGAGGGAAGGAAGAGAGAGTGAGCCGCAGAGGCCCAACATGTCCCGGCATCACTTCTATTCTGCGGTGCTGCTCCTCCTCGTCGTGATGATGTGCCGCGGCAGTGGAGCTGCGCACGCTTTGGAGAGAAACTCAGGGGATTTGCAAATGCCGCAGGAGATCGCCATGTTTGTGCCGA
+   <br/>
+   Note that sequence name will be truncated at space or special characters: ~!?@#$%^&amp;*(){}[]"'/\,;:
+  </div>
+  <div id="dialog-singlegene" style="display: none;" title="load example help">
+   A single gene example has been loaded,
+   <b>
+    please keep
+    <i>
+     T. cruzi
+    </i>
+    genome selected to run the example
+   </b>
+  </div>
+  <div id="dialog-multigene" style="display: none;" title="load example help">
+   A multiple copy gene example has been loaded, this gene has &gt;65 copies in the
+   <i>
+    T. cruzi
+   </i>
+   genome,
+   <b>
+    please keep
+    <i>
+     T. cruzi
+    </i>
+    genome selected to run the example
+   </b>
+  </div>
+  <div id="dialog-loadexample" style="display: none;" title="load example help">
+   <b>
+    Example 1
+   </b>
+   is a single locus gene that has 2 alleles in the
+   <i>
+    T. cruzi
+   </i>
+   CL strain genome
+   <br/>
+   <b>
+    Example 2
+   </b>
+   is one member of the 65 member beta-galactofuranosyl-glycosyltransferase family. "On-target" guide RNA will be identified that target multiple gene family members. This analysis will also take significantly longer than single copy genes.
+  </div>
+  <div id="dialog-showflanklen" style="display: none;" title="help">
+   When determining gRNA on-targets, our program automatically compares the homology of each genomic hit to your gRNA-containing sequence. Sufficient homology would render a genomic hit to be an on-target. The homology arm length determines the length of the regions being compared. For example, homology arm length=50, 50bp upstream of gRNA and 50bp downstream of gRNA, plus gRNA (default 23bp), a total of 123bp will be used to determine homology
+   <br/>
+   <br/>
+   <img src="onofftarget.JPG" style="width:510px;height:300px"/>
+  </div>
+  <div id="dialog-identity" style="display: none;" title="help">
+   When determining guide RNA on-targets, our program automatically compares the homology of each genomic hit to your guide RNA-containing sequence. Sufficient homology would render a genomic hit to be an on-target. In such process, the identity parameter is the threshold for minimum alignment identity between genomic hits and guide RNA-containing sequence.
+   <br/>
+   <br/>
+   <img src="onofftarget.JPG" style="width:510px;height:300px"/>
+  </div>
+  <div id="dialog-coverage" style="display: none;" title="help">
+   When determining guide RNA on-targets, our program automatically compares the homology of each genomic hit to your guide RNA-containing sequence. Sufficient homology would render a genomic hit to be an on-target. In such process, the coverage parameter is the threshold for minimum alignment coverage between genomic hits and guide RNA-containing sequence.
+   <br/>
+   <br/>
+   <img src="onofftarget.JPG" style="width:510px;height:300px"/>
+  </div>
+  <div id="dialog-genomefile" style="display: none;" title="help">
+   You selected a custom genome file to upload, but you didn't select the custom genome option, please select the "upload your custom genome" option under "custom genome" section and click "Get guide RNA" again.
+  </div>
+  <div id="dialog-genomefileabsent" style="display: none;" title="help">
+   You selected the option to upload a custom genome file, but you didn't select anyfile.
+  </div>
+  <div id="dialog-genelength-alert" style="display: none;font-size:18px;font-weight:bold" title="alert">
+   The gene sequence you entered is less than 100bp, EuPaGDT won't be able to accurately assess guide RNA on-targets in the genome .
+  </div>
+  <div id="dialog-maxnummismatch" style="display: none;" title="help">
+   When determining guide RNA off-targets, a genomic sequence will be considered potential off-target if the alignment of it with guide RNA has less than n mismatches. "n" is the "maximum number of mismatch" parameter value
+  </div>
+  <div id="dialog-offPAM" style="display: none;" title="help">
+   RNA-guided nucleases such as Cas9 can cleave targets using alternative PAMs at lower efficiency.
+   <br/>
+   <br/>
+   For example SpCas9 can also use PAM "NAG", "NGA"(with lower efficiency compared to "NGG");
+   <br/>
+   guide RNA "ATCGATCGATCGATCGATCG|NGG" could have the off-targets:
+   <br/>
+   "ATCGATCGATCGATCGATCG|NAG",
+   <br/>
+   "ATCGATCGATCGATCGATCG|NGA"
+   <br/>
+   in undesired loci.
+  </div>
+  <div id="dialog-specialchar-alert" style="display: none;" title="help">
+   Please do not include special characters such as _!@#$%^&amp;().,; in job names
+  </div>
+  <div id="dialog-MHsearch" style="display: none;" title="help">
+   Turning on this option will enable search for microhomology pairs bracketing each gRNA.
+   <br/>
+   Microhomology pairs can, in some cases, mediate joining of double-stranded-breaks in the absence of a repair template.
+  </div>
+  <div id="dialog-conserved-region" style="display: none;" title="help">
+   Turning on this option will enable the evaulation of whether each gRNA hits a conserved region. Conserved regions are identified by tblastx (translated query vs translated database) input sequence against the following 13 genomes:
+   <br/>
+   <i>
+    Mus Musculus
+   </i>
+   ,
+   <br/>
+   <i>
+    S.cerevisiae
+   </i>
+   S288c,
+   <br/>
+   <i>
+    D. melanogaster
+   </i>
+   r6.10,
+   <br/>
+   <i>
+    N. crassa
+   </i>
+   OR74A,
+   <br/>
+   <i>
+    E. histolytica
+   </i>
+   HM1IMSS-B,
+   <br/>
+   <i>
+    C. parvum
+   </i>
+   IowaII,
+   <br/>
+   <i>
+    P. falciparum
+   </i>
+   3D7,
+   <br/>
+   <i>
+    T. gondii
+   </i>
+   ME49,
+   <br/>
+   <i>
+    T. cruzi
+   </i>
+   CLBrener,
+   <br/>
+   <i>
+    L. donovani
+   </i>
+   BPK282A1,
+   <br/>
+   <i>
+    G. intestinalis
+   </i>
+   AssemblageA,
+   <br/>
+   <i>
+    E. cuniculi
+   </i>
+   GBM1,
+   <br/>
+   <i>
+    T. annulata
+   </i>
+   Ankara.
+   <br/>
+   A region of input sequence is marked as conserved region if tblastx-matches are found for at least 12 out of 13 genomes.
+  </div>
+  <div id="dialog-Nuclease" style="display: none;" title="help">
+   The following parameters will be automatically set if respective nuclease is chosen:
+   <br/>
+   <br/>
+   <b>
+    SpCas9
+   </b>
+   : gRNA length 20; 3'PAM: NGG; off-target PAM: NAG, NGA
+   <br/>
+   <br/>
+   <b>
+    SaCas9
+   </b>
+   : gRNA length 21; 3'PAM: NNGRRT; off-target PAM: NNGRRA,NNGRRG,NNGRRC
+   <br/>
+   <br/>
+   <b>
+    AsCpf1
+   </b>
+   : gRNA length 20; 5'PAM: TTTN; off-target PAM: None
+   <br/>
+   <br/>
+   <b>
+    CjCas9
+   </b>
+   : gRNA length 23; 3'PAM: NNNNACA; off-target PAM: NNNNACAC,NNNNRYAC
+   <br/>
+   <br/>
+   <b>
+    FnCas9
+   </b>
+   : gRNA length 21; 3'PAM: NGG; off-target PAM: NGA,NAG,NAA
+   <br/>
+   <br/>
+   <b>
+    FnCpf1
+   </b>
+   : gRNA length 23; 5'PAM: TTN,YG; off-target PAM: CTN
+   <br/>
+   <br/>
+   <b>
+    LbCpf1
+   </b>
+   : gRNA length 20; 5'PAM: TTTN; off-target PAM: None
+   <br/>
+   <br/>
+   <b>
+    NmCas9
+   </b>
+   : gRNA length 20; 3'PAM: NNNNGANN; off-target PAM: NNNNGTTN,NNNNGNNT,NNNNGTNN,NNNNGNTN
+   <br/>
+   <br/>
+   <b>
+    St1Cas9
+   </b>
+   : gRNA length 20; 3'PAM: NNAGAA,NNGGAA; off-target PAM: NNAGGA,NNANAA,NNGGGA
+   <br/>
+   <br/>
+   <b>
+    TdCas9
+   </b>
+   : gRNA length 20; 3'PAM: NAAAAC; off-target PAM: None
+   <br/>
+   <br/>
+  </div>
+  <div id="dialog-tagging" style="display: none;" title="help">
+   Batch design gRNA and corresponding HDR templates to insert tags before start codons and after stop codons.
+  </div>
+  <div id="dialog-IUPACntcode" style="display: none;" title="help">
+   <br/>
+   <p style="text-align:center">
+    Please use IUPAC code for degenerative base(s) in PAM motif
+   </p>
+   <br/>
+   <table align="center" border="1" cellpadding="1" cellspacing="1">
+    <tr>
+     <td>
+      <b>
+       IUPAC nucleotide code
+      </b>
+     </td>
+     <td>
+      <b>
+       Base
+      </b>
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      A
+     </td>
+     <td style="text-align:center">
+      Adenine
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      C
+     </td>
+     <td style="text-align:center">
+      Cytosine
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      G
+     </td>
+     <td style="text-align:center">
+      Guanine
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      T
+     </td>
+     <td style="text-align:center">
+      Thymine
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      R
+     </td>
+     <td style="text-align:center">
+      A or G
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      Y
+     </td>
+     <td style="text-align:center">
+      C or T
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      S
+     </td>
+     <td style="text-align:center">
+      G or C
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      W
+     </td>
+     <td style="text-align:center">
+      A or T
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      K
+     </td>
+     <td style="text-align:center">
+      G or T
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      M
+     </td>
+     <td style="text-align:center">
+      A or C
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      B
+     </td>
+     <td style="text-align:center">
+      C or G or T
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      D
+     </td>
+     <td style="text-align:center">
+      A or G or T
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      H
+     </td>
+     <td style="text-align:center">
+      A or C or T
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      V
+     </td>
+     <td style="text-align:center">
+      A or C or G
+     </td>
+    </tr>
+    <tr>
+     <td style="text-align:center">
+      N
+     </td>
+     <td style="text-align:center">
+      any base
+     </td>
+    </tr>
+   </table>
+   <br/>
+   <p style="text-align:center">
+    Reference:
+IUPAC-IUB SYMBOLS FOR NUCLEOTIDE NOMENCLATURE:
+Cornish-Bowden (1985) Nucl. Acids Res. 13: 3021-3030.
+   </p>
+  </div>
+  <div id="dialog-confirm">
+  </div>
+  <div id="page">
+   <div id="pagetop">
+    <p>
+     <h1>
+      <span title="Eukaryotic Pathogen CRISPR guide RNA/DNA Design Tool">
+       EuPaGDT
+      </span>
+     </h1>
+    </p>
+    <div class="links">
+     <ul>
+      <li>
+       <a href="http://paige.ctegd.uga.edu">
+        Lab page
+       </a>
+      </li>
+      <li>
+       <a href="contact.html">
+        Contact
+       </a>
+      </li>
+      <li>
+       <a href="citation.html">
+        Citation
+       </a>
+      </li>
+      <li>
+       <a href="scoring.html">
+        Scoring
+       </a>
+      </li>
+      <li>
+       <a href="pipeline.html">
+        Pipeline
+       </a>
+      </li>
+      <li>
+       <a href="instructions.html">
+        Instructions
+       </a>
+      </li>
+      <li>
+       <a href="http://grna.ctegd.uga.edu">
+        Home
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div id="header">
+   </div>
+   <div id="main">
+    <div class="content">
+     <div class="main_top">
+      <h1 style="text-align:center;font-size:22px;font-weight:bold">
+       Eukaryotic Pathogen CRISPR guide RNA/DNA Design Tool
+      </h1>
+      <p style="color:#267B9B;text-align:center;font-style:italic">
+       with (1) custom genome upload, (2) off-target analysis, (3) on-targets searching (for targeting gene families), (4) efficiency/activity prediction, (5) assisted oligo repair template design , (6) guide RNA transcription problem identification, (7) flanking microhomology searching (for predicting deletions)
+      </p>
+      <br/>
+      <p style="line-height:1px;margin:0;text-align:right;margin-bottom:0;">
+       <a href="batch.html" style="text-align:right;font-size:15px">
+        batch mode available here
+       </a>
+      </p>
+      <p style="line-height:1px;margin:0;text-align:right;margin-bottom:0;">
+       <img src="new.png" style="vertical-align:middle;width:40px;height:40px"/>
+       <a href="batch_tagging.html" style="text-align:right;font-size:15px">
+        Gene tagging batch mode available here
+       </a>
+       <span onclick="showtaggingDialog()" style="cursor: pointer;color:blue" title="click for help">
+        (?)
+       </span>
+      </p>
+     </div>
+     <div class="main_body">
+      <form action="/cgi-bin/sgRNATcruzi.cgi" enctype="multipart/form-data" method="POST" name="nameemailseq" onsubmit="return validateForm()" target="_blank">
+       <table align="center" border="0" cellpadding="5" cellspacing="5">
+        <thead>
+        </thead>
+        <tbody>
+         <table border="0" cellpadding="5" cellspacing="5">
+          <tr>
+           <td align="center">
+            <h3>
+             Our CRISPR/Cas gRNA design tool has a new look!!
+            </h3>
+           </td>
+          </tr>
+          <tr>
+           <td align="center">
+            <h3>
+             Job Name:
+            </h3>
+            <input id="name" name="name" type="text"/>
+           </td>
+          </tr>
+          <tr>
+           <td>
+            <h3>
+             RNA guided nuclease selection:
+             <span onclick="showNucleaseDialog()" style="cursor: pointer;color:blue" title="click for help">
+              (?)
+             </span>
+            </h3>
+            <!--
+<br>
+<input type="radio" name="Protein" value="SpCas9" onclick=loadNucleaseRequirement("NGG","NAG,NGA","20") checked="checked"/> SpCas9: 20nt gRNA NGG PAM<br>
+<input type="radio" name="Protein" value="SaCas9" onclick=loadNucleaseRequirement("NNGRRT","NNGRRA,NNGRRG,NNGRRC","21") /> SaCas9: 21nt gRNA NNGRRT PAM<br>
+<input type="radio" name="Protein" value="AsCpf1" onclick=loadNucleaseRequirement("TTTN","X","20") /> AsCpf1: 20nt gRNA TTTN PAM<br>
+<input type="radio" name="Protein" value="CjCas9" onclick=loadNucleaseRequirement("NNNNACA","NNNNACAC,NNNNRYAC","23") /> CjCas9: 23nt gRNA NNNNACA PAM<br>
+<input type="radio" name="Protein" value="FnCas9" onclick=loadNucleaseRequirement("NGG","NGA,NAG,NAA","21") /> FnCas9: 21nt gRNA NGG PAM<br>
+<input type="radio" name="Protein" value="FnCpf1" onclick=loadNucleaseRequirement("TTN,YG","CTN","23") /> FnCpf1: 23nt gRNA TTN & YG PAM<br>
+<input type="radio" name="Protein" value="LbCpf1" onclick=loadNucleaseRequirement("TTTN","X","20") /> LbCpf1: 20nt gRNA TTTN PAM<br>
+<input type="radio" name="Protein" value="NmCas9" onclick=loadNucleaseRequirement("NNNNGANN","NNNNGTTN,NNNNGNNT,NNNNGTNN,NNNNGNTN","20") /> NmCas9: 20nt gRNA NNNNGANN PAM<br>
+<input type="radio" name="Protein" value="St1Cas9" onclick=loadNucleaseRequirement("NNAGAA,NNGGAA","NNAGGA,NNANAA,NNGGGA","20") /> St1Cas9: 20nt gRNA NNAGAA & NNGGAA PAM<br>
+<input type="radio" name="Protein" value="TdCas9" onclick=loadNucleaseRequirement("NAAAAC","X","20") /> TdCas9: 20nt gRNA NAAAAC PAM<br>
+<input type="radio" name="Protein" value="custom" onclick=loadNucleaseRequirement("NGG","NAG,NGA,","20") /> custom (please manually enter PAM requirement below)<br>
+<br>
+-->
+            <select name="proteinselection" onclick="loadNucleaseRequirementdropdown()">
+             <option value="SpCas9">
+              SpCas9: 20nt gRNA, NGG PAM on 3' end
+             </option>
+             <br/>
+             <option value="SaCas9">
+              SaCas9: 21nt gRNA, NNGRRT PAM on 3' end
+             </option>
+             <br/>
+             <option value="AsCpf1">
+             </option>
+             AsCpf1: 20nt gRNA, TTTN PAM on 5' end
+             <br/>
+             <option value="CjCas9">
+             </option>
+             CjCas9: 23nt gRNA, NNNNACA PAM on 3' end
+             <br/>
+             <option value="CjCas9_2">
+             </option>
+             CjCas9: 23nt gRNA, NNNNACAC PAM on 3' end (Dugar et al.)
+             <br/>
+             <option value="FnCas9">
+             </option>
+             FnCas9: 21nt gRNA, NGG PAM on 3' end
+             <br/>
+             <option value="FnCpf1">
+             </option>
+             FnCpf1: 23nt gRNA, TTN &amp; YG PAM on 5' end
+             <br/>
+             <option value="LbCpf1">
+             </option>
+             LbCpf1: 20nt gRNA, TTTN PAM on 5' end
+             <br/>
+             <option value="NmCas9">
+             </option>
+             NmCas9: 20nt gRNA, NNNNGANN PAM on 3' end
+             <br/>
+             <option value="St1Cas9">
+             </option>
+             St1Cas9: 20nt gRNA, NNAGAA &amp; NNGGAA PAM on 3' end
+             <br/>
+             <option value="TdCas9">
+             </option>
+             TdCas9: 20nt gRNA, NAAAAC PAM on 3' end
+             <br/>
+             <option value="custom">
+             </option>
+             custom (please manually enter PAM requirement below)
+             <br/>
+            </select>
+            <br/>
+            <br/>
+            <h3>
+             optional search:
+            </h3>
+            Microhomology search:
+            <span onclick="showMHsearchDialog()" style="cursor: pointer;color:blue" title="click for help">
+             (?)
+            </span>
+            <input name="MH_switch" type="radio" value="on">
+             on
+             <input checked="checked" name="MH_switch" type="radio" value="off"/>
+             off
+             <br/>
+             Conserved region search:
+             <span onclick="showConservedregionDialog()" style="cursor: pointer;color:blue" title="click for help">
+              (?)
+             </span>
+             <input name="conreg_switch" type="radio" value="on"/>
+             on
+             <input checked="checked" name="conreg_switch" type="radio" value="off"/>
+             off
+             <br/>
+            </input>
+           </td>
+          </tr>
+          <tr>
+           <!-- parameter accordions -->
+           <td>
+            <h3>
+             Additional option settings: (click to expand a category)
+            </h3>
+            <div id="accordion2">
+             <h3>
+              <b>
+               guide RNA search parameters
+              </b>
+             </h3>
+             <div>
+              <hr style="height:6px; visibility:hidden;"/>
+              guide RNA length:
+              <input id="gRNAlength" name="gRNAlength" placeholder="20" size="2" style="text-align:right" type="text"/>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              PAM motif(s):
+              <br/>
+              (use comma to separate multiple PAM motifs
+              <br/>
+              use
+              <span onclick="showIUPACDialog()" style="cursor: pointer;color:blue" title="click for help">
+               IUPAC code
+              </span>
+              for degenerate base)
+              <br/>
+              <input id="PAM" name="PAM" placeholder="NGG" size="20" style="text-align:right;" type="text"/>
+              <br/>
+              PAM position:
+              <input checked="checked" id="3PAMpos" name="PAMpos" type="radio" value="3PAM">
+               3' end
+               <input id="5PAMpos" name="PAMpos" type="radio" value="5PAM">
+                5' end
+                <br/>
+               </input>
+              </input>
+             </div>
+             <h3>
+              <b>
+               on-target search parameters
+              </b>
+             </h3>
+             <div>
+              <span style="font-size:11px;font-weight:bold">
+               (Default settings
+               <br/>
+               recommended for most users)
+              </span>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              homology arm length:
+              <label>
+               <span onclick="showflanklenDialog()" style="cursor: pointer;color:blue" title="click for help">
+                (?)
+               </span>
+              </label>
+              <input id="onTflanklen" name="onTflanklen" placeholder="50" size="2" style="text-align:right" type="text"/>
+              <br/>
+              identity:
+              <label>
+               <span onclick="showidentityDialog()" style="cursor: pointer;color:blue" title="click for help">
+                (?)
+               </span>
+              </label>
+              <input id="onTidentity" name="onTidentity" placeholder="0.7" size="2" style="text-align:right" type="text"/>
+              <br/>
+              coverage:
+              <label>
+               <span onclick="showcoverageDialog()" style="cursor: pointer;color:blue" title="click for help">
+                (?)
+               </span>
+              </label>
+              <input id="onTcoverage" name="onTcoverage" placeholder="0.7" size="2" style="text-align:right" type="text"/>
+              <br/>
+             </div>
+             <h3>
+              <b>
+               off-target search parameters
+              </b>
+             </h3>
+             <div>
+              <span style="font-size:11px;font-weight:bold">
+               (Default settings
+               <br/>
+               recommended for most users)
+              </span>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              seed sequence length (including PAM):
+              <input id="seedlength" name="seedlength" placeholder="15" size="2" style="text-align:right" type="text"/>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              maximum number
+              <br/>
+              of mismatches:
+              <label>
+               <span onclick="showmaxnummismatchDialog()" style="cursor: pointer;color:blue" title="click for help">
+                (?)
+               </span>
+              </label>
+              <input id="maxnummismatch" name="maxnummismatch" placeholder="3" size="2" style="text-align:right" type="text"/>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              off-target PAM motif(s)
+              <span onclick="showoffPAMDialog()" style="cursor: pointer;color:blue" title="click for help">
+               (?)
+              </span>
+              :
+              <br/>
+              (comma separated if more than one,
+              <br/>
+              use
+              <span onclick="showIUPACDialog()" style="cursor: pointer;color:blue" title="click for help">
+               IUPAC code
+              </span>
+              for degenerate base)
+              <br/>
+              <input id="offPAM" name="offPAM" placeholder="" size="20" style="text-align:right;" type="text"/>
+              <br/>
+             </div>
+             <h3>
+              <b>
+               HDR repair template parameters
+              </b>
+             </h3>
+             <div>
+              <span style="font-size:11px;font-weight:bold">
+               (Default settings
+               <br/>
+               recommended for most users)
+              </span>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              homology arm length:
+              <a href="HDRtemplate.html">
+               (?)
+              </a>
+              <input id="HDRflank" name="HDRflank" placeholder="30" size="2" style="text-align:right" type="text"/>
+              <br/>
+              <hr style="height:6px; visibility:hidden;"/>
+              insertion:
+              <a href="HDRtemplate.html">
+               (?)
+              </a>
+              <br/>
+              <input id="HDRinsertion" name="HDRinsertion" placeholder="TAGATAGATAG" size="20" style="text-align:right" type="text"/>
+              <br/>
+             </div>
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td align="center" rowspan="1">
+            <h3>
+             Genome (expand a category and choose one):
+            </h3>
+            <!--<h4>genome naming paradigm:<br> <i>specie</i> strain database-version</h4>-->
+           </td>
+          </tr>
+          <tr>
+           <td>
+            <script src="genome_selection.js?1013">
+            </script>
+           </td>
+          </tr>
+         </table>
+         <table>
+          <tr>
+           <td>
+            <p align="center">
+             Sequence:
+             <label>
+              <span onclick="showpasteseqDialog()" style="cursor: pointer;color:blue" title="click for more help on pasting sequence">
+               (?)
+              </span>
+             </label>
+            </p>
+            <textarea cols="65" id="textbox1" name="textcontent" placeholder="paste a single sequence here, FASTA or raw format" rows="7"></textarea>
+           </td>
+          </tr>
+          <!-- 
+<tr><td><p align="center">Gene copy number in genome <label><span style="color:blue" title="For estimating the number of on-targets, see instructions for details" onclick="showDialog()">(?)</span></label>: <input type="number" name="copynumber" placeholder="1"></p></td></tr> 
+-->
+         </table>
+        </tbody>
+        <tfoot>
+         <table>
+          <tr>
+           <td>
+            <label>
+             <span onclick="showloadexampleDialog()" style=" visibility: hidden" title="click for help on loading examples">
+              (?)
+             </span>
+            </label>
+            <!--<span  title="load single locus gene example">-->
+            <button onclick="addintext(&quot;single-locus-gene&quot;,'JohnDoe@uga.edu',&quot;'&gt;'TcCLB.506799.10_FATP\nATGGCGACCACCGTCAATACGGTAGGAAGATGGAATTGGGTTATCATGTCGCATTACGCATACATCACGACGGCTGAGTATATAAAACTGGGATGCTCTTTGGGTGCCGTGCAGGCAAGAAACTCTATGCGGAACGCAAAGTTAATTTGTAAGGATGCATGGAAATTGATTGTGCCGTGCTGCAATTGCTGGAAGAAGAAGGAGAACTCTATTGTTCCGGATGGTATTAACGAGCACATCGTTCCTTTACTTCATGATGTTGCCGCTATGGCAGAGATCACACATGGGCAGTCCGTAAGCATGACACTTCTCAAGGCATTTAGGAGGCAGTCACAATTTGTCGCTTGTGCGCAGCGGGAACATCAGGTGGTGTTTGAGATGGCGACAACAGATGCGGCCGTCCCAAAAATGAAGCTTTGTGGTGCCCCATTAAAAGTGACGTATGATGA&quot;);showsinglegeneexampleDialog()" type="button">
+             Load example 1
+            </button>
+            <!--</span>-->
+           </td>
+           <td>
+            <!--<span  title="load gene family member example">-->
+            <button onclick="addintext(&quot;gene-family-example&quot;,'JohnDoe@uga.edu',&quot;'&gt;'beta-galactofuranosyl-glycosyltransferase-1-200bp\nATGGTGGTCCCGCTGATGCTCGATCCGATGGACTTTCGGAGGATGATGTGCAACATCAATGTGCCAATCCGGCTGTTGGTTTTGGTGCAGAACGGGCGGGAGGCGATGCTGTTGTTGTGCCTGCAGGAACTCGAGAGGGTCTATGGGTGGTTCGGACGCCTGGTTGTGAGTCGTCACCCGGAAAACATCGGGTACAGCGC&quot;);showmultigeneexampleDialog()" type="button">
+             Load example 2
+            </button>
+            <!--</span>-->
+            <label>
+             <span onclick="showloadexampleDialog()" style="color:blue" title="click for help on loading examples">
+              (?)
+             </span>
+            </label>
+           </td>
+          </tr>
+          <tr>
+           <td colspan="2">
+            <p>
+            </p>
+           </td>
+          </tr>
+          <tr>
+           <td colspan="2" style="text-align:center">
+            <button onclick="addintext(&quot;&quot;,'',&quot;&quot;);closeexampleDialog();" type="button">
+             clear example
+            </button>
+           </td>
+          </tr>
+          <tr>
+           <td colspan="2">
+            <p>
+            </p>
+           </td>
+          </tr>
+          <tr>
+           <td colspan="2">
+            <p>
+            </p>
+           </td>
+          </tr>
+          <tr>
+           <td colspan="2" style="text-align:center">
+            <!--<span  title="start guide RNA search and analysis">-->
+            <input type="submit" value="Get guide RNA">
+             <!--</span>-->
+            </input>
+           </td>
+          </tr>
+         </table>
+        </tfoot>
+       </table>
+      </form>
+      <p colspan="2" style="text-align:center">
+       (please use Chrome browser or enable Javascript in your browser for optimal results)
+      </p>
+     </div>
+    </div>
+    <div class="clear">
+    </div>
+   </div>
+   <div id="footer">
+    <div id="pagebottom">
+     <p style="text-align:center;font-size:12px">
+      <a href="http://paige.ctegd.uga.edu">
+       Tarleton Research Group,
+      </a>
+      <a href="http://www.ctegd.uga.edu">
+       The Center for Tropical and Emerging Global Diseases,
+      </a>
+      <a href="http://uga.edu">
+       The University of Georgia
+      </a>
+     </p>
+    </div>
+   </div>
+  </div>
+  <span style="margin-left:auto;margin-right:auto;">
+   <a href="http://paige.ctegd.uga.edu">
+    <img src="TRGlogo.jpg" style="width:84px;height:66.5px"/>
+   </a>
+   <a href="http://www.ctegd.uga.edu">
+    <img src="CTEGDlogo.jpg" style="width:159px;height:63.3px"/>
+   </a>
+  </span>
+ </body>
+</html>
+

@@ -1,0 +1,1725 @@
+http://eden.cce.cornell.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- =SharePoint Experts, Inc. - "SharePointV4_Comments_and_Corrections.master" is based on the v4.master file for SharePoint 2010. Commentary is copyright 2010-2011 SharePoint Experts, Inc. and Heather Solomon. Distributed to the public for reference and educational purposes. Code may be used as long as this copyright message stays intact.
+-sharepointexperience.com
+
+COMMENTS GUIDE
+This master page is heavily commented. The comments provide labels and explanations for various SharePoint components.  There is also information indicating the purpose and need for IDs and CSS classes that are used for various elements. The comments follow a common structure and naming schema:
+
+When the start of a comment is formatted like so:   
+  =Component 
+The comment is in reference to the following code block.
+
+When the start of a comment includes a caret (^) like so:
+  ^ =Component
+The comment is in reference to the preceding tag. These comments are used as much as possible so when a code block is moved the comment(s) are included and moved as well.
+
+The comments are tagged with a category so you can quickly jump through the file by searching for the category name preceded by an equal(=) symbol.  The categories are:
+
+=Content Placeholder
+=Layout
+=Legacy
+=Navigation
+=Page Data
+=Page Tools
+=Publishing
+=Ribbon
+=SharePoint 
+=Site Data
+=Temporary
+=Custom
+
+It is not necessary to keep the comments in your final master page file. 
+
+CORRECTIONS
+The original v4.master file that ships with SharePoint 2010 contains some minor issues such as missing quotes and extraneous tags. These issues have been corrected or notated in this file.
+
+-->
+<html __expr-val-dir="ltr" dir="ltr" lang="en-us" xmlns:o="urn:schemas-microsoft-com:office:office">
+ <head>
+  <meta content="IE=8" http-equiv="X-UA-Compatible"/>
+  <meta content="Microsoft SharePoint" name="GENERATOR"/>
+  <meta content="SharePoint.WebPartPage.Document" name="progid"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="0" http-equiv="Expires"/>
+  <!-- =SharePoint - Site Title -->
+  <title>
+   NY EDEN
+  </title>
+  <!-- =SharePoint - CSS -->
+  <!-- SharePoint CSS files and file set for the Alternate CSS for the site (if any) -->
+  <link href="/Style%20Library/en-US/Themable/Core%20Styles/controls.css" rel="stylesheet" type="text/css"/>
+  <link href="/_layouts/1033/styles/Themable/corev4.css?rev=p63%2BuzTeSJc22nVGNZ5zwg%3D%3D" rel="stylesheet" type="text/css"/>
+  <link href="/Style%20Library/en-us/Core%20Styles/CCE2010.css" rel="stylesheet" type="text/css"/>
+  <link href="/Style%20Library/INSERT_PATH.css" rel="stylesheet" type="text/css"/>
+  <!-- =Legacy - Theme Support - Not needed for UI4 -->
+  <!-- =SharePoint - Supporting file -->
+  <!-- =SharePoint - ECMAScript variable 
+	  -Remove this script if you don't want the Ribbon to dock at the top of the page.
+	  -It is also emitted by SPWebPartManager below.
+	  -Removing this will cause the script to not be present during usual on-load events for the Ribbon and therefore can improve rendering performance. 
+	-->
+  <script type="text/javascript">
+   var _fV4UI = true;
+  </script>
+  <!-- =SharePoint - Supporting files -->
+  <script type="text/javascript">
+   // <![CDATA[
+document.write('<script type="text/javascript" src="/_layouts/1033/init.js?rev=wgiyW1GQqDQZTITaawvYoA%3D%3D"></' + 'script>');
+document.write('<script type="text/javascript" src="/ScriptResource.axd?d=cc3PH0ysknSZTcKHuonndDxA6zCVHxCxlG5qRt1g1VdHgmhGfqIsS14g5DXQoHszVy7QE_LtFB79zujm2lOzlLSYktdwzxbGzWmv0AZg_pvgnsTMf0AiuM2SN26jv4bnWUUW78zU1E1SQ6IWq8awz6pfio01&amp;t=3f4a792d"></' + 'script>');
+document.write('<script type="text/javascript" src="/_layouts/blank.js?rev=QGOYAJlouiWgFRlhHVlMKA%3D%3D"></' + 'script>');
+// ]]>
+  </script>
+  <link href="/_vti_bin/spsdisco.aspx" rel="alternate" type="text/xml"/>
+  <link href="/Style%20Library/Images/cce/ico/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+  <!-- =Custom - CSS -->
+  <!-- CSS file linking options  - LINK or CssRegistration
+		-Use the LINK tag to link a CSS file; it will be loaded on every web page that uses this master page.
+		-Use CssRegistration to include your CSS file in the above SharePoint:CssLink control.
+		-Can use CssRegistration to reference CSS file(s) that include theming comments.
+		-Use SPUrl (publishing sites only) to create a fully flexible relative path that will resolve to the top site (~site) or site collection (~sitecollection).   Can be used in LINK or CssRegistration.
+		
+		-PATH OPTIONS
+		-Store the CSS in the content database in the Style Library (/Style Library/CUSTOM FOLDER OPTIONAL/INSERT_PATH.css).
+		-Store the CSS file on the web server in the STYLES directory (/_layouts/1033/styles/CUSTOM FOLDER OPTIONAL/INSERT_PATH.css).
+		-Store themable CSS files in the Themeable directory either in the Style Library or the web server (/Style Library/en-us/Themable/INSERT_PATH.css   or  /_layouts/1033/styles/themable/INSERT_PATH.css).
+		-->
+  <!-- LINK tag sample -->
+  <link href="/Style%20Library/INSERT_PATH.css" rel="stylesheet" type="text/css"/>
+  <!-- 	LINK tag sample that uses SPUrl (publishing only) -->
+  <link href="/Style Library/INSERT_PATH.css" rel="stylesheet" type="text/css"/>
+  <!-- CssRegistration sample -->
+  <!-- =Content Placeholder - adds body styles, must be stored in HEAD element -->
+  <!-- =Content Placeholder - adds title area styles, must be stored in HEAD element -->
+  <!-- =Content Placeholder - allows for content page/page layout additions of CSS and scripts, must be stored in HEAD element -->
+  <style type="text/css">
+   .ItemLink {font-size: 14px; color: #b31b1b;}
+		#LeftMenuNav li li {display: none;}
+		#leftContent {min-width: 230px;}
+  </style>
+  <!-- =SharePoint - allows for HEAD element modifications via custom control, must be stored in the HEAD element -->
+  <style type="text/css">
+   .search-form-query 
+		{
+	        border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	padding: 3px;
+	width: 145px;
+	        	font-family: verdana, arial, helvetica, sans-serif;
+	        	font-size: 1.1em;
+	        	font-weight: bold;
+	        	color: #fff;
+	        background: #990f0f url('/Style%20Library/Images/cce/header_search.gif') no-repeat left top;
+	        	vertical-align: middle;
+	    }
+		.search-form-submit {
+	        padding: 0px 2px 3px 2px;;
+	        border-top: 1px solid #bf6060;
+	        border-left: 1px solid #bf6060;
+	        border-right: 1px solid #400606;
+	        border-bottom: 1px solid #400606;
+	        font-family: verdana, arial, helvetica, sans-serif;
+	        font-size: 1.0em;
+	        font-weight: bold;
+	        color: #fff;
+	        background: #900;
+	        vertical-align: middle;
+	    }
+  </style>
+  <!-- CORNELL Emergency Banner -->
+  <script src="https://embanner.univcomm.cornell.edu/OWC-emergency-banner.js" type="text/javascript">
+  </script>
+  <style type="text/css">
+   .s4-skipribbonshortcut { display:none; }
+	.zz1_GlobalNav_0 { background-color:white;visibility:hidden;display:none;position:absolute;left:0px;top:0px; }
+	.zz1_GlobalNav_1 { text-decoration:none; }
+	.zz1_GlobalNav_2 {  }
+	.zz2_CurrentNav_0 { background-color:white;visibility:hidden;display:none;position:absolute;left:0px;top:0px; }
+	.zz2_CurrentNav_1 { text-decoration:none; }
+	.zz2_CurrentNav_2 {  }
+	.zz2_CurrentNav_3 { border-style:none; }
+	.zz2_CurrentNav_4 {  }
+	.zz2_CurrentNav_5 {  }
+	.zz2_CurrentNav_6 { border-style:none; }
+	.zz2_CurrentNav_7 {  }
+	.zz2_CurrentNav_8 { border-style:none; }
+	.zz2_CurrentNav_9 {  }
+	.zz2_CurrentNav_10 { border-style:none; }
+	.zz2_CurrentNav_11 {  }
+	.zz2_CurrentNav_12 { border-style:none; }
+	.zz2_CurrentNav_13 {  }
+	.zz2_CurrentNav_14 { border-style:none; }
+	.zz2_CurrentNav_15 {  }
+	.zz2_CurrentNav_16 { border-style:none; }
+	.zz2_CurrentNav_17 {  }
+	.ctl00_PlaceHolderMain_leftWebPart_0 { border-color:Black;border-width:1px;border-style:Solid; }
+	.ctl00_PlaceHolderMain_rightWebPart_0 { border-color:Black;border-width:1px;border-style:Solid; }
+	.ctl00_wpz_0 { border-color:Black;border-width:1px;border-style:Solid; }
+  </style>
+ </head>
+ <!-- =Layout - Body tag
+  -Set scroll to "no" if you want the Ribbon docked at the top of the browser window. 
+  -Keep "v4master" CSS class if you want the Ribbon docked at the top of the browser window.
+  -Must add height, width and overflow properties set in v4master to the body either through v4master class addition or by adding the properties to your custom body class in order for the modal dialog windows to auto generate their sizing correctly.
+  -->
+ <body class="body" onload="if (typeof(_spBodyOnLoadWrapper) != 'undefined') _spBodyOnLoadWrapper();" scroll="no">
+  <!-- =SharePoint - Leave the following in place -->
+  <form action="/Pages/default.aspx" id="aspnetForm" method="post" name="aspnetForm">
+   <input id="MSOWebPartPage_PostbackSource" name="MSOWebPartPage_PostbackSource" type="hidden" value=""/>
+   <input id="MSOTlPn_SelectedWpId" name="MSOTlPn_SelectedWpId" type="hidden" value=""/>
+   <input id="MSOTlPn_View" name="MSOTlPn_View" type="hidden" value="0"/>
+   <input id="MSOTlPn_ShowSettings" name="MSOTlPn_ShowSettings" type="hidden" value="False"/>
+   <input id="MSOGallery_SelectedLibrary" name="MSOGallery_SelectedLibrary" type="hidden" value=""/>
+   <input id="MSOGallery_FilterString" name="MSOGallery_FilterString" type="hidden" value=""/>
+   <input id="MSOTlPn_Button" name="MSOTlPn_Button" type="hidden" value="none"/>
+   <input id="__REQUESTDIGEST" name="__REQUESTDIGEST" type="hidden" value="0xC49079174D83990B3C6FD299230DB7F02D2592E8C5402EF76BB60F88AEAC710A850A906F2153E9060972AA825F8BFBB059C6A1DB5BCA0C36A3EBA26E9975AF54,10 Mar 2019 07:15:15 -0000"/>
+   <input id="MSOSPWebPartManager_DisplayModeName" name="MSOSPWebPartManager_DisplayModeName" type="hidden" value="Browse"/>
+   <input id="MSOSPWebPartManager_ExitingDesignMode" name="MSOSPWebPartManager_ExitingDesignMode" type="hidden" value="false"/>
+   <input id="MSOWebPartPage_Shared" name="MSOWebPartPage_Shared" type="hidden" value=""/>
+   <input id="MSOLayout_LayoutChanges" name="MSOLayout_LayoutChanges" type="hidden" value=""/>
+   <input id="MSOLayout_InDesignMode" name="MSOLayout_InDesignMode" type="hidden" value=""/>
+   <input id="_wpSelected" name="_wpSelected" type="hidden" value=""/>
+   <input id="_wzSelected" name="_wzSelected" type="hidden" value=""/>
+   <input id="MSOSPWebPartManager_OldDisplayModeName" name="MSOSPWebPartManager_OldDisplayModeName" type="hidden" value="Browse"/>
+   <input id="MSOSPWebPartManager_StartWebPartEditingName" name="MSOSPWebPartManager_StartWebPartEditingName" type="hidden" value="false"/>
+   <input id="MSOSPWebPartManager_EndWebPartEditing" name="MSOSPWebPartManager_EndWebPartEditing" type="hidden" value="false"/>
+   <input id="_maintainWorkspaceScrollPosition" name="_maintainWorkspaceScrollPosition" type="hidden" value="0"/>
+   <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUBMA9kFgJmD2QWAgICD2QWBAIBD2QWAgIHD2QWAmYPZBYCAgEPFgIeE1ByZXZpb3VzQ29udHJvbE1vZGULKYgBTWljcm9zb2Z0LlNoYXJlUG9pbnQuV2ViQ29udHJvbHMuU1BDb250cm9sTW9kZSwgTWljcm9zb2Z0LlNoYXJlUG9pbnQsIFZlcnNpb249MTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NzFlOWJjZTExMWU5NDI5YwFkAgMPZBYMAgMPZBYMBSZnXzEzNDA5NDU4X2Q0MGNfNGNmZl9hOWRkX2U5Y2JiYjA3YTM1MQ8PZGRkBSZnXzg5MTJkMzczXzk2YjRfNDA2Ml85MjM1XzExNzcyOWIxOWI3Yg8PZGRkBSZnXzFhMmQzMjlkXzZkNjlfNDMxN19hZmQ2XzY0NWI0MzUyMzdiYg8PZGRkBSZnXzZhYzI4MGY3XzA2NWZfNDZiN185ZjlkXzA1MGJkYjM5MjMyYw8PZGRkBSZnXzY0OTM5YTcwX2FkMGRfNGQ5M19iY2M0X2QyZDhjYzRjMjM4Nw8PZGRkBSZnX2I3N2ZhNWJiX2U2MWRfNGUyZF84YzU0XzBlODNhZjI1MGRjYg9kFgRmDxYCHgdWaXNpYmxlaGQCAQ8WAh8BaGQCEQ9kFgRmD2QWAgIBDxYCHwFoFgJmD2QWBAICD2QWBgIBDxYCHwFoZAIDDxYIHhNDbGllbnRPbkNsaWNrU2NyaXB0BW9qYXZhU2NyaXB0OkNvcmVJbnZva2UoJ1Rha2VPZmZsaW5lVG9DbGllbnRSZWFsJywxLCA1MywgJ2h0dHA6XHUwMDJmXHUwMDJmZWRlbi5jY2UuY29ybmVsbC5lZHUnLCAtMSwgLTEsICcnLCAnJykeGENsaWVudE9uQ2xpY2tOYXZpZ2F0ZVVybGQeKENsaWVudE9uQ2xpY2tTY3JpcHRDb250YWluaW5nUHJlZml4ZWRVcmxkHgxIaWRkZW5TY3JpcHQFIlRha2VPZmZsaW5lRGlzYWJsZWQoMSwgNTMsIC0xLCAtMSlkAgUPFgIfAWhkAgMPDxYKHglBY2Nlc3NLZXkFAS8eD0Fycm93SW1hZ2VXaWR0aAIFHhBBcnJvd0ltYWdlSGVpZ2h0AgMeEUFycm93SW1hZ2VPZmZzZXRYZh4RQXJyb3dJbWFnZU9mZnNldFkC6wNkZAIBD2QWBgIFD2QWAgIBDxAWAh8BaGQUKwEAZAIHD2QWAmYPZBYCZg8UKwADZGRkZAIJDw8WAh8BaGRkAjkPZBYCAgEQPCsADQIADxYCHgtfIURhdGFCb3VuZGdkDBQrAAgFGzA6MCwwOjEsMDoyLDA6MywwOjQsMDo1LDA6NhQrAAIWDh4EVGV4dAUNTllTIEVERU4gSG9tZR4FVmFsdWUFDU5ZUyBFREVOIEhvbWUeC05hdmlnYXRlVXJsBQEvHgdFbmFibGVkZx4KU2VsZWN0YWJsZWceCERhdGFQYXRoBQEvHglEYXRhQm91bmRnZBQrAAIWDh8MBR1Db3JuZWxsIENvb3BlcmF0aXZlIEV4dGVuc2lvbh8NBR1Db3JuZWxsIENvb3BlcmF0aXZlIEV4dGVuc2lvbh8OBRtodHRwOi8vd3d3LmNjZS5jb3JuZWxsLmVkdS8fD2cfEGcfEQUbaHR0cDovL3d3dy5jY2UuY29ybmVsbC5lZHUvHxJnZBQrAAIWDh8MBQVBYm91dB8NBQVBYm91dB8OBTJodHRwOi8vY2NlLmNvcm5lbGwuZWR1L2xlYXJuQWJvdXQvUGFnZXMvQWJvdXQuYXNweB8PZx8QZx8RBTJodHRwOi8vY2NlLmNvcm5lbGwuZWR1L2xlYXJuQWJvdXQvUGFnZXMvQWJvdXQuYXNweB8SZ2QUKwACFg4fDAUNUHJvZ3JhbSBBcmVhcx8NBQ1Qcm9ncmFtIEFyZWFzHw4FMWh0dHA6Ly9jY2UuY29ybmVsbC5lZHUvUGFnZXMvUHJvZ3JhbS1sYW5kaW5nLmFzcHgfD2cfEGcfEQUxaHR0cDovL2NjZS5jb3JuZWxsLmVkdS9QYWdlcy9Qcm9ncmFtLWxhbmRpbmcuYXNweB8SZ2QUKwACFg4fDAUHSm9pbiBVcx8NBQdKb2luIFVzHw4FRGh0dHA6Ly9jY2UuY29ybmVsbC5lZHUvbGVhcm5BYm91dC9HZXRJbnZvbHZlZC9QYWdlcy9HZXRJbnZvbHZlZC5hc3B4Hw9nHxBnHxEFRGh0dHA6Ly9jY2UuY29ybmVsbC5lZHUvbGVhcm5BYm91dC9HZXRJbnZvbHZlZC9QYWdlcy9HZXRJbnZvbHZlZC5hc3B4HxJnZBQrAAIWDh8MBQROZXdzHw0FBE5ld3MfDgUqaHR0cDovL2NjZS5jb3JuZWxsLmVkdS9QYWdlcy9DQ0UtTmV3cy5hc3B4Hw9nHxBnHxEFKmh0dHA6Ly9jY2UuY29ybmVsbC5lZHUvUGFnZXMvQ0NFLU5ld3MuYXNweB8SZ2QUKwACFg4fDAUNTG9jYWwgT2ZmaWNlcx8NBQ1Mb2NhbCBPZmZpY2VzHw4FOmh0dHA6Ly9jY2UuY29ybmVsbC5lZHUvbGVhcm5BYm91dC9QYWdlcy9Mb2NhbF9PZmZpY2VzLmFzcHgfD2cfEGcfEQU6aHR0cDovL2NjZS5jb3JuZWxsLmVkdS9sZWFybkFib3V0L1BhZ2VzL0xvY2FsX09mZmljZXMuYXNweB8SZ2RkZAI9D2QWAgICD2QWCAIDEDwrAA0CAA8WAh8LZ2QMFCsAEAVAMDowLDA6MSwwOjIsMDozLDA6NCwwOjUsMDo2LDA6NywwOjgsMDo5LDA6MTAsMDoxMSwwOjEyLDA6MTMsMDoxNBQrAAIWDh8MBQRIb21lHw0FBEhvbWUfDgUBLx8PZx8QZx8RBQEvHxJnZBQrAAIWDh8MBQ1BYm91dCBOWSBFREVOHw0FDUFib3V0IE5ZIEVERU4fDgUfL0Fib3V0TllFREVOL1BhZ2VzL2RlZmF1bHQuYXNweB8PZx8QZx8RBQwvQUJPVVROWUVERU4fEmdkFCsAAhYOHwwFDEFncm9zZWN1cml0eR8NBQxBZ3Jvc2VjdXJpdHkfDgUgL2Fncm9zZWN1cml0eS9QYWdlcy9kZWZhdWx0LmFzcHgfD2cfEGcfEQUNL0FHUk9TRUNVUklUWR8SZ2QUKwACFg4fDAUoQ3JvcCBJbnN1cmFuY2UgJmFtcDsgRGlzYXN0ZXIgUmVzaWxpZW5jZR8NBShDcm9wIEluc3VyYW5jZSAmYW1wOyBEaXNhc3RlciBSZXNpbGllbmNlHw4FOWh0dHA6Ly93d3cuYWdyaWN1bHR1cmUubnkuZ292L0FQL0Nyb3BJbnN1cmFuY2VCYXNpY3MuaHRtbB8PZx8QZx8RBTpodHRwOi8vd3d3LmFncmljdWx0dXJlLm55Lmdvdi9BUC9Dcm9wSW5zdXJhbmNlQmFzaWNzLmh0bWwgHxJnZBQrAAIWDh8MBRVEaXNhc3RlciBQcmVwYXJlZG5lc3MfDQUVRGlzYXN0ZXIgUHJlcGFyZWRuZXNzHw4FIC9QcmVwYXJlZG5lc3MvUGFnZXMvZGVmYXVsdC5hc3B4Hw9nHxBnHxEFDS9QUkVQQVJFRE5FU1MfEmdkFCsAAhYOHwwFB0Rpc2Vhc2UfDQUHRGlzZWFzZR8OBRsvZGlzZWFzZS9QYWdlcy9kZWZhdWx0LmFzcHgfD2cfEGcfEQUIL0RJU0VBU0UfEmdkFCsAAhYOHwwFDkZhbWlseSBNYXR0ZXJzHw0FDkZhbWlseSBNYXR0ZXJzHw4FGi9mYW1pbHkvUGFnZXMvZGVmYXVsdC5hc3B4Hw9nHxBnHxEFBy9GQU1JTFkfEmdkFCsAAhYOHwwFJUZhcm0gRGlzYXN0ZXIgUHJlcGFyYXRpb24gQ2VydGlmaWNhdGUfDQUlRmFybSBEaXNhc3RlciBQcmVwYXJhdGlvbiBDZXJ0aWZpY2F0ZR8OBRsvZmRwY2VydC9QYWdlcy9kZWZhdWx0LmFzcHgfD2cfEGcfEQUIL0ZEUENFUlQfEmdkFCsAAhYOHwwFIEhvbWVsYW5kICZhbXA7IFBlcnNvbmFsIFNlY3VyaXR5Hw0FIEhvbWVsYW5kICZhbXA7IFBlcnNvbmFsIFNlY3VyaXR5Hw4FJC9Ib21lbGFuZFNlY3VyaXR5L1BhZ2VzL2RlZmF1bHQuYXNweB8PZx8QZx8RBREvSE9NRUxBTkRTRUNVUklUWR8SZ2QUKwACFg4fDAURTmF0dXJhbCBEaXNhc3RlcnMfDQURTmF0dXJhbCBEaXNhc3RlcnMfDgUdL2Rpc2FzdGVycy9QYWdlcy9kZWZhdWx0LmFzcHgfD2cfEGcfEQUKL0RJU0FTVEVSUx8SZxQrAAQFCzA6MCwwOjEsMDoyFCsAAhYOHwwFD011ZC9MYW5kLXNsaWRlcx8NBQ9NdWQvTGFuZC1zbGlkZXMfDgViaHR0cDovL2VtZXJnZW5jeXByZXBhcmVkbmVzcy5jY2UuY29ybmVsbC5lZHUvZGlzYXN0ZXJzL1NpdGVQYWdlcy9kaXNhc3Rlci5hc3B4P2Rpcz1NdWQvTGFuZC1zbGlkZXMfD2cfEGcfEQViaHR0cDovL2VtZXJnZW5jeXByZXBhcmVkbmVzcy5jY2UuY29ybmVsbC5lZHUvZGlzYXN0ZXJzL1NpdGVQYWdlcy9kaXNhc3Rlci5hc3B4P2Rpcz1NdWQvTGFuZC1zbGlkZXMfEmdkFCsAAhYOHwwFFUFnIERhbWFnZSBBc3Nlc3NtZW50IB8NBRVBZyBEYW1hZ2UgQXNzZXNzbWVudCAfDgUtL2Fncm9zZWN1cml0eS9QYWdlcy9BZy1EYW1hZ2UtQXNzZXNzbWVudC5hc3B4Hw9nHxBnHxEFLS9hZ3Jvc2VjdXJpdHkvUGFnZXMvQWctRGFtYWdlLUFzc2Vzc21lbnQuYXNweB8SZ2QUKwACFg4fDAUPU3Rvcm1zIEFyY2hpdmVzHw0FD1N0b3JtcyBBcmNoaXZlcx8OBRovUGFnZXMvU3Rvcm0tQXJjaGl2ZXMuYXNweB8PZx8QZx8RBRovUGFnZXMvU3Rvcm0tQXJjaGl2ZXMuYXNweB8SZ2QUKwACFg4fDAURT3RoZXIgRW1lcmdlbmNpZXMfDQURT3RoZXIgRW1lcmdlbmNpZXMfDgUkL290aGVyZW1lcmdlbmNpZXMvUGFnZXMvZGVmYXVsdC5hc3B4Hw9nHxBnHxEFES9PVEhFUkVNRVJHRU5DSUVTHxJnZBQrAAIWDh8MBRpDQ0UgRWR1Y2F0b3JzL0Fzc29jaWF0aW9ucx8NBRpDQ0UgRWR1Y2F0b3JzL0Fzc29jaWF0aW9ucx8OBQovZWR1Y2F0b3JzHw9nHxBnHxEFCi9lZHVjYXRvcnMfEmdkFCsAAhYOHwwFGkRpc2FzdGVycyBhbmQgRGlzYWJpbGl0aWVzHw0FGkRpc2FzdGVycyBhbmQgRGlzYWJpbGl0aWVzHw4FGC9QYWdlcy9kaXNhYmlsaXRpZXMuYXNweB8PZx8QZx8RBRgvUGFnZXMvZGlzYWJpbGl0aWVzLmFzcHgfEmdkFCsAAhYOHwwFCFJlc2VhcmNoHw0FCFJlc2VhcmNoHw4FFC9QYWdlcy9SZXNlYXJjaC5hc3B4Hw9nHxBnHxEFFC9QYWdlcy9SZXNlYXJjaC5hc3B4HxJnZBQrAAIWDh8MBQhUcmFpbmluZx8NBQhUcmFpbmluZx8OBRQvUGFnZXMvdHJhaW5pbmcuYXNweB8PZx8QZx8RBRQvUGFnZXMvdHJhaW5pbmcuYXNweB8SZ2RkZAIHDxYCHwALKwQBZAIJDxYCHwALKwQBFgJmDw9kZGQCCw8WAh8ACysEARYCZg8PZGRkAj8PZBYCZg9kFgICAQ9kFgICAg8PFgYeCENzc0NsYXNzBQ1zNC1zaWduSW5MaW5rHgRfIVNCAgIfAWcWAh4Fc3R5bGUFD2Rpc3BsYXk6aW5saW5lO2QCRQ9kFgQCDQ9kFgICAQ9kFgJmD2QWAgIBDw9kFgYeBWNsYXNzBSJtcy1zYnRhYmxlIG1zLXNidGFibGUtZXggczQtc2VhcmNoHgtjZWxscGFkZGluZwUBMB4LY2VsbHNwYWNpbmcFATBkAhkPZBYCAgcPZBYCAgEPDxYCHwFoZBYCAgMPZBYCZg9kFgICAw9kFgICBQ8PFgQeBkhlaWdodBsAAAAAAAB5QAEAAAAfFAKAAWQWAgIBDzwrAAkBAA8WBB4NUGF0aFNlcGFyYXRvcgQIHg1OZXZlckV4cGFuZGVkZ2RkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYFBRJjdGwwMCRSYWRpb0J1dHRvbjAFEmN0bDAwJFJhZGlvQnV0dG9uMQUSY3RsMDAkUmFkaW9CdXR0b24xBRJjdGwwMCRSYWRpb0J1dHRvbjIFEmN0bDAwJFJhZGlvQnV0dG9uMga+atmIaj2XyHdpCSGZ7V49NhvH"/>
+   <script src="/WebResource.axd?d=N7ae-mLmpnalgfetyXAH_LaYJhUQIozXW5a8juUXqYkgQWOAJdFXXK77V0QOuCJPlq60CKRo_mdpXiXCXKqWUgr8ZmQ1-7EY2yVtJb1as_u00p5CjKCiD8bFqf9dr08WngUvyJ8-m0EZQYSOSpUViuOnIYQ1&amp;t=636412222972858631" type="text/javascript">
+   </script>
+   <script src="/WebResource.axd?d=z7EgVW4Bvqf_tM6-oc4FnymPuDL9Bi-Txg6AAWpfNWWly5cGsyoPv_9S0Eyzlq0j429dJFQ_zcbZ9Zd2EmvPl8DElXQqpldb_2sMDSEcdeMF5roEbSwhAM8-J97rlyKUNeoOFVTxl1TTd1P16Of2olXGr381&amp;t=636412222972858631" type="text/javascript">
+   </script>
+   <link href="/WebResource.axd?d=XFA57TRyz75lX8qE4yfFUxuTtCaKOGTuggOdfWpEXKYMYUxnFScJk_BpeTzW_7K2CbJCdSegEG8gS7xRw528LKsOewCvXsl-08grlaneYfxjPwTvkVsL80ElqqV1BLlqPbCssQ2&amp;t=636412222972858631" rel="stylesheet" type="text/css"/>
+   <link href="/WebResource.axd?d=zOI5TsD8tjEi11Q04asugLpH58Kg3xjE9nw8ZdL20AcH1cyhPs41UQRCaY_dEw4BJVG9muxqw_X09kJacGO7auCzV7oxau-dkHNzL6Nb5M3lBPEJjL44AqGROIUymKabI-VjxQQcREY--R85Ijo1poQYIAQ1&amp;t=636412222972858631" rel="stylesheet" type="text/css"/>
+   <script type="text/javascript">
+    //<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = false;
+var g_wsaEnabled = false;
+var g_wsaLCID = 1033;
+var g_wsaSiteTemplateId = 'BLANKINTERNET#0';
+var g_wsaListTemplateId = 850;
+var _fV4UI=true;var _spPageContextInfo = {webServerRelativeUrl: "\u002f", webLanguage: 1033, currentLanguage: 1033, webUIVersion:4,pageListId:"{de0161ac-13c4-41b4-98f8-2ab12e8bfd6e}",pageItemId:1, alertsEnabled:true, siteServerRelativeUrl: "\u002f", allowSilverlightPrompt:'True'};function CallServer_m1697405272(arg, context) {WebForm_DoCallback('ctl00$ctl21',arg,SP.UI.MyLinksRibbon.MyLinksRibbonPageComponent.ribbonActionCallback,context,null,false); }function _myLinksRibbonLoad2()
+{
+    var fnd = function () {
+        try {
+            mylinks_init.MyLinksInit('CallServer_m1697405272'); 
+        } 
+        catch (Ex)
+        { }
+    };
+    RegisterSod('mylinks_init', '/_layouts/SP.UI.MyLinksRibbon.js');
+    LoadSodByKey('mylinks_init', fnd);
+}
+
+function _myLinksRibbonLoad1()
+{
+    ExecuteOrDelayUntilScriptLoaded(_myLinksRibbonLoad2, 'SP.Ribbon.js');
+}
+
+_spBodyOnLoadFunctionNames.push('_myLinksRibbonLoad1');
+
+                            function DoCallBack(filterText)
+                            {WebForm_DoCallback('ctl00$m$g_13409458_d40c_4cff_a9dd_e9cbbb07a351',filterText,UpdateFilterCallback,0,CallBackError,true)
+                            }
+                            function CallBackError(result, clientsideString)
+                            {                
+                            }
+                        //]]>
+   </script>
+   <script type="text/javascript">
+    <!--
+var L_Menu_BaseUrl="";
+var L_Menu_LCID="1033";
+var L_Menu_SiteTheme="Lacquer";
+//-->
+   </script>
+   <script type="text/javascript">
+    //<![CDATA[
+document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};var dlc_fvsi = {"DefaultViews":[],"ViewUrls":[],"WebUrl":"\/"};//]]>
+   </script>
+   <script type="text/javascript">
+    //<![CDATA[
+function _spNavigateHierarchy(nodeDiv, dataSourceId, dataPath, url, listInContext, type) {
+    CoreInvoke('ProcessDefaultNavigateHierarchy', nodeDiv, dataSourceId, dataPath, url, listInContext, type, document.forms.aspnetForm, "", "\u002fPages\u002fdefault.aspx");
+
+}
+//]]>
+   </script>
+   <script type="text/javascript">
+    //<![CDATA[
+var _spWebPartComponents = new Object();//]]>
+   </script>
+   <script src="/_layouts/blank.js?rev=QGOYAJlouiWgFRlhHVlMKA%3D%3D" type="text/javascript">
+   </script>
+   <script type="text/javascript">
+    //<![CDATA[
+if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+   </script>
+   <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="BAB98CB3"/>
+   <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="/wEWBgLO4cPODgLTip32CAK5wZ6ZDALbpOPPDgLbpP+wBQLbpIuUDK5JmWsiEmJ5P6ji97TFmiZ+OzlF"/>
+   <noscript>
+    <div class="noindex">
+     You may be trying to access this site from a secured browser on the server. Please enable scripts and reload this page.
+    </div>
+   </noscript>
+   <!-- =SharePoint - Accessibility Controls -->
+   <div class="s4-notdlg noindex" id="TurnOnAccessibility" style="display:none">
+    <a class="ms-TurnOnAcc" href="#" id="linkTurnOnAcc" onclick="SetIsAccessibilityFeatureEnabled(true);UpdateAccessibilityUI();document.getElementById('linkTurnOffAcc').focus();return false;">
+     Turn on more accessible mode
+    </a>
+   </div>
+   <div class="s4-notdlg noindex" id="TurnOffAccessibility" style="display:none">
+    <a class="ms-TurnOffAcc" href="#" id="linkTurnOffAcc" onclick="SetIsAccessibilityFeatureEnabled(false);UpdateAccessibilityUI();document.getElementById('linkTurnOnAcc').focus();return false;">
+     Turn off more accessible mode
+    </a>
+   </div>
+   <div class="s4-notdlg s4-skipribbonshortcut noindex">
+    <a accesskey="Y" class="ms-SkiptoNavigation" href="javascript:;" onclick="javascript:this.href='#startNavigation';">
+     Skip Ribbon Commands
+    </a>
+   </div>
+   <div class="s4-notdlg noindex">
+    <a accesskey="X" class="ms-SkiptoMainContent" href="javascript:;" onclick="javascript:this.href='#mainContent';">
+     Skip to main content
+    </a>
+   </div>
+   <a href="javascript:;" id="HiddenAnchor" style="display:none;">
+   </a>
+   <!-- =Temporary - Custom Design and Development 
+-Insert your code here and move SharePoint components into your code. Be sure to move any wrapper content placeholders and/or DIVs along with the SharePoint component.
+-Move any unused SharePoint components to the hidden ASP Panel at the bottom of the this file.
+-Add a class of s4-notdlg to any element that you do not want to display in a modal dialog window. 
+-->
+   <!-- =SharePoint - allows for page modifications via custom control -->
+   <div class="s4-pr s4-ribbonrowhidetitle" id="s4-ribbonrow">
+    <!-- ^ =Ribbon Block 
+  -The s4-ribbonrow DIV ID is mandatory and must be kept for the ECMAScript logic (Ribbon) so the Ribbon will function; also used for modal dialog box styles.
+  -It is not recommended to add anything within the Ribbon container below as the height is set using static values that will not adjust to additional content. 
+  -->
+    <div id="s4-ribboncont">
+     <!-- =Ribbon - Control -->
+     <div class="ms-cui-ribbonTopBars">
+      <div class="ms-cui-topBar1">
+      </div>
+      <div class="ms-cui-topBar2">
+       <div class="ms-cui-TabRowLeft ms-siteactionscontainer s4-notdlg" id="RibbonContainer-TabRowLeft">
+        <span class="ms-siteactionsmenu" id="siteactiontd">
+         <!-- =Navigation - Site Actions
+						-Reorder items by changing 'MenuGroupId' and 'Sequence'.
+						-'Text' is the Site Actions item title and 'Description' is the descriptive text listed under the title.
+						-Alternatively use PublishingSiteAction:SiteActionMenu control in lieu of menu below; requires control registration.
+						-->
+        </span>
+        <!-- =Navigation - Global - Breadcrumb Popout/Hierarchy Tree -->
+        <span class="s4-breadcrumb-anchor">
+         <span class="s4-clust" style="height:16px;width:16px;position:relative;display:inline-block;overflow:hidden;">
+          <a href="javascript:;" id="GlobalBreadCrumbNavPopout-anchor" onclick="CoreInvoke('callOpenBreadcrumbMenu', event, 'GlobalBreadCrumbNavPopout-anchor', 'GlobalBreadCrumbNavPopout-menu', 'GlobalBreadCrumbNavPopout-img', 's4-breadcrumb-anchor-open', 'ltr', '', false); return false;" onmouseout="" onmouseover="" style="display:inline-block;height:16px;width:16px;" title="Navigate Up">
+           <img alt="Navigate Up" src="/_layouts/images/fgimg.png" style="border:0;position:absolute;left:-0px !important;top:-112px !important;"/>
+          </a>
+         </span>
+        </span>
+        <div class="ms-popoutMenu s4-breadcrumb-menu" id="GlobalBreadCrumbNavPopout-menu" style="display:none;">
+         <div class="s4-breadcrumb-top">
+          <!-- ^ =Navigation - Global - Breadcrumb Popout/Hierarchy Tree - Starting label in dropdown -->
+          <span class="s4-breadcrumb-header">
+           This page location is:
+          </span>
+         </div>
+         <div style="height: 10px; background: #b3b3aa;">
+         </div>
+        </div>
+        <!-- =Legacy - list of subsites and sibling sites in the global navigation on the page -->
+        <div class="s4-die">
+        </div>
+        <!-- =Ribbon - Page state icon that displays when in Edit mode (Edit/Save) -->
+       </div>
+       <div class="ms-cui-TabRowRight s4-trc-container s4-notdlg" id="RibbonContainer-TabRowRight">
+        <!-- =Navigation - Variation Labels menu -->
+        <div class="s4-trc-container-menu">
+         <div>
+          <!-- =Navigation - Personal Actions ('Welcome User') Menu -->
+          <a class="s4-signInLink" href="http://eden.cce.cornell.edu/_layouts/Authenticate.aspx?Source=%2FPages%2Fdefault%2Easpx" id="ctl00_IdWelcome_ExplicitLogin" style="display:inline;">
+           Sign In
+          </a>
+          <!-- =Navigation - Multi-lingual User Interface menu -->
+          <script type="text/javascript">
+           // <![CDATA[
+function OnSelectionChange(value)
+{
+	var today = new Date();
+	var oneYear = new Date(today.getTime() + 365 * 24 * 60 * 60 * 1000);
+	var url = window.location.href;
+	document.cookie = "lcid=" + value + ";path=/;expires=" + oneYear.toGMTString();
+	window.location.href = url;
+}
+// ]]>
+          </script>
+         </div>
+        </div>
+        <!-- =Legacy (?) - My Links -->
+        <span>
+         <!-- =Developer Dashboard -->
+         <span class="s4-devdashboard">
+         </span>
+        </span>
+       </div>
+      </div>
+     </div>
+     <script type="text/javascript">
+      //<![CDATA[
+var g_commandUIHandlers = {"name":"CommandHandlers","attrs":{},"children":[]};
+//]]>
+     </script>
+    </div>
+    <!-- =Ribbon - Notification area under Ribbon -->
+    <div class="s4-noti" id="notificationArea">
+    </div>
+    <!-- =Publishing - Enables publishing features on Publish tab in Ribbon -->
+    <span id="ctl00_SPNavigation_ctl00_publishingConsoleV4_publishingRibbon">
+    </span>
+    <div id="WebPartAdderUpdatePanelContainer">
+     <!-- ^ =Page Tools - Add Web Parts Panel -->
+     <div id="ctl00_WebPartAdderUpdatePanel">
+      <span id="ctl00_WebPartAdder">
+      </span>
+     </div>
+    </div>
+    <!-- =Ribbon END -->
+   </div>
+   <style type="text/css">
+    body #s4-ribbonrow {
+        display: none;
+       }
+   </style>
+   <div id="s4-workspace">
+    <!-- ^ =Layout - Workspace Container  - DO NOT DELETE
+  -The  above DIV and DIV ID is mandatory and must be kept for the ECMAScript logic (Ribbon) IF you want the Ribbon docked at the top of the browser window.
+  -Creates scrollable area when Ribbon is enabled. 
+  -Used to set up modal dialog box sizing.
+  -The s4-workspace ID is referenced in many SharePoint script files.
+  -s4-nosetwidth class should be added to this DIV if the web page design is a fixed width design or includes a right/left margin for the entire web page.
+  -->
+    <div id="s4-bodyContainer">
+     <!-- ^ =Layout - Body Container - DO NOT DELETE
+	  -The above DIV and s4-bodyContainer DIV ID is mandatory and must be kept for the ECMAScript logic (Ribbon) IF you want the Ribbon docked at the top of the browser window.
+	  -s4-bodyContainer ID is used to create proper modal dialog box scrollbars and widths.
+	  -Used to determine width of the page.
+	  -->
+     <div id="s4-statusbarcontainer">
+      <!-- ^ =Page Tools - Edit Mode - Status Bar 
+		-DIV is not needed to maintain site functionality.
+		-Following child #pageStatusBar DIV is needed to display Status Bar.
+		-->
+      <div class="s4-status-s1" id="pageStatusBar">
+      </div>
+     </div>
+     <div class="s4-pr s4-widecontentarea" id="s4-mainarea">
+      <!-- ^ =Layout - Outer container setting width and float 
+		-The s4-mainarea ID is referenced in SharePoint script files.
+		-->
+      <div class="s4-ca s4-ca-dlgNoRibbon" id="MSO_ContentTable">
+       <!-- ^ =Layout - Right Content Area 
+			-Keep the s4-ca class to maintain OOTB themable styles.
+			-Keep the s4-ca and s4-ca-dlgNoRibbon classes to maintain modal dialog box styles.
+			-Keep the MSO_ContentTable ID, it is referenced in many SharePoint script files and is used for web parts.
+			-->
+       <div class="s4-die">
+        <!-- ^ =Legacy - Content Placeholders and Page Title -->
+        <!-- =Content Placeholder - Page image in UI3 - Legacy Support -->
+        <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        <!-- =Content Placeholder - Area between page image and page title in UI3 - Legacy Support -->
+        <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        <!-- =Legacy - Page title -->
+        <div class="ms-pagetitleareaframe s4-pagetitle" id="onetidPageTitleAreaFrame">
+        </div>
+        <!-- =Content Placeholder - Mini Console - provides page level commands such as the supplementary buttons for Site Map in UI3 - Legacy Support -->
+        <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        <!-- This SPAN is likely unnecessary as it has the same s4-die CSS class as the parent DIV element -->
+        <span class="s4-die">
+         <!-- =Content Placeholder - Area between page name and right page border in UI3 - Legacy Support -->
+         <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        </span>
+        <!-- =Content Placeholder - Area between top nav bar and page content in UI3 - Legacy Support -->
+        <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        <!-- =Content Placeholder - Sets a width of the left nav bar in UI3 - Legacy Support -->
+        <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        <!-- =Content Placeholder - Area between left nav bar and page content in UI3 - Legacy Support -->
+        <!-- =Content Placeholder - Area between left nav and content in UI3 - Legacy Support -->
+        <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+       </div>
+       <!-- =Page Tools - Edit console - UI Version 3 -->
+       <div class="s4-ba">
+        <!-- ^ =Layout - Content area -->
+        <!-- CU HEADER -->
+        <div id="mainwrapper">
+         <div id="cu-identity">
+          <div id="cu-identity-content">
+           <div id="cu-logo">
+            <a class="cce-logo" href="http://www.cce.cornell.edu/">
+             <img alt="Cornell University" border="0" height="76" src="/Style%20Library/Images/cce/CornellLogo/CCE_new.png"/>
+            </a>
+           </div>
+           <div id="cu-seal">
+            <a class="cu-insignia" href="http://www.cornell.edu">
+             <img alt="Cornell University" border="0" src="/Style%20Library/Images/cce/CornellLogo/cornell_seal.png" width="76"/>
+            </a>
+           </div>
+           <div id="search-form" style="width: 322px; top: 12px; text-align:right">
+            <div align="right" id="search-input">
+             <label for="search-form-query">
+              SEARCH:
+             </label>
+             <input class="search-form-query" id="ctl00_searchFormQuery" name="ctl00$searchFormQuery" type="text"/>
+             <input class="search-form-submit" id="ctl00_searchFormSumbit" name="ctl00$searchFormSumbit" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$searchFormSumbit", "", true, "", "", false, false))' type="submit" value="Go"/>
+            </div>
+            <div align="right" id="search-filters">
+             <input checked="checked" id="ctl00_RadioButton0" name="ctl00$tab" type="radio" value="RadioButton0"/>
+             <label for="ctl00_RadioButton0">
+              CCE Pages
+             </label>
+             <input id="ctl00_RadioButton1" name="ctl00$tab" type="radio" value="RadioButton1"/>
+             <label for="ctl00_RadioButton1">
+              Cornell Pages
+             </label>
+             <input id="ctl00_RadioButton2" name="ctl00$tab" type="radio" value="RadioButton2"/>
+             <label for="ctl00_RadioButton2">
+              People
+             </label>
+             <br/>
+             <a href="http://www.cornell.edu/search/">
+              more options
+             </a>
+            </div>
+           </div>
+          </div>
+         </div>
+         <!--END OF CU HEADER -->
+         <!-- HEADER -->
+         <div id="TopMenu">
+          <!-- MAINNAV-->
+          <div id="mainnav">
+           <div class="AspNet-Menu-Horizontal" id="zz1_GlobalNav">
+            <ul class="AspNet-Menu">
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="/">
+               NYS EDEN Home
+              </a>
+             </li>
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="http://www.cce.cornell.edu/">
+               Cornell Cooperative Extension
+              </a>
+             </li>
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="http://cce.cornell.edu/learnAbout/Pages/About.aspx">
+               About
+              </a>
+             </li>
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="http://cce.cornell.edu/Pages/Program-landing.aspx">
+               Program Areas
+              </a>
+             </li>
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="http://cce.cornell.edu/learnAbout/GetInvolved/Pages/GetInvolved.aspx">
+               Join Us
+              </a>
+             </li>
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="http://cce.cornell.edu/Pages/CCE-News.aspx">
+               News
+              </a>
+             </li>
+             <li class="AspNet-Menu-Leaf">
+              <a class="AspNet-Menu-Link" href="http://cce.cornell.edu/learnAbout/Pages/Local_Offices.aspx">
+               Local Offices
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <!-- END MAINNAV -->
+         </div>
+         <!-- END HEADER -->
+         <!--Banner -->
+         <div id="BannerWrapper">
+          <div style="min-height: 100px; margin-left: auto; margin-right: auto; width: 980px;">
+           <div style="float:left;">
+            <a href="http://eden.cce.cornell.edu/">
+             <img border="0" src="/PublishingImages/Banner/background2.jpg"/>
+            </a>
+           </div>
+           <div style="font-size: 15px; padding-top: 35px; padding-left:500px; color: #4c4c4c; font-family:Verdana,arial,helvetica,sans-serif;">
+            Linking extension educators, emergency managers, and community officials to enhance resilience and reduce the impact of disasters in New York communities.
+           </div>
+          </div>
+         </div>
+         <div style="height: 10px; background: #b3b3aa;">
+         </div>
+         <div id="mainwrapper">
+          <div id="content">
+           <div id="pageContent">
+            <div class="ms-bodyareacell">
+             <div id="ctl00_MSO_ContentDiv">
+              <!-- ^ =Page Tools - Web Part Tool Pane
+						-Keep the MSO_ContentDiv ID, it sets up the Web Part Tool Pane.
+						-->
+              <a name="mainContent">
+              </a>
+              <!-- =Content Placeholder - Large content block -->
+              <div id="mainContainer">
+               <table>
+                <tr>
+                 <td valign="top">
+                  <div id="leftContent">
+                   <div id="LeftMenuNav">
+                    <div style="background: url('/Style%20Library/Images/cce/Box/TopLeftCorner.gif') no-repeat left top; height: 26px;">
+                     <div style="background: url('/Style%20Library/Images/cce/Box/TopRightCorner.gif') no-repeat right top; height: 28px;">
+                      <div style="background: url('/Style%20Library/Images/cce/Box/TopSide.gif') repeat-x 50% top; margin-right: 28px; margin-left: 28px; margin-bottom: 0px; height: 28px;">
+                      </div>
+                     </div>
+                    </div>
+                    <div style="background: url('/Style%20Library/Images/cce/Box/RightSide.gif') repeat-y right 50%; padding-right: 10px; margin-top: -19px; margin-bottom: -4px;">
+                     <div style="background: url('/Style%20Library/Images/cce/Box/LeftSide.gif') repeat-y left 50%; padding-left: 5px;">
+                      <div id="BlueBox-Content">
+                       <div class="AspNet-Menu-Vertical" id="zz2_CurrentNav">
+                        <ul class="AspNet-Menu">
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/">
+                           Home
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/AboutNYEDEN/Pages/default.aspx">
+                           About NY EDEN
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/agrosecurity/Pages/default.aspx">
+                           Agrosecurity
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="http://www.agriculture.ny.gov/AP/CropInsuranceBasics.html">
+                           Crop Insurance &amp; Disaster Resilience
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/Preparedness/Pages/default.aspx">
+                           Disaster Preparedness
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/disease/Pages/default.aspx">
+                           Disease
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/family/Pages/default.aspx">
+                           Family Matters
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/fdpcert/Pages/default.aspx">
+                           Farm Disaster Preparation Certificate
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/HomelandSecurity/Pages/default.aspx">
+                           Homeland &amp; Personal Security
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-WithChildren">
+                          <a class="AspNet-Menu-Link" href="/disasters/Pages/default.aspx">
+                           Natural Disasters
+                          </a>
+                          <ul>
+                           <li class="AspNet-Menu-Leaf">
+                            <a class="AspNet-Menu-Link" href="http://emergencypreparedness.cce.cornell.edu/disasters/SitePages/disaster.aspx?dis=Mud/Land-slides">
+                             Mud/Land-slides
+                            </a>
+                           </li>
+                           <li class="AspNet-Menu-Leaf">
+                            <a class="AspNet-Menu-Link" href="/agrosecurity/Pages/Ag-Damage-Assessment.aspx">
+                             Ag Damage Assessment
+                            </a>
+                           </li>
+                           <li class="AspNet-Menu-Leaf">
+                            <a class="AspNet-Menu-Link" href="/Pages/Storm-Archives.aspx">
+                             Storms Archives
+                            </a>
+                           </li>
+                          </ul>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/otheremergencies/Pages/default.aspx">
+                           Other Emergencies
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/educators">
+                           CCE Educators/Associations
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/Pages/disabilities.aspx">
+                           Disasters and Disabilities
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/Pages/Research.aspx">
+                           Research
+                          </a>
+                         </li>
+                         <li class="AspNet-Menu-Leaf">
+                          <a class="AspNet-Menu-Link" href="/Pages/training.aspx">
+                           Training
+                          </a>
+                         </li>
+                        </ul>
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                    <div style="background: url('/Style%20Library/Images/cce/Box/BottomLeftCorner.gif') no-repeat left bottom; margin-top: 0px; margin-top: -22px; margin-left: -0px;">
+                     <div style="background: url('/Style%20Library/Images/cce/Box/BottomRightCorner.gif') no-repeat right bottom; ">
+                      <div style="background: url('/Style%20Library/Images/cce/Box/BottomSide.gif') repeat-x 50% bottom; margin-right: 28px; margin-left: 28px; height: 28px;">
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                   <div id="AreaLeftLinks">
+                    <div id="ExteralLinksBox">
+                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                       <td class="s4-wpcell-plain" id="MSOZoneCell_WebPartWPQ5" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" class="s4-wpTopTable" width="100%">
+                         <tr>
+                          <td>
+                           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr class="ms-WPHeader">
+                             <td align="left" class="ms-wpTdSpace">
+                             </td>
+                             <td class="ms-WPHeaderTd" id="WebPartTitleWPQ5" title="EDEN Resources - Use to display links on your web page that can be grouped and styled and can be organized by dragging and dropping">
+                              <h3 class="ms-standardheader ms-WPTitle" style="text-align:justify;">
+                               <nobr>
+                                <span>
+                                 EDEN Resources
+                                </span>
+                                <span id="WebPartCaptionWPQ5">
+                                </span>
+                               </nobr>
+                              </h3>
+                             </td>
+                             <td class="ms-WPHeaderTdSelection">
+                              <span class="ms-WPHeaderTdSelSpan">
+                               <input class="ms-WPHeaderCbxHidden" id="SelectionCbxWebPartWPQ5" onblur="this.className='ms-WPHeaderCbxHidden'" onclick="TrapMenuClick(event); return false;" onfocus="this.className='ms-WPHeaderCbxVisible'" onkeyup="WpCbxKeyHandler(event);" onmouseup="WpCbxSelect(event); return false;" title="Select or deselect EDEN Resources Web Part" type="checkbox"/>
+                              </span>
+                             </td>
+                             <td align="left" class="ms-wpTdSpace">
+                             </td>
+                            </tr>
+                           </table>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td class="" valign="top">
+                           <div allowdelete="false" class="ms-WPBody noindex ms-wpContentDivSpace" haspers="false" id="WebPartWPQ5" style="" webpartid="6ac280f7-065f-46b7-9f9d-050bdb39232c" width="100%">
+                            <script language="javascript" type="text/javascript">
+                             var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_m_g_6ac280f7_065f_46b7_9f9d_050bdb39232c'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$m$g_6ac280f7_065f_46b7_9f9d_050bdb39232c\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                            </script>
+                            <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_m_g_6ac280f7_065f_46b7_9f9d_050bdb39232c">
+                             <tr>
+                              <td id="column" valign="top" width="100%">
+                               <div class="slm-layout-main" id="group">
+                                <div class="item" id="linkitem">
+                                 <div class="image-area-top">
+                                  <a href="/disasters/SitePages/disaster.aspx?dis=Lake%20Ontario%20Flooding%202017" target="">
+                                   <img alt="" class="image" src="/PublishingImages/IMG_4546.JPG"/>
+                                  </a>
+                                 </div>
+                                 <div class="link-item">
+                                  <a href="/disasters/SitePages/disaster.aspx?dis=Lake%20Ontario%20Flooding%202017" target="" title="">
+                                   Ontario Lake Flooding 2017
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/disease/Pages/Zika.aspx" target="" title="">
+                                   Zika Virus information
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/agrosecurity/Pages/default.aspx" target="" title="">
+                                   Prevent Bird Flu in NYS!
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/Pages/OnTheMap.aspx" target="" title="">
+                                   Real-time Disaster tracking
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/Pages/NY-EDEN-in-the-NEWS.aspx" target="" title="">
+                                   NY EDEN in the NEWS
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/Pages/Storm-Archives.aspx" target="" title="">
+                                   Storm Archives
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div id="footer">
+                                </div>
+                               </div>
+                              </td>
+                             </tr>
+                            </table>
+                           </div>
+                          </td>
+                         </tr>
+                        </table>
+                        <div class="ms-PartSpacingVertical">
+                        </div>
+                       </td>
+                      </tr>
+                      <tr>
+                       <td class="s4-wpcell-plain" id="MSOZoneCell_WebPartWPQ7" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" class="s4-wpTopTable" width="100%">
+                         <tr>
+                          <td valign="top">
+                           <div allowdelete="false" class="ms-WPBody noindex" haspers="false" id="WebPartWPQ7" style="" webpartid="b77fa5bb-e61d-4e2d-8c54-0e83af250dcb" width="100%">
+                            <iframe border="0" height="180" name="National Terrorism Advisory System" scrolling="no" src="http://www.dhs.gov/ntas/" width="170">
+                            </iframe>
+                           </div>
+                          </td>
+                         </tr>
+                        </table>
+                        <div class="ms-PartSpacingVertical">
+                        </div>
+                       </td>
+                      </tr>
+                      <tr>
+                       <td class="s4-wpcell-plain" id="MSOZoneCell_WebPartWPQ6" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" class="s4-wpTopTable" width="100%">
+                         <tr>
+                          <td valign="top">
+                           <div allowdelete="false" class="ms-WPBody noindex" haspers="false" id="WebPartWPQ6" style="" webpartid="64939a70-ad0d-4d93-bcc4-d2d8cc4c2387" width="100%">
+                            <script language="javascript" type="text/javascript">
+                             var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_m_g_64939a70_ad0d_4d93_bcc4_d2d8cc4c2387'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$m$g_64939a70_ad0d_4d93_bcc4_d2d8cc4c2387\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                            </script>
+                            <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_m_g_64939a70_ad0d_4d93_bcc4_d2d8cc4c2387">
+                             <tr>
+                              <td id="column" valign="top" width="100%">
+                               <div class="slm-layout-main" id="group">
+                                <div class="item" id="linkitem">
+                                 <div class="image-area-left">
+                                  <a href="https://www.facebook.com/CCE.NY.EDEN" target="_blank">
+                                   <img alt="" class="image" src="/PublishingImages/Find-Us-Facebook.jpg"/>
+                                  </a>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="image-area-left">
+                                  <a href="https://twitter.com/CCE_Disaster" target="_blank">
+                                   <img alt="" class="image" src="https://cdn2.iconfinder.com/data/icons/minimalism/128/twitter.png"/>
+                                  </a>
+                                 </div>
+                                </div>
+                                <div id="footer">
+                                </div>
+                               </div>
+                              </td>
+                             </tr>
+                            </table>
+                           </div>
+                          </td>
+                         </tr>
+                        </table>
+                        <div class="ms-PartSpacingVertical">
+                        </div>
+                       </td>
+                      </tr>
+                      <tr>
+                       <td class="s4-wpcell-plain" id="MSOZoneCell_WebPartWPQ4" style="display:none;" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" class="s4-wpTopTable" style="display:none;" width="100%">
+                         <tr>
+                          <td>
+                           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr class="ms-WPHeader">
+                             <td align="left" class="ms-wpTdSpace">
+                             </td>
+                             <td class="ms-WPHeaderTd" id="WebPartTitleWPQ4" title="(Hidden) Drought - Use to display links on your web page that can be grouped and styled and can be organized by dragging and dropping">
+                              <h3 class="ms-standardheader ms-WPTitle" style="text-align:justify;">
+                               <nobr>
+                                <span>
+                                 ‭(Hidden)‬ Drought
+                                </span>
+                                <span id="WebPartCaptionWPQ4">
+                                </span>
+                               </nobr>
+                              </h3>
+                             </td>
+                             <td class="ms-WPHeaderTdSelection">
+                              <span class="ms-WPHeaderTdSelSpan">
+                               <input class="ms-WPHeaderCbxHidden" id="SelectionCbxWebPartWPQ4" onblur="this.className='ms-WPHeaderCbxHidden'" onclick="TrapMenuClick(event); return false;" onfocus="this.className='ms-WPHeaderCbxVisible'" onkeyup="WpCbxKeyHandler(event);" onmouseup="WpCbxSelect(event); return false;" title="Select or deselect (Hidden) Drought Web Part" type="checkbox"/>
+                              </span>
+                             </td>
+                             <td align="left" class="ms-wpTdSpace">
+                             </td>
+                            </tr>
+                           </table>
+                          </td>
+                         </tr>
+                         <tr>
+                          <td class="" valign="top">
+                           <div allowdelete="false" class="ms-WPBody noindex ms-wpContentDivSpace" haspers="false" id="WebPartWPQ4" style="" webpartid="1a2d329d-6d69-4317-afd6-645b435237bb" width="100%">
+                            <script language="javascript" type="text/javascript">
+                             var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_m_g_1a2d329d_6d69_4317_afd6_645b435237bb'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$m$g_1a2d329d_6d69_4317_afd6_645b435237bb\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                            </script>
+                            <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_m_g_1a2d329d_6d69_4317_afd6_645b435237bb">
+                             <tr>
+                              <td id="column" valign="top" width="100%">
+                               <div class="slm-layout-main" id="group">
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/disasters/Pages/Drought.aspx" target="" title="">
+                                   NYS Drought
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div id="footer">
+                                </div>
+                               </div>
+                              </td>
+                             </tr>
+                            </table>
+                           </div>
+                          </td>
+                         </tr>
+                        </table>
+                        <div class="ms-PartSpacingVertical">
+                        </div>
+                       </td>
+                      </tr>
+                      <tr>
+                       <td class="s4-wpcell-plain" id="MSOZoneCell_WebPartWPQ2" style="display:none;" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" class="s4-wpTopTable" style="display:none;" width="100%">
+                         <tr>
+                          <td valign="top">
+                           <div allowdelete="false" class="ms-WPBody noindex" haspers="false" id="WebPartWPQ2" style="" webpartid="13409458-d40c-4cff-a9dd-e9cbbb07a351" width="100%">
+                            <script language="javascript" type="text/javascript">
+                             var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_m_g_13409458_d40c_4cff_a9dd_e9cbbb07a351'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$m$g_13409458_d40c_4cff_a9dd_e9cbbb07a351\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                            </script>
+                            <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_m_g_13409458_d40c_4cff_a9dd_e9cbbb07a351">
+                             <tr>
+                              <td id="column" valign="top" width="100%">
+                               <div class="slm-layout-main" id="group">
+                                <div class="groupheader item medium">
+                                 Hot Topics
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="http://www.nyfarmnet.org" target="" title="">
+                                   Farm Net
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/disasters/Pages/Drought.aspx" target="" title="">
+                                   Drought
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/Pages/FDPCertificate.aspx" target="" title="">
+                                   Farm Disaster Preparation Certificate
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/otheremergencies/Pages/PowerOutages.aspx" target="" title="">
+                                   Power Outages
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="link-item">
+                                  <a href="/disasters/Pages/Irene-Lee.aspx" target="" title="">
+                                   Hurricanes Irene &amp; Lee
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div class="item" id="linkitem">
+                                 <div class="image-area-left">
+                                  <a href="https://twitter.com/cce_disaster" target="_blank">
+                                   <img alt="" class="image" src="/PublishingImages/sm-twitter-bird-light-bgs.png"/>
+                                  </a>
+                                 </div>
+                                 <div class="link-item">
+                                  <a href="https://twitter.com/cce_disaster" target="_blank" title="">
+                                   Follow us on Twitter!
+                                  </a>
+                                  <div class="description">
+                                  </div>
+                                 </div>
+                                </div>
+                                <div id="footer">
+                                </div>
+                               </div>
+                              </td>
+                             </tr>
+                            </table>
+                           </div>
+                          </td>
+                         </tr>
+                        </table>
+                       </td>
+                      </tr>
+                     </table>
+                    </div>
+                   </div>
+                  </div>
+                 </td>
+                 <td class="PageVerticalDivider">
+                 </td>
+                 <td style="background: #f0eee4;" valign="top">
+                  <div id="mainContent">
+                   <div id="AreaFeatureStory" style="margin-top: -15px;">
+                    <div class="mainContainerHeader">
+                    </div>
+                   </div>
+                   <div>
+                    <table style="width: 711px;">
+                     <tr>
+                      <td valign="top">
+                       <div style="min-width: 237px; margin-left: 0px;">
+                        <div id="ctl00_PlaceHolderMain_SummaryLink1__ControlWrapper_SummaryLinkFieldControl" style="display:inline">
+                         <script language="javascript" type="text/javascript">
+                          var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_PlaceHolderMain_SummaryLink1_SummaryLink1'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$PlaceHolderMain$SummaryLink1$SummaryLink1\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                         </script>
+                         <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_PlaceHolderMain_SummaryLink1_SummaryLink1">
+                          <tr>
+                           <td id="column" valign="top" width="100%">
+                            <div class="slm-layout-main" id="group">
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/disease/Pages/default.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/Virus.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/disease/Pages/default.aspx" target="" title="">
+                                Infectious Diseases
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/otheremergencies/Pages/HazardousMaterials.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/Problem.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/otheremergencies/Pages/HazardousMaterials.aspx" target="" title="">
+                                Hazardous Materials
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/disasters/Pages/default.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/Landslide.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/disasters/Pages/default.aspx" target="" title="">
+                                Natural Disasters
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/family/Pages/AnimalsinEmergencies.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/Largeanimalrescue-1.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/family/Pages/AnimalsinEmergencies.aspx" target="" title="">
+                                Animals in Emergencies
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="http://sp.ehs.cornell.edu/Pages/Home.aspx" target="">
+                                <img alt="Cornell University Environmental Health &amp; Safety " class="image" src="/PublishingImages/SplashPageImages/EHStruck.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="http://sp.ehs.cornell.edu/Pages/Home.aspx" target="" title="">
+                                CU Environmental Health &amp; Safety
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/Pages/Research.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/Research%20c.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/Pages/Research.aspx" target="" title="">
+                                Research
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="http://nyfarmnet.org/" target="">
+                                <img alt="" class="image" src="/PublishingImages/farmnet%20icon.JPG"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="http://nyfarmnet.org/" target="" title="">
+                                FarmNet
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="http://climateinstitute.cals.cornell.edu/" target="">
+                                <img alt="" class="image" src="/PublishingImages/CICSS.GIF"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="http://climateinstitute.cals.cornell.edu/" target="" title="">
+                                Cornell Institute for Climate Change &amp; Agriculture
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div id="footer">
+                             </div>
+                            </div>
+                           </td>
+                          </tr>
+                         </table>
+                        </div>
+                       </div>
+                      </td>
+                      <td valign="top">
+                       <div style="min-width: 237px;">
+                        <div id="ctl00_PlaceHolderMain_SummaryLink2__ControlWrapper_SummaryLinkFieldControl" style="display:inline">
+                         <script language="javascript" type="text/javascript">
+                          var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_PlaceHolderMain_SummaryLink2_SummaryLink2'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$PlaceHolderMain$SummaryLink2$SummaryLink2\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                         </script>
+                         <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_PlaceHolderMain_SummaryLink2_SummaryLink2">
+                          <tr>
+                           <td id="column" valign="top" width="100%">
+                            <div class="slm-layout-main" id="group">
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/Preparedness/Pages/default.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/Safty.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/Preparedness/Pages/default.aspx" target="" title="">
+                                Disaster Preparedness
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/otheremergencies/Pages/Fire.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/Fire.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/otheremergencies/Pages/Fire.aspx" target="" title="">
+                                Fire
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/disasters/Pages/WinterStorms.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/snow1.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/disasters/Pages/WinterStorms.aspx" target="" title="">
+                                Winter Storms
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/HomelandSecurity/Pages/default.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/HomeLandSecurity.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/HomelandSecurity/Pages/default.aspx" target="" title="">
+                                Homeland &amp; Personal Security
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/Pages/disabilities.aspx" target="">
+                                <img alt="Disabilities logo" class="image" src="/PublishingImages/disability%20logo.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/Pages/disabilities.aspx" target="" title="">
+                                Disaster and Disabilities
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="/disasters/Pages/How-to-Help.aspx" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/donate%20sponsor%20volunteer2.png"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="/disasters/Pages/How-to-Help.aspx" target="" title="">
+                                How to Help
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="http://www.nysrise.org/index.php" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/NYS%20RISE%20LOGO.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="http://www.nysrise.org/index.php" target="" title="">
+                                NY RISE
+                               </a>
+                               <div class="description">
+                                NY EDEN is a Member of the New York State Resiliency Institute for Storms and Emergencies
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="link-item">
+                               <a href="http://weather.uky.edu/php/next48.php?state=New_York" target="" title="">
+                                In-depth weather &amp; climate
+                               </a>
+                               <div class="description">
+                               </div>
+                              </div>
+                             </div>
+                             <div class="item centered" id="linkitem">
+                              <div class="image-area-top">
+                               <a href="http://www.nws.noaa.gov/com/weatherreadynation/" target="">
+                                <img alt="" class="image" src="/PublishingImages/SplashPageImages/wrn%20logo.jpg"/>
+                               </a>
+                              </div>
+                              <div class="link-item">
+                               <a href="http://www.nws.noaa.gov/com/weatherreadynation/" target="" title="">
+                                NOAA Weather-Ready Nation
+                               </a>
+                               <div class="description">
+                                NY EDEN is a Member of the NOAA Weather-Ready Nation
+                               </div>
+                              </div>
+                             </div>
+                             <div id="footer">
+                             </div>
+                            </div>
+                           </td>
+                          </tr>
+                         </table>
+                        </div>
+                       </div>
+                      </td>
+                      <td valign="top">
+                       <div style="min-width: 237px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                         <tr>
+                          <td class="s4-wpcell-plain" id="MSOZoneCell_WebPartWPQ3" valign="top">
+                           <table border="0" cellpadding="0" cellspacing="0" class="s4-wpTopTable" width="100%">
+                            <tr>
+                             <td valign="top">
+                              <div allowdelete="false" class="ms-WPBody noindex" haspers="false" id="WebPartWPQ3" style="" webpartid="8912d373-96b4-4062-9235-117729b19b7b" width="100%">
+                               <script language="javascript" type="text/javascript">
+                                var slwp;
+        if (slwp == null) slwp = new Array();
+        slwp['ctl00_m_g_8912d373_96b4_4062_9235_117729b19b7b'] = "WebForm_DoPostBackWithOptions\u0028new WebForm_PostBackOptions\u0028\u0022ctl00$m$g_8912d373_96b4_4062_9235_117729b19b7b\u0022, \u0022SLWPToken\u0022, false, \u0022\u0022, \u0022\u0022, true, true\u0029\u0029";
+                               </script>
+                               <table cellpadding="0" cellspacing="0" class="slm-layout-main" id="slwp_ctl00_m_g_8912d373_96b4_4062_9235_117729b19b7b">
+                                <tr>
+                                 <td id="column" valign="top" width="100%">
+                                  <div class="slm-layout-main" id="group">
+                                   <div class="item centered" id="linkitem">
+                                    <div class="image-area-top">
+                                     <a href="/agrosecurity/Pages/default.aspx" target="">
+                                      <img alt="" class="image" src="/PublishingImages/SplashPageImages/Farm.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="/agrosecurity/Pages/default.aspx" target="" title="">
+                                      Agrosecurity/Food Safety
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div class="item centered" id="linkitem">
+                                    <div class="image-area-top">
+                                     <a href="/otheremergencies/Pages/PowerOutages.aspx" target="">
+                                      <img alt="" class="image" src="/PublishingImages/SplashPageImages/Power_Outage.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="/otheremergencies/Pages/PowerOutages.aspx" target="" title="">
+                                      Power Outages
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div class="item centered" id="linkitem">
+                                    <div class="image-area-top">
+                                     <a href="/otheremergencies/Pages/RadiologicalIncidents.aspx" target="">
+                                      <img alt="" class="image" src="/PublishingImages/SplashPageImages/Nile Mile Point2.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="/otheremergencies/Pages/RadiologicalIncidents.aspx" target="" title="">
+                                      Radiological Incidents
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div class="item" id="linkitem">
+                                    <div class="image-area-left">
+                                     <a href="http://ccams.eas.cornell.edu/index.php?page=forecast" target="">
+                                      <img alt="" class="image" src="/PublishingImages/SplashPageImages/CU meteorology.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="http://ccams.eas.cornell.edu/index.php?page=forecast" target="" title="">
+                                      Today’s weather in New York
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div class="item centered" id="linkitem">
+                                    <div class="image-area-top">
+                                     <a href="http://www.eden.lsu.edu" target="">
+                                      <img alt="" class="image" src="/PublishingImages/SplashPageImages/Eden_Logo.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="http://www.eden.lsu.edu" target="" title="">
+                                      National EDEN
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div class="item centered" id="linkitem">
+                                    <div class="image-area-top">
+                                     <a href="http://www.clrp.cornell.edu/index.htm" target="">
+                                      <img alt="Cornell Local Roads Program " class="image" src="/PublishingImages/WinterRoades.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="http://www.clrp.cornell.edu/index.htm" target="" title="">
+                                      Cornell Local Roads Program
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div class="item centered" id="linkitem">
+                                    <div class="image-area-top">
+                                     <a href="/Pages/training.aspx" target="">
+                                      <img alt="" class="image" src="/PublishingImages/training logo.jpg"/>
+                                     </a>
+                                    </div>
+                                    <div class="link-item">
+                                     <a href="/Pages/training.aspx" target="" title="">
+                                      Training
+                                     </a>
+                                     <div class="description">
+                                     </div>
+                                    </div>
+                                   </div>
+                                   <div id="footer">
+                                   </div>
+                                  </div>
+                                 </td>
+                                </tr>
+                               </table>
+                              </div>
+                             </td>
+                            </tr>
+                           </table>
+                          </td>
+                         </tr>
+                        </table>
+                       </div>
+                      </td>
+                     </tr>
+                    </table>
+                   </div>
+                  </div>
+                 </td>
+                </tr>
+               </table>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <!--FooterWrap -->
+        <div id="footerwrap">
+         <div id="page_footer">
+          <div id="print-copyright">
+           ©201
+           <span lang="en-us">
+            9
+           </span>
+           <a href="http://www.cornell.edu">
+            Cornell University
+           </a>
+           <br/>
+           <br/>
+           <a href="http://cce.cornell.edu/disclaimer">
+            Disclaimer
+           </a>
+           |
+           <a href="http://cce.cornell.edu/privacy">
+            Privacy Policy
+           </a>
+          </div>
+          <ul>
+           <li>
+            <a class="s4-signInLink" href="http://eden.cce.cornell.edu/_layouts/Authenticate.aspx?Source=%2FPages%2Fdefault%2Easpx" id="ctl00_LV_BottomLogin_explitLogout2_ExplicitLogin" style="display:inline;">
+             Sign In
+            </a>
+           </li>
+           <li>
+            <a href="http://cce.cornell.edu">
+             CCE Public Site
+            </a>
+           </li>
+           <li>
+            <a href="mailto:cce-contact@cornell.edu">
+             Site Feedback
+            </a>
+           </li>
+          </ul>
+          <div id="legalstmt">
+           Cornell Cooperative Extension is an equal opportunity, affirmative action educator and employer.
+           <br/>
+           <br/>
+           If you have a disability and are having trouble accessing information on this website or need materials in an alternate format, Contact
+           <a href="mailto:web-accessibility@cornell.edu">
+            web-accessibility@cornell.edu
+           </a>
+           for assistance.
+          </div>
+         </div>
+         <!-- end footer -->
+        </div>
+        <!-- end footerwrap -->
+        <div class="s4-die">
+         <!-- ^ =Legacy - Content Placeholder -->
+         <!-- =Content Placeholder - Area between content and right page border in UI3 - Legacy Support -->
+         <!-- Even though this is within an element hidden from UI4, it is still required by some content pages and therefore must stay in the master page -->
+        </div>
+        <!-- =Layout - END Right Content Area -->
+       </div>
+       <!-- =Layout - END Outer container setting width and float -->
+      </div>
+      <!-- =Ribbon - END Body Container -->
+     </div>
+     <!-- =Ribbon - END Workspace Container -->
+    </div>
+    <!-- =SharePoint - Hidden Components -->
+    <!-- =SharePoint - Leave below items intact -->
+    <!-- Inserts security validation within form -->
+    <!-- Used for Search -->
+    <input name="__spText1" style="display:none;" title="text" type="text"/>
+    <input name="__spText2" style="display:none;" title="text" type="text"/>
+    <div id="ctl00_panelZone">
+     <div id="hidZone" style="display:none">
+      <menu class="ms-SrvMenuUI">
+       <ie:menuitem iconsrc="/_layouts/images/HelpIcon.gif" id="MSOMenu_Help" onmenuclick="MSOWebPartPage_SetNewWindowLocation(MenuWebPart.getAttribute('helpLink'), MenuWebPart.getAttribute('helpMode'))" style="display:none" text="Help" type="option">
+       </ie:menuitem>
+      </menu>
+     </div>
+    </div>
+    <input id="_wpcmWpid" name="_wpcmWpid" type="hidden" value=""/>
+    <input id="wpcmVal" name="wpcmVal" type="hidden" value=""/>
+    <script type="text/javascript">
+     //<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.g_updateFormDigestPageLoaded = new Date(); window.g_updateFormDigestPageLoaded.setDate(window.g_updateFormDigestPageLoaded.getDate() -5);function loadMDN2() { EnsureScript('MDN.js', typeof(loadFilterFn), null); }
+function loadMDN1() { ExecuteOrDelayUntilScriptLoaded(loadMDN2, 'sp.ribbon.js'); }
+_spBodyOnLoadFunctionNames.push('loadMDN1');
+function _spNavigateHierarchyEx(nodeDiv, dataSourceId, dataPath, url, listInContext, type, additionalQString) {
+    SetAdditionalNavigateHierarchyQString(additionalQString);
+    g_originalSPNavigateFunc(nodeDiv, dataSourceId, dataPath, url, listInContext, type);
+}
+
+g_originalSPNavigateFunc = _spNavigateHierarchy;
+_spNavigateHierarchy = _spNavigateHierarchyEx;
+
+function EnsureScripts(scriptInfoList, finalFunction)
+{
+if (scriptInfoList.length == 0)
+{
+finalFunction();
+}
+else
+{
+var scriptInfo = scriptInfoList.shift();
+var rest = function () { EnsureScripts(scriptInfoList, finalFunction); };
+var defd;
+try
+{
+eval('defd = typeof(' + scriptInfo[1] + ');');
+}
+catch (e)
+{
+defd = 'undefined';
+}
+if (scriptInfo[2])
+{
+EnsureScript(scriptInfo[0], defd, null);
+ExecuteOrDelayUntilScriptLoaded(rest, scriptInfo[0]);
+}
+else
+{
+EnsureScript(scriptInfo[0], defd, rest);
+}
+}
+}
+function PublishingRibbonUpdateRibbon()
+{
+var pageManager = SP.Ribbon.PageManager.get_instance();
+if (pageManager)
+{
+pageManager.get_commandDispatcher().executeCommand('appstatechanged', null);
+}
+}var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{de0161ac-13c4-41b4-98f8-2ab12e8bfd6e}",itemId: 1,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fPages",itemPermissions:{High:16,Low:196673}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+}
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js"); var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';
+ExecuteOrDelayUntilScriptLoaded(
+function()
+{
+var initInfo = 
+{
+itemPermMasks: {High:16,Low:196673},
+listPermMasks: {High:16,Low:196673},
+listId: "de0161ac-13c4-41b4-98f8-2ab12e8bfd6e",
+itemId: 1,
+workflowsAssociated: true,
+editable: false,
+doNotShowProperties: false,
+enableVersioning: true
+};
+SP.Ribbon.DocLibAspxPageComponent.registerWithPageManager(initInfo);
+},
+"sp.ribbon.js");
+var g_disableCheckoutInEditMode = false;
+var _spWebPermMasks = {High:16,Low:196673};//]]>
+    </script>
+    <script type="text/javascript">
+     // <![CDATA[
+// ]]>
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.core.js", "\u002f_layouts\u002fsp.core.js?rev=7ByNlH\u00252BvcgRJg\u00252BRCctdC0w\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.res.resx", "\u002f_layouts\u002fScriptResx.ashx?culture=en\u00252Dus\u0026name=SP\u00252ERes\u0026rev=b6\u00252FcRx1a6orhAQ\u00252FcF\u00252B0ytQ\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.ui.dialog.js", "\u002f_layouts\u002fsp.ui.dialog.js?rev=Tpcmo1\u00252FSu6R0yewHowDl5g\u00253D\u00253D");RegisterSodDep("sp.ui.dialog.js", "sp.core.js");RegisterSodDep("sp.ui.dialog.js", "sp.res.resx");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("core.js", "\u002f_layouts\u002f1033\u002fcore.js?rev=Emb5hNX1RZMNXk9oS82yvA\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.runtime.js", "\u002f_layouts\u002fsp.runtime.js?rev=IGffcZfunndj0247nOxKVg\u00253D\u00253D");RegisterSodDep("sp.runtime.js", "sp.core.js");RegisterSodDep("sp.runtime.js", "sp.res.resx");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.js", "\u002f_layouts\u002fsp.js?rev=\u00252B4ZEyA892P3T0504qi0paw\u00253D\u00253D");RegisterSodDep("sp.js", "sp.core.js");RegisterSodDep("sp.js", "sp.runtime.js");RegisterSodDep("sp.js", "sp.ui.dialog.js");RegisterSodDep("sp.js", "sp.res.resx");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("cui.js", "\u002f_layouts\u002fcui.js?rev=OOyJv78CADNBeet\u00252FvTvniQ\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("inplview", "\u002f_layouts\u002finplview.js?rev=WB6Gy8a027aeNCq7koVCUg\u00253D\u00253D");RegisterSodDep("inplview", "core.js");RegisterSodDep("inplview", "sp.js");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("ribbon", "\u002f_layouts\u002fsp.ribbon.js?rev=F\u00252BUEJ66rbXzSvpf7nN69wQ\u00253D\u00253D");RegisterSodDep("ribbon", "core.js");RegisterSodDep("ribbon", "sp.core.js");RegisterSodDep("ribbon", "sp.js");RegisterSodDep("ribbon", "cui.js");RegisterSodDep("ribbon", "sp.res.resx");RegisterSodDep("ribbon", "sp.runtime.js");RegisterSodDep("ribbon", "inplview");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.ui.policy.resources.resx", "\u002f_layouts\u002fScriptResx.ashx?culture=en\u00252Dus\u0026name=SP\u00252EUI\u00252EPolicy\u00252EResources\u0026rev=YhBHGmUAGyJ3lAgSdE4V\u00252Fw\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("mdn.js", "\u002f_layouts\u002fmdn.js?rev=gwmFFJ2\u00252FfFacqXWAqG\u00252FqKg\u00253D\u00253D");RegisterSodDep("mdn.js", "sp.core.js");RegisterSodDep("mdn.js", "sp.runtime.js");RegisterSodDep("mdn.js", "sp.js");RegisterSodDep("mdn.js", "cui.js");RegisterSodDep("mdn.js", "ribbon");RegisterSodDep("mdn.js", "sp.ui.policy.resources.resx");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.publishing.resources.resx", "\u002f_layouts\u002fScriptResx.ashx?culture=en\u00252Dus\u0026name=SP\u00252EPublishing\u00252EResources\u0026rev=q6nxzZIVVXE5X1SPZIMD3A\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("sp.ui.pub.ribbon.js", "\u002f_layouts\u002fsp.ui.pub.ribbon.js?rev=epwnP\u00252FbdljnctbCVld1nnA\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("msstring.js", "\u002f_layouts\u002f1033\u002fmsstring.js?rev=QtiIcPH3HV7LgVSO7vONFg\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("browserScript", "\u002f_layouts\u002f1033\u002fnon_ie.js?rev=EVTj1bu32\u00252FMla6SDN\u00252FsNTA\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSod("WPAdderClass", "\u002f_layouts\u002fwpadder.js?rev=rmznE9UTHIeAZF\u00252FGRiGNVA\u00253D\u00253D");
+    </script>
+    <script type="text/javascript">
+     RegisterSodDep("browserScript", "msstring.js");
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+Sys.Application.initialize();
+//]]>
+    </script>
+   </div>
+  </form>
+  <!-- Added content beneath closing FORM tag -->
+  <!-- Unsupported browser warning -->
+  <!--
+SharePoint Experts, Inc. 
+-sharepointexperience.com
+-->
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17833498-32']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+ </body>
+</html>
+

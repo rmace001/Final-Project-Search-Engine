@@ -1,0 +1,611 @@
+http://map.utah.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="Universtiy of Utah Interactive Campus Map." description"="" name="viewport"/>
+  <meta content="Facilities Management GIS" name="author"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <link href="app/resources/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="57x57"/>
+  <link href="app/resources/images/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76"/>
+  <link href="app/resources/images/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"/>
+  <link href="app/resources/images/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"/>
+  <link href="app/resources/images/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="app/resources/images/icon-normal.png" rel="icon" sizes="128x128"/>
+  <link href="app/resources/images/icon-hires.png" rel="icon" sizes="192x192"/>
+  <link href="app/resources/images/favicon.ico" rel="icon"/>
+  <title>
+   Campus Map - The University of Utah
+  </title>
+  <link href="app/resources/css/app.css" rel="stylesheet"/>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https:\/\/www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-51161023-12', 'auto'); ga('send', 'pageview');
+  </script>
+ </head>
+ <body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+   <div class="container">
+    <div class="navbar-header">
+     <div class="loadingGif" id="loadingGif">
+     </div>
+     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+     </button>
+     <span class="navbar-brand">
+      <a href="http:\/\/utah.edu" target="_blank">
+       <img alt="U Logo" class="navbar-brand-image ulogo" id="ulogo" src="dojo/resources/blank.gif"/>
+      </a>
+      Campus Map
+     </span>
+    </div>
+    <div class="navbar-collapse collapse" style="height: auto;">
+     <ul class="nav navbar-nav">
+      <li class="dropdown" id="mapLayers">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Map Features
+        <b class="caret">
+        </b>
+       </a>
+       <ul class="dropdown-menu">
+        <li class="dropdown dropdown-submenu" id="accesibilitySubmenuDropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Accessibility
+         </a>
+         <div class="dropdown-menu" id="accesibilityLayersMenu" style="min-width: 305px; overflow:auto !important;">
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="powered accessible entrances" class="menuImage poweredAccessibleEntranceIcon" id="poweredaccessibleentranceicon" src="dojo/resources/blank.gif" title="Powered Accessible Entrances"/>
+            Powered
+           </span>
+           <span class="layerSwitchContainerSpan" id="poweredAccessibleEntranceSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="accessible entrance" class="menuImage accessibleEntranceIcon" id="accessibleentranceicon" src="dojo/resources/blank.gif" title="Accessible Entrances"/>
+            Standard
+           </span>
+           <span class="layerSwitchContainerSpan" id="accessibleEntranceSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="gender free restrooms" class="menuImage genderFreeRestroomsIcon" id="genderfreerestroomsicon" src="dojo/resources/blank.gif" title="Gender Free Restrooms"/>
+            Gender Free Restrooms
+           </span>
+           <span class="layerSwitchContainerSpan" id="genderFreeRestroomsSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="lactation rooms" class="menuImage lactationRoomsIcon" id="lactationroomsicon" src="dojo/resources/blank.gif" title="Lactation Rooms"/>
+            Lactation Rooms
+           </span>
+           <span class="layerSwitchContainerSpan" id="lactationRoomsSwitch">
+           </span>
+          </div>
+         </div>
+        </li>
+        <li class="dropdown dropdown-submenu" id="pointOfInterestSubmenuDropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Points of Interest
+         </a>
+         <div class="dropdown-menu" id="pointsOfInterestLayersMenu" style="min-width: 305px; overflow:auto !important;">
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel subLayerMenuLabel">
+            <img alt="coffe icon" class="menuImage coffeeIcon" id="coffeeIcon" src="dojo/resources/blank.gif"/>
+            Coffee
+           </span>
+           <span class="layerSwitchContainerSpan" id="coffeeSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel subLayerMenuLabel">
+            <img alt="food icon" class="menuImage foodIcon" id="foodIcon" src="dojo/resources/blank.gif"/>
+            Food
+           </span>
+           <span class="layerSwitchContainerSpan" id="foodSwitch">
+           </span>
+          </div>
+         </div>
+        </li>
+        <li class="dropdown dropdown-submenu" id="transportationSubmenuDropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Transportation
+         </a>
+         <div class="dropdown-menu" id="transportationLayersMenu" style="min-width: 305px; overflow:auto !important;">
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="utah bus stop icon" class="menuImage utaBusStopIcon" id="utabusicon" src="dojo/resources/blank.gif" title="UTA Bus"/>
+            UTA Bus Stop
+           </span>
+           <span class="layerSwitchContainerSpan" id="utaBusStopSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="bike station icon" class="menuImage bikeStorageIcon" id="bikestorageicon" src="dojo/resources/blank.gif" title="Bike Rack"/>
+            Bike Parking
+           </span>
+           <span class="layerSwitchContainerSpan" id="bikeRackSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="secure bike storage icon" class="menuImage secureBikeStorageIcon" id="securebikestorageicon" src="dojo/resources/blank.gif" title="Bike Locker"/>
+            Secure Bike Parking
+           </span>
+           <span class="layerSwitchContainerSpan" id="bikeLockerSwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="bike repair icon" class="menuImage bikeRepairIcon" id="bikerepairicon" src="dojo/resources/blank.gif" title="Repair Station"/>
+            Repair Station
+           </span>
+           <span class="layerSwitchContainerSpan" id="bikeRepairStationSwitch">
+           </span>
+          </div>
+         </div>
+        </li>
+        <li class="dropdown dropdown-submenu" id="campusSafetySubmenuDropdown">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Campus Safety
+         </a>
+         <div class="dropdown-menu" id="campusSafetyLayersMenu" style="min-width: 305px; overflow:auto !important;">
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="emergency assembly point icon" class="menuImage eapIcon" id="eapicon" src="dojo/resources/blank.gif" title="eap"/>
+            Emergency Assembly
+           </span>
+           <span class="layerSwitchContainerSpan" id="emergencyAssemblySwitch">
+           </span>
+          </div>
+          <div class="overrideClicks subLayerMenuItem">
+           <span class="layerMenuLabel">
+            <img alt="emergency phone icon" class="menuImage ephoneIcon" id="ephoneicon" src="dojo/resources/blank.gif" title="ephone"/>
+            Emergency Phones
+           </span>
+           <span class="layerSwitchContainerSpan" id="emergencyPhonesSwitch">
+           </span>
+          </div>
+         </div>
+        </li>
+        <li>
+         <div id="buildingsLayerMenuItem" style="min-width: 305px; overflow:auto !important;">
+          <div class="divider">
+          </div>
+          <div class="overrideClicks layerMenuItem">
+           <span class="layerMenuLabel">
+            Buildings
+           </span>
+           <span class="layerSwitchContainerSpan" id="buildingsSwitch">
+           </span>
+          </div>
+         </div>
+        </li>
+        <li>
+         <div id="constructionLayerMenuItem" style="min-width: 305px; overflow:auto !important;">
+          <div class="divider">
+          </div>
+          <div class="overrideClicks layerMenuItem">
+           <span class="layerMenuLabel">
+            Construction
+           </span>
+           <span class="layerSwitchContainerSpan" id="constructionSwitch">
+           </span>
+          </div>
+         </div>
+        </li>
+       </ul>
+      </li>
+      <li class="dropdown" id="parkingList">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Parking
+        <span class="caret">
+        </span>
+       </a>
+       <div class="dropdown-menu" style="min-width: 260px; overflow:auto !important;">
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="visitor parking icon" class="menuImage visitorParkingIcon" id="visitorparkingicon" src="dojo/resources/blank.gif"/>
+          Visitor
+         </span>
+         <span class="layerSwitchContainerSpan" id="visitorParkingSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="faculty staff parking icon" class="menuImage aPermitParkingIcon" id="facultystaffparkingicon" src="dojo/resources/blank.gif"/>
+          Faculty/Staff
+         </span>
+         <span class="layerSwitchContainerSpan" id="facultyStaffParkingSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="student parking icon" class="menuImage uPermitParkingIcon" id="studentparkingicon" src="dojo/resources/blank.gif"/>
+          Student
+         </span>
+         <span class="layerSwitchContainerSpan" id="studentParkingSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="student housing parking icon" class="menuImage housingParkingIcon" id="housingparkingicon" src="dojo/resources/blank.gif"/>
+          Housing
+         </span>
+         <span class="layerSwitchContainerSpan" id="housingParkingSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="economy parking icon" class="menuImage economyParkingIcon" id="economyparkingicon" src="dojo/resources/blank.gif"/>
+          Economy
+         </span>
+         <span class="layerSwitchContainerSpan" id="economyParkingSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="motorcycle parking icon" class="menuImage motorcyclePermitParkingIcon" id="motorcycleparkingicon" src="dojo/resources/blank.gif"/>
+          Motorcycle
+         </span>
+         <span class="layerSwitchContainerSpan" id="motorcycleParkingSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="accessible parking icon" class="menuImage accessibleParkingIcon" id="accessibleparkingicon" src="dojo/resources/blank.gif"/>
+          Accessible
+         </span>
+         <span class="layerSwitchContainerSpan" id="accessibleParkingSwitch">
+         </span>
+        </div>
+       </div>
+      </li>
+      <li class="dropdown" id="basemapList">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Map Views
+        <span class="caret">
+        </span>
+       </a>
+       <div class="dropdown-menu">
+        <div id="basemapGallery">
+        </div>
+       </div>
+      </li>
+      <li>
+       <a href="#" id="campusSearch">
+        Search
+       </a>
+      </li>
+      <li class="dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Tours
+        <span class="caret">
+        </span>
+       </a>
+       <ul class="dropdown-menu" role="menu">
+        <li>
+         <a href="http:\/\/universityofutah.maps.arcgis.com/apps/MapJournal/index.html?appid=03f368d1c3eb4607b7055ed61e80f5a6" target="_blank">
+          Campus Tour
+         </a>
+        </li>
+        <li>
+         <a href="http:\/\/universityofutah.maps.arcgis.com/apps/MapTour/index.html?appid=7ff2a3b2f77a4f73ad3eee7b5c75cdc7" target="_blank">
+          Historic Building Tour
+         </a>
+        </li>
+        <li>
+         <a href="http:\/\/universityofutah.maps.arcgis.com/apps/MapTour/index.html?appid=7c12aab3af204f35b74c22a8febcaf50" target="_blank">
+          Tree Tour
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="dropdown" id="shuttleTrackerList">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Shuttle Tracker
+        <span class="caret">
+        </span>
+       </a>
+       <div class="dropdown-menu" style="min-width: 260px; overflow:auto !important;">
+        <div class="overrideClicks subLayerMenuItem">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="all active shuttle icon" class="menuImage allShuttlesIcon" id="allShuttlesicon" src="dojo/resources/blank.gif"/>
+          All Active Shuttles
+         </span>
+         <span class="layerSwitchContainerSpan" id="allShuttleSwitch">
+         </span>
+        </div>
+        <div class="divider">
+        </div>
+        <div class="overrideClicks layerMenuItem">
+         <span class="layerMenuLabel">
+          Active Shuttle Routes
+         </span>
+        </div>
+        <div class="divider">
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="redShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="red shuttle icon" class="menuImage redShuttleIcon" id="redicon" src="dojo/resources/blank.gif"/>
+          Red
+         </span>
+         <span class="layerSwitchContainerSpan" id="redShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="greenShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="green shuttle icon" class="menuImage greenShuttleIcon" id="greenicon" src="dojo/resources/blank.gif"/>
+          Green
+         </span>
+         <span class="layerSwitchContainerSpan" id="greenShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="purpleShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="purple shuttle icon" class="menuImage purpleShuttleIcon" id="purpleicon" src="dojo/resources/blank.gif"/>
+          Purple
+         </span>
+         <span class="layerSwitchContainerSpan" id="purpleShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="orangeShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="orange shuttle icon" class="menuImage orangeShuttleIcon" id="orangeicon" src="dojo/resources/blank.gif"/>
+          Orange
+         </span>
+         <span class="layerSwitchContainerSpan" id="orangeShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="wasatchShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="wasatch express shuttle icon" class="menuImage wasatchExpressShuttleIcon" id="wasatchicon" src="dojo/resources/blank.gif"/>
+          Wasatch Express
+         </span>
+         <span class="layerSwitchContainerSpan" id="wasatchExpressShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="vaShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="va shuttle icon" class="menuImage vaShuttleIcon" id="vaicon" src="dojo/resources/blank.gif"/>
+          VA
+         </span>
+         <span class="layerSwitchContainerSpan" id="vaShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="hciShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="hci shuttle icon" class="menuImage hciShuttleIcon" id="hciicon" src="dojo/resources/blank.gif"/>
+          HCI-Institute
+         </span>
+         <span class="layerSwitchContainerSpan" id="hciShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="guardsmanShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="guardsman shuttle icon" class="menuImage guardsmanShuttleIcon" id="guardsmanicon" src="dojo/resources/blank.gif"/>
+          Guardsman Direct
+         </span>
+         <span class="layerSwitchContainerSpan" id="guardsmanShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="bsbShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="bsb shuttle icon" class="menuImage bsbShuttleIcon" id="bsbicon" src="dojo/resources/blank.gif"/>
+          BSB-U Hospital
+         </span>
+         <span class="layerSwitchContainerSpan" id="bsbShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="unionShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="union trax shuttle icons" class="menuImage pchShuttleIcon" id="pchicon" src="dojo/resources/blank.gif"/>
+          Union-Trax
+         </span>
+         <span class="layerSwitchContainerSpan" id="unionTraxShuttleSwitch">
+         </span>
+        </div>
+        <div class="overrideClicks subLayerMenuItem shuttleItem" id="nightShuttle">
+         <span class="layerMenuLabel subLayerMenuLabel">
+          <img alt="night shuttle icon" class="menuImage nightShuttleIcon" id="nighticon" src="dojo/resources/blank.gif"/>
+          Night Route
+         </span>
+         <span class="layerSwitchContainerSpan" id="nightShuttleSwitch">
+         </span>
+        </div>
+       </div>
+      </li>
+      <li>
+       <a href="http:\/\/utah.edu/printable-maps" target="_blank">
+        Printable Maps
+       </a>
+      </li>
+      <li class="dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        About
+        <span class="caret">
+        </span>
+       </a>
+       <ul class="dropdown-menu" role="menu">
+        <li>
+         <a href="mailto:m.wintriss@utah.edu?Subject=Campus%20Map%20Application">
+          Feedback
+         </a>
+        </li>
+        <li>
+         <a href="app/resources/apidoc/index.html" target="_blank">
+          API
+         </a>
+        </li>
+        <li>
+         <span style="font-family: Verdana, Geneva, sans-serif; font-size: 8pt; padding: 5px 20px; opacity: .5; alpha(opacity=50);">
+          Version 3.2.0
+         </span>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </nav>
+  <div aria-hidden="true" class="modal fade" id="routingModal" style="display: none;">
+   <div class="modal-dialog">
+    <div class="modal-content" id="routingModalContent">
+     <div class="modal-header" id="routingModalHeader">
+      <button aria-hidden="true" class="close" data-dismiss="modal" id="routingModalCloseButton" type="button">
+       ×
+      </button>
+      <h4 class="modal-title">
+       Get Route
+      </h4>
+     </div>
+     <div class="modal-body" id="routingDiv">
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" class="modal fade" id="onCampusSearchModal" style="display: none;">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+       ×
+      </button>
+      <h4 class="modal-title">
+       Search
+      </h4>
+     </div>
+     <div class="modal-body">
+      <form>
+       <div class="form-group clearfix">
+        <input class="campusSearchNode populate placeholder" id="campusSearchNode" type="hidden"/>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-label="basicModal" class="modal fade" id="buildingImageModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header" id="bldgImageModalHeader">
+     </div>
+     <div class="modal-body">
+      <img alt="modal body" id="modalBuildingImageNode" src="#" style="width: 100%; height: 100%"/>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-label="basicModal" class="modal fade" id="bikeInfrastructureImageModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header" id="bikeInfrastructureImageModalHeader">
+     </div>
+     <div class="modal-body">
+      <img alt="bike infrastructure modal" id="bikeInfrastructureImageNode" src="#" style="width: 100%; height: 100%"/>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-label="basicModal" class="modal fade" id="genderfreeImageModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header" id="genderfreeImageModalHeader">
+     </div>
+     <div class="modal-body">
+      <img alt="gender free image modal" id="genderfreeImageNode" src="#" style="width: 100%; height: 100%"/>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-label="basicModal" class="modal fade" id="lactationImageModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header" id="lactationImageModalHeader">
+     </div>
+     <div class="modal-body">
+      <img alt="lactation room image modal" id="lactationImageNode" src="#" style="width: 100%; height: 100%"/>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-label="basicModal" class="modal fade" id="coffeeFoodImageModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header" id="coffeeFoodImageModalHeader">
+     </div>
+     <div class="modal-body">
+      <img alt="coffee and food image modal" id="coffeeFoodImageNode" src="#" style="width: 100%; height: 100%"/>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" aria-label="bitlyModal" class="modal fade" id="bitlyModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content" style="padding-bottom: 20px; height: 150px;">
+     <div class="modal-header" id="bitlyModalHeader">
+     </div>
+     <div class="modal-body" id="bitlyModalBody">
+      <div class="form-group clearfix">
+       <button class="btn btn-danger pull-right" id="btnGetBitly" style="margin-top: 10px;" type="button">
+        Get Link
+       </button>
+       <input class="bitlyUrlInput" id="bitlyUrlInput" type="url">
+        <label class="bitlyUrlLabel" id="bitlyUrlLabel">
+        </label>
+        <span class="bitlyCopy" id="bitlyCopy">
+         Copy
+        </span>
+       </input>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="mapDiv">
+   <div id="homeButton">
+   </div>
+   <div id="locateButton">
+   </div>
+   <div class="bitlyButton" id="bitlyButton" role="presentation" style="display: block;">
+    <div class="locateContainer">
+     <div class="zoomLocateButton" role="button" title="Short URL">
+      <span>
+       Short URL
+      </span>
+     </div>
+    </div>
+   </div>
+   <div class="campusSearchButton" id="searchButton" role="presentation" style="display: block;">
+    <div class="locateContainer">
+     <div class="zoomLocateButton" role="button" title="Search">
+      <span>
+       Search
+      </span>
+     </div>
+    </div>
+   </div>
+   <div class="clearGraphics mapSurfaceClearGraphicsIcon" id="clearGraphics" style="cursor: pointer" title="Clear">
+   </div>
+   <div class="recallRoutingModalButton mapSurfaceRecallDirectionsIcon" id="recallRoutingModalButton" style="cursor: pointer" title="Show Directions">
+   </div>
+  </div>
+  <script>
+   var dojoConfig = { baseUrl: '.', async: true, packages: [ 'app', 'bootstrap', 'bootstrap-switch', 'select2', 'dijit', 'dojo', 'dojox', 'dstore', 'dgrid', 'xstyle', 'put-selector', 'esri', 'Dojo-Bootstrap', 'bootstrapmap', 'u_modules', { name: "template", location: 'app/resources/printdirections/tpl' }, { name: 'moment', location: 'moment', main: 'moment', trees: [ [".", ".", /(\/\.)|(~$)|(test|txt|src|min|templates)/] ] } ], selectorEngine: 'lite', tlmSiblingOfDojo: false };
+  </script>
+  <script src="dojo/dojo.js">
+  </script>
+  <script>
+   require([ 'app/main' ], function(App){ app = App; app.init(); });
+  </script>
+ </body>
+</html>

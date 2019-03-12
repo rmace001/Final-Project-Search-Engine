@@ -1,0 +1,678 @@
+https://campusmaps.uark.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="initial-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta content="Educational" name="classification"/>
+  <meta content="University of Arkansas at Fayetteville" name="Description"/>
+  <meta content="University of Arkansas, UA, UA Fayetteville, University of Arkansas Fayetteville, Education, College, Colleges, University, Universities, U of A, University, College, Higher Education, Institution of Higher Learning, Institution of Higher  Education, Arkansas Educational Institution, Education on-line education, distance learning, distance education" name="keywords"/>
+  <meta content="ALL" name="robots"/>
+  <meta content="Global" name="distribution"/>
+  <meta content="General" name="rating"/>
+  <meta content="Web Page" name="doc-type"/>
+  <meta content="Living Document" name="doc-class"/>
+  <title>
+   Campus Map | University of Arkansas
+  </title>
+  <link href="/Content/header.css" rel="stylesheet" type="text/css"/>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+   <link href="//www.uark.edu/_resources/php/combine.php?t=css&amp;f=bootstrap-3.min.css,uark-style.css&amp;rebuild=1" rel="stylesheet"/>
+   <link href="/Content/Site.css" rel="stylesheet" type="text/css"/>
+   <link href="/Content/themes/base/minified/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/jquery-ui-1.8.23.min.js" type="text/javascript">
+   </script>
+   <script src="//www.uark.edu/_resources/js/respond.js">
+   </script>
+   <script src="//www.uark.edu/_resources/php/combine.php?t=js&amp;f=bootstrap.min.js,oucampus.js">
+   </script>
+   <script src="/Scripts/modernizr.custom.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/uofa.footer.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/html5shiv.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/html5shiv-printshiv.js" type="text/javascript">
+   </script>
+   <script src="//s7.addthis.com/js/300/addthis_widget.js" type="text/javascript">
+   </script>
+   <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCfuE2tpw3nhw8xJ_4AL04tQvoNVfFNyyk" type="text/javascript">
+   </script>
+   <script src="/Scripts/json2.min.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/jquery.signalR-0.5.2.min.js" type="text/javascript">
+   </script>
+   <script src="//campusdata.uark.edu/signalr/hubs" type="text/javascript">
+   </script>
+   <script src="/Scripts/google.map.extensions.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/campusBetaMap.js" type="text/javascript">
+   </script>
+   <script src="/Scripts/label.js" type="text/javascript">
+   </script>
+   <script>
+    var current_path = "";
+   </script>
+   <!-- javascripts that don't need to go in the head can go here -->
+   <script type="text/javascript">
+    $(document).ready(function () {
+            var checkIfTrue = ['Y', 't', 'Yes', 'True', '1', 'T', 'true', 'y', 'yes'];
+            var checkIfFalse = ['F', 'f', 'No', 'False', '0', 'N', 'false', 'n', 'no'];
+
+            var viewPortWidth = $(window).width() - 25;
+
+            viewPortWidth = viewPortWidth + 'px !important;';
+
+            // $(".moveLeft").css('left', viewPortWidth);
+            $("<style> .moveLeft { left: " + viewPortWidth + " }</style>").appendTo("head");
+
+
+            if ('' != null && '' != "") {
+                //if (panelDisplay == "") { panelDisplay = "?pnl_disp=Y"; }
+                buildingCode = '';
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                initEmbedMap();
+                $("#map_canvas").css('height', '100%');
+            } else {
+                $("#currentTimes").dialog({ autoOpen: false });
+                initMap();
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtbus = setInterval(function () {
+                    clearTimeout(ebtbus);
+                    onBuses();
+                    if ('' != null && '' != '') {
+                            var ebtbus3 = setInterval(function () {
+                                clearTimeout(ebtbus3);
+                                var routesList = 'null';
+                                $.each(JSON.parse(routesList), function (idx, val) {
+                                    if (val != null) {
+                                        $("#chk" + val.id).prop("checked", true);
+                                        showOfS(val.id);
+                                        selectedRoutes[val.id] = val.id;
+                                        var t = val.name.split(" ");
+
+                                        if (t.length == 3) { val.name = t[2]; }
+
+                                        if (t.length > 3 && t.length == 4) { val.name = t[2] + " " + t[3]; }
+                                        if (transitQueryUrl == "") { transitQueryUrl = '&trnst=' + '' + '-' + val.name.replace(/ /g, "_"); } else { transitQueryUrl += '-' + val.name.replace(/ /g, "_"); }
+                                        console.log(transitQueryUrl);
+                                }
+                            });
+
+                                $.each(selectedRoutes, function (key, val) { if (val != null) { routeIds = routeIds + '-' + val; } });
+                                $.each(JSON.parse(routesList), function (idx, val) { showStops(val.id); });
+                                $.each(selectedRoutes, function (key, val) { if (val != null) { showRoute(val); } });
+                                showBuses(routeIds);
+                                $.connection.hub.url = 'https://campusdata.uark.edu/signalr';
+                                hubBuses = $.connection.busesHub;
+                                hubBuses.updateBuses = function (data) { trackBuses(data); };
+                                $.connection.hub.start(function () { });
+                            }, 1000);
+                    }
+                }, 1000);
+
+            } else { ChangeUrl('maps', ''); }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtlot = setInterval(function () {
+                    clearTimeout(ebtlot);
+                    onParking();
+                    if ('' != null && '' != '') {
+                        var ebtlot5 = setInterval(function () {
+                            clearTimeout(ebtlot5);
+                            var zoneTypeList = 'null';
+                                        $.each(JSON.parse(zoneTypeList), function (idx, val) {
+                                            if (val != null) {
+                                                $("#zoneType" + val.id).prop("checked", true);
+                                                showParkingZoneByType(val.id);
+                                                if (parkingQueryUrl == "") { parkingQueryUrl = '&parklot=Y'; }
+                                                parkingQueryUrl += '-' + encodeURIComponent(val.name.replace(/ /g, "_"));
+                                            }
+                                        });
+                                    }, 1000);
+                                }
+                }, 1000);
+                        }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtRack = setInterval(function () {
+                    clearTimeout(ebtRack);
+                    onParking();
+                    var ebtRack1 = setInterval(function () {
+                        clearTimeout(ebtRack1);
+                        $("#chkRack").prop("checked", true);
+                        showBicycleRacks();
+                        if (bicycleQueryUrl == "") { bicycleQueryUrl = "&bicycle=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtMoto = setInterval(function () {
+                    clearTimeout(ebtMoto);
+                    onParking();
+                    var ebtMoto1 = setInterval(function () {
+                        clearTimeout(ebtMoto1);
+                        $("#chkMoto").prop("checked", true);
+                        showMotoParking();
+                        if (motoQueryUrl == "") { motoQueryUrl = "&motoscooter=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtHist = setInterval(function () {
+                    clearTimeout(ebtHist);
+                    onSights();
+                    var ebtHist1 = setInterval(function () {
+                        clearTimeout(ebtHist1);
+                        $("#chkHistoric").prop("checked", true);
+                        showHistoricMarkers();
+                        if (histQueryUrl == "") { histQueryUrl = "&hist_markers=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtLac = setInterval(function () {
+                    clearTimeout(ebtLac);
+                    onSights();
+                    var ebtLac1 = setInterval(function () {
+                        clearTimeout(ebtLac1);
+                        $("#chkLactation").prop("checked", true);
+                        showLactationPoints();
+                        if (lactationPointQueryUrl == "") { lactationPointQueryUrl = "&lactation_rooms=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtArts = setInterval(function () {
+                    clearTimeout(ebtArts);
+                    onSights();
+                    var ebtArts1 = setInterval(function () {
+                        clearTimeout(ebtArts1);
+                        $("#chkArt").prop("checked", true);
+                        showPublicArts();
+                        if (pubArtQueryUrl == "") { pubArtQueryUrl = "&public_arts=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtAccess = setInterval(function () {
+                    clearTimeout(ebtAccess);
+                    onSights();
+                    var ebtAccess1 = setInterval(function () {
+                        clearTimeout(ebtAccess1);
+                        $("#chkDisability").prop("checked", true);
+                        showAccessiblePoints();
+                        if (accessibleQueryUrl == "") { accessibleQueryUrl = "&accessible_pt=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtEmerg = setInterval(function () {
+                    clearTimeout(ebtEmerg);
+                    onSights();
+                    var ebtEmerg1 = setInterval(function () {
+                        clearTimeout(ebtEmerg1);
+                        $("#chkEmergency").prop("checked", true);
+                        showEmergencyBoxes();
+                        if (emergencyBoxQueryUrl == "") { emergencyBoxQueryUrl = "&emerg_boxes=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtDining = setInterval(function () {
+                    clearTimeout(ebtDining);
+                    onServices();
+                    var ebtDining1 = setInterval(function () {
+                        clearTimeout(ebtDining1);
+                        $("#chkDining").prop("checked", true);
+                        showDinings();
+                        if (diningQueryUrl == "") { diningQueryUrl = "&dining=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var ebtlabs = setInterval(function () {
+                    clearTimeout(ebtlabs);
+                    onServices();
+                    var ebtlabs1 = setInterval(function () {
+                        clearTimeout(ebtlabs1);
+                        $("#chkComputerLabs").prop("checked", true);
+                        showComputerLabs();
+                        if (computerlabsQueryUrl == "") { computerlabsQueryUrl = "&computer_labs=Y"; }
+                    }, 1000);
+                }, 1000);
+            }
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                if ('' != "" && '' != "") {
+                    var ebtDir = setInterval(function () {
+                        clearTimeout(ebtDir);
+                        onWalking();
+                        var fromA = '';
+                            var toB = '';
+                            var ebtDir1 = setInterval(function () {
+                                clearTimeout(ebtDir1);
+
+                                $("#fromA").val(fromA);
+                                $("#toB").val(toB);
+
+                                var ebrDir2 = setInterval(function () {
+                                    clearTimeout(ebrDir2);
+                                    onDirections();
+                                }, 1000);
+                            }, 1000);
+
+                            if (directionQueryUrl == "") { directionQueryUrl = "&dir=Y"; }
+
+                            directionQueryUrl += "&fromA=" + fromA.replace(/ /g, '+') + "&toB=" + toB.replace(/ /g, '+');
+                        }, 1000);
+                    }
+                }
+
+            if ((checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                    || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)) { var ebtbuslot = setInterval(function () { clearTimeout(ebtbuslot); $('#parkingImg').removeClass("menuSelected"); $('#parking').hide(); }, 1000); }
+            if ((checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                    || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)) { var ebtmark = setInterval(function () { clearTimeout(ebtmark); $('#sightsImg').removeClass("menuSelected"); $('#sights').hide(); }, 1000); }
+            if ((checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                    || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)
+                || (checkIfTrue.indexOf('') >= 0 && checkIfTrue.indexOf('') >= 0)) { var ebtservice = setInterval(function () { clearTimeout(ebtservice); $('#servicesImg').removeClass("menuSelected"); $('#services').hide(); }, 1000); }
+
+            
+
+            if (checkIfTrue.indexOf('') >= 0) {
+                var changeURL = setInterval(function () {
+                    ChangeUrl('', '?embedMap=Y' + buildingQueryUrl + directionQueryUrl + transitQueryUrl + parkingQueryUrl + bicycleQueryUrl + motoQueryUrl + histQueryUrl + pubArtQueryUrl + accessibleQueryUrl + emergencyBoxQueryUrl + diningQueryUrl + computerlabsQueryUrl);
+                }, 1000);
+
+            } else {
+                var changeURL = setInterval(function () {
+                    pageurl();
+                }, 1000);
+            }
+
+
+            $(window).on('resize', function () {
+
+                var wWidth = $(window).width() - 25;
+
+                wWidth = wWidth + 'px !important;';
+
+                $("<style> .moveLeft { left: " + wWidth + " }</style>").appendTo("head");
+
+                if (panelDisplay == "N") { var ebt1 = setInterval(function () { clearTimeout(ebt1); $('#mainMenu').css('right', ''); }, 500); }
+            });
+
+
+            if (checkIfFalse.indexOf('') >= 0) {
+                var ebtPnl = setInterval(function () {
+                    clearTimeout(ebtPnl);
+                    onToggleMenu();
+                }, 1500);
+            }
+
+        });
+   </script>
+  </link>
+ </head>
+ <body class="landing">
+  <div class="page">
+   <header>
+    <div id="header-bg">
+    </div>
+    <div class="container" id="opener" role="banner">
+     <a class="brand" href="//www.uark.edu/">
+      University of Arkansas
+     </a>
+     <h1 id="site-heading">
+      <a class="siteIdentifierLinks" href="/" title="Campus Maps">
+       Campus Maps
+      </a>
+     </h1>
+     <div id="search-stack">
+      <div class="form-group" role="search">
+       <form action="https://search.uark.edu/s/search.html" class="form-search" id="site-search" method="get" name="gsa">
+        <!-- funnelback 'global' uark collection repo -->
+        <input name="collection" type="hidden" value="uark-search"/>
+        <input class="input-medium search-query" name="query" placeholder="search" title="Site Search" type="text"/>
+        <button class="searchButton" id="searchButton" name="sa" title="Go" type="submit" value="Search">
+        </button>
+       </form>
+      </div>
+      <div id="global-dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Links to important University of Arkansas pages">
+        <i class="icon-reorder icon-large">
+        </i>
+       </a>
+       <ul class="dropdown-menu">
+        <li class="nav-header">
+         University of Arkansas
+        </li>
+        <li>
+         <a href="//uark.edu/a-to-z.php">
+          A-Z Index
+         </a>
+        </li>
+        <li>
+         <a href="//learn.uark.edu">
+          Blackboard
+         </a>
+        </li>
+        <li>
+         <a href="//campusmaps.uark.edu/">
+          Campus Map
+         </a>
+        </li>
+        <li>
+         <a href="//uaconnect.uark.edu">
+          UAConnect
+         </a>
+        </li>
+        <li>
+         <a href="//directory.uark.edu/">
+          Directory
+         </a>
+        </li>
+        <li>
+         <a href="//email.uark.edu/">
+          UARK Gmail
+         </a>
+        </li>
+        <li>
+         <a href="//exchange.uark.edu/">
+          Exchange Mail
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </header>
+   <nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+    </div>
+   </nav>
+   <div id="main-container" role="main">
+    <div id="map_canvas">
+    </div>
+    <div id="currentTimes" title="Current Times">
+    </div>
+   </div>
+   <!-- FOOTER -->
+   <footer>
+    <div class="container">
+     <div class="row">
+      <div class="col-md-12">
+       <h3 id="footer-logo">
+        <a href="//uark.edu">
+         UNIVERSITY OF ARKANSAS
+        </a>
+       </h3>
+       <ul class="list-unstyled" id="footer-global-links">
+        <li>
+         <a href="//www.uark.edu/admissions/index.php">
+          Admissions
+         </a>
+        </li>
+        <li>
+         <a href="//www.uark.edu/academics/index.php">
+          Academics
+         </a>
+        </li>
+        <li>
+         <a href="//www.uark.edu/campus-life/index.php">
+          Campus Life
+         </a>
+        </li>
+        <li>
+         <a href="//www.uark.edu/research/index.php">
+          Research
+         </a>
+        </li>
+        <li>
+         <a href="//www.uark.edu/athletics/index.php">
+          Athletics
+         </a>
+        </li>
+        <li>
+         <a href="//www.uark.edu/about/index.php">
+          About
+         </a>
+        </li>
+       </ul>
+       <ul class="nav pull-right clearfix list-unstyled" id="social-stack">
+        <li>
+         <a href="//www.facebook.com/UofArkansas">
+          <i class="icon-facebook">
+          </i>
+          <span class="sr-only">
+           Like us on Facebook
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="//twitter.com/uarkansas">
+          <i class="icon-twitter">
+          </i>
+          <span class="sr-only">
+           Follow us on Twitter
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="//www.youtube.com/user/UniversityArkansas">
+          <i class="icon-youtube">
+          </i>
+          <span class="sr-only">
+           Watch us on YouTube
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="//instagram.com/uarkansas">
+          <i class="icon-instagram">
+          </i>
+          <span class="sr-only">
+           See us on Instagram
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="//pinterest.com/uofaadmissions/">
+          <i class="icon-pinterest">
+          </i>
+          <span class="sr-only">
+           Join us on Pinterest
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="//www.linkedin.com/company/university-of-arkansas">
+          <i class="icon-linkedin">
+          </i>
+          <span class="sr-only">
+           Connect with us on LinkedIn
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="//foursquare.com/uarkansas">
+          <i class="icon-foursquare">
+          </i>
+          <span class="sr-only">
+           Find us on FourSquare
+          </span>
+         </a>
+        </li>
+       </ul>
+       <hr/>
+       <div class="row">
+        <div class="col-sm-3">
+         <i class="icon-map-marker pull-left">
+         </i>
+         <address>
+          Fayetteville, AR 72701
+          <br/>
+          479-575-2000
+         </address>
+         <a href="//campusmaps.uark.edu/" title="View Campus Maps">
+          <img alt="Map of University of Arkansas Campus" class="img-responsive" src="//www.uark.edu/_resources/img/map.png"/>
+         </a>
+        </div>
+        <div class="col-sm-3 footer-news">
+         <h4>
+          <a href="//newswire.uark.edu/" title="Arkansas Newswire">
+           NEWS
+          </a>
+         </h4>
+         <ul id="newsFooter">
+         </ul>
+        </div>
+        <div class="col-sm-3 footer-events">
+         <h4>
+          <a href="//calendars.uark.edu/" title="Calendar Events">
+           EVENTS
+          </a>
+         </h4>
+         <script type="text/javascript">
+          $(function () {
+                                         $.ajax({
+                                             url: 'https://calendars.uark.edu/RSSSyndicator.aspx?type=N&amp;category=32-0&amp;numdays=7&amp;binary=Y&amp;rssid=25',
+                                             data: {},
+                                             contentType: 'application/xml',
+                                             cache: 'true',
+                                             success: function (data) {
+                                                 var list_data = '';
+
+                                                 var $xml = $(data).find('item:lt(3)');
+                                                 $xml.each(function () {
+                                                     var $this = $(this); var headline = $this.find('title').text();
+                                                     var link = $this.find('link').text();
+                                                     list_data += '<li><a href="' + link + '">' + headline + '</a></li>';
+
+                                                 });
+
+                                                 $(list_data).appendTo("#events-Footer");
+                                             }
+                                         });
+                                     });
+         </script>
+         <ul id="events-Footer">
+         </ul>
+        </div>
+        <div class="col-sm-3 footer-buttons">
+         <a class="btn btn-default btn-lg" href="//application.uark.edu">
+          <i class="icon-check icon-large">
+          </i>
+          <strong>
+           APPLY
+          </strong>
+          Online
+         </a>
+         <a class="btn btn-default btn-lg" href="//visit.uark.edu/">
+          <i class="icon-calendar icon-large">
+          </i>
+          Schedule a
+          <strong>
+           VISIT
+          </strong>
+         </a>
+         <a class="btn btn-default btn-lg" href="//onlinegiving.uark.edu/">
+          <i class="icon-gift icon-large">
+          </i>
+          Make a
+          <strong>
+           Gift
+          </strong>
+         </a>
+        </div>
+       </div>
+       <hr/>
+       <ul class="centered-nav vertical-divide list-unstyled footer-disclaimer">
+        <li>
+         <a href="//emergency.uark.edu/">
+          Emergency Information
+         </a>
+        </li>
+        <li>
+         <a href="//vcfa.uark.edu/2525.php">
+          Fraud Prevention
+         </a>
+        </li>
+        <li>
+         <a href="//www.uark.edu/contact-us.php">
+          Contact Us
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-127684-33']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+ </body>
+</html>
+

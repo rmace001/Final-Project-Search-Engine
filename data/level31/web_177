@@ -1,0 +1,621 @@
+http://www.wicci.wisc.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="" name="description"/>
+  <meta content="" name="keywords"/>
+  <meta content="index,follow" name="robots"/>
+  <title>
+   Wisconsin Initiative on Climate Change Impacts - WICCI : Events &amp; Meetings
+  </title>
+  <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+  <script src="script/validation.js" type="text/javascript">
+  </script>
+  <script src="scripts/jquery.js">
+  </script>
+  <script src="scripts/TweenMax.min.js">
+  </script>
+  <script>
+   var photos;
+	var timer;
+	var changeRate=6; // seconds
+	var currentPosition=0;
+	var tween;
+
+	var one, two, three, four;
+	var photos=new Array();
+	var boxes=new Array();
+	var depths=new Array(5000,4000,3000,2000);
+	var nextPosition;
+
+	$(function() {
+
+		one = document.getElementById("photo1");
+		two = document.getElementById("photo2");
+		three = document.getElementById("photo3");
+		four = document.getElementById("photo4");
+
+		b1 = document.getElementById("box1");
+		b2 = document.getElementById("box2");
+		b3 = document.getElementById("box3");
+		b4 = document.getElementById("box4");
+
+		$("#box1, #box2, #box3, #box4").click(function(event) {
+			forceOrder(event);
+		});
+
+		photos.push(one, two, three, four);
+		boxes.push(b1, b2, b3,b4);
+
+		boxes[0].className="current";
+		photos[0].style.zIndex=10000;
+
+		tween=TweenMax.set(photos[0], {transformOrigin:"center top"});
+
+		timer = setInterval(flipPhoto, changeRate*1000);
+	});
+
+	function flipPhoto() {
+		clearInterval(timer);
+
+		nextPosition=currentPosition+1;
+
+		if (nextPosition > (photos.length-1)) {
+			nextPosition=0;
+		}
+
+		clearBoxes();
+
+		boxes[nextPosition].className="current";
+		photos[nextPosition].style.zIndex=20000;
+		photos[currentPosition].style.zIndex=10000;
+
+		tween=TweenMax.to(photos[nextPosition], 1, {top:0, onComplete:reOrder});
+	}
+
+	function reOrder() {
+		for (i=0;i<photos.length;i++) {
+			if (i != nextPosition) {
+				photos[i].style.zIndex=i+100;
+				TweenMax.set(photos[i], {top: -300});
+			}
+		}
+
+		currentPosition++;
+
+		if (currentPosition > (photos.length-1)) {
+			currentPosition=0;
+		}
+
+		timer = setInterval(flipPhoto, changeRate*1000);
+	}
+
+	function clearBoxes() {
+		for (i=0;i<boxes.length;i++) {
+			boxes[i].className="";
+		}
+	}
+
+	function forceOrder(event) {
+		clearInterval(timer);
+		tween.seek(4);
+
+		clearBoxes();
+
+		var idx=1000;
+		var boxid=event.target.id.replace(/^\D+/g,'');
+		nextPosition=parseInt(boxid)-1;
+		currentPosition=nextPosition-1;
+
+		if (currentPosition<0) {
+			currentPosition=photos.length-1;
+		}
+
+		for (i=0;i<photos.length;i++) {
+			photos[i].style.zIndex=idx;
+			//boxes[i].className="";
+			idx++;
+		}
+
+		photos[nextPosition].style.zIndex=20000;
+		boxes[nextPosition].className="current";
+		TweenMax.set(photos[nextPosition], {top: -300, transformOrigin:"center top"});
+
+		tween=TweenMax.to(photos[nextPosition], 1, {top:0, onComplete:reOrder});
+
+	}
+  </script>
+  <link href="includes/small-wi_map_red.png" rel="SHORTCUT ICON"/>
+  <link href="css/sIFR-screen.css" media="screen" rel="stylesheet" type="text/css">
+   <script src="scripts/sifr.js" type="text/javascript">
+   </script>
+   <script src="scripts/sifr-addons.js" type="text/javascript">
+   </script>
+   <script language="javascript" src="scripts/menu.js" type="text/javascript">
+   </script>
+   <script src="scripts/validation.js" type="text/javascript">
+   </script>
+   <script language="Javascript" type="text/javascript">
+    /*
+function hideNav(){
+	document.getElementById('navigation').style.visibility = 'hidden';
+	document.getElementById('navigation').style.display = 'none';
+}
+function showNav(){
+	document.getElementById('navigation').style.visibility = '';
+	document.getElementById('navigation').style.display = '';
+}
+function popupWindow(){
+		var bg = document.getElementById('blackout').style;
+		var bidbox = document.getElementById('bidbox');
+		var popup_content = document.getElementById('popup_content');
+
+		bidbox.style.display='';
+		bidbox.style.left = '-' + Math.floor(bidbox.clientWidth/2) + 'px';
+		updateBackdropHeight();
+		bg.display='';
+	document.getElementById('navigation').style.visibility = 'hidden';
+	document.getElementById('navigation').style.display = 'none';
+}
+function updateBackdropHeight(){
+		var bg = document.getElementById('blackout').style;
+		var bidbox = document.getElementById('bidbox');
+		//IE does not carry innerWidth and innerHeight
+		var maximum = 0;
+		if(window.innerWidth) bg.width = window.innerWidth + 'px';
+		if(window.innerHeight) maximum = Math.max(maximum,Number(window.innerHeight));
+		maximum = Math.max(maximum,0+Number(bidbox.clientHeight));
+		maximum = Math.max(maximum,Number(document.body.clientHeight));
+		bg.height = maximum + 'px';
+
+}
+function closePopup(){
+	document.getElementById('blackout').style.display = 'none';
+	document.getElementById('bidbox').style.display = 'none';
+	document.getElementById('navigation').style.visibility = '';
+	document.getElementById('navigation').style.display = '';
+}*/
+   </script>
+   <link href="css/dropdown/dropdown2.css" media="all" rel="stylesheet" type="text/css"/>
+   <!--[if lt IE 7]>
+<script type="text/javascript" src="scripts/jquery/jquery.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery.dropdown.js"></script>
+<![endif]-->
+   <link href="css/default.css" rel="stylesheet" type="text/css"/>
+   <script src="scripts/vm-drop.js" type="text/javascript">
+   </script>
+   <style type="text/css">
+    #photo1, #photo2, #photo3, #photo4 {width: 843px; height: 300px;}
+   #photo1 a, #photo2 a, #photo3 a, #photo4 a {display: block; width: 100%; height: 100%;}
+   #photo1 {background-image: url('images/index/NYTspecialreport.jpg'); top: 0px; position: absolute; z-index: 5000;}
+   #photo2 {background-image: url('images/index/climate2050_communities.jpg'); top: -300px; position: absolute; z-index: 3000;}
+   #photo3 {background-image: url('images/index/pnc_cva.jpg');top: -300px; position: absolute; z-index: 4000;}
+   #photo4 {background-image: url('images/index/elnino.jpg');top: -300px; position: absolute; z-index: 5000;}
+
+	#slides {overflow: hidden; height: 300px; background-color: #f00; width: 843px; position: relative;}
+   #photoBoxes {padding: 0;}
+   #photoBoxes li {display: inline; list-style: none; float: left;}
+   ul#photoBoxes li a {width: 10px; height: 10px; border: 1px solid #f00; display: block;}
+   ul#photoBoxes li a:hover {background-color: #f00;}
+   .current {background-color: #f00;}
+   </style>
+  </link>
+ </head>
+ <body>
+  <div id="body-page-inner-bg">
+   <div id="body-page-inner">
+    <div id="container">
+     <div class="header-top" style="height:150px;">
+      <div class="header-left">
+       <a href="index.php">
+        <img alt="Logo" border="0" height="128" src="images/wicci-logo.gif" width="180"/>
+       </a>
+      </div>
+      <div class="header-right" style="position:relative;">
+       <!--<div id="header-nav">
+<ul>
+
+<li id="submition-search"> <a href="#"><span>s</span></a> </li>
+<li id="search"><input type="text" value="Coming soon"  style="margin:2px 2px 0 5px;"/></li>
+<li id="contact"><a href="#"><span>contact</span></a></li>
+<li id="nav-about"><a href="#"><span>about</span></a></li>
+<li style="margin:5px 15px 0 0;" id="media"><a href="#"><span>Media</span></a></li>
+</ul>
+<div style="clear:both"></div>
+</div>-->
+       <div style="padding:5px 0px ">
+        <div style="float:right; width:215px;">
+         <form action="results.php" method="get" name="searchform">
+          <input name="zoom_sort" type="hidden" value="0"/>
+          <input name="zoom_per_page" type="hidden" value="10"/>
+          <input name="zoom_and" type="hidden" value="0"/>
+          <div id="search" style="float:left; width:175px;">
+           <input name="zoom_query" onblur="if(this.value=='') this.value='Enter Search'; " onfocus="if(this.value=='Enter Search') this.value='';" style="margin:2px 2px 0 5px;" type="text" value="Enter Search"/>
+          </div>
+          <div style="float:left; width:40px;">
+           <a href="#" onclick="document.searchform.submit(); return false;">
+            <img alt="go" border="0" height="22" src="images/search.jpg" width="24"/>
+           </a>
+          </div>
+          <div style="clear:both">
+          </div>
+         </form>
+        </div>
+        <div style="float:right; padding:0 10px">
+         <ul id="sddm">
+          <li class="drop-ico">
+           <a href="about.php" onmouseout="mclosetime()" onmouseover="mopen('m2')">
+            About WICCI
+           </a>
+           <div id="m2" onmouseout="mclosetime()" onmouseover="mcancelclosetime()">
+            <a href="coordination-team.php">
+             Coordination Team
+            </a>
+            <a href="comm-education-group.php">
+             Communications and Education Group
+            </a>
+            <a href="science-council.php">
+             Science Advisory Board
+            </a>
+            <a href="working-group-council.php">
+             Working Group Council
+            </a>
+            <a href="working-groups.php">
+             Working Groups
+            </a>
+            <a href="collaborators.php">
+             Collaborators
+            </a>
+           </div>
+          </li>
+          <li>
+           <a href="contacts.php">
+            Contacts
+           </a>
+          </li>
+         </ul>
+         <div style="clear:both">
+         </div>
+        </div>
+        <div style="clear:both">
+        </div>
+       </div>
+       <div id="navigation" style="position:absolute; top:39px; left:59px;">
+        <ul class="dropdown dropdown-horizontal">
+         <li id="resources" onmouseover="menu2_mouseover(this);">
+          <a href="publications.php">
+           <span>
+            resources
+           </span>
+          </a>
+          <ul style="left:-550px; width:680px;">
+           <li style="width:80px; padding:0; margin:0;">
+            <a href="news.php" style="width:80px;">
+             News
+            </a>
+           </li>
+           <li style="width:120px; padding:0; margin:0;">
+            <a href="in-the-media.php" style="width:120px;">
+             In the Media
+            </a>
+           </li>
+           <li style="width:130px; padding:0; margin:0;">
+            <a href="publications.php" style="width:130px;">
+             Publications
+            </a>
+           </li>
+           <li style="width:200px; padding:0; margin:0;">
+            <a href="presentation-materials.php" style="width: 200px;">
+             Presentation Materials
+            </a>
+           </li>
+          </ul>
+          <div style="clear:both">
+          </div>
+         </li>
+         <li id="adaptation" onmouseover="menu2_mouseover(this);">
+          <a href="adaptation.php">
+           <span>
+            adaptation
+           </span>
+          </a>
+          <ul style="left:-210px; width:500px;">
+           <li style="width:150px; padding:0; margin:0;">
+            <a href="adaptation-working-group.php" style="width:150px;">
+             Adaptation WG
+            </a>
+           </li>
+           <li style="width:160px; padding:0; margin:0;">
+            <a href="adaptation-science.php" style="width:160px;">
+             Adaptation Science
+            </a>
+           </li>
+           <li style="width:110px; padding:0; margin:0;">
+            <a href="adaptation.php" style="width:110px;">
+             Overview
+            </a>
+           </li>
+          </ul>
+          <div style="clear:both">
+          </div>
+         </li>
+         <li id="impact" onmouseover="menu2_mouseover(this);">
+          <a href="impacts.php">
+           <span>
+            Impacts
+           </span>
+          </a>
+          <ul style=" left:-200px; width:500px;">
+           <li style="width:140px; padding:0; margin:0;">
+            <a href="working-groups.php" style="width:140px;">
+             Working Groups
+            </a>
+           </li>
+           <li style="width:140px; padding:0; margin:0;">
+            <a href="impact-science.php" style="width:140px;">
+             Impact Science
+            </a>
+           </li>
+           <li style="width:110px; padding:0; margin:0;">
+            <a href="impacts.php" style="width:110px;">
+             Overview
+            </a>
+           </li>
+          </ul>
+          <div style="clear:both">
+          </div>
+         </li>
+         <li id="climate-change" onmouseover="menu2_mouseover(this);">
+          <a href="climate-change.php">
+           <span>
+            climate-change
+           </span>
+          </a>
+          <ul style=" width:510px;">
+           <li style="width:80px; padding:0; margin:0;">
+            <a href="faq.php" style="width:80px;">
+             FAQs
+            </a>
+           </li>
+           <li style="width:100px; padding:0; margin:0;">
+            <a href="climate-modeling-methods.php" style="width:100px;">
+             Methods
+            </a>
+           </li>
+           <li style="width:110px; padding:0; margin:0;">
+            <a href="climate-working-group.php" style="width:110px;">
+             Climate WG
+            </a>
+           </li>
+           <li style="width:95px; padding:0; margin:0;">
+            <a href="climate-change.php" style="width:100px;">
+             Overview
+            </a>
+           </li>
+          </ul>
+          <div style="clear:both">
+          </div>
+         </li>
+        </ul>
+        <div style="clear:both">
+        </div>
+       </div>
+       <!--<div class="sub-menu"><a href="#">News</a> |         <a href="#">Events</a> |         <a href="#">Presentations</a> |         <a href="#">Documents</a> |         <a href="#">Maps</a></div>-->
+      </div>
+      <div style="clear:both">
+      </div>
+     </div>
+     <div id="body-containe-inner">
+      <div id="work-container">
+       <div id="content">
+        <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+          <td bgcolor="#fff" valign="top">
+           <div id="slides">
+            <div id="photo1">
+             <a href="https://www.nytimes.com/2017/08/07/climate/climate-change-drastic-warming-trump.html" target="_blank">
+             </a>
+            </div>
+            <div id="photo2">
+             <a href="http://www.wicci.wisc.edu/news-climatewicommunities.php" target="_blank">
+             </a>
+            </div>
+            <div id="photo3">
+             <a href="http://www.wicci.wisc.edu/publications.php#PNCVulnerabilityAssessments" target="_blank">
+             </a>
+            </div>
+            <div id="photo4">
+             <a href="http://nelson.wisc.edu/news/story.php?story=2317" target="_blank">
+             </a>
+            </div>
+           </div>
+           <br/>
+           <!--<div style="height: 280px;"></div>-->
+           <ul id="photoBoxes">
+            <li>
+             <a href="#" id="box1">
+             </a>
+            </li>
+            <li>
+             <a href="#" id="box2">
+             </a>
+            </li>
+            <li>
+             <a href="#" id="box3">
+             </a>
+            </li>
+            <li>
+             <a href="#" id="box4">
+             </a>
+            </li>
+           </ul>
+           <br style="clear: both;"/>
+           <div style="border-top: 1px solid #b70101; border-bottom: 1px solid #b70101; width: 100%; height: 250px; padding: 20px 0 20px 0;">
+            <div style="float: left; margin-right: 13px;">
+             <a href="climate-change.php">
+              <img alt="" src="images/index/climate.png"/>
+             </a>
+            </div>
+            <div style="float: left; margin-right: 11px;">
+             <a href="impacts.php">
+              <img alt="" src="images/index/impact.png"/>
+             </a>
+            </div>
+            <div style="float: right;">
+             <a href="adaptation.php">
+              <img alt="" src="images/index/adapt.png"/>
+             </a>
+            </div>
+           </div>
+           <div style="width: 380px; height: 385px; padding: 10px; margin-top: 20px; float: left; margin-right: 20px; background-color: #ddd;">
+            <span style="font-weight: bold; color: #9a0000; font-size:17px">
+             Wisconsin's Changing Climate: Impacts and Adaptation
+            </span>
+            <br/>
+            <br/>
+            <a href="publications.php">
+             <img align="left" border="0" hspace="10" src="images/cover-1.png" vspace="10"/>
+            </a>
+            In 2011, the Wisconsin Initiative on Climate Change Impacts released its first comprehensive report,
+            <i>
+             Wisconsin's Changing Climate: Impacts and Adaptation
+            </i>
+            .  The report serves as a resource for business  executives, government, natural resource managers, public health officials and other decision  makers as they take strategic steps to preserve jobs, invest resources wisely,  build resiliency and protect our built and natural environment in the face of a changing climate.
+            <a href="publications.php">
+             Download your copy.
+            </a>
+           </div>
+           <div style="width: 380px; height: 385px;  padding: 10px; margin-top: 20px; float: right; background-color: #ddd;">
+            <span style="font-weight: bold; color: #9a0000; font-size:17px">
+             Telling Stories of Climate
+            </span>
+            <br/>
+            <p>
+             Climate change affects our everyday lives. From warming trout streams to decreasing snow pack, lower lake levels to extreme weather, WICCI helps people understand how climate change is affecting Wisconsin. One of the ways WICCI does this is through telling stories.
+            </p>
+            <ul>
+             <li>
+              <a href="http://www.wicci.wisc.edu/news.php">
+               WICCI News
+              </a>
+             </li>
+             <li>
+              <a href="http://www.wicci.wisc.edu/publications.php#WICCICaseStudies">
+               WICCI Case Studies
+              </a>
+             </li>
+             <li>
+              <a href="http://www.wicci.wisc.edu/magazine.php">
+               Adapting to Wisconsin's Changing Climate
+              </a>
+             </li>
+             <li>
+              <a href="http://climatewisconsin.org/" target="_blank">
+               Climate Wisconsin videos
+              </a>
+             </li>
+             <li>
+              WICCI in  Wisconsin Natural Resources Magazine
+              <ul>
+               <li>
+                <a href="http://dnr.wi.gov/wnrmag/2010/02/climate.htm" target="_blank">
+                 Preparing to adapt
+                </a>
+               </li>
+               <li>
+                <a href="http://dnr.wi.gov/wnrmag/2011/02/climate.htm" target="_blank">
+                 Managing our future: Getting ahead of a changing climate
+                </a>
+               </li>
+              </ul>
+             </li>
+            </ul>
+           </div>
+           <br style="clear: both;"/>
+           <br/>
+           <p style="clear: both; font-size: 8px;">
+            Images courtesy of dan, winnond and Apples Eyes Studios / FreeDigitalPhotos.net
+           </p>
+           <!-- TemplateEndEditable -->
+          </td>
+         </tr>
+         <tr>
+          <td bgcolor="#fff" valign="top">
+          </td>
+         </tr>
+        </table>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div style="width:510px; width:860px; margin:0 auto; padding:0; padding-bottom:10px;">
+   </div>
+  </div>
+  <div id="main-footer">
+   <div id="main-footer2" style="position:relative;">
+    <div id="footer-inner">
+     <div id="footer-nav-inner">
+      <div id="footer-nav-containe">
+       Copyright  2009
+       <br/>
+       Board of Regents of the University of Wisconsin System
+      </div>
+      <div id="footer-navigation">
+       <ul>
+        <li>
+         <a href="site-map.php">
+          SITEMAP
+         </a>
+        </li>
+        <li>
+        </li>
+        <li>
+         <a href="privacy-policy.php">
+          PRIVACY POLICY
+         </a>
+        </li>
+        <li>
+        </li>
+        <li>
+         <a href="http://eepurl.com/iL1eT" target="_blank">
+          <img alt="click to subscribe to the WICCI newsletter" heigtht="20" src="/images/wicci_subscribe.png" width="86"/>
+         </a>
+        </li>
+       </ul>
+       <div style="clear:both">
+       </div>
+      </div>
+     </div>
+     <div id="footer-logo">
+      <div class="wisconsin-logo">
+      </div>
+      <div class="dept-logo">
+       <a href="http://dnr.wi.gov/" target="_blank">
+        <img alt="Dept Of Natural Resources" border="0" height="88" src="images/dept-natural.png" width="122"/>
+       </a>
+      </div>
+      <div class="nelson-logo">
+       <a href="http://www.nelson.wisc.edu/" target="_blank">
+        <img alt="The Nelson Institute" border="0" src="images/Nelson_logo_reversed.png"/>
+       </a>
+      </div>
+      <!--div class="wisconsin-logo"><a href="index.php"><img src="images/wisconsin-initiative.jpg" alt="Wisconsin Initiative" width="114" height="98" border="0" /></a></div-->
+     </div>
+    </div>
+   </div>
+  </div>
+  <!--Google Analytics Tracking Code"-->
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-2269569-3");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

@@ -1,0 +1,1115 @@
+https://hseb.utah.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   HSEB - Spencer F. and Cleone P. Eccles Health Sciences Education Building
+  </title>
+  <!-- Favicon -->
+  <link href="/lib_layouts/pics/uutempl/ehsl_favicon.ico" rel="shortcut icon"/>
+  <!-- CSS -->
+  <link href="/lib_layouts/utils/styles/uutempl/hseb_main.css" rel="stylesheet" type="text/css"/>
+  <link href="/lib_layouts/utils/styles/uutempl/hseb_print.css" media="print" rel="stylesheet" type="text/css"/>
+  <!-- Meta Tags-->
+  <meta content="Health Sciences Education Building, University of Utah, Eccles, UofU, Alumni Hall, School of Medicine, Upper Campus, HSEB, Spencer F. and Cleone P. Eccles Health Sciences Education Building, Eccles Health Sciences Library, University of Utah" name="keywords"/>
+  <meta content="The Spencer F. and Cleone P. Eccles Health Sciences Education Building website. The Spencer F. and Cleone P. Eccles Health Sciences Education Building is managed by the Eccles Health Sciences Library, and is located at the University of Utah in Salt Lake City, Utah" name="description"/>
+  <!-- Javascript -->
+  <!-- JQuery -->
+  <!-- SM: move to JQuery 3.x-->
+  <!--<script type="text/javascript" src="/include/3rd-party/jquery/jquery.js"></script>-->
+  <script src="/include/3rd-party/jquery3-dev/jquery-3.2.1.js" type="text/javascript">
+  </script>
+  <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" type="text/javascript">
+  </script>
+  <!--non-logging = '.min.js' -->
+  <!-- Shadowbox -->
+  <link href="/include/3rd-party/shadowbox/shadowbox.css" rel="stylesheet" type="text/css"/>
+  <script src="/include/3rd-party/shadowbox/shadowbox.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   Shadowbox.init({
+    players:["img","html","iframe","qt","wmp","swf"],
+    overlayOpacity: 0.9
+});
+  </script>
+  <!-- panel scripts -->
+  <script type="text/javascript">
+   // <![CDATA[
+		$(document).ready(function() 
+		{
+
+			// external links
+			$('a[rel="external"]').on( "click", function(e) {
+				e.preventDefault();
+				window.open( $(this).attr('href') );
+				//return false;
+			});
+			
+			
+			// [Do not delete this placeholder line]
+			
+			// Slide Down Effect for QuickLinks
+			$('h4 > a').on( "click", function() {
+				var expander = $(this).parent().parent().children('.more');
+				$(expander).slideToggle('fast');
+				var link_text = $(this).text();
+				if (link_text == "[+] see more" || link_text == "more...")
+				{
+					if(link_text == "[+] see more")
+					{
+						$(this).text("[-] hide");
+					}
+					else
+					{
+						$(this).text("collapse");
+					}
+				}
+				else if (link_text == "[-] hide" || link_text == "collapse")
+				{
+					if(link_text == "[-] hide")
+					{
+						$(this).text("[+] see more");
+					}
+					else
+					{
+						$(this).text("more...");
+					}
+				}
+				else
+				{
+					Window.location( $(this).attr('href') );
+				}
+				//return false;
+			});
+			
+			// Slide Down Effect for News and Events
+			$('.open').on( "click", function(e) {
+				e.preventDefault();
+				var expander = $(this).parent().children('.more');
+				var short_blurb = $(expander).parent().children('.short_blurb');
+				$(short_blurb).slideToggle('fast');
+				$(expander).slideToggle('fast');
+				var link_text = $(this).text();
+				if (link_text == "[+] read more" || link_text == "more...")
+				{
+					if(link_text == "[+] read more")
+					{
+						$(this).text("[-] hide");
+					}
+					else
+					{
+						$(this).text("collapse");
+					}
+				}
+				else if (link_text == "[-] hide" || link_text == "collapse")
+				{
+					if(link_text == "[-] hide")
+					{
+						$(this).text("[+] read more");
+					}
+					else
+					{
+						$(this).text("more...");
+					}
+				}
+				else
+				{
+					Window.location( $(this).attr('href') );
+				}
+				//return false;
+			});
+			
+			// Nav fix for non windows fonts
+			var page_width = $('#horizontal_nav').width();
+			var nav_width = 0;
+			var nav_padding = 0;
+			var fsize = $('#horizontal_nav > ul > li > a').css("font-size");
+			$('#horizontal_nav > ul > li > a').each( function() 
+			{
+				nav_width += $(this).width();
+				nav_padding = nav_padding + 36;
+			});
+			if(page_width < nav_width + nav_padding)
+			{
+				$('#horizontal_nav > ul > li > a').css("font-size", ".85em");
+			}
+			else
+			{
+				var left_margin = (page_width - (nav_width + nav_padding)) / 2;
+				$('#horizontal_nav > ul').css("margin-left", left_margin + "px");
+			}
+			//alert("page_width: " + page_width + " nav_width: " + nav_width + " padding: " + nav_padding + " left_margin: " + left_margin + " font-size: " + fsize);
+			
+
+			// tab box
+			var tabcolor = '#717397';
+			var selected_tabcolor = '#585973';
+
+			$('#tab_box > .content').hide();//hide class .content
+			var selection = $('#tab_box > .content:first').attr('id');
+			showSelection(selection); 
+
+			function showSelection (selection) 
+			{
+				// reset
+				$('#tab_box > .content').hide();
+				$('#tab_box > .tabs > li > a').css('background', tabcolor); //background color
+
+				// set
+				$('#tab_box > .content[id='+selection+']').show();
+				$('#tab_box > .tabs > li > a[class='+selection+']').css('background', selected_tabcolor); //background color
+			}
+			$('#tab_box > .tabs > li > a').on( "click", function(event) 
+			{
+				if(!$(this).hasClass('tab_box_rg'))
+				{
+					event.preventDefault();
+  					var selection = $(this).attr('class');
+					showSelection(selection);
+					return;
+				}
+			});
+			
+
+				//$('#tab_box .db').change(function() {
+				$('#tab_box .db').on( "change", function() {
+					var db_URL = $('.db option:selected').attr("value");
+					if(db_URL != "default")
+						{
+							window.open(db_URL);
+						}
+				});
+				
+				
+
+			
+	
+
+			//search open in new window 'div[@class*=child]'
+			$(".new_window").on( "submit", function() {
+				// Allows validation but also allows new search queries to be placed in new window
+				$(this).attr("target", "_blank");
+			});
+		});
+	// ]]>
+  </script>
+  <!--Feature Rotator-->
+  <script type="text/javascript">
+   // == set to override defaults == //
+	//var fade_timer = 7000;
+	var transition_time = 1000;
+	//var longdesc_limit = 270;
+	var title_limit = 45;
+  </script>
+  <script src="/includes/feature_rotator/feature_rotator.js" type="text/javascript">
+  </script>
+  <!-- local Google Search -->
+  <script type="text/javascript">
+   // add or remove watermark if no text is entered
+	function watermark(){
+		if (inputId.value.length > 0){
+		if (inputId.className == "gsa_watermark")
+		inputId.className = "";
+		}else
+		inputId.className = "gsa_watermark";
+	}
+	// remove watermark when input has focus
+	function noWatermark() {
+		inputId.className = "";
+	}
+	var inputId; //declare reference to input <
+	function loadWatermark() {
+		inputId = document.getElementById("gsa_searchbox");
+		watermark(); //initialize watermark
+	}
+  </script>
+  <!-- GSA Search -->
+  <script type="text/javascript">
+   // add or remove watermark if no text is entered
+	function watermark(){
+		if (inputId.value.length > 0){
+			if (inputId.className == "gsa_watermark")
+				inputId.className = "";
+		}else
+			inputId.className = "gsa_watermark";
+	}
+	// remove watermark when input has focus
+	function noWatermark() {
+			inputId.className = "";
+	}
+	var inputId; //declare reference to input <
+	function loadWatermark() {
+		inputId = document.getElementById("gsa_searchbox"); 
+		watermark(); //initialize watermark
+	}
+  </script>
+  <!-- end -->
+  <!-- This section is for the feature rotator -->
+  <link href="/includes/feature_rotator/feature_rotator.css" rel="stylesheet" type="text/css"/>
+  <!-- IE fixes -->
+  <!--[if IE]>
+<style type="text/css" media="screen">
+#feature_rotator .feature_text, #feature_rotator .feature_selections { background: transparent;-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000)"; /* IE8 */ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000); /* IE6 & 7 */ zoom: 1; }
+</style>
+<![endif]-->
+  <!-- IE fixes -->
+  <!--[if IE]>
+<style type="text/css" media="screen">
+body {behavior: url(/include/uutempl/csshover.htc);} 
+.campus_bar { max-width: 310px; width: 310px; }
+</style>
+<script defer type="text/javascript" src="/include/uutempl/pngfix.js"></script>
+<![endif]-->
+ </head>
+ <body>
+  <!-- Google Tag Manager -->
+  <noscript>
+   <iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-WHM3N9" style="display:none;visibility:hidden" width="0">
+   </iframe>
+  </noscript>
+  <script>
+   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WHM3N9');
+  </script>
+  <!-- End Google Tag Manager -->
+  <div id="website_container">
+   <!-- Header -->
+   <div id="banner">
+    <a href="/index.php">
+     <img alt="HSEB Logo" class="logo" src="/lib_layouts/pics/uutempl/hseb_logo.png"/>
+    </a>
+    <div class="campus_bar">
+     <ul>
+      <li>
+       campus:
+       <a href="http://www.utah.edu/a_z/index.html" rel="external">
+        a to z index
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://www.map.utah.edu/index.jsp" rel="external">
+        map
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://www.acs.utah.edu/prod/hrbin/campus-directory" rel="external">
+        directory
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://www.events.utah.edu/" rel="external">
+        calendar
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="search_bar">
+     <!--<form method="get" action="http://search.utah.edu:8765/custom/query.html">
+			<fieldset>
+				<input type="hidden" name="qpname" value="University Health Care"/>
+				<input type="hidden" name="style" value="healthcare"/>
+				<input class="search_text" type="text" name="qt" size="18" />
+				<input class="search_btn" type="image" src="http://healthcare.utah.edu/images/academicTemplate/search.gif" alt="Search!" />
+			</fieldset>
+			</form>-->
+     <!-- HSEB Website Search -->
+     <!--<form id="searchbox_top" method="post" action="/search.php" class="new_window">
+			<fieldset>
+				<input type="hidden" name="search_engine" value="HSEB" />
+				<input class="search_text" type="text" name="search_text" size="18" />
+				<input class="search_btn" type="image" src="http://healthcare.utah.edu/images/academicTemplate/search.gif" alt="Search!" />
+			</fieldset>
+			</form>-->
+     <form action="http://gsa.search.utah.edu/search" id="gsa_search" method="get" name="search">
+      <label for="gsa_searchbox">
+       Search Site:
+      </label>
+      <input id="gsa_searchbox" name="q" onblur="watermark();" onfocus="noWatermark();" title="enter search terms" type="text" value=""/>
+      <input name="site" type="hidden" value="Look-only-in-hseb-health-sciences-education-bldg-website"/>
+      <input name="client" type="hidden" value="hseb-health-sciences-education-bldg_frontend"/>
+      <input name="output" type="hidden" value="xml_no_dtd"/>
+      <input name="proxystylesheet" type="hidden" value="hseb-health-sciences-education-bldg_frontend"/>
+      <input name="numgm" type="hidden" value="10"/>
+      <input alt="submit search" id="gsa_searchbutton" name="btnG" src="/images/gsa_search_btn.png" title="submit search" type="image" value="Submit Search"/>
+      <img onload="loadWatermark();" src="/images/spacer.gif"/>
+     </form>
+    </div>
+   </div>
+   <!-- HSEB Main Navigation - "horizontal_nav" -->
+   <div id="horizontal_nav">
+    <ul>
+     <li>
+      <a href="/index.php?WT.svl=link1">
+       Home
+      </a>
+     </li>
+     <li>
+      <a href="/schedule/?WT.svl=link1" title="Sheduling">
+       Scheduling
+      </a>
+      <ul>
+       <li>
+        <a href="/schedule/index.php?WT.svl=link1#class" title="Schedule Classes">
+         Schedule Classes
+        </a>
+       </li>
+       <li>
+        <a href="/schedule/index.php?WT.svl=link1#event" title="Schedule Events">
+         Schedule Events
+        </a>
+       </li>
+       <li>
+        <a href="/schedule/index.php?WT.svl=link1#roomrental" title="Room Rentals">
+         Room Rentals
+        </a>
+       </li>
+       <li>
+        <a href="/schedule/index.php?WT.svl=link1#roomrequests" title="Rooom Requests">
+         Room Requests
+        </a>
+       </li>
+       <!--<li><a href="/schedule/index.php#equiprequests?WT.svl=link1" title="Teaching Requests">Teaching Requests</a></li>-->
+       <li>
+        <a href="https://astra.utah.edu/AstraProd/Calendars/ActivityCalendar.aspx?calendarId=6bebb600-be51-11e2-9682-e9c743d8511f" rel="external">
+         HSEB Weekly Room Schedule
+        </a>
+       </li>
+       <li>
+        <a href="/schedule/astra.php">
+         HSEB Daily Room Schedule
+        </a>
+       </li>
+       <!--<li><a href="http://registration.med.utah.edu/classes.cfm?WT.svl=link1" title="workshops" rel="external">Workshops</a></li>-->
+       <li>
+        <a href="https://umarket.utah.edu/um2/eccleslibrary/" rel="external">
+         Consultations and Training Services
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/sim.php">
+         Clinical Center and Intermountain Healthcare Simulation Learning Center
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/technology/?WT.svl=link1" title="Technology">
+       Technology
+      </a>
+      <ul>
+       <li>
+        <a href="http://library.med.utah.edu/ed/ars.php?WT.svl=link1" rel="external" title="Audience Response System">
+         Audience Respone System
+        </a>
+       </li>
+       <li>
+        <a href="/contact/?WT.svl=link1#report" title="Computer Services and Equipment">
+         Computer Services and Equipment
+        </a>
+       </li>
+       <li>
+        <a href="/technology/podium.php?WT.svl=link1">
+         Podium Help Sheets
+        </a>
+       </li>
+       <!--<li><a href="http://registration.med.utah.edu/detail.cfm?class=77" rel="external">Podium Training</a></li>-->
+       <li>
+        <a href="http://library.med.utah.edu/ed/videoresources.php" rel="external" title="Video Services">
+         Video Services
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/facilities/?WT.svl=link1" title="Building Services">
+       Facilities
+      </a>
+      <ul>
+       <li>
+        <a href="/facilities/awards.php?WT.svl=link1">
+         Award-winning Design
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#overview">
+         Building Overview
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#bicycle">
+         Bicycle Cages
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#classrooms">
+         Classrooms
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#clinical">
+         Clinical Suite
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#computer">
+         Computer Suite
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#distance">
+         Distance Education Classrooms
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#use">
+         Facilities Use Policies
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#hours">
+         Hours
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#lecture">
+         Lecture Halls
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#multipurpose">
+         Multi-purpose Room
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#parking_garage">
+         Parking Garage
+        </a>
+       </li>
+       <li>
+        <a href="/facilities/?WT.svl=link1#teaching">
+         Teaching Lab
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/directory/?WT.svl=link1" title="Directory">
+       Directory
+      </a>
+      <ul>
+       <li>
+        <a href="http://www.campusstore.utah.edu/" rel="external" title="Health Sciences Bookstore">
+         Bookstore, Health Sciences
+        </a>
+       </li>
+       <li>
+        <a href="/thehub/?WT.svl=link1" title="The Bistro Cafe">
+         Bistro Cafe @ the Hub
+        </a>
+       </li>
+       <li>
+        <a href="/services/index.php?WT.svl=link1#clinical" title="Clinical Skills Suite/Lab">
+         Clinical Skills Suite
+        </a>
+       </li>
+       <li>
+        <a href="http://healthcare.utah.edu/education/cse/?WT.svl=link1" rel="external" title="Clinical Staff Education">
+         Clinical Staff Education
+        </a>
+       </li>
+       <li>
+        <a href="/services/index.php?WT.svl=link1#lostfound" title="Lost and Found">
+         Lost and Found
+        </a>
+       </li>
+       <li>
+        <a href="/contact/directory.php?WT.svl=link1" title="Contact Directory of Colleges, Departments, and Staff">
+         HSEB Directory
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/contact/?WT.svl=link1">
+       Contact Us
+      </a>
+      <ul>
+       <li>
+        <a href="/contact/?WT.svl=link1#report" title="Report a Problem">
+         Report a Problem
+        </a>
+       </li>
+       <li>
+        <a href="/feedback/?WT.svl=link1" rel="external" title="Send us Feedback!">
+         Feedback
+        </a>
+       </li>
+       <li>
+        <a href="/contact/directory.php?WT.svl=link1" title="Contact Directory of Colleges, Departments, and Staff">
+         Contact Info
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="/site-index/?WT.svl=link1">
+       Site Index
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div id="center_content">
+    <img alt="main pic" src="/lib_layouts/pics/uutempl/HSEB_banner-alumni_hall-red_no_leaf.jpg">
+     <!--***** Left App Column *****-->
+     <div class="floating_box_col">
+      <div class="floating_box">
+       <h2>
+        <span>
+         Quick Links
+        </span>
+       </h2>
+       <ul>
+        <li>
+         <a href="https://astra.utah.edu/AstraProd/Calendars/ActivityCalendar.aspx?calendarId=0c3121f0-5cb9-11e5-a22f-7712a9584b0e" rel="external">
+          Today's Classes and Events
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php?WT.svl=link2" title="FAQ - Frequently Asked Questions">
+          FAQ
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#study">
+          Study Rooms
+         </a>
+        </li>
+        <li>
+         <a href="http://www.surveymonkey.com/s.asp?u=607522470761&amp;WT.svl=link2" rel="external" title="Class Evaluation Link">
+          Class Evaluation Link
+         </a>
+        </li>
+        <li>
+         <a href="/facilities/sim.php">
+          Clinical Center and Intermountain Healthcare Simulation Learning Center
+         </a>
+        </li>
+        <li>
+         <a href="/schedule/?WT.svl=link2" title="Scheduling">
+          Scheduling
+         </a>
+        </li>
+        <li>
+         <a href="http://library.med.utah.edu/ed/ars.php?WT.svl=link2" rel="external" title="Polling / Audience Response System">
+          Audience Polling (was ARS)
+         </a>
+        </li>
+        <li>
+         <a href="http://www.campusstore.utah.edu/" rel="external" title="HSEB Bookstore">
+          HSEB Bookstore
+         </a>
+        </li>
+        <li>
+         <a href="http://library.med.utah.edu/ed/remoteaccess.php?WT.svl=link2" rel="external" title="Off Campus? Learn how to connect to the University Network.">
+          Remote Access
+         </a>
+        </li>
+       </ul>
+       <!--
+	<ul class="more" style="display: none;">-->
+       <!--  inline styles must be used for jquery to work -->
+       <!--
+		<li><a href="/ed/remoteaccess.php" title="Off campus? Learn how to connect to the University network.">Remote Access</a></li>
+	</ul>
+	<h4><a href="#">more...</a></h4>-->
+       <h4>
+       </h4>
+      </div>
+      <!-- Hard coded until Map App is done -->
+      <a href="https://astra.utah.edu/AstraProd/Calendars/ActivityCalendar.aspx?calendarId=2536b9e0-5b2f-11e5-a7ed-2fdfcf55b0f4" rel="external" title="HSEB Rooms (Weekly View)">
+       <!--<a href="https://astra.utah.edu/AstraProd/Calendars/DailyGridCalendar.aspx" title="HSEB Rooms" rel="external">
+	<a href="/schedule/astra.php" title="Learn how to access the Astra rooms schedule">-->
+       <img alt="HSEB Rooms" class="floating_box_img" src="/lib_layouts/pics/uutempl/hseb_rooms_btn.jpg"/>
+      </a>
+      <!-- Hard coded until Feedback App is done -->
+      <a href="/feedback/" title="Report a Problem">
+       <img alt="Report a Problem" class="floating_box_img" src="/lib_layouts/pics/uutempl/hseb_feedback_btn.jpg"/>
+      </a>
+      <!--<a href="/schedule/room_schedule.php" title="HSEB Maps">
+		<img src="/lib_layouts/pics/uutempl/hseb_rooms_btn.jpg" alt="HSEB Rooms" class="floating_box_img" />
+	</a>-->
+      <a href="/contact/maps.php" title="HSEB Maps">
+       <img alt="HSEB Maps" class="floating_box_img" src="/lib_layouts/pics/uutempl/hseb_maps_btn.jpg"/>
+      </a>
+      <!-- Hard coded until Awards App is done -->
+      <a href="/services/awards.php" title="HSEB Awards">
+       <img alt="HSEB Awards" class="floating_box_img" src="/lib_layouts/pics/uutempl/hseb_awards_btn.jpg"/>
+      </a>
+     </div>
+     <!--***** Middle "Main" Column *****-->
+     <div class="main_three_col">
+      <!-- Construction DIV -->
+      <!--<div class="construction" style="margin: 8px 0 0 0;">     
+    <p>
+		Medical Drive South will be closed at 1900 E to 2000 E, from 9:00 am to 3:30 pm, associated with construction of the new Pharmacy building until fall 2012. Parking garage access to HSEB will be maintained.
+	</p>
+</div>-->
+      <!-- this rotator will not display unless javascript is enabled-->
+      <div id="feature_rotator">
+       <!--<img src="pics/slideshow/hseb_slideshow_5.jpg" title="Caf&#233; Holiday Closure" longdesc="HSEB's <a href='/thehub/' style='border-bottom:solid 1px;'>Bistro Caf&#233; at the Hub</a> will be closed from December 19 - January 2 for winter break, reopening Tuesday, January 3, 2012." alt="Caf&#233; Holiday Closure" />-->
+       <img alt="picture of HSEB building" longdesc="Monday - Friday: 7am - 7pm &lt;br /&gt; Closed Saturday and Sunday" src="pics/slideshow/hseb_slideshow_1.jpg" title="Hours:"/>
+       <!--<img src="pics/slideshow/hseb_slideshow_1.jpg" title="Hours:" longdesc="Monday - Friday: 7am - 7pm <br /> Saturday: 11am - 4pm" alt="picture of HSEB building" />-->
+       <img alt="picture of study computers" longdesc="The third floor Computer Suite in room 3100 has 25 open access stations. &lt;a href='/facilities/#computer'&gt;[read more]&lt;/a&gt;" src="pics/slideshow/hseb_slideshow_2.jpg" title="Computer Suite"/>
+       <img alt="picture of window study area" longdesc="Comfortable seating and study carrels are available on the west side of the 4th and 5th floors overlooking the valley." src="pics/slideshow/hseb_slideshow_4.jpg" title="Studying with a View"/>
+      </div>
+      <div class="two_col_left">
+       <div class="index">
+        <h2>
+         <a href="/schedule/" title="Schedule">
+          Scheduling
+         </a>
+        </h2>
+        <ul>
+         <li>
+          <a href="/schedule/#class">
+           Schedule Classes
+          </a>
+         </li>
+         <li>
+          <a href="/schedule/#event">
+           Schedule Events
+          </a>
+         </li>
+         <li>
+          <a href="/schedule/#roomrental">
+           Room Rentals
+          </a>
+         </li>
+         <li>
+          <a href="/schedule/#roomrequests">
+           Room Requests
+          </a>
+         </li>
+         <!-- Teaching Requests -->
+         <!--<li><a href="http://astraweb.acs.utah.edu/index.jsp?start_page=view_FRM.jsp&amp;viewClasses=viewClasses&amp;viewEvents=viewEvents&amp;viewType=daily_grid&amp;BUILDING=HSEB&amp;START_TIME=06%3A00+AM&amp;END_TIME=11%3A59+PM&amp;DATE=Today" rel="external">HSEB Daily Room Schedule</a></li>-->
+         <!--<li><a href="http://astraweb.acs.utah.edu/index.jsp?start_page=view_FRM.jsp&amp;viewClasses=viewClasses&amp;viewEvents=viewEvents&amp;viewType=weekly_grid&amp;BUILDING=HSEB&amp;ROOM=1007&amp;START_TIME=06%3A00+AM&amp;END_TIME=11%3A59+PM&amp;DATE=Today" rel="external">HSEB Weekly Room Schedule</a>&nbsp; <em>(Select Room Number: 1007 is default.)</em></li>-->
+         <li>
+          <a href="https://astra.utah.edu/AstraProd/Calendars/ActivityCalendar.aspx?calendarId=2536b9e0-5b2f-11e5-a7ed-2fdfcf55b0f4" rel="external">
+           HSEB Weekly Room Schedule
+          </a>
+         </li>
+         <li>
+          <a href="/schedule/astra.php">
+           HSEB Daily Room Schedule
+          </a>
+         </li>
+         <!--<li><a href="https://umarket.utah.edu/eccleslibrary/">Workshops</a></li> -->
+         <li>
+          <a href="https://umarket.utah.edu/um2/eccleslibrary/" rel="external">
+           Consultations and Training Services
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/sim.php">
+           Clinical Center and Intermountain Healthcare Simulation Learning Center
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="index">
+        <h2>
+         <a href="/facilities/">
+          Facilities
+         </a>
+        </h2>
+        <ul>
+         <li>
+          <a href="/facilities/awards.php">
+           Award-Winning Design
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#overview">
+           Building Overview
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#multipurpose">
+           Alumni Hall
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#bicycle">
+           Bicycle Cages
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#classrooms">
+           Classrooms
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#clinical">
+           Clinical Suite
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#computer">
+           Computer Suite
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#distance">
+           Distance Education Classrooms
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#use">
+           Facilities Use Policies
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#hours">
+           Hours
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#lecture">
+           Lecture Halls
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/?WT.svl=link1#lockers">
+           Lockers
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#parking_garage">
+           Parking Garage
+          </a>
+         </li>
+         <li>
+          <a href="/facilities/#teaching">
+           Teaching Lab
+          </a>
+         </li>
+         <!--<li><a href="http://155.100.78.96/view/view.shtml" rel="shadowbox;height=600;width=800">HSEB webcam</a></li>-->
+        </ul>
+       </div>
+      </div>
+      <div class="two_col_right">
+       <div class="index" style="min-height:auto;">
+        <h2>
+         <a href="/technology/" title="Technology">
+          Technology
+         </a>
+        </h2>
+        <ul>
+         <li>
+          <a href="https://library.med.utah.edu/ed/ars.php">
+           ARS Audience Response System
+          </a>
+         </li>
+         <li>
+          <a href="/contact/#report">
+           Computers and HSEB Provided Technology and Equipment
+          </a>
+         </li>
+         <li>
+          <a href="/technology/podium.php">
+           Podium Help Sheets
+          </a>
+         </li>
+         <!--<li><a href="http://registration.med.utah.edu/detail.cfm?class=77" rel="external">Podium Training</a></li>-->
+         <li>
+          <a href="https://library.med.utah.edu/ed/videoresources.php" rel="external" title="Video Services">
+           Video Services
+          </a>
+         </li>
+         <li>
+          <a href="/technology/wireless.php" title="Connect Wirelessly">
+           Wi-Fi Access
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="index">
+        <h2>
+         <a href="/directory/">
+          Directory
+         </a>
+        </h2>
+        <ul>
+         <li>
+          <a href="https://library.med.utah.edu/">
+           Spencer S. Eccles Health Sciences Library
+          </a>
+         </li>
+         <li>
+          <a href="http://medicine.utah.edu/students/programs/" rel="external" title="Office of Admissions, School of Medicine">
+           Admissions Office, School of Medicine
+          </a>
+         </li>
+         <li>
+          <a href="http://www.campusstore.utah.edu/utah/home.aspx" rel="external" title="Health Sciences Bookstore">
+           Bookstore, Health Sciences
+          </a>
+         </li>
+         <li>
+          <a href="/thehub/" title="The Bistro Cafe">
+           Bistro at The England Hub
+          </a>
+         </li>
+         <li>
+          <a href="/services/index.php#clinical" title="Clinical Center Lab">
+           Clinical Center Lab
+          </a>
+         </li>
+         <li>
+          <a href="http://healthcare.utah.edu/education/cse/" rel="external" title="Clinical Staff Education">
+           Clinical Staff Education
+          </a>
+         </li>
+         <!--<li><a href="/services/index.php#dental" title="Dental Education">Dental Education</a></li>-->
+         <!--<li><a href="/services/index.php#informatics" title="Informatics">Informatics</a></li>-->
+         <li>
+          <a href="/services/index.php#lostfound" title="Lost and Found">
+           Lost and Found
+          </a>
+         </li>
+         <li>
+          <a href="/schedule/" title="Scheduling">
+           Scheduling
+          </a>
+         </li>
+         <li>
+          <a href="/contact/directory.php" title="Contact Directory of Colleges, Departments, and Staff">
+           HSEB Directory
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <!-- ***** Right App Column ***** -->
+     <div class="floating_box_col">
+      <!-- -->
+      <!-- Hard coded until HUB App is done 
+	<a href="/thehub/" title="HSEB HUB Cafe">
+		<img src="/lib_layouts/pics/uutempl/hseb_hub_btn.jpg" alt="HSEB HUB Cafe" class="floating_box_img" />
+	</a>-->
+      <!-- Hardcoded until FAQ App is done -->
+      <div class="floating_box" style="background: url(/lib_layouts/pics/uutempl/hub_background.jpg) top left no-repeat #FFF;">
+       <h2>
+        <span>
+         HSEB Bistro Specials
+        </span>
+       </h2>
+       <div style="font-style:italic;padding:2px;padding-top:3px;">
+        for Saturday, March 9
+       </div>
+       <p>
+        <strong>
+         <em>
+          Sorry, no specials are available for today.
+         </em>
+        </strong>
+       </p>
+       <p>
+        <em>
+         Please check again soon.
+        </em>
+       </p>
+       <br/>
+       <h4>
+        <a href="/thehub/">
+         Bistro hours &amp; menu
+        </a>
+       </h4>
+      </div>
+      <div class="floating_box">
+       <h2>
+        <span>
+         FAQ
+        </span>
+       </h2>
+       <ul>
+        <li>
+         <a href="/services/faq.php#located" title="Library hours">
+          Where are you located?
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#parking" title="Where to park">
+          Where can I park?
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#hours" title="What are our hours">
+          What are your hours?
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#study">
+          Where are the study rooms?
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#trax">
+          Can I get there by TRAX or shuttle?
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#computers" title="Where can I use a computer">
+          Where can I use a computer?
+         </a>
+        </li>
+        <li>
+         <a href="/services/faq.php#wifi" title="Do you have Wi-Fi internet access">
+          Do you have Wi-Fi internet access?
+         </a>
+        </li>
+        <li>
+         <a href="/contact/">
+          How do I report a problem?
+         </a>
+        </li>
+       </ul>
+       <!--<ul class="full_faq">
+		<li><a href="#" title="Something Else">What is another question we should answer here be?</a></li>
+	</ul>-->
+       <h4>
+        <a href="/services/faq.php">
+         view all
+        </a>
+       </h4>
+      </div>
+      <a href="http://library.med.utah.edu/or/asklibrarian.php" rel="external" title="Ask A Question">
+       <img alt="ask a question" class="floating_box_img" src="/lib_layouts/pics/uutempl/question_green.png"/>
+      </a>
+     </div>
+     <!-- Page updated -->
+     <div class="updated">
+      <p>
+       Page updated: Tue, 2019-03-05
+      </p>
+     </div>
+     <!-- Sponsor bar and Add This -->
+     <div class="sponsor_bar">
+      <!-- Sponsor Logos -->
+      <a href="http://www.nlm.nih.gov/" rel="external" title="National Library of Medicine">
+       <img alt="National Library of Medicine Logo" src="/lib_layouts/pics/uutempl/NLM_logo35x35.jpg"/>
+      </a>
+      <a href="http://nnlm.gov/" rel="external" title="National Network of Libraries of Medicine">
+       <img alt="National Network of Libraries of Medicine Logo" src="/lib_layouts/pics/uutempl/nnlmlogoSmall.gif"/>
+      </a>
+      <a href="http://healthsciences.utah.edu/" rel="external" title="University Health Care">
+       <img alt="University of Utah Health Care Logo" src="/lib_layouts/pics/uutempl/HSC_LOGO.gif"/>
+      </a>
+      <a href="http://www.utah.edu/" rel="external" title="University of Utah">
+       <img alt="University of Utah" src="/lib_layouts/pics/uutempl/UU_LOGO.gif"/>
+      </a>
+      <a href="http://www.utah.gov/" rel="external" title="Utah State">
+       <img alt="State of Utah Logo" src="/lib_layouts/pics/uutempl/STATE_UTAH.gif"/>
+      </a>
+      <a href="http://library.med.utah.edu/" rel="external" title="Eccles Health Sciences Library">
+       <img alt="EHSL Logo" src="/lib_layouts/pics/uutempl/ehsl_sponsorbar.jpg"/>
+      </a>
+      <a href="http://twitter.com/EHSLibrary" rel="external" title="Eccles Health Sciences Library Twitter Page">
+       <img alt="Twitter Logo" src="/lib_layouts/pics/uutempl/twitter_small.png"/>
+      </a>
+      <a href="http://www.facebook.com/EcclesLibrary" rel="external" title="Eccles Health Sciences Library Facebook Page">
+       <img alt="Facebook Logo" src="/lib_layouts/pics/uutempl/facebook.jpg"/>
+      </a>
+      <!--<a href="https://www.healthonnet.org/HONcode/Conduct.html?HONConduct413855" rel="external"><img src="http://www.honcode.ch/HONcode/Seal/HONConduct413855_s1.gif" style="width: 43px; height: 60px; vertical-align: top;" title="This website is certified by Health On the Net Foundation. Click to verify." alt="This website is certified by Health On the Net Foundation. Click to verify." /></a>-->
+      <!--<a href="https://www.healthonnet.org/HONcode/Conduct.html?HONConduct413855" rel="external">verify<br />here.</a>-->
+      <!-- AddThis Button BEGIN -->
+      <script type="text/javascript">
+       var addthis_pub="eccleslib";
+      </script>
+      <a class="bookmark_this" href="http://www.addthis.com/bookmark.php?v=20" onclick="return addthis_sendto()" onmouseout="addthis_close()" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')">
+       <img alt="Bookmark and Share" src="https://s7.addthis.com/static/btn/lg-bookmark-en.gif"/>
+      </a>
+      <script src="/include/uutempl/addthis.js" type="text/javascript">
+      </script>
+      <!-- AddThis Button END -->
+     </div>
+    </img>
+   </div>
+   <!--End Center Content-->
+   <!-- Footer -->
+   <div id="footer">
+    <p>
+     ©1993 – 2019 The University of Utah • Spencer F. &amp; Cleone P. Eccles Health Sciences Education Building, 26 South 2000 East, Salt Lake City, Utah 84112
+    </p>
+    <div id="footer_nav">
+     <ul style="text-align: center;">
+      <li>
+       <a href="http://library.med.utah.edu/">
+        Spencer S. Eccles Health Sciences Library
+       </a>
+      </li>
+     </ul>
+     <br/>
+     <ul>
+      <li>
+       <a href="http://utah.edu" rel="external">
+        University of Utah
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://healthcare.utah.edu/" rel="external" title="University of Utah Health Care">
+        University Health Care
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://library.med.utah.edu/lib/faculty/contact-form.php?addressee=zq818241&amp;dom=91aea213acb2018" rel="external">
+        Webmaster
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://www.utah.edu/disclaimer/" rel="external">
+        Disclaimer
+       </a>
+      </li>
+      <li>
+       |
+      </li>
+      <li>
+       <a href="http://healthcare.utah.edu/policies/privacy.php" rel="external">
+        Privacy
+       </a>
+      </li>
+      <!--<li>|</li>
+				<li><a href="http://uuhsc.utah.edu/uuhsc/publicinfo.html" rel="external">Joint Commission Public Information Policy</a></li>-->
+     </ul>
+    </div>
+   </div>
+  </div>
+  <!-- End website_container -->
+ </body>
+</html>
+

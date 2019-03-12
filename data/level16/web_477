@@ -1,0 +1,579 @@
+https://booklist.byu.edu/
+<!DOCTYPE doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <title>
+   Brigham Young University Sign-in Service
+  </title>
+  <meta content="" name="description"/>
+  <meta content="" name="author"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="632638754951-9q53bg1isopd4npp5ma1eo7mltsfk5gr.apps.googleusercontent.com" name="google-signin-client_id"/>
+  <script src="/cas/js/jquery/3.2.1/jquery-3.2.1.min.js" type="text/javascript">
+  </script>
+  <script src="/cas/js/jquery/1.12.1/jquery-ui.min.js" type="text/javascript">
+  </script>
+  <link href="/cas/images/favicon.ico" rel="shortcut icon"/>
+  <script src="/cas/js/input/classie.js" type="text/javascript">
+  </script>
+  <link href="https://cdn.byu.edu/theme-fonts/1.x.x/ringside/fonts.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="/cas/css/handheld.css?version=014" media="all and (min-width: 1px) and (max-width: 550px)" rel="stylesheet">
+   <link href="/cas/css/style.css?version=013" media="all and (min-width: 550px)" rel="stylesheet"/>
+   <link href="/cas/css/application.css?version=002" media="all" rel="stylesheet"/>
+   <link href="/cas/css/jquery-ui.min.css?version=001" media="all" rel="stylesheet"/>
+   <link href="/cas/css/jquery-ui.structure.min.css?version=001" media="all" rel="stylesheet"/>
+   <link href="/cas/css/jquery-ui.theme.min.css?version=001" media="all" rel="stylesheet"/>
+   <script src="/cas/js/cas.js" type="text/javascript">
+   </script>
+   <script src="/cas/js/modernizr/modernizr.custom.js" type="text/javascript">
+   </script>
+   <script src="https://apis.google.com/js/api:client.js">
+   </script>
+   <!--[if IE]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+   <style type="text/css">
+    .ui-widget-overlay.custom-overlay {
+            background-color: black;
+            background-image: none;
+            opacity: 0.9;
+            z-index: 1040;
+        }
+   </style>
+  </link>
+ </head>
+ <body>
+  <!--Content-->
+  <div class="content container" id="main" role="main">
+   <h2>
+    <div id="BYU">
+    </div>
+    <!--img src="/cas/images/BYUBar.png" alt="BYU Brigham Young University" /-->
+   </h2>
+   <div align="center" class="beforeConnectInfo" style="font-weight: bold; font-size: 32px; color: #444444; padding-bottom: 10px; padding-top: 5px;">
+    Sign In To BYU
+    Account
+   </div>
+   <div align="center" class="poofOnSecondPage" style=" padding-bottom: 20px;">
+    By Signing in you agree to BYU Account
+    <a href="http://iam.byu.edu/" style="cursor: pointer; text-decoration: underline; padding-bottom: 20px;">
+     Terms of Use
+    </a>
+    .
+   </div>
+   <div align="center" class="connectInfo" id="linkHeader" style="display: none;">
+    Link to your BYU Account
+   </div>
+   <div align="center" class="connectInfo" style="display: none;">
+    You are signed in to
+    <span id="credType">
+    </span>
+    as
+   </div>
+   <div align="center" class="connectInfo" id="credName" style="display: none;">
+   </div>
+   <div align="center" class="connectInfo" style="display: none;">
+    Sign in with the account you would like to link:
+   </div>
+   <table width="100%">
+    <tr>
+     <td>
+      <table class="contentTable" width="46%">
+       <tr>
+        <td width="100%">
+         <form action="/cas/login?service=https%3a%2f%2fbooklist.byu.edu%2fCAS%2fLogin%3freturnUrl%3d%252f" id="credentials" method="post" onsubmit="return prepareSubmit(this)">
+          <table style="border-collapse: collapse;" width="100%">
+           <tr id="errorRow" style="display: none;">
+            <td colspan="2" height="20px" id="errorSpacing" width="100%">
+            </td>
+           </tr>
+           <tr>
+            <td align="center" colspan="2">
+             <div style="max-width: 295px;">
+              <input accesskey="n" autocomplete="true" id="netid" name="username" onblur="onBlurNetID()" onfocus="onFocusNetID()" placeholder="Net ID" size="28" style="font-size: 18px; padding-left: 5px; font-family: 'HCo Ringside Narrow SSm', Arial, sans-serif; max-width: 300px;" type="text" value=""/>
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td colspan="2" height="10px">
+            </td>
+           </tr>
+           <tr>
+            <td align="center" colspan="2">
+             <div style="max-width: 295px;">
+              <input accesskey="p" id="password" name="password" onblur="onBlurPassword()" onfocus="onFocusPassword()" placeholder="Password" size="28" style="font-size: 18px; padding-left: 5px; font-family: 'HCo Ringside Narrow SSm', Arial, sans-serif; max-width: 300px;" type="password" value=""/>
+             </div>
+            </td>
+           </tr>
+           <tr>
+            <td align="center" colspan="2">
+             <div style="max-width: 295px">
+              <input name="execution" type="hidden" value="e1s1"/>
+              <input name="lt" type="hidden" value="LT-1322713-mfpgpwwBdaxHnzfgrm1V7gAohDWcUM"/>
+              <input name="_eventId" type="hidden" value="submit"/>
+              <input class="submit" style="margin-top: 16px; margin-bottom: 32px; height: 40px; cursor: pointer; font-size: 14px; font-family: 'HCo Ringside Narrow SSm', Arial, sans-serif;" type="submit" value="Sign In"/>
+             </div>
+            </td>
+           </tr>
+          </table>
+         </form>
+        </td>
+       </tr>
+       <tr class="poofOnSecondPage">
+        <td align="center" style="padding-bottom: 10px;">
+         Forgot your
+         <a href="https://y.byu.edu/ae/prod/person/cgi/createNetId.cgi">
+          Net ID
+         </a>
+         or
+         <a href="https://y.byu.edu/ae/prod/authentication/cgi/findNetId.cgi">
+          password
+         </a>
+         ?
+        </td>
+       </tr>
+       <tr class="poofOnSecondPage">
+        <td align="center" style="padding-bottom: 20px;">
+         <a href="https://y.byu.edu/ae/prod/person/cgi/createNetId.cgi">
+          Create A Net ID
+         </a>
+        </td>
+       </tr>
+      </table>
+      <table class="horizontalOR">
+       <tr>
+        <td align="center">
+         <div style="max-width: 295px;">
+          <table style="border-collapse: collapse;" width="100%">
+           <tr>
+            <td style="border-bottom: 2px solid #A7A9AC" width="100px">
+            </td>
+            <td align="center" rowspan="2" width="100px">
+             OR
+            </td>
+            <td style="border-bottom: 2px solid #A7A9AC" width="100px">
+            </td>
+           </tr>
+           <tr>
+            <td style="border-top: 2px solid #A7A9AC">
+            </td>
+            <td style="border-top: 2px solid #A7A9AC">
+            </td>
+           </tr>
+          </table>
+         </div>
+        </td>
+       </tr>
+      </table>
+      <table class="verticalOR">
+       <tr>
+        <td align="center" width="100%">
+         <div width="100%">
+          <table style="border-collapse: collapse;" width="100%">
+           <tr>
+            <td height="100px" style="border-right: 2px solid #A7A9AC;">
+            </td>
+            <td style="border-left: 2px solid #A7A9AC;">
+            </td>
+           </tr>
+           <tr>
+            <td colspan="2">
+             OR
+            </td>
+           </tr>
+           <tr>
+            <td height="100px" style="border-right: 2px solid #A7A9AC;">
+            </td>
+            <td style="border-left: 2px solid #A7A9AC;">
+            </td>
+           </tr>
+          </table>
+         </div>
+        </td>
+       </tr>
+      </table>
+      <table class="contentTable">
+       <tr id="facebookRow">
+        <td align="center">
+         <div class="facebookSignIn" onclick="facebookLogin()">
+          Sign in with Facebook
+         </div>
+        </td>
+        <td>
+         <img alt="" height="20px" id="facebookLoading" src="images/spinner.gif" style="padding-top: 20px; display: none;" width="20px"/>
+        </td>
+       </tr>
+       <tr id="googleRow">
+        <td align="center" style="padding-top: 18px;">
+         <div class="googleSignIn" id="customGoogleSignIn">
+          Sign in with Google
+         </div>
+         <div class="googleSignIn" id="brokenGoogleSignIn" style="display: none;">
+          Sign in with Google
+         </div>
+        </td>
+        <td>
+         <img alt="" height="20px" id="googleLoading" src="images/spinner.gif" style="padding-top: 20px; display: none;" width="20px"/>
+        </td>
+       </tr>
+       <tr id="ldsRow">
+        <td align="center" style="padding-top: 18px;">
+         <div class="ldsSignIn" id="ldsSignIn" onclick="ldsSignIn()">
+          Sign in with LDS Account
+         </div>
+        </td>
+        <td>
+         <img alt="" height="20px" id="ldsLoading" src="images/spinner.gif" style="padding-top: 20px; display: none;" width="20px"/>
+        </td>
+       </tr>
+       <tr id="byuhRow">
+        <td align="center" style="padding-top: 18px;">
+         <div class="byuhSignIn" id="byuhSignIn" onclick="byuhSignIn()">
+          Sign in with BYU Hawaii
+         </div>
+        </td>
+        <td>
+         <img alt="" height="20px" id="byuhLoading" src="images/spinner.gif" style="padding-top: 20px; display: none;" width="20px"/>
+        </td>
+       </tr>
+       <tr id="byuiRow">
+        <td align="center" style="padding-top: 18px;">
+         <div class="byuiSignIn" id="byuiSignIn" onclick="byuiSignIn()">
+          Sign in with BYU Idaho
+         </div>
+        </td>
+        <td>
+         <img alt="" height="20px" id="byuiLoading" src="images/spinner.gif" style="padding-top: 20px; display: none;" width="20px"/>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+    <tr class="poofOnSecondPage">
+     <td>
+      <div align="center" style="padding-bottom: 10px; padding-top:0px;">
+       <p>
+        Protect your account with Duo Two-Step Verification.
+        <br/>
+        <br/>
+        Learn more and sign up at
+        <a href="https://duo.byu.edu/" style="cursor: pointer; text-decoration: underline;">
+         duo.byu.edu
+        </a>
+       </p>
+      </div>
+     </td>
+    </tr>
+   </table>
+   <form action="/cas/login?service=https%3a%2f%2fbooklist.byu.edu%2fCAS%2fLogin%3freturnUrl%3d%252f" id="credentials" method="post" onsubmit="return prepareSubmit(this)">
+    <fieldset class="inputarea">
+     <input name="execution" type="hidden" value="e1s1"/>
+     <input name="lt" type="hidden" value="LT-1322713-mfpgpwwBdaxHnzfgrm1V7gAohDWcUM"/>
+     <input name="_eventId" type="hidden" value=""/>
+     <input name="accessToken" type="hidden" value=""/>
+     <input name="genericName" type="hidden" value=""/>
+     <input name="genericEmail" type="hidden" value=""/>
+     <input name="userID" type="hidden" value=""/>
+     <input name="userName3" type="hidden" value=""/>
+     <input name="samlFederation" type="hidden" value=""/>
+     <input class="submit" id="federationSubmit" style="display: none" type="submit" value=""/>
+    </fieldset>
+   </form>
+   <script>
+    (function () {
+        // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+        if (!String.prototype.trim) {
+            (function () {
+                // Make sure we trim BOM and NBSP
+                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                String.prototype.trim = function () {
+                    return this.replace(rtrim, '');
+                };
+            })();
+        }
+
+        [].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
+            // in case the input is already filled..
+            if (inputEl.value.trim() !== '') {
+                classie.add(inputEl.parentNode, 'input--filled');
+            }
+
+            // events:
+            inputEl.addEventListener('focus', onInputFocus);
+            inputEl.addEventListener('blur', onInputBlur);
+        });
+
+        function onInputFocus(ev) {
+            classie.add(ev.target.parentNode, 'input--filled');
+        }
+
+        function onInputBlur(ev) {
+            if (ev.target.value.trim() === '') {
+                classie.remove(ev.target.parentNode, 'input--filled');
+            }
+        }
+    })();
+   </script>
+   <script type="text/javascript">
+    if (!String.prototype.trim) {
+        (function () {
+// Make sure we trim BOM and NBSP
+            var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+            String.prototype.trim = function () {
+                return this.replace(rtrim, '');
+            };
+        })();
+    }
+
+    function facebookLogin() {
+        FB.login(function (response) {
+            if (response.status === 'connected') {
+                $("input[name='accessToken']").val(response.authResponse.accessToken);
+                $("input[name='userID']").val(response.authResponse.userID);
+                $("input[name='_eventId']").val('Facebook');
+                FB.api('/me', function (response) {
+                    $(".facebookSignIn").attr("onclick", "");
+                    $(".facebookSignIn").attr("style", "cursor: progress;");
+                    $("#customGoogleSignIn").attr("style", "display: none");
+                    $("#brokenGoogleSignIn").attr("style", "display: block; line-height: 40px; cursor: progress;");
+                    $("#main").attr("style", "cursor: progress !important;")
+                    $("#facebookLoading").attr('style', 'padding-top: 20px; display: inline-block;');
+                    $("input[name='userName3']").val(response.name);
+                    $("input[name='genericName']").val(response.name);
+                    $("#federationSubmit").click();
+                });
+            }
+        });
+    }
+
+    function ldsSignIn() {
+        $("input[name='_eventId']").val('saml');
+        $("input[name='samlFederation']").val('LDS_ACCOUNT_ID');
+        $("#federationSubmit").click();
+    }
+
+    function byuiSignIn() {
+        $("input[name='_eventId']").val('saml');
+        $("input[name='samlFederation']").val('BYU_IDAHO_ID');
+        $("#federationSubmit").click();
+    }
+
+//    function byunewSignIn() {
+//        $("input[name='_eventId']").val('saml');
+//        $("input[name='samlFederation']").val('BYU_NEW_ID');
+//        $("#federationSubmit").click();
+//    }
+
+    function byuhSignIn() {
+        $("input[name='_eventId']").val('saml');
+        $("input[name='samlFederation']").val('BYU_HAWAII_ID');
+        $("#federationSubmit").click();
+    }
+
+    /**
+     * Prepares the login form for submission by appending any URI
+     * fragment (hash) to the form action in order to propagate it
+     * through the re-direct (i.e. store it client side).
+     * @param form The login form object.
+     * @returns boolean to allow the form to be submitted.
+     */
+    var prepareSubmit = function (form) {
+// Extract the fragment from the browser's current location.
+        var hash = decodeURIComponent(self.document.location.hash);
+
+// The fragment value may not contain a leading # symbol
+        if (hash && hash.indexOf("#") === -1) {
+            hash = "#" + hash;
+        }
+
+// Append the fragment to the current action so that it persists to the redirected URL.
+        form.action = form.action + hash;
+
+        var netIDElement = document.getElementById('netid');
+        netIDElement.value = netIDElement.value.trim().toLowerCase();
+        return true;
+    };
+
+    //The issue with lastpass autofill in is having an issue because of the following function (haven't tried getting rid of defer and async while calling this function)
+    var googleIsReady = function () {
+        gapi.load('auth2', function () {
+            /**
+             * Retrieve the singleton for the GoogleAuth library and set up the
+             * client.
+             */
+            auth2 = gapi.auth2.init({
+                client_id: '632638754951-9q53bg1isopd4npp5ma1eo7mltsfk5gr.apps.googleusercontent.com',
+                scope: 'profile email'
+            });
+
+            auth2.attachClickHandler('customGoogleSignIn', {}, function (googleUser) {
+                $(".facebookSignIn").attr("onclick", "");
+                $(".facebookSignIn").attr("style", "cursor: progress;");
+                $("#customGoogleSignIn").attr("style", "display: none");
+                $("#brokenGoogleSignIn").attr("style", "display: block; line-height: 40px; cursor: progress;");
+                $("#main").attr("style", "cursor: progress !important;")
+                $("#googleLoading").attr('style', 'padding-top: 20px; display: inline-block;');
+                $("input[name='accessToken']").val(googleUser.getAuthResponse().id_token);
+                $("input[name='userID']").val(googleUser.getBasicProfile().getId());
+                $("input[name='userName3']").val(googleUser.getBasicProfile().getEmail());
+                $("input[name='genericName']").val(googleUser.getBasicProfile().getName());
+                $("input[name='genericEmail']").val(googleUser.getBasicProfile().getEmail());
+                $("input[name='_eventId']").val('Google');
+                $("#federationSubmit").click();
+            }, function (error) {
+            });
+
+        });
+    }
+
+    /**
+     * The Sign-In client object.
+     */
+    var auth2;
+
+    $(document).ready(function () {
+        $("#netid").focus();
+        if ($("#errorSpacing").html() != "") {
+            $("#errorRow").attr("style", "display: table-row;")
+        }
+
+        if ("" == "FACEBOOK_ID") {
+            $("#errorSpacing").attr("height", "");
+            $("#facebookRow").attr("style", "display: none;");
+            $("#googleRow").attr("style", "padding-top: 18px;");
+            $(".beforeConnectInfo").attr("style", "display: none;");
+            $(".connectInfo").attr("style", "display: block;");
+            $("#credName").attr("style", "display: block; font-weight: bold;");
+            $("#linkHeader").attr("style", "display: block; font-weight: bold; font-size: 32px; color: #444444;");
+            $("#credType").text("Facebook");
+            $("#credName").text("");
+            $(".poofOnSecondPage").attr('style', 'display: none;');
+        }
+        if ("" == "GOOGLE_ID") {
+            $("#errorSpacing").attr("height", "");
+            $("#googleRow").attr("style", "display: none");
+            $(".beforeConnectInfo").attr("style", "display: none;");
+            $(".connectInfo").attr("style", "display: block;");
+            $("#credName").attr("style", "display: block; font-weight: bold;");
+            $("#linkHeader").attr("style", "display: block; font-weight: bold; font-size: 32px; color: #444444;");
+            $("#credType").text("Google");
+            $("#credName").text("");
+            $(".poofOnSecondPage").attr('style', 'display: none;');
+        }
+        if ("" == "LDS_ACCOUNT_ID") {
+            $("#errorSpacing").attr("height", "");
+            $("#ldsRow").attr("style", "display: none");
+            $(".beforeConnectInfo").attr("style", "display: none;");
+            $(".connectInfo").attr("style", "display: block;");
+            $("#credName").attr("style", "display: block; font-weight: bold;");
+            $("#linkHeader").attr("style", "display: block; font-weight: bold; font-size: 32px; color: #444444;");
+            $("#credType").text("lds.org");
+            $("#credName").text("");
+            $(".poofOnSecondPage").attr('style', 'display: none;');
+        }
+        if ("" == "BYU_HAWAII_ID") {
+            $("#errorSpacing").attr("height", "");
+            $("#byuhRow").attr("style", "display: none");
+            $(".beforeConnectInfo").attr("style", "display: none;");
+            $(".connectInfo").attr("style", "display: block;");
+            $("#credName").attr("style", "display: block; font-weight: bold;");
+            $("#linkHeader").attr("style", "display: block; font-weight: bold; font-size: 32px; color: #444444;");
+            $("#credType").text("BYU Hawaii");
+            $("#credName").text("");
+            $(".poofOnSecondPage").attr('style', 'display: none;');
+        }
+        if ("" == "BYU_IDAHO_ID") {
+            $("#errorSpacing").attr("height", "");
+            $("#byuiRow").attr("style", "display: none");
+            $(".beforeConnectInfo").attr("style", "display: none;");
+            $(".connectInfo").attr("style", "display: block;");
+            $("#credName").attr("style", "display: block; font-weight: bold;");
+            $("#linkHeader").attr("style", "display: block; font-weight: bold; font-size: 32px; color: #444444;");
+            $("#credType").text("BYU Idaho");
+            $("#credName").text("");
+            $(".poofOnSecondPage").attr('style', 'display: none;');
+        }
+
+        if(window.location.href.indexOf("cas-stg")!=-1){
+            $("#ldsRow").attr("style", "display: none");
+        }
+
+        if(window.location.href.indexOf("cas-dev")!=-1){
+            $("#byuhRow").attr("style", "display: none");
+            $("#byuiRow").attr("style", "display: none");
+        }
+
+
+    });
+
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '919619424831234',
+            cookie: true,  // enable cookies to allow the server to access the session
+            xfbml: true,  // parse social plugins on this page
+            version: 'v2.5' // use graph api version 2.5
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function onFocusNetID() {
+        $("#netid").attr("placeholder", "");
+    }
+    function onBlurNetID() {
+        $("#netid").attr("placeholder", "Net ID");
+    }
+    function onFocusPassword() {
+        $("#password").attr("placeholder", "");
+    }
+    function onBlurPassword() {
+        $("#password").attr("placeholder", "Password");
+    }
+   </script>
+   <script>
+    googleIsReady();
+   </script>
+  </div>
+  <div id="powered-by">
+   <p>
+    ⋅
+    <i>
+     Powered by
+    </i>
+    BYU Office of Information Technology ⋅
+   </p>
+  </div>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-17149951-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+ </body>
+</html>
+

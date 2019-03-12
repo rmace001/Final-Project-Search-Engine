@@ -1,0 +1,2577 @@
+https://vergil.registrar.columbia.edu/
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="global">
+ <head>
+  <!-- Proudly developed by Jake Young & Steven Liao -->
+  <!-- Columbia University Information Technology - Interactive Services (ias-service@columbia.edu) -->
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="Vergil@CU" name="apple-mobile-web-app-title"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="A course planner servicing Columbia University in the City of New York. Contains and displays information pertaining to courses offered by the University." name="description"/>
+  <meta content="INDEX, NOFOLLOW" name="robots"/>
+  <title ng-bind="pageTitle">
+   Vergil, your personal course planning guide | Columbia University
+  </title>
+  <style type="text/css">
+   body {
+        background: #769ABF;
+      }
+  </style>
+  <link href="img/touch-icon-iphone.png" rel="apple-touch-icon"/>
+  <link href="img/touch-icon-ipad.png" rel="apple-touch-icon" sizes="76x76"/>
+  <link href="img/touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="120x120"/>
+  <link href="img/touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="152x152"/>
+  <link href="img/touch-icon-iphone-plus.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="img/apple-startup-1242x2148.png" media="screen and (min-device-width: 414px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image"/>
+  <link href="img/apple-startup-750x1294.png" media="screen and (device-width: 375px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"/>
+  <link href="img/apple-startup-640x1096.png" media="screen and (device-width: 320px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image"/>
+  <link href="img/apple-startup-320x460.png" media="screen and (device-width: 320px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image"/>
+  <link href="img/favicon-crown.png" rel="shortcut icon"/>
+  <link href="opensearch.xml" rel="search" title="Vergil - Columbia University" type="application/opensearchdescription+xml"/>
+  <link href="min/g=css?v=1.13.4" rel="stylesheet"/>
+  <link href="css/styles.css?v=1.13.4" rel="stylesheet"/>
+  <link href="https://search.sites.columbia.edu/cu-privacy-notice/cu-privacy-notice.css" rel="stylesheet"/>
+  <script src="min/g=js?v=1.13.4">
+  </script>
+  <script src="scripts.js?v=1.13.4">
+  </script>
+  <script src="https://search.sites.columbia.edu/cu-privacy-notice/cu-privacy-notice.js">
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      if (document.location.hostname == "vergil.registrar.columbia.edu") {
+        ga('create', 'UA-58732044-1', 'auto');
+      }
+      else {
+        ga('create', 'UA-58732044-2', 'auto');
+      }
+      ga('set', 'anonymizeIp', true);
+  </script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+ </head>
+ <body breakpoint="{0:'mobile', 767:'break768', 991:'break992'}" class="beta" ng-class="[currentPage, global.showprogwidget ? 'program-widget-open' : '', userinfo.status == 1 ? 'logged-in' : '']" ng-cloak="">
+  <div id="site-container">
+   <header class="navbar navbar-fixed-top" role="banner">
+    <div class="container" id="rooftop">
+     <div class="row">
+      <div class="col-xs-6 col-sm-4">
+       <p class="navbar-text cu-crown sprite hidden-xs hidden-sm">
+        <a href="http://www.columbia.edu/" target="_blank">
+         Columbia University in the City of New York
+        </a>
+       </p>
+       <p class="navbar-text cu-crown sprite visible-xs-block visible-sm-block">
+        <a href="http://www.columbia.edu/" target="_blank">
+         Columbia University
+        </a>
+       </p>
+      </div>
+      <nav class="col-xs-6 col-sm-8 text-right" role="navigation">
+       <div class="navbar-text navbar-right" ng-if="::global.userinfoReady" ng-switch="" on="::userinfo.status">
+        <div ng-switch-when="1">
+         <a class="hidden-xs" href="/cms/user/logout" id="logged-in-user" keep-within-app="">
+          <span class="sprite sprite-lock">
+          </span>
+          <span ng-bind="::userinfo.data.full_name">
+          </span>
+          <span ng-bind="::userinfo.data.uni" ng-if="::!userinfo.data.full_name">
+          </span>
+         </a>
+         <a class="last" href="/cms/user/logout" id="log-out" keep-within-app="">
+          <span class="sprite sprite-lock visible-xs-inline">
+          </span>
+          Log Out
+         </a>
+         <span ng-if="global.secret">
+          <a class="alpha-beta" href="" ng-click="::toggleBetaDesign()" ng-switch="" on="::global.betaDesign || 'null'">
+           <span ng-switch-when="null">
+            α
+           </span>
+           <span ng-switch-default="">
+            <em>
+             β
+            </em>
+           </span>
+          </a>
+         </span>
+        </div>
+        <div ng-switch-default="">
+         <a class="last" keep-within-app="" ng-href="{{::loginPath()}}">
+          <span class="sprite sprite-lock">
+          </span>
+          Log In
+         </a>
+         <span ng-if="global.secret">
+          <a class="alpha-beta" href="" ng-click="::toggleBetaDesign()" ng-switch="" on="::global.betaDesign || 'null'">
+           <span ng-switch-when="null">
+            α
+           </span>
+           <span ng-switch-default="">
+            <em>
+             β
+            </em>
+           </span>
+          </a>
+         </span>
+        </div>
+       </div>
+       <ul class="nav navbar-nav navbar-right hidden-xs">
+        <li ng-if="::!item.children" ng-repeat="item in ::global.variables.menus.menu_roof_top as Rooftop track by item.mlid">
+         <a ng-href="{{::item.url}}" target="_blank">
+          <span ng-bind="::item.label">
+          </span>
+         </a>
+        </li>
+        <li ng-if="::item.children" ng-repeat="item in Rooftop track by item.mlid">
+         <a epd-click="" id="rooftop-{{::$index}}" ng-click="::toggleMenuDropdown('rooftop-'+ $index)" ng-href="{{::item.url}}" target="_blank">
+          <span ng-bind="::item.label">
+          </span>
+          <span class="caret">
+          </span>
+         </a>
+         <ul aria-labelledby="rooftop-{{::$index}}" class="dropdown-menu with-arrow-top-right ng-trans ng-trans-fade-down angular-animate" ng-show="menuDropdownShown['rooftop-{{::$index}}']" role="menu">
+          <li ng-repeat="subitem in ::item.children track by subitem.mlid">
+           <a ng-click="::clearMenuDropdowns()" ng-href="{{::subitem.url}}" role="menuitem" tabindex="-1" target="_blank">
+            <span ng-bind="::subitem.label">
+            </span>
+           </a>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </nav>
+     </div>
+    </div>
+   </header>
+   <div id="branding">
+    <div class="container">
+     <div class="row">
+      <div class="col-xs-3">
+       <h1 id="site-name">
+        <a href="#">
+         Vergil
+        </a>
+       </h1>
+      </div>
+      <div class="col-xs-9" ng-if="::global.userinfoReady" ng-switch="" on="userinfo.status || 'null'">
+       <nav class="clearfix" id="top-nav" role="navigation">
+        <ul class="nav navbar-nav navbar-right text-right">
+         <li id="toggle-search">
+          <a class="visible-xs-inline-block" href="#courses" ng-class="{active: global.mobileCourseFiltersShown}" ng-click="::global.showprogwidget = 0">
+           <span class="sprite sprite-search">
+           </span>
+           <span class="sr-only">
+            Toggle Search
+           </span>
+          </a>
+          <a class="hidden-xs angular-animate" href="#" ng-show="currentPage != 'home'">
+           <span class="sprite sprite-search">
+           </span>
+           <span class="sr-only">
+            Toggle Search
+           </span>
+          </a>
+         </li>
+         <li>
+          <a data-placement="bottom" data-toggle="tooltip" keep-within-app="" ng-href="{{::loginPath('#my-dar')}}" ng-switch-default="" title="Log in to see your DAR.">
+           <span class="visible-xs-inline-block">
+            DAR
+           </span>
+           <span class="hidden-xs">
+            <span class="sprite sprite-list">
+            </span>
+            My DAR
+           </span>
+          </a>
+          <a epd-click="" href="/cms/#my-dar" ng-click="::myDAR()" ng-switch-when="1">
+           <span class="visible-xs-inline-block">
+            DAR
+           </span>
+           <span class="hidden-xs">
+            <span class="sprite sprite-list">
+            </span>
+            My DAR
+           </span>
+          </a>
+         </li>
+         <li ng-switch-default="">
+          <a data-placement="bottom" data-toggle="tooltip" id="mobile-favorites-count-wrapper" keep-within-app="" ng-href="{{::loginPath('#my-planner')}}" title="Log in to see your favorites.">
+           <span class="visible-xs-inline-block">
+            <span class="sprite sprite-calendar">
+            </span>
+            0
+           </span>
+           <span class="hidden-xs">
+            <span class="sprite sprite-calendar">
+            </span>
+            My Planner
+            <span class="badge" id="favorites-count">
+             0
+            </span>
+           </span>
+          </a>
+         </li>
+         <li hover-intent-delay="800" hover-intent-out="::favoritesPreviewToggle(0)" ng-switch-when="1">
+          <a hover-intent="::favoritesPreviewToggle(1)" hover-intent-delay="200" href="#my-planner" id="mobile-favorites-count-wrapper" ng-class="{active: showFavoritesPreview || currentPage == 'planner'}" ng-click="::favoritesPreviewToggle(0); global.showprogwidget = 0">
+           <span class="visible-xs-inline-block">
+            <span class="sprite sprite-calendar">
+            </span>
+            <span ng-bind="favorites.currentFavoritesCount">
+            </span>
+           </span>
+           <span class="hidden-xs">
+            <span class="sprite sprite-calendar">
+            </span>
+            My Planner
+            <span class="badge" id="favorites-count" ng-bind="favorites.currentFavoritesCount">
+            </span>
+           </span>
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <div ng-if="breakpoint.class != 'mobile'">
+        <div class="hidden-xs" id="teacherwidget" ng-controller="teacherwidget" ng-switch="" on="userinfo.status || 'null'">
+         <div ng-if="teachersDataReady" ng-switch-when="1">
+          <a href="" id="teacherwidget-button" ng-class="{'active': global.teacherPopupShown}" ng-click="::toggleTeacherPopup()">
+           Faculty Evaluations
+           <span class="caret">
+           </span>
+          </a>
+          <div class="with-arrow-top-left panel panel-default ng-trans ng-trans-fade-down angular-animate" id="teacherwidget-popup" ng-show="global.teacherPopupShown">
+           <div class="panel-body">
+            <label for="teacher">
+             Faculty Name
+            </label>
+            <select chosen="::teachers" class="form-control" data-placeholder=" " id="teacher" name="teacher" ng-model="global.instructor" ng-options="d.uni as d.lastname + ', '+ d.firstname for d in ::teachers | orderObjectBy:'firstname' | orderObjectBy:'lastname'" no-results-text="Sorry, there are no evaluations for">
+             <option value="">
+             </option>
+            </select>
+            <span class="help-block">
+             Type in any part of the name
+            </span>
+            <button class="btn btn-primary" ng-click="::searchEval(); toggleTeacherPopup(false)" ng-disabled="!global.instructor" type="button">
+             Search
+            </button>
+           </div>
+          </div>
+         </div>
+         <div ng-switch-default="">
+          <a class="btn btn-default btn-block" id="login-teacherwidget-button" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" title="Log in to view evaluations.">
+           <span class="sprite sprite-lock">
+           </span>
+           Faculty Evaluations
+          </a>
+         </div>
+        </div>
+       </div>
+       <div class="hidden-xs animate-flip-light angular-animate" hover-intent-delay="800" hover-intent-out="::favoritesPreviewToggle(0)" id="favorites-preview-wrapper" ng-if="favorites.data &amp;&amp; currentPage != 'planner' &amp;&amp; breakpoint.class != 'mobile'" ng-show="showFavoritesPreview" ng-switch-when="1">
+        <div aria-labelledby="favoritesPreviewLabel" class="list-group with-arrow-top-right" id="favorites-preview" role="menu">
+         <a class="list-group-item" favorites-preview-term="" ng-click="::favoritesPreviewToggle(0)" ng-href="#my-planner/{{::termyear}}" ng-init="term = global.variables.current_term_year">
+          <span class="hidden-xs" ng-bind="::termLabel">
+          </span>
+          <span class="hidden-sm hidden-md hidden-lg" ng-bind="::termLabelCompact">
+          </span>
+          <span class="badge pull-right" ng-bind="favorites.favoritesCount[termyear]">
+          </span>
+          <div class="default" ng-if="global.variables.current_term_year == term">
+           <h4 class="list-group-item-heading">
+            Go to My Planner
+           </h4>
+           <p class="list-group-item-text">
+            Add to your Schedule and see how your week will look.
+           </p>
+          </div>
+         </a>
+         <a class="list-group-item" favorites-preview-term="" ng-click="::favoritesPreviewToggle(0)" ng-href="#my-planner/{{::termyear}}" ng-if="global.variables.current_term_year != term" ng-repeat="term in ::global.currentTerms track by $id(term)">
+          <span class="hidden-xs" ng-bind="::termLabel">
+          </span>
+          <span class="hidden-sm hidden-md hidden-lg" ng-bind="::termLabelCompact">
+          </span>
+          <span class="badge pull-right" ng-bind="favorites.favoritesCount[termyear]">
+          </span>
+         </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div id="main" ng-class="currentPage + '-content'">
+    <div id="messaging" ng-click="::hideMessaging()" ng-if="global.messagingShown">
+     <div class="alert alert-info alert-dismissible" role="alert">
+      <div class="container">
+       <button class="close" type="button">
+        <span aria-hidden="true">
+         ×
+        </span>
+        <span class="sr-only">
+         Close
+        </span>
+       </button>
+       <div class="item" ng-bind-html="global.variables.global.message | to_trusted">
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- #carousel-wrapper -->
+    <div id="carousel-wrapper" ng-if="currentPage == 'home'" ng-swipe-left="::carouselNext()" ng-swipe-right="::carouselPrev()">
+     <div class="carousel slide" id="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+       <li data-slide-to="{{::$index}}" data-target="#carousel" ng-class="::{active: $index == 0}" ng-repeat="image in ::global.variables.slideshow_images as images track by $index">
+       </li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+       <div class="item" ng-class="::{active: $index == 0}" ng-repeat="image in ::images track by $index" ng-switch="" on="breakpoint.class == 'mobile' || 'null'">
+        <img alt="" ng-src="{{::image}}" ng-switch-when="null"/>
+        <img alt="" ng-src="{{::global.variables.slideshow_images_mobile[$index]}}" ng-switch-default=""/>
+       </div>
+      </div>
+     </div>
+     <a class="hidden-xs" id="image-attr-link" inbound-outbound="" ng-click="::nodeContent('node/7')" ng-href="/cms/node/7">
+      About the Stewardship Collection
+     </a>
+     <div class="jumbotron" ng-show="::global.userinfoReady" ng-switch="" on="userinfo.status">
+      <h1 class="hidden-xs">
+       Search Classes
+      </h1>
+      <p class="welcome-message ng-trans ng-trans-fade-down angular-animate" ng-switch-when="1">
+       Welcome back,
+       <span ng-bind="::userinfo.data.first_name">
+       </span>
+       <span ng-hide="::userinfo.data.first_name">
+        <span ng-bind="::userinfo.data.uni">
+        </span>
+       </span>
+      </p>
+      <p ng-switch-default="">
+       <a class="btn btn-primary" keep-within-app="" ng-href="{{::loginPath()}}" role="button">
+        Log in
+       </a>
+       <span class="clearfix visible-xs-block">
+       </span>
+       to see your schedule, book lists, syllabi, faculty evaluations and more.
+      </p>
+     </div>
+    </div>
+    <!-- /#carousel-wrapper -->
+    <aside id="progwidget" ng-class="{open: global.showprogwidget}" ng-controller="progwidget" ng-if="currentPage == 'courses' || currentPage == 'planner'">
+     <h3 class="aside-label">
+      <button class="btn btn-primary btn-sm" data-placement="left" data-toggle="tooltip" ng-click="::progWidgetToggle()" title="Search and view a program's requirements" type="button">
+       <span ng-bind="(global.showprogwidget) ? 'Close' : 'Open'">
+       </span>
+      </button>
+      Program Course Lookup
+     </h3>
+     <div class="aside-content ng-trans {{(breakpoint.class == 'mobile') ? 'ng-trans-fade-up' : 'ng-trans-flip-y'}} angular-animate" id="program-course-lookup" ng-show="global.showprogwidget">
+      <div class="heading">
+       <select chosen="::global.filters.program_courses" class="form-control" data-placeholder="Select Program Requirements" id="program" name="program" ng-model="program" ng-options="d.value as d.label for d in ::global.filters.program_courses" no-results-text="Sorry, there are no results for">
+        <option selected="" value="">
+         Select Program Requirements
+        </option>
+       </select>
+      </div>
+      <div class="content ng-trans {{(breakpoint.class == 'mobile') ? 'ng-trans-fade-up' : 'ng-trans-fade-right'}} angular-animate" ng-show="programInfo &amp;&amp; program">
+       <div id="program-information" ng-compile="programInfo">
+       </div>
+       <div class="visible-xs-block">
+        <button class="btn btn-primary btn-block" ng-click="::progWidgetToggle()" type="button">
+         Close
+        </button>
+       </div>
+      </div>
+     </div>
+    </aside>
+    <!-- #content-wrapper -->
+    <div id="content-wrapper" ng-class="{'hidden-xs': global.showprogwidget &amp;&amp; global.progwidgetSelected}">
+     <!-- #content -->
+     <div id="content" ng-controller="searchfilters">
+      <h2 class="heading-toggle hidden-xs" ng-show="currentPage == 'courses' || currentPage == 'planner' || currentPage == 'evaluations'">
+       <div class="container">
+        <a href="" ng-click="::basicFiltersToggle()">
+         Search Classes
+         <span class="sprite {{(global.basicFiltersShown) ? 'sprite-chevron-up' : 'sprite-chevron-down'}} pull-right">
+         </span>
+        </a>
+       </div>
+      </h2>
+      <div class="visible-xs-block" ng-show="global.basicFiltersShown &amp;&amp; global.mobileCourseFiltersShown">
+       <ul class="nav nav-tabs nav-justified ng-trans ng-trans-flip-x angular-animate" id="mobile-search-tabs" role="tablist">
+        <li class="classes-tab" ng-class="{active: active.MobileSearchTab == 0}">
+         <a href="" ng-click="::setActiveMobileSearchTab(0)">
+          Search Classes
+         </a>
+        </li>
+        <li class="faculty-tab" ng-class="{active: active.MobileSearchTab == 1}" ng-show="::global.userinfoReady" ng-switch="" on="::userinfo.status">
+         <a href="" ng-click="::setActiveMobileSearchTab(1)" ng-switch-when="1">
+          Faculty Evaluations
+         </a>
+         <a data-placement="top" data-toggle="tooltip" keep-within-app="" ng-href="{{::loginPath('#teacherwidget-popup')}}" ng-switch-default="" title="Log in to view evaluations.">
+          <span class="sprite sprite-lock">
+          </span>
+          Faculty Evaluations
+         </a>
+        </li>
+       </ul>
+      </div>
+      <form class="hidden-sm hidden-md hidden-lg ng-trans ng-trans-fade-up easeInOutCubic angular-animate" id="mobile-teacherwidget" ng-controller="teacherwidget" ng-if="userinfo.status == 1 &amp;&amp; breakpoint.class == 'mobile'" ng-show="active.MobileSearchTab == 1 &amp;&amp; global.basicFiltersShown" role="form">
+       <div class="container" ng-if="teachersDataReady">
+        <label for="teacher">
+         Faculty Name
+        </label>
+        <select chosen="::teachers" class="form-control" data-placeholder=" " id="teacher" name="teacher" ng-model="global.instructor" ng-options="d.uni as d.lastname + ', '+ d.firstname for d in ::teachers | orderObjectBy:'firstname' | orderObjectBy:'lastname'" no-results-text="Sorry, there are no evaluations for">
+         <option value="">
+         </option>
+        </select>
+        <span class="help-block">
+         Type in any part of the name
+        </span>
+        <button class="btn btn-primary btn-lg btn-block" ng-click="::searchEval()" ng-disabled="!global.instructor" type="button">
+         Search
+        </button>
+       </div>
+      </form>
+      <form class="ng-trans ng-trans-fade-up easeInOutCubic angular-animate" id="search-classes" ng-class="{'hidden-xs': !global.mobileCourseFiltersShown}" ng-show="active.MobileSearchTab == 0 &amp;&amp; global.basicFiltersShown" role="form">
+       <div class="container">
+        <div class="row">
+         <div class="col-sm-12" ng-class="(!global.moreFiltersShown) ? 'col-md-8 col-md-push-2' : 'col-lg-8'">
+          <div class="input-group-lg" id="search-input-group">
+           <label for="search">
+            Keywords
+           </label>
+           <input class="form-control input-lg" id="search" ng-change="searchChange()" ng-keyup="searchKeyUp($event)" ng-model="form.search" ng-model-options="{ updateOn: 'default blur', debounce: {'default': 300, 'blur': 0} }" type="search"/>
+           <button class="btn ng-trans ng-trans-flip-y angular-animate" id="reset-keywords" ng-click="::clearSearch()" ng-show="form.search" type="button">
+            <span class="sr-only">
+             Clear keywords
+            </span>
+            <span class="glyphicon glyphicon-remove">
+            </span>
+           </button>
+          </div>
+          <span class="help-block">
+           (e.g. instructor name,
+           <a data-placement="bottom" data-toggle="tooltip" data-tooltip-mobile="true" href="" title="ex. American Studies">
+            class title
+           </a>
+           , etc.)
+          </span>
+         </div>
+        </div>
+        <div class="row">
+         <div class="col-sm-12" ng-class="{'col-md-8 col-md-push-2': !global.moreFiltersShown }">
+          <hr/>
+         </div>
+        </div>
+        <div class="row">
+         <div class="form-group col-sm-6" ng-class="{'col-md-4 col-md-push-2': !global.moreFiltersShown }">
+          <label for="subject">
+           Subject
+          </label>
+          <select chosen="::global.filters.subjects" class="form-control" data-placeholder="Subject Area" id="subject" name="subject" ng-model="subject" ng-options="d.value as d.label for d in ::global.filters.subjects">
+           <option selected="" value="">
+            Subject Area
+           </option>
+          </select>
+         </div>
+         <div class="form-group col-sm-6" ng-class="{'col-md-4 col-md-push-2': !global.moreFiltersShown }">
+          <hr class="visible-xs-block"/>
+          <label for="department">
+           Department
+          </label>
+          <select chosen="::global.filters.departments" class="form-control" data-placeholder="Select Department" id="department" name="department" ng-model="department" ng-options="d.value as d.label for d in ::global.filters.departments">
+           <option selected="" value="">
+            Select Department
+           </option>
+          </select>
+         </div>
+        </div>
+        <hr/>
+        <div class="ng-trans ng-trans-scale-up easeInOutCubic angular-animate" id="more-filters" ng-show="global.moreFiltersShown">
+         <div class="row">
+          <div class="form-group col-sm-4 col-md-4">
+           <label for="year">
+            Year
+           </label>
+           <select chosen="" class="form-control" data-placeholder=" " disabled="" id="year" name="year" ng-model="year">
+            <option selected="" value="">
+             Current Academic Year
+            </option>
+           </select>
+          </div>
+          <div class="col-sm-8 col-md-8">
+           <hr class="visible-xs-block"/>
+           <fieldset>
+            <legend>
+             Semester
+            </legend>
+            <div class="angular-btn-toggle" id="semester-buttons">
+             <label class="sprite-container-right btn btn-default" ng-class="{active: formCheckboxes[semester.id]}" ng-click="" ng-repeat="semester in ::form.semesters track by semester.value">
+              <input checked="" name="semester[]" ng-model="formCheckboxes[semester.id]" type="checkbox" value="{{::semester.value}}"/>
+              <span ng-bind="semester.label">
+              </span>
+              <span class="sprite sprite-checkbox-toggle">
+              </span>
+             </label>
+            </div>
+           </fieldset>
+          </div>
+         </div>
+         <hr/>
+         <div class="row">
+          <div class="col-sm-12">
+           <fieldset>
+            <legend>
+             Days
+            </legend>
+            <div class="angular-btn-toggle" id="days-buttons">
+             <label class="sprite-container-right btn btn-default" ng-class="{active: formCheckboxes[day.id]}" ng-click="" ng-repeat="day in ::form.days track by day.value">
+              <input checked="" name="days[]" ng-model="formCheckboxes[day.id]" type="checkbox" value="{{::day.value}}"/>
+              <span class="hidden-md hidden-lg" ng-bind="day.label">
+              </span>
+              <span class="visible-md-inline visible-lg-inline" ng-bind="day.longLabel">
+              </span>
+              <span class="sprite sprite-checkbox-toggle">
+              </span>
+             </label>
+            </div>
+           </fieldset>
+          </div>
+         </div>
+         <hr/>
+         <div class="row">
+          <div class="form-group col-sm-6">
+           <label for="classtype">
+            Class Type
+           </label>
+           <select chosen="::global.filters.class_types" class="form-control" data-placeholder="All Classes" id="classtype" name="classtype" ng-model="classtype" ng-options="d.value as d.label for d in ::global.filters.class_types">
+            <option selected="" value="">
+             All Classes
+            </option>
+           </select>
+          </div>
+          <div class="form-group col-sm-6">
+           <hr class="visible-xs-block"/>
+           <label for="school">
+            School
+           </label>
+           <select chosen="::global.filters.schools" class="form-control" data-placeholder="School Name" id="school" name="school" ng-model="school" ng-options="d.value as d.label for d in ::global.filters.schools">
+            <option selected="" value="">
+             School Name
+            </option>
+           </select>
+          </div>
+         </div>
+         <hr/>
+         <div class="row">
+          <div class="col-sm-4">
+           <div class="form-group">
+            <label for="times">
+             Times Offered
+            </label>
+            <div id="times">
+            </div>
+           </div>
+          </div>
+          <div class="col-sm-4">
+           <hr class="visible-xs-block"/>
+           <div class="form-group">
+            <label for="credits">
+             Credits
+            </label>
+            <div id="credits">
+            </div>
+           </div>
+          </div>
+          <div class="col-sm-4">
+           <hr class="visible-xs-block"/>
+           <div class="form-group">
+            <label for="levels">
+             Course Level
+            </label>
+            <div id="levels">
+            </div>
+           </div>
+          </div>
+         </div>
+         <hr/>
+         <div class="row">
+          <div class="col-sm-6 col-md-4 angular-btn-toggle">
+           <label class="sprite-container-right btn btn-default btn-wide full-width" ng-class="{active: formCheckboxes.withoutevals}" ng-click="">
+            <input checked="" id="withoutevals" name="withoutevals" ng-model="formCheckboxes.withoutevals" type="checkbox" value="1"/>
+            Include classes without evaluations
+            <span class="sprite sprite-checkbox-toggle">
+            </span>
+           </label>
+          </div>
+         </div>
+         <hr/>
+        </div>
+        <div class="row" id="form-actions">
+         <div class="col-sm-8 col-md-9">
+          <a href="" id="more-filters-toggle" ng-click="::moreFiltersToggle()">
+           <span class="sprite {{(global.moreFiltersShown) ? 'sprite-chevron-up' : 'sprite-chevron-down'}}">
+           </span>
+           <span ng-bind="(global.moreFiltersShown) ? 'Less Search Criteria' : 'More Search Criteria'">
+           </span>
+          </a>
+          <a href="" ng-click="::resetSearch()">
+           Reset
+           <span class="hidden-xs">
+            Search
+           </span>
+          </a>
+         </div>
+         <div class="clearfix visible-xs-block">
+         </div>
+         <div class="col-sm-4 col-md-3">
+          <button class="btn btn-primary btn-lg btn-block" data-empty-text="test" data-error-text="Please enter a keyword" data-loading-text="Loading..." id="search-button" name="op" ng-click="::searchStart()" type="button" value="search">
+           Search
+          </button>
+         </div>
+        </div>
+       </div>
+      </form>
+      <div class="container visible-xs-block" id="mobile-extra-nav" ng-if="breakpoint.class == 'mobile'" ng-show="global.mobileCourseFiltersShown">
+       <a class="btn-anchor" ng-href="{{::item.url}}" ng-if="::!item.children" ng-repeat="item in Rooftop track by item.mlid" target="_blank">
+        <span ng-bind="::item.label">
+        </span>
+       </a>
+       <div class="btn-group dropup" ng-if="::item.children" ng-repeat="item in Rooftop track by item.mlid">
+        <button class="btn btn-primary btn-lg dropdown-toggle pull-right" data-toggle="dropdown" type="button">
+         <span ng-bind="::item.label">
+         </span>
+         <span class="caret">
+         </span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right with-arrow-bottom-right" role="menu">
+         <li ng-repeat="subitem in ::item.children track by subitem.mlid">
+          <a ng-href="{{::subitem.url}}" role="menuitem" tabindex="-1" target="_blank">
+           <span ng-bind="::subitem.label">
+           </span>
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="visible-xs-block container" id="courses-not-ready" ng-hide="global.rendered.courses" ng-if="currentPage == 'courses' &amp;&amp; !global.mobileCourseFiltersShown">
+       <div class="alert alert-info" role="alert">
+        Loading Search Results ...
+       </div>
+      </div>
+      <!-- course-list -->
+      <div id="course-list-wrapper" ng-if="global.userinfoReady">
+       <div id="course-list" ng-class="{'hidden-xs': global.mobileCourseFiltersShown}" ng-controller="searchresults" ng-hide="!displayedCourses" ng-if="currentPage == 'courses'">
+        <div class="tab-content">
+         <div class="activetab-{{active.TabIndex}}" data-terms-count="{{termsCount}}" id="course-list-header">
+          <div class="container">
+           <ul class="term-tabs nav nav-tabs nav-justified" role="tablist">
+            <li ng-class="{active: active.Tab == term.termyear}" ng-repeat="term in courses.data as coursesData track by term.termyear">
+             <a href="" ng-click="::setActiveTab(term.termyear); setActiveTabIndex($index)">
+              <span class="hidden-xs" ng-bind="::term.label">
+              </span>
+              <span class="hidden-sm hidden-md hidden-lg" ng-bind="::term.labelCompact">
+              </span>
+              <span class="count" ng-bind="(term.coursesCount &gt; 100) ? '(100+)' : '('+ term.coursesCount +')'">
+              </span>
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+         <div class="container" id="course-list-actions">
+          <span id="expand-collapse-all">
+           <a href="" ng-click="::expandAll()" ng-hide="breakpoint.class == 'mobile' &amp;&amp; active.expandCollapseAll[active.Tab]" ng-switch="" on="active.expandCollapseAll[active.Tab]">
+            <span ng-switch-when="1">
+             Show All Information
+            </span>
+            <span ng-switch-when="2">
+             Show Less Information
+            </span>
+            <span ng-switch-default="">
+             Expand All
+            </span>
+           </a>
+           <a href="" id="collapse-all" ng-click="::collapseAll()">
+            Collapse All
+           </a>
+          </span>
+          <br class="visible-xs-block"/>
+          <button class="btn btn-default btn-wide sprite-container-right pull-right angular-animate ng-trans ng-trans-fade-left" id="toggle-relevant-sections" ng-class="{active: !form.relevantSections}" ng-click="::toggleRelevantSections()" ng-show="coursesData[active.Tab].filteredSectionsCountTotal &gt; 0 || !form.relevantSections">
+           Display omitted classes
+           <span class="badge" ng-bind="(form.relevantSections) ? coursesData[active.Tab].filteredSectionsCountTotal : ''">
+           </span>
+           <span class="sprite sprite-checkbox-toggle">
+           </span>
+          </button>
+         </div>
+         <div class="term-item ng-trans ng-trans-fade-down easeInOutCubic angular-animate" ng-repeat="term in coursesData track by term.termyear" ng-show="active.Tab == term.termyear" ng-switch="" on="breakpoint.class == 'mobile' || 'null'" on-last-repeat="coursesPostRender()">
+          <!-- NON-MOBILE -->
+          <div class="course-item" ng-init="($first) ? course.headingToggle = 1 : false" ng-repeat="course in term.filteredCourses | courseNotExcluded | limitTo:100 | orderBy:['-score','course'] track by course.id" ng-switch-when="null">
+           <h3 class="heading-toggle">
+            <div class="container">
+             <a epd-click="" ng-class="{'active-toggle': course.headingToggle &amp;&amp; course.filteredSectionsCount, 'hidden-sections': !course.filteredSectionsCount}" ng-click="::courseHeadingToggle(course.course)" ng-href="/#courses/{{::course.course}}">
+              <div>
+               <strong ng-bind="::course.title">
+               </strong>
+              </div>
+              <span ng-bind="::course.subject">
+              </span>
+              <span ng-bind="::course.number2">
+              </span>
+              (
+              <span ng-bind="::course.course">
+              </span>
+              )
+              <span ng-bind="::(course.units) ? ' - ' + course.units + ' ' + course.unitsLabel : ''">
+              </span>
+              <span class="sprite sprite-chevron-toggle pull-right">
+              </span>
+             </a>
+             <div class="relevant-classes-indicator">
+              <span class="badge" data-placement="left" data-toggle="tooltip" ng-bind="(course.sectionsCount &gt; 1) ? course.sectionsCount : ''" title="# of sections available">
+              </span>
+             </div>
+            </div>
+           </h3>
+           <div class="course-content ng-trans ng-trans-fade-up easeInOutCubic angular-animate" ng-if="course.headingToggle &amp;&amp; course.filteredSectionsCount" ng-switch="" on="::userinfo.status">
+            <div class="container">
+             <div class="class-section ng-trans ng-trans-flip-x easeInOutCubic angular-animate" ng-repeat="section in course.filteredSections track by section.uci">
+              <div class="class-description">
+               <h4 ng-bind="::section.subtitle">
+               </h4>
+               <div ng-bind-html="::section.description | to_trusted">
+               </div>
+              </div>
+              <div class="class-section-inner">
+               <div class="hidden-xs">
+                <table class="table">
+                 <thead>
+                  <tr>
+                   <th>
+                    Section Number
+                   </th>
+                   <th>
+                    Call Number
+                   </th>
+                   <th ng-if="::section.times[0].formattedTime">
+                    Day, Time &amp; Location
+                   </th>
+                   <th ng-if="::section.instructorsHtmlLinked">
+                    Instructor
+                   </th>
+                   <th ng-if="::section.enrollment || section.status">
+                    Enrollment
+                   </th>
+                  </tr>
+                 </thead>
+                 <tbody>
+                  <tr>
+                   <td ng-bind="::section.section">
+                   </td>
+                   <td ng-bind="::section.callNumber">
+                   </td>
+                   <td ng-if="::section.times[0].formattedTime">
+                    <div ng-repeat="time in ::section.times track by $index">
+                     <span ng-bind-html="::time.formattedTime + ' at ' + time.locationRich | to_trusted">
+                     </span>
+                    </div>
+                   </td>
+                   <td ng-bind-html="::section.instructorsHtmlLinked | to_trusted">
+                   </td>
+                   <td ng-bind="::section.enrollment + section.status">
+                   </td>
+                  </tr>
+                 </tbody>
+                </table>
+               </div>
+               <div class="class-details ng-trans ng-trans-fade-down angular-animate" ng-if="section.moreInfoToggle">
+                <div class="inner" ng-switch="" on="::userinfo.status">
+                 <div>
+                  <div class="class-extras" ng-switch-when="1">
+                   <a class="btn btn-primary extras-evaluations" href="" ng-click="::modalEvaluations(section, course)" ng-if="::coursesWithEval[course.course]">
+                    Evaluations
+                   </a>
+                   <a class="btn btn-primary extras-syllabus" href="" ng-click="::modalSyllabus(section, course)">
+                    Syllabus
+                   </a>
+                   <a class="btn btn-primary extras-books" href="" ng-click="::modalBooks(section, course)">
+                    Book List
+                   </a>
+                   <a class="btn btn-primary extras-courseworks" ng-href="{{::section.websiteUrl}}" target="_blank">
+                    View in
+                    <span ng-bind="::section.website">
+                    </span>
+                   </a>
+                  </div>
+                  <div class="class-extras" ng-switch-default="">
+                   <a class="btn btn-primary extras-evaluations" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" ng-if="::coursesWithEval[course.course]" title="Log in to view evaluations.">
+                    <span class="sprite sprite-lock pull-left">
+                    </span>
+                    Evaluations
+                   </a>
+                   <a class="btn btn-primary extras-syllabus" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" title="Log in to view Syllabus.">
+                    <span class="sprite sprite-lock pull-left">
+                    </span>
+                    Syllabus
+                   </a>
+                   <a class="btn btn-primary extras-books" href="" ng-click="::modalBooks(section, course)">
+                    Book List
+                   </a>
+                   <a class="btn btn-primary extras-courseworks" ng-href="{{::section.websiteUrl}}" target="_blank">
+                    View in
+                    <span ng-bind="::section.website">
+                    </span>
+                   </a>
+                  </div>
+                 </div>
+                 <div class="class-more-info">
+                  <dl ng-if="::section.type">
+                   <dt>
+                    Type
+                   </dt>
+                   <dd ng-bind="::section.type">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.subterm">
+                   <dt>
+                    Subterm
+                   </dt>
+                   <dd ng-bind="::course.subterm">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.department" ng-switch="" on="::course.departmentUrl || 'null'">
+                   <dt>
+                    Department
+                   </dt>
+                   <dd ng-bind="::course.department" ng-switch-when="null">
+                   </dd>
+                   <dd ng-switch-default="">
+                    <a ng-bind="::course.department" ng-href="{{::course.departmentUrl}}" target="_blank">
+                    </a>
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.subject">
+                   <dt>
+                    Subject
+                   </dt>
+                   <dd ng-bind="::course.subject">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.number2">
+                   <dt>
+                    Number
+                   </dt>
+                   <dd ng-bind="::course.number2">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.division">
+                   <dt>
+                    Division
+                   </dt>
+                   <dd ng-bind="::course.division">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.openTo">
+                   <dt>
+                    Open To
+                   </dt>
+                   <dd ng-bind="::section.openTo">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.campus">
+                   <dt>
+                    Campus
+                   </dt>
+                   <dd ng-bind="::course.campus">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.fee">
+                   <dt>
+                    Fee(s)
+                   </dt>
+                   <dd ng-bind="::section.fee">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.note">
+                   <dt>
+                    Note
+                   </dt>
+                   <dd ng-bind="::section.note">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.approval">
+                   <dt>
+                    Approvals Required
+                   </dt>
+                   <dd ng-bind="::section.approval">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.exam.date">
+                   <dt>
+                    Exam Date
+                   </dt>
+                   <dd ng-bind-html="::section.exam.date + ' ' + section.exam.formattedTime | to_trusted">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.exam.locationRich">
+                   <dt>
+                    Exam Location
+                   </dt>
+                   <dd ng-bind-html="::section.exam.locationRich | to_trusted">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.sectionKey">
+                   <dt>
+                    Section Key
+                   </dt>
+                   <dd ng-bind="::section.sectionKey">
+                   </dd>
+                  </dl>
+                 </div>
+                </div>
+               </div>
+               <div class="course-actions" ng-switch="" on="::userinfo.status">
+                <a class="btn btn-lg btn-success" data-out-class="btn-success" data-over-class="btn-primary" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" ng-switch-default="" title="Log in to add to your favorites.">
+                 Add to Planner
+                </a>
+                <a class="btn btn-lg" href="" ng-class="(!section.Favorite) ? 'btn-success' : 'btn-danger'" ng-click="::setFavorite(section, course)" ng-switch-when="1">
+                 <span ng-bind="(section.Favorite) ? 'Remove' : 'Add to Planner'">
+                 </span>
+                </a>
+                <a class="toggle-info" href="" ng-click="section.moreInfoToggle = !section.moreInfoToggle">
+                 <span ng-bind="(section.moreInfoToggle) ? 'Less Info' : 'More Info'">
+                 </span>
+                 <span class="visible-xs-inline">
+                  .
+                 </span>
+                 <span class="hidden-xs">
+                  rmation
+                 </span>
+                </a>
+               </div>
+              </div>
+             </div>
+             <div class="show-all-classes" ng-if="course.sectionsFiltered">
+              <a class="btn btn-primary btn-md btn-block" ng-click="::toggleSectionsFilteredOverride(course, true)">
+               Show all classes
+               <span class="badge" ng-bind="course.sectionsHiddenCount">
+               </span>
+              </a>
+             </div>
+            </div>
+           </div>
+          </div>
+          <!-- /.course-item (non-mobile) -->
+          <!-- MOBILE -->
+          <div class="course-item" ng-repeat="course in term.filteredCourses | courseNotExcluded | limitTo:100 | orderBy:['-score','course'] track by course.id" ng-switch-default="">
+           <h3 class="heading-toggle">
+            <div class="container">
+             <a epd-click="" ng-class="{'active-toggle': course.headingToggle &amp;&amp; course.filteredSectionsCount, 'hidden-sections': !course.filteredSectionsCount}" ng-click="::courseHeadingToggle(course.course)" ng-href="/#courses/{{::course.course}}" ng-init="::course.headingToggle = ($index == 0) ? 1 : 0">
+              <div>
+               <strong ng-bind="::course.title">
+               </strong>
+              </div>
+              <span ng-bind="::course.subject">
+              </span>
+              <span ng-bind="::course.number2">
+              </span>
+              (
+              <span ng-bind="::course.course">
+              </span>
+              )
+              <span ng-bind="::(course.units) ? ' - ' + course.units + ' ' + course.unitsLabel : ''">
+              </span>
+              <span class="sprite sprite-chevron-toggle pull-right">
+              </span>
+             </a>
+             <div class="relevant-classes-indicator">
+              <span class="badge" data-placement="left" data-toggle="tooltip" ng-bind="(course.sectionsCount &gt; 1) ? course.sectionsCount : ''" title="# of sections available">
+              </span>
+             </div>
+            </div>
+           </h3>
+           <div class="course-content ng-trans ng-trans-fade-up easeInOutCubic angular-animate" ng-if="course.headingToggle &amp;&amp; course.filteredSectionsCount" ng-switch="" on="::userinfo.status">
+            <div class="container">
+             <div class="class-section ng-trans ng-trans-flip-x easeInOutCubic angular-animate" ng-repeat="section in course.filteredSections track by section.uci">
+              <div class="class-description">
+               <h4 ng-bind="::section.subtitle">
+               </h4>
+               <div ng-bind-html="::section.description | to_trusted">
+               </div>
+              </div>
+              <div class="class-section-inner">
+               <div class="hidden-sm hidden-md hidden-lg">
+                <div class="div-class-listing">
+                 <dl>
+                  <dt>
+                   Section Number
+                  </dt>
+                  <dd ng-bind="::section.section">
+                  </dd>
+                  <dt>
+                   Call Number
+                  </dt>
+                  <dd ng-bind="::section.callNumber">
+                  </dd>
+                  <dt ng-if="::section.times[0].formattedTime">
+                   Day, Time &amp; Location
+                  </dt>
+                  <dd ng-if="::section.times[0].formattedTime">
+                   <div ng-repeat="time in ::section.times track by $index">
+                    <span ng-bind-html="::time.formattedTime | to_trusted">
+                    </span>
+                    at
+                    <span ng-bind-html="::time.locationRich | to_trusted">
+                    </span>
+                   </div>
+                  </dd>
+                  <dt ng-if="::section.instructorsHtmlLinked">
+                   Instructor
+                  </dt>
+                  <dd ng-bind-html="::section.instructorsHtmlLinked | to_trusted" ng-if="::section.instructorsHtmlLinked">
+                  </dd>
+                  <dt ng-if="::section.enrollment || section.status">
+                   Enrollment
+                  </dt>
+                  <dd ng-bind="::section.enrollment + section.status" ng-if="::section.enrollment || section.status">
+                  </dd>
+                 </dl>
+                </div>
+               </div>
+               <div class="class-details ng-trans ng-trans-fade-down angular-animate" ng-if="section.moreInfoToggle">
+                <div class="inner" ng-switch="" on="::userinfo.status">
+                 <div>
+                  <div class="class-extras" ng-switch-when="1">
+                   <a class="btn btn-primary extras-evaluations" href="" ng-click="::modalEvaluations(section, course)" ng-if="::coursesWithEval[course.course]">
+                    Evaluations
+                   </a>
+                   <a class="btn btn-primary extras-syllabus" href="" ng-click="::modalSyllabus(section, course)">
+                    Syllabus
+                   </a>
+                   <a class="btn btn-primary extras-books" href="" ng-click="::modalBooks(section, course)">
+                    Book List
+                   </a>
+                   <a class="btn btn-primary extras-courseworks" ng-href="{{::section.websiteUrl}}" target="_blank">
+                    View in
+                    <span ng-bind="::section.website">
+                    </span>
+                   </a>
+                  </div>
+                  <div class="class-extras" ng-switch-default="">
+                   <a class="btn btn-primary extras-evaluations" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" ng-if="::coursesWithEval[course.course]" title="Log in to view evaluations.">
+                    <span class="sprite sprite-lock pull-left">
+                    </span>
+                    Evaluations
+                   </a>
+                   <a class="btn btn-primary extras-syllabus" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" title="Log in to view Syllabus.">
+                    <span class="sprite sprite-lock pull-left">
+                    </span>
+                    Syllabus
+                   </a>
+                   <a class="btn btn-primary extras-books" href="" ng-click="::modalBooks(section, course)">
+                    Book List
+                   </a>
+                   <a class="btn btn-primary extras-courseworks" ng-href="{{::section.websiteUrl}}" target="_blank">
+                    View in
+                    <span ng-bind="::section.website">
+                    </span>
+                   </a>
+                  </div>
+                 </div>
+                 <div class="class-more-info">
+                  <dl ng-if="::section.type">
+                   <dt>
+                    Type
+                   </dt>
+                   <dd ng-bind="::section.type">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.subterm">
+                   <dt>
+                    Subterm
+                   </dt>
+                   <dd ng-bind="::course.subterm">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.department" ng-switch="" on="::course.departmentUrl || 'null'">
+                   <dt>
+                    Department
+                   </dt>
+                   <dd ng-bind="::course.department" ng-switch-when="null">
+                   </dd>
+                   <dd ng-switch-default="">
+                    <a ng-bind="::course.department" ng-href="{{::course.departmentUrl}}" target="_blank">
+                    </a>
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.subject">
+                   <dt>
+                    Subject
+                   </dt>
+                   <dd ng-bind="::course.subject">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.division">
+                   <dt>
+                    Division
+                   </dt>
+                   <dd ng-bind="::course.division">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.openTo">
+                   <dt>
+                    Open To
+                   </dt>
+                   <dd ng-bind="::section.openTo">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::course.campus">
+                   <dt>
+                    Campus
+                   </dt>
+                   <dd ng-bind="::course.campus">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.fee">
+                   <dt>
+                    Fee(s)
+                   </dt>
+                   <dd ng-bind="::section.fee">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.note">
+                   <dt>
+                    Note
+                   </dt>
+                   <dd ng-bind="::section.note">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.approval">
+                   <dt>
+                    Approvals Required
+                   </dt>
+                   <dd ng-bind="::section.approval">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.exam.date">
+                   <dt>
+                    Exam Date
+                   </dt>
+                   <dd ng-bind-html="::section.exam.date + ' ' + section.exam.formattedTime | to_trusted">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.exam.location">
+                   <dt>
+                    Exam Location
+                   </dt>
+                   <dd ng-bind="::section.exam.location">
+                   </dd>
+                  </dl>
+                  <dl ng-if="::section.sectionKey">
+                   <dt>
+                    Section Key
+                   </dt>
+                   <dd ng-bind="::section.sectionKey">
+                   </dd>
+                  </dl>
+                 </div>
+                </div>
+               </div>
+               <div class="course-actions" ng-switch="" on="::userinfo.status">
+                <a class="btn btn-lg btn-success" data-out-class="btn-success" data-over-class="btn-primary" keep-within-app="" login-click="" ng-href="{{::loginPath()}}" ng-switch-default="" title="Log in to add to your favorites.">
+                 Add to Planner
+                </a>
+                <a class="btn btn-lg" href="" ng-class="(!section.Favorite) ? 'btn-success' : 'btn-danger'" ng-click="::setFavorite(section, course)" ng-switch-when="1">
+                 <span ng-bind="(section.Favorite) ? 'Remove' : 'Add to Planner'">
+                 </span>
+                </a>
+                <a class="toggle-info" href="" ng-click="section.moreInfoToggle = !section.moreInfoToggle">
+                 <span ng-bind="(section.moreInfoToggle) ? 'Less Info' : 'More Info'">
+                 </span>
+                 <span class="visible-xs-inline">
+                  .
+                 </span>
+                 <span class="hidden-xs">
+                  rmation
+                 </span>
+                </a>
+               </div>
+              </div>
+             </div>
+             <div class="show-all-classes" ng-if="course.sectionsFiltered">
+              <a class="btn btn-primary btn-md btn-block" ng-click="::toggleSectionsFilteredOverride(course, true)">
+               Show all classes
+               <span class="badge" ng-bind="course.sectionsHiddenCount">
+               </span>
+              </a>
+             </div>
+            </div>
+           </div>
+          </div>
+          <!-- /.course-item (mobile) -->
+         </div>
+         <div class="container" id="more-available" ng-if="coursesInQueryExceeded">
+          <div class="alert alert-info" role="alert">
+           Please refine your search filters to see additional courses.
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- /#course-list -->
+       <div class="container ng-trans ng-trans-scale-up angular-animate" id="no-results" ng-show="currentPage == 'courses' &amp;&amp; global.rendered.courses == 1 &amp;&amp; displayedCourses == 0 &amp;&amp; !global.mobileCourseFiltersShown">
+        <div class="jumbotron">
+         <h2>
+          Sorry
+         </h2>
+         <p>
+          There are no classes to display with the provided search criteria.
+         </p>
+         <div class="visible-xs-block">
+          <a href="#courses">
+           Back to Search
+          </a>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- /.container: #course-list -->
+      <div aria-hidden="true" aria-labelledby="courseModalLabel" class="modal fade" id="courseModal" ng-if="::global.userinfoReady" role="dialog" tabindex="-1">
+       <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         <div class="modal-header">
+          <a class="modal-dismiss" data-dismiss="modal">
+           <span class="sprite sprite-remove">
+           </span>
+           <span class="sr-only">
+            Close
+           </span>
+          </a>
+          <div id="courseModalLabel" ng-bind="modalCourse.title">
+          </div>
+          <span ng-bind="modalCourse.number2">
+          </span>
+          <span ng-if="modalSection.unit.formatted">
+           -
+           <span ng-bind="modalSection.unit.formatted">
+           </span>
+           <span ng-bind="modalSection.unit.label">
+           </span>
+          </span>
+          <div class="clearfix visible-xs-block">
+          </div>
+          <span ng-if="modalSection.instructorsHtml">
+           <span class="hidden-xs">
+            |
+           </span>
+           Instructor:
+           <span ng-bind-html="modalSection.instructorsHtml | to_trusted">
+           </span>
+          </span>
+         </div>
+         <div class="modal-body" ng-switch="" on="::userinfo.status">
+          <div ng-switch-when="-1">
+           <ul class="nav nav-tabs nav-justified hidden-xs" id="modal-tabs" role="tablist">
+            <li class="disabled" ng-if="coursesWithEval[modalCourse.course]">
+             <a href="">
+              <span class="sprite sprite-lock">
+              </span>
+              Faculty Evaluations
+             </a>
+            </li>
+            <li class="disabled">
+             <a href="">
+              <span class="sprite sprite-lock">
+              </span>
+              Syllabus
+             </a>
+            </li>
+            <li ng-class="{active: active.ModalTab == 2}">
+             <a href="" ng-click="::setActiveModalTab(2)">
+              Book List
+             </a>
+            </li>
+           </ul>
+          </div>
+          <div ng-switch-when="1">
+           <ul class="nav nav-tabs nav-justified hidden-xs" id="modal-tabs" role="tablist">
+            <li ng-class="{active: active.ModalTab == 0}" ng-if="coursesWithEval[modalCourse.course]">
+             <a href="" ng-click="::setActiveModalTab(0)">
+              Faculty Evaluations
+             </a>
+            </li>
+            <li ng-class="{active: active.ModalTab == 1}">
+             <a href="" ng-click="::setActiveModalTab(1)">
+              Syllabus
+             </a>
+            </li>
+            <li ng-class="{active: active.ModalTab == 2}">
+             <a href="" ng-click="::setActiveModalTab(2)">
+              Book List
+             </a>
+            </li>
+           </ul>
+           <div class="dropdown visible-xs-block">
+            <a class="btn btn-primary btn-block" data-target="#" data-toggle="dropdown" href="" id="modalDropdownLabel" role="button">
+             <span ng-if="active.ModalTab == 0 &amp;&amp; coursesWithEval[modalCourse.course]">
+              Faculty Evaluations
+             </span>
+             <span ng-if="active.ModalTab == 1">
+              Syllabus
+             </span>
+             <span ng-if="active.ModalTab == 2">
+              Book List
+             </span>
+             <span class="caret">
+             </span>
+            </a>
+            <ul aria-labelledby="modalDropdownLabel" class="dropdown-menu" role="menu">
+             <li ng-class="{'active disabled': active.ModalTab == 0}" ng-if="coursesWithEval[modalCourse.course]">
+              <a href="" ng-click="::setActiveModalTab(0)">
+               Faculty Evaluations
+              </a>
+             </li>
+             <li ng-class="{'active disabled': active.ModalTab == 1}">
+              <a href="" ng-click="::setActiveModalTab(1)">
+               Syllabus
+              </a>
+             </li>
+             <li ng-class="{'active disabled': active.ModalTab == 2}">
+              <a href="" ng-click="::setActiveModalTab(2)">
+               Book List
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <div class="modal-item ng-trans ng-trans-fade-left easeInOutCubic angular-animate" id="modal-cw-not-ready" ng-hide="CWApiReady">
+           Fetching data from CourseWorks ...
+          </div>
+          <div class="modal-item ng-trans ng-trans-fade-left easeInOutCubic angular-animate" id="modal-cw-aborted" ng-show="CWApiAborted">
+           Sorry, CourseWorks is currently unavailable.
+          </div>
+          <div class="modal-item hyperlinked-list ng-trans ng-trans-fade-left easeInOutCubic angular-animate" id="modal-evaluations" ng-show="active.ModalTab == 0 &amp;&amp; CWApiReady &amp;&amp; !CWApiAborted" ng-switch-when="1">
+           <div ng-switch="" on="modalSection.cw.evaluations.reports || 'null'">
+            <div ng-switch-when="null">
+             Sorry, no evaluations are available.
+            </div>
+            <div ng-switch-default="">
+             <div ng-repeat="(year, report) in modalSection.cw.evaluationsList track by $index">
+              <h4 ng-bind="year">
+              </h4>
+              <ul class="list-unstyled">
+               <li ng-repeat="(semester, path) in ::report track by $index">
+                <a ng-href="{{::path}}" target="_blank">
+                 <span class="glyphicon glyphicon-file">
+                 </span>
+                 <span ng-bind="semester">
+                 </span>
+                </a>
+               </li>
+              </ul>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="modal-item hyperlinked-list ng-trans ng-trans-fade-left easeInOutCubic angular-animate" id="modal-syllabus" ng-show="active.ModalTab == 1 &amp;&amp; CWApiReady &amp;&amp; !CWApiAborted" ng-switch-when="1">
+           <div ng-switch="" on="modalSection.cw.syllabus || 'null'">
+            <div ng-switch-when="null">
+             Sorry, no syllabus information is available.
+            </div>
+            <div ng-switch-default="">
+             <div class="force-body-style" ng-bind-html="modalSection.cw.syllabus | to_trusted">
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="modal-item hyperlinked-list hyperlinked-list-hover ng-trans ng-trans-fade-left easeInOutCubic angular-animate" id="modal-books" ng-show="active.ModalTab == 2 &amp;&amp; CWApiReady &amp;&amp; !CWApiAborted">
+           <div ng-if="modalSection.cw.books.textbooks.length">
+            <h4 ng-if="resultsReq.length">
+             Required Books
+            </h4>
+            <ul>
+             <li class="list-unstyled" ng-repeat="textbook in modalSection.cw.books.textbooks | filter: {type: 'required'} as resultsReq track by $index">
+              <h4 ng-bind="textbook.title">
+              </h4>
+              <dl class="dl-inline">
+               <dt ng-if="textbook.isbn">
+                <abbr title="International Standard Book Number">
+                 ISBN
+                </abbr>
+               </dt>
+               <dd ng-bind="textbook.isbn">
+               </dd>
+               <dt ng-if="textbook.author">
+                Author(s)
+               </dt>
+               <dd ng-bind="textbook.author">
+               </dd>
+               <dt ng-if="textbook.publisher">
+                Publisher
+               </dt>
+               <dd ng-bind="textbook.publisher">
+               </dd>
+               <dt ng-if="textbook.year">
+                Copyright Date
+               </dt>
+               <dd ng-bind="textbook.year">
+               </dd>
+               <dt>
+                Price
+               </dt>
+               <dd ng-bind="(textbook.price | currency) ? (textbook.price | currency) : '*'">
+               </dd>
+              </dl>
+             </li>
+            </ul>
+            <hr ng-if="resultsReq.length"/>
+            <h4 ng-if="resultsRec.length">
+             Recommended Books
+            </h4>
+            <ul>
+             <li class="list-unstyled" ng-repeat="textbook in modalSection.cw.books.textbooks | filter: {type: 'recommended'} as resultsRec track by $index">
+              <h4 ng-bind="textbook.title">
+              </h4>
+              <dl class="dl-inline">
+               <dt ng-if="textbook.isbn">
+                <abbr title="International Standard Book Number">
+                 ISBN
+                </abbr>
+               </dt>
+               <dd ng-bind="textbook.isbn">
+               </dd>
+               <dt ng-if="textbook.author">
+                Author(s)
+               </dt>
+               <dd ng-bind="textbook.author">
+               </dd>
+               <dt ng-if="textbook.publisher">
+                Publisher
+               </dt>
+               <dd ng-bind="textbook.publisher">
+               </dd>
+               <dt ng-if="textbook.year">
+                Copyright Date
+               </dt>
+               <dd ng-bind="textbook.year">
+               </dd>
+               <dt>
+                Price
+               </dt>
+               <dd ng-bind="(textbook.price | currency) ? (textbook.price | currency) : '*'">
+               </dd>
+              </dl>
+             </li>
+            </ul>
+            <hr ng-if="resultsRec.length"/>
+            <div ng-if="modalSection.cw.books.comment">
+             <h4>
+              Comments
+             </h4>
+             <div class="force-body-style" ng-bind-html="modalSection.cw.books.comment | to_trusted">
+             </div>
+            </div>
+            <div ng-bind-html="modalSection.cw.books.disclaimer | to_trusted" ng-if="modalSection.cw.books.disclaimer">
+            </div>
+           </div>
+           <div ng-if="!modalSection.cw.books.textbooks.length" ng-switch="" on="modalSection.cw.books['no-textbook']">
+            <div ng-switch-when="1">
+             <div>
+              This course does not require or recommend the purchase of any textbooks.
+             </div>
+             <div ng-bind-html="modalSection.cw.books.comment | to_trusted" ng-if="modalSection.cw.books.comment">
+             </div>
+             <div ng-bind-html="modalSection.cw.books.disclaimer | to_trusted" ng-if="modalSection.cw.books.disclaimer">
+             </div>
+            </div>
+            <div ng-switch-default="">
+             Sorry, textbook information is not yet available.
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="modal-footer angular-animate ng-trans ng-trans-fade-up" ng-if="active.ModalTab == 0 &amp;&amp; modalSection.instructors">
+          <ul class="more-evaluations">
+           <li ng-if="uniHasEval(instructor.uni)" ng-repeat="instructor in modalSection.instructors track by $index">
+            <a ng-click="::hideCourseModal()" ng-href="#evaluations/{{instructor.uni}}">
+             More Evaluations for
+             <span ng-bind="instructor.name">
+             </span>
+            </a>
+           </li>
+          </ul>
+          <button class="visible-xs btn btn-primary btn-block" data-dismiss="modal" type="button">
+           Close
+          </button>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div aria-hidden="true" aria-labelledby="hintsModalLabel" class="modal fade" id="hintsModal" role="dialog" tabindex="-1">
+       <div class="modal-dialog">
+        <div class="modal-content">
+         <div class="modal-header">
+          <h4 class="modal-title" id="hintsModalLabel">
+           <span ng-bind="modal.course.title">
+           </span>
+           -
+           <span ng-bind="modal.section.section">
+           </span>
+           <div>
+            <span ng-bind="modal.course.subject">
+            </span>
+            <span ng-bind="modal.course.number2">
+            </span>
+            (
+            <span ng-bind="modal.course.course">
+            </span>
+            )
+           </div>
+          </h4>
+         </div>
+         <div class="modal-body modal-item">
+          <span class="sprite sprite-warning">
+          </span>
+          <h4 ng-bind="modal.body">
+          </h4>
+         </div>
+         <div class="modal-footer">
+          <div class="pull-right">
+           <a class="btn" data-dismiss="modal" href="">
+            Add to my favorites
+           </a>
+           <button class="btn btn-primary btn-lg" ng-click="removeFavorite(modal.section.uci, modal.term)" type="button">
+            OK
+           </button>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div id="myplanner" ng-controller="myplanner" ng-if="currentPage == 'planner'">
+       <h2 class="heading-toggle hidden-xs ng-trans ng-trans-fade angular-animate" id="my-schedule-toggle" ng-animate-children="" ng-if="breakpoint.class != 'mobile'">
+        <div class="container">
+         <div class="col-sm-6 col-md-7">
+          <a class="nolink" href="">
+           My Schedule
+           <span class="label label-info" ng-show="!plannerReady">
+            Loading ...
+           </span>
+           <span class="ng-trans ng-trans-fade angular-animate" ng-if="plannerReady &amp;&amp; favorites.scheduledSectionsCount &gt; 0">
+            ({{favorites.scheduledSectionsCount}} course
+            <span ng-if="favorites.scheduledSectionsCount &gt; 1">
+             s
+            </span>
+            <span ng-bind="(favorites.scheduledCredits) ? ' / ' + favorites.scheduledCredits + ' credit' : ''">
+            </span>
+            <span ng-if="favorites.scheduledCredits &gt; 1">
+             s
+            </span>
+            )
+           </span>
+          </a>
+         </div>
+         <div class="pull-right">
+          <a class="btn btn-lg" data-placement="left" data-toggle="tooltip" href="" id="add-personal-event" ng-click="::addPersonalEventModal()" title="Block off time for a personal event">
+           Add Personal Event
+          </a>
+          <a class="btn btn-lg" data-placement="top" data-toggle="tooltip" href="" id="export-to-calendar" ng-class="(!courses.data || favorites.scheduledSectionsCount == 0) ? 'disabled' : ''" ng-click="::exportIcs()" title="Export your schedule to your personal calendar">
+           Export to Calendar
+          </a>
+         </div>
+        </div>
+       </h2>
+       <div class="visible-xs-block container" id="planner-mobile-sched-toggle" ng-switch="" on="plannerReady || 'null'">
+        <div id="my-planner-not-ready" ng-switch-when="null">
+         <div class="alert alert-info" role="alert">
+          Loading My Planner ...
+         </div>
+        </div>
+        <div ng-switch-default="">
+         <a href="" ng-click="::togglePlannerMobileSched()" ng-switch="" on="planner.mobileSched">
+          <span ng-switch-when="true">
+           See Classes
+          </span>
+          <span ng-switch-default="">
+           See Schedule
+          </span>
+         </a>
+        </div>
+       </div>
+       <div class="activetab-{{active.TabIndex}}" data-terms-count="3" id="planner-list-header">
+        <div class="container">
+         <ul class="term-tabs nav nav-tabs nav-justified" role="tablist">
+          <li ng-class="{active: term.value == active.Tab}" ng-repeat="term in favoritesTerms track by term.value">
+           <a ng-click="setActiveTab(term.value); setActiveTabIndex($index)" ng-href="#my-planner/{{term.value}}">
+            <span class="hidden-xs" ng-bind="::term.label">
+            </span>
+            <span class="hidden-sm hidden-md hidden-lg" ng-bind="::term.labelCompact">
+            </span>
+            <span class="count hidden-xs" ng-bind="(favorites.favoritesCount[term.value]) ? '('+ favorites.favoritesCount[term.value] +')' : ''">
+            </span>
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="container visible-xs-block" id="my-schedule-progress-mobile">
+        <div class="progress" ng-if="plannerReady">
+         <div aria-valuemax="{{favorites.progressPct}}" aria-valuemin="0" aria-valuenow="{{favorites.progressPct}}" class="progress-bar" role="progressbar" style="width: {{favorites.progressPct}}%;">
+         </div>
+        </div>
+        <div class="text" ng-bind="favorites.progressMessage">
+        </div>
+       </div>
+       <div class="visible-xs-block" id="planner-list-wrapper" ng-if="breakpoint.class == 'mobile' &amp;&amp; plannerReady">
+        <div class="ng-trans ng-trans-scale-down angular-animate" data-ng-attr-active="active" data-ng-attr-courses="courses" data-ng-attr-favorites="favorites" favorite-sections="" id="favorite-sections-wrapper" ng-animate-children="" ng-if="!planner.mobileSched">
+        </div>
+        <div class="container ng-trans ng-trans-fade-down angular-animate" id="planner-message" ng-animate-children="" ng-if="plannerMessageShown">
+         <div class="alert alert-info alert-dismissible" ng-if="favorites.favoritesCount[active.Tab] != 0 &amp;&amp; favorites.scheduledSectionsCount == 0" role="alert">
+          <button class="close" ng-click="::plannerMessageToggle()" type="button">
+           <span aria-hidden="true">
+            ×
+           </span>
+           <span class="sr-only">
+            Close
+           </span>
+          </button>
+          <span ng-bind="::messages.emptySchedule">
+          </span>
+         </div>
+        </div>
+        <div class="ng-trans ng-trans-scale-up angular-animate" id="planner-list" ng-if="!planner.mobileSched">
+         <ul class="planner-list-inner ng-trans ng-trans-fade-down angular-animate" id="planner-list-inner-{{::term}}" ng-if="([term] | filter: favoritesTerms[active.Tab].value).length &gt; 0" ng-repeat="(term, coursesByTerm) in courses.data as coursesData track by coursesByTerm.termyear">
+          <li class="container ng-trans ng-trans-fade-down angular-animate" ng-if="plannerMessageShown">
+           <div class="alert alert-info" ng-bind="::messages.emptyPlanner" ng-if="favorites.favoritesCount[active.Tab] == 0" role="alert">
+           </div>
+          </li>
+          <li ng-repeat="(docPattern, thisCourse) in coursesByTerm.courses track by thisCourse.id" on-last-repeat="plannerPostRender()">
+           <ul>
+            <li class="ng-trans ng-trans-scale-down planner-item angular-animate" ng-if="thisSection.Favorite == true" ng-repeat="thisSection in thisCourse.sections track by thisSection.uci">
+             <div class="planner-item-inner">
+              <div class="planner-item-inner-inner" ng-switch="" on="coursesData[term].courses[docPattern] || 'null'">
+               <div ng-switch-when="null">
+                <div class="text-capitalize">
+                 <strong ng-bind="::docPattern">
+                 </strong>
+                 <small ng-bind="::thisSection.section">
+                 </small>
+                </div>
+                <p>
+                 Sorry, this class is no longer listed.
+                </p>
+                <div class="course-actions">
+                 <a class="btn btn-danger btn-lg" data-placement="left" data-toggle="tooltip" href="" ng-click="::removeFavorite(thisSection.uci, term)" title="Remove from your favorites">
+                  Remove
+                 </a>
+                </div>
+               </div>
+               <div class="planner-item-details" ng-switch-default="">
+                <div ng-if="::!thisSection.isPersonalEvent">
+                 <div ng-switch="" on="hintReqData[thisSection.uci] || 'null'">
+                  <div class="details-head" ng-switch-when="null">
+                   <div>
+                    <a href="" ng-click="::modalSyllabus(thisSection, thisCourse)">
+                     <strong ng-bind="::thisCourse.title">
+                     </strong>
+                    </a>
+                   </div>
+                   <span ng-bind="::thisCourse.subject">
+                   </span>
+                   <span ng-bind="::thisCourse.number2">
+                   </span>
+                   (
+                   <span ng-bind="::thisCourse.course">
+                   </span>
+                   ) - Section
+                   <span ng-bind="::thisSection.section">
+                   </span>
+                   <span ng-if="::thisCourse.units">
+                    -
+                    <span ng-bind="::thisCourse.units">
+                    </span>
+                    <span ng-bind="::thisCourse.unitsLabel">
+                    </span>
+                   </span>
+                  </div>
+                  <div class="details-head details-head-with-hint" data-placement="bottom" data-toggle="tooltip" data-tooltip-mobile="true" ng-switch-default="" title="{{::hintReqData[thisSection.uci]}}">
+                   <div>
+                    <a href="" ng-click="::modalSyllabus(thisSection, thisCourse)">
+                     <strong ng-bind="::thisCourse.title">
+                     </strong>
+                    </a>
+                   </div>
+                   <span ng-bind="::thisCourse.subject">
+                   </span>
+                   <span ng-bind="::thisCourse.number2">
+                   </span>
+                   (
+                   <span ng-bind="::thisCourse.course">
+                   </span>
+                   ) - Section
+                   <span ng-bind="::thisSection.section">
+                   </span>
+                   <span ng-if="::thisCourse.units">
+                    -
+                    <span ng-bind="::thisCourse.units">
+                    </span>
+                    <span ng-bind="::thisCourse.unitsLabel">
+                    </span>
+                   </span>
+                  </div>
+                 </div>
+                 <dl class="dl-inline">
+                  <dt>
+                   Call Number
+                  </dt>
+                  <dd>
+                   <span ng-bind="::thisSection.callNumber">
+                   </span>
+                  </dd>
+                  <dt ng-if="::thisSection.times[0].formattedTime">
+                   Day and Time
+                  </dt>
+                  <dd class="multi" ng-if="::thisSection.times[0].formattedTime">
+                   <span ng-bind-html="::time.formattedTime | to_trusted" ng-repeat="time in ::thisSection.times track by $index">
+                   </span>
+                  </dd>
+                  <dt ng-if="::thisSection.instructors">
+                   Instructor
+                  </dt>
+                  <dd ng-bind-html="::thisSection.instructorsHtml | to_trusted" ng-if="::thisSection.instructors">
+                  </dd>
+                 </dl>
+                 <a class="sections-toggle" data-placement="bottom" data-toggle="tooltip" href="" id="sections-toggle-{{::thisSection.uci}}" ng-class="{'active-toggle' : thisCourse.sectionsShown == thisSection.uci}" ng-click="showFavoriteSections(thisSection, term, docPattern, thisCourse.sectionsShown)" ng-if="::thisCourse.sectionsCount &gt; 1" title="View sections of this course">
+                  <span class="sprite sprite-chevron-toggle">
+                  </span>
+                  <span class="hidden-xs">
+                   More
+                  </span>
+                  Sections
+                  <span class="badge" ng-bind="::thisCourse.sectionsCount">
+                  </span>
+                 </a>
+                 <div class="course-actions" ng-switch="" on="thisSection.added_to_schedule">
+                  <button class="btn btn-default btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, docPattern, 1)" ng-switch-when="0" type="button">
+                   Add to Schedule
+                   <span class="sprite sprite-checkbox-off">
+                   </span>
+                  </button>
+                  <button class="btn btn-default active btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, docPattern, 0)" ng-switch-when="1" type="button">
+                   Added to Schedule
+                   <span class="sprite sprite-checkbox-on">
+                   </span>
+                  </button>
+                  <a class="text-danger" data-placement="left" data-toggle="tooltip" href="" ng-click="::removeFavorite(thisSection.uci, term)" title="Remove from your favorites">
+                   Remove
+                  </a>
+                 </div>
+                </div>
+                <div ng-if="::thisSection.isPersonalEvent">
+                 <div class="details-head text-success">
+                  <strong ng-bind="::thisSection.title">
+                  </strong>
+                  <br/>
+                  Personal Event
+                 </div>
+                 <dl class="dl-inline">
+                  <dt>
+                   Day
+                  </dt>
+                  <dd ng-bind="::thisSection.times[0].weekdayDisplay">
+                  </dd>
+                  <dt>
+                   Time
+                  </dt>
+                  <dd ng-bind="::thisSection.times[0].time">
+                  </dd>
+                 </dl>
+                 <div class="course-actions" ng-switch="" on="thisSection.added_to_schedule">
+                  <button class="btn btn-default btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, 'personalEvents', 1)" ng-switch-when="0" type="button">
+                   Add to Calendar
+                   <span class="sprite sprite-checkbox-off">
+                   </span>
+                  </button>
+                  <button class="btn btn-success active btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, 'personalEvents', 0)" ng-switch-when="1" type="button">
+                   Added to Calendar
+                   <span class="sprite sprite-checkbox-green">
+                   </span>
+                  </button>
+                  <a class="text-danger" data-placement="left" data-toggle="tooltip" href="" ng-click="::removePersonalEvent(thisSection, term, 0)" title="Remove from your favorites">
+                   Remove
+                  </a>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <!-- /planner-list-wrapper -->
+       <div class="container hidden-sm hidden-md hidden-lg" id="my-schedule-mobile-toggle" ng-class="{'hidden-xs': !planner.mobileSched}">
+        <span class="inline-block-heading">
+         My Schedule
+         <span ng-bind="(favorites.scheduledCredits) ? ' (' + favorites.scheduledCredits + ' cr)' : ''">
+         </span>
+        </span>
+        <a class="btn btn-lg btn-primary pull-right" href="" ng-click="::addPersonalEventModal()">
+         Add Personal
+        </a>
+       </div>
+       <div class="container hidden-sm hidden-md hidden-lg" id="planner-mobile-cal-toggle" ng-class="{'hidden-xs': !planner.mobileSched}">
+        <a href="" ng-click="::togglePlannerMobileCal()" ng-switch="" on="planner.mobileCal">
+         <span ng-switch-when="true">
+          Show List View
+         </span>
+         <span ng-switch-default="">
+          Show Schedule View
+         </span>
+        </a>
+       </div>
+       <div class="ng-trans ng-trans-scale-up angular-animate" id="my-schedule-wrapper" ng-class="{'active-wday-set': activeWDay != 0, 'schedule-focus-set': scheduleFocus != 0}" ng-hide="breakpoint.class == 'mobile' &amp;&amp; !planner.mobileSched" ng-show="myScheduleShown">
+        <div class="container hidden-xs" id="my-schedule-progress">
+         <div class="row">
+          <div ng-class="(favorites.progressPct == 100) ? 'col-sm-9' : 'col-sm-12'">
+           <div class="progress" ng-if="plannerReady">
+            <div aria-valuemax="{{favorites.progressPct}}" aria-valuemin="0" aria-valuenow="{{favorites.progressPct}}" class="progress-bar" ng-bind="favorites.progressMessage" role="progressbar" style="width: {{favorites.progressPct}}%;">
+            </div>
+           </div>
+          </div>
+          <div class="col-sm-3 text-center" ng-if="favorites.progressPct == 100">
+           <a id="ssol-progress-btn" ng-click="pushToSSOL()" ng-href="https://ssol.columbia.edu/?tran[1]_tran_name=sregb&amp;tran[1]_term_id={{active.Tab}}" target="_blank">
+            <span class="sprite sprite-lock">
+            </span>
+            Push
+            <span class="hidden-sm">
+             Courses
+            </span>
+            to SSOL Registration
+           </a>
+          </div>
+         </div>
+        </div>
+        <div class="my-schedule container ng-trans ng-trans-fade angular-animate">
+         <div class="visible-xs-block ng-trans ng-trans-fade-right angular-animate" id="sticky-table-column" ng-if="planner.mobileCal">
+          <div ng-bind="hour" ng-repeat="hour in ::favoritesTimes track by $index">
+          </div>
+         </div>
+         <div class="my-schedule-inner clearfix">
+          <div class="col-sm-8 ng-trans ng-trans-fade angular-animate" id="schedule-table-wrapper" ng-hide="breakpoint.class == 'mobile' &amp;&amp; !planner.mobileCal">
+           <div class="schedule-table">
+            <div class="table-head clearfix">
+             <div class="hour">
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 1}">
+              <a href="" ng-click="::inspectWDay(1)">
+               Mon
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 2}">
+              <a href="" ng-click="::inspectWDay(2)">
+               Tue
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 3}">
+              <a href="" ng-click="::inspectWDay(3)">
+               Wed
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 4}">
+              <a href="" ng-click="::inspectWDay(4)">
+               Thu
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 5}">
+              <a href="" ng-click="::inspectWDay(5)">
+               Fri
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 6}">
+              <a href="" ng-click="::inspectWDay(6)">
+               Sat
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+             <div class="wday" ng-class="{'active-wday': activeWDay == 7}">
+              <a href="" ng-click="::inspectWDay(7)">
+               Sun
+               <span class="icon">
+                <span class="glyphicon glyphicon-th-list">
+                </span>
+               </span>
+              </a>
+             </div>
+            </div>
+            <div class="table-body" ng-click="::inspectWDay(0)">
+             <div class="trow empty clearfix">
+              <div class="hour-empty">
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+             </div>
+             <div class="trow hour-start clearfix hour-{{::hour}}" ng-class-even="'even'" ng-class-odd="'odd'" ng-repeat-start="hour in ::favoritesTimes track by $index">
+              <div class="hour">
+               <span ng-bind="hour">
+               </span>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+             </div>
+             <div class="trow hour-end clearfix hour-{{::hour}}" ng-class-even="'even'" ng-class-odd="'odd'" ng-repeat-end="">
+              <div class="hour">
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="schedule-list col-sm-4" ng-if="plannerReady &amp;&amp; ([term] | filter: favoritesTerms[active.Tab].value).length &gt; 0" ng-repeat="(term, coursesByTerm) in courses.data track by coursesByTerm.termyear" ng-switch="" on="breakpoint.class != 'mobile' || 'null'">
+           <div ng-switch-when="null">
+            <div class="schedule-list-weekday ng-trans ng-trans-flip-x angular-animate" ng-if="favorites.scheduledSectionsCount == 0  &amp;&amp; favorites.personalEventsCount == 0">
+             <h3>
+              My Week
+             </h3>
+             <div class="schedule-list-weekday-empty" ng-bind-html="::messages.emptyScheduleList | to_trusted">
+             </div>
+            </div>
+            <div class="ng-trans ng-trans-fade angular-animate" ng-if="favorites.scheduledSectionsCount &gt; 0 || favorites.personalEventsCount &gt; 0">
+             <div class="schedule-list-weekday ng-trans ng-trans-fade angular-animate" data-weekday="0" ng-if="weekdayNotEmpty('Uncat', term)">
+              <h3 ng-class="{'hidden-xs': planner.mobileCal}">
+               Uncategorized
+               <span class="badge pull-right" ng-bind="favorites.weekdays.Uncat.scheduleCount[term]">
+               </span>
+              </h3>
+              <div class="schedule-list-weekday-inner" ng-repeat="(docPattern, thisCourse) in coursesByTerm.courses track by thisCourse.id">
+               <div class="schedule-list-weekday-item repeat-anim angular-animate" ng-if="thisSection.added_to_schedule == 1" ng-repeat="thisSection in thisCourse.sections | groupCourseUncat track by thisSection.uci" schedule-list-weekday="">
+               </div>
+              </div>
+             </div>
+             <div class="schedule-list-weekday ng-trans ng-trans-fade angular-animate" data-weekday="{{::$index}}" ng-class="(activeWDay == {{::$index}}) ? 'active-wday' : 'inactive-wday'" ng-if="!$first &amp;&amp; weekdayNotEmpty(weekday.value, term)" ng-repeat="weekday in favorites.weekdays | orderObjectBy:'unit' track by weekday.value" on-last-repeat="weekdaysPostRender()">
+              <h3 ng-class="{'hidden-xs': planner.mobileCal}">
+               <span ng-bind="::weekday.label">
+               </span>
+               <span class="badge pull-right" ng-bind="weekday.scheduleCount[term]">
+               </span>
+              </h3>
+              <div class="schedule-list-weekday-inner" ng-repeat="(docPattern, thisCourse) in coursesByTerm.courses track by thisCourse.id">
+               <div class="schedule-list-weekday-item repeat-anim angular-animate" ng-class="{'schedule-focus': scheduleFocus == thisSection.uci}" ng-if="thisSection.added_to_schedule == 1" ng-mouseout="::scheduleFocusChange(0)" ng-mouseover="::scheduleFocusChange(thisSection.uci, weekday.unit)" ng-repeat="thisSection in thisCourse.sections | groupCourseByWeekday: weekday.value track by thisSection.uci" schedule-list-weekday="">
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div ng-switch-default="">
+            <ul class="term-tabs nav nav-tabs nav-justified" id="planner-toggle">
+             <li ng-class="{'active': global.myPlannerShown}">
+              <a href="" ng-click="::myPlannerToggle(true)">
+               All
+               <span class="hidden-sm">
+                Classes
+               </span>
+               <span ng-bind="(favorites.favoritesCount[active.Tab]) ? '('+ favorites.favoritesCount[active.Tab] +')' : ''">
+               </span>
+              </a>
+             </li>
+             <li ng-class="{'active': !global.myPlannerShown}">
+              <a href="" ng-click="::myPlannerToggle(false)">
+               Added
+               <span class="hidden-sm">
+                to Schedule
+               </span>
+               <span ng-bind="(favorites.scheduledSectionsCount) ? '('+ favorites.scheduledSectionsCount +')' : ''">
+               </span>
+              </a>
+             </li>
+            </ul>
+            <div id="planner-container">
+             <div class="ng-trans ng-trans-flip-x angular-animate" id="planner-all-classes" ng-if="plannerReady" ng-show="global.myPlannerShown">
+              <div class="ng-trans ng-trans-scale-down angular-animate" data-ng-attr-active="active" data-ng-attr-courses="courses" data-ng-attr-favorites="favorites" favorite-sections="" id="favorite-sections-wrapper" ng-show="global.myPlannerShown">
+              </div>
+              <div class="alert alert-info" ng-bind="::messages.emptyPlanner" ng-if="favorites.favoritesCount[active.Tab] == 0" role="alert">
+              </div>
+              <div class="planner-list-inner-grid ng-trans ng-trans-fade angular-animate" id="planner-list-inner-grid-{{::term}}" ng-if="([term] | filter: favoritesTerms[active.Tab].value).length &gt; 0" ng-repeat="(term, coursesByTerm) in courses.data track by coursesByTerm.termyear">
+               <div ng-repeat="(docPattern, thisCourse) in coursesByTerm.courses track by thisCourse.id">
+                <div class="planner-list-grid-item ng-trans ng-trans-flip-x angular-animate" hover-intent-delay="100" hover-intent-out="::scheduleFocusChange(0)" ng-class="{'schedule-focus': scheduleFocus == thisSection.uci}" ng-if="thisSection.Favorite == true" ng-mouseover="(thisSection.added_to_schedule == 1 &amp;&amp; thisSection.times.length) ? scheduleFocusChange(thisSection.uci) : scheduleFocusChange(0)" ng-repeat="thisSection in thisCourse.sections track by thisSection.uci" on-last-repeat="plannerPostRender()">
+                 <div class="planner-item-inner">
+                  <div class="planner-item-inner-inner" ng-switch="" on="courses.data[term].courses[docPattern] || 'null'">
+                   <div ng-switch-when="null">
+                    <div class="text-capitalize">
+                     <strong ng-bind="::docPattern">
+                     </strong>
+                     <small ng-bind="::thisSection.section">
+                     </small>
+                    </div>
+                    <p>
+                     Sorry, this class is no longer listed.
+                    </p>
+                    <div class="course-actions">
+                     <a class="btn btn-danger btn-lg" data-placement="left" data-toggle="tooltip" href="" ng-click="::removeFavorite(thisSection.uci, term)" title="Remove from your favorites">
+                      Remove
+                     </a>
+                    </div>
+                   </div>
+                   <div class="planner-item-details" ng-switch-default="">
+                    <div ng-if="::!thisSection.isPersonalEvent">
+                     <div ng-switch="" on="hintReqData[thisSection.uci] || 'null'">
+                      <div class="details-head" ng-switch-when="null">
+                       <div>
+                        <a href="" ng-click="::modalSyllabus(thisSection, thisCourse)">
+                         <strong ng-bind="::thisCourse.title">
+                         </strong>
+                        </a>
+                       </div>
+                       <span ng-bind="::thisCourse.subject">
+                       </span>
+                       <span ng-bind="::thisCourse.number2">
+                       </span>
+                       (
+                       <span ng-bind="::thisCourse.course">
+                       </span>
+                       ) - Section
+                       <span ng-bind="::thisSection.section">
+                       </span>
+                       <span ng-if="::thisCourse.units">
+                        -
+                        <span ng-bind="::thisCourse.units">
+                        </span>
+                        <span ng-bind="::thisCourse.unitsLabel">
+                        </span>
+                       </span>
+                      </div>
+                      <div class="details-head details-head-with-hint" data-placement="bottom" data-toggle="tooltip" data-tooltip-mobile="true" ng-switch-default="" title="{{::hintReqData[thisSection.uci]}}">
+                       <div>
+                        <a href="" ng-click="::modalSyllabus(thisSection, thisCourse)">
+                         <strong ng-bind="::thisCourse.title">
+                         </strong>
+                        </a>
+                       </div>
+                       <span ng-bind="::thisCourse.subject">
+                       </span>
+                       <span ng-bind="::thisCourse.number2">
+                       </span>
+                       (
+                       <span ng-bind="::thisCourse.course">
+                       </span>
+                       ) - Section
+                       <span ng-bind="::thisSection.section">
+                       </span>
+                       <span ng-if="::thisCourse.units">
+                        -
+                        <span ng-bind="::thisCourse.units">
+                        </span>
+                        <span ng-bind="::thisCourse.unitsLabel">
+                        </span>
+                       </span>
+                      </div>
+                     </div>
+                     <dl class="dl-inline">
+                      <dt>
+                       Call Number
+                      </dt>
+                      <dd>
+                       <span ng-bind="::thisSection.callNumber">
+                       </span>
+                      </dd>
+                      <dt ng-if="::thisSection.times[0].formattedTime">
+                       Day and Time
+                      </dt>
+                      <dd ng-bind-html="::thisSection.times[0].formattedTime | to_trusted" ng-if="::thisSection.times[0].formattedTime">
+                      </dd>
+                      <dt ng-if="::thisSection.instructors">
+                       Instructor
+                      </dt>
+                      <dd ng-bind-html="::thisSection.instructorsHtml | to_trusted" ng-if="::thisSection.instructors">
+                      </dd>
+                     </dl>
+                     <a class="sections-toggle" data-placement="right" data-toggle="tooltip" href="" id="sections-toggle-{{::thisSection.uci}}" ng-class="{'active-toggle' : thisCourse.sectionsShown == thisSection.uci}" ng-click="showFavoriteSections(thisSection, term, docPattern, thisCourse.sectionsShown)" ng-if="::thisCourse.sectionsCount &gt; 1" title="View sections of this course">
+                      <span class="sprite sprite-chevron-toggle">
+                      </span>
+                      More Sections
+                      <span class="badge" ng-bind="::(thisCourse.sectionsCount)">
+                      </span>
+                     </a>
+                     <div class="course-actions" ng-switch="" on="thisSection.added_to_schedule">
+                      <button class="btn btn-default btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, docPattern, 1)" ng-switch-when="0" type="button">
+                       <span class="hidden-sm" ng-class="{hidden: global.showprogwidget}">
+                        Add to
+                       </span>
+                       Schedule
+                       <span class="sprite sprite-checkbox-off">
+                       </span>
+                      </button>
+                      <button class="btn btn-default active btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, docPattern, 0)" ng-switch-when="1" type="button">
+                       <span class="hidden-sm" ng-class="{hidden: global.showprogwidget}">
+                        Added to
+                       </span>
+                       Schedule
+                       <span class="sprite sprite-checkbox-on">
+                       </span>
+                      </button>
+                      <a class="text-danger" data-placement="top" data-toggle="tooltip" href="" ng-click="::removeFavorite(thisSection.uci, term)" title="Remove from your favorites">
+                       Remove
+                      </a>
+                     </div>
+                    </div>
+                    <div ng-if="::thisSection.isPersonalEvent">
+                     <div class="details-head text-success">
+                      <strong ng-bind="::thisSection.title">
+                      </strong>
+                      <br/>
+                      Personal Event
+                     </div>
+                     <dl class="dl-inline">
+                      <dt>
+                       Day
+                      </dt>
+                      <dd ng-bind="::thisSection.times[0].weekdayDisplay">
+                      </dd>
+                      <dt>
+                       Time
+                      </dt>
+                      <dd ng-bind="::thisSection.times[0].time">
+                      </dd>
+                     </dl>
+                     <div class="course-actions" ng-switch="" on="thisSection.added_to_schedule">
+                      <button class="btn btn-default btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, 'personalEvents', 1)" ng-switch-when="0" type="button">
+                       <span class="hidden-sm" ng-class="{hidden: global.showprogwidget}">
+                        Add to
+                       </span>
+                       Calendar
+                       <span class="sprite sprite-checkbox-off">
+                       </span>
+                      </button>
+                      <button class="btn btn-success active btn-lg sprite-container-right" ng-click="::updateFavorite(thisSection, term, 'personalEvents', 0)" ng-switch-when="1" type="button">
+                       <span class="hidden-sm" ng-class="{hidden: global.showprogwidget}">
+                        Added to
+                       </span>
+                       Calendar
+                       <span class="sprite sprite-checkbox-green">
+                       </span>
+                      </button>
+                      <a class="text-danger" data-placement="top" data-toggle="tooltip" href="" ng-click="::removePersonalEvent(thisSection, term, 0)" title="Remove from your favorites">
+                       Remove
+                      </a>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <!-- /#planner-all-classes -->
+             <div id="added-to-calendar">
+              <div class="schedule-list-weekday ng-trans ng-trans-flip-x angular-animate" ng-if="favorites.scheduledSectionsCount == 0  &amp;&amp; favorites.personalEventsCount == 0 &amp;&amp; !global.myPlannerShown">
+               <h3>
+                My Week
+               </h3>
+               <div class="schedule-list-weekday-empty" ng-bind-html="::messages.emptyScheduleList | to_trusted">
+               </div>
+              </div>
+              <div class="ng-trans ng-trans-fade angular-animate" ng-if="favorites.scheduledSectionsCount &gt; 0 || favorites.personalEventsCount &gt; 0">
+               <div class="schedule-list-weekday ng-trans ng-trans-fade angular-animate" data-weekday="0" ng-if="weekdayNotEmpty('Uncat', term)">
+                <h3 ng-class="{'hidden-xs': planner.mobileCal}" ng-hide="global.myPlannerShown">
+                 Uncategorized
+                </h3>
+                <div class="schedule-list-weekday-inner repeat-anim angular-animate" ng-repeat="(docPattern, thisCourse) in coursesByTerm.courses track by thisCourse.id">
+                 <div class="schedule-list-weekday-item repeat-anim angular-animate" ng-if="thisSection.added_to_schedule == 1" ng-repeat="thisSection in thisCourse.sections | groupCourseUncat track by thisSection.uci" schedule-list-weekday="">
+                 </div>
+                </div>
+               </div>
+               <div class="schedule-list-weekday ng-trans ng-trans-fade angular-animate" data-weekday="{{::$index}}" ng-class="(activeWDay == {{::$index}}) ? 'active-wday' : 'inactive-wday'" ng-if="!$first &amp;&amp; weekdayNotEmpty(weekday.value, term)" ng-repeat="weekday in favorites.weekdays | orderObjectBy:'unit' track by weekday.value" on-last-repeat="weekdaysPostRender()">
+                <h3 ng-class="{'hidden-xs': planner.mobileCal}" ng-hide="global.myPlannerShown">
+                 <span ng-bind="::weekday.label">
+                 </span>
+                </h3>
+                <div class="schedule-list-weekday-inner" ng-repeat="(docPattern, thisCourse) in coursesByTerm.courses track by thisCourse.id">
+                 <div class="schedule-list-weekday-item repeat-anim angular-animate" hover-intent-delay="100" hover-intent-out="::scheduleFocusChange(0)" ng-class="{'schedule-focus': scheduleFocus == thisSection.uci}" ng-if="thisSection.added_to_schedule == 1" ng-mouseover="::scheduleFocusChange(thisSection.uci, weekday.unit)" ng-repeat="thisSection in thisCourse.sections | groupCourseByWeekday: weekday.value track by thisSection.uci" schedule-list-weekday="">
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <!-- /#added-to-calendar -->
+            </div>
+            <!-- /#planner-container -->
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="container visible-xs-block text-center" id="my-planner-mobile-bottom-links" ng-if="plannerReady">
+        <a href="" id="export-to-calendar-mobile" ng-class="(!courses.data || favorites.scheduledSectionsCount == 0) ? 'disabled' : ''" ng-click="::exportIcs()">
+         Export to Calendar
+        </a>
+        <hr/>
+        <a class="btn btn-lg btn-primary btn-block" href="" ng-click="::addPersonalEventModal()">
+         Add Personal Event
+        </a>
+        <a class="btn btn-lg btn-primary btn-block" ng-click="pushToSSOL()" ng-href="https://ssol.columbia.edu/?tran[1]_tran_name=sregb&amp;tran[1]_term_id={{active.Tab}}" target="_blank">
+         <span class="sprite sprite-lock">
+         </span>
+         Push Courses to SSOL Registration
+        </a>
+       </div>
+       <div aria-hidden="true" aria-labelledby="personalEventsModalLabel" class="modal fade" id="personalEventsModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+         <div class="modal-content">
+          <div class="modal-header">
+           <a class="modal-dismiss pull-right" data-dismiss="modal">
+            <span class="sprite sprite-remove">
+            </span>
+            <span class="sr-only">
+             Close
+            </span>
+           </a>
+           <h4 class="modal-title text-center" id="personalEventsModalLabel">
+            Add Personal Event
+           </h4>
+          </div>
+          <div class="modal-body clearfix">
+           <div class="col-md-7">
+            <label class="sr-only" for="personal-events-title">
+             Event Title
+            </label>
+            <input class="form-control" id="personal-events-title" ng-model="personalEventsTitle" placeholder="Event Title" type="text"/>
+           </div>
+           <div class="col-md-5">
+            <label class="sr-only" for="year">
+             Weekday
+            </label>
+            <select chosen="::favorites.weekdays" class="form-control" data-placeholder="Weekday" id="personal-events-weekday" name="weekday" ng-model="personalEventsWeekday" required="">
+             <option value="">
+             </option>
+             <option ng-bind="d.label" ng-if="!$first" ng-repeat="(initial, d) in ::favorites.weekdays | orderObjectBy:'unit' track by d.value" ng-value="d.unit">
+             </option>
+            </select>
+           </div>
+           <div class="col-md-12" id="personal-events-time-wrapper">
+            <div class="form-group">
+             <label for="personal-events-time">
+              Time
+             </label>
+             <div id="personal-events-time">
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="modal-footer">
+           <div class="text-center">
+            <button class="btn btn-primary btn-lg" ng-click="::savePersonalEvent()" ng-disabled="!personalEventsTitle || !personalEventsWeekday" type="button">
+             Add to calendar
+            </button>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <!-- /#myplanner -->
+      <div id="evaluations" ng-controller="evaluations" ng-if="currentPage == 'evaluations'">
+       <h2 class="heading-no-toggle" id="evaluations-toggle">
+        <div class="container">
+         Evaluations
+         <span ng-bind="(global.instructorName) ? 'for '+ global.instructorName : ''">
+         </span>
+         <div class="visible-xs-block">
+          <a href="#teacherwidget-popup">
+           Back to Search
+          </a>
+         </div>
+        </div>
+       </h2>
+       <div class="angular-animate ng-trans ng-trans-flip-x" id="evaluations-content" ng-animate-children="" ng-show="CWEvalApiReady &amp;&amp; !CWEvalApiAborted" ng-switch="" on="evaluations.reports.length || 'null'">
+        <div class="container" id="no-results-evals" ng-switch-when="null">
+         <div class="jumbotron">
+          <h2>
+           Sorry
+          </h2>
+          <p>
+           There are no evaluations available
+           <span ng-bind="(global.instructorName) ? ' for ' + global.instructorName : ''">
+           </span>
+           <span ng-bind="(global.instructor) ? ' (' + global.instructor + ')' : ''">
+           </span>
+           .
+          </p>
+         </div>
+         <div class="text-center">
+          <p>
+           <a href="" ng-click="::searchForClasses()">
+            Search for
+            <span ng-bind="global.instructorName">
+            </span>
+            's classes
+           </a>
+          </p>
+         </div>
+        </div>
+        <div id="evaluations-list" ng-switch-default="">
+         <div class="container">
+          <div class="row">
+           <div class="col-md-12 evaluations-course">
+            <!--
+                        <h3>
+                          <strong>Title</strong><br />
+                          Course - credits
+                        </h3>
+-->
+            <div ng-repeat="(evalCourse, reportsData) in evaluationsList track by $index">
+             <div ng-switch="" on="reportsData.courseData.title || 'null'">
+              <h3 ng-switch-when="null">
+               <strong ng-bind="evalCourse">
+               </strong>
+              </h3>
+              <h3 ng-switch-default="">
+               <strong ng-bind="reportsData.courseData.title">
+               </strong>
+               <br/>
+               <span ng-bind="reportsData.courseData.subject">
+               </span>
+               <span ng-bind="reportsData.courseData.number2">
+               </span>
+               (
+               <span ng-bind="reportsData.courseData.course">
+               </span>
+               )
+               <span ng-if="reportsData.courseData.units">
+                -
+                <span ng-bind="reportsData.courseData.units">
+                </span>
+                <span ng-bind="reportsData.courseData.unitsLabel">
+                </span>
+               </span>
+              </h3>
+              <div class="evaluations-course-content hyperlinked-list" ng-repeat="(year, report) in reportsData.years track by year">
+               <h4 ng-bind="year">
+               </h4>
+               <ul class="list-unstyled">
+                <li ng-repeat="(semester, paths) in report track by $index">
+                 <a ng-href="{{path}}" ng-repeat="path in paths" target="_blank">
+                  <span class="glyphicon glyphicon-file">
+                  </span>
+                  <span ng-bind="semester">
+                  </span>
+                  <span ng-bind="' (' + ($index+1) + ')'" ng-if="$index">
+                  </span>
+                 </a>
+                </li>
+               </ul>
+              </div>
+             </div>
+            </div>
+            <a class="btn btn-primary btn-lg sprite-container-right" href="" ng-click="::searchForClasses()">
+             Search for
+             <span ng-bind="global.instructorName">
+             </span>
+             's classes
+            </a>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="container angular-animate ng-trans ng-trans-fade-up" id="evals-not-ready" ng-hide="CWEvalApiReady">
+        <div class="alert alert-info" role="alert">
+         Fetching data from CourseWorks ...
+        </div>
+       </div>
+       <div class="container angular-animate ng-trans ng-trans-fade-down" id="evals-aborted" ng-show="CWEvalApiAborted">
+        <div class="alert alert-warning" role="alert">
+         Sorry, CourseWorks is currently unavailable.
+        </div>
+       </div>
+      </div>
+      <!-- /#evaluations -->
+     </div>
+     <!-- /#content -->
+    </div>
+    <!-- /#content-wrapper -->
+   </div>
+   <!-- /.equal-heights-wrapper -->
+   <!-- Modal -->
+   <div aria-hidden="true" aria-labelledby="globalModalLabel" class="modal fade" id="globalModal" ng-class="modal.classes" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+      <div class="modal-header" ng-if="modal.title">
+       <a class="modal-dismiss" data-dismiss="modal">
+        <span class="sprite sprite-remove">
+        </span>
+        <span class="sr-only">
+         Close
+        </span>
+       </a>
+       <h4 class="modal-title" id="globalModalLabel">
+        <span ng-bind="modal.title">
+        </span>
+        <a class="btn btn-default" href="/cms/dar/download" ng-click="" ng-if="modal.classes == 'dar'" target="_blank">
+         Printable View
+        </a>
+       </h4>
+      </div>
+      <div class="modal-body modal-item" ng-switch="" on="modal.body || 'null'">
+       <p ng-switch-when="null">
+        Loading...
+       </p>
+       <div ng-bind-html="modal.body | to_trusted" ng-switch-default="">
+       </div>
+      </div>
+      <div class="modal-footer">
+       <button class="btn btn-default" data-dismiss="modal" type="button">
+        Close
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div aria-hidden="true" aria-labelledby="programModalLabel" class="modal fade" id="programModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+      <div class="modal-header">
+       <a class="modal-dismiss" data-dismiss="modal">
+        <span class="sprite sprite-remove">
+        </span>
+        <span class="sr-only">
+         Close
+        </span>
+       </a>
+       <h4 class="modal-title" id="programModalLabel" ng-bind="modal.title">
+       </h4>
+      </div>
+      <div class="modal-body modal-item" ng-bind="modal.body">
+      </div>
+      <div class="modal-footer">
+       <button class="btn btn-default" data-dismiss="modal" type="button">
+        Close
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="ng-trans ng-trans-scale-down angular-animate" id="global-message" ng-if="global.messageShown">
+    <div id="global-message-backdrop" ng-click="::closeGlobalMessage()">
+    </div>
+    <div id="global-message-content">
+     <div id="global-message-content-inner">
+      <span ng-bind-html="global.message | to_trusted">
+      </span>
+      <a href="" id="global-message-close" ng-click="::closeGlobalMessage()">
+       <span class="glyphicon glyphicon-remove">
+       </span>
+      </a>
+     </div>
+    </div>
+   </div>
+   <div class="angular-animate" id="dropdown-backdrop" ng-click="::clearMenuDropdowns()" ng-if="global.menuDropdownVisible">
+   </div>
+   <footer class="navbar navbar-fixed-bottom">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-6 col-md-5">
+       Copyright ©
+       <span ng-bind="::global.variables.current_academic_year">
+       </span>
+       COLUMBIA UNIVERSITY.
+       <span class="visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline">
+        All rights reserved.
+       </span>
+      </div>
+      <div class="col-sm-6 col-md-7 navbar-right">
+       <a class="visible-xs-block" inbound-outbound="" ng-click="::nodeContent('node/7')" ng-href="/cms/node/7">
+        About the Stewardship Collection
+       </a>
+       <a inbound-outbound="" ng-click="::nodeContent(item.url)" ng-href="{{::item.url}}" ng-if="::!item.children" ng-repeat="item in ::global.variables.menus.menu_footer track by item.mlid">
+        <span ng-bind="::item.label">
+        </span>
+       </a>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <!--
+    <div class="container"><div class="row">
+      <pre id="code-output"></pre>
+    </div></div>
+-->
+ </body>
+</html>

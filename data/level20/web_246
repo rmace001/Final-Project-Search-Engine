@@ -1,0 +1,443 @@
+http://codemaroon.tamu.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+   <meta content="Code Maroon is Texas A&amp;M University's emergency notification system. Code Maroon uses multiple notification methods in a best effort to reach campus members in an emergency – by SMS text message, Texas A&amp;M Email, KAMU-FM radio, campus cable television, Emergency Alert System radios, computer alerts, classroom alerts, mobile alerts, Twitter and RSS." name="description"/>
+   <meta content="Code maroon, texas a&amp;m emergency, college station emergency, alert message college station, email notification" name="Keywords"/>
+   <meta content="Texas A&amp;M University" name="author"/>
+   <title>
+    CODE MAROON Emergency Notification System | Texas A&amp;M University
+   </title>
+   <!-- Bootstrap core CSS -->
+   <link href="../Style/bootstrap.css" rel="stylesheet"/>
+   <link href="../Style/tamu-theme.css" rel="stylesheet"/>
+   <link href="../Style/stats.css" rel="stylesheet"/>
+   <!-- Include custom icons from IconMoon -->
+   <link href="../Style/style.css" rel="stylesheet"/>
+   <link href="../Style/custom.css" rel="stylesheet"/>
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!--[if lt IE 9]>
+      <script src="../js/html5shiv.js"></script>
+      <script src="../js/respond.min.js"></script>
+    <![endif]-->
+  </meta>
+ </head>
+ <body onload="init();">
+  <!-- Wrap all page content here -->
+  <div id="wrap">
+   <!-- Begin Announcement -->
+   <div class="alert alert-codemaroon accordion alert-codemaroon-col" id="alert">
+    <div class="equal-columns">
+     <div class="btn-warning-col accordion-toggle collapsed" data-target="#collapseOne" data-toggle="collapse" id="tamu-alerts">
+      <div class="accordion-heading subheader alert-title alert-title-col">
+       <span class="heavy">
+        CODEMAROON ALERT
+       </span>
+       <sup>
+        *
+       </sup>
+       <div class="alertLocation-col">
+        - College Station
+       </div>
+       <div class="arrowButton-col">
+        SHOW ALERT
+        <span class="caret caret-red">
+        </span>
+       </div>
+      </div>
+      <div class="accordion-body collapse" id="collapseOne">
+       <div class="accordion-inner">
+        <div class="maroon maroon-col">
+         Go to
+         <a href="http://emergency.tamu.edu" target="_blank">
+          emergency.tamu.edu (new window)
+         </a>
+         for more information
+        </div>
+        <div>
+         <div class="list-unstyled">
+          <div id="alertMessage">
+          </div>
+         </div>
+        </div>
+        <div style="width: 100%">
+         <span class="alertBottomInfo">
+          * Order of messages is newest to oldest.
+         </span>
+         <span class="arrowButton-col arrowButton-col-reversed">
+          HIDE ALERT
+          <span class="caret caret-reversed caret-red">
+          </span>
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="btn-warning-col accordion-toggle collapsed" data-target="#collapseTwo" data-toggle="collapse" id="law-alerts">
+      <div class="accordion-heading subheader alert-title alert-title-col" style="padding-bottom: 0px">
+       <span class="heavy">
+        LAW ALERT
+       </span>
+       <sup>
+        *
+       </sup>
+       <div class="alertLocation-col">
+        - Fort Worth
+       </div>
+       <div class="arrowButton-col">
+        SHOW ALERT
+        <span class="caret caret-red">
+        </span>
+       </div>
+      </div>
+      <div class="accordion-body collapse" id="collapseTwo">
+       <div class="accordion-inner">
+        <div class="maroon maroon-col">
+         Go to
+         <a href="http://law.tamu.edu/emergency-information" target="_blank">
+          law.tamu.edu/emergency-information (new window)
+         </a>
+         for more
+                                information
+        </div>
+        <div>
+         <div class="list-unstyled">
+          <div id="alertMessageLaw">
+          </div>
+         </div>
+        </div>
+        <div style="width: 100%">
+         <span class="alertBottomInfo">
+          * Order of messages is newest to oldest.
+         </span>
+         <span class="arrowButton-col arrowButton-col-reversed">
+          HIDE ALERT
+          <span class="caret caret-reversed caret-red">
+          </span>
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="btn-warning-col accordion-toggle collapsed" data-target="#collapseThree" data-toggle="collapse" id="McAllen-alerts">
+      <div class="accordion-heading subheader alert-title alert-title-col" style="padding-bottom: 0px">
+       <span class="heavy">
+        HECM ALERT
+       </span>
+       <sup>
+        *
+       </sup>
+       <div class="alertLocation-col">
+        - McAllen
+       </div>
+       <div class="arrowButton-col">
+        SHOW ALERT
+        <span class="caret caret-red">
+        </span>
+       </div>
+      </div>
+      <div class="accordion-body collapse" id="collapseThree">
+       <div class="accordion-inner">
+        <div class="maroon maroon-col">
+         Go to
+         <a href="http://mcallen.tamu.edu/Current-Students/Emergency-Notifications" target="_blank">
+          mcallen.tamu.edu/Current-Students/Emergency-Notifications (new window)
+         </a>
+         for more
+                                information
+        </div>
+        <div>
+         <div class="list-unstyled">
+          <div id="alertMessageMcAllen">
+          </div>
+         </div>
+        </div>
+        <div style="width: 100%">
+         <span class="alertBottomInfo">
+          * Order of messages is newest to oldest.
+         </span>
+         <span class="arrowButton-col arrowButton-col-reversed">
+          HIDE ALERT
+          <span class="caret caret-reversed caret-red">
+          </span>
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <a class="sr-only" href="#main">
+    <span class="whitefont">
+     Skip to content
+    </span>
+   </a>
+   <!-- Navbar -->
+   <div class="navbar header-nav navbar-default">
+    <div class="container">
+     <div class="navbar-header">
+      <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle main menu
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+      </button>
+      <h1 class="navbar-brand">
+       <a href="Default.aspx">
+        Code Maroon - Emergency Notification System
+       </a>
+      </h1>
+     </div>
+     <div class="navbar-logo navbar-right">
+      <a href="http://www.tamu.edu">
+       Texas A&amp;M University
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- Begin page content -->
+  <!-- for page don't need form tag -->
+  <!-- for page don't need form tag -->
+  <form action="./" id="aspnetForm" method="post" name="aspnetForm">
+   <div>
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="F8tNgART4UqpTnU3K8+OQvt1gxu2U5pZ3zqGcSU5vJYSUZQ6Hl3pcbaiaGEXpzWAF9yfmN7nFxAclim/JBgDDAt1Q/Vz9vIauRRz2SdDtGAY5mvB+ROFq/xtZErssa0FFQk/IbAOk+0Rwu7RzKtUQI04bZejYquWRUBzDZKpITnd5S4naLyzM7xwneEBKgdvquZmRAu1satSZb0n6bzrFyKgM+b9c50iV+Eozkw1FaOIuprLe+CXhkZrrK5RDFBbOSm5lRU4wpsv7z8SvnEezQdREPb+H3uL9NLxm4B4LRfKU8IRyWCzWPgtBlJy0n+8k/Z9kwQ3UzTavvEHJaVeZs/BGLgOHphAy/0xqikhk1u/n/DR"/>
+   </div>
+   <div>
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+    <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="WMGJ3yYW+QMT60eOoIpX+iVDeHeSufhLc0WVIRJ2rFtTt+QzlqScOxLaipA4127mkaVxdkHmHnk2u4ALgw5heqlmbT6F9Id7TsKsUdxw4bSm1wlR7l5iLDxWtXwu4Xc0OkV/iuCmCr+2nlepyO0AB8sB6EjVctf7a3V44lUxVBQ84MSDLozrTORWEgzdTfnY7S8kqj6k8Ku8fFAcEfnprYH6FtQCgN8mILxwKQ=="/>
+   </div>
+   <div class="container">
+    <div class="collapse navbar-collapse">
+     <ul class="nav navbar-nav">
+      <li>
+       <a href="Default.aspx">
+        Home
+       </a>
+      </li>
+      <li>
+       <a aria-label="About Code Maroon at Texas A&amp;M University" href="About.aspx">
+        Texas A&amp;M University
+       </a>
+      </li>
+      <li>
+       <a aria-label="About Code Maroon at Texas A&amp;M School of Law" href="LawAbout.aspx">
+        Texas A&amp;M School of Law
+       </a>
+      </li>
+      <li>
+       <a aria-label="About Code Maroon at Texas A&amp;M McAllen" href="McAllenAbout.aspx">
+        Texas A&amp;M McAllen
+       </a>
+      </li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+      <li class="gradient-link">
+       <a href="Login.aspx">
+        ACCOUNT SETTINGS
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!--/.nav-collapse -->
+   </div>
+   <div class="spotlight div-announcement-spacing">
+    <div class="container">
+     <div class="col-sm-6 col-md-5">
+      <div class="panel panel-default panel-solid text-center valign">
+       <div class="panel-heading" id="main" tabindex="-1">
+        <h2>
+         <strong>
+          Sign Up
+         </strong>
+         <small>
+          to get alerts in case of an emergency
+         </small>
+        </h2>
+       </div>
+       <div class="panel-body">
+        <p>
+         <input class="btn btn-info btn-lg btn-xlg" id="ctl00_ContentPlaceHolder1_btnSubmit" name="ctl00$ContentPlaceHolder1$btnSubmit" type="submit" value="Campus Members"/>
+         <br/>
+         <br/>
+         <div class="btn-group btn-xlg-group">
+          <button aria-label="Public Access Sign Up to get alerts - Choose your campus" class="btn btn-default btn-lg btn-xlg dropdown-toggle grey-color" data-toggle="dropdown" id="campuschooser" type="submit">
+           Public Access
+           <span class="caret">
+           </span>
+          </button>
+          <ul aria-labelledby="campuschooser" class="dropdown-menu dropdown-inverse wide-menu" role="menu">
+           <li class="dropdown-header" role="presentation">
+            Choose your campus:
+           </li>
+           <li role="presentation">
+            <a href="PublicAccess.aspx" role="menuitem">
+             Texas A&amp;M University
+            </a>
+           </li>
+           <li role="presentation">
+            <a href="LawPublicAccess.aspx" role="menuitem">
+             Texas A&amp;M School of Law
+            </a>
+           </li>
+           <li role="presentation">
+            <a href="McAllenPublicAccess.aspx" role="menuitem">
+             Texas A&amp;M McAllen
+            </a>
+           </li>
+          </ul>
+         </div>
+         <br/>
+        </p>
+       </div>
+       <div class="panel-footer">
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container" id="announcements">
+    <div class=" col-sm-10 col-md-9">
+     <div class="panel panel-overlap dropshadow">
+      <div class="panel-body">
+       <h3 class="maroon">
+        Announcements
+       </h3>
+       <p>
+        <font size="3">
+         Twitter’s “Fast Follow” feature has changed:
+        </font>
+        <p class="leftMarginIndent-20">
+         If you or a family member receives Code Maroon text alerts using Twitter’s “Fast Follow” feature, you may not receive future notifications due to changes in Twitter’s operating procedures.  To test whether these notifications will continue, please click “Public Access” above and follow instructions for “Fast Follow”.
+        </p>
+        <br/>
+        <p>
+         <font size="3">
+          Texas A&amp;M University College Station will send Code Maroon tests on the following dates and times:
+         </font>
+         <div id="contentarea" style="float:left; width:70%;">
+          <table id="tableContent" style="margin-left:20px">
+           <thead>
+            <tr>
+             <th>
+              Spring 2019
+              <br/>
+              12:30 pm
+             </th>
+             <th>
+              Summer 2019
+              <br/>
+              1:45 pm
+             </th>
+            </tr>
+            <tr>
+             <td>
+              Jan. 25
+             </td>
+             <td>
+              May 31
+             </td>
+            </tr>
+            <tr>
+             <td>
+              Feb. 22
+             </td>
+             <td>
+              June 28
+             </td>
+            </tr>
+            <tr>
+             <td>
+              Mar. 29
+             </td>
+             <td>
+              July 26
+             </td>
+            </tr>
+            <tr>
+             <td>
+              Apr. 26
+             </td>
+             <td>
+             </td>
+            </tr>
+           </thead>
+          </table>
+         </div>
+        </p>
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </form>
+  <div id="footer">
+   <div class="container">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+     <ul class="list-unstyled">
+      <li>
+       <a href="http://www.tamu.edu/" title="Texas A&amp;M University Home
+    Page">
+        Texas A&amp;M University
+       </a>
+      </li>
+      <li>
+       <a href="http://www.tamu.edu/emergency/" title="What should YOU do in an emergency">
+        Emergency Preparedness
+       </a>
+      </li>
+      <li>
+       <a href="http://itaccessibility.tamu.edu/" title="Texas A&amp;M
+    University Information Technology Web Accessibility Policy">
+        Accessibility
+       </a>
+      </li>
+      <li>
+       <a href="../ContactUs.aspx" title="Contact Us">
+        Contact Us
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-3">
+     <ul class="list-unstyled">
+      <li>
+       <a href="http://cio.tamu.edu/Privacy_and_Security_Statement.php" title="Privacy and Security Statement">
+        Privacy and Security
+       </a>
+      </li>
+      <li>
+       <a href="mailto:codemaroon@tamu.edu" title="E-mail Webmaster">
+        Webmaster
+       </a>
+      </li>
+      <li>
+       <a href="http://www.adobe.com/products/acrobat/readstep2.html" title="Download Adobe Acrobat Reader.">
+        Download Adobe Acrobat Reader
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <script src="../js/codemaroon.js" type="text/javascript">
+  </script>
+  <script src="../js/jquery-1.10.2.min.js" type="text/javascript">
+  </script>
+  <script src="../js/bootstrap.min.js" type="text/javascript">
+  </script>
+  <script src="../js/app.js" type="text/javascript">
+  </script>
+  <script src="../js/footable.js" type="text/javascript">
+  </script>
+ </body>
+</html>
+

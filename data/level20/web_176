@@ -1,0 +1,850 @@
+https://tickets.arts.gatech.edu
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>
+   Tickets | ARTS@TECH
+  </title>
+  <meta content="width=device-width, height=device-height, initial-scale=1.0" name="viewport"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="no" http-equiv="Imagetoolbar"/>
+  <link href="../content/images/gatech.ico?_7.31.1" rel="shortcut icon"/>
+  <link href="/content/Images/branding/home-screen-icon.png?_7.31.1" rel="apple-touch-icon"/>
+  <!-- inclusion of bootstrap specific CSS -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css?_7.31.1" rel="Stylesheet"/>
+  <!-- end of bootstrap specific CSS -->
+  <link href="../../content/images/branding/global.css?_=7.31.1" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../content/images/branding/global_IE.css?_7.31.1" type="text/css">
+<![endif]-->
+  <script language="Javascript">
+  </script>
+  <link href="/content/Files/CSS/GATech-branding.css?_=7.31.1" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Check whether cookies are enabled.
+	document.cookie = "TestCookie=1";
+	var testCookie = document.cookie;
+
+	// Try to retrieve the value we just set.
+	if (testCookie.indexOf("TestCookie=1") == -1)
+	{
+		
+		    document.location = "error.asp?nocookie=";
+		
+    }
+	else
+		document.cookie = "TestCookie=;expires=Thu, 01-Jan-1970 00:00:00 GMT";
+  </script>
+  <script type="text/javascript">
+   function setRSVPButtons(response, eventCode)
+{
+                var url = '/' + eventCode + '/invited?user=' + response.authResponse.userID + '&access_token=' + response.authResponse.accessToken;
+                 FB.api(url, 'get',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred: " + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                        if (response.data[0].rsvp_status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else if (response.data[0].rsvp_status == "unsure")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                    }
+                });
+}
+function setRSVPButtonsLogin(eventCode)
+{
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                setRSVPButtons(response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        setRSVPButtons(response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+
+function rsvpToFBEvent(status, response, eventCode)
+{
+
+                var url = '/' + eventCode + '/' + status + '?access_token=' + response.authResponse.accessToken;
+
+                 FB.api(url, 'post',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred:" + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                      gaTrackEvent('Facebook', 'RSVP to Event Success');
+
+                        if (status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                        else if (status == "maybe")
+                        {
+                            var buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                    }
+                 });
+}
+
+function rsvpToFBEventLogin(status, eventCode) {
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                rsvpToFBEvent(status, response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        rsvpToFBEvent(status, response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+  </script>
+  <script src="../Common/browser_detect.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var genericConfirmationMessage = "Are you sure?";
+  var offerExpired = "Your order has expired.";
+  var admissionsExpired = "An offer on one of your tickets has expired.";
+  var alertHeaderText = "Attention";
+  var termsHeaderText = "Terms and Conditions";
+  var helpHeaderText = "Help";
+  var sectionHeaderText = "More Information";
+
+  var okayButtonText = "OK";
+  var cancelButtonText = "Cancel";
+  var acceptButtonText = "Accept";
+  var declineButtonText = "Decline";
+  var closeButtonText = "Close";
+
+  var sTokenName = 'sToken';
+  var sToken = '1,af134a87,5c84b6c3,7E23BB96-CB40-46B9-874E-977E64BA8148,6Yi30EF78HT5Q3JO7wVsW+RP7WQ=';
+  </script>
+  <script src="../Common/online-jscript.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/online-navigation-jscript.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/widgetParent.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /*
+
+*/
+function displayMessage(onClickEvent)
+{
+
+}
+
+function tsOrderChanged( url )
+{
+  new showConfirmPopup( '', 'The current order has unsaved changes that may be lost. Continue anyway?', function () { document.location = url }, '' );
+}
+
+// Used for drop-down menu in IE 6
+<!--//--><![CDATA[//><!--
+function startList() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("menuTop");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.id=="menuTopItem") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+
+                node.onfocus=function(){
+                    this.className+=" over";
+                }
+
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+
+                node.onblur=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+//--><!]]>
+
+var plusApi_loaded = false;
+var twitterApi_loaded = false;
+var fbApi_loaded = false;
+  </script>
+  <noscript>
+   <meta content="0; URL=error.asp" http-equiv="refresh"/>
+  </noscript>
+  <script type="text/javascript">
+   var longMonthsOfYear = new Array();
+longMonthsOfYear[ 0 ] = "January";
+longMonthsOfYear[ 1 ] = "February";
+longMonthsOfYear[ 2 ] = "March";
+longMonthsOfYear[ 3 ] = "April";
+longMonthsOfYear[ 4 ] = "May";
+longMonthsOfYear[ 5 ] = "June";
+longMonthsOfYear[ 6 ] = "July";
+longMonthsOfYear[ 7 ] = "August";
+longMonthsOfYear[ 8 ] = "September";
+longMonthsOfYear[ 9 ] = "October";
+longMonthsOfYear[ 10 ] = "November";
+longMonthsOfYear[ 11 ] = "December";
+  </script>
+  <script src="../Common/Widgets/articleWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/TabularSearchResultsWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/SearchFilterWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/LoginWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/VideoWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/Tk3DDVWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/CalendarWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/twitterWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googlePlusOneWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googleMapsWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookSocialWidgets.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookEvent.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/instagramFeedWebWidget.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function loadLocalPage()
+{
+
+}
+
+var articleContext = {
+  searchHeaders : [ "Id", "Object Type", "Type", "Category", "Name", "Description", "Short Description", "Start Date", "End Date", "On Sale Date", "Sales Status", "Availability", "Available Number", "Keywords", "Additional Info", "Group", "Image 1", "Image 2", "thumbnail", "Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9", "Data 10", "Data 11", "Data 12", "Data 13", "Data 14", "Data 15", "Data 16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "Organization Short Description", "Sales Type", "Options", "Street", "City", "Province / State", "Postal Code", "Country", "Longitude", "Latitude", "Venue ID", "Venue Name", "Venue Description", "Venue Short Description", "Venue Group", "Venue Data 1", "Venue Data 2", "Venue Data 3", "Venue Data 4", "Venue Data 5", "Venue Data 6", "Venue Data 7", "Venue Data 8", "Venue Data 9", "Venue Data 10", "Venue Data 11", "Venue Data 12", "Series Name", "Minimum Price", "Maximum Price", "Upsell Article", "Add-on Article", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "Venue Organization Id", "Meta Description", "" ],
+  searchNames : [ "id", "object_type", "type", "category", "name", "description", "short_description", "start_date", "end_date", "on_sale_date", "sales_status", "availability_status", "availability_num", "keywords", "additional_info", "group", "image1", "image2", "thumbnail", "data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10", "data11", "data12", "data13", "data14", "data15", "data16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "organization_short_description", "sales_type", "options", "street", "city", "state", "zip", "country", "longitude", "latitude", "venue_id", "venue_name", "venue_description", "venue_short_description", "venue_group", "venue_data1", "venue_data2", "venue_data3", "venue_data4", "venue_data5", "venue_data6", "venue_data7", "venue_data8", "venue_data9", "venue_data10", "venue_data11", "venue_data12", "series_name", "min_price", "max_price", "upsell_article_id", "addon_article_id", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "organization_id", "meta_description", "" ],
+  searchResults : [ 
+    [ "F7F2AE2A-10B7-40E5-BC66-3EB2D64750F7", "P", "Main", "homepage", "1819RENTBANFF16MAR19", "<p style=\"margin-bottom:12.0pt\"><strong>2019 Banff Centre Mountain Film Festival World Tour<\/strong><br />\n<br />\nNOTE: We have reached capacity for VIP Tickets. They are now sold out.<br />\n<br />\n&nbsp;The Banff Mountain Film Festival World Tour is the largest and most recognized name in adventure and environmental films. This year\'s tour features a collection of the most inspiring and thought-provoking action, environmental, and adventure mountain films. Traveling from remote landscapes and cultures&nbsp;to up close and personal&nbsp;with adrenaline-packed action sports, the 2019 World Tour us an exhilarating and provocative exporation of the mountain world. All proceeds will go to support the Georgia Conservancy!<br />\n<br />\n<strong>GENERAL ADMISSION<\/strong><br />\nSingle Tickets: $22, plus fees<br />\n<br />\nThe Ferst Center lobby doors will open at 6pm for General Admission guests, with doors to the theater opening at 6:30pm. Films will begin at 7pm. Parking is free.<br />\n<br />\n<strong>VIP ADMISSION&nbsp;<em> SOLD OUT!<\/em><\/strong><br />\nSingle Tickets: $32, plus fees<br />\n&nbsp;<br />\n<em>VIP tickets include one complimentary SweetWater Brewing Company beer, light snacks, free parking, and advanced seating in the theater.<\/em><br />\n<br />\nThe Ferst Center lobby doors and theater will open at 6pm for VIP ticket holders. VIP reception will begin&nbsp;at 6pm in the lobby. Films will begin at 7pm.&nbsp;<\/p>", "2019 Banff Mountain Film Festival", "Sat, Mar 16, 2019 7:00 PM", "", "", "S", "S", "0", "", "", "Rentals", "/content/Images/branding/GATech/Thumbnails/Banff19Thumb.jpg", "", "", "", "", "", "", "REI & The Georgia Conservancy", "present", "2019 Banff Mountain Film Festival", "20190316", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3"], "349 Ferst Dr", "Atlanta", "GA", "30332", "USA", "", "", "C1D4105A-658E-4F93-8CE7-2D8F687B7CC4", "General Admission - Ferst Center", "GA house, allocate accordingly", "Ferst Center Gen Adm", "", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Rentals", "$22.00", "$22.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "0B9D2FCF-BC67-4D84-AFB0-925FFC3DE850", "A", "2", "homepage", "1819 Dance Canvas Main Page", "Fri 3/22 and Sat 3/23 at 8pm", "2019 Dance Canvas: Introducing the Next Generation", "", "", "", "S", "", "", "", "", "", "/content/Images/branding/GATech/Thumbnails/1819dancecanvas.jpg", "", "", "", "", "", "", "", "", "", "20190322", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], [], "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+    [ "C19B1805-926F-4892-8B79-64E11DD1ACB0", "P", "Main", "homepage,theatre", "1819MAYA29MAR19", "Maya Kodes is a singer who released a dance pop song on iTunes, recorded an EP, performed over 30 concerts and amassed over 5,500 Facebook followers … all as a hologram! The world’s first interactive real-time virtual pop star, Kodes is the creation of Neweb Labs in Montreal. Local dancers will join Maya onstage for this performance.<br />\nPlease Note: Due to the nature of projecting a hologram on stage, the outside seats in the front orchestra section have been blocked from sale for sight line issues.<br />\n<br />\n<a href=\"http://youtube.com/watch?v=E3EKg7SOPb0\">Maya Kodes, The Virtual Singer<\/a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<a href=\"http://arts.gatech.edu/accessibility-0\">Accessibility and Special Needs<\/a><br />\n&nbsp;", "Arts@Tech presents Maya Kodes: The Virtual Singer", "Fri, Mar 29, 2019 8:00 PM", "", "", "S", "E", "634", "", "", "Arts@Tech", "/content/Images/branding/GATech/Thumbnails/maya_thumb.jpg", "", "", "", "", "", "", "Arts@Tech presents", "Maya Kodes:", "The Virtual Singer", "20190329", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["2","3"], "349 Ferst Drive", "Atlanta", "GA", "30332", "USA", "-84.3996118", "33.7734451", "911BA1BF-B0E0-414C-8456-450870A8652A", "OLD Ferst Reserved A@T", "new config 885 (895 max)", "Ferst Center", "2018 renovation 18-19 a@t built", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Arts@Tech", "$20.00", "$36.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "9F7E4C89-2C7E-4E4C-9361-FF629E820F26", "P", "Main", "homepage", "1819RENT31MAR19", "This event is a showcase for our organization as well as other dance organizations at Georgia Tech, and features performances in many different dance styles.&nbsp;<br />\n<br />\n<a href=\"http://gtdancetech.wixsite.com/gatech\">Learn more here<\/a>", "DanceTech\'s Spring Showcase 2019", "Sun, Mar 31, 2019 7:00 PM", "", "", "S", "E", "403", "", "", "Rentals", "/content/Images/branding/GATech/Thumbnails/dancetechthumb.jpg", "", "", "", "", "", "", "", "DanceTech Performing Company", "Spring Showcase", "20190331", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["1","3"], "349 Ferst Dr", "Atlanta", "GA", "30332", "USA", "-84.3996118", "33.7734451", "609616D6-1661-45DA-9986-564790060C0B", "General Admission - 725", "GA curtained house, no pit seating", "Ferst Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 GT Rentals", "$10.00", "$10.00", "", "", "", "", "", "", "", "", "", "", "Public", "", "", "" ],
+    [ "56B2E905-1DAD-40F5-90B0-E959D6AF9AE5", "P", "Main", "homepage", "1819RENTAMINI31MAY19", "Max Amini brings his highly anticipated Authentically Absurd Tour to Atlanta, GA.<br />\n<br />\nThrough an array of eccentric impressions and novel storytelling, Max\'s Authentically Absurd Tour delivers a strong message about family ties, cultural trappings, and social topics.&nbsp;<br />\n<br />\n<a href=\"http://www.MaxAmini.com\">Learn more about Max Amini<\/a><br />\n<br />\n<br />\n<br />\n<br />\n<br />\n&nbsp;", "Max Amini Live in Atlanta - Authentically Absurd Tour", "Fri, May 31, 2019 8:00 PM", "", "", "S", "E", "835", "", "", "Rentals", "/content/Images/branding/GATech/Thumbnails/Maxthumb3.jpg", "", "", "", "", "", "", "Authentically Absurd Tour", "", "Max Amini Live in Atlanta", "20190531", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", [], ["2","3"], "349 Ferst Drive", "Atlanta", "GA", "30332", "USA", "-84.3996118", "33.7734451", "0439FC6F-B6A4-46C1-A60E-FB40A13C0146", "Ferst Reserved New, with Pit", "new config (869 installed/995 with Pit)", "Ferst Center at Georgia Tech", "2018 renovation FINAL", "", "", "", "", "", "", "", "", "", "", "", "", "18-19 Rentals", "$20.00", "$75.00", "", "", "", "", "", "", "", "", "", "491085347746162", "Public", "", "", "" ]
+  ],
+  searchFilters : [ 
+    { name : "object_type_filter", label : "Type Filter", className : "objectTypeFilterList", clearFilterLabel : "Clear Type Filter", selectedValue : "", values : [  ]  },
+    { name : "month_filter", label : "Month Filter", className : "monthFilterList", clearFilterLabel : "Clear Month Filter", selectedValue : "", values : [  ]  },
+    { name : "city_filter", label : "City Filter", className : "cityFilterList", clearFilterLabel : "Clear City Filter", selectedValue : "", values : [  ]  },
+    { name : "venue_filter", label : "Venue Filter", className : "venueFilterList", clearFilterLabel : "Clear Venue Filter", selectedValue : "", values : [  ]  },
+    { name : "category_filter", label : "Category Filter", className : "categoryFilterList", clearFilterLabel : "Clear Category Filter", selectedValue : "", values : [  ]  },
+    { name : "organization_short_description_filter", label : "Organization Filter", className : "organizationShortDescriptionFilterList", clearFilterLabel : "Clear Organization Filter", selectedValue : "", values : [  ]  },
+    { name : "filter1", label : "Filter 1", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter2", label : "Filter 2", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter3", label : "Filter 3", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter4", label : "Filter 4", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent1", label : "Filter Parent 1", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent2", label : "Filter Parent 2", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter1", label : "Multi Filter 1", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter2", label : "Multi Filter 2", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  }
+  ],
+  searchLabels: { performances: "Events", date: "Date", unavailable_message: "No Tickets Required", sold_out_message: "Sold Out!", on_sale_message: "On sale", to_be_determined_message: "TBD", next: "»", previous: "«", avail_excellent: "Excellent", avail_good: "Good", avail_limited: "Limited", avail_sold_out: "Sold Out", promo_item: "This item is available with a promocode", buy_seats_message: "Buy", buy_bundle_message: "Buy", buy_item_message: "Buy", buy_gift_message: "Donate", buy_storedvalueitem_message: "Buy", view_article_message: "Info & Tickets", upsell_seats_message: "Upgrade", upsell_bundle_message: "Upgrade", upsell_item_message: "Upgrade", upsell_gift_message: "Upgrade", upsell_storedvalueitem_message: "Upgrade", upsell_popup_title: "Interested in Upgrading?", addon_seats_message: "Select", addon_bundle_message: "Select", addon_item_message: "Select", addon_gift_message: "Select", addon_storedvalueitem_message: "Select", price_title: "Price", availability_title: "Availability", active_promo_codes: "Active promotions:", promo_code_item_title: "This item is available with a promocode", has_promo_code: "false", brand_path: "../../content/images/branding/" }, 
+  searchSUMO: { availability_access: "true", mapSelect_access: "true" }, 
+  pagination: { current_page: "1", page_size: "20", total_pages: "1" },
+  loginLabels: { pageTarget: "maintainAccount.asp", loginBoxClass: "login-required", forgotPassword: "true", formLoginName: "", accountLogin: "true" }, 
+  contextId: "", 
+  articleId: "64C39D67-4069-46E6-B3B1-060BB7601A7A", 
+  articleSearchId: "", 
+  salesType: "P",
+  sToken: "1,af134a87,5c84b6c3,7E23BB96-CB40-46B9-874E-977E64BA8148,6Yi30EF78HT5Q3JO7wVsW+RP7WQ="
+ };
+
+createSearchMapping(articleContext);
+
+tsAddLoadEvent(function() {
+    setCalendarWidgetDisplayMonth();
+    drawWidgets(articleContext);
+    insertToken(articleContext);
+});
+
+function setCalendarWidgetDisplayMonth()
+{
+    // If a date has been selected from the calendar widget, we will receive a 'search_from' parameter.
+    // Pass this back to the widget so that it redisplays the month that was previously visible
+    
+}
+  </script>
+  <script type="text/javascript">
+   function doGAClicks(selectedItem) {
+        //do nothing
+    };
+
+    function gaTrackEvent(category, action) {
+        //do nothing
+    };
+  </script>
+ </head>
+ <body lang="en" onload='startList();loadLocalPage(); displayMessage(""); displayOnOfferTimeout();' onunload="closeChildren()">
+  <div class="spinner" id="spinner">
+  </div>
+  <script>
+   var spinnerDelayTimeout;
+    
+    var showSpinner = function(){};
+    var spinnerElement = document.querySelector('body')
+
+
+
+    var spinnerDelay = 3;
+    
+
+    function stopSpinner() {
+        spinnerElement.classList.remove('show-spinner');
+        cancelSpinnerTimeouts();
+        expandSpinner();
+    }
+
+    function startSpinner() {
+        expandSpinner();
+        spinnerElement.classList.add('show-spinner');
+    }
+    
+    
+    function cancelSpinnerTimeouts() {
+        clearTimeout(spinnerDelayTimeout);
+    }
+    
+    function expandSpinner() {
+        spinnerElement.classList.remove('minimize-spinner');
+    }
+    
+    function minimizeSpinner() {
+        spinnerElement.classList.add('minimize-spinner');
+    }
+    
+    // stop spinner if a JS error occurred
+    window.addEventListener('error', stopSpinner);
+    
+    // Mimimize spinner if clicked
+    spinnerElement.addEventListener('click', minimizeSpinner);
+
+    // Shows the spinner if page takes long to load
+    (showSpinner = function() {
+        if (!document.querySelector('#popupDiv')) {
+            spinnerDelayTimeout = setTimeout(startSpinner, spinnerDelay*1000);
+        }
+    })();
+  </script>
+  <div id="header">
+   <div class="header-content container">
+    <a href="http://arts.gatech.edu" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <img alt="Arts@GATech" src="/content/Images/branding/GATech/gt-arts-logo.png"/>
+    </a>
+   </div>
+   <a class="menu-toggle menu-button btn btn-default">
+    <span class="glyphicon glyphicon-align-justify">
+    </span>
+   </a>
+   <a class="menu-toggle sidebar-button btn btn-default">
+    <span class="glyphicon glyphicon-shopping-cart">
+    </span>
+   </a>
+  </div>
+  <div class="content-wrapper">
+   <div id="menu">
+    <div class="menuContainer main-nav">
+     <ul class="nav clearfix" id="menuTop">
+      <li class="menuTopItem " id="menuTopItem0">
+       <a class="menu_item menu-link" href="http://tickets.arts.gatech.edu" tabindex="1" target="_blank" title="Tickets">
+        <span class="menu-label">
+         Tickets
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem1">
+       <a class="menu_item menu-link" href="http://arts.gatech.edu" tabindex="2" target="_blank" title="Arts Home">
+        <span class="menu-label">
+         Arts Home
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem2">
+       <a class="menu_item menu-link" href="http://arts.gatech.edu/17-18-artstech-season" tabindex="3" target="_blank" title="Arts@Tech Series">
+        <span class="menu-label">
+         Arts@Tech Series
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem3">
+       <a class="menu_item menu-link" href="http://arts.gatech.edu/directions-and-parking-0" tabindex="4" target="_blank" title="Directions and Parking">
+        <span class="menu-label">
+         Directions and Parking
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem4">
+       <a class="menu_item menu-link" href="maintainAccount.asp?menu_id=77E87883-30DD-49E0-A827-A639DF828E6C" tabindex="5" title="My Account">
+        <span class="menu-label">
+         My Account
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem" id="menuTopItem-help">
+       <a class="menu_item menu-link" href="javascript:var jsPop=new showInformationPopup( 'Help', 'loadArticle.asp?BOparam::WScontent::loadArticle::article_id=F8103D8C-7EA0-4B4B-A37E-9DE398B93107' )" tabindex="6" title="Help">
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- customer/order information -->
+   <div class="customer-options" id="customer-utilities">
+    <!--ORDER DETAILS BOX-->
+    <div id="orderInfo">
+     <div id="customer-order-info">
+      <div class="customer-greeting">
+       <span class="greeting-message">
+        Order for
+       </span>
+       <span class="greeting-name">
+        Guest
+       </span>
+      </div>
+      <div class="customer-order shopping-cart-details order-message ">
+       <span id="orderInfoEmptyMessage">
+        Your shopping cart is empty.
+       </span>
+      </div>
+      <div class="customer-buttons">
+       <div class="cart-callout">
+        <a class="shopping-cart-link btn btn-default" href="shoppingCart.asp?sToken=1%2Caf134a87%2C5c84b6c3%2C7E23BB96-CB40-46B9-874E-977E64BA8148%2C6Yi30EF78HT5Q3JO7wVsW%2BRP7WQ%3D" id="orderInfoCartLink" tabindex="7" title="Shopping Cart">
+         <span>
+          Shopping Cart
+         </span>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menuContainer utility-nav">
+     <ul class="nav" id="utility-menu">
+      <li class="utility-menu-item" id="utility-menu-item-login">
+       <a class="menu_item" href="login.asp" tabindex="8" title="Login">
+        Login
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- CONTENT START -->
+   <div id="content">
+    <div class="container">
+     <div class="bodyDetails" id="default">
+      <div class="search-box" id="searchBox">
+       <form action="default.asp" class="form-inline" id="searchItems" method="post">
+        <input class="form-inline" name="sToken" type="hidden" value="1,af134a87,5c84b6c3,7E23BB96-CB40-46B9-874E-977E64BA8148,6Yi30EF78HT5Q3JO7wVsW+RP7WQ="/>
+        <input name="BOset::WScontent::SearchCriteria::venue_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::city_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::month_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::object_type_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::category_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_from" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_to" type="hidden" value=""/>
+        <input name="doWork::WScontent::search" type="hidden" value="1"/>
+        <input name="BOparam::WScontent::search::article_search_id" type="hidden" value="EE8716B4-0827-4B0D-9ACB-038A148DF966"/>
+        <ul class="list-unstyled">
+         <li class="item-search-keyword">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Search Events
+           </span>
+           <input class="form-control" id="BOset::WScontent::SearchCriteria::search_criteria" name="BOset::WScontent::SearchCriteria::search_criteria" tabindex="9" title="Search Events" type="text" value=""/>
+          </label>
+         </li>
+         <li class="item-search-start-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Event Dates
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_from::0" name="BOset::WScontent::SearchCriteria::search_from" tabindex="10" title="Event Dates" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_from::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_from::0", "0", "true", "sToken", "1,af134a87,5c84b6c3,7E23BB96-CB40-46B9-874E-977E64BA8148,6Yi30EF78HT5Q3JO7wVsW+RP7WQ=");' title="Show date picker" type="button">
+             </button>
+            </div>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-end-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            to
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_to::0" name="BOset::WScontent::SearchCriteria::search_to" tabindex="11" title="to" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_to::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_to::0", "0", "true", "sToken", "1,af134a87,5c84b6c3,7E23BB96-CB40-46B9-874E-977E64BA8148,6Yi30EF78HT5Q3JO7wVsW+RP7WQ=");' title="Show date picker" type="button">
+             </button>
+            </div>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-submit">
+          <input class="btn btn-default" name="Go" onclick="doGAClicks('Search')" tabindex="12" type="submit" value="Go"/>
+         </li>
+        </ul>
+       </form>
+      </div>
+      <div class="articles has-primary-features has-secondary-features">
+       <!-- top scrolling features included -->
+       <div class="article-container primary-feature-wrapper">
+        <div class="static-inner" id="feature-box">
+         <div class="item item-0 static">
+          <img alt="" src="/content/Images/branding/GATech/Slider/maya_slider.jpg" style="width: 1130px; height: 397px;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+        </div>
+       </div>
+       <div class="article-body-container">
+        <div class="article-container main-article-body">
+         <div id="avWidget_64C39D67-4069-46E6-B3B1-060BB7601A7A_ID43SFGMQIU535NIPHRWCNEORHOFPXKFSZSFMFXFSFJM1GMNMYRN" name="avWidget" xmlns:av="http://www.audienceview.com/xml/email/" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+          <script type="text/javascript">
+           registerWidget( "SearchWebWidget2", "avWidget_64C39D67-4069-46E6-B3B1-060BB7601A7A_ID43SFGMQIU535NIPHRWCNEORHOFPXKFSZSFMFXFSFJM1GMNMYRN", {
+  "SearchWebWidget2": "Upcoming Events", 
+  
+  "css_style": "", 
+  
+  "css_class": "", 
+  
+  "css_id": "", 
+  
+  "showLegend": "", 
+  
+  "showPrice": "", 
+  
+  "showNoResults": "", 
+  
+  "title": "Upcoming Events", 
+   "1": "1"});
+          </script>
+         </div>
+        </div>
+        <div class="article-container secondary-linked-features">
+         <div class="promotional-code-input" id="promoCodeBox">
+          <form action="" method="get">
+           <input name="sToken" type="hidden" value="1,af134a87,5c84b6c3,7E23BB96-CB40-46B9-874E-977E64BA8148,6Yi30EF78HT5Q3JO7wVsW+RP7WQ="/>
+           <input name="BOparam::WScontent::loadArticle::article_id" type="hidden" value="64C39D67-4069-46E6-B3B1-060BB7601A7A"/>
+           <h4>
+            <span class="glyphicon glyphicon-tag promotag">
+            </span>
+            Promotional Code
+           </h4>
+           <ul class="list-unstyled">
+            <li class="promotional-code-message">
+             If you have a promotion, please enter the Access Code here:
+            </li>
+            <li>
+             <div class="input-group">
+              <input class="form-control" id="promoCodeBoxInput" name="BOparam::WScontent::loadArticle::promocode_access_code" tabindex="13" title="If you have a promotion, please enter the Access Code here:" type="text"/>
+              <span class="input-group-btn">
+               <input class="btn btn-default" name="doWork::WScontent::loadArticle" onclick="doGAClicks('Apply')" tabindex="14" type="submit" value="Go"/>
+              </span>
+             </div>
+            </li>
+           </ul>
+          </form>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-0">
+          <img alt="" src="/content/Images/branding/GATech/Slider/SeasonGen300x300.jpg" style="width: 300px; height: 300px;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-1">
+          <h2 style="text-align: center;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <br clear="none"/>
+          </h2>
+          <p style="text-align: center;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <span style="font-size:12px;">
+            <strong>
+             Accessibility and Special Needs
+            </strong>
+           </span>
+          </p>
+          <p style="text-align: center;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <span style="font-size:10px;">
+            The Ferst Center is committed to serving patrons with disabilities
+            <br clear="none"/>
+            and provides an array of services to assist patrons at performances and events:
+           </span>
+          </p>
+          <p style="text-align: center;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <span style="font-size:10px;">
+            * Wheelchair accessible seating is available and was expanded with our 2018 renovation.
+            <br clear="none"/>
+            * An assisted listening system for patrons who are hard-of-hearing is available at most performances.
+            <br clear="none"/>
+            * Water fountains, restrooms, and ticket counters are wheelchair accessible.
+            <br clear="none"/>
+            * Accessible parking is available in two visitors lots on Ferst Drive.
+            <br clear="none"/>
+            <strong>
+             * Please note that our theater auditorium does contain stairs to most seating rows. If you have mobility issues, please call the Box Office for assistance with selecting seats.
+            </strong>
+           </span>
+          </p>
+          <p style="text-align: center;" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <span style="font-size:10px;">
+            You may reserve accessible seating and make requests for any special services in advance by
+            <br clear="none"/>
+            calling the Box Office at 404-894-9600.
+            <br clear="none"/>
+            <br clear="none"/>
+            For additional information please call 404-894-2787.
+           </span>
+          </p>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-2">
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-3">
+          <div id="avWidget_B3B83067-1483-45F9-827E-0905BCC4D388_IDE3S31PTXVVUGKEHA5FECCLFKEJMCKLE0J1WRRTKZRI1RPF3VVL1D" name="avWidget" xmlns:av="http://www.audienceview.com/xml/email/" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+           <script type="text/javascript">
+            registerWidget( "CalendarWidget", "avWidget_B3B83067-1483-45F9-827E-0905BCC4D388_IDE3S31PTXVVUGKEHA5FECCLFKEJMCKLE0J1WRRTKZRI1RPF3VVL1D", { "1": "1"});
+           </script>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!--\\ .bodyDetails -->
+   </div>
+   <!--\\ .container -->
+  </div>
+  <!--\\ #content -->
+  <div id="footer">
+   <div class="footer-content container">
+    <div class="row" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <div class="col-md-3">
+      <img alt="" src="/content/Images/branding/GATech/gt-logo-footer-retina.png"/>
+      <br clear="none"/>
+      © Georgia Institute of Technology
+     </div>
+     <div class="col-md-9">
+     </div>
+    </div>
+   </div>
+  </div>
+  <!--\\ .content-wrapper -->
+  <div class="black_overlay" id="fade">
+  </div>
+  <!-- inclusion of bootstrap.js and jquery -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <script src="/lib/jquery/jquery.min.js?_=7.31.1" type="text/javascript">
+  </script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js?_=7.31.1" type="text/javascript">
+  </script>
+  <!-- end of bootstrap.js and jquery -->
+  <!-- contains bootstrap specific function declarations -->
+  <script src="/lib/bootstrap/js/bootstrap-functions.js?_=7.31.1" type="text/javascript">
+  </script>
+  <!-- Logout Handler -->
+  <script>
+   $(document).ready(function() {
+    var body = $("body");
+    
+    body
+    .on("logged-out", function(e) {
+        var targetPage = "default.asp?";
+        window.location.assign("login.asp?targetPage="+encodeURIComponent(targetPage));
+    });
+    
+    // on pressing Enter key on an anchor trigger click
+    $("a").keypress(function(e){
+      if(e.keyCode == 13){
+        $(this).trigger("click");
+      }
+    });
+    
+    // When page is loaded make sure the Page Load Spinner is not shown
+    if (spinnerDelayTimeout) {
+        cancelSpinnerTimeouts();
+    }
+    
+    body.removeClass("show-spinner");
+    
+    // Show spinner when form submitted or link clicked
+    var onSubmit;
+    $("form").each(
+      //Trigger the spinner after any other onsubmit functions for the form
+      function(index)
+      {
+        onSubmit = $(this).attr("onsubmit");
+        onSubmit && onSubmit != "" ? onSubmit += ";" : onSubmit = "";
+        $(this).attr("onsubmit", onSubmit + "showSpinner()");
+      }
+    );
+    
+    $("a").click(function(e) {
+      var href = $(this).attr("href") || "";
+      var target = $(this).attr("target") || "";
+      
+      if ((target == "" || /^(_self|_top|_parent)/.test(href)) && href != "" && !/^(#|javascript:|mailto:|file:)/.test(href))
+        showSpinner();
+    });
+    
+    
+});
+  </script>
+  <!-- CONTENT END -->
+ </body>
+</html>
+<script>
+ $(function(){
+
+    // "Continue Shopping" and "Look for other events" buttons to redirect back to Brochure page user came from
+    $("a[name=continue-shopping], a[name=continueShopping], input[name=startOver], a[name=error-StartOver], input[name=error-StartOver]").on("click", function(e) {
+      var returnTo = getCookie('returnTo');
+      if(returnTo){
+        e.preventDefault();
+        deleteCookie('returnTo');
+        window.location.href = returnTo;
+      }
+    })
+
+    // "New Order" button to redirect to EIF home page
+    $("input.new-order,input[name=cancel-order]").on("click", function(e){
+         var returnTo = getCookie('returnTo');
+          if(returnTo){
+            e.preventDefault();
+            $("#popupDiv_okayButton").on("click", function(e){
+               $.ajax({
+                 url: 'clearOrder.asp',
+                 complete: function() {
+                    deleteCookie('returnTo');
+                    window.location.href = returnTo;           
+                 }
+                });
+               
+             });
+          }
+    })
+  });
+
+//adding the returnTo to the cookie
+  var returnTo = "";
+
+  if (returnTo) {
+      var reffA = document.createElement('a');
+      reffA.href = returnTo;
+
+    if(reffA.host != window.location.host) {
+      setCookie("returnTo", returnTo, 1);
+    }
+  }
+
+  /*
+    *****************************************************
+    Cookie methods
+    *****************************************************
+  */
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function deleteCookie(cname) {
+      setCookie(cname, "", -1);
+  }
+</script>

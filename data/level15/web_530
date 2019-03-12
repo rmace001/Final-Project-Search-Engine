@@ -1,0 +1,788 @@
+http://classschedule.byu.edu
+<link href="css/courseCatalog.css?v9b" rel="stylesheet" type="text/css"/>
+<link href="css/classScheduleOverride.css" rel="stylesheet" type="text/css"/>
+<link href="js/dataTables/media/css/jquery.dataTables.css?v6" rel="stylesheet" type="text/css"/>
+<script src="js/jquery.js" type="text/javascript">
+</script>
+<script src="js/jshashtable.js" type="text/javascript">
+</script>
+<script src="js/jshashset.js" type="text/javascript">
+</script>
+<script src="js/dataTables/media/js/jquery.dataTables.js" type="text/javascript">
+</script>
+<!-- Google Analytics -->
+<script type="text/javascript">
+ var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-4867146-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<!-- End Google Analytics -->
+<script>
+ xmlFiles = ["20135","20141","20143","20144","20145","20151","20153","20154","20155","20161","20163","20164","20165","20171","20173","20174","20175","20181","20183","20184","20185","20191","20193","20194","20195"];
+</script>
+<script src="js/classSchedule.js?v3">
+</script>
+<div class="header-top">
+ <div class="logo-wrapper">
+  <div class="logo">
+   <div id="header-bg">
+   </div>
+   <a href="http://www.byu.edu">
+    <img src="./images/logo_03.png" style="margin-top: 2px;"/>
+   </a>
+   <a href="http://registrar.byu.edu" id="parent">
+    Registrar's Office
+   </a>
+   <a href="" id="homeLink">
+    Class Schedule
+   </a>
+   <div id="feedback">
+    <a href="http://catalog.byu.edu">
+     Catalog
+    </a>
+    <a href="javascript:showArchives()">
+     Archives
+    </a>
+    <a href="javascript:showFeedback()">
+     Feedback
+    </a>
+   </div>
+  </div>
+ </div>
+ <div class="semester-wrapper">
+  <div class="semesterDiv">
+  </div>
+ </div>
+</div>
+<div id="pageWrapper">
+ <!--		<div id="breadcrumb">
+			<div id="breadcrumb-home"><a href="#"><img alt="home" src="http://registrar.byu.edu/registrar/template/img/home.png"></a>
+				<div class="bread-drop">
+					<a href="http://www.byu.edu">BYU Home</a>
+					<a href="http://registrar.byu.edu">Registrar's Office</a>
+				</div>
+		</div>
+		› <a href="http://registrar.byu.edu/registrar/acadsched/index.php">Academic Scheduling</a> › <a href="http://registrar.byu.edu/registrar/acadsched/classSched.php">Class Schedule</a> › Class Schedule</div>
+-->
+ <div id="searchDiv" style="display:none">
+  <select id="dropSemester">
+  </select>
+  <select id="dropTerm">
+  </select>
+  <table class="filterTable" id="searchTable">
+   <tr>
+    <td class="header checkFilter">
+     <div class="filterTitle">
+      <input class="filterCheck" id="departmentCheck" name="Department" onchange='toggleInput("department")' type="checkbox"/>
+      Department
+     </div>
+    </td>
+   </tr>
+  </table>
+ </div>
+</div>
+<td class="filterBody">
+ <div class="filterHidden" id="departmentData">
+  <select class="filterSelect" id="departmentInput" style="width:95%">
+   <option value="Choose . . .">
+    Choose . . .
+   </option>
+   <!-- Options added with JS -->
+  </select>
+ </div>
+</td>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="catalogCheck" name="CourseNumber" onchange='toggleInput("catalog")' type="checkbox"/>
+   Course #
+  </div>
+ </td>
+</tr>
+<td class="filterBody">
+ <div class="filterHidden" id="catalogData">
+  <table style="margin:0px auto">
+   <tr>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        100
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat100" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        200
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat200" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        300
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat300" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        400
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat400" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        500
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat500" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        600
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat600" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td class="catCheckLabel">
+        700
+       </td>
+      </tr>
+      <tr>
+       <td class="checkCat">
+        <input class="catCheck" id="cat700" type="checkbox"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </div>
+</td>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="descriptionCheck" name="Description" onchange='toggleInput("description")' type="checkbox"/>
+   Title/Description
+  </div>
+ </td>
+</tr>
+<td class="filterBody">
+ <div class="filterHidden" id="descriptionData">
+  <input class="filterSelect" id="descriptionInput" style="width:95%" type="text"/>
+ </div>
+</td>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="daytimeCheck" name="DayTime" onchange='toggleInput("daytime")' type="checkbox"/>
+   Day &amp; Time
+  </div>
+ </td>
+</tr>
+<td class="filterBody">
+ <div class="filterHidden" id="daytimeData">
+  <table>
+   <tr>
+    <td>
+    </td>
+    <td>
+     <table style="margin:0px auto">
+      <tr>
+       <td>
+        <table>
+         <tr>
+          <td class="dayCheckLabel">
+           M
+          </td>
+         </tr>
+         <tr>
+          <td class="checkDay">
+           <input class="dayCheck" id="mCheck" type="checkbox"/>
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td>
+        <table>
+         <tr>
+          <td class="dayCheckLabel">
+           T
+          </td>
+         </tr>
+         <tr>
+          <td class="checkDay">
+           <input class="dayCheck" id="tCheck" type="checkbox"/>
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td>
+        <table>
+         <tr>
+          <td class="dayCheckLabel">
+           W
+          </td>
+         </tr>
+         <tr>
+          <td class="checkDay">
+           <input class="dayCheck" id="wCheck" type="checkbox"/>
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td>
+        <table>
+         <tr>
+          <td class="dayCheckLabel">
+           Th
+          </td>
+         </tr>
+         <tr>
+          <td class="checkDay">
+           <input class="dayCheck" id="rCheck" type="checkbox"/>
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td>
+        <table>
+         <tr>
+          <td class="dayCheckLabel">
+           F
+          </td>
+         </tr>
+         <tr>
+          <td class="checkDay">
+           <input class="dayCheck" id="fCheck" type="checkbox"/>
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td>
+        <table>
+         <tr>
+          <td class="dayCheckLabel">
+           S
+          </td>
+         </tr>
+         <tr>
+          <td class="checkDay">
+           <input class="dayCheck" id="sCheck" type="checkbox"/>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+   <tr>
+    <td style="vertical-align:middle">
+     <table style="text-align:right;">
+      <tr>
+       <td style="padding-bottom:15px">
+        Between
+       </td>
+      </tr>
+      <tr>
+       <td>
+        and
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td>
+     <table>
+      <tr>
+       <td>
+        <table>
+         <tr>
+          <td>
+           <select class="timeSelect" id="beginHourSelect">
+            <option>
+             1
+            </option>
+            <option>
+             2
+            </option>
+            <option>
+             3
+            </option>
+            <option>
+             4
+            </option>
+            <option>
+             5
+            </option>
+            <option>
+             6
+            </option>
+            <option>
+             7
+            </option>
+            <option selected="">
+             8
+            </option>
+            <option>
+             9
+            </option>
+            <option>
+             10
+            </option>
+            <option>
+             11
+            </option>
+            <option>
+             12
+            </option>
+           </select>
+          </td>
+          <td>
+           :
+          </td>
+          <td>
+           <select class="timeSelect" id="beginMinSelect">
+            <option>
+             00
+            </option>
+            <option>
+             15
+            </option>
+            <option>
+             30
+            </option>
+            <option>
+             45
+            </option>
+           </select>
+          </td>
+          <td>
+           <select class="timeSelect" id="beginPeriodSelect">
+            <option>
+             AM
+            </option>
+            <option>
+             PM
+            </option>
+           </select>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <table>
+         <tr>
+          <td>
+           <select class="timeSelect" id="endHourSelect">
+            <option>
+             1
+            </option>
+            <option>
+             2
+            </option>
+            <option>
+             3
+            </option>
+            <option>
+             4
+            </option>
+            <option>
+             5
+            </option>
+            <option>
+             6
+            </option>
+            <option>
+             7
+            </option>
+            <option>
+             8
+            </option>
+            <option selected="">
+             9
+            </option>
+            <option>
+             10
+            </option>
+            <option>
+             11
+            </option>
+            <option>
+             12
+            </option>
+           </select>
+          </td>
+          <td>
+           :
+          </td>
+          <td>
+           <select class="timeSelect" id="endMinSelect">
+            <option>
+             00
+            </option>
+            <option>
+             15
+            </option>
+            <option>
+             30
+            </option>
+            <option>
+             45
+            </option>
+           </select>
+          </td>
+          <td>
+           <select class="timeSelect" id="endPeriodSelect">
+            <option>
+             AM
+            </option>
+            <option>
+             PM
+            </option>
+           </select>
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </div>
+</td>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="sectiontypeCheck" name="Section" onchange='toggleInput("sectiontype")' type="checkbox"/>
+   Section Type
+  </div>
+ </td>
+ <td class="filterBody">
+  <div class="filterHidden" id="sectiontypeData">
+   <select class="filterSelect" id="sectiontypeSelect" style="width:95%">
+    <option value="Choose . . .">
+     Choose . . .
+    </option>
+   </select>
+  </div>
+ </td>
+</tr>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="instructorCheck" name="Instructor" onchange='toggleInput("instructor")' type="checkbox"/>
+   Instructor
+  </div>
+ </td>
+ <td class="filterBody">
+  <div class="filterHidden" id="instructorData">
+   <input class="filterSelect" id="instructorInput" style="width:95%" type="text"/>
+  </div>
+ </td>
+</tr>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="creditCheck" name="CreditType" onchange='toggleInput("credit")' type="checkbox"/>
+   Credit Hours
+  </div>
+ </td>
+ <td class="filterBody">
+  <div class="filterHidden" id="creditData">
+   <select class="filterSelect" id="creditComparator" style="width:45%">
+    <option value="Choose . . .">
+     Choose . . .
+    </option>
+    <option value="=">
+     =
+    </option>
+    <option value="&lt;=">
+     ≤
+    </option>
+    <option value="&gt;=">
+     ≥
+    </option>
+   </select>
+   <select class="filterSelect" id="creditInput" style="width:45%">
+    <option value="Choose . . .">
+     Choose . . .
+    </option>
+    <option>
+     .5
+    </option>
+    <option>
+     1
+    </option>
+    <option>
+     1.5
+    </option>
+    <option>
+     2
+    </option>
+    <option>
+     2.5
+    </option>
+    <option>
+     3
+    </option>
+    <option>
+     3.5
+    </option>
+    <option>
+     4
+    </option>
+    <option>
+     4.5
+    </option>
+    <option>
+     5
+    </option>
+    <option>
+     5.5
+    </option>
+    <option>
+     6
+    </option>
+    <option>
+     6.5
+    </option>
+    <option>
+     7
+    </option>
+    <option>
+     7.5
+    </option>
+    <option>
+     8
+    </option>
+    <option>
+     8.5
+    </option>
+    <option>
+     9
+    </option>
+    <option>
+     9.5
+    </option>
+    <option>
+     10
+    </option>
+    <option>
+     10.5
+    </option>
+    <option>
+     11
+    </option>
+    <option>
+     11.5
+    </option>
+    <option>
+     12
+    </option>
+   </select>
+  </div>
+ </td>
+</tr>
+<tr>
+ <td class="header checkFilter">
+  <div class="filterTitle">
+   <input class="filterCheck" id="buildingCheck" name="Building" onchange='toggleInput("building")' type="checkbox"/>
+   Building
+  </div>
+ </td>
+</tr>
+<td class="filterBody">
+ <div class="filterHidden" id="buildingData">
+  <select class="filterSelect" id="buildingInput" style="width:95%">
+   <option value="Choose . . .">
+    Choose . . .
+   </option>
+   <!-- Options added with JS -->
+  </select>
+ </div>
+</td>
+<div id="searchActionDiv" style="display:none">
+ <table id="searchActionTable">
+  <tr>
+   <td>
+    <button class="actionBtn" id="searchBtn" onclick="search()" type="button">
+     Search
+    </button>
+   </td>
+  </tr>
+ </table>
+</div>
+<table id="searchResults">
+ <thead>
+  <tr>
+   <th>
+    Course
+   </th>
+   <th>
+    Sec
+   </th>
+   <th>
+    Sec Type
+   </th>
+   <th>
+    Course Name
+   </th>
+   <th>
+    Instructor
+   </th>
+   <th>
+    Hr
+   </th>
+   <th>
+    Days
+   </th>
+   <th>
+    Start
+   </th>
+   <th>
+    End
+   </th>
+   <th>
+    Location
+   </th>
+   <th>
+    Headers
+   </th>
+   <th>
+    Seats Avail
+   </th>
+   <th>
+    WL
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+ </tbody>
+</table>
+<div id="updatedTimeDiv">
+</div>
+<div class="myAlert">
+ <p id="alertText">
+ </p>
+ <button id="okBtn" onclick="hideMyAlert()" type="button">
+  OK
+ </button>
+</div>
+<div id="pageLoader" style="display:none">
+ <img src="images/ajax-loader.gif" style="margin:0px auto"/>
+</div>
+<div class="popup" id="feedbackWrapper">
+ <div class="main">
+  <div id="feedbackForm">
+   <b>
+    Class Schedule - Feedback
+   </b>
+   <br/>
+   <br/>
+   Email:
+   <br/>
+   <input class="email" id="feedbackEmail" name="feedbackEmail" type="text">
+    <br/>
+    <br/>
+    Comments:
+    <br/>
+    <input class="feedbackInput" id="feedbackName" name="feedbackName" type="text">
+     <textarea id="feedbackContent" name="feedbackContent"></textarea>
+     <br/>
+     <br/>
+     <input class="actionBtn gray" onclick="feedbackSubmit()" type="button" value="Submit">
+      <input class="actionBtn" onclick='$("#feedbackWrapper").hide()' type="button" value="Cancel">
+      </input>
+     </input>
+    </input>
+   </input>
+  </div>
+  <div id="feedbackMessageWrapper">
+   <div id="feedbackMessage">
+   </div>
+   <br/>
+   <input class="actionBtn" onclick="feedbackMessageAcknowledge()" type="button" value="Okay">
+   </input>
+  </div>
+ </div>
+</div>
+<div class="popup" id="archiveWrapper">
+ <div class="main">
+  <b>
+   Class Schedule - Archives
+  </b>
+  <br/>
+  <br/>
+  <select id="archive_year">
+   <option disabled="" selected="" value="">
+    Select a term...
+   </option>
+  </select>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <input class="actionBtn gray" onclick="skipToYearTerm()" type="button" value="Go">
+   <input class="actionBtn" onclick='$("#archiveWrapper").hide()' type="button" value="Cancel">
+   </input>
+  </input>
+ </div>
+</div>
+

@@ -1,0 +1,551 @@
+http://mystatus.utep.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="Document" name="Resource-type"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Login - Welcome to UTEP
+  </title>
+  <link href="//cdn.utep.edu/images/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="/Scripts/jquery/jquery-ui.css" rel="stylesheet"/>
+  <link href="/Scripts/jquery/jquery-ui.theme.css" rel="stylesheet"/>
+  <link href="/Content/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+  <link href="/Content/bootstrap/css/bootstrapXL.css" rel="stylesheet"/>
+  <link href="/Content/bootstrap/css/bootstrapXXL.css" rel="stylesheet"/>
+  <link href="/Scripts/videoJS/video-js.css" rel="stylesheet"/>
+  <link href="/Scripts/bigVideo/css/bigvideo.css" rel="stylesheet"/>
+  <link href="/Content/common/doc.css" rel="stylesheet"/>
+  <link href="/Content/Account/css/account.css" rel="stylesheet"/>
+  <link href="/Content/Kendo/kendo.common.css" rel="stylesheet"/>
+  <link href="/Content/Kendo/kendo.material.css" rel="stylesheet"/>
+  <link href="/Content/Custom/custom2.css" rel="stylesheet"/>
+  <script src="/Scripts/jquery/jquery-1.11.0.js">
+  </script>
+  <script src="/Scripts/jquery/jquery-ui.js">
+  </script>
+  <script src="/Content/bootstrap/js/bootstrap.js">
+  </script>
+  <script src="/Scripts/other/imagesloaded.min.js">
+  </script>
+  <script src="/Scripts/videoJS/video.js">
+  </script>
+  <script src="/Scripts/bigVideo/lib/bigvideo.js">
+  </script>
+  <script src="/Scripts/custom/UTEP.js">
+  </script>
+  <script src="/Scripts/custom/account.js">
+  </script>
+  <script src="/Scripts/Kendo/kendo.core.js">
+  </script>
+  <script src="/Scripts/Kendo/kendo.selectable.js">
+  </script>
+  <script src="/Scripts/Kendo/kendo.calendar.js">
+  </script>
+  <script src="/Scripts/Kendo/kendo.popup.js">
+  </script>
+  <script src="/Scripts/Kendo/kendo.dateinput.js">
+  </script>
+  <script src="/Scripts/Kendo/kendo.datepicker.js">
+  </script>
+  <script>
+   (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-44187000-1', 'utep.edu');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+  </script>
+  <script>
+   var trackOutboundLink = function (url) {
+            ga('send', 'event', 'outbound', 'click', url, {
+                'hitCallback':
+                    function () {
+                        document.location = url;
+                    }
+            });
+        }
+  </script>
+ </head>
+ <body>
+  <a class="skippy sr-only sr-only-focusable" href="#LoginPane" id="skippy">
+   <span class="container" style="display:block;">
+    <span class="skiplink-text">
+     Skip to main content
+    </span>
+   </span>
+  </a>
+  <!--
+ *************************************************************************
+ *
+ * ESTech CONFIDENTIAL
+ * __________________
+ *
+ * Copyright (c) ESTech
+ * All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of ESTech and its suppliers, if any.
+ * The intellectual and technical concepts contained herein
+ * are proprietary to ESTech and its suppliers and may be
+ * covered by U.S. and Foreign Patents, patents in process, and
+ * are protected by trade secret or copyright law. Dissemination
+ * of this information or reproduction of this material is strictly
+ * forbidden unless prior written permission is obtained
+ * from ESTech.
+ *
+ ***************************************************************************
+ -->
+  <div id="utep-video-container">
+  </div>
+  <link href="/Content/Custom/header/headerV3.css" rel="stylesheet"/>
+  <div id="header">
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-xs-6">
+      <a href="http://www.utep.edu/" rel="noopener" target="_blank">
+       <img alt="Utep Home Page" class="utep-page-header-utep-logo" src="/Content/Custom/header/images/utep_logo.png"/>
+      </a>
+     </div>
+     <div class="col-xs-6">
+      <a class="utep-page-header-my-utep-pic pull-right" href="http://my.utep.edu/" rel="noopener" target="_blank" title="My UTEP">
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="fullpage">
+   <div class="section" id="section-login">
+    <div id="img-container">
+    </div>
+    <script>
+     function adaptiveImg() {
+                var basePath = '/Content/Account/img',
+                    images;
+
+                $('#img-container').empty();
+
+                if ($(window).width() < 992) {
+                    images = '<img class="active" src="' + basePath + '/img1_mobile_portrait.jpg" alt="mobile portrait"/>' +
+                        //'<img src="' + basePath + '/img2_mobile_portrait.jpg" />' +
+                        '<img src="' + basePath + '/img3_mobile_portrait.jpg" alt="mobile portrait"/>' +
+                        //'<img src="' + basePath + '/img4_mobile_portrait.jpg" />' +
+                        '<img src="' + basePath + '/img5_mobile_portrait.jpg" alt="mobile portrait"/>';
+                } else {
+                    images = '<img class="active" src="' + basePath + '/img1.jpg" alt="utep building"/>' +
+                        '<img src="' + basePath + '/img2.jpg" alt="utep building"/>' +
+                        '<img src="' + basePath + '/img3.jpg" alt="utep building"/>' +
+                        '<img src="' + basePath + '/img4.jpg" alt="utep building"/>' +
+                        '<img src="' + basePath + '/img5.jpg" alt="utep building"/>';
+                }
+
+                $(images).appendTo('#img-container');
+                UTEP.Util.crossFade($('#img-container > img'));
+                
+                $('#section-login').css('height', Math.max($('#img-container > img').first().height(), $('#LoginPane').height() + 110) + 40);
+            }
+            adaptiveImg();
+
+            $(document).on("click", "#LoginPane a", function () {
+                setTimeout(function () {
+                    $(window).resize();
+                    
+                }, 200);
+            });
+            $(window).on('resize', UTEP.Util.throttle(adaptiveImg));
+    </script>
+    <div class="container-fluid">
+     <div class="row section-login-nav">
+      <div class="col-xs-12 col-md-offset-5 col-md-6 col-lg-offset-7 col-lg-4 col-xl-offset-7 col-xl-4" style="margin-top: 100px">
+       <div class="section-login-tabs" id="LoginPane">
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills" role="tablist">
+         <li class="active" role="presentation">
+          <a aria-label="Admitted Tab" data-toggle="tab" href="#current-student" role="tab">
+           Admitted
+          </a>
+         </li>
+         <li role="presentation">
+          <a aria-label="Future Miner Tab" data-toggle="tab" href="#future-miner" role="tab">
+           Future Miner
+          </a>
+         </li>
+         <li role="presentation">
+          <a aria-label="Retrieve UTEP ID Tab" data-toggle="tab" href="#get-id" role="tab">
+           Retrieve UTEP ID
+          </a>
+         </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+         <div class="tab-pane fade in active" id="current-student" role="tabpanel">
+          <div class="row">
+           <div class="col-md-12 center-block">
+            <p style="text-align: left">
+             If you are a current student, or have been admitted to UTEP, please sign in using your UTEP credentials.
+            </p>
+            <a class="btn btn-orange" href="/Account/SignIn" style="width: 100%;">
+             Sign In
+            </a>
+            <div style="text-align: left">
+             <p>
+              <a href="#WhatIsMyStatus">
+               Learn more
+              </a>
+              about MyStatus
+             </p>
+             <p>
+              <a href="#HowToLogin">
+               Don't know or forgot your UTEP credentials?
+              </a>
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="tab-pane fade" id="future-miner" role="tabpanel">
+          <div class="row">
+           <div class="col-md-12 center-block">
+            <div>
+             <p>
+              Sign in using the 8-digit UTEP ID number given to you when you applied to UTEP or submitted a FAFSA.
+                                                Enter this number along with your date of birth and the last 4 digits of your social security number to sign in.
+             </p>
+            </div>
+            <form action="/Account/FutureMiner?ReturnUrl=%2F" id="futureMiner_form" method="post">
+             <span class="field-validation-valid" data-valmsg-for="FutureMiner" data-valmsg-replace="true">
+             </span>
+             <div class="form-group">
+              <input aria-label="UTEP Student ID" autocomplete="off" autofocus="" class="form-control" data-val="true" data-val-length="The Student ID must be no larger than 8 characters long." data-val-length-max="8" id="StudentID" name="StudentID" placeholder="UTEP Student ID" type="text" value=""/>
+             </div>
+             <div class="form-group">
+              <input aria-label="Date of Birth" autocomplete="off" class="form-control" data-val="true" data-val-date="The field Date of Birth must be a date." id="BDFuture" name="BirthDate" placeholder="Date of Birth" style="width:100%" type="text" value=""/>
+             </div>
+             <div class="form-group">
+              <input aria-label="Last 4 of SSN" autocomplete="off" class="form-control" data-val="true" data-val-length="The Last 4 of SSN must be no larger than 4 characters long." data-val-length-max="4" id="Last4ofSSN" name="Last4ofSSN" placeholder="Last 4 of SSN" type="text" value=""/>
+              <h5 class="pull-right">
+               <a href="http://www.ssa.gov/" rel="noopener" target="_blank">
+                Don't know SSN?
+               </a>
+              </h5>
+             </div>
+             <button class="btn btn-orange" type="submit">
+              Sign In
+             </button>
+            </form>
+            <div style="text-align: left">
+             <p>
+              <a href="#WhatIsMyStatus">
+               Learn more
+              </a>
+              about MyStatus
+             </p>
+             <p>
+              <a href="/Account/GetID">
+               Don't know your UTEP ID Number?
+              </a>
+             </p>
+             <p>
+              <a data-toggle="tooltip" href="#" title="Leave the 'Last 4 of SSN' field empty if you don't have a SSN.">
+               Don't have an SSN?
+              </a>
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="tab-pane fade" id="get-id" role="tabpanel">
+          <div class="row">
+           <div class="col-md-12 center-block">
+            <div>
+             <p>
+              If you have NOT been admitted to UTEP, please enter the email address you used in your UTEP or FAFSA application.
+                                                We will send you a verification email with a link to retrieve your UTEP ID number.
+             </p>
+             <p>
+              If you have been admitted to UTEP, please enter your UTEP email address.
+                                                We will send you an email with your UTEP ID number.
+             </p>
+            </div>
+            <form action="/Account/GetID?ReturnUrl=%2F" id="getid_form" method="post">
+             <span class="field-validation-valid" data-valmsg-for="GetID" data-valmsg-replace="true">
+             </span>
+             <div class="form-group">
+              <input aria-label="Email Address" autocomplete="off" class="form-control" data-val="true" data-val-length="The Email address must be no larger than 70 characters long." data-val-length-max="70" id="Email" name="Email" placeholder="Email address" type="text" value=""/>
+             </div>
+             <button class="btn btn-orange" type="submit">
+              Submit
+             </button>
+            </form>
+            <div style="text-align: left">
+             <p>
+              <a href="#WhatIsMyStatus">
+               Learn more
+              </a>
+              about MyStatus
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div style="clear:both;">
+        </div>
+       </div>
+      </div>
+     </div>
+     <a class="move down bounce arrow-bounce" href="#WhatIsMyStatus" id="down-arrow">
+      <span class="ico-wrap">
+      </span>
+     </a>
+    </div>
+   </div>
+   <div style="clear:both;">
+   </div>
+   <div class="section" id="section-whatis" style="padding-bottom:80px">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="col-md-6 center-block">
+       <h1 id="WhatIsMyStatus" style="margin-top: 0px;">
+        What is MyStatus?
+       </h1>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-8 center-block">
+       <p>
+        MyStatus is your all-inclusive portal to access and manage your student accounts. MyStatus allows you to check important status information and gives you the tools to complete all requirements. Use MyStatus throughout your college career to stay informed.
+        <a href="#section-login">
+         Log in now!
+        </a>
+       </p>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-8 center-block">
+       <div class="col-md-4">
+        <div style="height: 220px; margin-top: 40px">
+         <img alt="holds icon" src="/Content/Account/img/HOLDS-ICON.png"/>
+        </div>
+        <p>
+         Check your application status, holds, and missing items.
+        </p>
+       </div>
+       <div class="col-md-4">
+        <div style="height: 220px; margin-top: 40px">
+         <img alt="financial aid icon" src="/Content/Account/img/FINANCIAL-AID-ICON.png"/>
+        </div>
+        <p>
+         Check your financial aid missing items, awards, and refund status.
+        </p>
+       </div>
+       <div class="col-md-4">
+        <div style="height: 220px; margin-top: 40px">
+         <img alt="life cycle icon" src="/Content/Account/img/LIFE-CYCLE-ICON.png"/>
+        </div>
+        <p>
+         Register for new student orientation and complete your Pre-Assessment Module, Texas Success Initiative, and KEYS sessions.
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="section" id="section-howtologin">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="col-md-6 center-block" style="padding-bottom: 20px">
+       <h1 id="HowToLogin">
+        How do I log in?
+       </h1>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-6 border-right">
+       <h2>
+        Haven't been admitted?
+       </h2>
+       <p>
+        Select the
+        <a href="/Account/FutureMiner">
+         Future Miner
+        </a>
+        tab and sign in using the 8-digit UTEP ID number mailed to you when you applied to UTEP or submitted a FAFSA. Enter this number along with your date of birth and last 4 digits of your social security number to sign up.
+       </p>
+       <p>
+        If you do not remember your UTEP ID number, please select the
+        <a href="/Account/GetID">
+         Retrieve UTEP ID
+        </a>
+        tab. You will be prompted to enter your personal information to locate your UTEP ID number.
+       </p>
+       <p>
+        UTEP is not at liberty to share your social security information. Please ask your parent or legal guardian for your social security number or contact the
+        <a href="http://www.ssa.gov/" rel="noopener" target="_blank">
+         Social Security Administration
+        </a>
+        .
+       </p>
+      </div>
+      <div class="col-md-6">
+       <h2>
+        Admitted or Current UTEP Student?
+       </h2>
+       <p>
+        If you are a current student, or have been admitted to UTEP, please sign in using your UTEP credentials.
+       </p>
+       <p>
+        If you have been admitted to UTEP and have not set up your new student account, please visit
+        <a href="https://newaccount.utep.edu" rel="noopener" target="_blank">
+         https://newaccount.utep.edu
+        </a>
+        .
+       </p>
+       <p>
+        If you forgot your UTEP credentials, please visit
+        <a href="http://my.utep.edu" rel="noopener" target="_blank">
+         http://my.utep.edu
+        </a>
+        to retrieve your UTEP credentials.
+       </p>
+      </div>
+     </div>
+     <div class="row extra-help" style="padding: 20px 0 80px 0;">
+      <div class="col-md-4 center-block">
+       <p>
+        For any extra help, please contact us at
+        <span class="phone-number">
+         915.747.4357(Help)
+        </span>
+        or
+        <a href="mailto:helpdesk@utep.edu">
+         helpdesk@utep.edu
+        </a>
+       </p>
+      </div>
+     </div>
+     <link href="/Content/Custom/footer/footerV3.css" rel="stylesheet"/>
+     <footer id="footer">
+      <div class="row bg-gray">
+       <div class="col-md-2">
+        <a href="http://www.utep.edu/" rel="noopener" target="_blank" title="UTEP">
+         <img alt="utep logo" src="/Content/Custom/footer/images/utep-logo-blue.png"/>
+        </a>
+       </div>
+       <div class="col-md-5 col-xs-12">
+        <p>
+         The University of Texas at El Paso
+         <br/>
+         500 West University Avenue |
+         <span class="nowrap">
+          El Paso, Texas 79968 | 915.747.5000
+         </span>
+         <br/>
+         Copyright The University of Texas
+         <span class="nowrap">
+          at El Paso. All Rights Reserved
+         </span>
+        </p>
+       </div>
+       <div class="col-md-5">
+        <div class="social-buttons">
+         <p style="text-align:center">
+          Stay Connected with UTEP
+         </p>
+         <div class="align-container">
+          <div class="v-align">
+           <div class="h-align">
+            <a class="social-spacing" href="https://www.facebook.com/utepminers" rel="noopener" target="_blank" title="Facebook link">
+             <img alt="facebook" src="/Content/Custom/footer/images/facebook.png" title="facebook" width="30"/>
+            </a>
+            <a class="social-spacing" href="https://www.twitter.com/utepnews" rel="noopener" target="_blank" title="Twitter link">
+             <img alt="Twitter" src="/Content/Custom/footer/images/twitter.png" title="Twitter" width="30"/>
+            </a>
+            <a class="social-spacing" href="https://www.youtube.com/user/UTEP" id="footer-image-youtube" rel="noopener" target="_blank" title="Youtube link">
+             <img alt="Youtube" src="/Content/Custom/footer/images/youTube.png" title="Youtube" width="30"/>
+            </a>
+            <a class="social-spacing" href="https://www.instagram.com/utep_miners/" id="footer-image-pinterest" rel="noopener" target="_blank" title="Instagram link">
+             <img alt="Instagram" src="/Content/Custom/footer/images/instagram.png" title="Instagram" width="30"/>
+            </a>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="row bg-darkblue">
+       <div class="col-md-12 col-xs-12">
+        <p class="page-footer-bottom bg-darkblue">
+         <a class="page-footer-white-link" href="https://www.utep.edu/vpba/state-reports/" rel="noopener" target="_blank">
+          State Reports
+         </a>
+         <span class="page-footer-white-link">
+          |
+         </span>
+         <a class="page-footer-white-link" href="http://www.utsystem.edu/" rel="noopener" target="_blank">
+          UT System
+         </a>
+         <span class="page-footer-white-link">
+          |
+         </span>
+         <a class="page-footer-white-link" href="https://www.utep.edu/customerservice/" rel="noopener" target="_blank">
+          Customer Service Statement
+         </a>
+         <span class="page-footer-white-link">
+          |
+         </span>
+         <a class="page-footer-white-link" href="https://www.utep.edu/titleix/" rel="noopener" target="_blank">
+          Title IX
+         </a>
+         <span class="page-footer-white-link">
+          |
+         </span>
+         <a class="page-footer-white-link" href="http://www.admin.utep.edu/Default.aspx?tabid=54275" rel="noopener" target="_blank">
+          Required Links
+         </a>
+        </p>
+       </div>
+      </div>
+     </footer>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   $(function () {
+
+            $('.section-login-tabs a[href=#current-student]').tab('show');
+
+        });
+
+        $("#login_form").submit(function () {
+
+            $(document.body).css({ 'cursor': 'wait' });
+
+        });
+
+        $("#futureMiner_form").submit(function () {
+
+            $(document.body).css({ 'cursor': 'wait' });
+
+        });
+
+        $("#getid_form").submit(function () {
+
+            $(document.body).css({ 'cursor': 'wait' });
+
+        });
+
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+  </script>
+ </body>
+</html>
+

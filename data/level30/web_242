@@ -1,0 +1,255 @@
+http://email.umflint.edu
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Copyright (c) 2006 Microsoft Corporation.  All rights reserved. -->
+<!-- OwaPage = ASP.auth_logon_aspx -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Weblogin | University of Michigan-Flint
+  </title>
+  <meta content="initial-scale=1.0,user-scalable=no" name="viewport"/>
+  <link href="https://cdn.umflint.edu/bootstrap/dist/img/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+  <link href="https://cdn.umflint.edu/weblogin/dist/css/weblogin.min.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="/owa/14.3.319.2/scripts/premium/flogon.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   <!--
+        var a_fRC = 1;
+        var g_fFcs = 1;
+        var a_fLOff = 0;
+        var a_fCAC = 1;
+        var a_fEnbSMm = 1;
+        /// <summary>
+        /// Is Mime Control installed?
+        /// </summary>
+        function IsMimeCtlInst(progid)
+        {
+            if (!a_fEnbSMm)
+                return false;
+
+            var oMimeVer = null;
+
+            try
+            {
+                // TODO: ingore this on none IE browser
+                //
+                //oMimeVer = new ActiveXObject(progid);
+            }
+            catch (e)
+            {
+            }
+
+            if (oMimeVer != null)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Render out the S-MIME control if it is installed.
+        /// </summary>
+        function RndMimeCtl()
+        {
+            if (IsMimeCtlInst("MimeBhvr.MimeCtlVer"))
+                RndMimeCtlHlpr("MimeNSe2k3", "D801B381-B81D-47a7-8EC4-EFC111666AC0", "MIMEe2k3", "mimeLogoffE2k3");
+
+            if (IsMimeCtlInst("OwaSMime.MimeCtlVer"))
+                RndMimeCtlHlpr("MimeNSe2k7sp1", "833aa5fb-7aca-4708-9d7b-c982bf57469a", "MIMEe2k7sp1", "mimeLogoffE2k7sp1");
+
+            if (IsMimeCtlInst("OwaSMime2.MimeCtlVer"))
+                RndMimeCtlHlpr("MimeNSe2k9", "4F40839A-C1E5-47E3-804D-A2A17F42DA21", "MIMEe2k9", "mimeLogoffE2k9");
+        }
+
+        /// <summary>
+        /// Helper function to factor out the rendering of the S/MIME control.
+        /// </summary>
+        function RndMimeCtlHlpr(objid, classid, ns, id)
+        {
+            document.write("<OBJECT id='" + objid + "' classid='CLSID:" + classid + "'></OBJECT>");
+            document.write("<?IMPORT namespace='" + ns + "' implementation=#" + objid + ">");
+            document.write("<" + ns + ":Logoff id='" + id + "' style='display:none'/>");
+        }
+        -->
+  </script>
+ </head>
+ <body>
+  <div class="container">
+   <a class="logo" href="https://www.umflint.edu">
+   </a>
+   <div class="dialog">
+    <div class="dialog-overlay">
+    </div>
+    <div class="dialog-content">
+     <h2 class="dialog-header">
+      Authentication Required
+     </h2>
+     <form action="/owa/auth.owa" autocomplete="off" enctype="application/x-www-form-urlencoded" id="login" method="POST" name="logonForm">
+      <input name="destination" type="hidden" value="https://email.umflint.edu/owa/"/>
+      <input name="flags" type="hidden" value="0"/>
+      <input name="forcedownlevel" type="hidden" value="0"/>
+      <input name="isUtf8" type="hidden" value="1"/>
+      <div class="form-group">
+       <label class="form-control-label">
+        <span class="form-control-icon">
+         <i class="fa fa-user">
+         </i>
+        </span>
+        <input class="form-control" id="username" name="username" placeholder="Uniqname" required="" type="text"/>
+       </label>
+      </div>
+      <div class="form-group">
+       <label class="form-control-label">
+        <span class="form-control-icon">
+         <i class="fa fa-lock">
+         </i>
+        </span>
+        <input class="form-control" id="password" name="password" onfocus="g_fFcs=0" placeholder="Password" required="" type="password"/>
+       </label>
+      </div>
+      <div class="form-group-radio">
+       <div class="radio">
+        <label>
+         <input checked="" class="rdo" id="rdoPblc" name="trusted" onclick="clkSec()" type="radio" value="0"/>
+         This is a public or shared computer
+        </label>
+       </div>
+      </div>
+      <div class="form-group-radio">
+       <div class="radio">
+        <label>
+         <input class="rdo" id="rdoPrvt" name="trusted" onclick="clkSec()" type="radio" value="4"/>
+         This is a private computer
+        </label>
+       </div>
+      </div>
+      <div id="trPrvtWrn" style="display: none;">
+      </div>
+      <button class="btn btn-login btn-block" id="login-button" onclick="clkLgn()" type="submit">
+       Login
+      </button>
+     </form>
+     <ul>
+      <li>
+       <a href="http://password.umflint.edu/forgot">
+        Forgot Password?
+       </a>
+      </li>
+      <li>
+       <a href="https://password.umflint.edu/pwm/public/ForgottenPassword?umfRedirectURL=http://my.umflint.edu">
+        New Student?
+       </a>
+      </li>
+      <li>
+       <a data-target="#modal-account-help" data-toggle="modal" href="#">
+        Need help with your account?
+       </a>
+      </li>
+      <li>
+       <a data-target="#modal-mtoken" data-toggle="modal" href="#">
+        Manage your token
+       </a>
+      </li>
+     </ul>
+     <p class="dialog-content-footer">
+      By using this service you agree to adhere to all applicable
+      <a href="https://www.umflint.edu/its/policies" target="_blank">
+       policies and guidelines
+      </a>
+      .
+     </p>
+     <p class="dialog-content-footer">
+      Copyright © 2017
+      <a href="http://www.regents.umich.edu/" target="_blank">
+       The Regents of the University of Michigan
+      </a>
+     </p>
+    </div>
+   </div>
+  </div>
+  <div aria-hidden="true" class="modal fade" id="modal-account-help" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+       ×
+      </button>
+      <h4 class="modal-title">
+       Need Help With Your Account?
+      </h4>
+     </div>
+     <div class="modal-body">
+      <p>
+       For questions or concerns about your account or logging into this service please contact the
+       <a href="http://www.umflint.edu/helpdesk" target="_blank">
+        ITS Helpdesk
+       </a>
+       by email at
+       <a href="mailto:itshelpdesk@umflint.edu">
+        itshelpdesk@umflint.edu
+       </a>
+       or by phone at
+       <a href="tel:+810-766-6804">
+        810-766-6804
+       </a>
+       .
+      </p>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" type="button">
+       Close
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- /#modal-account-help -->
+  <div aria-hidden="true" class="modal fade" id="modal-mtoken" role="dialog" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+       ×
+      </button>
+      <h4 class="modal-title">
+       About MTokens
+      </h4>
+     </div>
+     <div class="modal-body">
+      <p>
+       An MToken is a security device used to authenticate to web-delivered U-M Administrative Systems.
+      </p>
+      <p>
+       For questions regarding obtaining a MToken or problems with your MToken please contact UM-Flint Human Resources at
+       <a href="tel:+810-762-3150">
+        810-762-3150
+       </a>
+       .
+      </p>
+      <p>
+       Additional information on MTokenâ€™s can be found here:
+       <a href="http://go.umflint.edu/mtoken" target="_blank">
+        http://go.umflint.edu/mtoken
+       </a>
+       .
+      </p>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" type="button">
+       Close
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- /.modal-mtoken -->
+  <script src="https://cdn.umflint.edu/bootstrap/dist/js/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="https://cdn.umflint.edu/weblogin/dist/js/weblogin.min.js" type="text/javascript">
+  </script>
+ </body>
+</html>
+

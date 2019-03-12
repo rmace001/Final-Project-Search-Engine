@@ -1,0 +1,394 @@
+https://my.cu.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:dlm="http://www.uportal.org/layout/dlm">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   My.CU - Campus Portal Selection - University of Colorado
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+   <meta content="no-cache" http-equiv="Pragma">
+    <meta content="-1" http-equiv="Expires">
+     <!-- Bootstrap core CSS -->
+     <link href="https://content.cu.edu/EP/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+     <script src="https://content.cu.edu/EP/bootstrap/js/ie-emulation-modes-warning.js">
+     </script>
+     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+     <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+     <link href="https://www.cu.edu/sites/default/files/favicon.png" rel="shortcut icon" type="image/png"/>
+     <link href="css/myCU.css" rel="stylesheet" type="text/css"/>
+     <link href="favicon.png" rel="icon" type="image/x-icon"/>
+     <link href="favicon.png" rel="shortcut icon" type="image/x-icon"/>
+     <style>
+      .campus-logo {
+					max-width:640px;
+					height:95%;
+			}
+			.campus-logo img {
+				width:98%;
+			}
+     </style>
+     <script language="JavaScript">
+      function openBrWindow(theURL,winName,features){window.open(theURL,winName,features);}
+     </script>
+     <script language="javascript" src="js/jquery-1.7.2.min.js" type="text/javascript">
+     </script>
+     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css" media="all" rel="stylesheet" type="text/css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+       var _gaq = _gaq || [];
+			var locPath = location.pathname;
+			var n = locPath.indexOf("DEV-TEST");
+			if (n == -1) _gaq.push(['_setAccount', 'UA-36025632-1']);
+			else _gaq.push(['_setAccount', 'UA-36025632-2']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
+			var instruction_bg = "";
+	
+			function hideHeader(speed) {
+				$("#uportal-body-container").animate({"top": "-=95px"}, "fast");
+				setCookie("hideMyCUeduHeader","true",9999);
+			}
+			function seewhatsnew() {
+				if (typeof(_campus) == "undefined") {_campus = 'unknown';} else if (_campus == "") {_campus = 'unknown';}
+				if (typeof(_userid) == "undefined") {_userid = 'unknown';} else if (_userid == "") {_userid = 'unknown';}
+				_gaq.push(['_trackEvent', 'CU Resources Wordpress Redirect', _campus, _userid]);
+				window.open("http://curesources.wordpress.com/");
+			}
+
+			var currCampus = "";
+
+			function setGAParmValue(value) {
+				_campus = escape(value); //still needed for GA tracking done in onclick event
+
+			}
+
+			function readCookie(name) {
+				var nameEQ = name + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i < ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+					if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+				}
+				return null;
+			}
+
+			function setCookie(c_name,value,exdays) {
+				var exdate=new Date();
+				exdate.setDate(exdate.getDate() + exdays);
+				var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+
+				document.cookie=c_name + "=" + c_value;
+			}
+
+			function resetInstructions () {
+				document.getElementById("instructions").innerHTML = "Click on your campus to log in.";
+			}
+			
+			function changeCampus(campus) {
+				delay = 0;
+				if (campus != currCampus && campus != "") {
+					if (currCampus=='Identikey') {
+						$("#ucbCampus").fadeTo(delay, .5);
+						$("#ucbCampusXS").fadeTo(delay, .5);
+					}
+					else if (currCampus=='UCDHSC') {
+						$("#ucdCampus").fadeTo(delay, .5);
+						$("#ucdCampusXS").fadeTo(delay, .5);
+					}
+					else if (currCampus=='UCCSAD') {
+						$("#uccsCampus").fadeTo(delay, .5);
+						$("#uccsCampusXS").fadeTo(delay, .5);
+					}
+					else if (currCampus=='UMSAD') {
+						$("#sysCampus").fadeTo(delay, .5);
+						$("#sysCampusXS").fadeTo(delay, .5);
+					}
+				}
+				var instructionsText = "Click to log in to ";
+				if (campus != currCampus) {
+					if (campus=='Identikey') {
+						document.getElementById("instructions").innerHTML = instructionsText + "myCUinfo.";
+						$("#ucbCampus").fadeTo(delay, 1);
+						$("#ucbCampusXS").fadeTo(delay, 1);
+						$("#sysCampus").fadeTo(delay, .5);
+						$("#sysCampusXS").fadeTo(delay, .5);
+						$("#ucdCampus").fadeTo(delay, .5);
+						$("#ucdCampusXS").fadeTo(delay, .5);
+						$("#uccsCampus").fadeTo(delay, .5);
+						$("#uccsCampusXS").fadeTo(delay, .5);
+					}
+					else if (campus=='UCDHSC') {
+						document.getElementById("instructions").innerHTML = instructionsText + "UCD Access.";
+						$("#ucdCampus").fadeTo(delay, 1);
+						$("#ucdCampusXS").fadeTo(delay, 1);
+						$("#sysCampus").fadeTo(delay, .5);
+						$("#sysCampusXS").fadeTo(delay, .5);
+						$("#uccsCampus").fadeTo(delay, .5);
+						$("#uccsCampusXS").fadeTo(delay, .5);
+						$("#ucbCampus").fadeTo(delay, .5);
+						$("#ucbCampusXS").fadeTo(delay, .5);
+					}
+					else if (campus=='UCCSAD') {
+						document.getElementById("instructions").innerHTML = instructionsText + "myUCCS Portal.";
+						$("#uccsCampus").fadeTo(delay, 1);
+						$("#uccsCampusXS").fadeTo(delay, 1);
+						$("#sysCampus").fadeTo(delay, .5);
+						$("#sysCampusXS").fadeTo(delay, .5);
+						$("#ucdCampus").fadeTo(delay, .5);
+						$("#ucdCampusXS").fadeTo(delay, .5);
+						$("#ucbCampus").fadeTo(delay, .5);
+						$("#ucbCampusXS").fadeTo(delay, .5);
+					}
+					else if (campus=='UMSAD') {
+						document.getElementById("instructions").innerHTML = instructionsText + "the System Portal.";
+						$("#sysCampus").fadeTo(delay, 1 );
+						$("#sysCampusXS").fadeTo(delay, 1 );
+						$("#ucdCampus").fadeTo(delay, .5);
+						$("#ucdCampusXS").fadeTo(delay, .5);
+						$("#uccsCampus").fadeTo(delay, .5);
+						$("#uccsCampusXS").fadeTo(delay, .5);
+						$("#ucbCampus").fadeTo(delay, .5);
+						$("#ucbCampusXS").fadeTo(delay, .5);
+					}
+					else {
+						resetInstructions();
+						$("#sysCampus").fadeTo(delay, 1 );
+						$("#sysCampusXS").fadeTo(delay, 1 );
+						$("#ucdCampus").fadeTo(delay, 1);
+						$("#ucdCampusXS").fadeTo(delay, 1);
+						$("#uccsCampus").fadeTo(delay, 1);
+						$("#uccsCampusXS").fadeTo(delay, 1);
+						$("#ucbCampus").fadeTo(delay, 1);
+						$("#ucbCampusXS").fadeTo(delay, 1);
+					}
+
+					currCampus = campus;
+				}
+			}
+			var showHide = "hidden";
+			function showSystemAlert (action) {
+				if (action == "hide") {
+					showHide = "visible";
+				}
+				if (showHide == "hidden") {
+					document.getElementById("systemAlert").style.zIndex="99";
+					document.getElementById("campus-logo-container").style.zIndex="98";
+					document.getElementById("systemAlertIframe").height="600";
+					document.getElementById("systemAlertIframe").width="600";
+					showHide = "visible";
+				}
+				else {
+
+					if(navigator.appVersion.indexOf("MSIE 8.")==-1) { // is not IE8
+						document.getElementById("systemAlertIframe").height="58";
+					}
+					else { // is IE8
+						document.getElementById('systemAlertIframe').height="68";
+					}
+					document.getElementById("campus-logo-container").style.zIndex="99";
+					document.getElementById("systemAlert").style.zIndex="1";
+					showHide = "hidden";
+				}
+			}
+			
+			function resetBodyHeight() {
+				var ht = window.innerHeight;
+				var bodyHt = document.getElementById("uportal-content-container").firstElementChild.offsetHeight;
+				var newHt = bodyHt;
+				if (bodyHt < ht) 
+					newHt = ht - 40;
+				document.getElementById("uportal-content-container").style.height = newHt + "px";
+			}
+
+			//try to insert into parent: <meta name="viewport" content="width=device-width, initial-scale=1">
+			//var viewPortTag=window.parent.document.createElement('meta');
+			//viewPortTag.id="viewport";
+			//viewPortTag.name = "viewport";
+			//viewPortTag.content = "width=device-width, initial-scale=1";
+			//window.parent.document.getElementsByTagName('head')[0].appendChild(viewPortTag);
+      </script>
+      <script language="javascript" src="js/psErrorMessage.js" type="text/javascript">
+      </script>
+     </link>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body class="uportal-body" onload="checkPsErrorMsg(); resetBodyHeight();" onresize="resetBodyHeight()">
+  <div id="uportal-body-container">
+   <div align="center" id="uportal-content-container">
+    <div class="container">
+     <div class="row-fluid" style="height:100px;">
+      <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12" style="height:100px; text-align:left; ">
+       <img class="img-responsive" src="images/cu_logo_white.png"/>
+      </div>
+     </div>
+     <div class="row-fluid">
+      <div align="right" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:50px;">
+       <a href="javascript:void(0)" id="systemAlertAnchor" onclick="showSystemAlert('show');">
+        <div id="systemAlert" onmouseout="showSystemAlert('hide');" onmouseover="showSystemAlert('show');">
+         <iframe frameborder="0" height="58" id="systemAlertIframe" scrolling="auto" src="rss/rss2html.php?http://www.getrave.com/rss/cusys/channel2" width="316">
+         </iframe>
+        </div>
+        <script type="text/javascript">
+         if(navigator.appVersion.indexOf("MSIE 8.")!=-1) {
+										document.getElementById('systemAlertIframe').width="356";
+										document.getElementById('systemAlertIframe').height="68";
+		      							}
+        </script>
+       </a>
+      </div>
+     </div>
+     <div class="row-fluid">
+      <div class="hidden-lg col-md-12 col-sm-12 col-xs-12">
+       <div id="generalAnnouncementNotLG">
+        <!-- General announcement, for all users, displayed all the time -->
+        <script src="js/mycu_general_announcement.js">
+        </script>
+       </div>
+      </div>
+     </div>
+     <div class="row-fluid">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="instruction-container">
+       <span id="instructions">
+        Click on your campus to log in.
+       </span>
+      </div>
+     </div>
+     <div class="row-fluid">
+      <div id="campus-logo-container">
+       <div class="col-lg-3 col-md-6 col-sm-6 hidden-xs">
+        <div class="img-responsive campus-logo" id="ucbCampus" onclick="setGAParmValue('my.cu.edu_Boulder'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus]);" onmouseout="changeCampus('');" onmouseover="changeCampus('Identikey');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='http://mycuinfo.colorado.edu/'" title="CU Boulder - Click here to log in to myCUinfo">
+          <!-- img src="https://cucontent.colorado.edu/portal/ep/ucb2/graphics/bannerMyCuInfo.jpg" border="0" height="75%" -->
+          <img alt="CU Boulder - Click here to log in to myCUinfo" border="0" class="img-responsive campus-img" src="images/cu_boulder.jpg"/>
+          <p>
+           CU Boulder
+          </p>
+         </a>
+        </div>
+       </div>
+       <div class="hidden-lg hidden-md hidden-sm col-xs-12">
+        <div class="img-responsive campus-logo" id="ucbCampusXS" onclick="setGAParmValue('my.cu.edu_Boulder'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus, 'XS Form Factor']);" onmouseout="changeCampus('');" onmouseover="changeCampus('Identikey');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='http://mycuinfo.colorado.edu/'" title="CU Boulder - Click here to log in to myCUinfo">
+          <p>
+           CU Boulder
+          </p>
+          <!-- img src="https://cucontent.colorado.edu/portal/ep/ucb2/graphics/bannerMyCuInfo.jpg" border="0" height="75%" -->
+          <img alt="CU Boulder - Click here to log in to myCUinfo" border="0" class="img-responsive campus-img" src="images/cu_boulder.jpg"/>
+         </a>
+        </div>
+       </div>
+       <div class="col-lg-3 col-md-6 col-sm-6 hidden-xs">
+        <div class="img-responsive campus-logo" id="uccsCampus" onclick="setGAParmValue('my.cu.edu_UCCS'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus]);" onmouseout="changeCampus('');" onmouseover="changeCampus('UCCSAD');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='https://portal.prod.cu.edu/MyUCCSFedAuthLogin.html'" title="UCCS - Click here to log in to the myUCCS Portal">
+          <img alt="UCCS - Click here to log in to the myUCCS Portal" border="0" class="img-responsive campus-img" src="images/uccs.jpg"/>
+          <p>
+           UCCS
+          </p>
+         </a>
+        </div>
+       </div>
+       <div class="hidden-lg hidden-md hidden-sm col-xs-12">
+        <div class="img-responsive campus-logo" id="uccsCampusXS" onclick="setGAParmValue('my.cu.edu_UCCS'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus, 'XS Form Factor']);" onmouseout="changeCampus('');" onmouseover="changeCampus('UCCSAD');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='https://portal.prod.cu.edu/MyUCCSFedAuthLogin.html'" title="UCCS - Click here to log in to the myUCCS Portal">
+          <p>
+           UCCS
+          </p>
+          <img alt="UCCS - Click here to log in to the myUCCS Portal" border="0" class="img-responsive campus-img" src="images/uccs.jpg"/>
+         </a>
+        </div>
+       </div>
+       <div class="col-lg-3 col-md-6 col-sm-6 hidden-xs">
+        <div class="img-responsive campus-logo" id="ucdCampus" onclick="setGAParmValue('my.cu.edu_Denver'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus]);" onmouseout="changeCampus('');" onmouseover="changeCampus('UCDHSC');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='https://portal.prod.cu.edu/UCDAccessFedAuthLogin.html'" title="CU Denver | Anschutz - Click here to log in to UCD Access">
+          <img alt="CU Denver | Anschutz - Click here to log in to UCD Access" border="0" class="img-responsive campus-img" src="images/cu_denver.jpg"/>
+          <p>
+           CU Denver | Anschutz
+          </p>
+         </a>
+        </div>
+       </div>
+       <div class="hidden-lg hidden-md hidden-sm col-xs-12">
+        <div class="img-responsive campus-logo" id="ucdCampusXS" onclick="setGAParmValue('my.cu.edu_Denver'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus, 'XS Form Factor']);" onmouseout="changeCampus('');" onmouseover="changeCampus('UCDHSC');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='https://portal.prod.cu.edu/UCDAccessFedAuthLogin.html'" title="CU Denver | Anschutz - Click here to log in to UCD Access">
+          <p>
+           CU Denver | Anschutz
+          </p>
+          <img alt="CU Denver | Anschutz - Click here to log in to UCD Access" border="0" class="img-responsive campus-img" src="images/cu_denver.jpg"/>
+         </a>
+        </div>
+       </div>
+       <div class="col-lg-3 col-md-6 col-sm-6 hidden-xs">
+        <div class="img-responsive campus-logo" id="sysCampus" onclick="setGAParmValue('my.cu.edu_System'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus]);" onmouseout="changeCampus('');" onmouseover="changeCampus('UMSAD');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='https://portal.prod.cu.edu/SYSFedAuthLogin.html'" title="Office of the President - Click here to log in to the System portal">
+          <img alt="Office of the President - Click here to log in to the System portal" border="0" class="img-responsive campus-img" src="images/cu_system.jpg"/>
+          <p>
+           CU System Office
+          </p>
+         </a>
+        </div>
+       </div>
+       <div class="hidden-lg hidden-md hidden-sm col-xs-12">
+        <div class="img-responsive campus-logo" id="sysCampusXS" onclick="setGAParmValue('my.cu.edu_System'); _gaq.push(['_trackEvent', 'Image clicks to Campus login pages', _campus, 'XS Form Factor']);" onmouseout="changeCampus('');" onmouseover="changeCampus('UMSAD');">
+         <a class="campus-link" href="javascript:void(0)" onclick="window.top.location='https://portal.prod.cu.edu/SYSFedAuthLogin.html'" title="Office of the President - Click here to log in to the System portal">
+          <p>
+           CU System Office
+          </p>
+          <img alt="Office of the President - Click here to log in to the System portal" border="0" class="img-responsive campus-img" src="images/cu_system.jpg"/>
+         </a>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="row-fluid">
+      <div class="col-lg-12 hidden-md hidden-sm hidden-xs">
+       <div id="generalAnnouncement">
+        <!-- General announcement, for all users, displayed all the time -->
+        <script src="js/mycu_general_announcement.js">
+        </script>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <a name="uportal-footer">
+  </a>
+  <h4 class="uportal-hide">
+   Footer
+  </h4>
+  <div id="uportal-footer-container">
+   © Regents of the University of Colorado
+  </div>
+  <noscript>
+   <p>
+    * JavaScript is currently disabled... JavaScript must be enabled to continue
+   </p>
+  </noscript>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+  </script>
+  <script src="https://content.cu.edu/EP/bootstrap/js/bootstrap.min.js">
+  </script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="https://content.cu.edu/EP/bootstrap/js/ie10-viewport-bug-workaround.js">
+  </script>
+ </body>
+</html>
+

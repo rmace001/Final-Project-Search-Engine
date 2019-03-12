@@ -1,0 +1,444 @@
+https://mail365.nps.edu/
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta content="IE=10.000" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta content="text/html;charset=utf-8" http-equiv="content-type"/>
+  <meta content="no-cache,no-store" http-equiv="cache-control"/>
+  <meta content="no-cache" http-equiv="pragma"/>
+  <meta content="-1" http-equiv="expires"/>
+  <meta content="Connecting to Naval Postgraduate School" name="mswebdialog-title"/>
+  <title>
+   Sign In
+  </title>
+  <script type="text/javascript">
+   //<![CDATA[
+function LoginErrors(){this.userNameFormatError = 'Enter your user ID in the format \u0026quot;domain\\user\u0026quot; or \u0026quot;user@domain\u0026quot;.'; this.passwordEmpty = 'Enter your password.'; this.passwordTooLong = 'Password must be shorter than 128 characters.';}; var maxPasswordLength = 128;
+//]]>
+  </script>
+  <script type="text/javascript">
+   //<![CDATA[
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+function InputUtil(errTextElementID, errDisplayElementID) {
+
+    if (!errTextElementID)  errTextElementID = 'errorText'; 
+    if (!errDisplayElementID)  errDisplayElementID = 'error'; 
+
+    this.hasFocus = false;
+    this.errLabel = document.getElementById(errTextElementID);
+    this.errDisplay = document.getElementById(errDisplayElementID);
+};
+InputUtil.prototype.canDisplayError = function () {
+    return this.errLabel && this.errDisplay;
+}
+InputUtil.prototype.checkError = function () {
+    if (!this.canDisplayError){
+        throw new Error ('Error element not present');
+    }
+    if (this.errLabel && this.errLabel.innerHTML) {
+        this.errDisplay.style.display = '';        
+        var cause = this.errLabel.getAttribute('for');
+        if (cause) {
+            var causeNode = document.getElementById(cause);
+            if (causeNode && causeNode.value) {
+                causeNode.focus();
+                this.hasFocus = true;
+            }
+        }
+    }
+    else {
+        this.errDisplay.style.display = 'none';
+    }
+};
+InputUtil.prototype.setInitialFocus = function (input) {
+    if (this.hasFocus) return;
+    var node = document.getElementById(input);
+    if (node) {
+        if ((/^\s*$/).test(node.value)) {
+            node.focus();
+            this.hasFocus = true;
+        }
+    }
+};
+InputUtil.prototype.setError = function (input, errorMsg) {
+    if (!this.canDisplayError) {
+        throw new Error('Error element not present');
+    }
+    input.focus();
+
+    if (errorMsg) {
+        this.errLabel.innerHTML = errorMsg;
+    }
+    this.errLabel.setAttribute('for', input.id);
+    this.errDisplay.style.display = '';
+};
+InputUtil.makePlaceholder = function (input) {
+    var ua = navigator.userAgent;
+
+    if (ua != null && 
+        (ua.match(/MSIE 9.0/) != null || 
+         ua.match(/MSIE 8.0/) != null ||
+         ua.match(/MSIE 7.0/) != null)) {
+        var node = document.getElementById(input);
+        if (node) {
+            var placeholder = node.getAttribute("placeholder");
+            if (placeholder != null && placeholder != '') {
+                var label = document.createElement('input');
+                label.type = "text";
+                label.value = placeholder;
+                label.readOnly = true;
+                label.style.position = 'absolute';
+                label.style.borderColor = 'transparent';
+                label.className = node.className + ' hint';
+                label.tabIndex = -1;
+                label.onfocus = function () { this.nextSibling.focus(); };
+
+                node.style.position = 'relative';
+                node.parentNode.style.position = 'relative';
+                node.parentNode.insertBefore(label, node);
+                node.onkeyup = function () { InputUtil.showHint(this); };
+                node.onblur = function () { InputUtil.showHint(this); };
+                node.style.background = 'transparent';
+
+                node.setAttribute("placeholder", "");
+                InputUtil.showHint(node);
+            }
+        }
+    }
+};
+InputUtil.focus = function (inputField) {
+    var node = document.getElementById(inputField);
+    if (node) node.focus();
+};
+InputUtil.hasClass = function(node, clsName) {
+    return node.className.match(new RegExp('(\\s|^)' + clsName + '(\\s|$)'));
+};
+InputUtil.addClass = function(node, clsName) {
+    if (!this.hasClass(node, clsName)) node.className += " " + clsName;
+};
+InputUtil.removeClass = function(node, clsName) {
+    if (this.hasClass(node, clsName)) {
+        var reg = new RegExp('(\\s|^)' + clsName + '(\\s|$)');
+        node.className = node.className.replace(reg, ' ');
+    }
+};
+InputUtil.showHint = function (node, gotFocus) {
+    if (node.value && node.value != '') {
+        node.previousSibling.style.display = 'none';
+    }
+    else {
+        node.previousSibling.style.display = '';
+    }
+};
+//]]>
+  </script>
+  <link href="/adfs/portal/css/style.css?id=58D1952B80B73D6EAC647F2961A7A459934E63A9E62EB02A414163D7B5020D77" rel="stylesheet" type="text/css"/>
+  <style>
+   .illustrationClass {background-image:url(/adfs/portal/illustration/illustration.jpg?id=90E4DB3A94FB84F6718C278547134E59DDEC6CA82E0FA10DA3BB0E13A7BD7931);}
+  </style>
+ </head>
+ <body class="body" dir="ltr">
+  <div id="noScript" style="position:static; width:100%; height:100%; z-index:100">
+   <h1>
+    JavaScript required
+   </h1>
+   <p>
+    JavaScript is required. This web browser does not support JavaScript or JavaScript in this web browser is not enabled.
+   </p>
+   <p>
+    To find out if your web browser supports JavaScript or to enable JavaScript, see web browser help.
+   </p>
+  </div>
+  <script language="JavaScript" type="text/javascript">
+   document.getElementById("noScript").style.display = "none";
+  </script>
+  <div id="fullPage">
+   <div class="float" id="brandingWrapper">
+    <div id="branding">
+    </div>
+   </div>
+   <div class="float" id="contentWrapper">
+    <div id="content">
+     <div id="header">
+      <img alt="Naval Postgraduate School" class="logoImage" src="/adfs/portal/logo/logo.png?id=DE2EA7624B3ABEBB07BABB20E705BCC6D621960EAE14A4581FEDC6A64C4ACCD4"/>
+     </div>
+     <div id="workArea">
+      <div class="groupMargin" id="authArea">
+       <div id="loginArea">
+        <div class="groupMargin" id="loginMessage">
+         Sign in with your organizational account
+        </div>
+        <form action="/adfs/ls/?client-request-id=ff39325d-de97-448a-9bc8-9b57cbe3f55f&amp;username=&amp;wa=wsignin1.0&amp;wtrealm=urn%3afederation%3aMicrosoftOnline&amp;wctx=estsredirect%3d2%26estsrequest%3drQIIAY2RPWzTQACFe3Hrql1AiI2lQkxIZ9_54vPZEoMbR2mcVFHTxm2CUJS4dmIT-_JjO21GFhBTN6RmYyMjC4iNDZWlcwcWFhYkhITEBo1YGPuGT29933soYAkbD9C_KHBJiHwfQ9dbtv8yvrN5-4mi_3n15aU1_zQ__Pz1V_scrMfDieQdpwtwv58kw4khyzxNBpw_lbjvB65HqCq5PJL5tCO_B-ASgEVOo4QyTdM1DTGVYlVjVCJdTSWe50GCSR7mdYphp-v6kDFGaccniBHvKnerZqZJX1mCj4OZ9zO34fNx1B7ySXIuhJabVC1u9ixzu44q-KjSYg0lLruoajeKSo1lA4UpTUxmIxztHqitne3a_q7lR7btnLY6JbN3mo4qkVUyR069H2pKYd8u4IIb7flHSjfboV44y2wYnrR7C-FG0t4K4vX4iMcXgsiHXhwcX66C36vg9dq1zXvz6I3-sVh6_vh781n93crFmmw2TqYh1txB1ck3KyydRtqhsxdQWg4GcqAHzYOslOnFcuyYj5iBz0RwJorfRPBDBC_WVz5s3OCEq827CsI6RARitIWooaoGYq2_0" autocomplete="off" id="loginForm" method="post" novalidate="novalidate" onkeypress="if (event &amp;&amp; event.keyCode == 13) Login.submitLoginRequest();">
+         <div class="fieldMargin error smallText" id="error">
+          <label for="" id="errorText">
+          </label>
+         </div>
+         <div id="formsAuthenticationArea">
+          <div id="userNameArea">
+           <input autocomplete="off" class="text fullWidth" id="userNameInput" name="UserName" placeholder="someone@example.com" spellcheck="false" tabindex="1" type="email" value=""/>
+          </div>
+          <div id="passwordArea">
+           <input autocomplete="off" class="text fullWidth" id="passwordInput" name="Password" placeholder="Password" tabindex="2" type="password"/>
+          </div>
+          <div id="kmsiArea" style="display:none">
+           <input id="kmsiInput" name="Kmsi" tabindex="3" type="checkbox" value="true"/>
+           <label for="kmsiInput">
+            Keep me signed in
+           </label>
+          </div>
+          <div class="submitMargin" id="submissionArea">
+           <span class="submit" id="submitButton" onclick="return Login.submitLoginRequest();" onkeypress="if (event &amp;&amp; event.keyCode == 32) Login.submitLoginRequest();" tabindex="4">
+            Sign in
+           </span>
+          </div>
+         </div>
+         <input id="optionForms" name="AuthMethod" type="hidden" value="FormsAuthentication"/>
+        </form>
+        <div id="authOptions">
+         <form action="https://fs.nps.edu:443/adfs/ls/?client-request-id=ff39325d-de97-448a-9bc8-9b57cbe3f55f&amp;username=&amp;wa=wsignin1.0&amp;wtrealm=urn%3afederation%3aMicrosoftOnline&amp;wctx=estsredirect%3d2%26estsrequest%3drQIIAY2RPWzTQACFe3Hrql1AiI2lQkxIZ9_54vPZEoMbR2mcVFHTxm2CUJS4dmIT-_JjO21GFhBTN6RmYyMjC4iNDZWlcwcWFhYkhITEBo1YGPuGT29933soYAkbD9C_KHBJiHwfQ9dbtv8yvrN5-4mi_3n15aU1_zQ__Pz1V_scrMfDieQdpwtwv58kw4khyzxNBpw_lbjvB65HqCq5PJL5tCO_B-ASgEVOo4QyTdM1DTGVYlVjVCJdTSWe50GCSR7mdYphp-v6kDFGaccniBHvKnerZqZJX1mCj4OZ9zO34fNx1B7ySXIuhJabVC1u9ixzu44q-KjSYg0lLruoajeKSo1lA4UpTUxmIxztHqitne3a_q7lR7btnLY6JbN3mo4qkVUyR069H2pKYd8u4IIb7flHSjfboV44y2wYnrR7C-FG0t4K4vX4iMcXgsiHXhwcX66C36vg9dq1zXvz6I3-sVh6_vh781n93crFmmw2TqYh1txB1ck3KyydRtqhsxdQWg4GcqAHzYOslOnFcuyYj5iBz0RwJorfRPBDBC_WVz5s3OCEq827CsI6RARitIWooaoGYq2_0" id="options" method="post">
+          <script type="text/javascript">
+           function SelectOption(option) {
+                    var i = document.getElementById('optionSelection');
+                    i.value = option;
+                    document.forms['options'].submit();
+                    return false;
+                }
+          </script>
+          <input id="optionSelection" name="AuthMethod" type="hidden"/>
+          <div class="groupMargin">
+          </div>
+         </form>
+        </div>
+        <div class="groupMargin" id="introduction">
+         <p class="signindesc passwordhelp">
+          <a href="https://npspassword.nps.edu" target="npspassword">
+           Forgot your password?
+          </a>
+         </p>
+         <p class="signindesc dodpolicy">
+          By signing in, you agree to the terms described within the
+          <a href="https://wiki.nps.edu/x/IIBO" target="_blank">
+           DoD Acceptable Use Policy
+          </a>
+          .
+         </p>
+        </div>
+        <script type="text/javascript">
+         //<![CDATA[
+
+            function Login() {
+            }
+
+            Login.userNameInput = 'userNameInput';
+            Login.passwordInput = 'passwordInput';
+
+            Login.initialize = function () {
+
+                var u = new InputUtil();
+
+                u.checkError();
+                u.setInitialFocus(Login.userNameInput);
+                u.setInitialFocus(Login.passwordInput);
+            }();
+
+            Login.submitLoginRequest = function () { 
+                var u = new InputUtil();
+                var e = new LoginErrors();
+
+                var userName = document.getElementById(Login.userNameInput);
+                var password = document.getElementById(Login.passwordInput);
+
+                if (!userName.value || !userName.value.match('[@\\\\]')) {
+                    u.setError(userName, e.userNameFormatError);
+                    return false;
+                }
+
+                if (!password.value) {
+                    u.setError(password, e.passwordEmpty);
+                    return false;
+                }
+
+                if (password.value.length > maxPasswordLength) {
+                    u.setError(password, e.passwordTooLong);
+                    return false;
+                }
+
+                document.forms['loginForm'].submit();
+                return false;
+            };
+
+            InputUtil.makePlaceholder(Login.userNameInput);
+            InputUtil.makePlaceholder(Login.passwordInput);
+        //]]>
+        </script>
+       </div>
+      </div>
+     </div>
+     <div id="footerPlaceholder">
+     </div>
+    </div>
+    <div id="footer">
+     <div class="floatReverse" id="footerLinks">
+      <div>
+       <span id="copyright">
+        © 2013 Microsoft
+       </span>
+       <a class="pageLink" href="http://www.nps.edu/" id="home">
+        Home
+       </a>
+       <a class="pageLink" href="https://wiki.nps.edu/x/IIBO" id="privacy">
+        Privacy
+       </a>
+       <a class="pageLink" href="https://wiki.nps.edu/tac/" id="helpDesk">
+        Help
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   //<![CDATA[
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+
+// This file contains several workarounds on inconsistent browser behaviors that administrators may customize.
+"use strict";
+
+// iPhone email friendly keyboard does not include "\" key, use regular keyboard instead.
+// Note change input type does not work on all versions of all browsers.
+if (navigator.userAgent.match(/iPhone/i) != null) {
+    var emails = document.querySelectorAll("input[type='email']");
+    if (emails) {
+        for (var i = 0; i < emails.length; i++) {
+            emails[i].type = 'text';
+        }
+    }
+}
+
+// In the CSS file we set the ms-viewport to be consistent with the device dimensions, 
+// which is necessary for correct functionality of immersive IE. 
+// However, for Windows 8 phone we need to reset the ms-viewport's dimension to its original
+// values (auto), otherwise the viewport dimensions will be wrong for Windows 8 phone.
+// Windows 8 phone has agent string 'IEMobile 10.0'
+if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+    var msViewportStyle = document.createElement("style");
+    msViewportStyle.appendChild(
+        document.createTextNode(
+            "@-ms-viewport{width:auto!important}"
+        )
+    );
+    msViewportStyle.appendChild(
+        document.createTextNode(
+            "@-ms-viewport{height:auto!important}"
+        )
+    );
+    document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+}
+
+// If the innerWidth is defined, use it as the viewport width.
+if (window.innerWidth && window.outerWidth && window.innerWidth !== window.outerWidth) {
+    var viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute('content', 'width=' + window.innerWidth + 'px; initial-scale=1.0; maximum-scale=1.0');
+}
+
+// Gets the current style of a specific property for a specific element.
+function getStyle(element, styleProp) {
+    var propStyle = null;
+
+    if (element && element.currentStyle) {
+        propStyle = element.currentStyle[styleProp];
+    }
+    else if (element && window.getComputedStyle) {
+        propStyle = document.defaultView.getComputedStyle(element, null).getPropertyValue(styleProp);
+    }
+
+    return propStyle;
+}
+
+// The script below is used for downloading the illustration image 
+// only when the branding is displaying. This script work together
+// with the code in PageBase.cs that sets the html inline style
+// containing the class 'illustrationClass' with the background image.
+var computeLoadIllustration = function () {
+    var branding = document.getElementById("branding");
+    var brandingDisplay = getStyle(branding, "display");
+    var brandingWrapperDisplay = getStyle(document.getElementById("brandingWrapper"), "display");
+
+    if (brandingDisplay && brandingDisplay !== "none" &&
+        brandingWrapperDisplay && brandingWrapperDisplay !== "none") {
+        var newClass = "illustrationClass";
+
+        if (branding.classList && branding.classList.add) {
+            branding.classList.add(newClass);
+        } else if (branding.className !== undefined) {
+            branding.className += " " + newClass;
+        }
+        if (window.removeEventListener) {
+            window.removeEventListener('load', computeLoadIllustration, false);
+            window.removeEventListener('resize', computeLoadIllustration, false);
+        }
+        else if (window.detachEvent) {
+            window.detachEvent('onload', computeLoadIllustration);
+            window.detachEvent('onresize', computeLoadIllustration);
+        }
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('resize', computeLoadIllustration, false);
+    window.addEventListener('load', computeLoadIllustration, false);
+}
+else if (window.attachEvent) {
+    window.attachEvent('onresize', computeLoadIllustration);
+    window.attachEvent('onload', computeLoadIllustration);
+}
+
+// Change “Sign in with organizational account” string.
+// Check whether the loginMessage element is present on this page.
+var loginMessage = document.getElementById('loginMessage');
+if (loginMessage)
+{
+    loginMessage.innerHTML = 'Sign in with your NPS account';
+}
+
+if (typeof Login != 'undefined'){
+    document.getElementById(Login.userNameInput).placeholder = 'Username';
+
+    var userNameCheck = document.getElementById(Login.userNameInput);
+    if (userNameCheck.value) {
+        var userNameClean = userNameCheck.value.replace('@nps.edu','');
+        document.forms['loginForm'].UserName.value = userNameClean;
+    }
+
+    Login.submitLoginRequest = function () { 
+    var u = new InputUtil();
+    var e = new LoginErrors();
+    var userName = document.getElementById(Login.userNameInput);
+    var password = document.getElementById(Login.passwordInput);
+    if (!userName.value) {
+       u.setError(userName, 'Enter your username.');
+       return false;
+    }
+
+    if (!password.value) 
+    {
+        u.setError(password, e.passwordEmpty);
+        return false;
+    }
+
+    if (userName.value && !userName.value.match('[@\\\\]')) 
+    {
+        var userNameValue = userName.value + '@nps.edu';
+        document.forms['loginForm'].UserName.value = userNameValue;
+    }
+
+    document.forms['loginForm'].submit();
+    return false;
+};
+}
+//]]>
+  </script>
+ </body>
+</html>
+

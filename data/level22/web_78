@@ -1,0 +1,331 @@
+http://www.emergency.uga.edu/
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport"/>
+  <meta content="IE=edge,chrome=1,requiresActiveX=true" http-equiv="X-UA-Compatible"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <meta content="The University of Georgia, a land-grant and sea-grant university with state-wide commitments and responsibilities, is Georgia's flagship institution of higher education. It is also the state's oldest, most comprehensive and most diversified institution of higher education." name="description"/>
+  <title>
+   Alert :: UGA
+  </title>
+  <link href="/library/images/favicon.ico" rel="shortcut icon"/>
+  <link href="/library/css/fontawesome/font-awesome.min.css" rel="stylesheet"/>
+  <link href="/library/css/style.min.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="wrap">
+   <header id="header">
+    <div id="header-top">
+     <div class="row">
+      <div class="span6">
+       <a href="/" id="logo">
+        <img alt="University of Georgia" class="responsive-img" src="/library/images/GEORGIA-XH-W.png"/>
+       </a>
+      </div>
+      <div class="span3" id="header-top-widget-area-1">
+       <div>
+       </div>
+      </div>
+      <div class="span3" id="header-top-widget-area-2">
+       <div class="widget ewf_widget_social_media">
+        <a class="youtube-icon social-icon" href="https://www.youtube.com/uga">
+         <i class="fa fa-youtube-play">
+         </i>
+        </a>
+        <a class="twitter-icon social-icon" href="https://twitter.com/universityofga">
+         <i class="fa fa-twitter">
+         </i>
+        </a>
+        <a class="facebook-icon social-icon" href="https://www.facebook.com/universityofga">
+         <i class="fa fa-facebook">
+         </i>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </header>
+   <section id="content" role="main">
+    <section class="row">
+     <nav class="span3 box_gray" id="toc" role="status">
+      <h1 class="fs-18">
+       <strong>
+        CONTENTS
+       </strong>
+      </h1>
+      <ul>
+       <li>
+        <a href="/">
+         Home
+        </a>
+       </li>
+       <!-- <li><a href="/">Timeline of events and news</a></li> -->
+       <!-- <li><a href="/notices">Notices</a></li> -->
+       <!-- <li><a href="/notices#notices">Advisories</a></li>
+<li><a href="/notices#counseling">Counseling Information</a></li>
+<li><a href="/notices#hotlines">Hotlines</a></li>
+<li><a href="/notices#bri">Press Briefings</a></li>
+<li><a href="/notices#resources">Resources and Related Links</a></li> -->
+       <li>
+        <a href="/faq">
+         Frequently Asked Questions
+        </a>
+       </li>
+       <!--
+<li><a href="/president_message">Message from the Administration</a></li>
+-->
+      </ul>
+     </nav>
+     <article class="span8">
+      <h1 class="fs-36">
+       <strong>
+        Emergency News &amp; Information
+       </strong>
+      </h1>
+      <div id="archive-info" role="status">
+       <h1>
+        <span class="fs-36 fs-24">
+         CURRENTLY ALL UNIVERSITY OPERATIONS ARE NORMAL
+        </span>
+       </h1>
+       <p>
+        This emergency information website may be accessed at any time. You may wish to save the URL for easy referencing in the event of an emergency impacting the University of Georgia's main Athens campus. During an emergency, information on this site will be updated regularly to keep students, faculty, staff, and family members informed with accurate and current information.
+       </p>
+      </div>
+      <script>
+       var months = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec");
+			// Load RSS Feed
+			function loadFeed(){
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status < 300){
+						var html = "";
+						var json = JSON.parse(this.responseText);
+						if(json[0].pubDate && json[0].title){
+							for(i in json){
+								
+								var pubDate = new Date(json[i].pubDate);
+								
+								var hs = pubDate.getHours();
+								var hours = hs > 13 ? hs - 12 : hs == 0 ? 12 : hs;
+								var ampm = hs > 11 ? "PM" : "AM";
+								var day = (parseInt(pubDate.getDate()) < 9) ? pubDate.getDate() : "0" + pubDate.getDate();
+								var minutes = (parseInt(pubDate.getMinutes()) < 9) ? "0" + pubDate.getMinutes() : pubDate.getMinutes();
+
+								html += '<div class="alert" style="clear:both">' + 
+									'<p style="float:right;display:inline-block;margin-bottom:0;font-weight:bold">' + months[pubDate.getMonth()] + ". " + 
+									pubDate.getDate() + ", " + pubDate.getFullYear() + " " + 
+									hours + ":" + minutes + " " + ampm + '</p>' +
+								'<h2 class="fs-24" style="float:left;display:inline-block;"><strong>' + 
+									json[i].title + 
+								'</strong></h2><p style="clear:both;">' + 
+									json[i].description + 
+								'</p></div>';
+							}
+						}
+						// Replace HTML created from RSS feed into "archive-info".
+						if ( html ){
+							document.getElementById("archive-info").innerHTML = html;
+							console.log('refreshing...');
+						}
+					} else if(this.status > 300){
+						console.log("There was an error retrieving the file. Status: " + this.status + ". Please switch to manual messages.");
+					}
+				};
+				xmlhttp.open("GET", "/_resources/includes/messages.json", true);
+				xmlhttp.send();	
+			}
+			loadFeed();
+			setInterval(function() {
+				loadFeed();
+			}, 2000);
+      </script>
+     </article>
+    </section>
+    <section class="row">
+     <article class="span12">
+      <p>
+       <strong>
+        <span style="font-size: 18pt;">
+         Updates
+        </span>
+       </strong>
+      </p>
+      <h2>
+       In the event of an emergency, official updates will be posted here.
+      </h2>
+     </article>
+    </section>
+   </section>
+   <footer id="footer">
+    <div id="footer-middle">
+     <div class="row">
+      <div class="span3" id="footer-middle-widget-area-1">
+       <div class="widget widget_text">
+        <h3 class="widget-title">
+         UGA Alert
+        </h3>
+        <p>
+         The University of Georgia maintains an emergency mass notification system called UGAAlert.
+                           Student, faculty and staff’s local contact phone number and their UGA email address
+                           are automatically loaded into the alert system; however, it is important for faculty,
+                           staff and students to check their information, add additional phone contact or email
+                           information and to select text messaging as a preference in the system via the UGAAlert
+                           web site at
+         <a href="http://www.ugaalert.uga.edu/">
+          www.ugaalert.uga.edu
+         </a>
+         . Text messaging is one of the fastest options to receive an emergency alert from
+                           the UGAAlert system and participation in receiving the text alerts is encouraged.
+        </p>
+       </div>
+      </div>
+      <div class="span3" id="footer-middle-widget-area-2">
+       <div class="widget ewf_widget_social_media">
+        <h3 class="widget-title">
+         Reference links
+        </h3>
+        <p>
+         In the event of a campus-wide emergency, information will first be communicated via
+                           UGA Alert to all students, faculty, and staff who have enrolled in the system, and
+                           also made available on the University's home page and office social media accounts.
+                           The sites below include plans, policies, and procedures to make sure you are prepared
+                           for any situation.
+        </p>
+        <ul>
+         <li>
+          <a href="https://safeandsecure.uga.edu/">
+           Safe and Secure guide
+          </a>
+         </li>
+         <li>
+          <a href="https://www.police.uga.edu/">
+           UGA Police
+          </a>
+         </li>
+         <li>
+          <a href="http://www.prepare.uga.edu/">
+           Office of Emergency Preparedness
+          </a>
+         </li>
+         <li>
+          <a href="https://www.uhs.uga.edu/">
+           University Health Center
+          </a>
+         </li>
+         <li>
+          <a href="http://drc.uga.edu/">
+           Disability Resource Center
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <div class="span3" id="footer-middle-widget-area-3">
+       <div class="widget ewf_widget_social_media">
+        <h3 class="widget-title">
+         Social networks
+        </h3>
+        <p>
+         UGA will post relevant information including announcements and statements on the two
+                           official social media accounts listed below. Please question the validity of any post
+                           not originating from these two accounts.
+        </p>
+        <ul>
+         <li>
+          <a href="https://twitter.com/universityofga">
+           UGA on Twitter
+          </a>
+         </li>
+         <li>
+          <a href="https://www.facebook.com/universityofga">
+           UGA on Facebook
+          </a>
+         </li>
+         <!-- <li> <i class="fa fa-google-plus"></i> <a href="#">plus.google.com/mirror</a> </li>
+<li> <i class="fa fa-vimeo-square"></i> <a href="#">vimeo.com/mirror</a> </li>
+<li> <i class="fa fa-wordpress"></i> <a href="#">mirror.wordperss.com</a> </li>
+<li> <i class="fa fa-youtube-play"></i> <a href="#">youtube.com/user/mirror</a> </li> -->
+        </ul>
+       </div>
+      </div>
+      <div class="span3" id="footer-middle-widget-area-4">
+       <div class="widget ewf_widget_contact_info">
+        <h3 class="widget-title">
+         Our address
+        </h3>
+        <div>
+         The University of Georgia,
+         <br/>
+         Athens, GA 30602
+         <br/>
+         706-542-3000
+         <br/>
+         (tty) 706-542-8778
+         <br/>
+         <a href="https://www.uga.edu/">
+          https://www.uga.edu/
+         </a>
+         <br/>
+         <a href="mailto:emergency@uga.edu">
+          emergency@uga.edu
+         </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div id="footer-bottom">
+     <div class="row">
+      <div class="span6" id="footer-bottom-widget-area-1">
+       <div class="widget widget_text">
+        <div class="textwidget">
+         <p class="white">
+          © University of Georgia
+         </p>
+         <p class="last white">
+          <a href="https://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">
+           Privacy Policy
+          </a>
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="span6 text-right" id="footer-bottom-widget-area-2">
+       <div class="widget widget_pages">
+       </div>
+      </div>
+     </div>
+     <div id="hidden">
+      <a href="http://a.cms.omniupdate.com/10?skin=uga&amp;account=EMERGENCY&amp;site=Emergency&amp;action=de&amp;path=/index.pcf" id="de">
+      </a>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <a href="#" id="back-to-top">
+   <i class="fa fa-angle-up">
+   </i>
+  </a>
+  <script src="/library/js/jquery-2.1.1.min.js">
+  </script>
+  <script src="/library/js/scripts.min.js">
+  </script>
+  <script type="text/javascript">
+   // Google Analytics
+					var _gaq=_gaq||[];
+					_gaq.push(["_setAccount","UA-76653044-1"]);
+					_gaq.push(["_trackPageview"]);
+					(function() {
+						var a=document.createElement("script");
+						a.type="text/javascript";
+						a.async=true;
+						a.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+						var b=document.getElementsByTagName("script")[0];
+						b.parentNode.insertBefore(a,b)}
+					)()
+  </script>
+ </body>
+</html>

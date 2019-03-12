@@ -1,0 +1,897 @@
+http://mesowest.utah.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   MesoWest Data
+  </title>
+  <link href="/css/main1.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/index.css" rel="stylesheet" type="text/css"/>
+  <script>
+   function showlocation() {
+   // One-shot position request.
+   navigator.geolocation.getCurrentPosition(callback);
+}
+function callback(position) {
+   window.open('/cgi-bin/droman/my_local_weather_station.cgi?latcen='+position.coords.latitude+'&loncen='+position.coords.longitude,"_self");
+}
+  </script>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+ </head>
+ <body>
+  <div style="height:3px;background:#990000;border-bottom:2px solid #333333;font-size:1px">
+  </div>
+  <!-- DIVS FOR LAYOUT -->
+  <div id="wp">
+   <div id="bd">
+    <div id="doc" style="*background-color:#990000;">
+     <!-- CONTENT BEGINS HERE -->
+     <div class="left" id="s1" style="background-color:#990000;">
+      <span style="margin-top:1em;font-weight:bold;display:inline-block;*display:inline;*zoom:1;margin-right:1em;">
+       Station Search
+      </span>
+      <a href="/html/help/yourweather.html" style="font-size:small;">
+       Help
+      </a>
+      <form action="/cgi-bin/droman/quick_links.cgi" id="quicklinks" method="get">
+       <fieldset style="border:0;">
+        <select id="select5" name="type">
+         <option selected="selected" value="address">
+          Address
+         </option>
+         <option value="zip">
+          Zipcode
+         </option>
+         <option value="latlon">
+          Lat, lon
+         </option>
+         <option value="location">
+          Location, ST
+         </option>
+         <option value="county">
+          County, ST
+         </option>
+         <option value="name">
+          Stn Name
+         </option>
+         <option value="stn">
+          Station ID
+         </option>
+         <option value="wims">
+          WIMS ID
+         </option>
+        </select>
+        <input id="input" name="input" size="17" type="text"/>
+        <input id="rawsflag" name="rawsflag" type="hidden" value="3"/>
+        <input id="fdir" name="fdir" type="hidden" value="droman"/>
+       </fieldset>
+      </form>
+      <ul class="linkbar">
+       <li>
+        <span class="linkbar" style="font-weight:bold">
+         QUICK LINKS
+        </span>
+       </li>
+       <li>
+        <a class="linkbar" href="javascript:showlocation()">
+         Find a Nearby Station
+        </a>
+       </li>
+       <li>
+        <a class="linkbar" href="/cgi-bin/droman/whats_new.cgi">
+         What's New
+        </a>
+       </li>
+       <li>
+        <a class="linkbar" href="/html/help/status.html">
+         Current Status
+        </a>
+       </li>
+       <li>
+        <a class="linkbar" href="/html/help/main_index.html">
+         Help
+        </a>
+       </li>
+       <li>
+        <a class="linkbar" href="https://developers.synopticdata.com/">
+         Data API Services
+        </a>
+       </li>
+       <li>
+        <a class="linkbar" href="http://www.atmos.utah.edu/">
+         Department of Atmospheric Sciences
+        </a>
+       </li>
+      </ul>
+      <form action="/cgi-bin/droman/my_login.cgi" enctype="multipart/form-data" id="login_menu" method="post" style="width:170px;color:white;font-size:small; padding-top:8px;padding-bottom:8px;margin:auto;margin-bottom:1em;">
+       <fieldset style="border-top:1px solid #999999;border-bottom:1px solid #999999;border-left:0;border-right:0;">
+        <legend style="color:#f0e68c;padding-bottom:.5em;">
+         Login to My MesoWest
+        </legend>
+        <p class="login">
+         <label class="login" for="user">
+          Login:
+         </label>
+         <input class="inputText" id="user" name="user" type="text"/>
+        </p>
+        <p class="login">
+         <label class="login" for="password">
+          Password:
+         </label>
+         <input class="inputText" id="password" name="password" type="password"/>
+        </p>
+        <p class="submit">
+         <input name="came_from" type="hidden" value="/cgi-bin/droman/my_mesowest.cgi"/>
+         <input id="submitted" name="submitted" style="font-size:70%;" type="submit" value="Login"/>
+        </p>
+        <a href="/cgi-bin/droman/my_join.cgi?came_from=http://mesowest.utah.edu" style="margin-bottom:.5em;margin-top:.3em;display:block;">
+         Create a User
+        </a>
+       </fieldset>
+      </form>
+      <a href="http://www.facebook.com/mesowest">
+       <img alt="facebook" src="/images/mesowest_static/facebook.gif" style="border:0;"/>
+      </a>
+     </div>
+     <!-- HERE IS NEW SECTION, JAH! -->
+     <div id="s2" style="vertical-align:top">
+      <img alt="Welcome to MesoWest!" src="/images/mesowest_static/mesowest_banner.jpg" style="width:651px;vertical-align:top;"/>
+      <!-- <td align="center"><strong><font color="730000" size="+3">This particular page is currently under construction. <br> Please visit the active MesoWest site <a href ="http://www.met.utah.edu/jhorel/html/mesonet/">here</a>. (11/08)<br></font></strong></td> -->
+      <p style="text-align:center;">
+       <span style="margin-top:.5em;font-weight:bold;color:#730000;font-size:x-large;display:block;">
+        States
+       </span>
+       <span style="font-style:italic;font-size:small;">
+        Click on a State to access weather observations
+       </span>
+      </p>
+      <img alt="statesmap" height="409" id="statesmap" src="/images/mesowest_static/statesmap.gif" style="border:0;margin-left:1px;" usemap="#m_statesmap" width="588"/>
+      <map id="m_statesmap" name="m_statesmap">
+       <area alt="Alaska" coords="133,284,145,343,150,342,155,346,158,348,161,347,161,346,164,342,168,345,180,356,186,359,189,360,191,367,191,369,187,368,183,372,179,370,178,365,173,365,168,361,163,355,159,354,155,350,151,348,145,347,141,346,137,347,132,346,128,346,123,351,119,350,114,354,112,355,111,360,110,365,105,370,103,370,102,369,98,366,94,370,90,373,83,377,77,379,71,381,64,385,56,388,47,390,40,390,29,391,21,390,13,389,7,387,6,385,9,383,15,385,22,386,30,387,45,387,50,385,56,383,65,379,74,375,82,371,90,365,92,361,93,357,86,360,83,355,77,357,77,352,77,348,73,349,69,344,67,347,65,347,62,345,62,343,67,343,68,341,66,336,69,332,72,327,76,327,78,328,80,327,81,326,84,324,84,320,85,317,79,319,73,318,70,314,70,312,65,308,77,305,79,306,82,309,83,307,82,304,79,301,79,298,73,292,75,290,79,290,86,283,91,280,96,279,98,276,102,277,104,280,107,280,110,282,115,282,121,282,125,283,128,283" href="/cgi-bin/droman/main_menu.cgi?state=AK&amp;amp;product=mesomap&amp;amp;rawsflag=3" shape="poly" title="Alaska"/>
+       <area alt="Hawaii" coords="280,391,274,400,258,402,253,395,250,384,233,372,221,365,209,363,202,364,200,357,206,350,212,348,228,350,246,358,263,367,279,378" href="/cgi-bin/droman/main_menu.cgi?state=HI&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Hawaii"/>
+       <area alt="Maine" coords="547,58,548,58,549,57,551,49,551,43,553,42,552,39,554,28,556,26,559,29,563,25,569,27,571,30,573,36,573,39,575,43,575,44,579,45,580,48,580,50,582,50,586,54,586,55,584,57,582,58,581,59,579,60,579,63,573,66,571,64,570,64,569,70,567,71,565,76,563,76,561,75,561,77,562,79,560,80,559,83,558,85,557,85,555,83,555,79,547,60" href="/cgi-bin/droman/main_menu.cgi?state=ME&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Maine"/>
+       <area alt="New Hampshire" coords="547,59,554,80,554,83,557,86,558,86,558,88,556,90,554,92,543,95,541,93,543,91,542,89,542,74,544,71,546,69,545,67,544,60" href="/cgi-bin/droman/main_menu.cgi?state=NH&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="New Hampshire"/>
+       <area alt="Vermont" coords="528,69,529,67,534,67,544,63,545,66,545,69,544,72,542,74,542,89,543,91,541,93,542,95,536,97,533,91,534,88,531,85,530,80,530,78,530,76,529,71" href="/cgi-bin/droman/main_menu.cgi?state=VT&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Vermont"/>
+       <area alt="Massachusetts" coords="536,96,538,97,554,92,558,89,561,92,559,94,559,96,560,97,564,100,565,103,569,102,569,100,567,99,565,97,569,98,571,99,571,101,570,103,567,104,566,106,568,108,566,109,563,108,564,104,561,108,559,107,557,104,557,101,536,106" href="/cgi-bin/droman/main_menu.cgi?state=MA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Massachusetts"/>
+       <area alt="Rhode Island" coords="552,103,553,102,557,102,557,104,560,108,558,108,557,110,555,111,554,109,553,106" href="/cgi-bin/droman/main_menu.cgi?state=RI&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Rhode Island"/>
+       <area alt="Connecticut" coords="536,107,536,112,538,115,538,116,537,118,537,120,543,116,547,114,551,113,554,111,554,108,552,102,539,105" href="/cgi-bin/droman/main_menu.cgi?state=CT&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Connecticut"/>
+       <area alt="New York" coords="475,117,476,114,479,112,481,108,482,108,482,106,481,104,479,104,479,103,485,99,489,98,491,98,494,99,496,98,501,97,504,94,505,91,505,89,505,87,503,86,503,85,506,82,507,79,508,77,512,72,518,70,528,69,530,76,531,78,529,79,530,82,532,86,533,91,535,96,536,108,538,114,538,116,536,118,537,120,537,122,539,121,541,120,544,118,547,117,549,117,549,116,550,114,552,115,555,115,555,116,551,119,547,121,546,123,541,124,538,125,537,126,535,126,536,123,536,121,533,120,528,118,526,117,523,116,522,113,518,111,476,120" href="/cgi-bin/droman/main_menu.cgi?state=NY&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="New York"/>
+       <area alt="New Jersey" coords="526,118,536,121,534,126,533,128,536,130,536,137,535,140,534,145,531,149,530,147,524,144,523,140,526,138,527,135,528,135,529,133,524,128,525,125,524,123,524,122" href="/cgi-bin/droman/main_menu.cgi?state=NJ&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="New Jersey"/>
+       <area alt="Delaware" coords="526,158,525,157,522,147,520,142,521,140,523,139,523,143,525,146,527,149,529,151,530,152,532,154,531,155,528,157" href="/cgi-bin/droman/main_menu.cgi?state=DE&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Delaware"/>
+       <area alt="Maryland" coords="484,149,486,155,489,151,491,150,494,149,496,148,500,148,503,149,504,150,506,153,510,154,511,157,510,159,510,161,510,162,512,161,517,163,519,164,520,161,518,159,517,158,515,147,519,145,520,146,518,149,519,155,520,159,524,161,525,163,532,162,532,156,526,158,524,156,522,148,520,141,515,143,505,144,492,147,485,148" href="/cgi-bin/droman/main_menu.cgi?state=MD&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Maryland"/>
+       <area alt="Pennsylvania" coords="468,121,474,151,503,144,518,142,520,141,521,140,524,139,527,137,527,136,530,133,526,130,523,128,523,127,524,125,524,123,526,119,525,117,523,116,521,113,517,112,476,120,476,116" href="/cgi-bin/droman/main_menu.cgi?state=PA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Pennsylvania"/>
+       <area alt="West Virginia" coords="473,151,484,149,486,156,489,152,491,150,494,149,496,147,499,147,501,149,503,150,502,153,499,151,496,151,494,157,492,160,491,159,491,162,489,165,487,166,486,164,485,163,483,170,481,175,481,179,475,181,473,183,470,183,467,186,463,182,460,180,460,179,456,175,456,171,457,171,458,170,459,168,459,166,460,163,463,162,463,160,465,157,467,156,468,154,471,152,471,145,472,143,473,150" href="/cgi-bin/droman/main_menu.cgi?state=WV&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="West Virginia"/>
+       <area alt="Virginia" coords="451,195,453,192,456,191,457,187,460,185,462,182,466,184,467,185,470,184,473,183,475,182,479,180,480,180,480,175,483,171,485,164,487,164,486,165,489,166,490,161,490,160,492,159,496,153,497,151,501,152,503,150,504,150,506,153,509,154,511,156,509,159,510,162,512,161,514,162,519,164,520,165,521,165,522,169,523,172,522,175,525,175,525,173,525,168,526,163,531,162,529,166,528,170,527,175,527,178,528,182,504,187,478,192" href="/cgi-bin/droman/main_menu.cgi?state=VA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Virginia"/>
+       <area alt="North Carolina" coords="469,194,469,196,465,199,465,200,463,201,461,203,457,204,457,205,454,207,451,209,449,209,447,211,445,214,444,214,444,218,456,217,463,213,470,211,474,211,478,210,480,211,481,213,482,214,489,214,493,212,498,216,503,219,508,223,511,221,514,220,516,215,521,209,528,207,533,200,537,200,537,196,535,192,533,189,532,186,529,183,479,193" href="/cgi-bin/droman/main_menu.cgi?state=NC&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="North Carolina"/>
+       <area alt="South Carolina" coords="486,251,484,251,482,246,481,245,479,245,479,242,477,240,477,239,475,238,473,235,472,234,469,233,467,230,464,229,462,226,460,222,455,221,454,220,456,217,456,217,460,214,464,213,470,212,475,212,479,211,481,213,482,214,490,214,493,212,504,220,508,223,504,226,502,230,502,233,501,236,496,241,492,244,490,246,488,250" href="/cgi-bin/droman/main_menu.cgi?state=SC&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="South Carolina"/>
+       <area alt="Georgia" coords="430,220,438,249,441,252,442,255,441,258,440,260,440,262,442,265,442,268,443,271,444,275,474,272,476,276,477,274,477,269,479,269,480,269,483,269,483,264,483,260,487,252,486,251,484,251,482,245,480,245,479,243,477,239,475,239,473,236,469,233,466,230,461,226,460,222,456,222,454,219,456,216,433,220" href="/cgi-bin/droman/main_menu.cgi?state=GA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Georgia"/>
+       <area alt="Florida" coords="491,351,494,348,496,347,498,348,501,347,502,345,502,342,499,342,497,340,497,337,495,334,490,332,489,330,487,327,484,325,482,322,478,317,475,314,473,311,472,308,473,305,473,298,473,297,471,294,470,292,469,292,465,290,463,287,459,283,456,281,454,281,452,283,450,285,448,287,441,289,440,287,438,284,432,282,428,281,416,283,416,279,413,275,417,274,443,272,444,275,474,272,476,275,477,274,477,273,477,270,479,269,481,269,483,270,485,274,489,284,491,288,495,292,499,297,497,300,501,305,504,311,508,314,510,329,508,335,510,337,509,339,508,342,505,344,502,347,500,349,497,350,493,352" href="/cgi-bin/droman/main_menu.cgi?state=FL&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Florida"/>
+       <area alt="Michigan" coords="441,129,428,132,427,130,408,132,411,128,411,124,413,118,412,115,409,109,408,107,408,104,408,102,409,97,410,93,411,90,414,87,417,84,419,83,419,80,419,78,420,77,420,75,414,74,412,76,409,77,405,80,402,80,399,83,397,87,395,87,394,82,389,78,385,79,378,76,375,75,373,75,370,72,373,69,376,67,380,66,383,63,385,60,387,60,390,59,392,59,389,60,388,63,387,65,386,67,387,67,389,66,391,66,394,68,397,70,399,71,400,72,402,71,405,69,409,67,413,67,417,64,418,64,418,68,419,69,421,69,424,69,425,67,426,71,428,73,430,73,432,73,432,75,422,74,421,77,422,78,425,79,425,79,428,80,433,81,436,84,434,87,436,89,437,93,435,97,433,100,432,101,433,105,435,104,438,100,440,98,442,98,444,99,446,104,447,108,449,111,448,114,446,117,444,120,443,122,442,125" href="/cgi-bin/droman/main_menu.cgi?state=MI&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Michigan"/>
+       <area alt="Wisconsin" coords="351,71,351,80,348,82,346,85,348,88,348,89,348,90,348,96,350,99,352,100,360,107,363,108,364,112,363,113,364,117,364,121,366,123,367,123,370,125,395,124,396,123,397,120,397,117,395,114,396,106,398,98,399,93,402,89,401,86,401,86,399,88,398,90,398,92,395,95,393,97,392,94,394,92,396,90,395,87,393,82,392,81,391,80,389,79,384,79,379,76,373,75,371,74,368,71,364,71,365,68,358,71,354,72" href="/cgi-bin/droman/main_menu.cgi?state=WI&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Wisconsin"/>
+       <area alt="Illinois" coords="371,126,371,128,372,129,374,131,374,137,369,140,365,142,367,144,366,150,365,151,363,153,362,157,365,163,368,166,370,167,372,169,372,170,374,173,375,173,377,173,378,176,375,181,377,183,384,187,385,190,386,189,385,195,389,196,390,194,392,193,394,195,395,196,397,195,395,192,397,191,399,188,400,184,400,178,403,176,405,173,403,170,402,168,404,162,400,134,397,128,396,126,397,123,396,124,372,126" href="/cgi-bin/droman/main_menu.cgi?state=IL&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Illinois"/>
+       <area alt="Indiana" coords="401,134,403,154,404,164,403,166,402,168,404,170,404,172,404,173,404,175,402,177,401,179,401,185,403,184,404,183,407,183,409,184,411,182,413,181,415,181,418,180,421,179,421,178,422,176,424,176,424,175,426,173,425,171,429,170,431,168,432,164,427,130,408,132,404,134" href="/cgi-bin/droman/main_menu.cgi?state=IN&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Indiana"/>
+       <area alt="Ohio" coords="428,131,431,130,437,129,442,129,447,131,451,133,453,130,455,130,458,129,461,125,466,122,468,122,471,139,470,140,471,142,471,143,471,145,471,152,469,154,467,156,465,157,463,160,462,162,460,162,458,166,460,167,458,169,457,170,453,170,451,168,449,170,447,169,446,168,444,170,440,169,437,167,435,164,434,165,431,164" href="/cgi-bin/droman/main_menu.cgi?state=OH&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Ohio"/>
+       <area alt="Kentucky" coords="450,195,452,193,453,191,455,191,457,187,463,182,460,180,459,179,456,175,455,171,453,169,452,167,449,169,446,169,443,170,441,168,438,168,437,167,435,165,433,165,432,165,431,166,432,168,429,170,426,171,426,173,425,175,424,176,423,177,421,179,421,180,416,181,416,182,413,182,411,182,410,184,408,184,405,184,400,185,400,188,399,190,396,190,396,193,396,194,396,195,391,193,390,196,390,203,402,202,402,200,446,196" href="/cgi-bin/droman/main_menu.cgi?state=KY&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Kentucky"/>
+       <area alt="" coords="388,204,402,202,401,200,445,197,468,193,468,196,463,201,462,200,461,203,457,203,457,205,451,209,449,209,447,212,445,214,444,214,444,218,380,224,381,222,381,218,383,215,385,212,386,207,387,205" href="/cgi-bin/droman/main_menu.cgi?state=TN&amp;product=mesomap&amp;rawsflag=3" shape="poly"/>
+       <area alt="Alabama" coords="402,222,430,219,439,250,442,255,441,257,440,261,441,264,441,268,443,272,440,271,423,274,418,273,412,275,415,279,416,283,412,284,410,282,409,280,407,283,405,282,402,266" href="/cgi-bin/droman/main_menu.cgi?state=AL&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Alabama"/>
+       <area alt="Mississippi" coords="402,223,402,265,405,282,404,285,401,285,398,283,394,285,394,286,391,286,390,283,387,280,389,277,368,277,368,273,369,268,372,265,373,262,374,259,373,256,372,255,372,252,372,246,370,244,374,236,375,232,377,232,377,228,380,225,399,223" href="/cgi-bin/droman/main_menu.cgi?state=MS&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Mississippi"/>
+       <area alt="Louisiana" coords="340,251,340,264,342,267,343,269,343,271,344,273,345,276,343,288,344,291,342,295,344,295,348,294,361,298,363,296,366,298,368,296,372,298,371,299,372,300,376,302,379,301,381,300,384,299,385,301,387,301,386,297,390,297,390,298,392,299,394,300,394,304,397,304,399,301,399,300,396,297,393,297,391,295,392,293,395,291,394,289,391,290,390,290,391,287,388,281,387,280,389,276,368,278,368,275,368,272,370,267,372,264,374,259,373,257,371,250,357,252" href="/cgi-bin/droman/main_menu.cgi?state=LA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Louisiana"/>
+       <area alt="Arkansas" coords="333,206,335,228,335,244,339,245,340,251,357,252,371,250,372,248,371,243,372,238,373,235,375,233,376,233,377,227,381,222,381,221,381,220,381,218,382,216,384,211,377,212,377,210,380,207,378,204,361,205" href="/cgi-bin/droman/main_menu.cgi?state=AR&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Arkansas"/>
+       <area alt="Missouri" coords="320,153,324,161,328,162,328,164,327,166,328,169,331,172,332,201,333,206,355,206,360,206,379,204,380,207,378,210,377,211,382,211,384,211,386,208,386,204,389,203,389,197,387,196,385,194,385,190,383,187,381,185,377,183,375,179,378,176,378,174,375,173,373,174,371,172,371,169,367,166,364,162,362,159,362,153,360,151,337,152" href="/cgi-bin/droman/main_menu.cgi?state=MO&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Missouri"/>
+       <area alt="Iowa" coords="363,113,365,116,364,121,366,123,368,124,370,126,372,129,374,130,374,133,374,137,372,138,366,140,366,143,367,144,368,145,367,148,366,150,363,151,363,154,360,151,336,153,320,152,319,149,318,145,318,141,316,139,316,136,315,133,314,131,314,128,312,125,313,121,313,115" href="/cgi-bin/droman/main_menu.cgi?state=IA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Iowa"/>
+       <area alt="Minnesota" coords="325,37,327,37,329,42,329,45,329,45,333,45,337,47,341,46,345,45,347,47,349,50,352,49,355,51,357,53,359,53,362,50,363,50,365,51,368,51,375,53,375,53,365,58,362,61,356,68,352,70,351,80,349,81,347,84,347,86,348,88,347,91,348,97,350,99,352,99,353,101,355,102,359,106,362,109,363,110,363,111,362,114,313,114,314,110,314,92,313,89,310,90,309,86,312,82,311,76,310,64,308,50,308,42,324,42" href="/cgi-bin/droman/main_menu.cgi?state=MN&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Minnesota"/>
+       <area alt="North Dakota" coords="246,38,307,42,308,52,309,60,310,65,311,71,313,82,244,79,245,60,246,41" href="/cgi-bin/droman/main_menu.cgi?state=ND&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="North Dakota"/>
+       <area alt="South Dakota" coords="244,79,262,81,312,83,310,86,311,89,313,91,314,111,312,115,312,120,312,125,304,122,301,122,297,123,295,123,293,121,281,121,240,117" href="/cgi-bin/droman/main_menu.cgi?state=SD&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="South Dakota"/>
+       <area alt="Nebraska" coords="240,118,278,121,292,121,294,122,298,124,301,123,304,122,312,126,313,128,313,131,316,138,316,140,319,145,319,149,320,153,321,156,324,158,324,160,257,158,257,145,238,143" href="/cgi-bin/droman/main_menu.cgi?state=NE&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Nebraska"/>
+       <area alt="Kansas" coords="255,198,289,200,332,199,332,173,329,169,327,166,328,162,321,160,256,159" href="/cgi-bin/droman/main_menu.cgi?state=KS&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Kansas"/>
+       <area alt="Oklahoma" coords="332,199,335,226,334,243,330,242,326,240,319,240,314,242,310,241,303,240,300,239,297,240,295,238,286,237,283,235,281,233,278,234,274,230,274,222,274,206,243,203,244,196,285,200" href="/cgi-bin/droman/main_menu.cgi?state=OK&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Oklahoma"/>
+       <area alt="Texas" coords="243,203,239,263,198,259,198,261,199,261,203,266,211,275,214,278,215,281,217,286,218,291,223,297,228,298,233,302,234,302,238,298,240,293,245,291,249,293,254,293,258,297,261,300,263,305,267,313,271,319,274,322,275,323,276,326,277,329,276,330,279,337,279,339,282,340,285,341,288,343,291,344,296,345,298,346,300,347,303,345,304,343,301,330,303,324,306,320,311,316,318,310,326,306,327,304,332,301,337,298,342,295,343,292,344,285,346,278,344,273,341,266,340,264,340,245,337,244,330,242,329,241,320,241,314,243,310,241,302,240,299,240,296,241,294,238,286,237,283,235,281,233,278,233,273,230,274,222,274,206" href="/cgi-bin/droman/main_menu.cgi?state=TX&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Texas"/>
+       <area alt="New Mexico" coords="181,190,213,194,243,197,238,263,197,258,197,261,181,260,179,264,169,263" href="/cgi-bin/droman/main_menu.cgi?state=NM&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="New Mexico"/>
+       <area alt="Colorado" coords="188,138,221,143,257,145,255,198,218,195,181,189" href="/cgi-bin/droman/main_menu.cgi?state=CO&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Colorado"/>
+       <area alt="Wyoming" coords="241,92,237,143,203,140,168,134,177,83,211,89" href="/cgi-bin/droman/main_menu.cgi?state=WY&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Wyoming"/>
+       <area alt="Montana" coords="246,39,242,91,212,88,177,82,176,89,173,86,171,88,167,88,164,87,162,87,160,86,159,87,158,86,158,83,157,82,155,82,153,73,152,69,150,70,148,71,147,69,149,63,151,56,147,53,145,49,144,47,144,46,142,44,142,41,139,35,141,32,141,27,143,21,176,29,216,36" href="/cgi-bin/droman/main_menu.cgi?state=MT&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Montana"/>
+       <area alt="Idaho" coords="170,122,176,89,173,86,171,87,167,88,165,87,163,88,160,86,159,88,157,86,158,83,156,82,155,82,154,74,152,69,150,71,147,70,147,69,148,63,151,56,149,55,147,53,145,50,144,47,144,46,141,44,142,40,139,35,140,32,142,22,134,21,125,59,129,64,127,67,121,75,118,77,120,86,118,89,112,110" href="/cgi-bin/droman/main_menu.cgi?state=ID&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Idaho"/>
+       <area alt="Utah" coords="141,116,170,122,168,134,188,138,181,190,155,186,130,180" href="/cgi-bin/droman/main_menu.cgi?state=UT&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Utah"/>
+       <area alt="Nevada" coords="85,103,113,111,142,116,127,188,126,191,125,194,122,190,120,190,119,192,119,202,117,204,74,142,74,140" href="/cgi-bin/droman/main_menu.cgi?state=NV&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Nevada"/>
+       <area alt="Arizona" coords="129,180,155,187,180,190,169,264,147,261,109,238,109,235,111,234,113,233,112,230,112,226,113,225,115,222,116,220,120,215,119,213,117,207,118,200,119,192,121,190,125,194,127,191" href="/cgi-bin/droman/main_menu.cgi?state=AZ&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Arizona"/>
+       <area alt="California" coords="85,103,74,140,74,141,117,204,119,213,121,215,118,217,116,218,114,225,112,225,112,230,113,232,113,234,84,231,83,225,83,222,77,215,75,212,74,214,73,213,73,210,72,208,69,208,66,205,62,201,58,198,54,198,52,195,54,191,54,188,52,186,51,183,46,169,47,165,48,164,48,162,47,161,44,159,43,157,44,154,45,148,41,145,42,142,42,141,37,132,39,129,39,124,40,121,39,116,36,113,36,111,38,108,41,104,43,99,45,97,43,94,45,91" href="/cgi-bin/droman/main_menu.cgi?state=CA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="California"/>
+       <area alt="Oregon" coords="112,110,117,89,120,86,118,78,124,73,127,67,129,65,127,62,125,59,122,57,110,56,108,54,106,55,104,55,99,54,95,56,92,55,88,55,84,52,81,52,78,52,77,53,73,49,73,47,73,47,73,44,71,42,69,40,64,38,63,42,62,46,60,50,52,68,52,71,48,76,47,77,45,80,46,84,44,90,46,92" href="/cgi-bin/droman/main_menu.cgi?state=OR&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Oregon"/>
+       <area alt="Washington" coords="134,21,125,59,122,58,111,55,108,54,105,55,104,54,98,54,94,56,92,54,87,55,85,53,83,51,81,51,78,53,76,53,73,49,74,45,71,42,68,40,64,38,65,30,66,26,66,20,65,10,68,9,72,15,77,17,81,18,83,15,87,12,84,7,85,7" href="/cgi-bin/droman/main_menu.cgi?state=WA&amp;product=mesomap&amp;rawsflag=3" shape="poly" title="Washington"/>
+      </map>
+      <div style="width:650px;*position:relative;">
+       <div style="display:inline-block;width:33%;margin-left:3px;*display:inline;*zoom:1;">
+        <a href="/index.html">
+         States
+        </a>
+       </div>
+       <div style="display:inline-block;width:33%;*display:inline;*zoom:1;*position:relative;*margin:auto;">
+        <a href="/index_cwa.html">
+         CWAs
+        </a>
+       </div>
+       <div style="display:inline-block;width:32%;*display:inline;">
+        <a href="/index_nograph.html">
+         Text Only
+        </a>
+       </div>
+      </div>
+      <img alt="bar" src="/images/mesowest_static/gifs/bar.gif" style="width:590px;height:10px;margin-left:1px;"/>
+      <span style="font-weight:bold;color:#730000;margin-bottom:.5em;display:block;">
+       Observations and Summaries
+      </span>
+      <form action="/cgi-bin/droman/main_menu.cgi" id="masterform" method="post" onsubmit="return submitIt(this)">
+       <p style="display:inline-block;*display:inline;*zoom:1;">
+        <strong style="display:block;">
+         Region
+        </strong>
+        <select id="state" name="state">
+         <option value="AKCC">
+          Alaska GCA
+         </option>
+         <option value="NWCC">
+          Pacific Northwest GCA
+         </option>
+         <option value="NOCC">
+          Northern California GCA
+         </option>
+         <option value="SOCC">
+          Southern California GCA
+         </option>
+         <option value="GBCC">
+          Great Basin GCA
+         </option>
+         <option value="NRCC">
+          Northern Rockies GCA
+         </option>
+         <option value="RMCC">
+          Rocky Mountain GCA
+         </option>
+         <option value="SWCC">
+          Southwest GCA
+         </option>
+         <option value="EACC">
+          Eastern GCA
+         </option>
+         <option value="SACC">
+          Southern GCA
+         </option>
+         <option value="AL">
+          ALABAMA
+         </option>
+         <option value="BMX">
+          AL - Birmingham CWA
+         </option>
+         <option value="HUN">
+          AL - Huntsville CWA
+         </option>
+         <option value="MOB">
+          AL - Mobile/Pensacola CWA
+         </option>
+         <option value="AK">
+          ALASKA
+         </option>
+         <option value="AFC">
+          AK - Anchorage CWA
+         </option>
+         <option value="AFG">
+          AK - Fairbanks CWA
+         </option>
+         <option value="AJK">
+          AK - Juneau CWA
+         </option>
+         <option value="AZ">
+          ARIZONA
+         </option>
+         <option value="FGZ">
+          AZ - Flagstaff CWA
+         </option>
+         <option value="PSR">
+          AZ - Phoenix CWA
+         </option>
+         <option value="TWC">
+          AZ - Tucson CWA
+         </option>
+         <option value="AR">
+          ARKANSAS
+         </option>
+         <option value="LZK">
+          AR - Little Rock CWA
+         </option>
+         <option value="CA">
+          CALIFORNIA
+         </option>
+         <option value="EKA">
+          CA - Eureka CWA
+         </option>
+         <option value="LOX">
+          CA - Los Angeles/Oxnard CWA
+         </option>
+         <option value="STO">
+          CA - Sacramento CWA
+         </option>
+         <option value="SGX">
+          CA - San Diego CWA
+         </option>
+         <option value="MTR">
+          CA - San Francisco Bay Area/Monterey CWA
+         </option>
+         <option value="HNX">
+          CA - San Joaquin Valley/Hanford CWA
+         </option>
+         <option value="CO">
+          COLORADO
+         </option>
+         <option value="BOU">
+          CO - Denver/Boulder CWA
+         </option>
+         <option value="GJT">
+          CO - Grand Junction CWA
+         </option>
+         <option value="PUB">
+          CO - Pueblo CWA
+         </option>
+         <option value="CT">
+          CONNECTICUT
+         </option>
+         <option value="DE">
+          DELAWARE
+         </option>
+         <option value="FL">
+          FLORIDA
+         </option>
+         <option value="JAX">
+          FL - Jacksonville CWA
+         </option>
+         <option value="EYW">
+          FL - Key West CWA
+         </option>
+         <option value="MLB">
+          FL - Melbourne CWA
+         </option>
+         <option value="MFL">
+          FL - Miami/South Florida CWA
+         </option>
+         <option value="TAE">
+          FL - Tallahassee CWA
+         </option>
+         <option value="TBW">
+          FL - Tampa Bay CWA
+         </option>
+         <option value="GA">
+          GEORGIA
+         </option>
+         <option value="FFC">
+          GA - Peachtree City CWA
+         </option>
+         <option value="HI">
+          HAWAII
+         </option>
+         <option value="HFO">
+          HI - Honolulu CWA
+         </option>
+         <option value="ID">
+          IDAHO
+         </option>
+         <option value="BOI">
+          ID - Boise CWA
+         </option>
+         <option value="PIH">
+          ID - Pocatello CWA
+         </option>
+         <option value="IL">
+          ILLINOIS
+         </option>
+         <option value="ILX">
+          IL - Central Illinois CWA
+         </option>
+         <option value="LOT">
+          IL - Chicago CWA
+         </option>
+         <option value="IN">
+          INDIANA
+         </option>
+         <option value="IND">
+          IN - Indianapolis CWA
+         </option>
+         <option value="IWX">
+          IN - Northern Indiana CWA
+         </option>
+         <option value="IA">
+          IOWA
+         </option>
+         <option value="DMX">
+          IA - Des Moines CWA
+         </option>
+         <option value="DVN">
+          IA - Quad Cities CWA
+         </option>
+         <option value="KS">
+          KANSAS
+         </option>
+         <option value="DDC">
+          KS - Dodge City CWA
+         </option>
+         <option value="GLD">
+          KS - Goodland CWA
+         </option>
+         <option value="TOP">
+          KS - Topeka CWA
+         </option>
+         <option value="ICT">
+          KS - Wichita CWA
+         </option>
+         <option value="KY">
+          KENTUCKY
+         </option>
+         <option value="JKL">
+          KY - Jackson CWA
+         </option>
+         <option value="LMK">
+          KY - Louisville CWA
+         </option>
+         <option value="PAH">
+          KY - Paducah CWA
+         </option>
+         <option value="LA">
+          LOUISIANA
+         </option>
+         <option value="LCH">
+          LA - Lake Charles CWA
+         </option>
+         <option value="LIX">
+          LA - New Orleans/Baton Rouge CWA
+         </option>
+         <option value="SHV">
+          LA - Shreveport CWA
+         </option>
+         <option value="ME">
+          MAINE
+         </option>
+         <option value="CAR">
+          ME - Caribou CWA
+         </option>
+         <option value="GYX">
+          ME - Portland CWA
+         </option>
+         <option value="MD">
+          MARYLAND
+         </option>
+         <option value="LWX">
+          MD - Baltimore/Washington D.C. CWA
+         </option>
+         <option value="MA">
+          MASSACHUSETTS
+         </option>
+         <option value="BOX">
+          MA - Boston CWA
+         </option>
+         <option value="MI">
+          MICHIGAN
+         </option>
+         <option value="DTX">
+          MI - Detroit CWA
+         </option>
+         <option value="APX">
+          MI - Gaylord CWA
+         </option>
+         <option value="GRR">
+          MI - Grand Rapids CWA
+         </option>
+         <option value="MQT">
+          MI - Marquette CWA
+         </option>
+         <option value="MN">
+          MINNESOTA
+         </option>
+         <option value="DLH">
+          MN - Duluth CWA
+         </option>
+         <option value="MPX">
+          MN - Minneapolis CWA
+         </option>
+         <option value="MS">
+          MISSISSIPPI
+         </option>
+         <option value="JAN">
+          MS - Jackson CWA
+         </option>
+         <option value="MO">
+          MISSOURI
+         </option>
+         <option value="EAX">
+          MO - Kansas City/Pleasant Hill CWA
+         </option>
+         <option value="SGF">
+          MO - Springfield CWA
+         </option>
+         <option value="LSX">
+          MO - St. Louis CWA
+         </option>
+         <option value="MT">
+          MONTANA
+         </option>
+         <option value="BYZ">
+          MT - Billings CWA
+         </option>
+         <option value="GGW">
+          MT - Glasgow CWA
+         </option>
+         <option value="TFX">
+          MT - Great Falls CWA
+         </option>
+         <option value="MSO">
+          MT - Missoula CWA
+         </option>
+         <option value="NE">
+          NEBRASKA
+         </option>
+         <option value="GID">
+          NE - Hastings CWA
+         </option>
+         <option value="LBF">
+          NE - North Platte CWA
+         </option>
+         <option value="OAX">
+          NE - Omaha CWA
+         </option>
+         <option value="NV">
+          NEVADA
+         </option>
+         <option value="LKN">
+          NV - Elko CWA
+         </option>
+         <option value="VEF">
+          NV - Las Vegas CWA
+         </option>
+         <option value="REV">
+          NV - Reno CWA
+         </option>
+         <option value="NH">
+          NEW HAMPSHIRE
+         </option>
+         <option value="NJ">
+          NEW JERSEY
+         </option>
+         <option value="NM">
+          NEW MEXICO
+         </option>
+         <option value="ABQ">
+          NM - Albuquerque CWA
+         </option>
+         <option value="NY">
+          NEW YORK
+         </option>
+         <option value="ALY">
+          NY - Albany CWA
+         </option>
+         <option value="BGM">
+          NY - Binghamton CWA
+         </option>
+         <option value="BUF">
+          NY - Buffalo CWA
+         </option>
+         <option value="OKX">
+          NY - Upton CWA
+         </option>
+         <option value="NC">
+          NORTH CAROLINA
+         </option>
+         <option value="MHX">
+          NC - Morehead City CWA
+         </option>
+         <option value="RAH">
+          NC - Raleigh/Durham CWA
+         </option>
+         <option value="ILM">
+          NC - Wilmington CWA
+         </option>
+         <option value="ND">
+          NORTH DAKOTA
+         </option>
+         <option value="BIS">
+          ND - Bismarck CWA
+         </option>
+         <option value="FGF">
+          ND - Grand Forks CWA
+         </option>
+         <option value="OH">
+          OHIO
+         </option>
+         <option value="CLE">
+          OH - Cleveland CWA
+         </option>
+         <option value="ILN">
+          OH - Wilmington CWA
+         </option>
+         <option value="OK">
+          OKLAHOMA
+         </option>
+         <option value="OUN">
+          OK - Oklahoma City CWA
+         </option>
+         <option value="TSA">
+          OK - Tulsa CWA
+         </option>
+         <option value="OR">
+          OREGON
+         </option>
+         <option value="MFR">
+          OR - Medford CWA
+         </option>
+         <option value="PDT">
+          OR - Pendleton CWA
+         </option>
+         <option value="PQR">
+          OR - Portland CWA
+         </option>
+         <option value="PA">
+          PENNSYLVANIA
+         </option>
+         <option value="PHI">
+          PA - Philadelphia/Mount Holly CWA
+         </option>
+         <option value="PBZ">
+          PA - Pittsburgh CWA
+         </option>
+         <option value="CTP">
+          PA - State College CWA
+         </option>
+         <option value="PR">
+          PUERTO RICO
+         </option>
+         <option value="RI">
+          RHODE ISLAND
+         </option>
+         <option value="SC">
+          SOUTH CAROLINA
+         </option>
+         <option value="CHS">
+          SC - Charleston CWA
+         </option>
+         <option value="CAE">
+          SC - Columbia CWA
+         </option>
+         <option value="GSP">
+          SC - Greenville/Spartanburg CWA
+         </option>
+         <option value="SD">
+          SOUTH DAKOTA
+         </option>
+         <option value="ABR">
+          SD - Aberdeen CWA
+         </option>
+         <option value="UNR">
+          SD - Rapid City CWA
+         </option>
+         <option value="FSD">
+          SD - Sioux Falls CWA
+         </option>
+         <option value="TN">
+          TENNESSEE
+         </option>
+         <option value="MEG">
+          TN - Memphis CWA
+         </option>
+         <option value="MRX">
+          TN - Morristown CWA
+         </option>
+         <option value="OHX">
+          TN - Nashville CWA
+         </option>
+         <option value="TX">
+          TEXAS
+         </option>
+         <option value="AMA">
+          TX - Amarillo CWA
+         </option>
+         <option value="EWX">
+          TX - Austin/San Antonio CWA
+         </option>
+         <option value="BRO">
+          TX - Brownsville CWA
+         </option>
+         <option value="CRP">
+          TX - Corpus Christi CWA
+         </option>
+         <option value="EPZ">
+          TX - El Paso CWA
+         </option>
+         <option value="FWD">
+          TX - Fort Worth CWA
+         </option>
+         <option value="HGX">
+          TX - Houston/Galveston CWA
+         </option>
+         <option value="LUB">
+          TX - Lubbock CWA
+         </option>
+         <option value="MAF">
+          TX - Midland/Odessa CWA
+         </option>
+         <option value="SJT">
+          TX - San Angelo CWA
+         </option>
+         <option selected="selected" value="UT">
+          UTAH
+         </option>
+         <option value="SLC">
+          UT - Salt Lake City CWA
+         </option>
+         <option value="VT">
+          VERMONT
+         </option>
+         <option value="BTV">
+          VT - Burlington CWA
+         </option>
+         <option value="VA">
+          VIRGINIA
+         </option>
+         <option value="RNK">
+          VA - Roanoke CWA
+         </option>
+         <option value="AKQ">
+          VA - Wakefield CWA
+         </option>
+         <option value="WA">
+          WASHINGTON
+         </option>
+         <option value="SEW">
+          WA - Seattle CWA
+         </option>
+         <option value="OTX">
+          WA - Spokane CWA
+         </option>
+         <option value="WV">
+          WEST VIRGINIA
+         </option>
+         <option value="RLX">
+          WV - Charleston CWA
+         </option>
+         <option value="WI">
+          WISCONSIN
+         </option>
+         <option value="GRB">
+          WI - Green Bay CWA
+         </option>
+         <option value="ARX">
+          WI - La Crosse CWA
+         </option>
+         <option value="MKX">
+          WI - Milwaukee CWA
+         </option>
+         <option value="WY">
+          WYOMING
+         </option>
+         <option value="CYS">
+          WY - Cheyenne CWA
+         </option>
+         <option value="RIW">
+          WY - Riverton CWA
+         </option>
+         <option value="AB">
+          ALBERTA
+         </option>
+         <option value="BC">
+          BRITISH COLUMBIA
+         </option>
+         <option value="MB">
+          MANITOBA
+         </option>
+         <option value="NB">
+          NEW BRUNSWICK
+         </option>
+         <option value="NF">
+          NEWFOUNDLAND
+         </option>
+         <option value="NT">
+          NORTHWEST TERRITORIES
+         </option>
+         <option value="NS">
+          NOVA SCOTIA
+         </option>
+         <option value="NU">
+          NUNAVUT
+         </option>
+         <option value="ON">
+          ONTARIO
+         </option>
+         <option value="PE">
+          PRINCE EDWARD ISLAND
+         </option>
+         <option value="QC">
+          QUEBEC
+         </option>
+         <option value="SK">
+          SASKATCHEWAN
+         </option>
+         <option value="YT">
+          YUKON
+         </option>
+        </select>
+        <input name="rawsflag" type="hidden" value="3"/>
+       </p>
+       <p style="display:inline-block;*display:inline;*zoom:1;">
+        <strong style="display:block;">
+         Product
+        </strong>
+        <select id="product" name="product" size="1">
+         <option selected="selected" value="mesomap">
+          Surface Weather Maps
+         </option>
+         <option value="summary">
+          Current Weather Summary
+         </option>
+         <option value="hrtrend">
+          Hourly Trend Monitor
+         </option>
+         <option value="trend">
+          24-Hour Trend Monitor
+         </option>
+         <option value="monitor">
+          Fire Weather Monitor
+         </option>
+         <option value="mx_mn_temp">
+          5 Day Mx/Mn Temperature
+         </option>
+         <option value="mx_mn_rh">
+          5 Day Mx/Mn RH
+         </option>
+         <option value="mx_mn_sp">
+          5 Day Mx/Mn Speed
+         </option>
+         <option value="mx_mn_gust">
+          5 Day Mx/Mn Gust
+         </option>
+         <option value="precip_mon">
+          Precipitation Monitor
+         </option>
+         <option value="precip_sum">
+          Precipitation Summary
+         </option>
+        </select>
+        <input name="submit" type="submit" value="Go"/>
+       </p>
+      </form>
+      <div style="width:650px;*position:relative;">
+       <br/>
+       <div style="display:inline-block;width:33%;margin-left:3px;*display:inline;*zoom:1;">
+        <a href="/fire.html">
+         Weather Near Fires
+        </a>
+       </div>
+       <img alt="bar1" src="/images/mesowest_static/gifs/bar1.gif" style="width:590px;height:10px;margin-left:1px;display:block;margin-top:.5em;"/>
+       <a href="http://www.utah.edu/">
+        University of Utah
+       </a>
+       <a href="http://www.atmos.utah.edu/">
+        Department of Atmospheric Sciences
+       </a>
+       <span style="display:inline-block;font-size:x-small;line-height:1em;">
+        Copyright © 2002-2019 University of Utah. 
+		 All Rights Reserved.
+        <br>
+         For Questions or Comments about this page or MesoWest contact
+         <a href="mailto:atmos-mesowest@lists.utah.edu">
+          atmos-mesowest@lists.utah.edu
+         </a>
+        </br>
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   </script>
+   <script type="text/javascript">
+    try {
+var pageTracker = _gat._getTracker("UA-9976723-1");
+pageTracker._trackPageview();
+} catch(err) {}
+   </script>
+  </div>
+ </body>
+</html>
+

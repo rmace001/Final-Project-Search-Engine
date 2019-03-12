@@ -1,0 +1,342 @@
+https://carat.fas.harvard.edu/
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   CARAT
+  </title>
+  <link href="/assets/ui-manifest-be98afb90c0cb640d5e448a203fecf8c.css" rel="stylesheet"/>
+  <script src="/assets/ui-manifest-a7e7e8ec99303c05947ed060ff1669b2.js" type="text/javascript">
+  </script>
+  <link href="/assets/ui-modules-manifest-45c9068000bc39c4f3a6a939d240095c.css" rel="stylesheet"/>
+  <script src="/assets/ui-modules-manifest-492c689472f90ddd04a0003a1cd91020.js" type="text/javascript">
+  </script>
+  <link href="/assets/favicon-642e94565781140a432f173933f18b9f.ico" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/assets/carat-8bc291476ee31b1acadd6b2b1050d230.css" rel="stylesheet"/>
+  <script src="/assets/bootbox.min-503a5c9fbbf9469779c9e82475b4aaae.js" type="text/javascript">
+  </script>
+  <script>
+   $(function() {
+                var focusedElement;
+                $(".dropdown-toggle").dropdown();
+                $body = $("body");
+                $(document).ajaxSend(function(event, jqXHR, settings) {
+                    //Call method to display spinner
+                    console.log('start spinner');
+                  //  $body.addClass("loading");
+					focusedElement = $(':focus');
+					// this was needed in chrome anyway because the cursor is removed from view
+					// when you are editing a text box and tnis will make it appear with the load spinner
+                    focusedElement.css({'cursor' : 'wait'});
+                    $(document.body).css({'cursor' : 'wait'});
+                });
+                $(document).ajaxComplete(function(event, jqXHR, settings) {
+                    //Call method to hide spinner
+                    console.log('stop spinner');
+                    focusedElement.css({'cursor' : 'default'});
+                    $(document.body).css({'cursor' : 'default'});
+                });
+                formChanged = false;
+                function formWasChanged() {
+                    formChanged = true;
+                }
+                $(document).on('click', ".modalDialog", function(event) {
+                    event.preventDefault();
+                    var modalDisplayed = false;
+                    var url = $(this).attr('data-rel');
+                    $.get(url, function(data) {
+                        
+                        if (data.indexOf('flash alert') != -1) {
+                            $('#flash_message').html(data);
+                            
+                            $("html, body").animate({ scrollTop: 0 }, "slow");
+                        }
+                        else {
+                            modalDisplayed = true;
+                            $('#response_modal').html(data);
+                            $('#response_modal').modal({
+                                keyboard: false,
+                                resizable: true,
+                                backdrop: 'static'
+                            });
+                        }
+                    }).success(function() {
+                        
+                        if (modalDisplayed) {
+                            formChanged = false;
+                            $('#response_modal :input').change(formWasChanged);
+                            $('input:text:visible:first').focus();
+                        }
+                    });
+                });
+            });
+  </script>
+  <!-- production - google analytics -->
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-38722749-1']);
+	  _gaq.push(['_setDomainName', 'fas.harvard.edu']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+  </script>
+ </head>
+ <body>
+  <!--  nav - partially injected from application -->
+  <div class="row header-row">
+   <div class="header">
+    <div class="col-sm-4 col-lg-3 hidden-xs">
+     <span id="college-logo" style="float:left">
+      <img class="img-responsive" src="/assets/harvard_fas-65810148caea207ebe2a18301804a8f5.png" style="width:100%; height:auto;"/>
+     </span>
+    </div>
+    <div class="col-sm-8 col-md-6 col-lg-6 text-center hidden-xs">
+     <h2 id="title">
+      <span>
+       <h2>
+        CARAT
+       </h2>
+      </span>
+     </h2>
+    </div>
+    <div class="col-xs-12 col-md-4 col-lg-3 pull-right" id="topmenu">
+     <ul class="spaced-top horizontal text-right top-menu-links hidden-xs">
+      <li class="text-right">
+       <a href="/home/index">
+        Login
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <nav class="navbar navbar-inverse navbar-default ">
+   <div class="navbar-header">
+    <button class="navbar-toggle" data-target="#main-nav-collapse" data-toggle="collapse" type="button">
+     <span class="sr-only">
+      Toggle navigation
+     </span>
+     <span class="icon-bar">
+     </span>
+     <span class="icon-bar">
+     </span>
+     <span class="icon-bar">
+     </span>
+    </button>
+    <span class="navbar-brand visible-xs">
+     <img height="28" src="/assets/harvard-shield-fas-75-38ad452ba8c274d81089568e18c6b746.png" width="22"/>
+    </span>
+    <a class="navbar-brand visible-xs" href="/home">
+     CARAT
+    </a>
+   </div>
+   <div class="collapse navbar-collapse" id="main-nav-collapse">
+    <ul class="nav navbar-nav">
+     <li class="">
+      <a href="/about/index">
+       About
+      </a>
+     </li>
+     <li class="visible-xs">
+      <a href="/home/index">
+       Login
+      </a>
+     </li>
+    </ul>
+   </div>
+  </nav>
+  <div class="col-xs-12" id="menu-wrapper">
+  </div>
+  <div class="row" id="content-wrapper">
+   <div class="col-xs-12">
+    <div class="indent">
+     <div id="flash_message">
+      <style>
+       .alert .glyphicon{
+	display:table-cell;
+}
+
+.alert div,
+.alert span{
+	padding-left: 5px;
+	display:table-cell;
+}
+      </style>
+     </div>
+     <div class="container" style="width:95%">
+      <div class="row spaced">
+       <div class="well col-xs-offset-2 col-xs-8">
+        <h2 class="text-center">
+         <strong>
+          Welcome to CARAT
+         </strong>
+        </h2>
+        <div class="col-xs-12 spaced">
+         <h4 class="text-center">
+          <span style="color: #8E0F22">
+           XID Users
+          </span>
+          : It may take an
+          <span style="color: #8E0F22;">
+           <u>
+            hour
+           </u>
+          </span>
+          from the time you create
+						your account for CARAT to recognize your XID.
+         </h4>
+         <h4 class="text-center">
+          Non-Harvard applicants create your XID account
+          <a href=" https://xid.harvard.edu/xid-apps/displaySSCreateForm.do" target="_blank">
+           here
+          </a>
+          .
+         </h4>
+         <p>
+         </p>
+         <div class="text-center spaced">
+          <a class="btn-lg btn-primary" href="/home/index">
+           Login to CARAT
+          </a>
+          <a data-target="#loginInstructions" data-toggle="modal" title="Login Help">
+           <img src="/assets/question_mark-b04eae44a1522d0bb0df5ee8559cb077.png"/>
+          </a>
+         </div>
+        </div>
+        <div class="col-xs-12 spaced">
+         <h4 class="text-center">
+          To browse the catalog of opportunities please select one of the following:
+         </h4>
+         <div class="text-center spaced">
+          <a class="btn btn-primary" href="/applicant/browse?type=G">
+           Graduate Opportunities
+          </a>
+          <a class="btn btn-primary" href="/applicant/browse?type=U">
+           Undergraduate Opportunities
+          </a>
+         </div>
+        </div>
+        <div class="col-xs-12 spaced">
+         <p style="text-align:center;">
+          If you are experiencing technical difficulties, please email the HUIT helpdesk at
+          <a href="mailto:ithelp@harvard.edu?subject=assistance%20required%20for%20CARAT&amp;body=Please%20help%20us%20resolve%20the%20issue%20more%20quickly%20by%20describing%20the%20error%20in%20as%20much%20detail%20as%20possible.%20Include%20the%20exact%20URL%20where%20the%20error%20occurred,%20if%20known.">
+           ithelp@harvard.edu
+          </a>
+          or call 617-495-7777.
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="modal fade" id="loginInstructions" role="dialog">
+       <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+         <div class="modal-header">
+          <button class="close" data-dismiss="modal" type="button">
+           <span aria-hidden="true">
+            ×
+           </span>
+           <span class="sr-only">
+            Close
+           </span>
+          </button>
+          <h3 class="modal-title">
+           Login Help
+          </h3>
+         </div>
+         <div class="modal-body">
+          <div class="col-xs-12">
+           <p>
+            To enter this application you must authenticate via HarvardKey, using either your
+            <strong>
+             HarvardKey
+            </strong>
+            or
+            <strong>
+             XID
+            </strong>
+            .
+                    After successfully authenticating you will be returned to the application.
+           </p>
+          </div>
+          <div class="col-xs-12">
+           <h5 style="text-align:center;">
+            Harvard Affiliates: if you are eligible to but have not yet done so, you may
+            <a href="https://key.harvard.edu/select-user-type" target="_blank">
+             claim your HarvardKey here
+            </a>
+            .
+           </h5>
+          </div>
+          <div class="col-xs-12">
+           <h5 style="text-align:center;">
+            If you are not eligible to claim a HarvardKey, you can
+            <a href="https://xid.harvard.edu/xid-apps/displaySSCreateForm.do" target="_blank">
+             create a new XID account here
+            </a>
+            if necessary.
+           </h5>
+          </div>
+          <div class="col-xs-12">
+           <h5 style="text-align:center;">
+            <span style="color: #8E0F22;font-weight: bold;">
+             XID Users:
+            </span>
+            There may be a 1 hour delay after creating your XID before you can login to CARAT while your account is activated.
+           </h5>
+          </div>
+         </div>
+         <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" type="button">
+           Close
+          </button>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div id="loaderBig">
+       <div id="newloader">
+       </div>
+      </div>
+      <div id="status" style="display: none">
+       <div>
+        <img height="30" src="/assets/spinner-c1936a9d829a5f3ee6241ff0c34ac824.svg" width="30"/>
+        <span id="statusMessage">
+         Status Bar!
+        </span>
+       </div>
+      </div>
+     </div>
+     <div class="modal-fill modal hide fade" id="response_modal">
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="indent row footer horizontal" id="footer">
+   <div class="col-xs-12">
+    <div class="footer pull-right text-right">
+     © 2019 The President and Fellows of Harvard College - All rights reserved.
+     <ul class="horizontal">
+      <li>
+       <a href="http://registrar.fas.harvard.edu/general-information/family-educational-rights-and-privacy-act-ferpa" target="_blank">
+        Privacy Statement
+       </a>
+      </li>
+      <li>
+       <a data-html="true" data-placement="left" data-toggle="tooltip" href="mailto:ithelp@harvard.edu?subject=Assistance%20required%20for%20CARAT&amp;body=Please%20help%20us%20resolve%20the%20issue%20more%20quickly%20by%20describing%20the%20error%20in%20as%20much%20detail%20as%20possible.%20Include%20the%20exact%20URL%20where%20the%20error%20occurred,%20if%20known." title="&lt;h3&gt;Need help?&lt;/h3&gt;&lt;hr/&gt;&lt;p&gt; Consult the 'Help' link in the top menu, which contains FAQs and tutorials on common issues facing CARAT users&lt;/p&gt;">
+        Contact Us
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <div id="datacheckDialog" style="display:none">
+  </div>
+ </body>
+</html>
+

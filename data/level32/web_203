@@ -1,0 +1,1071 @@
+https://directory.weill.cornell.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>
+   Directory | Weill Cornell Medicine
+  </title>
+  <link href="https://cdn.jsdelivr.net/gh/wcmc-its/wcm-styles@v0.4.11/dist/wcm.css" rel="stylesheet"/>
+  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
+  <link href="/assets/application-0d3a0868ad7660f53bc890543b8bb7e55a97a057f617a537662132ed0192da0b.css" media="all" rel="stylesheet">
+   <meta content="width=device-width" name="viewport"/>
+   <meta content="The searchable directory for departments, people, and services within Weill Cornell Medicine" name="description"/>
+   <meta content="authenticity_token" name="csrf-param">
+    <meta content="d7o6z1LgoCPCl7Zs8cLcCNZivyi2X16zLFRU2N5Pbn23VocURPMnbkvTC2yG8Vkf/abepS/id4asp/51d3hZZg==" name="csrf-token">
+     <script data-turbolinks-track="true" src="https://cdn.jsdelivr.net/gh/wcmc-its/wcm-styles@v0.4.11/dist/wcm.js">
+     </script>
+     <script data-turbolinks-track="true" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript">
+     </script>
+     <script data-turbolinks-track="true" src="/assets/application-2803e0550d5bcbaeef88fb7fae36e5780a62cca61ab7e71a897e3a7f9f1b2731.js">
+     </script>
+    </meta>
+   </meta>
+  </link>
+ </head>
+ <body>
+  <header>
+   <nav class="bg-primary fixed-top navbar navbar-dark navbar-expand-xl navbar-wcm">
+    <div class="container">
+     <a class="navbar-brand" href="http://weill.cornell.edu/">
+      <img src="/assets/wcm-logo-1line-white-0240a38d94afdf5f833dab495032a8463433288681e3d682a4caa1dacb5207fe.png" title="WCM Logo"/>
+     </a>
+     <button aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapse-right" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon">
+      </span>
+     </button>
+     <nav class="collapse navbar-collapse" id="navbar-collapse-right" role="navigation">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-right">
+       <li class="nav-item">
+        <a class=" nav-link" href="/search">
+         Search
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class=" nav-link" href="/browse">
+         Browse Departments &amp; Services
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="mailto:idm@med.cornell.edu?body=https%3A%2F%2Fdirectory.weill.cornell.edu%2F&amp;subject=Suggested%20Change%20to%20Web%20Directory" title="Make Suggestion">
+         <i class="fa fa-comment">
+         </i>
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="https://its.weill.cornell.edu/services/phones-fax-directories/wcmc-directory" target="_blank">
+         <i class="fa fa-question-circle">
+         </i>
+         Help
+        </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/auth/login">
+         <i class="fa fa-sign-in">
+         </i>
+         Login to edit profile
+        </a>
+       </li>
+      </ul>
+     </nav>
+    </div>
+   </nav>
+  </header>
+  <div class="container mt-4 main-content">
+   <div id="notifications">
+   </div>
+   <div class="text-2x">
+    <h1 class="display-4 text-dark text-center">
+     Directory Search
+    </h1>
+   </div>
+   <div class="row">
+    <div class="col-lg-8 offset-lg-2 search-index">
+     <form accept-charset="UTF-8" action="/search" data-remote="true" id="search-form" method="get">
+      <input name="utf8" type="hidden" value="✓"/>
+      <label for="q">
+       <small class="form-text text-muted">
+        <strong>
+         Search People, Departments &amp; Services
+        </strong>
+       </small>
+      </label>
+      <div class="input-group search form-group">
+       <input autofocus="autofocus" class="form-control input-lg search-input" id="q" maxlength="100" minlength="3" name="q" pattern="^\S(\w|\s|[%&amp;(),\-:'./])+$" required="required" title="Only letters, numbers, and % &amp; ( ) , - : ' . / allowed" type="search"/>
+       <div class="input-group-append">
+        <button class="btn btn-primary input-lg" data-disable-with="Loading..." type="submit">
+         <strong class="d-inline-block">
+          <span class="d-none d-sm-inline-block">
+           Search
+          </span>
+          <i class="fa fa-search">
+          </i>
+         </strong>
+        </button>
+       </div>
+      </div>
+     </form>
+    </div>
+   </div>
+   <div hidden="" id="no-results">
+    No results. Please try your search again.
+   </div>
+   <div hidden="" id="results">
+    <div class="row">
+     <div class="col d-block">
+      <div class="form-inline float-right" id="search-filters">
+       <div class="form-group ml-4">
+        <label class="mr-1" for="type-filters">
+         Filter by Type:
+        </label>
+        <span class="dropdown dropdown-persistant">
+         <button aria-haspopup="" class="btn btn-outline-dark btn-large dropdown-wcm dropdown-toggle" data-toggle="dropdown" id="type-filters" type="button">
+          Select
+          <span class="caret-wcm">
+          </span>
+         </button>
+         <ul aria-labelledby="type-filters" class="dropdown-menu dropdown-menu-right filters-menu z-9999">
+          <li>
+           <label class="justify-content-start filters-toggler" data-target="person-type-filters">
+            <input class="filter-checkbox" name="recordtype" type="checkbox" value="person"/>
+            <strong>
+             Person
+            </strong>
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <div class="ml-4" id="person-type-filters">
+           <li>
+            <label class="justify-content-start filters-toggler" data-target="persontype--academic-faculty">
+             <input class="filter-checkbox persontype-filter" data-text="Faculty" name="persontypes" type="checkbox" value="academic-faculty"/>
+             Faculty
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+            <ul class="list-style-none pl-4" id="persontype--academic-faculty">
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Full-Time Faculty" name="persontypes" type="checkbox" value="academic-faculty-weillfulltime"/>
+               Full-Time Faculty
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Voluntary Faculty" name="persontypes" type="checkbox" value="academic-faculty-voluntary"/>
+               Voluntary Faculty
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <label class="justify-content-start filters-toggler" data-target="persontype--affiliate">
+             <input class="filter-checkbox persontype-filter" data-text="Affiliate" name="persontypes" type="checkbox" value="affiliate"/>
+             Affiliate
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+            <ul class="list-style-none pl-4" id="persontype--affiliate">
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Collaborator" name="persontypes" type="checkbox" value="affiliate-collaborator"/>
+               Collaborator
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Contractor" name="persontypes" type="checkbox" value="affiliate-contractor"/>
+               Contractor
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="NYP Attending" name="persontypes" type="checkbox" value="affiliate-nyp-attending"/>
+               NYP Attending
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="NYP Employee" name="persontypes" type="checkbox" value="affiliate-nyp-employee"/>
+               NYP Employee
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="NYP Resident" name="persontypes" type="checkbox" value="affiliate-nyp-resident"/>
+               NYP Resident
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Temp Employee From Agency" name="persontypes" type="checkbox" value="affiliate-temp-employee-agency"/>
+               Temp Employee From Agency
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Affiliate Vendor" name="persontypes" type="checkbox" value="affiliate-vendor"/>
+               Affiliate Vendor
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Volunteer" name="persontypes" type="checkbox" value="affiliate-volunteer"/>
+               Volunteer
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="WCPN Staff" name="persontypes" type="checkbox" value="affiliate-wcpn-staff"/>
+               WCPN Staff
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <label class="justify-content-start filters-toggler" data-target="persontype--employee">
+             <input class="filter-checkbox persontype-filter" data-text="Employee" name="persontypes" type="checkbox" value="employee"/>
+             Employee
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+            <ul class="list-style-none pl-4" id="persontype--employee">
+            </ul>
+           </li>
+           <li>
+            <label class="justify-content-start filters-toggler" data-target="persontype--student">
+             <input class="filter-checkbox persontype-filter" data-text="Student" name="persontypes" type="checkbox" value="student"/>
+             Student
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+            <ul class="list-style-none pl-4" id="persontype--student">
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Certificate Student" name="persontypes" type="checkbox" value="student-certificate"/>
+               Certificate Student
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Masters Student" name="persontypes" type="checkbox" value="student-masters"/>
+               Masters Student
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="MD (New York) Student" name="persontypes" type="checkbox" value="student-md-new-york"/>
+               MD (New York) Student
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="Non-Degree Student" name="persontypes" type="checkbox" value="student-nondegree"/>
+               Non-Degree Student
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="PhD (Tri-I) Student" name="persontypes" type="checkbox" value="student-phd-tri-i"/>
+               PhD (Tri-I) Student
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+             <li>
+              <label class="justify-content-start">
+               <input class="filter-checkbox persontype-filter" data-text="PhD (Weill) Student" name="persontypes" type="checkbox" value="student-phd-weill"/>
+               PhD (Weill) Student
+               <span class="badge badge-secondary ml-1">
+               </span>
+              </label>
+             </li>
+            </ul>
+           </li>
+          </div>
+          <li class="divider" role="separator">
+          </li>
+          <li>
+           <label class="justify-content-start filters-toggler" data-target="dept-service-type-filters">
+            <input class="filter-checkbox" name="recordtype" type="checkbox" value="department_or_service"/>
+            <strong>
+             Department/Service
+            </strong>
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <div class="ml-4" id="dept-service-type-filters">
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Department" name="subtype" type="checkbox" value="Department"/>
+             Department
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Division" name="subtype" type="checkbox" value="Division"/>
+             Division
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Affiliated organization" name="subtype" type="checkbox" value="Affiliated Organization"/>
+             Affiliated organization
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Building" name="subtype" type="checkbox" value="Building"/>
+             Building
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Center" name="subtype" type="checkbox" value="Center"/>
+             Center
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Clinical program" name="subtype" type="checkbox" value="Clinical Program"/>
+             Clinical program
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Educational program" name="subtype" type="checkbox" value="Educational Program"/>
+             Educational program
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Institute" name="subtype" type="checkbox" value="Institute"/>
+             Institute
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Institution" name="subtype" type="checkbox" value="Institution"/>
+             Institution
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Lab" name="subtype" type="checkbox" value="Lab"/>
+             Lab
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Office" name="subtype" type="checkbox" value="Office"/>
+             Office
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Research program" name="subtype" type="checkbox" value="Research Program"/>
+             Research program
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+           <li>
+            <label class="justify-content-start">
+             <input class="filter-checkbox subtype-filter" data-text="Service" name="subtype" type="checkbox" value="Service"/>
+             Service
+             <span class="badge badge-secondary ml-1">
+             </span>
+            </label>
+           </li>
+          </div>
+         </ul>
+        </span>
+       </div>
+       <div class="form-group ml-4">
+        <label class="mr-1" for="affiliation-filters">
+         Filter by Affiliation:
+        </label>
+        <span class="dropdown dropdown-persistant">
+         <button aria-haspopup="" class="btn btn-outline-dark btn-large dropdown-wcm dropdown-toggle" data-toggle="dropdown" id="affiliation-filters" type="button">
+          Select
+          <span class="caret-wcm">
+          </span>
+         </button>
+         <ul aria-labelledby="affiliation-filters" class="dropdown-menu dropdown-menu-right filters-menu z-9999">
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Weill Cornell Medical College" name="o" type="checkbox" value="WCMC"/>
+            Weill Cornell Medical College
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="New York-Presbyterian Hospital" name="o" type="checkbox" value="NYP"/>
+            New York-Presbyterian Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Cornell University" name="o" type="checkbox" value="Cornell"/>
+            Cornell University
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Winifred Masterson Burke Rehabilitation Hospital" name="o" type="checkbox" value="WMBRH"/>
+            Winifred Masterson Burke Rehabilitation Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Winifred Masterson Burke Medical Research Institute" name="o" type="checkbox" value="WMBMRI"/>
+            Winifred Masterson Burke Medical Research Institute
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="St. Luke's-Roosevelt Hospital Center" name="o" type="checkbox" value="St Luke's"/>
+            St. Luke's-Roosevelt Hospital Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Coler-Goldwater Hospital" name="o" type="checkbox" value="Coler"/>
+            Coler-Goldwater Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Maimonides Medical Center" name="o" type="checkbox" value="Maimonides"/>
+            Maimonides Medical Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Westchester Square Medical Center" name="o" type="checkbox" value="WSMC"/>
+            Westchester Square Medical Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Morristown Memorial Hospital" name="o" type="checkbox" value="Morristown"/>
+            Morristown Memorial Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Bellevue Hospital" name="o" type="checkbox" value="Bellevue"/>
+            Bellevue Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Columbia University College of Physicians and Surgeons" name="o" type="checkbox" value="CUCPS"/>
+            Columbia University College of Physicians and Surgeons
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="The Brooklyn Hospital Center" name="o" type="checkbox" value="BHC"/>
+            The Brooklyn Hospital Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="University Group Medical Associates" name="o" type="checkbox" value="UGMA"/>
+            University Group Medical Associates
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="New York Community Hospital of Brooklyn" name="o" type="checkbox" value="NYCHB"/>
+            New York Community Hospital of Brooklyn
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Hospital for Special Surgery" name="o" type="checkbox" value="HSS"/>
+            Hospital for Special Surgery
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Jamaica Hospital" name="o" type="checkbox" value="JamaicaH"/>
+            Jamaica Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="La Guardia Hospital" name="o" type="checkbox" value="LaGuardH"/>
+            La Guardia Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Memorial Sloan Kettering Cancer Center" name="o" type="checkbox" value="MSKCC"/>
+            Memorial Sloan Kettering Cancer Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="North Shore University Hospital" name="o" type="checkbox" value="North Shore"/>
+            North Shore University Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="St. Barnabas Hospital" name="o" type="checkbox" value="StBarnH"/>
+            St. Barnabas Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="New York Blood Center" name="o" type="checkbox" value="NYBC"/>
+            New York Blood Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="New York United Hospital" name="o" type="checkbox" value="NYUH"/>
+            New York United Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Rogosin Institute" name="o" type="checkbox" value="RI"/>
+            Rogosin Institute
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Catholic Medical Center of Brooklyn" name="o" type="checkbox" value="CMC Bklyn"/>
+            Catholic Medical Center of Brooklyn
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Mary Immaculate Hospital" name="o" type="checkbox" value="MIH"/>
+            Mary Immaculate Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="St. Johns Queens Hospital" name="o" type="checkbox" value="St Johns"/>
+            St. Johns Queens Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="St. Mary's Hospital of Brooklyn" name="o" type="checkbox" value="St Mary's"/>
+            St. Mary's Hospital of Brooklyn
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="HIP of Greater New York" name="o" type="checkbox" value="HIP"/>
+            HIP of Greater New York
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Manhattan Eye, Ear and Throat Hospital" name="o" type="checkbox" value="MEETH"/>
+            Manhattan Eye, Ear and Throat Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Amsterdam Nursing Home" name="o" type="checkbox" value="ANH"/>
+            Amsterdam Nursing Home
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Strang Cancer Prevention Center" name="o" type="checkbox" value="SCPC"/>
+            Strang Cancer Prevention Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="New York Presbyterian - Queens" name="o" type="checkbox" value="NYPQ"/>
+            New York Presbyterian - Queens
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="New York Methodist Hospital" name="o" type="checkbox" value="NYMH"/>
+            New York Methodist Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Flushing Hospital Medical Center" name="o" type="checkbox" value="FlushHMC"/>
+            Flushing Hospital Medical Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Cayuga Medical Center of Ithaca" name="o" type="checkbox" value="CMCIthaca"/>
+            Cayuga Medical Center of Ithaca
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Coney Island Hospital" name="o" type="checkbox" value="CIH"/>
+            Coney Island Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="St. Vincent Hospital and Medical Center" name="o" type="checkbox" value="StVHMC"/>
+            St. Vincent Hospital and Medical Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Columbia Presbyterian Hospital" name="o" type="checkbox" value="CPH"/>
+            Columbia Presbyterian Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Non-Affiliated Institution" name="o" type="checkbox" value="Non-Affil"/>
+            Non-Affiliated Institution
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Lenox Hill Hospital" name="o" type="checkbox" value="Lenox"/>
+            Lenox Hill Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Wyckoff Heights Medical Center" name="o" type="checkbox" value="WHMC"/>
+            Wyckoff Heights Medical Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Rockefeller University" name="o" type="checkbox" value="RU"/>
+            Rockefeller University
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Columbia University Department of Rehabiliation Medicine" name="o" type="checkbox" value="CUCPS-Rehab"/>
+            Columbia University Department of Rehabiliation Medicine
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Rockefeller University Hospital" name="o" type="checkbox" value="RUH"/>
+            Rockefeller University Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Downtown Bronx Medical Associates" name="o" type="checkbox" value="DBMA"/>
+            Downtown Bronx Medical Associates
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Lincoln Medical and Mental Health Center" name="o" type="checkbox" value="LMMHC"/>
+            Lincoln Medical and Mental Health Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Westchester Medical Group" name="o" type="checkbox" value="WMGp"/>
+            Westchester Medical Group
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Community Health Network" name="o" type="checkbox" value="CHN"/>
+            Community Health Network
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="American Hospital of Paris" name="o" type="checkbox" value="AHP"/>
+            American Hospital of Paris
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Sloan Kettering Institute for Cancer Research" name="o" type="checkbox" value="SKI"/>
+            Sloan Kettering Institute for Cancer Research
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Houston Methodist Hospital" name="o" type="checkbox" value="HMH"/>
+            Houston Methodist Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Hamad Medical Corporation" name="o" type="checkbox" value="HMC"/>
+            Hamad Medical Corporation
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Houston Methodist Research Institute" name="o" type="checkbox" value="HMRI"/>
+            Houston Methodist Research Institute
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Aspetar Hospital" name="o" type="checkbox" value="AspH"/>
+            Aspetar Hospital
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Weill Cornell Physician Network" name="o" type="checkbox" value="WCPN"/>
+            Weill Cornell Physician Network
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="One Medical Group" name="o" type="checkbox" value="OMG"/>
+            One Medical Group
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="SIDRA Medical and Research Center" name="o" type="checkbox" value="SIDRA"/>
+            SIDRA Medical and Research Center
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="CityMD" name="o" type="checkbox" value="CityMD"/>
+            CityMD
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Cornell University Gannette Health Services" name="o" type="checkbox" value="CU GHS"/>
+            Cornell University Gannette Health Services
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Primary Health Care Corporation (Qatar)" name="o" type="checkbox" value="PHCC"/>
+            Primary Health Care Corporation (Qatar)
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Hunter College CUNY" name="o" type="checkbox" value="Hunter College CUNY"/>
+            Hunter College CUNY
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Calvary Hospital Brooklyn NY" name="o" type="checkbox" value="Calvary Hospital Brooklyn NY"/>
+            Calvary Hospital Brooklyn NY
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Feto-Maternal Medical Polyclinic (Qatar)" name="o" type="checkbox" value="FMMP"/>
+            Feto-Maternal Medical Polyclinic (Qatar)
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+          <li>
+           <label class="justify-content-start">
+            <input class="filter-checkbox o-filter" data-text="Weill Cornell Medical College in Qatar" name="o" type="checkbox" value="WCMC-Q"/>
+            Weill Cornell Medical College in Qatar
+            <span class="badge badge-secondary ml-1">
+            </span>
+           </label>
+          </li>
+         </ul>
+        </span>
+       </div>
+      </div>
+      <span hidden="" id="refined-by">
+       <strong>
+        Refined by:
+       </strong>
+       <ul class="d-inline list-inline ml-2" id="refined-by-list">
+       </ul>
+       <strong class="underline">
+        <a href="javascript:void(0)" onclick="EPSEARCH.clearFilters()">
+         Clear All
+        </a>
+       </strong>
+      </span>
+     </div>
+    </div>
+    <div class="row">
+     <div class="col">
+      <hr/>
+      <h4>
+       Displaying
+       <strong id="filtered-result-count">
+       </strong>
+       of
+       <span id="result-count">
+       </span>
+       total results found for "
+       <strong id="query">
+       </strong>
+       "
+      </h4>
+     </div>
+    </div>
+    <table class="stickyHeader table table-hover table-mobile-friendly" id="search-results" width="100%">
+     <thead>
+      <tr class="bg-dark small text-uppercase">
+       <th>
+       </th>
+       <th>
+        Name
+       </th>
+       <th>
+        Type
+       </th>
+       <th width="100px">
+        Affiliations
+       </th>
+       <th>
+        Phone
+       </th>
+       <th>
+        Email/Website
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+     </tbody>
+    </table>
+    <div class="row" hidden="" id="search-results-footer">
+     <div class="col-sm-6">
+      <small id="query-time">
+       Query time: s
+      </small>
+     </div>
+     <div class="col-sm-6 text-right" id="download-btn">
+     </div>
+    </div>
+   </div>
+   <h5 class="alert alert-danger text-center" hidden="" id="search-error">
+    We are sorry, but the application encountered a problem. If you experience this issue again, please contact
+    <a href="mailto:idm@med.cornell.edu">
+     idm@med.cornell.edu
+    </a>
+    .
+   </h5>
+   <script src="/assets/search-e3eb07011ac0ec3139c8c395ae60a7f1d7af6325e1f0adec7dba76e2eeca39be.js">
+   </script>
+  </div>
+  <!-- end main page container -->
+  <footer class="bg-dark fixed-bottom navbar-dark">
+   <div class="container">
+    <div class="d-flex navbar-text">
+     <small>
+      ©
+      <span id="copyright-year">
+      </span>
+      Weill Cornell Medicine. Reproduction, electronic or otherwise, without the permission of Weill Cornell Medicine is strictly forbidden. All Rights Reserved.
+     </small>
+     <small class="ml-auto">
+      Version 2.1.1
+     </small>
+     <span aria-hidden="true" hidden="">
+      For debug only - release: public, Remote IP: 66.215.35.104
+     </span>
+    </div>
+   </div>
+   <script type="text/javascript">
+    document.getElementById('copyright-year').innerHTML = (new Date()).getFullYear()
+   </script>
+  </footer>
+ </body>
+</html>
+

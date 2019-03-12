@@ -1,0 +1,183 @@
+https://wisdm2.doit.wisc.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <base href="/DS/"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="" name="description"/>
+  <meta content="" name="author"/>
+  <link href="images/favicon.png" rel="icon"/>
+  <title>
+   UW System Authentication Redirector
+  </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/app.css" rel="stylesheet"/>
+  <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="css/ie7.css">
+    <link rel="stylesheet" type="text/css" href="css/ie.css">
+<![endif]-->
+  <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" href="css/ie.css">
+
+<![endif]-->
+  <script src="js/html5shiv.min.js">
+  </script>
+  <script src="js/respond.min.js">
+  </script>
+  <script src="js/jquery.min.js">
+  </script>
+  <script src="js/bootstrap.min.js">
+  </script>
+ </head>
+ <body>
+  <!-- Begin page content -->
+  <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+   <div class="container">
+    <div class="navbar-header">
+    </div>
+    <div class="">
+     <ul class="nav navbar-nav navbar-right">
+      <li>
+       <a href="https://kb.wisc.edu/helpdesk/page.php?id=5500">
+        Login Help
+       </a>
+      </li>
+      <li>
+       <a href="https://kb.wisc.edu/page.php?id=13967">
+        Troubleshooting
+       </a>
+      </li>
+      <li>
+       <a href="https://outages.wisconsin.edu">
+        System Outages
+       </a>
+      </li>
+     </ul>
+    </div>
+    <!--/.nav-collapse -->
+   </div>
+   <!--/.container-fluid -->
+  </div>
+  <div class="container">
+   <div class="main-content">
+    <div class="iaa-system-logo well white-bg system-logo center text-center">
+     <img alt="UW-System Logo" class="img-responsive" src="images/Systemlogo.png"/>
+    </div>
+    <script>
+     $(function(){
+//  $("#campus-select").selectBoxIt({
+//      theme : "bootstrap",
+//      showFirstOption: false,
+//      autoWidth : false
+//  });
+    
+    if( $("#campus-select").val() != null && $("#campus-select").val().length != 0 ) {
+        $("#submit-go").focus();
+    }
+    else {
+        $("#campus-select").focus();
+    }
+    
+    $('[data-toggle="tooltip"]').tooltip();
+});
+    </script>
+    <p class="center text-center lead">
+     This service requires you to authenticate with your local organization.
+     <br/>
+     Select your organization from the list below.
+    </p>
+    <form class="form-horizontal" id="orgs" method="post" role="form">
+     <div class="well dark-grey-bg authentication-form center text-center">
+      <!-- campus dropdown form -->
+      <div class="form-group form-inline center text-center" id="campus-input">
+       <select class="form-control center text-left" id="campus-select" name="organization" tabindex="1" title="Select organization">
+        <option value="">
+         Select Organization
+        </option>
+        <option value="https://idp.uwc.edu/uwc/shibboleth">
+         UW Colleges
+        </option>
+        <option value="https://login.uwec.edu/idp/shibboleth">
+         UW-Eau Claire
+        </option>
+        <option value="https://idp.uwex.edu/uwex/shibboleth">
+         UW-Extension
+        </option>
+        <option value="https://idp.uwgb.edu/uwgb/shibboleth">
+         UW-Green Bay
+        </option>
+        <option value="https://idp.uwlax.edu/uwlax/shibboleth">
+         UW-La Crosse
+        </option>
+        <option value="https://login.wisc.edu/idp/shibboleth">
+         UW-Madison
+        </option>
+        <option value="https://idp.uwm.edu/idp/shibboleth">
+         UW-Milwaukee
+        </option>
+        <option value="https://idp.uwosh.edu/uwosh/shibboleth">
+         UW-Oshkosh
+        </option>
+        <option value="https://idp.uwp.edu/uwp/shibboleth">
+         UW-Parkside
+        </option>
+        <option value="https://shib1.uwplatt.edu/idp/shibboleth">
+         UW-Platteville
+        </option>
+        <option value="https://falconidp.uwrf.edu/idp/shibboleth">
+         UW-River Falls
+        </option>
+        <option value="https://idp.uwsp.edu/uwsp/shibboleth">
+         UW-Stevens Point
+        </option>
+        <option value="https://smidp.uwstout.edu/idp/shibboleth">
+         UW-Stout
+        </option>
+        <option value="https://idp.uwsuper.edu/uwsuper/shibboleth">
+         UW-Superior
+        </option>
+        <option value="https://idp.uwsa.edu/uwsa/shibboleth">
+         UW System Administration
+        </option>
+        <option value="https://idp.uww.edu/idp/shibboleth">
+         UW-Whitewater
+        </option>
+       </select>
+       <button class="btn btn-primary select-button" id="submit-go" tabindex="3" type="submit" value="submit">
+        Go
+       </button>
+      </div>
+      <input name="entityID" type="hidden" value="https://wisdm2.doit.wisc.edu/shibboleth"/>
+      <input name="return" type="hidden" value="https://wisdm2.doit.wisc.edu/Shibboleth.sso/DS?SAMLDS=1&amp;target=cookie%3A1552201849_142f"/>
+      <input name="returnIDParam" type="hidden" value="entityID"/>
+      <!-- end form -->
+     </div>
+     <div class="checkbox center text-center" id="auto-redirect-preference-content">
+      <label>
+       <input checked="" name="auto-redirect-preference" tabindex="2" type="checkbox"/>
+       <span class="auto-redirect-preference-text">
+        Remember my selection for this session
+        <a data-placement="top" data-toggle="tooltip" href="#" title="Checking this box will save your campus location and forward you to the corresponding log-in screen for the duration of this browser session.">
+         (?)
+        </a>
+       </span>
+      </label>
+     </div>
+    </form>
+   </div>
+  </div>
+  <div class="footer">
+   <div class="container system-red-bg">
+    <div class="display">
+    </div>
+    <p class="">
+     © Board of Regents - University of Wisconsin System. All Rights Reserved.
+    </p>
+   </div>
+   <div class="dark-red-bg">
+   </div>
+  </div>
+ </body>
+</html>

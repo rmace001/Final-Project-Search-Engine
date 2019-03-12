@@ -1,0 +1,256 @@
+http://aar.colostate.edu/
+<!---
+Description>>>
+Template Page for Login Page
+Provides the user with user cerdentials form for logging in to IVE.
+re
+Template Variables>>>
+prompts - This variable is an array of hashes that contain username/password text box information.
+LoginPageErrorCode - This argument contains the error code in case of an Error or Message.
+    1020: Password Change Success
+    1021: Account Disabled
+    1022: Account Locked out
+    1023: Account Expired
+	Usage:RealmList - List of Realms
+    If size is 0. Allow the user to enter the Realm in text box
+    IF size is > 1 , Allow the user to enter in List box
+AnonymousAuthentication - Set if IVE allows anonymous auth
+CertificateAuthentication -Set if IVE allows certificate auth
+SAMLAuthentication -Set if IVE allows SAML consumer auth
+    If any of above two is set, the realm is avaialable in RealmList.0. It needs to be sent in the form as hidden variable.
+LoginPageErrorMessage
+
+Required Template Variables>>>
+LoginPageErrorMessage
+The four new variables added are:
+hcInAcTimeout - Specifies the HC login inactivity timeout in minutes
+hcRunning     - Specifies whether HC is running or not, by looking at the DSPREAUTH cookie.
+ccInAcTimeout - Specifies the CC login inactivity timeout in minutes
+ccRunning     - Specifies whether CC is running or not, by looking at the DSPREAUTH cookie.
+
+Other>>>
+1. The following HTML Code with appropriate formatting is required to be present in the FORM:
+    <input id="tz_offset_4" type="hidden" name="tz_offset">
+username	<input id="username" type="text" name="username">password	<input id="password" type="password" name="password">Additional password	<input id="passwordSecondary" type="password" name="password#2">
+2. FORM Action must be 'login.cgi'
+
+3. For custom pages to display the custom logo and not the juniper logo, do the following change in the way logo image is being refrenced below.
+   change the following occurance
+        src="welcome.cgi?p=logo&signinId=url_1"
+   to
+        src="/dana-na/auth/url_1/imgs/custom-logo.gif"
+   where custom-logo.gif is the image/file name that was uploaded as part of the modified custom sign-in page zip file.
+
+--->
+<html>
+ <head>
+  <!-- START DUO SNIPPET -->
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <!-- END DUO SNIPPET -->
+  <meta http-equiv="Content-Language"/>
+  <meta content="text/html" http-equiv="Content-Type"/>
+  <meta content="none" name="robots"/>
+  <title>
+   Pulse Connect Secure
+  </title>
+  <script src="/dana-na/css/ds.js">
+  </script>
+  <script>
+   WriteCSS();
+  </script>
+  <noscript>
+   <link href="/dana-na/css/ds.css" rel="stylesheet"/>
+  </noscript>
+  <script>
+   <!--
+if (window.top != self) {
+	top.location = location;
+}
+if(window.name == "newpincancel" || window.name == "nexttokencancel") {
+   window.close();
+}
+//-->
+  </script>
+  <script>
+   <!--
+function hideJSWarn() {
+    if(window.top == self) {
+        document.getElementById('noJSWarn').style.display = "none";
+    }
+}
+//-->
+  </script>
+  <script src="/dana-na/auth/lastauthserverused.js">
+  </script>
+  <script>
+   function deletepreauth() {
+    document.cookie = "DSPREAUTH="+ escape("")+ ";path=/dana-na/;expires=12-Nov-1996";
+}
+  </script>
+  <!-- START DUO SNIPPET -->
+  <script src="/dana-na/auth/url_1/js/Duo-Juniper-Desktop.js">
+  </script>
+  <!-- END DUO SNIPPET -->
+ </head>
+ <body alink="#3366CC" bgcolor="#FFFFFF" color="#000000" leftmargin="0" link="#3366CC" marginheight="0" marginwidth="0" onload="FinishLoad(0);hideJSWarn();" rightmargin="0" topmargin="0" vlink="#CC6699">
+  <div class="cssSecurityWarning" id="noJSWarn">
+   Your browser is executing scripts on this page. If this message persists, please make sure that you are visiting a correct site and JavaSript support is enabled in your browser, and then try again.
+  </div>
+  <table border="0" cellpadding="3" cellspacing="0" id="table_LoginPage_1" width="100%">
+   <tr>
+    <td bgcolor="#E3E3E3">
+     <img alt="Logo" border="0" src="welcome.cgi?p=logo&amp;signinId=url_1"/>
+    </td>
+    <td align="right" bgcolor="#E3E3E3">
+    </td>
+   </tr>
+  </table>
+  <table border="0" cellpadding="0" cellspacing="0" id="table_LoginPage_2" width="100%">
+   <tr>
+    <td bgcolor="#000000" colspan="2">
+     <img border="0" height="1" src="/dana-na/auth/url_1/imgs/space.gif" width="1"/>
+    </td>
+   </tr>
+  </table>
+  <!-- START DUO SNIPPET -->
+  <blockquote id="tp_hide">
+   <!-- END DUO SNIPPET -->
+   <form action="login.cgi" autocomplete="off" id="frmLogin_4" method="POST" name="frmLogin" onsubmit="return Login(0)">
+    <input id="tz_offset_5" name="tz_offset" type="hidden"/>
+    <table border="0" cellpadding="2" cellspacing="0" id="table_LoginPage_3">
+     <tr>
+      <td colspan="3" nowrap="">
+       <b>
+        Welcome to the
+       </b>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="3" nowrap="">
+       <span class="cssLarge">
+        <b>
+         Pulse Connect Secure
+        </b>
+       </span>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="3">
+      </td>
+     </tr>
+     <tr>
+      <td valign="top">
+       <table border="0" cellpadding="2" cellspacing="0" id="table_LoginPage_6">
+        <tr>
+         <td>
+          username
+         </td>
+         <td>
+         </td>
+         <td>
+          <input id="username" name="username" size="20" type="text"/>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          password
+         </td>
+         <td>
+         </td>
+         <td>
+          <input id="password" name="password" size="20" type="password"/>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Additional password
+         </td>
+         <td>
+         </td>
+         <td>
+          <input id="passwordSecondary" name="password#2" size="20" type="password"/>
+         </td>
+        </tr>
+        <tr>
+         <input id="realm_16" name="realm" type="hidden" value="CSUeID-duo"/>
+        </tr>
+        <tr>
+         <td colspan="3">
+         </td>
+        </tr>
+        <tr>
+         <td>
+         </td>
+         <td>
+         </td>
+         <td>
+          <input id="btnSubmit_6" name="btnSubmit" type="submit" value="Sign In"/>
+         </td>
+        </tr>
+       </table>
+      </td>
+      <td valign="top">
+      </td>
+      <td valign="top">
+       <table border="0" cellpadding="2" cellspacing="0" id="TABLE_LoginPage_1">
+        <tr>
+         <td>
+          Please sign in to begin your secure session.
+          <br/>
+          <br/>
+          <noscript>
+           Note: Javascript is disabled on your browser.
+          </noscript>
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+    </table>
+   </form>
+  </blockquote>
+ </body>
+</html>
+<!-- START DUO SNIPPET -->
+<div id="tp_attach">
+</div>
+<!-- END DUO SNIPPET -->
+<table border="0" cellpadding="0" cellspacing="0" id="table_LoginPage_9" width="100%">
+ <tr>
+  <td background="/dana-na/auth/url_1/imgs/footerbg.gif">
+   <table border="0" cellpadding="0" cellspacing="0" id="table_LoginPage_10" width="100%">
+    <tr>
+     <td>
+      <img height="10" src="/dana-na/auth/url_1/imgs/space.gif" width="10"/>
+     </td>
+     <td>
+      <img height="2" src="/dana-na/auth/url_1/imgs/space.gif" width="1"/>
+     </td>
+     <td>
+      <img height="10" src="/dana-na/auth/url_1/imgs/space.gif" width="10"/>
+     </td>
+    </tr>
+    <tr valign="top">
+     <td>
+      <img height="1" src="/dana-na/auth/url_1/imgs/space.gif" width="10"/>
+     </td>
+     <td nowrap="">
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <td align="right">
+       <img height="10" src="/dana-na/auth/url_1/imgs/space.gif" width="10"/>
+      </td>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td colspan="2">
+   <img alt="" border="0" height="6" src="/dana-na/auth/url_1/imgs/space.gif" width="1"/>
+  </td>
+ </tr>
+</table>
+

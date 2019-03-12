@@ -1,0 +1,182 @@
+https://jagwire.tamusa.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   JagWire
+  </title>
+  <link href="images/favicon.png" rel="icon" type="image/x-icon"/>
+  <link href="libs/bootstrap_3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/custom-common.css" rel="stylesheet"/>
+  <link href="css/tamusa.css" rel="stylesheet"/>
+  <!--[if lt IE 9]>
+        <script src="js/html5shiv.min.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+ </head>
+ <body class="login-page">
+  <section class="login-page" id="login-page">
+   <!-- page content -->
+   <div class="video-container">
+    <div class="video-wrapper">
+     <video autoplay="" loop="" muted="" poster="images/tamusa_background.jpg" preload="metadata">
+      <source src="images/tamusa_dino.mp4" type="video/mp4"/>
+     </video>
+    </div>
+   </div>
+   <div class="container">
+    <!-- content -->
+    <div class="flip-container">
+     <div class="flipper">
+      <div class="front">
+       <div class="form-logo">
+        <a href="http://www.tamusa.edu" rel="noopener" target="_blank" title="Texas A&amp;M University San Antonio Website">
+        </a>
+       </div>
+       <form action="../commonauth" class="login-form" id="loginForm" method="post">
+        <label accesskey="U" for="username" style="float: left;">
+         Username
+        </label>
+        <input class="form-control form-control input-block" id="username" name="username" placeholder="Username" tabindex="0" type="text"/>
+        <label accesskey="P" for="password" style="float: left;">
+         Password
+        </label>
+        <input autocomplete="off" class="form-control form-control input-block" id="password" name="password" placeholder="Password" type="password"/>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+         <input name="sessionDataKey" type="hidden" value="433cfb6c-22bb-47e7-a49e-c921f18596b3">
+         </input>
+        </div>
+        <label class="checkbox-label">
+         <input id="chkRemember" name="chkRemember" type="checkbox">
+          Remember me
+         </input>
+        </label>
+        <a class="forgot-link" href="#">
+         Forgot Password?
+        </a>
+        <div class="botton-group">
+         <button class="wr-btn grey-bg col-xs-12 col-md-12 col-lg-12 uppercase font-extra-large" type="submit">
+          Sign in
+         </button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <div class="register active-link">
+          <a href="https://selfservice.tamusa.tamus.edu/showLogin.cc?logoutFromSSO=true" rel="noopener" style="cursor: pointer" target="_blank">
+           First time user?
+          </a>
+          or
+          <a href="https://selfservice.tamusa.tamus.edu/showLogin.cc?logoutFromSSO=true" rel="noopener" style="cursor: pointer" target="_blank">
+           Password expired?
+          </a>
+         </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <div class="admissions active-link">
+          <a class="admissons-link" href="http://www.tamusa.edu/admissions/reginfo.html" rel="noopener" style="color: #24292e!important; font-weight: 400; text-decoration: underline;" target="_blank">
+           Course Registration Information
+          </a>
+         </div>
+        </div>
+       </form>
+      </div>
+      <div class="back">
+       <div class="form-logo-back">
+        <a href="http://www.tamusa.edu" rel="noopener" target="_blank" title="Texas A&amp;M University San Antonio Website">
+        </a>
+       </div>
+       <div class="login-form">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 reset-link">
+         <a class="float-left" href="https://selfservice.tamusa.tamus.edu/accounts/Reset" rel="noopener" style="cursor: pointer" target="_blank">
+          Reset Your Password
+         </a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 unlock-link">
+         <a class="float-left" href="https://selfservice.tamusa.tamus.edu/accounts/UnLock" rel="noopener" style="cursor: pointer" target="_blank">
+          Unlock Your Account
+         </a>
+        </div>
+        <button class="wr-btn grey-bg col-xs-12 col-md-12 col-lg-12 uppercase font-extra-large cancel-link" type="button">
+         Return to Login
+        </button>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!-- /content -->
+   </div>
+   <!-- /content/body -->
+  </section>
+  <!-- footer -->
+  <footer class="footer">
+   <div class="container-fluid">
+    <a href="http://www.tamusa.edu" rel="noopener" target="_blank" title="Texas A&amp;M University San Antonio Website">
+     Texas A&amp;M University San Antonio
+    </a>
+    <span>
+     | ©
+    </span>
+    <span id="footer-date" style="font-style: normal;">
+    </span>
+    <span>
+     All Rights Reserved
+    </span>
+   </div>
+  </footer>
+  <script src="libs/jquery_1.11.3/jquery-1.11.3.js">
+  </script>
+  <script src="libs/bootstrap_3.3.5/js/bootstrap.min.js">
+  </script>
+  <script src="./assets/js/app.js">
+  </script>
+  <script>
+   $(document).ready(function () {
+            $('.main-link').click(function () {
+                $('.main-link').next().hide();
+                $(this).next().toggle('fast');
+                var w = $(document).width();
+                var h = $(document).height();
+                $('.overlay').css("width", w + "px").css("height", h + "px").show();
+            });
+            $('[data-toggle="popover"]').popover();
+            $('.overlay').click(function () {
+                $(this).hide();
+                $('.main-link').next().hide();
+            });
+
+            
+        });
+        function myFunction(key, value, name) {
+            var object = document.getElementById(name);
+            var domain = object.value;
+
+
+            if (domain != "") {
+                document.location = "../commonauth?idp=" + key + "&authenticator=" + value +
+                        "&sessionDataKey=433cfb6c-22bb-47e7-a49e-c921f18596b3&domain=" +
+                        domain;
+            } else {
+                document.location = "../commonauth?idp=" + key + "&authenticator=" + value +
+                        "&sessionDataKey=433cfb6c-22bb-47e7-a49e-c921f18596b3";
+            }
+        }
+
+        function handleNoDomain(key, value) {
+            document.location = "../commonauth?idp=" + key + "&authenticator=" + value +
+                    "&sessionDataKey=433cfb6c-22bb-47e7-a49e-c921f18596b3";
+        }
+
+        $('#popover').popover({
+            html: true,
+            title: function () {
+                return $("#popover-head").html();
+            },
+            content: function () {
+                return $("#popover-content").html();
+            }
+        });
+  </script>
+ </body>
+</html>
+

@@ -1,0 +1,473 @@
+https://maps.northwestern.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Northwestern University Campus Maps
+  </title>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <link href="/css/main.css?v=1.15" rel="stylesheet"/>
+  <link href="/apple-icon-57x57.png" rel="apple-touch-icon" sizes="57x57"/>
+  <link href="/apple-icon-60x60.png" rel="apple-touch-icon" sizes="60x60"/>
+  <link href="/apple-icon-72x72.png" rel="apple-touch-icon" sizes="72x72"/>
+  <link href="/apple-icon-76x76.png" rel="apple-touch-icon" sizes="76x76"/>
+  <link href="/apple-icon-114x114.png" rel="apple-touch-icon" sizes="114x114"/>
+  <link href="/apple-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"/>
+  <link href="/apple-icon-144x144.png" rel="apple-touch-icon" sizes="144x144"/>
+  <link href="/apple-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"/>
+  <link href="/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="/android-icon-192x192.png" rel="icon" sizes="192x192" type="image/png"/>
+  <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+  <link href="/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+  <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+  <link href="/manifest.json" rel="manifest"/>
+  <meta content="#ffffff" name="msapplication-TileColor"/>
+  <meta content="/ms-icon-144x144.png" name="msapplication-TileImage"/>
+  <meta content="#ffffff" name="theme-color"/>
+  <script>
+   var mapsRouter={'action': 'null','id': -1, 'mode': 'default'};
+  </script>
+ </head>
+ <body class="default">
+  <div id="container">
+   <div id="maps-header">
+    <a class="panel-handle hide" href="#">
+    </a>
+    <a href="http://www.northwestern.edu">
+     <img alt="Northwestern University" src="/images/northwestern.svg"/>
+    </a>
+    <span id="header-campus-label">
+     Evanston
+    </span>
+   </div>
+   <div id="map-canvas">
+   </div>
+   <a href="#" id="button-refresh">
+    Reset
+   </a>
+   <!-- panel:start -->
+   <div class="panel-content" id="panel">
+    <div class="panel-inner">
+     <div class="panel-items">
+      <div class="panel-search ui-widget">
+       <label for="panel-search">
+        Search:
+       </label>
+       <input autocomplete="off" class="js-search" id="panel-search" placeholder="Search"/>
+      </div>
+      <ul class="panel-tools" id="panel-tools">
+       <li class="li-listings">
+        <a class="listings js-listings js-panel-item" href="#">
+         A-Z Listings
+        </a>
+        <div class="panel-container js-panel-container" id="panel-listings">
+        </div>
+       </li>
+       <li class="li-layers">
+        <a class="layers js-layers js-panel-item" href="#">
+         Layers
+        </a>
+        <div class="panel-container js-panel-container">
+         <div id="layer-select">
+          <div>
+           <p class="layer-buildings">
+            <input checked="" class="js-layer-selector js-layer-1" id="layer-1" type="checkbox"/>
+            <label for="layer-1">
+             Buildings
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="layer-parking">
+            <input checked="" class="js-layer-selector js-layer-2" id="layer-2" type="checkbox"/>
+            <label for="layer-2">
+             Parking
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+          <div class="layers-evanston">
+           <p class="layer-athletics">
+            <input checked="" class="js-layer-selector js-layer-3" id="layer-3" type="checkbox"/>
+            <label for="layer-3">
+             Athletics
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="layer-libraries">
+            <input checked="" class="js-layer-selector js-layer-4" id="layer-4" type="checkbox"/>
+            <label for="layer-4">
+             Libraries
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="layer-other">
+            <input checked="" class="js-layer-selector js-layer-5" id="layer-5" type="checkbox"/>
+            <label for="layer-5">
+             Campus Landmarks
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+          <div class="layers-chicago">
+           <p class="layer-nmh">
+            <input checked="" class="js-layer-selector js-layer-6" id="layer-6" type="checkbox"/>
+            <label for="layer-6">
+             Northwestern Memorial Hospital
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="layer-chc">
+            <input checked="" class="js-layer-selector js-layer-7" id="layer-7" type="checkbox"/>
+            <label for="layer-7">
+             Ann and Robert H Lurie Children's Hospital
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="layer-ric">
+            <input checked="" class="js-layer-selector js-layer-8" id="layer-8" type="checkbox"/>
+            <label for="layer-8">
+             Shirley Ryan AbilityLab
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+          <p class="layer-bikeracks layers-evanston">
+           <input class="js-layer-selector js-layer-9" id="layer-9" type="checkbox"/>
+           <label for="layer-9">
+            Bike Racks
+            <span>
+             ■
+            </span>
+           </label>
+          </p>
+          <p class="layer-construction layers-evanston">
+           <input class="js-layer-selector js-layer-10" id="layer-10" type="checkbox"/>
+           <label for="layer-10">
+            Construction
+            <span>
+             ■
+            </span>
+           </label>
+          </p>
+          <p class="layer-construction layers-chicago">
+           <input class="js-layer-selector js-layer-11" id="layer-11" type="checkbox"/>
+           <label for="layer-11">
+            Construction
+            <span>
+             ■
+            </span>
+           </label>
+          </p>
+         </div>
+        </div>
+       </li>
+       <li class="li-shuttles">
+        <a class="shuttles js-shuttles js-panel-item" href="#">
+         Shuttles
+        </a>
+        <div class="panel-container js-panel-container">
+         <div id="shuttle-select">
+          <p class="header shuttle-legend">
+           = GPS Tracking
+          </p>
+          <p class="shuttle-transloc">
+           <a href="https://northwestern.transloc.com/">
+            <img alt="Transloc" src="/images/transloc-btn.png" width="161px"/>
+           </a>
+          </p>
+          <div class="shuttle-routes layers-evanston">
+           <p class="shuttle-201">
+            <input class="js-shuttle-selector" id="shuttle-201" name="shuttle" type="checkbox"/>
+            <label for="shuttle-201">
+             CTA 201
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+          <div class="shuttle-routes">
+           <p class="shuttle-icb">
+            <input class="js-shuttle-selector" id="shuttle-icb" name="shuttle" type="checkbox"/>
+            <label for="shuttle-icb">
+             Intercampus
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-express">
+            <input class="js-shuttle-selector" id="shuttle-express" name="shuttle" type="checkbox"/>
+            <label for="shuttle-express">
+             Chicago Express
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+          <div class="shuttle-routes layers-evanston">
+           <p class="shuttle-camp">
+            <input class="js-shuttle-selector" id="shuttle-camp" name="shuttle" type="checkbox"/>
+            <label for="shuttle-camp">
+             Campus Loop
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-evanston">
+            <input class="js-shuttle-selector" id="shuttle-evanston" name="shuttle" type="checkbox"/>
+            <label for="shuttle-evanston">
+             Evanston Loop
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-shopnride">
+            <input class="js-shuttle-selector" id="shuttle-shopnride" name="shuttle" type="checkbox"/>
+            <label for="shuttle-shopnride">
+             Shop-N-Ride
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-cfrost">
+            <input class="js-shuttle-selector" id="shuttle-cfrost" name="shuttle" type="checkbox"/>
+            <label for="shuttle-cfrost">
+             Campus Frostbite
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-evfrost">
+            <input class="js-shuttle-selector" id="shuttle-evfrost" name="shuttle" type="checkbox"/>
+            <label for="shuttle-evfrost">
+             Evanston Frostbite
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-game">
+            <input class="js-shuttle-selector" id="shuttle-game" name="shuttle" type="checkbox"/>
+            <label for="shuttle-game">
+             Student Game Day
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+          <div class="shuttle-routes layers-chicago">
+           <p class="shuttle-oga">
+            <input class="js-shuttle-selector" id="shuttle-oga" name="shuttle" type="checkbox"/>
+            <label for="shuttle-oga">
+             Ogilvie/Union AM
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-ogb">
+            <input class="js-shuttle-selector" id="shuttle-ogb" name="shuttle" type="checkbox"/>
+            <label for="shuttle-ogb">
+             Ogilvie/Union PM
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-randa">
+            <input class="js-shuttle-selector" id="shuttle-randa" name="shuttle" type="checkbox"/>
+            <label for="shuttle-randa">
+             Millennium/LaSalle AM
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-randb">
+            <input class="js-shuttle-selector" id="shuttle-randb" name="shuttle" type="checkbox"/>
+            <label for="shuttle-randb">
+             Millennium/LaSalle PM
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+           <p class="shuttle-saferide">
+            <input class="js-shuttle-selector" id="shuttle-saferide" name="shuttle" type="checkbox"/>
+            <label for="shuttle-saferide">
+             SafeRide Chicago
+             <span>
+              ■
+             </span>
+            </label>
+           </p>
+          </div>
+         </div>
+        </div>
+       </li>
+       <li class="layers-evanston">
+        <a class="sustainability last" href="https://www.google.com/maps/d/viewer?mid=1nZyi-kZ1W0eFjfCubEmviUULH9E&amp;ll=42.05513811965979%2C-87.680020924166&amp;z=16" target="_blank">
+         Sustainability
+        </a>
+       </li>
+       <li class="layers-chicago">
+        <a class="sustainability last" href="https://www.google.com/maps/d/viewer?mid=1qPcqFFKfRR_Ldx473TtWhlhdqvM&amp;ll=41.895397325729924%2C-87.61973189999998&amp;z=18" target="_blank">
+         Sustainability
+        </a>
+       </li>
+      </ul>
+     </div>
+     <ul class="panel-links">
+      <li class="js-link-evanston" id="js-panel-link-evanston">
+       <a href="#">
+        Go to Evanston
+       </a>
+      </li>
+      <li class="js-link-chicago" id="js-panel-link-chicago">
+       <a href="#">
+        Go to Chicago
+       </a>
+      </li>
+      <li>
+       <a href="/txt">
+        Text Version
+       </a>
+      </li>
+      <li>
+       <a href="#" id="js-panel-link-feedback">
+        Feedback
+       </a>
+      </li>
+      <li>
+       <a href="http://www.northwestern.edu/univ-relations/webcomm/help/maps-help.html" id="js-panel-link-help" target="_blank">
+        Help
+       </a>
+      </li>
+      <li>
+       <a href="http://www.northwestern.edu/campus-life/campuses/maps/index.html" id="js-panel-link-print" target="_blank">
+        Printable Maps
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- panel:end -->
+   <div class="panel-mobile">
+    <div>
+     <a class="modal-close-icon js-modal-close" href="#">
+      <img height="35" src="/css/icons/close.svg" width="35">
+      </img>
+     </a>
+     <h2 class="panel-mobile-title modal-title">
+     </h2>
+     <div class="panel-mobile-content">
+     </div>
+    </div>
+   </div>
+   <div class="status" id="status-top">
+   </div>
+   <div class="status" id="status-bottom">
+   </div>
+   <div class="status" id="status-shuttle">
+    <img alt="Close" class="js-status-close" src="/images/icon-close.png"/>
+    <p class="title">
+     Shuttles
+    </p>
+    <p>
+     See the
+     <a href="http://www.northwestern.edu/transportation-parking/shuttles/routes/index.html" target="_blank">
+      Transportation &amp; Parking
+     </a>
+     website for schedule and service updates.
+    </p>
+   </div>
+   <div id="shuttle-prompt">
+    <img alt="Close" class="js-status-close" src="/images/icon-close.png"/>
+    Are you still there?
+    <br/>
+    <button id="btnContinue" type="button">
+     Continue tracking the shuttle
+    </button>
+   </div>
+   <div id="facility-detail">
+   </div>
+   <div id="facility-email">
+   </div>
+   <div id="feedback-email">
+   </div>
+  </div>
+  <div id="location-button">
+   <span id="location-error">
+   </span>
+  </div>
+  <div aria-labelledby="entrance-header" id="modal-backdrop" role="dialog">
+   <div id="entrance-screen">
+    <h2 id="entrance-header">
+     <img alt="Northwestern University" src="/images/northwestern.svg" width="200"/>
+    </h2>
+    <!--<p>Select a campus:</p>-->
+    <a href="/txt" id="text-link">
+     Text only version: Northwestern University Chicago and Evanston campus building locations.
+    </a>
+    <a class="entrance-button js-link-evanston" href="#" id="entrance-evanston">
+     Evanston
+    </a>
+    <a class="entrance-button js-link-chicago" href="#" id="entrance-chicago">
+     Chicago
+    </a>
+    <div id="entrance-search-outer">
+     <!--<p>Search for a facility:</p>-->
+     <div class="entrance-search ui-widget search">
+      <label for="entrance-search">
+       Search:
+      </label>
+      <input autocomplete="off" class="js-search" id="entrance-search" placeholder="Search">
+      </input>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script data-main="/js/main.js" src="/js/lib/requirejs/require.js">
+  </script>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-23739615-30']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+  </script>
+  <div class="desktop">
+  </div>
+ </body>
+</html>

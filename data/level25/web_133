@@ -1,0 +1,717 @@
+http://libguides.iusb.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   Home - Schurz Library LibGuides at Indiana University South Bend
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="noindex,nofollow,noarchive" name="robots">
+   <!-- favicon.twig -->
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/site.webmanifest" rel="manifest"/>
+   <link color="#5bbad5" href="//libapps.s3.amazonaws.com/apps/common/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/favicon.ico" rel="shortcut icon"/>
+   <meta content="#ffc40d" name="msapplication-TileColor"/>
+   <meta content="//libapps.s3.amazonaws.com/apps/common/favicon/browserconfig.xml" name="msapplication-config"/>
+   <meta content="#ffffff" name="theme-color"/>
+   <meta content="Schurz Library LibGuides" property="og:title"/>
+   <meta content=" " property="og:description"/>
+   <meta content="website" property="og:type"/>
+   <meta content="http://libguides.iusb.edu/" property="og:url"/>
+   <meta content="summary_large_image" name="twitter:card"/>
+   <meta content="@springshare" name="twitter:site"/>
+   <link href="/web/jquery/css/jquery-ui.min.css?2695" rel="stylesheet">
+    <link href="/web/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="/web/css1.29.5/lg-public.min.css" rel="stylesheet">
+      <script src="/web/jquery/js/1.12.1_jquery.min.js" type="text/javascript">
+      </script>
+      <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js">
+      </script>
+      <script>
+       jQuery.ui || document.write('<script src="/web/jquery/js/jquery-ui.min.js?2695">\x3C/script>');
+      </script>
+      <script src="/web/js1.29.5/lg-public.min.js" type="text/javascript">
+      </script>
+      <!-- BEGIN: CUSTOM HEAD JS/CSS -->
+      <link href="//s3.amazonaws.com/libapps/sites/1222/include/base.css" rel="stylesheet" type="text/css"/>
+      <!-- END: CUSTOM HEAD JS/CSS -->
+      <script>
+       var system = {"name":"Schurz Library LibGuides"};
+                    springSpace.publicObj = new springSpace.public.Public({
+                        constant: {
+                            PROCESSING: {
+                                
+                            },
+                            CONTENT: {
+                            }
+                        },
+                        system_name: system.name,
+                        customer: {"name":"Indiana University South Bend"}
+                    });
+					springSpace.Session.CONST.ACTION_AUTH_SET_LG_SESSION_COOKIE = 750;
+      </script>
+      <script>
+       var springStats = springStats || {};
+springStats.saConfig = springStats.saConfig || {
+    site_id: 1222,
+    tracking_parameters: {"_st_site_id":1222},
+    tracking_server_host: "libguides-proc.springyaws.com"
+};
+      </script>
+      <script async="" src="/web/js/sa.min.js?3116">
+      </script>
+      <script>
+       springSpace.Common = springSpace.Common || { };
+                    springSpace.Common.constant = {
+                        PROCESSING: {
+                            ACTION_DISPLAY_POLL: 159
+                        }
+                    };
+                    springSpace.publicObj.constant.PROCESSING.ACTION_LOAD_GUIDE_LIST = 170;
+                    springSpace.publicObj.homeNavButtons = {"170":"All Guides","171":"By Group","172":"By Subject","173":"By Type","174":"By Owner"};
+                    springSpace.publicObj.getCountType=function(action) {
+                        var count_type = "";
+                        switch (action) {
+                            case 176:
+                                count_type = "guidetype";
+                                break;
+                            case 177:
+                                count_type = "group";
+                                break;
+                            case 178:
+                                count_type = "owner";
+                                break;
+                        }
+                        return count_type;
+                    };
+                    springSpace.publicObj.loadGuideCounts=function(config) {
+                        xhr = jQuery.ajax({
+                            url: "/index_process.php?action=" + config.action + "&site_id=" + config.site_id + "&group_id=" + config.group_id + "&key=" + key,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(response, textStatus, jqXHR) {
+                                if ( response.errCode == 200 ) {
+                                    var count_type = springSpace.publicObj.getCountType(config.action);
+                                    jQuery.each(response.data, function(idx, elt) {
+											jQuery("#s-lg-index-" + count_type + "-" + elt.id).show();
+											jQuery("#s-lg-index-" + count_type + "-count-" + elt.id).html(elt.count);
+                                    });
+                                } else {
+                                    // Show error message.
+                                    springSpace.UI.notify({mode: "custom", msg: "Error loading guide counts."});
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                // error
+                                springSpace.UI.notify({mode: "custom", msg: "Error loading guide counts."});
+                            }
+                        });
+                    }
+                    
+                    var button_data = {"code":"s"};
+                    
+                    springSpace.homepage = {
+                        default_list_order: "a",
+                        current_list: 172,
+                        current_btn_id: "s-lg-index-subject-btn",
+                        current_num_cols: 3,
+                        current_type_label: "",
+                        current_button_code: button_data.code,
+                        group_id: 0,
+				        historyEdited: false,
+                        initPushState: function() {
+                            if (window.history && history.pushState) {
+                                jQuery(window).bind("popstate", function(e) {
+                                    // Don't reload list if this is the result of a skip link hash update.
+                                    if ( springSpace.homepage.historyEdited ) {
+                                        // location.search will return URL encoded values which will end up causing double-encoding when jQuery sends the loadAzList request.
+                                        var button_code = springSpace.Util.getQSParam({name: "b", qs: location.search});
+                                        var guide_display_code = springSpace.Util.getQSParam({name: "d", qs: location.search});
+                                        
+                                        // If there is no button code, leave things the same.
+                                        if (button_code === "") {
+                                            return;
+                                        }
+                                        
+                                        springSpace.publicObj.loadHomepageList({
+                                            nav: "back",
+                                            action: springSpace.homepage.mapQSIdToActionId(button_code),
+                                            group_id: springSpace.homepage.group_id,
+                                            order: springSpace.homepage.mapQSIdToGuideSortId(guide_display_code),
+                                            num_cols: 3,
+                                            elt_id: "s-lg-index-list",
+                                            button_id: springSpace.homepage.mapQSIdToButtonEltId(button_code),
+                                            type_label: "Subjects",
+                                            display_sort: ( springSpace.homepage.mapQSIdToButtonEltId(button_code) === "s-lg-index-all-btn")
+                                        });
+                                    }
+                                });
+                            }
+                        },
+                        mapQSIdToButtonEltId: function(qs_id) {
+                            var button_ids = {
+                                "g": "s-lg-index-all-btn",
+                                "s": "s-lg-index-subject-btn",
+                                "t": "s-lg-index-guidetype-btn",
+                                "o": "s-lg-index-owner-btn",
+                                "p": "s-lg-index-group-btn",
+                            };
+                            springSpace.Util.setObjProp(qs_id, "", button_ids);
+                            
+                            return button_ids[qs_id];
+                        },
+                        mapQSIdToActionId: function(qs_id) {
+                            var button_ids = {
+                                "g": "170",
+                                "s": "172",
+                                "t": "173",
+                                "o": "174",
+                                "p": "171",
+                            };
+                            springSpace.Util.setObjProp(qs_id, "", button_ids);
+                            
+                            return button_ids[qs_id];
+                        },
+                        mapButtonEltIdToQSId: function(btn_elt_id) {
+                            var button_ids = {
+                                "s-lg-index-all-btn": "g",
+                                "s-lg-index-subject-btn": "s",
+                                "s-lg-index-guidetype-btn": "t",
+                                "s-lg-index-owner-btn": "o",
+                                "s-lg-index-group-btn": "p",
+                            };
+                            springSpace.Util.setObjProp(btn_elt_id, "", button_ids);
+                            
+                            return button_ids[btn_elt_id];
+                        },
+                        mapQSIdToGuideSortId: function(qs_id) {
+                            var sort_ids = {
+                                "a": "0",
+                                "r": "2",
+                                "p": "3"
+                            };
+                            springSpace.Util.setObjProp(qs_id, "", sort_ids);
+                            
+                            return sort_ids[qs_id];
+                        },
+                        mapGuideSortIdToQSId: function(sort_id) {
+                            var sort_ids = {
+                                "0": "a",
+                                "2": "r",
+                                "3": "p"
+                            };
+                            springSpace.Util.setObjProp(sort_id, "", sort_ids);
+                            
+                            return sort_ids[sort_id];
+                        },
+                        processPushState: function(config) {
+                            if (history.pushState) {
+                                // Only call pushState if this is a call to navigate forward (link, etc.), not back or initial load.
+                                if ( config.nav !== "back" && config.nav !== "init" ) {
+                                    // Only add display code to URL if on the guides button.
+                                    var qs_config = (
+                                        springSpace.homepage.current_button_code === "g" ?
+                                        { button_code: springSpace.homepage.current_button_code,
+                                          guide_display_code: springSpace.homepage.default_list_order } : 
+                                        { button_code: springSpace.homepage.current_button_code }
+                                    );
+                                    
+                                    var url = location.pathname + springSpace.homepage.buildQS(qs_config);
+                                    history.pushState({}, null, url);
+                                }
+                            }
+                            
+                            // Set flag to indicate history has been updated.
+                            springSpace.homepage.historyEdited = true;				
+                        },
+                        buildQS: function(config) {
+                            var params = {
+                                b: springSpace.Util.setProp(config.button_code, ""),
+                                d: springSpace.Util.setProp(config.guide_display_code, "")
+                            };
+                            
+                            // Add group_id to query string if supplied.
+                            if (springSpace.homepage.group_id) {
+                                params.group_id = springSpace.homepage.group_id;                            
+                            } 
+                            
+                            var qs_params = [];
+                            
+                            jQuery.each(params, function(idx, val) {
+                                if ( val !== "" && val !== "0") { 
+                                    qs_params.push(idx + "=" + encodeURIComponent(val));
+                                }
+                            });
+                    
+                            return ( qs_params.length == 0 ? "" : "?" + qs_params.join("&") );
+                        }
+                    };
+                    
+                    jQuery(function() {
+                        // Initialize pushState handling.
+                        springSpace.homepage.initPushState();
+                        
+						// Clear out the search term from previous search/back button.
+						jQuery("#s-lg-guide-search").val("");
+						
+						// Load guide list.
+						springSpace.publicObj.loadHomepageList({
+                            action: springSpace.homepage.current_list,
+                            group_id: "0",
+                            order: springSpace.homepage.mapQSIdToGuideSortId(springSpace.homepage.default_list_order),
+                            num_cols: 3,
+                            elt_id: "s-lg-index-list",
+                            button_id: springSpace.homepage.current_btn_id,
+                            type_label: "Subjects",
+							display_sort: ( springSpace.homepage.current_btn_id === "s-lg-index-all-btn")
+                        });
+
+                        // Select default dropdown option.
+                        jQuery("#s-lg-guide-order > option[value=" + springSpace.homepage.mapQSIdToGuideSortId(springSpace.homepage.default_list_order) + "]").prop("selected",true);
+
+                        // Load guide type counts.
+                        springSpace.publicObj.loadGuideCounts({
+                            action: 176,
+                            site_id: 1222,
+                            group_id: 0
+                        });
+
+                        // Load group guides counts.
+                        springSpace.publicObj.loadGuideCounts({
+                            action: 177,
+                            site_id: 1222
+                        });
+
+						   // Load owner group counts.
+                        springSpace.publicObj.loadGuideCounts({
+                            action: 178,
+                            site_id: 1222,
+							   group_id: 0
+                        }	);
+                    });
+                    jQuery(function() {jQuery(window).on('load', function() {springSpace.springTrack.trackPage({_st_type_id: '11'});});
+                        });
+      </script>
+     </link>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="s-lib-public-body">
+  <a class="alert-info" href="#s-lib-public-main" id="s-lg-public-skiplink">
+   Skip to main content
+  </a>
+  <!-- BEGIN: Page Header -->
+  <div class="container s-lib-banner-public" id="s-lib-banner">
+   <a aria-hidden="true" href="https://www.iusb.edu/library/index.php" tabindex="-1" target="" title="">
+    <img alt="Banner Image" aria-hidden="true" class="img-responsive" id="s-lib-banner-img" name="s-lib-banner-img" src="//libapps.s3.amazonaws.com/sites/1222/banner/iusb.jpg" tabindex="-1"/>
+   </a>
+  </div>
+  <!-- END: Page Header -->
+  <!-- BEGIN: Content Header -->
+  <div class="s-lib-header container s-lib-side-borders" id="s-lib-public-header">
+   <div id="s-lib-bc">
+    <ol class="breadcrumb" id="s-lib-bc-list">
+     <li id="s-lib-bc-customer">
+      <a href="https://www.iusb.edu/library/index.php" title="IU South Bend Libraries">
+       IU South Bend Libraries
+      </a>
+     </li>
+     <li id="s-lib-bc-site">
+      <a href="//libguides.iusb.edu/" title="Schurz Library LibGuides">
+       Schurz Library LibGuides
+      </a>
+     </li>
+     <li class="active" id="s-lib-bc-page">
+      Home
+     </li>
+    </ol>
+   </div>
+   <h1 id="s-lib-public-header-title">
+   </h1>
+   <div id="s-lib-public-header-desc">
+   </div>
+  </div>
+  <!-- END: Content Header -->
+  <!-- BEGIN: Nav Bar -->
+  <div class="container s-lib-side-borders" id="s-lib-public-nav">
+  </div>
+  <!-- END: Nav Bar -->
+  <!-- BEGIN: content -->
+  <div class="s-lib-main container s-lib-side-borders" id="s-lib-public-main">
+   <div class="row" id="s-lg-index-cols">
+    <div class="col-md-8 center" id="col1">
+     <div class="clearfix">
+      <div id="s-lg-hp-nav">
+       <ul>
+        <li>
+         <ul class="nav nav-pills">
+          <li class="s-lg-index-nav-btn active" id="s-lg-index-all-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+									action: 170,
+									group_id: 0,
+									order: jQuery('#s-lg-guide-order').val(),
+									num_cols: 3,
+									elt_id: 's-lg-index-list',
+									button_id: 's-lg-index-all-btn',
+									display_sort: true
+								});" type="button">
+            ALL GUIDES
+           </button>
+          </li>
+          <li class="s-lg-index-nav-btn" id="s-lg-index-subject-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+                                action: 172,
+								group_id: 0,
+								num_cols: 3,
+								type_label: 'Subjects',
+                                elt_id: 's-lg-index-list',
+                                button_id: 's-lg-index-subject-btn',
+                      		});" type="button">
+            BY SUBJECT
+           </button>
+          </li>
+          <!----- Testing----->
+          <li class="s-lg-index-nav-btn" id="s-lg-index-course-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+													action: 170,
+													type_id: 2,
+													order: jQuery('#s-lg-guide-order').val(),
+													num_cols: 3,
+													elt_id: 's-lg-index-list',
+													button_id: 's-lg-index-course-btn',
+													display_sort: true
+												});" type="button">
+            COURSE GUIDES
+           </button>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<!----------------------------------------------->
+<li id="s-lg-hp-nav-bottom">
+ <div class="clearfix">
+  <form action="/srch.php" class="form-inline pull-right" role="search">
+   <span>
+    Search:
+   </span>
+   <div class="form-group">
+    <div class="s-lg-public-search-field">
+     <label class="control-label sr-only" for="s-lg-guide-search">
+      Enter Search Words
+     </label>
+     <div class="input-group">
+      <input class="form-control" id="s-lg-guide-search" name="q" placeholder="Enter Search Words" type="text"/>
+      <span class="input-group-btn">
+       <button class="btn btn-default" type="submit">
+        Search
+       </button>
+      </span>
+     </div>
+    </div>
+   </div>
+  </form>
+ </div>
+</li>
+<div id="s-lg-guide-list-controls">
+ <div class="pull-left">
+  <h2 class="muted" id="s-lg-index-list-header">
+  </h2>
+ </div>
+ <div class="pull-right muted">
+  <div class="form-inline" id="form-group-s-lg-guide-order">
+   <div class="form-group">
+    <label for="s-lg-guide-order">
+     Display
+    </label>
+    <select class="form-control" id="s-lg-guide-order" name="s-lg-guide-order">
+     <option value="0">
+      Alphabetically
+     </option>
+     <option value="3">
+      By Popularity
+     </option>
+     <option value="2">
+      Most Recent
+     </option>
+    </select>
+   </div>
+   <button class="btn btn-default" onclick="springSpace.publicObj.loadHomepageList({
+                            action: 170,
+                            group_id: 0,
+                            order: jQuery('#s-lg-guide-order').val(),
+                            num_cols: 3,
+                            elt_id: 's-lg-index-list',
+                            button_id: 's-lg-index-all-btn',
+                            display_sort: true,
+                            type_label: springSpace.homepage.current_type_label
+                        });" type="button">
+    Go
+   </button>
+  </div>
+ </div>
+</div>
+<div class="" id="s-lg-index-list">
+ Loading...
+</div>
+<div class="col-md-4 center" id="col2">
+ <div class="margin-bottom-xlg">
+  <div class="s-lib-public-side-header">
+   <div class="pad-bottom-sm">
+    A-Z Database List
+   </div>
+  </div>
+  <div class="txt pad-top-sm">
+   Full list of Databases the library subscribes to, including trial access.
+  </div>
+  <a class="btn btn-info s-lg-hp-btn-section" href="/az.php">
+   Go to A-Z List
+  </a>
+ </div>
+ <!--------Contact Us--------->
+ <div class="button">
+  <h2>
+   Contact Us
+  </h2>
+  <p>
+   <strong>
+    Phone:
+   </strong>
+   574-520-4441
+   <br/>
+   <p>
+    <strong>
+     Email:
+    </strong>
+    <a href="refquest@iusb.edu">
+     refquest@iusb.edu
+    </a>
+    <br/>
+    <p>
+     <strong>
+      Report access issue:
+     </strong>
+     <a href="eproblem@iusb.edu">
+      eproblem@iusb.edu
+     </a>
+    </p>
+   </p>
+  </p>
+ </div>
+ <!-------------------------->
+ <div class="margin-bottom-xlg">
+  <div class="s-lib-public-side-header">
+   <div class="pad-bottom-sm">
+    More Guides...
+   </div>
+  </div>
+  <div class="txt pad-top-sm">
+   <div class=" clearfix" id="s-lg-content-12492234">
+    <style type="text/css">
+     .button { width: 100%; padding: 0% 7% 4% 7%; margin:0 0 2% 0; border: 1px solid #cccccc; border-radius: 15px;}
+.button:hover { background: #dddddd; color: #222222 }
+.button h2 { font-size: 1.3em; font-weight:bold; }
+    </style>
+    <!--
+<div class="button">
+<h2><a href="https://libguides.iusb.edu/courseguides">Course Guides</a></h2>
+
+<p>Find a research guide for your course</p>
+</div>
+-->
+    <div class="button">
+     <h2>
+      <a href="http://libguides.iusb.edu/c.php?g=378255">
+       How Do I...?
+      </a>
+     </h2>
+     <p>
+      Get help with basic library tasks and services
+     </p>
+    </div>
+    <div class="button">
+     <h2>
+      <a href="https://library.iusb.edu/werc/subject-guides.html">
+       K-12 Resources
+      </a>
+     </h2>
+     <p>
+      Guides for school teachers
+     </p>
+    </div>
+    <div class="button">
+     <h2>
+      <a href="http://libguides.iusb.edu/">
+       All Guides A to Z
+      </a>
+     </h2>
+     <!--<h2><a href="/az.php">All Guides A to Z</a></h2>-->
+     <p>
+      List of published guides
+     </p>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="margin-bottom-xlg">
+  <div class="s-lib-public-side-header">
+   <div class="pad-bottom-sm">
+    Chat with a Librarian
+   </div>
+  </div>
+  <div class="txt pad-top-sm">
+   <div class=" clearfix" id="s-lg-content-6283004">
+    <!-- Place this div in your web page where you want your chat widget to appear. -->
+    <div class="needs-js">
+     JavaScript disabled or chat unavailable.
+    </div>
+    <!-- Place this script as near to the end of your BODY as possible. -->
+    <script type="text/javascript">
+     (function() {
+    var x = document.createElement("script"); x.type = "text/javascript"; x.async = true;
+    x.src = (document.location.protocol === "https:" ? "https://" : "http://") + "us.libraryh3lp.com/js/libraryh3lp.js?7278";
+    var y = document.getElementsByTagName("script")[0]; y.parentNode.insertBefore(x, y);
+  })();
+    </script>
+   </div>
+  </div>
+ </div>
+</div>
+<!-- END: content -->
+<!-- BEGIN: Page Footer -->
+<div class="s-lib-footer footer container s-lib-side-borders" id="s-lib-footer-public">
+ <div>
+  <div id="s-lib-footer-brand">
+   Powered by Springshare.
+  </div>
+  <div id="s-lib-footer-rights">
+   All rights reserved.
+  </div>
+  <div id="s-lib-footer-login-link">
+   <a href="https://iusb.libapps.com/libapps/login.php?site_id=1222">
+    Login to LibApps
+   </a>
+  </div>
+ </div>
+ <div>
+  <!--
+                <div id="s-lib-footer-print-link">
+                    ~[23]~
+                </div>
+                -->
+  <div id="s-lib-footer-support-link">
+  </div>
+ </div>
+</div>
+<!-- END: Page Footer -->
+<div id="s-lib-alert" title="">
+ <div id="s-lib-alert-content">
+ </div>
+</div>
+<div class="hide" id="s-lib-popover-title">
+ <span class="text-info">
+  <strong>
+   title
+  </strong>
+ </span>
+ <button class="close" id="popclose" onclick="jQuery('.s-lib-popover').popover('hide')" type="button">
+  ×
+ </button>
+</div>
+<div class="hide" id="s-lib-popover-content">
+ <i class="fa fa-refresh fa-spin">
+ </i>
+ Loading...
+ <button class="btn btn-default btn-sm popclose" type="button">
+  Close
+ </button>
+</div>
+<div id="s-lib-scroll-top" title="Back to Top">
+ <span class="fa-stack fa-lg">
+  <i class="fa fa-square-o fa-stack-2x">
+  </i>
+  <i class="fa fa-angle-double-up fa-stack-1x" style="position:relative; bottom:2px;">
+  </i>
+ </span>
+</div>
+<!-- BEGIN: Custom Footer -->
+<div id="footer" role="contentinfo">
+ <div class="wrapper">
+  <p class="tagline">
+   What matters. Where it matters.
+  </p>
+  <div class="internal" id="icons">
+   <h3 class="hide">
+    Social networking links:
+   </h3>
+   <a href="https://www.iusb.edu/portal/blogs.php" target="_blank" title="Blogger">
+    <img alt="Blogger" height="24" src="https://www.iusb.edu/_common/images/template/icon-blogger.gif" width="24"/>
+   </a>
+   <a href="http://www.instagram.com/iusouthbend" target="_blank" title="Instagram">
+    <img alt="Instagram" height="24" src="https://www.iusb.edu/_common/images/template/icon-instagram.gif" width="24"/>
+   </a>
+   <a href="http://www.youtube.com/user/IUSouthBend" target="_blank" title="YouTube">
+    <img alt="YouTube" height="24" src="https://www.iusb.edu/_common/images/template/icon-youtube.gif" width="24"/>
+   </a>
+   <a href="http://twitter.com/#!/IUSouthBend" target="_blank" title="Twitter">
+    <img alt="Twitter" height="24" src="https://www.iusb.edu/_common/images/template/icon-twitter.gif" width="24"/>
+   </a>
+   <a href="http://www.facebook.com/pages/Indiana-University-South-Bend/116828985000129" target="_blank" title="Facebook">
+    <img alt="Facebook" height="24" src="https://www.iusb.edu/_common/images/template/icon-facebook.gif" width="24"/>
+   </a>
+  </div>
+  <p class="copyright">
+   <a class="block-iu" href="http://www.iu.edu/">
+    <img alt="Block IU" height="26" src="http://iusb.edu/_iu-brand/img/block-iu.png" width="22"/>
+   </a>
+   <span class="line-break">
+    <a href="http://www.iu.edu/copyright/index.shtml">
+     Copyright
+    </a>
+    ©
+    <script type="text/javascript">
+     var theDate=new Date()                    document.write(theDate.getFullYear())
+    </script>
+   </span>
+   <span class="line-break">
+    The Trustees of
+    <a href="http://www.iu.edu/">
+     Indiana University
+    </a>
+    ,
+   </span>
+   <span class="line-break">
+    <a href="http://www.iu.edu/copyright/complaints.shtml">
+     Copyright Complaints
+    </a>
+    |
+    <a href="https://www.iusb.edu/portal/privacy_policy.php">
+     Privacy Notice
+    </a>
+    |
+    <a href="http://www.iusb.edu/portal/contact.php">
+     Contact Us
+    </a>
+   </span>
+  </p>
+ </div>
+</div>
+<!-- END: Custom Footer -->
+<!-- BEGIN: Analytics code -->
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');  ga('create', 'UA-62100857-1', 'auto');  ga('send', 'pageview');
+</script>
+<!-- END: Analytics code -->
+

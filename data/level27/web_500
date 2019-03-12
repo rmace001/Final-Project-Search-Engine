@@ -1,0 +1,1047 @@
+http://co4h.colostate.edu
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <script type="text/javascript">
+   function hide_all(){
+    document.getElementById("topinfobox").style.display='none';
+ }
+  </script>
+  <!-- The jQuery library is needed in order to make the generic event tracking take place for Google Analytics -->
+  <script src="jquery-1.12.3.js" type="text/javascript">
+  </script>
+  <!-- The following script will set up generic event tracking for downloaded files in Google Analytics.
+		Source: http://www.blastam.com/blog/index.php/2013/03/how-to-track-downloads-in-google-analytics-v2
+		Tracks file downloads as events for the following extensions: .zip, .exe, dmg, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .mp3, .txt, rar, wma, mov, avi, wmv, flv, wav -->
+  <script type="text/javascript">
+   if (typeof jQuery != 'undefined') {
+  jQuery(document).ready(function($) {
+    var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
+    var baseHref = '';
+    if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
+
+    jQuery('a').on('click', function(event) {
+      var el = jQuery(this);
+      var track = true;
+      var href = (typeof(el.attr('href')) != 'undefined' ) ? el.attr('href') :"";
+      var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
+      if (!href.match(/^javascript:/i)) {
+    	var elEv = []; elEv.value=0, elEv.non_i=false;
+        if (href.match(/^mailto\:/i)) {
+          elEv.category = "email";
+          elEv.action = "click";
+          elEv.label = href.replace(/^mailto\:/i, '');
+          elEv.loc = href;
+        }
+        else if (href.match(filetypes)) {
+          var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+          elEv.category = "download";
+          elEv.action = "click-" + extension[0];
+          elEv.label = href.replace(/ /g,"-");
+          elEv.loc = baseHref + href;
+        }
+        else if (href.match(/^https?\:/i) && !isThisDomain) {
+          elEv.category = "external";
+          elEv.action = "click";
+          elEv.label = href.replace(/^https?\:\/\//i, '');
+          elEv.non_i = true;
+          elEv.loc = href;
+        }
+        else if (href.match(/^tel\:/i)) {
+          elEv.category = "telephone";
+          elEv.action = "click";
+          elEv.label = href.replace(/^tel\:/i, '');
+          elEv.loc = href;
+        }
+        else track = false;
+
+       	if (track) {
+          _gaq.push(['_trackEvent', elEv.category.toLowerCase(), elEv.action.toLowerCase(), elEv.label.toLowerCase(), elEv.value, elEv.non_i]);
+          if ( el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank') {
+            setTimeout(function() { location.href = elEv.loc; }, 400);
+            return false;
+	  }
+	}
+      }
+    });
+  });
+}
+  </script>
+  <title>
+   Colorado 4-H Youth Development is part of CSU Extension | Colorado 4-H Grows Here
+  </title>
+  <meta content="4h, 4H, 4-h, 4-H, colorado, colorado state university extension, Extension, 4-H community, leadership, youth development, learning, citizenship, life skills, 4-H youth, young people, horse care, youth and horses, youth and animals, learn by doing, volunteers, shooting sports" name="keywords"/>
+  <meta content="Colorado 4-H Youth Development" name="author"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+  <link href="http://gmpg.org/xfn/11" rel="profile"/>
+  <link href="http://co4h.colostate.edu/xmlrpc.php" rel="pingback"/>
+  <link href="http://co4h.colostate.edu/wp-content/themes/csu-extension/style.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="//s.w.org" rel="dns-prefetch"/>
+  <link href="http://co4h.colostate.edu/feed/" rel="alternate" title="Colorado 4-H Youth Development is part of CSU Extension » Feed" type="application/rss+xml"/>
+  <link href="http://co4h.colostate.edu/comments/feed/" rel="alternate" title="Colorado 4-H Youth Development is part of CSU Extension » Comments Feed" type="application/rss+xml"/>
+  <script type="text/javascript">
+   window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/co4h.colostate.edu\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.0.3"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+  </script>
+  <style type="text/css">
+   img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+  </style>
+  <link href="http://co4h.colostate.edu/wp-content/themes/csu-extension/color/darkgreen.css?ver=5.0.3" id="coloroptions-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="http://co4h.colostate.edu/wp-content/themes/csu-extension/css/shortcode.css?ver=5.0.3" id="shortcodes-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="http://co4h.colostate.edu/wp-includes/css/dist/block-library/style.min.css?ver=5.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+var MyAjax = {"ajaxurl":"http:\/\/co4h.colostate.edu\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/functions/leads_form/demo.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/jquery.aw-showcase.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/jcarousellite_1.0.1.min.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/ddsmoothmenu.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/jquery.prettyPhoto.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/jquery.validate.min.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/custom.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/slider-init.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <link href="http://co4h.colostate.edu/wp-json/" rel="https://api.w.org/"/>
+  <link href="http://co4h.colostate.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+  <link href="http://co4h.colostate.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+  <meta content="WordPress 5.0.3" name="generator"/>
+  <script type="text/javascript">
+   (function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		if (window.wfLogHumanRan) { return; }
+		window.wfLogHumanRan = true;
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//co4h.colostate.edu/?wordfence_lh=1&hid=C32E1B166F5ECEC8C693E2A8ACB2C280');
+  </script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', '', 'co4h.colostate.edu');ga('send', 'pageview');
+  </script>
+  <link href="http://co4h.colostate.edu/wp-content/uploads/2018/06/4h-clover-16x16-trans.gif" rel="shortcut icon"/>
+  <!-- Custom Styling -->
+  <style type="text/css">
+   a {color:#307743;}
+a:hover {color:#666;}
+.footer a {color:#fff;}
+.footer a:hover {color:#ccc;}
+form .searchform {background-color:none;}
+.info a {color:#ead469;}
+  </style>
+  <link href="http://co4h.colostate.edu/wp-content/uploads/2017/04/cropped-4H-Grows-Here3-32x32.jpg" rel="icon" sizes="32x32"/>
+  <link href="http://co4h.colostate.edu/wp-content/uploads/2017/04/cropped-4H-Grows-Here3-192x192.jpg" rel="icon" sizes="192x192"/>
+  <link href="http://co4h.colostate.edu/wp-content/uploads/2017/04/cropped-4H-Grows-Here3-180x180.jpg" rel="apple-touch-icon-precomposed"/>
+  <meta content="http://co4h.colostate.edu/wp-content/uploads/2017/04/cropped-4H-Grows-Here3-270x270.jpg" name="msapplication-TileImage"/>
+ </head>
+ <!--[if IE 7]>
+<style>
+#carousel-full .carousel-posts {
+	margin:0;
+	width:620px !important;
+ }
+</style>
+<![endif]-->
+ <body class="home blog" style=" background: fixed url('http://extension.colostate.edu/wp-content/uploads/2016/01/bg.jpg') ">
+  <div class="wrapper-csu-logo">
+   <!-- <div align="left"><a href="http://www.colostate.edu/" onclick="this.target='_blank';"><img src="http://co4h.colostate.edu/wp-content/themes/csu-extension/images/csu-logo-linear-white-285.png" alt="Offsite Link: Colorado State University"  /></a></div> -->
+  </div>
+  <div class="wrapper">
+   <!-- Begin CSU Branding Header -->
+   <section id="BrandLogo">
+    <script>
+     (function(){BrandLogo.style.cssText = 'opacity:0; height:67px; overflow:hidden;'})();
+    </script>
+    <h1>
+     <a href="http://colostate.edu">
+      Colorado State University
+     </a>
+    </h1>
+    <h2>
+     <a href="http://co4h.colostate.edu">
+      Colorado 4-H Youth Development is part of CSU Extension
+     </a>
+    </h2>
+    <script async="" defer="" src="//static.colostate.edu/logo/reslogo/logo.min.js">
+    </script>
+    <script>
+     var logosettings = {
+screenSM: 480
+,screenMD: 768
+,screenLG: 992
+,baseSize: 380
+,fontSize: 'large' //large or small (default is small)
+};
+    </script>
+   </section>
+   <!-- End CSU Branding Header -->
+   <div class="body_wrapper">
+    <div class="topmain_wrapper">
+     <div class="topinfobar" id="topinfobox">
+      <div class="container_24">
+       <div class="grid_24">
+        <div class="grid_5 alpha">
+         <div class="socialicon">
+          <ul class="social_logos">
+           <li class="sl-1">
+            <a href="https://twitter.com/#!/Colorado4H" title="Tweet this">
+             <span>
+             </span>
+             <span style="display:none">
+              Twitter Link
+             </span>
+            </a>
+           </li>
+           <li class="sl-2">
+            <a href="http://www.facebook.com/colorado4h" title="Share on Facebook">
+             <span>
+             </span>
+             <span style="display:none">
+              Facebook Link
+             </span>
+            </a>
+           </li>
+           <li class="sl-5">
+            <a href="http://www.linkedin.com/pub/colorado-4-h/53/397/a60" title="Share on Linkedin">
+             <span>
+             </span>
+             <span style="display:none">
+              LinkedIn Link
+             </span>
+            </a>
+           </li>
+           <li class="sl-6">
+            <a href="http://www.youtube.com/user/colorado4h" title="Share on Youtube">
+             <span>
+             </span>
+             <span style="display:none">
+              YouTube Link
+             </span>
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+        <div class="grid_15">
+         <div class="info">
+          <p>
+           Contact your local county Extension office through our
+           <a href="http://extension.colostate.edu/staff-directory/">
+            County Office List
+           </a>
+           .
+          </p>
+         </div>
+        </div>
+        <div class="grid_2">
+         <div class="siteinfourl">
+          <a href="http://extension.colostate.edu/staff-directory/">
+           <p>
+            County Office List
+           </p>
+          </a>
+         </div>
+        </div>
+        <div class="grid_2 omega">
+         <!--<div class="closeicon"><a href="javascript:hide_all();"><img src="/images/close-icon.png" alt="Close Icon"  /></a></div>-->
+        </div>
+       </div>
+       <div class="clear">
+       </div>
+       <div class="toptip">
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="container_24">
+     <div class="grid_24">
+      <div class="header" id="#top">
+       <div class="grid_12 alpha">
+        <div class="logo">
+         <a href="http://co4h.colostate.edu">
+          <img alt="Colorado 4-H Youth Development is part of CSU Extension" src="http://co4h.colostate.edu/wp-content/uploads/2018/12/csuE4H-C4c.png"/>
+         </a>
+        </div>
+       </div>
+       <div class="grid_12 omega">
+        <div class="contactinfo">
+         <!--<img src="/images/mobile-icon.png" alt="Contact Info" />&nbsp;&nbsp;&nbsp;&nbsp;-->
+         <span class="calldetails">
+          4-H is a community of young people, across America, learning leadership, citizenship, and life skills. Colorado 4-H is a positive youth development and mentoring organization.
+         </span>
+         <br/>
+         <a class="btn" href="tel:(970) 491-1152">
+          <span>
+          </span>
+          <span style="display:none;">
+           Tap to Call
+          </span>
+         </a>
+        </div>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="wrapper_menu">
+       <div class="menu_container">
+        <div class="menu_bar">
+         <div id="MainNav">
+          <a class="mobile_nav closed" href="#">
+           Pages Navigation Menu
+           <span>
+           </span>
+          </a>
+          <div id="menu">
+           <ul class="ddsmoothmenu">
+            <li class="current_page_item">
+             <a href="http://co4h.colostate.edu/">
+              Home
+             </a>
+            </li>
+            <li class="page_item page-item-11 page_item_has_children">
+             <a href="http://co4h.colostate.edu/ar/">
+              Agent Resources
+             </a>
+             <ul class="children">
+              <li class="page_item page-item-29">
+               <a href="http://co4h.colostate.edu/ar/4-h-agent-handbook/">
+                4-H Agent Handbook
+               </a>
+              </li>
+              <li class="page_item page-item-467 page_item_has_children">
+               <a href="http://co4h.colostate.edu/ar/4hyd-progam-update/">
+                4-H YD Program Meeting
+               </a>
+               <ul class="children">
+                <li class="page_item page-item-1268">
+                 <a href="http://co4h.colostate.edu/ar/4hyd-progam-update/2018-archives/">
+                  2018 Archives
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="page_item page-item-773">
+               <a href="http://co4h.colostate.edu/ar/horse-levels-test-resources/">
+                Horse Resources
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="page_item page-item-730 page_item_has_children">
+             <a href="http://co4h.colostate.edu/about-us/">
+              About Us
+             </a>
+             <ul class="children">
+              <li class="page_item page-item-731">
+               <a href="http://co4h.colostate.edu/about-us/4-h-policy-handbook/">
+                4-H Policies
+               </a>
+              </li>
+              <li class="page_item page-item-980">
+               <a href="http://co4h.colostate.edu/about-us/campaigns/">
+                Campaigns
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="page_item page-item-480 page_item_has_children">
+             <a href="http://co4h.colostate.edu/program-areas/">
+              4-H Programs &amp;
+              <br/>
+              Projects
+             </a>
+             <ul class="children">
+              <li class="page_item page-item-491 page_item_has_children">
+               <a href="http://co4h.colostate.edu/program-areas/projects/">
+                Project Information
+               </a>
+               <ul class="children">
+                <li class="page_item page-item-518 page_item_has_children">
+                 <a href="http://co4h.colostate.edu/program-areas/projects/e-records/">
+                  e-Records (Animal)
+                 </a>
+                 <ul class="children">
+                  <li class="page_item page-item-581">
+                   <a href="http://co4h.colostate.edu/program-areas/projects/e-records/supplemental-resources-animal/">
+                    Supplemental Resources (Animal)
+                   </a>
+                  </li>
+                 </ul>
+                </li>
+                <li class="page_item page-item-572">
+                 <a href="http://co4h.colostate.edu/program-areas/projects/e-records-general/">
+                  e-Records (General)
+                 </a>
+                </li>
+                <li class="page_item page-item-591">
+                 <a href="http://co4h.colostate.edu/program-areas/projects/manuals-animal/">
+                  Manuals (Animal)
+                 </a>
+                </li>
+                <li class="page_item page-item-593">
+                 <a href="http://co4h.colostate.edu/program-areas/projects/manuals-general/">
+                  Manuals (General)
+                 </a>
+                </li>
+                <li class="page_item page-item-537">
+                 <a href="http://co4h.colostate.edu/program-areas/projects/tip-sheets/">
+                  Tip Sheets
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="page_item page-item-589 page_item_has_children">
+               <a href="http://co4h.colostate.edu/program-areas/state-fair-information/">
+                State Fair Information
+               </a>
+               <ul class="children">
+                <li class="page_item page-item-696">
+                 <a href="http://co4h.colostate.edu/program-areas/state-fair-information/score-sheets/">
+                  Score Sheets (general)
+                 </a>
+                </li>
+                <li class="page_item page-item-704">
+                 <a href="http://co4h.colostate.edu/program-areas/state-fair-information/judging-guides/">
+                  Judging Guides
+                 </a>
+                </li>
+                <li class="page_item page-item-935">
+                 <a href="http://co4h.colostate.edu/program-areas/state-fair-information/results/">
+                  Results
+                 </a>
+                </li>
+                <li class="page_item page-item-740">
+                 <a href="http://co4h.colostate.edu/program-areas/state-fair-information/contest-score-sheets/">
+                  Contest Score Sheets
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="page_item page-item-598 page_item_has_children">
+               <a href="http://co4h.colostate.edu/program-areas/shooting-sports/">
+                Shooting Sports
+               </a>
+               <ul class="children">
+                <li class="page_item page-item-612 page_item_has_children">
+                 <a href="http://co4h.colostate.edu/program-areas/shooting-sports/ss-state-events/">
+                  State Events
+                 </a>
+                 <ul class="children">
+                  <li class="page_item page-item-635">
+                   <a href="http://co4h.colostate.edu/program-areas/shooting-sports/ss-state-events/updates/">
+                    State Contest Updates
+                   </a>
+                  </li>
+                 </ul>
+                </li>
+                <li class="page_item page-item-620">
+                 <a href="http://co4h.colostate.edu/program-areas/shooting-sports/ss-documents/">
+                  Rulebook, Forms &amp; Safety Notices
+                 </a>
+                </li>
+                <li class="page_item page-item-629">
+                 <a href="http://co4h.colostate.edu/program-areas/shooting-sports/ss-county-events/">
+                  County Events &amp; Invitationals
+                 </a>
+                </li>
+                <li class="page_item page-item-631">
+                 <a href="http://co4h.colostate.edu/program-areas/shooting-sports/ss-nat-events/">
+                  National Events &amp; Invitationals
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="page_item page-item-596 page_item_has_children">
+               <a href="http://co4h.colostate.edu/program-areas/horse-resources/">
+                Horse Resources
+               </a>
+               <ul class="children">
+                <li class="page_item page-item-756">
+                 <a href="http://co4h.colostate.edu/program-areas/horse-resources/levels-testing/">
+                  Levels Testing
+                 </a>
+                </li>
+                <li class="page_item page-item-760">
+                 <a href="http://co4h.colostate.edu/program-areas/horse-resources/competitive-trail-riding/">
+                  Competitive Trail Riding
+                 </a>
+                </li>
+                <li class="page_item page-item-763">
+                 <a href="http://co4h.colostate.edu/program-areas/horse-resources/horse-rule-book/">
+                  Horse Rule Book
+                 </a>
+                </li>
+                <li class="page_item page-item-766">
+                 <a href="http://co4h.colostate.edu/program-areas/horse-resources/horse-judge-score-cards/">
+                  Horse Judge Score Cards
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="page_item page-item-600">
+               <a href="http://co4h.colostate.edu/program-areas/events-opportunities/">
+                Events &amp; Opportunities
+               </a>
+              </li>
+              <li class="page_item page-item-828">
+               <a href="http://co4h.colostate.edu/program-areas/4honline/">
+                4HOnline Resources
+               </a>
+              </li>
+              <li class="page_item page-item-826 page_item_has_children">
+               <a href="http://co4h.colostate.edu/program-areas/fair-entry/">
+                FairEntry Resources
+               </a>
+               <ul class="children">
+                <li class="page_item page-item-837">
+                 <a href="http://co4h.colostate.edu/program-areas/fair-entry/fairentry-webinars/">
+                  FairEntry Webinars
+                 </a>
+                </li>
+                <li class="page_item page-item-844">
+                 <a href="http://co4h.colostate.edu/program-areas/fair-entry/documentation/">
+                  Documentation
+                 </a>
+                </li>
+               </ul>
+              </li>
+              <li class="page_item page-item-1323">
+               <a href="http://co4h.colostate.edu/program-areas/livestock-resources/">
+                Livestock Resources
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="page_item page-item-781 page_item_has_children">
+             <a href="http://co4h.colostate.edu/volunteer-resources/">
+              Volunteer &amp;
+              <br/>
+              Leadership Resources
+             </a>
+             <ul class="children">
+              <li class="page_item page-item-789">
+               <a href="http://co4h.colostate.edu/volunteer-resources/club-group-resources/">
+                Club and Group Resources
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="page_item page-item-450">
+             <a href="http://co4h.colostate.edu/calendar/">
+              Calendar
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="slider_wrapper">
+       <input id="txt_name" type="hidden" value=" 3000		"/>
+       <div id="featured">
+        <div class="showcase" id="showcase">
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://co4h.colostate.edu/about-us/campaigns/" onclick="this.target='_blank';" title="Offsite link">
+            <img alt="Slide 1" src="http://co4h.colostate.edu/wp-content/images/4h-slider.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             <a href="http://co4h.colostate.edu/about-us/campaigns/">
+              Current 4-H Campaign Resources
+             </a>
+            </h3>
+            <p>
+             Colorado 4-H Campaign Resources
+            </p>
+           </div>
+          </div>
+         </div>
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://co4h.colostate.edu/program-areas/">
+            <img alt="Slide 2" src="http://co4h.colostate.edu/wp-content/images/slider-goat-show.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             <a href="http://co4h.colostate.edu/program-areas/">
+              Current 4-H Year Project &amp; State Fair Resources
+             </a>
+            </h3>
+            <p>
+             Current 4-H Year Project &amp; State Fair Resources
+            </p>
+           </div>
+          </div>
+         </div>
+         <!-- Third Content -->
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://co4h.colostate.edu/events-opportunities/">
+            <img alt="Slide 3" src="http://co4h.colostate.edu/wp-content/images/slider-girls.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             <a href="http://co4h.colostate.edu/events-opportunities/">
+              4-H State &amp; National Events - Youth and Adults!
+             </a>
+            </h3>
+            <p>
+             4-H State &amp; National Events - Youth and Adults!
+            </p>
+           </div>
+          </div>
+         </div>
+         <!-- Fourth Content -->
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://www.4hstemk12.colostate.edu/">
+            <img alt="Slide 4" src="http://co4h.colostate.edu/wp-content/images/slider-stem-youth.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             <a href="http://www.4hstemk12.colostate.edu/">
+              Science, Technology, Engineering, Math &amp; K-12 Program Information
+             </a>
+            </h3>
+            <p>
+             Science, Technology, Engineering, Math &amp; K-12 Program Information
+            </p>
+           </div>
+          </div>
+         </div>
+         <!-- Fifth Slider -->
+         <div class="showcase-slide">
+          <div class="showcase-content">
+           <a href="http://co4h.colostate.edu/program-areas/shooting-sports/">
+            <img alt="Slide 5" src="http://co4h.colostate.edu/wp-content/images/4h2-slider.jpg"/>
+           </a>
+          </div>
+          <div class="showcase-thumbnail">
+           <div class="showcase-thumbnail-content">
+            <h3>
+             <a href="http://co4h.colostate.edu/program-areas/shooting-sports/">
+              Colorado 4-H Shooting Sports Information
+             </a>
+            </h3>
+            <p>
+             Colorado 4-H Shooting Sports Information
+            </p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="slider_shadow">
+       </div>
+       <div class="infotag">
+        <h1>
+         <h3>
+          <iframe frameborder="0" height="251" scrolling="no" src="http://co4h.colostate.edu/wp-content/uploads/2019/03/colorado-roborally-sm.png" width="300">
+          </iframe>
+         </h3>
+         <br>
+          Have a youth robotics team? Sign up to compete at the Colorado RoboRally.
+          <br>
+           April 6 in the San Luis Valley!
+           <a href="http://www.tinyurl.com/roboravecolorado/">
+            To learn more click here!
+           </a>
+           <br/>
+           Registration closes March 27. #TrueLeaders  #InspireKidstoDo
+          </br>
+         </br>
+        </h1>
+       </div>
+      </div>
+      <div class="clear">
+      </div>
+      <div class="contentbox">
+       <div class="grid_16 alpha">
+        <div class="feturebox">
+         <div class="featurebox_inner">
+          <!-- <div class="grid_5 alpha">-->
+          <div class="featurebox_desc first">
+           <!-- <h2><a href=""></a></h2> -->
+           <!-- STRIP OUT THE HREF TO ELIMINATE REDUNDANT LINK - ADA COMPLIANCE -->
+           <h2>
+            <strong>
+             Colorado 4-H Foundation Scholarships NOW OPEN
+            </strong>
+           </h2>
+           <p>
+            To apply go to the
+            <a href="https://co4hfoundation.extension.colostate.edu/benefits/colorado-4-h-foundation-scholarships/">
+             Colorado 4-H Foundation website
+            </a>
+            Applications are due May 1!
+           </p>
+           <a class="readmore" href="https://co4hfoundation.extension.colostate.edu/benefits/colorado-4-h-foundation-scholarships/">
+            Colorado 4-H
+            <span class="button-tip">
+            </span>
+           </a>
+          </div>
+          <!--   </div>-->
+          <!-- <div class="grid_5">-->
+          <div class="featurebox_desc second">
+           <!-- <h2><a href=""></a></h2> -->
+           <!-- STRIP OUT THE HREF TO ELIMINATE REDUNDANT LINK - ADA COMPLIANCE -->
+           <h2>
+            <strong>
+             Colorado 4-H Mission
+            </strong>
+           </h2>
+           <p>
+            4-H empowers youth to reach their full potential, working and learning in partnership with caring adults.
+           </p>
+           <a class="readmore" href="">
+            Read More
+            <span class="button-tip">
+            </span>
+           </a>
+          </div>
+          <!-- </div>-->
+          <!-- <div class="grid_5 omega">-->
+          <div class="featurebox_desc third">
+           <!-- <h2><a href=""></a></h2> -->
+           <!-- STRIP OUT THE HREF TO ELIMINATE REDUNDANT LINK - ADA COMPLIANCE -->
+           <h2>
+            <strong>
+             Colorado 4-H Vision &amp; Pledge
+            </strong>
+           </h2>
+           <p>
+            <strong>
+             4-H Vision:
+            </strong>
+            A world in which youth and adults learn, grow and work together as catalysts for positive change.
+            <p>
+            </p>
+            <strong>
+             4-H Pledge:
+            </strong>
+            I Pledge my HEAD to clearer thinking, my HEART to greater loyalty, my HANDS to larger service and my HEALTH to better living for my Club, my Community, my Country, and my World.
+           </p>
+           <a class="readmore" href="">
+            Read More
+            <span class="button-tip">
+            </span>
+           </a>
+          </div>
+          <!--</div>-->
+         </div>
+        </div>
+        <div class="clear">
+        </div>
+        <!--carousel slider goes here - front-page-carousel-slider.php	-->
+        <!--carousel slider	-->
+        <!-- /End Carousel -->
+        <!-- END slideshow carousel -->
+       </div>
+       <div class="grid_8 omega">
+        <div class="signinwidgetarea">
+         <div class="signinformbox1 widget">
+          <h3>
+           Additional Resources
+          </h3>
+          <div class="menu-rightnav-container">
+           <ul class="menu" id="menu-rightnav">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-6" id="menu-item-6">
+             <a href="http://co4h.colostate.edu/">
+              Home
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9" id="menu-item-9">
+             <a href="http://co4h.colostate.edu/ar/">
+              Agent Resources
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-992" id="menu-item-992">
+             <a href="http://co4hfoundation.extension.colostate.edu/">
+              Colorado 4-H Foundation
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-536" id="menu-item-536">
+             <a href="http://co4h.colostate.edu/program-areas/">
+              4-H Programs &amp;
+              <br/>
+              Projects
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10" id="menu-item-10">
+             <a href="http://extension.colostate.edu">
+              CSU Extension
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-993" id="menu-item-993">
+             <a href="http://4h.org">
+              National 4-H Headquarters
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <p>
+      </p>
+      <p>
+      </p>
+      <!-- testimonial section removed -->
+     </div>
+    </div>
+    <div class="clear">
+    </div>
+    <!--Start Footer-->
+    <div class="footer-wrapper">
+     <div class="footer">
+      <div class="container_24">
+       <div class="grid_24">
+        <div class="grid_6 alpha">
+         <div class="footer_widget first">
+          <h4>
+           About Colorado 4-H
+          </h4>
+          <div class="textwidget">
+           <p>
+            <strong>
+             4-H
+            </strong>
+            is America’s largest out-of-school education program for boys and girls. It is a worldwide youth development program available in every state and many countries. Youth who participate in 4-H, get what all young people need to succeed in life–the confidence, compassion and connections with caring adults to make contributions to their communities…..
+           </p>
+          </div>
+         </div>
+        </div>
+        <div class="grid_6">
+         <div class="footer_widget second">
+          <h4>
+           Archives Widget
+          </h4>
+          <ul>
+           <li>
+            <a href="#">
+             January 2010
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             December 2009
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             November 2009
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             October 2009
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+        <div class="grid_6">
+         <div class="footer_widget third">
+          <h4>
+           Categories
+          </h4>
+          <ul>
+           <li>
+            <a href="#">
+             Entertainment
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Technology
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Template Design
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Sports &amp; Recreation
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Jobs &amp; Lifestyle
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+        <div class="grid_6 omega">
+         <div class="footer_widget last">
+          <h4>
+           Search
+          </h4>
+          <div class="side-search">
+           <script>
+            (function() {
+    var cx = '010767680283762075896:s5jvnl-kanm';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+           </script>
+           <gcse:search>
+           </gcse:search>
+          </div>
+          <div class="clear">
+          </div>
+          <p>
+          </p>
+          <!-- <a href="http://www.4hstemk12.colostate.edu/"><img src="http://extension.colostate.edu/images/AmeriCorps-Logo-150.gif" alt="AmeriCorps Logo" /></a> -->
+         </div>
+        </div>
+       </div>
+       <div class="clear">
+       </div>
+      </div>
+      <div class="footersep">
+      </div>
+      <div class="clear">
+      </div>
+      <div class="footer-bottom-wrapper">
+       <div class="footer-bottom">
+        <div class="container_24">
+         <div class="grid_24">
+          <!--<div class="grid_10 alpha">-->
+          <div class="copyrightinfo">
+           <p>
+            <span style="font-size:.9em;padding64px;">
+             <a href="http://extension.colostate.edu/employment/">
+              Employment
+             </a>
+             |
+             <a href="http://www.colostate.edu/equal-opportunity/" onclick="this.target='_blank';" title="Offsite link">
+              Equal Opportunity
+             </a>
+             |
+             <a href="http://www.colostate.edu/disclaimer/" onclick="this.target='_blank';" title="Offsite link">
+              Disclaimer
+             </a>
+             |
+             <a href="http://extension.colostate.edu/?p=4054">
+              Non-Discrimination Statement
+             </a>
+             |
+             <a href="http://www.colostate.edu/privacy/" onclick="this.target='_blank';" title="Offsite link">
+              Privacy Statement
+             </a>
+             |
+             <a href="mailto:joy.bauder@colostate.edu?subject=4-H Website Questions">
+              Webmaster
+             </a>
+             |
+             <a href="http://admissions.colostate.edu/" onclick="this.target='_blank';" title="Offsite link">
+              Apply to CSU
+             </a>
+             |
+             <!-- <a href="http://www.colostate.edu/" onclick="this.target='_blank';" title="Offsite link">CSU Home</a><br /> -->
+             <a href="http://www.colostate.edu/search" onclick="this.target='_blank';" title="Offsite link">
+              CSU A-Z Search
+             </a>
+             <br>
+              ©2019, Colorado State University Extension, Fort Collins, Colorado 80523 USA
+             </br>
+            </span>
+           </p>
+          </div>
+          <div id="responsive-img" style="margin-top:-12px;">
+           <a href="http://giving.colostate.edu/" onclick="this.target='_blank';" title="Offsite link - Giving page for CSU's State Your Purpose Campaign">
+            <img alt="CSU State Your Purpose - The Giving Campaign for Colorado State University" src="http://extension.colostate.edu/wp-content/uploads/2016/02/csu-state-your-purpose-325.png"/>
+           </a>
+          </div>
+          <!--</div>-->
+          <!--<div class="grid_14 omega">
+            <div class="copyright_right"><a id="scroll-top" href="#top"><img src="http://co4h.colostate.edu/wp-content/themes/csu-extension/images/topsroll-icon.png" alt="Topscroll Icon" /></a>
+             </div>-->
+         </div>
+        </div>
+        <div class="clear">
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
+<!-- container -->
+<script src="http://co4h.colostate.edu/wp-includes/js/wp-embed.min.js?ver=5.0.3" type="text/javascript">
+</script>
+<script src="http://co4h.colostate.edu/wp-content/themes/csu-extension/js/mobile-menu.js?ver=5.0.3" type="text/javascript">
+</script>
+

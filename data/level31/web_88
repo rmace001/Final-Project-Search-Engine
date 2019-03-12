@@ -1,0 +1,1035 @@
+http://libguides.umd.umich.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+   Home - Subject Guides at University of Michigan-Dearborn
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="noarchive" name="robots">
+   <!-- favicon.twig -->
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/site.webmanifest" rel="manifest"/>
+   <link color="#5bbad5" href="//libapps.s3.amazonaws.com/apps/common/favicon/safari-pinned-tab.svg" rel="mask-icon"/>
+   <link href="//libapps.s3.amazonaws.com/apps/common/favicon/favicon.ico" rel="shortcut icon"/>
+   <meta content="#ffc40d" name="msapplication-TileColor"/>
+   <meta content="//libapps.s3.amazonaws.com/apps/common/favicon/browserconfig.xml" name="msapplication-config"/>
+   <meta content="#ffffff" name="theme-color"/>
+   <meta content="Subject Guides" property="og:title"/>
+   <meta content="SUBJECT GUIDES Research assistance, subject guides, and useful resources compiled by your friendly librarians." property="og:description"/>
+   <meta content="website" property="og:type"/>
+   <meta content="https://guides.umd.umich.edu/" property="og:url"/>
+   <meta content="summary_large_image" name="twitter:card"/>
+   <meta content="@springshare" name="twitter:site"/>
+   <link href="/web/jquery/css/jquery-ui.min.css?2695" rel="stylesheet">
+    <link href="/web/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="/web/css1.29.5/lg-public.min.css" rel="stylesheet">
+      <script src="/web/jquery/js/1.12.1_jquery.min.js" type="text/javascript">
+      </script>
+      <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js">
+      </script>
+      <script>
+       jQuery.ui || document.write('<script src="/web/jquery/js/jquery-ui.min.js?2695">\x3C/script>');
+      </script>
+      <script src="/web/js1.29.5/lg-public.min.js" type="text/javascript">
+      </script>
+      <!-- BEGIN: CUSTOM HEAD JS/CSS -->
+      <link href="//s3.amazonaws.com/libapps/sites/1423/include/header_footerCSS.css" rel="stylesheet" type="text/css"/>
+      <link href="//s3.amazonaws.com/libapps/sites/1423/include/main.css" rel="stylesheet" type="text/css"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700|Open+Sans:400,700,300" rel="stylesheet" type="text/css"/>
+      <!-- END: CUSTOM HEAD JS/CSS -->
+      <script>
+       var system = {"name":"Subject Guides"};
+                    springSpace.publicObj = new springSpace.public.Public({
+                        constant: {
+                            PROCESSING: {
+                                
+                            },
+                            CONTENT: {
+                            }
+                        },
+                        system_name: system.name,
+                        customer: {"name":"University of Michigan-Dearborn"}
+                    });
+					springSpace.Session.CONST.ACTION_AUTH_SET_LG_SESSION_COOKIE = 750;
+      </script>
+      <script>
+       var springStats = springStats || {};
+springStats.saConfig = springStats.saConfig || {
+    site_id: 1423,
+    tracking_parameters: {"_st_site_id":1423},
+    tracking_server_host: "libguides-proc.springyaws.com"
+};
+      </script>
+      <script async="" src="/web/js/sa.min.js?3116">
+      </script>
+      <script>
+       springSpace.Common = springSpace.Common || { };
+                    springSpace.Common.constant = {
+                        PROCESSING: {
+                            ACTION_DISPLAY_POLL: 159
+                        }
+                    };
+                    springSpace.publicObj.constant.PROCESSING.ACTION_LOAD_GUIDE_LIST = 170;
+                    springSpace.publicObj.homeNavButtons = {"170":"All Guides","171":"By Group","172":"By Subject","173":"By Resource","174":"By Librarian"};
+                    springSpace.publicObj.getCountType=function(action) {
+                        var count_type = "";
+                        switch (action) {
+                            case 176:
+                                count_type = "guidetype";
+                                break;
+                            case 177:
+                                count_type = "group";
+                                break;
+                            case 178:
+                                count_type = "owner";
+                                break;
+                        }
+                        return count_type;
+                    };
+                    springSpace.publicObj.loadGuideCounts=function(config) {
+                        xhr = jQuery.ajax({
+                            url: "/index_process.php?action=" + config.action + "&site_id=" + config.site_id + "&group_id=" + config.group_id + "&key=" + key,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(response, textStatus, jqXHR) {
+                                if ( response.errCode == 200 ) {
+                                    var count_type = springSpace.publicObj.getCountType(config.action);
+                                    jQuery.each(response.data, function(idx, elt) {
+											jQuery("#s-lg-index-" + count_type + "-" + elt.id).show();
+											jQuery("#s-lg-index-" + count_type + "-count-" + elt.id).html(elt.count);
+                                    });
+                                } else {
+                                    // Show error message.
+                                    springSpace.UI.notify({mode: "custom", msg: "Error loading guide counts."});
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                // error
+                                springSpace.UI.notify({mode: "custom", msg: "Error loading guide counts."});
+                            }
+                        });
+                    }
+                    
+                    var button_data = {"code":"s"};
+                    
+                    springSpace.homepage = {
+                        default_list_order: "a",
+                        current_list: 172,
+                        current_btn_id: "s-lg-index-subject-btn",
+                        current_num_cols: 2,
+                        current_type_label: "",
+                        current_button_code: button_data.code,
+                        group_id: 0,
+				        historyEdited: false,
+                        initPushState: function() {
+                            if (window.history && history.pushState) {
+                                jQuery(window).bind("popstate", function(e) {
+                                    // Don't reload list if this is the result of a skip link hash update.
+                                    if ( springSpace.homepage.historyEdited ) {
+                                        // location.search will return URL encoded values which will end up causing double-encoding when jQuery sends the loadAzList request.
+                                        var button_code = springSpace.Util.getQSParam({name: "b", qs: location.search});
+                                        var guide_display_code = springSpace.Util.getQSParam({name: "d", qs: location.search});
+                                        
+                                        // If there is no button code, leave things the same.
+                                        if (button_code === "") {
+                                            return;
+                                        }
+                                        
+                                        springSpace.publicObj.loadHomepageList({
+                                            nav: "back",
+                                            action: springSpace.homepage.mapQSIdToActionId(button_code),
+                                            group_id: springSpace.homepage.group_id,
+                                            order: springSpace.homepage.mapQSIdToGuideSortId(guide_display_code),
+                                            num_cols: 2,
+                                            elt_id: "s-lg-index-list",
+                                            button_id: springSpace.homepage.mapQSIdToButtonEltId(button_code),
+                                            type_label: "Subjects",
+                                            display_sort: ( springSpace.homepage.mapQSIdToButtonEltId(button_code) === "s-lg-index-all-btn")
+                                        });
+                                    }
+                                });
+                            }
+                        },
+                        mapQSIdToButtonEltId: function(qs_id) {
+                            var button_ids = {
+                                "g": "s-lg-index-all-btn",
+                                "s": "s-lg-index-subject-btn",
+                                "t": "s-lg-index-guidetype-btn",
+                                "o": "s-lg-index-owner-btn",
+                                "p": "s-lg-index-group-btn",
+                            };
+                            springSpace.Util.setObjProp(qs_id, "", button_ids);
+                            
+                            return button_ids[qs_id];
+                        },
+                        mapQSIdToActionId: function(qs_id) {
+                            var button_ids = {
+                                "g": "170",
+                                "s": "172",
+                                "t": "173",
+                                "o": "174",
+                                "p": "171",
+                            };
+                            springSpace.Util.setObjProp(qs_id, "", button_ids);
+                            
+                            return button_ids[qs_id];
+                        },
+                        mapButtonEltIdToQSId: function(btn_elt_id) {
+                            var button_ids = {
+                                "s-lg-index-all-btn": "g",
+                                "s-lg-index-subject-btn": "s",
+                                "s-lg-index-guidetype-btn": "t",
+                                "s-lg-index-owner-btn": "o",
+                                "s-lg-index-group-btn": "p",
+                            };
+                            springSpace.Util.setObjProp(btn_elt_id, "", button_ids);
+                            
+                            return button_ids[btn_elt_id];
+                        },
+                        mapQSIdToGuideSortId: function(qs_id) {
+                            var sort_ids = {
+                                "a": "0",
+                                "r": "2",
+                                "p": "3"
+                            };
+                            springSpace.Util.setObjProp(qs_id, "", sort_ids);
+                            
+                            return sort_ids[qs_id];
+                        },
+                        mapGuideSortIdToQSId: function(sort_id) {
+                            var sort_ids = {
+                                "0": "a",
+                                "2": "r",
+                                "3": "p"
+                            };
+                            springSpace.Util.setObjProp(sort_id, "", sort_ids);
+                            
+                            return sort_ids[sort_id];
+                        },
+                        processPushState: function(config) {
+                            if (history.pushState) {
+                                // Only call pushState if this is a call to navigate forward (link, etc.), not back or initial load.
+                                if ( config.nav !== "back" && config.nav !== "init" ) {
+                                    // Only add display code to URL if on the guides button.
+                                    var qs_config = (
+                                        springSpace.homepage.current_button_code === "g" ?
+                                        { button_code: springSpace.homepage.current_button_code,
+                                          guide_display_code: springSpace.homepage.default_list_order } : 
+                                        { button_code: springSpace.homepage.current_button_code }
+                                    );
+                                    
+                                    var url = location.pathname + springSpace.homepage.buildQS(qs_config);
+                                    history.pushState({}, null, url);
+                                }
+                            }
+                            
+                            // Set flag to indicate history has been updated.
+                            springSpace.homepage.historyEdited = true;				
+                        },
+                        buildQS: function(config) {
+                            var params = {
+                                b: springSpace.Util.setProp(config.button_code, ""),
+                                d: springSpace.Util.setProp(config.guide_display_code, "")
+                            };
+                            
+                            // Add group_id to query string if supplied.
+                            if (springSpace.homepage.group_id) {
+                                params.group_id = springSpace.homepage.group_id;                            
+                            } 
+                            
+                            var qs_params = [];
+                            
+                            jQuery.each(params, function(idx, val) {
+                                if ( val !== "" && val !== "0") { 
+                                    qs_params.push(idx + "=" + encodeURIComponent(val));
+                                }
+                            });
+                    
+                            return ( qs_params.length == 0 ? "" : "?" + qs_params.join("&") );
+                        }
+                    };
+                    
+                    jQuery(function() {
+                        // Initialize pushState handling.
+                        springSpace.homepage.initPushState();
+                        
+						// Clear out the search term from previous search/back button.
+						jQuery("#s-lg-guide-search").val("");
+						
+						// Load guide list.
+						springSpace.publicObj.loadHomepageList({
+                            action: springSpace.homepage.current_list,
+                            group_id: "0",
+                            order: springSpace.homepage.mapQSIdToGuideSortId(springSpace.homepage.default_list_order),
+                            num_cols: 2,
+                            elt_id: "s-lg-index-list",
+                            button_id: springSpace.homepage.current_btn_id,
+                            type_label: "Subjects",
+							display_sort: ( springSpace.homepage.current_btn_id === "s-lg-index-all-btn")
+                        });
+
+                        // Select default dropdown option.
+                        jQuery("#s-lg-guide-order > option[value=" + springSpace.homepage.mapQSIdToGuideSortId(springSpace.homepage.default_list_order) + "]").prop("selected",true);
+
+                        // Load guide type counts.
+                        springSpace.publicObj.loadGuideCounts({
+                            action: 176,
+                            site_id: 1423,
+                            group_id: 0
+                        });
+
+                        // Load group guides counts.
+                        springSpace.publicObj.loadGuideCounts({
+                            action: 177,
+                            site_id: 1423
+                        });
+
+						   // Load owner group counts.
+                        springSpace.publicObj.loadGuideCounts({
+                            action: 178,
+                            site_id: 1423,
+							   group_id: 0
+                        }	);
+                    });
+                    jQuery(function() {jQuery(window).on('load', function() {springSpace.springTrack.trackPage({_st_type_id: '11'});});
+                        });
+      </script>
+     </link>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <body class="s-lib-public-body">
+  <a class="alert-info" href="#s-lib-public-main" id="s-lg-public-skiplink">
+   Skip to main content
+  </a>
+  <!-- BEGIN: Page Header -->
+  <!-- END: Page Header -->
+  <!-- BEGIN: Content Header -->
+  <div class="s-lib-header container s-lib-side-borders" id="s-lib-public-header">
+   <div id="s-lib-bc">
+    <ol class="breadcrumb" id="s-lib-bc-list">
+     <li id="s-lib-bc-customer">
+      <a href="http://library.umd.umich.edu/" title="Mardigian Library">
+       Mardigian Library
+      </a>
+     </li>
+     <li id="s-lib-bc-site">
+      <a href="//guides.umd.umich.edu/" title="Subject Guides">
+       Subject Guides
+      </a>
+     </li>
+     <li class="active" id="s-lib-bc-page">
+      Home
+     </li>
+    </ol>
+   </div>
+   <h1 id="s-lib-public-header-title">
+    SUBJECT GUIDES
+   </h1>
+   <div id="s-lib-public-header-desc">
+    Research assistance, subject guides, and useful resources compiled by your friendly librarians.
+   </div>
+  </div>
+  <!-- END: Content Header -->
+  <!-- BEGIN: Nav Bar -->
+  <div class="container s-lib-side-borders" id="s-lib-public-nav">
+  </div>
+  <!-- END: Nav Bar -->
+  <!-- BEGIN: content -->
+  <div class="s-lib-main container s-lib-side-borders" id="s-lib-public-main">
+   <div class="row" id="s-lg-index-cols">
+    <div class="col-md-8 center" id="col1">
+     <div class="clearfix">
+      <div id="s-lg-hp-nav">
+       <ul>
+        <li class="subjectGuideBanner">
+        </li>
+        <li>
+         <ul class="nav nav-pills">
+          <li class="s-lg-index-nav-btn" id="s-lg-index-subject-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+                                action: 172,
+								group_id: 0,
+								num_cols: 2,
+								type_label: 'Subjects',
+                                elt_id: 's-lg-index-list',
+                                button_id: 's-lg-index-subject-btn',
+                      		});" type="button">
+            BY SUBJECT
+           </button>
+          </li>
+          <li class="s-lg-index-nav-btn" id="s-lg-index-guidetype-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+								action: 173,
+								group_id: 0,
+								num_cols: 2,
+								type_label: 'Guide Types',
+								elt_id: 's-lg-index-list',
+								button_id: 's-lg-index-guidetype-btn',
+							});" type="button">
+            BY RESOURCE
+           </button>
+          </li>
+          <li class="s-lg-index-nav-btn" id="s-lg-index-owner-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+								action: 174,
+								group_id: 0,
+								num_cols: 1,
+								type_label: 'Guide Owners',
+								elt_id: 's-lg-index-list',
+								button_id: 's-lg-index-owner-btn',
+							});" type="button">
+            BY LIBRARIAN
+           </button>
+          </li>
+          <li class="s-lg-index-nav-btn active" id="s-lg-index-all-btn">
+           <button class="btn" onclick="springSpace.publicObj.loadHomepageList({
+									action: 170,
+									group_id: 0,
+									order: jQuery('#s-lg-guide-order').val(),
+									num_cols: 2,
+									elt_id: 's-lg-index-list',
+									button_id: 's-lg-index-all-btn',
+									display_sort: true
+								});" type="button">
+            ALL GUIDES
+           </button>
+          </li>
+         </ul>
+        </li>
+        <li id="s-lg-hp-nav-bottom">
+         <div class="clearfix">
+          <form action="/srch.php" class="form-inline pull-right" role="search">
+           <span>
+            Search our Guides:
+           </span>
+           <div class="form-group">
+            <div class="s-lg-public-search-field">
+             <label class="control-label sr-only" for="s-lg-guide-search">
+              Enter Search Words
+             </label>
+             <div class="input-group">
+              <input class="form-control" id="s-lg-guide-search" name="q" placeholder="Enter Search Words" type="text"/>
+              <span class="input-group-btn">
+               <button class="btn btn-default" type="submit">
+                <i aria-hidden="true" class="fa fa-search">
+                </i>
+               </button>
+              </span>
+             </div>
+            </div>
+           </div>
+          </form>
+         </div>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="" id="s-lg-index-list">
+      Loading...
+     </div>
+    </div>
+    <div class="col-md-4 center" id="col2">
+     <div class="margin-bottom-xlg">
+      <div class="s-lib-public-side-header">
+       <h2 class="pad-bottom-sm">
+        A-Z Database List
+       </h2>
+      </div>
+      <div class="txt pad-top-sm">
+       Full list of Databases the library subscribes to, including trial access.
+      </div>
+      <a class="btn btn-info s-lg-hp-btn-section" href="/az.php">
+       Databases
+       <i aria-hidden="true" class="fa fa-chevron-right">
+       </i>
+      </a>
+     </div>
+     <div class="margin-bottom-xlg">
+      <div class="s-lib-public-side-header">
+       <h2 class="pad-bottom-sm">
+        Quick Library Links
+       </h2>
+      </div>
+      <div class="txt pad-top-sm">
+       <div class=" clearfix" id="s-lg-content-23370215">
+        <ul style="list-style:none;">
+         <li>
+          <a href="http://library.umd.umich.edu/find/journals.php">
+           <i aria-hidden="true" class="fa fa-file-text-o">
+           </i>
+           Find Journals
+          </a>
+         </li>
+         <!--<li><a href="http://library.umd.umich.edu/find/databases.php"><i aria-hidden="true" class="fa fa-table"></i>&nbsp;&nbsp;Find Databases</a></li>-->
+         <li>
+          <a href="http://library.umd.umich.edu/find/books.php">
+           <i aria-hidden="true" class="fa fa-book">
+           </i>
+           Find Books &amp; e-Books
+          </a>
+         </li>
+         <li>
+          <a href="http://library.umd.umich.edu/us/hours.php">
+           <i aria-hidden="true" class="fa fa-clock-o">
+           </i>
+           Hours
+          </a>
+         </li>
+         <li>
+          <a href="http://library.umd.umich.edu/services/ill.php">
+           <i aria-hidden="true" class="fa fa-book">
+           </i>
+           Interlibrary Loan
+          </a>
+         </li>
+         <li>
+          <a href="http://library.umd.umich.edu/services/course_reserves.php">
+           <i aria-hidden="true" class="fa fa-files-o">
+           </i>
+           Course Reserves
+          </a>
+         </li>
+         <li>
+          <a href="http://library.umd.umich.edu/find/citing.php">
+           <i aria-hidden="true" class="fa fa-pencil">
+           </i>
+           Citing Your Sources
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="margin-bottom-xlg">
+      <div class="s-lib-public-side-header">
+       <h2 class="pad-bottom-sm">
+        Ask a Question
+       </h2>
+      </div>
+      <div class="txt pad-top-sm">
+       <div class=" clearfix" id="s-lg-content-23281051">
+        <ul style="list-style:none;">
+         <li>
+          <a href="tel:1-313-593-5559">
+           <i aria-hidden="true" class="fa fa-phone">
+           </i>
+           Call us: 313-593-5559
+          </a>
+         </li>
+         <!--<li><a href="#" target="_blank"><i aria-hidden="true" class="fa fa-comment"></i> Chat with us &nbsp;<i aria-hidden="true" class="fa fa-external-link-square"></i></a></li>-->
+         <li>
+          <a href="mailto:ask-a-question@umd.umich.edu">
+           <i aria-hidden="true" class="fa fa-envelope">
+           </i>
+           Email us your question
+          </a>
+         </li>
+         <li>
+          <a href="sms:13134865399">
+           <i aria-hidden="true" class="fa fa-2x fa-mobile">
+           </i>
+           Text us: 313-486-5399
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="margin-bottom-xlg">
+      <div class="s-lib-public-side-header">
+       <h2 class="pad-bottom-sm">
+        Your Librarians
+       </h2>
+      </div>
+      <div class="txt pad-top-sm">
+       <div class=" clearfix" id="s-lg-content-23291381">
+        <style type="text/css">
+         .profileLibrarianTitle {
+	font-weight: bold;
+}
+        </style>
+        <ul style="list-style:none;">
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://umd-umich.beta.libguides.com/prf.php?account_id=104170">
+            Nadine Anderson
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=100961">
+            Anthropology
+           </a>
+           ,
+           <a href="">
+            Behavioral Sciences
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100965">
+            Criminology &amp; Criminal Justice
+           </a>
+           ,
+           <a href="http://guides.umd.umich.edu/LGBTQStudies">
+            LGBTQ Studies
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100972">
+            Psychology
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100974">
+            Sociology
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100975">
+            Women's &amp; Gender Studies
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="/prf.php?account_id=104168">
+            Barbara Bolek
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=100977">
+            College &amp; Careers
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://guides.umd.umich.edu/prf.php?account_id=118091">
+            Carla Brooks
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=100963">
+            Communications
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100969">
+            English Language/Literature
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100980">
+            Health Policy Studies
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100971">
+            Political Science
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://umd-umich.beta.libguides.com/prf.php?account_id=104163">
+            Julia Daniel Walkuski
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=101177">
+            BrowZine
+           </a>
+           , Modern &amp; Classical Languages,
+           <a href="/sb.php?subject_id=104312">
+            Music
+           </a>
+           ,
+           <a href="/sb.php?subject_id=104049">
+            Philosophy
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100990">
+            Public Allies
+           </a>
+           ,
+           <a href="/sb.php?subject_id=104313">
+            Religion
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100982">
+            Summon Discovery Tool
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://umd-umich.beta.libguides.com/prf.php?account_id=104166">
+            Bob Fraser
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/grad">
+            Graduate Studies
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://library.umd.umich.edu/services/librarians-bkriigel.php">
+            Barbara Kriigel
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="http://library.umd.umich.edu/find/juvenile.php">
+            Juvenile Literature
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://umd-umich.beta.libguides.com/prf.php?account_id=104173">
+            Joan Martin
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=104560">
+            Banking and Finance
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100962">
+            Business
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100966">
+            Economics
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="/prf.php?account_id=104172">
+            Elaine Meyer
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=100968">
+            Engineering
+           </a>
+           ,
+           <a href="/sb.php?subject_id=100964">
+            Computer Science
+           </a>
+           ,
+           <a href="">
+            Mathematics
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://guides.umd.umich.edu/prf.php?account_id=107661">
+            Raya Samet
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=100967">
+            Education
+           </a>
+           ,
+           <a href="/healthandhumanservices">
+            Health and Human Services
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://umd-umich.beta.libguides.com/prf.php?account_id=104165">
+            Joel Seewald
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=104309">
+            Biology
+           </a>
+           ,
+           <a href="/sb.php?subject_id=104310">
+            Environmental Science/Studies
+           </a>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://umd-umich.beta.libguides.com/prf.php?account_id=104171">
+            Holly Sorscher
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <p>
+            First Year Experience
+           </p>
+          </div>
+         </li>
+         <li>
+          <div class="profileLibrarianTitle">
+           <a href="http://guides.umd.umich.edu/prf.php?account_id=127562">
+            Tim Streasick
+           </a>
+          </div>
+          <div class="profileSubjects">
+           <a href="/sb.php?subject_id=100970">
+            History
+           </a>
+           , Journalism and Screen Studies
+          </div>
+         </li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div>
+     <div id="s-lg-box-wrapper-13168244">
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- END: content -->
+  <!-- BEGIN: Page Footer -->
+  <div class="s-lib-footer footer container s-lib-side-borders" id="s-lib-footer-public">
+   <div>
+    <div id="s-lib-footer-brand">
+     Powered by Springshare.
+    </div>
+    <div id="s-lib-footer-rights">
+     All rights reserved.
+    </div>
+    <div id="s-lib-footer-login-link">
+     <a href="https://umd-umich.libapps.com/libapps/login.php?site_id=1423">
+      Login to LibApps
+     </a>
+    </div>
+   </div>
+   <div>
+    <!--
+                <div id="s-lib-footer-print-link">
+                    ~[23]~
+                </div>
+                -->
+    <div id="s-lib-footer-support-link">
+    </div>
+   </div>
+  </div>
+  <!-- END: Page Footer -->
+  <div id="s-lib-alert" title="">
+   <div id="s-lib-alert-content">
+   </div>
+  </div>
+  <div class="hide" id="s-lib-popover-title">
+   <span class="text-info">
+    <strong>
+     title
+    </strong>
+   </span>
+   <button class="close" id="popclose" onclick="jQuery('.s-lib-popover').popover('hide')" type="button">
+    ×
+   </button>
+  </div>
+  <div class="hide" id="s-lib-popover-content">
+   <i class="fa fa-refresh fa-spin">
+   </i>
+   Loading...
+   <button class="btn btn-default btn-sm popclose" type="button">
+    Close
+   </button>
+  </div>
+  <div id="s-lib-scroll-top" title="Back to Top">
+   <span class="fa-stack fa-lg">
+    <i class="fa fa-square-o fa-stack-2x">
+    </i>
+    <i class="fa fa-angle-double-up fa-stack-1x" style="position:relative; bottom:2px;">
+    </i>
+   </span>
+  </div>
+  <!-- BEGIN: Custom Footer -->
+  <!--Footer-->
+  <div class="row">
+   <div class="MLfooter">
+    <div class="container">
+     <div class="footerColumnOne">
+      <img alt="University of Michigan - Dearborn Logo" src="http://umdearborn.edu/logo.png" width="100"/>
+      <div class="group">
+       <ul class="campuses">
+        <li>
+         <a href="http://umdearborn.edu/">
+          <span>
+           Dearborn
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="http://umflint.edu/">
+          <span>
+           Flint
+          </span>
+         </a>
+        </li>
+        <li>
+         <a href="http://umich.edu/">
+          <span>
+           Ann Arbor
+          </span>
+         </a>
+        </li>
+       </ul>
+       <ul class="contact">
+        <li>
+         4901 Evergreen Road
+         <br/>
+         Dearborn, MI 48128, USA
+         <br/>
+        </li>
+        <li class="phone">
+         <i class="fa fa-phone">
+         </i>
+         Phone: 313-593-5000
+         <br/>
+        </li>
+        <li>
+         <a href="http://umdearborn.edu/contact/">
+          <span>
+           <i class="fa fa-envelope">
+           </i>
+           Contact us
+          </span>
+         </a>
+        </li>
+       </ul>
+       <ul class="social-icons">
+        <li>
+         <a href="https://twitter.com/UM_Dearborn">
+          <em>
+           twitter
+          </em>
+          <i class="fa fa-twitter">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://www.facebook.com/UMDearborn">
+          <em>
+           facebook
+          </em>
+          <i class="fa fa-facebook">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="http://www.youtube.com/user/UMDearborn">
+          <em>
+           youtube
+          </em>
+          <i class="fa fa-youtube">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="http://instagram.com/umdearborn/">
+          <em>
+           instagram
+          </em>
+          <i class="fa fa-instagram">
+          </i>
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="footerColumnTwo">
+      <ul class="footer-nav">
+       <li>
+        <a href="http://umdearborn.edu/maps_directions">
+         Maps &amp; Directions
+        </a>
+       </li>
+       <li>
+        <a href="http://canvas.umd.umich.edu/">
+         Canvas
+        </a>
+       </li>
+       <li>
+        <a href="http://email.umich.edu">
+         M+Google Mail
+        </a>
+       </li>
+       <li>
+        <a href="http://directory.umd.umich.edu">
+         Directory
+        </a>
+       </li>
+       <li>
+        <a href="https://ctools.umich.edu/gateway/">
+         CTools
+        </a>
+       </li>
+       <li>
+        <a href="https://umich.app.box.com/login">
+         M+Box
+        </a>
+       </li>
+       <li>
+        <a href="http://umdearborn.edu/emergency">
+         Emergency Information
+        </a>
+       </li>
+       <li>
+        <a href="https://web-sis.umd.umich.edu/PROD/twbkwbis.P_GenMenu?name=homepage">
+         UM-Dearborn Connect
+        </a>
+       </li>
+       <li>
+        <a href="https://wolverineaccess.umich.edu">
+         Wolverine Access
+        </a>
+       </li>
+       <li>
+        <a href="http://umjobs.org">
+         Employment
+        </a>
+       </li>
+       <li>
+        <a href="http://umd.bncollege.com/webapp/wcs/stores/servlet/BNCBHomePage?storeId=25557&amp;&amp;catalogId=10001&amp;langId=-1">
+         Bookstore
+        </a>
+       </li>
+       <li>
+        <a href="http://library.umd.umich.edu">
+         Library
+        </a>
+       </li>
+      </ul>
+      <p>
+       <script>
+        var today = new Date();
+          document.write("© ")
+          document.write(today.getFullYear());
+          document.write(" The Regents of the University of Michigan")
+       </script>
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!--END FOOTER-->
+  <!-- END: Custom Footer -->
+  <!-- BEGIN: Analytics code -->
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-384355-11', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <!-- END: Analytics code -->
+ </body>
+</html>

@@ -1,0 +1,259 @@
+http://mediamatrix.tamu.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   ims :: mediamatrix
+  </title>
+  <meta content="application/xhtml+xml; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="" name="description"/>
+  <meta content="" name="keywords"/>
+  <meta content="Status:OK" name="nagios"/>
+  <link href="/style.css" rel="stylesheet" type="text/css"/>
+  <script>
+   var djConfig = {
+                parseOnLoad:true
+            };
+  </script>
+  <script src="/include/js/dojo.js" type="text/javascript">
+  </script>
+  <script src="/include/js/util.js" type="text/javascript">
+  </script>
+  <script src="/include/js/top.js" type="text/javascript">
+  </script>
+  <script src="/include/js/status.js" type="text/javascript">
+  </script>
+ </head>
+ <body>
+  <div id="header">
+   <div id="logo">
+    <div id="logoimage">
+     <a href="/">
+      <img alt="MediaMatrix" src="/images/mediamatrix_logo.png"/>
+     </a>
+    </div>
+    <div style="float: right">
+     <h1>
+      <a href="/">
+       <span class="dark">
+        Media
+       </span>
+       Matrix
+      </a>
+     </h1>
+     <div id="mm-version">
+      v2.6
+     </div>
+     <div id="ims-link">
+      <a href="http://imedia.tamu.edu/">
+       Internet Media Services
+      </a>
+     </div>
+    </div>
+   </div>
+   <div id="top_info">
+    <p>
+     <strong>
+      You are not Logged in!
+     </strong>
+     <br/>
+     Do you want to
+     <a href="/login.php">
+      Log in
+     </a>
+     ?
+    </p>
+   </div>
+  </div>
+  <div id="menubar">
+   <ul>
+    <li class="active">
+     <a href="/index.php">
+      Home
+     </a>
+    </li>
+    <!--<li ><a href="/news.php">News</a></li>-->
+    <li>
+     <a href="/support/">
+      Support
+     </a>
+     <ul>
+      <li>
+       <a href="/support/user_manual.php">
+        User Manual
+       </a>
+      </li>
+      <li>
+       <a href="/support/system_requirements.php">
+        System Requirements
+       </a>
+      </li>
+      <li>
+       <a href="/support/supported_formats.php">
+        Supported Formats
+       </a>
+      </li>
+      <li>
+       <a href="/support/copyright_information.php">
+        Copyright Information
+       </a>
+      </li>
+      <li>
+       <a href="/support/faq.php">
+        F.A.Q.
+       </a>
+      </li>
+      <li>
+       <a href="/support/support_form.php">
+        Request Support
+       </a>
+      </li>
+      <li>
+       <a href="/support/contact.php">
+        Contact Information
+       </a>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </div>
+  <div id="search">
+   <div id="searchleft">
+    <a href="/search.php">
+     Advanced Search
+    </a>
+   </div>
+   <form action="/search.php" method="post">
+    <div id="searchform">
+     <div class="label">
+      Search MediaMatrix:
+     </div>
+     <input class="search" name="keywords" type="text" value=""/>
+     <input class="submit" name="search_button" type="submit" value="Search"/>
+    </div>
+   </form>
+  </div>
+  <div id="content">
+   <div id="status">
+   </div>
+   <div id="leftcol">
+    <h1>
+     Welcome!
+    </h1>
+    <p>
+     Welcome to MediaMatrix.  You may search anonymously, or login if you
+       have an account.
+    </p>
+    <h2>
+     What is MediaMatrix?
+    </h2>
+    <p>
+     MediaMatrix is a specialized database application specifically designed
+       to handle internet media streaming content.  With MediaMatrix you can
+       upload your own streaming videos, creating your own personal collection
+       of educational media content for your students or other viewing
+       audiences.
+     <a href="http://imedia.tamu.edu/mediamatrix">
+      (more)
+     </a>
+    </p>
+   </div>
+   <div id="rightcol">
+    <div id="vidbox">
+     <div id="flv">
+      <script src="https://mediamatrix.tamu.edu/flash/jw_media_player/jwplayer.js" type="text/javascript">
+      </script>
+      <div id="container">
+       <p style="color: red; margin: 1em 0;">
+        If your video fails to load, your browser's flash player is not working properly. Please check out our
+        <a href="/support/flash.php">
+         Flash help section
+        </a>
+        .
+       </p>
+      </div>
+      <script type="text/javascript">
+       jwplayer("container").setup({
+bufferlength: 1,
+plugins: {
+"viral-2": {
+onpause: false,
+oncomplete: false,
+allowmenu: false
+}
+},
+streamer: "rtmp://imsrn.tamu.edu/delivery/mediamatrix/",
+file: "root/temp_21dc5b29b2e90c74427bb723ee6005a1_13644.flv",
+modes: [
+{type: 'flash', src: 'https://mediamatrix.tamu.edu/flash/jw_media_player/player.swf'}
+],
+id: "MMPlayer",
+autostart: false,
+height: 193,
+width: 302
+});
+      </script>
+      <script src="/include/js/detect_browser.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+       var playerId = "MMPlayer";
+var browser = detectBrowser();
+if (browser == "msie") {
+    var playerObj = document.getElementById(playerId);
+} else {
+    var playerObj = document.embeds[playerId];
+}
+      </script>
+     </div>
+    </div>
+    <h2>
+     Account Request
+    </h2>
+    <p>
+     Are you a teacher or aide with the need to post audio/video clips for a
+    class? You can
+     <a href="/support/support_form.php?form_type=account_request">
+      request a content manager account
+     </a>
+     .
+    </p>
+    <p>
+     <b>
+      Note:
+     </b>
+     If you are a Texas A&amp;M student or employee who only
+    needs to view streams (not post them), you already have an account.  Just
+     <a href="login.php">
+      login
+     </a>
+     with your NetID and password.
+    </p>
+    <p>
+     <b>
+      Don’t know what your NetID is?
+     </b>
+     Please visit the CIS
+     <a href="http://it.tamu.edu/Accounts_and_ID_Management/UIN_NetID_and_Passwords/NetID/index.php">
+      NetID homepage
+     </a>
+     for more details.
+    </p>
+   </div>
+  </div>
+  <div style="clear: both; margin-bottom: 2em;">
+  </div>
+  <div id="footer">
+   <div class="left">
+    <a href="/support/copyright_information.php">
+     File Copyright Information
+    </a>
+   </div>
+   © Copyright 2002-2019
+   <a href="http://www.tamu.edu/">
+    Texas A&amp;M University
+   </a>
+  </div>
+ </body>
+</html>
+

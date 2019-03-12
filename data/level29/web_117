@@ -1,0 +1,536 @@
+http://leelab.uchicago.edu
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Lee Lab, University of Chicago
+  </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Ka Yee C. Lee group at the Univerisity of Chicago, with a focus on lipid interactions with protein, lipid, polymer, among other physiological molecules or drugs." name="description"/>
+  &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+  <meta content="physical chemistry, lipid membrane, alpha synuclein, tim proteins, mfg-e8, Ka Yee C. Lee, Ka Yee Lee, Kayee Lee, Peter Chung, Zhiliang Gong, Daniel Kerr, Dan Kerr, Peter J Chung, Hyeondo Luke Hwang, Luke Hwang, Ben Slaw, Benjamin Slaw, Michael Henderson, Tiffany Suwatthee, Andrew Molina, Alessandra Leong, Kathleen Cao, Greg Tietjen, Charles Heffern" name="keywords">
+   <meta content="telephone=no" name="format-detection">
+    =======
+    <meta content="physical chemistry, lipid membrane, alpha synuclein, tim proteins, mfg-e8, Ka Yee C. Lee, Ka Yee Lee, Kayee Lee, Peter Chung, Zhiliang Gong, Daniel Kerr, Dan Kerr, Peter J Chung, Hyeondo Luke Hwang, Luke Hwang, Ben Slaw, Benjamin Slaw, James Michael Henderson, J Michael Henderson, Michael Henderson, Tiffany Suwatthee, Andrew Molina, Alessandra Leong, Kathleen Cao, Greg Tietjen, Charles Heffern" name="keywords"/>
+    <meta content="telephone=no" name="format-detection"/>
+    &gt;&gt;&gt;&gt;&gt;&gt;&gt; 3dacb0a3ce4a392b5fcfa9f3ece311ec2bcad060
+    <link href="./img/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+    <link href="./css/lee.css" rel="stylesheet"/>
+    <script src="./js/jquery.min.js">
+    </script>
+    <script src="./js/jquery.easing.min.js">
+    </script>
+    <script src="./js/bootstrap.min.js">
+    </script>
+    <script src="./js/angular.min.js">
+    </script>
+    <script src="app.js">
+    </script>
+    <script src="./js/lee.js">
+    </script>
+    <script src="./js/google-analytics.js">
+    </script>
+   </meta>
+  </meta>
+ </head>
+ <body data-spy="scroll" data-target=".navbar-fixed-top" id="page-top" ng-app="app">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+   <div class="container">
+    <div class="navbar-header page-scroll">
+     <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+      <span class="sr-only">
+       Toggle navigation
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+     </button>
+     <a class="navbar-brand page-scroll lee-hover-maroon" href="#page-top">
+      LEE LAB
+     </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+     <ul class="nav navbar-nav">
+      <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+      <!-- Note to self -- the # is used for a link on this page -- i.e. #news refers to the news section -->
+      <li class="hidden">
+       <a class="page-scroll" href="#page-top">
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#news">
+        NEWS
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#people">
+        PEOPLE
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#research">
+        RESEARCH
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#publication">
+        PUBLICATION
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#alumni">
+        ALUMNI
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#photos">
+        PHOTOS
+       </a>
+      </li>
+      <li>
+       <a class="page-scroll lee-hover-maroon" href="#contact">
+        CONTACT
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </nav>
+  <!-- First Parallax Image with Logo Text -->
+  <div class="bgimg">
+   <div class="lee-display-middle" style="white-space:nowrap;">
+    <span class="membrane-people-box">
+     MEMBRANE PEOPLE
+    </span>
+   </div>
+  </div>
+  <!--news section-->
+  <section class="white-section" id="news" ng-controller="newsSection">
+   <div class="container text-center">
+    <h4 class="lee-section-title">
+     NEWS
+    </h4>
+   </div>
+   <div class="container pub-text">
+    <div class="list-group">
+     <li class="list-group-item" ng-repeat="piece in news">
+      {{piece.message}}
+      <span class="badge">
+       {{piece.date}}
+      </span>
+      <a href="{{piece.link}}" ng-if="piece.link" style="font-style: italic">
+       link
+      </a>
+     </li>
+    </div>
+   </div>
+  </section>
+  <!-- Current Members section -->
+  <section class="white-section" id="people" ng-controller="peopleSection">
+   <div class="container text-center">
+    <h4 class="lee-section-title">
+     CURRENT MEMBERS
+    </h4>
+   </div>
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="{{person.id}}" ng-repeat="person in people" style="height:780px">
+      <div class="thumbnail lee-portrait">
+       <img alt="{{person.name}}" class="img-rounded" src="{{person.image}}"/>
+       <div class="caption">
+        <h4>
+         {{person.name}}
+         <a href="{{person.link}}" target="_blank">
+          <i class="{{person.icon}}">
+          </i>
+         </a>
+        </h4>
+        <p class="lee-text-gray">
+         {{person.title}}
+        </p>
+        <div class="list-group">
+         <a class="list-group-item">
+          <i class="fa fa-envelope-o">
+          </i>
+          {{person.email}}
+         </a>
+         <a class="list-group-item">
+          <i class="fa fa-building-o">
+          </i>
+          {{person.office}}
+         </a>
+         <a class="list-group-item">
+          <i class="fa fa-phone">
+          </i>
+          {{person.phone}}
+         </a>
+        </div>
+        <p>
+         {{person.acholades}}
+        </p>
+        <p>
+         <span ng-repeat="degree in person.degrees">
+          {{degree}}
+          <br/>
+         </span>
+        </p>
+        <p>
+         <span ng-repeat="affiliation in person.affiliations">
+          <a href="{{affiliation.link}}" target="_blank">
+           {{affiliation.name}}
+          </a>
+          <br/>
+         </span>
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Research section -->
+  <section class="white-section" id="research" ng-controller="researchSection">
+   <div class="container text-center">
+    <h4 class="lee-section-title">
+     RESEARCH
+    </h4>
+   </div>
+   <div class="container">
+    <div class="navbar navbar-default" role="navigation">
+     <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#research-pill-collapse" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+      </button>
+      <a class="navbar-brand sub-nav" id="fields">
+       Research Fields
+      </a>
+     </div>
+     <!--nav header-->
+     <div class="collapse navbar-collapse" id="research-pill-collapse">
+      <ul class="nav nav-pills nav-justified head-menu">
+       <li ng-class="{active:$first}" ng-repeat="piece in research">
+        <a data-toggle="pill" href="#{{piece.id}}">
+         {{piece.title}}
+        </a>
+       </li>
+      </ul>
+     </div>
+     <!--nav fields-->
+    </div>
+    <!--nav pills-->
+    <div class="tab-content">
+     <div class="tab-pane fade in" id="{{piece.id}}" ng-class="{active:$first}" ng-repeat="piece in research">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 science-col">
+       <div class="thumbnail science-thumbnail" ng-repeat="figure in piece.figure">
+        <img alt="{{figure.caption}}" class="img-rounded science-img" src="{{figure.link}}">
+         <p>
+          {{figure.caption}}
+         </p>
+        </img>
+       </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9 science-col">
+       <h4>
+        {{piece.heading}}
+       </h4>
+       <p>
+        <span class="lee-author" ng-repeat="person in piece.people">
+         {{person.name}}{{user.Username}}{{$last ? '' :', '}}
+        </span>
+       </p>
+       <p ng-repeat="paragraph in piece.body">
+        {{paragraph}}
+       </p>
+       <p ng-if="piece.reference">
+        <b>
+         Selected bibliography
+        </b>
+        <ul>
+         <li ng-repeat="paper in piece.reference">
+          {{paper}}
+         </li>
+        </ul>
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Publication section-->
+  <section class="white-section" id="publication" ng-controller="publicationSection">
+   <div class="container text-center">
+    <h4 class="lee-section-title">
+     PUBLICATION
+    </h4>
+   </div>
+   <div class="container">
+    <div class="navbar navbar-default" role="navigation">
+     <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#publication-pill-collapse" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+      </button>
+      <a class="navbar-brand sub-nav" id="pubs">
+       Publication Year
+      </a>
+     </div>
+     <div class="collapse navbar-collapse" id="publication-pill-collapse">
+      <ul class="nav nav-pills nav-justified">
+       <li ng-class="{active:$first}" ng-repeat="cohort in papers | reverse">
+        <a data-toggle="pill" href="#{{cohort.id}}">
+         {{cohort.id}}
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <!--nav pills-->
+    <div class="tab-content">
+     <div class="tab-pane fade in pub-text" id="{{cohort.id}}" ng-class="{active:$first}" ng-repeat="cohort in papers | reverse">
+      <div class="list-group">
+       <li class="list-group-item" ng-repeat="paper in cohort.papers | reverse">
+        {{paper.title}}
+        <a href="{{'./papers/'+paper.id+'.pdf'}}" ng-if="paper.id">
+         (pdf)
+        </a>
+       </li>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Alumni section-->
+  <section class="grey-section" id="alumni" ng-controller="alumniSection">
+   <div class="container text-center">
+    <h4 class="lee-section-title">
+     ALUMNI
+    </h4>
+   </div>
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="{{person.id}}" ng-repeat="person in alumni" style="height:700px">
+      <div class="thumbnail lee-portrait">
+       <img alt="{{person.name}}" class="img-rounded" src="{{person.image}}"/>
+       <div class="caption">
+        <h4>
+         {{person.name}}
+        </h4>
+        <p class="lee-text-gray">
+         {{person.title}}
+        </p>
+        <div class="list-group">
+         <a class="list-group-item">
+          <i class="fa fa-envelope-o">
+          </i>
+          {{person.email}}
+         </a>
+         <a class="list-group-item">
+          <i class="fa fa-user-secret">
+          </i>
+          {{person.position}}
+         </a>
+         <a class="list-group-item">
+          <i class="fa fa-university">
+          </i>
+          {{person.institution}}
+         </a>
+        </div>
+        <p>
+         <span ng-repeat="degree in person.degrees">
+          {{degree}}
+          <br/>
+         </span>
+        </p>
+        <p>
+         <span ng-repeat="item in person.accolades">
+          {{item}}
+          <br/>
+         </span>
+        </p>
+        <div ng-if="person.thesis">
+         <b>
+          Thesis:
+         </b>
+         {{person.thesis}}
+        </div>
+       </div>
+      </div>
+     </div>
+     <!--each repeating piece-->
+    </div>
+    <!--the row-->
+   </div>
+  </section>
+  <!--photos section-->
+  <section class="white-section" id="photos" ng-controller="photosSection">
+   <div class="container text-center">
+    <h4 class="lee-section-title">
+     PHOTOS
+    </h4>
+   </div>
+   <!-- above modified -- below needs to be changed -->
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/IMG_2025.jpeg">
+        <img src="./img/photos/IMG_2025.jpeg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          The undergrads know how to ride
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/IMG_2008.jpeg">
+        <img src="./img/photos/IMG_2008.jpeg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          The Lee Lab, Summer 2017
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/IMG_2038.jpeg">
+        <img src="./img/photos/IMG_2038.jpeg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          BBQ at Ka Yee's!
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/20171006_115316.jpg">
+        <img src="./img/photos/20171006_115316.jpg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          Alessandra presents her poster at the 2017 UCISTEM Undergraduate Research Symposium
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/IMG_0417.jpg">
+        <img src="./img/photos/IMG_0417.jpg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          Group Outing 2018 - The Indiana Dunes!
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/IMG_0428.jpg">
+        <img src="./img/photos/IMG_0428.jpg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          (Most of) The Lee Lab, Summer 2018
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/IMG_0562.jpg">
+        <img src="./img/photos/IMG_0562.jpg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          Tiffany presents her poster at the 2018 UCISTEM Undergraduate Research Symposium
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="thumbnail">
+       <a href="./img/photos/image3.jpeg">
+        <img src="./img/photos/image3.jpeg" style="width:100%"/>
+        <div class="caption">
+         <p>
+          Pascale presents her poster at the 2018 UCISTEM Undergraduate Research Symposium
+         </p>
+        </div>
+       </a>
+      </div>
+     </div>
+     <!-- <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+				 <div class="thumbnail">
+				 	  <a href="./img/photos/IMG_0428.jpg">
+					  	 <img src="./img/photos/IMG_0428.jpg" style="width:100%">
+						 <div class="caption">
+						 	  <p>(Most of) The Lee Lab, Summer 2018</p>
+						 </div>
+					  </a>
+				 </div>
+	   		</div -->
+    </div>
+   </div>
+   <!-- end of stuff to modify -->
+  </section>
+  <!-- Footer -->
+  <!-- <div ng-include="'./html/footer.html'"></div> -->
+  <footer class="lee-footer lee-hover-maroon" id="contact">
+   <p>
+    Reach us at:
+   </p>
+   <p>
+    929 E 57th St.
+   </p>
+  </footer>
+ </body>
+</html>
+GCIS ESB 31
+Chicago, IL 60637
+<p>
+ <i class="fa fa-phone">
+ </i>
+ 773-834-2793
+ <br/>
+</p>
+<p>
+ Copyright © Ka Yee Lee Group, 2016
+ <br/>
+ All rights reserved.
+</p>
+

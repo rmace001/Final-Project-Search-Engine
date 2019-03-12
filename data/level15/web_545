@@ -1,0 +1,182 @@
+https://mercury.usu.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   Login - USU Secure Login
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="/cas/favicon.ico" rel="icon" type="image/x-icon"/>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.3.0/zxcvbn.js" type="text/javascript">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript">
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript">
+  </script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+  </script>
+  <link href="/cas/themes/usu-prod/css/cas.css" rel="stylesheet"/>
+  <script>
+   /*<![CDATA[*/
+
+        var trackGeoLocation = false;
+
+        var googleAnalyticsTrackingId = "UA-117410384-1";
+
+        if (googleAnalyticsTrackingId != null && googleAnalyticsTrackingId != '') {
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', googleAnalyticsTrackingId, 'auto');
+            ga('send', 'pageview');
+        }
+
+        /*]]>*/
+  </script>
+ </head>
+ <body class="login" id="cas">
+  <div class="container" id="container">
+   <header>
+    <a href="http://www.usu.edu" id="logo" title="go to Apereo home page">
+     <img alt="go to Apereo home page" class="logoImg" src="/cas/themes/usu-prod/images/main_logo.png" title="go to Apereo home page"/>
+    </a>
+   </header>
+   <div id="content">
+    <div class="row">
+     <!--<div id="notices" class="col-sm-12 col-md-6 col-md-push-6">
+                <div th:replace="fragments/insecure"/>
+                <div th:replace="fragments/defaultauthn"/>
+                <div th:replace="fragments/cookies"/>
+                <div th:replace="fragments/serviceui"/>
+                <div th:replace="fragments/cas-resources-list" />
+                <div th:replace="fragments/loginProviders" />
+            </div>-->
+     <div class="col-sm-12 col-md-10 col-md-push-1">
+      <div class="box" id="login">
+       <!--<div class="login-header">-->
+       <!--&lt;!&ndash; <h2 th:text="#{cas.login.pagetitle}"></h2>-->
+       <!--<span class="fa-stack fa-2x hidden-xs">-->
+       <!--<i class="fa fa-circle fa-stack-2x"></i>-->
+       <!--<i class="fa fa-lock fa-stack-1x fa-inverse"></i>-->
+       <!--</span> &ndash;&gt;-->
+       <!--<h1>USU Login</h1>-->
+       <!--<img th:href="@{/themes/usu-prod/images/main_logo.png}">-->
+       <!--</div>-->
+       <div class="cas">
+        <img class="logoImg" src="/cas/themes/usu-prod/images/usu_login.png"/>
+        <div class="usudevl">
+         <h3>
+          Development
+         </h3>
+        </div>
+       </div>
+       <form id="fm1" method="post">
+        <h2>
+         Enter your Username and Password
+        </h2>
+        <section class="row">
+         <label for="username">
+          A-number
+         </label>
+         <div>
+          <input accesskey="u" autocomplete="off" class="required" id="username" name="username" placeholder="A-Number" size="25" tabindex="1" type="text" value=""/>
+         </div>
+         <a class="helpLink" href="https://id.usu.edu/username/forgot" tabindex="4" target="_blank">
+          Need your A-Number?
+         </a>
+        </section>
+        <section class="row">
+         <label for="password">
+          <span class="accesskey">
+           P
+          </span>
+          assword:
+         </label>
+         <div>
+          <input accesskey="p" autocomplete="off" class="required" id="password" name="password" placeholder="Password" size="25" tabindex="2" type="password" value=""/>
+          <span id="capslock-on" style="display:none;">
+           <p>
+            <i class="fa fa-exclamation-circle">
+            </i>
+            <span>
+             CAPSLOCK key is turned on!
+            </span>
+           </p>
+          </span>
+         </div>
+         <a class="helpLink" href="https://id.usu.edu/password/forgot" tabindex="5" target="_blank">
+          Forgot your password?
+         </a>
+        </section>
+        <section class="row check">
+        </section>
+        <section class="row btn-row">
+         <input name="execution" type="hidden" value="2b390289-4ca7-4e0e-805b-5b041440b2a1_ZXlKaGJHY2lPaUpJVXpVeE1pSjkuWWpoYWVuZFJhRWxXYWxvNU5XbzNiSHBrU0doRFVDOXJNR1ZMV1hKS0x6Qk9RVVZNY1RWMFZ6QlVRa3RXTjBKUVNWTTRVVE5yTUVGRFpsWTJWbEZUUXpoVE1EVnhjblp0Y1hjMFFYQmpZVlozVjJoYWJEUnZNRUpGWjAxb2MzbHlVa2N3V0ROT05HbERVRll2TVRocWEwbHBZU3Q2TUVaMVpXdFhiSE5qTXpoTVIwaHpPWEk0WW5kTlR6WkZjVWw1Y0U1dk1HeHhiVkpaWkZNM1QxcEhjRm9yYms5RlVWTnZXbXhoUTNZME9TOW5TemRRYmxsRlJYZHhUMWREYjI5MGVFaEdObUZFYVVWV1ZraEhXR2RCV0VZeFZubERWVmhTZDNaeVlVbHZkMEpzZVhWcmIycHJZMEpYU1ZSaFExWnhWMlJvZEZNMllYaEJSVnA0Y25GcVdGa3pVREJTUTBRMGVFZFJaWFlyTlVwUWRuZHFVVlpFUjBsTloyNTJhREIxVDBKaWQzZ3ZOM2xGUTNKQmJUbDZZVmQxTVVSTEt6RndjME41V200NVMweHRNakYxVUZWTWFDdEpNV1ppUW5Cd1prZFRjQ3RRTTJSNVdWbFlTbFl4VWtWcE5IbzFRamQ2Wlc5MmRVSkdOa3BQWVhJeU1XRndXWGhxTjFaSGJTOHpUMngyU25aTWNUZ3lkMnhwZW5GR2JYSnRielJqWlV3cllsYzRSelJEWm5OQ1MyUTJTaTl4YlZWUEwwVjVjRTV0VEdwS1dXSnFhVGRYUzBjd1NWWk5aakl2ZDJoWmRpOVNhVmxNVW14S016WklWRTA0VGpSWlNHOXFRMnA2YlhKeFl6RjROMjVzVlRGSWVFMXpUM1JaVkROb1kxaExXVTlHVVV4bkx6VmhaWGRyTkRWbVJFUnNjakJDZFhKYVEwSkxiV2hSYXpGM01IQkdSa1ZYS3k4NVZGZFNRVnB0U1ZoeFdsSktlVzVvVFdkUGJVeFJUeXRtTDA1T1drTjVWa3RsWW1oMllWbFRSVnBDVVd3elJWbDJPVFJqTXpCMVRqaDNaV0U0VDB0SGFsRlhkMkpGUWxCaFFtd3hTRGc0ZUc0NVVYZ3lWMFpDVFhnNVVGSXZjSGRyT1hWSlEzZDVRM05IU0ZOd1lWWlBaelpHV1RKWmRTOUJka1ZRWWl0elUzWXJTV0UxYXpoR0wyWlpSVFpxVkZsS09FeHhhRkIzTWxkVWRuZDVPRkZDVDBWeWRHdHdOVVZMWW01NlZVbENPRU14UlRGbFNGTXZRV0l4YW5WdFpFWTBjRkpxUm5OT1dsQkRVbWxPVm5KcU5tUTJRazQwVW10U05tWkxibVp0YzAxUGJubHRSR2xLVUVsVVJIWXJlREY1TjFGUlYyRTRjekkzYUdoc0syNVdlVTVLTVd3d01pdElNVWR1VDJGS1prRnRUR1ZITkRSd2MzTTVTamc0VGtoM2VUUTVWRkZTTTNjM1FTOXhMeTluTlZWNFNHbzVkelJNTnpBNVprZE5ZbVl5TUhob2VtUndSSGtyZWxrd2NUUTRORXN2TUd3MmFuVXpVSEZtWmpsa1UxTlZUbGd6T1VveVRsRlRWUzk2YVVveE5rTTBibVpVV2xaek1VMVdkRlpKYmpKTFdTODFZakZHU0M4dlVXRnVkM05TYmpSdlVuZEhkSGxLVDJOMWNUSk9SbVJFUlVneU5qWjZRWHBNV0V4WlZuUkNja1ZwUm1OSlVETllTVU01WmxFMVoyMVlSblExWTJJM2IwMVRiRmRTV0RGbVlqTk5VbHAyTW13dlQydFNSbWxDUkZSR2FTOW9iSHA2Um5kNGRVTnViMFJ0YUVGeGNIZFJSWE54VUU5S1MydGxaREl3YjFGclVuUTRZek5FYzFFd1pEWkViVFZ5UW05MEszWmtWV1JtV25aMFp6RkJkakZ5WWpKVmVFeFZOVk5TYVVWNmRIcGpWbTFoV2pWR1Zsa3ZSa0ZDU1VwRFdYaHRhME0yUTNFM1dFUmxWVm8wVTB0UWFHZ3ZhMUJzU1hrd1pIUXhjbE5tUkVOUFJHZElNM2xRTmtkNmNXaFdTSGxuUmpZd05sSXJTV2t2YldSME1GQnFTRGhuUzJ0WFJscHVRa2MxVnpseWRWaHhhbU5PVVU5Qkt6bHRRaXMyUWtaNGExVm9NVEIyY0c5UmRrRnlTR01yTTB0SVlrNXNhbVJwV2xkak5raEpkRzQwWnpsdmRITkVVakZ4ZDJRMU1HWlVURWRRWlZwc1JXbEhhSEF4T1RGUGFEYzVVR0pwY25SdFVtTXJNME5zYzJoWFExRkthSGhCZUcxbmNHODRaMmRDU0VRNE9EQXpNbW94WnpFck1HbENhMlUwUTBaSFMySnJjbEZaTkhCMlowYzBZbmx3ZUVWaVpEUm9jRmxSWmxncmFVTnJhemN2TURSamVWVTRjRzl6Y25sNFEzZFJaR1JvTDBabU9VWktXbkJyYlZGamVFZGxVR1p2S3pSUVNWZExRMUpHTjA5alRHRlFUVmhvV1hSaFZVODBiVTFJSzI1blZuVnFTa2xFTmpaR01EWm1TalJsU1ROdGRsVkJUMGxFVnpsck5qaFRSekZCT1U5SmFuZ3JaMVIzYUhkbmRFSTRSSGhDU1ZFdlFuSTBjR05zY0VkVVlrTnFkVWRwUjB0eVRqZGxaWEZrU2xnNWRuZFhZbmg1VTJSbmNHdFNWalEzU1RsNmJHdzNaV0ZpZWt3eWVWVk1PVlJYVWxscVJrVnVjV0ZIYVVodWEyOXFjVUUzWldoWmJtaHFjbFpKV1ZKb2VIUllUSHBKUVZaUlZVcDNXamhxTm1aQk1XbFJPREpQVmxBd1VVTlJSV05OZVV0YVJsZEVVbVpPVFVRMFZpOXNjRlI1ZG1KdU0yOWpha1ZGTDFwc1QzSnFjVzFYY1c5R1FrRXdWRVZLZUdjMFJqUXZiMlZCSzNGcU9IRnFTbEZCZDJ0NmFXaE1TMUIyVHpOWUwwVnVaM1JTYnpjMGRrSmxRMUpHV0VwWFdHaFZWemxuVDJKVmVHaGFWVVk0UlVOdk5qVTBOMGxtVlRaemNqUnhNa2MyVldWQ05VRkVXR1k0VjAxblVWUjFlR1IyU1U1M1oweFlWMjFCV1Vzd056TmlXbU5VVm5GcmVIaGhXbWhYUTFKR2MzbDVVVTVuTm01bVkzcEdWazFKUzB0cmFHUnFkRFF3UmxsNFZtTnNiM1pKUkVkTlRXOWpNQzl4Um5wdlNtNXNLMmh2VldKcFN6QkhPV1p6YTNOcFVuWmlhVVF6YVdKQmJFUTFlRUozUjBGWWVWUXhTMk5vVkhoak9WQXJNV3MyVEVVNVpsUTBjMXBhYkVwblRFMUZlR294ZHpSUVRtRjFLMnhLY0RoR2VWb3laM1JaVWxocWFtMTNZbTVrV0VOamFqUmFiak5HWVM5QkszY3hRMHRPV1ZaSmRXRm5NU3RJZWpOM0wySnNWWGRTVjFWTWMzbDBaM2RNTkVodk5ITmFOREp0WW1STlUwOHlielIzYlhCYVRYRm5lV1F5TTBSc1FYRnlXV3BrTWpaSFRVeERTMHhyTVRVeWVFSnFTMjlNWkhKVVJIWk5SMmwxVlhkRVpXbEdVSE56WWpWTFdHOXFNRVp3YVhoSmVGRlhiSFYxTUV0NWVHWkliRWhNVnl0amRHSk5WRmh0Wldkb1lWRm5WMFJNZDJWalIwUldUREpaY1daVmNXYzNZbVowYTJrNWIzTTFTV3QyUjBOVmFVRktTVTh4TWpsclVWSndjVElyY0U1Q2VHTTRNSEYxZG1OUlYyaEthRkJSZWs5RmNYaHJWM05PUWpRNVZtRnVUMWRSZGtkc2NUSXhibWhsU213NVJuVnZRVkJJWmxWaFYyRTJLMHg1T0ZGWFZqUTNjREp2VmxsMEszTnNTREJOZDFWWVREUXZPWGRDYUZjd1lVOTFhSGh2ZG1KelZ6QjFLMWh3WmtoaGVGb3ZVR0ZOYjNsWGVYcHZkME40V0cwNEsxWmhObGxrSzJkVWIxVmtWMUpuUVdFMlNrTmlaVkIxU0c5NlVtOHZVSFJKTWpkalpVZFRTVGxyUTJscU5FZG5ZVFZxTDNaU01ubDNUMjQzV1RJNFNWQldWbEpRT0Znd05WRkhhVFpMZGtoUldsVk1OMGx4VURaTmNIY3lSbk5IU2xKdEsyVkZNV3dyZFhKT1pUQktUelpFUm1KVUwwdHVNRVJNVVZvdlUydGFaREJCYTJJMVdWVmlia3hWYkVkMWJqUjVORFp1ZG5SYVVraHlkMWRyU1hsU1lsWjVXRlJ4T0UwMVRVNU5UR1pRV1dsbVJWQnFTa2hOVVdKSFIyUjRTVmxzUTNRM09IaElUbTg0WkRReVpYTk5VR2hKZEZocFQzbEdhVlJUVVVObVJEZ3JaRU0wUW01UVIycFNkelpOUlZWck1EUnBVMEpJWkdoM2IwbFZXR1pNYkZaTmNWQXJZa0Z1VUVZd1duSTBXV3g1TVhaaE1TOXhSRXQzVDFoUmFHNDRjMUJ4WmtwTU5YaFpVR1pGTmtwcFNWWk1abVpaUmpOdGIwNXJUSGhRY0ZoM1dsSkVRMHhhVEVwbFFrd3dWbWMzVXpCVE9HNVlhRFZYTjFOWVlVWXdhMjVyWlRGQlRIUmlOVGhQVkVoYU5tWlNaWGM1YVRWelpVTkxWQzlWYzNOTFVWWjRVRzVvVlV0UWVtMDNSMjVhYkVVeGMyZE9ZMlZQY0hZeldVaHRiREZ2VTAxdFJFOXRaMnBtYkZoSll6ZG9VVTlEWTNGbUwzTnZNbGRpZEhCMldERm9ZMXBNVlVaMGExZE1aa2xCTTBwSlJFNHZjMUZ2TW1zNVFWVndWMFptVjJ0cGRFTXJiMjlLYlhvMFkzcHNlbXR0Y1RsaGMyVk1lRmRPZWs1bGIxRmtTa05HYm5Kd1lWbFJZVTQyTDFSUWRrOXNiekp3VmpsaE1tMXVVRVpuVlRKdlEwUjBaWG92WkhrclRtVkxhbVJWTUVSUWIwUXJNMXBNUldGeGIwWTNPRmRpZVZBclltMU9TbEUyTVdSNWVVUjBkR05aTDBWUFpXSkVVRU0xZW1sSVNGcENURGRrWkVGaGJYVmxTM05RVm5CVlF6aEtOemgyU1dselJrSXJXVlZvZFdWTE9YWjJXVkZzWlU1a1lVWnlOMjVZT0VaWWJuWmtjMFpaVEVoSWJWcFhVSFl3V0d0elFVUTBNamhYY25ONVYyVldaWE50YTNkaVpqaDRRamtyVVM5SWR5OUhaMnBUV0VKVE1rOXZUbXBUU0dwb05rTnVUVUUyZDJWUE5UWkpRMVZaWVdkYVpsbE5UM0oxWmpWSlYwOU1UVkpyV2pNd2NsWnBRMnhaWW5oc1VGY3lNM1JuVDNwaVVYTXZUbEZ2ZUVWdFVXbFJla3hOT1VWRE0wTm1SMGhGZEZZMFZWRTRaVWRaYzJabVYwaFVTRTR6YkhwRFNXaFZZMEUwVVVWT2RXcEZTMGR6YXowLlVwd2tJUEpXSnMxcjQzZTdlQ2poZWthZjNtQ29wVlNaVVVmcDZqdE5HS1d2NFo5eE1aelNVUHhDNDdES2szMXdMTVFSQkdRVk84cnNkdHoxeEVtZk1n"/>
+         <input name="_eventId" type="hidden" value="submit"/>
+         <input name="geolocation" type="hidden"/>
+         <input accesskey="l" class="btn btn-submit buttonlogin" name="submit" tabindex="6" type="submit" value="LOGIN"/>
+        </section>
+       </form>
+       <script type="text/javascript">
+        var i = "One moment please..."
+        $("#fm1").submit(function() {
+            $(":submit").attr("disabled", true);
+            $(":submit").attr("value", i);
+            return true;
+        });
+       </script>
+       <div id="sidebar">
+        <div class="sidebar-content">
+         <h5>
+          <b>
+           Please note:
+          </b>
+         </h5>
+         <p>
+          Before entering your USU A-Number and password, be sure that your browser is displaying USU's real login page at https://login.usu.edu/cas/ and not a hacker's password-stealing imitation on another web server.
+         </p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <div class="container" id="copyright">
+     <p class="loginDescription">
+      Authentication through login.usu.edu provides single sign-on access to many campus
+      <br/>
+      systems and resources. When logging out, close your web browser to protect your identity.
+     </p>
+     <div class="truefooter">
+      <div class="rightLinks">
+       <a href="http://www.usu.edu/copyright/">
+        © Utah State University
+       </a>
+       <a href="http://www.usu.edu/campussafety/emergencycontacts.cfm">
+        Emergency Info
+       </a>
+       <a href="http://www.usu.edu/ias/concerns/">
+        Ethics &amp; Compliance Hotline
+       </a>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <div>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js">
+   </script>
+   <script src="/cas/themes/usu-prod/js/cas.js" type="text/javascript">
+   </script>
+  </div>
+ </body>
+</html>
+

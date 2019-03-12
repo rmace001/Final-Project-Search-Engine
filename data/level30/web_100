@@ -1,0 +1,3537 @@
+http://techarticles.uark.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta charset="utf-8"/>
+  <title>
+   Tech Articles Knowledge Base | IT Services | University of Arkansas
+  </title>
+  <meta content="" name="Description"/>
+  <meta content="" name="Keywords"/>
+  <meta content="" name="Author"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"/>
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css"/>
+  <link href="https://www.uark.edu/_resources/php/combine.php?t=css&amp;f=bootstrap-3.min.css,uark-style.css" rel="stylesheet"/>
+  <link href="https://www.uark.edu/_resources/js/nivo/nivo-slider.css" rel="stylesheet"/>
+  <!-- Nivo Slider -->
+  <script src="//www.uark.edu/_resources/js/jquery.js" type="text/javascript">
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js" type="text/javascript">
+  </script>
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
+<![endif]-->
+  <script async="async" src="https://applygsie.uark.edu/ping">
+   /**/
+  </script>
+  <script async="async" src="https://applyundergrad.uark.edu/ping">
+   /**/
+  </script>
+  <script src="//www.uark.edu/_resources/includes/universal-www-google-analytics.inc" type="text/javascript">
+  </script>
+  <script src="/_resources/includes/secondary-google-analytics.inc" type="text/javascript">
+  </script>
+  <link href="/_resources/css/its-style.css?m=20190215" rel="stylesheet">
+   <style>
+    #oudirectedit{ position: absolute; top: 0px; left: 0px; text-decoration: none; }
+   </style>
+   <style>
+    .filter-table input {
+	  width: 396px;
+	  max-width:100%;
+  height: 45px;
+  padding: 4px 12px 0;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+    border: 2px solid #0097cf;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+			#tiles img {
+			margin-bottom:15px;
+			}
+.striped td {
+			background-color:#f9f9f9;
+			}
+   </style>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js">
+   </script>
+   <script src="/_resources/js/bindWithDelay.js">
+   </script>
+   <script src="/_resources/js/jquery.filtertable.min.js">
+   </script>
+   <script type="text/javascript">
+    // 
+		$(function(){
+		
+	var filtered = $('table.articleTable').filterTable({
+	placeholder: 'Search articles',
+	callback: function (term, table) {
+		if (term === '') {
+			table.find('tbody').hide();
+			$('#instruction').show();
+		} else {
+			table.find('tbody').show();
+			$('#instruction').hide();
+		}
+		
+		($.debounce( 1500, function() {
+					setHash(window.searchbox.val());
+					if(table.find('tr:visible').length == 0 && window.searchbox.val().length > 1) {
+						$('#askit_form:hidden').fadeIn();
+					} else {
+						$('#askit_form').hide();
+					}
+				} ))();
+		table.find('tr').order(true, function(el){ var $el = $(el); return [$el.data('computed'), $el.text()]; }, function(){doStripe(table); table.find('tr:visible').each(function(){/*console.log($(this).data())*/}).removeData()}, window.searchbox.val() != 'all');
+		
+		$(".clearFilterTable")
+			.addClass('btn-primary')
+			.removeAttr("disabled");
+	},
+	label:''
+	});
+
+	window.searchbox = $(".filter-table input");
+		/*.on('blur change', function() {
+			setHash(window.searchbox.val());
+		});
+*/
+	
+	$(".filter-table")
+		// .after($('<button style="margin-left:1em;" class="showall btn btn-default btn-sm">Show all</button>').on('click', function(){setQuery('all');}))
+		.after($('<button class="clearFilterTable btn btn-sm btn-default" style="margin-bottom:10px;">Show all</button>').on("click", function() {
+			setQuery('all');
+			$( this ).removeClass('btn-primary').attr( "disabled", "disabled");
+			window.searchbox.focus();
+		}));
+
+
+	filtered.find('tbody').hide();
+
+
+	filtered.on('sorted', function () {
+		/*doStripe(filtered);*/
+	});
+
+	$('.filters a').on('click', function(evt){
+		evt.preventDefault();
+		setQuery($(this).data('query'));
+	});
+
+	// do this LAST
+	$(window).on('hashchange', function(evt){
+		if (window.searchbox.val() != window.location.hash.replace('#search/', '')) {
+			setQuery(decodeURIComponent(window.location.hash.replace('#search/', '')));
+		}
+		
+	}).trigger('hashchange');
+	window.searchbox.focus();
+});
+
+function setHash (query) {
+	if (encodeURIComponent(window.searchbox.val()) == window.location.hash.replace('#search/', '')) {
+		return;
+	}
+	if (query) {
+		window.location.hash = 'search/' + encodeURIComponent(query);
+	} else {
+		removeHash();
+	}
+}
+function setQuery(query) {
+	if (!window.searchbox) {
+		window.searchbox = $(".filter-table input");
+	}
+	window.searchbox.val(decodeURIComponent(query)).trigger("search");
+}
+
+
+function doStripe(table) {
+	table.find('tr:visible').removeClass('striped').filter(':even').addClass('striped');
+}
+
+function removeHash () { 
+    var scrollV, scrollH, loc = window.location;
+    if ("pushState" in history)
+        history.pushState("", document.title, loc.pathname + loc.search);
+    else {
+        // Prevent scrolling by storing the page's current scroll offset
+        scrollV = document.body.scrollTop;
+        scrollH = document.body.scrollLeft;
+
+        loc.hash = "";
+
+        // Restore the scroll offset, should be flicker free
+        document.body.scrollTop = scrollV;
+        document.body.scrollLeft = scrollH;
+    }
+}
+
+// track searches in GA
+
+function trackTAsearches(t) {
+    function e(t, e, n) {
+        ga(o + ".send", "event", {
+            eventCategory: t,
+            eventAction: e,
+            eventLabel: n,
+			transport: 'beacon',
+            hitCallback: function() {}
+        })
+    }
+    var n = window.location.hostname
+      , i = n.replace(/-/g, "")
+      , o = i.substring(0, i.indexOf("."));
+    o = o + "_" + siteNameCounter,
+    siteNameCounter += 1,
+    ga("create", t, "auto", {
+        name: o
+    }),
+    $(document).ready(function() {
+        var t = window.location.href;
+        $("a").on("click", function(evt) {
+            $(this).parents("table").length ? e( "articleSearch", $('.filter-table input').val() , $(this).text() + "_" + this.href ) : e('articleSearch', "abandoned", $(this).text() + "_" + this.href);
+			return true;
+        })
+    })
+}
+
+trackTAsearches('UA-18311705-2'); // ITS
+trackTAsearches('UA-75143705-33') // UREL-new
+
+
+		//
+   </script>
+  </link>
+ </head>
+ <body class="interior">
+  <div id="skip">
+   <a href="#content">
+    Skip navigation
+   </a>
+  </div>
+  <div id="header-bg">
+  </div>
+  <div class="container" id="opener" role="banner">
+   <a class="brand" href="http://www.uark.edu/">
+    University of Arkansas
+   </a>
+   <h1 id="site-heading">
+    <a class="siteName" href="http://its.uark.edu/" title="Information Technology Services">
+     Information Technology Services
+    </a>
+   </h1>
+   <div id="search-stack">
+    <div class="form-group" role="search">
+     <form action="https://search.uark.edu/s/search.html" class="form-search" id="site-search" method="get" name="gsa">
+      <!-- funnelback 'global' uark collection repo -->
+      <input name="collection" type="hidden" value="uark-search"/>
+      <div>
+       <input aria-expanded="true" aria-haspopup="true" class="input-medium search-query dropdown-toggle" data-toggle="dropdown" id="searchbox" name="query" placeholder="Search this site" title="Site Search" type="text"/>
+       <ul aria-labelledby="searchbox" class="dropdown-menu" id="searchParameter">
+        <script>
+         // dynamically gets subdomain from current URL in browser window
+					var hostname = window.location.hostname;  
+
+					// if not main domain, pass the subdomain's scope
+					if(hostname !='www.uark.edu' && hostname !='arkansas.edu' && hostname !='uark.edu')
+					{
+						document.write('<input type="hidden" name="scope" value="' + hostname + '"/>');
+					}
+        </script>
+       </ul>
+      </div>
+      <button class="searchButton" id="searchButton" title="Search" type="submit">
+      </button>
+     </form>
+    </div>
+    <div id="global-dropdown">
+     <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Links to important University of Arkansas pages">
+      <span class="hidden">
+       Links to important University of Arkansas pages
+      </span>
+      <i class="fa fa-lg fa-bars">
+      </i>
+     </a>
+     <ul class="dropdown-menu">
+      <li class="nav-header">
+       University of Arkansas
+      </li>
+      <li>
+       <a href="https://www.uark.edu/a-to-z.php">
+        A-Z Index
+       </a>
+      </li>
+      <li>
+       <a href="https://learn.uark.edu">
+        Blackboard Learn
+       </a>
+      </li>
+      <li>
+       <a href="https://campusmaps.uark.edu/">
+        Campus Map
+       </a>
+      </li>
+      <li>
+       <a href="https://UAConnect.uark.edu/">
+        UAConnect
+       </a>
+      </li>
+      <li>
+       <a href="https://directory.uark.edu/">
+        Directory
+       </a>
+      </li>
+      <li>
+       <a href="https://email.uark.edu/">
+        UARK Gmail
+       </a>
+      </li>
+      <li>
+       <a href="https://outlook.office.com">
+        Exchange Mail
+       </a>
+      </li>
+      <li>
+       <a href="https://webbasis.uark.edu/">
+        webBASIS
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <nav class="navbar navbar-default" role="navigation">
+   <div class="container">
+    <div class="navbar-header">
+     <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+      <span class="sr-only">
+       Toggle navigation
+      </span>
+      Menu
+      <i class="icon-chevron-down icon-large">
+      </i>
+     </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+     <ul class="nav navbar-nav" id="mainnav">
+      <li>
+       <a class="prepend-fa-comment" href="/help/index.php">
+        Get help
+       </a>
+      </li>
+      <li>
+       <a class="prepend-fa-lock" href="https://password.uark.edu/">
+        <span class="inline-hidden-sm">
+         Change
+        </span>
+        <span class="inline-visible-xs inline-visible-lg">
+         my
+        </span>
+        password
+       </a>
+      </li>
+      <li>
+       <a class="prepend-fa-check-square-o" href="/get-started/index.php">
+        Get Started
+       </a>
+      </li>
+      <li>
+       <a class="prepend-fa-group" href="/careers/index.php">
+        Careers
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </nav>
+  <div class="container" id="main-container">
+   <div class="row" id="content">
+    <div class="col-md-3" id="sidebar">
+     <p class="hidden-md hidden-lg">
+      <button class="btn btn-default" data-target=".navbar-ex2-collapse" data-toggle="collapse" type="button">
+       <i class="icon-chevron-down">
+       </i>
+       Menu
+      </button>
+     </p>
+     <nav class="collapse navbar-collapse sidenav navbar-ex2-collapse" role="navigation">
+      <!--/help/ta-->
+      <!--top level /-->
+      <!--path /-->
+      <!--last_crumb /-->
+      <!--top level /-->
+      <!--path /-->
+      <!--last_crumb /-->
+      <!--top level /-->
+      <!--path /-->
+      <!--last_crumb /-->
+      <ul class="nav nav-stacked" data-nav-path="/index.php">
+       <li>
+        <a href="/help/index.php">
+         Help and Support
+        </a>
+       </li>
+       <li>
+        <a href="/services/index.php">
+         Browse Services
+        </a>
+       </li>
+       <li>
+        <a href="/labs/index.php">
+         Computer Labs
+        </a>
+       </li>
+       <li>
+        <a href="/services/research/research-computing/index.php">
+         Research at the University
+        </a>
+       </li>
+       <li>
+        <a href="/security/index.php">
+         Security
+        </a>
+       </li>
+       <li>
+        <a href="/software/index.php">
+         Get Software
+        </a>
+       </li>
+       <li>
+        <a href="/policies/index.php">
+         Policies
+        </a>
+       </li>
+       <li>
+        <a href="/news-events/index.php">
+         News &amp; Events
+        </a>
+       </li>
+       <li>
+        <a href="/projects/index.php">
+         Campus IT Projects
+        </a>
+       </li>
+       <li>
+        <a href="/about/index.php">
+         About IT Services
+        </a>
+       </li>
+      </ul>
+      <ul class="nav nav-stacked" data-nav-path="/help/index.php">
+       <li>
+        <a href="/help/ta/index.php">
+         Tech Articles Knowledge Base
+        </a>
+       </li>
+       <li>
+        <a href="/help/fac-staff/index.php">
+         Department Tech Support
+        </a>
+       </li>
+       <li>
+        <a href="/help/forms-docs/index.php">
+         Forms and Documents
+        </a>
+       </li>
+      </ul>
+      <ul class="nav nav-stacked" data-nav-path="/help/ta/index.php">
+      </ul>
+     </nav>
+     <!-- contact-info -->
+     <script id="statusTemplate" type="text/template">
+      <div class="status">
+<p class="head">Network Health</p>
+<p class="notice" style="width:75%;"><a style="display:inline-block; width:100%; color: #fff; font-weight:bold;" href="http://itstatus.uark.edu/network/">{0}%</a></p>
+																																		<div class="progress" style="width:75%">
+  <div class="progress-bar progress-bar-success" style="width: {0}%;"></div>
+  <div class="progress-bar progress-bar-danger" style="width: {1}%;"></div>
+</div>
+</div></div>
+<p class="head">Service Health</p>
+<ul class="list-unstyled">{2}</ul>
+     </script>
+     <script id="serviceTemplate" type="text/template">
+      <li title="{0}">{1} {2}</li>
+     </script>
+     <script>
+      String.prototype.format = function() {
+  var args = arguments;
+  return this.replace(/{(\d+)}/g, function(match, number) {
+    return typeof args[number] != 'undefined'
+      ? args[number]
+      : match
+    ;
+  });
+};
+	var req = $.getJSON('https://itstatus.uark.edu/api/summary/?callback=?');
+	req.done(function( data ) {
+		var widgetTemplate = $('#statusTemplate').html();
+		var serviceTemplate = $('#serviceTemplate').html();
+		var widget;
+		var services = '';
+		$.each(
+			data.monitors.detail,
+			function(index, value) {
+				var html = serviceTemplate.format(
+					value.name + ' ' + value.message,
+					keyToIcon(value.status),
+					value.name,
+					value.link
+					);
+				services += html;
+			}
+			);
+		widget = widgetTemplate.format(
+			Math.floor(data.network.health),
+			100 - Math.floor(data.network.health),
+			services
+		);
+		$('#detail').html(widget);
+		$('#alertCharm').html(data.alert).slideDown();
+		$('#loading').hide();
+
+	});
+function keyToIcon(key) {
+	switch(key)
+	{
+	case 'up':
+		return '<i class="fa fa-check"></i>';
+		break;
+	case 'down':
+		return '<i class="fa fa-exclamation-triangle"></i>';
+		break;
+	case 'up':
+		return '<i class="fa fa-exclamation-triangle medium"></i>';
+		break;
+	default:
+	case 'up':
+		return '<i class="fa fa-question-circle"></i>';
+		break;
+	}
+}
+     </script>
+     <div id="status">
+      <h4>
+       <a href="http://itstatus.uark.edu/">
+        IT Status Monitor
+       </a>
+      </h4>
+      <p>
+       <i class="icon-calendar">
+       </i>
+       <a href="http://itstatus.uark.edu/">
+        Alert Calendar
+       </a>
+      </p>
+      <div id="loading">
+       <i class="fa fa-spinner fa-spin fa-lg">
+       </i>
+       Loading
+      </div>
+      <div id="detail">
+      </div>
+     </div>
+     <!-- /contact-info -->
+    </div>
+    <div class="col-md-9">
+     <h1>
+      Tech Articles Knowledge Base
+     </h1>
+     <ul class="breadcrumb">
+      <li>
+       <a class="uark-home" href="https://www.uark.edu/">
+        U of A
+       </a>
+      </li>
+      <li>
+       <a href="/">
+        IT Services
+       </a>
+      </li>
+      <li>
+       <a href="/help/">
+        Help and Support
+       </a>
+      </li>
+      <li>
+       Tech Articles Knowledge Base
+      </li>
+     </ul>
+     <div class="row">
+      <div class="col-sm-8 col-lg-9">
+       <div id="tiles">
+        <div class="row hidden-xs">
+         <div class="col-sm-4">
+          <a href="/services/network-devices/desktop-mobile/index.php">
+           <img alt="Having Trouble? Try these steps." class="img-responsive" height="166" src="/_resources/images/ta-tile-trouble3.png" width="273"/>
+          </a>
+         </div>
+         <div class="col-sm-4">
+          <a href="#search/uark%20wi-fi%20setup">
+           <img alt="Get connected to Wi-Fi." class="img-responsive" height="166" src="/_resources/images/ta-tile-wifi3.png" width="273"/>
+          </a>
+         </div>
+         <div class="col-sm-4">
+          <a href="/services/security/uark-accounts-passwords/index.php">
+           <img alt="Update your password." class="img-responsive" height="166" src="/_resources/images/ta-tile-password3.png" width="273"/>
+          </a>
+         </div>
+        </div>
+        <ul class="visible-xs">
+         <li>
+          <a href="/services/network-devices/desktop-mobile/index.php">
+           Having Trouble? Try these steps.
+          </a>
+         </li>
+         <li>
+          <a href="#search/uark%20wi-fi%20setup">
+           Get connected to Wi-Fi.
+          </a>
+         </li>
+         <li>
+          <a href="/services/security/uark-accounts-passwords/index.php">
+           Update your password.
+          </a>
+         </li>
+        </ul>
+       </div>
+       <table class="table table-hover filtertable articleTable" id="articleTable">
+        <tbody class="list">
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/25live-create-event.php">
+            25Live: Creating an Event
+           </a>
+           <br/>
+           Create an event in 25Live using the Events Wizard.
+           <span class="hidden">
+            <!--noindex-->
+            25live, r-25, r25, r, 25, events, add, create,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/25live-overview.php">
+            25Live: Overview
+           </a>
+           <br/>
+           Overview of 25Live, the web-based event request, scheduling, calendaring and publishing environment.
+           <span class="hidden">
+            <!--noindex-->
+            25live, 25, live, r, 25, event
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/25live-quick-reference-guide.php">
+            25Live: Quick Reference Guide
+           </a>
+           <br/>
+           Learn about features of 25Live including location availability, calendar and dashboard.
+           <span class="hidden">
+            <!--noindex-->
+            25, live, 25live, r, 25, event, dashboard
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/25live-search-for-event.php">
+            25Live: Search for an Event
+           </a>
+           <br/>
+           Search for events within 25Live.
+           <span class="hidden">
+            <!--noindex-->
+            25, live, 25live, event, r, 25,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/accessing-mydocs.php">
+            Accessing MyDocs
+           </a>
+           <br/>
+           You can use MyDocs to access files from your computer or the Documents folder in a Tech Spot computer lab.
+           <span class="hidden">
+            <!--noindex-->
+            MyDocs, storage, share, sharing, store, documents, my, docs, mapping, server, drive
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/office-activation-off-campus.php">
+            Activate Microsoft Office from Off Campus
+           </a>
+           <br/>
+           Activate your UARK licensed copy of Office 2016 from off campus.
+           <span class="hidden">
+            <!--noindex-->
+            activate microsoft office, off-campus, ms, remote, vpn, word, excel, powerpoint
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/active-directory-organizational-units.php">
+            Active Directory Organizational Units (OU)
+           </a>
+           <br/>
+           Create and manage an Active Directory Organizational Unit.
+           <span class="hidden">
+            <!--noindex-->
+            Network, Active Directory, Organizational Units, security groups
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/add-ua-holidays.php">
+            Add UA Holidays to Exchange Calendar
+           </a>
+           <br/>
+           This article describes how to display all day, banner entries for university holidays in your Outlook calendar.
+           <span class="hidden">
+            <!--noindex-->
+            Exchange, Calendar, UA Holidays, Outlook, 2016
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/basis-print-windows.php">
+            BASIS Print Setup for Windows
+           </a>
+           <br/>
+           Set up BASIS printing on non-networked computers in Windows.
+           <span class="hidden">
+            <!--noindex-->
+            BASIS, print, windows, 7
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/bidata-warehouse-ms-access.php">
+            BI/Data Warehouse for MS Access
+           </a>
+           <br/>
+           Work with BI/Data Warehouse using MS Access.
+           <span class="hidden">
+            <!--noindex-->
+            BI/Data, Warehouse, MS, Microsoft, Access, query, database, business, intelligence
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/blackboard-collaborate.php">
+            Blackboard Collaborate
+           </a>
+           <br/>
+           With Blackboard Collaborate, users on campus or anywhere in the world can access virtual collaborative spaces to participate in online course sessions, office hours or committee meetings.
+           <span class="hidden">
+            <!--noindex-->
+            web conferencing, blackboard, collaborate
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/blackboard-learn.php">
+            Blackboard Learn
+           </a>
+           <br/>
+           Visit bbhelp.uark.edu for help with Blackboard Learn.
+           <span class="hidden">
+            <!--noindex-->
+            Blackboard, learn, stub
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/cname-records.php">
+            CNAME Records
+           </a>
+           <br/>
+           CNAME records are aliases for existing A or AAAA records, and can stand alone or as part of a host record. In the Infoblox GUI, the terms “CNAME” and “alias” are used interchangeably.
+           <span class="hidden">
+            <!--noindex-->
+            cname, see, name, sea, c, host, records, alias, aliases, A, AAAA, fqdn, canonical, DNS, domain name services, infoblocks, passages
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/managed-print-installation.php">
+            Canon Secure Print Setup (Pilot Users Only)
+           </a>
+           <br/>
+           Canon Secure Print is only for pilot users in the Campus Managed Print project.
+           <span class="hidden">
+            <!--noindex-->
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/clickers.php">
+            Clickers
+           </a>
+           <br/>
+           Visit clickers.uark.edu for help with Clickers.
+           <span class="hidden">
+            <!--noindex-->
+            Clickers, classroom, feedback, stub
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/distribution-switch-location.php">
+            Distribution Switch Locations
+           </a>
+           <br/>
+           Network distribution switches route campus network traffic to various buildings on campus.
+           <span class="hidden">
+            <!--noindex-->
+            Network, Distribution, Switch, Locations, buildings, ethernet, routes, routing
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/eduroam-wi-fi.php">
+            Eduroam Wi-Fi
+           </a>
+           <br/>
+           The University of Arkansas is an eduroam member, providing secure wireless access to visitors from participating institutions.
+           <span class="hidden">
+            <!--noindex-->
+            eduroam, network, wi-fi, wifi, wireless, visitor, guest, visiting, faculty
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/email-filters.php">
+            Email Filters
+           </a>
+           <br/>
+           Setting filters for spam or other messages in UARK Gmail or OWA allows you to indicate which messages you wish to block or redirect at the server level.
+           <span class="hidden">
+            <!--noindex-->
+            Email, Security, Filters, filtering, rules, inbox, move, Spam, automatically, phishing, server-side, exchange, ProofPoint
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/exchange-email-rules.php">
+            Exchange Email Rules
+           </a>
+           <br/>
+           Create, edit and delete rules with the Office 365 Outlook Web App. Rules allow you to automatically filter email into folders or set other commands.
+           <span class="hidden">
+            <!--noindex-->
+            Email, Exchange, Outlook, rules, inbox, filtering, move, automatic, automated, delete rules, sort
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/exchange-resource-calendar.php">
+            Exchange Resource Calendars
+           </a>
+           <br/>
+           Request and manage resource calendar accounts in Exchange.
+           <span class="hidden">
+            <!--noindex-->
+            Exchange, Resource, Calendars, emails, emailing, outlook, rooms, projectors, location, equipment, reservations, reserve
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/exchange-setup.php">
+            Exchange Setup
+           </a>
+           <br/>
+           Set up your faculty or staff Exchange Online mailbox in Outlook 2013 or Outlook 2016.
+           <span class="hidden">
+            <!--noindex-->
+            email, exchange, e-mail, e mail, setup, set up, mailbox, mail box, office365, office 365, outlook, Outlook 2013, Outlook 2016, faculty, staff
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/exchange-setup-mobile.php">
+            Exchange Setup for Mobile Devices
+           </a>
+           <br/>
+           Set up your Exchange mailbox on a mobile device.
+           <span class="hidden">
+            <!--noindex-->
+            Email, Exchange, iPhone, iPad, ios, android, tablet, exchange, faculty, staff, windows, mobile, device, add, setup, phone, windows
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/exchange-sharing-delegating.php">
+            Exchange Sharing and Delegating
+           </a>
+           <br/>
+           Set up sharing and delegation of calendars and other items in Outlook.
+           <span class="hidden">
+            <!--noindex-->
+            Exchange, Calendar, Sharing, Delegating, emails, emailing, delegation, shares, outlook,  mailbox, mailing, resources, shared, permissions
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/find-dns-entry.php">
+            Find a DNS Entry
+           </a>
+           <br/>
+           Find the DNS entry for your computer or site.
+           <span class="hidden">
+            <!--noindex-->
+            Networks, DNS, entry, entries, domain, name, servers, networking, ip address
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/find-ip-address.php">
+            Finding Your IP Address
+           </a>
+           <br/>
+           Find your IP address and reset an IP address.
+           <span class="hidden">
+            <!--noindex-->
+            Networks, networking, addresses, internet, protocol, reset, ipconfig, ifconfig
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/find-mac-address.php">
+            Finding Your MAC Address
+           </a>
+           <br/>
+           Find your MAC address in Windows or Mac.
+           <span class="hidden">
+            <!--noindex-->
+            Networks, networking, Mac, addresses, access, adapter, physical, ethernet
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/forwarding-email.php">
+            Forwarding Email
+           </a>
+           <br/>
+           Set your UARK Gmail to automatically forward to a personal email account.
+           <span class="hidden">
+            <!--noindex-->
+            email, forwarding, gmail, exchange, pop, imap
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="-20">
+          <td>
+           <a class="title" href="/help/ta/generic-email-settings.php">
+            Generic Email Settings
+           </a>
+           <br/>
+           Set up your UARK mailbox in an unsupported or open-source email client such as Thunderbird, MailBird, Zimbra Desktop, etc.
+           <span class="hidden">
+            <!--noindex-->
+            Email, Exchange, Gmail, basic, Generic, Settings, setup, phone, mobile, imap, smtp
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/gmail-password-older-apps.php">
+            Gmail Password for Older Apps
+           </a>
+           <br/>
+           <span class="hidden">
+            <!--noindex-->
+            gmail, imap, password, login, issue, problem, log-in
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/google-apps-access-guidleines.php">
+            Google Apps and Accessibility Guidelines
+           </a>
+           <br/>
+           While access to Google Apps offers powerful sharing and collaboration tools, the accessibility of files created in Google Apps may vary as Google continues with development of these tools.
+           <span class="hidden">
+            <!--noindex-->
+            ADA, Accessibility, Guidelines, Google, Apps, Americans, disabilities, act, disability, disabled, impairments, blind, deaf
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/google-apps-faculty-staff.php">
+            Google Apps for Faculty and Staff
+           </a>
+           <br/>
+           Faculty and staff can use Google Apps to share Google Drive content with students by creating Google accounts using their Exchange account information.
+           <span class="hidden">
+            <!--noindex-->
+            Google Apps, Faculty and Staff Accounts
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/host-records.php">
+            Host Records
+           </a>
+           <br/>
+           Host records consolidate DNS, DHCP and IP address information in single place. A single host record is equivalent to creating A, PTR, and CNAME resource records for an IPv4 address.
+           <span class="hidden">
+            <!--noindex-->
+            names, ipv4, cname, name-to-address, address-to-name, create, creation, creating, domain name services, infoblox, infoblocks, blox, blocks, PTR, MAC, passage.uark.edu, passages
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/word-usage.php">
+            IT Services Word Usage
+           </a>
+           <br/>
+           When writing documentation, check this list for proper word usage.
+           <span class="hidden">
+            <!--noindex-->
+            Web Development, IT Services Word Usage
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/identity-finder.php">
+            Identity Finder
+           </a>
+           <br/>
+           Download and use Identity Finder, a software tool designed to prevent identity theft.
+           <span class="hidden">
+            <!--noindex-->
+            Security, Identity Finder, personally identifiable information, sensitive information, Identity Finder Enterprise Edition, AnyFind Searching, Automatic Searching Using AnyFind Worldwide, OnlyFind Include List, Search Summary window, Scan a Custom Location, Shred Sensitive Data, credit card, PII
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/install-kofax-windows.php">
+            Install Kofax Capture for Windows
+           </a>
+           <br/>
+           Download and install Kofax Capture for Windows.
+           <span class="hidden">
+            <!--noindex-->
+            kofax, imaging, scanning, batch, cofax
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/joining-workstatoin-active-directory.php">
+            Joining a Workstation to Active Directory
+           </a>
+           <br/>
+           Join Windows or Mac computers to Active Directory on campus.
+           <span class="hidden">
+            <!--noindex-->
+            Network, Microsoft, Active Directory, Workstation Account, Windows Workstation, Mac Workstation
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/kofax-preinstall-steps.php">
+            Kofax Capture Pre-installation Steps
+           </a>
+           <br/>
+           Follow these steps to fulfill security requirements before installing Kofax Capture.
+           <span class="hidden">
+            <!--noindex-->
+            kofax, imaging, scanning, batch, cofax
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/listserv-settings.php">
+            Listserv Settings
+           </a>
+           <br/>
+           Manage your subscribed mailing list settings, and mange Listservs you own.
+           <span class="hidden">
+            <!--noindex-->
+            Emails, emailing, Mailing, Lists, Listserv, manages, managing, management, subscribes, subscriptions, subscribing, unsubscribe, unsubscribing, unsubscriptions
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/mac-filters.php">
+            MAC Filters
+           </a>
+           <br/>
+           MAC filters are used to make sure that the correct PXE booting options are sent to the correct clients in campus buildings occupied by multiple departments with local IT support.
+           <span class="hidden">
+            <!--noindex-->
+            mack, filters, pxe, booting, adding, deleting, delete, manage, infoblox, dhcpadmin
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/matlab-setup.php">
+            MATLAB Setup
+           </a>
+           <br/>
+           Students, faculty and staff can download and activate MATLAB free of charge.
+           <span class="hidden">
+            <!--noindex-->
+            MathWorks, data, analysis, analyze, visualization, computational, finance, analytics
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="10">
+          <td>
+           <a class="title" href="/help/ta/maintenance-schedules.php">
+            Maintenance Schedules
+           </a>
+           <br/>
+           Scheduled maintenance is performed on the following systems as needed within these published time frames.
+           <span class="hidden">
+            <!--noindex-->
+            Maintenance Schedules, Open Systems, Campus Network, Blackboard Learn, Windows Servers, BASIS Mainframe
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/mapping-a-drive.php">
+            Mapping a Drive
+           </a>
+           <br/>
+           This article includes common network locations, mapping a drive in Windows, and connecting to a server on a Mac.
+           <span class="hidden">
+            <!--noindex-->
+            mapping, drive, fileshare, server, vpn, gizmo, mydocs, cavern, locations, smb, ftp, sftp
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/nebula-setup-instructions.php">
+            Nebula Setup Instructions
+           </a>
+           <br/>
+           Follow the setup instructions for your first time accessing Nebula. Nebula is a cloud computing platform for research and development.
+           <span class="hidden">
+            <!--noindex-->
+            vm, virtual, machines, openstack, stack, open, lamp, keypair, key, pair, instance
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/network-printing.php">
+            Network Printing
+           </a>
+           <br/>
+           How to register a printer on the network.
+           <span class="hidden">
+            <!--noindex-->
+            Networks, Printing, Networking, Printers, DHCP, connections, connecting, connects
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/ou-security-groups-active-directory.php">
+            OU Security Groups in Active Directory
+           </a>
+           <br/>
+           Create and manage security groups in an Active Directory Organizational Unit.
+           <span class="hidden">
+            <!--noindex-->
+            Network, Microsoft, Windows, Active Directory, OU Security Groups, RSAT, organizational units, distribution groups, create OU
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/office-365-desktop.php">
+            Office 365 Desktop Apps
+           </a>
+           <br/>
+           Install Office 365 apps like Excel, OneDrive, Outlook, OneNote, PowerPoint and Word on your Windows or Mac laptop or desktop.
+           <span class="hidden">
+            <!--noindex-->
+            office 365, O365, office365, windows, mac setup, set up, install apps, applications, word, excel, powerpoint, onenote, outlook, onedrive, skype for business, power, point, one, drive, out, look, note
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/office-365-mobile.php">
+            Office 365 Mobile Setup
+           </a>
+           <br/>
+           Install and set up Office 365 apps like Excel, OneDrive, Outlook, OneNote, PowerPoint and Word on your iPhone, iPad or Android mobile devices.
+           <span class="hidden">
+            <!--noindex-->
+            Office365, Mobile, Setup, office, 365, word, powerpoint, power, point, excel, note, Microsoft, software, downloads, productivity, onenote, onedrive, one, drive, note, outlook, out, look
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/office-365-onedrive.php">
+            Office 365 OneDrive
+           </a>
+           <br/>
+           Manage your files with OneDrive.
+           <span class="hidden">
+            <!--noindex-->
+            Office 365, OneDrive, one, drive, Microsoft, micro, soft, storage, files, management, stores, retrieve, retrieval, organize, save
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/office-365-online.php">
+            Office 365 Online Apps
+           </a>
+           <br/>
+           Office 365 allows you to use Office apps like Excel, OneDrive, Outlook, OneNote, PowerPoint and Word in your web browser without installing any software.
+           <span class="hidden">
+            <!--noindex-->
+            365, Office365, OWA, Outlook, web, app, WebApp, OneDrive, one, drive, Microsoft, out, look, onenote, note, excel, word, powerpoint, power, point, o365, office
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/onedrive-troubleshoot.php">
+            OneDrive Troubleshooting
+           </a>
+           <br/>
+           The Microsoft Office Support team provides troubleshooting tips relating to naming, uploading and syncing files with OneDrive.
+           <span class="hidden">
+            <!--noindex-->
+            one drive, onedrive, office, 365, office365, troubleshoot, troubleshooting, trouble, shoot, saving, naming, files
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-parent-family-auth.php">
+            Parent/Family Authorization
+           </a>
+           <br/>
+           How to authorize a parent or 3rd party to view student information.
+           <span class="hidden">
+            <!--noindex-->
+            Parent, center, family, guardian,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/password-protect-office.php">
+            Password-protect Microsoft Office Files
+           </a>
+           <br/>
+           Protect student information or other sensitive data by requiring a password to open a Microsoft Office file.
+           <span class="hidden">
+            <!--noindex-->
+            protection, password, secure, security, sensitive, data, save, password, excel, gradebook, grades
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/perceptive-content-windows.php">
+            Perceptive Content for Windows
+           </a>
+           <br/>
+           To work with large volumes of files, complex workflows, batch scanning and indexing, and bulk loading of documents, download and install the Perceptive Content application for Windows.
+           <span class="hidden">
+            <!--noindex-->
+            Document, Management, perceptive, content, workflows, Application, Windows, ImageNow, driver, storage, storing, retrieve, retrieval
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/phishing-scams.php">
+            Phishing Scams
+           </a>
+           <br/>
+           Phishing scams have become much more sophisticated at imitating university communications, and IT Services encourages users to take care in evaluating email messages that purport to be from the university.
+           <span class="hidden">
+            <!--noindex-->
+            Email, Security, Phishing, Scams, prevents, prevention, scamming, protection, protects, phish
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/printing-basis.php">
+            Printing from BASIS
+           </a>
+           <br/>
+           Selected items, such as reports, can be printed from a BASIS session using a networked printer or a printer attached to a networked computer.
+           <span class="hidden">
+            <!--noindex-->
+            BASIS, print, printing, networked printer
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/printing-from-web.php">
+            Printing from the Web
+           </a>
+           <br/>
+           With Web Print, you can submit PDFs or documents from Excel, Word and PowerPoint to any General Access Computing Lab printer on campus.
+           <span class="hidden">
+            <!--noindex-->
+            Printing, PrintSmart, webprinting, web
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/quotas-server-information.php">
+            Quotas and Server Information
+           </a>
+           <br/>
+           Get quota information for servers hosted at the University of Arkansas.
+           <span class="hidden">
+            <!--noindex-->
+            Email, data center, Cavern, Comp Server, Quota, Information, Exchange Online, Gizmo Server, Microsoft IIS Server, www1, MyDocs, Legacy Web Servers
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/real-safety-virtual-world.php">
+            Real World Safety in the Virtual World
+           </a>
+           <br/>
+           Today's Internet is big business, and what happens online can have a big impact in your real world.
+           <span class="hidden">
+            <!--noindex-->
+            Security, online safety, tips
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/report-email-headers.php">
+            Report Abusive Email and Expand Headers
+           </a>
+           <br/>
+           Forward abusive email to abuse@uark.edu with expanded headers in UARK Gmail, Exchange, Outlook and macOS Mail (OS X Mail).
+           <span class="hidden">
+            <!--noindex-->
+            email, security, report phishing, spam, abusive, expand headers, gmail, exchange
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/requesting-ssl-certificate.php">
+            Requesting SSL Certificates
+           </a>
+           <br/>
+           Generate SSL certificates and submit Certificate Signing Requests to the IT Services Security Team.
+           <span class="hidden">
+            <!--noindex-->
+            comodo, certificates, signing, security, secure, ssl, certification, esig, esignature, e-signature, e-sign, esign
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/sas.php">
+            SAS
+           </a>
+           <br/>
+           SAS is an integrated suite of analytics software products, available by site license and in the General Access Computing Labs
+           <span class="hidden">
+            <!--noindex-->
+            Statistical, statistics, analytics, research, SAS, Mathematical Analysis, programming language, data analysis, license
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/sas-tutorial-info.php">
+            SAS Tutorial Information
+           </a>
+           <br/>
+           Faculty and students can access SAS e-Learning materials with a licensed copy of SAS.
+           <span class="hidden">
+            <!--noindex-->
+            Statistical, Software, system, SAS, Tutorial, analytics, data, management, license
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/spss.php">
+            SPSS
+           </a>
+           <br/>
+           SPSS site licenses are available for purchase from IT Services, and SPSS for Windows is available in computer labs.
+           <span class="hidden">
+            <!--noindex-->
+            Statistical Software, SPSS, statistics, analytics, reporting, research, data management, statistical analysis
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/secure-sensitive-data.php">
+            Securing Sensitive Data
+           </a>
+           <br/>
+           University employees have a legal responsibility to protect personal faculty, staff and student data.
+           <span class="hidden">
+            <!--noindex-->
+            security, securing sensitive data, personal, legal requirements, standards, protecting devices, protected, secure, antivirus, crashplan, crash plan, code of computing practices, hipaa, ferpa, fisma, glba, pcidss, pci/dss, pci, dss
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/securing-passwords.php">
+            Securing Your Passwords
+           </a>
+           <br/>
+           Get tips and learn general best practices for saving and protecting your passwords.
+           <span class="hidden">
+            <!--noindex-->
+            Security, Passwords, password, passphrases, pass phrases, Protecting, Password Safe Tools, Encrypted, Password Card, password apps
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/service-account-guidelines.php">
+            Service Account Guidelines
+           </a>
+           <br/>
+           A UARK service account is intended to authenticate one system, subsystem or application to another. Service accounts are not intended for personal use.
+           <span class="hidden">
+            <!--noindex-->
+            security, service account guidelines, authenticate, system, subsystem, request
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/sharepoint-group-access.php">
+            SharePoint Online Group Access
+           </a>
+           <br/>
+           SharePoint Online sites have three types of group access automatically given default permission levels.
+           <span class="hidden">
+            <!--noindex-->
+            SharePoint, Groups, Permissions, Add Users, Remove Users, Delete a Group, Access, Site, development
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/sharepoint-online-nav.php">
+            SharePoint Online Navigation Tools
+           </a>
+           <br/>
+           SharePoint Online includes a set of customizable navigation features to help users find content in lists, libraries, and sub-sites.
+           <span class="hidden">
+            <!--noindex-->
+            SharePoint, Navigation, development, site, website, settings, global, sorting, editing, ribbon
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/sharepoint-online-permission.php">
+            SharePoint Online Permission Levels
+           </a>
+           <br/>
+           The level of access for users on a SharePoint Online site can be customized by changing permissions.
+           <span class="hidden">
+            <!--noindex-->
+            SharePoint, Permission, Levels, sub-sites, document, management, storage, stores, Microsoft
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/sharepoint-permissions-owner.php">
+            SharePoint Online Permissions for Site Owners
+           </a>
+           <br/>
+           Using security groups to grant access to SharePoint Online sites
+           <span class="hidden">
+            <!--noindex-->
+            department tech support, sharepoint, share point,  security groups, managing, manage, organizational units, OU, site owners, administrators, active directory, email-enabled, permissions
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/exchange-calendar-sharing.php">
+            Sharing an Exchange Calendar
+           </a>
+           <br/>
+           Share and publish calendars in Outlook Web App.
+           <span class="hidden">
+            <!--noindex-->
+            Exchange, Calendars, Sharing, emails, emailing, outlook, office365, office, 365, share, publish
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/software-updates-backups.php">
+            Software Updates and Backups
+           </a>
+           <br/>
+           Keeping your software up-to-date is as important—perhaps even more important—than keeping antivirus software updated.
+           <span class="hidden">
+            <!--noindex-->
+            Security, Backup, Software, Updates
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/spam.php">
+            Spam
+           </a>
+           <br/>
+           Spam is unsolicited bulk email—indiscriminate, network-wide broadcasted messages which distribute advertisements and solicitations.
+           <span class="hidden">
+            <!--noindex-->
+            Security, Spam, Spoofing, Chain Email, Chain Letter, Code of Computing Practices, email
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/stream-video-kaltura.php">
+            Streaming Video with Kaltura
+           </a>
+           <br/>
+           Kaltura allows you to create and share videos in Blackboard.
+           <span class="hidden">
+            <!--noindex-->
+            Kaltura, video, streaming, Blackboard, stub
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/style-guide-online-forms.php">
+            Style Guide for University Online Forms
+           </a>
+           <br/>
+           When creating online forms, use this guide for proper styles and labels.
+           <span class="hidden">
+            <!--noindex-->
+            Web Development, Style Guide, Online Forms, Layout, Capitalization, Word Usage, Coding, CSS Styling, Validation, standards
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/tech-enhance-class-document-camera.php">
+            Technology Enhanced Classroom Document Camera
+           </a>
+           <br/>
+           Learn how to use the document camera in a Campus Standard Technology Enhanced Classroom.
+           <span class="hidden">
+            <!--noindex-->
+            classrooms, podium, projector, standard, Document, Camera, display live images, Ladibug
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/tech-enhance-class-annotation.php">
+            Technology Enhanced Classrooms: Annotation
+           </a>
+           <br/>
+           Learn how to use annotation software in Campus Standard Technology Enhanced Classrooms.
+           <span class="hidden">
+            <!--noindex-->
+            classrooms, display, podium, projector, Annotation, Open-Sankoré
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/scanning-guidelines.php">
+            Test Scanning Guidelines and Instructions
+           </a>
+           <br/>
+           Drop-off and self-service test scanning is available from 9 a.m. to 4 p.m., Monday through Friday, in Gibson Annex next to the Fine Arts building.
+           <span class="hidden">
+            <!--noindex-->
+            testing, tests, scanner, self-service, faculty, pearson, forms
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/transfer-uark-gmail-to-personal.php">
+            Transfer UARK Gmail to a Personal Gmail Account
+           </a>
+           <br/>
+           Students can transfer their UARK Gmail account inbox to a personal Gmail account.
+           <span class="hidden">
+            <!--noindex-->
+            leaving, graduating, graduate, email, transferring, forwarding, moved, moving
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/troubleshoot-port.php">
+            Troubleshoot an Active Network Port
+           </a>
+           <br/>
+           How to troubleshoot an active or inactive network port.
+           <span class="hidden">
+            <!--noindex-->
+            troubleshoot, trouble, shoot, porting, ports, ethernet, connections, networking
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-adhe-transcript.php">
+            UAConnect: ADHE Transcript Request
+           </a>
+           <br/>
+           Request a transcript for the Arkansas Department of Higher Education for the Arkansas Academic Challenge Scholarship using your Student Center. A $7.50 charge per request is placed on your student account.
+           <span class="hidden">
+            <!--noindex-->
+            transcript, adhe, students, academics, scholarship, official
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-academic-structure.php">
+            UAConnect: Academic Structure
+           </a>
+           <br/>
+           UAConnect Academic Structure example.
+           <span class="hidden">
+            <!--noindex-->
+            uaconnect, academics, administrative, administrator, plan, program, career,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-academic-term-codes.php">
+            UAConnect: Academic Term Codes
+           </a>
+           <br/>
+           Each term (semester) is assigned a four-digit code to identify it in UAConnect. Some terms will contain multiple sessions, such as Eight Week sessions. The table below describes how to decipher and interpret this code.
+           <span class="hidden">
+            <!--noindex-->
+            uaconnect, terms, academics, students, faculty, advisors, administrative, administrator, sessions
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-accessibility-features.php">
+            UAConnect: Accessibility Features
+           </a>
+           <br/>
+           UAConnect has accessibility features that can be enabled or disabled.
+           <span class="hidden">
+            <!--noindex-->
+            accessibility, ada, student, miscellaneous, tasks, faculty, instructors, administrator, administrative
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-add-remove-fac-mentor.php">
+            UAConnect: Add/Remove a Faculty Mentor
+           </a>
+           <br/>
+           A Faculty Mentor may be added or removed to a student’s account along with the student’s advisor.
+           <span class="hidden">
+            <!--noindex-->
+            advisor, mentor, administrative, administrator, user, job, aids, faculty
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-add-query-to-favorites.php">
+            UAConnect: Add Query to Favorites List
+           </a>
+           <br/>
+           The Query Manager and Query Viewer search pages can include a list of queries called My Favorite Queries. If you use certain queries often, you can place them in this list for easy access.
+           <span class="hidden">
+            <!--noindex-->
+            add, favorites, accessing, reporting, query, manager, aids
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-waitlist-add-student.php">
+            UAConnect: Add Student to Class Waitlist
+           </a>
+           <br/>
+           Add a student to an established class waitlist.
+           <span class="hidden">
+            <!--noindex-->
+            waitlist, administrative, advisors, administrator, user, job, aids, waitlisted, adding, students,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-advisor-homepage-overview.php">
+            UAConnect: Advisor Homepage Overview
+           </a>
+           <br/>
+           Navigate advisor features within the Advisor Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            advisors, home, page, advisee, faculty, academics,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-apply-for-graduation.php">
+            UAConnect: Applying for Graduation
+           </a>
+           <br/>
+           Current students can apply for graduation through their Student Homepage in UAConnect. Applicants who no longer have access to UAConnect will need to contact their Dean’s Office to apply for graduation.
+           <span class="hidden">
+            <!--noindex-->
+            graduation, applying, uaconnect, students, academics
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-grade-roster-assign-grades.php">
+            UAConnect: Assign Grades in Grade Roster
+           </a>
+           <br/>
+           The following document includes details on how to assign student grades within the Grade Roster. Grade Rosters links are listed on the instructor’s teaching schedule found on the opening screen of the Faculty Homepage. The following grade assignment instructions apply to both Early Progress (Mid-term) and Final grades.
+           <span class="hidden">
+            <!--noindex-->
+            grades, faculty, students, advisors, assigning, grading, instructors
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-assign-advisor.php">
+            UAConnect: Assign an Advisor
+           </a>
+           <br/>
+           Use the Student Advisor page to view or assign individual advisors or a committee of advisors associated with the student.
+           <span class="hidden">
+            <!--noindex-->
+            uaconnect, advisor, assigning, administrator, administrative, user, job, aids
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-calculate-student-hours.php">
+            UAConnect: Calculating Students’ Hours
+           </a>
+           <br/>
+           All formulas are for the STDNT_CAR_TERM table unless otherwise indicated. When querying hours by students and by careers, you will need to group by EMPLID and Academic career and sum the hours. When querying hours by student, you will need to group by EMPLID and sum the hours.
+           <span class="hidden">
+            <!--noindex-->
+            calculate, students, reporting, query, manager, aids, hourly,  employees, administrative, administrators
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-grade-roster-grade-change.php">
+            UAConnect: Change Grades with Grade Roster
+           </a>
+           <br/>
+           This document details how to change grades with the grade roster. Faculty with an active UAConnect account may process a change of grade from their faculty homepage.
+           <span class="hidden">
+            <!--noindex-->
+            grades, grading, changing, students, faculty, advisors, instructors,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-copy-query.php">
+            UAConnect: Copy Query to Another List of Queries
+           </a>
+           <br/>
+           Query Manager allows you to copy a query from your list of private queries to another user’s list of queries.
+           <span class="hidden">
+            <!--noindex-->
+            copying, listing, reporting, query, manager, aids
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-create-edit-favorites.php">
+            UAConnect: Create/Edit Favorites
+           </a>
+           <br/>
+           Frequently used UAConnect pages can be set as Favorites for quick and easy access without having to use the full navigation path.
+           <span class="hidden">
+            <!--noindex-->
+            favorites, favorited, bookmarks, navigation, links, faculty, advisors, administrators, administrative, instructors
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-create-homepage-admin.php">
+            UAConnect: Create a Homepage - Administrative
+           </a>
+           <br/>
+           This document describes the process of creating a homepage for administrative users.
+           <span class="hidden">
+            <!--noindex-->
+            homepage, home, page, creating, administrators, faculty, advisors, job, aids, miscellaneous, tasks
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-create-schedule-of-classes.php">
+            UAConnect: Create a Schedule of Classes
+           </a>
+           <br/>
+           This document details the process of creating a schedule of classes.
+           <span class="hidden">
+            <!--noindex-->
+            schedule, scheduling, administrative, administrator
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-create-sec-req.php">
+            UAConnect: Create a Security Request
+           </a>
+           <br/>
+           Use this electronic form to create a request for security to UAConnect for full-time employees, hourly employees, and university affiliates.
+           <span class="hidden">
+            <!--noindex-->
+            requesting, creating, workers, employees, accessing, full, time, part,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-sec-req-hourly.php">
+            UAConnect: Create a Security Request for Hourly Employees
+           </a>
+           <br/>
+           Use this electronic form to create a request for security to UAConnect for hourly or work-study employees.
+           <span class="hidden">
+            <!--noindex-->
+            hourly, workers, study, form, requesting, access, part-time, part, administrators, administrative
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-dean-dir-sec-req-approval.php">
+            UAConnect: Dean/Director Approval of a Security Request
+           </a>
+           <br/>
+           When an electronic security request is created and submitted, verification of the user’s eligibility to access the system is processed.  Once the user has been determined eligible, the request is routed electronically to the user’s Dean/Director for approval.
+           <span class="hidden">
+            <!--noindex-->
+            dean, director, approving, security, online, on, line, requests
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-degree-audit-admin-users.php">
+            UAConnect: Degree Audit for Administrative Users
+           </a>
+           <br/>
+           degrees, auditing, audits, administrative, administrator, job, aids, courses, classes
+           <span class="hidden">
+            <!--noindex-->
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-degree-audit-advisors.php">
+            UAConnect: Degree Audit for Advisors
+           </a>
+           <br/>
+           This document contains information needed to view degree requirements, displaying those which are satisfied and those remaining unsatisfied. Keep in mind that this is not an official degree certification.
+           <span class="hidden">
+            <!--noindex-->
+            audit, advisors, advising, auditing, faculty,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-student-degree-audit.php">
+            UAConnect: Degree Audit for Students
+           </a>
+           <br/>
+           This document contains information needed to view your degree requirements, displaying those you have satisfied and those remaining unsatisfied. Keep in mind that this is not an official degree certification and should be used in conjunction with your academic advisor.
+           <span class="hidden">
+            <!--noindex-->
+            degree, audit, students, academics, requirements
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-drop-class.php">
+            UAConnect: Drop a Class
+           </a>
+           <br/>
+           Dropping a class from your class schedule is very easy to do. Follow the instructions below to drop a class during the enrollment changes period for the semester.
+           <span class="hidden">
+            <!--noindex-->
+            dropping, student, academics, schedule
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-drop-waitlist-class.php">
+            UAConnect: Drop a Waitlisted Class
+           </a>
+           <br/>
+           Students can drop a waitlisted class from their schedule in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            uaconnect, dropping, waitlisted, students, academics, classes,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-enroll-in-classes.php">
+            UAConnect: Enroll in Classes
+           </a>
+           <br/>
+           Enrolling in a class is a multi-step process that includes selecting and confirming your course selections along with verification that you have read all the Class Notes. In addition, all classes that are not taught face-to-face must have a predominant location identified where the course will be taken.
+           <span class="hidden">
+            <!--noindex-->
+            enrolling, classes, courses, students, academics
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-enrollment-verification.php">
+            UAConnect: Enrollment Verification
+           </a>
+           <br/>
+           Students may choose to print or view an unofficial copy of their Enrollment Verification or request that the University mail an official copy to a specified address.
+           <span class="hidden">
+            <!--noindex-->
+            enrollment, verification, students, academics, enrolling, verifying, requesting
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-export-screens-to-excel.php">
+            UAConnect: Export Screens to Excel
+           </a>
+           <br/>
+           Download your UAConnect screens to a Microsoft Excel spreadsheet using either the download icon or the download link.
+           <span class="hidden">
+            <!--noindex-->
+            downloading, use, faculty, advisors, miscellaneous, tasks, using, exports, exporting, microsoft,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-ferpa-3rd-party-release.php">
+            UAConnect: FERPA Third Party Release
+           </a>
+           <br/>
+           Students may choose to allow certain people, such as parents, to view their student education records by completing the release form in the Student Center on UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            ferpa, 3rd, party, release, third, students, accounts, personal, information, parents, family
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-faculty-homepage-overview.php">
+            UAConnect: Faculty Homepage Overview
+           </a>
+           <br/>
+           Faculty can access many features from the UAConnect homepage.
+           <span class="hidden">
+            <!--noindex-->
+            homepage, faculty, accessing, advisors, instructors,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-financial-agreement-guide.php">
+            UAConnect: Financial Agreement Activity Guide
+           </a>
+           <br/>
+           Students must complete the Students Financials Agreement in UAConnect before they enroll in future terms at the U of A.
+           <span class="hidden">
+            <!--noindex-->
+            financials, guides, students, accounts, enrolling,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-grant-parentcenter-access.php">
+            UAConnect: Grant Access to Parent Center
+           </a>
+           <br/>
+           The Parent/Family Access option allows students to authorize access to certain academic and financial information on the Student Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            parents, family, access, authorize, authorizing, family, accessing, student, info,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-payments-authorized-user.php">
+            UAConnect: Make Payment - Authorized User
+           </a>
+           <br/>
+           Authorized Users can make payments on their student’s account by credit card or electronic check.
+           <span class="hidden">
+            <!--noindex-->
+            payments, pay, parents, guardians, paying,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-payment-from-homepage.php">
+            UAConnect: Make a Payment from Student Homepage
+           </a>
+           <br/>
+           Students can make payments to their student accounts from the UAConnect Student Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            payments, balance, credit, cards, debit, students, account
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-manage-class-syllabus.php">
+            UAConnect: Manage Your Class Syllabus
+           </a>
+           <br/>
+           Faculty and Instructors have the option to upload and manage their class syllabi for current, past or future assigned classes using Faculty Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            faculty, advisors, instructors, add, change, delete, view, viewing. adding, changing, editing,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-naming-query.php">
+            UAConnect: Naming A Query
+           </a>
+           <br/>
+           The University of Arkansas has defined a naming convention for queries that are developed in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            naming, uaconnect, queries, reporting, query, manager, aids,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-withdraw-official.php">
+            UAConnect: Official Withdrawal
+           </a>
+           <br/>
+           Students can officially withdraw from the university using UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            withdrawal, students, academics, withdrawing, classes,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-parentcenter-setup.php">
+            UAConnect: Parent Center Initial Setup
+           </a>
+           <br/>
+           The Parent/Family Authorization option allows a student to authorize access to view certain student information.
+           <span class="hidden">
+            <!--noindex-->
+            parents, children, viewing, parent, center, info, authorizing
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-payment-plan.php">
+            UAConnect: Payment Plan
+           </a>
+           <br/>
+           Students can set up a payment plan to pay on their accounts in installments by credit card or electronic check on the UAConnect Student Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            payments, uaconnect, plans, students, accounts,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-print-class-roster.php">
+            UAConnect: Print Class Roster
+           </a>
+           <br/>
+           Faculty and staff can print their class rosters from UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            printing, rosters, classes, advisors, instructors,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-qm-component-tabs.php">
+            UAConnect: Query Manager Component Tabs
+           </a>
+           <br/>
+           The pages in Query Manager enable you to tailor queries to retrieve data that is specific to your business needs. This table lists the name and purpose of the Query Manager pages.
+           <span class="hidden">
+            <!--noindex-->
+            query, queries, manager, tabs, reporting, aids, administrators, administrative, reports
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-quick-enroll.php">
+            UAConnect: Quick Enroll
+           </a>
+           <br/>
+           Use Quick Enroll a Student to process overrides and other administrative adjustments to a student’s schedule.
+           <span class="hidden">
+            <!--noindex-->
+            enrollment, enrolling, administrative, administrators, job, aids, schedules, scheduling, overriding, overrides, issues, adjustment
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-quick-start-guide.php">
+            UAConnect: Quick Start Guide
+           </a>
+           <br/>
+           Each time you log in to UAConnect, the system opens to your main homepage where you can easily navigate to pages or screens that you commonly use.
+           <span class="hidden">
+            <!--noindex-->
+            home, page, homepages, starting, administrative, administrator, user, faculty, advisors, customize, personalize, customization, personalization, instructors
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-release-advising-hold.php">
+            UAConnect: Release an Advising Hold
+           </a>
+           <br/>
+           This process describes how to remove an advising hold or other service indicator from an advisee’s account using the UA Advisor Center navigation on your Advisor Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            advising, holds, advisors, administrators, administrative, removing, releasing, releases, removes
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-reorder-homepage.php">
+            UAConnect: Reorder Homepage - Administrative
+           </a>
+           <br/>
+           If you have more than one Homepage, you may want to reorder which one opens when you log in to UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            homepages, administrative, administrator, faculty, advisors, job, aids, miscellaneous, tasks,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-reporting-absences.php">
+            UAConnect: Report Student Attendance
+           </a>
+           <br/>
+           This document shows how to report student attendance through the class roster. To be in compliance with federal financial aid and to address class attendance issues, we ask faculty to provide information regarding student absences in UAConnect. This information allows the staff to be notified of those students who have been missing class in a pattern that you believe will be detrimental to their overall performance.
+           <span class="hidden">
+            <!--noindex-->
+            faculty, advisors, students, classes, attendance, roster
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-request-advisement-report.php">
+            UAConnect: Request an Advisement Report
+           </a>
+           <br/>
+           Users with the authorized security, granted by the dean’s office, may request Academic Advisement Reports administratively. The option to request a new report or to view previously run reports are covered in this document.
+           <span class="hidden">
+            <!--noindex-->
+            advisement, administrative, advisors, administrator, user, job, aids,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-official-transcript.php">
+            UAConnect: Request an Official Transcript
+           </a>
+           <br/>
+           Students may request an official transcript be mailed from their student homepage and billed directly to their student account.
+           <span class="hidden">
+            <!--noindex-->
+            transcripts, students, requesting, mailing, home, page,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-what-if-report.php">
+            UAConnect: Running a "What-If" Report
+           </a>
+           <br/>
+           Students, advisors, or administrative users can run a "What-If" Report to view the degree requirements for various majors and minors.
+           <span class="hidden">
+            <!--noindex-->
+            what-if, audit, report, what, if, faculty, advisors, students, academics, degree, requirements
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-schedule-query.php">
+            UAConnect: Schedule a Query
+           </a>
+           <br/>
+           This document provides instructions to schedule an existing query to run at a specific day and time. Additionally, instructions on how to cancel, hold, and restart a scheduled query.
+           <span class="hidden">
+            <!--noindex-->
+            scheduling, reporting, query, manager, aids, administrative, administrators, scheduled, running, reports
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-schedule-of-classes-report.php">
+            UAConnect: Schedule of Classes Report
+           </a>
+           <br/>
+           This document details the process of running a schedule of classes report. Security access to the Report Manager option in UAConnect is necessary to run this report. The process used to run this report is similar to all report processes in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            schedules, soc, reporting, reports, scheduling, running, administrators, administrative
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-screen-print.php">
+            UAConnect: Screen Print
+           </a>
+           <br/>
+           Print without the banner or left-side menu in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            printing, screen, troubleshooting
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-search-match.php">
+            UAConnect: Search/Match
+           </a>
+           <br/>
+           The Search/Match functionality is used when looking up records for a person in the UAConnect database.  Before entering a new prospector applicant into the system, search the database using Search/Match to see if a record already exists for the person.
+           <span class="hidden">
+            <!--noindex-->
+            search, match, administrator, administrative, job, aids, searching
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-search-classes.php">
+            UAConnect: Search Classes
+           </a>
+           <br/>
+           Faculty, students, and staff administrative users can search for classes using UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            classes, searching, faculty, instructors, administrative, administrators, students, academics, homepage, courses
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-search-intersession-classes.php">
+            UAConnect: Search for Intersession Classes
+           </a>
+           <br/>
+           Students can locate intersession classes in Search for Classes and in Schedule Planner.
+           <span class="hidden">
+            <!--noindex-->
+            searching, courses, students, academics, scheduling, homepage
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-service-indicator-codes.php">
+            UAConnect: Service Indicator Codes
+           </a>
+           <br/>
+           Service indicator codes describe the types of holds that can be placed on a student's account.
+           <span class="hidden">
+            <!--noindex-->
+            indicator, service, holds, faculty, advisors,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-set-user-defaults.php">
+            UAConnect: Set Administrative User Defaults
+           </a>
+           <br/>
+           User Default will auto-populate field values in search pages and data entry pages based on your User ID. It is a very useful tool for making data entry easier and faster.
+           <span class="hidden">
+            <!--noindex-->
+            administrative, administrator, miscellaneous, tasks, using,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-setup-ferpa-restrictions.php">
+            UAConnect: Set FERPA Restrictions
+           </a>
+           <br/>
+           Students can restrict the release of their directory/public information by completing and submitting the FERPA Directory Restriction form located on the User Profile tile on the Student homepage.
+           <span class="hidden">
+            <!--noindex-->
+            ferpa, restricting, students, accounts, personal, information
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-setup-authorized-user.php">
+            UAConnect: Set Up New Authorized User
+           </a>
+           <br/>
+           Students can assign access to authorized users to make payments to their student accounts in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            authorized, authorization, users, assigning, pay, parent, family
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-student-groups.php">
+            UAConnect: Student Groups
+           </a>
+           <br/>
+           This document provides instructions on how to add, view and inactivate a student within a group.
+           <span class="hidden">
+            <!--noindex-->
+            students, groups, grouping, adding, viewing, inactivating, administrative, administrator, job, aids
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-student-homepage-detail.php">
+            UAConnect: Student Homepage - Detail
+           </a>
+           <br/>
+           Students can access many tiles from the UAConnect Student Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            homepage, accessing, students, academics, advisors, faculty, home, page,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-student-homepage-overview.php">
+            UAConnect: Student Homepage Overview
+           </a>
+           <br/>
+           Students can access many services using the UAConnect student homepage.
+           <span class="hidden">
+            <!--noindex-->
+            homepage, accessing, students, academics, home, page,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-swap-class.php">
+            UAConnect: Swapping a Class
+           </a>
+           <br/>
+           Swapping a Class Swapping a class allows you to simultaneously add a class at the same time you drop one.
+           <span class="hidden">
+            <!--noindex-->
+            swapping, classes, uaconnect, classes, adding, dropping,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-criteria-condition-types.php">
+            UAConnect: Understand Criteria Condition Types
+           </a>
+           <br/>
+           The more you use Query Manager, the more you are likely to refine queries with conditions other than the Equal To condition that is the default.
+           <span class="hidden">
+            <!--noindex-->
+            query, understanding, reporting, manager, aids,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-unofficial-transcript.php">
+            UAConnect: Unofficial Transcript
+           </a>
+           <br/>
+           Students can access their unofficial transcript through the Student Center.
+           <span class="hidden">
+            <!--noindex-->
+            transcripts, unofficial, students, grades, gpa
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-upload-grades-from-bb.php">
+            UAConnect: Upload Grades from Blackboard
+           </a>
+           <br/>
+           This optional process allows faculty to approve grades in Blackboard Grade Center and then transfer those grades to UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            grades, blackboard, uploading, uploads, grading, transferring, faculty, instructors, center
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-viewing-academic-info.php">
+            UAConnect: View Academic Information
+           </a>
+           <br/>
+           The Parent/Family Authorization option allows a student to authorize access to view certain student information. This authorization provides access to the designee (parent or another third party) to view financial, academic and directory information. This document addresses access to Academic Information.
+           <span class="hidden">
+            <!--noindex-->
+            parents, family, families, grades, academics, info, children, students, authorize
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-photo-roster.php">
+            UAConnect: View Class Photo Roster
+           </a>
+           <br/>
+           There are three options when viewing student photos in your Class Roster. You can Link to Photos (default), Include Photos in List or view a Photo Roster.  The first two options allow you to view the student photo individually, while the third option provides a group roster.
+           <span class="hidden">
+            <!--noindex-->
+            classes, faculty, advisor, photos, pictures, courses,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-class-roster.php">
+            UAConnect: View Class Roster
+           </a>
+           <br/>
+           Class rosters are accessible through the roster link on the Faculty Homepage.
+           <span class="hidden">
+            <!--noindex-->
+            roster, faculty, viewing, classes, courses, advisors
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-financial-aid.php">
+            UAConnect: View Financial Aid in ParentConnect
+           </a>
+           <br/>
+           The Parent/Family Authorization option allows a student to authorize access to view certain student information. This authorization provides access to the designee (parent or other third party) to view finances, financial aid, academic and personal information. This document covers information about Viewing Financial Aid.
+           <span class="hidden">
+            <!--noindex-->
+            financial, aid, info, viewing, parents, guardian, authorized, user, scholarships, connect,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-personal-info.php">
+            UAConnect: View Personal Information
+           </a>
+           <br/>
+           The Parent/Family Authorization option allows a student to authorize access to view certain student information. This authorization provides access to the designee (parent or other third party) to view financial, academic and personal information. This document addresses access to Personal Information.
+           <span class="hidden">
+            <!--noindex-->
+            uaconnect, viewing, parents, guardian, children, students, info, accessing
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-waitlist-class-position.php">
+            UAConnect: View Position on a Waitlisted Class
+           </a>
+           <br/>
+           Students can check their class schedules to see their positions on a waitlisted class in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            waitlisted, scheduling, schedule, students, academics, viewing, views, wait
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-enroll-dates.php">
+            UAConnect: View Student Enrollment Appointment
+           </a>
+           <br/>
+           View the student's enrollment period in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            enrollment, advising, appointment, priority, registration, faculty, advisors,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-student-program-rec.php">
+            UAConnect: View Student Program/Plan Records
+           </a>
+           <br/>
+           Use the Student Program/Plan component to view a student’s program stack data and track the history of the information when a student changes his orher academic program, academic plan, or academic sub-plan.
+           <span class="hidden">
+            <!--noindex-->
+            students, administrative, administrator, job, aids, programs, plans,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-view-test-scores.php">
+            UAConnect: View Test Scores
+           </a>
+           <br/>
+           This document provides information and navigation paths to allow you to view test scores, both individually and in summary.
+           <span class="hidden">
+            <!--noindex-->
+            viewing, scoring, administrative, administrator, user, job, aids, exams, tests, students,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uac-ecommerce-overview.php">
+            UAConnect: eCommerce Overview - Authorized Users
+           </a>
+           <br/>
+           Students can use the eCommerce Payment System to make payments on their student accounts.
+           <span class="hidden">
+            <!--noindex-->
+            ecommerce, payments, pay, parent, family,
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/data-dictionary.php">
+            UAConnect Data Dictionary
+           </a>
+           <br/>
+           Find key parent field names and descriptions for running reports in UAConnect.
+           <span class="hidden">
+            <!--noindex-->
+            administrator, reporting, reports, tables, charts
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uark-gmail-setup.php">
+            UARK Gmail Setup Instructions
+           </a>
+           <br/>
+           How to set up UARK Gmail on your laptop or mobile devices.
+           <span class="hidden">
+            <!--noindex-->
+            gmail
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uark-wi-fi-mac.php">
+            UARK Wi-Fi Mac Setup
+           </a>
+           <br/>
+           Connect to UARK Wi-Fi using Mac OS X.
+           <span class="hidden">
+            <!--noindex-->
+            Network, UARK Wi-Fi, Mac, wifi, internet, wireless, online, connection
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uark-wi-fi-mobile.php">
+            UARK Wi-Fi Mobile Setup
+           </a>
+           <br/>
+           Connect to UARK Wi-Fi using your mobile device.
+           <span class="hidden">
+            <!--noindex-->
+            networks, wifi, mobile, apple, iphone, windows phone, wireless, internet
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uark-wi-fi-ubuntu.php">
+            UARK Wi-Fi Ubuntu Setup
+           </a>
+           <br/>
+           Connect to UARK Wi-Fi in Ubuntu using the correct security settings.
+           <span class="hidden">
+            <!--noindex-->
+            networks, networking, wifi, ubuntu, linux, internet access, wireless
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/uark-wi-fi-windows.php">
+            UARK Wi-Fi Windows Setup
+           </a>
+           <br/>
+           Connect to UARK Wi-Fi with Windows.
+           <span class="hidden">
+            <!--noindex-->
+            Network, Wi-Fi, Windows, setup, wifi, online, connection, internet, wireless, web
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/vdi-labs-list.php">
+            VDI Computer Lab Locations
+           </a>
+           <br/>
+           Listing of all computer labs on campus using VDI.
+           <span class="hidden">
+            <!--noindex-->
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/vdi-labs-troubleshooting.php">
+            VDI Lab Troubleshooting Tips
+           </a>
+           <br/>
+           If you experience issues with computers in a VDI computer lab, follow these troubleshooting tips.
+           <span class="hidden">
+            <!--noindex-->
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/vpn-mac-setup.php">
+            VPN Mac Setup
+           </a>
+           <br/>
+           Install Pulse Secure to connect to the University of Arkansas virtual private network (VPN) using Mac OS X.
+           <span class="hidden">
+            <!--noindex-->
+            VPN, vpn, virtual private network, mac setup, set up, pulse secure, junos, installer, libraries, library, work from home
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/vpn-mobile-setup.php">
+            VPN Mobile Setup
+           </a>
+           <br/>
+           Install Pulse Secure for iOS or Android to connect to the University of Arkansas virtual private network (vpn) from your mobile device.
+           <span class="hidden">
+            <!--noindex-->
+            VPN, virtual, private, network, Mobile, setup, Pulse, Secure, drivers
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/vpn-windows-setup.php">
+            VPN Windows Setup
+           </a>
+           <br/>
+           Install Pulse Secure to connect to the University of Arkansas virtual private network (VPN) using Windows.
+           <span class="hidden">
+            <!--noindex-->
+            VPN, virtual private networks, windows setup, set up, pulse secure, library
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/voip.php">
+            VoIP Training and How-Tos
+           </a>
+           <br/>
+           VoIP training and how-tos are available at voip.uark.edu
+           <span class="hidden">
+            <!--noindex-->
+            voip, phone, teams, skype
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/wipe-data-from-lost-device.php">
+            Wipe Data from Stolen or Lost Mobile Device
+           </a>
+           <br/>
+           If your phone is lost, stolen or otherwise compromised, you can remotely wipe its data using the Office 365 Outlook Web App, protecting your identity and sensitive data.
+           <span class="hidden">
+            <!--noindex-->
+            Exchange, wipe, stolen, lost, phone, remove, faculty, staff, mobile, tablet, sensitive, data, secure, security
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+         <tr data-computed="0">
+          <td>
+           <a class="title" href="/help/ta/writing-verifiable-email.php">
+            Writing Verifiable Emails
+           </a>
+           <br/>
+           A legitimate email can easily be disregarded as spam or a phishing attempt, creating a problem when important information that requires follow-up on the part of the recipient is ignored.
+           <span class="hidden">
+            <!--noindex-->
+            Security, verifiable, anti-phishing, antiphishing, prevent, avoid, scam, email, phishing, spam, avoid
+            <!--endnoindex-->
+           </span>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+       <div id="helpful_block">
+        <div id="askit_form" style="display:none;">
+         <p>
+          Didn't find what you were looking for?
+          <a href="https://help.uark.edu/CherwellPortal/ITHelpPortal2/Command/OneStep.LaunchOneStep?Name=Report%20Outage%20or%20Error%20Incident ">
+           Let us know
+          </a>
+          and we'll be in touch with you soon, or
+          <a href="/help/chat/">
+           chat with tech support
+          </a>
+          .
+         </p>
+        </div>
+       </div>
+      </div>
+      <div class="col-sm-4 col-lg-3">
+       <div id="affixed">
+        <nav class="floater">
+         <p class="head">
+          Featured Topics
+         </p>
+         <ul class="nav navlist">
+          <li>
+           <a href="/help/ta/index.php#search/Office%20365">
+            Office 365
+           </a>
+          </li>
+          <li>
+           <a href="/help/ta/index.php#search/Gmail">
+            UARK Gmail
+           </a>
+          </li>
+          <li>
+           <a href="/help/ta/index.php#search/Antivirus">
+            Antivirus
+           </a>
+          </li>
+          <li>
+           <a href="/help/ta/index.php#search/Blackboard%20Learn">
+            Blackboard Learn
+           </a>
+          </li>
+          <li>
+           <a href="/help/ta/index.php#search/Wi-Fi">
+            Wi-Fi Setup
+           </a>
+          </li>
+          <li>
+           <a href="/help/ta/ou-security-groups-active-directory.php">
+            Security Groups
+           </a>
+          </li>
+          <li>
+           <a href="/help/ta/index.php#search/Printing">
+            Printing
+           </a>
+          </li>
+         </ul>
+        </nav>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!--noindex-->
+  <section class="container" id="prefooter">
+   <div class="row">
+    <div class="col-md-12">
+     <h2 class="fancy">
+      IT Services
+     </h2>
+     <div class="row">
+      <div class="col-md-3 col-xs-6 col-sm-5 col-sm-offset-1 col-md-offset-0">
+       <h4>
+        Contact IT Services
+       </h4>
+       <ul class="list-unstyled">
+        <li>
+         479-575-2901
+        </li>
+        <li>
+         <a href="http://its.uark.edu/about/index.php">
+          Mailing Address
+         </a>
+        </li>
+        <li>
+         <a href="http://its.uark.edu/">
+          its.uark.edu
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6">
+       <h4>
+        IT Help Desk
+       </h4>
+       <ul class="list-unstyled">
+        <li>
+         479-575-2905
+        </li>
+        <li>
+         <a href="http://its.uark.edu/help/index.php">
+          Hours
+         </a>
+        </li>
+        <li>
+         <a href="https://help.uark.edu/CherwellPortal/ITHelpPortal2/Command/OneStep.LaunchOneStep?Name=Report%20Outage%20or%20Error%20Incident">
+          Report an Outage
+         </a>
+        </li>
+        <li>
+         <a href="http://help.uark.edu/">
+          IT Help Portal
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6 col-sm-5 col-sm-offset-1 col-md-offset-0">
+       <h4>
+        Updates &amp; Social
+       </h4>
+       <ul class="list-unstyled">
+        <li>
+         <a href="http://www.facebook.com/uarkITS">
+          <i class="fa fa-facebook fa-fw fa-lg">
+           <!--empty-->
+          </i>
+          Facebook
+         </a>
+        </li>
+        <li>
+         <a href="http://twitter.com/uarkITS">
+          <i class="fa fa-twitter fa-fw fa-lg">
+           <!--empty-->
+          </i>
+          Twitter
+         </a>
+        </li>
+        <li>
+         <a href="http://instagram.com/uarkits">
+          <i class="fa fa-instagram fa-fw fa-lg">
+           <!--empty-->
+          </i>
+          Instagram
+         </a>
+        </li>
+        <li>
+         <a href="https://www.youtube.com/user/uarkITS" title="Watch us on YouTube">
+          <i class="fa fa-youtube fa-fw fa-lg">
+           <!--empty-->
+          </i>
+          YouTube
+         </a>
+        </li>
+        <li>
+         <a class="its-icon" href="http://its.uark.edu/news-events/index.php">
+          <img alt="" src="https://its.uark.edu/_resources/images/its-icon.png">
+           IT Services News
+          </img>
+         </a>
+        </li>
+        <li>
+         <a href="https://plus.google.com/101413725212662617797" rel="publisher" style="display: none;">
+          Google+
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div class="col-md-3 col-xs-6">
+       <h4>
+        Quick Links
+       </h4>
+       <ul class="list-unstyled">
+        <li>
+         <a href="https://learn.uark.edu">
+          Blackboard Learn
+         </a>
+        </li>
+        <li>
+         <a href="https://email.uark.edu">
+          UARK Gmail
+         </a>
+        </li>
+        <li>
+         <a href="https://outlook.office.com/uark.edu">
+          Exchange
+         </a>
+        </li>
+        <li>
+         <a href="https://password.uark.edu">
+          Password Manager
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+       ×
+      </button>
+      <h4 class="modal-title" id="myModalLabel">
+       Modal title
+      </h4>
+     </div>
+     <div class="modal-body">
+      <iframe height="240" id="iframe" sandbox="allow-modals allow-forms allow-scripts allow-popups allow-forms allow-same-origin" src="" style="height: 100%;" width="100%">
+       <!-- intentionally non-empty iframe; for xsl -->
+      </iframe>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script async="async" src="//its.uark.edu/_resources/js/its.js?20181101a" type="text/javascript">
+  </script>
+  <!--endnoindex-->
+  <script>
+   $($('body').append('<div id="global-help"><a href="https://help.uark.edu"><img src="/help/_portal/images/robot-head.svg"/><span>Get Help</span></a></div>'));
+  </script>
+  <!-- FOOTER -->
+  <footer>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <h3 id="footer-logo">
+       <a href="//www.uark.edu" title="University of Arkansas Home Page">
+        UNIVERSITY OF ARKANSAS
+       </a>
+      </h3>
+      <ul class="list-unstyled" id="footer-global-links">
+       <li>
+        <a href="//www.uark.edu/admissions/index.php" title="University of Arkansas Admissions">
+         Admissions
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/academics/index.php" title="University of Arkansas Academics">
+         Academics
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/campus-life/index.php" title="Campus Life at the University of Arkansas">
+         Campus Life
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/research/index.php" title="University of Arkansas Research">
+         Research
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/athletics/index.php" title="University of Arkansas Athletics">
+         Athletics
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/about/index.php" title="About the University of Arkansas">
+         About
+        </a>
+       </li>
+      </ul>
+      <ul class="nav clearfix list-unstyled" id="social-stack">
+       <li>
+        <a href="https://www.facebook.com/UofArkansas">
+         <i class="fa fa-facebook">
+         </i>
+         <span class="sr-only">
+          Like us on Facebook
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://twitter.com/uarkansas">
+         <i class="fa fa-twitter">
+         </i>
+         <span class="sr-only">
+          Follow us on Twitter
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.youtube.com/user/UniversityArkansas">
+         <i class="fa fa-youtube">
+         </i>
+         <span class="sr-only">
+          Watch us on YouTube
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://instagram.com/uarkansas">
+         <i class="fa fa-instagram">
+         </i>
+         <span class="sr-only">
+          See us on Instagram
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://pinterest.com/uofaadmissions/">
+         <i class="fa fa-pinterest">
+         </i>
+         <span class="sr-only">
+          Join us on Pinterest
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.linkedin.com/company/university-of-arkansas">
+         <i class="fa fa-linkedin">
+         </i>
+         <span class="sr-only">
+          Connect with us on LinkedIn
+         </span>
+        </a>
+       </li>
+      </ul>
+      <hr/>
+      <div class="row">
+       <div class="col-sm-3">
+        <i class="fa fa-map-marker pull-left fa-lg">
+        </i>
+        <address>
+         1 University of Arkansas
+         <br/>
+         Fayetteville, AR 72701
+         <br/>
+         479-575-2000
+        </address>
+        <a href="//campusmaps.uark.edu/" title="View Campus Maps">
+         <img alt="Map of University of Arkansas Campus" class="img-responsive" src="//www.uark.edu/_resources/img/map.png"/>
+        </a>
+       </div>
+       <div class="col-sm-3 footer-news">
+        <h4>
+         <a href="//news.uark.edu/" title="Arkansas Newswire">
+          NEWS
+         </a>
+        </h4>
+        <ul id="newsFooter">
+        </ul>
+        <script>
+         $(function () {
+      	parseNews('//campusdata.uark.edu/apiv2/articles/articlesCommon?$orderby=publishDate+desc&$filter=Commons/any%28c:+c/id+eq+1%29&$top=3');
+        
+            
+    });
+       
+    function parseNews(url) {
+           $.ajax({
+			   url: url,
+			   data: {},
+			   contentType: "application/json; charset=utf-8",
+			   dataType: 'jsonp',
+			   jsonpCallback: 'Articles',
+			   async: "true",
+			   cache: "true",
+			   success: function (articles) {
+				   var list_data = '';
+				   $.each(articles, function (key, a) {
+					   var headline = a.headline;
+					   headline = headline.replace("â€˜", "'").replace("â€™", "'").replace("â€œ", "\"").replace("â€", "\"");
+					   list_data += '<li><a href="https://news.uark.edu/articles/' + a.id + '" onclick="gaSendEvent(this.href, \'footer-global-links\', \'news.uark.edu\/articles\/' + a.id + '\');">' + headline + '</a></li>';
+				   })
+				   $(list_data).appendTo("#newsFooter");
+			   }
+		});
+          
+     }
+        </script>
+        <script>
+         $(function ()
+   {
+       $.ajax({
+		type: 'GET',
+        url: 'https://calendars.uark.edu/RSSSyndicator.aspx?type=N&amp;category=32-0&amp;number=5&amp;rssid=25&amp;expire=Y&amp;sortorder=ASC',
+        data: {},
+        cache: 'true',
+        success: function (data)
+        {
+           var list_data = '';
+		   
+		   var $xml = $(data).find('item:lt(3)'); 
+		   $xml.each(function () { 
+		   		var $this = $(this); var headline = $this.find('title').text(); 
+				var link = $this.find('link').text(); 
+				list_data += '<li><a href="' + link + '" onclick="gaSendEvent(this.href, \'footer-global-links\', \' + headline + \');">' + headline + '</a></li>'; 
+			});
+
+		   $(list_data).appendTo("#eventsFooter");
+        }
+      });
+   });
+        </script>
+       </div>
+       <div class="col-sm-3 footer-events">
+        <h4>
+         <a href="//calendars.uark.edu/" title="Calendar Events">
+          EVENTS
+         </a>
+        </h4>
+        <ul id="eventsFooter">
+        </ul>
+       </div>
+       <div class="col-sm-3 footer-buttons">
+        <a class="btn btn-default btn-lg" href="//application.uark.edu/">
+         <i class="fa fa-check fa-lg fa-fw">
+         </i>
+         <strong>
+          APPLY
+         </strong>
+         Online
+        </a>
+        <a class="btn btn-default btn-lg" href="//visit.uark.edu/">
+         <i class="fa fa-calendar fa-lg fa-fw">
+         </i>
+         Schedule a
+         <strong>
+          VISIT
+         </strong>
+        </a>
+        <a class="btn btn-default ca btn-lg" href="//campaign.uark.edu/">
+         <strong>
+          Support
+         </strong>
+         Campaign Arkansas
+        </a>
+       </div>
+      </div>
+      <hr/>
+      <ul class="centered-nav vertical-divide list-unstyled footer-disclaimer">
+       <li>
+        <a href="//emergency.uark.edu/" title="University of Arkansas Emergency Information">
+         Emergency Information
+        </a>
+       </li>
+       <li>
+        <a href="//report.uark.edu/" title="Report a Concern">
+         Report a Concern
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/privacy-policy/index.php" title="University of Arkansas Privacy Policy">
+         Privacy Policy
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/contact-us.php" title="Contact the University of Arkansas">
+         Contact Us
+        </a>
+       </li>
+       <li>
+        <a href="//jobs.uark.edu" title="Jobs at the University of Arkansas">
+         Jobs
+        </a>
+       </li>
+       <li>
+        <a href="//m.uark.edu" title="Mobile Site">
+         Mobile
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script>
+   var current_path = "/help/ta/index.php";
+  </script>
+  <!-- javascripts that don't need to go in the head can go here -->
+  <!-- respond.js - Enables media queries in some unsupported browsers-->
+  <script src="//www.uark.edu/_resources/js/respond.js" type="text/javascript">
+  </script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="//www.uark.edu/_resources/php/combine.php?t=js&amp;f=nivo/jquery.nivo.slider.pack.js,bootstrap.min.js,oucampus.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function() {
+		$('#slider').nivoSlider({
+			effect: 'fade',
+			pauseTime: 6000, // How long each slide will show
+			pauseOnHover: true, // Stop animation while hovering
+		});
+	});
+  </script>
+  <script src="//www.uark.edu/inc/js/tablesorter/jquery.tablesorter.min.js" type="text/javascript">
+  </script>
+  <script>
+   $(function() {
+		$('table.tablesorter').addClass('table-striped').tablesorter();
+	});
+  </script>
+  <!-- JS and CSS for search and mobile-menu -->
+  <script type="text/javascript">
+   $(function() {
+
+	$(".form-search").on("click", function() {
+		selectedValue = $(".form-search [name='sitesearch']:checked").val();
+		if(selectedValue == "http://uark.edu" ) {
+			$("label[for=radioLabela]").removeClass("searchSelected");
+			$("label[for=radioLabelb]").addClass("searchSelected");
+			$("#searchbox").attr("placeholder", "Search all uark.edu");
+		} else if($.type(selectedValue) === "string" ) {
+			$("label[for=radioLabela]").addClass("searchSelected");
+			$("label[for=radioLabelb]").removeClass("searchSelected");
+			$("#searchbox").attr("placeholder", "Search this site");
+		}
+	});
+
+
+$( "#sidebar .nav-stacked" ).clone().addClass( "visible-xs-block hidden-sm hidden-md hidden-lg" ).appendTo( ".navbar-default .navbar-collapse" );
+
+});
+  </script>
+  <!-- END JS and CSS for search and mobile-menu -->
+  <!--
+<script src="//www.uark.edu/_resources/js/oucampus-2.js" type="text/javascript" ></script>
+-->
+  <script type="text/javascript">
+   <!--
+function directedit() {
+var link = document.getElementById("oudirectedit").parentNode.innerHTML ;
+link.trim();
+var anchor = link.replace("</a>","Copyright of University of Arkansas</a>");
+anchor = anchor.replace("oudirectedit", "none");
+document.getElementById("directedit-footer").innerHTML = anchor;
+//console.log(anchor);
+}
+window.onload = function(){ directedit(); }
+//-->
+  </script>
+  <!--2018-05-31T19:53:00Z-->
+  <div id="hidden">
+   <a href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=www&amp;site=its&amp;action=de&amp;path=/help/ta/index.pcf" id="oudirectedit" rel="nofollow">
+    <span class="hidden">
+     Edit webpage
+    </span>
+   </a>
+  </div>
+  <span id="directedit-footer">
+  </span>
+ </body>
+</html>

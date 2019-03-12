@@ -1,0 +1,237 @@
+https://netidclaim.illinois.edu/
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <link href="/static/css/apps.css" rel="stylesheet" type="text/css"/>
+  <link href="/static/css/netidapps.css" rel="stylesheet" type="text/css"/>
+  <link href="/static/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+  <script src="/static/js/jquery-1.10.2.min.js">
+  </script>
+  <script src="/static/js/jquery-ui.min.js">
+  </script>
+  <script src="/static/js/jquery.sessionTimeout.js">
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function() {
+        $('div#logout-confirm').dialog({
+            autoOpen: false,
+            closeOnEscape: false,
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 600,
+            buttons: [
+                {
+                    text: "Continue Claiming",
+                    click: function() {
+                    $( this ).dialog( "close" );
+                    $( "#logout-link" ).focus();
+                    }
+                },
+                {
+                    text: "Logout",
+                    click: function() {
+                    $( this ).dialog( "close" );
+                    $( location ).attr('href', '/claim/logout/');
+                    }
+                }
+            ]
+
+        })
+        $('#logout-link').click(function() {
+            $('#logout-confirm').dialog('open');
+        });
+        $("form").submit(function() {
+            $(this).submit(function() {
+                return false;
+            });
+            if ( $("input[id='submit']")[0] ) {
+                $("input[id='submit']").val('Please wait...');
+                $("input[id='submit']").focus();
+                $("input[id='submit']").attr('disabled', 'disabled');
+            }
+
+            $("#button-alert").html('Please wait...');
+            function resetAlertButtonText() {
+               $("#button-alert").html('');
+               $("#button-alert").html('Please wait...');
+            }
+            setInterval(resetAlertButtonText, 3000);
+
+            form_submitted = true;
+            return true;
+        });
+    })
+    var form_submitted = false;
+    $(function() {
+        $( "#back-button" ).dialog({
+            modal: true,
+            closeOnEscape: false,
+            resizable: false,
+            draggable: false,
+            width: 600,
+            buttons: [
+                {
+                    text: "OK",
+                    click: function() {
+                    $( this ).dialog( "close" );
+                    }
+                }
+            ]
+        });
+    });
+    $(function() {
+        $( "#need-new-pin" ).dialog({
+            modal: true,
+            closeOnEscape: false,
+            resizable: false,
+            draggable: false,
+            width: 600,
+            buttons: [
+                {
+                    text: "OK",
+                    click: function() {
+                    $( this ).dialog( "close" );
+                    }
+                }
+            ]
+        });
+    });
+    $( function() {
+        $( document ).tooltip();
+    });
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function() {
+        $('div#login-info').dialog({
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 600,
+        })
+        $('#login-info-link').click(function() {
+            $('#login-info').dialog('open');
+        });
+        $("#id_uin").on("change keyup blur input", enableSubmitButton);
+    })
+    function enableSubmitButton() {
+        if ( form_submitted ) {
+            return;
+        }
+        if (document.getElementById('id_uin').value) {
+            document.getElementById('submit').disabled=false;
+        }
+        else {
+            document.getElementById('submit').disabled=true;
+        }
+    }
+  </script>
+  <title>
+   Log In - Step 1 - NetID Claim
+  </title>
+ </head>
+ <body>
+  <div id="container">
+   <header id="header" role="banner">
+    <div id="top_bar">
+     <span id="illinois">
+      Illinois
+     </span>
+     <div>
+      <h1 class="banner_title">
+       NetID Claim
+      </h1>
+     </div>
+     <a href="http://illinois.edu" id="imark">
+      <img alt="University of Illinois I mark" src="/static/image/i-mark.gif"/>
+     </a>
+    </div>
+   </header>
+   <main id="content" role="main">
+    <noscript>
+     <div class="warning_box">
+      <p class="text_center">
+       This application requires JavaScript
+                    to function properly.
+      </p>
+     </div>
+    </noscript>
+    <div id="login-info" title="Get Your UIN">
+     <dl>
+      <dt>
+       Undergraduate Students
+      </dt>
+      <dd class="bottom_spacing">
+       Go to
+       <a href="https://myillini.illinois.edu/">
+        myIllini
+       </a>
+       if you are an
+undergraduate student to look up your UIN.  You can find your UIN at the
+top of your Admitted Checklist.  myIllini is the system you used to apply
+for admissions.
+      </dd>
+      <dt>
+       Graduate Students
+      </dt>
+      <dd class="bottom_spacing">
+       If you are a graduate student, re-review your
+       <a href="https://choose.illinois.edu/apply/status">
+        admission letter
+       </a>
+       to look up your UIN.
+      </dd>
+      <dt>
+       University Affiliates
+      </dt>
+      <dd class="bottom_spacing">
+       If you are a University Affiliate, contact the
+       <a href="https://techservices.illinois.edu/get-help/help-desk">
+        Technology Services Help Desk
+       </a>
+       to obtain information about retrieving your UIN.
+      </dd>
+     </dl>
+    </div>
+    <h1>
+     Log In - Step 1
+    </h1>
+    <p>
+     Enter your University Identification Number (UIN).
+    If you need help you can
+     <a href="#" id="login-info-link">
+      get your UIN
+     </a>
+     or contact the
+     <a href="https://techservices.illinois.edu/get-help/help-desk">
+      Technology Services Help Desk
+     </a>
+     at (217) 244-7000 or
+     <a href="mailto:consult@illinois.edu">
+      consult@illinois.edu
+     </a>
+     .
+    </p>
+    <form method="post">
+     <input name="csrfmiddlewaretoken" type="hidden" value="RPu2oMaqUinGmcYzbOoEtf5tuQDEFqGA7yY7kIpQWF9tpZfm4t7y3WDLriy3vCqj"/>
+     <div>
+      <div>
+       <label for="id_uin">
+        University ID Number (UIN)
+       </label>
+      </div>
+      <div class="bottom_spacing">
+       <input autocomplete="off" id="id_uin" maxlength="9" name="uin" type="text"/>
+      </div>
+      <input disabled="disabled" id="submit" type="submit" value="Continue"/>
+     </div>
+    </form>
+   </main>
+  </div>
+  <div class="visually-hidden" id="button-alert" role="status">
+  </div>
+ </body>
+</html>
+

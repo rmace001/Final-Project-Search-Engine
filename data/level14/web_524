@@ -1,0 +1,714 @@
+http://baseline.stanford.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-type"/>
+  <title>
+   Reconstructing Shark Baselines
+  </title>
+  <!--	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="js/8-3.js"></script>
+	this is supposed to allow the java script to run but it does not work
+-->
+  <link href="http://baseline.stanford.edu/wp-content/themes/baseline2/style.css" media="screen" rel="stylesheet" type="text/css"/>
+  <!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" media="screen"  href="http://baseline.stanford.edu/wp-content/themes/baseline2/_css/add_ie6.css"/>
+<![endif]-->
+  <script type="text/javascript">
+   window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"wpemoji":"http:\/\/baseline.stanford.edu\/wp-includes\/js\/wp-emoji.js?ver=4.2.2","twemoji":"http:\/\/baseline.stanford.edu\/wp-includes\/js\/twemoji.js?ver=4.2.2"}};
+			( function( window, document, settings ) {
+	var src, ready;
+
+	/**
+	 * Detect if the browser supports rendering emoji or flag emoji. Flag emoji are a single glyph
+	 * made of two characters, so some browsers (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param type {String} Whether to test for support of "simple" or "flag" emoji.
+	 * @return {Boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var canvas = document.createElement( 'canvas' ),
+			context = canvas.getContext && canvas.getContext( '2d' );
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		if ( type === 'flag' ) {
+			/*
+			 * This works because the image will be one of three things:
+			 * - Two empty squares, if the browser doesn't render emoji
+			 * - Two squares with 'G' and 'B' in them, if the browser doesn't render flag emoji
+			 * - The British flag
+			 *
+			 * The first two will encode to small images (1-2KB data URLs), the third will encode
+			 * to a larger image (4-5KB data URL).
+			 */
+			context.fillText( String.fromCharCode( 55356, 56812, 55356, 56807 ), 0, 0 );
+			return canvas.toDataURL().length > 3000;
+		} else {
+			/*
+			 * This creates a smiling emoji, and checks to see if there is any image data in the
+			 * center pixel. In browsers that don't support emoji, the character will be rendered
+			 * as an empty square, so the center pixel will be blank.
+			 */
+			context.fillText( String.fromCharCode( 55357, 56835 ), 0, 0 );
+			return context.getImageData( 16, 16, 1, 1 ).data[0] !== 0;
+		}
+	}
+
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	settings.supports = {
+		simple: browserSupportsEmoji( 'simple' ),
+		flag:   browserSupportsEmoji( 'flag' )
+	};
+
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	if ( ! settings.supports.simple || ! settings.supports.flag ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+  </script>
+  <style type="text/css">
+   img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+  </style>
+  <link href="http://baseline.stanford.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+  <link href="http://baseline.stanford.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+  <meta content="WordPress 4.2.2" name="generator"/>
+  <link href="http://baseline.stanford.edu/" rel="canonical"/>
+  <link href="http://baseline.stanford.edu/" rel="shortlink"/>
+  <style type="text/css">
+   .qtranxs_flag_en {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/gb.png); background-repeat: no-repeat;}
+.qtranxs_flag_zh {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/cn.png); background-repeat: no-repeat;}
+.qtranxs_flag_ja {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/jp.png); background-repeat: no-repeat;}
+.qtranxs_flag_KO {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/kr.png); background-repeat: no-repeat;}
+.qtranxs_flag_pt {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/br.png); background-repeat: no-repeat;}
+.qtranxs_flag_es {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/es.png); background-repeat: no-repeat;}
+.qtranxs_flag_fr {background-image: url(http://baseline.stanford.edu/wp-content/plugins/qtranslate-x/flags/fr.png); background-repeat: no-repeat;}
+  </style>
+  <meta content="qTranslate-X 3.3" name="generator"/>
+  <link href="http://baseline.stanford.edu/?lang=en" hreflang="en" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/?lang=zh" hreflang="zh" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/?lang=ja" hreflang="ja" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/?lang=KO" hreflang="KO" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/?lang=pt" hreflang="pt" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/?lang=es" hreflang="es" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/?lang=fr" hreflang="fr" rel="alternate"/>
+  <link href="http://baseline.stanford.edu/" hreflang="x-default" rel="alternate"/>
+ </head>
+ <body>
+  <div id="container">
+   <div class="sharkpulse" id="header">
+    <div id="logo">
+     <a href="http://baseline.stanford.edu">
+      <h1>
+       Reconstructing Shark Baselines
+      </h1>
+     </a>
+    </div>
+   </div>
+   <div id="menu">
+    <ul>
+     <li class="page_item page-item-802 current_page_item">
+      <a href="http://baseline.stanford.edu/">
+       Home
+      </a>
+     </li>
+     <li class="page_item page-item-2">
+      <a href="http://baseline.stanford.edu/?page_id=2">
+       About
+      </a>
+     </li>
+     <li class="page_item page-item-12">
+      <a href="http://baseline.stanford.edu/?page_id=12">
+       People
+      </a>
+     </li>
+     <li class="page_item page-item-242 page_item_has_children">
+      <a href="http://baseline.stanford.edu/?page_id=242">
+       Shark CPUE Database
+      </a>
+      <ul class="children">
+       <li class="page_item page-item-236">
+        <a href="http://baseline.stanford.edu/?page_id=236">
+         Species in DB
+        </a>
+       </li>
+       <li class="page_item page-item-157">
+        <a href="http://baseline.stanford.edu/?page_id=157">
+         Help
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="page_item page-item-36">
+      <a href="http://baseline.stanford.edu/?page_id=36">
+       Blog
+      </a>
+     </li>
+     <li class="page_item page-item-807 page_item_has_children">
+      <a href="http://baseline.stanford.edu/?page_id=807">
+       SharkPulse
+      </a>
+      <ul class="children">
+       <li class="page_item page-item-1220">
+        <a href="http://baseline.stanford.edu/?page_id=1220">
+         Pulse Monitor
+        </a>
+       </li>
+       <li class="page_item page-item-1563">
+        <a href="http://baseline.stanford.edu/?page_id=1563">
+         pulseMonitor 2.0
+        </a>
+       </li>
+       <li class="page_item page-item-1413">
+        <a href="http://baseline.stanford.edu/?page_id=1413">
+         Validation Monitor
+        </a>
+       </li>
+       <li class="page_item page-item-1030">
+        <a href="http://baseline.stanford.edu/?page_id=1030">
+         SharkPulse iPhone App Manual
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="page_item page-item-1240">
+      <a href="http://baseline.stanford.edu/?page_id=1240">
+       Publications
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div class="clearfix" id="contentwrapper">
+    <div id="content">
+     <h1>
+      <a href="http://baseline.stanford.edu/?page_id=802" id="perm_link" rel="bookmark" title="Home">
+       Home
+      </a>
+     </h1>
+     <p>
+      <a href="http://baseline.stanford.edu/SharkPulseIphone.png">
+       <img alt="" src="http://baseline.stanford.edu/SharkPulseIphone.png"/>
+      </a>
+     </p>
+     <h1>
+      Welcome to SharkPulse
+     </h1>
+     <h2>
+      A database of wild shark sighting photos from all over the world
+     </h2>
+     <h2>
+      Have you seen a wild shark?
+     </h2>
+     <h2>
+      <b>
+      </b>
+      <strong>
+       Submit your pictures
+       <a href="http://baseline.stanford.edu/?page_id=807" target="_blank">
+        here!
+       </a>
+      </strong>
+     </h2>
+     <p>
+      SharkPulse is a smartphone application developed to involve citizen scientists in monitoring global wild shark populations. The app can be downloaded from the
+      <a href="https://itunes.apple.com/us/app/sharkpulse-v1.1/id673243556?mt=8" target="_blank">
+       Apple Store
+      </a>
+      and
+      <a href="https://play.google.com/store/apps/details?id=edu.stanford.baseline.sharkpulse" target="_blank">
+       Google Play
+      </a>
+      store and allows users to report shark sightings to The Shark Baseline Project. We are also interested in any previous shark sighting photos or videos you may have!
+     </p>
+     <p>
+      SharkPulse’s vision is to build a worldwide observer network where everyone can contribute in taking the pulse of the global wild shark population. Over a billion smartphones are currently in use around the world and they can be seen as electrodes of a pulse-monitoring machine capable of constantly taking wild shark pictures and communicating the GPS location to our database.
+     </p>
+     <p>
+      Here is how
+      <b>
+       YOU
+      </b>
+      can participate!
+     </p>
+     <p>
+      <img alt="" src="http://i59.tinypic.com/2cfej5x.png" style="float: right; width: 200px; height: 140px;"/>
+      <strong>
+       Whale Watchers
+      </strong>
+      Have you had an amazing whale watching trip and been lucky enough to see a shark? Share your pictures with us by using the SharkPulse mobile app, via our website, or on our social media pages!*
+      <img alt="" src="http://i62.tinypic.com/2dukzkw.png" style="float: left; width: 200px; height: 130px;"/>
+      <br/>
+      <strong>
+       Scientists
+      </strong>
+      When you see a shark during fieldwork out at sea, just snap a photo and upload it to our database with the SharkPulse mobile app, via our website, or on our social media pages!*
+      <br/>
+      If you are a shark scientist and want to assist us in validating the identity of shark sightings, please contact sharkbaselines [at] gmail [dot] com (substitute @ for [at] and . for [dot]).
+      <img alt="" src="http://i60.tinypic.com/24l3cxy.png" style="float: right; width: 230px; height: 160px;"/>
+      <br/>
+      <strong>
+       Divers
+      </strong>
+      Do you have pictures of sharks taken with your underwater camera? Share your pictures with us by using the SharkPulse mobile app, via our website, or on our social media pages!*
+      <img alt="" src="http://i60.tinypic.com/16iiqrk.png" style="float: left; width: 250px; height: 200px;"/>
+      <br/>
+      <strong>
+       Anybody
+      </strong>
+      Are you a surfer, sailor, beachgoer, or fisherman? When along the coast or out at sea snap a photo of any shark you encounter. Share your pictures with us by using the SharkPulse mobile app, via our website, or on our social media pages!* Our shark scientists will verify and store your valuable sighting in our database.
+     </p>
+     <p>
+      *You can also submit your pictures via
+      <a href="http://facebook.com/sharkbaselines" target="_blank">
+       Facebook
+      </a>
+      ,
+      <a href="https://twitter.com/sharkbaselines" target="_blank">
+       Twitter
+      </a>
+      ,
+      <a href="http://instagram.com/sharkbaselines/" target="_blank">
+       Instagram
+      </a>
+      , Flickr, Panoramio, and other social media. To use your favorite social media sites to submit photos, please use the hashtag #sharkPulse so we can retrieve the information from the web. If you prefer to email your photos to us, please send them to: sharkbaselines [at] gmail [dot] com (substitute @ for [at] and . for [dot]).
+     </p>
+     <h2>
+      <strong>
+       SHARKPULSE FLYERS
+      </strong>
+     </h2>
+     <p>
+      <strong>
+       English
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsediverenglish.jpg" target="_blank" title="SharkPulse Flyer - Divers">
+       SharkPulse Flyer – Divers
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsewhalewatchenglish.jpg" target="_blank" title="SharkPulse Flyer - Whalewatchers">
+       SharkPulse Flyer – Whalewatchers
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsesurferenglish.jpg" target="_blank" title="SharkPulse Flyer - Surfers">
+       SharkPulse Flyer – Surfers
+      </a>
+     </p>
+     <p>
+      <strong>
+       Español
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsediverspanish.jpg" target="_blank" title="Folleto SharkPulse - Buzos">
+       Folleto SharkPulse – Buzos
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsewhalewatchspanish.jpg" target="_blank" title="Folleto SharkPulse - Observadores de Ballenas">
+       Folleto SharkPulse – Observadores de Ballenas
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsesurferspanish.jpg" target="_blank" title="Folleto SharkPulse - Surfistas">
+       Folleto SharkPulse – Surfistas
+      </a>
+     </p>
+     <p>
+      <strong>
+       Italiano
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsediveritalian.jpg" target="_blank" title="Opuscolo SharkPulse - Subacquei">
+       Opuscolo SharkPulse – Subacquei
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsewhalewatchitalian.jpg" target="_blank" title="Opuscolo SharkPulse - Osservazione delle Balene">
+       Opuscolo SharkPulse – Osservazione delle Balene
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsesurferitalian.jpg" target="_blank" title="Opuscolo SharkPulse - Surfista">
+       Opuscolo SharkPulse – Surfista
+      </a>
+     </p>
+     <p>
+      <strong>
+       Français
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsediverfrench.jpg" target="_blank" title="Brochure SharkPulse - Plongeur">
+       Brochure SharkPulse – Plongeur
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsewhalewatchfrench.jpg" target="_blank" title="Brochure SharkPulse - Observation des Baleines">
+       Brochure SharkPulse – Observation des Baleines
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/SharkPulsesurferfrench.jpg" target="_blank" title="Brochure SharkPulse - Surfer">
+       Brochure SharkPulse – Surfer
+      </a>
+     </p>
+     <p>
+      <strong>
+       Português
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsediverportuguese.jpg" target="_blank" title="Folheto SharkPulse - Mergulhadores">
+       Folheto SharkPulse – Mergulhadores
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulse flyer_wwportuguese" target="_blank" title="Folheto SharkPulse - Observadores de bordo">
+       Folheto SharkPulse – Observadores de bordo
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulse flyer_surferportuguese" target="_blank" title="Folheto SharkPulse - Surfistas">
+       Folheto SharkPulse – Surfistas
+      </a>
+     </p>
+     <p>
+      <strong>
+       한국어 (Korean)
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsediverkorean.jpg" target="_blank" title="SharkPulse 전단지 – 다이버">
+       SharkPulse 전단지 – 다이버
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsewwkorean.jpg" target="_blank" title="SharkPulse 전단지 – 고래 관찰자">
+       SharkPulse 전단지 – 고래 관찰자
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsesurferkorean.jpg" target="_blank" title="SharkPulse 전단지 – 서퍼">
+       SharkPulse 전단지 – 서퍼
+      </a>
+     </p>
+     <p>
+      <strong>
+       日本語 (Japanese)
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsediverjapanese.jpg" target="_blank" title="SharkPulseプリント：ダイバー">
+       SharkPulseプリント：ダイバー
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsewhalewatchjapanese.jpg" target="_blank" title="SharkPulseプリント：クジラに興味がある人々">
+       SharkPulseプリント：クジラに興味がある人々
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsesurferjapanese.jpg" target="_blank" title="SharkPulseプリント：サーファー">
+       SharkPulseプリント：サーファー
+      </a>
+     </p>
+     <p>
+      <strong>
+       中文 (Chinese)
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsediverchinese.jpg" target="_blank" title="SharkPulse 传单 – 潜水爱好者">
+       SharkPulse 传单 – 潜水爱好者
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsewhalewatchchinese.jpg" target="_blank" title="SharkPulse 传单 – 观鲸爱好者">
+       SharkPulse 传单 – 观鲸爱好者
+      </a>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulsesurferchinese.jpg" target="_blank" title="SharkPulse 传单 – 冲浪爱好者">
+       SharkPulse 传单 – 冲浪爱好者
+      </a>
+     </p>
+     <p>
+      <strong>
+       Kiswahili
+      </strong>
+      <br/>
+      <a href="http://baseline.stanford.edu/sharkpulseflyerswahili.jpg" target="_blank" title="SharkPulse">
+       SharkPulse
+      </a>
+     </p>
+     <h2>
+     </h2>
+     <h2>
+      <strong>
+       COLLABORATION WITH OTHER SHARK MONITORING PROGRAMS
+      </strong>
+     </h2>
+     <p>
+      SharkPulse does not intend to duplicate ongoing monitoring programs. It rather aspires to contribute to their effort by making sure a real-time monitoring process will be available to shark research. For example, through a collaboration with the
+      <a href="http://www.arpat.toscana.it/temi-ambientali/acqua/acque-marine-e-costiere/medlem/pr_medlem_en.html" target="_blank">
+       MEDLEM program
+      </a>
+      , SharkPulse is directing all sightings coming from the Mediterranean Sea to this monitoring program of Mediterranean sharks and rays. Shark monitoring projects can request direct access to the data and can also contribute to the data validation process (e.g. identifying the species in recently received photos).
+     </p>
+     <h2>
+      Submit your pictures
+      <a href="http://baseline.stanford.edu/?page_id=807" target="_blank">
+       <strong>
+        here!
+       </strong>
+      </a>
+     </h2>
+     <p>
+      <a href="http://baseline.stanford.edu/?page_id=1030" target="_blank">
+       <br/>
+       SharkPulse iPhone App Manual
+      </a>
+     </p>
+     <!-- You can start editing here. -->
+     <!-- If comments are closed. -->
+     <p class="nocomments">
+      Comments are closed.
+     </p>
+    </div>
+    <div id="sidebar">
+     <ul>
+      <li class="widget widget_text" id="text-3">
+       <h2 class="widgettitle">
+        Sponsor
+       </h2>
+       <div class="textwidget">
+        <a href="http://www.lenfestocean.org/">
+         <img alt="Lenfest Ocean Program" src="http://baseline.stanford.edu/wp-content/themes/baseline2/images/lenfestocean-logo_small.gif"/>
+        </a>
+       </div>
+      </li>
+      <li class="widget widget_text" id="text-4">
+       <h2 class="widgettitle">
+        Latest Tweets
+       </h2>
+       <div class="textwidget">
+        <a class="twitter-timeline" data-widget-id="498517975360483328" href="https://twitter.com/SharkBaselines">
+         Tweets by @SharkBaselines
+        </a>
+        <script>
+         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        </script>
+       </div>
+      </li>
+      <style type="text/css">
+       .qtranxs_widget ul { margin: 0; }
+.qtranxs_widget ul li
+{
+display: inline; /* horizontal list, use "list-item" or other appropriate value for vertical list */
+list-style-type: none; /* use "initial" or other to enable bullets */
+margin: 0 5px 0 0; /* adjust spacing between items */
+opacity: 0.5;
+-o-transition: 1s ease opacity;
+-moz-transition: 1s ease opacity;
+-webkit-transition: 1s ease opacity;
+transition: 1s ease opacity;
+}
+//.qtranxs_widget ul li span { margin: 0 5px 0 0; } /* other way to control spacing */
+.qtranxs_widget ul li.active { opacity: 0.8; }
+.qtranxs_widget ul li:hover { opacity: 1; }
+.qtranxs_widget img { box-shadow: none; vertical-align: middle; }
+.qtranxs_flag { height:12px; width:18px; display:block; }
+.qtranxs_flag_and_text { padding-left:20px; }
+.qtranxs_flag span { display:none; }
+      </style>
+      <li class="widget qtranxs_widget" id="qtranslate-2">
+       <h2 class="widgettitle">
+        Language:
+       </h2>
+       <ul class="qtranxs_language_chooser" id="qtranslate-2-chooser">
+        <li class="lang-en active">
+         <a href="http://baseline.stanford.edu/?lang=en" hreflang="en" title="English">
+          <span>
+           English
+          </span>
+         </a>
+        </li>
+        <li class="lang-zh">
+         <a href="http://baseline.stanford.edu/?lang=zh" hreflang="zh" title="中文">
+          <span>
+           中文
+          </span>
+         </a>
+        </li>
+        <li class="lang-ja">
+         <a href="http://baseline.stanford.edu/?lang=ja" hreflang="ja" title="日本語">
+          <span>
+           日本語
+          </span>
+         </a>
+        </li>
+        <li class="lang-KO">
+         <a href="http://baseline.stanford.edu/?lang=KO" hreflang="KO" title="한국어">
+          <span>
+           한국어
+          </span>
+         </a>
+        </li>
+        <li class="lang-pt">
+         <a href="http://baseline.stanford.edu/?lang=pt" hreflang="pt" title="Português do Brasil">
+          <span>
+           Português do Brasil
+          </span>
+         </a>
+        </li>
+        <li class="lang-es">
+         <a href="http://baseline.stanford.edu/?lang=es" hreflang="es" title="Español">
+          <span>
+           Español
+          </span>
+         </a>
+        </li>
+        <li class="lang-fr">
+         <a href="http://baseline.stanford.edu/?lang=fr" hreflang="fr" title="Français">
+          <span>
+           Français
+          </span>
+         </a>
+        </li>
+       </ul>
+       <div class="qtranxs_widget_end">
+       </div>
+       <script type="text/javascript">
+        // <![CDATA[
+var lc = document.getElementById('qtranslate-2-chooser');
+var s = document.createElement('select');
+s.id = 'qtranxs_select_qtranslate-2-chooser';
+lc.parentNode.insertBefore(s,lc);
+
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('English');
+		o.selected = 'selected';
+		o.value = 'http://baseline.stanford.edu/?lang=en';
+		o.appendChild(l);
+		sb.appendChild(o);
+		
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('中文');
+		
+		o.value = 'http://baseline.stanford.edu/?lang=zh';
+		o.appendChild(l);
+		sb.appendChild(o);
+		
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('日本語');
+		
+		o.value = 'http://baseline.stanford.edu/?lang=ja';
+		o.appendChild(l);
+		sb.appendChild(o);
+		
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('한국어');
+		
+		o.value = 'http://baseline.stanford.edu/?lang=KO';
+		o.appendChild(l);
+		sb.appendChild(o);
+		
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('Português do Brasil');
+		
+		o.value = 'http://baseline.stanford.edu/?lang=pt';
+		o.appendChild(l);
+		sb.appendChild(o);
+		
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('Español');
+		
+		o.value = 'http://baseline.stanford.edu/?lang=es';
+		o.appendChild(l);
+		sb.appendChild(o);
+		
+		var sb = document.getElementById('qtranxs_select_qtranslate-2-chooser');
+		var o = document.createElement('option');
+		var l = document.createTextNode('Français');
+		
+		o.value = 'http://baseline.stanford.edu/?lang=fr';
+		o.appendChild(l);
+		sb.appendChild(o);
+		s.onchange = function() { document.location.href = this.value;}
+lc.style.display='none';
+// ]]>
+       </script>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div id="footer">
+    <p>
+     <p>
+      © Reconstructing Shark Baselines 2015.
+      <a href="http://baseline.stanford.edu/colophon">
+      </a>
+      <a href="http://baseline.stanford.edu/wp-login.php">
+       Log in
+      </a>
+     </p>
+    </p>
+   </div>
+  </div>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-38568357-1");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

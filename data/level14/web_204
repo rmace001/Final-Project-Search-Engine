@@ -1,0 +1,1258 @@
+http://calendar.byui.edu/
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="no-cache" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<html class="no-js" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:wairole="http://www.w3.org/2005/01/wai-rdf/GUIRoleTaxonomy#" xmlns:waistate="http://www.w3.org/2005/07/aaa">
+ <head id="ctl00_Head1">
+  <!-- University web analytics code for all university pages. Contact University Relations with questions. -->
+  <script src="//assets.adobedtm.com/9d799723fb681f246e7d4d8e9f3a613af54bd1c5/satelliteLib-763e69fcdbcd777505c39888c333ff18deaf58ca.js">
+  </script>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+   <meta content="NO-CACHE" http-equiv="CACHE-CONTROL">
+    <meta content="no-cache" http-equiv="Pragma">
+     <meta content="en" http-equiv="Content-Language">
+      <title>
+       Master Calendar - Calendar
+      </title>
+      <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+      <link href="ShortcutIcon.ico" rel="shortcut icon" type="image/x-icon"/>
+      <style type="text/css">
+       #HeaderContainer h1{margin-top:5em;margin-left:40%;margin-right:40%;}
+        #PageLinksContainer {clear:both;margin-top:2em;bottom:1%;width: 100%;text-align: center;}
+        #FooterContainer{clear:both;margin-top:2em;bottom:1%;width: 100%;text-align: center;}
+        /*our footer text*/
+        .footer{font-size: smaller;color: #225d92;}
+        .callbackStatus{border:black thin solid;background-color: #fff8dc;}
+        div#CallbackStatus{position:fixed;clear:both;margin-top:.4em;padding:.5em;width:12em;}
+        div.centerRow{clear: both;text-align: center;}
+        @media screen
+        {
+            /*Centers the header (things above the menu) at the top of the page*/
+            .HeaderContainer
+            {
+                clear:both;
+	            width: 100%;
+	            text-align:center;
+            }
+        }
+        @media Print
+        {
+            .HeaderContainer
+            {
+                display:none;	
+            }
+        }
+      </style>
+      <link href="Styles/Calendar/dynamiccss.ashx" rel="stylesheet" type="text/css"/>
+      <script src="Includes/modernizr.custom.70372.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery-1.9.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery-ui-1.10.2.custom.min.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.tools.min.js" type="text/javascript">
+      </script>
+      <script src="Includes/json.js" type="text/javascript">
+      </script>
+      <script src="Includes/Globals.js" type="text/javascript">
+      </script>
+      <script src="Includes/Common.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.validate.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.mc.user.menu-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.mc.login-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/Utilities.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+       $(document).ready(function () {
+            if (helpTextMsg != '' || showHelpEdit) {
+                $('.help-text-icon').click(function () {
+                    openHelpText();
+                });
+
+                $('.help-text-icon').keypress(function (e) {
+                    if (e.which == 13 || e.which == 32) 
+                        openHelpText();
+                });
+                if (showHelpEdit) {
+                    $('.edit-Help-Link').show();
+                    $('.edit-Help-Link').click(function () {
+                        if(helpTextEditLink != '')
+                            document.location.href = helpTextEditLink;
+                    });
+                }
+            }
+            else {
+                $('.help-text-icon').hide();
+            }
+
+        });
+        function openHelpText() {
+            $('#helpTextDialog').modal({
+                closeHTML: "<span class='visuallyhidden' id='helptextCloseMsg'> Help Text Close</span>" + 
+                    "<a aria-labelledby='helptextCloseMsg' tabindex='0' href='#' class='modal-close modalFirstInput'>x</a>",
+                position: ["20%"],
+                overlayId: 'helpText-overlay',
+                containerId: 'helpText-container',
+                singleInput: true,
+                onShow: function (dialog) {
+                    var modal = this;
+                    $('.helpTextMessage').append(helpTextMsg);
+                    $('.modal-close', dialog.container).focus();
+                }
+            });
+        }
+      </script>
+      <script src="Includes/Calendar/fluidgrid.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.ticker.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/html5placeholder.jquery.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/search.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.features.scoller-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/knockout-2.2.1.debug.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/knockout.mapping-latest.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/ko.lib.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/SideBySideKOViewModel.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.simplemodal.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.simplemodal-osx.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.print.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.group.box-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.dropdown.multiselect.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.mousedown.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/event-list-ko-viewmodel.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/DateFormat.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.eventlist.accordion-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.curtain-01.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.tooltip.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.eventgrid-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/event-curtains-data-ko-viewmodel.js" type="text/javascript">
+      </script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5220ba9a39b147c7" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.special.dates-0.1.js" type="text/javascript">
+      </script>
+      <script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyALWSXqWl2Kj9KfOxt7TK_QnaovBtzrma8&amp;sensor=false" type="text/javascript">
+      </script>
+     </meta>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body class="mc-bg-color-2" id="mcBody">
+  <div class="mcCon" id="mcCon">
+   <noscript>
+    Master Calendar requires Javascript to be supported and enabled.
+   </noscript>
+   <form action="./MasterCalendar.aspx" id="aspnetForm" method="post" name="aspnetForm">
+    <div>
+     <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+     <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+     <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="LtvgzS1wLOKZqs1qO934rRsvXInt2WcTtf3oWBiZb827ZduqOwlyvBVwc0qqKtplRFNL6mzRjPG1YWgWng8qX0wXScSwM3437ANz1Hw2F80+BeGe5PAHRWeRFmfFXSiqDjd8kh/QGYKTtDnrDd6DOidqjeIn0A/2K0u/yc7b8hnEX2jE03ABUY1ozq+FUEUdv2VvO9CuOAjNzbbrNoDV2en3U9ibx2Dh0OlGp7bHlTHVQIA+Wva9O2uwgE60p4l8FRxXa+g1v76Lo9Hp5AaZPg8FB40G9GFLR58qdYVLjTkykljd9q3IsA1lMirc3jO0jyEquQcrKO6p7pJffbrtcg=="/>
+    </div>
+    <script type="text/javascript">
+     //<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+    </script>
+    <script src="/WebResource.axd?d=LJPwM6FXIJT7BzY7aUT2Up-EqPEw2cn9LbAKz9H044pVqJDUp9EzZAzMg7uVeS1OrgXe2dxXThgk2p9u1uGXqnTqnR_BIJqFt0HCCDLhfGY1&amp;t=636765212300000000" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+var announcementTxt = "Announcements";var featuredFeedTxt = "Featured Events";var checkAllTxt = "Check All";var expandAllTxt = "Expand All";var uncheckAllTxt = "Uncheck All";var collapseAllTxt = "Collapse All";var viewTxt = "View";var monthTxt = "Month";var yearTxt = "Year";var alertTxt = "Alert";var showWeekends = true;var startWeekOn = 0;var displayView = 1;var displayFormat = 0;var listType = 1;var startdateInvalidmsg = "Start date must be earlier than end date.";var blinkPendingApproval = false;var pendingApprovalCount = 0;var pendingApprovaltxt = "Event(s) Pending Approval";var showAddEvent = false;var multipleSelectedtxt = "(Multiple Selected)";var selectMultipletxt = "Select Multiple";var allText = "(all)";var useSubLocation = false;var showTimezonePicker = true;var expandCalendars = true;var noSpecialDatesMsg = "There are no special dates for the date selected.";var specialDatesTxt = "Special Dates";var calTimeStamp = '9acfc040fbe8482c98ac570b929c46ff';var collaspeFilters = true;var tickerDelay = 5000;var helpTextEditLink = "/EditWebText.aspx?data=DDKzQnfoMIkKQQPSXGYI974KMnEbnY6ej%2bVgYsXSr1Q0F28%2fSstE0o038yP%2byxAkzHHGvk%2btSNg%3d";var groupingTxt = "Grouping";var selectTxt = "Select {0}";var selectNextDay = "Select the next day in the calendar";var selectPrevDay = "Select the previous day in the calendar";var selectNextWeek = "Select the next week in the calendar";var selectPrevWeek = "Select the previous week in the calendar";var selectNextMonth = "Select the next month in the calendar";var selectPrevMonth = "Select the previous month in the calendar";var expandCollapseTxt = "Expand/Collapse Arrow";var externalLinkTxt = "External Link";var viewEventDetailsFormatTxt = "View details for {0}"; var announcement = []; var events = [{"ticklers":[],"ID":126756,"Title":"Center Stage - Winter Jazz Festival","ALTText":"saxophone quartet called the Miami Sax Quartet","Description":"\u003cp\u003eThe Miami Saxophone Quartet will headline this year’s Winter Jazz Fest. South Florida saxophonists Gary Keller, Gary Lindsay, Ed Calle, and Mike Brignola have created a contemporary sound unique among saxophone quartets. The quartet explores the realms of jazz, pop, Latin, R\u0026amp;B and chamber music, performing both originals and their own arrangements of songs from a diverse array of musical legends. Backing up the saxophone quartet will be the BYU-Idaho Sound Alliance jazz ensemble under the direction of Mark Watkins. More information about the Winter Jazz Fest, clinics, workshops and performances will be made available as the event draws near.\u0026nbsp;\u003ca href=\"http://www.byui.edu/tickets\"\u003eTickets\u003c/a\u003e go on sale January 14. Floor and Red Seats: $6 for BYU-Idaho students, $12 for general public. Bleachers: $5 for BYU-Idaho students, $10 for general public. No children under four. Classroom dress.\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"http://www.garykeller.net/miami-sax-quartet/\"\u003eVisit Site\u003c/a\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1\u0026ImageId=16685","InfoDate":"Saturday, March 09, 2019","InfoTime":"7:30 PM - 9:00 PM","Location":null},{"ticklers":[],"ID":138918,"Title":"Devotional Luncheon - Elder Kevin S. Hamilton","ALTText":"devotional luncheon","Description":"Join the devotional speaker in the MC Ballroom for a delicious $3 hot buffet lunch and conversation each Tuesday prior to the devotional. Limited seating. Purchase up to two tickets at least a week in advance from the \u003ca href=\"http://www.byui.edu/tickets/\"\u003eTicket Office.\u003c/a\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1\u0026ImageId=17426","InfoDate":"Tuesday, March 12, 2019","InfoTime":"12:45 PM - 1:45 PM","Location":null},{"ticklers":[],"ID":127099,"Title":"Devotional: Elder Kevin S. Hamilton","ALTText":"Kevin Hamilton","Description":"Elder Kevin S. Hamilton was sustained as a General Authority Seventy of The Church of Jesus Christ of Latter-day Saints on April 6, 2013. He served for five years in the Africa Southeast Area Presidency, the last two years as Area President. Elder Hamilton received a bachelor’s degree in marketing from Brigham Young University in 1979, and in 1982 he received a master’s degree in finance from the University of Washington. Prior to his call he was a co-founder and partner in a venture\ncapital firm. Elder Hamilton has served in numerous Church callings, including full-time missionary in the Switzerland\nGeneva Mission, bishop, high councilor, stake president, and president of the Belgium Brussels/Netherlands Mission from 2003 to 2006. Elder Hamilton likes to run but his real passion is skiing. He married Claudia Keysor in July 1978. They\nare the parents of six children and the grandparents of 21 grandchildren.","ImgSrc":"ImageWriter.aspx?ShowFullImage=1\u0026ImageId=16856","InfoDate":"Tuesday, March 12, 2019","InfoTime":"2:10 PM - 2:45 PM","Location":null},{"ticklers":[],"ID":138935,"Title":"Disco Roller Skate Night","ALTText":"Disco Skating","Description":"Enjoy an evening of Disco Skating fun! BYU-Idaho appropriate Retro Attire encouraged! MC Ballroom 6:30-9:30 p.m. $2 with I-Card; $3 without!","ImgSrc":"ImageWriter.aspx?ShowFullImage=1\u0026ImageId=17466","InfoDate":"Thursday, March 28, 2019","InfoTime":"6:30 PM - 9:30 PM","Location":null}];var calendars = [{"Id":23,"Name":"Alumni","Selected":0},{"Id":18,"Name":"Art Shows and Exhibits","Selected":0},{"Id":6,"Name":"Employee Calendar","Selected":0},{"Id":5,"Name":"Highlighted Events","Selected":0},{"Id":16,"Name":"Music","Selected":0},{"Id":22,"Name":"Other Activities","Selected":0},{"Id":17,"Name":"Student Activities","Selected":0},{"Id":21,"Name":"Student Calendar","Selected":0},{"Id":19,"Name":"Theatre and Dance","Selected":0}];var groupBoxData = [{"expanded":true,"checked":false,"text":"Academic","id":10,"items":[{"checked":false,"text":"Academic Dates","id":20,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Activities","id":12,"items":[{"checked":false,"text":"Student Activities","id":17,"isCalendar":true,"link":""},{"checked":false,"text":"Other Activities","id":22,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Arts and Culture","id":11,"items":[{"checked":false,"text":"Art Shows and Exhibits","id":18,"isCalendar":true,"link":""},{"checked":false,"text":"Music","id":16,"isCalendar":true,"link":""},{"checked":false,"text":"Theatre and Dance","id":19,"isCalendar":true,"link":""}]},{"expanded":true,"checked":true,"text":"Highlighted Events","id":4,"items":[{"checked":true,"text":"Highlighted Events","id":5,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Student and Employee","id":13,"items":[{"checked":false,"text":"Student Calendar","id":21,"isCalendar":true,"link":""},{"checked":false,"text":"Employee Calendar","id":6,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Alumni","id":1,"items":[{"checked":false,"text":"Alumni","id":23,"isCalendar":true,"link":""}]}];var specialDates = [{"day":"11","SpecialDates":[{"Id":1874,"EventDate":"3/11/2019","Title":"April 2019 Grad Application deadline","Notes":"","CalendarName":null,"EventDateTime":null}]},{"day":"14","SpecialDates":[{"Id":1876,"EventDate":"3/14/2019","Title":"2nd Block Financial Aid Determination Date","Notes":"","CalendarName":null,"EventDateTime":null},{"Id":1875,"EventDate":"3/14/2019","Title":"Last Day Change 2nd Block from Credit to Audit","Notes":"","CalendarName":null,"EventDateTime":null}]}];
+var displayView = 1;var displayFormat = 0;var listType = 1;var keyWord = "";var eventlistData = [{"Id":127099,"EventId":0,"Title":"Devotional: Elder Kevin S. Hamilton","Notes":null,"Description":"Elder Kevin S. Hamilton was sustained as a General Authority Seventy of The Church of Jesus Christ of Latter-day Saints on April 6, 2013. He served for five years in the Africa Southeast Area Presidency, the last two years as Area President. Elder Hamilton received a bachelor’s degree in marketing from Brigham Young University in 1979, and in 1982 he received a master’s degree in finance from the University of Washington. Prior to his call he was a co-founder and partner in a venture capital firm. Elder Hamilton has served in numerous Church callings, including full-time missionary in the Switzerland Geneva Mission, bishop, high councilor, stake president, and president of the Belgium Brussels/Netherlands Mission from 2003 to 2006. Elder Hamilton likes to run but his real passion is skiing. He married Claudia Keysor in July 1978. They are the parents of six children and the grandparents of 21 grandchildren.","EventImageURL":"ImageWriter.aspx?ImageId=16856","ALTText":"Kevin Hamilton","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Devotionals and Speeches","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/12/2019 2:10:00 PM","EventDuaration":35,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552370400000)\/"},"Location":{"Id":1,"Name":"BYU-Idaho Center Auditorium","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":138233,"EventId":0,"Title":"String Chamber Ensemble","Notes":null,"Description":"The String Chamber Ensembles will offer an eclectic evening. Pieces from several different eras will be performed by ensembles of various shapes and sizes, from traditional string quartet, to a string bass duet, to the beloved Mendelssohn Octet.   ","EventImageURL":"ImageWriter.aspx?ImageId=17154","ALTText":"string chamber ensembles","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Concert","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/13/2019 7:30:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552456800000)\/"},"Location":{"Id":1,"Name":"Snow 269 Recital Hall","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":126840,"EventId":0,"Title":"BYUI\u0027s Got Talent","Notes":null,"Description":"A night of many talents, all under one roof from music to dance to whatever unique talents show up! It is BYUI\u0027s largest student-ran show of the semester!  Tickets","EventImageURL":"ImageWriter.aspx?ImageId=16966","ALTText":"I Cover","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Activities/Talent/Performance","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/15/2019 7:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552629600000)\/"},"Location":{"Id":1,"Name":"Hart 250 Auditorium (gym/stage combo)","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":138236,"EventId":0,"Title":"Choir Concert-Collegiate Singers \u0026 Vocal Union","Notes":null,"Description":"The Collegiate Singers and Vocal Union join forces for an eclectic evening of vocal jazz and classical choral music, including new music by Dan Forrest. Enjoy the tight harmonies and upbeat music of Vocal Union along with the powerful sound of this semester’s Collegiate Singers in one evening.","EventImageURL":"ImageWriter.aspx?ImageId=17159","ALTText":"music","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Concert","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/15/2019 7:30:00 PM","EventDuaration":90,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552629600000)\/"},"Location":{"Id":1,"Name":"Snow 136 Barrus Concert Hall","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":138674,"EventId":0,"Title":"Unscripted- An Improv Comedy Show","Notes":null,"Description":"Come enjoy a night of laughs with one of BYU-Idaho\u0027s funniest improv comedy shows-Unscripted. Shows at 7 p.m. and 9 p.m. $1 admission. ","EventImageURL":"ImageWriter.aspx?ImageId=17185","ALTText":"improv","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Activities/Talent/Performance","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/16/2019 6:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552716000000)\/"},"Location":{"Id":1,"Name":"Manwaring Center 372 A Little Theater","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":138682,"EventId":0,"Title":"Comic Frenzy","Notes":null,"Description":"Enjoy the best in Improvisational Theatre--Comic Frenzy! ","EventImageURL":"ImageWriter.aspx?ImageId=17190","ALTText":"comic frenzy","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Theatre Production","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/16/2019 7:00:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552716000000)\/"},"Location":{"Id":1,"Name":"Snow 107 Black Box Theatre","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":138675,"EventId":0,"Title":"Unscripted- An Improv Comedy Show","Notes":null,"Description":"Come enjoy a night of laughs with one of BYU-Idaho\u0027s funniest improv comedy shows-Unscripted. Shows at 7 p.m. and 9 p.m. $1 admission. ","EventImageURL":"ImageWriter.aspx?ImageId=17184","ALTText":"improv","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Activities/Talent/Performance","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/16/2019 8:00:00 PM","EventDuaration":90,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552716000000)\/"},"Location":{"Id":1,"Name":"Manwaring Center 372 A Little Theater","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360},{"Id":138683,"EventId":0,"Title":"Comic Frenzy","Notes":null,"Description":"Enjoy the best in Improvisational Theatre--Comic Frenzy! ","EventImageURL":"ImageWriter.aspx?ImageId=17189","ALTText":"comic frenzy","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Theatre Production","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/16/2019 9:00:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-360,"BaseDate":"\/Date(1552716000000)\/"},"Location":{"Id":1,"Name":"Snow 107 Black Box Theatre","Address":""},"UDFs":null,"EventKeyWords":null,"Icon1":null,"Icon2":null,"SelectedTZBias":-360}];
+ var EventTypesFilterData = [{"expanded":true,"checked":false,"text":"Event Types","id":-1,"items":[{"checked":false,"text":"Academic Dates (calendar, testing, graduation)","id":56},{"checked":false,"text":"Academic Sponsored Event","id":118},{"checked":false,"text":"Activities (complete listing) ","id":48},{"checked":false,"text":"Activities/Fitness","id":125},{"checked":false,"text":"Activities/Involvement","id":148},{"checked":false,"text":"Activities/Life Skills","id":84},{"checked":false,"text":"Activities/Social","id":129},{"checked":false,"text":"Activities/Sports","id":128},{"checked":false,"text":"Activities/Sports/Event","id":18},{"checked":false,"text":"Activities/Talent","id":124},{"checked":false,"text":"Activities/Talent/Performance","id":21},{"checked":false,"text":"Activities/Wellness","id":145},{"checked":false,"text":"Alumni Event or Reunion","id":106},{"checked":false,"text":"Art Shows","id":133},{"checked":false,"text":"Banquet/Meal","id":22},{"checked":false,"text":"Broadcast/Video Conference","id":23},{"checked":false,"text":"City of Rexburg Event","id":138},{"checked":false,"text":"College of Performing and Visual Arts","id":69},{"checked":false,"text":"Concert","id":24},{"checked":false,"text":"Conference/Workshop","id":25},{"checked":false,"text":"Conference/Workshop, Academics","id":120},{"checked":false,"text":"Devotional/Firesides","id":27},{"checked":false,"text":"Devotionals and Speeches","id":130},{"checked":false,"text":"Get Connected","id":127},{"checked":false,"text":"Get Connected/Activity","id":75},{"checked":false,"text":"Graduation","id":28},{"checked":false,"text":"Performance Events (concerts, theatre, etc.)","id":54},{"checked":false,"text":"Reception/Openhouse","id":126},{"checked":false,"text":"Reception/Openhouse, Public","id":107},{"checked":false,"text":"Recital, Student","id":60},{"checked":false,"text":"Theatre Production","id":34}]}]; var LocationFilterData = [{"expanded":true,"checked":false,"text":"Locations","id":-1,"items":[{"checked":false,"text":"Agricultural Science Center - Main","id":41},{"checked":false,"text":"Agriculture Engineering Building","id":30},{"checked":false,"text":"Amphitheatre \u0026amp; Plaza Quads","id":11},{"checked":false,"text":"Austin","id":12},{"checked":false,"text":"Benson","id":10},{"checked":false,"text":"BYU-Idaho Center","id":3},{"checked":false,"text":"Clarke","id":20},{"checked":false,"text":"Fields","id":4},{"checked":false,"text":"Hart","id":7},{"checked":false,"text":"Hinckley","id":8},{"checked":false,"text":"Kimball","id":33},{"checked":false,"text":"Kirkham ","id":9},{"checked":false,"text":"Manwaring Center","id":1},{"checked":false,"text":"McKay Library","id":24},{"checked":false,"text":"Off-Campus","id":5},{"checked":false,"text":"Outdoor Learning Center at Badger Creek","id":29},{"checked":false,"text":"Ricks","id":23},{"checked":false,"text":"Romney","id":17},{"checked":false,"text":"Ropes Course","id":28},{"checked":false,"text":"Science and Technology Center","id":37},{"checked":false,"text":"Smith","id":14},{"checked":false,"text":"Snow","id":15},{"checked":false,"text":"Spori","id":6},{"checked":false,"text":"Stadium","id":27},{"checked":false,"text":"Taylor","id":2},{"checked":false,"text":"Thomas E  Ricks Gardens","id":22}]}]; var DepartmentFilterData = [{"expanded":true,"checked":false,"text":"Departments","id":-1,"items":[{"checked":false,"text":"City of Rexburg","id":3},{"checked":false,"text":"City of Sugar City","id":4},{"checked":false,"text":"Madison County","id":5},{"checked":false,"text":"Madison Memorial Hospital","id":1},{"checked":false,"text":"Madison School District 321","id":6},{"checked":false,"text":"Sugar Salem School District 322","id":2}]}]; var showSubscribe = true;showExactMatch = true;currentDates = "3/10/2019|3/16/2019";var ems_timeSep = ":",mc_Help = "Help",mc_useHelpIcon = 0,mc_allowSystemCheckAccess = 1,mc_localAddress = "10.9.163.18",mc_remoteHost = "66.215.35.104",ems_nosystemcheckacess = "Access to this page is restricted to the server that is hosting the application. To view version information see the About.aspx page",ems_AM = "AM",ems_PM = "PM",ems_timeFormat = "h:mm tt",ems_timePicker = "Time Picker",eventDetailstxt = "Event Details",gotoString = "Go to the current month",todayString = "Today is",scrollLeftMessage = "Click to scroll to previous month. Hold mouse button to scroll automatically.",scrollRightMessage = "Click to scroll to next month. Hold mouse button to scroll automatically.",selectMonthMessage = "Click to select a month.",selectYearMessage = "Click to select a year.",selectDateMessage = "Select [date] as date.",ems_UnhandledCallback = "Unhandled Callback.",ems_FailedToLoadCallbackXml = "Error loading xml document from server",localizationKey = "en-US",localizationDateSeparator = "/",localizationDateFormat = "m/d/yyyy",ems_FirstDateViolation = "Date violates your first available event date",ems_LastDateViolation = "Date violates your last available event date",ems_InvalidDate = "Invalid Date",ems_InvalidTime = "Invalid Time",ems_CloseTheCalendar = "Close the Calendar",mc_rootDirectory = "/",ajaxRootDirectory = "",sSelectedColor = "rgb(175,188,33)";checkVersion("data=x3ijH9FTK9UfR1IPnJHJBB0vNIurQVtwSnGbxY%2bikSKDfpyXwL0zZA%3d%3d");Dea.pageCallback = function (mcObject) { WebForm_DoCallback('__Page','' + Dea.JSON.stringify(mcObject) + '',Dea.handleCallback,'' + mcObject.router + '',Dea.errorCallback,true)};var PathToRoot = '/';var isLoggedIn = false;var loginTxt = "Login";var logoutTxt = "Log Out";var helpTextMsg = "";var postionMenuRight = false;var showLogout = true;var showLogin = true;var showHelpEdit = false;var loginUsername = "";var showLoginTimezone = false;var showEmailPasswordLink = false; var logintimezonesData = [{"id":"73","name":"(GMT -12:00) Eniwetok, Kwajalein","bias":-720,"abbr":""},{"id":"72","name":"(GMT -11:00) Midway Island, Samoa","bias":-660,"abbr":""},{"id":"71","name":"(GMT -10:00) Hawaii","bias":-600,"abbr":"HAT"},{"id":"70","name":"(GMT -09:00) Alaska","bias":-540,"abbr":"AKT"},{"id":"69","name":"(GMT -08:00) Pacific Time","bias":-480,"abbr":"PT"},{"id":"83","name":"(GMT -08:00) Tijuana, Baja California","bias":-480,"abbr":""},{"id":"67","name":"(GMT -07:00) Arizona","bias":-420,"abbr":"MT"},{"id":"68","name":"(GMT -07:00) Mountain Time","bias":-420,"abbr":"MT"},{"id":"81","name":"(GMT -07:00) Chihuahua, La Paz, Mazatlan","bias":-420,"abbr":""},{"id":"63","name":"(GMT -06:00) Central America","bias":-360,"abbr":""},{"id":"64","name":"(GMT -06:00) Central Time","bias":-360,"abbr":"CT"},{"id":"65","name":"(GMT -06:00) Mexico City","bias":-360,"abbr":"CST"},{"id":"66","name":"(GMT -06:00) Saskatchewan","bias":-360,"abbr":""},{"id":"60","name":"(GMT -05:00) Bogota, Lima, Quito","bias":-300,"abbr":""},{"id":"61","name":"(GMT -05:00) Eastern Time","bias":-300,"abbr":"ET"},{"id":"62","name":"(GMT -05:00) Indiana - East","bias":-300,"abbr":"ET"},{"id":"84","name":"(GMT -04:30) Caracas","bias":-270,"abbr":""},{"id":"57","name":"(GMT -04:00) Atlantic Time - Canada","bias":-240,"abbr":"AT"},{"id":"58","name":"(GMT -04:00) Caracas, La Paz","bias":-240,"abbr":""},{"id":"98","name":"(GMT -04:00) Atlantic Time - Puerto Rico","bias":-240,"abbr":"AST"},{"id":"56","name":"(GMT -03:30) Newfoundland","bias":-210,"abbr":""},{"id":"53","name":"(GMT -03:00) Brasilia","bias":-180,"abbr":"BRT"},{"id":"54","name":"(GMT -03:00) Buenos Aires, Georgetown","bias":-180,"abbr":""},{"id":"55","name":"(GMT -03:00) Greenland","bias":-180,"abbr":""},{"id":"59","name":"(GMT -04:00) Santiago","bias":-180,"abbr":""},{"id":"86","name":"(GMT -03:00) Argentina","bias":-180,"abbr":"ART"},{"id":"94","name":"(GMT -04:00) Paraguay","bias":-180,"abbr":"PYST"},{"id":"52","name":"(GMT -02:00) Mid-Atlantic","bias":-120,"abbr":""},{"id":"80","name":"(GMT -03:00) Montevideo","bias":-120,"abbr":""},{"id":"1","name":"(GMT +00:00) Casablanca, Monrovia","bias":0,"abbr":""},{"id":"2","name":"(GMT +00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London","bias":0,"abbr":"GMT"},{"id":"92","name":"(GMT +00:00) Morroco","bias":0,"abbr":"WET"},{"id":"3","name":"(GMT +01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna","bias":60,"abbr":"CET"},{"id":"4","name":"(GMT +01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague","bias":60,"abbr":"CET"},{"id":"5","name":"(GMT +01:00) Brussels, Copenhagen, Madrid, Paris","bias":60,"abbr":"CET"},{"id":"6","name":"(GMT +01:00) Sarajevo, Skopje, Sofija, Vilnius, Warsaw, Zagreb","bias":60,"abbr":""},{"id":"7","name":"(GMT +01:00) West Central Africa","bias":60,"abbr":""},{"id":"50","name":"(GMT -01:00) Azores","bias":60,"abbr":""},{"id":"51","name":"(GMT -01:00) Cape Verde Is., Yerevan, Baku, Tbilisi","bias":60,"abbr":""},{"id":"8","name":"(GMT +02:00) Athens, Istanbul, Minsk","bias":120,"abbr":"EET"},{"id":"9","name":"(GMT +02:00) Bucharest","bias":120,"abbr":""},{"id":"10","name":"(GMT +02:00) Cairo","bias":120,"abbr":""},{"id":"11","name":"(GMT +02:00) Harare, Pretoria","bias":120,"abbr":""},{"id":"12","name":"(GMT +02:00) Helsinki, Riga, Tallinn","bias":120,"abbr":"EET"},{"id":"13","name":"(GMT +02:00) Jerusalem","bias":120,"abbr":""},{"id":"78","name":"(GMT +02:00) Amman","bias":120,"abbr":""},{"id":"79","name":"(GMT +02:00) Beirut","bias":120,"abbr":""},{"id":"82","name":"(GMT +02:00) Windhoek","bias":120,"abbr":""},{"id":"85","name":"(GMT +02:00) Turkey","bias":120,"abbr":"EET"},{"id":"95","name":"(GMT +02:00) Syria","bias":120,"abbr":"EET"},{"id":"14","name":"(GMT +03:00) Baghdad","bias":180,"abbr":"AT"},{"id":"15","name":"(GMT +03:00) Kuwait, Riyadh","bias":180,"abbr":"AT"},{"id":"16","name":"(GMT +03:00) Moscow, St. Petersburg, Volgograd","bias":180,"abbr":"MSK"},{"id":"17","name":"(GMT +03:00) Nairobi","bias":180,"abbr":""},{"id":"18","name":"(GMT +03:30) Tehran","bias":180,"abbr":""},{"id":"77","name":"(GMT +03:00) Tbilisi","bias":180,"abbr":""},{"id":"88","name":"(GMT +03:00) Kaliningrad","bias":180,"abbr":"EEST"},{"id":"19","name":"(GMT +04:00) Abu Dhabi, Muscat","bias":240,"abbr":""},{"id":"20","name":"(GMT +04:30) Kabul","bias":240,"abbr":""},{"id":"74","name":"(GMT +04:00) Baku","bias":240,"abbr":""},{"id":"75","name":"(GMT +04:00) Yerevan","bias":240,"abbr":""},{"id":"76","name":"(GMT +04:00) Manaus","bias":240,"abbr":""},{"id":"91","name":"(GMT +04:00) Mauritius","bias":240,"abbr":"MUT"},{"id":"21","name":"(GMT +05:00) Ekaterinburg","bias":300,"abbr":""},{"id":"22","name":"(GMT +05:00) Islamabad, Karachi, Tashkent","bias":300,"abbr":""},{"id":"24","name":"(GMT +05:45) Kathmandu","bias":300,"abbr":""},{"id":"93","name":"(GMT +05:00) Pakistan","bias":300,"abbr":"PKT"},{"id":"23","name":"(GMT +05:30) Calcutta, Chennai, Mumbai, New Delhi","bias":330,"abbr":"IST"},{"id":"27","name":"(GMT +06:00) Sri Jayawardenepura","bias":330,"abbr":""},{"id":"25","name":"(GMT +06:00) Almaty, Novosibirsk","bias":360,"abbr":""},{"id":"26","name":"(GMT +06:00) Astana, Dhaka","bias":360,"abbr":""},{"id":"28","name":"(GMT +06:30) Rangoon","bias":360,"abbr":""},{"id":"87","name":"(GMT +06:00) Bangladesh","bias":360,"abbr":"BST"},{"id":"29","name":"(GMT +07:00) Bangkok, Hanoi, Jakarta","bias":420,"abbr":"ICT"},{"id":"30","name":"(GMT +07:00) Krasnoyarsk","bias":420,"abbr":""},{"id":"31","name":"(GMT +08:00) Beijing, Chongqing, Hong Kong, Urumqi","bias":480,"abbr":"HKT"},{"id":"32","name":"(GMT +08:00) Irkutsk, Ulaan Bataar","bias":480,"abbr":""},{"id":"33","name":"(GMT +08:00) Kuala Lumpur, Singapore","bias":480,"abbr":"SGT"},{"id":"34","name":"(GMT +08:00) Perth","bias":480,"abbr":"WST"},{"id":"35","name":"(GMT +08:00) Taipei","bias":480,"abbr":""},{"id":"96","name":"(GMT +08:00) Ulaanbaatar","bias":480,"abbr":"ULAT"},{"id":"36","name":"(GMT +09:00) Osaka, Sapporo, Tokyo","bias":540,"abbr":"JST"},{"id":"37","name":"(GMT +09:00) Seoul","bias":540,"abbr":"SST"},{"id":"38","name":"(GMT +09:00) Yakutsk","bias":540,"abbr":""},{"id":"40","name":"(GMT +09:30) Darwin","bias":570,"abbr":"CST"},{"id":"41","name":"(GMT +10:00) Brisbane","bias":600,"abbr":"EST"},{"id":"43","name":"(GMT +10:00) Guam, Port Moresby","bias":600,"abbr":""},{"id":"45","name":"(GMT +10:00) Vladivostok","bias":600,"abbr":""},{"id":"39","name":"(GMT +09:30) Adelaide","bias":630,"abbr":"CST"},{"id":"42","name":"(GMT +10:00) Canberra, Melbourne, Sydney","bias":660,"abbr":"EST"},{"id":"44","name":"(GMT +10:00) Hobart","bias":660,"abbr":"EST"},{"id":"46","name":"(GMT +11:00) Magadan, Solomon Is., New Caledonia","bias":660,"abbr":""},{"id":"48","name":"(GMT +12:00) Fiji, Kamchatka, Marshall Is.","bias":720,"abbr":""},{"id":"89","name":"(GMT +12:00) Kamchatka","bias":720,"abbr":"PETT"},{"id":"90","name":"(GMT +12:00) Magadan","bias":720,"abbr":"MAGT"},{"id":"47","name":"(GMT +12:00) Auckland, Wellington","bias":780,"abbr":"NZT"},{"id":"49","name":"(GMT +13:00) Nuku\u0026#39;alofa","bias":780,"abbr":""}]; var userMenu = [{"group":{"url":"MasterCalendar.aspx","title":"Calendar","urlMethod":1,"items":[]}}];var isLeft = true;
+//]]>
+    </script>
+    <div>
+     <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="90941271"/>
+     <input id="__VIEWSTATEENCRYPTED" name="__VIEWSTATEENCRYPTED" type="hidden" value=""/>
+    </div>
+    <div class="HeaderContainer show-large" id="ctl00_HeaderContainer">
+     <div class="row po">
+      <div class="twelve columns">
+       <div class="imgBanner centered pointer" id="ctl00_Header_imgBannerDiv">
+        <img alt="Banner Image" src="http://calendar.byui.edu/ImageWriter.aspx?data=IPkf9F3DB00QXiXkxgLpWUHaJn7Stmk1LYW9RquVg83YbQVMuktNbGNrUzVCxnBA" style="border-width:0px;"/>
+       </div>
+      </div>
+     </div>
+     <script type="text/javascript">
+      if (isLeft) {
+        $('.imgBanner').css({ 'margin': '20px -20px 20px -10px' });
+    }
+
+    $(document).ready(function () {
+        $('.imgBanner').click(function () {
+            document.location.href = 'MasterCalendar.aspx';
+        });
+    });
+     </script>
+    </div>
+    <div class="HeaderContainer1 show-medium show-small" id="HeaderContainer1">
+     <div class="row mc-title-primary">
+      <!--<div class=">EMS Master Calendar</div>-->
+      <div class="ml10" id="ctl00_Div2">
+       EMS Master Calendar
+      </div>
+     </div>
+    </div>
+    <div class="row">
+     <div class="c-wrapper-active fl opacity-medium ml10 pointer help-text-icon" style="width:20px;height:20px" title="Help Text">
+      <span class="visuallyhidden" id="helpTextLabel">
+       Help Text
+      </span>
+      <div aria-labelledby="helpTextLabel" class="icon question" role="button" style="margin-left:-3px;margin-top:-2px" tabindex="0">
+      </div>
+     </div>
+    </div>
+    <div id="page" style="padding-left:.2em; padding-right:.2em;">
+     <div class="outMessage" id="ctl00_lblOutMessage">
+     </div>
+     <div class="errorSummary" id="ctl00_Summary" style="color:Red;display:none;">
+     </div>
+     <div id="helpDialog">
+      <span class="clear helpDialog" id="ctl00_DefaultHelp">
+      </span>
+     </div>
+     <div class="visuallyhidden" role="banner">
+      <h1>
+       Calendar Managers
+      </h1>
+     </div>
+     <section class="main">
+      <div class="show-medium show-large" id="breakpointdetect">
+      </div>
+      <div class="show-large" id="fedetect">
+      </div>
+      <div class="row centered">
+       <div "="" class="compatModeMessage" style="display:none">
+        <span>
+         It looks like you have enabled Internet Explorer Compatibility View.
+Master Calendar works best if you turn this off.
+        </span>
+        <span class="dismissCompatMode">
+         Dismiss
+        </span>
+       </div>
+       <div class="fluid three columns show-large filters-main-container">
+        <div style="height: 35px; line-height: 21px; vertical-align: middle; margin-right: 10px">
+         <div class="fr">
+          <div class="font-size-normal mc-color-3 font-weight-bold">
+           <div class="pending-notifications c-wrapper-active fl opacity-full">
+            <div class="fl icon important pointer" title="Pending Events">
+            </div>
+            <span>
+            </span>
+           </div>
+           <div class="login-container">
+            <div class="login-bar fl" style="height:35px;">
+             <div class="fl icon person-male" title="User Name">
+             </div>
+             <div class="fl">
+              <div class="fl pointer" onclick="$(this).next().trigger('click')" onkeypress="$(this).next().trigger('click')">
+               guest
+              </div>
+              <span class="size75 icon75 down75 pointer fl userMenu mt3 ml2" onkeydown="mc_keypressHandlerAsButton(event, this);" tabindex="0" title="Menu Open/Close Arrow">
+              </span>
+              <span class="ml10 pointer login mt2" id="loginButton" tabindex="0">
+              </span>
+              <div class="mc-boxshadow" id="loginForm" style="display: none">
+               <div class="font-size-normal mc-color-1" id="loginMessage">
+               </div>
+               <section class="form login-info" id="secLogin" style="clear: both">
+                <div>
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;clear:both;">
+                  <div>
+                   <label class="fl label-small" for="loginUserID">
+                    User Id
+                   </label>
+                   <input class="ml10 text defaultInvalid fl" id="loginUserID" name="userID" type="text"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;clear:both">
+                  <div>
+                   <label class="fl label-small" for="loginPassword">
+                    Password
+                   </label>
+                   <input autocomplete="off" class="ml10 text defaultInvalid fl" id="loginPassword" name="password" type="password"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="input-wrapper fl br-5 p5 space login-timezone" style="line-height:20px;clear:both">
+                  <div>
+                   <label class="fl label" for="loginTimeZone">
+                    Time zone
+                   </label>
+                   <select class="ml10 ddl-small" id="loginTimeZone" name="loginTimeZone">
+                   </select>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="mt10" style="line-height:20px;clear:both">
+                  <div class="fl mt5 ml20 font-size-normal mc-color-5 pointer email-my-pass" tabindex="0">
+                   Email me my password
+                  </div>
+                  <div class="button selected fr br-5 p5" onclick="LoginUser($('#loginUserID').val(), $('#loginPassword').val(), $('#loginTimeZone').val())" onkeypress="LoginUser($('#loginUserID').val(), $('#loginPassword').val(), $('#loginTimeZone').val())" style="line-height:20px;" tabindex="0">
+                   <div class="icon key fl">
+                   </div>
+                   Login
+                  </div>
+                  <div class="login-cancel button selected fr br-5 p5 mr10" onclick="$('.login').data('login').close()" onkeypress="$('.login').data('login').close()" style="line-height:20px;" tabindex="0">
+                   <div class="icon x fl">
+                   </div>
+                   Cancel
+                  </div>
+                 </div>
+                </div>
+               </section>
+               <section id="secEmailPassword" style="clear: both; display: none">
+                <div class="fl mt20">
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;">
+                  <div>
+                   <label class="fl label-small" for="emailPassword">
+                    Email
+                   </label>
+                   <input class="ml10 text defaultInvalid" id="emailPassword" name="emailPassword" type="text"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="button selected fr br-5 p5 " onclick="EmailMyPassword($('#emailPassword').val());" onkeypress="EmailMyPassword($('#emailPassword').val());" style="line-height:20px;clear:both" tabindex="0">
+                  <div class="icon email fl">
+                  </div>
+                  Email Me
+                 </div>
+                 <div class="email-password-cancel button selected fr br-5 p5 mr10" onclick="$('.login').data('login').close()" onkeypress="$('.login').data('login').close()" style="line-height:20px;" tabindex="0">
+                  <div class="icon x fl">
+                  </div>
+                  Cancel
+                 </div>
+                </div>
+               </section>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="centered space" id="cal-container">
+         <input class="date" id="inlineCal" min="2004-02-20" title="Calendar Picker" type="date"/>
+        </div>
+        <section>
+         <div class="row centered search-box-small space" style="display:block;">
+          <div class="fl mt20" style="position:relative;z-index:1000">
+           <div class="fl mc-bg-color-5 search-box ml20">
+            <div class="icon loupe centered fl">
+            </div>
+            <div class="fl">
+             <input class="search-box-input mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" placeholder="Search for Events" title="Search for Events" type="text" value=""/>
+            </div>
+            <div class="go fl pl5 pointer">
+             GO
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <section>
+         <div class="row" id="subscribeHolder" style="margin-left:20px">
+          <div style="line-height:20px;vertical-align:middle">
+           <div class="icon star fl">
+           </div>
+           <a class="subscribe font-size-normal" onkeydown="mc_keypressHandlerAsButton(event, this)" role="link" tabindex="0" title="Notifications/iCal Feeds">
+            Notifications/iCal Feeds
+           </a>
+          </div>
+         </div>
+        </section>
+        <section class="calendar-types-section">
+         <div class="centered side-box calendar-types" style="margin-top:5px;margin-left:-1px">
+          <div class="side-box-head calendar-side-box-head">
+           <div class="side-box-title fl" id="GroupBoxHeader">
+            Calendars
+           </div>
+           <span class="visuallyhidden" id="GroupBoxExpandCollapseLbl">
+            Expand/Collapse Arrow
+           </span>
+           <div aria-expanded="true" aria-labelledby="GroupBoxHeader GroupBoxExpandCollapseLbl" class="fr icon down pointer" role="button" tabindex="0">
+           </div>
+          </div>
+          <div>
+           <div class="p5 font-size-small">
+            <span class="pointer check-all" onkeydown="mc_keypressHandlerAsButton(event, this)" role="button" tabindex="0">
+            </span>
+            <span class="fr pointer expand-all" onkeydown="mc_keypressHandlerAsButton(event, this)" role="button" tabindex="0">
+            </span>
+           </div>
+          </div>
+          <div class="calendar-types-container">
+          </div>
+         </div>
+        </section>
+        <div class="centered side-box filters-box" style="margin-top: 20px; margin-left: -1px">
+         <div class="side-box-head filter-side-box-head space">
+          <div class="side-box-title fl" id="FilterBoxHeader">
+           Filters
+          </div>
+          <span class="visuallyhidden" id="FilterBoxExpandCollapseLbl">
+           Expand/Collapse Arrow
+          </span>
+          <div aria-expanded="true" aria-labelledby="FilterBoxHeader FilterBoxExpandCollapseLbl" class="fr icon down pointer" role="button" tabindex="0">
+          </div>
+         </div>
+         <div class="filters-container">
+          <div class="input-wrapper fl br-5 p5 space" id="eventTypeFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_EventTypesLabel">
+              Event Types
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="EventTypesFilter" title="Event Types">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="locationFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_LocationsLabel">
+              Locations
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="LocationsFilter" title="Locations">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="sublocationFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_SubLocationLabel">
+              Rooms
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="SubLocationsFilter" title="Rooms">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="departmentFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_departmentsLabel">
+              Departments
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="DepartmentsFilter" title="Departments">
+            </select>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- Search -->
+       <section>
+        <div class="fluid search-results nine columns" style="display:none">
+         <div class="row">
+          <div class="show-small show-medium mt10">
+          </div>
+          <div class="fr pointer back-to-events" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:10px;">
+           <div class="c-wrapper-active fl opacity-full">
+            <div class="fl icon back" title="Back to Calendar">
+            </div>
+           </div>
+           <div class="fl pl6 font-size-normal mc-color-3 font-weight-bold" tabindex="0">
+            Back to Calendar
+           </div>
+          </div>
+         </div>
+         <div class="row pl6 mc-title-primary mc-boxshadow br-5" style="margin-bottom:10px;display:block">
+          Search Results
+         </div>
+         <div class="row space">
+          <div class="column three po fl">
+           <label class="fl" for="startDate">
+            From:
+           </label>
+           <div class="fl" id="sdCal-container">
+            <input class="fl" id="startDate" type="text"/>
+           </div>
+          </div>
+          <div class="column three po fl">
+           <label class="fl" for="endDate">
+            To:
+           </label>
+           <div class="fl" id="edCal-container">
+            <input class="fl" id="endDate" type="text"/>
+           </div>
+          </div>
+          <div class="column six po">
+           <div class="row centered search-box-large fl" style="display:block;">
+            <div class="fl" style="position:relative;z-index:1000;">
+             <div class="fl mc-bg-color-5 search-box ml20">
+              <div class="icon loupe pointer centered fl" title="Search">
+              </div>
+              <div class="fl">
+               <input aria-labeledby="largeSearchBox" class="search-box-input mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" id="largeSearchBox" placeholder="Search for Events" style="width:200px" title="Search for Events" type="text" value=""/>
+              </div>
+              <div class="go fl pl5 pointer" tabindex="0">
+               GO
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="space" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:30px;">
+          <div class="fl">
+           <input class="fl show-large" id="chkUseFilters" style="margin-top:3px;" type="checkbox"/>
+           <label class="fl font-size-normal pl10 pr10 show-large" for="chkUseFilters">
+            Use Selected Filters
+           </label>
+           <input class="fl" id="chkExactMatch" style="margin-top:3px;" type="checkbox"/>
+           <label class="fl font-size-normal pl10 pr10" for="chkExactMatch">
+            Use Exact Match
+           </label>
+           <input checked="" class="fl pl5 mt2" id="generalEvents" name="rdeventType" type="radio" value="0"/>
+           <label class="fl pl5 font-size-normal pl10 pr10" for="generalEvents">
+            General events
+           </label>
+           <input class="fl pl5 mt2" id="specialEvents" name="rdeventType" type="radio" value="1"/>
+           <label class="fl pl5 font-size-normal pl10 pr10" for="specialEvents">
+            Special dates
+           </label>
+          </div>
+         </div>
+         <section class="space">
+          <div class="font-size-Xlarge">
+           Your search for: '
+           <span class="font-weight-bold search-text-value">
+           </span>
+           ' returned (
+           <span class="font-weight-bold search-count-value">
+           </span>
+           ) result(s)
+          </div>
+          <section class="event-type-display-search space" role="navigation" style="margin-top:15px;">
+           <div class="row centered" style="margin-top:10px;">
+            <div class="pl10 pr10">
+             <span class="visuallyhidden" id="searchResultsExportText">
+              Select to export the search results as a .csv file
+             </span>
+             <div aria-labelledby="searchResultsExportText" class="button normal fr" tabindex="0">
+              <div class="icon export fl" title="Export">
+              </div>
+              Export
+             </div>
+            </div>
+           </div>
+          </section>
+          <section class="p10 search-list-bar">
+           <div class="row centered box el-container" data-bind="with:$root.searcheventlistVM">
+            <div>
+             <div class="row el-title show-large show-medium">
+              <div class="three columns title" data-bind="event: { click:function(){ sortBy('EventDate',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('EventDate',$element) } }  }" tabindex="0">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                Event Date
+               </span>
+              </div>
+              <div class="four columns title" data-bind="event: { click:function(){sortBy('Title',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('Title',$element) } } }" tabindex="0">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                Title
+               </span>
+              </div>
+              <div class="two columns title" data-bind="event: { click:function(){sortBy('Location',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('Location',$element) } } }" tabindex="0">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                <div id="ctl00_pc_LocationSearchLabel">
+                 Location
+                </div>
+               </span>
+              </div>
+              <div class="two columns title" data-bind="event: { click:function(){sortBy('CalendarName',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('CalendarName',$element) } } }" tabindex="0">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                Calendar
+               </span>
+              </div>
+              <div class="one columns title po">
+               <div class="icon expand centered" style="margin-top:1px;" title="Expand">
+               </div>
+              </div>
+             </div>
+             <div class="el-data-container">
+              <div class="el-data-item" data-bind="template: { name: 'searchResults-list-template', foreach: events}, searchListPost:{}">
+              </div>
+             </div>
+             <div class="row mc-color-3 p5 font-weight-bold more-results">
+              <span class="go pointer">
+               Load More Results
+              </span>
+             </div>
+            </div>
+           </div>
+          </section>
+          <!-- BEGIN - Block Event List - List-->
+          <section class="special-date-list space" style="display:none;">
+           <div class="row centered box el-container pr10" data-bind="with:$root.specialDatesVM">
+            <div>
+             <div class="row el-title show-large show-medium">
+              <div class="two columns title" data-bind="event: { click:function(){ sortBy('EventDate',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('EventDate',$element) } }  }" tabindex="0">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                Event Date
+               </span>
+              </div>
+              <div class="four columns title" data-bind="event: { click:function(){ sortBy('Title',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('Title',$element) } }  }" tabindex="0">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                Title
+               </span>
+              </div>
+              <div class="four columns title" data-bind="event: { click:function(){ sortBy('Notes',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('Notes',$element) } }  }" tabindex="0">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                <div id="ctl00_pc_Div2">
+                 Notes
+                </div>
+               </span>
+              </div>
+              <div class="two columns title" data-bind="event: { click:function(){ sortBy('CalendarName',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('CalendarName',$element) } }  }" tabindex="0">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                Calendar
+               </span>
+              </div>
+             </div>
+             <div class="el-data-container p10">
+              <div class="el-data-item" data-bind="template: { name: 'specialDate-list-template',foreach: events}, specialListPost:{}">
+              </div>
+             </div>
+            </div>
+           </div>
+          </section>
+          <!-- END - Block Event List - List-->
+         </section>
+        </div>
+       </section>
+       <div class="fluid events nine columns" style="display:block">
+        <div class="row login-fluid show-small show-medium ">
+         <div class="twelve column mt5 mb5">
+          <div class="fr login-fluid-container">
+          </div>
+         </div>
+        </div>
+        <!-- BEGIN - Announcements Ticker -->
+        <div id="announcementHolder">
+         <section class="space show-large">
+          <div class="row">
+           <ul class="js-hidden" id="js-news">
+           </ul>
+          </div>
+         </section>
+        </div>
+        <!-- END - Announcements Ticker -->
+        <!-- BEGIN - Featured Events -->
+        <div class="show-large" id="feHolder">
+         <div class="row pl6 mc-title-primary mc-boxshadow br-5" style="margin-bottom:10px;display:block">
+          <div class="fl" id="ctl00_pc_FeaturedEventsLabel">
+           Featured Events
+          </div>
+          <div class="fr icon down pointer" onclick="UpDown(this,'.fetured-events-content')" onkeypress="UpDown(this,'.fetured-events-content')" style="margin-top:5px;" tabindex="0" title="Expand/Collapse Arrow">
+          </div>
+         </div>
+         <section class="fetured-events space">
+          <div class="fetured-events-content fetured-events-content-horizontal-1" style="display:block;">
+           <div class="row box mc-bg-color-1 mc-border-style-solid mc-border-color-5 mc-border-width-3px p10">
+            <div class="row content p10">
+             <!-- Viewer Row -->
+             <div class="six columns scroller-image">
+              <!--Image Container-->
+             </div>
+             <div class="six columns scroller-text">
+              <h1 class="mc-color-3 font-size-Xlarge font-weight-bold space scroller-text-title pointer" tabindex="0">
+               Featured Event Title
+              </h1>
+              <div style="overflow:auto;max-height:110px;margin-bottom:5px">
+               <p class="mc-color-4 font-size-normal space scroller-text-description" style="text-overflow:ellipsis">
+               </p>
+              </div>
+              <div class="mc-color-4 font-size-small font-weight-bold scroller-text-info">
+               <div class="info-date">
+               </div>
+               <div class="info-time">
+               </div>
+               <div class="info-location">
+               </div>
+              </div>
+              <div class="mc-color-4 font-size-normal space m4 pointer scroller-text-more" tabindex="0">
+               more
+              </div>
+             </div>
+             <div class="scroller-playback-controls">
+              <div class="c-wrapper-active fl" tabindex="0">
+               <div class="icon pointer play fl" title="Play">
+               </div>
+              </div>
+              <div class="c-wrapper-inactive fl" tabindex="0">
+               <div class="icon pointer pause fl" title="Pause">
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="row scroller-control mc-bg-color-5">
+            <div class="fl mc-border-color-2 mc-border-style-solid mc-border-width-1px scroller">
+             <div class="prev-next pointer prev-item" tabindex="0" title="Previous">
+             </div>
+             <div class="prev-group prev-group-img pointer" tabindex="0" title="Previous Group">
+             </div>
+            </div>
+            <div class="fl items mc-color-4">
+             <div class="items-scroller" style="height:inherit;position:relative;">
+             </div>
+            </div>
+            <div class="fr mc-border-color-2 mc-border-style-solid mc-border-width-1px scroller">
+             <div class="prev-next pointer next-item" tabindex="0" title="Next">
+             </div>
+             <div class="next-group next-group-img pointer" tabindex="0" title="Next Group">
+             </div>
+            </div>
+           </div>
+          </div>
+         </section>
+        </div>
+        <!-- END - Featured Events -->
+        <!-- BEGIN - Block Event List -->
+        <!-- BEGIN - Block Event List - Selector Bar -->
+        <section class="space event-list-bar" role="navigation" style="margin-top:10px;">
+         <div class="row mc-title-primary br-5">
+          <div class="fl pl6 two column">
+           Events
+          </div>
+          <div class="ten column">
+           <div class="row">
+            <div class="column seven">
+             <div class="fl pr20 date-scroller">
+              <div class="icon previous-arrow fl mt5 mr5 pointer scroll-date" role="button" tabindex="0" title="Select the previous month in the calendar">
+              </div>
+              <span class="fl dateLabel">
+              </span>
+              <div class="icon next fl mt5 ml5 pointer scroll-date" role="button" tabindex="0" title="Select the next month in the calendar">
+              </div>
+             </div>
+            </div>
+            <div class="column five ">
+             <div class="display-type-buttons fr">
+              <div aria-pressed="false" class="button normal fl" role="button" tabindex="0">
+               <div class="icon cal-week fl" style="margin-top:5px" title="Switch the calendar view to display only the selected date">
+               </div>
+               Day
+              </div>
+              <div aria-pressed="false" class="button normal fl" role="button" tabindex="0">
+               <div class="icon cal-week fl" style="margin-top:5px" title="Switch the calendar view to display only the week of the selected date">
+               </div>
+               Week
+              </div>
+              <div aria-pressed="false" class="button normal fl" role="button" tabindex="0">
+               <div class="icon cal-month fl" style="margin-top:5px" title="Switch the calendar view to display only the month of the selected date">
+               </div>
+               Month
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - Selector Bar -->
+        <!-- BEGIN - Block Event List - Display Bar-->
+        <section class="event-type-display-nav space" role="navigation" style="margin-top:15px;">
+         <div class="row centered" style="margin-top:10px;">
+          <div class="pl10 pr10">
+           <div aria-pressed="false" class="button trigger normal fl show-large show-medium" role="button" tabindex="0">
+            <div class="icon list fl" title="Switch the display type to the list view">
+            </div>
+            List
+           </div>
+           <div aria-pressed="false" class="button trigger normal fl show-large show-medium" role="button" tabindex="0">
+            <div class="icon grid fl" title="Switch the display type to the calendar view">
+            </div>
+            Calendar
+           </div>
+           <div class="button trigger normal fr" role="button" tabindex="0">
+            <div class="icon add fl" title="Add Event">
+            </div>
+            Add Event
+           </div>
+           <div class="time-zone normal fr br-5 p5" style="line-height:20px;">
+            <div class="icon world fl" title="Time zone">
+            </div>
+            <div class="pr6 time-zone-selected fl" data-bind="with:$root.timeZonesVM">
+             <label class="fl pr5" for="timezoneChangeddl">
+              Display as
+             </label>
+             <select class="fl tz-ddl ddl" data-bind="options: timeZones, optionsText: 'name', optionsValue: 'id', value:timeZones.id" id="timezoneChangeddl" name="timezoneChangeddl" tabindex="0">
+             </select>
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - Display Bar-->
+        <!-- BEGIN - Special Dates -->
+        <div class="row special-dates show-large show-medium" style="margin-top:10px;">
+         <div class="twelve column special-date-func-list">
+         </div>
+        </div>
+        <!-- END - Special Dates -->
+        <!-- BEGIN Search Fluid -->
+        <div class="row search-fluid centered show-small show-medium space" style="margin-top:10px;">
+         <div class="twelve column centered">
+          <div class="mc-bg-color-5 search-box fl">
+           <div class="icon loupe pointer centered fl">
+           </div>
+           <div class="fl">
+            <input aria-labeledby="smallSearchBox" class="search-box-input-fluid mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" id="smallSearchBox" placeholder="Search for Events" style="width:200px" title="Search for Events" type="text" value=""/>
+           </div>
+           <div class="go fl pl5 pointer">
+            GO
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- END Search Fluid -->
+        <!-- BEGIN Calendar Fluid -->
+        <div class="row calendars-fluid show-medium show-small">
+         <div class="button selected fl br-5 p5 ml20" onclick="setFluidCalBox(this)" onkeypress="setFluidCalBox(this)" style="line-height:20px;">
+          <div class="icon cal-week fl">
+          </div>
+          Select Calendar(s)
+         </div>
+        </div>
+        <!-- END Calendar Fluid -->
+        <!-- BEGIN Back to grid -->
+        <div class="row show-large show-medium back-to-calendar" style="margin-top:10px;display:none">
+         <div class="fr pointer back-to-events" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:10px;">
+          <div class="c-wrapper-active fl opacity-full">
+           <div class="fl icon back">
+           </div>
+          </div>
+          <div class="fl pl6 font-size-normal mc-color-3 font-weight-bold">
+           Back to events
+          </div>
+         </div>
+        </div>
+        <!-- END Back to grid -->
+        <!-- BEGIN - Block Event List - List-->
+        <section class="event-list space" style="display:block;">
+         <div class="row centered" data-bind="with:$root.eventlistVM">
+          <div class="margin-clear p10" data-bind="template: { name: 'event-list-template',foreach: events}, eventListPost:{}">
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - List-->
+        <!-- BEGIN - Block Event List - List-->
+        <section class="event-functional-list space" style="display:none;">
+         <div class="row centered box el-container pr10" data-bind="with:$root.eventlistVM">
+          <div>
+           <div class="row el-title show-large show-medium">
+            <div class="three columns title" data-bind="event: { click:function(){ sortBy('EventDate',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('EventDate',$element) } }  }" tabindex="0">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              Event Date
+             </span>
+            </div>
+            <div class="four columns title" data-bind="event: { click:function(){ sortBy('Title',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('Title',$element) } }  }" tabindex="0">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              Title
+             </span>
+            </div>
+            <div class="two columns title" data-bind="event: { click:function(){ sortBy('Location',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('Location',$element) } }  }" tabindex="0">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              <div id="ctl00_pc_Div1">
+               Location
+              </div>
+             </span>
+            </div>
+            <div class="two columns title" data-bind="event: { click:function(){ sortBy('CalendarName',$element)}, keypress:function(data, event){ if (event.which === 13) {sortBy('CalendarName',$element) } }  }" tabindex="0">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              Calendar
+             </span>
+            </div>
+            <div class="one columns title po">
+             <div class="icon expand centered" style="margin-top:1px;">
+             </div>
+            </div>
+           </div>
+           <div class="el-data-container p10">
+            <div class="el-data-item" data-bind="template: { name: 'functional-list-template',foreach: events}, functionalListPost:{}">
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - List-->
+        <!-- BEGIN - Block Event List - Grid-->
+        <div class="event-grid-container row centered space p20">
+        </div>
+        <div class="tooltip-template" data-bind="with: $root.eventTTVM">
+         <div class="tooltip br-10 p10">
+          <div class="tooltip-close" tabindex="0">
+           X
+          </div>
+          <div class="mc-color-3 font-size-large font-weight-bold pr10 space" style="clear:both">
+           <div class="fl icon edit pointer mt5" data-bind="click:function(){ CreateEditLink(event()); }, style: { display: event().AllowEdit() ? '' : 'none', marginTop: '-3px' }" title="Edit">
+           </div>
+           <div data-bind="text: event().Title, style: { textDecoration: event().Cancel()  ? 'line-through' : 'none'}">
+           </div>
+          </div>
+          <div class="mc-color-4 font-size-small fl space" style="width:100%">
+           <div class="fl mt2" data-bind="style: { backgroundColor: event().EventTypeColor }" style="width:10px;height:10px;">
+           </div>
+           <div class="fl ml2" data-bind="text: event().EventType">
+           </div>
+          </div>
+          <div class="mc-color-4 font-size-small font-weight-bold space">
+           <div data-bind="text: event().EventDateTime().DateFormated">
+           </div>
+           <div class="space" data-bind="text: event().isAllDay() ? 'All day event' : event().EventDateTime().TimeFormated">
+           </div>
+           <div data-bind="if:event().Icon1().ShowOnToolTip(), style: { display: event().Icon1().ShowOnToolTip() || event().Icon1().ShowOnToolTip() ? '' : 'none', clear: 'both' }">
+            <a class="space" data-bind="attr: { href: event().Icon1().CustomURL }, style: { display: event().Icon1().ShowOnToolTip() ? '' : 'none', float: 'left' }" target="_blank">
+             <img data-bind="attr: { src: event().Icon1().LargeIcon, alt: event().Icon1().IconDescription, title: event().Icon1().IconDescription }" style="display:block"/>
+            </a>
+            <a class="space pl5" data-bind="attr: { href: event().Icon2().CustomURL }, style: { display: event().Icon2().ShowOnToolTip() ? '' : 'none', float: 'left' }" target="_blank">
+             <img data-bind="attr: { src: event().Icon2().LargeIcon, alt: event().Icon2().IconDescription, title: event().Icon2().IconDescription }" style="display:block"/>
+            </a>
+           </div>
+           <div data-bind="text: event().Location().Name" style="clear:both;">
+           </div>
+          </div>
+          <div class="mc-color-4 font-size-small" data-bind="text: event().setEllipsis($data.event(), 'Description', 150, $element)">
+          </div>
+          <div class=" mc-color-3 font-size-small pointer tooltip-more" style="text-align:right" tabindex="0">
+           more
+          </div>
+          <div class="tooltip-arrow">
+          </div>
+         </div>
+        </div>
+        <!-- END - Block Event List - Grid-->
+       </div>
+       <!-- panel bottom -->
+       <!-- END - Block Event List -->
+      </div>
+      <div class="row centered" style="display:none">
+       <div class="twelve columns">
+        <div class="centered">
+         Footer
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- search box -->
+     <div class="search-box-modal mc-bg-color-5 mc-boxshadow mc-border-color-6 mc-border-style-solid mc-border-width-3px" style="display: none">
+     </div>
+     <!-- end search box -->
+     <!-- modal content -->
+     <div id="osx-modal-content">
+      <div class="pl6" id="osx-modal-title">
+       Announcements
+      </div>
+      <div class="close" tabindex="0">
+       <a class="simplemodal-close" href="#">
+        x
+       </a>
+      </div>
+      <div id="osx-modal-data">
+      </div>
+     </div>
+     <div id="basic-modal-content">
+      <div id="event-loader">
+      </div>
+     </div>
+     <!-- end modal content -->
+     <!-- filter buttons -->
+     <div class="fr filter-buttons" style="display: none">
+      <div class="button selected fl br-5 p5" style="line-height: 20px;" tabindex="0">
+       <div class="icon check fl">
+       </div>
+       Apply
+      </div>
+     </div>
+     <!-- end filter buttons -->
+     <script id="event-list-template" type="text/html">
+      <div class="box mc-border-style-solid mc-border-color-5 mc-border-width-3px br-10 fl mc-bg-color-1 space" data-bind="event:{mouseover:$parent.setTitleHover,mouseout:$parent.setTitleOut}">
+            <div class="row collapse mc-title-secondary br-t-7 event-func-list-header">
+                <div class="eleven column po">
+                    <div class="nine column">
+                        <div>
+                            <p class="pl6 middle fl" data-bind="text:$data.Title,style: { textDecoration: $data.Cancel()  ? 'line-through' : 'none', lineHeight: 'initial'}"></p>
+                        </div>
+                    </div>
+                    <div class="three column po">
+                        <span class="fr event-list-datetime-label" data-bind="text:$parent.formatDateTime($data, 'DateShort', $element)"></span>
+                    </div>
+                </div>
+                <div class="one column">
+                    <!-- if we use the KO keypress binding, it swallows all keypresses -->
+                    <div tabindex="0" title="Expand" 
+                         class="mr6 event-list-expand-event icon expand pointer fr"
+                         onkeydown="mc_keypressHandlerAsButton(event, this);"
+                         data-bind="event: {
+                            click:function() { return $parent.bindAccordion('box', $data, $element); },
+                        }">
+                    </div>
+                </div>
+            </div>
+
+            <div class="p10">
+                <div class="row">
+                    <!-- ko if: $data.EventImageURL() !== "" -->
+                    <div class="two column">
+                        <div class="fl mc-border-style-solid mc-border-color-5 mc-border-width-3px" style="max-width:100px">
+                            <img style="display:block" data-bind="attr: { src: $data.EventImageURL, alt: $data.ALTText, title: $data.ALTText }"/>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div data-bind="attr: { class: $data.EventImageURL() !== '' ? 'ten column font-size-normal' : 'twelve column font-size-normal' }">
+                        <div class="font-weight-bold event-list-datetime-label"><span data-bind="text:$data.isAllDay() ? 'All day event' : $parent.formatDateTime($data, 'TimeShort', $element)"></span><span data-bind="text:$data.Location.Name() != '' ? ', ' +  $data.Location.Name() : ''"></span></div>
+                        <div class="fl mt2" data-bind="style: { backgroundColor: $data.EventTypeColor(), display: $data.EventTypeColor() != '' ? '' : 'none',width: '10px', height: '10px' }, attr: { title: $data.EventTypeName() }"></div>
+                        <div class="fl ml2 font-weight-bold" data-bind="text:$data.EventTypeName()"></div>
+                        <br />
+                        <div class="event-list-description" data-bind="text:$parent.setEllipsis($data,'Description', 150, $element)"></div>
+                        <span tabindex="0" class="fr" style="display:none" onkeydown="mc_keypressHandlerAsButton(event, this);"><a>more</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Accordion-->
+        <div class="accordion box mc-border-style-solid mc-border-color-4 mc-border-width-3px br-10 fl mc-bg-color-1 space" style="display:none;"></div>
+        <!-- END Accordion-->
+     </script>
+     <!--ON event-list-description || data-bind="text:$parent.setEllipsis($data,'Description', 150, $element)" -->
+     <!-- END Event List Template-->
+     <script id="functional-list-template" type="text/html">
+      <!-- ko if: $data.Title().length > 0 -->
+        <div class="funcBox" style="clear:both">
+            <div class="row el-data-row">
+                <div class="three columns po"><div class="pl6"><span data-bind="text:$data.isAllDay() ? $parent.formatDateTime($data, 'DateShort', $element) + ' (All day)' : $parent.formatDateTime($data, 'DateTimeShort', $element)"></span></div></div>
+                <!--<div class="two columns po"><div class="pl6"><span data-bind="text:$parent.formatDateTime($data, 'TimeShort', $element)"></span></div></div>-->
+                <div class="four columns po font-weight-bold">
+                     <div class="pl4">
+                        <div class="fl mt2" data-bind="style: { backgroundColor: $data.EventTypeColor(), display: $data.EventTypeColor() != '' ? '' : 'none',width: '10px', height: '10px' }, attr: { title: $data.EventTypeName() }"></div>
+                        <div class="fl ml2 font-weight-bold" data-bind="text:$data.Title(), style: { textDecoration: $data.Cancel()  ? 'line-through' : 'none'}"></div>
+                    </div>
+                </div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.Location.Name()"></div></div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.CalendarName()"></div></div>
+                <div class="one columns po">
+                    <div class="fr pr6 expand-trigger show-small">
+                        <span class="show-small fl label mt2">Expand</span>
+                        <div class="icon expand pointer fl" data-bind="click:$parent.bindAccordion"></div>
+                    </div>
+                    <div tabindex="0" title="Expand" class="icon expand pointer expand-trigger-icon centered show-medium show-large" 
+                        data-bind="event: { click:function() { return $parent.bindAccordion('funcBox', $data, $element); }, keypress:function(data, event) { if(event.which === 13) {return $parent.bindAccordion('funcBox', $data, $element);} } }"></div>
+                        
+                </div>
+            </div>
+            <div class="row el-data-row-separator bg-color1">
+                <div class="two columns show-small show-medium show-large"></div>
+                <div class="six columns show-large show-medium"></div>
+                <div class="three columns  show-large show-medium"></div>
+                <div class="one columns show-large show-medium"></div>
+            </div>
+        </div>
+         <!-- Accordion-->
+         <div class="accordion searchBox mc-border-style-solid mc-border-color-4 mc-border-width-3px br-10 fl mc-bg-color-1 space mt5" style="display:none;min-width:100%"></div>
+        <!-- END Accordion-->
+        <!-- /ko -->
+     </script>
+     <script id="searchResults-list-template" type="text/html">
+      <!-- ko if: $data.Title().length > 0 -->
+        <div class="searchBox" style="clear:both">
+            <div class="row el-data-row">
+                <div class="three columns po"><div class="pl6"><span data-bind="text:$data.isAllDay() ? $parent.formatDateTime($data, 'DateShort', $element) + ' (All day)' : $parent.formatDateTime($data, 'DateTimeShort', $element)"></span></div></div>
+                <div class="four columns po font-weight-bold">
+                    <div class="pl4">
+                    <div class="fl mt2" data-bind="style: { backgroundColor: $data.EventTypeColor(), display: $data.EventTypeColor() != '' ? '' : 'none',width: '10px', height: '10px' }, attr: { title: $data.EventTypeName() }"></div>
+                    <div class="fl ml2 font-weight-bold" data-bind="text:$data.Title(), style: { textDecoration: $data.Cancel()  ? 'line-through' : 'none'}"></div>
+                    </div>
+                </div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.Location.Name()"></div></div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.CalendarName()"></div></div>
+                <div  class="one columns po">
+                    <div class="fr pr6 expand-trigger show-small">
+                        <span class="show-small fl label mt2">Expand</span>
+                        <div class="icon expand pointer fl" data-bind="click:function() { return $parent.bindAccordion('searchBox', $data, $element); }"></div>
+                    </div>
+                    <span id="searchResultsExpandText" data-bind="text:'Select To Expand {0}'.replace('{0}', $data.Title())"class="visuallyhidden"></span>
+                    <div tabindex="0" title="Expand" aria-labelledby="searchResultsExpandText" class="icon expand pointer expand-trigger-icon centered show-medium show-large" 
+                        data-bind="event: { click:function() { return $parent.bindAccordion('searchBox', $data, $element); }, keypress:function(data, event) { if(event.which === 13 || event.which === 32) {return $parent.bindAccordion('searchBox', $data, $element);} } }"></div>
+                </div>
+            </div>
+            <div class="row el-data-row-separator bg-color1">
+                <div class="two columns show-small show-medium show-large"></div>
+                <div class="six columns show-large show-medium"></div>
+                <div class="three columns  show-large show-medium"></div>
+                <div class="one columns show-large show-medium"></div>
+            </div>
+
+        </div>
+         <!-- Accordion-->
+         <div class="accordion searchBox mc-border-style-solid mc-border-color-4 mc-border-width-3px br-10 fl mc-bg-color-1 space mt5" style="display:none;min-width:100%"></div>
+        <!-- END Accordion-->
+        <!-- /ko -->
+     </script>
+     <script id="specialDate-list-template" type="text/html">
+      <!-- ko if: $data.Title().length > 0 -->
+        <div class="searchBox" style="clear:both">
+            <div class="row el-data-row">
+                <div class="two columns po"><div class="pl6"><span data-bind="text:$parent.formatDateTime($data, 'DateShort', $element)"></span></div></div>
+                <div class="four columns po font-weight-bold"><div class="fl pl6 font-weight-bold"  data-bind="text:$data.Title()"></div></div>
+                <div class="four columns po"><div class="pl6" data-bind="text:$data.Notes()"></div></div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.CalendarName()"></div></div>
+            </div>
+            <div class="row el-data-row-separator bg-color1">
+                <div class="two columns show-small show-medium show-large"></div>
+                <div class="six columns show-large show-medium"></div>
+                <div class="three columns  show-large show-medium"></div>
+                <div class="one columns show-large show-medium"></div>
+            </div>
+        </div>
+        <!-- /ko -->
+     </script>
+     <div class="center" id="PageLinksContainer">
+      <div class="centerRow">
+       <a href="CalendarManagers.aspx" id="ctl00_CalendarManagersLink" target="_blank">
+        Calendar Managers
+       </a>
+       <span id="linkSeperator">
+        |
+       </span>
+       <a href="RSSFeeds.aspx" id="ctl00_RssFeedsLink" target="_blank">
+        RSS Feeds
+       </a>
+      </div>
+     </div>
+     <div class="footer" id="FooterContainer">
+     </div>
+     <div class="callbackStatus" id="CallbackStatus" style="display: none; z-index: 2100">
+      <img alt="Loading" id="ctl00_LoadingImage" src="Images/Loading.gif" style="border-width:0px;" title="Loading"/>
+      <span id="ctl00_LoadingText">
+       Loading
+      </span>
+     </div>
+    </div>
+    <div class="br-10" id="helpTextDialog">
+     <div class="header pl6">
+      <span>
+       Help Text
+      </span>
+     </div>
+     <div class="p10" style="clear:both;">
+      <div class="fl pointer pr10 edit-Help-Link" style="display:none;">
+       <a>
+        Edit
+       </a>
+      </div>
+      <span class="helpTextMessage fl">
+      </span>
+     </div>
+    </div>
+    <script type="text/javascript">
+     //<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_Summary"));
+//]]>
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+var ctl00_Summary = document.all ? document.all["ctl00_Summary"] : document.getElementById("ctl00_Summary");
+ctl00_Summary.headertext = "The following errors occurred attempting to process your request:";
+var ctl00_DefaultHelp = document.all ? document.all["ctl00_DefaultHelp"] : document.getElementById("ctl00_DefaultHelp");
+ctl00_DefaultHelp.isHelpText = "True";
+//]]>
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+var showFeaturedEvents = true;var hidefilters = false;pageCount = "0";
+WebForm_InitCallback();mc_useHelpIcon = 0;//]]>
+    </script>
+   </form>
+  </div>
+  <script type="text/javascript">
+   function mc_keypressHandlerAsButton(e, that) {
+        var key = e.keyCode;
+        if (key === 13 || key === 32) {
+            $(that).trigger('click');
+        }
+    }
+  </script>
+  <script type="text/javascript">
+   _satellite.pageBottom();
+  </script>
+ </body>
+</html>

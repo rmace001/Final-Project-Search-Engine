@@ -1,0 +1,134 @@
+https://vdi.uwgb.edu/
+<!DOCTYPE html>
+<html id="ng-app" ng-app="com.vmware.vdi.client" ng-controller="AppCenterController">
+ <head>
+  <title>
+   VMware Horizon
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="VMware, Inc." name="author">
+   <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+   <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="white" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" id="viewport" name="viewport"/>
+    <link href="../favicon.ico" rel="shortcut icon"/>
+    <style type="text/css">
+     .ng-hide { display: none !important; }
+    </style>
+    <link href="style.app-htmlaccess.cd5f0c1e75288e4b4529.css" rel="stylesheet"/>
+   </meta>
+  </meta>
+ </head>
+ <body ng-class="{desktopBackground:$root.CLIENT_MODE == 'desktop',showMenuBar:isShowMenuBar}">
+  <div ng-class="{noDragable: isAppMaximized}" ng-controller="MenuBarCtrl" ng-if="isShowMenuBar">
+   <div class="title-area draggable-area ng-hide" id="chrome-menu-bar">
+    <div class="title-button">
+     <div class="window-button" id="closeAppWindow" ng-click="closeWindow()">
+     </div>
+     <div class="window-button" id="maximizeButton" ng-click="maximizeWindow()">
+     </div>
+     <div class="window-button" id="minimizeButton" ng-click="minimizeWindow()">
+     </div>
+    </div>
+   </div>
+  </div>
+  <div ng-class="{marginTopChrome:isShowMenuBar}">
+   <div data-role="page" id="browserWarning">
+    <noscript>
+     <style>
+      #canvas-container {display:none;}
+     </style>
+     <div class="ui-content-area login-bg">
+      <div class="container">
+       <div class="ui-center-panel ui-widget-home">
+        <div class="ui-pattern-logo">
+        </div>
+        <div class="ui-panel-content">
+         <div class="ui-browser-warning">
+          <p class="top-warning">
+           <span class="ui-warning-logo">
+           </span>
+           There is a problem with this web browser.
+          </p>
+          <p>
+           Please enable JavaScript in your browser. Or you could download the native Horizon Client.
+          </p>
+         </div>
+        </div>
+        <div class="ui-panel-footer">
+         <a class="btn btn-default" href="https://docs.vmware.com/en/VMware-Horizon-HTML-Access/4.8/html-access-user/GUID-20F0C9F6-7DE9-4D3D-8095-391C9F795F54.html" id="helpBtn" target="_blank" title="Help">
+          Help
+         </a>
+        </div>
+       </div>
+      </div>
+      <div class="bottom-logo">
+      </div>
+     </div>
+    </noscript>
+   </div>
+   <!-- launcher views -->
+   <div id="header-container" ng-if="$root.CLIENT_MODE == 'launcher'">
+    <div class="ui-strip ng-hide" ng-hide="header.striphide">
+    </div>
+    <launcher-header>
+    </launcher-header>
+   </div>
+   <div id="cert-view-container" ng-class="$root.showCertPage ? 'showCertWebview' : 'hideCertWebview'" ng-if="$root.isShowMenuBar">
+    <cert-frame>
+    </cert-frame>
+   </div>
+   <!-- views -->
+   <div class="ui-page ui-body {{transitionState}}" ng-if="$root.CLIENT_MODE !== null" ng-view="">
+   </div>
+   <canvas height="240" id="canvas" ng-if="$root.CLIENT_MODE == 'desktop'" style="display: none;" width="320">
+   </canvas>
+   <video autoplay="" height="0" id="video" ng-if="$root.CLIENT_MODE == 'desktop'" style="display: none;" width="0">
+   </video>
+   <div class="canvas-view-port" id="main" ng-if="$root.CLIENT_MODE == 'desktop'">
+    <!-- Main application canvas -->
+    <div id="canvas-container">
+    </div>
+   </div>
+   <!-- Dialog holder contains resources that are not visible by default -->
+   <div class="ng-hide" id="dialog-holder" ng-if="$root.CLIENT_MODE == 'desktop'">
+    <!-- About, gesture guide dialogs are dynamically added here -->
+    <!-- Load jQuery icons and touch icons upfront for iPad. -->
+    <div class="ui-widget-header" id="preLoadImage">
+     <div class="ui-icon jquery-ui-image">
+     </div>
+     <div class="ui-touch-feedback-icon">
+     </div>
+    </div>
+   </div>
+   <!-- Angular container -->
+   <div ng-if="$root.CLIENT_MODE == 'desktop'">
+    <div id="busy-overlay-container">
+     <ajax-busy-overlay>
+     </ajax-busy-overlay>
+    </div>
+    <div id="sidebar-container">
+     <sidebar>
+     </sidebar>
+    </div>
+    <div id="clipboard-container">
+     <clipboard>
+     </clipboard>
+    </div>
+    <div id="file-transfer-container">
+     <file-transfer-panel>
+     </file-transfer-panel>
+    </div>
+    <div id="print-frame-container">
+     <print-frame>
+     </print-frame>
+    </div>
+   </div>
+  </div>
+  <script src="vendor.cd5f0c1e75288e4b4529.js" type="text/javascript">
+  </script>
+  <script src="app-htmlaccess.cd5f0c1e75288e4b4529.js" type="text/javascript">
+  </script>
+ </body>
+</html>
+

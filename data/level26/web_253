@@ -1,0 +1,750 @@
+http://www.sga.vt.edu/
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html lang="en-US" class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html lang="en-US" class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en-US">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <!-- Google Chrome Frame for IE -->
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+  <!-- mobile meta -->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <link href="https://www.sga.vt.edu/xmlrpc.php" rel="pingback"/>
+   <!-- head functions -->
+   <title>
+    Student Government Association – Representing students on the Virginia Tech campus
+   </title>
+   <link href="//fonts.googleapis.com" rel="dns-prefetch">
+    <link href="//s.w.org" rel="dns-prefetch"/>
+    <link href="https://www.sga.vt.edu/feed/" rel="alternate" title="Student Government Association » Feed" type="application/rss+xml"/>
+    <link href="https://www.sga.vt.edu/comments/feed/" rel="alternate" title="Student Government Association » Comments Feed" type="application/rss+xml"/>
+    <script type="text/javascript">
+     window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/www.sga.vt.edu\/wp-includes\/js\/wp-emoji.js?ver=5.0.3","twemoji":"https:\/\/www.sga.vt.edu\/wp-includes\/js\/twemoji.js?ver=5.0.3"}};
+			( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	/*
+	 * Create a canvas element for testing native browser support
+	 * of emoji.
+	 */
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Check if two sets of Emoji characters render the same.
+	 *
+	 * @param set1 array Set of Emoji characters.
+	 * @param set2 array Set of Emoji characters.
+	 * @returns {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detect if the browser supports rendering emoji or flag emoji. Flag emoji are a single glyph
+	 * made of two characters, so some browsers (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param type {String} Whether to test for support of "flag" or "emoji".
+	 * @return {Boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 55356, 56826, 55356, 56819 ],
+					[ 55356, 56826, 8203, 55356, 56819 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447 ],
+					[ 55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447 ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * She's the hero Emoji deserves, but not the one it needs right now.
+				 *
+				 * To test for support, try to render a new emoji (female superhero),
+				 * then compare it to how it would look if the browser doesn't render it correctly
+				 * (superhero + female sign).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[55358, 56760, 9792, 65039],
+					[55358, 56760, 8203, 9792, 65039]
+				);
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+    </script>
+    <style type="text/css">
+     img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+    </style>
+    <link href="https://www.sga.vt.edu/wp-content/themes/valenti/plugins/login-with-ajax/widget.css?ver=3.1.7" id="login-with-ajax-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.sga.vt.edu/wp-includes/css/dist/block-library/style.css?ver=5.0.3" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.sga.vt.edu/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=5.2.1" id="js_composer_front-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://www.sga.vt.edu/wp-content/themes/valenti/library/css/style.min.css?ver=5.5.4" id="cb-main-stylesheet-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Gudea%3A400%2C700%2C400italic%7COpen+Sans%3A400%2C700%2C400italic&amp;subset=greek%2Cgreek-ext&amp;ver=5.5.4" id="cb-font-stylesheet-css" media="all" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+<link rel='stylesheet' id='cb-ie-only-css'  href='https://www.sga.vt.edu/wp-content/themes/valenti/library/css/ie.css?ver=5.5.4' type='text/css' media='all' />
+<![endif]-->
+    <script src="https://www.sga.vt.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript">
+    </script>
+    <script src="https://www.sga.vt.edu/wp-includes/js/jquery/jquery-migrate.js?ver=1.4.1" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+     /* <![CDATA[ */
+var LWA = {"ajaxurl":"https:\/\/www.sga.vt.edu\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+    </script>
+    <script src="https://www.sga.vt.edu/wp-content/themes/valenti/plugins/login-with-ajax/login-with-ajax.source.js?ver=3.1.7" type="text/javascript">
+    </script>
+    <script src="https://www.sga.vt.edu/wp-content/themes/valenti/library/js/modernizr.custom.min.js?ver=2.6.2" type="text/javascript">
+    </script>
+    <link href="https://www.sga.vt.edu/wp-json/" rel="https://api.w.org/"/>
+    <link href="https://www.sga.vt.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+    <link href="https://www.sga.vt.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+    <meta content="WordPress 5.0.3" name="generator"/>
+    <link href="https://www.sga.vt.edu/" rel="canonical"/>
+    <link href="https://www.sga.vt.edu/" rel="shortlink"/>
+    <link href="https://www.sga.vt.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.sga.vt.edu%2F" rel="alternate" type="application/json+oembed"/>
+    <link href="https://www.sga.vt.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.sga.vt.edu%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+    <style>
+     .cb-base-color, .cb-overlay-stars .fa-star, #cb-vote .fa-star, .cb-review-box .cb-score-box, .bbp-submit-wrapper button, .bbp-submit-wrapper button:visited, .buddypress .cb-cat-header #cb-cat-title a,  .buddypress .cb-cat-header #cb-cat-title a:visited, .woocommerce .star-rating:before, .woocommerce-page .star-rating:before, .woocommerce .star-rating span, .woocommerce-page .star-rating span, .woocommerce .stars a {
+            color:#891b38;
+        }#cb-search-modal .cb-header, .cb-join-modal .cb-header, .lwa .cb-header, .cb-review-box .cb-score-box, .bbp-submit-wrapper button, #buddypress button:hover, #buddypress a.button:hover, #buddypress a.button:focus, #buddypress input[type=submit]:hover, #buddypress input[type=button]:hover, #buddypress input[type=reset]:hover, #buddypress ul.button-nav li a:hover, #buddypress ul.button-nav li.current a, #buddypress div.generic-button a:hover, #buddypress .comment-reply-link:hover, #buddypress .activity-list li.load-more:hover, #buddypress #groups-list .generic-button a:hover {
+            border-color: #891b38;
+        }.cb-sidebar-widget .cb-sidebar-widget-title, .cb-multi-widget .tabbernav .tabberactive, .cb-author-page .cb-author-details .cb-meta .cb-author-page-contact, .cb-about-page .cb-author-line .cb-author-details .cb-meta .cb-author-page-contact, .cb-page-header, .cb-404-header, .cb-cat-header, #cb-footer #cb-widgets .cb-footer-widget-title span, #wp-calendar caption, .cb-tabs ul .current, .cb-tabs ul .ui-state-active, #bbpress-forums li.bbp-header, #buddypress #members-list .cb-member-list-box .item .item-title, #buddypress div.item-list-tabs ul li.selected, #buddypress div.item-list-tabs ul li.current, #buddypress .item-list-tabs ul li:hover, .woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+            border-bottom-color: #891b38 ;
+        }#cb-main-menu .current-post-ancestor, #cb-main-menu .current-menu-item, #cb-main-menu .current-menu-ancestor, #cb-main-menu .current-post-parent, #cb-main-menu .current-menu-parent, #cb-main-menu .current_page_item, #cb-main-menu .current-page-ancestor, #cb-main-menu .current-category-ancestor, .cb-review-box .cb-bar .cb-overlay span, #cb-accent-color, .cb-highlight, #buddypress button:hover, #buddypress a.button:hover, #buddypress a.button:focus, #buddypress input[type=submit]:hover, #buddypress input[type=button]:hover, #buddypress input[type=reset]:hover, #buddypress ul.button-nav li a:hover, #buddypress ul.button-nav li.current a, #buddypress div.generic-button a:hover, #buddypress .comment-reply-link:hover, #buddypress .activity-list li.load-more:hover, #buddypress #groups-list .generic-button a:hover {
+            background-color: #891b38;
+        }
+    </style>
+    <style type="text/css">
+     body, #respond { font-family: 'Open Sans', sans-serif; }
+                                                 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, #cb-nav-bar #cb-main-menu ul li > a, .cb-author-posts-count, .cb-author-title, .cb-author-position, .search  .s, .cb-review-box .cb-bar, .cb-review-box .cb-score-box, .cb-review-box .cb-title, #cb-review-title, .cb-title-subtle, #cb-top-menu a, .tabbernav, #cb-next-link a, #cb-previous-link a, .cb-review-ext-box .cb-score, .tipper-positioner, .cb-caption, .cb-button, #wp-calendar caption, .forum-titles, .bbp-submit-wrapper button, #bbpress-forums li.bbp-header, #bbpress-forums fieldset.bbp-form .bbp-the-content-wrapper input, #bbpress-forums .bbp-forum-title, #bbpress-forums .bbp-topic-permalink, .widget_display_stats dl dt, .cb-lwa-profile .cb-block, #buddypress #members-list .cb-member-list-box .item .item-title, #buddypress div.item-list-tabs ul li, #buddypress .activity-list li.load-more, #buddypress a.activity-time-since, #buddypress ul#groups-list li div.meta, .widget.buddypress div.item-options, .cb-activity-stream #buddypress .activity-header .time-since, .cb-font-header, .woocommerce table.shop_table th, .woocommerce-page table.shop_table th, .cb-infinite-scroll a, .cb-no-more-posts { font-family:'Gudea', sans-serif; }
+    </style>
+    <style type="text/css">
+     .header { background-color: #822941; }
+    </style>
+    <!-- end custom css -->
+    <meta content="Powered by Visual Composer - drag and drop page builder for WordPress." name="generator"/>
+    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.sga.vt.edu/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]-->
+    <style>
+     #cb-nav-bar #cb-main-menu .main-nav .menu-item-803:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-803:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-803 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-803 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-803 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-485:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-485:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-485 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-485 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-485 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-530:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-530:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-530 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-530 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-530 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-546:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-546:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-546 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-546 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-546 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-531:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-531:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-531 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-531 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-531 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-541:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-541:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-541 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-541 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-541 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-309:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-309:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-309 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-309 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-309 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-603:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-603:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-603 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-603 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-603 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-824:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-824:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-824 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-824 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-824 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-643:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-643:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-643 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-643 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-643 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-810:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-810:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-810 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-810 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-810 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-931:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-931:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-931 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-931 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-931 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+#cb-nav-bar #cb-main-menu .main-nav .menu-item-801:hover,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-801:focus,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-801 .cb-sub-menu li .cb-grandchild-menu,
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-801 .cb-sub-menu { background:#891b38!important; }
+                                         #cb-nav-bar #cb-main-menu .main-nav .menu-item-801 .cb-mega-menu .cb-sub-menu li a { border-bottom-color:#891b38!important; }
+    </style>
+    <link href="https://www.sga.vt.edu/wp-content/uploads/2015/07/cropped-SGA-LOGO-32x32.jpg" rel="icon" sizes="32x32"/>
+    <link href="https://www.sga.vt.edu/wp-content/uploads/2015/07/cropped-SGA-LOGO-192x192.jpg" rel="icon" sizes="192x192"/>
+    <link href="https://www.sga.vt.edu/wp-content/uploads/2015/07/cropped-SGA-LOGO-180x180.jpg" rel="apple-touch-icon-precomposed"/>
+    <meta content="https://www.sga.vt.edu/wp-content/uploads/2015/07/cropped-SGA-LOGO-270x270.jpg" name="msapplication-TileImage"/>
+    <style data-type="vc_shortcodes-custom-css" type="text/css">
+     .vc_custom_1543528435470{margin-top: 0px !important;margin-bottom: 0px !important;border-top-width: 0px !important;border-bottom-width: 0px !important;padding-top: 0px !important;padding-bottom: 0px !important;background: #c64600 url(http://www.sga.vt.edu/wp-content/uploads/2015/08/diagmonds-light.png?id=17) !important;background-position: 0 0 !important;background-repeat: repeat !important;}.vc_custom_1543528456539{background-color: #c64600 !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1502309742352{border-right-width: 2px !important;padding-right: 2px !important;border-right-color: #ffffff !important;}
+    </style>
+    <noscript>
+     <style type="text/css">
+      .wpb_animate_when_almost_visible { opacity: 1; }
+     </style>
+    </noscript>
+    <!-- end head functions-->
+   </link>
+  </meta>
+ </head>
+ <body class="home page-template page-template-page-valenti-builder page-template-page-valenti-builder-php page page-id-6 cb-sticky-mm cb-mod-zoom cb-layout-fw cb-m-sticky cb-sb-nar-embed-fw cb-cat-t-dark cb-mobm-light cb-gs-style-a cb-modal-dark cb-sidebar-right cb-unboxed cb-fis-type- cb-fis-tl-default wpb-js-composer js-comp-ver-5.2.1 vc_responsive">
+  <div id="cb-outer-container">
+   <!-- Small-Screen Menu -->
+   <div class="clearfix cb-light-menu" id="cb-mob-menu">
+    <a class="cb-link" href="#" id="cb-mob-close">
+     <i class="fa cb-times">
+     </i>
+    </a>
+    <div class="cb-mob-menu-wrap">
+     <ul class="cb-small-nav">
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-803">
+       <a href="https://www.sga.vt.edu/">
+        Home
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-485">
+       <a href="https://www.sga.vt.edu/executive/">
+        Executive
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children cb-has-children menu-item-530">
+       <a href="https://www.sga.vt.edu/legislative/">
+        Legislative
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-546">
+         <a href="https://www.sga.vt.edu/legislation/">
+          Legislation
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-531">
+         <a href="https://www.sga.vt.edu/legislative/meet-college-representatives/">
+          Meet Your College Representatives
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-541">
+         <a href="https://www.sga.vt.edu/at-large-representatives/">
+          Meet Your At- Large Representatives
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-309">
+         <a href="https://www.sga.vt.edu/legislative/general-assembly-meetings/">
+          General Assembly Meetings
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-603">
+       <a href="https://www.sga.vt.edu/judicial/">
+        Judicial
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-824">
+       <a href="https://www.sga.vt.edu/elections/">
+        Elections
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children cb-has-children menu-item-643">
+       <a href="https://www.sga.vt.edu/flex/">
+        FLEX
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-810">
+         <a href="https://www.sga.vt.edu/flex/about/">
+          About
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-931">
+       <a href="https://www.sga.vt.edu/opportunities/">
+        Opportunities to Get Involved
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-801">
+       <a href="https://www.sga.vt.edu/about-us/">
+        About Us
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- /Small-Screen Menu -->
+   <div class="cb-s-modal cb-modal cb-light-menu" id="cb-search-modal">
+    <div class="cb-search-box">
+     <div class="cb-header">
+      <div class="cb-title">
+       Search
+      </div>
+      <div class="cb-close">
+       <span class="cb-close-modal cb-close-m">
+        <i class="fa fa-times">
+        </i>
+       </span>
+      </div>
+     </div>
+     <form action="https://www.sga.vt.edu/" class="cb-search" method="get" role="search">
+      <input class="cb-search-field" name="s" placeholder="" title="" type="text" value=""/>
+      <button class="cb-search-submit" type="submit" value="">
+       <i class="fa fa-search">
+       </i>
+      </button>
+     </form>
+    </div>
+   </div>
+   <div class="clearfix" id="cb-container">
+    <header class="header clearfix cb-logo-center">
+     <div class="wrap clearfix" id="cb-logo-box">
+      <div id="logo">
+       <a href="https://www.sga.vt.edu">
+        <img alt="Student Government Association logo" data-at2x="http://www.sga.vt.edu/wp-content/uploads/2015/08/sgaheader-1.png" src="http://www.sga.vt.edu/wp-content/uploads/2015/08/sgaheader-1.png"/>
+       </a>
+      </div>
+     </div>
+     <nav class="clearfix cb-light-menu cb-full-width" id="cb-nav-bar">
+      <div class="cb-nav-bar-wrap clearfix wrap" id="cb-main-menu">
+       <ul class="nav main-nav wrap clearfix">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-803" id="menu-item-803">
+         <a href="https://www.sga.vt.edu/">
+          Home
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-485" id="menu-item-485">
+         <a href="https://www.sga.vt.edu/executive/">
+          Executive
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children cb-has-children menu-item-530" id="menu-item-530">
+         <a href="https://www.sga.vt.edu/legislative/">
+          Legislative
+         </a>
+         <div class="cb-links-menu">
+          <ul class="cb-sub-menu">
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-546" id="menu-item-546">
+            <a class="cb-c-l" data-cb-c="543" href="https://www.sga.vt.edu/legislation/">
+             Legislation
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-531" id="menu-item-531">
+            <a class="cb-c-l" data-cb-c="513" href="https://www.sga.vt.edu/legislative/meet-college-representatives/">
+             Meet Your College Representatives
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-541" id="menu-item-541">
+            <a class="cb-c-l" data-cb-c="538" href="https://www.sga.vt.edu/at-large-representatives/">
+             Meet Your At- Large Representatives
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-309" id="menu-item-309">
+            <a class="cb-c-l" data-cb-c="299" href="https://www.sga.vt.edu/legislative/general-assembly-meetings/">
+             General Assembly Meetings
+            </a>
+           </li>
+          </ul>
+         </div>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-603" id="menu-item-603">
+         <a href="https://www.sga.vt.edu/judicial/">
+          Judicial
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-824" id="menu-item-824">
+         <a href="https://www.sga.vt.edu/elections/">
+          Elections
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children cb-has-children menu-item-643" id="menu-item-643">
+         <a href="https://www.sga.vt.edu/flex/">
+          FLEX
+         </a>
+         <div class="cb-links-menu">
+          <ul class="cb-sub-menu">
+           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-810" id="menu-item-810">
+            <a class="cb-c-l" data-cb-c="60" href="https://www.sga.vt.edu/flex/about/">
+             About
+            </a>
+           </li>
+          </ul>
+         </div>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-931" id="menu-item-931">
+         <a href="https://www.sga.vt.edu/opportunities/">
+          Opportunities to Get Involved
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-801" id="menu-item-801">
+         <a href="https://www.sga.vt.edu/about-us/">
+          About Us
+         </a>
+        </li>
+        <li class="cb-icons">
+         <ul id="cb-icons-wrap">
+          <li class="cb-icon-search cb-menu-icon">
+           <a class="cb-tip-bot" data-cb-tip="Search" href="#" id="cb-s-trigger">
+            <i class="fa fa-search">
+            </i>
+           </a>
+          </li>
+         </ul>
+        </li>
+       </ul>
+      </div>
+     </nav>
+     <!-- Secondary Menu -->
+     <div class="clearfix cb-light-menu cb-hidden" id="cb-top-menu">
+      <div class="wrap cb-top-menu-wrap clearfix">
+       <div class="cb-left-side cb-mob">
+        <a href="#" id="cb-mob-open">
+         <i class="fa fa-bars">
+         </i>
+        </a>
+       </div>
+       <div class="cb-mob-right">
+        <a class="cb-small-menu-icons cb-small-menu-search" href="#" id="cb-s-trigger-sm">
+         <i class="fa fa-search">
+         </i>
+        </a>
+       </div>
+      </div>
+     </div>
+     <!-- /Secondary Menu -->
+     <a class="cb-base-color" href="#" id="cb-to-top">
+      <i class="fa fa-long-arrow-up">
+      </i>
+     </a>
+    </header>
+    <!-- end header -->
+    <div class="wrap cb-pb clearfix" id="cb-content">
+     <div class="cb-fw-bs clearfix" id="main" role="main">
+      <article class="clearfix post-6 page type-page status-publish cb-entry-content" id="post-6">
+       <div class="vc_row wpb_row vc_row-fluid vc_custom_1543528435470 vc_row-has-fill">
+        <div class="wpb_column vc_column_container vc_col-sm-12">
+         <div class="vc_column-inner ">
+          <div class="wpb_wrapper">
+           <div class="wpb_text_column wpb_content_element ">
+            <div class="wpb_wrapper">
+             <h2 style="text-align: center;">
+              <span style="color: #ffffff;">
+               <span class="s1">
+                We’re your Student Government.  We’re a group of students passionate about Virginia Tech and more importantly, increasing your voice as a student.
+               </span>
+              </span>
+             </h2>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="vc_row wpb_row vc_row-fluid">
+        <div class="wpb_column vc_column_container vc_col-sm-12">
+         <div class="vc_column-inner ">
+          <div class="wpb_wrapper">
+           <div class="vc_separator wpb_content_element vc_separator_align_center vc_sep_width_100 vc_sep_border_width_9 vc_sep_pos_align_center vc_sep_color_grey vc_separator-has-text">
+            <span class="vc_sep_holder vc_sep_holder_l">
+             <span class="vc_sep_line">
+             </span>
+            </span>
+            <h4>
+             OUR MISSION
+            </h4>
+            <span class="vc_sep_holder vc_sep_holder_r">
+             <span class="vc_sep_line">
+             </span>
+            </span>
+           </div>
+           <div class="wpb_text_column wpb_content_element ">
+            <div class="wpb_wrapper">
+             <blockquote>
+              <p>
+               <em>
+                We, the undergraduate members of the Student Body of Virginia Polytechnic Institute and State University, desiring:
+               </em>
+              </p>
+              <p>
+               <em>
+                To provide an effective organization for the administration of student activities
+               </em>
+               <br/>
+               <em>
+                To promote academic freedom and academic responsibility
+               </em>
+               <br/>
+               <em>
+                To establish and protect student rights
+               </em>
+               <br/>
+               <em>
+                To improve the quality of student life
+               </em>
+               <br/>
+               <em>
+                To unify the student voice
+               </em>
+               <br/>
+               <em>
+                To foster awareness of the student’s position in the campus, local, state, and national communities
+               </em>
+               <br/>
+               <em>
+                To provide a liaison between the student body, faculty, and administration of the university.
+               </em>
+              </p>
+              <p>
+               <em>
+                We recognize that a student organization embodying these principles is necessary in the building of a great university.
+               </em>
+              </p>
+             </blockquote>
+             <p>
+              -Excerpt from the Constitution of the Student Government Association
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="vc_row wpb_row vc_row-fluid vc_custom_1543528456539 vc_row-has-fill">
+        <div class="wpb_column vc_column_container vc_col-sm-4">
+         <div class="vc_column-inner ">
+          <div class="wpb_wrapper">
+           <div class="wpb_single_image wpb_content_element vc_align_left">
+            <figure class="wpb_wrapper vc_figure">
+             <div class="vc_single_image-wrapper vc_box_border_grey">
+              <img alt="" class="vc_single_image-img attachment-medium" height="279" sizes="(max-width: 300px) 100vw, 300px" src="https://www.sga.vt.edu/wp-content/uploads/2015/08/structure-300x279.png" srcset="https://www.sga.vt.edu/wp-content/uploads/2015/08/structure-300x279.png 300w, https://www.sga.vt.edu/wp-content/uploads/2015/08/structure.png 424w" width="300"/>
+             </div>
+            </figure>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="wpb_column vc_column_container vc_col-sm-8">
+         <div class="vc_column-inner ">
+          <div class="wpb_wrapper">
+           <div class="wpb_text_column wpb_content_element vc_custom_1502309742352">
+            <div class="wpb_wrapper">
+             <p style="text-align: center;">
+              <span style="color: #ffffff;">
+               The Student Government Association was established by the Student Body of Virginia Polytechnic Institute and State University in order to provide an effective organization for the administration of student activities, to promote academic freedom and academic responsibility, to establish and protect student rights, to foster awareness of the student’s position in the campus, local, state, and national communities, and to provide a liaison between the student body, faculty, and administration.
+              </span>
+             </p>
+             <p style="text-align: center;">
+              <span style="color: #ffffff;">
+               The Membership of the Student Government Association consists of all enrolled undergraduate students who have paid the student Activities Fee at Virginia Polytechnic Institute and State University.
+              </span>
+             </p>
+             <p style="text-align: center;">
+              <span style="color: #ffffff;">
+               The Student Government Association is an official Student Organization within the University. The association is derived from the University Commission System, specifically the Commission on Student Affairs. We work closely with various administrative groups within the University to provide a forum for students to voice their opinion to the school. The Student Government plays a key role in various organizations on campus, such as The Big Event and Relay for Life.
+              </span>
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </article>
+     </div>
+    </div>
+    <footer class="" id="cb-footer" role="contentinfo">
+     <div class="cb-footer-f cb-footer-wrap wrap clearfix cb-fw" id="cb-widgets">
+     </div>
+     <div class="cb-footer-lower clearfix">
+      <div class="wrap clearfix">
+       <div class="cb-copyright">
+        Student Government Association of Virginia Tech 
+Squires Student Center, Suite 123
+Blacksburg, VA 24061
+540-231-8631
+sga@vt.edu
+       </div>
+      </div>
+     </div>
+    </footer>
+    <!-- end footer -->
+   </div>
+   <!-- end #cb-container -->
+  </div>
+  <!-- end #cb-outer-container -->
+  <span id="cb-overlay">
+  </span>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+var cbExt = {"cbSS":"on","cbLb":"on"};
+/* ]]> */
+  </script>
+  <script src="https://www.sga.vt.edu/wp-content/themes/valenti/library/js/jquery.ext.js?ver=5.5.4" type="text/javascript">
+  </script>
+  <script src="https://www.sga.vt.edu/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4" type="text/javascript">
+  </script>
+  <script src="https://www.sga.vt.edu/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4" type="text/javascript">
+  </script>
+  <script src="https://www.sga.vt.edu/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+var cbScripts = {"cbUrl":"https:\/\/www.sga.vt.edu\/wp-admin\/admin-ajax.php","cbPostID":"6","cbSlider":["600",true,"7000"]};
+/* ]]> */
+  </script>
+  <script src="https://www.sga.vt.edu/wp-content/themes/valenti/library/js/cb-scripts.min.js?ver=5.5.4" type="text/javascript">
+  </script>
+  <script src="https://www.sga.vt.edu/wp-includes/js/wp-embed.js?ver=5.0.3" type="text/javascript">
+  </script>
+  <script src="https://www.sga.vt.edu/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=5.2.1" type="text/javascript">
+  </script>
+ </body>
+</html>
+<!-- The End. what a ride! -->
+

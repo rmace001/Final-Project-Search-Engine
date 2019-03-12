@@ -1,0 +1,762 @@
+http://library.uark.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <link href="/scripts/ProStyles.css" rel="stylesheet" type="text/css"/>
+  <link href="/screens/styles.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/elcontent.js" type="text/javascript">
+  </script>
+  <script src="/scripts/common.js" type="text/javascript">
+  </script>
+  <script src="/scripts/webbridge.js" type="text/javascript">
+  </script>
+  <!-- Rel 2009B Example Set -->
+  <!-- Updated: 09 June 2010; revised 1AM 7.21.11 -->
+  <title>
+   University of Arkansas Library Catalog
+  </title>
+  <script>
+   /* <![CDATA[ */
+function iiiSearchValidate() {
+	try{
+	  if (document.getElementById('search').searcharg.value==null||document.getElementById('search').searcharg.value=="") {
+		return false;
+		}
+	}
+	catch(err) {
+	}
+  return true;
+}
+
+function iiiDoSubmit_1()
+{
+//getFormHandleForm() is in common.js
+var obj = getFormHandleForm(1);
+if(iiiSearchValidate()){
+obj.submit();
+}
+}
+/* ]]> */
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+  </script>
+  <script src="/screens/bibdisplay.js">
+  </script>
+  <style>
+   .catalog-alert {width:75%; border:2px; border-style:dotted; border-color: #F2F2F4; margin-top: 10px; padding: 5px; align-content: center;}
+  </style>
+ </head>
+ <body class="mainmenu">
+  <!-- begin toplogo.html file -->
+  <!-- Rel 2009B Example Set -->
+  <!-- Updated: 06 Oct 2010 -->
+  <!-- Customised AM 6.27.11 -->
+  <!--added stackmap  BJ 7.20.12-->
+  <!-- Altered DH 8.24.15 -->
+  <header>
+   <div id="skip">
+    <a href="#content">
+     Skip navigation
+    </a>
+   </div>
+   <div id="header-bg">
+   </div>
+   <div class="container" id="opener" role="banner">
+    <a class="brand" href="http://www.uark.edu/">
+     University of Arkansas
+    </a>
+    <span id="site-heading">
+     <a class="siteName" href="http://libraries.uark.edu/" title="Click for Libraries Home">
+      University Libraries
+     </a>
+     <span>
+      <a href="/">
+       Catalog
+      </a>
+     </span>
+    </span>
+   </div>
+   <nav class="navbar navbar-default" id="main-nav" role="navigation">
+    <div class="container">
+     <div class="navbar-header">
+      <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       Menu
+       <i class="fa fa-chevron-down fa-lg">
+       </i>
+      </button>
+     </div>
+     <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav" id="mainnav">
+       <li>
+        <a class="myaccount" href="/patroninfo/">
+         My Library Account
+        </a>
+       </li>
+       <li>
+        <a class="illiad" href="//libraries.uark.edu/ill/">
+         Interlibrary Loan
+        </a>
+       </li>
+       <li>
+        <a class="dibs" href="//libraries.uark.edu/rooms/">
+         Reserve a Room
+        </a>
+       </li>
+       <li>
+        <a class="libguides" href="http://uark.libguides.com/">
+         Research Guides
+        </a>
+       </li>
+       <li>
+        <a class="help" href="//libraries.uark.edu/help/">
+         Help
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </nav>
+  </header>
+  <div class="alert alert-info" id="not-loggedin">
+   <div class="container">
+    <div id="help">
+     <a href="/screens/help.html">
+      Catalog Help
+     </a>
+    </div>
+    <form class="form-inline" id="searchoptions" name="searchoptions">
+     <select class="form-control" name="searchby" onchange="window.location=document.searchoptions.searchby.options[document.searchoptions.searchby.selectedIndex].value">
+      <option selected="" value="">
+       Search by...
+      </option>
+      <option value="/search/Y">
+       Keyword
+      </option>
+      <option value="/search/X">
+       Advanced Keyword
+      </option>
+      <option value="/search/t">
+       Title
+      </option>
+      <option value="/search/s">
+       Journal Title
+      </option>
+      <option value="/search/y">
+       Database Name
+      </option>
+      <option value="/search/a">
+       Author
+      </option>
+      <option value="/search/d">
+       Subject
+      </option>
+      <option value="/search/y">
+       Database Subject
+      </option>
+      <option value="/search/q">
+       Genre and Form
+      </option>
+      <option value="/search/r">
+       Course Reserves
+      </option>
+      <option value="/screens/helpaudio.html">
+       Audio
+      </option>
+      <option value="/screens/helpvideo.html">
+       Video
+      </option>
+      <option value="/screens/helperesources.html">
+       eBooks &amp; eJournals
+      </option>
+      <option value="/screens/helpmanuscripts.html">
+       Manuscripts
+      </option>
+      <option value="/screens/helpscores.html">
+       Musical Scores
+      </option>
+      <option value="/screens/helpdissertations.html">
+       Theses &amp; Dissertations
+      </option>
+      <option value="/search/i">
+       ISSN / ISBN
+      </option>
+      <option value="/search/c">
+       Call Number
+      </option>
+      <option value="/search/z">
+       Local Call Number
+      </option>
+      <option value="/search/m">
+       Dewey Decimal #
+      </option>
+      <option value="/search/g">
+       Government Documents #
+      </option>
+      <option value="/search/j">
+       Su Docs #
+      </option>
+      <option value="/search/o">
+       OCLC #
+      </option>
+      <option value="/search/,">
+       Record #
+      </option>
+      <option value="/">
+       Start Over
+      </option>
+     </select>
+    </form>
+   </div>
+  </div>
+  <!--not-loggedin-->
+  <div class="container" id="main-container">
+   <div id="content">
+    <!--end toplogo.html-->
+    <!--this is customized <screens/mainmenu.html>-->
+    <h1>
+     Search the Library Catalog
+    </h1>
+    <form action="/search/" class="form-inline mainmenu" id="search" method="get" name="search" onsubmit="return iiiSearchValidate();">
+     <input id="iiiFormHandle_1" type="hidden"/>
+     <div class="form-group">
+      <label class="accessibleAddInfo" for="searchtype">
+       Search Type
+      </label>
+      <select class="form-control" id="searchtype" name="searchtype">
+       <option selected="selected" value="X">
+        Keyword
+       </option>
+       <option value="t">
+        Title
+       </option>
+       <option value="s">
+        Journal Title
+       </option>
+       <option value="y">
+        Database Name
+       </option>
+       <option value="a">
+        Author
+       </option>
+       <option value="d">
+        Subject
+       </option>
+       <option value="h">
+        Database Subject
+       </option>
+       <option value="q">
+        Genre and Form
+       </option>
+       <option value="i">
+        ISSN / ISBN
+       </option>
+       <option value="r">
+        Course
+       </option>
+       <option value="p">
+        Instructor
+       </option>
+       <option value="c">
+        LC Call Number
+       </option>
+       <option value="z">
+        Local Call Number
+       </option>
+       <option value="m">
+        Dewey Decimal #
+       </option>
+       <option value="g">
+        Government Documents #
+       </option>
+       <option value="j">
+        Su Docs #
+       </option>
+       <option value="o">
+        OCLC #
+       </option>
+      </select>
+     </div>
+     <input id="SORT" name="SORT" type="hidden" value="D"/>
+     <div class="form-group">
+      <label class="accessibleAddInfo" for="searcharg">
+       Search term
+      </label>
+      <input autofocus="" class="form-control" id="searcharg" maxlength="75" name="searcharg"/>
+     </div>
+     <div class="form-group">
+      <label class="accessibleAddInfo" for="searchscope">
+       Collection
+      </label>
+      <select class="form-control" id="searchscope" name="searchscope">
+       <option selected="selected" value="4">
+        All UofA Campus Libraries
+       </option>
+       <option value="5">
+        E-Journals and E-Books
+       </option>
+       <option value="15">
+        Audio
+       </option>
+       <option value="16">
+        Video
+       </option>
+       <option value="14">
+        UA Theses and Dissertations
+       </option>
+       <option value="13">
+        Special Collections
+       </option>
+       <option value="9">
+        Children's Collection
+       </option>
+       <option value="3">
+        Law Library
+       </option>
+       <option value="2">
+        Crystal Bridges Library
+       </option>
+       <option value="0">
+        All Libraries
+       </option>
+      </select>
+     </div>
+     <!--{scope}-->
+     <!--{submit}-->
+     <input onclick="iiiDoSubmit_1();" type="submit" value="Search"/>
+    </form>
+    <div class="row" id="more">
+     <div class="col-md-6">
+      <p>
+       <a href="/search%7ES4/X">
+        Advanced Keyword Search
+       </a>
+      </p>
+     </div>
+     <div class="col-md-6">
+      <select aria-label="Special Format Options" class="form-control" id="more-options" name="more-options">
+       <option value="">
+        Special Formats
+       </option>
+       <option value="/screens/helpaudio.html">
+        Audio
+       </option>
+       <option value="/screens/helpvideo.html">
+        Video
+       </option>
+       <option value="/screens/helperesources.html">
+        eBooks &amp; eJournals
+       </option>
+       <option value="/screens/helpmanuscripts.html">
+        Manuscripts
+       </option>
+       <option value="/screens/helpscores.html">
+        Musical Scores
+       </option>
+       <option value="/screens/helpdissertations.html">
+        Theses &amp; Dissertations
+       </option>
+      </select>
+     </div>
+    </div>
+    <div class="alert alert-warning" role="alert" style="margin-top:20px;">
+     <h2>
+      <i aria-hidden="true" class="fa fa-mobile">
+      </i>
+      Sign up for Text Message Notices
+     </h2>
+     <p>
+      Opt in to recieve hold pick up, overdue, and renewal information through our
+      <a href="https://libraries.uark.edu/circulation/textmessage.asp">
+       Text Message Service
+      </a>
+      .
+     </p>
+     <h2>
+      <i aria-hidden="true" class="fa fa-exclamation-triangle">
+      </i>
+      Requesting from the Library Annex
+     </h2>
+     <p>
+      We're delivering from the Library Annex several times a day. See the instructions for
+      <a href="https://uark.libanswers.com/faq/235202">
+       requesting an entire book or an article or chapter scan
+      </a>
+      .
+     </p>
+    </div>
+    <!-- begin botlogo.html file -->
+   </div>
+   <!-- /#content -->
+  </div>
+  <!-- /#main-container -->
+  <script src="/screens/stackview/jquery.stackview.js" type="text/javascript">
+  </script>
+  <div id="superfoot">
+   <div class="container">
+    <div class="row">
+     <div class="col-sm-3" id="footerLH">
+      <address>
+       University of Arkansas Libraries
+       <br/>
+       365 N. McIlroy Ave.
+       <br/>
+       Fayetteville, AR 72701-4002
+      </address>
+     </div>
+     <div class="col-sm-6" id="footercenter">
+      <ul class="nav clearfix list-unstyled" id="social-stack-libraries">
+       <li>
+        <a href="https://instagram.com/uarklibraries" title="Instagram">
+         <i class="fab fa-instagram">
+         </i>
+         <span class="sr-only">
+          See us on Instagram
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://twitter.com/UARKLibraries" title="Twitter">
+         <i class="fab fa-twitter">
+         </i>
+         <span class="sr-only">
+          Follow us on Twitter
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.facebook.com/UARKLibraries" title="Facebook">
+         <i class="fab fa-facebook-f">
+         </i>
+         <span class="sr-only">
+          Like us on Facebook
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://uark.libguides.com/">
+         <i class="fas fa-sun" title="Research Guides">
+         </i>
+         <span class="sr-only">
+          Research Guides
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://uark.libguides.com/citationmanagmenttools/" title="Citation Managers">
+         <i class="fas fa-quote-left" title="Citation Managers">
+         </i>
+         <span class="sr-only">
+          Citation Managers
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.pinterest.com/uarklibraries/" title="Pinterest">
+         <i class="fab fa-pinterest">
+         </i>
+         <span class="sr-only">
+          Libraries on Pinterest
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://uark.libguides.com/instructionalvideo" title="Instructional Videos">
+         <i class="fas fa-video">
+         </i>
+         <span class="sr-only">
+          Instructional Videos and Tutorials
+         </span>
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-sm-3" id="footerRH">
+      <ul class="list-unstyled">
+       <li>
+        Phone: 479-575-4104
+       </li>
+       <li>
+        Toll-free: 866-818-8115
+       </li>
+       <li>
+        Fax: 479-575-6656
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="modal fade" id="modal" role="dialog">
+  </div>
+  <footer>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <h3 id="footer-logo">
+       <a href="http://uark.edu">
+        UNIVERSITY OF ARKANSAS
+       </a>
+      </h3>
+      <ul class="list-unstyled" id="footer-global-links">
+       <li>
+        <a href="http://www.uark.edu/admissions/index.php" onclick="_sz.push(['event', 'footer-global-links', 'click', 'Admissions']);">
+         Admissions
+        </a>
+       </li>
+       <li>
+        <a href="http://www.uark.edu/academics/index.php" onclick="_sz.push(['event', 'footer-global-links', 'click', 'Academics']);">
+         Academics
+        </a>
+       </li>
+       <li>
+        <a href="http://www.uark.edu/campus-life/index.php" onclick="_sz.push(['event', 'footer-global-links', 'click', 'Campus Life']);">
+         Campus Life
+        </a>
+       </li>
+       <li>
+        <a href="http://www.uark.edu/research/index.php" onclick="_sz.push(['event', 'footer-global-links', 'click', 'Research']);">
+         Research
+        </a>
+       </li>
+       <li>
+        <a href="http://www.uark.edu/athletics/index.php" onclick="_sz.push(['event', 'footer-global-links', 'click', 'Athletics']);">
+         Athletics
+        </a>
+       </li>
+       <li>
+        <a href="http://www.uark.edu/about/index.php" onclick="_sz.push(['event', 'footer-global-links', 'click', 'About']);">
+         About
+        </a>
+       </li>
+      </ul>
+      <ul class="nav pull-right clearfix list-unstyled" id="social-stack">
+       <li>
+        <a href="https://www.facebook.com/UofArkansas" onclick="_sz.push(['event', 'social-stack', 'click', 'Facebook']);">
+         <i class="fab fa-facebook-f">
+         </i>
+         <span class="sr-only">
+          Like us on Facebook
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://twitter.com/uarkansas" onclick="_sz.push(['event', 'social-stack', 'click', 'Twitter']);">
+         <i class="fab fa-twitter">
+         </i>
+         <span class="sr-only">
+          Follow us on Twitter
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.youtube.com/user/UniversityArkansas" onclick="_sz.push(['event', 'social-stack', 'Youclick', 'YouTube']);">
+         <i class="fab fa-youtube">
+         </i>
+         <span class="sr-only">
+          Watch us on YouTube
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://instagram.com/uarkansas" onclick="_sz.push(['event', 'social-stack', 'click', 'Instagram']);">
+         <i class="fab fa-instagram">
+         </i>
+         <span class="sr-only">
+          See us on Instagram
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://pinterest.com/uofaadmissions/" onclick="_sz.push(['event', 'social-stack', 'click', 'Pinterest']);">
+         <i class="fab fa-pinterest">
+         </i>
+         <span class="sr-only">
+          Join us on Pinterest
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.linkedin.com/company/university-of-arkansas" onclick="_sz.push(['event', 'social-stack', 'click', 'LinkedIn']);">
+         <i class="fab fa-linkedin-in">
+         </i>
+         <span class="sr-only">
+          Connect with us on LinkedIn
+         </span>
+        </a>
+       </li>
+      </ul>
+      <hr/>
+      <div class="row">
+       <div class="col-sm-3">
+        <i class="fas fa-map-marker-alt pull-left">
+        </i>
+        <address>
+         1 University of Arkansas
+         <br/>
+         Fayetteville, AR 72701
+         <br/>
+         479-575-2000
+        </address>
+        <a href="http://campusmaps.uark.edu/" title="View Campus Maps">
+         <img alt="Map of University of Arkansas Campus" class="img-responsive" src="//www.uark.edu/_resources/img/map.png"/>
+        </a>
+       </div>
+       <div class="col-sm-3 footer-news">
+        <h4>
+         <a href="http://newswire.uark.edu/" title="Arkansas Newswire">
+          NEWS
+         </a>
+        </h4>
+        <ul id="newsFooter">
+        </ul>
+        <script>
+         $(function () {
+      	parseNews('//campusdata.uark.edu/apiv2/articles/articlesCommon?$orderby=publishDate+desc&$filter=Commons/any%28c:+c/id+eq+1%29&$top=3');  
+    });
+       
+    function parseNews(url) {
+           $.ajax({
+			   url: url,
+			   data: {},
+			   contentType: "application/json; charset=utf-8",
+			   dataType: 'jsonp',
+			   jsonpCallback: 'Articles',
+			   success: function (articles) {
+				   var list_data = '';
+				   $.each(articles, function (key, a) {
+					   var headline = a.headline;
+					   headline = headline.replace("â€˜", "'").replace("â€™", "'").replace("â€œ", "\"").replace("â€", "\"");
+					   list_data += '<li><a href="http://news.uark.edu/articles/' + a.id + '" onclick="ga(\'event\', \'footer-global-links\', \'click\', \'news.uark.edu\/articles\/' + a.id + '\');">' + headline + '</a></li>';
+				   })
+				   $(list_data).appendTo("#newsFooter");
+			   }
+		});   
+     }
+        </script>
+        <script>
+         $.ajax({
+    type: 'GET',
+    url: '//calendars.uark.edu/RSSSyndicator.aspx?type=N&amp;category=32-0&amp;numdays=7&amp;binary=Y&amp;rssid=25',
+    data: {},
+    cache: 'true',
+    success: function (data) {
+        var list_data = '';
+        var $xml = $(data).find('item:lt(3)');
+        $xml.each(function () { var $this = $(this);
+        var headline = $this.find('title').text();
+        var link = $this.find('link').text();
+        list_data += '<li><a href="' + link + '">' + headline + '</a></li>';
+    });
+    $(list_data).appendTo("#eventsFooter");
+    }
+    });
+        </script>
+       </div>
+       <div class="col-sm-3 footer-events">
+        <h4>
+         <a href="http://calendars.uark.edu/" title="Calendar Events">
+          EVENTS
+         </a>
+        </h4>
+        <ul id="eventsFooter">
+        </ul>
+       </div>
+       <div class="col-sm-3 footer-buttons">
+        <a class="btn btn-default btn-lg" href="https://application.uark.edu/" onclick="_sz.push(['event', 'footer-buttons', 'click', 'APPLY Online']);">
+         <i class="fa fa-check fa-lg">
+         </i>
+         <strong>
+          APPLY
+         </strong>
+         Online
+        </a>
+        <a class="btn btn-default btn-lg" href="http://visit.uark.edu/" onclick="_sz.push(['event', 'footer-buttons', 'click', 'Schedule a VISIT']);">
+         <i class="fa fa-calendar fa-lg">
+         </i>
+         Schedule a
+         <strong>
+          VISIT
+         </strong>
+        </a>
+        <a class="btn btn-default btn-lg" href="https://onlinegiving.uark.edu/" onclick="_sz.push(['event', 'footer-buttons', 'click', 'Make a Gift']);">
+         <i class="fa fa-gift fa-lg">
+         </i>
+         Make a
+         <strong>
+          Gift
+         </strong>
+        </a>
+       </div>
+      </div>
+      <hr/>
+      <ul class="centered-nav vertical-divide list-unstyled footer-disclaimer">
+       <li>
+        <a href="//emergency.uark.edu/">
+         Emergency Information
+        </a>
+       </li>
+       <li>
+        <a href="//report.uark.edu/">
+         Report a Concern
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/privacy-policy/">
+         Privacy Policy
+        </a>
+       </li>
+       <li>
+        <a href="//www.uark.edu/contact-us.php">
+         Contact Us
+        </a>
+       </li>
+       <li>
+        <a href="//jobs.uark.edu">
+         Jobs
+        </a>
+       </li>
+       <li>
+        <a href="//m.uark.edu">
+         Mobile
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   var pageTracker = _gat._getTracker("UA-3687364-3");
+pageTracker._trackPageview();
+  </script>
+  <script crossorigin="anonymous" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+  </script>
+  <!-- end botlogo.html file -->
+  <script>
+   $( document ).ready(function() {
+   $('#more-options').change(function() {
+        window.location = $(this).find("option:selected").val();
+    });
+});
+  </script>
+  <script language="javascript" type="text/javascript">
+   <!--//--><![CDATA[//><!--
+try { document.forms[0].searcharg.focus(); }
+catch(err) {}
+//--><!]]>
+  </script>
+  <span style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; visibility: visible; font-size: 85%; text-align: center; display: block; ">
+   WebPAC PRO © Innovative Interfaces, Inc.
+  </span>
+ </body>
+</html>
+

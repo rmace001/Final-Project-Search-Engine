@@ -1,0 +1,712 @@
+https://netpartnerstudent.wustl.edu/
+<!DOCTYPE html>
+<html lang="en-us">
+ <head>
+  <link href="/NetPartnerStudent/DXR.axd?r=1_40,1_41,1_50,1_53,1_51,1_4,1_14,1_15,1_16,1_13-g6mrh" rel="stylesheet" type="text/css"/>
+  <title>
+   (Office of Student Financial Planning Student Portal) Student Log In
+  </title>
+  <meta charset="utf-8"/>
+  <meta content="&lt;%=AntiXSS.HtmlEncode(MetaTags)%&gt;" name="keywords"/>
+  <meta content="&lt;%=AntiXSS.HtmlEncode(MetaTagDescription)%&gt;" name="description"/>
+  <link href="StyleSheets/styles_customized.css" rel="stylesheet" type="text/css"/>
+  <link href="StyleSheets/login_customized.css" rel="stylesheet" type="text/css"/>
+  <!-- jQuery -->
+  <script src="scripts/jquery-1.12.0.min.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/jquery.ie.cors.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/jquery.cookie.js" type="text/javascript">
+  </script>
+  <!-- Handlebars -->
+  <script src="scripts/security/handlebars.js" type="text/javascript">
+  </script>
+  <!-- JSON -->
+  <script src="scripts/security/json2.js" type="text/javascript">
+  </script>
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        </script>
+    <![endif]-->
+ </head>
+ <body>
+  <script type="text/javascript">
+   var authServiceURI = '/NetPartnerStudent/AppService.asmx/ValidateSession';
+        var partnerCookiesDomain = 'netpartnerstudent.wustl.edu';
+        var loginUrl = '/NetPartnerStudent/Logon.aspx';
+        var domainUrl = 'https://netpartnerstudent.wustl.edu/NetPartnerStudent';
+
+        // delete app login cookie
+        $.removeCookie('np_student_app_login',
+            {
+                path: "/",
+                domain: partnerCookiesDomain,
+                secure: true
+            });
+
+        //Remove cookies holding sessionId and domain for Custom FAD
+        $.removeCookie('np_student_sessionId');
+        $.removeCookie('np_student_domain');
+  </script>
+  <header id="utility">
+   <div class="headerText">
+    <input class="button" name="help" onclick='window.open("/NetPartnerStudent/PFHelp.aspx");return false;' type="button" value="Help"/>
+   </div>
+  </header>
+  <div id="outer">
+   <script>
+    var enterKeyCode = 13;
+    window.onkeypress = function OnKeyPress(e) {
+        if (e.keyCode !== enterKeyCode)
+            return;
+        else {
+            ClientSSNPopup.Hide();
+
+            if (PasswordSettingsPopup.IsVisible()) {
+                OnPasswordSettingsCloseButtonClick();
+            }
+        }
+    }
+
+    function OnForgotLoginID(url) {
+        if (0 == 0) {
+            ClientSSNPopup.Show();
+        } else {
+            RedirectWithoutLoginId('0', url);
+        }
+    }
+
+    function OnOKButtonClick() {
+        ClientSSNPopup.Hide();
+    }
+
+    function OnPasswordSettingsCloseButtonClick() {
+        PasswordSettingsPopup.Hide();
+        RedirectWithoutLoginId('', 'ForgotPassword.aspx');
+    }
+   </script>
+   <div id="header">
+    <div class="headerImage">
+     <a href="#">
+      <img src="/NetPartnerStudent/images/header/logo.gif"/>
+     </a>
+    </div>
+    <div class="headerTitle" style="text-align:left">
+    </div>
+   </div>
+   <form action="./Logon.aspx?ReturnUrl=%2fNetPartnerStudent" autocomplete="off" id="Form1" method="post" onsubmit="javascript:return WebForm_OnSubmit();">
+    <div class="aspNetHidden">
+     <input id="__LASTFOCUS" name="__LASTFOCUS" type="hidden" value=""/>
+     <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+     <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+     <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="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"/>
+    </div>
+    <script type="text/javascript">
+     //<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+    </script>
+    <script src="/NetPartnerStudent/WebResource.axd?d=jhigQIcS7ID6FK84MOo2IvpkQUTe6g6GxeGoBBl4udgj4BCPjXtm3r6sBD3uhQWRl6Tt5R9vCxX9BRCIUO4FG5qDBHssgP8xx4eQQ1s5Xv81&amp;t=636765283264470882" type="text/javascript">
+    </script>
+    <script src="/NetPartnerStudent/WebResource.axd?d=pfu0DeQQFlP61_DV09cQAAB5SmGYZ-sHzN_kbChMVBCBmKMzoOablRwG5lCKuo7riWFAxbL1Kf8Kh3MaPLz_WzyC21vzVnw3VZVr02qEZBj9jg9TeghfM3LXkk_Tr1EYDGFRfyK_mF9vFGHWcXLPMQ2&amp;t=636725221180000000" type="text/javascript">
+    </script>
+    <script src="/NetPartnerStudent/scripts/login.js" type="text/javascript">
+    </script>
+    <script src="/NetPartnerStudent/WebResource.axd?d=7q3mGdcHaaZxNrPDPvD7XgZ7c5U41j_lUPu6oEy1M8nuELEkJbJRuxqtVlrDYgc87XLFUhHKSLfeN4iI2zFOrdayILRwx5grKQND-ypopM41&amp;t=636765283264470882" type="text/javascript">
+    </script>
+    <script src="/NetPartnerStudent/WebResource.axd?d=NSCFgcgdueHn3iLPjJiraH5kjKyaysaVt9YbLsKca53XBfR1w5SylX4bnnr1Xwl1neyO6t1yvgvCKGtEdzowU2p9tHhRNufk1IMbt6BkRWQ1&amp;t=636765283264470882" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+    </script>
+    <div class="aspNetHidden">
+     <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="DA59F698"/>
+     <input id="__SCROLLPOSITIONX" name="__SCROLLPOSITIONX" type="hidden" value="0"/>
+     <input id="__SCROLLPOSITIONY" name="__SCROLLPOSITIONY" type="hidden" value="0"/>
+     <input id="__VIEWSTATEENCRYPTED" name="__VIEWSTATEENCRYPTED" type="hidden" value=""/>
+     <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="RJxmUYldpusYSGIc26Mxn0fb0lhbPxoe3WeKNiaQ/5dDM7rnyq3kdZVhagtA31871b9edoNKhA6K+o8UUpsHBHJ8u38ig88JTGgYBeamiMu732S09IZPIVEImDd9wJLYUWF7/TJTCzIctXJu8DEBO1zOzjHY5vAX3X2WiouQHlxKgYZKO/RvB7ZMi/SPBBgo9cJZSFMpWiySHbdaQEdjDsVKVkFqHecoYOmZHN43rDzRMr7KMcXolrkNDQKY3y0JsvBNYYDwVlb8zwvsBuc2vvhrmAZ6hrce5/YsSCvnGcg="/>
+    </div>
+    <div id="Login1_loginControl">
+     <div id="content_left">
+      <h1>
+       Financial Aid Student Portal
+      </h1>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         Welcome!
+        </span>
+       </strong>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         This site allows you to:
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+       </span>
+      </p>
+      <ul>
+       <li style="margin-left: 48px">
+        <span style="font-size: 12pt; line-height: 150%; font-family: Calibri, sans-serif">
+         Complete our institutional financial aid application online
+        </span>
+       </li>
+       <li style="margin-left: 48px">
+        <span style="font-size: 12pt; line-height: 150%; font-family: Calibri, sans-serif">
+         View received and outstanding documents
+        </span>
+       </li>
+       <li style="margin-left: 48px">
+        <span style="font-size: 12pt; line-height: 150%; font-family: Calibri, sans-serif">
+         Print financial aid forms if necessary
+        </span>
+       </li>
+       <li style="margin-left: 48px">
+        <span style="font-size: 12pt; line-height: 150%; font-family: Calibri, sans-serif">
+         View/accept/decline financial aid awards
+        </span>
+       </li>
+       <li style="margin-left: 48px">
+        <span style="font-size: 12pt; line-height: 150%; font-family: Calibri, sans-serif">
+         Check disbursement schedules
+        </span>
+       </li>
+      </ul>
+      <div>
+       <span style="font-family: Calibri, sans-serif">
+        <span style="font-size: 16px">
+         <br/>
+        </span>
+       </span>
+      </div>
+      <h2>
+       Log In Instructions
+      </h2>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         NEW STUDENTS:
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+        Under the submit button, choose the
+        <strong>
+        </strong>
+       </span>
+       <strong>
+        <span style="font-size: 12pt; color: red">
+         First Time User
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+        link to create your
+        <strong>
+         Password/PIN.
+         <span style="background: yellow">
+          Student ID = your SSN.
+         </span>
+        </strong>
+        You will also need to set up two challenge questions and answers to verify your identity.
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 9pt">
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         RETURNING STUDENTS:
+         <span style="background: yellow">
+          Student ID = your SSN.
+         </span>
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+        If you have forgotten your Password/PIN, you may reset it by following the
+       </span>
+       <strong>
+        <span style="font-size: 12pt; color: red">
+         Forgot your Password/PIN?
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+        link in the LOG IN box.
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 9pt">
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 12pt">
+        You must have a financial aid record already established at Washington University School of Medicine in order to use this system. If you have not begun the financial aid application process, you can get started by completing the
+        <a href="http://www.fafsa.ed.gov/" target="_blank">
+         <em>
+          <span style="color: blue">
+           Free Application for Federal Student Aid
+          </span>
+         </em>
+        </a>
+        (FAFSA) on-line.
+        <strong>
+         Enter our school code, G24620
+        </strong>
+        , on your application and we will automatically receive a copy.
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 9pt">
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 12pt">
+        If you need help using this application, or have any questions about financial aid, please contact the Financial Aid Office at 314-362-6845 or 888-840-3239.
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         If you attempt to enter the site unsuccessfully more than 5 times, your account will be locked and you will need to contact our office.
+        </span>
+       </strong>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         Technical Requirements:
+        </span>
+       </strong>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 12pt">
+        Microsoft Internet Explorer Version 9.0 or higher
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 12pt">
+        Current versions of Google Chrome or Firefox
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <span style="font-size: 12pt">
+        Safari 5.0 or higher (Macintosh computers only)
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         DO NOT USE
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+        :  Opera, MAC IE 5, KDE Konqueror, or GNOME Epiphany
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <strong>
+        <span style="font-size: 12pt">
+         OS Requirements:
+        </span>
+       </strong>
+       <span style="font-size: 12pt">
+        PC strongly preferred over MAC.
+       </span>
+      </p>
+      <p style="font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+       <br/>
+      </p>
+     </div>
+     <div id="content_right">
+      <div class="loginForm">
+       <h2>
+        LOG IN
+       </h2>
+       <fieldset class="login">
+        <div id="Login1_manualLogin">
+         <p>
+          <label>
+           <input aria-describedby="Login1_rvusername" aria-label="Social Security Number" aria-required="true" id="Login1_username" maxlength="50" name="Login1$username" placeholder="Social Security Number" type="password"/>
+           <span class="labelError" id="Login1_rvusername" style="visibility:hidden;">
+            Please enter your Social Security Number.
+           </span>
+          </label>
+         </p>
+         <p>
+          <label>
+           <input aria-describedby="Login1_rvpassword" aria-required="true" autocomplete="off" id="Login1_password" name="Login1$password" placeholder="Password/PIN" type="password"/>
+           <span class="labelError" id="Login1_rvpassword" style="visibility:hidden;">
+            Please enter your Password/PIN.
+           </span>
+          </label>
+         </p>
+         <p>
+          <input autofocus="autofocus" class="button" id="Login1_submit" name="Login1$submit" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("Login1$submit", "", true, "", "", false, false))' onfocus="try{document.getElementById('__LASTFOCUS').value=this.id} catch(e) {}" style="font-size: 14px" type="submit" value="Submit"/>
+         </p>
+         <div style="font-size: 14px; font-family: Arial,Verdana,sans-serif">
+          <a href="#" onclick="RedirectWithoutLoginId('','ForgotPassword.aspx');">
+           Forgot Your Password/PIN?
+          </a>
+         </div>
+         <div>
+          <a href="#" onclick="RedirectWithoutLoginId('','ActivateAccount.aspx');" style="font-size: 14px; font-family: Arial,Verdana,sans-serif">
+           First Time User
+          </a>
+         </div>
+        </div>
+        <p>
+         <span class="labelError" id="Login1_message">
+         </span>
+        </p>
+       </fieldset>
+      </div>
+      <div id="sidebar">
+       <h2>
+        REMINDERS
+       </h2>
+       <p>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <strong>
+         <span style="color: red">
+          Financial Aid application materials for Award Year 2019-2020 are now available.
+         </span>
+        </strong>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <br/>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <strong>
+         <span style="background: white">
+          ALL Forms should be completed by April 1st for newly accepted MD students ONLY.  May 1st for all other students.
+         </span>
+        </strong>
+        <span style="background: white">
+        </span>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <br/>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <strong>
+         <span style="color: red; background: white">
+          Please note:  Due to the high volume of mail we receive at this time, submitted forms should show up as received within 5-10 days of being submitted.
+         </span>
+        </strong>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <br/>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <strong>
+         <span style="background: white">
+          If you have completed your 2019-2020 FAFSA, it should show as received under the Documents tab within two weeks of your submission, provided the correct school code,
+         </span>
+        </strong>
+        <strong>
+         <span style="background: yellow">
+          G24620
+         </span>
+        </strong>
+        <strong>
+         <span style="background: white">
+          , was used.
+         </span>
+        </strong>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <br/>
+       </p>
+       <p align="center" style="text-align: center; font-size: 14.6667px; font-family: Calibri, sans-serif; margin: 0px 0px 0.000133333px">
+        <strong>
+         <span style="color: red; background: white">
+          IMPORTANT:  Submission of need-based financial aid application materials by the application deadline is essential.  Need-based application materials received after the deadline could result in a reduced financial aid package due to availability of funding.
+         </span>
+        </strong>
+       </p>
+      </div>
+     </div>
+    </div>
+    <div style="float: left; width: 99%; padding: 5px;">
+    </div>
+    <script id="dxis_275504377" src="/NetPartnerStudent/DXR.axd?r=1_304,1_185,1_298,1_211,1_188,1_182,1_290,1_288,1_198-g6mrh" type="text/javascript">
+    </script>
+    <script id="dxss_202018773" type="text/javascript">
+     <!--
+ASPx.AccessibilitySR.DefaultCallbackMessage = 'Callback in process.';
+//-->
+    </script>
+    <div aria-labelledby="dialog_title" class="dxpcLite drag dxpclW" id="Login1_SSNPopup_PW-1" role="alertdialog" style="width:300px;user-select:none;-khtml-user-select:none;-ms-user-select:none;z-index:10000;display:none;visibility:hidden;">
+     <div class="dxpc-mainDiv dx-acc-r dxpc-shadow">
+      <div class="dxpc-contentWrapper">
+       <div class="dxpc-content">
+        <div id="dialog_msg" style="text-align: center; background-color: white">
+         <br>
+          <br>
+           Your Social Security Number is your Social Security Number.
+           <br>
+            <br>
+             <br>
+              <br>
+              </br>
+             </br>
+            </br>
+           </br>
+          </br>
+         </br>
+        </div>
+       </div>
+      </div>
+      <div class="dxpc-footer" style="padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">
+       <div style="text-align: center">
+        <div aria-describedby="dialog_msg" class="dxbButton dx-acc-r dxbButtonSys dxbTSys" id="Login1_SSNPopup_TPCFm1_CloseButton" style="font-weight:bold;user-select:none;-khtml-user-select:none;-ms-user-select:none;">
+         <div class="dxb">
+          <input class="dxAIFE" id="Login1_SSNPopup_TPCFm1_CloseButton_I" name="Login1$SSNPopup$TPCFm1$TC$CloseButton" type="submit" value="OK"/>
+          <span class="dx-vam" id="Login1_SSNPopup_TPCFm1_CloseButton_BTC">
+           OK
+          </span>
+         </div>
+        </div>
+        <script id="dxss_153471578" type="text/javascript">
+         <!--
+ASPx.AddHoverItems('Login1_SSNPopup_TPCFm1_CloseButton',[[['dxbButtonHover'],[''],[''],['','TC']]]);
+ASPx.AddPressedItems('Login1_SSNPopup_TPCFm1_CloseButton',[[['dxbButtonPressed'],[''],[''],['','TC']]]);
+ASPx.AddDisabledItems('Login1_SSNPopup_TPCFm1_CloseButton',[[['dxbDisabled'],[''],[''],['','TC']]]);
+ASPx.AddSelectedItems('Login1_SSNPopup_TPCFm1_CloseButton',[[['dxbf'],[''],['CD']]]);
+ASPx.createControl(ASPxClientButton,'Login1_SSNPopup_TPCFm1_CloseButton','okButton',{'uniqueID':'Login1$SSNPopup$TPCFm1$TC$CloseButton','accessibilityCompliant':true,'autoPostBackFunction':function(postBackArg) { WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("Login1$SSNPopup$TPCFm1$TC$CloseButton",  postBackArg, true, "", "", false, false)); }},{'Click': OnOKButtonClick});
+
+//-->
+        </script>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="dxpcModalBackLite" id="Login1_SSNPopup_DXPWMB-1" style="z-index:9999;">
+    </div>
+    <table class="dxpcLoadingPanel dxlpLoadingPanel" id="Login1_SSNPopup_LP" style="left:0px;top:0px;z-index:30000;display:none;">
+     <tr>
+      <td class="dx" style="padding-right:0px;">
+       <span class="dx-acc dxlp-loadingImage dxlp-imgPosLeft dx-acc-s">
+        <img alt="" src="/NetPartnerStudent/DXR.axd?r=1_58-g6mrh"/>
+       </span>
+      </td>
+      <td class="dx" style="padding-left:0px;">
+       <span id="Login1_SSNPopup_TL">
+        Loading…
+       </span>
+      </td>
+     </tr>
+    </table>
+    <div class="dxpcLoadingDiv dxlpLoadingDiv dx-ft" id="Login1_SSNPopup_LD" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+    </div>
+    <script id="dxss_858341368" type="text/javascript">
+     <!--
+ASPx.AddHoverItems('Login1_SSNPopup',[[['dxpc-closeBtnHover'],[''],['HCB-1']]]);
+ASPx.createControl(ASPxClientPopupControl,'Login1_SSNPopup','ClientSSNPopup',{'callBack':function(arg) { WebForm_DoCallback('Login1$SSNPopup',arg,ASPx.Callback,'Login1_SSNPopup',ASPx.CallbackError,true); },'uniqueID':'Login1$SSNPopup','accessibilityCompliant':true,'popupAnimationType':'fade','closeAction':'CloseButton','popupHorizontalAlign':'WindowCenter','popupVerticalAlign':'WindowCenter','isPopupPositionCorrectionOn':false,'isWindowDragging':true,'allowDragging':true,'modal':true,'width':300,'widthFromServer':true});
+
+//-->
+    </script>
+    <div aria-labelledby="dialog_title" class="dxpcLite drag dxpclW" id="Login1_popPasswordSettings_PW-1" role="alertdialog" style="width:500px;user-select:none;-khtml-user-select:none;-ms-user-select:none;z-index:10000;display:none;visibility:hidden;">
+     <div class="dxpc-mainDiv dx-acc-r dxpc-shadow">
+      <div class="dxpc-contentWrapper">
+       <div class="dxpc-content">
+        <div id="dialog_msg_password_settings" style="text-align: left; background-color: white">
+         <br>
+          Your password does not meet the minimum security requirements.
+          <br>
+           <br>
+            <div style="margin-top: 10px; margin-bottom: 10px;">
+            </div>
+            <br>
+             <br>
+              Please click OK to change your password.
+              <br>
+               <br/>
+              </br>
+             </br>
+            </br>
+           </br>
+          </br>
+         </br>
+        </div>
+       </div>
+      </div>
+      <div class="dxpc-footer" style="padding-left:5px;padding-right:5px;padding-top:5px;padding-bottom:5px;">
+       <div style="text-align: center">
+        <div aria-describedby="dialog_msg_password_settings" class="dxbButton dx-acc-r dxbButtonSys dxbTSys" id="Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton" style="font-weight:bold;user-select:none;-khtml-user-select:none;-ms-user-select:none;">
+         <div class="dxb">
+          <input class="dxAIFE" id="Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton_I" name="Login1$popPasswordSettings$TPCFm1$TC$PasswordSettingsCloseButton" type="submit" value="OK"/>
+          <span class="dx-vam" id="Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton_BTC">
+           OK
+          </span>
+         </div>
+        </div>
+        <script id="dxss_1341023371" type="text/javascript">
+         <!--
+ASPx.AddHoverItems('Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton',[[['dxbButtonHover'],[''],[''],['','TC']]]);
+ASPx.AddPressedItems('Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton',[[['dxbButtonPressed'],[''],[''],['','TC']]]);
+ASPx.AddDisabledItems('Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton',[[['dxbDisabled'],[''],[''],['','TC']]]);
+ASPx.AddSelectedItems('Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton',[[['dxbf'],[''],['CD']]]);
+ASPx.createControl(ASPxClientButton,'Login1_popPasswordSettings_TPCFm1_PasswordSettingsCloseButton','PasswordSettingsCloseButton',{'uniqueID':'Login1$popPasswordSettings$TPCFm1$TC$PasswordSettingsCloseButton','accessibilityCompliant':true,'autoPostBackFunction':function(postBackArg) { WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("Login1$popPasswordSettings$TPCFm1$TC$PasswordSettingsCloseButton",  postBackArg, true, "", "", false, false)); }},{'Click':OnPasswordSettingsCloseButtonClick});
+
+//-->
+        </script>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="dxpcModalBackLite" id="Login1_popPasswordSettings_DXPWMB-1" style="z-index:9999;">
+    </div>
+    <table class="dxpcLoadingPanel dxlpLoadingPanel" id="Login1_popPasswordSettings_LP" style="left:0px;top:0px;z-index:30000;display:none;">
+     <tr>
+      <td class="dx" style="padding-right:0px;">
+       <span class="dx-acc dxlp-loadingImage dxlp-imgPosLeft dx-acc-s">
+        <img alt="" src="/NetPartnerStudent/DXR.axd?r=1_58-g6mrh"/>
+       </span>
+      </td>
+      <td class="dx" style="padding-left:0px;">
+       <span id="Login1_popPasswordSettings_TL">
+        Loading…
+       </span>
+      </td>
+     </tr>
+    </table>
+    <div class="dxpcLoadingDiv dxlpLoadingDiv dx-ft" id="Login1_popPasswordSettings_LD" style="left:0px;top:0px;z-index:29999;display:none;position:absolute;">
+    </div>
+    <script id="dxss_662830144" type="text/javascript">
+     <!--
+ASPx.AddHoverItems('Login1_popPasswordSettings',[[['dxpc-closeBtnHover'],[''],['HCB-1']]]);
+ASPx.createControl(ASPxClientPopupControl,'Login1_popPasswordSettings','PasswordSettingsPopup',{'callBack':function(arg) { WebForm_DoCallback('Login1$popPasswordSettings',arg,ASPx.Callback,'Login1_popPasswordSettings',ASPx.CallbackError,true); },'uniqueID':'Login1$popPasswordSettings','accessibilityCompliant':true,'popupAnimationType':'fade','closeAction':'CloseButton','popupHorizontalAlign':'WindowCenter','popupVerticalAlign':'WindowCenter','isPopupPositionCorrectionOn':false,'isWindowDragging':true,'allowDragging':true,'modal':true,'width':500,'widthFromServer':true});
+
+//-->
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+var Page_Validators =  new Array(document.getElementById("Login1_rvusername"), document.getElementById("Login1_rvpassword"));
+//]]>
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+var Login1_rvusername = document.all ? document.all["Login1_rvusername"] : document.getElementById("Login1_rvusername");
+Login1_rvusername.controltovalidate = "Login1_username";
+Login1_rvusername.focusOnError = "t";
+Login1_rvusername.errormessage = "Please enter your Social Security Number.";
+Login1_rvusername.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+Login1_rvusername.initialvalue = "";
+var Login1_rvpassword = document.all ? document.all["Login1_rvpassword"] : document.getElementById("Login1_rvpassword");
+Login1_rvpassword.controltovalidate = "Login1_password";
+Login1_rvpassword.focusOnError = "t";
+Login1_rvpassword.errormessage = "Please enter your Password/PIN.";
+Login1_rvpassword.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+Login1_rvpassword.initialvalue = "";
+//]]>
+    </script>
+    <script type="text/javascript">
+     if (document.getElementsByTagName) { var inputElements = document.getElementsByTagName('input'); for (i=0; inputElements[i]; i++) { if (inputElements[i].className && (inputElements[i].className.indexOf('disableAutoComplete') != -1)) { inputElements[i].setAttribute('autocomplete','off'); } } }
+    </script>
+    <script type="text/javascript">
+     //<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+var callBackFrameUrl='/NetPartnerStudent/WebResource.axd?d=S7ILsr6sO_gYQSJ_0E5FEcLjBj9i9uTuEoBWaV0ebTf8XlZpKCeRIs8ZBrjcATaGBxTl9i6538NbowvJv0pJ2RGB9OL6ebQDbKnbdLluLLU1&t=636765283264470882';
+WebForm_InitCallback();
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+WebForm_AutoFocus('Login1_username');//]]>
+    </script>
+   </form>
+   <div class="spacer">
+   </div>
+   <footer id="footer">
+    <div class="footerText">
+     <a href="http://www.collegeboard.com" target="_blank">
+      The College Board.
+     </a>
+     PowerFAIDS® Net Partner Version 24.1
+    </div>
+   </footer>
+  </div>
+  <!-- Levity Dependencies -->
+  <script src="scripts/security/underscore.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/backbone.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/backbone-super.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/log4javascript.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/levity-profile-partner.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/coreutils.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/cb_iam.js" type="text/javascript">
+  </script>
+  <script src="scripts/security/protector.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   cb.core.iam.init({});
+        cb.core.protector.init();
+
+        var onLogout = function () {
+            window.location.assign(loginUrl);
+        };
+
+        // subscribe to login and logout events
+        var iamBus = cb.core.iam.getEventBus();
+        iamBus.on(cb.core.iam.events.Logout, onLogout);
+  </script>
+ </body>
+</html>
+

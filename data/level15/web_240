@@ -1,0 +1,875 @@
+https://my.gwu.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>
+   myGW - The George Washington University Web Portal
+  </title>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+  <link href="/libraries/jquery-ui.1.12.1/jquery-ui.custom.min.css" rel="stylesheet"/>
+  <link href="/libraries/jquery-ui.1.10.4/mygw_channels/jquery-ui.custom.min.css" rel="stylesheet"/>
+  <link href="/css/mygw/mygw_header_jquery_v2.css" rel="stylesheet"/>
+  <link href="/libraries/bootstrap.4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="/css/portal_v2.css?v=1.0" rel="stylesheet" type="text/css"/>
+  <link href="/css/portal_v2_full.css?v=0.1" rel="stylesheet" type="text/css"/>
+  <script src="/libraries/jquery.3.3.1/jquery.min.js">
+  </script>
+  <script src="/libraries/jquery-ui.1.12.1.notheme/jquery-ui.min.js">
+  </script>
+  <script>
+   // Change JQueryUI plugin names to fix name collision with Bootstrap.
+$.widget.bridge('uitooltip', $.ui.tooltip);
+$.widget.bridge('uibutton', $.ui.button);
+$.widget.bridge('uibuttonset', $.ui.buttonset);
+$.widget.bridge('uimenu', $.ui.menu);
+  </script>
+  <script src="/libraries/popper.v1/popper.min.js">
+  </script>
+  <script src="/libraries/bootstrap.4.0.0/js/bootstrap.min.js">
+  </script>
+  <script src="/js/mygw_header_v2_jquery.js">
+  </script>
+  <script>
+   $(document).ready(function(){
+	var minContentHeight = $("#myGWLeftSidebar").height() + 100;
+	//alert(minContentHeight);
+	$("#myGWContentInner").css("min-height",minContentHeight);
+});
+  </script>
+  <script>
+   function openHelp() {
+	window.open('/mod/help/index.cfm','MyGWHelp','WIDTH=400,HEIGHT=300,scrollbars=yes,resizable=yes,left=150,top=100,screenX=150,screenY=100').focus();
+	return false;	
+}
+  </script>
+ </head>
+ <body class="bg-med-blue" id="body">
+  <div id="myGWContainer">
+   <div id="myGWHeader">
+    <nav class="navbar navbar-expand-lg navbar-dark header-navbar1 bg-dk-blue">
+     <a class="navbar-brand bg-dk-blue" href="/">
+      <img alt="myGW" border="0" height="53" hspace="0" src="/images/themes/mygw.gif" vspace="0" width="142"/>
+      <img alt="" height="53" hspace="0" src="/images/common/mygw_tab_end.gif" vspace="0" width="24"/>
+     </a>
+     <button aria-controls="navbarTabsContent " aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target=".nav-button-target" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon">
+      </span>
+     </button>
+     <div class="navbar-header collapse navbar-collapse nav-button-target" id="navbarTabsContent">
+      <ul class="navbar-nav mr-auto">
+       <li class="nav-item nav-tabs active">
+        <a class="nav-link" href="/?tab=1">
+         my portal
+        </a>
+       </li>
+       <li class="nav-item nav-tabs ">
+        <a class="nav-link" href="/?tab=2">
+         academics
+        </a>
+       </li>
+       <li class="nav-item nav-tabs ">
+        <a class="nav-link" href="/?tab=3">
+         gw life
+        </a>
+       </li>
+       <li class="nav-item nav-tabs ">
+        <a class="nav-link" href="/?tab=4">
+         news &amp; events
+        </a>
+       </li>
+       <li class="nav-item nav-tabs ">
+        <a class="nav-link" href="/?tab=5">
+         tools &amp; resources
+        </a>
+       </li>
+      </ul>
+      <form action="/mod/search/index.cfm" class="form-inline my-2 my-lg-0" method="get">
+       <div class="input-group">
+        <input class="form-control form-control-sm" name="q" placeholder="Search" title="Search GW" type="text"/>
+        <button aria-label="Left Align" class="btn btn-sm btn-outline-secondary my-2 my-sm-0" title="Search Button" type="submit">
+         <span aria-hidden="true" class="fa fa-search">
+         </span>
+        </button>
+       </div>
+      </form>
+     </div>
+    </nav>
+    <nav class="navbar-expand navbar-dark header-navbar2 bg-med-blue">
+     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+       <a class="nav-link" href="/login/">
+        sign in
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link" href="#" onclick="return openHelp();">
+        help
+       </a>
+      </li>
+     </ul>
+    </nav>
+   </div>
+   <div class="bg-med-blue" id="myGWContentContainer">
+    <div class="myGWContentRow">
+     <div class="col-fixed header-sidebar" id="myGWLeftSidebar">
+      <nav id="myGWLeftSidebarNav">
+       <div class="container-fluid">
+        <div class="row">
+         <div class="col-4 col-sm-12 sidebarNavItem">
+          <a class="nav-link" href="/mod/email/" target="_blank">
+           <span class="nav-img">
+            <img align="absmiddle" alt="" border="0" height="22" hspace="8" src="/images/common/nav_email.gif" vspace="0" width="35"/>
+           </span>
+           e-mail
+          </a>
+         </div>
+         <div class="col-4 col-sm-12 sidebarNavItem">
+          <a class="nav-link" href="/mod/email/?calendar=1">
+           <span class="nav-img">
+            <img align="absmiddle" alt="" border="0" height="22" hspace="8" src="/images/common/nav_calendar.gif" vspace="0" width="35"/>
+           </span>
+           my calendar
+          </a>
+         </div>
+         <div class="col-4 col-sm-12 sidebarNavItem">
+          <a class="nav-link" href="http://calendar.gwu.edu">
+           <span class="nav-img">
+            <img align="absmiddle" alt="" border="0" height="22" hspace="8" src="/images/common/nav_gwcalendar.gif" vspace="0" width="35"/>
+           </span>
+           university calendar
+          </a>
+         </div>
+         <div class="col-4 col-sm-12 sidebarNavItem">
+          <a class="nav-link" href="http://blackboard.gwu.edu">
+           <span class="nav-img">
+            <img align="absmiddle" alt="" border="0" height="22" hspace="8" src="/images/common/nav_blackboard.gif" vspace="0" width="35"/>
+           </span>
+           blackboard
+          </a>
+         </div>
+         <div class="col-4 col-sm-12 sidebarNavItem">
+          <a class="nav-link" href="/mod/banweb">
+           <span class="nav-img">
+            <img align="absmiddle" alt="" border="0" height="22" hspace="8" src="/images/common/nav_banner.gif" vspace="0" width="35"/>
+           </span>
+           gweb info system
+          </a>
+         </div>
+         <div class="col-4 col-sm-12 sidebarNavItem">
+          <a class="nav-link" href="/mod/directory/">
+           <span class="nav-img">
+            <img align="absmiddle" alt="" border="0" height="22" hspace="8" src="/images/common/nav_directory.gif" vspace="0" width="35"/>
+           </span>
+           directories
+          </a>
+         </div>
+        </div>
+       </div>
+      </nav>
+      <div>
+       <a class="tab-off" href="http://campusadvisories.gwu.edu">
+        <img align="absmiddle" alt="GW Campus Advisories" border="0" height="30" hspace="10" src="/images/common/nav_advisories2.gif" vspace="0" width="148"/>
+       </a>
+       <div class="d-none d-sm-block">
+        <div align="center">
+         <a href="http://gwtoday.gwu.edu">
+          <img alt="Ad - Click for more information" border="0" src="/files/banner_ads/GWTD_1314_3_GWTodayRedesign_mygw.jpg" vspace="5"/>
+         </a>
+        </div>
+       </div>
+       <div class="d-none d-sm-block" style="margin:2px;">
+        <!-- bQueries? true -->
+        <script language="JavaScript">
+         function openWin( windowURL, windowName, windowFeatures ) {
+		return window.open( windowURL, windowName, windowFeatures ) ;
+	}
+	function openBuildingInfo(bldg_code) {
+		newWin = window.open('/mod/calendar/map_it.cfm?BLDG_CODE='+bldg_code, 'bldg_info', 'width=300,height=400,toolbar=no,menubar=no,location=no,scrollbars=yes,resizable=yes');
+		newWin.focus();
+		return false;
+	}
+        </script>
+        <style>
+         .listing_course_timeslot { color: #fff; margin-left: 10px; }
+.listing_course_timeslot a, .listing_course_timeslot a:visited, .listing_course_timeslot a:active { color:#ffff99; }
+.listing_course_timeslot_time, .listing_event_timeslot_time { color:#dddddd; margin-left:0px; font-size: 0.9em; }
+.listingcontent .eventcontent { margin-bottom:6px; }
+        </style>
+        <div class="calendarpadding">
+         <span class="dateyear">
+          Calendar
+         </span>
+        </div>
+        <div id="mygw_side_calendar">
+        </div>
+        <noscript>
+         <div class="white11" style="margin:6px;">
+          <a href="mod/calendar/default.cfm?option=day&amp;day=03/10/2019">
+           <span class="yellow11">
+            March 10, 2019
+           </span>
+          </a>
+         </div>
+        </noscript>
+        <div>
+        </div>
+        <div class="calendarpadding">
+         <span class="dateyear">
+          Events Today
+         </span>
+        </div>
+        <div class="listingcontent">
+         <div class="eventcontent">
+          <div>
+           <a href="https://calendar.gwu.edu/spring-break-james-river-kayaking-and-hiking-trip">
+            <span class="yellow11">
+             Spring Break James River Kayaking and Hiking Trip
+            </span>
+           </a>
+          </div>
+         </div>
+         <div class="eventcontent">
+          <div>
+           <a href="https://calendar.gwu.edu/grand-canyon-spring-break-trip">
+            <span class="yellow11">
+             Grand Canyon Spring Break Trip
+            </span>
+           </a>
+          </div>
+         </div>
+         <div class="eventcontent">
+          <div>
+           <a href="https://calendar.gwu.edu/open-installation-robin-bell">
+            <span class="yellow11">
+             Open: An Installation by Robin Bell
+            </span>
+           </a>
+          </div>
+         </div>
+         <div class="eventcontent">
+          <div>
+           <a href="https://calendar.gwu.edu/rat-nest">
+            <span class="yellow11">
+             Rat Nest
+            </span>
+           </a>
+          </div>
+         </div>
+         <div class="eventcontent">
+          <div>
+           <a href="https://calendar.gwu.edu/have-look-selections-gw-collection">
+            <span class="yellow11">
+             Have a Look: Selections from the GW Collection
+            </span>
+           </a>
+          </div>
+         </div>
+         <div class="eventcontent">
+          <div>
+           <a href="https://calendar.gwu.edu/good-enough">
+            <span class="yellow11">
+             Good Enough
+            </span>
+           </a>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="col-fixed2 bg-white" id="myGWContent">
+      <a name="srdr_content">
+      </a>
+      <div class="container-fluid" id="myGWContentInner">
+       <div class="container-fluid">
+        <div class="row">
+         <div class="col-sm-12 col-md-8">
+          <!-- MODULE: Quick Links -->
+          <div class="channel_module">
+           <div class="channel_options_menu_obj">
+            <ul class="channel_options_menu">
+             <li>
+              <a class="channel_settings" href="/mod/links/customize.cfm">
+               <span class="ui-icon">
+               </span>
+               Customize
+              </a>
+             </li>
+             <li>
+              <a class="channel_moveup" href="/mod/move.cfm?id=30&amp;tab=1&amp;go=U">
+               <span class="ui-icon">
+               </span>
+               Move Up
+              </a>
+             </li>
+             <li>
+              <a class="channel_movedown" href="/mod/move.cfm?id=30&amp;tab=1&amp;go=D">
+               <span class="ui-icon">
+               </span>
+               Move Down
+              </a>
+             </li>
+             <li>
+              <a class="channel_close" href="/mod/move.cfm?id=30&amp;tab=1&amp;go=X">
+               <span class="ui-icon">
+               </span>
+               Remove
+              </a>
+             </li>
+            </ul>
+           </div>
+           <div class="ui-widget channel-widget">
+            <div class="ui-widget-header">
+             <button class="channel_header_button channel_options_extra">
+             </button>
+             Quick Links
+            </div>
+            <div class="ui-widget-content">
+             <div class="container-fluid">
+              <div class="row">
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="/mod/4ride/">
+                  4-RIDE
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://www.gwu.edu/academic-calendar" target="_blank">
+                  Academic Calendar
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://www.campusadvisories.gwu.edu">
+                  Campus Advisories
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="https://www.gwu.edu/our-location" target="_blank">
+                  Campus Maps
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="https://alumni.gwu.edu/career-advisor-network" target="_blank">
+                  Career Advisor Network
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://careerservices.gwu.edu/" target="_blank">
+                  Career Services, Center of
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://studentengagement.gwu.edu/" target="_blank">
+                  Center for Student Engagement
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://colonialcentral.gwu.edu" target="_blank">
+                  Colonial Central
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://compliance.gwu.edu" target="_blank">
+                  Compliance and Privacy, Office of
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="/mod/directory/">
+                  Directories
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://my.gwu.edu/mod/etsreports/">
+                  ETS Reports
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://living.gwu.edu" target="_blank">
+                  GW Housing
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://gwtoday.gwu.edu/" target="_blank">
+                  GW Today
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://mediarelations.gwu.edu/" target="_blank">
+                  Media Relations
+                 </a>
+                </div>
+               </div>
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="https://counselingcenter.gwu.edu" target="_blank">
+                  Mental Health Crises
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://www.gwu.edu/~parking/" target="_blank">
+                  Parking Services
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="https://police.gwu.edu" target="_blank">
+                  Police, University
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://www.gwu.edu/~research/" target="_blank">
+                  Research and Research Services
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="https://my.gwu.edu/mod/pws/" target="_blank">
+                  Schedule of Classes
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="/mod/vacancies" target="_blank">
+                  Staff Employment Vacancies
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://studentaccounts.gwu.edu/">
+                  Student Accounts
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://sa.gwu.edu/" target="_blank">
+                  Student Association
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://go.gwu.edu/vote2016">
+                  Student Elections
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://financialaid.gwu.edu" target="_blank">
+                  Student Financial Assistance, Office of
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="https://orgsync.com/login/george-washington-university" target="_blank">
+                  Student Organization Listing
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://bulletin.gwu.edu" target="_blank">
+                  University Bulletin
+                 </a>
+                </div>
+                <div style="margin-bottom:4px;">
+                 <a href="http://calendar.gwu.edu" target="_blank">
+                  University Calendar
+                 </a>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div align="right">
+              <a class="blue10" href="/mod/links/#85">
+               more
+               <img alt="More links" border="0" height="9" src="/images/go2_noborder_small.gif" width="13"/>
+              </a>
+             </div>
+            </div>
+           </div>
+          </div>
+          <!-- END MODULE: Quick Links -->
+          <!-- MODULE: Libraries -->
+          <div class="channel_module">
+           <div class="channel_options_menu_obj">
+            <ul class="channel_options_menu">
+             <li>
+              <a class="channel_moveup" href="/mod/move.cfm?id=10&amp;tab=1&amp;go=U">
+               <span class="ui-icon">
+               </span>
+               Move Up
+              </a>
+             </li>
+             <li>
+              <a class="channel_movedown" href="/mod/move.cfm?id=10&amp;tab=1&amp;go=D">
+               <span class="ui-icon">
+               </span>
+               Move Down
+              </a>
+             </li>
+             <li>
+              <a class="channel_close" href="/mod/move.cfm?id=10&amp;tab=1&amp;go=X">
+               <span class="ui-icon">
+               </span>
+               Remove
+              </a>
+             </li>
+            </ul>
+           </div>
+           <div class="ui-widget channel-widget">
+            <div class="ui-widget-header">
+             <button class="channel_header_button channel_options">
+             </button>
+             Libraries
+            </div>
+            <div class="ui-widget-content">
+             <div class="container-fluid">
+              <div class="row">
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="http://library.gwu.edu" target="_blank">
+                  Gelman Library
+                 </a>
+                 <div style="margin:0px 0px 12px 0px;">
+                  <i>
+                   GW's main university library
+                  </i>
+                 </div>
+                </div>
+               </div>
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="http://www.law.gwu.edu/burns" target="_blank">
+                  Burns Law Library
+                 </a>
+                 <div style="margin:0px 0px 12px 0px;">
+                  <i>
+                   The GW Law School library
+                  </i>
+                 </div>
+                </div>
+               </div>
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="http://library.gwu.edu/eckles" target="_blank">
+                  Eckles Library
+                 </a>
+                 <div style="margin:0px 0px 12px 0px;">
+                  <i>
+                   The Mount Vernon campus library
+                  </i>
+                 </div>
+                </div>
+               </div>
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="https://himmelfarb.gwu.edu/" target="_blank">
+                  Himmelfarb Health Sciences Library
+                 </a>
+                 <div style="margin:0px 0px 12px 0px;">
+                  <i>
+                   The GW Medical Center library
+                  </i>
+                 </div>
+                </div>
+               </div>
+               <div class="col col-12 col-lg-6">
+                <div style="margin-bottom:4px;">
+                 <a href="http://library.gwu.edu/virginia" target="_blank">
+                  Virginia Campus Library
+                 </a>
+                 <div style="margin:0px 0px 12px 0px;">
+                  <i>
+                  </i>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <!-- END MODULE: Libraries -->
+          <!-- MODULE: 101 Things To Do -->
+          <div class="channel_module">
+           <div class="channel_options_menu_obj">
+            <ul class="channel_options_menu">
+             <li>
+              <a class="channel_moveup" href="/mod/move.cfm?id=27&amp;tab=1&amp;go=U">
+               <span class="ui-icon">
+               </span>
+               Move Up
+              </a>
+             </li>
+             <li>
+              <a class="channel_movedown" href="/mod/move.cfm?id=27&amp;tab=1&amp;go=D">
+               <span class="ui-icon">
+               </span>
+               Move Down
+              </a>
+             </li>
+             <li>
+              <a class="channel_close" href="/mod/move.cfm?id=27&amp;tab=1&amp;go=X">
+               <span class="ui-icon">
+               </span>
+               Remove
+              </a>
+             </li>
+            </ul>
+           </div>
+           <div class="ui-widget channel-widget">
+            <div class="ui-widget-header">
+             <button class="channel_header_button channel_options">
+             </button>
+             101 Things To Do
+            </div>
+            <div class="ui-widget-content">
+             <center>
+              <b>
+               #11.  Donate to your Senior Class Gift Campaign.
+              </b>
+              <p align="center">
+               <a href="/mod/101things/dsp_user_form.cfm">
+                <img align="center" alt="101 Things Logo" border="0" src="/images/101things/101_things_wide.gif"/>
+               </a>
+              </p>
+              <p>
+               <b>
+                TOTAL:
+               </b>
+               <b>
+                0
+               </b>
+              </p>
+              <p>
+               We're putting you to the test, but don't worry--it's not as hard as your Chemistry final, we promise! How GW are you? Do you spend every waking hour stuck inside a cubicle reading in the library or do you really take advantage of everything GW and DC have to offer? Find out by going down this list and checking the things that you have done. Click "Submit" at the bottom of the page and find out how you're doing!
+              </p>
+              <div align="right">
+               <a class="blue10" href="/mod/101things/">
+                <b>
+                 test yourself
+                </b>
+                <img alt="test yourself" border="0" height="9" src="/images/go2_noborder_small.gif" width="13"/>
+               </a>
+              </div>
+             </center>
+            </div>
+           </div>
+          </div>
+          <!-- END MODULE: 101 Things To Do -->
+         </div>
+         <div class="col-sm-12 col-md-4">
+          <!-- MODULE: GW Radio -->
+          <div class="channel_module">
+           <div class="channel_options_menu_obj">
+            <ul class="channel_options_menu">
+             <li>
+              <a class="channel_moveup" href="/mod/move.cfm?id=16&amp;tab=1&amp;go=U">
+               <span class="ui-icon">
+               </span>
+               Move Up
+              </a>
+             </li>
+             <li>
+              <a class="channel_movedown" href="/mod/move.cfm?id=16&amp;tab=1&amp;go=D">
+               <span class="ui-icon">
+               </span>
+               Move Down
+              </a>
+             </li>
+             <li>
+              <a class="channel_close" href="/mod/move.cfm?id=16&amp;tab=1&amp;go=X">
+               <span class="ui-icon">
+               </span>
+               Remove
+              </a>
+             </li>
+            </ul>
+           </div>
+           <div class="ui-widget channel-widget">
+            <div class="ui-widget-header">
+             <button class="channel_header_button channel_options">
+             </button>
+             GW Radio
+            </div>
+            <div class="ui-widget-content">
+             <script language="JavaScript">
+              function openRadioWin() {
+  radioWin = window.open ("http:///www.gwradio.com", "radioWindow","status=0,toolbar=0,width=720,height=600,location=0,menubar=0");
+  radioWin.focus();
+  return false;
+}
+             </script>
+             <div align="center">
+              <div>
+               <a href="http:///www.gwradio.com" onclick="return openRadioWin();" target="_blank">
+                <img alt="[AM 540 WRGW]" border="0" height="52" hspace="0" src="/images/radio/gw_radio.gif" vspace="0" width="110"/>
+               </a>
+              </div>
+              <div>
+               <a href="http:///www.gwradio.com" onclick="return openRadioWin();" target="_blank">
+                Click to listen to WRGW Live!
+               </a>
+              </div>
+              <div style="margin-top:10px;">
+               <a href="http://www.gwradio.com">
+                WRGW Home
+               </a>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <!-- END MODULE: GW Radio -->
+          <!-- MODULE: Poll -->
+          <div class="channel_module">
+           <div class="channel_options_menu_obj">
+            <ul class="channel_options_menu">
+             <li>
+              <a class="channel_moveup" href="/mod/move.cfm?id=19&amp;tab=1&amp;go=U">
+               <span class="ui-icon">
+               </span>
+               Move Up
+              </a>
+             </li>
+             <li>
+              <a class="channel_movedown" href="/mod/move.cfm?id=19&amp;tab=1&amp;go=D">
+               <span class="ui-icon">
+               </span>
+               Move Down
+              </a>
+             </li>
+             <li>
+              <a class="channel_close" href="/mod/move.cfm?id=19&amp;tab=1&amp;go=X">
+               <span class="ui-icon">
+               </span>
+               Remove
+              </a>
+             </li>
+            </ul>
+           </div>
+           <div class="ui-widget channel-widget">
+            <div class="ui-widget-header">
+             <button class="channel_header_button channel_options">
+             </button>
+             Poll
+            </div>
+            <div class="ui-widget-content">
+             <style>
+              .channel_poll_question { margin-bottom:10px; }
+		.channel_poll_response { margin-left:10px; margin-bottom:10px; }
+		.channel_poll_buttons { text-align:right; }
+             </style>
+             <div class="channel_poll_question">
+              January 17, 2018:
+              <br/>
+              <div class="question">
+               How do you prefer to receive communications from the Division of IT?
+              </div>
+             </div>
+             <div class="channel_poll_response">
+              InfoMail (69%)
+              <br/>
+              <img alt="823 votes - 69%" class="poll_img_on" height="10" src="/img/poll_bar.gif" width="69"/>
+              <img alt="" class="poll_img_off" height="8" src="/img/poll_null.gif" width="31"/>
+             </div>
+             <div class="channel_poll_response">
+              Twitter (4%)
+              <br/>
+              <img alt="47 votes - 4%" class="poll_img_on" height="10" src="/img/poll_bar.gif" width="4"/>
+              <img alt="" class="poll_img_off" height="8" src="/img/poll_null.gif" width="96"/>
+             </div>
+             <div class="channel_poll_response">
+              Website (5%)
+              <br/>
+              <img alt="56 votes - 5%" class="poll_img_on" height="10" src="/img/poll_bar.gif" width="5"/>
+              <img alt="" class="poll_img_off" height="8" src="/img/poll_null.gif" width="95"/>
+             </div>
+             <div class="channel_poll_response">
+              GW Mobile App (15%)
+              <br/>
+              <img alt="182 votes - 15%" class="poll_img_on" height="10" src="/img/poll_bar.gif" width="15"/>
+              <img alt="" class="poll_img_off" height="8" src="/img/poll_null.gif" width="85"/>
+             </div>
+             <div class="channel_poll_response">
+              Other (6%)
+              <br/>
+              <img alt="77 votes - 6%" class="poll_img_on" height="10" src="/img/poll_bar.gif" width="6"/>
+              <img alt="" class="poll_img_off" height="8" src="/img/poll_null.gif" width="94"/>
+             </div>
+             <div class="channel_poll_buttons">
+              1185 votes.
+             </div>
+             <br/>
+             <b>
+              <a href="/mod/poll/past.cfm">
+               Past Polls
+              </a>
+             </b>
+            </div>
+           </div>
+          </div>
+          <!-- END MODULE: Poll -->
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="myGWContentRow" id="myGWFooterRow">
+     <div class="col-fixed header-sidebar">
+      <div class="sidebarLogo">
+       <a href="http://www.gwu.edu">
+        <img alt="The George Washington University" border="0" height="76" hspace="10" src="/images/common/gwlogo_new.png" vspace="10" width="100"/>
+       </a>
+      </div>
+     </div>
+     <div class="col-fixed2 bg-white" id="myGWFooter">
+      <div>
+       <div>
+        <hr noshade="" size="1"/>
+        <div>
+         <a href="/tos.cfm">
+          Terms of Service
+         </a>
+         |
+         <a href="/mod/help">
+          Site Help
+         </a>
+         |
+         <a href="/mod/feedback" target="_blank">
+          Contact Us
+         </a>
+        </div>
+        <div>
+         © 2019, The George Washington University
+         <br/>
+         1918 F Street, NW; Washington, DC 20052. Phone: (202) 994-GWGW (4949)
+         <br/>
+         Site Maintained by
+         <a href="http://it.gwu.edu">
+          Division of IT
+         </a>
+         <br/>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="clearfix">
+    </div>
+   </div>
+   <div class="clearfix">
+   </div>
+   <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+					document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   </script>
+   <script type="text/javascript">
+    // code: portal
+					try {
+						var pageTracker = _gat._getTracker("UA-737548-5");
+						pageTracker._trackPageview();
+					} catch(err) {}
+   </script>
+   <script src="https://siteimproveanalytics.com/js/siteanalyze_67741177.js">
+   </script>
+  </div>
+ </body>
+</html>
+

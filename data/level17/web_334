@@ -1,0 +1,359 @@
+https://ris01.uthsc.edu/
+<!DOCTYPE html>
+<html>
+ <head>
+  <script src="js/common.js" type="text/javascript">
+  </script>
+  <script charset="utf-8" src="jquery/jquery-generic.js" type="text/javascript">
+  </script>
+  <script charset="utf-8" src="jquery/caps/jquery.caps.js" type="text/javascript">
+  </script>
+  <script charset="utf-8" src="jquery/jquery.hoverIntent.minified.js" type="text/javascript">
+  </script>
+  <script charset="utf-8" src="jquery/bgiframe/jquery.bgiframe.min.js" type="text/javascript">
+  </script>
+  <script charset="utf-8" src="jquery/btooltip/jquery.bt.js" type="text/javascript">
+  </script>
+  <script src="js/Login.js" type="text/javascript">
+  </script>
+  <title>
+   iRIS: Log In
+  </title>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="-1" http-equiv="Expires"/>
+  <meta content="no-store,no-cache, must-revalidate,max-age=0" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="0" http-equiv="Expires"/>
+  <link href="css/iris_master.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   document.write('<link rel="stylesheet" type="text/css" href="css/ui_1.css">')
+
+
+	if ( true  && '' != '' )
+	{
+		top.location='System_Info.jsp?s=1552201088389';
+	}
+
+
+
+function verify_form()
+{
+	if (!document.THEFORM.USER_ID.value && !document.THEFORM.PASSWORD.value)
+	{
+		no_id_and_pw();
+		return false;
+	}
+	else if (!document.THEFORM.USER_ID.value)
+	{
+		no_id();
+		return false;
+	}
+	else if (!document.THEFORM.PASSWORD.value)
+	{
+		no_pw();
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function no_id_and_pw()
+{
+	var msg = "You must enter your User ID and Password.\n\nIf you don't know them, please contact\nyour site's System Administrator.\nOtherwise, click OK to try again.\n\n";
+	alert(msg);
+	document.THEFORM.USER_ID.focus();
+}
+
+function no_id()
+{
+	var msg = "You must enter your User ID.\n\nIf you don't know your User ID, please contact\nyour site's System Administrator.\nOtherwise, click OK to try again.\n\n";
+	alert(msg);
+	document.THEFORM.USER_ID.focus();
+}
+
+function no_pw()
+{
+	var msg = "You must enter your Password.\n\nIf you can't remember your Password, please contact\nyour site's System Administrator.\nOtherwise, click OK to try again.\n\n";
+	alert(msg);
+	document.THEFORM.PASSWORD.focus();
+}
+
+function iforgot()
+{
+	var msg = "Please contact\nYour sites System Administrator.\n\n";
+	alert(msg);
+}
+
+
+function Show_password( )
+{
+	pos_x = (screen.width - 800)/2;
+	pos_y = (screen.height - 500)/2;
+
+		window.open( "System_Login_Forgot.jsp?partition_id=1&init=Yes", "", "status=no,toolbar=no,location=no,left="+pos_x+",top="+pos_y+",screenX="+pos_x+",screenY="+pos_y+",menu=no,scrollbars,width=800,height=500");
+
+	
+}
+
+
+function Show_System(  )
+{
+	pos_x = (screen.width - 800)/2;
+	pos_y = (screen.height - 600)/2;
+	
+
+		window.open( "browser_requirements.jsp?partition_id=1&s=1552201088389", "", "status=no,toolbar=no,location=no,left="+pos_x+",top="+pos_y+",screenX="+pos_x+",screenY="+pos_y+",menu=no,scrollbars,width=800,height=600");
+
+	
+}
+
+function Show_Terms( )
+{
+	pos_x = (screen.width - 800)/2;
+	pos_y = (screen.height - 600)/2;
+	
+	window.open( "terms_of_use.html?s=1552201088389", "", "status=no,toolbar=no,location=no,left="+pos_x+",top="+pos_y+",screenX="+pos_x+",screenY="+pos_y+",menu=no,scrollbars,width=800,height=600");
+}
+
+function Show_Privacy( )
+{
+	pos_x = (screen.width - 800)/2;
+	pos_y = (screen.height - 600)/2;
+	
+	window.open( "privacy.html?s=1552201088389", "", "status=no,toolbar=no,location=no,left="+pos_x+",top="+pos_y+",screenX="+pos_x+",screenY="+pos_y+",menu=no,scrollbars,width=800,height=600");
+}
+
+function showResolutionInstructions()
+{
+	pos_x = (screen.width - 800)/2;
+	pos_y = (screen.height - 600)/2;
+	
+	window.open( "resolutionChangeInstructions.html?s=1552201088389", "", "status=no,toolbar=no,location=no,left="+pos_x+",top="+pos_y+",screenX="+pos_x+",screenY="+pos_y+",menu=no,scrollbars,width=600,height=400");
+}
+
+if(top.location != location)
+{
+	top.location.href = document.location.href;
+}
+
+function closeMe(id)
+{
+	document.getElementById(id).innerHTML='';
+}
+
+
+function handleError()
+{
+
+		if(document.THEFORM.USER_ID.value == '')
+		{
+			document.THEFORM.USER_ID.focus();
+		}
+		else
+		{
+			document.THEFORM.PASSWORD.focus();
+			
+		}
+
+	
+
+}
+
+
+
+$(document).ready(function()
+{
+	$('#caps_tip').bt({ trigger: 'none', fill: '#F7F7F7', strokeStyle: '#B7B7B7', spikeLength: 10, spikeGirth: 10, padding: 8, cornerRadius: 5, cssStyles: { fontFamily: '"lucida grande",tahoma,verdana,arial,sans-serif', fontSize: '11px' }, positions: [ 'right', 'bottom', 'left' ] });
+	$('#PASSWORD').caps(function(caps)
+	{
+		
+		//if(jQuery.browser.safari) return; // Safari already indicates caps lock
+		
+		try
+		{
+			if(caps)
+			{
+				$('#caps_tip').btOn();
+			}
+			else
+			{
+				$('#caps_tip').btOff();
+			}
+		}catch(ex){}
+	});
+});
+
+window.name = '';
+  </script>
+ </head>
+ <body onload="handleError()" style="background-color: #FFFFFF; margin:0; ">
+  <div style="color:white;">
+   .
+  </div>
+  <form action="Login_Post.jsp" method="POST" name="THEFORM" onsubmit="return verify_form()">
+   <div id="cdiv" style=" margin:0 auto; width:500px; text-align:center; display:">
+    <table style=" width:100%;">
+     <tr>
+      <td style=" width:100%; text-align:left; font-size:24px; font-weight:bold; font-family:Arial,Helvetica,sans-serif; color:#000000;">
+       Log In
+      </td>
+     </tr>
+     <tr>
+      <td id="warning" style=" width:100%;">
+      </td>
+     </tr>
+     <tr>
+      <td style="height:350px; width:100%; background-image:url('images/iMedRIS_logon.png'); background-repeat:no-repeat;">
+       <div style=" float:right; margin-top:125px; padding:15px; text-align:left;width:100px; font-weight:bold; font-family:Arial,Helvetica,sans-serif;">
+        <table class="login_table" style="width:100%;">
+         <tr>
+          <td style=" width:100%;  font-weight:bolder; font-family:Arial,Helvetica,sans-serif;">
+           User ID:
+          </td>
+         </tr>
+         <tr>
+          <td>
+           <input autocomplete="OFF" maxlength="64" name="USER_ID" size="14" style="width:90px;"/>
+          </td>
+         </tr>
+         <tr>
+          <td style=" width:100%; font-weight:bolder; font-family:Arial,Helvetica,sans-serif;">
+           Password:
+          </td>
+         </tr>
+         <tr>
+          <td style="white-space:nowrap;">
+           <input autocomplete="OFF" id="PASSWORD" maxlength="64" name="PASSWORD" size="14" style="width:90px" type="password"/>
+           <div class="tooltip" id="caps_tip" title="Your CAPSLOCK is on.">
+           </div>
+          </td>
+         </tr>
+         <tr>
+          <td>
+          </td>
+          <input name="PARTITION_ID" type="hidden" value="1">
+          </input>
+         </tr>
+         <tr>
+          <td colspan="2" style="text-align:center;">
+           <input id="button1" style="font-family: Verdana; font-size: 12pt; font-weight: bold;" type="submit" value="Log In"/>
+          </td>
+         </tr>
+        </table>
+       </div>
+      </td>
+     </tr>
+    </table>
+   </div>
+   <div style="text-align:center; width:100%; height:100%;">
+    <table style="margin: 0 auto;  font-family:Arial,Helvetica; font-size:13px; ">
+     <tr>
+      <td class="login_table_bottom" style="text-align:center;">
+       <a href="#" onclick="Show_System();return false;" style="font-weight:bolder;">
+        System/Browser Requirements
+       </a>
+      </td>
+     </tr>
+    </table>
+   </div>
+   <div style=" width:100%; height:100%;">
+    <table style="width:600px; margin: 0 auto; ">
+     <tr>
+      <td colspan="2">
+       <hr/>
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2" style=" vertical-align:text-top;font-size:14px; font-family:Arial,Helvetica,sans-serif;">
+       <br/>
+       <br/>
+      </td>
+     </tr>
+     <tr>
+      <td style=" font-size:10px; font-family:Arial,Helvetica,sans-serif;">
+       <a href="#" onclick="Show_Terms();return false;">
+        Terms of Use
+       </a>
+       |
+       <a href="#" onclick="Show_Privacy();return false;">
+        Privacy Statement
+       </a>
+       <br/>
+       Copyright Â© 2001-2018
+       <a href="https://www.imedris.com" target="_blank">
+        iMedRIS Data Corporation.
+       </a>
+       All rights reserved.
+       <br/>
+       Version 11.01dev Build 74 Updated 2018/10/04 13:31
+      </td>
+      <td>
+      </td>
+     </tr>
+    </table>
+   </div>
+   <input name="TIMEZONE_OFFSET" type="hidden" value="">
+    <input name="DST" type="hidden" value="">
+     <input name="FORM_ACTION" type="hidden" value="SUBMIT"/>
+    </input>
+   </input>
+  </form>
+  <script>
+   var visitortime = new Date();
+var fsa = new Date;
+var lso = new Date;
+
+fsa.setMonth(2); // March
+fsa.setDate(1);
+for (i = 0 ; i < 6; i++)
+{
+	if(fsa.getDay() == 0 )
+		break;
+	else
+	fsa.setDate(fsa.getDate()+1);//First Sunday
+}
+fsa.setDate(fsa.getDate()+7); // add a week
+
+lso.setMonth(10); // November
+lso.setDate(1);
+for (i = 0 ;i< 6; i++)
+{
+	if(lso.getDay() == 0 )
+		break;
+	else
+	fsa.setDate(lso.getDate()+1); //first Sunday
+}
+
+day = lso.getDay();
+lso.setDate(31-day);
+
+var offset = 0;
+offset = Math.max(fsa.getTimezoneOffset()/60, lso.getTimezoneOffset()/60);
+document.THEFORM.TIMEZONE_OFFSET.value = (offset *-1)  ;//client - GTM
+
+
+
+
+var winter = new Date(2007,01,01);
+var summer = new Date(2007,07,01);
+var now = new Date();
+
+var winterOffset = winter.getTimezoneOffset();
+var summerOffset = summer.getTimezoneOffset();
+var nowOffset = now.getTimezoneOffset();
+
+if((nowOffset == summerOffset) && (nowOffset != winterOffset))
+{
+	//daylight savings in effect, add one hour
+	document.THEFORM.DST.value = 1;
+}
+else
+{
+	document.THEFORM.DST.value = 0;
+}
+  </script>
+ </body>
+</html>
+

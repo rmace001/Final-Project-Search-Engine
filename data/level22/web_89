@@ -1,0 +1,372 @@
+https://parking.wsu.edu/
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   Washington State University Parking
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <link href="https://parking.wsu.edu/resources/index.php?cmd=get_css&amp;css=common.css&amp;version=c89a253a0aaef497711cac04d6f0c6d3" rel="stylesheet" type="text/css"/>
+   <link href="https://parking.wsu.edu/resources/index.php?cmd=get_css&amp;css=home.css&amp;version=c89a253a0aaef497711cac04d6f0c6d3" rel="stylesheet" type="text/css"/>
+   <style type="text/css">
+   </style>
+   <script type="text/javascript">
+    var URL_ROOT = 'https://parking.wsu.edu/';
+   </script>
+   <link href="https://parking.wsu.edu/resources/index.php?cmd=get_favicon" rel="shortcut icon" type="image/png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-1982230-4">
+    </script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-1982230-4');
+    </script>
+   </link>
+  </meta>
+ </head>
+ <body>
+  <a class="skip_to_main_content btn btn-primary" href="#main_content">
+   Skip to main content
+  </a>
+  <header aria-label="Page Header">
+   <div class="mini" id="header">
+   </div>
+   <div data-show_button_at="90" id="countdown_container" role="status">
+   </div>
+   <script id="countdown_template" type="text/template">
+    <% if (num_locks > 0) { %>        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <% if (isoDateToMilliseconds(expire_time) > Date.now()) { %>                        <span id="countdown_time"></span>
+                        <span id="countdown_description">remaining to complete order</span>
+                    <% } else { %>                        Order Time Expired
+                    <% } %>                                            <button class="extend_btn btn btn-default btn-xs">I need more time</button>
+                                    </div>
+            </div>
+        </div>
+    <% } %>
+   </script>
+   <div class="modal fade " id="items_removed_from_cart_by_lock_dialog" role="alertdialog" tabindex="0">
+    <div class="modal-dialog">
+     <div class="modal-content">
+      <div class="modal-header">
+       <button aria-label="Close" class="close aria-tooltip" data-dismiss="modal" type="button">
+        <span aria-hidden="true">
+         ×
+        </span>
+       </button>
+       <div class="h4 modal-title" role="heading">
+        Items removed from cart
+       </div>
+      </div>
+      <div class="modal-body" role="main">
+       Item(s) have become unavailable and have been removed from your cart
+      </div>
+      <div class="modal-footer" role="navigation">
+       <button class="btn btn-default close-button" data-dismiss="modal" type="button">
+        Close
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <script id="header_template" type="text/template">
+   <div id="upper_header">
+        <div class="container">
+            <div class="row">
+                <div id="upper_left_header" class="col-xs-7 col-sm-8">
+                    <a href='https://parking.wsu.edu/'>
+                        <div class="logo_container single_image_header">
+    <img id="site_logo" src="https://parking.wsu.edu/resources/index.php?cmd=get_site_logo" alt="logo"/>
+</div>
+                    </a>
+                </div>
+                <div id="upper_right_header" class="col-xs-5 col-sm-4 text-right">
+                    <a id="shopping_cart_summary"
+                       href="https://parking.wsu.edu/cart/index.php"
+                       class="aria-tooltip <% if(cart.num_cart_items > 0) { %>text-primary<% } %>"
+                       aria-label="Shopping cart <% if (cart.num_cart_items > 0) { %>contains <%= cart.num_cart_items %> item<% if (cart.num_cart_items > 1) { %>s<% } %> for <%= formatDecimal128Currency(cart.total) %> total<% } %>">
+                        <% if (cart.num_cart_items > 0) { %>                            <span id="num_cart_items" class="badge" aria-hidden="true"><%= cart.num_cart_items %></span>
+                        <% } %>                        <div class=" icon icon-black"><div class=" sprite-image icon-shopping_cart" aria-hidden="true"></div></div>
+                        <% if (cart.num_cart_items > 0) { %>                            <span id="cart_total" aria-hidden="true"><%= formatDecimal128Currency(cart.total) %></span>
+                        <% } %>                    </a>
+                                            <% if (user.logged_in) { %>                            <% if (user.can_logout) { %>                                <button type="button" id="login_logout_link" data-cmd="logout">Logout</button>
+                            <% } %>                        <% } else { %>                            <button type="button" id="login_logout_link" data-cmd="login">Login</button>
+                        <% } %>                                    </div>
+            </div>
+        </div>
+    </div>
+    <div id="lower_header">
+                <div class="container">
+            <div class="row">
+                <% if (user.logged_in) { %>                    <div class="col-xs-1 mobile_menu_container">
+                        <button id="mobile_menu"
+                                class="aria-tooltip"
+                                aria-expanded="false"
+                                aria-label="Toggle Main Menu">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
+                    </div>
+                    <div id="logged_in_as" class="col-xs-11 text-right">
+                        
+                            <% if (account.p_contact != null && ((account.p_contact.first_name != null) || (account.p_contact.last_name != null))) { %>                                Logged in as <%- account.p_contact.first_name %> <%- account.p_contact.last_name %>                            <% } else if(account.account_number != null) { %>                                Logged in as account # <%- account.account_number %>                            <% } %>                        
+                    </div>
+                <% } %>            </div>
+        </div>
+    </div>
+  </script>
+  <div class="container" id="main_content_container">
+   <div class="row">
+    <div class="col-md-3" id="menu_placeholder">
+    </div>
+    <script id="menu_template" type="text/template">
+     <%        if (user.logged_in) {
+            $("#main_content").removeClass('col-md-12').addClass("col-md-9");
+    %>        <nav id="menu" class="navbar">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="<% if (url === URL_ROOT ) { %>active<% } %>"
+                    role="presentation" aria-labelledby="account_menu_label">
+                    <a href="https://parking.wsu.edu/">
+                        <div class=" icon"><div class=" sprite-image icon-account" aria-hidden="true"></div></div>
+                        <span id="account_menu_label">Account</span>
+                    </a>
+                </li>
+                                    <li class="<% if (url === URL_ROOT + 'vehicles/index.php' ) { %>active<% } %>"
+                        role="presentation" aria-labelledby="vehicles_menu_label">
+                        <a href="https://parking.wsu.edu/vehicles/index.php">
+                            <div class=" icon"><div class=" sprite-image icon-car" aria-hidden="true"></div></div>
+                            <span id="vehicles_menu_label">Vehicles</span>
+                            <% if (account_vehicles.length > 0) { %>                                <span class="badge"><%= account_vehicles.length %></span>
+                            <% } %>                        </a>
+                    </li>
+                                                    <li class="<% if (url === URL_ROOT + 'tickets/index.php' ) { %>active<% } %>"
+                        role="presentation" aria-labelledby="tickets_menu_label">
+                        <a href="https://parking.wsu.edu/tickets/index.php">
+                            <div class=" icon"><div class=" sprite-image icon-ticket" aria-hidden="true"></div></div>
+                            <span id="tickets_menu_label">Tickets</span>
+                            <% if (unpaid_account_tickets.tickets.length > 0) { %>                                <span class="badge"><%= unpaid_account_tickets.tickets.length %></span>
+                            <% } %>                        </a>
+                    </li>
+                                                    <li class="<% if (url === URL_ROOT + 'permits/index.php' ) { %>active<% } %>"
+                        role="presentation" aria-labelledby="permits_menu_label">
+                        <a href="https://parking.wsu.edu/permits/index.php">
+                            <div class=" icon"><div class=" sprite-image icon-permit" aria-hidden="true"></div></div>
+                            <span id="permits_menu_label">Permits</span>
+                            <% if (active_account_permits.permits.length > 0) { %>                                <span class="badge"><%= active_account_permits.permits.length %></span>
+                            <% } %>                        </a>
+                    </li>
+                                                            </ul>
+        </nav>
+    <% } %>
+    </script>
+    <main aria-label="Main Content" class="col-md-12" id="main_content">
+     <div class="row">
+      <div id="home_screen">
+       <div class="col-xs-12 col-md-8 ">
+        <div class="shortcut_buttons_container " id="shortcut_buttons">
+        </div>
+        <script id="shortcut_buttons_template" type="text/template">
+         <nav class="container" aria-label="Shortcut Buttons">
+        <div class="row">
+                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && false) ||
+                                (!user.logged_in && true)) { %>                                <div id="ACCOUNT_VIEW" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/?cmd=view_account">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-account" aria-hidden="true"></div></div>
+                                        <div id="ACCOUNT_VIEW_label" class="h4">View/Manage Account</div>
+                                        <div id="ACCOUNT_VIEW_description" class="small">View and manage your account</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && false)) { %>                                <div id="ACCOUNT_EDIT_CONTACT" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/contacts/">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-contact" aria-hidden="true"></div></div>
+                                        <div id="ACCOUNT_EDIT_CONTACT_label" class="h4">Edit Contact Information</div>
+                                        <div id="ACCOUNT_EDIT_CONTACT_description" class="small">Update or edit contact information</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                
+
+                                                                                                                                                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="TICKET_PAY" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/tickets/">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-customer_web_portal" aria-hidden="true"></div></div>
+                                        <div id="TICKET_PAY_label" class="h4">Pay Ticket</div>
+                                        <div id="TICKET_PAY_description" class="small">Pay a ticket online</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="TICKET_APPEAL" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/tickets/?cmd=view_all_appeal_eligible">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-gavel" aria-hidden="true"></div></div>
+                                        <div id="TICKET_APPEAL_label" class="h4">Appeal Ticket</div>
+                                        <div id="TICKET_APPEAL_description" class="small">File a request to appeal a ticket</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="PERMIT_REQUEST" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/permits/?cmd=new">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-permit" aria-hidden="true"></div></div>
+                                        <div id="PERMIT_REQUEST_label" class="h4">Order Permits</div>
+                                        <div id="PERMIT_REQUEST_description" class="small">Order a new permit</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                                                                        
+
+                                                    <% if ((user.logged_in && false) ||
+                                (!user.logged_in && true)) { %>                                <div id="PERMIT_REQUEST_NON_AUTH" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/permits/?cmd=new_non_auth">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-permit" aria-hidden="true"></div></div>
+                                        <div id="PERMIT_REQUEST_NON_AUTH_label" class="h4">Order Visitor Permits</div>
+                                        <div id="PERMIT_REQUEST_NON_AUTH_description" class="small">Order a new visitor permit</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                        
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && false)) { %>                                <div id="PERMIT_GUEST_INVITE" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/permits/?cmd=new_guest_invite">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-permit" aria-hidden="true"></div></div>
+                                        <div id="PERMIT_GUEST_INVITE_label" class="h4">Send New Permit Invites</div>
+                                        <div id="PERMIT_GUEST_INVITE_description" class="small">Send a new permit invite</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && false)) { %>                                <div id="PERMIT_CLAIM_INVITE" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/permits/?cmd=claim_permit_invite">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-permit" aria-hidden="true"></div></div>
+                                        <div id="PERMIT_CLAIM_INVITE_label" class="h4">Claim Permit Invite</div>
+                                        <div id="PERMIT_CLAIM_INVITE_description" class="small">Claim a permit invite</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="PERMIT_EVENT_PERMIT" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/permits/?cmd=new_event">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-event" aria-hidden="true"></div></div>
+                                        <div id="PERMIT_EVENT_PERMIT_label" class="h4">Purchase Event Permit</div>
+                                        <div id="PERMIT_EVENT_PERMIT_description" class="small">Lookup and Purchase a Parking Permit for an Event</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                                                                        
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="VEHICLES_CHANGE_REQUEST" class="col-md-3 col-xs-6"
+                                     role="presentation">
+                                    <a class="btn btn-default" href="https://parking.wsu.edu/vehicles/?cmd=change_request">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-car" aria-hidden="true"></div></div>
+                                        <div id="VEHICLES_CHANGE_REQUEST_label" class="h4">Modify Account Vehicles</div>
+                                        <div id="VEHICLES_CHANGE_REQUEST_description" class="small">Modify vehicles on your account</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                
+
+                                                                                                                                                                                                                                                                            
+
+                                                                                                                                                                                                        
+        </div>
+    </nav>
+        </script>
+       </div>
+       <div class="col-xs-12 col-md-4">
+        <div aria-label="News" id="news_feed" role="region">
+         <div class="panel panel-default">
+          <div class="panel-body">
+           <a aria-label="Twitter Page" class="twitter-timeline" data-chrome="nofooter" href="https://twitter.com/WSUPullman">
+           </a>
+           <script async="" charset="utf-8" src="//platform.twitter.com/widgets.js">
+           </script>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="col-xs-12">
+       </div>
+      </div>
+     </div>
+    </main>
+   </div>
+  </div>
+  <div class="container" id="sub_content">
+  </div>
+  <script src="https://parking.wsu.edu/resources/js/common.js?version=c89a253a0aaef497711cac04d6f0c6d3">
+  </script>
+  <script src="https://parking.wsu.edu/resources/js/home.js?version=c89a253a0aaef497711cac04d6f0c6d3">
+  </script>
+  <footer aria-label="Page Footer" class="footer">
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-7">
+     </div>
+     <div class="col-xs-12 col-sm-5 text-right">
+      <a href="http://www.wsu.edu" id="copyright">
+       Washington State University
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <div id="form_validation_error_container">
+  </div>
+  <script id="form_validation_error_template" type="text/template">
+   <div id="form_validation_error" class="modal fade "
+     data-keyboard="false" data-backdrop="static"     role="alertdialog" tabindex="0">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                            <div class="modal-header">
+                                        <div class="h4 modal-title" role="heading">Invalid data detected</div>
+                </div>
+                                        <div class="modal-body" role="main">
+                    An error was found in your form, please ensure all required fields are populated before continuing.
+                </div>
+                                </div>
+    </div>
+</div>
+  </script>
+  <div id="please_wait_dialog_container">
+  </div>
+  <script id="please_wait_dialog_template" type="text/template">
+   <div id="<%= uniqid() %>" class="modal fade "
+     data-keyboard="false" data-backdrop="static"     role="alertdialog" tabindex="0">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                            <div class="modal-header">
+                                        <div class="h4 modal-title" role="heading"><%if (isset(title)) { %><%- title %><% } else { %>Please Wait...<% } %></div>
+                </div>
+                                        <div class="modal-body" role="main">
+                            <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-primary active" role="progressbar" style="width:100%"></div>
+        </div>
+    
+                </div>
+                                </div>
+    </div>
+</div>
+  </script>
+ </body>
+</html>

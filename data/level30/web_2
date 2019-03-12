@@ -1,0 +1,148 @@
+https://voicemail.its.utexas.edu
+<html lang="en">
+ <title>
+  Login to UT Voicemail
+ </title>
+ <head>
+  <link href="/VXView/res/co/utexas/styles/default.css" rel="stylesheet" type="text/css"/>
+  <script language="javascript">
+   var invalidInput = "Invalid input: ";
+			var requireInt = "requires integer.";
+			var accountLabel = "Account";
+	    
+		  	function checkBrowser()
+		  	{
+		      	var goodBrowser=false;
+		        var i, end;
+		        var version;
+		        if (navigator.appName.indexOf("WebTV") != -1)
+		        {
+		            goodBrowser = true;
+		        }
+		        else if ((i=navigator.userAgent.indexOf("MSIE")) != -1)
+		        {
+		            end = navigator.userAgent.indexOf(";",i);
+		            version = navigator.userAgent.substring(i+5,end);
+		            if (navigator.userAgent.indexOf("Mac") != -1)
+		            	goodBrowser = (version > 4.01);
+		            else
+		                goodBrowser = (version >= 4.0);
+		        }
+		        else if ((i=navigator.userAgent.indexOf("Mozilla/")) != -1)
+		        {
+		            end = navigator.userAgent.indexOf(" ",i);
+		            version = navigator.userAgent.substring(i+8,end);
+		            if (navigator.userAgent.indexOf("OS/2") != -1)
+		                goodBrowser = (version >= 2.02);
+		            else
+		                goodBrowser = (version >= 4.06);
+		        }
+		        if (!goodBrowser)
+		        {
+		           location.replace = "";
+		        }
+		  	}
+		  	
+		  	function login()
+			{
+				if (!validateDialNumber())
+					return false;
+			}
+	
+			function validateDialNumber()
+	        {
+			     var value =document.LoginForm.account.value;		
+			     var pattern = new RegExp("[^" + "0123456789\r\n" + "]");	
+			     var index = value.search(pattern);
+            	 if(index != -1)
+             	 {		
+			    	alert(invalidInput+" "+value+"\n"+accountLabel+" "+requireInt);	
+					document.LoginForm.account.focus();
+					return false;
+			 	 } 
+				 else 
+				 	return true;					
+			}
+		  	
+			function clearLogin()
+		  	{
+		    	document.LoginForm.account.value = ""
+		    	document.LoginForm.password.value = ""
+		    	document.LoginForm.account.focus();
+		  	}
+  </script>
+ </head>
+ <body class="login">
+  <form action="/VXView/co/utexas/login" method="post" name="LoginForm" onsubmit="return login()">
+   <input name="lastLogon" type="hidden" value="1552202059983"/>
+   <div id="logintopbanner">
+    <img src="/VXView/res/co/utexas/images/GENBAND_logo_splash.gif"/>
+   </div>
+   <div id="loginnav">
+   </div>
+   <div id="loginmain">
+    <table align="center" width="100%">
+     <tr>
+      <td align="center" colspan="6">
+       <img height="80" src="/VXView/res/co/utexas/images/EXPERiUS_logo.gif" width="250"/>
+      </td>
+     </tr>
+    </table>
+    <table align="center" class="logintable" width="100%">
+     <tr>
+      <td class="LoginTitle" colspan="6">
+       Login to UT Voicemail
+      </td>
+     </tr>
+     <tr>
+      <td align="right" class="fldname" width="10%">
+      </td>
+      <td align="left" class="fldname" width="25%">
+       <img src="/VXView/res/co/utexas/images/nav-bullet.gif"/>
+       Mailbox
+      </td>
+      <td align="center" width="33%">
+       <input class="login" maxlength="32" name="account" size="20" type="text" value=""/>
+      </td>
+      <td align="left" class="Warning" colspan="3" width="%">
+      </td>
+     </tr>
+     <tr>
+      <td align="right" class="fldname" width="10%">
+      </td>
+      <td align="left" class="fldname" width="25%">
+       <img src="/VXView/res/co/utexas/images/nav-bullet.gif"/>
+       PIN
+      </td>
+      <td align="center" width="33%">
+       <input class="login" maxlength="32" name="password" size="20" type="password" value=""/>
+      </td>
+      <td align="left" class="Warning" colspan="3" width="%">
+      </td>
+     </tr>
+     <tr>
+      <td align="center" class="Warning" colspan="6" valign="top">
+       <br/>
+      </td>
+     </tr>
+     <tr>
+      <td align="center" colspan="6" valign="top">
+       <input class="sbttnLogin" type="submit" value="Login"/>
+       <input class="sbttnLogin" name="clearOpt" onclick="javascript:clearLogin();" type="button" value="Clear"/>
+      </td>
+     </tr>
+    </table>
+   </div>
+  </form>
+  <script language="JavaScript" type="text/javascript">
+   <!--
+  var focusControl = document.forms["LoginForm"].elements["account"];
+
+  if (focusControl.type != "hidden" && !focusControl.disabled) {
+     focusControl.focus();
+  }
+  // -->
+  </script>
+ </body>
+</html>
+

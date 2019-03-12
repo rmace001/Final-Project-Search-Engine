@@ -1,0 +1,1071 @@
+https://events.d.umn.edu/
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>
+   Events Calendar - University of Minnesota Duluth
+  </title>
+  <meta content="Duluth home" name="description"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="719033375fdfd8fe-ffc0c28ec05bdf25-g9d3c5bb0a0dd3166-1a" name="google-translate-customization"/>
+  <meta content="Events Calendar - University of Minnesota Duluth" property="og:title"/>
+  <meta content="https://events.d.umn.edu/Online//default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=1C87EE4F-8A95-4D66-BCAE-D0BBF180494D&amp;BOparam::WScontent::loadArticle::context_id=undefined" property="og:url"/>
+  <meta content="Duluth home" property="og:description"/>
+  <meta content="Duluth Site" property="og:site_name"/>
+  <meta content="no" http-equiv="Imagetoolbar"/>
+  <link href="/ArticleMedia/Images/umn/umnfavicon-16x16.png?_7.20.0" rel="shortcut icon"/>
+  <link href="/ArticleMedia/Images/marketview-brand/home-screen-icon.png?_7.20.0" rel="apple-touch-icon"/>
+  <!-- inclusion of bootstrap specific CSS -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <link href="/lib/bootstrap/css/bootstrap.min.css?_7.20.0" rel="Stylesheet"/>
+  <!-- end of bootstrap specific CSS -->
+  <link href="../../content/images/branding/global.css?_=7.20.0" rel="stylesheet" type="text/css"/>
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="../../content/images/branding/global_IE.css?_7.20.0" type="text/css">
+<![endif]-->
+  <script language="Javascript">
+  </script>
+  <link href="/ArticleMedia/Files/CSS/avc-umn-duluth_091318_1.css?_=7.20.0" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Check whether cookies are enabled.
+	document.cookie = "TestCookie=1";
+	var testCookie = document.cookie;
+
+	// Try to retrieve the value we just set.
+	if (testCookie.indexOf("TestCookie=1") == -1)
+	{
+		
+		    document.location = "error.asp?nocookie=";
+		
+    }
+	else
+		document.cookie = "TestCookie=;expires=Thu, 01-Jan-1970 00:00:00 GMT";
+  </script>
+  <script type="text/javascript">
+   function setRSVPButtons(response, eventCode)
+{
+                var url = '/' + eventCode + '/invited?user=' + response.authResponse.userID + '&access_token=' + response.authResponse.accessToken;
+                 FB.api(url, 'get',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred: " + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                        if (response.data[0].rsvp_status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else if (response.data[0].rsvp_status == "unsure")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                        else
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).style.display = "inline";
+                            }
+                        }
+                    }
+                });
+}
+function setRSVPButtonsLogin(eventCode)
+{
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                setRSVPButtons(response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        setRSVPButtons(response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+
+function rsvpToFBEvent(status, response, eventCode)
+{
+
+                var url = '/' + eventCode + '/' + status + '?access_token=' + response.authResponse.accessToken;
+
+                 FB.api(url, 'post',
+                 function (response) {
+                    if (!response || response.error) {
+                      new showAlertPopup("Error occurred:" + response.error.message, "", "", "", "", "");
+                    }
+                    else
+                    {
+                      gaTrackEvent('Facebook', 'RSVP to Event Success');
+
+                        if (status == "attending")
+                        {
+                            var buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                        else if (status == "maybe")
+                        {
+                            var buttons = document.getElementsByName("maybeButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = true;
+                            }
+                            buttons = document.getElementsByName("attendingButton" + eventCode);
+                            for (var x = 0; x < buttons.length; x++)
+                            {
+                                buttons.item(x).disabled = false;
+                            }
+                        }
+                    }
+                 });
+}
+
+function rsvpToFBEventLogin(status, eventCode) {
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                rsvpToFBEvent(status, response, eventCode);
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        rsvpToFBEvent(status, response, eventCode);
+                    } else {
+                    }
+                }, { scope: 'rsvp_event,email,user_groups,publish_stream' });
+            }
+        });
+        return true;
+}
+  </script>
+  <script src="../Common/browser_detect.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var genericConfirmationMessage = "Are you sure?";
+  var offerExpired = "Your order has expired.";
+  var admissionsExpired = "An offer on one of your tickets has expired.";
+  var alertHeaderText = "Attention";
+  var termsHeaderText = "Terms and Conditions";
+  var helpHeaderText = "Help";
+  var sectionHeaderText = "More Information";
+
+  var okayButtonText = "OK";
+  var cancelButtonText = "Cancel";
+  var acceptButtonText = "Accept";
+  var declineButtonText = "Decline";
+  var closeButtonText = "Close";
+
+  var sTokenName = 'sToken';
+  var sToken = '1,c782013d,5c84b7fa,32F71944-A396-4455-853E-8E3249EFBF3E,0Aus4Cfxo3nKl0XnxaTun8GKH4g=';
+  </script>
+  <script src="../Common/online-jscript.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/online-navigation-jscript.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/widgetParent.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /*
+
+*/
+function displayMessage(onClickEvent)
+{
+
+}
+
+function tsOrderChanged( url )
+{
+  new showConfirmPopup( '', 'The current order has unsaved changes that may be lost. Continue anyway?', function () { document.location = url }, '' );
+}
+
+// Used for drop-down menu in IE 6
+<!--//--><![CDATA[//><!--
+function startList() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("menuTop");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.id=="menuTopItem") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+
+                node.onfocus=function(){
+                    this.className+=" over";
+                }
+
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+
+                node.onblur=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+//--><!]]>
+
+var plusApi_loaded = false;
+var twitterApi_loaded = false;
+var fbApi_loaded = false;
+
+    fbApi_loaded = true;
+
+    plusApi_loaded = true;
+
+    twitterApi_loaded = true;
+  </script>
+  <noscript>
+   <meta content="0; URL=error.asp" http-equiv="refresh"/>
+  </noscript>
+  <script type="text/javascript">
+   var longMonthsOfYear = new Array();
+longMonthsOfYear[ 0 ] = "January";
+longMonthsOfYear[ 1 ] = "February";
+longMonthsOfYear[ 2 ] = "March";
+longMonthsOfYear[ 3 ] = "April";
+longMonthsOfYear[ 4 ] = "May";
+longMonthsOfYear[ 5 ] = "June";
+longMonthsOfYear[ 6 ] = "July";
+longMonthsOfYear[ 7 ] = "August";
+longMonthsOfYear[ 8 ] = "September";
+longMonthsOfYear[ 9 ] = "October";
+longMonthsOfYear[ 10 ] = "November";
+longMonthsOfYear[ 11 ] = "December";
+  </script>
+  <script src="../Common/Widgets/articleWidgets.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/TabularSearchResultsWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/SearchFilterWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/LoginWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/VideoWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/Tk3DDVWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/CalendarWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/twitterWidgets.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googlePlusOneWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/googleMapsWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookSocialWidgets.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/facebookEvent.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="../Common/Widgets/instagramFeedWebWidget.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   function loadLocalPage()
+{
+
+}
+
+var articleContext = {
+  searchHeaders : [ "Id", "Object Type", "Type", "Category", "Name", "Description", "Short Description", "Start Date", "End Date", "On Sale Date", "Sales Status", "Availability", "Available Number", "Keywords", "Additional Info", "Group", "Image 1", "Image 2", "Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9", "Data 10", "Data 11", "Data 12", "Data 13", "Data 14", "Data 15", "Data 16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "Organization Short Description", "Sales Type", "Options", "Street", "City", "Province / State", "Postal Code", "Country", "Longitude", "Latitude", "Venue ID", "Venue Name", "Venue Description", "Venue Short Description", "Venue Group", "Venue Data 1", "Venue Data 2", "Venue Data 3", "Venue Data 4", "Venue Data 5", "Venue Data 6", "Venue Data 7", "Venue Data 8", "Venue Data 9", "Venue Data 10", "Venue Data 11", "Venue Data 12", "Series Name", "Minimum Price", "Maximum Price", "Upsell Article", "Add-on Article", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "Venue Organization Id", "Meta Description", "" ],
+  searchNames : [ "id", "object_type", "type", "category", "name", "description", "short_description", "start_date", "end_date", "on_sale_date", "sales_status", "availability_status", "availability_num", "keywords", "additional_info", "group", "image1", "image2", "data1", "data2", "data3", "data4", "data5", "data6", "data7", "data8", "data9", "data10", "data11", "data12", "data13", "data14", "data15", "data16", "filter1", "filter2", "filter3", "filter4", "filter_parent1", "filter_child2", "filter_parent2", "filter_child1", "multifilter1", "multifilter2", "organization_short_description", "sales_type", "options", "street", "city", "state", "zip", "country", "longitude", "latitude", "venue_id", "venue_name", "venue_description", "venue_short_description", "venue_group", "venue_data1", "venue_data2", "venue_data3", "venue_data4", "venue_data5", "venue_data6", "venue_data7", "venue_data8", "venue_data9", "venue_data10", "venue_data11", "venue_data12", "series_name", "min_price", "max_price", "upsell_article_id", "addon_article_id", "email", "e_address1", "e_address2", "e_address3", "customer_id", "tracking_code", "twitter_search_term", "external_reference_code", "access", "organization_id", "meta_description", "" ],
+  searchResults : [ 
+    [ "392BBEC6-5AD3-4713-A1BB-0EEF249F5609", "P", "", "", "11818-2019-02-27T14:14:17.567-Glensheen Unplugged", "Glensheen Unplugged returns to the Amusement Room! This year\'s intimate acoustic house show features local musicians and their unique interpretations of folk music.<br />\n<br />\n3.6 | Sonja Bjordal of Feeding Leroy<br />\n3.13 | kyle ollah<br />\n3.20 | Laura Sellner of Superior Siren<br />\n3.27 | Gavin St. Clair<br />\n<br />\nDOORS 7:00PM | MUSIC 7:30PM | FREE<br />\nALL AGES | CAPACITY 75 | CASH BAR<br />\n<br />\nBest arrive early to ensure your seat within our intimate listening room as this series usually hits capacity by the time music hits the Amusement Room Fireplace Stage. A cash bar will provide beverages for enjoyment. See you at the show!", "Glensheen Unplugged", "Wednesday, March 13, 2019 07:00 PM", "", "", "S", "U", "-1", "umdfeature", "article/event_b/392BBEC6-5AD3-4713-A1BB-0EEF249F5609", "", "/content/images/3CDCAFFC-C217-4A5E-9886-BE5CEB479CAF/glplug.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "", "", "", "", "", "", "", "", "", "Glensheen, the Historic Congdon Estate", [], ["1","3"], "3300 London Road", "Duluth", "MN", "55804", "USA", "-92.051128", "46.815223", "593BFBBC-7219-4DE5-B8FC-4547C7F9EE6E", "1152-2015-07-29T16:30:03.881-Glensheen, the Histo-2015-11-05T16:58:12.179-Glensheen, the Historic Co", "", "Glensheen, the Historic Congdon Estate", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#glensheen", "", "Public", "BCC2D873-EC0C-4D21-8B17-7983AD4FE099", "", "" ],
+    [ "E9672447-8E36-47BA-BAC7-CE66C30AB600", "P", "", "", "1135-2019-02-14T23:32:54.524-Our Climate Futures:", "UMD will present \"Our Climate Futures: Meeting the Challenges in Duluth,\" a conference to address the climate challenges facing Minnesota. Sixteen sessions and a keynote address will be held over the course of the two days. Panelists will include representatives from academia, government, and businesses. The public is invited.<br />\n<br />\nOn March 19 sessions will be held at NRRI from noon-5pm and at UMD in the evening. On March 20 events will be held on the UMD campus.<br />\n<br />\nThe conference keynote speaker, Jesse Keenan, will speak on \"Destination Duluth: The Fact and Fiction of a Shared Climate Future.” Keenan\'s presentation is on Wednesday, March 20 at 7 pm in the Marshall Performing Arts Center.<br />\n<br />\nKeenan is a member of the faculty of the Graduate School of Design at Harvard. His work is focused on climate change adaptation and the built environment, including aspects of design, engineering, financing and planning.<br />\n<br />\nThe conference is hosted by the UMD Research Scholarship and Creative Activities Committee and Institute on the Environment - Duluth with financial support from the UMD Distinguished Visiting Speakers Series Endowment, University for Seniors, Natural Resources Research Institute, and Minnesota Sea Grant.&nbsp;<br />\n<br />\nFor free tickets to the keynote presentation, contact the MPAC box office at 218-726-8561. Need info? See &nbsp;<a href=\"https://docs.google.com/document/d/1t9ins1JL4Tu17Fm7e9hj4Cr8yI8jDc-Z_RWZI9zCuiM/edit\">Climate Futures Conference Program<\/a> &nbsp;|&nbsp;&nbsp; <a href=\"https://news.d.umn.edu/news-center/news/climate-futures-conference-site\">Climate Futures Conference Information<\/a>&nbsp; |&nbsp; <a href=\"http://z.umn.edu/climate-futures\">z.umn.edu/climate-futures<\/a><br />\n#UMDclimatefutures", "Climate Futures: Challenges in Duluth", "Tuesday, March 19, 2019 12:00 PM", "Tue, March 19, 2019 9:00 PM", "", "S", "U", "-1", "umdfeature", "article/event_b/E9672447-8E36-47BA-BAC7-CE66C30AB600", "", "/content/images/C8ABD183-4DA8-497C-8520-E35E22478181/Screen Shot 2019-02-14 at 11.07.29 PM.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - Swenson College of Science and Engineering", "", "", "conference", "", "Academics and Research", "", "", "Conference or Workshop", "UMD", [], ["1","3"], "5013 Miller Trunk Hwy", "Hermantown", "MN", "55811", "USA", "-92.20723220000002", "46.8359739", "6569DC20-5548-4369-9681-1501EDD1E657", "1135-2016-06-09T17:08:48.652-UMD-2016-10-27T19:07:48.487-Natural Resources Research Institute", "", "Natural Resources Research Institute", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#UMDclimatefutures", "", "Public", "2009DDA8-91CD-494A-AFA9-29FB5CC365C3", "", "" ],
+    [ "112875B2-60AF-4EDD-B159-32D4BE25A4E8", "P", "", "", "47379-2018-12-12T23:11:39.419-Visual Culture Lectu", "UMD Department of Art &amp; Design presents<br />\n<strong>Visual Culture Lecture Series<br />\nTuesday, March 19, 2019 | 6 pm | Dr Jill Casid |&nbsp;Montague 70<br />\nFree and open to the public<\/strong><br />\nJill H. Casid is Professor of Visual Studies at the University of Wisconsin-Madison where she founded and served as the first director of the Center for Visual Cultures. A historian, theorist, and practicing artist, she is the author of&nbsp;Sowing Empire: Landscape and Colonization&nbsp;and&nbsp;Scenes of Projection: Recasting the Enlightenment Subject&nbsp;and the edited collection&nbsp;Art History in the Wake of the Global Turn.&nbsp;Recent essays and articles have appeared in&nbsp;Women and Performance,&nbsp;TDR, the&nbsp;Journal of Visual Culture,&nbsp;Migration and the Contemporary Mediterranean,&nbsp;The Philosophical Salon,&nbsp;and&nbsp;Architecture is All Over. She is currently completing the two-book project&nbsp;Form at the Edges of Life.&nbsp; Dr. Casid is the Clark-Oakley Fellow for AY18-19 at the Clark Art Institute in Williamstown, MA.<br />\nMore information on her website:<br />\nWebsite:&nbsp;jillhcasid.net<br />\n<br />\nFor full listing of the 2018-2019 Visual Culture Lecture Series visit&nbsp;https://sfa.d.umn.edu/about/departments/department-art-design/art-design-news-events/vcls", "Visual Culture Lecture Series: Dr. Jill Casid", "Tuesday, March 19, 2019 06:00 PM", "Tue, March 19, 2019 7:30 PM", "", "S", "U", "-1", "umdad,umdfeature", "article/event_b/112875B2-60AF-4EDD-B159-32D4BE25A4E8", "", "/content/images/5FF0D562-3035-4C77-8A80-5CC332181F5E/VCLS_UMDEventCal_484x252.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - School of Fine Arts", "Art & Design", "", "Art", "", "Arts, Culture, and Design", "Art", "", "Lecture or Program", "School of Fine Arts", [], ["1","3"], "University of Minnesota Duluth", "Duluth", "MN", "55812", "USA", "-92.08281439999996", "46.8177225", "2752F52A-CD9B-40C0-BCB9-EC6C5D3888D3", "4118-2015-07-07T11:47:57.922-School of Fine Arts-2016-09-20T10:02:46.263-Montague 70", "", "Montague 70", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "EDBF014B-30FB-43B4-97C4-10E13AAFBF1A", "", "" ],
+    [ "AB7F8116-6525-4015-A2DB-41CCA1C11928", "P", "", "", "1135-2019-02-14T23:42:49.401-Climate Futures: Cha", "UMD will present \"Our Climate Futures: Meeting the Challenges in Duluth,\" a conference to address the climate challenges facing Minnesota. Sixteen sessions and a keynote address will be held over the course of the two days. Panelists will include representatives from academia, government, and businesses. The public is invited.<br />\n<br />\nOn March 19 sessions will be held at NRRI from noon-5pm and at UMD in the evening. On March 20 events will be held on the UMD campus.<br />\n<br />\nThe conference keynote speaker, Jesse Keenan, will speak on \"Destination Duluth: The Fact and Fiction of a Shared Climate Future.” Keenan\'s presentation is on Wednesday, March 20 at 7 pm in the Marshall Performing Arts Center.<br />\n<br />\nKeenan is a member of the faculty of the Graduate School of Design at Harvard. His work is focused on climate change adaptation and the built environment, including aspects of design, engineering, financing and planning.<br />\n<br />\nThe conference is hosted by the UMD Research Scholarship and Creative Activities Committee and Institute on the Environment - Duluth with financial support from the UMD Distinguished Visiting Speakers Series Endowment, University for Seniors, Natural Resources Research Institute, and Minnesota Sea Grant.&nbsp;<br />\n<br />\nFor free tickets to the keynote presentation, contact the MPAC box office at 218-726-8561. Need info? See &nbsp;Climate Futures Conference Program &nbsp;|&nbsp;&nbsp; Climate Futures Conference Information&nbsp; |&nbsp; z.umn.edu/climate-futures<br />\n#UMDclimatefutures", "Climate Futures: Challenges in Duluth", "Wednesday, March 20, 2019 08:00 AM", "Wed, March 20, 2019 9:00 PM", "", "S", "U", "-1", "umdfeature", "article/event_b/AB7F8116-6525-4015-A2DB-41CCA1C11928", "", "/content/images/C8ABD183-4DA8-497C-8520-E35E22478181/Screen Shot 2019-02-14 at 11.07.29 PM.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - Swenson College of Science and Engineering", "", "", "conference", "", "Academics and Research", "", "", "Conference or Workshop", "UMD", [], ["1","3"], "1215 Ordean Court", "Duluth", "MN", "55812", "USA", "-92.08310489999997", "46.8196099", "CB500B45-100E-43DC-ADC0-389E85A2E42A", "1135-2016-06-09T17:08:48.652-UMD-2016-08-09T07:33:31.502-Marshall Performing Arts Center", "", "Marshall Performing Arts Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#UMDclimatefutures", "", "Public", "2009DDA8-91CD-494A-AFA9-29FB5CC365C3", "", "" ],
+    [ "E995059E-01FA-456F-AE9B-D7E90C1F3C67", "P", "", "", "122766-2019-02-26T11:09:04.210-Guest Speaker, Dr. E", "Join us Wednesday, March 20, at 6:00 p.m. in the Library\'s 4th Floor Rotunda for this special Listening Project event with Dr. Elizabeth S. Parks. Listening is a valued part of communication across cultures, but values around listening vary from culture to culture. Find out more at this Listening Project presentation.<br />\n<br />\nElizabeth S. Parks is an Assistant Professor of Communication Studies and the Assistant Director of the Center for Public Deliberation, both at Colorado State University. A research affiliate with the Center for Intercultural Dialogue, her research and teaching blends social scientific and humanistic methods to better understand how we can improve ethical listening with people who are different than ourselves. Her first book, \"The Ethics of Listening: Creating Space for Sustainable Dialogue,\" was published in late 2018.<br />\n<br />\nThis event is hosted by the Library Listening Project and all are welcome. If you have questions about this event, or about the Listening Project in general, please contact contact Mags David at&nbsp;mdavid@d.umn.edu, or 218-726-8585. You can also learn more about the Listening Project on the Library <a href=\"https://lib.d.umn.edu/about/listening\">website<\/a>.&nbsp;<br />\n&nbsp;", "Guest Speaker, Dr. Elizabeth Parks: Authentic Listening Across Cultural Difference", "Wednesday, March 20, 2019 06:00 PM", "", "", "S", "U", "-1", "Communication,Library,Listening Project,umdfeature", "article/event_b/E995059E-01FA-456F-AE9B-D7E90C1F3C67", "", "/content/images/CE1FBAA4-0C80-4A18-ACEF-87EE344126FF/Listening Project_Mar20_CalendarImg.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "", "", "", "", "", "", "", "", "Discussion,Lecture or Program", "Kathryn A. Martin Library", [], ["1","3"], "416 Library Drive", "Duluth", "MN", "55812", "USA - United States", "", "", "57017EE9-EEED-4E87-A231-DFB1CE3C9C47", "122766-2019-01-24T14:36:52.132-Kathryn A. Martin Li-2019-01-24T14:38:01.538-Kathryn A. Martin Librar", "", "Kathryn A. Martin Library", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#KathrynMartinLibrary", "", "Public", "7CBCD250-2285-46FB-A1A2-D3FC44BE213B", "", "" ],
+    [ "734EE2BF-EC98-413A-A409-05288AD731EC", "P", "", "", "11818-2019-02-27T14:15:21.020-Glensheen Unplugged", "Glensheen Unplugged returns to the Amusement Room! This year\'s intimate acoustic house show features local musicians and their unique interpretations of folk music.<br />\n<br />\n3.6 | Sonja Bjordal of Feeding Leroy<br />\n3.13 | kyle ollah<br />\n3.20 | Laura Sellner of Superior Siren<br />\n3.27 | Gavin St. Clair<br />\n<br />\nDOORS 7:00PM | MUSIC 7:30PM | FREE<br />\nALL AGES | CAPACITY 75 | CASH BAR<br />\n<br />\nBest arrive early to ensure your seat within our intimate listening room as this series usually hits capacity by the time music hits the Amusement Room Fireplace Stage. A cash bar will provide beverages for enjoyment. See you at the show!", "Glensheen Unplugged", "Wednesday, March 20, 2019 07:00 PM", "", "", "S", "U", "-1", "umdfeature", "article/event_b/734EE2BF-EC98-413A-A409-05288AD731EC", "", "/content/images/3CDCAFFC-C217-4A5E-9886-BE5CEB479CAF/glplug.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "", "", "", "", "", "", "", "", "", "Glensheen, the Historic Congdon Estate", [], ["1","3"], "3300 London Road", "Duluth", "MN", "55804", "USA", "-92.051128", "46.815223", "593BFBBC-7219-4DE5-B8FC-4547C7F9EE6E", "1152-2015-07-29T16:30:03.881-Glensheen, the Histo-2015-11-05T16:58:12.179-Glensheen, the Historic Co", "", "Glensheen, the Historic Congdon Estate", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "BCC2D873-EC0C-4D21-8B17-7983AD4FE099", "", "" ],
+    [ "6557507F-4A88-40E8-95CE-1267DBFCBD19", "P", "", "", "4118-2018-06-05T15:12:48.020-Time’s Up", "UMD Theatre presents<br />\n<br />\n<strong>Time’s Up<\/strong><br />\nDirected by Jenna Soleo-Shanks<br />\nChoreographer: Rebecca Katz-Harwood<br />\nMusic Supervisor: Andy Kust<br />\nMarch 7-9 &amp; 19-23, 2019 | 7:30 pm<br />\nMarch 24, 2019 | 2 pm&nbsp; (ASL interpreted performance)<br />\nMarshall Performing Arts Center - Dudley Experimental Theatre<br />\n#MeToo. Musical theatre. Medieval drama. &nbsp;What do these things have in common? This original piece, based on a 10th century play and created by UMD students and faculty artists, puts a spin on pop culture, sex, and politics. This work is an adaptation of a Hrotsvit of Gandersheim play.<br />\n<br />\n<br />\nTICKETS:<br />\n218-726-8877 or&nbsp;tickets.umn.edu<br />\n<a href=\"http://z.umn.edu/umdsfa\">Theatre tickets<\/a><br />\n(On sale: &nbsp;Wed., 8/29/18)<br />\n<br />\nINDIVIDUAL TICKET PRICES<br />\n$21 ADULT | $16 SENIOR/UMD FACULTY/STAFF/VETERAN | $10 STUDENT | $8 UMD STUDENT<br />\n(discounted season tickets available 8/1 - 8/31)<br />\n<br />\n<br />\n&nbsp;", "Time’s Up", "Wednesday, March 20, 2019 07:30 PM", "Wed, March 20, 2019 9:00 PM", "", "S", "U", "-1", "umdfeature,umdtheatre", "article/event_b/6557507F-4A88-40E8-95CE-1267DBFCBD19", "", "/content/images/5FF0D562-3035-4C77-8A80-5CC332181F5E/timesup_Th1819_Ucal_484x252.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - School of Fine Arts", "Theatre", "", "Theatre", "Play", "Arts, Culture, and Design", "", "", "Concert or Performance", "School of Fine Arts", [], ["1","3"], "1215 Ordean Ct", "Duluth", "MN", "55812", "USA", "-92.08310489999997", "46.8196099", "6622DA95-E44F-457D-95ED-9877A576CD7E", "4118-2015-07-07T11:47:57.922-School of Fine Arts-2015-08-18T10:00:46.802-Marshall Perf Arts Ctr", "", "Marshall Performing Arts Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "EDBF014B-30FB-43B4-97C4-10E13AAFBF1A", "", "" ],
+    [ "B955195F-A0D7-4C71-88D7-82A93168AC9F", "P", "", "", "4118-2018-12-13T10:38:23.190-Head of the Lakes Ja", "UMD Music presents<br />\n<br />\nFriday, March 22, 2019 | 7:30 pm<br />\n<strong>Head of the Lakes Jazz Festival<br />\nGuest Artist Concert: Jon Cowherd Trio<\/strong><br />\nJazz pianist/composer/arranger/producer Jon Cowherd performs with his trio of Brian Blade, drums &amp; Tony Scherr, bass.<br />\nWeber Music Hall<br />\nAdult $20 | Senior/Veteran $15 | UMD Faculty/Staff $15 | Student $10 | UMD Student $10<br />\nReserved seating<br />\n<br />\nTICKETS:<br />\n(On sale: &nbsp;Jan. 16, 2019)<br />\n218-726-8877 or tickets.umn.edu<br />\n<a href=\"z.umn.edu/sfamusic\">Music concert tickets<\/a>&nbsp;&nbsp;", "Head of the Lakes Jazz Festival Guest Artist Concert: Jon Cowherd Trio", "Friday, March 22, 2019 07:30 PM", "Fri, March 22, 2019 9:00 PM", "", "S", "U", "-1", "umdfeature,umdmusic", "article/event_b/B955195F-A0D7-4C71-88D7-82A93168AC9F", "", "/content/images/5FF0D562-3035-4C77-8A80-5CC332181F5E/MuSpring19_March22,23_370x180.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - School of Fine Arts", "Music", "", "Music", "Concert", "Arts, Culture, and Design", "Jazz", "", "Concert or Performance", "School of Fine Arts", [], ["1","3"], "10 University Drive", "Duluth", "MN", "55812", "USA", "-92.08281439999996", "46.8177225", "2DD3C15A-995F-4BD4-A217-20C04C6D6E58", "4118-2015-07-07T11:47:57.922-School of Fine Arts-2015-07-07T11:51:17.398-Weber Music Hall", "", "Weber Music Hall", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "EDBF014B-30FB-43B4-97C4-10E13AAFBF1A", "", "" ],
+    [ "7F327EFB-2A70-4627-8129-90502A372A61", "P", "", "", "90582-2019-02-26T11:27:07.571-Hmong Heritage Night", "HLUB is hosting a Hmong Heritage Night on Saturday, March 23 from 5 pm to 8 pm.<br />\n<br />\nCome join HLUB for a night of appreciation and reflection as we celebrate the Hmong culture! There will be food served as well as performances and a fashion show!<br />\n<br />\n$7 for advance<br />\n$9 at the door<br />\n<br />\nFor more information contact E-board Sponsored by Hmong Living In Unity and Balance", "Hmong Heritage Night", "Saturday, March 23, 2019 05:00 PM", "Sat, March 23, 2019 8:00 PM", "", "S", "U", "-1", "UMDdiversity,umdfeature", "article/event_b/7F327EFB-2A70-4627-8129-90502A372A61", "", "/content/images/E4A3FB45-9208-4606-96F6-F40AC4CDC10F/68df2088-6f63-479c-beb1-70efa7ac69de417591f2-3bf5-4436-aac3-35897cc9468b.png.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - Student Life", "", "", "", "", "", "", "", "", "Multicultural Center - Ofc of Diversity & Inclusion", [], ["1","3"], "St. Marie St", "Duluth", "MN", "55812", "USA - United States", "-92.08368080000002", "46.8220551", "5F0A1CBD-DB0E-432B-AA3F-32A44C6E70B2", "1135-2017-08-26T10:07:49.458-Multicultural Center-2017-09-26T14:30:17.377-Multicultural Center", "", "Hope United Methodist Church", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#UMDdiversity", "", "Public", "5D6862B2-000E-468B-B363-E0F8EC2CFD66", "", "" ],
+    [ "936C9F36-D9D4-4435-B300-F9AD8EDAC401", "P", "", "", "90582-2019-02-26T11:19:41.975-Drag Show", "The spring drag show will be held in the Kirby Ballroom, March 23 from 5 pm to 9 pm.&nbsp;<br />\n<br />\n<br />\nSponsored by QASU.&nbsp;", "Drag Show", "Saturday, March 23, 2019 05:00 PM", "Sat, March 23, 2019 9:00 PM", "", "S", "U", "-1", "UMDdiversity,umdfeature", "article/event_b/936C9F36-D9D4-4435-B300-F9AD8EDAC401", "", "/content/images/E4A3FB45-9208-4606-96F6-F40AC4CDC10F/BEE_4680.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - Student Life", "", "", "", "", "", "", "", "", "Multicultural Center - Ofc of Diversity & Inclusion", [], ["1","3"], "1120 Kirby Dr", "Duluth", "MN", "55812", "USA - United States", "", "", "43904577-0FC3-49C6-B62B-CB9F73F364C7", "1135-2017-08-26T10:07:49.458-Multicultural Center-2019-02-20T20:26:09.080-Kirby Ballroom", "", "Kirby Ballroom", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#UMDdiversity", "", "Public", "5D6862B2-000E-468B-B363-E0F8EC2CFD66", "", "" ],
+    [ "D7BD1A26-6B1B-4793-BAEB-948D288758DD", "P", "", "", "4118-2018-12-13T10:41:57.753-Head of the Lakes Ja", "UMD Music presents<br />\n<br />\nSaturday, March 23, 2019 | 5:30 pm<br />\n<strong>Head of the Lakes Jazz Festival with Andre Hayward<\/strong><br />\nJazz trombonist Andre Hayward joins UMD Jazz I and the Head of the Lakes Jazz Festival All Stars.<br />\nMarshall Performing Arts Center<br />\nAdult $20 | Senior/Veteran $15 | UMD Faculty/Staff $15 | Student $10 | UMD Student $10<br />\nReserved seating<br />\n<br />\nTICKETS:<br />\n(On sale: &nbsp;Jan. 16, 2019)<br />\n218-726-8877 or tickets.umn.edu<br />\n<a href=\"http://z.umn.edu/sfamusic\">Music concert tickets<\/a>&nbsp;&nbsp;", "Head of the Lakes Jazz Festival with Andre Hayward", "Saturday, March 23, 2019 05:30 PM", "Sat, March 23, 2019 7:00 PM", "", "S", "U", "-1", "umdfeature,umdmusic", "article/event_b/D7BD1A26-6B1B-4793-BAEB-948D288758DD", "", "/content/images/5FF0D562-3035-4C77-8A80-5CC332181F5E/MuSpring19_March22,23_370x180.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - School of Fine Arts", "Music", "", "Music", "Concert", "Arts, Culture, and Design", "Jazz", "", "Concert or Performance", "School of Fine Arts", [], ["1","3"], "1215 Ordean Ct", "Duluth", "MN", "55812", "USA", "-92.08310489999997", "46.8196099", "6622DA95-E44F-457D-95ED-9877A576CD7E", "4118-2015-07-07T11:47:57.922-School of Fine Arts-2015-08-18T10:00:46.802-Marshall Perf Arts Ctr", "", "Marshall Performing Arts Center", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "", "", "Public", "EDBF014B-30FB-43B4-97C4-10E13AAFBF1A", "", "" ],
+    [ "255325E2-AE94-4469-A01C-5370291CFCCF", "P", "", "", "1498-2018-12-19T15:07:08.742-MAPLE SYRUPING: FROM", "Join us in UMD’s Bagley Nature Area for our annual maple syruping program. Learn syruping history, and how sap is collected and turned into maple syrup. You will tap maples, collect sap and sample the sweet stuff. You also will learn about resources so you too can make maple syrup. This is a great time to be in the woods. MONDAY, MARCH 25, 5- 8PM Register By: Noon, Monday, March 25 We Provide: Maple Syruping Supplies and Instruction You Provide: Clothing, Snacks, and Water Meet: Bagley Nature Area Classroom Cost: $3 UMD Students/ $7 Others<br />\nPhone: (218)-926-7128<br />\nStop by: 153 Sports &amp; Health Center<br />\nEmail: rsop@d.umn.edu<br />\nwww.umdrsop.org<br />\n&nbsp;", "MAPLE SYRUPING: FROM TREES TO PANCAKES", "Monday, March 25, 2019 05:00 PM", "Mon, March 25, 2019 8:00 PM", "", "S", "U", "-1", "umdfeature", "article/event_b/255325E2-AE94-4469-A01C-5370291CFCCF", "", "/content/images/19235AE0-074A-42DE-9ACF-835589817011/maple syrup 2 11x6.jpg", "", "UMDfeature", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Duluth", "Duluth - Student Life", "Recreational Sports Outdoor", "", "", "Recreational Sports", "Athletics, Sports, and Recreation", "", "", "Outdoor Recreation", "RSOP Outdoor Activities (Programs)", [], ["1","3"], "1216 Ordean Ct", "Duluth", "MN", "55812", "USA", "-92.0844841", "46.8185201", "36D2135B-7495-41EB-B08D-0AAE150BC7E3", "1498-2016-01-25T16:48:40.678-RSOP Outdoor Activit-2016-08-08T13:48:50.051-Rental Center (154 SPHC)", "", "UMD Campus", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "$0.00", "$0.00", "", "", "", "", "", "", "", "", "#umdrsop", "", "Public", "44F4EFBA-6198-4DE3-BDCA-6659CEC048AF", "", "" ]
+  ],
+  searchFilters : [ 
+    { name : "object_type_filter", label : "Type Filter", className : "objectTypeFilterList", clearFilterLabel : "Clear Type Filter", selectedValue : "", values : [  ]  },
+    { name : "month_filter", label : "Month Filter", className : "monthFilterList", clearFilterLabel : "Clear Month Filter", selectedValue : "", values : [  ]  },
+    { name : "city_filter", label : "City Filter", className : "cityFilterList", clearFilterLabel : "Clear City Filter", selectedValue : "", values : [  ]  },
+    { name : "venue_filter", label : "Venue Filter", className : "venueFilterList", clearFilterLabel : "Clear Venue Filter", selectedValue : "", values : [  ]  },
+    { name : "category_filter", label : "Category Filter", className : "categoryFilterList", clearFilterLabel : "Clear Category Filter", selectedValue : "", values : [  ]  },
+    { name : "organization_short_description_filter", label : "Organization Filter", className : "organizationShortDescriptionFilterList", clearFilterLabel : "Clear Organization Filter", selectedValue : "", values : [  ]  },
+    { name : "filter1", label : "Campus", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [ ["Crookston", "Crookston"],["Duluth", "Duluth"],["Morris", "Morris"],["Rochester", "Rochester"],["Twin Cities", "Twin Cities"] ]  },
+    { name : "filter2", label : "Faculty", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter3", label : "Department", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter4", label : "Season", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent1", label : "Event Genre", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "filter_parent2", label : "Event Category", className : "customFilterParentList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter1", label : "Event Type", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  },
+    { name : "multifilter2", label : "Presentation Type", className : "customFilterList", clearFilterLabel : "Clear Filter", selectedValue : "", values : [  ]  }
+  ],
+  searchLabels: { performances: "Events", date: "Date", unavailable_message: "Registration / Tickets may be required for this event. See \"About this event\" for details.", sold_out_message: "Registration / Tickets may be required for this event. See \"About this event\" for details.", on_sale_message: "", to_be_determined_message: "", next: "»", previous: "«", avail_excellent: "", avail_good: "", avail_limited: "", avail_sold_out: "", promo_item: "This item is available with a promocode", buy_seats_message: "Register", buy_bundle_message: "Buy", buy_item_message: "Buy", buy_gift_message: "Donate", buy_storedvalueitem_message: "Buy", view_article_message: "View", upsell_seats_message: "Upgrade", upsell_bundle_message: "Upgrade", upsell_item_message: "Upgrade", upsell_gift_message: "Upgrade", upsell_storedvalueitem_message: "Upgrade", upsell_popup_title: "Interested in Upgrading?", addon_seats_message: "Select", addon_bundle_message: "Select", addon_item_message: "Select", addon_gift_message: "Select", addon_storedvalueitem_message: "Select", price_title: "Price", availability_title: "", active_promo_codes: "Active promotions:", promo_code_item_title: "This item is available with a promocode", has_promo_code: "false", brand_path: "../../content/images/branding/" }, 
+  searchSUMO: { availability_access: "true", mapSelect_access: "true" }, 
+  pagination: { current_page: "1", page_size: "12", total_pages: "2" },
+  loginLabels: { pageTarget: "maintainAccount.asp", loginBoxClass: "login-required", forgotPassword: "true", formLoginName: "", accountLogin: "true" }, 
+  contextId: "", 
+  articleId: "1C87EE4F-8A95-4D66-BCAE-D0BBF180494D", 
+  articleSearchId: "", 
+  salesType: "P",
+  sToken: "1,c782013d,5c84b7fa,32F71944-A396-4455-853E-8E3249EFBF3E,0Aus4Cfxo3nKl0XnxaTun8GKH4g="
+ };
+
+createSearchMapping(articleContext);
+
+tsAddLoadEvent(function() {
+    setCalendarWidgetDisplayMonth();
+    drawWidgets(articleContext);
+    insertToken(articleContext);
+});
+
+function setCalendarWidgetDisplayMonth()
+{
+    // If a date has been selected from the calendar widget, we will receive a 'search_from' parameter.
+    // Pass this back to the widget so that it redisplays the month that was previously visible
+    
+}
+  </script>
+  <script type="text/javascript">
+   function doGAClicks(selectedItem) {
+        _gaq.push(['_trackEvent', selectedItem, 'Clicked']);
+    };
+
+    function gaTrackEvent(category, action) {
+        _gaq.push(['_trackEvent', category, action]);
+    };
+  </script>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+    _gaq.push(['obj0._setAccount', 'UA-20893774-1']);
+_gaq.push(['obj0._setAllowHash', false]);
+_gaq.push(['obj0._setDomainName', 'none']);
+_gaq.push(['obj0._setAllowLinker',true]);
+_gaq.push(['obj0._trackPageview']);
+  </script>
+  <script type="text/javascript">
+   (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+ </head>
+ <body lang="en" onload='startList();loadLocalPage(); displayMessage(""); displayOnOfferTimeout();' onunload="closeChildren()">
+  <div class="spinner" id="spinner">
+  </div>
+  <script>
+   var spinnerDelayTimeout;
+    
+    var showSpinner = function(){};
+    var spinnerElement = document.querySelector('body')
+
+
+
+    var spinnerDelay = 3;
+    
+
+    function stopSpinner() {
+        spinnerElement.classList.remove('show-spinner');
+        cancelSpinnerTimeouts();
+        expandSpinner();
+    }
+
+    function startSpinner() {
+        expandSpinner();
+        spinnerElement.classList.add('show-spinner');
+    }
+    
+    
+    function cancelSpinnerTimeouts() {
+        clearTimeout(spinnerDelayTimeout);
+    }
+    
+    function expandSpinner() {
+        spinnerElement.classList.remove('minimize-spinner');
+    }
+    
+    function minimizeSpinner() {
+        spinnerElement.classList.add('minimize-spinner');
+    }
+    
+    // stop spinner if a JS error occurred
+    window.addEventListener('error', stopSpinner);
+    
+    // Mimimize spinner if clicked
+    spinnerElement.addEventListener('click', minimizeSpinner);
+
+    // Shows the spinner if page takes long to load
+    (showSpinner = function() {
+        if (!document.querySelector('#popupDiv')) {
+            spinnerDelayTimeout = setTimeout(startSpinner, spinnerDelay*1000);
+        }
+    })();
+  </script>
+  <div id="fb-root">
+  </div>
+  <script>
+   var FBAppID = '194912094014765'
+    var FBVersion = 'v2.8';
+    
+    window.fbAsyncInit = function () {
+
+        
+        FB.init({
+            appId: FBAppID,
+            status: true,
+            cookie: true,
+            frictionlessRequests: true,
+            xfbml: true,
+            oauth: true,
+            version: FBVersion
+        });
+        FB.Canvas.setAutoGrow();
+        FB.Canvas.getPageInfo(function (info) {
+	        FB.Canvas.scrollTo(0, 0);
+	    });
+        fbinit();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.defer = true;
+        fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'facebook-jssdk'));
+
+    function fblogin(thisForm, callback) {
+        // check if callback is defined and a function
+        var callback = callback && typeof callback === 'function' ? callback : function() {};
+
+        FB.getLoginStatus(function (response) {
+            if (response.status == 'connected') {
+                callback(thisForm, response);
+                thisForm.submit();
+            }
+            else {
+                FB.login(function (response) {
+                    if (response.authResponse) {
+                        callback(thisForm);
+                        thisForm.submit();
+                    }
+                }, { scope: 'rsvp_event,user_friends' });
+            }
+        });
+
+        return false;
+    }
+  </script>
+  <script>
+   var events = new Array();
+    var eventCounter = 0;
+
+    function fbinit() {
+        for (evnt in events) {
+            setRSVPButtonsLogin(events[evnt]);
+        }
+    };
+  </script>
+  <div id="header">
+   <div class="header-content container">
+    <div class="header-online-wrapper" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <a href="http://www.d.umn.edu" shape="rect">
+      <img alt="logo" src="/ArticleMedia/Images/umn/M_UMDwdmk220_D2D_gold-wh.png" style="width: 360px; height: 38px;"/>
+     </a>
+    </div>
+   </div>
+   <a class="menu-toggle menu-button btn btn-default">
+    <span class="glyphicon glyphicon-align-justify">
+    </span>
+   </a>
+   <a class="menu-toggle sidebar-button btn btn-default">
+    <span class="glyphicon glyphicon-shopping-cart">
+    </span>
+   </a>
+  </div>
+  <div class="content-wrapper">
+   <div id="menu">
+    <div class="menuContainer main-nav">
+     <ul class="nav clearfix" id="menuTop">
+      <li class="menuTopItem " id="menuTopItem0">
+       <a class="menu_item menu-link" href="default.asp?menu_id=DE636E2B-E97A-485A-8C17-B00DE8A8AA76" tabindex="1" title="Featured Events">
+        <span class="menu-label">
+         Featured Events
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem1">
+       <a class="menu_item menu-link" href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=0268DBC7-227A-4805-934F-6C8BB9393F83&amp;menu_id=75198732-29C7-43DE-8751-5B5D40E3B7D1" tabindex="2" title="All Events">
+        <span class="menu-label">
+         All Events
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem2">
+       <a class="menu_item menu-link" href="/app/eventmgmt/events/new?menu_id=442FA7DC-A3FE-43C8-B4BD-DD736513526C" tabindex="3" title="Create an Event">
+        <span class="menu-label">
+         Create an Event
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem3">
+       <a class="menu_item menu-link" href="maintainAccount.asp?menu_id=D8A9C662-AA85-4C35-AA74-69EB98688960" tabindex="4" title="My Account">
+        <span class="menu-label">
+         My Account
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem " id="menuTopItem4">
+       <a class="menu_item menu-link" href="feedSearch.asp?menu_id=AB91FA5D-81AB-424E-9DC3-D3BB1FF80766" tabindex="5" title="RSS Feed">
+        <span class="menu-label">
+         RSS Feed
+        </span>
+       </a>
+      </li>
+      <li class="menuTopItem" id="menuTopItem-help">
+       <a class="menu_item menu-link" href="javascript:var jsPop=new showInformationPopup( 'Help', 'loadArticle.asp?BOparam::WScontent::loadArticle::article_id=F8103D8C-7EA0-4B4B-A37E-9DE398B93107' )" tabindex="6" title="Help">
+        Help
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- customer/order information -->
+   <div class="customer-options" id="customer-utilities">
+    <!--ORDER DETAILS BOX-->
+    <div id="orderInfo">
+     <div id="customer-order-info">
+      <div class="customer-greeting">
+       <span class="greeting-message">
+        Order for
+       </span>
+       <span class="greeting-name">
+        Guest
+       </span>
+      </div>
+      <div class="customer-order shopping-cart-details order-message ">
+       <span id="orderInfoEmptyMessage">
+        Your shopping cart is empty.
+       </span>
+      </div>
+      <div class="customer-buttons">
+       <div class="cart-callout">
+        <a class="shopping-cart-link btn btn-default" href="shoppingCart.asp?sToken=1%2Cc782013d%2C5c84b7fa%2C32F71944-A396-4455-853E-8E3249EFBF3E%2C0Aus4Cfxo3nKl0XnxaTun8GKH4g%3D" id="orderInfoCartLink" tabindex="7" title="Shopping Cart">
+         <span>
+          Shopping Cart
+         </span>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="menuContainer utility-nav">
+     <ul class="nav" id="utility-menu">
+      <li class="utility-menu-item" id="utility-menu-item-login">
+       <a class="menu_item" href="login.asp" tabindex="8" title="Log in">
+        Log in
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- CONTENT START -->
+   <div id="content">
+    <div class="container">
+     <div class="bodyDetails" id="default">
+      <div class="search-box" id="searchBox">
+       <form action="default.asp" class="form-inline" id="searchItems" method="post">
+        <input class="form-inline" name="sToken" type="hidden" value="1,c782013d,5c84b7fa,32F71944-A396-4455-853E-8E3249EFBF3E,0Aus4Cfxo3nKl0XnxaTun8GKH4g="/>
+        <input name="BOset::WScontent::SearchCriteria::venue_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::city_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::month_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::object_type_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::category_filter" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_from" type="hidden" value=""/>
+        <input name="BOset::WScontent::SearchCriteria::search_to" type="hidden" value=""/>
+        <input name="doWork::WScontent::search" type="hidden" value="1"/>
+        <input name="BOparam::WScontent::search::article_search_id" type="hidden" value="6973DAF3-CD9F-4219-BFCF-2AB0CAB336DF"/>
+        <ul class="list-unstyled">
+         <li class="item-search-keyword">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Search Events
+           </span>
+           <input class="form-control" id="BOset::WScontent::SearchCriteria::search_criteria" name="BOset::WScontent::SearchCriteria::search_criteria" tabindex="9" title="Search Events" type="text" value=""/>
+          </label>
+         </li>
+         <li class="item-search-start-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            Event Dates
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_from::0" name="BOset::WScontent::SearchCriteria::search_from" tabindex="10" title="Event Dates" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_from::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_from::0", "0", "true", "sToken", "1,c782013d,5c84b7fa,32F71944-A396-4455-853E-8E3249EFBF3E,0Aus4Cfxo3nKl0XnxaTun8GKH4g=");' title="Show date picker" type="button">
+             </button>
+            </div>
+            <span class="input-group-btn">
+             <button class="btn-unstyled warningIcon" data-placement="right" data-toggle="tooltip" id="BOset::WScontent::SearchCriteria::search_from::0::warning" style="display:none" title="" type="button">
+             </button>
+            </span>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-end-date">
+          <label>
+           <span class="searchBoxLabel field-label">
+            to
+           </span>
+           <div class="input-group">
+            <input class="form-control" id="BOset::WScontent::SearchCriteria::search_to::0" name="BOset::WScontent::SearchCriteria::search_to" tabindex="11" title="to" type="text" value=""/>
+            <div class="input-group-addon">
+             <button class="btn-unstyled calIcon" id="cal::BOset::WScontent::SearchCriteria::search_to::0" onclick='tsOpenCalendar( event, "BOset::WScontent::SearchCriteria::search_to::0", "0", "true", "sToken", "1,c782013d,5c84b7fa,32F71944-A396-4455-853E-8E3249EFBF3E,0Aus4Cfxo3nKl0XnxaTun8GKH4g=");' title="Show date picker" type="button">
+             </button>
+            </div>
+            <span class="input-group-btn">
+             <button class="btn-unstyled warningIcon" data-placement="right" data-toggle="tooltip" id="BOset::WScontent::SearchCriteria::search_to::0::warning" style="display:none" title="" type="button">
+             </button>
+            </span>
+           </div>
+          </label>
+         </li>
+         <li class="item-search-submit">
+          <input class="btn btn-default" name="Go" onclick="doGAClicks('Search')" tabindex="12" type="submit" value="Go"/>
+         </li>
+        </ul>
+       </form>
+      </div>
+      <div class="articles has-secondary-features">
+       <!-- top scrolling features included -->
+       <div class="article-body-container">
+        <div class="article-container main-article-body">
+         <div class="main-page-wrapper" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+          <h1>
+           Featured Events
+          </h1>
+          <div id="avWidget_1C87EE4F-8A95-4D66-BCAE-D0BBF180494D_IDITLMRZUBBGCVOCFQSFFPKJO5PJTNMZVCW1Z4TPKLJ1KLBQHRHHRL" name="avWidget" xmlns="" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+           <script type="text/javascript">
+            registerWidget( "SearchWebWidget3", "avWidget_1C87EE4F-8A95-4D66-BCAE-D0BBF180494D_IDITLMRZUBBGCVOCFQSFFPKJO5PJTNMZVCW1Z4TPKLJ1KLBQHRHHRL", {
+  "SearchWebWidget3": "", 
+  
+  "css_class": "", 
+  
+  "css_id": "", 
+  
+  "css_style": "", 
+  
+  "showLegend": "false", 
+  
+  "showNoResults": "true", 
+  
+  "showPrice": "true", 
+  
+  "title": "", 
+   "1": "1"});
+           </script>
+          </div>
+          <br clear="none"/>
+         </div>
+        </div>
+        <div class="article-container secondary-linked-features">
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-0">
+          <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=0268DBC7-227A-4805-934F-6C8BB9393F83" shape="rect" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <img alt="See All Events - Filter by Category" src="/content/Images/umn/event-cal-type.jpg" style="width: 282px; height: 117px;"/>
+          </a>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-1">
+          <div class="social-media" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <div class="social-media-header">
+            <h2>
+             Follow UMD
+            </h2>
+           </div>
+           <div class="social-media-info">
+            <ul>
+             <li>
+              <a href="https://www.facebook.com/umnduluth" shape="rect">
+               <img alt="facebook" class="nmfsrydjiujybeycrtkn" src="/ArticleMedia/Images/umn/UMN-social-FACEBOOK-dark_64x64.png"/>
+              </a>
+             </li>
+             <li>
+              <a href="https://twitter.com/umnduluth" shape="rect">
+               <img alt="Twitter" src="/ArticleMedia/Images/umn/UMN-social-TWITTER_64x64.png"/>
+              </a>
+             </li>
+             <li>
+              <a href="http://instagram.com/umnduluth" shape="rect">
+               <img alt="" src="/ArticleMedia/Images/umn/instagram64.jpg" style="width: 64px; height: 64px;"/>
+              </a>
+             </li>
+             <li>
+              <a href="http://flickr.com/umnduluth" shape="rect">
+               <img alt="" src="/ArticleMedia/Images/umn/flickr64.jpg" style="width: 64px; height: 64px;"/>
+              </a>
+             </li>
+             <li>
+              <a href="http://youtube.com/umnduluth" shape="rect">
+               <img alt="" src="/ArticleMedia/Images/umn/youtube64.jpg" style="width: 64px; height: 64px;"/>
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-2">
+          <div class="campus-locations" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+           <div class="campus-locations-header">
+            <h2>
+             Campus Calendars
+            </h2>
+           </div>
+           <div class="campus-locations-info">
+            <ul class="list-unstyled">
+             <li>
+              <a href="https://events.crk.umn.edu/" shape="rect">
+               Crookston
+              </a>
+             </li>
+             <li>
+              <a href="https://events.d.umn.edu/" shape="rect">
+               Duluth
+              </a>
+             </li>
+             <li>
+              <a href="http://www.morris.umn.edu/newsevents/" shape="rect">
+               Morris
+              </a>
+             </li>
+             <li>
+              <a href="https://events.r.umn.edu/" shape="rect">
+               Rochester
+              </a>
+             </li>
+             <li>
+              <a href="https://events.umn.edu" shape="rect">
+               Twin Cities
+              </a>
+             </li>
+            </ul>
+           </div>
+          </div>
+          <br clear="none" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/"/>
+         </div>
+         <div class="secondary-linked-feature-div" id="secondary-linked-feature-3">
+          <div id="avWidget_EDE221AF-539E-4998-BBEF-DFC795FF4BC9_IDYV0FSKSDZT3PCRDMNH45YY0ZIFPWA43SVSUZD2CPCLAW2RP3QU5G" name="avWidget" xmlns:av="http://www.audienceview.com/xml/email/" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+           <script type="text/javascript">
+            registerWidget( "CalendarWidget", "avWidget_EDE221AF-539E-4998-BBEF-DFC795FF4BC9_IDYV0FSKSDZT3PCRDMNH45YY0ZIFPWA43SVSUZD2CPCLAW2RP3QU5G", { "1": "1"});
+           </script>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <!--\\ .bodyDetails -->
+   </div>
+   <!--\\ .container -->
+  </div>
+  <!--\\ #content -->
+  <div id="footer">
+   <div class="footer-content container">
+    <div class="row footer-copy" xmlns="http://www.w3.org/1999/xhtml" xmlns:av="http://www.audienceview.com/xml/email/">
+     <div id="google_translate_element">
+     </div>
+     <ul class="span2 unstyled">
+      <li class="footer-heading">
+       Terms &amp; Conditions
+      </li>
+      <li>
+       Terms of Service:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=E72097D3-596F-4E8C-8343-DA9CE270408C" shape="rect">
+        Ticket Buyers
+       </a>
+      </li>
+      <li>
+       Terms of Service:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=3A7BBCE4-A7E1-4A20-9D4C-EF3D06AC4BB3" shape="rect">
+        Event Owners
+       </a>
+      </li>
+      <li>
+       Privacy:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=D1D2067D-493A-4F5C-8961-A15B38197BF2" shape="rect">
+        Privacy Policy
+       </a>
+      </li>
+      <li>
+       Site Accessibility:
+       <a href="default.asp?doWork::WScontent::loadArticle=Load&amp;BOparam::WScontent::loadArticle::article_id=99033AB5-E5F0-41EB-8C22-BECEC14BAF16" shape="rect">
+        Accessibility
+       </a>
+      </li>
+     </ul>
+     <ul class="span2 unstyled">
+      <li class="footer-heading">
+       Helpdesk
+      </li>
+      <li>
+       <a href="https://docs.google.com/document/d/1NuOgOr3EW5D-JOdOeFPr38F4ZKb5JzVs5Tezd7hN2Wk/edit#heading=h.dhtol4fce8f" shape="rect" title="link to Google doc for Q and A directed for Event Attendees">
+        Q &amp; A for Event Attendees
+       </a>
+      </li>
+      <li>
+       <a href="https://docs.google.com/document/d/1m0dJdK_Q1KLqDiTodrX_Mvg8Hoo--yfBYytH7a5t-NA/edit" shape="rect" title="link to Google doc for Q and A directed for Event Owners">
+        Q &amp; A for Event Owners
+       </a>
+      </li>
+     </ul>
+     <ul class="span2 unstyled">
+      <li class="footer-heading">
+       Duluth Campus
+      </li>
+      <li>
+       <a href="http://duluth.umn.edu/maps/" shape="rect">
+        Maps &amp; Directions
+       </a>
+      </li>
+      <li>
+       <a href="http://duluth.umn.edu/parking/" shape="rect">
+        Parking &amp; Transportation
+       </a>
+      </li>
+      <li>
+       <a href="http://duluth.umn.edu/contact" shape="rect">
+        Contact U M D
+       </a>
+      </li>
+      <li>
+       <a href="http://privacy.umn.edu/" shape="rect">
+        Privacy
+       </a>
+      </li>
+      <li>
+       <a href="http://www.duluth.umn.edu/search" shape="rect">
+        Directories
+       </a>
+      </li>
+     </ul>
+     <ul class="span4 unstyled">
+      <li>
+       © 2011–2017 Regents of the University of Minnesota. All rights reserved.
+      </li>
+      <li>
+       The University of Minnesota is an equal opportunity educator and employer.
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <!--\\ .content-wrapper -->
+  <div class="black_overlay" id="fade">
+  </div>
+  <script type="text/javascript">
+   function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   // Defines the configuration options, these must be set before you load
+        // the plusone.js file.
+        
+        window.___gcfg = {
+            parsetags: 'explicit'
+        };
+
+        (function () {
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+  </script>
+  <script defer="defer" id="twitter-wjs" src="https://platform.twitter.com/widgets.js" type="text/javascript">
+  </script>
+  <!-- inclusion of bootstrap.js and jquery -->
+  <!-- http://twitter.github.com for documentation on bootstrap -->
+  <script src="/lib/jquery/jquery.min.js?_=7.20.0" type="text/javascript">
+  </script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js?_=7.20.0" type="text/javascript">
+  </script>
+  <!-- end of bootstrap.js and jquery -->
+  <!-- contains bootstrap specific function declarations -->
+  <script src="/lib/bootstrap/js/bootstrap-functions.js?_=7.20.0" type="text/javascript">
+  </script>
+  <!-- Logout Handler -->
+  <script>
+   $(document).ready(function() {
+    var body = $("body");
+    
+    body
+    .on("logged-out", function(e) {
+        var targetPage = "default.asp?";
+        window.location.assign("login.asp?targetPage="+encodeURIComponent(targetPage));
+    });
+    
+    // on pressing Enter key on an anchor trigger click
+    $("a").keypress(function(e){
+      if(e.keyCode == 13){
+        $(this).trigger("click");
+      }
+    });
+    
+    // When page is loaded make sure the Page Load Spinner is not shown
+    if (spinnerDelayTimeout) {
+        cancelSpinnerTimeouts();
+    }
+    
+    body.removeClass("show-spinner");
+    
+    // Show spinner when form submitted or link clicked
+    $("form").submit(function(e) {
+      showSpinner();
+    });
+    
+    $("a").click(function(e) {
+      var href = $(this).attr("href") || "";
+      var target = $(this).attr("target") || "";
+      
+      if ((target == "" || /^(_self|_top|_parent)/.test(href)) && href != "" && !/^(#|javascript:|mailto:|file:)/.test(href))
+        showSpinner();
+    });
+    
+    
+});
+  </script>
+  <!-- CONTENT END -->
+  <script type="text/javascript">
+   (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+ </body>
+</html>
+<script>
+ $(function(){
+
+    // "Continue Shopping" and "Look for other events" buttons to redirect back to Brochure page user came from
+    $("a[name=continue-shopping], a[name=continueShopping], input[name=startOver], a[name=error-StartOver], input[name=error-StartOver]").on("click", function(e) {
+      var returnTo = getCookie('returnTo');
+      if(returnTo){
+        e.preventDefault();
+        deleteCookie('returnTo');
+        window.location.href = returnTo;
+      }
+    })
+
+    // "New Order" button to redirect to EIF home page
+    $("input.new-order,input[name=cancel-order]").on("click", function(e){
+         var returnTo = getCookie('returnTo');
+          if(returnTo){
+            e.preventDefault();
+            $("#popupDiv_okayButton").on("click", function(e){
+               $.ajax({
+                 url: 'clearOrder.asp',
+                 complete: function() {
+                    deleteCookie('returnTo');
+                    window.location.href = returnTo;           
+                 }
+                });
+               
+             });
+          }
+    })
+  });
+
+//adding the returnTo to the cookie
+  var returnTo = "";
+
+  if (returnTo) {
+      var reffA = document.createElement('a');
+      reffA.href = returnTo;
+
+    if(reffA.host != window.location.host) {
+      setCookie("returnTo", returnTo, 1);
+    }
+  }
+
+  /*
+    *****************************************************
+    Cookie methods
+    *****************************************************
+  */
+  function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+          }
+      }
+      return "";
+  }
+
+  function deleteCookie(cname) {
+      setCookie(cname, "", -1);
+  }
+</script>

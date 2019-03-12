@@ -1,0 +1,3122 @@
+http://events.rpi.edu/
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>
+   Rensselaer Events Calendar
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/images/favicon.ico" rel="icon" type="image/ico"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/bootstrap3/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/jquery/jquery-ui-1.10.3.custom.min.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/bwThemeGlobal.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/bwThemeResponsive-00-Tiny.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/bwThemeResponsive-01-Small.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/bwThemeResponsive-02-Medium.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/bwThemeResponsive-03-Large.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/print.css" media="print" rel="stylesheet" type="text/css"/>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/modernizr-2.6.2-input.min.js" type="text/javascript">
+   /* include modernizr */
+  </script>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/jquery/jquery-1.10.2.min.js" type="text/javascript">
+   /* include jquery */
+  </script>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/jquery/jquery-ui-1.10.3.custom.min.js" type="text/javascript">
+   /* include jquery UI */
+  </script>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/bootstrap3/respond.min.js" type="text/javascript">
+   /* include respond for IE6-8 responsive support */
+  </script>
+  <script type="text/javascript">
+   var bwStrEvent = "event returned";
+      var bwStrEvents = "events returned";
+  </script>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/bedework/bedework.js" type="text/javascript">
+   /* bedework */
+  </script>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/bedework/navigation.js" type="text/javascript">
+   /* bedework navigation (menus, links) */
+  </script>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/bedework/eventList.js" type="text/javascript">
+   /* bedework list events object */
+  </script>
+  <script src="/bedework-common/javascript/bedework/bedeworkUtil.js" type="text/javascript">
+   /* bedework utilities */
+  </script>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/magnific/magnific-popup.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/magnific/jquery.magnific-popup.min.js" type="text/javascript">
+   /* for export/subscribe lightbox */
+  </script>
+  <link href="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/css/bwExportSubscribe.css" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/javascript/bedework/exportSubscribe.js" type="text/javascript">
+   /* bedework export/subscribe form */
+  </script>
+  <script src="/bedework-common/javascript/jquery/spin.min.js">
+   /* spinner for event load animations */
+  </script>
+  <script type="text/javascript">
+   var bwPage = "eventList";
+        var bwListPage = "";
+        var bwLastDateSeparatorInList = "";
+        var bwClearFilterStr = '(clear all)';
+        var bwResourcesRoot = "/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10";
+
+        var bwUrls = new Object;
+        bwUrls = {
+          "setSelection" : "/cal/main/setSelection.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de",
+          "setSelectionList" : "/cal/main/setSelectionList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de",
+          "async" : "/cal/misc/async.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de",
+          "feedPrefix" : "http://events.rpi.edu:7070",
+          "feedResources" : "http://events.rpi.edu/bw/approots3p10/calfeedrsrc.MainCampus/default/default/theme"
+        }
+
+        // calendar explorers
+        var closedViews = new Array();
+        var openCals = new Array();
+        
+
+        // set up the filtering objects
+        var bwQuery = "";
+
+        // search query
+        
+        var bwQueryName = "Filter:";
+        
+            var bwClearQueryMarkup = '<a href="javascript:bwClearSearch();" id="bwClearQuery">(clear)</a>';
+          
+
+
+        // filters from menus
+        var bwFilters = new Array(); 
+        var bwFilterPaths = new Array(); 
+
+        
+          bwFilters[0] = new Array();
+        
+
+        var bwFilterPrefix = "";
+        
+          bwFilterPrefix = '(categories.href!="/public/.bedework/categories/Ongoing")';
+        
+
+        
+        var bwMainEventsListOptions = {
+          title: "Upcoming Events",
+          showTitle: false,
+          displayDescription: false,
+          displayEventDetailsInline: false,
+          displayDayNameInList: true,
+          displayTimeInList: true,
+          displayLocationInList: true,
+          locationTitle: "Location:",
+          displayTopicalAreasInList: true,
+          topicalAreasTitle: "Topical Areas:",
+          displayThumbnailInList: true,
+          thumbWidth: 80,
+          useFullImageThumbs: true,
+          usePlaceholderThumb: false,
+          eventImagePrefix: "/pubcaldav",
+          resourcesRoot: "/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10",
+          limitList: false,
+          limit: 5,
+          listMode: "byTitle",
+          displayContactInDetails: true,
+          displayCostInDetails: true,
+          displayTagsInDetails: true,
+          displayTimezoneInDetails: true,
+          displayNoEventText: true,
+          showTitleWhenNoEvents: false,
+          noEventsText: "No events found.  Please try a different view or time period."
+        };
+
+        var bwMainEventList;
+
+        
+        $(document).ready(function(){
+          
+          bwFilterPaths = buildFilterPaths();
+
+          
+          bwMainEventList = new BwEventList("listEvents","html",bwMainEventsListOptions,"2019-03-10",bwFilterPrefix,bwFilterPaths,bwQuery,"/cal/main/setMainEventList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de","/cal/main/nextMainEventList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de","bwStartDate","bwResultSize");
+
+          
+          displayAllFilters(bwFilters);
+        });
+  </script>
+  <script src="http://w.sharethis.com/button/buttons.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   stLight.options({
+            publisher:'81abfaf7-6394-4e79-b88b-a921d3b6d703',
+            offsetTop:'0'
+           })
+  </script>
+ </head>
+ <body>
+  <header id="header">
+   <div id="rpi-bar">
+    <div class="container">
+     <span class="hidden-xs" id="nav-rpi">
+      Navigate RPI
+      <span class="nav-rpi-arrow">
+       ▾
+      </span>
+     </span>
+     <a href="http://www.rpi.edu/">
+      Rensselaer Polytechnic Institute
+     </a>
+    </div>
+   </div>
+   <div id="rpi-mega" style="display:none;">
+    <div id="rpi-mega-inner">
+     <ul id="rpi-mega-menu">
+      <li>
+       <a class="rpi-mega-menu-header" href="http://www.rpi.edu/about/index.html">
+        ABOUT
+       </a>
+       <ul>
+        <li>
+         <a href="http://www.rpi.edu/president/index.html">
+          President Jackson
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/about/facts.html">
+          Quick Facts
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/about/heoa/index.html">
+          Consumer Info
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/president/cabinet/index.html">
+          Cabinet
+         </a>
+        </li>
+        <li>
+         <a href="http://news.rpi.edu/">
+          News
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="rpi-mega-menu-header" href="http://www.rpi.edu/academics/">
+        ACADEMICS
+       </a>
+       <ul>
+        <li>
+         <a href="http://www.rpi.edu/academics/index.html">
+          Degrees / Programs
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/academics/calendar/">
+          Academic Calendar
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/academics/index.html">
+          Schools
+         </a>
+        </li>
+        <li>
+         <a href="http://admissions.rpi.edu/">
+          Admissions
+         </a>
+        </li>
+        <li>
+         <a href="http://catalog.rpi.edu/">
+          Academic Catalog
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="rpi-mega-menu-header" href="http://research.rpi.edu/">
+        RESEARCH
+       </a>
+       <ul>
+        <li>
+         <a href="http://www.rpi.edu/academics/faculty.html">
+          Faculty
+         </a>
+        </li>
+        <li>
+         <a href="http://admissions.rpi.edu/undergraduate/academics/research.html">
+          Undergraduate
+         </a>
+        </li>
+        <li>
+         <a href="http://research.rpi.edu/facilities">
+          Facilities
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <a class="rpi-mega-menu-header" href="http://admissions.rpi.edu/undergraduate/life/index.html">
+        CAMPUS LIFE
+       </a>
+       <ul>
+        <li>
+         <a href="http://se.rpi.edu/fye/">
+          First Year Experience
+         </a>
+        </li>
+        <li>
+         <a href="http://gradoffice.rpi.edu/setup.do">
+          Graduate Education
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpiathletics.com/">
+          Athletics
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/dept/cdc/">
+          Career Development
+         </a>
+        </li>
+        <li>
+         <a href="http://se.rpi.edu/fye/beyond-campus/">
+          Capital Region
+         </a>
+        </li>
+        <li>
+         <a href="http://events.rpi.edu/">
+          Events
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li>
+       <div class="rpi-mega-menu-header">
+        ENGAGE
+       </div>
+       <ul>
+        <li>
+         <a href="http://admissions.rpi.edu/undergraduate/admission/index.html">
+          Apply Now
+         </a>
+        </li>
+        <li>
+         <a href="http://alumni.rpi.edu">
+          Alummi/ae
+         </a>
+        </li>
+        <li>
+         <a href="http://giving.rpi.edu/">
+          Giving
+         </a>
+        </li>
+        <li>
+         <a href="http://se.rpi.edu/orientation/parents/freshmen/">
+          Parents
+         </a>
+        </li>
+        <li>
+         <a href="http://www.rpi.edu/tour/directions.html">
+          Visit
+         </a>
+        </li>
+        <li>
+         <a href="hr.rpi.edu/setup.do">
+          Human Resources
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+     <div id="rpi-meta-and-search">
+      <ul id="rpi-mega-meta">
+       <li>
+        <a href="http://rpinfo.rpi.edu/sitemap.html">
+         Websites A-Z
+        </a>
+       </li>
+       <li>
+        <a href="http://rpinfo.rpi.edu/directories.html">
+         Directories
+        </a>
+       </li>
+       <li>
+        <a href="http://www.rpi.edu/tour/index.html">
+         Maps
+        </a>
+       </li>
+       <li>
+        <a href="http://rpinfo.rpi.edu/contact.html">
+         Contact
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   <div id="masthead">
+    <div class="container">
+     <a class="btn btn-default navbar-toggle" href="#" id="mobileMenu">
+      <span class="sr-only">
+       menu
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+     </a>
+     <div class="hidden-xs" id="rpiLogo">
+      <a href="http://www.rpi.edu">
+       <img alt="Rensselaer Polytechnic Institute" class="img-responsive" src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/images/RPIlogo.png"/>
+      </a>
+     </div>
+     <div id="siteTitleAndNav">
+      <h1>
+       <a href="https://events.rpi.edu/cal/main/setSelectionList.do?b=de&amp;listMode=true&amp;setappvar=listPage(upcoming)">
+        Events Calendar
+       </a>
+      </h1>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <noscript>
+    Your browser does not support JavaScript!
+   </noscript>
+   <section id="content">
+    <div class="row">
+     <div class="col-lg-3 col-md-3 col-sm-3" id="leftColumn">
+      <div id="bwDatePicker">
+       <form action="/cal/main/setSelectionList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de" method="post" name="calForm" onsubmit="return changeStartDate(this,bwMainEventList);">
+        <ul id="bwDatePickerTodayLink">
+         <li class="last">
+          <a href="/cal/main/setSelectionList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de&amp;start=2019-03-10&amp;listMode=true&amp;setappvar=navDate(2019-03-10)">
+           today
+          </a>
+         </li>
+        </ul>
+        <label for="bwDatePickerInput">
+         Start date:
+        </label>
+        <div class="bwInputs">
+         <input class="form-control" id="bwDatePickerInput" name="start" onchange="return changeStartDate(this.form,bwMainEventList);" type="date" value="2019-03-10"/>
+         <input name="setappvar" type="hidden" value="navDate(2019-03-10)"/>
+         <input class="btn btn-default sr-only" type="submit" value="go"/>
+        </div>
+        <div id="bwDatePickerLinks">
+         <ul id="bwDatePickerRangeLinks">
+          <li>
+           <a class="bwUpcomingLink" href="/cal/main/setSelectionList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de&amp;listMode=true&amp;setappvar=listPage(upcoming)">
+            upcoming
+           </a>
+          </li>
+          <li>
+           <a class="bwRangeLink" href="/cal/main/setViewPeriod.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de&amp;viewType=dayView&amp;setappvar=listPage(eventscalendar)">
+            day
+           </a>
+          </li>
+          <li>
+           <a class="bwRangeLink" href="/cal/main/setViewPeriod.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de&amp;viewType=weekView&amp;setappvar=listPage(eventscalendar)">
+            week
+           </a>
+          </li>
+          <li class="last">
+           <a class="bwRangeLink" href="/cal/main/setViewPeriod.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de&amp;viewType=monthView&amp;setappvar=listPage(eventscalendar)">
+            month
+           </a>
+          </li>
+         </ul>
+        </div>
+       </form>
+      </div>
+      <script type="text/javascript">
+       $.datepicker.setDefaults({
+         constrainInput: true,
+         dateFormat: "yy-mm-dd",
+         gotoCurrent: true,
+         duration: ""
+       });
+       $(document).ready(function() {
+       
+           if (Modernizr.inputtypes['date']) {
+             // use HTML5 picker if available
+             $("#bwDatePickerInput").attr("value","2019-03-10");
+           } else {
+             // use jQuery datepicker otherwise
+             $("#bwDatePickerInput").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                setDate: "2019-03-10"
+             });
+           }
+         
+       });
+      </script>
+      <noscript>
+       Your browser does not support JavaScript!
+      </noscript>
+      <form action="#" class="form-group" id="bwBasicSearch" method="post" name="bwBasicSearch" onsubmit="return bwSearch(this.query.value)">
+       <label class="sr-only" for="bwBasicSearchInput">
+        Search for events:
+       </label>
+       <div class="bwInputs">
+        <input class="form-control" id="bwBasicSearchInput" name="query" placeholder="add a filter" type="text"/>
+        <button class="btn" id="searchSubmit" name="submit" type="submit">
+         <span class="glyphicon glyphicon-search">
+         </span>
+        </button>
+       </div>
+      </form>
+      <div id="bwViewList">
+       <div class="bwMenu" id="bwNav0">
+        <div class="bwMenuTitle">
+         <span class="caret">
+         </span>
+         All
+        </div>
+        <div class="bwMenuTree">
+         <ul>
+          <li id="bwNav0-userpublicuserAcademicCalendarexp">
+           <a href="/user/public-user/Academic Calendar" id="bwNav0-userpublicuserAcademicCalendar">
+            Academic Calendar
+           </a>
+          </li>
+          <li id="bwNav0-userpublicuserAlumniEventsexp">
+           <a href="/user/public-user/Alumni Events" id="bwNav0-userpublicuserAlumniEvents">
+            Alumni Events
+           </a>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserArtsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Arts" id="bwNav0-userpublicuserArts">
+            Arts
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesArtsConcertsexp">
+             <a href="/public/aliases/Arts/Concerts" id="bwNav0-publicaliasesArtsConcerts">
+              Concerts
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsDanceexp">
+             <a href="/public/aliases/Arts/Dance" id="bwNav0-publicaliasesArtsDance">
+              Dance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsExhibitsexp">
+             <a href="/public/aliases/Arts/Exhibits" id="bwNav0-publicaliasesArtsExhibits">
+              Exhibits
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsFilmsexp">
+             <a href="/public/aliases/Arts/Films" id="bwNav0-publicaliasesArtsFilms">
+              Films
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsInstallationexp">
+             <a href="/public/aliases/Arts/Installation" id="bwNav0-publicaliasesArtsInstallation">
+              Installation
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsPerformanceexp">
+             <a href="/public/aliases/Arts/Performance" id="bwNav0-publicaliasesArtsPerformance">
+              Performance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsReadingsexp">
+             <a href="/public/aliases/Arts/Readings" id="bwNav0-publicaliasesArtsReadings">
+              Readings
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsScreeningexp">
+             <a href="/public/aliases/Arts/Screening" id="bwNav0-publicaliasesArtsScreening">
+              Screening
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesArtsTheaterexp">
+             <a href="/public/aliases/Arts/Theater" id="bwNav0-publicaliasesArtsTheater">
+              Theater
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li id="bwNav0-userpublicuserAthleticsexp">
+           <a href="/user/public-user/Athletics" id="bwNav0-userpublicuserAthletics">
+            Athletics
+           </a>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserClubsandSocietiesexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Clubs and Societies" id="bwNav0-userpublicuserClubsandSocieties">
+            Clubs and Societies
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesClubsandSocieties2012ClassCouncilexp">
+             <a href="/public/aliases/Clubs and Societies/2012 Class Council" id="bwNav0-publicaliasesClubsandSocieties2012ClassCouncil">
+              2012 Class Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAcaciaexp">
+             <a href="/public/aliases/Clubs and Societies/Acacia" id="bwNav0-publicaliasesClubsandSocietiesAcacia">
+              Acacia
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAeronauticalFederationexp">
+             <a href="/public/aliases/Clubs and Societies/Aeronautical Federation" id="bwNav0-publicaliasesClubsandSocietiesAeronauticalFederation">
+              Aeronautical Federation
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAfricanandCaribbeanStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/African and Caribbean Students Association" id="bwNav0-publicaliasesClubsandSocietiesAfricanandCaribbeanStudentsAssociation">
+              African and Caribbean Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAikidoexp">
+             <a href="/public/aliases/Clubs and Societies/Aikido" id="bwNav0-publicaliasesClubsandSocietiesAikido">
+              Aikido
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAlianzaLatinaexp">
+             <a href="/public/aliases/Clubs and Societies/Alianza Latina" id="bwNav0-publicaliasesClubsandSocietiesAlianzaLatina">
+              Alianza Latina
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAlphaOmegaEpsilonexp">
+             <a href="/public/aliases/Clubs and Societies/Alpha Omega Epsilon" id="bwNav0-publicaliasesClubsandSocietiesAlphaOmegaEpsilon">
+              Alpha Omega Epsilon
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAlphaPhiexp">
+             <a href="/public/aliases/Clubs and Societies/Alpha Phi" id="bwNav0-publicaliasesClubsandSocietiesAlphaPhi">
+              Alpha Phi
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAlphaPhiAlphaexp">
+             <a href="/public/aliases/Clubs and Societies/Alpha Phi Alpha" id="bwNav0-publicaliasesClubsandSocietiesAlphaPhiAlpha">
+              Alpha Phi Alpha
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAlphaandOmegaexp">
+             <a href="/public/aliases/Clubs and Societies/Alpha and Omega" id="bwNav0-publicaliasesClubsandSocietiesAlphaandOmega">
+              Alpha and Omega
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAmericanNuclearSocietyexp">
+             <a href="/public/aliases/Clubs and Societies/American Nuclear Society" id="bwNav0-publicaliasesClubsandSocietiesAmericanNuclearSociety">
+              American Nuclear Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAmericanSocietyofCivilEngineersexp">
+             <a href="/public/aliases/Clubs and Societies/American Society of Civil Engineers" id="bwNav0-publicaliasesClubsandSocietiesAmericanSocietyofCivilEngineers">
+              American Society of Civil Engineers
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAmericanSocietyofMechanicalEngineersexp">
+             <a href="/public/aliases/Clubs and Societies/American Society of Mechanical Engineers" id="bwNav0-publicaliasesClubsandSocietiesAmericanSocietyofMechanicalEngineers">
+              American Society of Mechanical Engineers
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesArcheryClubexp">
+             <a href="/public/aliases/Clubs and Societies/Archery Club" id="bwNav0-publicaliasesClubsandSocietiesArcheryClub">
+              Archery Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesArmenianStudentAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Armenian Student Association" id="bwNav0-publicaliasesClubsandSocietiesArmenianStudentAssociation">
+              Armenian Student Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesArnoldAirSocietyexp">
+             <a href="/public/aliases/Clubs and Societies/Arnold Air Society" id="bwNav0-publicaliasesClubsandSocietiesArnoldAirSociety">
+              Arnold Air Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAsianAwarenessWeekexp">
+             <a href="/public/aliases/Clubs and Societies/Asian Awareness Week" id="bwNav0-publicaliasesClubsandSocietiesAsianAwarenessWeek">
+              Asian Awareness Week
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAssociationforComputingMachineryexp">
+             <a href="/public/aliases/Clubs and Societies/Association for Computing Machinery" id="bwNav0-publicaliasesClubsandSocietiesAssociationforComputingMachinery">
+              Association for Computing Machinery
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAstrophysicalSocietyexp">
+             <a href="/public/aliases/Clubs and Societies/Astrophysical Society" id="bwNav0-publicaliasesClubsandSocietiesAstrophysicalSociety">
+              Astrophysical Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesAutoshopexp">
+             <a href="/public/aliases/Clubs and Societies/Autoshop" id="bwNav0-publicaliasesClubsandSocietiesAutoshop">
+              Autoshop
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBadmintonexp">
+             <a href="/public/aliases/Clubs and Societies/Badminton" id="bwNav0-publicaliasesClubsandSocietiesBadminton">
+              Badminton
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBallroomDanceexp">
+             <a href="/public/aliases/Clubs and Societies/Ballroom Dance" id="bwNav0-publicaliasesClubsandSocietiesBallroomDance">
+              Ballroom Dance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBilliardsClubexp">
+             <a href="/public/aliases/Clubs and Societies/Billiards Club" id="bwNav0-publicaliasesClubsandSocietiesBilliardsClub">
+              Billiards Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBiomedicalEngineeringSocietyexp">
+             <a href="/public/aliases/Clubs and Societies/Biomedical Engineering Society" id="bwNav0-publicaliasesClubsandSocietiesBiomedicalEngineeringSociety">
+              Biomedical Engineering Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBlackCulturalCenterexp">
+             <a href="/public/aliases/Clubs and Societies/Black Cultural Center" id="bwNav0-publicaliasesClubsandSocietiesBlackCulturalCenter">
+              Black Cultural Center
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBlackStudentsAllianceexp">
+             <a href="/public/aliases/Clubs and Societies/Black Students Alliance" id="bwNav0-publicaliasesClubsandSocietiesBlackStudentsAlliance">
+              Black Students Alliance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBookstoreexp">
+             <a href="/public/aliases/Clubs and Societies/Bookstore" id="bwNav0-publicaliasesClubsandSocietiesBookstore">
+              Bookstore
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesBusinessInvestmentsexp">
+             <a href="/public/aliases/Clubs and Societies/Business Investments" id="bwNav0-publicaliasesClubsandSocietiesBusinessInvestments">
+              Business Investments
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCampusSerenadersexp">
+             <a href="/public/aliases/Clubs and Societies/Campus Serenaders" id="bwNav0-publicaliasesClubsandSocietiesCampusSerenaders">
+              Campus Serenaders
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCapoeiraexp">
+             <a href="/public/aliases/Clubs and Societies/Capoeira" id="bwNav0-publicaliasesClubsandSocietiesCapoeira">
+              Capoeira
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCardPlayersClubexp">
+             <a href="/public/aliases/Clubs and Societies/Card Players Club" id="bwNav0-publicaliasesClubsandSocietiesCardPlayersClub">
+              Card Players Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCheerleadingexp">
+             <a href="/public/aliases/Clubs and Societies/Cheerleading" id="bwNav0-publicaliasesClubsandSocietiesCheerleading">
+              Cheerleading
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesChiEpsilonexp">
+             <a href="/public/aliases/Clubs and Societies/Chi Epsilon" id="bwNav0-publicaliasesClubsandSocietiesChiEpsilon">
+              Chi Epsilon
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesChineseAmericanStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Chinese American Students Association" id="bwNav0-publicaliasesClubsandSocietiesChineseAmericanStudentsAssociation">
+              Chinese American Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesChineseStudentsandScholarsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Chinese Students and Scholars Association" id="bwNav0-publicaliasesClubsandSocietiesChineseStudentsandScholarsAssociation">
+              Chinese Students and Scholars Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesChungDoKwonexp">
+             <a href="/public/aliases/Clubs and Societies/Chung Do Kwon" id="bwNav0-publicaliasesClubsandSocietiesChungDoKwon">
+              Chung Do Kwon
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCircleKexp">
+             <a href="/public/aliases/Clubs and Societies/Circle K" id="bwNav0-publicaliasesClubsandSocietiesCircleK">
+              Circle K
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesClassof2010exp">
+             <a href="/public/aliases/Clubs and Societies/Class of 2010" id="bwNav0-publicaliasesClubsandSocietiesClassof2010">
+              Class of 2010
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesClassof2011exp">
+             <a href="/public/aliases/Clubs and Societies/Class of 2011" id="bwNav0-publicaliasesClubsandSocietiesClassof2011">
+              Class of 2011
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesClassof2012exp">
+             <a href="/public/aliases/Clubs and Societies/Class of 2012" id="bwNav0-publicaliasesClubsandSocietiesClassof2012">
+              Class of 2012
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesClassOf2017Councilexp">
+             <a href="/public/aliases/Clubs and Societies/ClassOf2017Council" id="bwNav0-publicaliasesClubsandSocietiesClassOf2017Council">
+              Class of 2017 Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesClubhousePubexp">
+             <a href="/public/aliases/Clubs and Societies/Clubhouse Pub" id="bwNav0-publicaliasesClubsandSocietiesClubhousePub">
+              Clubhouse Pub
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCollegeDemocratsexp">
+             <a href="/public/aliases/Clubs and Societies/College Democrats" id="bwNav0-publicaliasesClubsandSocietiesCollegeDemocrats">
+              College Democrats
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCollegeRepublicansexp">
+             <a href="/public/aliases/Clubs and Societies/College Republicans" id="bwNav0-publicaliasesClubsandSocietiesCollegeRepublicans">
+              College Republicans
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCommunityServiceexp">
+             <a href="/public/aliases/Clubs and Societies/Community Service" id="bwNav0-publicaliasesClubsandSocietiesCommunityService">
+              Community Service
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesConcertChoirexp">
+             <a href="/public/aliases/Clubs and Societies/Concert Choir" id="bwNav0-publicaliasesClubsandSocietiesConcertChoir">
+              Concert Choir
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesContingencyexp">
+             <a href="/public/aliases/Clubs and Societies/Contingency" id="bwNav0-publicaliasesClubsandSocietiesContingency">
+              Contingency
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCrewexp">
+             <a href="/public/aliases/Clubs and Societies/Crew" id="bwNav0-publicaliasesClubsandSocietiesCrew">
+              Crew
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCricketexp">
+             <a href="/public/aliases/Clubs and Societies/Cricket" id="bwNav0-publicaliasesClubsandSocietiesCricket">
+              Cricket
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesCyclingexp">
+             <a href="/public/aliases/Clubs and Societies/Cycling" id="bwNav0-publicaliasesClubsandSocietiesCycling">
+              Cycling
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesDanceClubexp">
+             <a href="/public/aliases/Clubs and Societies/Dance Club" id="bwNav0-publicaliasesClubsandSocietiesDanceClub">
+              Dance Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesDanceDanceRevolutionexp">
+             <a href="/public/aliases/Clubs and Societies/Dance Dance Revolution" id="bwNav0-publicaliasesClubsandSocietiesDanceDanceRevolution">
+              Dance Dance Revolution
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesDestinationImaginationexp">
+             <a href="/public/aliases/Clubs and Societies/Destination Imagination" id="bwNav0-publicaliasesClubsandSocietiesDestinationImagination">
+              Destination Imagination
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesDulyNotedexp">
+             <a href="/public/aliases/Clubs and Societies/Duly Noted" id="bwNav0-publicaliasesClubsandSocietiesDulyNoted">
+              Duly Noted
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesEcologicexp">
+             <a href="/public/aliases/Clubs and Societies/Ecologic" id="bwNav0-publicaliasesClubsandSocietiesEcologic">
+              Ecologic
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesElectronicsexp">
+             <a href="/public/aliases/Clubs and Societies/Electronics" id="bwNav0-publicaliasesClubsandSocietiesElectronics">
+              Electronics
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesEngineersforaSustainableWorldexp">
+             <a href="/public/aliases/Clubs and Societies/Engineers for a Sustainable World" id="bwNav0-publicaliasesClubsandSocietiesEngineersforaSustainableWorld">
+              Engineers for a Sustainable World
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesEntrepreneurshipexp">
+             <a href="/public/aliases/Clubs and Societies/Entrepreneurship" id="bwNav0-publicaliasesClubsandSocietiesEntrepreneurship">
+              Entrepreneurship
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesEquestrianClubexp">
+             <a href="/public/aliases/Clubs and Societies/Equestrian Club" id="bwNav0-publicaliasesClubsandSocietiesEquestrianClub">
+              Equestrian Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesExecutiveBoardexp">
+             <a href="/public/aliases/Clubs and Societies/Executive Board" id="bwNav0-publicaliasesClubsandSocietiesExecutiveBoard">
+              Executive Board
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesFathersexp">
+             <a href="/public/aliases/Clubs and Societies/Fathers" id="bwNav0-publicaliasesClubsandSocietiesFathers">
+              Fathers
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesFencingexp">
+             <a href="/public/aliases/Clubs and Societies/Fencing" id="bwNav0-publicaliasesClubsandSocietiesFencing">
+              Fencing
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesFoodServiceexp">
+             <a href="/public/aliases/Clubs and Societies/Food Service" id="bwNav0-publicaliasesClubsandSocietiesFoodService">
+              Food Service
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGMWeekexp">
+             <a href="/public/aliases/Clubs and Societies/GM Week" id="bwNav0-publicaliasesClubsandSocietiesGMWeek">
+              GM Week
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGameDevelopmentClubexp">
+             <a href="/public/aliases/Clubs and Societies/Game Development Club" id="bwNav0-publicaliasesClubsandSocietiesGameDevelopmentClub">
+              Game Development Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGamesAreaexp">
+             <a href="/public/aliases/Clubs and Societies/Games Area" id="bwNav0-publicaliasesClubsandSocietiesGamesArea">
+              Games Area
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGamingClubexp">
+             <a href="/public/aliases/Clubs and Societies/Gaming Club" id="bwNav0-publicaliasesClubsandSocietiesGamingClub">
+              Gaming Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGraduateCouncilexp">
+             <a href="/public/aliases/Clubs and Societies/Graduate Council" id="bwNav0-publicaliasesClubsandSocietiesGraduateCouncil">
+              Graduate Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGraduateIndianStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Graduate Indian Students Association" id="bwNav0-publicaliasesClubsandSocietiesGraduateIndianStudentsAssociation">
+              Graduate Indian Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesGraphicsClubexp">
+             <a href="/public/aliases/Clubs and Societies/Graphics Club" id="bwNav0-publicaliasesClubsandSocietiesGraphicsClub">
+              Graphics Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesHabitatforHumanityexp">
+             <a href="/public/aliases/Clubs and Societies/Habitat for Humanity" id="bwNav0-publicaliasesClubsandSocietiesHabitatforHumanity">
+              Habitat for Humanity
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesHellenicStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Hellenic Students Association" id="bwNav0-publicaliasesClubsandSocietiesHellenicStudentsAssociation">
+              Hellenic Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesHillelexp">
+             <a href="/public/aliases/Clubs and Societies/Hillel" id="bwNav0-publicaliasesClubsandSocietiesHillel">
+              Hillel
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesHinduStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Hindu Students Association" id="bwNav0-publicaliasesClubsandSocietiesHinduStudentsAssociation">
+              Hindu Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesHolocaustRemembranceCommitteeexp">
+             <a href="/public/aliases/Clubs and Societies/Holocaust Remembrance Committee" id="bwNav0-publicaliasesClubsandSocietiesHolocaustRemembranceCommittee">
+              Holocaust Remembrance Committee
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesHongKongStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Hong Kong Students Association" id="bwNav0-publicaliasesClubsandSocietiesHongKongStudentsAssociation">
+              Hong Kong Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesIndependentCouncilexp">
+             <a href="/public/aliases/Clubs and Societies/Independent Council" id="bwNav0-publicaliasesClubsandSocietiesIndependentCouncil">
+              Independent Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesIndianStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Indian Students Association" id="bwNav0-publicaliasesClubsandSocietiesIndianStudentsAssociation">
+              Indian Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesInterfraternityCouncilexp">
+             <a href="/public/aliases/Clubs and Societies/Interfraternity Council" id="bwNav0-publicaliasesClubsandSocietiesInterfraternityCouncil">
+              Interfraternity Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesIntramuralsexp">
+             <a href="/public/aliases/Clubs and Societies/Intramurals" id="bwNav0-publicaliasesClubsandSocietiesIntramurals">
+              Intramurals
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesIranianStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Iranian Students Association" id="bwNav0-publicaliasesClubsandSocietiesIranianStudentsAssociation">
+              Iranian Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesIsshrinyuKarateexp">
+             <a href="/public/aliases/Clubs and Societies/Isshrinyu Karate" id="bwNav0-publicaliasesClubsandSocietiesIsshrinyuKarate">
+              Isshrinyu Karate
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesJapaneseStudentsAssociationJSAexp">
+             <a href="/public/aliases/Clubs and Societies/Japanese Students Association (JSA)" id="bwNav0-publicaliasesClubsandSocietiesJapaneseStudentsAssociationJSA">
+              Japanese Students Association (JSA)
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesJazzEnsembleexp">
+             <a href="/public/aliases/Clubs and Societies/Jazz Ensemble" id="bwNav0-publicaliasesClubsandSocietiesJazzEnsemble">
+              Jazz Ensemble
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesJudicialBoardexp">
+             <a href="/public/aliases/Clubs and Societies/Judicial Board" id="bwNav0-publicaliasesClubsandSocietiesJudicialBoard">
+              Judicial Board
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesJudoClubexp">
+             <a href="/public/aliases/Clubs and Societies/Judo Club" id="bwNav0-publicaliasesClubsandSocietiesJudoClub">
+              Judo Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesJugglingClubexp">
+             <a href="/public/aliases/Clubs and Societies/Juggling Club" id="bwNav0-publicaliasesClubsandSocietiesJugglingClub">
+              Juggling Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesKendoexp">
+             <a href="/public/aliases/Clubs and Societies/Kendo" id="bwNav0-publicaliasesClubsandSocietiesKendo">
+              Kendo
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesKnightsofColumbusexp">
+             <a href="/public/aliases/Clubs and Societies/Knights of Columbus" id="bwNav0-publicaliasesClubsandSocietiesKnightsofColumbus">
+              Knights of Columbus
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesKoreanChristianFellowshipexp">
+             <a href="/public/aliases/Clubs and Societies/Korean Christian Fellowship" id="bwNav0-publicaliasesClubsandSocietiesKoreanChristianFellowship">
+              Korean Christian Fellowship
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesLambdaUpsilonLambdaexp">
+             <a href="/public/aliases/Clubs and Societies/Lambda Upsilon Lambda" id="bwNav0-publicaliasesClubsandSocietiesLambdaUpsilonLambda">
+              Lambda Upsilon Lambda
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesLavenderAmbassadorsexp">
+             <a href="/public/aliases/Clubs and Societies/Lavender Ambassadors" id="bwNav0-publicaliasesClubsandSocietiesLavenderAmbassadors">
+              Lavender Ambassadors
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesMacUserGroupexp">
+             <a href="/public/aliases/Clubs and Societies/Mac User Group" id="bwNav0-publicaliasesClubsandSocietiesMacUserGroup">
+              Mac User Group
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesMalaysianStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Malaysian Students Association" id="bwNav0-publicaliasesClubsandSocietiesMalaysianStudentsAssociation">
+              Malaysian Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesMarriedStudentsOrganizationexp">
+             <a href="/public/aliases/Clubs and Societies/Married Students Organization" id="bwNav0-publicaliasesClubsandSocietiesMarriedStudentsOrganization">
+              Married Students Organization
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesModelRailroadexp">
+             <a href="/public/aliases/Clubs and Societies/Model Railroad" id="bwNav0-publicaliasesClubsandSocietiesModelRailroad">
+              Model Railroad
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesMuellerCenterexp">
+             <a href="/public/aliases/Clubs and Societies/Mueller Center" id="bwNav0-publicaliasesClubsandSocietiesMuellerCenter">
+              Mueller Center
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesMuslimStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Muslim Students Association" id="bwNav0-publicaliasesClubsandSocietiesMuslimStudentsAssociation">
+              Muslim Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesMuslimWomensAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Muslim Womens Association" id="bwNav0-publicaliasesClubsandSocietiesMuslimWomensAssociation">
+              Muslim Womens Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesNewmanCatholicFellowshipexp">
+             <a href="/public/aliases/Clubs and Societies/Newman Catholic Fellowship" id="bwNav0-publicaliasesClubsandSocietiesNewmanCatholicFellowship">
+              Newman Catholic Fellowship
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesNigerianStudentAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Nigerian Student Association" id="bwNav0-publicaliasesClubsandSocietiesNigerianStudentAssociation">
+              Nigerian Student Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesOutingClubexp">
+             <a href="/public/aliases/Clubs and Societies/Outing Club" id="bwNav0-publicaliasesClubsandSocietiesOutingClub">
+              Outing Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPaintballexp">
+             <a href="/public/aliases/Clubs and Societies/Paintball" id="bwNav0-publicaliasesClubsandSocietiesPaintball">
+              Paintball
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPakistanStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Pakistan Students Association" id="bwNav0-publicaliasesClubsandSocietiesPakistanStudentsAssociation">
+              Pakistan Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPanhellenicCouncilexp">
+             <a href="/public/aliases/Clubs and Societies/Panhellenic Council" id="bwNav0-publicaliasesClubsandSocietiesPanhellenicCouncil">
+              Panhellenic Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPartialCreditexp">
+             <a href="/public/aliases/Clubs and Societies/Partial Credit" id="bwNav0-publicaliasesClubsandSocietiesPartialCredit">
+              Partial Credit
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPepBandexp">
+             <a href="/public/aliases/Clubs and Societies/Pep Band" id="bwNav0-publicaliasesClubsandSocietiesPepBand">
+              Pep Band
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPercussionEnsembleexp">
+             <a href="/public/aliases/Clubs and Societies/Percussion Ensemble" id="bwNav0-publicaliasesClubsandSocietiesPercussionEnsemble">
+              Percussion Ensemble
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPerformingArtsCommitteeexp">
+             <a href="/public/aliases/Clubs and Societies/Performing Arts Committee" id="bwNav0-publicaliasesClubsandSocietiesPerformingArtsCommittee">
+              Performing Arts Committee
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPhalanxHonorarySocietyexp">
+             <a href="/public/aliases/Clubs and Societies/Phalanx Honorary Society" id="bwNav0-publicaliasesClubsandSocietiesPhalanxHonorarySociety">
+              Phalanx Honorary Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPhilippineAmericanLeagueexp">
+             <a href="/public/aliases/Clubs and Societies/Philippine American League" id="bwNav0-publicaliasesClubsandSocietiesPhilippineAmericanLeague">
+              Philippine American League
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPhotoClubexp">
+             <a href="/public/aliases/Clubs and Societies/Photo Club" id="bwNav0-publicaliasesClubsandSocietiesPhotoClub">
+              Photo Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPiBetaPhiexp">
+             <a href="/public/aliases/Clubs and Societies/Pi Beta Phi" id="bwNav0-publicaliasesClubsandSocietiesPiBetaPhi">
+              Pi Beta Phi
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPiKappaAlphaexp">
+             <a href="/public/aliases/Clubs and Societies/Pi Kappa Alpha" id="bwNav0-publicaliasesClubsandSocietiesPiKappaAlpha">
+              Pi Kappa Alpha
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPiLambdaPhiexp">
+             <a href="/public/aliases/Clubs and Societies/Pi Lambda Phi" id="bwNav0-publicaliasesClubsandSocietiesPiLambdaPhi">
+              Pi Lambda Phi
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPillarsofRensselaerexp">
+             <a href="/public/aliases/Clubs and Societies/Pillars of Rensselaer" id="bwNav0-publicaliasesClubsandSocietiesPillarsofRensselaer">
+              Pillars of Rensselaer
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPlayersexp">
+             <a href="/public/aliases/Clubs and Societies/Players" id="bwNav0-publicaliasesClubsandSocietiesPlayers">
+              Players
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPlayhouseexp">
+             <a href="/public/aliases/Clubs and Societies/Playhouse" id="bwNav0-publicaliasesClubsandSocietiesPlayhouse">
+              Playhouse
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPolytechnicexp">
+             <a href="/public/aliases/Clubs and Societies/Polytechnic" id="bwNav0-publicaliasesClubsandSocietiesPolytechnic">
+              Polytechnic
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPrideAllianceexp">
+             <a href="/public/aliases/Clubs and Societies/Pride Alliance" id="bwNav0-publicaliasesClubsandSocietiesPrideAlliance">
+              Pride Alliance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesPublicityCommitteeexp">
+             <a href="/public/aliases/Clubs and Societies/Publicity Committee" id="bwNav0-publicaliasesClubsandSocietiesPublicityCommittee">
+              Publicity Committee
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRPIAmbulanceexp">
+             <a href="/public/aliases/Clubs and Societies/RPI Ambulance" id="bwNav0-publicaliasesClubsandSocietiesRPIAmbulance">
+              RPI Ambulance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRPIFlyingexp">
+             <a href="/public/aliases/Clubs and Societies/RPI Flying" id="bwNav0-publicaliasesClubsandSocietiesRPIFlying">
+              RPI Flying
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRPITVexp">
+             <a href="/public/aliases/Clubs and Societies/RPI TV" id="bwNav0-publicaliasesClubsandSocietiesRPITV">
+              RPI TV
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRacquetballexp">
+             <a href="/public/aliases/Clubs and Societies/Racquetball" id="bwNav0-publicaliasesClubsandSocietiesRacquetball">
+              Racquetball
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRadioContolAircraftClubexp">
+             <a href="/public/aliases/Clubs and Societies/Radio Contol Aircraft Club" id="bwNav0-publicaliasesClubsandSocietiesRadioContolAircraftClub">
+              Radio Contol Aircraft Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRedArmyexp">
+             <a href="/public/aliases/Clubs and Societies/Red Army" id="bwNav0-publicaliasesClubsandSocietiesRedArmy">
+              Red Army
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRedandWhiteStudentOrganizationexp">
+             <a href="/public/aliases/Clubs and Societies/Red and White Student Organization" id="bwNav0-publicaliasesClubsandSocietiesRedandWhiteStudentOrganization">
+              Red and White Student Organization
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerBengaliCommunityexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Bengali Community" id="bwNav0-publicaliasesClubsandSocietiesRensselaerBengaliCommunity">
+              Rensselaer Bengali Community
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerChemistrySocietyexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Chemistry Society" id="bwNav0-publicaliasesClubsandSocietiesRensselaerChemistrySociety">
+              Rensselaer Chemistry Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerChristianAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Christian Association" id="bwNav0-publicaliasesClubsandSocietiesRensselaerChristianAssociation">
+              Rensselaer Christian Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerMusicAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Music Association" id="bwNav0-publicaliasesClubsandSocietiesRensselaerMusicAssociation">
+              Rensselaer Music Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionBiodieselexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Union Biodiesel" id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionBiodiesel">
+              Rensselaer Union Biodiesel
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionFacilitiesexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Union Facilities" id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionFacilities">
+              Rensselaer Union Facilities
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionLegalServicesexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Union Legal Services" id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionLegalServices">
+              Rensselaer Union Legal Services
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionVendorsexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer Union Vendors" id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionVendors">
+              Rensselaer Union Vendors
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionexp">
+             <a href="/public/aliases/Clubs and Societies/RensselaerUnion" id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnion">
+              Rensselaer Union
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnionexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselaer_Union" id="bwNav0-publicaliasesClubsandSocietiesRensselaerUnion">
+              Rensselaer Union
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRensselyricsexp">
+             <a href="/public/aliases/Clubs and Societies/Rensselyrics" id="bwNav0-publicaliasesClubsandSocietiesRensselyrics">
+              Rensselyrics
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRifleClubexp">
+             <a href="/public/aliases/Clubs and Societies/Rifle Club" id="bwNav0-publicaliasesClubsandSocietiesRifleClub">
+              Rifle Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRollerHockeyClubexp">
+             <a href="/public/aliases/Clubs and Societies/Roller Hockey Club" id="bwNav0-publicaliasesClubsandSocietiesRollerHockeyClub">
+              Roller Hockey Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRugbyexp">
+             <a href="/public/aliases/Clubs and Societies/Rugby" id="bwNav0-publicaliasesClubsandSocietiesRugby">
+              Rugby
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRulesAndElectionsCommitteeexp">
+             <a href="/public/aliases/Clubs and Societies/RulesAndElectionsCommittee" id="bwNav0-publicaliasesClubsandSocietiesRulesAndElectionsCommittee">
+              Rules and Elections Committee
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRussianClubexp">
+             <a href="/public/aliases/Clubs and Societies/Russian Club" id="bwNav0-publicaliasesClubsandSocietiesRussianClub">
+              Russian Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesRustyPipesexp">
+             <a href="/public/aliases/Clubs and Societies/Rusty Pipes" id="bwNav0-publicaliasesClubsandSocietiesRustyPipes">
+              Rusty Pipes
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSCUBAexp">
+             <a href="/public/aliases/Clubs and Societies/SCUBA" id="bwNav0-publicaliasesClubsandSocietiesSCUBA">
+              SCUBA
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSailingexp">
+             <a href="/public/aliases/Clubs and Societies/Sailing" id="bwNav0-publicaliasesClubsandSocietiesSailing">
+              Sailing
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesScienceFictionSocietyexp">
+             <a href="/public/aliases/Clubs and Societies/Science Fiction Society" id="bwNav0-publicaliasesClubsandSocietiesScienceFictionSociety">
+              Science Fiction Society
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSecularStudentAllianceexp">
+             <a href="/public/aliases/Clubs and Societies/Secular Student Alliance" id="bwNav0-publicaliasesClubsandSocietiesSecularStudentAlliance">
+              Secular Student Alliance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSheerIdiocyexp">
+             <a href="/public/aliases/Clubs and Societies/Sheer Idiocy" id="bwNav0-publicaliasesClubsandSocietiesSheerIdiocy">
+              Sheer Idiocy
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSigmaAlphaEpsilonexp">
+             <a href="/public/aliases/Clubs and Societies/Sigma Alpha Epsilon" id="bwNav0-publicaliasesClubsandSocietiesSigmaAlphaEpsilon">
+              Sigma Alpha Epsilon
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSigmaPhiEpsilonexp">
+             <a href="/public/aliases/Clubs and Societies/Sigma Phi Epsilon" id="bwNav0-publicaliasesClubsandSocietiesSigmaPhiEpsilon">
+              Sigma Phi Epsilon
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSkiTeamexp">
+             <a href="/public/aliases/Clubs and Societies/Ski Team" id="bwNav0-publicaliasesClubsandSocietiesSkiTeam">
+              Ski Team
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSkiandSnowboardClubexp">
+             <a href="/public/aliases/Clubs and Societies/Ski and Snowboard Club" id="bwNav0-publicaliasesClubsandSocietiesSkiandSnowboardClub">
+              Ski and Snowboard Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSocietyforCreativeAnachronismexp">
+             <a href="/public/aliases/Clubs and Societies/Society for Creative Anachronism" id="bwNav0-publicaliasesClubsandSocietiesSocietyforCreativeAnachronism">
+              Society for Creative Anachronism
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSocietyofEnvironmentalProfessionalsexp">
+             <a href="/public/aliases/Clubs and Societies/Society of Environmental Professionals" id="bwNav0-publicaliasesClubsandSocietiesSocietyofEnvironmentalProfessionals">
+              Society of Environmental Professionals
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSocietyofHispanicProfessionalEngineersexp">
+             <a href="/public/aliases/Clubs and Societies/Society of Hispanic Professional Engineers" id="bwNav0-publicaliasesClubsandSocietiesSocietyofHispanicProfessionalEngineers">
+              Society of Hispanic Professional Engineers
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSocietyofWomenEngineersexp">
+             <a href="/public/aliases/Clubs and Societies/Society of Women Engineers" id="bwNav0-publicaliasesClubsandSocietiesSocietyofWomenEngineers">
+              Society of Women Engineers
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSpeakUpexp">
+             <a href="/public/aliases/Clubs and Societies/Speak Up" id="bwNav0-publicaliasesClubsandSocietiesSpeakUp">
+              Speak Up
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSportsCarAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Sports Car Association" id="bwNav0-publicaliasesClubsandSocietiesSportsCarAssociation">
+              Sports Car Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesStatlerandWaldorfexp">
+             <a href="/public/aliases/Clubs and Societies/Statler and Waldorf" id="bwNav0-publicaliasesClubsandSocietiesStatlerandWaldorf">
+              Statler and Waldorf
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesStudentSenateexp">
+             <a href="/public/aliases/Clubs and Societies/Student Senate" id="bwNav0-publicaliasesClubsandSocietiesStudentSenate">
+              Student Senate
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesStudentVeteransofAmericaexp">
+             <a href="/public/aliases/Clubs and Societies/Student Veterans of America" id="bwNav0-publicaliasesClubsandSocietiesStudentVeteransofAmerica">
+              Student Veterans of America
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesStudentsSustainabilityTaskForceSSTFexp">
+             <a href="/public/aliases/Clubs and Societies/Students Sustainability Task Force (SSTF)" id="bwNav0-publicaliasesClubsandSocietiesStudentsSustainabilityTaskForceSSTF">
+              Students Sustainability Task Force (SSTF)
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSwimClubexp">
+             <a href="/public/aliases/Clubs and Societies/Swim Club" id="bwNav0-publicaliasesClubsandSocietiesSwimClub">
+              Swim Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSymphonicBandexp">
+             <a href="/public/aliases/Clubs and Societies/Symphonic Band" id="bwNav0-publicaliasesClubsandSocietiesSymphonicBand">
+              Symphonic Band
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesSymphonyOrchestraexp">
+             <a href="/public/aliases/Clubs and Societies/Symphony Orchestra" id="bwNav0-publicaliasesClubsandSocietiesSymphonyOrchestra">
+              Symphony Orchestra
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTableTennisexp">
+             <a href="/public/aliases/Clubs and Societies/Table Tennis" id="bwNav0-publicaliasesClubsandSocietiesTableTennis">
+              Table Tennis
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTaiwaneseStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Taiwanese Students Association" id="bwNav0-publicaliasesClubsandSocietiesTaiwaneseStudentsAssociation">
+              Taiwanese Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTauBetaPiexp">
+             <a href="/public/aliases/Clubs and Societies/Tau Beta Pi" id="bwNav0-publicaliasesClubsandSocietiesTauBetaPi">
+              Tau Beta Pi
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTennisClubexp">
+             <a href="/public/aliases/Clubs and Societies/Tennis Club" id="bwNav0-publicaliasesClubsandSocietiesTennisClub">
+              Tennis Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTotalNutritionTodayexp">
+             <a href="/public/aliases/Clubs and Societies/Total Nutrition Today" id="bwNav0-publicaliasesClubsandSocietiesTotalNutritionToday">
+              Total Nutrition Today
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTransitYearbookexp">
+             <a href="/public/aliases/Clubs and Societies/Transit Yearbook" id="bwNav0-publicaliasesClubsandSocietiesTransitYearbook">
+              Transit Yearbook
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTravelContingencyexp">
+             <a href="/public/aliases/Clubs and Societies/Travel Contingency" id="bwNav0-publicaliasesClubsandSocietiesTravelContingency">
+              Travel Contingency
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTumblingexp">
+             <a href="/public/aliases/Clubs and Societies/Tumbling" id="bwNav0-publicaliasesClubsandSocietiesTumbling">
+              Tumbling
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesTurkishStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Turkish Students Association" id="bwNav0-publicaliasesClubsandSocietiesTurkishStudentsAssociation">
+              Turkish Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACCinemaexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Cinema" id="bwNav0-publicaliasesClubsandSocietiesUPACCinema">
+              UPAC Cinema
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACComedyexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Comedy" id="bwNav0-publicaliasesClubsandSocietiesUPACComedy">
+              UPAC Comedy
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACConcertsexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Concerts" id="bwNav0-publicaliasesClubsandSocietiesUPACConcerts">
+              UPAC Concerts
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACGeneralexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC General" id="bwNav0-publicaliasesClubsandSocietiesUPACGeneral">
+              UPAC General
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACLightsexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Lights" id="bwNav0-publicaliasesClubsandSocietiesUPACLights">
+              UPAC Lights
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACMothersexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Mothers" id="bwNav0-publicaliasesClubsandSocietiesUPACMothers">
+              UPAC Mothers
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACSoundexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Sound" id="bwNav0-publicaliasesClubsandSocietiesUPACSound">
+              UPAC Sound
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUPACSummerexp">
+             <a href="/public/aliases/Clubs and Societies/UPAC Summer" id="bwNav0-publicaliasesClubsandSocietiesUPACSummer">
+              UPAC Summer
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUltimateFrisbeeexp">
+             <a href="/public/aliases/Clubs and Societies/Ultimate Frisbee" id="bwNav0-publicaliasesClubsandSocietiesUltimateFrisbee">
+              Ultimate Frisbee
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUndergraduateCouncilexp">
+             <a href="/public/aliases/Clubs and Societies/Undergraduate Council" id="bwNav0-publicaliasesClubsandSocietiesUndergraduateCouncil">
+              Undergraduate Council
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesUnionSpeakersForumexp">
+             <a href="/public/aliases/Clubs and Societies/Union Speakers Forum" id="bwNav0-publicaliasesClubsandSocietiesUnionSpeakersForum">
+              Union Speakers Forum
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesVietnameseStudentsAssociationexp">
+             <a href="/public/aliases/Clubs and Societies/Vietnamese Students Association" id="bwNav0-publicaliasesClubsandSocietiesVietnameseStudentsAssociation">
+              Vietnamese Students Association
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesVolleyballexp">
+             <a href="/public/aliases/Clubs and Societies/Volleyball" id="bwNav0-publicaliasesClubsandSocietiesVolleyball">
+              Volleyball
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesVolunteersforEducationexp">
+             <a href="/public/aliases/Clubs and Societies/Volunteers for Education" id="bwNav0-publicaliasesClubsandSocietiesVolunteersforEducation">
+              Volunteers for Education
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesW2SZHAMRadioexp">
+             <a href="/public/aliases/Clubs and Societies/W2SZ HAM Radio" id="bwNav0-publicaliasesClubsandSocietiesW2SZHAMRadio">
+              W2SZ HAM Radio
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesWRPIexp">
+             <a href="/public/aliases/Clubs and Societies/WRPI" id="bwNav0-publicaliasesClubsandSocietiesWRPI">
+              WRPI
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesWaterPoloexp">
+             <a href="/public/aliases/Clubs and Societies/Water Polo" id="bwNav0-publicaliasesClubsandSocietiesWaterPolo">
+              Water Polo
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesWrestlingexp">
+             <a href="/public/aliases/Clubs and Societies/Wrestling" id="bwNav0-publicaliasesClubsandSocietiesWrestling">
+              Wrestling
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesYogaBreathingandMeditationClubexp">
+             <a href="/public/aliases/Clubs and Societies/Yoga Breathing and Meditation Club" id="bwNav0-publicaliasesClubsandSocietiesYogaBreathingandMeditationClub">
+              Yoga Breathing and Meditation Club
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesYoungActorsGuildexp">
+             <a href="/public/aliases/Clubs and Societies/Young Actors Guild" id="bwNav0-publicaliasesClubsandSocietiesYoungActorsGuild">
+              Young Actors Guild
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesClubsandSocietiesZetaBetaTauexp">
+             <a href="/public/aliases/Clubs and Societies/Zeta Beta Tau" id="bwNav0-publicaliasesClubsandSocietiesZetaBetaTau">
+              Zeta Beta Tau
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserConferencesMeetingsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Conferences_Meetings" id="bwNav0-userpublicuserConferencesMeetings">
+            Conferences_Meetings
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesConferencesMeetingsColloquiaexp">
+             <a href="/public/aliases/Conferences_Meetings/Colloquia" id="bwNav0-publicaliasesConferencesMeetingsColloquia">
+              Colloquia
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesConferencesMeetingsConferencesexp">
+             <a href="/public/aliases/Conferences_Meetings/Conferences" id="bwNav0-publicaliasesConferencesMeetingsConferences">
+              Conferences
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesConferencesMeetingsDiscussionsexp">
+             <a href="/public/aliases/Conferences_Meetings/Discussions" id="bwNav0-publicaliasesConferencesMeetingsDiscussions">
+              Discussions
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesConferencesMeetingsForumsexp">
+             <a href="/public/aliases/Conferences_Meetings/Forums" id="bwNav0-publicaliasesConferencesMeetingsForums">
+              Forums
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesConferencesMeetingsMeetingsexp">
+             <a href="/public/aliases/Conferences_Meetings/Meetings" id="bwNav0-publicaliasesConferencesMeetingsMeetings">
+              Meetings
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesConferencesMeetingsSymposiumexp">
+             <a href="/public/aliases/Conferences_Meetings/Symposium" id="bwNav0-publicaliasesConferencesMeetingsSymposium">
+              Symposium
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserGeneralCalendarsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/General Calendars" id="bwNav0-userpublicuserGeneralCalendars">
+            General Calendars
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesGeneralCalendarsAcademicCalendarexp">
+             <a href="/public/aliases/General Calendars/Academic Calendar" id="bwNav0-publicaliasesGeneralCalendarsAcademicCalendar">
+              Academic Calendar
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsCommencementexp">
+             <a href="/public/aliases/General Calendars/Commencement" id="bwNav0-publicaliasesGeneralCalendarsCommencement">
+              Commencement
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsConstructionexp">
+             <a href="/public/aliases/General Calendars/Construction" id="bwNav0-publicaliasesGeneralCalendarsConstruction">
+              Construction
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsDeadlinesexp">
+             <a href="/public/aliases/General Calendars/Deadlines" id="bwNav0-publicaliasesGeneralCalendarsDeadlines">
+              Deadlines
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsFacilitiesexp">
+             <a href="/public/aliases/General Calendars/Facilities" id="bwNav0-publicaliasesGeneralCalendarsFacilities">
+              Facilities
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsHolidaysexp">
+             <a href="/public/aliases/General Calendars/Holidays" id="bwNav0-publicaliasesGeneralCalendarsHolidays">
+              Holidays
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsParkingexp">
+             <a href="/public/aliases/General Calendars/Parking" id="bwNav0-publicaliasesGeneralCalendarsParking">
+              Parking
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsRoomClosingsexp">
+             <a href="/public/aliases/General Calendars/Room Closings" id="bwNav0-publicaliasesGeneralCalendarsRoomClosings">
+              Room Closings
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsScheduledopeningsclosingsexp">
+             <a href="/public/aliases/General Calendars/Scheduled openings_closings" id="bwNav0-publicaliasesGeneralCalendarsScheduledopeningsclosings">
+              Scheduled openings_closings
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesGeneralCalendarsServiceoutageschangesexp">
+             <a href="/public/aliases/General Calendars/Service outages_changes" id="bwNav0-publicaliasesGeneralCalendarsServiceoutageschanges">
+              Service outages_changes
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserLecturesSeminarsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Lectures_Seminars" id="bwNav0-userpublicuserLecturesSeminars">
+            Lectures_Seminars
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesLecturesSeminarsDemonstrationexp">
+             <a href="/public/aliases/Lectures_Seminars/Demonstration" id="bwNav0-publicaliasesLecturesSeminarsDemonstration">
+              Demonstration
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesLecturesSeminarsLecturesexp">
+             <a href="/public/aliases/Lectures_Seminars/Lectures" id="bwNav0-publicaliasesLecturesSeminarsLectures">
+              Lectures
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesLecturesSeminarsSeminarsexp">
+             <a href="/public/aliases/Lectures_Seminars/Seminars" id="bwNav0-publicaliasesLecturesSeminarsSeminars">
+              Seminars
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li id="bwNav0-userpublicuserOngoingEventsexp">
+           <a href="/user/public-user/Ongoing Events" id="bwNav0-userpublicuserOngoingEvents">
+            Ongoing Events
+           </a>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserOtherEventsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Other Events" id="bwNav0-userpublicuserOtherEvents">
+            Other Events
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesOtherEventsBridgetotheBicentennialexp">
+             <a href="/public/aliases/Other Events/Bridge to the Bicentennial" id="bwNav0-publicaliasesOtherEventsBridgetotheBicentennial">
+              Bridge to the Bicentennial
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsCallsforParticipationexp">
+             <a href="/public/aliases/Other Events/Calls for Participation" id="bwNav0-publicaliasesOtherEventsCallsforParticipation">
+              Calls for Participation
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsCommencementdepartmenteventsexp">
+             <a href="/public/aliases/Other Events/Commencement department events" id="bwNav0-publicaliasesOtherEventsCommencementdepartmentevents">
+              Commencement department events
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsCommunityServiceexp">
+             <a href="/public/aliases/Other Events/Community Service" id="bwNav0-publicaliasesOtherEventsCommunityService">
+              Community Service
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsEmployeeEventsexp">
+             <a href="/public/aliases/Other Events/Employee Events" id="bwNav0-publicaliasesOtherEventsEmployeeEvents">
+              Employee Events
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsFacultySenateexp">
+             <a href="/public/aliases/Other Events/Faculty Senate" id="bwNav0-publicaliasesOtherEventsFacultySenate">
+              Faculty Senate
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsFolsomLibraryexp">
+             <a href="/public/aliases/Other Events/Folsom Library" id="bwNav0-publicaliasesOtherEventsFolsomLibrary">
+              Folsom Library
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsFundRaisingexp">
+             <a href="/public/aliases/Other Events/Fund Raising" id="bwNav0-publicaliasesOtherEventsFundRaising">
+              Benefits and Charitable Events
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsGraduateStudentsexp">
+             <a href="/public/aliases/Other Events/Graduate Students" id="bwNav0-publicaliasesOtherEventsGraduateStudents">
+              Graduate Students
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsHealthServicesexp">
+             <a href="/public/aliases/Other Events/Health Services" id="bwNav0-publicaliasesOtherEventsHealthServices">
+              Health Services
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsJobFairsexp">
+             <a href="/public/aliases/Other Events/Job Fairs" id="bwNav0-publicaliasesOtherEventsJobFairs">
+              Job Fairs
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsManufacturingexp">
+             <a href="/public/aliases/Other Events/Manufacturing" id="bwNav0-publicaliasesOtherEventsManufacturing">
+              Manufacturing
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsOffCampusStudentsexp">
+             <a href="/public/aliases/Other Events/Off-Campus Students" id="bwNav0-publicaliasesOtherEventsOffCampusStudents">
+              Off-Campus Students
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsOpenHousesexp">
+             <a href="/public/aliases/Other Events/Open Houses" id="bwNav0-publicaliasesOtherEventsOpenHouses">
+              Open Houses
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsOpentoPublicexp">
+             <a href="/public/aliases/Other Events/Open to Public" id="bwNav0-publicaliasesOtherEventsOpentoPublic">
+              Open to Public
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsOtherexp">
+             <a href="/public/aliases/Other Events/Other" id="bwNav0-publicaliasesOtherEventsOther">
+              Other
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsSalesexp">
+             <a href="/public/aliases/Other Events/Sales" id="bwNav0-publicaliasesOtherEventsSales">
+              Sales
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsSpecialEventsexp">
+             <a href="/public/aliases/Other Events/Special Events" id="bwNav0-publicaliasesOtherEventsSpecialEvents">
+              Special Events
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsToursexp">
+             <a href="/public/aliases/Other Events/Tours" id="bwNav0-publicaliasesOtherEventsTours">
+              Tours
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsUniversityGovernanceexp">
+             <a href="/public/aliases/Other Events/University Governance" id="bwNav0-publicaliasesOtherEventsUniversityGovernance">
+              University Governance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesOtherEventsWomeninTechnologyexp">
+             <a href="/public/aliases/Other Events/Women in Technology" id="bwNav0-publicaliasesOtherEventsWomeninTechnology">
+              Women in Technology
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserSchoolsandDepartmentsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Schools and Departments" id="bwNav0-userpublicuserSchoolsandDepartments">
+            Schools, Departments, &amp; Programs
+           </a>
+           <ul>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsAdministrationexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/Administration" id="bwNav0-publicaliasesSchoolsandDepartmentsAdministration">
+              Administration
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsAdministrationCampusPlanningexp">
+               <a href="/public/aliases/Schools and Departments/Administration/Campus Planning" id="bwNav0-publicaliasesSchoolsandDepartmentsAdministrationCampusPlanning">
+                Campus Planning
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsAdministrationPhysicalPlantexp">
+               <a href="/public/aliases/Schools and Departments/Administration/Physical Plant" id="bwNav0-publicaliasesSchoolsandDepartmentsAdministrationPhysicalPlant">
+                Physical Plant
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsArcherCenterforStudentLeadershipDevelopmentexp">
+             <a href="/public/aliases/Schools and Departments/Archer Center for Student Leadership Development" id="bwNav0-publicaliasesSchoolsandDepartmentsArcherCenterforStudentLeadershipDevelopment">
+              Archer Center for Student Leadership Development
+             </a>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsArtXexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/Art_X" id="bwNav0-publicaliasesSchoolsandDepartmentsArtX">
+              Art_x
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsArtXAXISexp">
+               <a href="/public/aliases/Schools and Departments/Art_X/AXIS" id="bwNav0-publicaliasesSchoolsandDepartmentsArtXAXIS">
+                AXIS
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsArtXArtxexp">
+               <a href="/public/aliases/Schools and Departments/Art_X/Art_x" id="bwNav0-publicaliasesSchoolsandDepartmentsArtXArtx">
+                Art_x
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsCenterforGlobalCommunicationandDesignCommDexp">
+             <a href="/public/aliases/Schools and Departments/Center for Global Communication and Design (Comm+D)" id="bwNav0-publicaliasesSchoolsandDepartmentsCenterforGlobalCommunicationandDesignCommD">
+              Center for Global Communication and Design (Comm+D)
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsChapelandCulturalCenterexp">
+             <a href="/public/aliases/Schools and Departments/Chapel and Cultural Center" id="bwNav0-publicaliasesSchoolsandDepartmentsChapelandCulturalCenter">
+              Chapel and Cultural Center
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsCognitiveandImmersiveSystemsLabCISLexp">
+             <a href="/public/aliases/Schools and Departments/Cognitive and Immersive Systems Lab (CISL)" id="bwNav0-publicaliasesSchoolsandDepartmentsCognitiveandImmersiveSystemsLabCISL">
+              Cognitive and Immersive Systems Lab (CISL)
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsDeanofStudentsexp">
+             <a href="/public/aliases/Schools and Departments/Dean of Students" id="bwNav0-publicaliasesSchoolsandDepartmentsDeanofStudents">
+              Dean of Students
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsDotCIOexp">
+             <a href="/public/aliases/Schools and Departments/DotCIO" id="bwNav0-publicaliasesSchoolsandDepartmentsDotCIO">
+              Division of the Chief Information Officer
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsExperimentalMediaandPerformingArtsCenterexp">
+             <a href="/public/aliases/Schools and Departments/Experimental Media and Performing Arts Center" id="bwNav0-publicaliasesSchoolsandDepartmentsExperimentalMediaandPerformingArtsCenter">
+              Experimental Media and Performing Arts Center
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsFirstYearExperienceexp">
+             <a href="/public/aliases/Schools and Departments/First Year Experience" id="bwNav0-publicaliasesSchoolsandDepartmentsFirstYearExperience">
+              First Year Experience
+             </a>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/Folsom Library" id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibrary">
+              Folsom Library
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryHoursofOperationexp">
+               <a href="/public/aliases/Schools and Departments/Folsom Library/Hours of Operation" id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryHoursofOperation">
+                Hours of Operation
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryLibraryHoursexp">
+               <a href="/public/aliases/Schools and Departments/Folsom Library/Library Hours" id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryLibraryHours">
+                Library Hours of Operation
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryLunchandLearnexp">
+               <a href="/public/aliases/Schools and Departments/Folsom Library/Lunch and Learn" id="bwNav0-publicaliasesSchoolsandDepartmentsFolsomLibraryLunchandLearn">
+                Lunch and Learn
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsHumanResourcesexp">
+             <a href="/public/aliases/Schools and Departments/Human Resources" id="bwNav0-publicaliasesSchoolsandDepartmentsHumanResources">
+              Human Resources
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsInformationTechnologyexp">
+             <a href="/public/aliases/Schools and Departments/Information Technology" id="bwNav0-publicaliasesSchoolsandDepartmentsInformationTechnology">
+              Information Technology
+             </a>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/Institute-Wide Centers" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCenters">
+              Institute-Wide Centers
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCATSexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/CATS" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCATS">
+                Center for Automation Technologies and Systems (CATS)
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforArchitectureScienceandEcologyCASEexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/Center for Architecture, Science and Ecology (CASE)" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforArchitectureScienceandEcologyCASE">
+                Center for Architecture, Science and Ecology (CASE)
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforBiotechnologyandInterdisciplinaryStudiesexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/Center for Biotechnology and Interdisciplinary Studies" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforBiotechnologyandInterdisciplinaryStudies">
+                Center for Biotechnology and Interdisciplinary Studies
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforLightingEnabledSystemsandApplicationsLESAexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/Center for Lighting Enabled Systems and Applications (LESA)" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforLightingEnabledSystemsandApplicationsLESA">
+                Center for Lighting Enabled Systems and Applications (LESA)
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforMaterialsDevicesandIntegratedSystemsCMDISexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/Center for Materials, Devices, and Integrated Systems (CMDIS)" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersCenterforMaterialsDevicesandIntegratedSystemsCMDIS">
+                Center for Materials, Devices, and Integrated Systems (CMDIS)
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersIDEAexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/IDEA" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersIDEA">
+                IDEA
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersNetworkScienceandTechnologyCenterNeSTexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/Network Science and Technology Center (NeST)" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersNetworkScienceandTechnologyCenterNeST">
+                Network Science and Technology Center (NeST)
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersSCNARCexp">
+               <a href="/public/aliases/Schools and Departments/Institute-Wide Centers/SCNARC" id="bwNav0-publicaliasesSchoolsandDepartmentsInstituteWideCentersSCNARC">
+                Social Cognitive Network Academic Research Center (SCNARC)
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnology">
+              Lally School of Management
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallyInformationSessionsexp">
+               <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology/Lally - Information Sessions" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallyInformationSessions">
+                Lally - Information Sessions
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallySchoolofManagementandTechnologyexp">
+               <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology/Lally School of Management and Technology" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallySchoolofManagementandTechnology">
+                Lally School of Management
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallyCareerexp">
+               <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology/LallyCareer" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallyCareer">
+                Lally Career
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallyInterestexp">
+               <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology/LallyInterest" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologyLallyInterest">
+                of interest to Lally
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologySeverinoCenterexp">
+               <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology/Severino Center" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologySeverinoCenter">
+                Severino Center
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologySeverinoInterestGroupexp">
+               <a href="/public/aliases/Schools and Departments/Lally School of Management and Technology/Severino Interest Group" id="bwNav0-publicaliasesSchoolsandDepartmentsLallySchoolofManagementandTechnologySeverinoInterestGroup">
+                Severino Interest Group
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsProvostexp">
+             <a href="/public/aliases/Schools and Departments/Provost" id="bwNav0-publicaliasesSchoolsandDepartmentsProvost">
+              Provost
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsRensselaerTechnologyParkexp">
+             <a href="/public/aliases/Schools and Departments/Rensselaer Technology Park" id="bwNav0-publicaliasesSchoolsandDepartmentsRensselaerTechnologyPark">
+              Rensselaer Technology Park
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofArchitectureexp">
+             <a href="/public/aliases/Schools and Departments/School of Architecture" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofArchitecture">
+              School of Architecture
+             </a>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/School of Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineering">
+              School of Engineering
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringBiomedicalEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Biomedical Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringBiomedicalEngineering">
+                Biomedical Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringChemicalandBiologicalEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Chemical and Biological Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringChemicalandBiologicalEngineering">
+                Chemical and Biological Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringCivilandEnvironmentalEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Civil and Environmental Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringCivilandEnvironmentalEngineering">
+                Civil and Environmental Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringElectricalComputerandSystemsEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Electrical Computer and Systems Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringElectricalComputerandSystemsEngineering">
+                Electrical Computer and Systems Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringIndustrialandSystemsEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Industrial and Systems Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringIndustrialandSystemsEngineering">
+                Industrial and Systems Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringLeadersInEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Leaders In Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringLeadersInEngineering">
+                Leaders In Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMANEUndergraduateStudentServicesexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/MANE Undergraduate Student Services" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMANEUndergraduateStudentServices">
+                MANE Undergraduate Student Services
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMaterialsScienceandEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Materials Science and Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMaterialsScienceandEngineering">
+                Materials Science and Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMechanicalAerospaceandNuclearEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Mechanical Aerospace and Nuclear Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMechanicalAerospaceandNuclearEngineering">
+                Mechanical Aerospace and Nuclear Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMercerLectureSeriesexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/Mercer Lecture Series" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringMercerLectureSeries">
+                Mercer Lecture Series
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringSchoolofEngineeringexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/School of Engineering" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringSchoolofEngineering">
+                School of Engineering
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringTheHubexp">
+               <a href="/public/aliases/Schools and Departments/School of Engineering/The Hub" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofEngineeringTheHub">
+                The Hub
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciences">
+              School of Humanities Arts and Social Sciences
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesArtsDepartmentexp">
+               <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences/Arts Department" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesArtsDepartment">
+                Arts Department
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesCognitiveScienceexp">
+               <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences/Cognitive Science" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesCognitiveScience">
+                Cognitive Science
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesEconomicsexp">
+               <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences/Economics" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesEconomics">
+                Economics
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesHumanitiesArtsandSocialSciencesexp">
+               <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences/Humanities Arts and Social Sciences" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesHumanitiesArtsandSocialSciences">
+                Humanities Arts and Social Sciences
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesLanguageLiteratureandCommunicationexp">
+               <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences/Language Literature and Communication" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesLanguageLiteratureandCommunication">
+                Language Literature and Communication
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesScienceandTechnologyStudiesexp">
+               <a href="/public/aliases/Schools and Departments/School of Humanities Arts and Social Sciences/Science and Technology Studies" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofHumanitiesArtsandSocialSciencesScienceandTechnologyStudies">
+                Science and Technology Studies
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/School of Science" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScience">
+              School of Science
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceBiologyexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/Biology" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceBiology">
+                Biology
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceChemistryexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/Chemistry" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceChemistry">
+                Chemistry
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceComputerScienceexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/Computer Science" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceComputerScience">
+                Computer Science
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceEarthandEnvironmentalSciencesexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/Earth and Environmental Sciences" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceEarthandEnvironmentalSciences">
+                Earth and Environmental Sciences
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceMathematicalSciencesexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/Mathematical Sciences" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceMathematicalSciences">
+                Mathematical Sciences
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofSciencePhysicsAppliedPhysicsandAstronomyexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/Physics Applied Physics and Astronomy" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofSciencePhysicsAppliedPhysicsandAstronomy">
+                Physics Applied Physics and Astronomy
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceSchoolofScienceexp">
+               <a href="/public/aliases/Schools and Departments/School of Science/School of Science" id="bwNav0-publicaliasesSchoolsandDepartmentsSchoolofScienceSchoolofScience">
+                School of Science
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsStudentExperienceexp">
+             <a href="/public/aliases/Schools and Departments/Student Experience" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentExperience">
+              Student Experience
+             </a>
+            </li>
+            <li class="hasChildren closed" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeexp">
+             <span class="menuTreeToggle">
+              +
+             </span>
+             <a href="/public/aliases/Schools and Departments/Student Life" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLife">
+              Student Life
+             </a>
+             <ul>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeCareerexp">
+               <a href="/public/aliases/Schools and Departments/Student Life/Career" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeCareer">
+                Career
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeLeadershipexp">
+               <a href="/public/aliases/Schools and Departments/Student Life/Leadership" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeLeadership">
+                Leadership
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeSocialexp">
+               <a href="/public/aliases/Schools and Departments/Student Life/Social" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeSocial">
+                Social
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeStudentLivingandLearningexp">
+               <a href="/public/aliases/Schools and Departments/Student Life/Student Living and Learning" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeStudentLivingandLearning">
+                Student Living &amp; Learning
+               </a>
+              </li>
+              <li id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeStudentSupportexp">
+               <a href="/public/aliases/Schools and Departments/Student Life/Student Support" id="bwNav0-publicaliasesSchoolsandDepartmentsStudentLifeStudentSupport">
+                Student Support
+               </a>
+              </li>
+             </ul>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsTheArchexp">
+             <a href="/public/aliases/Schools and Departments/The Arch" id="bwNav0-publicaliasesSchoolsandDepartmentsTheArch">
+              The Arch
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSchoolsandDepartmentsWomenatRensselaerexp">
+             <a href="/public/aliases/Schools and Departments/Women at Rensselaer" id="bwNav0-publicaliasesSchoolsandDepartmentsWomenatRensselaer">
+              Women at Rensselaer
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserSocialEventsexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Social Events" id="bwNav0-userpublicuserSocialEvents">
+            Social Events
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesSocialEventsFestivalexp">
+             <a href="/public/aliases/Social Events/Festival" id="bwNav0-publicaliasesSocialEventsFestival">
+              Festival
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsGamingexp">
+             <a href="/public/aliases/Social Events/Gaming" id="bwNav0-publicaliasesSocialEventsGaming">
+              Gaming
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsReceptionsexp">
+             <a href="/public/aliases/Social Events/Receptions" id="bwNav0-publicaliasesSocialEventsReceptions">
+              Receptions
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsRecognitionsexp">
+             <a href="/public/aliases/Social Events/Recognitions" id="bwNav0-publicaliasesSocialEventsRecognitions">
+              Recognitions
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsReligiousSpiritualexp">
+             <a href="/public/aliases/Social Events/Religious_Spiritual" id="bwNav0-publicaliasesSocialEventsReligiousSpiritual">
+              Religious_Spiritual
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsSocialGatheringsexp">
+             <a href="/public/aliases/Social Events/Social Gatherings" id="bwNav0-publicaliasesSocialEventsSocialGatherings">
+              Social Gatherings
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsTournamentexp">
+             <a href="/public/aliases/Social Events/Tournament" id="bwNav0-publicaliasesSocialEventsTournament">
+              Tournament
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesSocialEventsVolunteerOpportunitiesexp">
+             <a href="/public/aliases/Social Events/Volunteer Opportunities" id="bwNav0-publicaliasesSocialEventsVolunteerOpportunities">
+              Volunteer Opportunities
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserTrainingexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/Training" id="bwNav0-userpublicuserTraining">
+            Training
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesTrainingShortCoursesexp">
+             <a href="/public/aliases/Training/Short Courses" id="bwNav0-publicaliasesTrainingShortCourses">
+              Short Courses
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTrainingStudentCareerDevelopmentexp">
+             <a href="/public/aliases/Training/Student Career Development" id="bwNav0-publicaliasesTrainingStudentCareerDevelopment">
+              Student Career Development
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTrainingTrainingexp">
+             <a href="/public/aliases/Training/Training" id="bwNav0-publicaliasesTrainingTraining">
+              Training
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTrainingWorkshopsexp">
+             <a href="/public/aliases/Training/Workshops" id="bwNav0-publicaliasesTrainingWorkshops">
+              Workshops
+             </a>
+            </li>
+           </ul>
+          </li>
+          <li class="hasChildren closed" id="bwNav0-userpublicuserTVexp">
+           <span class="menuTreeToggle">
+            +
+           </span>
+           <a href="/user/public-user/TV" id="bwNav0-userpublicuserTV">
+            TV
+           </a>
+           <ul>
+            <li id="bwNav0-publicaliasesTVTVAthleticsexp">
+             <a href="/public/aliases/TV/TV - Athletics" id="bwNav0-publicaliasesTVTVAthletics">
+              TV - Athletics
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVBioMedexp">
+             <a href="/public/aliases/TV/TV - BioMed" id="bwNav0-publicaliasesTVTVBioMed">
+              TV - BioMed
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVColloquiaexp">
+             <a href="/public/aliases/TV/TV - Colloquia" id="bwNav0-publicaliasesTVTVColloquia">
+              TV - Colloquia
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVCommencementexp">
+             <a href="/public/aliases/TV/TV - Commencement" id="bwNav0-publicaliasesTVTVCommencement">
+              TV - Commencement
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVConcertsexp">
+             <a href="/public/aliases/TV/TV - Concerts" id="bwNav0-publicaliasesTVTVConcerts">
+              TV - Concerts
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVConferencesexp">
+             <a href="/public/aliases/TV/TV - Conferences" id="bwNav0-publicaliasesTVTVConferences">
+              TV - Conferences
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVConstructionexp">
+             <a href="/public/aliases/TV/TV - Construction" id="bwNav0-publicaliasesTVTVConstruction">
+              TV - Construction
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVDanceexp">
+             <a href="/public/aliases/TV/TV - Dance" id="bwNav0-publicaliasesTVTVDance">
+              TV - Dance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVDeadlinesexp">
+             <a href="/public/aliases/TV/TV - Deadlines" id="bwNav0-publicaliasesTVTVDeadlines">
+              TV - Deadlines
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVDotCIOexp">
+             <a href="/public/aliases/TV/TV - DotCIO" id="bwNav0-publicaliasesTVTVDotCIO">
+              TV - DotCIO
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVEMPACexp">
+             <a href="/public/aliases/TV/TV - EMPAC" id="bwNav0-publicaliasesTVTVEMPAC">
+              TV - EMPAC
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVEmergenciesexp">
+             <a href="/public/aliases/TV/TV - Emergencies" id="bwNav0-publicaliasesTVTVEmergencies">
+              TV - Emergencies
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVEmployeeEventsexp">
+             <a href="/public/aliases/TV/TV - EmployeeEvents" id="bwNav0-publicaliasesTVTVEmployeeEvents">
+              TV - EmployeeEvents
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVEnrollmentManagementexp">
+             <a href="/public/aliases/TV/TV - EnrollmentManagement" id="bwNav0-publicaliasesTVTVEnrollmentManagement">
+              TV - EnrollmentManagement
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVExhibitsexp">
+             <a href="/public/aliases/TV/TV - Exhibits" id="bwNav0-publicaliasesTVTVExhibits">
+              TV - Exhibits
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVFacilitiesexp">
+             <a href="/public/aliases/TV/TV - Facilities" id="bwNav0-publicaliasesTVTVFacilities">
+              TV - Facilities
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVFilmsexp">
+             <a href="/public/aliases/TV/TV - Films" id="bwNav0-publicaliasesTVTVFilms">
+              TV - Films
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVFinanceexp">
+             <a href="/public/aliases/TV/TV - Finance" id="bwNav0-publicaliasesTVTVFinance">
+              TV - Finance
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVFundRaisingexp">
+             <a href="/public/aliases/TV/TV - FundRaising" id="bwNav0-publicaliasesTVTVFundRaising">
+              TV - FundRaising
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVGovtCommunityRelationsexp">
+             <a href="/public/aliases/TV/TV - GovtCommunityRelations" id="bwNav0-publicaliasesTVTVGovtCommunityRelations">
+              TV - GovtCommunityRelations
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVHealthServicesexp">
+             <a href="/public/aliases/TV/TV - HealthServices" id="bwNav0-publicaliasesTVTVHealthServices">
+              TV - HealthServices
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVHolidaysexp">
+             <a href="/public/aliases/TV/TV - Holidays" id="bwNav0-publicaliasesTVTVHolidays">
+              TV - Holidays
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVHumanResourcesexp">
+             <a href="/public/aliases/TV/TV - HumanResources" id="bwNav0-publicaliasesTVTVHumanResources">
+              TV - HumanResources
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVResearchexp">
+             <a href="/public/aliases/TV/TV - Research" id="bwNav0-publicaliasesTVTVResearch">
+              TV - Research
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVSoAexp">
+             <a href="/public/aliases/TV/TV - SoA" id="bwNav0-publicaliasesTVTVSoA">
+              TV - SoA
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVSoHASSexp">
+             <a href="/public/aliases/TV/TV - SoHASS" id="bwNav0-publicaliasesTVTVSoHASS">
+              TV - SoHASS
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVSoMexp">
+             <a href="/public/aliases/TV/TV - SoM" id="bwNav0-publicaliasesTVTVSoM">
+              TV - SoM
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVSoSexp">
+             <a href="/public/aliases/TV/TV - SoS" id="bwNav0-publicaliasesTVTVSoS">
+              TV - SoS
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVStudentClubexp">
+             <a href="/public/aliases/TV/TV - StudentClub" id="bwNav0-publicaliasesTVTVStudentClub">
+              TV - StudentClub
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVStudentLifeexp">
+             <a href="/public/aliases/TV/TV - StudentLife" id="bwNav0-publicaliasesTVTVStudentLife">
+              TV - StudentLife
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVUndergradEdexp">
+             <a href="/public/aliases/TV/TV - UndergradEd" id="bwNav0-publicaliasesTVTVUndergradEd">
+              TV - UndergradEd
+             </a>
+            </li>
+            <li id="bwNav0-publicaliasesTVTVengTVexp">
+             <a href="/public/aliases/TV/TV - engTV" id="bwNav0-publicaliasesTVTVengTV">
+              TV - engTV
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="sideBarContainer">
+       <div class="leftMenuTitle">
+        OPTIONS:
+       </div>
+       <ul class="sideLinks">
+        <li>
+         <a href="/cal/calendar/fetchPublicCalendars.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de">
+          Download Calendars
+         </a>
+        </li>
+        <li>
+         <a href="/caladmin">
+          Manage Events
+         </a>
+        </li>
+        <li>
+         <a href="http://dotcio.rpi.edu/services/web-data/calendaring/public-events-calendar">
+          Help
+         </a>
+        </li>
+       </ul>
+       <div class="leftMenuTitle">
+        OTHER INSTITUTE CALENDARS
+       </div>
+       <ul class="sideLinks">
+        <li>
+         <a href="http://www.rpi.edu/academics/calendar/">
+          Academic Calendar
+         </a>
+        </li>
+        <li>
+         <a href="http://empac.rpi.edu/events">
+          EMPAC Calendar
+         </a>
+        </li>
+        <li>
+         <a href="/hr">
+          Human Resources
+         </a>
+        </li>
+        <li>
+         <a href="/lally">
+          Lally School
+         </a>
+        </li>
+        <li>
+         <a href="/soe">
+          School of Engineering
+         </a>
+        </li>
+        <li>
+         <a href="http://union.rpi.edu/calendar">
+          Rensselaer Union
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="col-lg-9 col-md-9 col-sm-9" id="rightFullColumn">
+      <div class="hidden-xs" id="feature">
+       <img alt="EMPAC" class="img-responsive" src="http://events.rpi.edu/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/featured/empac1-left.jpg"/>
+       <img alt="Rensselaer Seal" class="img-responsive" src="http://events.rpi.edu/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/featured/seal.jpg"/>
+       <img alt="EMPAC" class="img-responsive" src="http://events.rpi.edu/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/featured/empac1-right.jpg"/>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3" id="ongoing">
+       <div id="bwOngoing">
+       </div>
+       <script type="text/javascript">
+        var bwOngoingOptions = {
+        title: "Ongoing",
+        showTitle: true,
+        showCaret: true,
+        displayDescription: false,
+        displayEventDetailsInline: false,
+        suppressStartDateInList: true,
+        untilText: "Ends",
+        displayTimeInList: false,
+        displayLocationInList: false,
+        limitList: false,
+        limit: 5,
+        listMode: "byTitle",
+        displayContactInDetails: true,
+        displayCostInDetails: true,
+        displayTagsInDetails: true,
+        displayTimezoneInDetails: true,
+        displayNoEventText: true,
+        showTitleWhenNoEvents: true,
+        noEventsText: "There are no ongoing events in this time period or view"
+      };
+
+      var ongoingFilter = '(vpath="/user/public-user/Ongoing Events")';
+
+      
+      var bwOngoingEventList = new BwEventList("bwOngoing","json",bwOngoingOptions,"20190310",ongoingFilter,"","","/cal/main/setOngoingList.do;jsessionid=09FAA0A19D5ECD054E4100FD63BB4934?b=de");
+
+      $(document).ready(function () {
+        bwOngoingEventList.display();
+      });
+       </script>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9" id="centerColumn">
+       <div class="secondaryColHeader">
+        <h2>
+         <span id="bwStartDate">
+          Sunday, March 10, 2019
+         </span>
+        </h2>
+        <a class="rss" href="#exportSubscribePopup" id="expSubLinksList" title="Export/Subscribe">
+         <span class="expSubText">
+          Export/Subscribe
+         </span>
+         <img alt="Export/Subscribe" src="/bw/approots3p10/calrsrc.MainCampus/themes/rpiTheme-3.10/images/feed-icon-14x14.png"/>
+        </a>
+        <script type="text/javascript">
+         $(document).ready(function(){
+        $('#expSubLinksList').magnificPopup({
+          type:'inline',
+          fixedBgPos: true,
+          midClick: true,
+          callbacks: {
+            open: function() {
+              
+              $("#bwExpFeed").click();
+
+              
+              $("#exportSubscribeFiltersBox").hide(); 
+              $("#exportSubscribeFilters").html(""); 
+
+              if ($(".bwQueryText").length || $(".calFilterContainer .bwFilterName").length) {
+                if ($(".bwQueryText").length) { 
+                  var queryText = '<div class="eventFilterInfo">';
+                  queryText += '<span class="bwExpFilterName">' + $(".bwQueryText .bwQueryTitle").text() + "</span> ";
+                  queryText += '<span class="bwExpFilterItems">' + $(".bwQueryText .bwQueryQuery").text() + "</span>";
+                  queryText += "</div>";
+                  $("#exportSubscribeFilters").append(queryText);
+                }
+
+                $(".calFilterContainer").each(function() {
+                  if($(this).find(".bwFilterName").length) { 
+                    var filterText = '<div class="eventFilterInfo">';
+                    filterText += '<span class="bwExpFilterName">' + $(this).find(".bwFilterName").text() + ":</span> ";
+                    var filterItemsLength = $(this).find(".bwFilterText .bwFilterItemName").length;
+                    filterText += '<span class="bwExpFilterItems">';
+                    $(this).find(".bwFilterText .bwFilterItemName").each(function(i) {
+                      filterText += $(this).text();
+                      if(i != filterItemsLength - 1) {
+                        filterText += ", ";
+                      }
+                    });
+                    filterText += "</span>";
+                    filterText += "</div>";
+                    $("#exportSubscribeFilters").append(filterText);
+                  }
+                });
+
+                $("#exportSubscribeFiltersBox").show(); 
+              }
+            }
+          }
+        });
+      });
+        </script>
+       </div>
+       <div id="bwResultSize">
+       </div>
+       <div id="bwQueryContainer">
+       </div>
+       <div class="calFilterContainer" id="calFilterContainer0">
+       </div>
+       <div id="listEvents">
+       </div>
+       <script type="text/javascript">
+        $(document).ready(function () {
+
+        bwMainEventList.display();
+
+      });
+       </script>
+       <div id="loadMoreEventsLink">
+        <a class="button" href="javascript:bwMainEventList.appendEvents();">
+         Load more events
+        </a>
+       </div>
+       <div class="invisible" id="noEventsToDisplayText">
+       </div>
+       <div class="mfp-hide" id="exportSubscribePopup">
+        <h2 id="exportSubscribeTitle">
+         Export / Subscribe
+        </h2>
+        <div id="exportSubscribeFiltersBox">
+         <h3>
+          Current Filters:
+         </h3>
+         <div id="exportSubscribeFilters">
+         </div>
+        </div>
+        <div id="exportSubscribeForm">
+         <h3>
+          Event feed or embeddable widget?
+         </h3>
+         <ul>
+          <li>
+           <input checked="checked" class="bwExpTrigger" id="bwExpFeed" name="feedOrWidget" onclick="updateUrlDisplay();" type="radio" value="feed"/>
+           <label for="bwExpFeed">
+            Feed
+           </label>
+          </li>
+          <li>
+           <input class="bwExpTrigger" id="bwExpWidget" name="feedOrWidget" onclick="updateUrlDisplay();" type="radio" value="widget"/>
+           <label for="bwExpWidget">
+            Widget (code to copy and paste onto a website)
+           </label>
+          </li>
+         </ul>
+         <div id="bwExpDataFormat">
+          <h3>
+           Data format?
+          </h3>
+          <ul>
+           <li>
+            <input checked="checked" class="bwExpDfTrigger" id="bwExpRss" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="rss"/>
+            <label for="bwExpRss">
+             RSS
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpJson" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="json"/>
+            <label for="bwExpJson">
+             JSON
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpXml" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="xml"/>
+            <label for="bwExpXml">
+             XML
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpIcs" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="ics"/>
+            <label for="bwExpIcs">
+             iCal - iCalendar (
+             <a href="http://tools.ietf.org/html/rfc5545" target="_blank">
+              RFC5545
+             </a>
+             , .ics)
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpJcal" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="ics"/>
+            <label for="bwExpJcal">
+             jCal - iCalendar JSON (
+             <a href="http://tools.ietf.org/html/rfc7265" target="_blank">
+              RFC7265
+             </a>
+             , .jcs)
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpXcal" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="ics"/>
+            <label for="bwExpXcal">
+             xCal - iCalendar XML (
+             <a href="http://tools.ietf.org/html/rfc6321" target="_blank">
+              RFC6321
+             </a>
+             , .xcs)
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpCsv" name="bwExpDataType" onclick="updateUrlDisplay()" type="radio" value="csv"/>
+            <label for="bwExpCsv">
+             CSV
+            </label>
+           </li>
+           <li>
+            <input class="bwExpDfTrigger" id="bwExpHtml" name="bwExpDataType" onclick="updateUrlDisplay();" type="radio" value="html"/>
+            <label for="bwExpHtml">
+             HTML list (copy &amp; paste into Word, etc.)
+            </label>
+            <ul id="bwHtmlListOptions">
+             <li>
+              <div class="bwExpOptionName">
+               Include download link?
+              </div>
+              <div class="bwExpOptionFields">
+               <input id="bwHtmlListDownloadTrue" name="bwHtmlListDownloadLink" onclick="updateUrlDisplay();" type="radio" value="true"/>
+               <label for="bwHtmlListDownloadTrue">
+                True
+               </label>
+               <input checked="checked" id="bwHtmlListDownloadFalse" name="bwHtmlListDownloadLink" onclick="updateUrlDisplay();" type="radio" value="false"/>
+               <label for="bwHtmlListDownloadFalse">
+                False
+               </label>
+              </div>
+             </li>
+             <li>
+              <div class="bwExpOptionName">
+               Show details or summary?
+              </div>
+              <div class="bwExpOptionFields">
+               <input checked="checked" id="bwHtmlDetailsTrue" name="bwHtmlDetails" onclick="updateUrlDisplay();" type="radio" value="true"/>
+               <label for="bwHtmlDetailsTrue">
+                Details
+               </label>
+               <input id="bwHtmlDetailsFalse" name="bwHtmlDetails" onclick="updateUrlDisplay();" type="radio" value="false"/>
+               <label for="bwHtmlDetailsFalse">
+                Summary
+               </label>
+              </div>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </div>
+         <div id="bwExpCount">
+          <h3>
+           Event count
+          </h3>
+          <div id="bwExpCountWidget">
+           <label for="bwExpEventCount">
+            Total number of events returned:
+           </label>
+           <input id="bwExpEventCount" name="count" onchange="updateUrlDisplay();" size="3" type="text" value="10"/>
+           <div class="bwExpSubField">
+            <div class="bwSlider" id="bwExpCountSlider">
+            </div>
+           </div>
+          </div>
+         </div>
+         <div id="bwExpTimeframeUnit">
+          <h3>
+           Time frame
+          </h3>
+          <ul id="bwExpTimeFrameWidgets">
+           <li>
+            <input checked="checked" id="bwExpDaysDefault" name="timeframe" onclick="updateUrlDisplay();" type="radio" value="default"/>
+            <label for="bwExpDaysDefault">
+             Default: pull events from "today" forward
+            </label>
+           </li>
+           <li>
+            <input id="bwExpNumberOfDays" name="timeframe" onclick="updateUrlDisplay();" type="radio" value="days"/>
+            <label for="bwExpNumberOfDays">
+             Limit to
+             <input class="slider" id="bwExpNumDays" onclick="updateUrlDisplay();" size="3" type="text"/>
+             days from "today"
+            </label>
+            <div class="bwExpSubField">
+             <div class="bwSlider" id="bwExpSlider">
+             </div>
+            </div>
+           </li>
+           <li>
+            <input id="bwExpStartEndDates" name="timeframe" onclick="updateUrlDisplay();" type="radio" value="dates"/>
+            <label for="bwExpStartEndDates">
+             Date Range:
+             <span class="bwExpSubField">
+              Start Date:
+              <input class="datepicker" id="bwExpStartDate" onclick="updateUrlDisplay();" size="8" type="text"/>
+              End Date:
+              <input class="datepicker" id="bwExpEndDate" onclick="updateUrlDisplay();" size="8" type="text"/>
+             </span>
+            </label>
+            <br/>
+            <span class="bwExpNote">
+             Note: Event count takes precedence over date range!
+            </span>
+           </li>
+          </ul>
+         </div>
+         <div id="bwExpJsWidgetOptions">
+          <h3>
+           Widget Options
+          </h3>
+          <ul id="bwJsWidgetOptionsGeneral">
+           <li>
+            <div class="bwExpOptionName">
+             Limit the number of events listed?
+            </div>
+            <div class="bwExpOptionFields">
+             <input class="bwExpTrigger" id="bwExpJsShowLimitListTrue" name="jsLimitList" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwExpJsShowLimitListTrue">
+              True
+             </label>
+             <input checked="checked" class="bwExpTrigger" id="bwExpJsShowLimitListFalse" name="jsLimitList" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwExpJsShowLimitListFalse">
+              False
+             </label>
+             <em>
+              (default: false)
+             </em>
+             <div class="bwExpSubField" id="bwExpWidgetLimit">
+              <label for="bwExpJsLimit">
+               Limit to:
+              </label>
+              <input id="bwExpJsLimit" name="jsLimit" onblur="updateUrlDisplay();" size="3" type="text" value="5"/>
+              events
+             </div>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Show a title above event list?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" class="bwExpTrigger" id="bwExpJsShowTitleTrue" name="jsShowTitle" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwExpJsShowTitleTrue">
+              True
+             </label>
+             <input class="bwExpTrigger" id="bwExpJsShowTitleFalse" name="jsShowTitle" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwExpJsShowTitleFalse">
+              False
+             </label>
+             <em>
+              (default: true)
+             </em>
+             <div id="bwExpJsSetTitle">
+              Title:
+              <input id="bwExpJsSetTitleName" name="jsTitleName" onblur="updateUrlDisplay();" size="20" type="text" value="Upcoming Events"/>
+              <em>
+               (default: "Upcoming Events")
+              </em>
+             </div>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Highlight event dates or event titles?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" id="bwJsDisplayByTitle" name="jsDisplayDateOrTitle" onclick="updateUrlDisplay();" type="radio" value="byTitle"/>
+             <label for="bwJsDisplayByTitle">
+              By title
+             </label>
+             <input id="bwJsDisplayByDate" name="jsDisplayDateOrTitle" onclick="updateUrlDisplay();" type="radio" value="byDate"/>
+             <label for="bwJsDisplayByDate">
+              By date
+             </label>
+             <em>
+              (default 'by title')
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Show description in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input id="bwJsDisplayDescriptionTrue" name="jsDisplayDescription" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayDescriptionTrue">
+              True
+             </label>
+             <input checked="checked" id="bwJsDisplayDescriptionFalse" name="jsDisplayDescription" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayDescriptionFalse">
+              False
+             </label>
+             <em>
+              (default: false)
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Display end date in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" id="bwJsDisplayEndDateTrue" name="jsDisplayEndDate" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayEndDateTrue">
+              True
+             </label>
+             <input id="bwJsDisplayEndDateFalse" name="jsDisplayEndDate" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayEndDateFalse">
+              False
+             </label>
+             <em>
+              (default: true)
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Display time in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input checked="checked" id="bwJsDisplayTimeTrue" name="jsDisplayTime" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayTimeTrue">
+              True
+             </label>
+             <input id="bwJsDisplayTimeFalse" name="jsDisplayTime" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayTimeFalse">
+              False
+             </label>
+             <em>
+              (default: true)
+             </em>
+            </div>
+           </li>
+           <li>
+            <div class="bwExpOptionName">
+             Display location in listing?
+            </div>
+            <div class="bwExpOptionFields">
+             <input id="bwJsDisplayLocationTrue" name="jsDisplayLocation" onclick="updateUrlDisplay();" type="radio" value="true"/>
+             <label for="bwJsDisplayLocationTrue">
+              True
+             </label>
+             <input checked="checked" id="bwJsDisplayLocationFalse" name="jsDisplayLocation" onclick="updateUrlDisplay();" type="radio" value="false"/>
+             <label for="bwJsDisplayLocationFalse">
+              False
+             </label>
+             <em>
+              (default: false)
+             </em>
+            </div>
+           </li>
+          </ul>
+         </div>
+         <div id="bwExpURL">
+          <p class="bwExpOutput">
+           Your URL:
+           <a href="" id="bwExpUrlBox" target="_blank">
+           </a>
+          </p>
+         </div>
+         <div id="bwExpCodeBox">
+          <p class="bwExpOutput">
+           Widget Code:
+          </p>
+          <div id="bwExpCodeBoxOutput">
+          </div>
+         </div>
+        </div>
+        <script type="text/javascript">
+         $(document).ready(function(){
+        // hide components:
+        $('#bwExpCodeBox').hide();
+        $('#bwHtmlListOptions').hide();
+        $('#bwExpJsWidgetOptions').hide();
+        $('#bwExpWidgetLimit').hide();
+        $('#bwJsWidgetOptionsInline').hide();
+
+        $(".bwExpTrigger").click(function() {
+          switch ($(this).val()) {
+            case "feed":
+              $('#bwExpDataFormat').show('fast');
+              $('#bwExpURL').show('fast');
+              $('#bwExpCodeBox').hide('fast');
+              $('#bwExpJsWidgetOptions').hide('fast');
+              break;
+            case "widget":
+              $('#bwExpDataFormat').hide('fast');
+              $('#bwExpURL').hide('fast');
+              $('#bwExpCodeBox').show('fast');
+              $('#bwExpJsWidgetOptions').show('fast');
+              break;
+            default:
+              // show/hide widget options:
+              if ($('#bwExpJsDisplayInlineTrue').prop('checked')) {
+                $('#bwExpJsWidgetOptionsInline').show();
+              } else {
+                $('#bwExpJsWidgetOptionsInline').hide();
+              }
+
+              if ($('#bwExpJsShowTitleTrue').prop('checked')) {
+                $('#bwExpJsSetTitle').show();
+              } else {
+                $('#bwExpJsSetTitle').hide();
+              }
+
+              if ($('#bwJsDisplayInlineTrue').prop('checked')) {
+                $('#bwJsWidgetOptionsInline').show();
+              } else {
+                $('#bwJsWidgetOptionsInline').hide();
+              }
+
+              if ($('#bwExpJsShowLimitListTrue').prop('checked')) {
+                $('#bwExpWidgetLimit').show();
+              } else {
+                $('#bwExpWidgetLimit').hide();
+              }
+          }
+        });
+
+        $(".bwExpDfTrigger").click(function() {
+          // show/hide html list options
+          if ($('#bwExpHtml').prop('checked')) {
+            $('#bwHtmlListOptions').show();
+          } else {
+            $('#bwHtmlListOptions').hide();
+          }
+        });
+      });
+        </script>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <footer class="row" id="footer">
+    Maintained by
+    <a href="http://dotcio.rpi.edu/about/organization/communications-middleware-technologies">
+     Communications &amp; Middleware Technologies
+    </a>
+    ,
+    <a href="http://dotcio.rpi.edu/">
+     Division of the Chief Information Officer
+    </a>
+    ,
+    <a href="http://www.rpi.edu">
+     Rensselaer Polytechnic Institute
+    </a>
+    .
+    <br/>
+    Based on the
+    <a href="http://www.bedework.org/">
+     Bedework Calendar System
+    </a>
+    |
+    <a href="http://j2ee.rpi.edu/swf/setup.do?target=calendarcomments">
+     Please contact us with your questions and comments.
+    </a>
+    <script charset="utf-8" type="text/javascript">
+     jQuery(document).ready(function($) {
+        $("#nav-rpi").click(function() {
+          if($("#rpi-mega").is(":visible")) {
+            $("#rpi-mega").slideUp();
+          } else {
+            $("#rpi-mega").slideDown();
+            $("#rpiQueryHolder").focus();
+          }
+        });
+      });
+    </script>
+   </footer>
+  </div>
+ </body>
+</html>
+

@@ -1,0 +1,1478 @@
+http://www.elmhurst.edu/
+<!DOCTYPE doctype html>
+<html lang="en">
+ <head>
+  <script type="text/javascript">
+   if (window.BEJSSDKObserver === undefined) {
+(function(BEJSSDKObserver, $, undefined) {
+  var observer = void 0;
+  var listeners = [];
+  var readySet = [];
+  var doc = window.document;
+  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  function checkSelector(selector, fn, indexList) {
+    var elements = doc.querySelectorAll(selector);
+    // issues on IE @see https://www.codesd.com/item/javascript-es6-not-a-function-error.html
+//    elements = Array.from(elements);
+    for (var i = 0, len = elements.length; i < len; i++) {
+        // -1 means all instances
+      if (indexList != -1 && !(i in indexList)) {
+        continue;
+      }
+      var element = elements[i];
+      for (var j = 0; j < readySet.length; j++) {
+        if (readySet[j] == element.className || readySet[j] == element.id) {
+          return;
+        }
+      }
+      if (element.className) {
+        readySet.push(element.className);
+      }
+      if (element.id) {
+        readySet.push(element.id);
+      }
+
+      if (!element.ready || MutationObserver==null) {
+        element.ready = true;
+        fn.call(element, element);
+      }
+    }
+  }
+
+  function checkListeners() {
+    listeners.forEach(function (listener) {
+        return checkSelector(listener.selector, listener.fn, listener.indexList);
+    });
+  }
+
+  function removeListener(selector, fn) {
+    var i = listeners.length;
+    while (i--) {
+      var listener = listeners[i];
+      if (listener.selector === selector && listener.fn === fn) {
+        listeners.splice(i, 1);
+        if (!listeners.length && observer) {
+          observer.disconnect();
+          observer = null;
+        }
+      }
+    }
+  }
+
+  /**
+   * Fire event on first js selector
+   * @param selector string to watch on
+   * @param fn       callback function
+   * @param index_list can be undefined which means only first one
+   *                   or -1 which means all
+   *                   or a list of allowable indexes
+   */
+  BEJSSDKObserver.jsElementReady = function(selector, fn, index_list) {
+    if (index_list === undefined) {
+        index_list = [];
+        index_list.push(0);
+    }
+
+    if (MutationObserver != null) {
+      if (!observer) {
+        observer = new MutationObserver(checkListeners);
+        observer.observe(doc.documentElement, {
+            childList: true,
+            subtree: true
+        });
+      }
+      listeners.push({ selector: selector, fn: fn, indexList: index_list });
+    } else {
+      // <= IE8
+      if (!document.addEventListener) {
+        // log("<=IE8 attachEvent assignment");
+        document.addEventListener = document.attachEvent;
+      }
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var elements = doc.querySelectorAll(selector);
+//        elements = Array.from(elements);
+        for (var i = 0, len = elements.length; i < len; i++) {
+          // -1 means all instances
+          if (index_list != -1 && !(i in index_list)) {
+            continue;
+          }
+          var element = elements[i];
+          element.ready = true;
+          fn.call(element, element);
+        }
+      });
+    }
+
+    checkSelector(selector, fn, index_list);
+    return function () {
+      return removeListener(selector, fn);
+    };
+  }
+}(window.BEJSSDKObserver = window.BEJSSDKObserver || {}));
+}
+var jsElementReady = window.BEJSSDKObserver.jsElementReady;
+
+if (window.BELinkBlockGenerator === undefined) {
+(function(BELinkBlockGenerator, $, undefined) {
+  BELinkBlockGenerator.MAXIMUM_HEADLINE_LENGTH = 100;
+  BELinkBlockGenerator.MAXIMUM_DESC_LENGTH = 200;
+
+  BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_URL_TYPE = 0;
+  BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_HEADLINE_TYPE = 1;
+  BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_DESCRIPTION_TYPE = 2;
+  BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_IMAGE_TYPE = 3;
+
+  BELinkBlockGenerator.REPLACEMENT_STRATEGY_OVERWRITE = 0;
+  BELinkBlockGenerator.REPLACEMENT_STRATEGY_POST_APPEND_ELEMENT = 1;
+  BELinkBlockGenerator.REPLACEMENT_STRATEGY_PRE_APPEND_ELEMENT = 2;
+  BELinkBlockGenerator.REPLACEMENT_STRATEGY_PRE_APPEND_PARENT = 3;
+
+  BELinkBlockGenerator.setMaximumHeadlineLength = function(length) {
+    BELinkBlockGenerator.MAXIMUM_HEADLINE_LENGTH = length;
+  }
+
+  BELinkBlockGenerator.setMaximumDescriptionLength = function(length) {
+    BELinkBlockGenerator.MAXIMUM_DESC_LENGTH = length;
+  }
+
+  BELinkBlockGenerator.generateIndividualLinks = function(parentElement, linkStructure, link) {
+  var link_level_element_tag = linkStructure[0];
+  var link_level_element = document.createElement(link_level_element_tag);
+  var link_attribute_dictionary = linkStructure[1];
+  var allowable_elements = linkStructure[2];
+  var children_link_structures = linkStructure[3];
+  for (var link_attribute_key in link_attribute_dictionary) {
+    link_level_element.setAttribute(link_attribute_key, link_attribute_dictionary[link_attribute_key]);
+  }
+
+  var added_something = false;
+  if (allowable_elements.indexOf(BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_URL_TYPE)>=0) {
+    link_level_element.setAttribute('href', link.url);
+	added_something = true;
+  }
+  if (allowable_elements.indexOf(BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_HEADLINE_TYPE)>=0 && link.h1) {
+    var headline_text = link.h1;
+	if (headline_text.length > BELinkBlockGenerator.MAXIMUM_HEADLINE_LENGTH) {
+      headline_text = headline_text.substring(0, BELinkBlockGenerator.MAXIMUM_HEADLINE_LENGTH) + '...';
+    }
+    var text_node = document.createTextNode(headline_text);
+	link_level_element.appendChild(text_node);
+	added_something = true;
+  }
+  if (allowable_elements.indexOf(BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_DESCRIPTION_TYPE)>=0 && link.desc) {
+    var desc_text = link.desc;
+	if (desc_text.length > BELinkBlockGenerator.MAXIMUM_DESC_LENGTH) {
+      desc_text = desc_text.substring(0, BELinkBlockGenerator.MAXIMUM_DESC_LENGTH) + '...';
+    }
+//    console.log("Got text " + desc_text + ", max=" + BELinkBlockGenerator.MAXIMUM_DESC_LENGTH);
+    var text_node = document.createTextNode(desc_text);
+	link_level_element.appendChild(text_node);
+	added_something = true;
+  }
+  if (allowable_elements.indexOf(BELinkBlockGenerator.IND_LINK_BLOCK_TYPE_IMAGE_TYPE)>=0 && link.image) {
+//    console.log("added image " + JSON.stringify(allowable_elements) + " for " + link_level_element_tag);
+    link_level_element.setAttribute('src', link.image);
+	added_something = true;
+  }
+  // don't emit for empty links, desc, headline, image
+  // except for parent structures where allowable_length=0
+  if (!added_something && allowable_elements.length != 0) {
+//    console.log("did not added anything for " + link_level_element_tag);
+
+    return;
+  }
+  // go depth first
+  for (var childrenIndex=0; childrenIndex<children_link_structures.length; childrenIndex++) {
+    var childLinkStructure = children_link_structures[childrenIndex];
+    BELinkBlockGenerator.generateIndividualLinks(link_level_element, childLinkStructure, link);
+  }
+  parentElement.appendChild(link_level_element);
+}
+
+ BELinkBlockGenerator.insertLinkBlocks = function(targetElement, replacementStrategy, overallStructure, linkStructure, links,
+                                                  titleStructure) {
+  if (targetElement == null) {
+    return;
+  }
+
+  if (replacementStrategy == BELinkBlockGenerator.REPLACEMENT_STRATEGY_OVERWRITE) {
+    while (targetElement.firstChild) {
+      targetElement.removeChild(targetElement.firstChild);
+    }
+  }
+
+  var previousElement = targetElement;
+  for (var i=0;i<overallStructure.length;i++) {
+    var level_definition = overallStructure[i];
+    var level_element_tag = level_definition[0]
+	var level_element = document.createElement(level_element_tag);
+	var attribute_dictionary = level_definition[1]
+    for (var attribute_key in attribute_dictionary) {
+	  level_element.setAttribute(attribute_key, attribute_dictionary[attribute_key]);
+    }
+
+    // need to place title structure
+	if (titleStructure && titleStructure[0] == i) {
+	  var title_element_tag = titleStructure[1];
+	  var title_element = document.createElement(title_element_tag);
+  	  var title_attribute_dictionary = titleStructure[2];
+	  var title_text_content = titleStructure[3];
+      for (var title_attribute_key in title_attribute_dictionary) {
+	    title_element.setAttribute(title_attribute_key, title_attribute_dictionary[title_attribute_key]);
+      }
+
+	  var title_text_node = document.createTextNode(title_text_content);
+   	  title_element.appendChild(title_text_node);
+
+
+	  level_element.appendChild(title_element);
+    }
+
+	// last level place links
+	if (i == overallStructure.length-1) {
+      for (var link_i=0; link_i < links.length; link_i++) {
+  	    var link = links[link_i];
+		for (var linkStructureIndex=0;linkStructureIndex < linkStructure.length; linkStructureIndex++) {
+		  BELinkBlockGenerator.generateIndividualLinks(level_element, linkStructure[linkStructureIndex], link)
+		}
+	  }
+	}
+
+	// first level child we need to check placement
+    if (previousElement == targetElement) {
+      if (replacementStrategy == BELinkBlockGenerator.REPLACEMENT_STRATEGY_PRE_APPEND_ELEMENT) {
+	    // 2 means insert right before
+  	    previousElement.insertBefore(level_element, targetElement.firstChild);
+      } else if (replacementStrategy == BELinkBlockGenerator.REPLACEMENT_STRATEGY_PRE_APPEND_PARENT) {
+	    // 3 means insert right before at parent level
+		var parentElement = previousElement.parentElement;
+  	    parentElement.insertBefore(level_element, previousElement);
+  	  } else {
+    	previousElement.appendChild(level_element);
+	  }
+    } else {
+  	  previousElement.appendChild(level_element);
+	}
+	previousElement = level_element;
+  }
+}
+}(window.BELinkBlockGenerator = window.BELinkBlockGenerator || {}));
+};
+  </script>
+  <script>
+   (function() {
+      var bec = document.createElement('script');
+      bec.type = 'text/javascript';
+      bec.async = true;
+      bec.setAttribute("data-id", "bec");
+      bec.setAttribute("org-id", "f00000000100045");
+      bec.setAttribute("domain", ".elmhurst.edu");
+      bec.setAttribute("session-timeout", 86400000);
+      bec.src = document.location.protocol + '//cdn.b0e8.com/conv_v3.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(bec, s);
+})();
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="ie=edge" http-equiv="x-ua-compatible"/>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+  </script>
+  <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport"/>
+  <script>
+   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WR664SW');
+  </script>
+  <link href="https://www.elmhurst.edu/wp-content/uploads/autoptimize/css/autoptimize_d3b64504b3700b13f0d2e5c435249bf2.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://www.elmhurst.edu/wp-content/uploads/autoptimize/css/autoptimize_8bb6f4a66390756d7084b6184abd3a4a.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="https://www.elmhurst.edu/wp-content/uploads/autoptimize/css/autoptimize_a81468beb67c02afe5b835fc8c7687a5.css" media="print" rel="stylesheet" type="text/css"/>
+  <title>
+   Home | Elmhurst College
+  </title>
+  <meta content="Located in a beautiful community minutes from Chicago, Elmhurst College is committed to helping you reach your full potential—in college and beyond." name="description">
+   <link href="https://www.elmhurst.edu/" rel="canonical"/>
+   <meta content="en_US" property="og:locale">
+    <meta content="website" property="og:type">
+     <meta content="Home | Elmhurst College" property="og:title"/>
+     <meta content="Located in a beautiful community minutes from Chicago, Elmhurst College is committed to helping you reach your full potential—in college and beyond." property="og:description"/>
+     <meta content="https://www.elmhurst.edu/" property="og:url"/>
+     <meta content="Elmhurst College" property="og:site_name"/>
+     <meta content="summary" name="twitter:card"/>
+     <meta content="Located in a beautiful community minutes from Chicago, Elmhurst College is committed to helping you reach your full potential—in college and beyond." name="twitter:description"/>
+     <meta content="Home | Elmhurst College" name="twitter:title"/>
+     <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","@id":"https://www.elmhurst.edu/#website","url":"https://www.elmhurst.edu/","name":"Elmhurst College","potentialAction":{"@type":"SearchAction","target":"https://www.elmhurst.edu/search/#?cludoquery={search_term_string}&cludopage=1","query-input":"required name=search_term_string"}}
+     </script>
+     <link href="//www.elmhurst.edu" rel="dns-prefetch"/>
+     <link href="//cloud.typography.com" rel="dns-prefetch"/>
+     <link href="//s.w.org" rel="dns-prefetch"/>
+     <link href="https://cloud.typography.com/7412376/6310792/css/fonts.css" id="theme-fonts-css" media="screen" rel="stylesheet" type="text/css"/>
+     <script src="https://www.elmhurst.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript">
+     </script>
+     <script type="text/javascript">
+      var aamLocal = {"nonce":"cf701b538f","ajaxurl":"https:\/\/www.elmhurst.edu\/wp-admin\/admin-ajax.php"};
+     </script>
+     <link href="https://www.elmhurst.edu/wp-json/" rel="https://api.w.org/"/>
+     <link href="https://www.elmhurst.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+     <link href="https://www.elmhurst.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+     <meta content="WordPress 5.0.3" name="generator"/>
+     <link href="https://www.elmhurst.edu/" rel="shortlink"/>
+     <link href="https://www.elmhurst.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.elmhurst.edu%2F" rel="alternate" type="application/json+oembed"/>
+     <link href="https://www.elmhurst.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.elmhurst.edu%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+     <meta content="v1" name="tec-api-version"/>
+     <meta content="https://www.elmhurst.edu" name="tec-api-origin"/>
+     <link href="https://www.elmhurst.edu/wp-json/tribe/events/v1/" rel="https://theeventscalendar.com/"/>
+     <link href="https://www.elmhurst.edu/wp-content/uploads/2017/11/ec-fabicon-150x150.png" rel="icon" sizes="32x32"/>
+     <link href="https://www.elmhurst.edu/wp-content/uploads/2017/11/ec-fabicon-240x240.png" rel="icon" sizes="192x192"/>
+     <link href="https://www.elmhurst.edu/wp-content/uploads/2017/11/ec-fabicon-240x240.png" rel="apple-touch-icon-precomposed"/>
+     <meta content="https://www.elmhurst.edu/wp-content/uploads/2017/11/ec-fabicon.png" name="msapplication-TileImage"/>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body class="home page-template page-template-template-full-width page-template-template-full-width-php page page-id-9 tribe-no-js">
+  <ul id="be_sdkms_capsule" style="display:none!important">
+   <li id="be_sdkms_sdk_version">
+    be_ixf; php_sdk; php_sdk_1.4.9
+   </li>
+   <li id="be_sdkms_capsule_connect_timer">
+    61 ms
+   </li>
+   <li id="be_sdkms_capsule_index_time">
+    iy_2019; im_03; id_09; ih_23; imh_14; i_epoch:1552202074219
+   </li>
+   <li id="be_sdkms_capsule_pub">
+    ixf-compiler; ixf-compiler_1.0.0.0
+   </li>
+   <li id="be_sdkms_capsule_date_modified">
+    py_2019; pm_03; pd_04; ph_21; pmh_13; p_epoch:1551762793798
+   </li>
+  </ul>
+  <ul id="be_sdkms_node" style="display:none!important">
+   <li id="be_sdkms_pub">
+    bec-built-in; bec-built-in_1.0.1; bodystr
+   </li>
+   <li id="be_sdkms_date_modified">
+    pn_tstr:Sat Mar 09 23:14:34 PST 2019; pn_epoch:1552202074219
+   </li>
+   <li id="be_sdkms_timer">
+    0 ms
+   </li>
+  </ul>
+  <ul id="be_sdkms_capsule" style="display:none!important">
+   <ul id="be_sdkms_capsule_messages">
+   </ul>
+  </ul>
+  <noscript>
+   <iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-WR664SW" style="display:none;visibility:hidden" width="0">
+   </iframe>
+  </noscript>
+  <div class="canvas">
+   <header class="header">
+    <div class="container header__container">
+     <a class="header__logo" href="https://www.elmhurst.edu">
+      <span class="hide">
+       Elmhurst College
+      </span>
+     </a>
+     <button class="header__button header__button--search">
+      <span class="hide">
+       Search
+      </span>
+     </button>
+     <button class="header__button header__button--menu">
+      <span class="hide">
+       Menu
+      </span>
+     </button>
+     <div class="header__menu">
+      <nav class="header__nav">
+       <ul class="header__nav__list" id="menu-navigation">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-638" id="menu-item-638">
+         <a href="https://www.elmhurst.edu/about/">
+          About
+         </a>
+         <button class="header__nav__button">
+          <span class="hide">
+           Toggle
+          </span>
+         </button>
+         <div class="header__mega">
+          <div class="container container--lg header__mega__container">
+           <div class="header__mega__description">
+            <p>
+             Get helpful tips on how to complete your bachelor’s or earn a graduate degree. Our new blog prepares for graduate school and beyond.
+            </p>
+            <p>
+             <a class="button" href="/blog">
+              Visit the Blog
+             </a>
+            </p>
+           </div>
+           <ul class="header__mega__nav">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1853" id="menu-item-1853">
+             <a href="https://www.elmhurst.edu/about/mission-vision-values/">
+              Mission, Vision and Values
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1854" id="menu-item-1854">
+             <a href="https://www.elmhurst.edu/about/elmhurst-college-history/">
+              Our History
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1855" id="menu-item-1855">
+             <a href="https://www.elmhurst.edu/about/united-church-christ/">
+              Our United Church of Christ Identity
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1856" id="menu-item-1856">
+             <a href="https://www.elmhurst.edu/about/facts-figures/">
+              Key Facts and Figures
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1857" id="menu-item-1857">
+             <a href="https://www.elmhurst.edu/about/location/">
+              Our Location and Campus
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1858" id="menu-item-1858">
+             <a href="https://www.elmhurst.edu/about/leadership/">
+              Leadership
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1859" id="menu-item-1859">
+             <a href="https://www.elmhurst.edu/about/offices/">
+              Administrative Offices
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1860" id="menu-item-1860">
+             <a href="https://www.elmhurst.edu/about/diversity-inclusion/">
+              Diversity and Inclusion
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1861" id="menu-item-1861">
+             <a href="https://www.elmhurst.edu/about/community-outreach/">
+              Community Outreach
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14563" id="menu-item-14563">
+             <a href="https://www.elmhurst.edu/about/accreditation/">
+              Accreditation
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10046" id="menu-item-10046">
+             <a href="https://www.elmhurst.edu/events/">
+              Calendar of Events
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10047" id="menu-item-10047">
+             <a href="https://www.elmhurst.edu/news/">
+              Recent News
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-639" id="menu-item-639">
+         <a href="https://www.elmhurst.edu/academics/">
+          Academics
+         </a>
+         <button class="header__nav__button">
+          <span class="hide">
+           Toggle
+          </span>
+         </button>
+         <div class="header__mega">
+          <div class="container container--lg header__mega__container">
+           <div class="header__mega__description">
+            <p>
+             Elmhurst has the academic program for you, offering more than 60 majors.
+            </p>
+            <p>
+             <a class="button" href="https://www.elmhurst.edu/academics/undergraduate/majors-minors/">
+              Explore majors
+             </a>
+            </p>
+           </div>
+           <ul class="header__mega__nav">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3118" id="menu-item-3118">
+             <a href="https://www.elmhurst.edu/academics/undergraduate/">
+              Undergraduate Programs
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3120" id="menu-item-3120">
+             <a href="https://www.elmhurst.edu/academics/graduate/">
+              Graduate Studies
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3121" id="menu-item-3121">
+             <a href="https://www.elmhurst.edu/academics/adult/">
+              Degree Completion Programs
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9410" id="menu-item-9410">
+             <a href="https://www.elmhurst.edu/academics/certificate-programs/">
+              Certificate Programs
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3123" id="menu-item-3123">
+             <a href="https://www.elmhurst.edu/academics/departments/">
+              Academic Departments
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3124" id="menu-item-3124">
+             <a href="https://www.elmhurst.edu/academics/academic-centers/">
+              Academic Centers
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5189" id="menu-item-5189">
+             <a href="https://www.elmhurst.edu/academics/registration-records/">
+              Registration and Records
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5190" id="menu-item-5190">
+             <a href="https://www.elmhurst.edu/academics/undergraduate/student-support/advising/">
+              Academic Advising
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3125" id="menu-item-3125">
+             <a href="https://www.elmhurst.edu/academics/career-education/">
+              Career Education
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3126" id="menu-item-3126">
+             <a href="http://library.elmhurst.edu">
+              A.C. Buehler Library
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5188" id="menu-item-5188">
+             <a href="https://www.elmhurst.edu/academics/elmhurst-learning-success-academy/">
+              ELSA
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9411" id="menu-item-9411">
+             <a href="https://www.elmhurst.edu/academics/research/">
+              Research
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-594" id="menu-item-594">
+         <a href="https://www.elmhurst.edu/admission/">
+          Admission &amp; Financial Aid
+         </a>
+         <button class="header__nav__button">
+          <span class="hide">
+           Toggle
+          </span>
+         </button>
+         <div class="header__mega">
+          <div class="container container--lg header__mega__container">
+           <div class="header__mega__description">
+            <p>
+             Take the first step and apply today!
+            </p>
+            <p>
+             <a class="button" href="http://connect.elmhurst.edu/apply" rel="noopener" target="_blank">
+              Apply Online
+             </a>
+            </p>
+           </div>
+           <ul class="header__mega__nav">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-595" id="menu-item-595">
+             <a href="https://www.elmhurst.edu/admission/first-year-students/">
+              First-Year Students
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-596" id="menu-item-596">
+             <a href="https://www.elmhurst.edu/admission/transfer-adult-students/">
+              Transfer and Adult Students
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2045" id="menu-item-2045">
+             <a href="https://www.elmhurst.edu/admission/international-students/">
+              International Students
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2043" id="menu-item-2043">
+             <a href="https://www.elmhurst.edu/admission/graduate-students/">
+              Graduate Students
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2044" id="menu-item-2044">
+             <a href="https://www.elmhurst.edu/admission/military-veteran-students/">
+              Military and Veteran Students
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10551" id="menu-item-10551">
+             <a href="/admission/elsa/admission-requirements/">
+              ELSA
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5120" id="menu-item-5120">
+             <a href="https://www.elmhurst.edu/admission/important-dates-deadlines/">
+              Important Dates and Deadlines
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2046" id="menu-item-2046">
+             <a href="https://www.elmhurst.edu/admission/financial-aid/">
+              Financial Aid
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5123" id="menu-item-5123">
+             <a href="https://www.elmhurst.edu/admission/financial-aid/tuition-fees/">
+              Tuition and Fees
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5118" id="menu-item-5118">
+             <a href="https://www.elmhurst.edu/admission/guidance-counselor-resources/">
+              School Counselor Resources
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1841" id="menu-item-1841">
+         <a href="https://www.elmhurst.edu/student-life/">
+          Student Life
+         </a>
+         <button class="header__nav__button">
+          <span class="hide">
+           Toggle
+          </span>
+         </button>
+         <div class="header__mega">
+          <div class="container container--lg header__mega__container">
+           <div class="header__mega__description">
+            <p>
+             Explore
+             <strong>
+              100-plus
+             </strong>
+             student organizations, teams and clubs.
+            </p>
+            <p>
+             <a class="button" href="https://www.elmhurst.edu/student-life/get-involved/">
+              Get Involved
+             </a>
+            </p>
+            <p>
+            </p>
+           </div>
+           <ul class="header__mega__nav">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3433" id="menu-item-3433">
+             <a href="https://www.elmhurst.edu/student-life/living-on-campus/">
+              Living on Campus
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3434" id="menu-item-3434">
+             <a href="https://www.elmhurst.edu/student-life/dining-options/">
+              Dining Options
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4570" id="menu-item-4570">
+             <a href="https://www.elmhurst.edu/student-life/get-involved/">
+              Get Involved
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3436" id="menu-item-3436">
+             <a href="https://www.elmhurst.edu/academics/career-education/">
+              Career Education
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3437" id="menu-item-3437">
+             <a href="https://www.elmhurst.edu/about/location/city-elmhurst-chicago/">
+              About Elmhurst and Chicago
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3438" id="menu-item-3438">
+             <a href="https://www.elmhurst.edu/student-life/health-and-wellness/">
+              Health and Wellness
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3439" id="menu-item-3439">
+             <a href="https://www.elmhurst.edu/student-life/support-services/">
+              Support Services
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3440" id="menu-item-3440">
+             <a href="https://www.elmhurst.edu/student-life/campus-safety-security/">
+              Campus Safety and Security
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6048" id="menu-item-6048">
+             <a href="https://www.elmhurst.edu/student-life/support-services/international-student-services/">
+              International Student Services
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3442" id="menu-item-3442">
+             <a href="http://www.beckstextbooks.com/store19/Home.aspx" target="_blank">
+              Bookstore
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-640" id="menu-item-640">
+         <a href="http://www.elmhurstbluejays.com/" target="_blank">
+          Athletics
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-16414" id="menu-item-16414">
+         <a href="https://www.elmhurst.edu/alumni/">
+          Alumni
+         </a>
+         <button class="header__nav__button">
+          <span class="hide">
+           Toggle
+          </span>
+         </button>
+         <div class="header__mega">
+          <div class="container container--lg header__mega__container">
+           <div class="header__mega__description">
+            <p>
+             Invest in our students by making your gift today.
+            </p>
+            <p>
+             <a class="button" href="/give" rel="noopener">
+              Donate online
+             </a>
+            </p>
+           </div>
+           <ul class="header__mega__nav">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3632" id="menu-item-3632">
+             <a href="https://www.elmhurst.edu/alumni/benefits-resources/">
+              Benefits and Resources
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3631" id="menu-item-3631">
+             <a href="https://www.elmhurst.edu/alumni/upcoming-events/">
+              Upcoming Events
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17317" id="menu-item-17317">
+             <a href="https://www.elmhurst.edu/alumni/alumni-magazine/">
+              The College Magazine
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13621" id="menu-item-13621">
+             <a href="https://www.elmhurst.edu/elmhurst-voices/alumni-stories/">
+              Alumni Stories
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3630" id="menu-item-3630">
+             <a href="https://www.elmhurst.edu/alumni/giving/">
+              Ways to Support Elmhurst
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17315" id="menu-item-17315">
+             <a href="https://www.elmhurst.edu/alumni/giving/presidents-circle/">
+              President’s Circle
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3633" id="menu-item-3633">
+             <a href="https://www.elmhurst.edu/alumni/update-alumni-profile/">
+              Update Your Alumni Profile
+             </a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3635" id="menu-item-3635">
+             <a href="https://www.elmhurst.edu/alumni/contact-us/">
+              Contact Us
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </li>
+       </ul>
+      </nav>
+      <div class="header__secondary">
+       <ul class="header__actions" id="menu-actions">
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-405" id="menu-item-405">
+         <a href="https://connect.elmhurst.edu/apply/" target="_blank">
+          Apply
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-413" id="menu-item-413">
+         <a href="/admission/plan-a-visit/">
+          Visit
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-636" id="menu-item-636">
+         <a href="/admission/request-information/">
+          Request Info
+         </a>
+        </li>
+       </ul>
+       <div class="header__tool header__tool--portal">
+        <a class="header__tool__button header__tool__button--portal" href="https://my.elmhurst.edu/" target="_blank">
+         My Elmhurst
+        </a>
+       </div>
+       <div class="header__tool header__tool--directory">
+        <a class="header__tool__button header__tool__button--directory" href="http://directory.elmhurst.edu/" target="_blank">
+         Directory
+        </a>
+       </div>
+       <div class="header__tool header__tool--search">
+        <button class="header__tool__button header__tool__button--search">
+         Search
+        </button>
+       </div>
+       <div class="header__tool">
+        <button class="header__tool__button header__tool__button--info">
+         Info for
+        </button>
+        <ul class="header__info" id="menu-info-for">
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5542" id="menu-item-5542">
+          <a href="https://www.elmhurst.edu/admitted-students/">
+           Admitted Students
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-390" id="menu-item-390">
+          <a href="https://www.elmhurst.edu/current-students/">
+           Current Students
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19625" id="menu-item-19625">
+          <a href="https://www.elmhurst.edu/alumni/">
+           Alumni and Friends
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3451" id="menu-item-3451">
+          <a href="https://www.elmhurst.edu/faculty-staff/">
+           Faculty and Staff
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5011" id="menu-item-5011">
+          <a href="https://www.elmhurst.edu/about/community-outreach/conference-event-services/">
+           Event Planning
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="header__tool header__tool--give">
+        <a class="button button--full" href="https://www.elmhurst.edu/give?utm_source=website&amp;utm_medium=button&amp;utm_campaign=give_now&amp;utm_content=header" target="">
+         Give Now
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <form action="https://www.elmhurst.edu/search/" class="header__search" id="search-form" method="get">
+     <div class="container container--lg header__search__container">
+      <label class="hide" for="cludoquery">
+       Search
+      </label>
+      <input class="header__search__input" id="cludoquery" name="cludoquery" placeholder="Type here to search" type="search"/>
+      <button class="header__search__button" type="submit">
+       Go
+      </button>
+     </div>
+    </form>
+   </header>
+   <div class="splash-wrapper">
+    <div class="splash hero__caption hero__caption--alt" style="background-image: url(https://www.elmhurst.edu/wp-content/uploads/2018/05/EC_journey.jpg);">
+     <div class="splash__overlay" style="opacity: .6">
+     </div>
+     <div class="hero__caption__box hero__caption__box--alt">
+      <div class="hero__caption__content">
+       <div class="hero__caption__header">
+        <h2 class="hero__caption__title">
+         Your Elmhurst Journey
+         <br/>
+         Begins Here.
+        </h2>
+       </div>
+       <div class="hero__caption__footer">
+        <a class="button button--full button--video" data-minimodal="" href="https://www.youtube.com/watch?v=5b6icFTReDc?autoplay=1&amp;rel=0">
+         Watch Our Video
+        </a>
+        <a class="button button--full" href="/visit" target="">
+         Schedule a Visit
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container container--sm">
+    <div class="actions">
+     <p>
+      Located in a beautiful community minutes from Chicago, Elmhurst College is committed to helping you reach your full potential—in college and beyond.
+     </p>
+     <ul class="actions__list">
+      <li class="actions__list__item">
+       <a class="button button--full" href="https://connect.elmhurst.edu/apply/" target="_blank">
+        Apply
+       </a>
+      </li>
+      <li class="actions__list__item">
+       <a class="button button--full" href="/admission/plan-a-visit/">
+        Visit
+       </a>
+      </li>
+      <li class="actions__list__item">
+       <a class="button button--full" href="/admission/request-information/">
+        Request Info
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="container">
+    <div class="slider-bg slider-bg--full slider-bg--full--alt">
+     <div class="slider slider--flush slider--centered">
+      <div class="slider__item">
+       <div class="stat">
+        <a href="/news/new-college-rankings-give-high-marks-elmhurst/">
+         <img alt="Best Regional Universities Midwest, U.S. News &amp; World Report (2019)" class="attachment-md-md size-md-md" height="255" src="https://www.elmhurst.edu/wp-content/uploads/2018/09/BC-regional-universities-midwest_2019-hp.png" width="250"/>
+        </a>
+       </div>
+      </div>
+      <div class="slider__item">
+       <div class="stat">
+        <a href="/news/new-college-rankings-give-high-marks-elmhurst/">
+         <img alt="The Princeton Review's Best Regional Colleges - Midwestern (2019)" class="attachment-md-md size-md-md" height="255" src="https://www.elmhurst.edu/wp-content/uploads/2018/09/TPR-2019-Regional_Midwestern-hp.png" width="250"/>
+        </a>
+       </div>
+      </div>
+      <div class="slider__item">
+       <div class="stat">
+        <a href="/news/new-college-rankings-give-high-marks-elmhurst/">
+         <img alt="Best Regional Universities Midwest - Undergraduate Teaching, U.S. News &amp; World Report (2019)" class="attachment-md-md size-md-md" height="255" src="https://www.elmhurst.edu/wp-content/uploads/2018/09/best-colleges-regional-universities-Undergrad-Teaching_2019-hp.png" width="250"/>
+        </a>
+       </div>
+      </div>
+      <div class="slider__item">
+       <div class="stat">
+        <a href="/news/new-college-rankings-give-high-marks-elmhurst/">
+         <img alt="Best Regional Universities Midwest - Best Value, U.S. News &amp; World Report (2019)" class="attachment-md-md size-md-md" height="255" src="https://www.elmhurst.edu/wp-content/uploads/2018/09/best-colleges-RU-Best-Value_2019-hp.png" width="250"/>
+        </a>
+       </div>
+      </div>
+      <div class="slider__item">
+       <div class="stat">
+        <a href="/news/new-college-rankings-give-high-marks-elmhurst/">
+         <img alt="Best Regional Universities Midwest - For Veterans, U.S. News &amp; World Report (2019)" class="attachment-md-md size-md-md" height="255" src="https://www.elmhurst.edu/wp-content/uploads/2018/09/BC-Vets-RegUNIV_midwest_2019-hp.png" width="250"/>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container">
+    <div class="profiles-wrap profiles-wrap--full">
+     <h2 class="profiles-wrap__heading">
+      Elmhurst students are active, passionate and engaged in the world around them.
+     </h2>
+     <div class="profiles">
+      <div class="profiles__item">
+       <img alt="" class="attachment-md-lg size-md-lg" height="792" sizes="(max-width: 792px) 100vw, 792px" src="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed.jpg" srcset="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed.jpg 792w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-150x150.jpg 150w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-300x300.jpg 300w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-768x768.jpg 768w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-240x240.jpg 240w" width="792"/>
+       <button class="profiles__toggle" data-minimodal="" data-minimodal-rootclass="minimodal--profiles">
+        <span class="hide">
+         Madiha Ahmed ’19
+        </span>
+       </button>
+       <div class="profiles__modal-container">
+        <div class="profiles__modal">
+         <div class="profiles__modal__image">
+          <img alt="" class="attachment-md-lg size-md-lg" height="792" sizes="(max-width: 792px) 100vw, 792px" src="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed.jpg" srcset="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed.jpg 792w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-150x150.jpg 150w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-300x300.jpg 300w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-768x768.jpg 768w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-madiha-ahmed-240x240.jpg 240w" width="792"/>
+          <div class="profiles__modal__description">
+           <p>
+            I'm...
+           </p>
+           <ul>
+            <li>
+             mastering the art of walking backwards as a "Jaywalker" student tour guide
+            </li>
+            <li>
+             going to present psychology research at a national conference
+            </li>
+            <li>
+             leading a project to create a commuter student lounge
+            </li>
+           </ul>
+          </div>
+         </div>
+         <div class="profiles__modal__content">
+          <blockquote class="profiles__modal__quote">
+           <p>
+            Elmhurst values diversity—it’s the foundation of everything we try to do as a college and as a community.
+           </p>
+           <cite class="profiles__modal__cite">
+            Madiha Ahmed ’19
+           </cite>
+          </blockquote>
+          <ul class="profiles__modal__buttons">
+           <li>
+            <a class="button button--full" href="/elmhurst-voices/student-stories/madiha-ahmed">
+             Read Madiha's Story
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="profiles__item">
+       <img alt="" class="attachment-md-lg size-md-lg" height="792" sizes="(max-width: 792px) 100vw, 792px" src="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert.jpg" srcset="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert.jpg 792w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-150x150.jpg 150w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-300x300.jpg 300w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-768x768.jpg 768w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-240x240.jpg 240w" width="792"/>
+       <button class="profiles__toggle" data-minimodal="" data-minimodal-rootclass="minimodal--profiles">
+        <span class="hide">
+         Kristen Hulbert ’18
+        </span>
+       </button>
+       <div class="profiles__modal-container">
+        <div class="profiles__modal">
+         <div class="profiles__modal__image">
+          <img alt="" class="attachment-md-lg size-md-lg" height="792" sizes="(max-width: 792px) 100vw, 792px" src="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert.jpg" srcset="https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert.jpg 792w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-150x150.jpg 150w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-300x300.jpg 300w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-768x768.jpg 768w, https://www.elmhurst.edu/wp-content/uploads/2017/10/profile-kristen-hulbert-240x240.jpg 240w" width="792"/>
+          <div class="profiles__modal__description">
+           <p>
+            I'm...
+           </p>
+           <ul>
+            <li>
+             a biology major from Wisconsin
+            </li>
+            <li>
+             a black belt in Taekwondo
+            </li>
+            <li>
+             a volunteer coordinator
+            </li>
+           </ul>
+          </div>
+         </div>
+         <div class="profiles__modal__content">
+          <blockquote class="profiles__modal__quote">
+           <p>
+            Elmhurst College helped me figure out where my passion meets my calling.
+           </p>
+           <cite class="profiles__modal__cite">
+            Kristen Hulbert ’18
+           </cite>
+          </blockquote>
+          <ul class="profiles__modal__buttons">
+           <li>
+            <a class="button button--full" href="/elmhurst-voices/student-stories/kristen-hulbert/">
+             Read Kristen's Story
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="profiles__item">
+       <img alt="" class="attachment-md-lg size-md-lg" height="792" sizes="(max-width: 792px) 100vw, 792px" src="https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks.jpg" srcset="https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks.jpg 792w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-150x150.jpg 150w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-300x300.jpg 300w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-768x768.jpg 768w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-240x240.jpg 240w" width="792"/>
+       <button class="profiles__toggle" data-minimodal="" data-minimodal-rootclass="minimodal--profiles">
+        <span class="hide">
+         Janisa Hicks ’19
+        </span>
+       </button>
+       <div class="profiles__modal-container">
+        <div class="profiles__modal">
+         <div class="profiles__modal__image">
+          <img alt="" class="attachment-md-lg size-md-lg" height="792" sizes="(max-width: 792px) 100vw, 792px" src="https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks.jpg" srcset="https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks.jpg 792w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-150x150.jpg 150w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-300x300.jpg 300w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-768x768.jpg 768w, https://www.elmhurst.edu/wp-content/uploads/2017/11/profile-jenisa-hicks-240x240.jpg 240w" width="792"/>
+          <div class="profiles__modal__description">
+           <p>
+            I'm...
+           </p>
+           <ul>
+            <li>
+             the events chair for the Spiritual Life Council and Kappa Kappa Gamma sorority
+            </li>
+            <li>
+             passionate about stopping animal cruelty
+            </li>
+            <li>
+             a huge fan of Harry Potter and Game of Thrones
+            </li>
+           </ul>
+          </div>
+         </div>
+         <div class="profiles__modal__content">
+          <blockquote class="profiles__modal__quote">
+           <p>
+            I love how small Elmhurst is, and that if I ever need help, it’s easy to find.
+           </p>
+           <cite class="profiles__modal__cite">
+            Janisa Hicks ’19
+           </cite>
+          </blockquote>
+          <ul class="profiles__modal__buttons">
+           <li>
+            <a class="button button--full" href="/elmhurst-voices/student-stories/janisa-hicks/">
+             Read Janisa's Story
+            </a>
+           </li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container">
+    <div class="feed">
+     <div class="container container--lg feed__container">
+      <h3>
+       Upcoming Events
+      </h3>
+      <div class="feed__list">
+       <div class="feed__item">
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/event/2019-03-08-violet/">
+            Violet
+           </a>
+          </h4>
+          <p>
+           <strong>
+            Mill Theatre
+           </strong>
+          </p>
+         </div>
+         <div class="feed__footer">
+          <p>
+           <br/>
+           Friday, March 8 - Sunday, March 10
+          </p>
+         </div>
+        </div>
+       </div>
+       <div class="feed__item">
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/event/2019-03-10-symphonic-band-wind-ensemble-winter-concert/">
+            Symphonic Band and Wind Ensemble Winter Concert
+           </a>
+          </h4>
+          <p>
+           <strong>
+            Hammerschmidt Memorial Chapel
+           </strong>
+          </p>
+         </div>
+         <div class="feed__footer">
+          <p>
+           <br/>
+           Today
+          </p>
+         </div>
+        </div>
+       </div>
+       <div class="feed__item">
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/event/2019-03-12-m-s-in-data-science-online-information-session/">
+            M.S. in Data Science Online Information Session
+           </a>
+          </h4>
+          <p>
+           <strong>
+            Online Information Session
+           </strong>
+          </p>
+         </div>
+         <div class="feed__footer">
+          <p>
+           <br/>
+           Tuesday, March 12
+           <br>
+            9:00  a.m.
+           </br>
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <p class="text-center">
+       <a class="button" href="https://www.elmhurst.edu/events/">
+        View all events
+       </a>
+      </p>
+     </div>
+    </div>
+   </div>
+   <div class="container">
+    <div class="feed">
+     <div class="container container--lg feed__container">
+      <h3>
+       Featured News
+      </h3>
+      <div class="feed__list">
+       <div class="feed__item feed__item--featured">
+        <a class="feed__image" href="https://www.elmhurst.edu/news/college-launches-new-environmental-studies-program/" style="background-image: url(https://www.elmhurst.edu/wp-content/uploads/2019/02/news-new-env-studies-program.jpg);">
+        </a>
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/news/college-launches-new-environmental-studies-program/">
+            College Launches New Environmental Studies Program
+           </a>
+          </h4>
+         </div>
+         <div class="feed__footer">
+          <p>
+           Tuesday, February 5
+          </p>
+         </div>
+        </div>
+       </div>
+       <div class="feed__item">
+        <a class="feed__image" href="https://www.elmhurst.edu/news/elmhurst-bands-perform-winter-concert/" style="background-image: url(https://www.elmhurst.edu/wp-content/uploads/2019/03/news-winter-band.jpg);">
+        </a>
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/news/elmhurst-bands-perform-winter-concert/">
+            Elmhurst Bands to Perform Winter Concert March 10
+           </a>
+          </h4>
+         </div>
+         <div class="feed__footer">
+          <p>
+           Tuesday, March 5
+          </p>
+         </div>
+        </div>
+       </div>
+       <div class="feed__item">
+        <a class="feed__image" href="https://www.elmhurst.edu/news/environmental-ethics-scholar-sarah-fredericks-give-staudt-lecture-march-13/" style="background-image: url(https://www.elmhurst.edu/wp-content/uploads/2019/02/news-staudt-lecture-2019-752x528.jpg);">
+        </a>
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/news/environmental-ethics-scholar-sarah-fredericks-give-staudt-lecture-march-13/">
+            Environmental Ethics Scholar Sarah Fredericks to Give Staudt Lecture on March 13
+           </a>
+          </h4>
+         </div>
+         <div class="feed__footer">
+          <p>
+           Wednesday, February 13
+          </p>
+         </div>
+        </div>
+       </div>
+       <div class="feed__item">
+        <a class="feed__image" href="https://www.elmhurst.edu/news/college-to-host-recycling-extravaganza-without-electronics-on-april-13/" style="background-image: url(https://www.elmhurst.edu/wp-content/uploads/2019/03/news-recycling-extravanganza-2019.jpg);">
+        </a>
+        <div class="feed__content">
+         <div class="feed__header">
+          <h4 class="feed__title">
+           <a class="heading-link" href="https://www.elmhurst.edu/news/college-to-host-recycling-extravaganza-without-electronics-on-april-13/">
+            College to Host Recycling Extravaganza—Without Electronics—on April 13
+           </a>
+          </h4>
+         </div>
+         <div class="feed__footer">
+          <p>
+           Friday, March 1
+          </p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <p class="text-center">
+       <a class="button" href="https://www.elmhurst.edu/news/">
+        View all news
+       </a>
+      </p>
+     </div>
+    </div>
+   </div>
+   <div class="juicer">
+    <div class="container container--lg">
+     <h3>
+      Connect with #ElmhurstCollege
+     </h3>
+     <ul class="juicer__nav">
+      <li class="juicer__nav__item">
+       <button class="juicer__nav__button" data-feed="https://www.juicer.io/api/feeds/elmcol?per=15">
+        <span class="juicer__nav__label">
+         View
+        </span>
+        All
+       </button>
+      </li>
+      <li class="juicer__nav__item">
+       <button class="juicer__nav__button juicer__nav__button--facebook" data-feed="https://www.juicer.io/api/feeds/elmcol?per=15&amp;filter=Facebook">
+        <span class="juicer__nav__label">
+         Facebook
+        </span>
+       </button>
+      </li>
+      <li class="juicer__nav__item">
+       <button class="juicer__nav__button juicer__nav__button--twitter" data-feed="https://www.juicer.io/api/feeds/elmcol?per=15&amp;filter=Twitter">
+        <span class="juicer__nav__label">
+         Twitter
+        </span>
+       </button>
+      </li>
+      <li class="juicer__nav__item">
+       <button class="juicer__nav__button juicer__nav__button--instagram" data-feed="https://www.juicer.io/api/feeds/elmcol?per=15&amp;filter=Instagram">
+        <span class="juicer__nav__label">
+         Instagram
+        </span>
+       </button>
+      </li>
+     </ul>
+    </div>
+    <div class="juicer__slider">
+    </div>
+   </div>
+   <footer class="footer">
+    <div class="container container--lg footer__container">
+     <div class="footer__block">
+      <h3 class="footer__heading">
+       Elmhurst College
+      </h3>
+      <p class="footer__text">
+       <a href="/about/location/maps-directions/" target="_blank">
+        190 Prospect Avenue
+        <br>
+         Elmhurst, Illinois 60126
+        </br>
+       </a>
+      </p>
+      <h4 class="footer__subheading">
+       Office of Admission
+      </h4>
+      <p class="footer__text">
+       <a href="tel:6306173400">
+        (630) 617-3400
+       </a>
+       <br/>
+       <a href="mailto:admit@elmhurst.edu">
+        admit@elmhurst.edu
+       </a>
+      </p>
+      <div class="social footer__social">
+       <ul class="social__list social__list--centered">
+        <li class="social__item">
+         <a class="social__link social__link--white social__link--facebook" href="https://www.facebook.com/ElmCol/" target="_blank">
+          <span class="hide">
+           Facebook
+          </span>
+         </a>
+        </li>
+        <li class="social__item">
+         <a class="social__link social__link--white social__link--twitter" href="https://twitter.com/elmhurstcollege" target="_blank">
+          <span class="hide">
+           Twitter
+          </span>
+         </a>
+        </li>
+        <li class="social__item">
+         <a class="social__link social__link--white social__link--instagram" href="https://www.instagram.com/elmhurstcollege/" target="_blank">
+          <span class="hide">
+           Instagram
+          </span>
+         </a>
+        </li>
+        <li class="social__item">
+         <a class="social__link social__link--white social__link--youtube" href="https://www.youtube.com/user/ECvids" target="_blank">
+          <span class="hide">
+           YouTube
+          </span>
+         </a>
+        </li>
+        <li class="social__item">
+         <a class="social__link social__link--white social__link--flickr" href="https://www.flickr.com/photos/elmhurstcollegepublicaffairs/" target="_blank">
+          <span class="hide">
+           Flickr
+          </span>
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer__block">
+      <ul class="footer__links" id="menu-footer">
+       <li class="footer__button menu-item menu-item-type-custom menu-item-object-custom menu-item-5025" id="menu-item-5025">
+        <a href="/give">
+         Make a Gift
+        </a>
+       </li>
+       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-395" id="menu-item-395">
+        <a href="https://my.elmhurst.edu/" target="_blank">
+         My Elmhurst Campus Portal
+        </a>
+       </li>
+       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-396" id="menu-item-396">
+        <a href="https://elmhurst.simplehire.com/" target="_blank">
+         Jobs at Elmhurst
+        </a>
+       </li>
+       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5023" id="menu-item-5023">
+        <a href="https://www.elmhurst.edu/about/policies-consumer-information/">
+         Consumer Information and Title IX
+        </a>
+       </li>
+       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5024" id="menu-item-5024">
+        <a href="https://www.elmhurst.edu/website-feedback/">
+         Website Feedback
+        </a>
+       </li>
+       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10381" id="menu-item-10381">
+        <a href="https://www.elmhurst.edu/privacy-policy/">
+         Privacy Policy
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="footer__block">
+      <div class="footer__virtual" id="be-ix-link-block">
+       <a class="virtualtour_embed" data-image-height="100%" data-image-width="100%" data-inst="61233" data-link-type="image" data-platform="v" href="https://www.youvisit.com" title="Virtual Reality, Virtual Tour">
+        Virtual Tour
+       </a>
+       <script async="async" defer="defer" src="https://www.youvisit.com/tour/Embed/js2">
+       </script>
+      </div>
+     </div>
+    </div>
+   </footer>
+   <div class="omnilert">
+    <div class="omnilert__container container">
+     <script src="//widgets.omnilert.net/5fb267efe64a62be1d534df4ecebcee8-621" type="text/javascript">
+     </script>
+     <button class="omnilert__close">
+      Close
+     </button>
+    </div>
+   </div>
+  </div>
+  <script>
+   ( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+  </script>
+  <script>
+   var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};var tribe_system_info = {"sysinfo_optin_nonce":"c2fbd87246","clipboard_btn_text":"Copy to clipboard","clipboard_copied_text":"System info copied","clipboard_fail_text":"Press \"Cmd + C\" to copy"};
+  </script>
+  <script type="text/javascript">
+   var qpprFrontData = {"linkData":{"\/calendar\/":[1,0,""],"\/admission\/1748502.html":[1,0,""],"\/tour\/":[1,0,""],"\/about\/directory\/index.html":[1,0,""],"\/rsvp\/":[1,0,""],"\/RSVP\/":[1,0,""],"\/firstlook\/":[1,0,""],"\/overnight\/":[1,0,""],"\/hopehandbook\/":[1,0,""],"\/artcollection\/":[1,0,""],"\/elsavisit\/":[1,0,""],"\/govforumsponsor\/":[1,0,""],"\/ndnh\/":[1,0,""],"\/hope\/":[1,0,""],"\/program-sheet-MBA\/":[1,0,""],"\/program-sheet-FTMBA\/":[1,0,""],"\/visit2018\/":[1,0,""],"\/coffeeMOT\/":[1,1,""],"\/coffeeMENP\/":[1,1,""],"\/bluejay_trivia\/":[1,0,""],"\/elsa2018\/":[1,0,""],"\/alumniband\/":[1,0,""],"\/MENP-RSVP\/":[1,0,""],"\/studyaway\/":[1,0,""],"\/MENP-LIVE\/":[1,0,""],"\/rancic\/":[1,0,""],"\/MOT-LIVE\/":[1,1,""],"\/yearbooks\/":[1,1,""],"\/prospectsurvey\/":[1,0,""],"\/niebuhrcompetition\/":[1,0,""],"\/juniorXCTF\/":[1,0,""],"\/bluejaybash2019\/":[1,0,""],"\/academics\/registration-records\/program-reinstatement\/":[1,0,""],"https:\/\/www.elmhurst.edu\/admission\/first-year-students\/visit-us\/":[1,0,"https:\/\/connect.elmhurst.edu\/portal\/campus_visit"],"https:\/\/www.elmhurst.edu\/about\/policies-consumer-information\/title-ix\/non-discrimination-non-harassment-policy\/":[1,0,"\/wp-content\/uploads\/2018\/10\/Elmhurst-College-Non-Discrimination-and-Non-Harassment-Policy-2018-10-30.pdf"],"https:\/\/www.elmhurst.edu\/academics\/registration-records\/course-schedule\/":[1,0,"https:\/\/bluenet.elmhurst.edu\/WALive\/WALive?CONSTITUENCY=WBAP&TYPE=P&PID=ST-XWSE"],"https:\/\/www.elmhurst.edu\/academics\/ac-buehler-library\/":[1,0,"http:\/\/library.elmhurst.edu\/"],"https:\/\/www.elmhurst.edu\/admission\/transfer-adult-students\/visit-us\/":[1,0,"https:\/\/connect.elmhurst.edu\/portal\/transfer_visit"],"https:\/\/www.elmhurst.edu\/alumni\/giving\/planned-giving\/":[1,0,"https:\/\/elmhurst.giftplans.org\/"],"https:\/\/www.elmhurst.edu\/alumni\/giving\/matching-gifts\/":[1,0,"http:\/\/www.matchinggifts.com\/elmhurst\/"],"https:\/\/www.elmhurst.edu\/admission\/military-veteran-students\/visit-us\/":[1,0,"https:\/\/connect.elmhurst.edu\/portal\/transfer_visit"],"https:\/\/www.elmhurst.edu\/student-life\/bookstore\/":[1,1,"http:\/\/www.beckstextbooks.com\/store19\/Home.aspx"],"https:\/\/www.elmhurst.edu\/academics\/undergraduate\/student-support\/advising\/search-for-classes\/":[1,0,""],"https:\/\/www.elmhurst.edu\/admission\/apply-today\/":[1,0,"https:\/\/connect.elmhurst.edu\/apply\/"],"https:\/\/www.elmhurst.edu\/academics\/registration-records\/program-reinstatement__trashed\/":[1,1,"https:\/\/elmhurst.co1.qualtrics.com\/jfe\/form\/SV_4PcqQPE8Se9NTxj"],"https:\/\/www.elmhurst.edu\/landing\/":[0,1,""],"https:\/\/www.elmhurst.edu\/academics\/departments\/business\/programs\/full-time-mba\/elmhurst-mba-network\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-network\/"],"https:\/\/www.elmhurst.edu\/admitted-students\/alternative-sources-credit\/":[0,1,"\/admission\/transfer-adult-students\/alternative-sources-credit\/"],"https:\/\/www.elmhurst.edu\/admission\/transfer-adult-students\/first-generation-college-students\/":[0,1,"\/admission\/first-year-students\/first-generation-college-students\/"],"https:\/\/www.elmhurst.edu\/alumni\/alumni-association-board-of-directors\/":[0,1,"\/about\/leadership\/alumni-association-board-directors\/"],"https:\/\/www.elmhurst.edu\/academics\/career-education\/contact-us\/":[0,1,"\/academics\/academic-centers\/cpe\/contact-us\/"],"https:\/\/www.elmhurst.edu\/academics\/academic-centers\/cpe\/career-education\/":[0,1,"\/academics\/career-education\/"],"https:\/\/www.elmhurst.edu\/academics\/academic-centers\/cpe\/career-experiences\/":[0,1,"\/academics\/career-education\/internships\/"],"https:\/\/www.elmhurst.edu\/academics\/academic-centers\/cpe\/health-professions-advising\/":[0,1,"\/academics\/academic-centers\/health-professions-advising\/"],"https:\/\/www.elmhurst.edu\/academics\/academic-centers\/cpe\/pre-law-advising\/":[0,1,"\/academics\/undergraduate\/preprofessional-programs\/pre-law\/pre-law-advising\/"],"https:\/\/www.elmhurst.edu\/admission\/elsa\/request-information\/":[0,1,"\/academics\/elmhurst-learning-success-academy\/request-information\/"],"https:\/\/www.elmhurst.edu\/admission\/elsa\/visit-us\/":[0,1,"\/academics\/elmhurst-learning-success-academy\/visit-us\/"],"https:\/\/www.elmhurst.edu\/admission\/elsa\/":[0,1,"\/admission\/elsa\/admission-requirements\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/computer-science-information-systems\/programs\/m-s-computer-information-technology\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/computer-science-information-systems\/programs\/m-s-data-science\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/geography-gis\/programs\/ms-geographic-information-systems-gis\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/psychology\/programs\/ma-industrial-organizational-psychology\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/nursing\/programs\/masters-entry-nursing-practice\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/nursing\/programs\/ms-nursing\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/business\/programs\/ms-supply-chain-management\/mba-option\/":[0,1,"\/academics\/departments\/business\/programs\/mba\/mba-option\/"],"https:\/\/www.elmhurst.edu\/about\/special-events\/jazz-festival\/participant-information\/registration-form\/":[0,1,"\/about\/special-events\/jazz-festival\/participant-information\/"],"https:\/\/www.elmhurst.edu\/academics\/undergraduate\/student-support\/advising\/major-evaluation-forms\/2018-2019\/":[0,1,"\/academics\/undergraduate\/student-support\/advising\/major-evaluation-forms\/"],"https:\/\/www.elmhurst.edu\/admission\/first-year-students\/tuition-fees\/":[0,0,"\/admission\/financial-aid\/tuition-fees\/undergraduate"],"https:\/\/www.elmhurst.edu\/alumni\/make-gift-now\/":[0,0,"\/give"],"https:\/\/www.elmhurst.edu\/admission\/first-year-students\/financial-aid-scholarships\/":[0,0,"\/admission\/financial-aid\/"],"https:\/\/www.elmhurst.edu\/admission\/international-students\/tuition-and-fees\/":[0,0,"\/admission\/financial-aid\/tuition-fees\/"],"https:\/\/www.elmhurst.edu\/about\/community-outreach\/speech-language-hearing-clinic\/":[0,0,"\/academics\/departments\/communication-sciences-disorders\/speech-language-hearing-clinic\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/education\/programs\/m-ed-teacher-leadership\/faculty-staff\/":[0,0,"\/academics\/departments\/education\/faculty-staff\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/education\/programs\/m-s-ed-special-education\/faculty-and-staff\/":[0,0,"\/academics\/departments\/education\/faculty-staff\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/education\/programs\/secondary-education-major\/courses\/":[0,0,"\/academics\/departments\/education\/courses\/secondary-education\/"],"https:\/\/www.elmhurst.edu\/academics\/departments\/education\/programs\/secondary-education-major\/admission-requirements\/":[0,0,"\/academics\/departments\/education\/admission-requirements\/secondary-education\/"],"https:\/\/www.elmhurst.edu\/academics\/undergraduate\/student-support\/advising\/the-integrated-curriculum\/":[0,0,"\/academics\/undergraduate\/integrated-curriculum\/"],"https:\/\/www.elmhurst.edu\/admission\/elsa\/tuition-and-fees\/":[0,0,"\/admission\/financial-aid\/tuition-fees\/elsa-costs\/"],"https:\/\/www.elmhurst.edu\/about\/leadership\/strategic-plan\/mission-vision-values\/":[0,0,"\/about\/mission-vision-values\/"],"https:\/\/www.elmhurst.edu\/academics\/find-your-program\/":[0,0,""],"https:\/\/www.elmhurst.edu\/admission\/graduate-students\/tuition-and-fees\/":[0,0,""],"https:\/\/www.elmhurst.edu\/admission\/transfer-adult-students\/tuition-fees\/":[0,0,""],"https:\/\/www.elmhurst.edu\/admission\/military-veteran-students\/tuition-fees\/":[0,0,""],"https:\/\/www.elmhurst.edu\/admission\/transfer-adult-students\/financial-aid-scholarships\/":[0,0,""]},"siteURL":"https:\/\/www.elmhurst.edu","siteURLq":"https:\/\/www.elmhurst.edu"};
+  </script>
+  <script defer="" src="https://www.elmhurst.edu/wp-content/uploads/autoptimize/js/autoptimize_e76a34c3fc9b1efc7b68500c45bbdc52.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"bea36ca149","applicationID":"90218474","transactionName":"blIAMkdVDBdXUUxYV1cYIwVBXQ0KGUZdXEhVVhYDGFIXCFofT1hcTV8=","queueTime":0,"applicationTime":763,"atts":"QhUDRA9PHxk=","errorBeacon":"bam.nr-data.net","agent":""}
+  </script>
+ </body>
+</html>

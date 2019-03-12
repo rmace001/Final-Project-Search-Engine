@@ -1,0 +1,1122 @@
+http://ohelp.oregonstate.edu
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <link href="/favicon.ico" rel="shortcut icon"/>
+  <link href="/favicon.ico" rel="icon"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport">
+   <title>
+    O-HELP
+   </title>
+   <link href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" rel="stylesheet">
+    <link href="css/jquery-impromptu.min.css" rel="stylesheet">
+     <script src="//code.jquery.com/jquery-1.9.1.min.js">
+     </script>
+     <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js">
+     </script>
+     <script src="js/jquery-impromptu.min.js">
+     </script>
+     <!-- load the "claro" theme -->
+     <link href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css" media="screen" rel="stylesheet"/>
+     <link href="http://js.arcgis.com/3.7/js/esri/css/esri.css" rel="stylesheet" type="text/css"/>
+     <link href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css" rel="stylesheet"/>
+     <link href="css/map.css" media="screen and (min-device-width: 1025px) and (max-width: 3000px)" rel="stylesheet" type="text/css"/>
+     <link href="css/map1.css" media="screen and (min-device-width: 769px) and (max-width: 1024px)" rel="stylesheet" type="text/css"/>
+     <link href="css/mobile-device.css" media="screen and (min-device-width: 320px) and (max-device-width: 768px)" rel="stylesheet" type="text/css">
+      <!-- load the ArcGIS Script and map.js -->
+      <script src="http://js.arcgis.com/3.7/">
+      </script>
+      <script src="js/map.js">
+      </script>
+      <script src="PapaParse-4.1.0/papaparse.min.js">
+      </script>
+     </link>
+    </link>
+   </link>
+  </meta>
+ </head>
+ <!-- Setup the main page -->
+ <body class="claro" height="device-height" width="device-width">
+  <!-- Header -->
+  <div id="wrapper">
+   <a href="http://oregonstate.edu" id="OSULogo" target="_blank">
+    <img alt="OSU_Logo" height="60" src="http://communications.oregonstate.edu/sites/communications.oregonstate.edu/files/osu-primarylogo-2-compressor.jpg" width="150"/>
+   </a>
+   <a href="http://ohelp.oregonstate.edu" id="OHELPLogo" target="_blank">
+    <img alt="OHELP_Logo" height="40" src="images/OHELP_Logo_TP.png" width="140"/>
+   </a>
+   <div class="appHeader" id="appHeader1">
+    O-HELP Oregon Hazard Explorer for Lifelines Program
+    <br/>
+    <a "="" href="http://cascadia.oregonstate.edu/" style="text-decoration: none; color:white;" target="_blank">
+     Cascadia Lifeline Programs (CLiP)
+     <span id="appHeader2">
+     </span>
+    </a>
+   </div>
+   <!-- Main Map Buttons -->
+   <div id="map">
+    <div id="HomeButton">
+    </div>
+    <div class="header-basemaps" id="header-basemaps" style="cursor:pointer;" title="Change Basemaps">
+    </div>
+    <div class="header-trans" id="header-trans" style="cursor:pointer;" title="Change Layer Transparency">
+    </div>
+    <div class="header-report" id="header-report" style="cursor:pointer;" title="Hazard Report and Print Tools">
+    </div>
+    <div class="header-measure" id="header-measure" style="cursor:pointer;" title="Measurements Tools">
+    </div>
+    <div class="clearButton" id="clearButton" title="Clear All Layers form Map">
+    </div>
+    <div class="sponsorButton" id="sponsorButton" style="cursor:pointer;" title="Sponsors">
+    </div>
+    <!-- ADJUST TRANSPARENCY -->
+    <div class="slider-Transparency">
+     <label for="slider">
+      Transparency:
+     </label>
+     <input data-highlight="true" data-mini="true" id="sliderTrans" max="100" min="0" name="slider" type="range" value="63"/>
+    </div>
+    <!-- SELECT SCENARIO -->
+    <div class="slider-Scenario" title="Cascadia Subduction Zone EarthquakesScenarios: M8.1, M8.4, M8.7, M9.0">
+     <label for="sliderScenario">
+      <strong>
+       Earthquake Magnitude
+      </strong>
+     </label>
+     <input data-highlight="true" data-mini="true" id="sliderScenario" max="9.0" min="8.1" name="sliderScenario" step="0.3" type="range" value="9.0"/>
+    </div>
+    <!-- SELECT BASEMAPS -->
+    <div class="content-basemaps" id="content-basemaps" title="Esri Basemaps">
+     <a class="basemapDivs" data-role="button" id="basemapStreets" title="Esri Streets Basemap">
+     </a>
+     <a class="basemapDivs" data-role="button" id="basemapImagery" title="Esri Imagery Basemap">
+     </a>
+     <a class="basemapDivs" data-role="button" id="basemapTopo" title="Esri Topo Basemap">
+     </a>
+    </div>
+    <div class="content-report" id="content-report">
+     <fieldset data-role="controlgroup" data-type="horizontal">
+      <a data-role="button" href="#" id="measure-point" onclick="dojo.disconnect(maponClickHandler);
+                            draw_measure.activate(esri.toolbars.Draw.POINT);" title="Single point OHELP report">
+      </a>
+      <a data-role="button" href="#" id="measure-multipoint" onclick="dojo.disconnect(maponClickHandler);
+                            draw_measure.activate(esri.toolbars.Draw.MULTI_POINT);" title="Multipoint OHELP report">
+      </a>
+      <a data-role="button" href="#" id="measure-multipoint-csv" title="Multipoint OHELP report. Uplaod a CSV (Comma Separated Values) file of points with latitude and longitude.">
+      </a>
+     </fieldset>
+     <div id="uploadFile" style="uploadFile">
+      <form action="file-upload-1.htm" enctype="multipart/form-data" method="post" name="submit">
+       <input id="fileField" name="fileField" type="file"/>
+      </form>
+      <input id="submit" name="submit" onclick="readFileCSV();" type="button" value="Submit"/>
+      <p>
+       * An acceptable CSV file format is comma-delimited with
+       <em>
+        <b>
+         PID, Latitude, Longitude
+        </b>
+       </em>
+       fields!
+      </p>
+     </div>
+     <div id="downloadFile" style="uploadFile">
+     </div>
+     <div id="printButton" title="Print Current Display">
+     </div>
+    </div>
+    <div class="content-measure" id="content-measure">
+     <fieldset data-role="controlgroup" data-type="horizontal">
+      <a data-role="button" href="#" id="measure-line" onclick="dojo.disconnect(maponClickHandler);
+                            draw_measure.activate(esri.toolbars.Draw.POLYLINE);">
+      </a>
+      <a data-role="button" href="#" id="measure-polygon" onclick="dojo.disconnect(maponClickHandler);
+                            draw_measure.activate(esri.toolbars.Draw.POLYGON);">
+      </a>
+      <a data-role="button" href="#" id="clear-graphics" onclick="dojo.disconnect(maponClickHandler);
+                            map.graphics.clear();">
+      </a>
+     </fieldset>
+     <div id="measure_output">
+      <div id="measure_value">
+      </div>
+      <div id="measure_units">
+       <select data-mini="true" id="measure_units_options" name="measure_units_options">
+        <option value="LongLat">
+         Long, Lat
+        </option>
+       </select>
+      </div>
+     </div>
+    </div>
+    <div class="content-sponsor" id="content-sponsor">
+     <img src="images/Logo/members.gif"/>
+    </div>
+   </div>
+   <input id="searchBox" name="searchBox" onkeydown="perform_search(event)" placeholder="Address or Lat, Long" type="search" value=""/>
+   <div class="read-me" id="read-me" title="User Manual">
+    <a href="User_Manual_V7_20180625.pdf" target="_blank">
+     <img src="images/help-icon5.png"/>
+    </a>
+   </div>
+   <div class="read-me" id="tool-rep" title="O-HELP Tool Repository">
+    <a href="http://geotech.forestry.oregonstate.edu/OHELP/o-help_tools.html" target="_blank">
+     <img src="images/tool_rep-icon-01.png"/>
+    </a>
+   </div>
+   <div class="read-me" id="movie-rep" title="Video Tutorial">
+    <a href="https://media.oregonstate.edu/media/t/0_zgjlxtkp" target="_blank">
+     <img src="images/movie-icon-01.png"/>
+    </a>
+   </div>
+   <div class="appFooter" id="appFooter1">
+   </div>
+   <a href="https://www.portlandgeneral.com/" id="PGELogo" target="_blank">
+    <img alt="PGE_Logo" height="60" src="images/Logo/PGE_logo.png" width="90"/>
+   </a>
+   <a href="https://www.bpa.gov/Pages/home.aspx" id="BPALogo" target="_blank">
+    <img alt="BPA_Logo" height="80" src="images/Logo/BPA_logo.png" width="90"/>
+   </a>
+   <a href="http://www.oregon.gov/ODOT/Pages/index.aspx" id="ODOTLogo" target="_blank">
+    <img alt="ODOT_Logo" height="40" src="images/Logo/ODOT_logo.png" width="90"/>
+   </a>
+   <a href="https://www.nwnatural.com/" id="NWLogo" target="_blank">
+    <img alt="NW_Logo" height="40" src="images/Logo/nwnatural_logo.png" width="90"/>
+   </a>
+   <a href="http://www2.portofportland.com/" id="PortlandLogo" target="_blank">
+    <img alt="Portland_Logo" height="50" src="images/Logo/port_logo.png" width="130"/>
+   </a>
+   <a href="http://www.eweb.org/" id="EWEBLogo" target="_blank">
+    <img alt="EWEB_Logo" height="40" src="images/Logo/EWEB_logo.png" width="90"/>
+   </a>
+   <a href="https://www.portlandoregon.gov/water/" id="PortlandWaterLogo" target="_blank">
+    <img alt="Portlandwater_Logo" height="80" src="images/Logo/portlandwater_logo.png" width="90"/>
+   </a>
+   <a href="https://www.tvwd.org/" id="tualatinLogo" target="_blank">
+    <img alt="tualatin_Logo" height="50" src="images/Logo/tualatin_logo.png" width="120"/>
+   </a>
+   <div class="header-GeneralMaps" id="header-GeneralMaps" style="cursor:pointer;" title="General Site Inforamation Tab">
+    <img src="images/General.png"/>
+   </div>
+   <div class="header-CSZMaps" id="header-CSZMaps" style="cursor:pointer;" title="Cascadia Subduction Zone (CSZ) Multi-Scenario Tab">
+    <img src="images/CSZ90.png"/>
+   </div>
+   <div class="header-ProbMaps" id="header-ProbMaps" style="cursor:pointer;" title="Probabilistic Hazards Tab ">
+    <img src="images/PE.png"/>
+   </div>
+   <div class="content-GeneralMaps" id="content-GeneralMaps">
+    <div data-content-theme="d" data-role="collapsible-set" data-theme="c">
+     <div data-role="collapsible">
+      <h3>
+       Elevation Model
+      </h3>
+      <input class="radio-layers" id="GEN_05" name="radio-layers" type="radio" value="on"/>
+      <label for="GEN_05">
+       30m Resolution
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_30mresolution" id="info_30mresolution">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_30mresolution" id="legend_30mresolution">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_30mresolution" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a hybrid elevation model which is compiled from 10 meter and 30 meter DEMs. Lidar data from the Oregon Lidar Consortium was downsampled.  Data from the USGS National Elevation Dataset were used in the remaining gaps where lidar data were not available.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_30mresolution" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_30mresolution">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Geology
+      </h3>
+      <input class="radio-layers" id="GEN_13" name="radio-layers" type="radio" value="on"/>
+      <label for="GEN_13">
+       Site Geology
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_surficialgeology" id="info_surficialgeology">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_surficialgeology" id="legend_surficialgeology">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_surficialgeology" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a complete, digitally compiled, general geology file with a vector polygon format from the Oregon Geologic Data Compilation by DOGAMI.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_surficialgeology" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_surficialgeology">
+       </div>
+      </div>
+      <input class="radio-layers" id="GEN_07" name="radio-layers" type="radio" value="off"/>
+      <label for="GEN_07">
+       Quaternary Faults
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_faults" id="info_faults">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_faults" id="legend_faults">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_faults" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a compilation of quaternary faults within the last 1,600,000 years. The source of this file is from USGS (USGS, 2006) website in a vector polyline structure.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_faults" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_faults">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Site Class
+      </h3>
+      <input class="radio-layers" id="GEN_01" name="radio-layers" type="radio" value="on"/>
+      <label for="GEN_01">
+       NEHRP
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_nehrp" id="info_nehrp">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_nehrp" id="legend_nehrp">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_nehrp" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        National earthquake hazard reduction program which depicts the site class based on the site soil properties and shear wave velocity in accordance with geotechnical data.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_nehrp" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_nehrp">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       SLIDO Database - V3
+      </h3>
+      <input class="radio-layers" id="slido3" name="radio-layers" type="radio" value="other"/>
+      <label for="slido3">
+       Landslide Polygons
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_polygon" id="info_polygon">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_polygon" id="legend_polygon">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_polygon" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a statewide landslide information database for Oregon a product by The Department of Oregon Geology and Mineral Industries (DOGAMI). In this website we are streaming this files from their server and present them on the interactive map. These are polygon feature datasets representing the landslide deposits and scarps along with scarp flanks.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_polygon" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_polygon">
+       </div>
+      </div>
+      <input class="radio-layers" id="slido3points" name="radio-layers" type="radio" value="other"/>
+      <label for="slido3points">
+       Landslide Points
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_points" id="info_points">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_points" id="legend_points">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_points" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a statewide landslide information database for Oregon a product by The Department of Oregon Geology and Mineral Industries (DOGAMI). In this website we are streaming this files from their server and present them on the interactive map.Historic landslides which previously occurred in Oregon are compiled in a feature dataset as these points.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_points" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_points">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Transportation
+      </h3>
+      <input class="radio-layers" id="TRA_00" name="radio-layers" type="radio" value="other"/>
+      <label for="TRA_00">
+       Base Condition
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_TRA0" id="info_TRA0">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_TRA0" id="legend_TRA0">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_TRA0" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This accessibility map presents the travel time from each zone to Portland International Airport when the network is intact. The afternoon peak traffic condition (4pm-5pm) is adopted for simulation in VISUM.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_TRA0" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_TRA">
+       </div>
+      </div>
+      <input class="radio-layers" id="TRA_01" name="radio-layers" type="radio" value="other"/>
+      <label for="TRA_01">
+       Bridge Failure Condition
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_TRA1" id="info_TRA1">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_TRA1" id="legend_TRA1">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_TRA1" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This accessibility map presents the travel time from each zone to Portland International Airport when the network is disrupted, specifically, the eight bridges over the Willamette Rive near Portland downtown are set to be failed. The afternoon peak traffic condition (4pm-5pm) is adopted for simulation in VISUM.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_TRA1" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_TRA">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Drillhole Database
+      </h3>
+      <input class="radio-layers" id="GEN_15" name="radio-layers" type="radio" value="other"/>
+      <label for="GEN_15">
+       PDX Boreholes
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_bh" id="info_bh">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_bh" id="legend_bh">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_bh" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This feature class contains actual and "pseudo" drillholes used to create 3D geologic and geophysical models for the 2013 Portland NEHRP project. Drillhole points were digitized from maps or coordinates in drilling reports for geotechnical or other purposes (e.g. water wells, hydrocarbon exploration, etc). The drillhole feature class participates in two one-to-many relationship classes with tables of downhole geologic interpretations (PDX_NEHRP_interpretations) and shear-wave velocity measurements (PDX_NEHRP_Vs) using the key field "LOG_ID_concatenated".  It is provided by department of Oregon geology and mineral industry (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_bh" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_bh">
+       </div>
+      </div>
+      <input class="list_item" id="layer2CheckBox" name="check-layers" type="checkbox" value="18"/>
+      <label for="GEN_18">
+       CPT
+      </label>
+      <input class="list_item" id="layer3CheckBox" name="check-layers" type="checkbox" value="19"/>
+      <label for="GEN_19">
+       SPT
+      </label>
+      <input class="list_item" id="layer4CheckBox" name="check-layers" type="checkbox" value="20"/>
+      <label for="GEN_20">
+       Shearwave Tests
+      </label>
+      <input class="radio-layers" id="BODO_0" name="radio-layers" type="radio" value="25"/>
+      <label for="BODO_0">
+       BODO
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_bodo" id="info_bodo">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_bodo" id="legend_bodo">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_bodo" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is an experimental layer of the Borehole Database of Oregon (BODO). The information is auto extracted from pdfs using OCR technology.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_bodo" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_bodo">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Bridges and Highways
+      </h3>
+      <input class="list_item" id="layer0CheckBox" name="check-layers" type="checkbox" value="16"/>
+      <label for="GEN_16">
+       Bridges
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_bridges" id="info_bridges">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_bridges" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a complete database of all bridges in the state of Oregon provided by the Oregon Geospatial Data Enterprise Spatial Data library.
+       </p>
+      </div>
+      <input class="list_item" id="layer1CheckBox" name="check-layers" type="checkbox" value="17"/>
+      <label for="GEN_17">
+       Highway Network
+      </label>
+      <a class="ui-btn ui-btn-inline ui-corner-all ui-shadow" data-rel="popup" href="#infocontent_highway" id="info_highway">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_highway" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a compilation of all ODOT highway networks.
+       </p>
+      </div>
+      <!--<input type="checkbox" name="check-layers" class="list_item" id="layer5CheckBox" value="21">
+                    <label for="hs">hillshade</label>  -->
+     </div>
+    </div>
+   </div>
+   <div class="content-CSZMaps" id="content-CSZMaps">
+    <div data-content-theme="d" data-role="collapsible-set" data-theme="c">
+     <div data-role="collapsible">
+      <h3>
+       Ground Motion
+      </h3>
+      <input class="radio-layers" id="0" name="radio-layers" type="radio" value="on"/>
+      <label for="0">
+       Modified Mercalli
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_modifiedmercalli" id="info_modifiedmercalli">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_modifiedmercalli" id="legend_modifiedmercalli">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_modifiedmercalli" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Using developed regression relationships between peak ground acceleration and Modified Mercalli intensity from Wald et al (1999), this continuous raster map is generated to give the users information about how strong the earthquake will be felt.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_modifiedmercalli" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_modifiedmercalli">
+       </div>
+      </div>
+      <input class="radio-layers" id="1" name="radio-layers" type="radio" value="on"/>
+      <label for="1">
+       Peak Ground Acceleration
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_peakgroundacceleration" id="info_peakgroundacceleration">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_peakgroundacceleration" id="legend_peakgroundacceleration">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_peakgroundacceleration" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses bedrock PGA values from the model developed by USGS for a specific secnario of Cascadia subduction earthquake ground shaking in the Pacific Northwest (http://earthquake.usgs.gov/eqcenter/shakemap/global/shake/Casc9.0_expanded_se/) combined with a new map of NEHRP site class for Oregon (Madin and Burns 2013) and uses the soil factor relationships of Boore and Atkinson (2008) to calculate site-dependent PGA. The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_peakgroundacceleration" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_peakgroundacceleration">
+       </div>
+      </div>
+      <input class="radio-layers" id="2" name="radio-layers" type="radio" value="on"/>
+      <label for="2">
+       Peak Ground Velocity
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_peakgroundvelocity" id="info_peakgroundvelocity">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_peakgroundvelocity" id="legend_peakgroundvelocity">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_peakgroundvelocity" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses bedrock one-second spectral amplification (SA01) values from the model developed by USGS for a specific secnario of Cascadia subduction earthquake ground shaking in the Pacific Northwest (http://earthquake.usgs.gov/eqcenter/shakemap/global/shake/Casc9.0_expanded_se/) combined with a new map of NEHRP site class for Oregon (Madin and Burns 2013) and uses the soil factor relationships of Boore and Atkinson (2008) to calculate site-dependent SA01. The SA01 values are then converted into PGV values. The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_peakgroundvelocity" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_peakgroundvelocity">
+       </div>
+      </div>
+      <input class="radio-layers" id="3" name="radio-layers" type="radio" value="on"/>
+      <label for="3">
+       Short period Spectral response
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_spspectralresponse" id="info_spspectralresponse">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_spspectralresponse" id="legend_spspectralresponse">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_spspectralresponse" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses bedrock 0.3 second spectral amplification (SA0p3) values from the model developed by USGS for a specific secnario of Cascadia subduction earthquake ground shaking in the Pacific Northwest (http://earthquake.usgs.gov/eqcenter/shakemap/global/shake/Casc9.0_expanded_se/) combined with a new map of NEHRP site class for Oregon (Madin and Burns 2013) and uses the soil factor relationships of Boore and Atkinson (2008) to calculate site-dependent SA0p3. The SA0p3 values are then converted into PGV values. The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_spspectralresponse" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_spspectralresponse">
+       </div>
+      </div>
+      <input class="radio-layers" id="4" name="radio-layers" type="radio" value="on"/>
+      <label for="4">
+       One second Spectral response
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_osspectralresponse" id="info_osspectralresponse">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_osspectralresponse" id="legend_osspectralresponse">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_osspectralresponse" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses bedrock one-second spectral acceleration (SA01) values from the model developed by USGS for  a specific secnario of Cascadia subduction earthquake ground shaking in the Pacific Northwest (http://earthquake.usgs.gov/eqcenter/shakemap/global/shake/Casc9.0_expanded_se/) combined with a new map of NEHRP site class for Oregon (Madin and Burns 2013) and uses the soil factor relationships of Boore and Atkinson (2008) to calculate site-dependent SA01., The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_osspectralresponse" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_osspectralresponse">
+       </div>
+      </div>
+      <!-- <input type="radio" name="radio-layers" class="radio-layers" id="lptransitionperiod" value="on">
+                    <label for="lptransitionperiod">Long period Transition period</label>
+                    <a href="#infocontent_lptransitionperiod" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="info_lptransitionperiod"></a>
+
+                    <div data-role="popup" id="infocontent_lptransitionperiod" class="ui-content" style="max-width:280px" data-position-to="window">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                    <p>Under development</p>
+                    </div> -->
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Landslide
+      </h3>
+      <input class="radio-layers" id="5" name="radio-layers" type="radio" value="on"/>
+      <label for="5">
+       Landslide triggering probability
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_lsprobab" id="info_lsprobab">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_lsprobab" id="legend_lsprobab">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_lsprobab" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses the methods of section 4.2.2.2 of the HAZUS-MH MR4 (FEMA, 2011 in references) to create a new coseismic landslide probability map for Oregon. The map uses a new landslide susceptibility map and a new map of site peak ground acceleration from Madin and Burns (2013, in references) as input to the model. The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013. Please note that all the probabilities in this dataset is scaled to 30 percentage. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_lsprobab" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_lsprobab">
+       </div>
+      </div>
+      <input class="radio-layers" id="6" name="radio-layers" type="radio" value="on"/>
+      <label for="6">
+       Landslide Displacement
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_landslidedisp" id="info_landslidedisp">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_landslidedisp" id="legend_landslidedisp">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_landslidedisp" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses the methods of section 4.2.2.2 of the HAZUS-MH MR4 (FEMA, 2011 in references) to create a new coseismic landslide permanent ground deformation (PGD) map for Oregon. The map uses a new landslide susceptibility map and a new map of site peak ground acceleration from Madin and Burns (2013, in references) as input to the model. The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013.  Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_landslidedisp" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslidedisp">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Liquefaction
+      </h3>
+      <input class="radio-layers" id="7" name="radio-layers" type="radio" value="other"/>
+      <label for="7">
+       Liquefaction triggering probability
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_lqprobab" id="info_lqprobab">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_lqprobab" id="legend_lqprobab">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_lqprobab" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses the methods of section 4.2.2.1 of the HAZUS-MH MR4 (FEMA, 2011 in references) to create a new coseismic liquefaction probability map for Oregon. The map uses a new liquefaction susceptibility map and a new map of site peak ground acceleration from Madin and Burns (2013, in references) as input to the model. The methods and data used to make this map are described in detail in : Madin, I.P., and Burns, W.J., 2013. Please note that all the probabilities in this dataset are scaled to 30 percentage. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_lqprobab" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_lqprobab">
+       </div>
+      </div>
+      <input class="radio-layers" id="8" name="radio-layers" type="radio" value="off"/>
+      <label for="8">
+       Lateral Spreading
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_hzdp" id="info_hzdp">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_hzdp" id="legend_hzdp">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_hzdp" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This map uses the methods of section 4.2.2.1 of the HAZUS-MH MR4 (FEMA, 2011 in references) to create a new coseismic liquefaction lateral spread permanent ground deformation (PGD) map for Oregon. The map uses a new liquefaction susceptibility map and a new map of site peak ground acceleration from Madin and Burns (2013, in references) as input to the model. The methods and data used to make this map are described in detail in: Madin, I.P., and Burns, W.J., 2013. Published in a open file report (OSSPAC,2013) by Oregon Department of Geology and Mineral Industries (DOGAMI).
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_hzdp" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_hzdp">
+       </div>
+      </div>
+      <!--<input type="radio" name="radio-layers" class="radio-layers" id="12">
+                    <label for="12">Lateral spreading displacement</label>
+                    <a href="#infocontent_latdp" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="info_latdp"></a>
+
+                    <div data-role="popup" id="infocontent_latdp" class="ui-content" style="max-width:280px" data-position-to="window">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                    <p>Under development</p>
+                    </div>-->
+     </div>
+     <!-- <div data-role="collapsible">
+                    <h3>Bridge Damage Assessment</h3>
+                    <input type="radio" name="radio-layers" class="radio-layers" id="9" value="other">
+                    <label for="9">Using HAZUS-MH Fragility Function</label>
+                    <a href="#infocontent_hazus" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="info_hazus"></a>
+                    <a href="#legendcontent_hazus" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="legend_hazus"></a>
+
+                    <div data-role="popup" id="infocontent_hazus" class="ui-content" style="max-width:280px" data-position-to="window">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <p>
+                           Bridge damage map for the selected Cascadia subduction zone earthquake scenario using HAZUS-MH fragility functions.
+                        </p>
+                    </div>
+                    <div data-role="popup" id="legendcontent_hazus" class="ui-content" style="max-width:280px" data-position-to="window">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <div id="legendimage_hazus"></div>
+                    </div>
+
+                    <input type="radio" name="radio-layers" class="radio-layers" id="10" value="off">
+                    <label for="10">Using EQ+LS+LQ Fragility Function</label>
+                    <a href="#infocontent_hazus2" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="info_hazus2"></a>
+                    <a href="#legendcontent_hazus2" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="legend_hazus2"></a>
+
+                    <div data-role="popup" id="infocontent_hazus2" class="ui-content" style="max-width:280px" data-position-to="window">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <p>
+                            Bridge damage map for the selected Cascadia subduction zone earthquake scenario using earthquake ground shaking + landslide + liquefaction fragility functions.
+                        </p>
+                    </div>
+                    <div data-role="popup" id="legendcontent_hazus2" class="ui-content" style="max-width:280px" data-position-to="window">
+                        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <div id="legendimage_hazus2"></div>
+                    </div>
+
+                </div>
+                
+                
+                -->
+     <div data-role="collapsible" id="radio-fault">
+      <h3>
+       Fault Rupture
+      </h3>
+      <input class="radio-layers" id="FLT_00" name="radio-layers" type="radio" value="other"/>
+      <label for="FLT_00">
+       Extent
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_Ext" id="info_Ext">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_Ext" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is the extent of fault rupture corresponding to selected Cascadia earthquake scenario.
+       </p>
+      </div>
+     </div>
+     <div data-role="collapsible" id="radio-subsidence">
+      <h3>
+       Subsidence
+      </h3>
+      <input class="radio-layers" id="11" name="radio-layers" type="radio" value="other"/>
+      <label for="11">
+       Coastal Coseismic Subsidence
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_sbmg" id="info_sbmg">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_sbmg" id="legend_sbmg">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_sbmg" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This is a parameter which depicts the land level change in a Cascadia subduction earthquake event.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_sbmg" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_sbmg">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible" id="radio-tsunami">
+      <h3>
+       Tsunami
+      </h3>
+      <input class="radio-layers" id="12" name="radio-layers" type="radio" value="on"/>
+      <label for="12">
+       Anticipated inundation area
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_inundationarea" id="info_inundationarea">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_inundationarea" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        This dataset is shapefile representing the areas which will be inundated in a Large (L1) tsunami scenario for Oregon coast. Please see the relevant text report for more details.
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="content-ProbMaps" id="content-ProbMaps">
+    <div data-content-theme="d" data-role="collapsible-set" data-theme="c">
+     <div data-role="collapsible">
+      <h3>
+       Ground Motion
+      </h3>
+      <input class="radio-layers" id="PRB_00" name="radio-layers" type="radio" value="on"/>
+      <label for="PRB_00">
+       2% in 50 Years PGA
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_peakgroundacceleration2p50" id="info_peakgroundacceleration2p50">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_peakgroundacceleration2p50" id="legend_peakgroundacceleration2p50">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_peakgroundacceleration2p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Probabilistic PGA from USGS.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_peakgroundacceleration2p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_peakgroundacceleration">
+       </div>
+      </div>
+      <input class="radio-layers" id="PRB_01" name="radio-layers" type="radio" value="on"/>
+      <label for="PRB_01">
+       10% in 50 Years PGA
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_peakgroundacceleration10p50" id="info_peakgroundacceleration10p50">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_peakgroundacceleration10p50" id="legend_peakgroundacceleration10p50">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_peakgroundacceleration10p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Probabilistic PGA from USGS.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_peakgroundacceleration10p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_peakgroundacceleration">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Landslide Hazard Map
+      </h3>
+      <input class="radio-layers" id="PRB_02" name="radio-layers" type="radio" value="on"/>
+      <label for="PRB_02">
+       2%in50 Landslide Disp.
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_ls2p50" id="info_ls2p50">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_ls2p50" id="legend_ls2p50">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_ls2p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Landslide displacement value corresponding to a 2% in 50 years event.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_ls2p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslidedispM">
+       </div>
+      </div>
+      <input class="radio-layers" id="PRB_03" name="radio-layers" type="radio" value="on"/>
+      <label for="PRB_03">
+       10%in50 Landslide Disp.
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_ls10p50" id="info_ls10p50">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_ls10p50" id="legend_ls10p50">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_ls10p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Landslide displacement value corresponding to a 10% in 50 years event.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_ls10p50" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslidedispM">
+       </div>
+      </div>
+     </div>
+     <div data-role="collapsible">
+      <h3>
+       Landslide Susceptibility Map
+      </h3>
+      <input class="radio-layers" id="GAL_00" name="radio-layers" type="radio" value="on"/>
+      <label for="GAL_00">
+       1_ek00_m025_cr0
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_ls_susep1" id="info_ls_susep1">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_ls_susep1" id="legend_ls_susep1">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_ls_susep1" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Susceptibility map for the Gales Creek watershed showing a probability of failure corresponding to a k
+        <sub>
+         h
+        </sub>
+        =0, m=0.25 and c
+        <sub>
+         r
+        </sub>
+        =0 scenario.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_ls_susep1" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslideSuscep">
+       </div>
+      </div>
+      <input class="radio-layers" id="GAL_01" name="radio-layers" type="radio" value="on"/>
+      <label for="GAL_01">
+       2_ek00_m025_cr8
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_ls_susep2" id="info_ls_susep2">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_ls_susep2" id="legend_ls_susep2">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_ls_susep2" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Susceptibility map for the Gales Creek watershed showing a probability of failure corresponding to a k
+        <sub>
+         h
+        </sub>
+        =0, m=0.25 and c
+        <sub>
+         r
+        </sub>
+        =8.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_ls_susep2" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslideSuscep">
+       </div>
+      </div>
+      <input class="radio-layers" id="GAL_02" name="radio-layers" type="radio" value="on"/>
+      <label for="GAL_02">
+       3_ek01_m025_cr8
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_ls_susep3" id="info_ls_susep3">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_ls_susep3" id="legend_ls_susep3">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_ls_susep3" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Susceptibility map for the Gales Creek watershed showing a probability of failure corresponding to a k
+        <sub>
+         h
+        </sub>
+        =0.1, m=0.25 and c
+        <sub>
+         r
+        </sub>
+        =8.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_ls_susep3" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslideSuscep">
+       </div>
+      </div>
+      <input class="radio-layers" id="GAL_03" name="radio-layers" type="radio" value="on"/>
+      <label for="GAL_03">
+       4_ek03_m025_cr8
+      </label>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#infocontent_ls_susep4" id="info_ls_susep4">
+      </a>
+      <a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" href="#legendcontent_ls_susep4" id="legend_ls_susep4">
+      </a>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="infocontent_ls_susep4" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <p>
+        Susceptibility map for the Gales Creek watershed showing a probability of failure corresponding to a k
+        <sub>
+         h
+        </sub>
+        =0.3, m=0.25 and c
+        <sub>
+         r
+        </sub>
+        =8.
+       </p>
+      </div>
+      <div class="ui-content" data-position-to="window" data-role="popup" id="legendcontent_ls_susep4" style="max-width:280px">
+       <a class="ui-btn-right" data-icon="delete" data-iconpos="notext" data-rel="back" data-role="button" data-theme="a" href="#">
+        Close
+       </a>
+       <div id="legendimage_landslideSuscep">
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-78016239-1', 'auto');
+		  ga('send', 'pageview');
+   </script>
+   <!--<div id="seismic_hazards_label"> Seismic hazard for M9.0 CSZ earthquake </div>-->
+   <!--<div style="position:absolute; right:20px; top:10px; z-Index:999;">
+        <div data-dojo-type="dijit/TitlePane"
+        data-dojo-props="title:'Switch Basemap', closable:false,  open:false">
+        <div data-dojo-type="dijit/layout/ContentPane" style="width:380px; height:180px; overflow:auto;">
+        <div id="basemapGallery" ></div></div>
+        </div>
+        </div>
+    
+        </div>-->
+  </div>
+ </body>
+</html>

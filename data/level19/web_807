@@ -1,0 +1,320 @@
+https://parking.westga.edu/
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   UWG Parking
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+   <link href="https://parking.westga.edu/resources/index.php?cmd=get_css&amp;css=common.css&amp;version=1a78177a6b3b8abee3ce9357e0ef843b" rel="stylesheet" type="text/css"/>
+   <link href="https://parking.westga.edu/resources/index.php?cmd=get_css&amp;css=home.css&amp;version=1a78177a6b3b8abee3ce9357e0ef843b" rel="stylesheet" type="text/css"/>
+   <style type="text/css">
+   </style>
+   <script type="text/javascript">
+    var URL_ROOT = 'https://parking.westga.edu/';
+    function defer(method) {
+if (window.jQuery) {
+method();
+} else {
+setTimeout(function() { defer(method) }, 50);
+}
+
+}
+
+defer(function() {
+user.if_logged_in(function () {
+$("#news_feed").hide();
+console.log('loaded');
+});
+});
+   </script>
+   <link href="https://parking.westga.edu/resources/index.php?cmd=get_favicon" rel="shortcut icon" type="image/png">
+   </link>
+  </meta>
+ </head>
+ <body>
+  <div class="mini" id="header">
+  </div>
+  <div data-show_button_at="90" id="countdown_container">
+  </div>
+  <script id="countdown_template" type="text/template">
+   <% if (num_locks > 0) { %>        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <% if (isoDateToMilliseconds(expire_time) > Date.now()) { %>                        <span id="countdown_time"></span>
+                        <span id="countdown_description">remaining to complete order</span>
+                    <% } else { %>                        Order Time Expired
+                    <% } %>                                            <button class="extend_btn btn btn-default btn-xs">I need more time</button>
+                                    </div>
+            </div>
+        </div>
+    <% } %>
+  </script>
+  <div class="modal fade " id="items_removed_from_cart_by_lock_dialog" role="dialog" tabindex="-1">
+   <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     <div class="modal-header">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+       <span aria-hidden="true">
+        ×
+       </span>
+      </button>
+      <h4 class="modal-title">
+       Items removed from cart
+      </h4>
+     </div>
+     <div class="modal-body">
+      Item(s) have become unavailable and have been removed from your cart
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-default close-button" data-dismiss="modal" type="button">
+       Close
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script id="header_template" type="text/template">
+   <div id="upper_header">
+        <div class="container">
+            <div class="row">
+                <div id="upper_left_header" class="col-xs-7 col-sm-8">
+                    <a href='https://parking.westga.edu/'>
+                        <div class="logo_container two_line_header">
+    <img id="site_logo" src="https://parking.westga.edu/resources/index.php?cmd=get_site_logo" alt="Site Logo"/>
+    <div id="logo_text" >
+        <div class="line_1">Parking and</div>
+        <div class="line_2">Transportation</div>
+    </div>
+</div>
+                    </a>
+                </div>
+                <div id="upper_right_header" class="col-xs-5 col-sm-4 text-right">
+                    <a id="shopping_cart_summary" href="https://parking.westga.edu/cart/index.php" class="<% if(cart.num_cart_items > 0) { %>text-primary<% } %>" aria-label="Shopping Cart">
+                        <% if (cart.num_cart_items > 0) { %>                            <span id="num_cart_items" class="badge"><%= cart.num_cart_items %></span>
+                        <% } %>                        <div class=" icon icon-black"><div class=" sprite-image icon-shopping_cart" aria-label="icon-shopping_cart"></div></div>
+                        <% if (cart.num_cart_items > 0) { %>                            <span id="cart_total"><%= formatDecimal128Currency(cart.total) %></span>
+                        <% } %>                    </a>
+                                            <% if (user.logged_in) { %>                            <% if (user.can_logout) { %>                                <button type="button" id="login_logout_link" data-cmd="logout">Logout</button>
+                            <% } %>                        <% } else { %>                            <button type="button" id="login_logout_link" data-cmd="login">Login</button>
+                        <% } %>                                    </div>
+            </div>
+        </div>
+    </div>
+    <div id="lower_header">
+                <div class="container">
+            <div class="row">
+                <% if (user.logged_in) { %>                    <div class="col-xs-1">
+                        <span id="mobile_menu" class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                    <div id="logged_in_as" class="col-xs-11 text-right">
+                        
+                            <% if (account.p_contact != null && ((account.p_contact.first_name != null) || (account.p_contact.last_name != null))) { %>                                Logged in as <%- account.p_contact.first_name %> <%- account.p_contact.last_name %>                            <% } else if(account.account_number != null) { %>                                Logged in as account # <%- account.account_number %>                            <% } %>                        
+                    </div>
+                <% } %>            </div>
+        </div>
+    </div>
+  </script>
+  <div class="container" id="main_content_container">
+   <div class="row">
+    <div class="col-md-3" id="menu_placeholder">
+    </div>
+    <script id="menu_template" type="text/template">
+     <%        if (user.logged_in) {
+            $("#main_content").removeClass('col-md-12').addClass("col-md-9");
+    %>        <nav id="menu" class="navbar">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="<% if (url === URL_ROOT ) { %>active<% } %>" >
+                    <a href="https://parking.westga.edu/">
+                        <div class=" icon"><div class=" sprite-image icon-account" aria-label="icon-account"></div></div>
+                        <span>Account</span>
+                    </a>
+                </li>
+                                    <li role="presentation" class="<% if (url === URL_ROOT + 'vehicles/index.php' ) { %>active<% } %>" >
+                        <a href="https://parking.westga.edu/vehicles/index.php">
+                            <div class=" icon"><div class=" sprite-image icon-car" aria-label="icon-car"></div></div>
+                            <span>Vehicles</span>
+                            <% if (account_vehicles.length > 0) { %>                            <span class="badge"><%= account_vehicles.length %></span>
+                            <% } %>                        </a>
+                    </li>
+                                                    <li role="presentation" class="<% if (url === URL_ROOT + 'tickets/index.php' ) { %>active<% } %>" >
+                        <a href="https://parking.westga.edu/tickets/index.php">
+                            <div class=" icon"><div class=" sprite-image icon-ticket" aria-label="icon-ticket"></div></div>
+                            <span>Tickets</span>
+                            <% if (unpaid_account_tickets.tickets.length > 0) { %>                                <span class="badge"><%= unpaid_account_tickets.tickets.length %></span>
+                            <% } %>                        </a>
+                    </li>
+                                                    <li role="presentation" class="<% if (url === URL_ROOT + 'permits/index.php' ) { %>active<% } %>" >
+                        <a href="https://parking.westga.edu/permits/index.php">
+                            <div class=" icon"><div class=" sprite-image icon-permit" aria-label="icon-permit"></div></div>
+                            <span>Permits</span>
+                            <% if (active_account_permits.permits.length > 0) { %>                                <span class="badge"><%= active_account_permits.permits.length %></span>
+                            <% } %>                        </a>
+                    </li>
+                                                            </ul>
+        </nav>
+    <% } %>
+    </script>
+    <div class="col-md-12" id="main_content">
+     <div class="row">
+      <div id="home_screen">
+       <div class="col-xs-12 col-md-8">
+        <div class="shortcut_buttons_container " id="shortcut_buttons">
+        </div>
+        <script id="shortcut_buttons_template" type="text/template">
+         <div class="container">
+        <div class="row">
+                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && false) ||
+                                (!user.logged_in && true)) { %>                                <div id="ACCOUNT_VIEW" class="col-md-3 col-xs-6">
+                                    <a class="btn btn-default" href="https://parking.westga.edu/?cmd=view_account">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-account" aria-label="icon-account"></div></div>
+                                        <h4>View/Manage Account</h4>
+                                        <div class="small">View and manage your account</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                                                                                                
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="TICKET_LOOKUP" class="col-md-3 col-xs-6">
+                                    <a class="btn btn-default" href="https://parking.westga.edu/tickets/?cmd=search">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-search" aria-label="icon-search"></div></div>
+                                        <h4>Lookup Ticket</h4>
+                                        <div class="small">Search for a ticket</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="TICKET_APPEAL" class="col-md-3 col-xs-6">
+                                    <a class="btn btn-default" href="https://parking.westga.edu/tickets/?cmd=view_all_appeal_eligible">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-gavel" aria-label="icon-gavel"></div></div>
+                                        <h4>Appeal Ticket</h4>
+                                        <div class="small">File a request to appeal a ticket</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                    
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="PERMIT_REQUEST" class="col-md-3 col-xs-6">
+                                    <a class="btn btn-default" href="https://parking.westga.edu/permits/?cmd=new">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-permit" aria-label="icon-permit"></div></div>
+                                        <h4>Order Permits</h4>
+                                        <div class="small">Order a new permit</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+                                                                                                                                                                                                                                                                            
+
+                                                                                                                                                                                                                                                                            
+
+                                                                                                                                                            
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="5bf30bcf8a8d5" class="col-md-3 col-xs-6">
+                                    <a class="btn btn-default" href="https://apps.westga.edu/uwgnavigator/">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-wheel" aria-label="icon-wheel"></div></div>
+                                        <h4>UWG Campus Navigator</h4>
+                                        <div class="small">Bus Routes/Parking Lots</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                                                                                                            
+
+                                                    <% if ((user.logged_in && true) ||
+                                (!user.logged_in && true)) { %>                                <div id="5bf30b1f8b52f" class="col-md-3 col-xs-6">
+                                    <a class="btn btn-default" href="/index.php?cmd=view_footer_link&name=5bf30a88a63ef">
+                                        <div class=" icon icon-primary icon-48"><div class=" sprite-image icon-fee" aria-label="icon-fee"></div></div>
+                                        <h4>Ticket Payment Options</h4>
+                                        <div class="small">Ticket Payment Options</div>
+                                    </a>
+                                </div>
+                            <% } %>                                                                        
+        </div>
+    </div>
+        </script>
+       </div>
+       <div class="col-xs-12 col-md-4">
+        <div id="news_feed">
+         <div class="panel panel-default">
+          <div class="panel-body">
+           <a aria-label="Twitter Page" class="twitter-timeline" data-chrome="nofooter" href="https://twitter.com/UWGAuxServices">
+           </a>
+           <script async="" charset="utf-8" src="//platform.twitter.com/widgets.js">
+           </script>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="col-xs-12">
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="container" id="sub_content">
+  </div>
+  <script src="https://parking.westga.edu/resources/js/common.js?version=1a78177a6b3b8abee3ce9357e0ef843b">
+  </script>
+  <script src="https://parking.westga.edu/resources/js/home.js?version=1a78177a6b3b8abee3ce9357e0ef843b">
+  </script>
+  <footer class="footer">
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-sm-7">
+      <a href="https://parking.westga.edu/index.php?cmd=view_footer_link&amp;name=5bf30a88a63ef" target="_blank">
+       Payment Options
+      </a>
+     </div>
+     <div class="col-xs-12 col-sm-5 text-right">
+      <a href="http://aimsparking.com" id="copyright">
+       AIMS Web 9.0.10.1f ©2017 EDC Corporation
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <div id="form_validation_error_container">
+  </div>
+  <script id="form_validation_error_template" type="text/template">
+   <div id="form_validation_error" class="modal fade " tabindex="-1" role="dialog"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                            <div class="modal-header">
+                                        <h4 class="modal-title">Invalid data detected</h4>
+                </div>
+                                        <div class="modal-body">
+                    An error was found in your form, please ensure all required fields are populated before continuing.
+                </div>
+                                </div>
+    </div>
+</div>
+  </script>
+  <div id="please_wait_dialog_container">
+  </div>
+  <script id="please_wait_dialog_template" type="text/template">
+   <div id="<%= uniqid() %>" class="modal fade " tabindex="-1" role="dialog"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                            <div class="modal-header">
+                                        <h4 class="modal-title"><%if (isset(title)) { %><%- title %><% } else { %>Please Wait...<% } %></h4>
+                </div>
+                                        <div class="modal-body">
+                            <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-primary active" role="progressbar" style="width:100%"></div>
+        </div>
+    
+                </div>
+                                </div>
+    </div>
+</div>
+  </script>
+ </body>
+</html>

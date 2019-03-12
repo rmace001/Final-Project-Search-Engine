@@ -1,0 +1,210 @@
+https://dvlf.uchicago.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <base href="/"/>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta content="" name="description"/>
+  <meta content="" name="author"/>
+  <link href="/dvlf.ico" rel="shortcut icon" type="image/x-icon"/>
+  <title>
+   DVLF
+  </title>
+  <link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700,700i" rel="stylesheet"/>
+  <link href="static/css/dvlf-1550792110.css" rel="stylesheet"/>
+  <script>
+   (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-21151868-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+ </head>
+ <body ng-app="DVLF" ng-cloak="" ng-controller="MainController as Main">
+  <nav class="navbar">
+   <div class="container">
+    <div class="navbar-header">
+     <a class="navbar-brand" href="/" style="font-size: 22px; font-variant: small-caps; text-align: center">
+      <img alt="Brand" src="static/images/logo.png" style="max-height: 25px; display: inline-block; padding-right: 5px; margin-top: -5px;"/>
+      Dictionnaire Vivant de la Langue Française
+     </a>
+     <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" style="border: 1px solid #000; border-radius: 0px;" type="button">
+      <span class="sr-only">
+       Toggle navigation
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+     </button>
+    </div>
+    <div class="navbar-right collapse navbar-collapse" id="navbar" style="font-size: 80%;">
+     <ul class="nav navbar-nav">
+      <li class="active">
+       <a href="http://artfl-project.uchicago.edu">
+        ARTFL Project
+       </a>
+      </li>
+      <li>
+       <a href="" ng-click="Main.viewAPropos()">
+        À propos du DVLF
+       </a>
+      </li>
+      <li class="dropdown">
+       <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+        Contactez-nous
+        <span class="caret">
+        </span>
+       </a>
+       <ul class="dropdown-menu">
+        <li>
+         <a>
+          dvlf@artfl.uchicago.edu
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </div>
+    <!--/.nav-collapse -->
+   </div>
+  </nav>
+  <div class="container-fluid">
+   <div style="text-align: center;">
+    <p class="lead">
+     Découvrez...explorez...définissez...votre langue
+    </p>
+   </div>
+   <div class="row" ng-if="!Main.atHome">
+    <form class="col-xs-12 col-sm-offset-3 col-md-offset-4 col-sm-6 col-md-4" ng-submit="Main.search(Main.queryTerm)">
+     <div class="input-group">
+      <div angucomplete-alt="" id="search" input-class="form-control" match-class="highlight" minlength="2" placeholder="Tapez un mot..." remote-url="/api/autocomplete/" remote-url-data-field="headwords" selected-object="autocomplete" title-field="headword" value="{{ Main.queryTerm }}">
+      </div>
+      <span class="input-group-btn">
+       <button class="btn btn-default" type="submit">
+        Rechercher
+       </button>
+      </span>
+     </div>
+    </form>
+   </div>
+   <div class="row" ng-hide="Main.atHome">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+     <total ng-class="{'hide-results': Main.apropos}">
+     </total>
+    </div>
+    <div class="col-xs-12 col-sm-3" style="margin-top: 15px">
+     <div class="pull-right hidden-xs">
+      <div class="btn-group">
+       <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="glyphicon glyphicon-plus add-button">
+        </span>
+        <span style="font-variant: small-caps;">
+         Contribuer au DVLF
+        </span>
+        <span class="caret">
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="/definition" style="font-variant: small-caps; font-weight: 700">
+          Ajouter une définition
+         </a>
+        </li>
+        <li>
+         <a href="/exemple" style="font-variant: small-caps; font-weight: 700">
+          Ajouter un exemple
+         </a>
+        </li>
+        <li>
+         <a href="/synonyme" style="font-variant: small-caps; font-weight: 700">
+          Ajouter un synonyme
+         </a>
+        </li>
+        <li>
+         <a href="/antonyme" style="font-variant: small-caps; font-weight: 700">
+          Ajouter un antonyme
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div class="hidden-sm hidden-md hidden-lg" style="text-align: center">
+      <div class="btn-group">
+       <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="glyphicon glyphicon-plus add-button">
+        </span>
+        <span style="font-variant: small-caps; font-weight: 700">
+         Contribuer au DVLF
+        </span>
+        <span class="caret">
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="/definition" style="font-variant: small-caps; font-weight: 700">
+          Ajouter une définition
+         </a>
+        </li>
+        <li>
+         <a href="/exemple" style="font-variant: small-caps; font-weight: 700">
+          Ajouter un exemple
+         </a>
+        </li>
+        <li>
+         <a href="/synonyme" style="font-variant: small-caps; font-weight: 700">
+          Ajouter un synonyme
+         </a>
+        </li>
+        <li>
+         <a href="/antonyme" style="font-variant: small-caps; font-weight: 700">
+          Ajouter un antonyme
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="panel panel-default" ng-hide="Main.atHome" style="padding: 10px; margin-top: 15px;">
+    <div ng-view="">
+    </div>
+   </div>
+   <div ng-if="Main.atHome" style="text-align: center">
+    <img alt="Brand" src="static/images/dvlf_logo_medium_no_beta_transparent.png" style="max-height: 150px;"/>
+    <div class="row" style="margin-top: 30px;">
+     <form class="col-xs-12 col-sm-offset-3 col-md-offset-4 col-sm-6 col-md-4" ng-submit="Main.search(Main.queryTerm)">
+      <div class="input-group">
+       <div angucomplete-alt="" id="search" input-class="form-control" match-class="highlight" minlength="2" placeholder="Tapez un mot..." remote-url="/api/autocomplete/" remote-url-data-field="headwords" selected-object="autocomplete" title-field="headword" value="{{ Main.queryTerm }}">
+       </div>
+       <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">
+         Rechercher
+        </button>
+       </span>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+  <!-- /.container -->
+  <script async="" defer="" src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&amp;render=explicit">
+  </script>
+  <script async="" src="static/js/dvlf-1550792110.js">
+  </script>
+ </body>
+</html>

@@ -1,0 +1,1546 @@
+http://calendar.augusta.edu/
+<!DOCTYPE doctype html>
+<html lang="en">
+ <head>
+  <meta content="IE=EDGE" http-equiv="X-UA-Compatible"/>
+  <title>
+   Event Calendar - List
+  </title>
+  <link href="/Fonts/material-icons/iconfont/material-icons.css" rel="stylesheet"/>
+  <link href="/Fonts/material-icons/css/material-icons.css" rel="stylesheet"/>
+  <link href="/Fonts/FontAwesome/font-awesome.css" rel="stylesheet" type="text/css"/>
+  <link href="/Fonts/FontAwesome/font-awesome-5.1.1/css/all.css" rel="stylesheet"/>
+  <link href="/Fonts/FontAwesome/font-awesome-5.1.1/css/v4-shims.css" rel="stylesheet"/>
+  <script src="/scripts/vendor/jQuery/jquery-1.9.1.min.js" type="text/javascript">
+  </script>
+  <script src="/scripts/vendor/moment.min.js" type="text/javascript">
+  </script>
+  <script src="/scripts/vendor/modernizr-2.6.2.js" type="text/javascript">
+  </script>
+  <script src="/scripts/core.js?v=2017.1.0" type="text/javascript">
+  </script>
+  <script src="/scripts/widgetsupport.js" type="text/javascript">
+  </script>
+  <script async="" defer="" src="https://www.google.com/recaptcha/api.js">
+  </script>
+  <script type="text/javascript">
+   $(window).resize(function () { if ($("#gadget").css('display') != 'none') { ActiveData.Gadgets.Resized(); } });
+        $(function () { $("input:password").each(function () { $(this).attr('autocomplete', 'off'); }); });
+  </script>
+  <!-- jQuery Datepicker -->
+  <link href="/scripts/vendor/jquery/ui/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript">
+   ActiveData.Variables = {"site":{"route":"","name":"Event Calendar","layoutDirectory":"/layouts/Community/Default Site/Active Data Default","private":false,"culture":"en-US","useColorCoding":true,"googleApiKey":"AIzaSyBZDPkFCDoWICiv9p7T7BYXT7ABltnb07c","mapboxApiKey":""},"tenant":{"route":"","name":"Augusta University"},"runtime":{"baseUrl":"https://calendar.augusta.edu","listUrl":"https://calendar.augusta.edu/","adminUrl":"https://calendar.augusta.edu/admin/default.aspx","isDetails":false,"isList":true,"isGadget":false,"view":"list2.xslt"},"user":{"isLoggedIn":false},"filter":{"startRange":"3/10/2019 12:00:00 AM","endRange":"9/6/2019 11:59:59 PM","keywords":"","categories":[],"locations":[]},"layout":{"sitelogo":"https://www.augusta.edu/images/au-logo.png","sitelogourl":"http://www.augusta.edu/","tagline":"Events Calendar","css":"\u003cstyle type=\"text/css\"\u003e\r\n\r\n.calendarcell {padding: 10px;}\r\n.calendarcellhilite {padding:10px; background-color:#c4d9e4;}\r\n#view_by_prev, #view_by_next {bottom: 3px;}\r\n\r\nh1 #logo, footer#sitefooter  {display:none;}\r\nh2#header-slogan {line-height:1; color:#003359;}\r\n#header-slogan {\r\n    margin: 25px 0 0 0;\r\n    font-size: 2.5em;\r\n    font-weight: 300;\r\n    font-family: lato;\r\n    line-height:1;\r\n}\r\n#logo {display:none;}\r\n#search_range {\r\n    margin-bottom: 30px;\r\n    padding: 10px;\r\n    font-size: 19px;\r\n    line-height: 22px;\r\n    color: #fff;\r\n    background-color: #003359;\r\n    text-transform: uppercase;\r\n    border-bottom: none;\r\n    border-left: 5px solid #44D62C;\r\n    text-align: center;\r\n    border-radius: 0;\r\n    font-family: lato;\r\n    font-weight: 200;\r\n}\r\n\r\n.list-event-link a {\r\n  background-color: #003359;\r\n  width: 86%;\r\n  max-width: 100px;\r\n  margin: 0 auto;\r\n  padding: 8px 0;\r\n  font-size: 14px;\r\n  color: #fff;\r\n  line-height:1;\r\n  text-transform: uppercase;\r\n  text-align: center;\r\n  display: block;\r\n  border-radius: 5px;\r\n  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);\t\r\n}\r\n.list-event-link a:hover {\r\n  background-color: #10274d;\r\n  color: #fff;\r\n  text-decoration: none;\r\n}\r\n.full-schedule-container {\r\n  width: 100%;\r\n  clear: both;\r\n  background-color: #dcdcdc;\r\n  border-radius: 5px;\r\n  text-align: center;\r\n  margin: 10px 0;\r\n}\r\n.full-schedule-container h3 a {\r\n  font-size: 13px;\r\n line-height:1;\r\n  color: #7c7c7c;\r\n  text-decoration: none;}\r\n.list-event-link {\r\n   padding: 11px 0 0 0;\r\n}\r\n#view-search {\r\nborder-top: none;\r\n}\r\n.event-detail-contact-person {\r\npadding: 0 0 0 8px;\r\n}\r\n#search-link {\r\n  margin: 5px 0 0 0;\r\n}\r\n#search-box {\r\nbackground-color:#dcdcdc;\r\nborder-radius:5px;\r\n\r\n}\r\n\r\n#core_search .core-button-container .core-button-submit, #core_search .core-button-container .core-button-clear {\r\n  background-color: #003359;\r\n  margin: 10px 0 0 0;\r\n  padding: 5px 0;\r\n}\r\n#core_search input {\r\n  height: 30px;\r\n}\r\n.list2 #main-content h4 {\r\n  margin: 0;\r\n  padding: 8px 0 8px 1.5%;\r\n  font-size: 18px;\r\n  background-color: #003359;\r\n  color: #FFFFFF;\r\n  font-weight: 200;\r\n line-height:1;\r\n  font-family: lato;\r\n}\r\n.list2 .list-event:nth-of-type(odd) {\r\n  background-color: #f6f6f6;\r\n}\r\n.list2 .list-event:nth-of-type(even) {\r\n  background-color: #e5e5e5;\r\n}\r\n\r\n\r\n\r\n.list2 #main-content h4 {\r\n  background-color: #3BAFDA;}\r\n  .list-event-preview h3 {padding:5px 0;}\r\n.list-event-preview h3 a, .list2 .quick-link-container ul li a {\r\n  color: #0499b1;\r\n}\r\n.list-event-preview h3 a, .list2 .quick-link-container ul li a {\r\n  color: #434A54;\r\n  font-family: lato;\r\n  font-weight: 600;\r\n  font-size: 1.2em;\r\n}\r\n\r\n#featuredEvents h3 {  line-height: 10px;}\r\n#calendar-month {  background-color: #003359;}\r\n.event-detail-contact-person {  padding: 10px 0 0 8px;}\r\n#theme-event-detail-view #event-details-main-content h2 {\r\n  margin: 0 0 5px 0;\r\n  color: #003359;\r\n  line-height: 1.3em;\r\n  font-weight: 300;\r\n  font-size: 3em;\r\n  font-family: lato;\r\n}\r\nheader#top-main {  margin: 0;}\r\n.list2 #main-content h4 {\r\n  background-color: transparent;\r\n  font-size: 2em;\r\n  padding: 20px 10px;\r\n  color: #656D78;\r\n  border-bottom: 1px solid #b5b5b5;\r\n}\r\n#event-detail-copy {\r\n  font-size: 1.2em;\r\n  line-height: 1.8em;\r\n}\r\n#featuredEvents {\r\n  margin: 20px 0 5px 0;\r\n}\r\n\r\n\r\n#cal-prev-month, #cal-next-month { top: 20px;}\r\n#event-detail-copy p, #event-detail-copy ul li, #event-detail-copy. #event-detail-copy p span, p span {\r\n    margin: 0 0 15px 0;\r\n    font-size: 16px!important;\r\n    line-height: 20px!important;\r\n    color: #616161;\r\n}\r\n#featuredEvents ul li a h3 {\r\n    font-size: 14px;\r\n    color: #003359;\r\n    line-height: 1.4em;\r\n}\r\n\r\n.list-event-locale p a[itemprop=\"url\"] span {color: #216294;font-weight: bold;}\r\n.event-detail-date, .event-detail-date, .event-detail-date {padding:10px;}\r\n.event-detail-contact-person p,  {line-height:20px; }\r\n\r\n\r\n.full-schedule-container {\r\n    width: 100%;\r\n    clear: both;\r\n    background-color: #003359;\r\n    border-radius: 0;\r\n    text-align: center;\r\n    margin: 10px 0;\r\n    border-left: 5px solid #44D62c;\r\n}\r\n\r\n.full-schedule-container h3 a {\r\n    font-size: 15px;\r\n    color: #fff;\r\n    text-decoration: none;\r\n    text-transform: uppercase;\r\n}\r\n#event-detail-copy p, #event-detail-copy ol, #event-detail-copy ul {\r\n    margin: 0 0 15px 0;\r\n    font-size: 16px;\r\n    line-height: 20px;\r\n}\r\nh3 { line-height: 1.2em}\r\n\u003c/style\u003e","js":"  \u003chead\u003e\r\n    \u003ctitle\u003eEvents Calendar\u003c/title\u003e\r\n    \u003cmeta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /\u003e\r\n\t\u003cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1\" /\u003e\r\n\u003cmeta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" /\u003e\r\n    \u003clink rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css\"\r\n    type=\"text/css\" /\u003e\r\n    \u003clink href=\"https://www.augusta.edu/css/calendar.css\" rel=\"stylesheet\" type=\"text/css\" /\u003e\r\n    \u003clink rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato:300,400,700,900\u0026amp;v1\u0026amp;mp;subset=latin,latin-ext\"\r\n    type=\"text/css\" media=\"screen\" id=\"google_font\" /\u003e\r\n    \u003clink rel=\"stylesheet\"\r\n    href=\"https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700\u0026amp;v1\u0026amp;mp;subset=latin,latin-ext\" type=\"text/css\"\r\n    media=\"screen\" id=\"google_font_body\" /\u003e\r\n\t\u003clink rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css\"/\u003e\r\n   \t\u003cscript src=\"https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js\" type=\"text/javascript\"\u003e\u003c/script\u003e\r\n \t\u003cscript src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js\" integrity=\"sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS\" crossorigin=\"anonymous\"\u003e\u003c/script\u003e\r\n  \u003c/head\u003e\r\n  \u003cbody class=\"\"\u003e\r\n    \u003cdiv id=\"page_wrapper\"\u003e\r\n      \u003cdiv id=\"gruheader\"\u003e\r\n        \u003cdiv\u003e\r\n          \u003c!-- logo --\u003e\r\n          \u003cdiv id=\"grulogo\"\u003e\r\n            \u003ca href=\"http://www.augusta.edu/\" style=\"padding:10px 0 0 10px;\"\u003e\r\n              \u003cimg style=\"width:250px; height:auto;\" src=\"https://www.augusta.edu/images/au-logo.png\" alt=\"Augusta University\" /\u003e\r\n            \u003c/a\u003e\r\n          \u003c/div\u003e\r\n          \u003cnav id=\"main_menu\" class=\"visible-desktop\"\u003e\r\n            \u003cul class=\"sf-menu clearfix\"\u003e\r\n              \u003cli\u003e\r\n                \u003ca href=\"http://www.augusta.edu/about/\"\u003eABOUT\u003c/a\u003e\r\n              \u003c/li\u003e\r\n              \u003cli\u003e\r\n                \u003ca href=\"http://www.augusta.edu/academics/\"\u003eSTUDENTS\u003c/a\u003e\r\n              \u003c/li\u003e\r\n              \u003cli\u003e\r\n                \u003ca href=\"http://www.augusta.edu/research/\" target=\"_blank\"\u003eRESEARCH\u003c/a\u003e\r\n              \u003c/li\u003e\r\n              \u003cli\u003e\r\n                \u003ca href=\"http://www.augustahealth.org/\" target=\"_blank\"\u003eHEALTH CARE\u003c/a\u003e\r\n              \u003c/li\u003e\r\n              \u003cli\u003e\r\n                \u003ca href=\"http://www.augusta.edu/alumni/\" target=\"_blank\"\u003eALUMNI\u003c/a\u003e\r\n              \u003c/li\u003e\r\n              \u003cli\u003e\r\n                \u003ca href=\"http://www.augusta.edu/faculty/\"\u003eFACULTY \u0026amp; STAFF\u003c/a\u003e\r\n              \u003c/li\u003e\r\n            \r\n            \u003c/ul\u003e\r\n          \u003c/nav\u003e\r\n          \u003c!-- end main_menu --\u003e\r\n        \u003c/div\u003e\r\n      \u003c/div\u003e\r\n\r\n\t    \r\n\t  \u003cdiv class=\"navbar navbar-harvest\"\u003e\r\n\t   \r\n  \u003cdiv class=\"navbar-inner\"\u003e\r\n \r\n \u003cdiv class=\"container\"\u003e\r\n      \u003c!-- .btn-navbar is used as the toggle for collapsed navbar content --\u003e\r\n      \u003ca class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\"\u003e\r\n        \u003cspan class=\"fa fa-bars open\"\u003e\u003c/span\u003e\r\n      \u003c/a\u003e\r\n\t  \u003ca class=\"brand visible-desktop\" href=\"http://calendar.augusta.edu/\"\u003e\u003cspan class=\"fa fa-calendar\" aria-hidden=\"true\"\u003e\u003c/span\u003e\u003c/a\u003e\r\n \r\n\r\n      \u003cul class=\"nav\"\u003e\r\n\t\t  \u003cli\u003e\u003ca href=\"http://calendar.augusta.edu/\"\u003eEvents\u003c/a\u003e\u003c/li\u003e\r\n\t\t  \u003cli\u003e\u003ca href=\"http://www.augusta.edu/registrar/calendar2018.php\"\u003eAcademics\u003c/a\u003e\u003c/li\u003e\r\n\t\t  \u003cli\u003e\u003ca href=\"http://augustajags.com/composite?y=2019\"\u003eAthletics\u003c/a\u003e\u003c/li\u003e\r\n\t\t\u003c/ul\u003e\r\n\t\t\t\t\t   \u003c!-- Everything you want hidden at 940px or less, place within here --\u003e\r\n                         \u003cdiv class=\"nav-collapse collapse navbar-responsive-collapse\"\u003e\r\n                    \r\n\t\t\t\u003cul class=\"nav pull-right\"\u003e\r\n                      \u003cli\u003e\u003ca href=\"http://www.augusta.edu/dcm/web/calendar/\"\u003eAbout\u003c/a\u003e\u003c/li\u003e\r\n                      \u003cli class=\"divider-vertical\"\u003e\u003c/li\u003e\r\n\t\t\t\u003cli\u003e\u003ca href=\"http://www.augusta.edu/dcm/web/calendar/calendar-training.php\"\u003eGuide\u003c/a\u003e\u003c/li\u003e\r\n \u003cli class=\"divider-vertical\"\u003e\u003c/li\u003e\r\n  \u003cli\u003e\u003ca href=\"http://jagwire.augusta.edu/email-signup\"\u003eSubscribe\u003c/a\u003e\u003c/li\u003e\r\n                    \u003c/ul\u003e\r\n\t\t\t\t\u003c/div\u003e\r\n\u003c/div\u003e \r\n\u003c/div\u003e\r\n \u003c/div\u003e\r\n \u003c/html\u003e","highlighted":"","disqus":"","view":{"list":"list.xslt","grid":"grid.xslt","list2":"list2.xslt"},"defaultview":"list2.xslt","gridviewshowmore":"Disabled","eventsperpage":"50","navBar":"","brandingTool":""},"event":{"route":""}};
+  </script>
+  <!-- Meta Tags -->
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <!-- Mobile Meta Tags -->
+  <meta content="true" name="HandheldFriendly"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <!-- Favicon -->
+  <link href="/Layouts/Community/Default Site/Active Data Default/favicon.ico" rel="shortcut icon"/>
+  <!-- Author  -->
+  <!-- TODO: Determine Who the Context Author Is -->
+  <meta content="Dude Solutions, Inc., https://www.dudesolutions.com/" name="author">
+   <!-- Stylesheets -->
+   <link href="/Layouts/Community/Default Site/Active Data Default/css/style.css?v=2018.09.10" media="screen" rel="stylesheet" type="text/css"/>
+   <link href="/Layouts/Community/Default Site/Active Data Default/css/core.css?v=2016.4.0.4" media="screen" rel="stylesheet" type="text/css"/>
+   <link href="/Layouts/Community/Default Site/Active Data Default/css/layout.css" media="screen" rel="stylesheet" type="text/css"/>
+   <link href="/scripts/vendor/jquery/ui/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+   <link href="/Layouts/Community/Default Site/Active Data Default/css/print.css?v2018.1.0" media="print" rel="stylesheet" type="text/css"/>
+   <script type="text/javascript">
+    var getQueryString = function ( field, url ) {
+            var href = url ? url : window.location.href;
+            var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+            var string = reg.exec(href);
+            return string ? string[1] : null;
+        };
+
+        if (self !== top && !getQueryString('preview')) {
+            var link = document.createElement('link');
+            link.type = 'text/css';
+            link.href = '/Layouts/Community/Default Site/Active Data Default/css/widget.css';
+            link.rel = "stylesheet";
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+   </script>
+   <!-- Header Scripts -->
+   <script src="/Layouts/Community/Default Site/Active Data Default/js/core.handles.js">
+   </script>
+   <!-- AddThis Button BEGIN -->
+   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-52b8419d5904e2aa" type="text/javascript">
+   </script>
+   <head>
+    <title>
+     Events Calendar
+    </title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+     <meta content="width=device-width, initial-scale=1" name="viewport"/>
+     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+     <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet" type="text/css"/>
+     <link href="https://www.augusta.edu/css/calendar.css" rel="stylesheet" type="text/css"/>
+     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&amp;v1&amp;mp;subset=latin,latin-ext" id="google_font" media="screen" rel="stylesheet" type="text/css"/>
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700&amp;v1&amp;mp;subset=latin,latin-ext" id="google_font_body" media="screen" rel="stylesheet" type="text/css"/>
+     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js" type="text/javascript">
+     </script>
+     <script crossorigin="anonymous" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+     </script>
+    </meta>
+   </head>
+   <body class="">
+    <div id="page_wrapper">
+     <div id="gruheader">
+      <div>
+       <!-- logo -->
+       <div id="grulogo">
+        <a href="http://www.augusta.edu/" style="padding:10px 0 0 10px;">
+         <img alt="Augusta University" src="https://www.augusta.edu/images/au-logo.png" style="width:250px; height:auto;"/>
+        </a>
+       </div>
+       <nav class="visible-desktop" id="main_menu">
+        <ul class="sf-menu clearfix">
+         <li>
+          <a href="http://www.augusta.edu/about/">
+           ABOUT
+          </a>
+         </li>
+         <li>
+          <a href="http://www.augusta.edu/academics/">
+           STUDENTS
+          </a>
+         </li>
+         <li>
+          <a href="http://www.augusta.edu/research/" target="_blank">
+           RESEARCH
+          </a>
+         </li>
+         <li>
+          <a href="http://www.augustahealth.org/" target="_blank">
+           HEALTH CARE
+          </a>
+         </li>
+         <li>
+          <a href="http://www.augusta.edu/alumni/" target="_blank">
+           ALUMNI
+          </a>
+         </li>
+         <li>
+          <a href="http://www.augusta.edu/faculty/">
+           FACULTY &amp; STAFF
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <!-- end main_menu -->
+      </div>
+     </div>
+     <div class="navbar navbar-harvest">
+      <div class="navbar-inner">
+       <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+         <span class="fa fa-bars open">
+         </span>
+        </a>
+        <a class="brand visible-desktop" href="http://calendar.augusta.edu/">
+         <span aria-hidden="true" class="fa fa-calendar">
+         </span>
+        </a>
+        <ul class="nav">
+         <li>
+          <a href="http://calendar.augusta.edu/">
+           Events
+          </a>
+         </li>
+         <li>
+          <a href="http://www.augusta.edu/registrar/calendar2018.php">
+           Academics
+          </a>
+         </li>
+         <li>
+          <a href="http://augustajags.com/composite?y=2019">
+           Athletics
+          </a>
+         </li>
+        </ul>
+        <!-- Everything you want hidden at 940px or less, place within here -->
+        <div class="nav-collapse collapse navbar-responsive-collapse">
+         <ul class="nav pull-right">
+          <li>
+           <a href="http://www.augusta.edu/dcm/web/calendar/">
+            About
+           </a>
+          </li>
+          <li class="divider-vertical">
+          </li>
+          <li>
+           <a href="http://www.augusta.edu/dcm/web/calendar/calendar-training.php">
+            Guide
+           </a>
+          </li>
+          <li class="divider-vertical">
+          </li>
+          <li>
+           <a href="http://jagwire.augusta.edu/email-signup">
+            Subscribe
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </body>
+  </meta>
+ </head>
+</html>
+<style type="text/css">
+ .calendarcell {padding: 10px;}
+.calendarcellhilite {padding:10px; background-color:#c4d9e4;}
+#view_by_prev, #view_by_next {bottom: 3px;}
+
+h1 #logo, footer#sitefooter  {display:none;}
+h2#header-slogan {line-height:1; color:#003359;}
+#header-slogan {
+    margin: 25px 0 0 0;
+    font-size: 2.5em;
+    font-weight: 300;
+    font-family: lato;
+    line-height:1;
+}
+#logo {display:none;}
+#search_range {
+    margin-bottom: 30px;
+    padding: 10px;
+    font-size: 19px;
+    line-height: 22px;
+    color: #fff;
+    background-color: #003359;
+    text-transform: uppercase;
+    border-bottom: none;
+    border-left: 5px solid #44D62C;
+    text-align: center;
+    border-radius: 0;
+    font-family: lato;
+    font-weight: 200;
+}
+
+.list-event-link a {
+  background-color: #003359;
+  width: 86%;
+  max-width: 100px;
+  margin: 0 auto;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #fff;
+  line-height:1;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  border-radius: 5px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);	
+}
+.list-event-link a:hover {
+  background-color: #10274d;
+  color: #fff;
+  text-decoration: none;
+}
+.full-schedule-container {
+  width: 100%;
+  clear: both;
+  background-color: #dcdcdc;
+  border-radius: 5px;
+  text-align: center;
+  margin: 10px 0;
+}
+.full-schedule-container h3 a {
+  font-size: 13px;
+ line-height:1;
+  color: #7c7c7c;
+  text-decoration: none;}
+.list-event-link {
+   padding: 11px 0 0 0;
+}
+#view-search {
+border-top: none;
+}
+.event-detail-contact-person {
+padding: 0 0 0 8px;
+}
+#search-link {
+  margin: 5px 0 0 0;
+}
+#search-box {
+background-color:#dcdcdc;
+border-radius:5px;
+
+}
+
+#core_search .core-button-container .core-button-submit, #core_search .core-button-container .core-button-clear {
+  background-color: #003359;
+  margin: 10px 0 0 0;
+  padding: 5px 0;
+}
+#core_search input {
+  height: 30px;
+}
+.list2 #main-content h4 {
+  margin: 0;
+  padding: 8px 0 8px 1.5%;
+  font-size: 18px;
+  background-color: #003359;
+  color: #FFFFFF;
+  font-weight: 200;
+ line-height:1;
+  font-family: lato;
+}
+.list2 .list-event:nth-of-type(odd) {
+  background-color: #f6f6f6;
+}
+.list2 .list-event:nth-of-type(even) {
+  background-color: #e5e5e5;
+}
+
+
+
+.list2 #main-content h4 {
+  background-color: #3BAFDA;}
+  .list-event-preview h3 {padding:5px 0;}
+.list-event-preview h3 a, .list2 .quick-link-container ul li a {
+  color: #0499b1;
+}
+.list-event-preview h3 a, .list2 .quick-link-container ul li a {
+  color: #434A54;
+  font-family: lato;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+#featuredEvents h3 {  line-height: 10px;}
+#calendar-month {  background-color: #003359;}
+.event-detail-contact-person {  padding: 10px 0 0 8px;}
+#theme-event-detail-view #event-details-main-content h2 {
+  margin: 0 0 5px 0;
+  color: #003359;
+  line-height: 1.3em;
+  font-weight: 300;
+  font-size: 3em;
+  font-family: lato;
+}
+header#top-main {  margin: 0;}
+.list2 #main-content h4 {
+  background-color: transparent;
+  font-size: 2em;
+  padding: 20px 10px;
+  color: #656D78;
+  border-bottom: 1px solid #b5b5b5;
+}
+#event-detail-copy {
+  font-size: 1.2em;
+  line-height: 1.8em;
+}
+#featuredEvents {
+  margin: 20px 0 5px 0;
+}
+
+
+#cal-prev-month, #cal-next-month { top: 20px;}
+#event-detail-copy p, #event-detail-copy ul li, #event-detail-copy. #event-detail-copy p span, p span {
+    margin: 0 0 15px 0;
+    font-size: 16px!important;
+    line-height: 20px!important;
+    color: #616161;
+}
+#featuredEvents ul li a h3 {
+    font-size: 14px;
+    color: #003359;
+    line-height: 1.4em;
+}
+
+.list-event-locale p a[itemprop="url"] span {color: #216294;font-weight: bold;}
+.event-detail-date, .event-detail-date, .event-detail-date {padding:10px;}
+.event-detail-contact-person p,  {line-height:20px; }
+
+
+.full-schedule-container {
+    width: 100%;
+    clear: both;
+    background-color: #003359;
+    border-radius: 0;
+    text-align: center;
+    margin: 10px 0;
+    border-left: 5px solid #44D62c;
+}
+
+.full-schedule-container h3 a {
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+#event-detail-copy p, #event-detail-copy ol, #event-detail-copy ul {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    line-height: 20px;
+}
+h3 { line-height: 1.2em}
+</style>
+<script type="text/javascript">
+ //Layout Config: Disqus
+        var disqus_shortname = "";
+</script>
+<script type="text/javascript">
+ //Layout Config: navBar
+        var navConfig = "<item key=\"navBar\" label=\"Navigation Bar\" type=\"ref\" description=\"NavigationBar\" />";
+        $(function () { if (navConfig.length > 0) { renderNavbar(navConfig); } });
+</script>
+<meta content="Event Calendar" property="og:title"/>
+<meta content="https://calendar.augusta.edu/" property="og:url"/>
+<meta content="https://www.augusta.edu/images/au-logo.png" property="og:image"/>
+<meta content="Contains all Events at Augusta University" property="og:description"/>
+<style type="text/css">
+ .display-more { text-align: center; padding: 10px; font-size: 20px; }
+        .display-more span { cursor: pointer; }
+</style>
+<script type="text/javascript">
+ ActiveData.EventList.Transform = ActiveData.Variables.runtime.view;
+
+        $(function () {
+            // Set required attributes for gadgets in sidebar
+            $(".list-shareit .supersocialshare").attr("data-url", ActiveData.Variables.runtime.searchUrl);
+            $("a.gadget-link, a.adx-share-sendtogoogle").attr("data-gadgetsite", ActiveData.Variables.site.route);
+
+            // Set view styles
+            if (ActiveData.Variables.runtime.view.indexOf("grid") > -1) {
+                // Grid, make full-width                
+                $("#main-content").css({ "width": "100%", "max-width": "100%" });
+            } else if (ActiveData.Variables.runtime.view.indexOf("list2") > -1) {
+                // List, show sidebar
+                $("#sidebar").removeClass("hide");
+                $("#theme-list-view").addClass("list2");
+                $("#main-content").addClass("list");
+            } else if (ActiveData.Variables.runtime.view.indexOf("list") > -1) {
+                // Summary, show sidebar
+                $("#sidebar").removeClass("hide");
+                $("#theme-list-view").addClass("right-sidebar");
+                $("#main-content").addClass("summary");
+            }
+        });
+
+        function CommitEventFavorite(guid) {
+            //Create a parameters object needed for the request
+            var lParams = { "tenant": "", "site": "" };
+            lParams["tenant"] = ActiveData.Variables.tenant.route;
+            lParams["site"] = ActiveData.Variables.site.route;
+            lParams["get"] = "favorite";
+            lParams["guid"] = guid;
+
+            //Create the URL that will make the call
+            var lUrl = ActiveData.Variables.runtime.baseUrl + "/handlers/query.ashx?" + $.param(lParams);
+
+            $.ajax({
+                type: "POST",
+                url: lUrl,
+                dataType: "jsonp",
+                async: true, cache: false,
+                success: function (response) {
+                   $(top.location).attr('href', response.data);
+                }
+            });
+        }
+</script>
+<script src="/scripts/vendor/jquery/ui/jquery-ui.min.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+ var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-37500387-6']);_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+</script>
+<script>
+ (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-104972143-1', 'auto', 'dsiAnalytics');
+ga('dsiAnalytics.send', 'pageview', '/');
+</script>
+<body id="core_public_body">
+ <form action="/" id="frmPublicMaster" method="post">
+  <div class="aspNetHidden">
+   <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+   <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+   <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUKMjEwNDQyMTMxMw9kFgJmD2QWAmYPZBYCZg9kFgQCAQ9kFgICCg9kFgJmD2QWAmYPFgIeBFRleHQFoQIKCjxtZXRhIHByb3BlcnR5PSJvZzp0aXRsZSIgY29udGVudD0iRXZlbnQgQ2FsZW5kYXIiLz4KPG1ldGEgcHJvcGVydHk9Im9nOnVybCIgY29udGVudD0iaHR0cHM6Ly9jYWxlbmRhci5hdWd1c3RhLmVkdS8iLz4KPG1ldGEgcHJvcGVydHk9Im9nOmltYWdlIiBjb250ZW50PSJodHRwczovL3d3dy5hdWd1c3RhLmVkdS9pbWFnZXMvYXUtbG9nby5wbmciLz4KCjxtZXRhIHByb3BlcnR5PSJvZzpkZXNjcmlwdGlvbiIgY29udGVudD0iQ29udGFpbnMgYWxsIEV2ZW50cyBhdCBBdWd1c3RhIFVuaXZlcnNpdHkiIC8+ZAIDD2QWAmYPFgIeBmFjdGlvbgUBLxYCAgMPZBYCAgMPZBYEZg9kFgQCAQ9kFgICAQ8WAh4JaW5uZXJodG1sBRFWSUVXIEJZOiBOZXh0IDE4MGQCAg9kFgJmD2QWBAIGDw9kFgIeB29uQ2xpY2sFE1RyYWNrU2VhcmNoQ2xpY2soKTtkAgoPFgIeB1Zpc2libGVoZAIBD2QWBGYPFgIfAgUyU3VuZGF5LCBNYXJjaCAxMCwgMjAxOSAtIEZyaWRheSwgU2VwdGVtYmVyIDYsIDIwMTlkAgIPFgIfBGgWCAIBDxYCHwRoZAIDDxYCHwRoZAIFDw8WAh8EaGRkAgcPDxYCHwRoZGRkIhHjvIP0aQXBqZpe4UMHx5QfdPFwtuxy/Sm2QIZ8fBI="/>
+  </div>
+  <script type="text/javascript">
+   //<![CDATA[
+var theForm = document.forms['frmPublicMaster'];
+if (!theForm) {
+    theForm = document.frmPublicMaster;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+  </script>
+  <script src="/WebResource.axd?d=Q4vvFR3FeJMavZG4ipXg97l6fhbhUVSv5GOWcknFdolltnutlz02Vsw-QosZY4vhAXk-klP0UFsLhTAc7dZVmGVgQ20kytp24z9f0orf6Ns1&amp;t=636390487349588498" type="text/javascript">
+  </script>
+  <script src="/ScriptResource.axd?d=Vkp5MV2qn7kl5SaycQUSap7YzXrJnS_Y3-rjjO9Kq55b_tFVtFntiW_71FYiTIoUEcQVB4a2Zu0F2dPxskbQW8yKmHKij9ajJzoTsvdX59A5su2e0BfR3nXwUyNfUwAo0I_qRFgEicvoJ4v4NYisOLSWEB2eqyuQkaP2YdwfUpM1&amp;t=ffffffffcce8aaf2" type="text/javascript">
+  </script>
+  <script src="/ScriptResource.axd?d=xkuMVgS4djoVDdvZiJo8KLoHr_K-M_6ihgRGXOjw-BEaENJkRNZxmfhrOsHC0hxQox2jsMrAMUlIp3otWPrEtyPa-myBtLOGOqk5TOwq2G5Su-bKpVLAaqqzfYh2VXb9m4mlAiGjseYCUeNlV6sH5DKmd9KYLIR21ajVz4NXcur6wSZI5RPJ6zAU3IWQ-ASn0&amp;t=ffffffffcce8aaf2" type="text/javascript">
+  </script>
+  <div class="aspNetHidden">
+   <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+   <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="/wEdAIkBdS/6nIve7uStgtoMusuGSERiT7KYT4n32LxBoWfvqRfQkqibzhp6hRt/yS1ivxbSSC6SRxKzFidcS3LG85HAZ9A1wGBfrltWLSelwe59dVs3ZL5HR87+X66pmefIy+sQ7UY7UZCOX8se9Yn9PNCmN+7Hmc1RVPzTxADMypLZuCm1vC9PwCVRS957scLapttRFn2pg3koMApH4UiA9MGoXLyjbyky6KabD4cnbjp7AXSoEoV3llCE0eAgduOjuZKTqwzGpf4ejopAopHL/F4TIBIA0VivOsr8tWF0TjI8Dz6r91MNb9QJcUZctJ96ttivOnpYOpkOSp6RX3TKobl42a+YALoeFzs5wLbyUhLikEQiK1P2Px4YKDJOSJdZyKCrKFISmuCu6DQQ0KQpC9e03xwQXh8qedGXMQjKaPKidMmQkYszSwkdhnmQpYwnKRvov0aD/K9V91ToSLONFXqQcU1u6pxLsy1SJOZbNdv5h+z3LDgYVuql+lFBNAz0GAnLIhAnY5jN/Dv1MLWxA+Md1yVFHUrcNrXK8aTRCsZCUu/9ybIBOnkShLeUmIZH+jqDn1CIACqO37qlyFKlgZMCACtTgiCwuGPrcOKhD4Gp6G53zHywmfJc7VT/q1R37pHfbOjtLfk4kBUgqG9SnxCie2x7LL5t8l95i2qp80/YvU0A+5pRyukwZJfeYAYV89OxIRXSuWGZj9QE04VPNL697aZNb3B9Aii93nXfDbNvhFrcn9YwDJTs/Et0jaF6eomuhZNauu6Eu4HHr6waLfOqtSCAy6htvsz+Gp8LDPcFj7Bz7KQpoKeLUb4+L4kpB3fDephyuQyAwCG03fGxY4OcGFkuz11K01Gz/TtoIAyiofEemht9J0TxWkTRej3Cwxzf5TgdBzTOdZOVpXG674NZ+Nph4lvQba32v40M3pSct0HorFtf0IsejZjDmFQimqu+Ne7noVpmzp2e16v+UvBV4ZNH1SZw8Jv7mQiefpABWOOEC+mnbRBSiJ8ZrxYge804tSHZmXxanxiVw9z/6Vg6CiMlua3t1u4RHrR9YmJumcp/ka0W/FsiNhh5vNr/P2vBHlfbXaLXUiniz8UXOaEkH3/mNbYzapBFVXMDL1q58C7VlxuzUubrKGciR8EQKB32p/WeQNLYihqrZPNCQXMU6N7mjnQmbCHYvPeZxFGkrMziUAqynTqhwKoBSHfXmMaI1CdwG/tw4VRGNrzcPpawHVJjbjpUY3CPxqzuRjrRgc360SRMpw10Mkz6YRDNXvf+6FSo2D7UEDU+kzhA+UUk1E/xYSKEESwJgIKAcfJ0sSD/lBmZe0+64eLg71OkR3BiTXARVcPI6w7+5v8DzHudFACM8RhbqqCvD1xz44juiSpnUrETXNeh+TDmmSCdFEpHkeAMitYKS6UnayR1D1Kk8V+jJGdUt75kvysZGdEukRKhKm8R7+agBeot50HQzHsN2/WJmN1+j00PGNgAIYirTgwVfJwQUVNXziLsimh/UoVa3AOgdy3Bz95aXdWj5ETMQ+40g4vc4/tOXwSEJ9YdvhLDdXGKYoMBHlxyA7UymmRxo8lKMwp4+EEKU+P0jpz857I3CmhRDi+ByxkcEgL5NSDB57TdPh9V94KWeRhC+tHg50aS+fywai9yMN6SBswB/+Dd49BTlJu2JuKk6YvbY3dfux1XOSB5LfZeMcxrE110EcPxQIxzpAor1oQOxG+5LNmi8L1aQrouhAidL5BmV9+tFpRnWKK1arCWT1pFLbikH/lzmfnKJbut8MdwfR45YxEna1ki/gZSo/F+HcW6dUoNGJR1jRgmpqMEy0rfeY/3GalF7Qf+H+LG3Z6+ScgJsXjp6bTBNqPZsTJTrmxjeT8nd1TIy0Q/C+j4ibXHGQLwaqus7Xl+dFehfsYnTKFf1Tl4aFgjL7RP7J2YMdd0bpfy0ddy1VCVobebi1Z9t58AA9mD1r1duM66gpV3QSh+YAjP8ZY8dbBcr80dXx49B4YaDyClk50mPD8YTsbp5TCgu8phSweY8aEfv2MnUF1fqHbWJ/pU2x/pY5/RJyotfhvlqL7ueN8VuGP4+aWQRZGNCvWMRZcKICzQRxIAHyDa9TSQxVNa/AZlGy7NeVThkG2SW1QcDZEVmDI5QCB7pYRWUBr1RCmHhj2BqTUEweNhab+EYbx5ZJRFwBhg84rEQsOjurCz69QYgoX2x2jhaYGN8Qx0H1IbxM464r9oUVRT1vMupTZuk01guoj58G3W/8rApiXKMFcKAs0tPhy6ZzsWPeu6INuT+8y0hUtfambGpCkcYRWnLjef1XBgj/K324AkZKvGKzxEYUbv99OaqSbGc0s+QTWCogMPaizJL7KFg2HDkkGvwEJlqMOUJZvqoSf85C3Xd8DrGLVX5ejDIYvnCzqmGM6QoLM+86jcuP5qQaFDkNENxOZQ6ZevUPT+IcydaQGGYs22d39hGS1rofHJNfuHXH4L/LhWpPpUWNWsP6LwokYl9/eSt/yI0067Z6KYvA8OGlZHNPm/zJNVB9WPt26foxpeaBYHqN1hgyHQxnaHvXFuSAvQ7B85sXgVopBYCbqdJbaZgvwagPk9PGH4p8QXxMSQMgCUia7pasrvhqPfr3hwxBjbkhG0YPM4vso8Kx+m8kChn8kT92ODyLCC1sHN8nnEG1jRDdPAdiWAEfvgKQhFV5cC67bkmJTwb6X5AguDuES5ZwvqFk+j3jouuovxYqFHg0KPbIFdZIIcbAYSGWfX2xaGUxuAsun4fAtju3vZ8uyNa3E6u6de6hbvb5JUAf7YYhPNgb+YBFJr50mj7oCJiZPF15glhYtcEn99TCsv905ZKpQtD2Awk+Zfs6Isvh1c3qCI12CTsDfFkk7MHGma3ODT2eyEYYWRZizu+Tjv2z9CgyU+4Tq6R4swB++xL15xRjCy35DtmjCS90kc1xWWauvRfPzLjZ6WWg=="/>
+  </div>
+  <script type="text/javascript">
+   //<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl01$ctl00$ctl00$smPublic', 'frmPublicMaster', [], [], [], 90, 'ctl01$ctl00$ctl00');
+//]]>
+  </script>
+  <a class="skip-nav" href="#main-content" id="skipNav">
+   Skip to main content
+  </a>
+  <!-- Layout Header -->
+  <header class="clearfix" id="top-main">
+   <div class="wrap">
+    <a aria-label="mobile navigation link" href="#" id="mobile-nav-link">
+     <i class="fa fa-bars open">
+     </i>
+     <i class="fa fa-times close">
+     </i>
+    </a>
+    <nav class="main clearfix" id="main">
+     <ul>
+      <li>
+       <a href="/login/">
+        Sign In
+       </a>
+      </li>
+      <li>
+       <a href="" onclick="window.print();return false;">
+        Print
+       </a>
+      </li>
+     </ul>
+    </nav>
+    <h1 id="logo">
+     <a href="http://www.augusta.edu/" title="Event Calendar">
+      <img alt="Event Calendar" id="publicBody_imgLogoImage" src="https://www.augusta.edu/images/au-logo.png"/>
+     </a>
+    </h1>
+    <h2 id="header-slogan">
+     Events Calendar
+    </h2>
+   </div>
+   <div class="nav-container">
+    <div class="ep-nav" style="clear: both;">
+     <div class="wrap nav-wrap">
+      <div id="ep-dynamic-nav">
+      </div>
+     </div>
+    </div>
+    <div class="ep-nav nav-more" style="clear: both;">
+     <div class="wrap nav-wrap">
+      <div id="ep-dynamic-nav-more">
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <header class="clearfix" id="widget-top-main">
+   <div class="wrap">
+    <nav class="main clearfix" id="widget-main">
+     <ul>
+      <li>
+       <a href="" onclick="redirectToLogIn('https://calendar.augusta.edu/login/', 'signin-widget');return false;">
+        Sign In
+       </a>
+      </li>
+     </ul>
+    </nav>
+   </div>
+  </header>
+  <div class="wrap main">
+   <!-- Layout Body -->
+   <!-- featured events -->
+   <!-- End featuredEvents -->
+   <section class="clearfix" id="view-search">
+    <nav id="view-type">
+     <ul id="publicBody_siteBody_UCEventSearch_view_type_list">
+      <li>
+       <h3>
+        View Type:
+       </h3>
+      </li>
+      <!-- Old list view is now titled "Summary View" -->
+      <li id="publicBody_siteBody_UCEventSearch_li_list_view">
+       <a class="view-icon " href="/?view=list&amp;search=y" id="list-view" title="Summary View">
+        <em class="icon-list-alt">
+        </em>
+        <span>
+         Summary View
+        </span>
+       </a>
+      </li>
+      <li id="publicBody_siteBody_UCEventSearch_li_grid_view">
+       <a class="view-icon " href="/?view=grid&amp;search=y" id="calendar-view" title="Calendar View">
+        <em class="icon-calendar">
+        </em>
+        <span>
+         Grid View
+        </span>
+       </a>
+      </li>
+      <!-- New list view added 1/16/2014 -->
+      <li id="publicBody_siteBody_UCEventSearch_li_list2_view">
+       <a class="view-icon here" href="/?view=list2&amp;search=y" id="list2-view" title="List View">
+        <em class="icon-list">
+        </em>
+        <span>
+         List View
+        </span>
+       </a>
+      </li>
+     </ul>
+    </nav>
+    <section class="list-subscribe" style="display: none">
+     <h3>
+      Subscribe
+     </h3>
+     <ul class="subscribe-section" style="padding-left: 5px;">
+      <li>
+       <a class="gadget-link" data-gadgetaction="Subscribe" data-gadgetsite="" data-query="duration=1months" data-sharetype="rss" id="rss-icon" title="RSS Subscription">
+        <img alt="Add to RSS" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/rss-icon2.png"/>
+       </a>
+      </li>
+      <li>
+       <a class="adx-share-sendtogoogle" data-analytics="SendtoGoogle" data-gadgetsite="" data-query="duration=1months" data-sharetype="ical" target="_blank" title="Add to Google Calendar">
+        <img alt="Add to Google Calendar" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/share-icons/google.png"/>
+       </a>
+      </li>
+      <li>
+       <a class="gadget-link add-calendar" data-gadgetaction="Subscribe" data-gadgetsite="" data-query="duration=1months" data-sharetype="ical" title="iCal Subscription">
+        <img alt="Add to Calendar" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/share-icons/outlook.png"/>
+       </a>
+      </li>
+      <li>
+       <a class="gadget-link" data-gadgetaction="Alert" data-gadgetsite="" title="Add Notifications">
+        <img alt="Email" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/notifications_icon.png"/>
+       </a>
+      </li>
+     </ul>
+    </section>
+    <div id="view-by-container">
+     <div class="wrapper-dropdown" id="view-by">
+      <span id="custom_viewby">
+       VIEW BY: Next 180
+      </span>
+      <ul class="dropdown" tabindex="1">
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnDay','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnDay" title="Events for Today">
+         Day
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnWeek','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnWeek" title="Events for this Week">
+         Week
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnMonth','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnMonth" title="Events for this Month">
+         Month
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnYear','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnYear" title="Events for this Year">
+         Year
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext7','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext7" title="Events for the Next 7 Days">
+         Next 7
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext14','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext14" title="Events for the Next 14 Days">
+         Next 14
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext30','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext30" title="Events for the Next 30 Days">
+         Next 30
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext60','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext60" title="Events for the Next 60 Days">
+         Next 60
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext90','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext90" title="Events for the Next 90 Days">
+         Next 90
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext180','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext180" title="Events for the Next 5 Months">
+         Next 180
+        </a>
+       </li>
+       <li>
+        <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$lbtnNext365','')" id="publicBody_siteBody_UCEventSearch_ViewBy_lbtnNext365" title="Events for the Next 12 Months">
+         Next 365
+        </a>
+       </li>
+      </ul>
+     </div>
+     <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$view_by_prev','')" id="view_by_prev" title="Previous">
+      <em class="icon-chevron-left">
+      </em>
+      <span class="font-awesome-508">
+       &lt;
+      </span>
+     </a>
+     <a href="javascript:__doPostBack('ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$view_by_next','')" id="view_by_next" title="Next">
+      <span class="font-awesome-508">
+       &gt;
+      </span>
+      <em class="icon-chevron-right">
+      </em>
+     </a>
+     <input id="publicBody_siteBody_UCEventSearch_ViewBy_hdnCurrentRange" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$ViewBy$hdnCurrentRange" type="hidden" value="Next180"/>
+     <script type="text/javascript">
+      $(document).ready(function () {
+            $("#main-content").on("click", ".icon-caret-right", function () {
+                var current = $(this).attr("data-month");
+                javascript: __doPostBack('grid_next_month', current)
+            });
+
+            $("#main-content").on("click", ".icon-caret-left", function () {
+                var current = $(this).attr("data-month");
+                javascript: __doPostBack('grid_previous_month', current)
+            });
+        });
+     </script>
+    </div>
+    <a href="#" id="search-link" title="Search">
+     <em class="icon-search">
+     </em>
+     <span>
+      Search
+     </span>
+    </a>
+   </section>
+   <section class="clearfix" id="search-box">
+    <!-- Start Event Search -->
+    <script type="text/javascript">
+     $(function () {
+        //Register jQueryUI calendar grid
+
+        //$('.js-calendar').datepicker({
+        //    inline: true,         
+        //    altfield: '.js-date-input',         
+        //    onchangemonthyear: function (year, month, inst) {
+        //        settimeout(function () {                 // add href prev/next anchors can receive tab focus                 
+        //            $('.ui-datepicker-prev, .ui-datepicker-next').attr("href", "#");
+        //        }, 50);
+        //    }
+        //});  // add href prev/next anchors can receive tab focus $('.ui-datepicker-prev, .ui-datepicker-next').attr("href", "#"); 
+
+        //Register jQueryUI calendar for end date selector
+        $(".core-search-end-date").datepicker({
+            maxDate: (new Date(2099, 12 - 1, 31)),
+            minDate: new Date($(".core-search-start-date").val()),
+        }).focus(function () {
+            this.blur();
+            setDatetimeTripper(this);
+        }).attr('readonly', 'true');
+
+        //Register jQueryUI calendar for start date selector
+        $(".core-search-start-date").datepicker({
+            minDate: (new Date(1980, 1 - 1, 1)),
+            maxDate: (new Date(2099, 12 - 1, 31)),
+            onClose: function (dateText, inst) {
+                $(".core-search-end-date").datepicker("option", "minDate", new Date(dateText));
+            },
+        }).focus(function () {
+            this.blur();
+            setDatetimeTripper(this);
+        }).attr('readonly', 'true');
+
+        $("#core_search_category a").on("click", function () {
+            ActiveData.Gadgets.Show({ 'action': 'Category', title: "Category", filter: { "Resize": "Y" } });
+            $(".core-search-category").val("");
+        });
+        $("#core_search_location a").on("click", function () {
+            ActiveData.Gadgets.Show({ 'action': 'Location', title: "Location", filter: { "Resize": "Y" } });
+            $(".core-search-location").val("");
+        });
+
+        $("#core_search_proximity input[type='text']").autocomplete({
+            minLength: 2,
+            source: function (request, response) {
+                $("#core_search_proximity input[type='hidden']").val("");
+                $.ajax({
+                    url: "/handlers/locationsearch.ashx?max=10&input=" + $("#core_search_proximity input[type='text']").val(),
+                    dataType: 'jsonp',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            if (item.Latitude != 0 & item.Longitude != 0)
+                            {
+                                return {
+                                    label: item.City + ', ' + item.Region,
+                                    val: item.Latitude + ',' + item.Longitude
+                                }
+                            }
+                            else {
+                                return {
+                                    label: 'No Results',
+                                    val: ''
+                                }
+                            }
+                        }))
+                        $("#core_search_proximity input[type='hidden']").val("")
+                    }
+                });
+            },
+            select: function (event, ui) {
+                if (ui.item.val != '') {
+                    $("#core_search_proximity input[type='hidden']").val(ui.item.val);
+                }
+                else {
+                    $("#core_search_proximity input[type='text']").val("");
+                    event.preventDefault();
+                }
+            },
+            delay:500
+        });
+
+
+        $("#core_search_proximity input[type='text']").bind("change", function (e) {
+            var val=$("#core_search_proximity input[type='text']").val();
+            if (!val)
+            {
+                $("#core_search_proximity input[type='hidden']").val("");
+            }
+        });
+
+        //Adjust the classes used by the search
+        switch ($("#core_search > div").length - 1) {
+            case 5: $("#core_search").addClass("five-fields"); break;
+            case 4: $("#core_search").addClass("four-fields"); break;
+            case 3: $("#core_search").addClass("three-fields"); break;
+            case 2: $("#core_search").addClass("two-fields"); break;
+            case 1: $("#core_search").addClass("one-fields"); break;
+        }
+
+
+
+        /*  ghost text for proximity fields  */
+        var proximity_text = "events near";
+        if (!$("#core_search_proximity input[type='text']").val() | $("#core_search_proximity input[type='text']").val() == proximity_text)
+        {
+            $("#core_search_proximity input[type='text']").val(proximity_text);
+            $("#core_search_proximity input[type='text']").addClass("ghost-text");
+        }
+
+        $("#core_search_proximity input[type='text']").bind("focus", function (e) {
+            if($("#core_search_proximity input[type='text']").hasClass("ghost-text"))
+            {
+                $("#core_search_proximity input[type='text']").removeClass("ghost-text");
+                $("#core_search_proximity input[type='text']").val("");
+            }
+        });
+
+        $("#core_search_proximity input[type='text']").bind("blur", function (e) {
+            if (!$("#core_search_proximity input[type='text']").val()) {
+                $("#core_search_proximity input[type='text']").val(proximity_text);
+                $("#core_search_proximity input[type='text']").addClass("ghost-text");
+            }
+        });
+
+        var proximity_radius_text = "from city state zip";
+
+        if (!$("#core_search_proximity_radius input[type='text']").val() | $("#core_search_proximity_radius input[type='text']").val() == proximity_radius_text) {
+            $("#core_search_proximity_radius input[type='text']").val(proximity_radius_text);
+            $("#core_search_proximity_radius input[type='text']").addClass("ghost-text");
+        }
+
+        $("#core_search_proximity_radius input[type='text']").bind("focus", function (e) {
+            if ($("#core_search_proximity_radius input[type='text']").hasClass("ghost-text")) {
+                $("#core_search_proximity_radius input[type='text']").removeClass("ghost-text");
+                $("#core_search_proximity_radius input[type='text']").val("");
+            }
+        });
+
+        $("#core_search_proximity_radius input[type='text']").bind("blur", function (e) {
+            if (!$("#core_search_proximity_radius input[type='text']").val()) {
+                $("#core_search_proximity_radius input[type='text']").val(proximity_radius_text);
+                $("#core_search_proximity_radius input[type='text']").addClass("ghost-text");
+            }
+        });
+
+        
+        $("#core_search_submit input[type='submit']").on("click", function () {
+            if ($("#core_search_proximity_radius input[type='text']").hasClass("ghost-text")) {
+                $("#core_search_proximity_radius input[type='text']").val("");
+            }
+            if($("#core_search_proximity input[type='text']").hasClass("ghost-text"))
+            {
+                $("#core_search_proximity input[type='text']").val("");
+            }
+        });
+
+    });
+
+    function doSearch()
+    {
+        if(ActiveData.Variables.runtime.isDetails)
+        {
+            window.location= ActiveData.Variables.runtime.listUrl + "?search=y";
+        }
+        else {
+            //if (window.parent.ADX) {
+            //    //Hide the gadget if possible
+            //    window.parent.ActiveData.Gadgets.Hide();
+            //}
+            window.parent.document.getElementById("frmPublicMaster").submit();
+        }
+    }
+
+    function TrackSearchClick() {
+        var startDate = $(".core-search-start-date").val();
+        var endDate = $(".core-search-end-date").val();
+        var keyword = $(".core-search-keywords").val();
+        if (typeof _gaq != 'undefined') {
+            _gaq.push(['_trackEvent', 'Event Search', 'Date Range', startDate + ' ' + endDate]);
+            _gaq.push(['_trackEvent', 'Event Search', 'Keywords', keyword]);
+        }
+    }
+
+    ActiveData.Variables.runtime.searchUrl = 'https://calendar.augusta.edu/?startdate=3/10/2019&enddate=9/6/2019';
+    </script>
+    <style>
+     .ui-autocomplete {
+        max-height: 210px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    * html .ui-autocomplete {
+        height: 100px;
+    }
+
+    .ghost-text {
+        color: #ccc;
+    }
+    </style>
+    <div class="core-primary-container" id="core_search">
+     <div class="core-input-container" id="core_search_start_date">
+      <label class="core-label" for="publicBody_siteBody_UCEventSearch_UCEventSearch_txtStartDate" id="publicBody_siteBody_UCEventSearch_UCEventSearch_lblStartDate">
+       Start Date
+      </label>
+      <input class="core-search-start-date core-text" id="publicBody_siteBody_UCEventSearch_UCEventSearch_txtStartDate" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$txtStartDate" type="text" value="3/10/2019"/>
+     </div>
+     <div class="core-input-container" id="core_search_end_date">
+      <label class="core-label" for="publicBody_siteBody_UCEventSearch_UCEventSearch_txtEndDate" id="publicBody_siteBody_UCEventSearch_UCEventSearch_lblEndDate">
+       End Date
+      </label>
+      <input class="core-search-end-date core-text" id="publicBody_siteBody_UCEventSearch_UCEventSearch_txtEndDate" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$txtEndDate" type="text" value="9/6/2019"/>
+     </div>
+     <div class="core-input-container" id="core_search_keywords">
+      <label class="core-label" for="publicBody_siteBody_UCEventSearch_UCEventSearch_txtKeywords" id="publicBody_siteBody_UCEventSearch_UCEventSearch_lblKeywords">
+       Keyword
+      </label>
+      <input class="core-search-keywords core-text" id="publicBody_siteBody_UCEventSearch_UCEventSearch_txtKeywords" maxlength="1000" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$txtKeywords" type="text"/>
+     </div>
+     <div class="core-input-container" id="core_search_location">
+      <label class="core-label" for="publicBody_siteBody_UCEventSearch_UCEventSearch_ddlLocation" id="publicBody_siteBody_UCEventSearch_UCEventSearch_lblLocation">
+       Location
+      </label>
+      <select class="search-location core-dropdown" id="publicBody_siteBody_UCEventSearch_UCEventSearch_ddlLocation" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$ddlLocation">
+       <option selected="selected" value="">
+        Select
+       </option>
+       <option value="41c34f1bfce64edb89158a5bb90bab7f">
+        Forest Hills Campus
+       </option>
+       <option value="39ec12cf4c5a46bdaa9602096b4ecab5">
+        -Christenberry Field House
+       </option>
+       <option value="4b66cb02355a48d5a9f8f8fbe6bd8957">
+        -Forest Hills Golf House
+       </option>
+       <option value="701199d42c3449faaa9ea86fb7bb7514">
+        -Jaguar Field
+       </option>
+       <option value="58899cac98f04de58001f9fbeabf65da">
+        -Norvell Golf House
+       </option>
+       <option value="b0b99bdec26c47f38b82d6cb65c83941">
+        -University Village
+       </option>
+       <option value="15c77fe178b545c89187010f7316ce1f">
+        Health Sciences Campus
+       </option>
+       <option value="a36320a6738849f18a7005255cc86c65">
+        -Administration, G. Lombard Kelly Building
+       </option>
+       <option value="288d11f5b0bd4c93bdecbdca98bc072e">
+        -Alumni Center
+       </option>
+       <option value="78021f0e1a234ae4b530d23a785de50a">
+        -Annex I
+       </option>
+       <option value="1e2a1b71828a40e6b8c663482e2be919">
+        -Annex II
+       </option>
+       <option value="370e7c2a6c6d41b986fcfe985bc583c4">
+        -Cancer Clinic
+       </option>
+       <option value="59353f503c04448481a3f1c6f3aac79f">
+        -Cancer Research Center
+       </option>
+       <option value="a438fd9784a041a2a514141d3f8a8186">
+        -Cardiovascular Center
+       </option>
+       <option value="c61ec32a906a462880ea82cbcb0b5a9a">
+        -Cardiovascular Center 15th Street
+       </option>
+       <option value="2d2b97e9ef86403c900ce0c22147b7f4">
+        -Child Care Center
+       </option>
+       <option value="acf3613343654179bdf8607e6df58b7c">
+        -Children's Hospital of Georgia
+       </option>
+       <option value="64c49f3f2b1a42cb88c95b686e1bf8ac">
+        -Clinical Cancer Research
+       </option>
+       <option value="5af4496bd220449295b1c6fc7ec97758">
+        -Clinical Investigative Services
+       </option>
+       <option value="d41bad25fca04134832c5c1cab57471e">
+        -Community Medicine Offices
+       </option>
+       <option value="88da548d6817444cbfb622e640586caf">
+        -Dugas Building
+       </option>
+       <option value="a19585c716e64bd88b513b1fa6b861b7">
+        -Elm Hall
+       </option>
+       <option value="dc9dac9c2f4c4ae8a18f0f689a3818b1">
+        -Faculty Office Building
+       </option>
+       <option value="f5dfe6fb99cb4b24a81afb72781f392d">
+        -Harrison Education Commons Building
+       </option>
+       <option value="22b87d31021c47fe9259420eb32ae65b">
+        -Health Sciences Building
+       </option>
+       <option value="c32cdaa4067841fdb66195365f478e4d">
+        -Human Resources
+       </option>
+       <option value="0ca4562c3d7b48a4a7153ca5c469956d">
+        -Interdisciplinary Research Center
+       </option>
+       <option value="eaf23ba747214b1798ab54a01580ba37">
+        -Jennings Building
+       </option>
+       <option value="9f0792a9c8bb47878b95d6d0ca3b5f54">
+        -Lansing B. Lee Sr. Auditoria Center
+       </option>
+       <option value="3561fc3a22b54be894c720b6a0b14811">
+        -Medical Center
+       </option>
+       <option value="d15b9e8663554352a1d238fda855031c">
+        -Medical Center (Terrace Dining)
+       </option>
+       <option value="944b41464bde474095f9e79d50d7fce0">
+        -Medical Office Building
+       </option>
+       <option value="d13f4b2ed5994c58be9806e33f7435a4">
+        -Murphey Building
+       </option>
+       <option value="e5aa57f458ec410da4baf2e405e6df98">
+        -Oak Hall
+       </option>
+       <option value="dc32497ca2e940208b79e7932848dfba">
+        -Pavilion I
+       </option>
+       <option value="6de48492739144e09b6aa3d165506c6b">
+        -Pavilion II
+       </option>
+       <option value="68cff44583184a3cacfb62da35cd4dc8">
+        -Pavilion III
+       </option>
+       <option value="519958fcd5704a27886953cd837cccd7">
+        -Professional Building 1
+       </option>
+       <option value="a584484ed8e0432b883f31fa301a1ac3">
+        -Robert B. Greenblatt, MD Library
+       </option>
+       <option value="b7037fcf705948a9a991ff7a20b8bf6f">
+        -Sanders R &amp; E Building
+       </option>
+       <option value="c889510155a34b6b926a620fe0528f19">
+        -Sports Medicine
+       </option>
+       <option value="67e6eda4e27f49f99ff0138c7a79a5d5">
+        -Stoney Building
+       </option>
+       <option value="0abe7e089bbb45d7a2406812d64897dc">
+        -Student Center
+       </option>
+       <option value="aea177085a5a4502bf993f58b7485f29">
+        -The Dental College of Georgia
+       </option>
+       <option value="8c4b5bfe620b4780849bd88778c1b78a">
+        -UGA Pharmacy
+       </option>
+       <option value="8872fc5fee3447a2a23bb183d06275ac">
+        -Walter L. Shepeard Building
+       </option>
+       <option value="12b429021cbc49b098839e8dc4789ce0">
+        Off Campus
+       </option>
+       <option value="e4a3c390c5e74bf4ab2da04f668f4539">
+        -Augusta Commons
+       </option>
+       <option value="073f4220aaef4685b2930f272087f583">
+        -Augusta Riverwalk
+       </option>
+       <option value="4cbd638aee9344f88a274eb892b4fa28">
+        -Bell Auditorium
+       </option>
+       <option value="cf159b3fa84a4a71aacb191d8448617a">
+        -Brunswick National Lanes
+       </option>
+       <option value="06ded99edde44543823c3cb074b27fc9">
+        -Edgar's Grille
+       </option>
+       <option value="a75a97e3f24443a9912ad53bf8da81c3">
+        -Evans Towne Center Park
+       </option>
+       <option value="19b46f632a814b7aafbce629dd618e59">
+        -Georgia War Veterans Nursing Home
+       </option>
+       <option value="581173bd26224457a36fc757da041290">
+        -Gertrude Herbert Institute of Art
+       </option>
+       <option value="5152e611ec8f4710b9a4c09be4ae50b9">
+        -Imperial Theatre
+       </option>
+       <option value="d70ae5ff6f944fb4921724aed67539e0">
+        -James Brown Arena
+       </option>
+       <option value="a5b195af5ae9490bafccdf41c7392001">
+        -Jones Creek Golf Course
+       </option>
+       <option value="d188ab7a3d854650b69482fc2efac213">
+        -Kroc Center Augusta
+       </option>
+       <option value="019fe3f6ccc74b84a1889dfa76f80289">
+        -La Chat Noir
+       </option>
+       <option value="f4f99363c95c463d86fa98beeee055ef">
+        -Lake Olmstead Stadium
+       </option>
+       <option value="bad46fda82a2432ab055d93f1bf3be5f">
+        -Newman Tennis Center
+       </option>
+       <option value="966c4da305c349b5abc5f4a5e262d0cd">
+        -Twin Gables
+       </option>
+       <option value="b5bd7976eab54b8ca793723b491aead7">
+        Riverfront Campus
+       </option>
+       <option value="f8ba8cb5738c4fba8b92706abcb6a760">
+        -Georgia Cyber Center Hull McKnight Building
+       </option>
+       <option value="ef836884544848799d641aaf75d8e575">
+        Summerville Campus
+       </option>
+       <option value="9f863430acdc457590370f96cf0055cd">
+        -Allgood Hall
+       </option>
+       <option value="e0a21041a6c849f19167a1e70ba4141b">
+        -Alumni Development Annex
+       </option>
+       <option value="d80e8cf8c8db4375be26515b6e44435e">
+        -Archaelogy Lab
+       </option>
+       <option value="e25b655cf3014360b296a2b901919d3a">
+        -Bellevue Annex
+       </option>
+       <option value="7a337842cea5492fb7289a686fc04a0a">
+        -Bellevue Hall
+       </option>
+       <option value="70921e75991e4005b66b784b727cac8c">
+        -Benet House
+       </option>
+       <option value="9a6e5124840b4c119d7df7249cd60f3f">
+        -Boykin Wright
+       </option>
+       <option value="d40547c14edf47f7aa2700303a9ba166">
+        -Central Energy Plant
+       </option>
+       <option value="6ef0a3ab14f74db58b463642b1465766">
+        -Ceramics &amp; Sculpture
+       </option>
+       <option value="ec03e32b52144e0d9b8b8c4dd8a3e8c2">
+        -Chateau
+       </option>
+       <option value="4d7ff988b9dc40a1b7191d7a23376f5a">
+        -Douglas Barnard Amphitheater
+       </option>
+       <option value="faa9b6ced8324faa982fb09912e16e43">
+        -Faculty Art Studios
+       </option>
+       <option value="30d8f2b429e64dcf82007add361a7646">
+        -Fanning Hall
+       </option>
+       <option value="5f9c97b478ab414ab770ad4189262869">
+        -Fine Arts Center
+       </option>
+       <option value="b6979a1afb344931b06d0a6f7126536f">
+        -Galloway Hall
+       </option>
+       <option value="ad931b7fc20f47728136c14b1679a5e0">
+        -Guardhouse Museum
+       </option>
+       <option value="5746caa9bc4746eeb15dab1371115f88">
+        -Jaguar Student Activity Center (JSAC)
+       </option>
+       <option value="e0d0097fc895468bb5fdfd6d7853257c">
+        -Maxwell Alumni House
+       </option>
+       <option value="c346aaf63a6641e288105dc6f1df09f2">
+        -Maxwell Theatre
+       </option>
+       <option value="a5f7321de80543abb283f7c384121745">
+        -Payne Hall
+       </option>
+       <option value="ae3697443a754b4a8722b3134c3e3645">
+        -Quad Wall Building
+       </option>
+       <option value="7bb8a34a0f3d465ca4bc147da119468f">
+        -Radio Station, CETC
+       </option>
+       <option value="6b857b784dba442f93b9e6e1e9129644">
+        -Rains Hall
+       </option>
+       <option value="e0db18b9dba04e4bb19acb48c1379792">
+        -Reese Library
+       </option>
+       <option value="83e6f4a149b347a6a7ddba248fab3e18">
+        -Science Hall
+       </option>
+       <option value="2a7cd7b24f1d405dbc1147b112fc0a16">
+        -University Hall
+       </option>
+       <option value="2ffde72bad0846249ddff1d39e7a7827">
+        -Washington Hall
+       </option>
+       <option value="ef8b920e08fe417eb17a15bc697add14">
+        --Mary S. Byrd Gallery
+       </option>
+      </select>
+      <a href="javascript:void(0)">
+       Select Multiple
+      </a>
+     </div>
+     <div class="core-input-container" id="core_search_category">
+      <label class="core-label" for="publicBody_siteBody_UCEventSearch_UCEventSearch_ddlCategory" id="publicBody_siteBody_UCEventSearch_UCEventSearch_lblCategory">
+       Category
+      </label>
+      <select class="search-category core-dropdown" id="publicBody_siteBody_UCEventSearch_UCEventSearch_ddlCategory" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$ddlCategory">
+       <option selected="selected" value="">
+        Select
+       </option>
+       <option value="bbed6d822950438c843485bed90aa554">
+        Academics
+       </option>
+       <option value="2862ceae5709441aa30faf7af9dce371">
+        -1st Eight Weeks
+       </option>
+       <option value="a88dc1fe4cb84eed975aedba442800c2">
+        -2nd Eight Weeks
+       </option>
+       <option value="b59fd034a4bf479fa703afc33bb6fe77">
+        -Full Term
+       </option>
+       <option value="b6bde13d617f48ff9644bb59393da02b">
+        -Summer-1st Five Weeks
+       </option>
+       <option value="fc168382b7da4b168282546b56560612">
+        -Summer-2nd Five Weeks
+       </option>
+       <option value="c3a34f693d684c5181a3333fce46446a">
+        -Summer-7 1/2 Weeks
+       </option>
+       <option value="35d97ba9cdad48c1aa89420f1637fbd8">
+        -Summer-Full Term 10 Weeks
+       </option>
+       <option value="dfd8893e791340bd80bbbfecc5269c3d">
+        -Summer-Full Term 11 Weeks
+       </option>
+       <option value="09d0b5f0a5bc4f73aa14f3f6899f14e6">
+        Alumni
+       </option>
+       <option value="bfb9eceab8f14017b8d23124a684462f">
+        Arts and Culture
+       </option>
+       <option value="324134ad62d946659ec6ba9cba1d09c3">
+        Athletics
+       </option>
+       <option value="8edf467d54544b839866b05d490de802">
+        Conferences, Fairs, &amp; Symposiums
+       </option>
+       <option value="1a2710e6aa9a42c9a88b3151f978c7e0">
+        Healthcare
+       </option>
+       <option value="52dcb3b000a74581b18c0f7413138498">
+        Major University Events
+       </option>
+       <option value="6ba3d0e5a93349aca841e56af9ef9f63">
+        Professional Development
+       </option>
+       <option value="96a8106b2f464c7c8008a52bbc6b6e17">
+        -HR Training
+       </option>
+       <option value="a63a25c6a8f447d8b138a3dcdc97ea38">
+        Research
+       </option>
+       <option value="13b5fd6f08a2492bb7eebc0789880269">
+        Students
+       </option>
+      </select>
+      <a href="javascript:void(0)">
+       Select Multiple
+      </a>
+     </div>
+     <div class="core-button-container" id="core_search_submit">
+      <input class="core-button-search core-button-submit" id="btnSearch" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$btnSearch" onclick="TrackSearchClick();" type="submit" value="Search"/>
+      <input class="core-button-clear" id="lbtnClearSearch" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCEventSearch$UCEventSearch$lbtnClearSearch" type="submit" value="Clear"/>
+     </div>
+    </div>
+    <!-- End Event Search -->
+   </section>
+   <div id="search_range">
+    Sunday, March 10, 2019 - Friday, September 6, 2019
+   </div>
+   <div style="clear: both;">
+   </div>
+   <script type="text/javascript">
+    $(function () {
+        if ($("#search_results").length > 0) {
+            $('#search-box').show();
+        }
+    });
+   </script>
+   <section class="clearfix" id="theme-list-view">
+    <section id="main-content">
+     <!-- URL -->
+     <script>
+      pathArray = window.location.href.split('/'); protocol = pathArray[0]; host = pathArray[2]; base_url = protocol + '//' + host;
+     </script>
+     <div class="adx-rendering" data-async="true">
+     </div>
+     <div class="event-pagination">
+     </div>
+    </section>
+    <aside class="hide" id="sidebar">
+     <section class="list-shareit">
+      <h3>
+       Share It
+      </h3>
+      <div class="supersocialshare" data-animate="false" data-networks="google,linkedin,twitter,facebook" data-open="true" data-url="">
+      </div>
+      <span class="social-share-508">
+       <a class="social-share-508" id="social-share-facebook">
+        Facebook
+       </a>
+       <br/>
+       <a class="social-share-508" id="social-share-twitter">
+        Twitter
+       </a>
+       <br/>
+       <a class="social-share-508" id="social-share-google">
+        Google Plus
+       </a>
+       <br/>
+       <a class="social-share-508" id="social-share-linkedin">
+        LinkedIn
+       </a>
+      </span>
+     </section>
+     <section class="list-subscribe">
+      <h3>
+       Subscribe
+      </h3>
+      <ul class="subscribe-section" style="padding-left: 5px;">
+       <li>
+        <a class="gadget-link" data-gadgetaction="Subscribe" data-gadgetsite="" data-query="duration=1months" data-sharetype="rss" id="rss-icon" title="RSS Subscription">
+         <img alt="Add to RSS" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/rss-icon2.png"/>
+        </a>
+       </li>
+       <li>
+        <a class="adx-share-sendtogoogle" data-analytics="SendtoGoogle" data-gadgetsite="" data-query="duration=1months" data-sharetype="ical" target="_blank" title="Add to Google Calendar">
+         <img alt="Add to Google Calendar" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/share-icons/google.png"/>
+        </a>
+       </li>
+       <li>
+        <a class="gadget-link add-calendar" data-gadgetaction="Subscribe" data-gadgetsite="" data-query="duration=1months" data-sharetype="ical" title="iCal Subscription">
+         <img alt="Add to Calendar" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/share-icons/outlook.png"/>
+        </a>
+       </li>
+       <li>
+        <a class="gadget-link" data-gadgetaction="Alert" data-gadgetsite="" title="Add Notifications">
+         <img alt="Email" class="core-sidebar-subscribe-icon" src="/Layouts/Community/Default%20Site/Active%20Data%20Default/images/notifications_icon.png"/>
+        </a>
+       </li>
+      </ul>
+     </section>
+    </aside>
+   </section>
+   <!-- Application Syndication Manager -->
+   <script type="text/javascript">
+    function TrackSyndicationClick(item) {
+        if (typeof _gaq != 'undefined') {
+            _gaq.push(['_trackEvent', 'Syndication', 'Click', item]);
+        }
+    }
+
+    //$(function () {
+    //    initUCSyndication();
+    //});
+
+    function initUCSyndication() {
+        //Get all links that need to be "linked"
+        var lSite = ActiveData.Variables.site.route;
+        var lTenant = ActiveData.Variables.tenant.route;
+        var lLinksFound = false;
+
+        //Generic Links
+        $(".adx-share-link").each(function () {
+            //Link Items Found
+            var lType = $(this).attr("data-sharetype");
+            var lDataQuery = $(this).attr("data-query");
+
+            if (!lDataQuery) {
+                lDataQuery = $("#hdnQueryParams").val();
+            }
+
+            var lurl = ActiveData.Routes.Generic("page", lType, lDataQuery, lTenant, lSite);
+            if (lType.toLowerCase() == "ical") {
+                var lBaseUrl = ActiveData.Variables.BaseUrl.replace("http://", "webcal://");
+                lurl = lBaseUrl + lurl;
+            }
+            $(this).attr("href", lurl);
+
+        }).click(function () { TrackSyndicationClick($(this).attr("data-analytics")); });
+
+        //Specialized Links
+        $(".adx-share-sendtogoogle").each(function () {
+            //Link Items Found
+            var lType = $(this).attr("data-sharetype");
+            var lDataQuery = $("#hdnQuerySendEventToGoogle").val();
+            var lBaseUrl = ActiveData.Variables.runtime.baseUrl;
+
+            var regex = /^https/i;
+            if (regex.test(lBaseUrl)) {
+                lBaseUrl = "http" + lBaseUrl.substring(5);
+            }
+
+            $(this).attr("href", "https://www.google.com/calendar/render?cid=" + encodeURIComponent(lBaseUrl + ActiveData.Routes.Generic("page", lType, lDataQuery, lTenant, lSite)));
+
+        }).click(function () { TrackSyndicationClick($(this).attr("data-analytics")); });
+
+
+        $(".adx-share-sendeventtogoogle").each(function () {
+            //Link Items Found
+            var lEventData = $("#hdnQuerySendEventToGoogle").val();
+            $(this).attr("href", "http://www.google.com/calendar/event?action=TEMPLATE" + lEventData);
+
+        }).click(function () { TrackSyndicationClick($(this).attr("data-analytics")); });
+    }
+   </script>
+   <input id="hdnQueryParams" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCSyndication$hdnQueryParams" type="hidden" value="startdate=3/10/2019&amp;enddate=9/6/2019&amp;keywords=&amp;category=&amp;location="/>
+   <input id="hdnQuerySendEventToGoogle" name="ctl01$ctl00$ctl00$publicBody$siteBody$UCSyndication$hdnQuerySendEventToGoogle" type="hidden" value="keywords=&amp;category=&amp;location="/>
+   <!--
+ADD THESE TO YOUR PAGE TO ENABLE FEED LINKS
+-------------------------------------------
+<a class="adx-share-link" data-sharetype="rss" data-analytics="RSS">RSS</a>
+<a class="adx-share-link" data-sharetype="ical" data-analytics="ICAL">iCal</a>
+<a class="adx-share-link" data-sharetype="csv" data-analytics="CSV">CSV</a>
+<a class="adx-share-link" data-sharetype="xml" data-analytics="XML">XML</a>
+<a class="adx-share-sendtogoogle" data-sharetype="ical" data-analytics="SendtoGoogle">Send to Google Calendar</a>
+<a class="adx-share-link" data-sharetype="print" data-analytics="Print">Print</a>
+-->
+   <!-- On Document Ready -->
+   <script>
+    $(function () {
+            //Application Gadgets
+            ActiveData.Gadgets.RegisterGadgets();
+        });
+   </script>
+   <!-- Required Application Element -->
+   <!-- Layout Footer -->
+   <footer id="sitefooter">
+    <p>
+     <script type="text/javascript">
+      document.write("Copyright " + new Date().getFullYear() + " ");
+     </script>
+     <a href="https://www.dudesolutions.com/privacy" target="_blank" title="Dude Solutions Inc.">
+      Dude Solutions Inc.
+     </a>
+    </p>
+   </footer>
+  </div>
+  <!-- Application Gadget Manager -->
+  <div class="adx-modal" id="gadget">
+   <div class="adx-modal-inner">
+    <div class="adx-modal-canvas">
+     <div class="core-primary-container" id="adx-modal-form">
+     </div>
+     <div class="core-primary-container" id="adx-modal-submit">
+      <div class="g-recaptcha" data-sitekey="6LcSqxITAAAAACdGZEBCysJzw9m_PfQ-_7ev9g1R" id="adx-modal-recaptcha">
+      </div>
+      <div class="core-button-container">
+       <a class="core-button-submit" id="lbtnGadgetSubmit">
+        Submit
+       </a>
+      </div>
+      <div id="adx-modal-error">
+      </div>
+     </div>
+     <input id="adx-modal-scroll-position" type="hidden" value=""/>
+    </div>
+    <a class="adx-close-modal">
+     Close
+    </a>
+   </div>
+  </div>
+  <script>
+   var intervalID = window.setInterval(captchaLabelCallback, 50);
+    function captchaLabelCallback() {
+        var textAreaCheck = document.getElementsByClassName('g-recaptcha-response');
+        if (textAreaCheck.length > 0) {
+               $(textAreaCheck).attr('aria-labelledby', 'g-recaptcha-response');
+          clearInterval(intervalID);
+        }
+     }
+  </script>
+  <!-- Footer Scripts -->
+  <script src="/Layouts/Community/Default Site/Active Data Default/js/site-scripts.js?ver=2018.10.05">
+  </script>
+  <!-- Social Share -->
+  <script src="/Layouts/Community/Default Site/Active Data Default/js/sss.js">
+  </script>
+  <script src="/Layouts/Community/Default Site/Active Data Default/js/share-it.js?ver=2016.4.0.6">
+  </script>
+ </form>
+ <iframe src="https://surveys.ep.dudesolutions.com/transfer.html?remove=tenant&amp;remove=user&amp;remove=userPrivelege&amp;remove=siteId" style="width: 1px; height: 1px; position: absolute; top: -1px; left: -1px;">
+ </iframe>
+</body>
+

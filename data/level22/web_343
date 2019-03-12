@@ -1,0 +1,684 @@
+http://registrar.schedule.wsu.edu/
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="telephone=no" name="format-detection"/>
+  <meta content="address=no" name="format-detection"/>
+  <meta content="date=no" name="format-detection"/>
+  <meta content="email=no" name="format-detection"/>
+  <title>
+   Academic Room Scheduling
+  </title>
+  <!-- FAVICON -->
+  <link href="//repo.wsu.edu/spine/2/favicon.ico" rel="shortcut icon"/>
+  <!-- STYLESHEETS -->
+  <link href="/Bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+  <link href="//repo.wsu.edu/spine/2/spine.min.css" rel="stylesheet" type="text/css"/>
+  <!-- RESPOND -->
+  <meta content="width=device-width, user-scalable=yes" name="viewport"/>
+  <!-- SCRIPTS -->
+  <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+  </script>
+  <script src="//repo.wsu.edu/spine/2/spine.min.js">
+  </script>
+  <script src="/scripts/colorbox/jquery.colorbox-min.js" type="text/javascript">
+  </script>
+  <link href="/scripts/colorbox/colorbox.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/fancybox/jquery.fancybox.pack.js" type="text/javascript">
+  </script>
+  <link href="/scripts/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css">
+   <script src="/scripts/Common.js" type="text/javascript">
+   </script>
+   <script src="/Bootstrap/js/bootstrap.js" type="text/javascript">
+   </script>
+   <link href="/scripts/fullcalendar.2.1.1/fullcalendar.css" rel="stylesheet" type="text/css"/>
+   <script src="/scripts/fullcalendar.2.1.1/moment.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/fullcalendar.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/gcal.js" type="text/javascript">
+   </script>
+   <!-- COMPATIBILITY -->
+   <!-- Include an HTML5 compatibility shim for HTML5 -->
+   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+   <!-- Ensure the Spine is displayed fully when no-JS -->
+   <noscript>
+    <style>
+     #spine .spine-sitenav ul ul li {
+        display: block !important;
+      }
+    </style>
+   </noscript>
+   <link href="/css/base.css" rel="stylesheet" type="text/css"/>
+   <!-- ANALYTICS -->
+   <script type="text/javascript">
+    /* <![CDATA[ */
+  var wsu_analytics = {
+    "wsuglobal":{
+      "campus":"all",
+      "unit":"registrar",
+      "events":[]
+    },
+    "app":{
+      "ga_code":"UA-69906812-1"
+    },
+    "site":{
+      "ga_code":"UA-79150478-8"
+    }
+
+  };
+  /* ]]> */
+   </script>
+   <script id="tracker_agent" src="https://repo.wsu.edu/jtrack/develop/bootstrap/bootstrap.min.js">
+   </script>
+   <link href="/css/SpinePad1.css" rel="stylesheet" type="text/css"/>
+   <script type="text/javascript">
+    $(document).ready(function(){
+      $(".jqbutton").button();
+      $(window).resize(resizeContent);
+      resizeContent();
+      setupRemoteContentLinks();
+    });
+	
+	function resizeContent(){
+      var newHeight = $(window).height();
+      var newWidth = $(window).width();
+      $(".resize-width").css("width", newWidth + "px");
+	}
+	
+	function setupRemoteContentLinks(){
+        $(".remote-content").each(function () {
+            $(this).on('click', function (e) {
+                var href = $(this).attr("href");
+                var title = $(this).attr("title");
+                if (title == undefined || title == null || title == "") {
+                    title = $(this).attr("alt");
+                    if (title == undefined || title == null || title == "") {
+                        title = "Info";
+                    }
+                }
+
+                var contentURL = "https://cms.em.wsu.edu/Ajax?Action=RemoteContent&URL=" + encodeURI(href);
+                var umbracoPageId = $(this).attr("rel");
+                if (umbracoPageId != undefined && umbracoPageId != null && umbracoPageId != "") {
+                    contentURL = "https://cms.em.wsu.edu/Ajax/?Action=RenderPage&PageId=" + umbracoPageId;
+                }
+
+                if (href != undefined && href != null && href != "") {
+                    // Load the remote content
+                    e.preventDefault();
+                    $.ajax({
+                        url: contentURL,
+                        type: 'GET',
+                        success: (data) => {
+                            $("<div>" + data + "</div>").dialog({
+                                height: "auto",
+                                width: "98%",
+                                modal: true,
+                                title: title,
+                                buttons: {
+                                    Close: function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+	}
+   </script>
+  </link>
+ </head>
+ <body>
+  <a class="screen-reader-shortcut" href="#wsu-main-content">
+   Skip to main content
+  </a>
+  <a class="screen-reader-shortcut" href="#spine-navigation">
+   Skip to navigation
+  </a>
+  <!-- WRAPPING -->
+  <div class="" id="jacket">
+   <div class="hybrid max-1980" id="binder">
+    <!-- CONTENT -->
+    <main id="wsu-main-content">
+     <header class="main-header" id="main-header" style="display:none;">
+      <div class="header-group hgroup guttered padded-bottom short">
+       <sup class="sup-header">
+        <span class="sup-header-default" id="sup-header">
+        </span>
+       </sup>
+       <sub class="sub-header">
+        <span class="sub-header-default" id="sub-header">
+        </span>
+       </sub>
+      </div>
+     </header>
+     <div class="resize-widths" id="custom-header">
+      <div id="custom-header-title-wrapper">
+       <span id="custom-header-title">
+       </span>
+      </div>
+     </div>
+     <!-- Responsive Sections -->
+     <section class="row sidebar side-right" id="main-content-area">
+      <div class="column one" id="custom-column-1">
+       <article>
+        <form enctype="application/x-www-form-urlencoded" id="UmbracoCMSForm" method="post">
+         <!-- BEGIN UMBRACO MAIN CONTENT -->
+         <div id="Umbraco_Page_Title" style="display:none;">
+          Academic Room Scheduling
+         </div>
+         <div id="Umbraco_Site_Name" style="display:none;">
+          Academic Room Scheduling
+         </div>
+         <p>
+          <img alt="aerial view of Pullman campus" src="/media/751376/campus-1471.jpg?width=500&amp;height=333.5526315789474" style="width: 500px; height: 333.5526315789474px;"/>
+         </p>
+         <h5>
+          Welcome to Academic and Event Room Scheduling!
+         </h5>
+         <p>
+         </p>
+         <p>
+          Here are a few things you can access from this site:
+         </p>
+         <ul>
+          <li>
+           Academic Scheduling Deadlines
+          </li>
+          <li>
+           List of the General University Classrooms (GUCs)
+          </li>
+          <li>
+           One-Time Event requests
+          </li>
+          <li>
+           And much, much more!
+          </li>
+         </ul>
+         <p>
+         </p>
+         <p>
+          <strong>
+           Office of the Registrar
+          </strong>
+          <br/>
+          French Administration Building Rm. 346
+          <br/>
+          PO Box 641035
+          <br/>
+          Washington State University
+          <br/>
+          Pullman, WA  99164-1035
+         </p>
+         <p>
+          <a href="mailto:schedule@wsu.edu">
+           schedule@wsu.edu
+          </a>
+          <br/>
+          (509) 335-9507
+         </p>
+         <!-- END UMBRACO MAIN CONTENT -->
+        </form>
+       </article>
+      </div>
+      <div class="column two" id="custom-column-2">
+       <aside>
+        <section>
+         <h5>
+          <span class="crimson">
+           Announcements
+          </span>
+         </h5>
+         <p>
+         </p>
+         <p>
+          <strong>
+           <span class="crimson">
+            Upcoming Items
+           </span>
+          </strong>
+         </p>
+         <p>
+          <strong>
+           Fall 2019
+          </strong>
+         </p>
+         <ul>
+          <li>
+           Schedule of Classes available March 1, 2019
+          </li>
+          <li>
+           Priority Registration begins April 8, 2019
+          </li>
+          <li>
+           Classes begin August 19, 2019
+          </li>
+          <li>
+           Classes end December 6, 2019
+          </li>
+          <li>
+           Final Exams are December 9-13, 2019
+          </li>
+         </ul>
+         <p>
+          <strong>
+           Spring 2019
+          </strong>
+         </p>
+         <ul>
+          <li>
+           Schedule of Classes available October 1, 2018
+          </li>
+          <li>
+           Priority Registration begins November 5, 2018
+          </li>
+          <li>
+           Classes begin January 7, 2019
+          </li>
+          <li>
+           Classes end April 26, 2019
+          </li>
+          <li>
+           Final Exams are April 29 - May 3, 2019
+          </li>
+         </ul>
+        </section>
+       </aside>
+      </div>
+     </section>
+    </main>
+    <!-- /CONTENT -->
+    <!-- SPINE -->
+    <div class="spine-column spine-column bleed lightly" id="spine">
+     <div class="spine-glue" id="glue">
+      <header class="spine-header">
+       <a href="http://wsu.edu/" id="wsu-signature">
+        Washington State University
+       </a>
+      </header>
+      <!-- ACTIONS -->
+      <section class="spine-actions" id="wsu-actions">
+       <!-- Tabs -->
+       <ul class="spine-actions-tabs clearfix" id="wsu-actions-tabs">
+        <li class="spine-search-tab closed" id="wsu-search-tab">
+         <button>
+          Search
+         </button>
+        </li>
+        <li class="spine-contact-tab closed" id="wsu-contact-tab">
+         <button>
+          Contact
+         </button>
+        </li>
+        <li class="spine-share-tab closed" id="wsu-share-tab">
+         <button>
+          Share
+         </button>
+        </li>
+        <li class="spine-print-tab closed" id="wsu-print-tab">
+         <button>
+          Print
+         </button>
+        </li>
+       </ul>
+       <!-- Actions generated by spine.js here -->
+      </section>
+      <!--/#wsu-actions-->
+      <section class="spine-navigation" id="spine-navigation">
+       <nav class="spine-sitenav">
+        <!-- Menu Reloaded -->
+        <ul>
+         <li id="nav_menu_home">
+          <a href="/">
+           Site Home
+          </a>
+         </li>
+         <li id="nav_menu_11642">
+          <a href="/campus-schedulers-contact-information/">
+           Campus Scheduler's Contact Information
+          </a>
+         </li>
+         <li id="nav_menu_9950">
+          <a href="/departmental-schedulers-contact-information/">
+           Departmental Scheduler's Contact Information
+          </a>
+         </li>
+         <li id="nav_menu_6919">
+          <a href="/academic-scheduling-deadlines/">
+           Academic Scheduling Deadlines
+          </a>
+         </li>
+         <li id="nav_menu_51397">
+          <a href="/general-university-classroom-guc-list-for-academic-course-scheduling/">
+           General University Classroom (GUC) List for Academic Course Scheduling
+          </a>
+         </li>
+         <li id="nav_menu_51682">
+          <a href="/event-scheduling/">
+           Event Scheduling
+          </a>
+         </li>
+         <li id="nav_menu_51683">
+          <a href="/rule-80-scheduling-all-common-examinations/">
+           Rule 80 - Scheduling All Common Examinations
+          </a>
+          <ul>
+           <li id="nav_menu_51780">
+            <a href="/rule-80-scheduling-all-common-examinations/create-a-common-exam-event-request-ad-hoc-repeats/">
+             Create a Common Exam Event request - Ad Hoc Repeats
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li id="nav_menu_51684">
+          <a href="/rule-81-scheduling-out-of-class-examinations/">
+           Rule 81 - Scheduling Out-of-Class Examinations
+          </a>
+          <ul>
+           <li id="nav_menu_51841">
+            <a href="/rule-81-scheduling-out-of-class-examinations/create-an-out-of-class-exam-event-request-ad-hoc-repeats/">
+             Create an Out-of-Class Exam Event request - Ad Hoc Repeats
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li id="nav_menu_6926">
+          <a href="/final-exams/">
+           Final Exams
+          </a>
+         </li>
+         <li id="nav_menu_6927">
+          <a href="/reasonable-accommodation-classroom-requests/">
+           Reasonable Accommodation Classroom Requests
+          </a>
+         </li>
+         <li id="nav_menu_36437">
+          <a href="/schedule-builder/">
+           Schedule Builder
+          </a>
+          <ul>
+           <li id="nav_menu_36439">
+            <a href="/schedule-builder/access-and-training/">
+             Access and Training
+            </a>
+           </li>
+           <li id="nav_menu_36438">
+            <a href="/schedule-builder/frequently-asked-questions/">
+             Frequently Asked Questions
+            </a>
+           </li>
+           <li id="nav_menu_36442">
+            <a href="/schedule-builder/initial-and-final-proofing-procedures-and-guidelines/">
+             Initial and Final Proofing Procedures and Guidelines
+            </a>
+           </li>
+           <li id="nav_menu_36440">
+            <a href="/schedule-builder/print-class-schedule/">
+             Print Class Schedule
+            </a>
+           </li>
+           <li id="nav_menu_36441">
+            <a href="/schedule-builder/obiee-reports/">
+             OBIEE Reports
+            </a>
+            <ul>
+             <li id="nav_menu_36490">
+              <a href="/schedule-builder/obiee-reports/approved-course-report/">
+               Approved Course Report
+              </a>
+             </li>
+             <li id="nav_menu_36491">
+              <a href="/schedule-builder/obiee-reports/unapproved-course-report/">
+               Unapproved Course Report
+              </a>
+             </li>
+             <li id="nav_menu_36492">
+              <a href="/schedule-builder/obiee-reports/schedule-builder-data/">
+               Schedule Builder Data
+              </a>
+             </li>
+             <li id="nav_menu_36493">
+              <a href="/schedule-builder/obiee-reports/condensed-schedule-builder-data/">
+               Condensed Schedule Builder Data
+              </a>
+             </li>
+             <li id="nav_menu_36494">
+              <a href="/schedule-builder/obiee-reports/schedule-builder-notesrequests/">
+               Schedule Builder Notes/Requests
+              </a>
+             </li>
+             <li id="nav_menu_36495">
+              <a href="/schedule-builder/obiee-reports/combined-courses/">
+               Combined Courses
+              </a>
+             </li>
+             <li id="nav_menu_36496">
+              <a href="/schedule-builder/obiee-reports/uncombined-courses/">
+               Uncombined Courses
+              </a>
+             </li>
+             <li id="nav_menu_36497">
+              <a href="/schedule-builder/obiee-reports/exporting-obiee-reports-into-excel/">
+               Exporting OBIEE Reports into Excel
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li id="nav_menu_36447">
+            <a href="/schedule-builder/maintain-schedule-of-classes/">
+             Maintain Schedule of Classes
+            </a>
+            <ul>
+             <li id="nav_menu_36448">
+              <a href="/schedule-builder/maintain-schedule-of-classes/basic-data-tab/">
+               Basic Data tab
+              </a>
+             </li>
+             <li id="nav_menu_36449">
+              <a href="/schedule-builder/maintain-schedule-of-classes/meetings-tab/">
+               Meetings tab
+              </a>
+             </li>
+             <li id="nav_menu_36450">
+              <a href="/schedule-builder/maintain-schedule-of-classes/enrollment-control-tab/">
+               Enrollment Control tab
+              </a>
+             </li>
+             <li id="nav_menu_36451">
+              <a href="/schedule-builder/maintain-schedule-of-classes/reserve-cap-tab/">
+               Reserve Cap tab
+              </a>
+             </li>
+             <li id="nav_menu_36452">
+              <a href="/schedule-builder/maintain-schedule-of-classes/soc-notes-tab/">
+               SOC Notes tab
+              </a>
+             </li>
+             <li id="nav_menu_36453">
+              <a href="/schedule-builder/maintain-schedule-of-classes/exam-tab/">
+               Exam tab
+              </a>
+             </li>
+             <li id="nav_menu_36454">
+              <a href="/schedule-builder/maintain-schedule-of-classes/comments-tab/">
+               Comments tab
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li id="nav_menu_36481">
+            <a href="/schedule-builder/instructor-assignments/">
+             Instructor Assignments
+            </a>
+           </li>
+           <li id="nav_menu_36462">
+            <a href="/schedule-builder/instructoradvisor-table/">
+             Instructor/Advisor Table
+            </a>
+            <ul>
+             <li id="nav_menu_36443">
+              <a href="/schedule-builder/instructoradvisor-table/add-a-new-instructor/">
+               Add a New Instructor
+              </a>
+             </li>
+             <li id="nav_menu_36444">
+              <a href="/schedule-builder/instructoradvisor-table/add-a-subject-to-an-existing-instructor/">
+               Add a Subject to an Existing Instructor
+              </a>
+             </li>
+             <li id="nav_menu_73478">
+              <a href="/schedule-builder/instructoradvisor-table/remove-a-subject-from-an-existing-instructor/">
+               Remove a Subject from an Existing Instructor
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li id="nav_menu_36445">
+            <a href="/schedule-builder/add-a-lab-section/">
+             Add a Lab Section
+            </a>
+           </li>
+           <li id="nav_menu_36456">
+            <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/">
+             Academic Media Services (AMS) Videoconferencing Scheduling
+            </a>
+            <ul>
+             <li id="nav_menu_36473">
+              <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/ams-videoconference-originating-site/">
+               AMS Videoconference Originating Site
+              </a>
+             </li>
+             <li id="nav_menu_36475">
+              <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/ams-videoconference-receiving-site/">
+               AMS Videoconference Receiving Site
+              </a>
+             </li>
+             <li id="nav_menu_36477">
+              <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/ams-videoconference-non-wsu-campus-site/">
+               AMS Videoconference Non-WSU Campus Site
+              </a>
+             </li>
+             <li id="nav_menu_74819">
+              <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/ams-videoconference-instructor-only-section/">
+               AMS Videoconference Instructor Only section
+              </a>
+             </li>
+             <li id="nav_menu_74826">
+              <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/ams-videoconference-panapto-section/">
+               AMS Videoconference Panapto section
+              </a>
+             </li>
+             <li id="nav_menu_36479">
+              <a href="/schedule-builder/academic-media-services-ams-videoconferencing-scheduling/request-an-ams-room/">
+               Request an AMS Room
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li id="nav_menu_43503">
+            <a href="/schedule-builder/combined-sections-scheduling-guidelines/">
+             Combined Sections - Scheduling Guidelines
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-offsitenav">
+       </nav>
+      </section>
+      <!-- #navigation -->
+      <!-- Social and Global Links -->
+      <footer class="spine-footer">
+       <nav class="spine-social-channels" id="wsu-social-channels">
+        <ul>
+         <li class="facebook-channel">
+          <a href="https://facebook.com/wsupullman">
+           Facebook
+          </a>
+         </li>
+         <li class="twitter-channel">
+          <a href="https://twitter.com/wsupullman">
+           Twitter
+          </a>
+         </li>
+         <li class="youtube-channel">
+          <a href="https://www.youtube.com/washingtonstateuniv">
+           YouTube
+          </a>
+         </li>
+         <li class="directory-channel">
+          <a href="https://socialmedia.wsu.edu/">
+           Social media at WSU
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-global-links" id="wsu-global-links">
+        <ul>
+         <li class="mywsu-link">
+          <a href="https://my.wsu.edu/">
+           myWSU
+          </a>
+         </li>
+         <li class="access-link">
+          <a href="https://access.wsu.edu/">
+           Access
+          </a>
+         </li>
+         <li class="policies-link">
+          <a href="https://policies.wsu.edu/">
+           Policies
+          </a>
+         </li>
+         <li class="copyright-link">
+          <a href="https://copyright.wsu.edu">
+           ©
+          </a>
+         </li>
+        </ul>
+       </nav>
+      </footer>
+     </div>
+     <!--/glue-->
+    </div>
+    <!--/spine-->
+    <!-- /SPINE -->
+   </div>
+   <!--/cover-->
+  </div>
+  <!--/jacket-->
+  <!-- /WRAPPING -->
+  <!-- SITE CONTACT -->
+  <div itemscope="" itemtype="http://schema.org/Organization">
+   <meta content="Academic Room Scheduling" itemprop="department"/>
+   <meta content="Washington State University" itemprop="name"/>
+   <div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+    <meta content="Office of the Registrar" itemprop="location"/>
+    <meta content="PO Box 641035" itemprop="streetAddress"/>
+    <meta content="Pullman, WA" itemprop="addressLocality"/>
+    <meta content="" itemprop="addressRegion"/>
+    <meta content="99164-1035" itemprop="postalCode"/>
+   </div>
+   <meta content="509-335-9507" itemprop="telephone"/>
+   <meta content="schedule@wsu.edu" itemprop="email"/>
+   <meta content="" itemprop="contactPoint"/>
+  </div>
+  <div id="isMobile" style="display:none;">
+  </div>
+ </body>
+</html>
+

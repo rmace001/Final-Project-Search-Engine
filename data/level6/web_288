@@ -1,0 +1,1405 @@
+http://news.uci.edu
+<!DOCTYPE html>
+<html lang="en-US" xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="//web.communications.uci.edu/assets/2015/img/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="//web.communications.uci.edu/assets/2015/img/webclip-icon.png" rel="apple-touch-icon"/>
+  <title>
+   UCI News | UCI
+  </title>
+  <title>
+   UCI News – Releases, features, advisories, briefs and coverage regarding UC Irvine
+  </title>
+  <link href="//code.jquery.com" rel="dns-prefetch">
+   <link href="//maxcdn.bootstrapcdn.com" rel="dns-prefetch">
+    <link href="//fonts.googleapis.com" rel="dns-prefetch"/>
+    <link href="//s.w.org" rel="dns-prefetch"/>
+    <script type="text/javascript">
+     window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11.2.0\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/news.uci.edu\/wp-includes\/js\/wp-emoji.js?ver=5.1","twemoji":"https:\/\/news.uci.edu\/wp-includes\/js\/twemoji.js?ver=5.1"}};
+			/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 55356, 56826, 55356, 56819 ],
+					[ 55356, 56826, 8203, 55356, 56819 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 55356, 57332, 56128, 56423, 56128, 56418, 56128, 56421, 56128, 56430, 56128, 56423, 56128, 56447 ],
+					[ 55356, 57332, 8203, 56128, 56423, 8203, 56128, 56418, 8203, 56128, 56421, 8203, 56128, 56430, 8203, 56128, 56423, 8203, 56128, 56447 ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * She's the hero Emoji deserves, but not the one it needs right now.
+				 *
+				 * To test for support, try to render a new emoji (female superhero),
+				 * then compare it to how it would look if the browser doesn't render it correctly
+				 * (superhero + female sign) .
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[55358, 56760, 9792, 65039],
+					[55358, 56760, 8203, 9792, 65039]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+    </script>
+    <style type="text/css">
+     img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+    </style>
+    <link href="https://news.uci.edu/wp-content/plugins/uci-wp-video-embedder/video-embed.css?ver=5.1" id="uci-wp-video-embeder-styles-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-includes/css/dist/block-library/style.css?ver=5.1" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/plugins/cj-authorship/css/style.css?ver=5.1" id="cj-authorship-front-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/plugins/cj-related-links/css/front.css?ver=5.1" id="cj-rl-front-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400" id="sharify-font-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/plugins/siteorigin-panels/css/front-flex.min.css?ver=2.10.1" id="siteorigin-panels-front-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/themes/uciseventeen-child/assets/theme-styles/uciseventeen.css?ver=5.1" id="uciseventeen-child-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/themes/uciseventeen-child/assets/theme-styles/Bootstrap3-UCI-theme/css/bootstrap3-uci.css?ver=5.1" id="bootstrap3-uci-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/themes/uciseventeen-child/assets/theme-styles/Bootstrap3-UCI-theme/css/bootstrap3-uci-accessibility/bootstrap3-uci-accessibility.css?ver=5.1" id="bootstrap3-accessibility-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/themes/uciseventeen-child/style.css?ver=5.1" id="main-style-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=5.1" id="font-awesome-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/themes/uciseventeen/style.css?ver=0.1" id="uciseventeen-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/plugins/uci-wp-slideshow/uci-slideshow/uci-slideshow.css?ver=5.1" id="uci-slideshow-frontend-css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="https://news.uci.edu/wp-content/plugins/uci-wp-slideshow/uci-slideshow/uci-slideshow-no-bootstrap.css?ver=5.1" id="uci-slideshow-no-bootstrap-css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="https://news.uci.edu/wp-includes/js/jquery/jquery.js?ver=1.12.4" type="text/javascript">
+    </script>
+    <script src="https://news.uci.edu/wp-includes/js/jquery/jquery-migrate.js?ver=1.4.1" type="text/javascript">
+    </script>
+    <script src="https://news.uci.edu/wp-content/plugins/uci-wp-video-embedder/video-embed.js?ver=5.1" type="text/javascript">
+    </script>
+    <script src="https://news.uci.edu/wp-content/themes/uciseventeen-child/assets/js/jquery-match-height/dist/jquery.matchHeight-min.js?ver=5.1" type="text/javascript">
+    </script>
+    <script src="https://news.uci.edu/wp-content/themes/uciseventeen-child/assets/js/jquery.imgpreload/dist/jquery.imgpreload.min.js?ver=5.1" type="text/javascript">
+    </script>
+    <script src="https://news.uci.edu/wp-content/themes/uciseventeen-child/assets/js/uciseventeen/height-matching.js?ver=5.1" type="text/javascript">
+    </script>
+    <link href="https://news.uci.edu/wp-json/" rel="https://api.w.org/"/>
+    <link href="https://news.uci.edu/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+    <link href="https://news.uci.edu/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+    <meta content="WordPress 5.1" name="generator">
+     <link href="https://news.uci.edu/" rel="canonical"/>
+     <link href="https://news.uci.edu/" rel="shortlink"/>
+     <link href="https://news.uci.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnews.uci.edu%2F" rel="alternate" type="application/json+oembed"/>
+     <link href="https://news.uci.edu/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnews.uci.edu%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+     <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NP3KPCC');
+
+// Auto-wrap non-bootstrap code in a container
+jQuery(function($) {
+	if (!$('.page main .container').length && !$('.page main .container-fluid').length) {
+		$('main').addClass('container');
+	}
+});
+     </script>
+     <meta content="" name="description"/>
+     <style id="siteorigin-panels-layouts-head" media="all" type="text/css">
+      /* Layout 33373 */ #pgc-33373-0-0 { width:66.6667%;width:calc(66.6667% - ( 0.33333333333333 * 0px ) ) } #pl-33373 #panel-33373-0-0-0 , #pl-33373 #panel-33373-0-1-0 , #pl-33373 #panel-33373-1-0-0 , #pl-33373 #panel-33373-2-0-0 {  } #pgc-33373-0-1 { width:33.3333%;width:calc(33.3333% - ( 0.66666666666667 * 0px ) ) } #pg-33373-0 , #pg-33373-1 , #pg-33373-2 , #pl-33373 .so-panel:last-child { margin-bottom:0px } #pgc-33373-1-0 , #pgc-33373-2-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-33373 .so-panel { margin-bottom:30px } #pg-33373-0.panel-no-style, #pg-33373-0.panel-has-style > .panel-row-style , #pg-33373-1.panel-no-style, #pg-33373-1.panel-has-style > .panel-row-style , #pg-33373-2.panel-no-style, #pg-33373-2.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-33373-0.panel-no-style, #pg-33373-0.panel-has-style > .panel-row-style , #pg-33373-1.panel-no-style, #pg-33373-1.panel-has-style > .panel-row-style , #pg-33373-2.panel-no-style, #pg-33373-2.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-33373-0 .panel-grid-cell , #pg-33373-1 .panel-grid-cell , #pg-33373-2 .panel-grid-cell { margin-right:0 } #pg-33373-0 .panel-grid-cell , #pg-33373-1 .panel-grid-cell , #pg-33373-2 .panel-grid-cell { width:100% } #pgc-33373-0-0 { margin-bottom:30px } #pl-33373 .panel-grid-cell { padding:0 } #pl-33373 .panel-grid .panel-grid-cell-empty { display:none } #pl-33373 .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c7588c541883 */ #pgc-w5c7588c541883-0-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-w5c7588c541883 #panel-w5c7588c541883-0-0-0 , #pl-w5c7588c541883 #panel-w5c7588c541883-0-0-1 {  } #pg-w5c7588c541883-0 , #pl-w5c7588c541883 .so-panel:last-child { margin-bottom:0px } #pl-w5c7588c541883 .so-panel { margin-bottom:30px } #pg-w5c7588c541883-0.panel-no-style, #pg-w5c7588c541883-0.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c7588c541883-0.panel-no-style, #pg-w5c7588c541883-0.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c7588c541883-0 .panel-grid-cell { margin-right:0 } #pg-w5c7588c541883-0 .panel-grid-cell { width:100% } #pl-w5c7588c541883 .panel-grid-cell { padding:0 } #pl-w5c7588c541883 .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c7588c541883 .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c82bd01ef359 */ #pgc-w5c82bd01ef359-0-0 , #pgc-w5c82bd01ef359-4-0 { width:100%;width:calc(100% - ( 0 * 30px ) ) } #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-0-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-1-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-1-1-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-2-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-2-1-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-3-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-3-1-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-4-0-0 {  } #pg-w5c82bd01ef359-0 , #pg-w5c82bd01ef359-1 , #pg-w5c82bd01ef359-2 , #pg-w5c82bd01ef359-3 , #pl-w5c82bd01ef359 .so-panel { margin-bottom:30px } #pgc-w5c82bd01ef359-1-0 , #pgc-w5c82bd01ef359-2-0 , #pgc-w5c82bd01ef359-3-0 { width:25%;width:calc(25% - ( 0.750000001875 * 30px ) ) } #pgc-w5c82bd01ef359-1-1 , #pgc-w5c82bd01ef359-2-1 , #pgc-w5c82bd01ef359-3-1 { width:75%;width:calc(75% - ( 0.249999998125 * 30px ) ) } #pl-w5c82bd01ef359 .so-panel:last-child { margin-bottom:0px } #pg-w5c82bd01ef359-0.panel-no-style, #pg-w5c82bd01ef359-0.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-1.panel-no-style, #pg-w5c82bd01ef359-1.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-2.panel-no-style, #pg-w5c82bd01ef359-2.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-3.panel-no-style, #pg-w5c82bd01ef359-3.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-4.panel-no-style, #pg-w5c82bd01ef359-4.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c82bd01ef359-0.panel-no-style, #pg-w5c82bd01ef359-0.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-4.panel-no-style, #pg-w5c82bd01ef359-4.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c82bd01ef359-0 .panel-grid-cell , #pg-w5c82bd01ef359-4 .panel-grid-cell { margin-right:0 } #pg-w5c82bd01ef359-0 .panel-grid-cell , #pg-w5c82bd01ef359-1 .panel-grid-cell , #pg-w5c82bd01ef359-2 .panel-grid-cell , #pg-w5c82bd01ef359-3 .panel-grid-cell , #pg-w5c82bd01ef359-4 .panel-grid-cell { width:100% } #pgc-w5c82bd01ef359-1-0 , #pgc-w5c82bd01ef359-2-0 , #pgc-w5c82bd01ef359-3-0 { margin-bottom:30px } #pl-w5c82bd01ef359 .panel-grid-cell { padding:0 } #pl-w5c82bd01ef359 .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c82bd01ef359 .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c82bd01ef30a */ #pgc-w5c82bd01ef30a-0-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-w5c82bd01ef30a #panel-w5c82bd01ef30a-0-0-0 , #pl-w5c82bd01ef30a #panel-w5c82bd01ef30a-0-0-1 , #pl-w5c82bd01ef30a #panel-w5c82bd01ef30a-0-0-2 {  } #pg-w5c82bd01ef30a-0 , #pl-w5c82bd01ef30a .so-panel:last-child { margin-bottom:0px } #pl-w5c82bd01ef30a .so-panel { margin-bottom:30px } #pg-w5c82bd01ef30a-0.panel-no-style, #pg-w5c82bd01ef30a-0.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } #pgc-w5c82bd01ef30a-0-0 { align-self:auto } @media (max-width:780px){ #pg-w5c82bd01ef30a-0.panel-no-style, #pg-w5c82bd01ef30a-0.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c82bd01ef30a-0 .panel-grid-cell { margin-right:0 } #pg-w5c82bd01ef30a-0 .panel-grid-cell { width:100% } #pl-w5c82bd01ef30a .panel-grid-cell { padding:0 } #pl-w5c82bd01ef30a .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c82bd01ef30a .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c4219ebd97eb */ #pgc-w5c4219ebd97eb-0-0 , #pgc-w5c4219ebd97eb-0-1 , #pgc-w5c4219ebd97eb-0-2 { width:33.3333%;width:calc(33.3333% - ( 0.66666666666667 * 0px ) ) } #pl-w5c4219ebd97eb #panel-w5c4219ebd97eb-0-0-0 , #pl-w5c4219ebd97eb #panel-w5c4219ebd97eb-0-1-0 , #pl-w5c4219ebd97eb #panel-w5c4219ebd97eb-0-2-0 {  } #pg-w5c4219ebd97eb-0 , #pl-w5c4219ebd97eb .so-panel:last-child { margin-bottom:0px } #pl-w5c4219ebd97eb .so-panel { margin-bottom:30px } #pg-w5c4219ebd97eb-0.panel-no-style, #pg-w5c4219ebd97eb-0.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c4219ebd97eb-0.panel-no-style, #pg-w5c4219ebd97eb-0.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c4219ebd97eb-0 .panel-grid-cell { margin-right:0 } #pg-w5c4219ebd97eb-0 .panel-grid-cell { width:100% } #pgc-w5c4219ebd97eb-0-0 , #pgc-w5c4219ebd97eb-0-1 { margin-bottom:30px } #pl-w5c4219ebd97eb .panel-grid-cell { padding:0 } #pl-w5c4219ebd97eb .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c4219ebd97eb .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c4219ebd983a */ #pgc-w5c4219ebd983a-0-0 , #pgc-w5c4219ebd983a-2-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-w5c4219ebd983a #panel-w5c4219ebd983a-0-0-0 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-1-0-0 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-1-1-0 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-1-1-1 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-2-0-0 {  } #pg-w5c4219ebd983a-0 , #pg-w5c4219ebd983a-1 , #pg-w5c4219ebd983a-2 , #pl-w5c4219ebd983a .so-panel:last-child { margin-bottom:0px } #pgc-w5c4219ebd983a-1-0 { width:66.6667%;width:calc(66.6667% - ( 0.33333333333333 * 0px ) ) } #pgc-w5c4219ebd983a-1-1 { width:33.3333%;width:calc(33.3333% - ( 0.66666666666667 * 0px ) ) } #pl-w5c4219ebd983a .so-panel { margin-bottom:30px } #pg-w5c4219ebd983a-0.panel-no-style, #pg-w5c4219ebd983a-0.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-1.panel-no-style, #pg-w5c4219ebd983a-1.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-2.panel-no-style, #pg-w5c4219ebd983a-2.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c4219ebd983a-0.panel-no-style, #pg-w5c4219ebd983a-0.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-1.panel-no-style, #pg-w5c4219ebd983a-1.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-2.panel-no-style, #pg-w5c4219ebd983a-2.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c4219ebd983a-0 .panel-grid-cell , #pg-w5c4219ebd983a-1 .panel-grid-cell , #pg-w5c4219ebd983a-2 .panel-grid-cell { margin-right:0 } #pg-w5c4219ebd983a-0 .panel-grid-cell , #pg-w5c4219ebd983a-1 .panel-grid-cell , #pg-w5c4219ebd983a-2 .panel-grid-cell { width:100% } #pgc-w5c4219ebd983a-1-0 { margin-bottom:30px } #pl-w5c4219ebd983a .panel-grid-cell { padding:0 } #pl-w5c4219ebd983a .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c4219ebd983a .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  }
+     </style>
+     <!-- START - Facebook Open Graph, Google+ and Twitter Card Tags 1.6.3 -->
+     <meta content="en_US" property="og:locale">
+      <meta content="UCI News" property="og:site_name">
+       <meta content="Home" property="og:title"/>
+       <meta content="Home" itemprop="name"/>
+       <meta content="https://news.uci.edu" property="og:url"/>
+       <meta content="website" property="og:type"/>
+       <meta content="Top Stories
+
+
+	Resources for the Media
+
+Press Releases
+Media Advisories
+News Briefs
+Visiting Campus
+Contact Us
+
+
+Curated Images
+B-Roll
+Film &amp; Photography Permit Application
+Film Location Agreement
+
+
+
+
+	School &amp; Department News
+
+
+Arts
+Biological Sciences
+Business
+Education
+Engineering
+Huma" property="og:description"/>
+       <meta content="Top Stories
+
+
+	Resources for the Media
+
+Press Releases
+Media Advisories
+News Briefs
+Visiting Campus
+Contact Us
+
+
+Curated Images
+B-Roll
+Film &amp; Photography Permit Application
+Film Location Agreement
+
+
+
+
+	School &amp; Department News
+
+
+Arts
+Biological Sciences
+Business
+Education
+Engineering
+Huma" itemprop="description"/>
+       <!-- END - Facebook Open Graph, Google+ and Twitter Card Tags -->
+      </meta>
+     </meta>
+    </meta>
+   </link>
+  </link>
+ </head>
+ <body class="page homepage">
+  <!-- skip to main nav -->
+  <nav aria-label="Skip to" id="skip-to">
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12">
+      <a class="sr-only sr-only-focusable" href="#content-main">
+       Skip to main content
+      </a>
+     </div>
+    </div>
+   </div>
+  </nav>
+  <!-- primary nav -->
+  <nav aria-label="Primary navigation" class="navbar navbar-inverse" id="nav-primary">
+   <div class="container-fluid">
+    <div class="navbar-header">
+     <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#nav-primary-items" data-toggle="collapse" type="button">
+      <span class="sr-only">
+       Toggle primary navigation
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+      <span class="icon-bar">
+      </span>
+     </button>
+     <a class="navbar-brand" href="https://uci.edu/">
+      UCI
+      <span class="sr-only">
+       homepage
+      </span>
+     </a>
+    </div>
+    <div class="collapse navbar-collapse" id="nav-primary-items">
+     <ul class="nav navbar-nav" id="menu-main-menu">
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-69 nav-item btn-group clearfix link-dropdown" id="menu-item-69">
+       <a class="btn" href="https://news.uci.edu/category/art-and-humanities/">
+        Arts &amp; Humanities
+       </a>
+       <button aria-expanded="false" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="sr-only">
+         Toggle dropdown: Arts &amp; Humanities
+        </span>
+        <span class="toggle-container">
+         <span aria-hidden="true" class="glyphicon toggle-icon">
+         </span>
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="https://news.uci.edu/category/arts/">
+          Arts
+         </a>
+        </li>
+        <li>
+         <a href="https://news.uci.edu/category/humanities/">
+          Humanities
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-70 nav-item btn-group clearfix link-only" id="menu-item-70">
+       <a class="btn" href="https://news.uci.edu/category/athletics/">
+        Athletics
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-71 nav-item btn-group clearfix link-dropdown" id="menu-item-71">
+       <a class="btn" href="https://news.uci.edu/category/campus-life/">
+        Campus Life
+       </a>
+       <button aria-expanded="false" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="sr-only">
+         Toggle dropdown: Campus Life
+        </span>
+        <span class="toggle-container">
+         <span aria-hidden="true" class="glyphicon toggle-icon">
+         </span>
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="https://news.uci.edu/category/campus-life/administration/">
+          Administration
+         </a>
+        </li>
+        <li>
+         <a href="https://news.uci.edu/category/campus-life/students/">
+          Students
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-72 nav-item btn-group clearfix link-dropdown" id="menu-item-72">
+       <a class="btn" href="https://news.uci.edu/category/health/">
+        Health
+       </a>
+       <button aria-expanded="false" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="sr-only">
+         Toggle dropdown: Health
+        </span>
+        <span class="toggle-container">
+         <span aria-hidden="true" class="glyphicon toggle-icon">
+         </span>
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="https://news.uci.edu/category/health/hospital/">
+          Hospital
+         </a>
+        </li>
+        <li>
+         <a href="https://news.uci.edu/category/health/public-health/">
+          Public Health
+         </a>
+        </li>
+        <li>
+         <a href="https://news.uci.edu/category/health/nursing/">
+          Nursing
+         </a>
+        </li>
+        <li>
+         <a href="https://news.uci.edu/category/health/school-of-medicine/">
+          School of Medicine
+         </a>
+        </li>
+        <li>
+         <a href="https://news.uci.edu/category/health/pharmaceutical-sciences/">
+          Pharmaceutical Science
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-73 nav-item btn-group clearfix link-dropdown" id="menu-item-73">
+       <a class="btn" href="https://news.uci.edu/category/science-and-tech/">
+        Science &amp; Tech
+       </a>
+       <button aria-expanded="false" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="sr-only">
+         Toggle dropdown: Science &amp; Tech
+        </span>
+        <span class="toggle-container">
+         <span aria-hidden="true" class="glyphicon toggle-icon">
+         </span>
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="https://news.uci.edu/category/science-and-tech/environment-and-energy/">
+          Environment/Energy
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-74 nav-item btn-group clearfix link-dropdown" id="menu-item-74">
+       <a class="btn" href="https://news.uci.edu/category/society-and-community/">
+        Society &amp; Community
+       </a>
+       <button aria-expanded="false" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="sr-only">
+         Toggle dropdown: Society &amp; Community
+        </span>
+        <span class="toggle-container">
+         <span aria-hidden="true" class="glyphicon toggle-icon">
+         </span>
+        </span>
+       </button>
+       <ul class="dropdown-menu">
+        <li>
+         <a href="https://news.uci.edu/category/society-and-community/education/">
+          Education
+         </a>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </nav>
+  <header>
+   <div id="masthead">
+    <div class="container">
+     <div class="row">
+      <div class="col-sm-12 col-md-8" id="wordmark">
+       <a href="https://news.uci.edu">
+        <img alt="UCI News" class="attachment-full size-full" height="75" src="https://news.uci.edu/wp-content/uploads/2018/04/news-wordmark.png" width="302"/>
+       </a>
+      </div>
+      <div class="col-sm-12 col-md-4" id="search">
+       <form action="https://search.uci.edu/" class="form-inline" method="get">
+        <input name="collection" type="hidden" value="uci_news"/>
+        <label class="sr-only" for="search-text">
+         Search
+        </label>
+        <input class="form-control" id="search-text" name="q" placeholder="Search..." type="text"/>
+        <div class="btn-group">
+         <button class="btn btn-default" name="type" type="submit" value="Web">
+          Web
+         </button>
+         <button class="btn btn-default" name="type" type="submit" value="People">
+          People
+         </button>
+        </div>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <hr/>
+  <!--<nav aria-label="breadcrumbs" id="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                            </div>
+        </div>
+    </div>
+</nav> -->
+  <main id="content-main">
+   <div class="pb-container">
+    <div class="panel-layout" id="pl-33373">
+     <div class="panel-grid panel-has-style" id="pg-33373-0">
+      <div class="scpa-home container panel-row-style panel-row-style-for-33373-0" id="top-section">
+       <div class="panel-grid-cell" id="pgc-33373-0-0">
+        <div class="so-panel widget widget_siteorigin-panels-builder panel-first-child panel-last-child" data-index="0" id="panel-33373-0-0-0">
+         <div class="panel-widget-style panel-widget-style-for-33373-0-0-0" id="top-stories">
+          <div class="panel-layout" id="pl-w5c7588c541883">
+           <div class="panel-grid panel-no-style" id="pg-w5c7588c541883-0">
+            <div class="panel-grid-cell" id="pgc-w5c7588c541883-0-0">
+             <div class="so-panel widget widget_sow-editor panel-first-child" data-index="0" id="panel-w5c7588c541883-0-0-0">
+              <div class="so-widget-sow-editor so-widget-sow-editor-base">
+               <div class="siteorigin-widget-tinymce textwidget">
+                <h2>
+                 Top Stories
+                </h2>
+               </div>
+              </div>
+             </div>
+             <div class="so-panel widget widget_siteorigin-panels-postloop panel-last-child" data-index="1" id="panel-w5c7588c541883-0-0-1">
+              <div class="loop-lg" data-mh="loop-lg-match">
+               <div>
+                <a href="https://news.uci.edu/2019/02/06/studying-the-students/">
+                 <img alt="Studying the Students" class="img-responsive" data-mh="loop-lg-img" src="https://news.uci.edu/wp-content/uploads/2019/02/Winter2019_cover_students_ALP_bio_180906_1361_sz-720x480.jpg"/>
+                 <div class="title">
+                  Studying the Students
+                 </div>
+                </a>
+               </div>
+               <div class="excerpt">
+                UCI to pilot a national survey on undergraduate life and learning – with an eye to improving both
+               </div>
+               <div class="pubdate">
+                February 6, 2019
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/01/29/uci-is-no-1-uc-choice-for-californias-college-bound-high-school-graduates/">
+                 <img alt="UCI is No. 1 UC choice for California’s college-bound high school graduates" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/01/convocation_180924_0190_sz-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/01/29/uci-is-no-1-uc-choice-for-californias-college-bound-high-school-graduates/">
+                 <p class="media-heading">
+                  UCI is No. 1 UC choice for California’s college-bound high school graduates
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  January 29, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/02/01/black-history-month/">
+                 <img alt="Black History Month" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/01/BHM_Autumn_190117_0209_sz-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/02/01/black-history-month/">
+                 <p class="media-heading">
+                  Black History Month
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  February 1, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="panel-grid-cell" id="pgc-33373-0-1">
+        <div class="so-panel widget widget_siteorigin-panels-builder panel-first-child panel-last-child" data-index="1" id="panel-33373-0-1-0">
+         <div class="panel-layout" id="pl-w5c82bd01ef30a">
+          <div class="panel-grid panel-has-style" id="pg-w5c82bd01ef30a-0">
+           <div class="panel-row-style panel-row-style-for-w5c82bd01ef30a-0" id="top-section-right">
+            <div class="panel-grid-cell" id="pgc-w5c82bd01ef30a-0-0">
+             <div class="so-panel widget widget_sow-editor panel-first-child" data-index="0" id="panel-w5c82bd01ef30a-0-0-0">
+              <div class="panel-widget-style panel-widget-style-for-w5c82bd01ef30a-0-0-0" id="media-resources">
+               <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                <div class="siteorigin-widget-tinymce textwidget">
+                 <h2>
+                  Resources for the Media
+                 </h2>
+                 <ul>
+                  <li>
+                   <a href="/category/press-releases/">
+                    Press Releases
+                   </a>
+                  </li>
+                  <li>
+                   <a href="/category/media_advisories/">
+                    Media Advisories
+                   </a>
+                  </li>
+                  <li>
+                   <a href="/category/briefs/">
+                    News Briefs
+                   </a>
+                  </li>
+                  <li>
+                   <a href="https://uci.edu/visit/">
+                    Visiting Campus
+                   </a>
+                  </li>
+                  <li>
+                   <a href="https://communications.uci.edu/for-journalists/media-relations-contacts.php">
+                    Contact Us
+                   </a>
+                  </li>
+                 </ul>
+                 <ul>
+                  <li>
+                   <a href="https://www.flickr.com/photos/ucirvine">
+                    Curated Images
+                   </a>
+                  </li>
+                  <li>
+                   <a href="https://communications.uci.edu/campus-resources/video-resources.php">
+                    B-Roll
+                   </a>
+                  </li>
+                  <li>
+                   <a href="https://communications.uci.edu/documents/pdf/film-photography-permit-application.pdf">
+                    Film &amp; Photography Permit Application
+                   </a>
+                  </li>
+                  <li>
+                   <a href="https://communications.uci.edu/documents/word/film-location-agreement.docx">
+                    Film Location Agreement
+                   </a>
+                  </li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="so-panel widget widget_sow-editor" data-index="1" id="panel-w5c82bd01ef30a-0-0-1">
+              <div class="panel-widget-style panel-widget-style-for-w5c82bd01ef30a-0-0-1" id="schools-departments">
+               <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                <div class="siteorigin-widget-tinymce textwidget">
+                 <h2>
+                  School &amp; Department News
+                 </h2>
+                 <div class="clearfix">
+                  <ul>
+                   <li>
+                    <a href="http://www.arts.uci.edu/news">
+                     Arts
+                    </a>
+                   </li>
+                   <li>
+                    <a href="https://www.bio.uci.edu/newsroom/">
+                     Biological Sciences
+                    </a>
+                   </li>
+                   <li>
+                    <a href="https://merage.uci.edu/news/">
+                     Business
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://education.uci.edu/news-center.html">
+                     Education
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://engineering.uci.edu/news-events/news">
+                     Engineering
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://www.humanities.uci.edu/SOH/about/press_release.php">
+                     Humanities
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://www.ics.uci.edu/community/news/">
+                     Information &amp; Computer Sciences
+                    </a>
+                   </li>
+                  </ul>
+                  <ul>
+                   <li>
+                    <a href="http://www.law.uci.edu/news/">
+                     Law
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://www.som.uci.edu/news.asp">
+                     Medicine
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://nursing.uci.edu/news.asp">
+                     Nursing
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://pharmsci.uci.edu/blog/">
+                     Pharmaceutical Sciences
+                    </a>
+                   </li>
+                   <li>
+                    <a href="https://ps.uci.edu/news_and_events">
+                     Physical Sciences
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://publichealth.uci.edu/ph/_news_events">
+                     Public Health
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://socialecology.uci.edu/news">
+                     Social Ecology
+                    </a>
+                   </li>
+                   <li>
+                    <a href="http://www.socsci.uci.edu/newsevents/news/">
+                     Social Sciences
+                    </a>
+                   </li>
+                  </ul>
+                 </div>
+                 <hr>
+                  <div class="clearfix">
+                   <ul>
+                    <li>
+                     <a href="https://news.uci.edu/giving/">
+                      University Advancement
+                     </a>
+                    </li>
+                   </ul>
+                   <ul>
+                    <li>
+                     <a href="http://dtei.uci.edu/news/">
+                      Division of Teaching Excellence and Innovation
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </hr>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="so-panel widget widget_siteorigin-panels-builder panel-last-child" data-index="2" id="panel-w5c82bd01ef30a-0-0-2">
+              <div class="panel-widget-style panel-widget-style-for-w5c82bd01ef30a-0-0-2" id="in-the-news">
+               <div class="panel-layout" id="pl-w5c82bd01ef359">
+                <div class="panel-grid panel-no-style" id="pg-w5c82bd01ef359-0">
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-0-0">
+                  <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="0" id="panel-w5c82bd01ef359-0-0-0">
+                   <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                    <div class="siteorigin-widget-tinymce textwidget">
+                     <h2>
+                      UCI in the News
+                     </h2>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="panel-grid panel-no-style" id="pg-w5c82bd01ef359-1">
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-1-0">
+                  <div class="so-panel widget widget_media_image panel-first-child panel-last-child" data-index="1" id="panel-w5c82bd01ef359-1-0-0">
+                   <img alt="" class="image wp-image-33231 attachment-full size-full" height="91" src="https://news.uci.edu/wp-content/uploads/2018/04/TheConversation_136x91.jpg" style="max-width: 100%; height: auto;" width="136"/>
+                  </div>
+                 </div>
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-1-1">
+                  <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="2" id="panel-w5c82bd01ef359-1-1-0">
+                   <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                    <div class="siteorigin-widget-tinymce textwidget">
+                     <p>
+                      The Conversation
+                     </p>
+                     <p>
+                      <a href="https://theconversation.com/3-ways-activist-kids-these-days-resemble-their-predecessors-112502">
+                       3 ways activist kids these days resemble their predecessors
+                      </a>
+                     </p>
+                     <p>
+                      March 8, 2019
+                     </p>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="panel-grid panel-no-style" id="pg-w5c82bd01ef359-2">
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-2-0">
+                  <div class="so-panel widget widget_media_image panel-first-child panel-last-child" data-index="3" id="panel-w5c82bd01ef359-2-0-0">
+                   <img alt="" class="image wp-image-32915 attachment-full size-full" height="91" src="https://news.uci.edu/wp-content/uploads/2018/04/IEEE-Spectrum1.jpg" style="max-width: 100%; height: auto;" width="136"/>
+                  </div>
+                 </div>
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-2-1">
+                  <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="4" id="panel-w5c82bd01ef359-2-1-0">
+                   <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                    <div class="siteorigin-widget-tinymce textwidget">
+                     <p>
+                      IEEE Spectrum
+                     </p>
+                     <p>
+                      <a href="https://spectrum.ieee.org/the-human-os/biomedical/ethics/how-to-steal-dna-with-sound">
+                       How to Steal DNA With Sound
+                      </a>
+                     </p>
+                     <p>
+                      March 7, 2019
+                     </p>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="panel-grid panel-no-style" id="pg-w5c82bd01ef359-3">
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-3-0">
+                  <div class="so-panel widget widget_media_image panel-first-child panel-last-child" data-index="5" id="panel-w5c82bd01ef359-3-0-0">
+                   <img alt="" class="image wp-image-32976 attachment-full size-full" height="91" src="https://news.uci.edu/wp-content/uploads/2018/04/Los-Angeles-Times.jpg" style="max-width: 100%; height: auto;" width="136"/>
+                  </div>
+                 </div>
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-3-1">
+                  <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="6" id="panel-w5c82bd01ef359-3-1-0">
+                   <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                    <div class="siteorigin-widget-tinymce textwidget">
+                     <p>
+                      Los Angeles Times
+                     </p>
+                     <p>
+                      <a href="https://www.latimes.com/local/education/la-me-edu-uc-no-tuition-increase-20190307-story.html">
+                       UC will not raise tuition for California students this fall, Napolitano says
+                      </a>
+                     </p>
+                     <p>
+                      March 7, 2019
+                     </p>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="panel-grid panel-no-style" id="pg-w5c82bd01ef359-4">
+                 <div class="panel-grid-cell" id="pgc-w5c82bd01ef359-4-0">
+                  <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="7" id="panel-w5c82bd01ef359-4-0-0">
+                   <div class="so-widget-sow-editor so-widget-sow-editor-base">
+                    <div class="siteorigin-widget-tinymce textwidget">
+                     <p>
+                      <a href="https://news.uci.edu/uci-in-the-news-march-8-2019/">
+                       View more UCI in the News
+                      </a>
+                     </p>
+                     <p>
+                     </p>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="panel-grid panel-has-style" id="pg-33373-1">
+      <div class="scpa-home banded panel-row-style panel-row-style-for-33373-1">
+       <div class="panel-grid-cell" id="pgc-33373-1-0">
+        <div class="so-panel widget widget_siteorigin-panels-builder panel-first-child panel-last-child" data-index="2" id="panel-33373-1-0-0">
+         <div class="panel-layout" id="pl-w5c4219ebd97eb">
+          <div class="panel-grid panel-has-style" id="pg-w5c4219ebd97eb-0">
+           <div class="container panel-row-style panel-row-style-for-w5c4219ebd97eb-0" id="loops">
+            <div class="panel-grid-cell" id="pgc-w5c4219ebd97eb-0-0">
+             <div class="so-panel widget widget_siteorigin-panels-postloop panel-first-child panel-last-child" data-index="0" id="panel-w5c4219ebd97eb-0-0-0">
+              <h3 class="widget-title">
+               Features
+              </h3>
+              <div class="loop-lg" data-mh="loop-lg-match">
+               <div>
+                <a href="https://news.uci.edu/2019/03/04/a-new-stone-age/">
+                 <img alt="A new stone age?" class="img-responsive" data-mh="loop-lg-img" src="https://news.uci.edu/wp-content/uploads/2019/03/UCI_dr_team_O_O0702-720x480.jpg"/>
+                 <div class="title">
+                  A new stone age?
+                 </div>
+                </a>
+               </div>
+               <div class="excerpt">
+                Shock wave device used by UCI Health urologists revamps treatment for painful kidney deposits
+               </div>
+               <div class="pubdate">
+                March 4, 2019
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/03/01/dedicated-to-becoming-a-doctor/">
+                 <img alt="Dedicated to becoming a doctor" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/03/savannah_190210_0186_lr_sz-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/03/01/dedicated-to-becoming-a-doctor/">
+                 <p class="media-heading">
+                  Dedicated to becoming a doctor
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  March 1, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/02/15/seeing-the-way-forward/">
+                 <img alt="Seeing the way forward" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/02/Wong_190129_0974_sz-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/02/15/seeing-the-way-forward/">
+                 <p class="media-heading">
+                  Seeing the way forward
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  February 15, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="category-more">
+               <a href="https://news.uci.edu/category/feature/">
+                View more Features
+                <i aria-hidden="true" class="fa fa-angle-right">
+                </i>
+               </a>
+              </div>
+             </div>
+            </div>
+            <div class="panel-grid-cell" id="pgc-w5c4219ebd97eb-0-1">
+             <div class="so-panel widget widget_siteorigin-panels-postloop panel-first-child panel-last-child" data-index="1" id="panel-w5c4219ebd97eb-0-1-0">
+              <h3 class="widget-title">
+               Campus News
+              </h3>
+              <div class="loop-lg" data-mh="loop-lg-match">
+               <div>
+                <a href="https://news.uci.edu/2019/03/05/cern-approves-uci-initiated-hunt-for-new-particles-at-the-large-hadron-collider/">
+                 <img alt="CERN approves UCI-initiated hunt for new particles at the Large Hadron Collider" class="img-responsive" data-mh="loop-lg-img" src="https://news.uci.edu/wp-content/uploads/2019/03/FASERinTunnel2-720x480.jpg"/>
+                 <div class="title">
+                  CERN approves UCI-initiated hunt for new particles at the Large Hadron Collider
+                 </div>
+                </a>
+               </div>
+               <div class="excerpt">
+                FASER detector will seek clues pointing to hidden matter in the universe
+               </div>
+               <div class="pubdate">
+                March 5, 2019
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/03/01/school-of-law-founding-dean-donates-personal-professional-papers-to-uci-libraries/">
+                 <img alt="School of Law founding dean donates personal, professional papers to UCI Libraries" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/03/Chem_papers_190301_0224_szA-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/03/01/school-of-law-founding-dean-donates-personal-professional-papers-to-uci-libraries/">
+                 <p class="media-heading">
+                  School of Law founding dean donates personal, professional papers to UCI Libraries
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  March 1, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/02/28/child-poverty-could-be-cut-in-half-with-proposals-by-uci-led-national-panel/">
+                 <img alt="Child poverty could be cut in half with proposals by UCI-led national panel" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/02/Duncan_131018_01_sz-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/02/28/child-poverty-could-be-cut-in-half-with-proposals-by-uci-led-national-panel/">
+                 <p class="media-heading">
+                  Child poverty could be cut in half with proposals by UCI-led national panel
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  February 28, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="category-more">
+               <a href="https://news.uci.edu/category/campus-news/">
+                View more Campus News
+                <i aria-hidden="true" class="fa fa-angle-right">
+                </i>
+               </a>
+              </div>
+             </div>
+            </div>
+            <div class="panel-grid-cell" id="pgc-w5c4219ebd97eb-0-2">
+             <div class="so-panel widget widget_siteorigin-panels-postloop panel-first-child panel-last-child" data-index="2" id="panel-w5c4219ebd97eb-0-2-0">
+              <h3 class="widget-title">
+               Gifts &amp; Grants
+              </h3>
+              <div class="loop-lg" data-mh="loop-lg-match">
+               <div>
+                <a href="https://news.uci.edu/2019/02/12/uci-gets-5-million-to-establish-first-national-rd-center-on-improving-writing-skills/">
+                 <img alt="UCI gets $5 million to establish first national R&amp;D center on improving writing skills" class="img-responsive" data-mh="loop-lg-img" src="https://news.uci.edu/wp-content/uploads/2019/02/olson_170221_02_sz-720x480.jpg"/>
+                 <div class="title">
+                  UCI gets $5 million to establish first national R&amp;D center on improving writing skills
+                 </div>
+                </a>
+               </div>
+               <div class="excerpt">
+                Focus will be on identifying best teaching practices in middle, high school classrooms
+               </div>
+               <div class="pubdate">
+                February 12, 2019
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/02/11/associate-professor-of-education-named-jacobs-foundation-research-fellow/">
+                 <img alt="Associate professor of education Drew Bailey is named Jacobs Foundation Research Fellow" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/02/Drew-Bailey-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/02/11/associate-professor-of-education-named-jacobs-foundation-research-fellow/">
+                 <p class="media-heading">
+                  Associate professor of education Drew Bailey is named Jacobs Foundation Research Fellow
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  February 11, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="media">
+               <div class="media-left">
+                <a href="https://news.uci.edu/2019/02/07/social-sciences-dean-receives-capital-one-grant-to-study-ai-in-financial-services/">
+                 <img alt="Social sciences dean Bill Maurer is awarded grant to study use of AI in financial services" class="media-object loop-sm-img" src="https://news.uci.edu/wp-content/uploads/2019/02/billmaurer2016_880-720x480.jpg"/>
+                </a>
+               </div>
+               <div class="media-body">
+                <a href="https://news.uci.edu/2019/02/07/social-sciences-dean-receives-capital-one-grant-to-study-ai-in-financial-services/">
+                 <p class="media-heading">
+                  Social sciences dean Bill Maurer is awarded grant to study use of AI in financial services
+                 </p>
+                </a>
+                <p>
+                 <time>
+                  February 7, 2019
+                 </time>
+                </p>
+               </div>
+              </div>
+              <div class="category-more">
+               <a href="https://news.uci.edu/category/gifts-and-grants/">
+                View more Gifts &amp; Grants
+                <i aria-hidden="true" class="fa fa-angle-right">
+                </i>
+               </a>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="panel-grid panel-has-style" id="pg-33373-2">
+      <div class="scpa-home container panel-row-style panel-row-style-for-33373-2" id="featured-videos">
+       <div class="panel-grid-cell" id="pgc-33373-2-0">
+        <div class="so-panel widget widget_siteorigin-panels-builder panel-first-child panel-last-child" data-index="3" id="panel-33373-2-0-0">
+         <div class="panel-layout" id="pl-w5c4219ebd983a">
+          <div class="panel-grid panel-no-style" id="pg-w5c4219ebd983a-0">
+           <div class="panel-grid-cell" id="pgc-w5c4219ebd983a-0-0">
+            <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="0" id="panel-w5c4219ebd983a-0-0-0">
+             <div class="so-widget-sow-editor so-widget-sow-editor-base">
+              <div class="siteorigin-widget-tinymce textwidget">
+               <h2>
+                Featured Videos
+               </h2>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="panel-grid panel-has-style" id="pg-w5c4219ebd983a-1">
+           <div class="panel-row-style panel-row-style-for-w5c4219ebd983a-1" id="videos">
+            <div class="panel-grid-cell" id="pgc-w5c4219ebd983a-1-0">
+             <div class="so-panel widget widget_media_video panel-first-child panel-last-child" data-index="1" id="panel-w5c4219ebd983a-1-0-0">
+              <h3 class="widget-title">
+               Paddling toward a more accessible future
+              </h3>
+              <div class="wp-video" style="width:100%;">
+               <video class="wp-video-shortcode" controls="controls" id="video-33373-7" preload="metadata">
+                <source src="https://youtu.be/4s8o1tfpu1Y?_=7" type="video/youtube"/>
+                <a href="https://youtu.be/4s8o1tfpu1Y">
+                 https://youtu.be/4s8o1tfpu1Y
+                </a>
+               </video>
+              </div>
+             </div>
+            </div>
+            <div class="panel-grid-cell" id="pgc-w5c4219ebd983a-1-1">
+             <div class="so-panel widget widget_media_video panel-first-child" data-index="2" id="panel-w5c4219ebd983a-1-1-0">
+              <h3 class="widget-title">
+               Pioneering the future of learning
+              </h3>
+              <div class="wp-video" style="width:100%;">
+               <video class="wp-video-shortcode" controls="controls" id="video-33373-8" preload="metadata">
+                <source src="https://youtu.be/AYcVzesnuCY?_=8" type="video/youtube"/>
+                <a href="https://youtu.be/AYcVzesnuCY">
+                 https://youtu.be/AYcVzesnuCY
+                </a>
+               </video>
+              </div>
+             </div>
+             <div class="so-panel widget widget_media_video panel-last-child" data-index="3" id="panel-w5c4219ebd983a-1-1-1">
+              <h3 class="widget-title">
+               Students set Guinness World record
+              </h3>
+              <div class="wp-video" style="width:100%;">
+               <video class="wp-video-shortcode" controls="controls" id="video-33373-9" preload="metadata">
+                <source src="https://www.youtube.com/watch?v=kqt0O8b9n3w&amp;_=9" type="video/youtube"/>
+                <a href="https://www.youtube.com/watch?v=kqt0O8b9n3w">
+                 https://www.youtube.com/watch?v=kqt0O8b9n3w
+                </a>
+               </video>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="panel-grid panel-no-style" id="pg-w5c4219ebd983a-2">
+           <div class="panel-grid-cell" id="pgc-w5c4219ebd983a-2-0">
+            <div class="so-panel widget widget_sow-editor panel-first-child panel-last-child" data-index="4" id="panel-w5c4219ebd983a-2-0-0">
+             <div class="so-widget-sow-editor so-widget-sow-editor-base">
+              <div class="siteorigin-widget-tinymce textwidget">
+               <p>
+                <a class="more-link" href="https://www.youtube.com/watch?v=S5-pZWt7-EY&amp;list=PLFGP08QVI6AdWtaLAakdL3PPGdrhenT-M">
+                 View more Featured Videos
+                 <i class="fa fa-angle-right">
+                 </i>
+                </a>
+               </p>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <footer>
+   <div class="container">
+    <div class="row">
+     <div class="col-xs-12 col-md-6">
+      <div class="row">
+       <div class="col-xs-12 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0">
+        <div class="menu-footer-column-one-container">
+         <ul id="menu-footer-column-one">
+          <li class="facebook menu-item menu-item-type-custom menu-item-object-custom menu-item-84" id="menu-item-84">
+           <a href="https://www.facebook.com/UCIrvine">
+            Facebook
+           </a>
+          </li>
+          <li class="twitter menu-item menu-item-type-custom menu-item-object-custom menu-item-85" id="menu-item-85">
+           <a href="https://twitter.com/UCIrvine">
+            Twitter
+           </a>
+          </li>
+          <li class="youtube menu-item menu-item-type-custom menu-item-object-custom menu-item-86" id="menu-item-86">
+           <a href="http://www.youtube.com/ucirvinenews">
+            YouTube
+           </a>
+          </li>
+          <li class="flickr menu-item menu-item-type-custom menu-item-object-custom menu-item-87" id="menu-item-87">
+           <a href="http://www.flickr.com/photos/ucirvine/">
+            Flickr
+           </a>
+          </li>
+          <li class="storify menu-item menu-item-type-custom menu-item-object-custom menu-item-88" id="menu-item-88">
+           <a href="http://storify.com/ucirvine">
+            Storify
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="col-xs-12 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0">
+        <div class="menu-footer-column-two-container">
+         <ul id="menu-footer-column-two">
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90" id="menu-item-90">
+           <a href="http://today.uci.edu/">
+            UCI Today
+           </a>
+          </li>
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91" id="menu-item-91">
+           <a href="http://search.uci.edu/">
+            UCI Search
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="col-xs-12 col-md-6">
+      <div class="row">
+       <div class="col-xs-12 col-sm-6 col-sm-offset-0 col-md-6 col-md-offset-0">
+        <div class="menu-footer-column-three-container">
+         <ul id="menu-footer-column-three">
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92" id="menu-item-92">
+           <a href="http://forms.communications.uci.edu/uci-feedback/">
+            Feedback
+           </a>
+          </li>
+          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-93" id="menu-item-93">
+           <a href="http://uci.edu/privacy/">
+            Privacy Notice
+           </a>
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="col-xs-12 col-sm-6 col-md-6 pull-right">
+        <address>
+         <span>
+          Strategic Communications &amp; Public Affairs
+         </span>
+         <br/>
+         <span>
+          120 Theory, Suite 100
+         </span>
+         <br/>
+         <span>
+          Irvine, CA 92697-5615
+         </span>
+         <br/>
+         <span>
+          949-824-6922
+         </span>
+         <br/>
+        </address>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="row">
+     <div class="col-xs-12 text-right">
+      <a href="//uci.edu/copyright">
+       <small>
+        © 2019 UC Regents
+       </small>
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <style id="siteorigin-panels-layouts-footer" media="all" type="text/css">
+   /* Layout w5c7588c541883 */ #pgc-w5c7588c541883-0-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-w5c7588c541883 #panel-w5c7588c541883-0-0-0 , #pl-w5c7588c541883 #panel-w5c7588c541883-0-0-1 {  } #pg-w5c7588c541883-0 , #pl-w5c7588c541883 .so-panel:last-child { margin-bottom:0px } #pl-w5c7588c541883 .so-panel { margin-bottom:30px } #pg-w5c7588c541883-0.panel-no-style, #pg-w5c7588c541883-0.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c7588c541883-0.panel-no-style, #pg-w5c7588c541883-0.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c7588c541883-0 .panel-grid-cell { margin-right:0 } #pg-w5c7588c541883-0 .panel-grid-cell { width:100% } #pl-w5c7588c541883 .panel-grid-cell { padding:0 } #pl-w5c7588c541883 .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c7588c541883 .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c82bd01ef359 */ #pgc-w5c82bd01ef359-0-0 , #pgc-w5c82bd01ef359-4-0 { width:100%;width:calc(100% - ( 0 * 30px ) ) } #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-0-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-1-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-1-1-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-2-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-2-1-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-3-0-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-3-1-0 , #pl-w5c82bd01ef359 #panel-w5c82bd01ef359-4-0-0 {  } #pg-w5c82bd01ef359-0 , #pg-w5c82bd01ef359-1 , #pg-w5c82bd01ef359-2 , #pg-w5c82bd01ef359-3 , #pl-w5c82bd01ef359 .so-panel { margin-bottom:30px } #pgc-w5c82bd01ef359-1-0 , #pgc-w5c82bd01ef359-2-0 , #pgc-w5c82bd01ef359-3-0 { width:25%;width:calc(25% - ( 0.750000001875 * 30px ) ) } #pgc-w5c82bd01ef359-1-1 , #pgc-w5c82bd01ef359-2-1 , #pgc-w5c82bd01ef359-3-1 { width:75%;width:calc(75% - ( 0.249999998125 * 30px ) ) } #pl-w5c82bd01ef359 .so-panel:last-child { margin-bottom:0px } #pg-w5c82bd01ef359-0.panel-no-style, #pg-w5c82bd01ef359-0.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-1.panel-no-style, #pg-w5c82bd01ef359-1.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-2.panel-no-style, #pg-w5c82bd01ef359-2.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-3.panel-no-style, #pg-w5c82bd01ef359-3.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-4.panel-no-style, #pg-w5c82bd01ef359-4.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c82bd01ef359-0.panel-no-style, #pg-w5c82bd01ef359-0.panel-has-style > .panel-row-style , #pg-w5c82bd01ef359-4.panel-no-style, #pg-w5c82bd01ef359-4.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c82bd01ef359-0 .panel-grid-cell , #pg-w5c82bd01ef359-4 .panel-grid-cell { margin-right:0 } #pg-w5c82bd01ef359-0 .panel-grid-cell , #pg-w5c82bd01ef359-1 .panel-grid-cell , #pg-w5c82bd01ef359-2 .panel-grid-cell , #pg-w5c82bd01ef359-3 .panel-grid-cell , #pg-w5c82bd01ef359-4 .panel-grid-cell { width:100% } #pgc-w5c82bd01ef359-1-0 , #pgc-w5c82bd01ef359-2-0 , #pgc-w5c82bd01ef359-3-0 { margin-bottom:30px } #pl-w5c82bd01ef359 .panel-grid-cell { padding:0 } #pl-w5c82bd01ef359 .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c82bd01ef359 .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c82bd01ef30a */ #pgc-w5c82bd01ef30a-0-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-w5c82bd01ef30a #panel-w5c82bd01ef30a-0-0-0 , #pl-w5c82bd01ef30a #panel-w5c82bd01ef30a-0-0-1 , #pl-w5c82bd01ef30a #panel-w5c82bd01ef30a-0-0-2 {  } #pg-w5c82bd01ef30a-0 , #pl-w5c82bd01ef30a .so-panel:last-child { margin-bottom:0px } #pl-w5c82bd01ef30a .so-panel { margin-bottom:30px } #pg-w5c82bd01ef30a-0.panel-no-style, #pg-w5c82bd01ef30a-0.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } #pgc-w5c82bd01ef30a-0-0 { align-self:auto } @media (max-width:780px){ #pg-w5c82bd01ef30a-0.panel-no-style, #pg-w5c82bd01ef30a-0.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c82bd01ef30a-0 .panel-grid-cell { margin-right:0 } #pg-w5c82bd01ef30a-0 .panel-grid-cell { width:100% } #pl-w5c82bd01ef30a .panel-grid-cell { padding:0 } #pl-w5c82bd01ef30a .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c82bd01ef30a .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c4219ebd97eb */ #pgc-w5c4219ebd97eb-0-0 , #pgc-w5c4219ebd97eb-0-1 , #pgc-w5c4219ebd97eb-0-2 { width:33.3333%;width:calc(33.3333% - ( 0.66666666666667 * 0px ) ) } #pl-w5c4219ebd97eb #panel-w5c4219ebd97eb-0-0-0 , #pl-w5c4219ebd97eb #panel-w5c4219ebd97eb-0-1-0 , #pl-w5c4219ebd97eb #panel-w5c4219ebd97eb-0-2-0 {  } #pg-w5c4219ebd97eb-0 , #pl-w5c4219ebd97eb .so-panel:last-child { margin-bottom:0px } #pl-w5c4219ebd97eb .so-panel { margin-bottom:30px } #pg-w5c4219ebd97eb-0.panel-no-style, #pg-w5c4219ebd97eb-0.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c4219ebd97eb-0.panel-no-style, #pg-w5c4219ebd97eb-0.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c4219ebd97eb-0 .panel-grid-cell { margin-right:0 } #pg-w5c4219ebd97eb-0 .panel-grid-cell { width:100% } #pgc-w5c4219ebd97eb-0-0 , #pgc-w5c4219ebd97eb-0-1 { margin-bottom:30px } #pl-w5c4219ebd97eb .panel-grid-cell { padding:0 } #pl-w5c4219ebd97eb .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c4219ebd97eb .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout w5c4219ebd983a */ #pgc-w5c4219ebd983a-0-0 , #pgc-w5c4219ebd983a-2-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-w5c4219ebd983a #panel-w5c4219ebd983a-0-0-0 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-1-0-0 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-1-1-0 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-1-1-1 , #pl-w5c4219ebd983a #panel-w5c4219ebd983a-2-0-0 {  } #pg-w5c4219ebd983a-0 , #pg-w5c4219ebd983a-1 , #pg-w5c4219ebd983a-2 , #pl-w5c4219ebd983a .so-panel:last-child { margin-bottom:0px } #pgc-w5c4219ebd983a-1-0 { width:66.6667%;width:calc(66.6667% - ( 0.33333333333333 * 0px ) ) } #pgc-w5c4219ebd983a-1-1 { width:33.3333%;width:calc(33.3333% - ( 0.66666666666667 * 0px ) ) } #pl-w5c4219ebd983a .so-panel { margin-bottom:30px } #pg-w5c4219ebd983a-0.panel-no-style, #pg-w5c4219ebd983a-0.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-1.panel-no-style, #pg-w5c4219ebd983a-1.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-2.panel-no-style, #pg-w5c4219ebd983a-2.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-w5c4219ebd983a-0.panel-no-style, #pg-w5c4219ebd983a-0.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-1.panel-no-style, #pg-w5c4219ebd983a-1.panel-has-style > .panel-row-style , #pg-w5c4219ebd983a-2.panel-no-style, #pg-w5c4219ebd983a-2.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-w5c4219ebd983a-0 .panel-grid-cell , #pg-w5c4219ebd983a-1 .panel-grid-cell , #pg-w5c4219ebd983a-2 .panel-grid-cell { margin-right:0 } #pg-w5c4219ebd983a-0 .panel-grid-cell , #pg-w5c4219ebd983a-1 .panel-grid-cell , #pg-w5c4219ebd983a-2 .panel-grid-cell { width:100% } #pgc-w5c4219ebd983a-1-0 { margin-bottom:30px } #pl-w5c4219ebd983a .panel-grid-cell { padding:0 } #pl-w5c4219ebd983a .panel-grid .panel-grid-cell-empty { display:none } #pl-w5c4219ebd983a .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  } /* Layout 33373 */ #pgc-33373-0-0 { width:66.6667%;width:calc(66.6667% - ( 0.33333333333333 * 0px ) ) } #pl-33373 #panel-33373-0-0-0 , #pl-33373 #panel-33373-0-1-0 , #pl-33373 #panel-33373-1-0-0 , #pl-33373 #panel-33373-2-0-0 {  } #pgc-33373-0-1 { width:33.3333%;width:calc(33.3333% - ( 0.66666666666667 * 0px ) ) } #pg-33373-0 , #pg-33373-1 , #pg-33373-2 , #pl-33373 .so-panel:last-child { margin-bottom:0px } #pgc-33373-1-0 , #pgc-33373-2-0 { width:100%;width:calc(100% - ( 0 * 0px ) ) } #pl-33373 .so-panel { margin-bottom:30px } #pg-33373-0.panel-no-style, #pg-33373-0.panel-has-style > .panel-row-style , #pg-33373-1.panel-no-style, #pg-33373-1.panel-has-style > .panel-row-style , #pg-33373-2.panel-no-style, #pg-33373-2.panel-has-style > .panel-row-style { -webkit-align-items:flex-start;align-items:flex-start } @media (max-width:780px){ #pg-33373-0.panel-no-style, #pg-33373-0.panel-has-style > .panel-row-style , #pg-33373-1.panel-no-style, #pg-33373-1.panel-has-style > .panel-row-style , #pg-33373-2.panel-no-style, #pg-33373-2.panel-has-style > .panel-row-style { -webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column } #pg-33373-0 .panel-grid-cell , #pg-33373-1 .panel-grid-cell , #pg-33373-2 .panel-grid-cell { margin-right:0 } #pg-33373-0 .panel-grid-cell , #pg-33373-1 .panel-grid-cell , #pg-33373-2 .panel-grid-cell { width:100% } #pgc-33373-0-0 { margin-bottom:30px } #pl-33373 .panel-grid-cell { padding:0 } #pl-33373 .panel-grid .panel-grid-cell-empty { display:none } #pl-33373 .panel-grid .panel-grid-cell-mobile-last { margin-bottom:0px }  }
+  </style>
+  <link href="https://news.uci.edu/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.6-78496d1" id="mediaelement-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://news.uci.edu/wp-includes/js/mediaelement/wp-mediaelement.css?ver=5.1" id="wp-mediaelement-css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="https://news.uci.edu/wp-content/plugins/sharify/admin/inc/sharifycounts.js?ver=1.4" type="text/javascript">
+  </script>
+  <script src="//code.jquery.com/jquery-2.1.4.min.js?ver=0.1" type="text/javascript">
+  </script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js?ver=0.1" type="text/javascript">
+  </script>
+  <script src="https://news.uci.edu/wp-content/themes/uciseventeen/assets/theme-styles/Bootstrap3-UCI-theme/js/bootstrap-uci-extensions.js?ver=0.1" type="text/javascript">
+  </script>
+  <script src="https://news.uci.edu/wp-content/plugins/uci-wp-slideshow/uci-slideshow/uci-slideshow.js?ver=5.1" type="text/javascript">
+  </script>
+  <script src="https://news.uci.edu/wp-includes/js/wp-embed.js?ver=5.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var mejsL10n = {"language":"en","strings":{"mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen-off":"Turn off Fullscreen","mejs.fullscreen-on":"Go Fullscreen","mejs.download-video":"Download Video","mejs.fullscreen":"Fullscreen","mejs.time-jump-forward":["Jump forward 1 second","Jump forward %1 seconds"],"mejs.loop":"Toggle Loop","mejs.play":"Play","mejs.pause":"Pause","mejs.close":"Close","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.time-skip-back":["Skip back 1 second","Skip back %1 seconds"],"mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.mute-toggle":"Mute Toggle","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.ad-skip":"Skip ad","mejs.ad-skip-info":["Skip in 1 second","Skip in %1 seconds"],"mejs.source-chooser":"Source Chooser","mejs.stop":"Stop","mejs.speed-rate":"Speed Rate","mejs.live-broadcast":"Live Broadcast","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+  </script>
+  <script src="https://news.uci.edu/wp-includes/js/mediaelement/mediaelement-and-player.js?ver=4.2.6-78496d1" type="text/javascript">
+  </script>
+  <script src="https://news.uci.edu/wp-includes/js/mediaelement/mediaelement-migrate.js?ver=5.1" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   /* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+  </script>
+  <script src="https://news.uci.edu/wp-includes/js/mediaelement/wp-mediaelement.js?ver=5.1" type="text/javascript">
+  </script>
+  <script src="https://news.uci.edu/wp-includes/js/mediaelement/renderers/vimeo.min.js?ver=4.2.6-78496d1" type="text/javascript">
+  </script>
+ </body>
+</html>

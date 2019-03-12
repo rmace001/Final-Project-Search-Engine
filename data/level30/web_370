@@ -1,0 +1,1163 @@
+http://www.nelson.wisc.edu/
+<!DOCTYPE HTML>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width; initial-scale=1.0" name="viewport"/>
+  <meta content="The Nelson Institute" property="og:title">
+   <meta content="website" property="og:type">
+    <meta content="http://nelson.wisc.edu/images/uwlogo_web.png" property="og:image"/>
+    <meta content="http://nelson.wisc.edu" property="og:url"/>
+    <meta content="The Nelson Institute for Environmental Studies" property="og:description"/>
+    <title>
+     The Nelson Institute
+    </title>
+    <link href="/css/stylesheets.css" media="screen" rel="stylesheet"/>
+    <link href="/css/flexslider.css" media="screen" rel="stylesheet"/>
+    <script src="js/jquery.js">
+    </script>
+    <script src="js/jquery.flexslider-min.js">
+    </script>
+    <script src="js/response.min.js">
+    </script>
+    <script>
+     var allPartners=[];
+		var currentPartner=0;
+		var totalPartners;
+		var changePartner;
+		var partnerRate=5000;
+		
+		$(function(){
+
+			stackImages();
+
+			$('.flexslider').flexslider({
+				animation: "fade",
+			    	directionNav: false,
+				pauseOnAction: false,
+				pauseOnHover: false,
+				slideshowSpeed: 5000
+			});
+
+			setHovers();
+						
+			$("#partners").children().each(function() {
+				allPartners.push($(this).attr('id'));
+			});
+			
+			allPartners.shift();
+			
+			totalPartners=allPartners.length-1;
+			
+			changePartner=window.setInterval(fadePartner, partnerRate);
+		});
+		
+		
+		function fadePartner() {
+			clearInterval(changePartner);
+			$("#"+allPartners[currentPartner]).fadeOut();
+			
+			currentPartner++;
+			
+			if (currentPartner>totalPartners) {
+				currentPartner=0;
+			}
+			
+			$("#"+allPartners[currentPartner]).fadeIn();
+			
+			changePartner=window.setInterval(fadePartner, partnerRate);
+			
+		}
+
+		function stackImages() {
+		var s=$("#page").width();
+		var fs=$(".bigcol h1").css("font-size");
+		var np=$(".newsRow .newsPhoto").css("display");
+
+
+		if (fs>='18' && np=='block') {
+		$("#slide1").html("<a href='https://earthday.nelson.wisc.edu/'><img src='images/index/092617ourwisc_L.jpg' alt='13th Annual Nelson Institute Earth Day Conference' /></a>");
+$("#slide2").html("<a href='https://nelson.wisc.edu/news/in-common/index.php'><img src='images/index/092117watercolor_L.jpg' alt='In Common Winter 2019 Living Well. Living Together. Check our the latest edition of In Common' /></a>");
+$("#np3132").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3132'><img src='images/news/thumbs/3132_site_L.jpg' alt='Globe' /></a>");
+$("#np3129").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3129'><img src='images/news/thumbs/3129_site_L.jpg' alt='Food Policy ' /></a>");
+$("#np3130").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3130'><img src='images/news/thumbs/3130_site_L.jpg' alt='Marika graduating ' /></a>");
+			$('#ctr_ccr a').html('<img src="images/ccr-plain.jpg" id="ccrimg" alt="click to learn more about the Center for Climatic Research" />');
+			$('#ctr_che a').html('<img src="images/che-plain.jpg" id="cheimg" alt="click to learn more about the Center for Culture, History and Environment" />');
+			$('#ctr_ltc a').html('<img src="images/ltc-plain.jpg" id="ltcimg" alt="click to learn more about the Land Tenure Center" />');
+			$('#ctr_sage a').html('<img src="images/sage-plain.jpg" id="sageimg" alt="click to learn more about the Center for Sustainability and the Global Environment" />');
+			$("#undergraduateStudies").html('<p><strong><a href="/undergraduate/index.php">UNDERGRADUATE STUDIES</a></strong></p><br><ul><li><a href="/undergraduate/major/index.php">Environmental Studies Major</a></li><li><a href="/undergraduate/environmental-studies-certificate/index.php">Environmental Studies Certificate</a></li></ul>');
+			$("#graduateStudies").html('<p><strong><a href="/graduate/index.php">GRADUATE STUDIES</a></strong></p><h3>Degree Programs</h3><ul><li><a href="/graduate/professional-programs/index.php">Professional Programs in Environmental Conservation</a></li><li><a href="/graduate/environment-and-resources/index.php">Environment and Resources</a></li><li><a href="/graduate/water-resources-management/index.php">Water Resources Management</a></li></ul><h3>Certificate programs</h3><ul><li><a href="/graduate/culture-history-environment/index.php">Culture, History and Environment</a></li><li><a href="/graduate/energy-analysis-policy/index.php">Energy Analysis and Policy</a></li></a></li></ul><br>');
+
+			}
+
+			if (fs<'18' && np=='block') {
+
+		$("#slide1").html("<a href='https://earthday.nelson.wisc.edu/'><img src='images/index/092617ourwisc_M.jpg' alt='13th Annual Nelson Institute Earth Day Conference' /></a>");
+$("#slide2").html("<a href='https://nelson.wisc.edu/news/in-common/index.php'><img src='images/index/092117watercolor_M.jpg' alt='In Common Winter 2019 Living Well. Living Together. Check our the latest edition of In Common' /></a>");
+$("#np3132").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3132'><img src='images/news/thumbs/3132_site_M.jpg' alt='Globe' /></a>");
+$("#np3129").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3129'><img src='images/news/thumbs/3129_site_M.jpg' alt='Food Policy ' /></a>");
+$("#np3130").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3130'><img src='images/news/thumbs/3130_site_M.jpg' alt='Marika graduating ' /></a>");
+
+			$('#ctr_ccr a').html('<img src="images/ccr-plain.jpg" id="ccrimg" alt="click to learn more about the Center for Climatic Research" />');
+			$('#ctr_che a').html('<img src="images/che-plain.jpg" id="cheimg" alt="click to learn more about the Center for Culture, History and Environment" />');
+			$('#ctr_ltc a').html('<img src="images/ltc-plain.jpg" id="ltcimg" alt="click to learn more about the Land Tenure Center" />');
+			$('#ctr_sage a').html('<img src="images/sage-plain.jpg" id="sageimg" alt="click to learn more about the Center for Sustainability and the Global Environment" />');
+			$("#undergraduateStudies").html('<p><strong><a href="/undergraduate/index.php">UNDERGRADUATE STUDIES</a></strong></p><br><ul><li><a href="/undergraduate/major/index.php">Environmental Studies Major</a></li><li><a href="/undergraduate/environmental-studies-certificate/index.php">Environmental Studies Certificate</a></li></ul>');
+			$("#graduateStudies").html('<p><strong><a href="/graduate/index.php">GRADUATE STUDIES</a></strong></p><h3>Degree Programs</h3><ul><li><a href="/graduate/professional-programs/environmental-conservation/index.php">Environmental Conservation Professional Master\'s Program</a></li><li><a href="/graduate/environment-and-resources/index.php">Environment and Resources</a></li><li><a href="/graduate/water-resources-management/index.php">Water Resources Management</a></li></ul><h3>Certificate programs</h3><ul><li><a href="/graduate/culture-history-environment/index.php">Culture, History and Environment</a></li><li><a href="/graduate/energy-analysis-policy/index.php">Energy Analysis and Policy</a></li><li></ul><br>');
+		}
+			if (np != 'block') {
+
+		$("#slide1").html("<a href='https://earthday.nelson.wisc.edu/'><img src='images/index/092617ourwisc_S.jpg' alt='13th Annual Nelson Institute Earth Day Conference' /></a>");
+$("#slide2").html("<a href='https://nelson.wisc.edu/news/in-common/index.php'><img src='images/index/092117watercolor_S.jpg' alt='In Common Winter 2019 Living Well. Living Together. Check our the latest edition of In Common' /></a>");
+$("#np3132").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3132'><img src='images/news/thumbs/site_index_L.jpg' alt='Globe' /></a>");
+$("#np3129").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3129'><img src='images/news/thumbs/site_index_L.jpg' alt='Food Policy ' /></a>");
+$("#np3130").html("<a href='http://www.nelson.wisc.edu/news/story.php?story=3130'><img src='images/news/thumbs/site_index_L.jpg' alt='Marika graduating ' /></a>");
+
+			$('#ctr_ccr a').html('Center for Climatic Research');
+			$('#ctr_che a').html('Center for Culture, History and Environment');
+			$('#ctr_ltc a').html('Land Tenure Center');
+			$('#ctr_sage a').html('Center for Sustainability and the Global Environment');
+			$("#undergraduateStudies").html('<p><a href="/undergraduate/index.php">UNDERGRADUATE STUDIES</a></p>');
+			$("#graduateStudies").html('<p><a href="/graduate/index.php">GRADUATE STUDIES</a></p>');
+			$(".newsPhoto a").html('');
+		}
+
+		setHovers();
+	}
+
+		$(window).resize(function() {
+		//document.getElementById("cow").value=$("#page").width();
+		stackImages();
+	});
+
+	function setHovers() {
+
+
+			$('#ccrimg').hover(function(){
+   				$(this).attr('src','images/ccr-plain-hover.jpg');
+			},function(){
+				$(this).attr('src','images/ccr-plain.jpg');
+			});
+
+			$('#cheimg').hover(function(){
+   				$(this).attr('src','images/che-plain-hover.jpg');
+			},function(){
+				$(this).attr('src','images/che-plain.jpg');
+			});
+
+			$('#ltcimg').hover(function(){
+   				$(this).attr('src','images/ltc-plain-hover.jpg');
+			},function(){
+				$(this).attr('src','images/ltc-plain.jpg');
+			});
+
+			$('#sageimg').hover(function(){
+   				$(this).attr('src','images/sage-plain-hover.jpg');
+			},function(){
+				$(this).attr('src','images/sage-plain.jpg');
+			});
+
+			$('#expertiseImg').hover(function(){
+   				$(this).attr('src','images/facstaff_expertise_hover.jpg');
+			},function(){
+				$(this).attr('src','images/facstaff_expertise.jpg');
+			});
+
+			$('#jobImg').hover(function(){
+   				$(this).attr('src','images/findajob_hover.jpg');
+			},function(){
+				$(this).attr('src','images/findajob.jpg');
+			});
+
+		}
+
+
+	function showHide() {
+		var nl = document.getElementById("navLinks");
+		var ht = document.getElementById("headerTools");
+		var h = document.getElementById("header");
+		var p = nl.style.left;
+
+		switch (p) {
+			case "" :
+				nl.style.left = '0px';
+				ht.style.left = '0px';
+				break;
+			case "-5000px" :
+				nl.style.left = '0px';
+				ht.style.left = '0px';
+				break;
+			case "0px" :
+				nl.style.left = '-5000px';
+				ht.style.left = '-5000px';
+				break;
+		}
+	}
+    </script>
+   </meta>
+  </meta>
+ </head>
+ <body>
+  <div id="fb-root">
+  </div>
+  <script>
+   (function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+  </script>
+  <a class="hidden" href="#ag">
+   Skip to main content
+  </a>
+  <header id="header" role="banner">
+   <div id="svglogo">
+    <a href="/index.php">
+     <img alt="nelson logo" src="/images/nelson-logo.svg"/>
+    </a>
+   </div>
+   <div id="headerTools">
+    <p id="uwnav">
+     <a href="http://wisc.edu" target="_blank">
+      UW Home
+     </a>
+     |
+     <a href="https://login.wisc.edu/" target="_blank">
+      My UW
+     </a>
+     |
+     <a href="http://map.wisc.edu/" target="_blank">
+      Map
+     </a>
+    </p>
+    <p id="social">
+     <a href="/support.php">
+      <img alt="click to support nelson" height="27" src="/images/support_header.png" width="95"/>
+     </a>
+     <a href="http://www.facebook.com/NelsonInstitute" target="_blank">
+      <img alt="facebook logo" height="27" src="/images/fb_header.png" width="27"/>
+     </a>
+     <a href="http://twitter.com/NelsonInstitute" target="_blank">
+      <img alt="twitter logo" height="27" src="/images/twitter_header.png" width="27"/>
+     </a>
+    </p>
+    <form action="/search/index.php" method="get" role="search">
+     <label class="hidden" for="sitesearch">
+      search box
+     </label>
+     <input id="sitesearch" name="zoom_query" placeholder="SEARCH NELSON" type="search"/>
+     <input alt="search icon" id="searchbutton" name="go" src="/images/search.png" type="image"/>
+    </form>
+   </div>
+   <!-- close header tools -->
+  </header>
+  <div id="navBox">
+   <nav role="navigation">
+    <div class="navToggle">
+     <a href="#" onclick="showHide();">
+     </a>
+    </div>
+    <div id="navLinks">
+     <div class="topNav" id="topAbout">
+      <a href="/about/index.php">
+       ABOUT
+      </a>
+      <div id="menu_about">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/about/nelson-legacy.php">
+           The Nelson Legacy
+          </a>
+         </li>
+         <li>
+          <a href="/about/mission-and-vision.php">
+           Mission and Vision
+          </a>
+         </li>
+         <li>
+          <a href="/about/organization.php">
+           Organization
+          </a>
+         </li>
+         <li>
+          <a href="/about/committees.php">
+           Committees
+          </a>
+         </li>
+         <li>
+          <a href="/about/resources.php">
+           Resources
+          </a>
+         </li>
+         <li>
+          <a href="/about/logos.php">
+           Logos
+          </a>
+         </li>
+         <li>
+          <a href="/about/fellow-bios.php">
+           Community Fellows Program
+          </a>
+         </li>
+         <li>
+          <a href="/support.php">
+           Support Nelson
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_about -->
+     </div>
+     <!-- close about -->
+     <div class="topNav" id="topUndergraduate">
+      <a href="/undergraduate/index.php">
+       UNDERGRADUATE
+      </a>
+      <div id="menu_undergraduate">
+       <div class="undergrad_col1">
+        <ul>
+         <li>
+          <a href="/undergraduate/major/index.php">
+           MAJOR
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/environmental-studies-certificate/index.php">
+           ENVIRONMENTAL STUDIES CERTIFICATE
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/sustainability-certificate/index.php">
+           SUSTAINABILITY CERTIFICATE
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/cesp/index.php">
+           COMMUNITY ENVIRONMENTAL SCHOLARS PROGRAM
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="menu_col2">
+        <ul>
+         <li>
+          <a href="/undergraduate/advising.php">
+           Advising
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/declare-withdraw.php">
+           How to Declare
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/scholarships.php">
+           Scholarships
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/internships/index.php">
+           Internships
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/faq.php">
+           FAQ
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/support.php">
+           Support Undergraduates
+          </a>
+         </li>
+        </ul>
+       </div>
+       <div class="menu_col2">
+        <ul>
+         <li>
+          <a href="/undergraduate/ambassadors.php">
+           Nelson Ambassadors
+          </a>
+         </li>
+         <li>
+          <a href="/undergraduate/index.php">
+           For Prospective Students
+          </a>
+         </li>
+         <li>
+          <a href="/careers/index.php">
+           Career Services
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_undergraduate -->
+     </div>
+     <!-- close top_undergraduate -->
+     <div class="topNav" id="topGraduate">
+      <a href="/graduate/index.php">
+       GRADUATE
+      </a>
+      <div id="menu_graduate">
+       <div class="grad_col1">
+        <h6>
+         DEGREES
+        </h6>
+        <ul>
+         <li>
+          <a href="/graduate/environment-and-resources/index.php">
+           ENVIRONMENT AND RESOURCES (Ph.D., M.S.)
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/professional-programs/index.php">
+           PROFESSIONAL PROGRAMS (M.S. in Environmental Conservation)
+          </a>
+          <ul id="pmp">
+           <li>
+            <a href="/graduate/professional-programs/environmental-conservation/index.php">
+             Environmental Conservation
+            </a>
+           </li>
+           <li>
+            <a href="/graduate/professional-programs/environmental-observation-informatics/index.php">
+             Environmental Observation Informatics
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li>
+          <a href="/graduate/water-resources-management/index.php">
+           WATER RESOURCES MANAGEMENT (M.S.)
+          </a>
+         </li>
+        </ul>
+        <h6 id="menucert">
+         CERTIFICATES
+        </h6>
+        <ul>
+         <li>
+          <a href="/graduate/culture-history-environment/index.php">
+           CULTURE, HISTORY AND ENVIRONMENT
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/energy-analysis-policy/index.php">
+           ENERGY ANALYSIS AND POLICY
+          </a>
+         </li>
+         <!--<li><a href="/graduate/change/index.php">HUMANS AND THE GLOBAL ENVIRONMENT</a></li>-->
+        </ul>
+       </div>
+       <div class="menu_col2">
+        <ul>
+         <li>
+          <a href="/graduate/advising.php">
+           Advising
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/application.php">
+           How to Apply
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/joint-double-dual.php">
+           Joint / Double / Dual Degrees
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/funding/index.php">
+           Funding
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/organizations.php">
+           Student Organizations / Activities
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/prospective/index.php">
+           For Prospective Students
+          </a>
+         </li>
+         <li>
+          <a href="/graduate/faq.php">
+           FAQ
+          </a>
+         </li>
+         <li>
+          <a href="/careers/index.php">
+           Career Services
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_graduate -->
+     </div>
+     <!-- close topgraduate -->
+     <div class="topNav" id="topPeople">
+      <a href="/people/index.php">
+       PEOPLE
+      </a>
+      <div id="menu_people">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/people/faculty.php">
+           Faculty
+          </a>
+         </li>
+         <li>
+          <a href="/people/teaching-and-research-staff.php">
+           Teaching and Research Staff
+          </a>
+         </li>
+         <li>
+          <a href="/people/staff.php">
+           Staff
+          </a>
+         </li>
+         <li>
+          <a href="/people/board-of-visitors.php">
+           Board of Visitors
+          </a>
+         </li>
+         <li>
+          <a href="/people/graduate-students.php">
+           Graduate Students
+          </a>
+         </li>
+         <li>
+          <a href="/people/join-our-faculty.php">
+           Join our Faculty
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_people -->
+     </div>
+     <!-- close people -->
+     <div class="topNav" id="topResearch">
+      <a href="/research/index.php">
+       RESEARCH
+      </a>
+      <div id="menu_research">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/ccr/index.php">
+           Center for Climatic Research
+          </a>
+         </li>
+         <li>
+          <a href="/che/index.php">
+           Center for Culture, History and the Environment
+          </a>
+         </li>
+         <li>
+          <a href="/ltc/index.php">
+           Land Tenure Center
+          </a>
+         </li>
+         <li>
+          <a href="/sage/index.php">
+           Center for Sustainability and the Global Environment
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_research -->
+     </div>
+     <!-- close research -->
+     <div class="topNav" id="topNews">
+      <a href="/news/index.php">
+       NEWS
+      </a>
+      <div id="menu_news">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/news/index.php">
+           Nelson News
+          </a>
+         </li>
+         <li>
+          <a href="/news/in-common/index.php">
+           In Common
+          </a>
+         </li>
+         <li>
+          <a href="/media.php">
+           Information for Media
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_news -->
+     </div>
+     <!-- close news -->
+     <div class="topNav" id="topEvents">
+      <a href="/events/index.php">
+       EVENTS
+      </a>
+      <div id="menu_events">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/events/index.php">
+           Nelson Events
+          </a>
+         </li>
+         <li>
+          <a href="https://earthday.nelson.wisc.edu/">
+           Earth Day
+          </a>
+         </li>
+         <li>
+          <a href="/events/week-view.php?i=0">
+           Environmental Events @ UW-Madison
+          </a>
+         </li>
+         <li>
+          <a href="/events/jordahl-lectures/index.php">
+           Jordahl Public Lands Lecture
+          </a>
+         </li>
+         <li>
+          <a href="/events/submit-an-event.php">
+           Submit an Event
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_events -->
+     </div>
+     <!-- close events -->
+     <div class="topNav" id="topAlumni">
+      <a href="/alumni/index.php">
+       ALUMNI
+      </a>
+      <div id="menu_alumni">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/alumni/index.php">
+           Resources
+          </a>
+         </li>
+         <li>
+          <a href="/alumni/awards/index.php">
+           Awards
+          </a>
+         </li>
+         <li>
+          <a href="/alumni/alumni-gatherings.php">
+           Gatherings
+          </a>
+         </li>
+         <li>
+          <a href="/alumni/thecommons-archive.php">
+           <i>
+            The Commons
+           </i>
+           Newsletter
+          </a>
+         </li>
+         <li>
+          <a href="/jobs/index.php">
+           Environmental Jobs
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_alumni-->
+     </div>
+     <!-- close alumni -->
+     <div class="topNav" id="topContact">
+      <a href="/contact/index.php">
+       CONTACT
+      </a>
+      <div id="menu_contact">
+       <div class="single_col">
+        <ul>
+         <li>
+          <a href="/contact/academic-programs-office.php">
+           Academic Programs Office
+          </a>
+         </li>
+         <li>
+          <a href="/contact/donor-relations.php">
+           Donor Relations Office
+          </a>
+         </li>
+         <li>
+          <a href="/contact/directors.php">
+           Director's Office
+          </a>
+         </li>
+         <li>
+          <a href="/contact/osc.php">
+           Strategic Communications
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- close menu_contact-->
+     </div>
+     <!-- close contact -->
+    </div>
+    <!--close navlinks -->
+   </nav>
+  </div>
+  <!-- close navbox -->
+  <div id="ag">
+  </div>
+  <div id="page" role="main">
+   <div class="flexslider">
+    <ul class="slides">
+     <li id="slide1">
+     </li>
+     <li id="slide2">
+     </li>
+    </ul>
+   </div>
+   <section id="research">
+    <div id="title">
+     <p>
+      Visit Our Research Centers
+     </p>
+    </div>
+    <div id="ctr_ccr">
+     <a href="/ccr/index.php">
+      <img alt="click to learn more about the Center for Climatic Research" id="ccrimg" src="images/ccr-plain.jpg"/>
+     </a>
+    </div>
+    <div id="ctr_che">
+     <a href="/che/index.php">
+      <img alt="click to learn more about the Center for Culture, History and Environment" id="cheimg" src="images/che-plain.jpg"/>
+     </a>
+    </div>
+    <div id="ctr_ltc">
+     <a href="/ltc/index.php">
+      <img alt="click to learn more about the Land Tenure Center" id="ltcimg" src="images/ltc-plain.jpg"/>
+     </a>
+    </div>
+    <div id="ctr_sage">
+     <a href="/sage/index.php">
+      <img alt="click to learn more about the Center for Sustainability and the Global Environment" id="sageimg" src="images/sage-plain.jpg"/>
+     </a>
+    </div>
+   </section>
+   <br style="clear: both;"/>
+   <div class="bigcol">
+    <h1>
+     Learning @ Nelson
+    </h1>
+    <div class="shadowBox">
+     <br/>
+     <div class="colContent">
+      <p>
+       <a href="featured-courses/index.php">
+        <img alt="click to learn more about our Summer and Fall courses" src="images/courses-button-index.jpg"/>
+       </a>
+      </p>
+      <br/>
+      <div id="undergraduateStudies">
+      </div>
+      <!-- close undergrad studies -->
+     </div>
+     <!-- close content -->
+     <hr/>
+     <div class="colContent">
+      <div id="graduateStudies">
+      </div>
+      <!-- close grad studies -->
+     </div>
+     <!-- close content -->
+    </div>
+    <!-- close shadowbox -->
+    <br/>
+    <br/>
+    <h1>
+     Connect on social media
+    </h1>
+    <div class="shadowBox">
+     <div class="facebag">
+      <div class="fb1">
+       <img alt="Nelson Institute logo" height="50" src="images/nelson_icon.jpg" width="50"/>
+      </div>
+      <div class="fb2">
+       <a href="http://facebook.com/NelsonInstitute/" target="_blank">
+        Nelson Institute for Environmental Studies, UW-Madison
+       </a>
+       <br/>
+       <div class="fb-like" data-action="like" data-href="http://facebook.com/nelsoninstitute" data-layout="button_count" data-share="false" data-show-faces="false">
+       </div>
+      </div>
+     </div>
+     <!-- close facebag -->
+     <br/>
+     <hr/>
+     <div class="tweet">
+      <a class="twitter-timeline" data-chrome="noheader nofooter noborders" data-tweet-limit="1" data-widget-id="431180908071092224" href="https://twitter.com/NelsonInstitute">
+       Tweets by @NelsonInstitute
+      </a>
+      <script>
+       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      </script>
+     </div>
+     <!-- close tweet -->
+     <hr/>
+     <!--<div class="instagram">
+				<iframe src="//users.instush.com/bee-gallery-v2/?cols=2&rows=1&size=small&border=0&round=false&space=4&sl=true&bg=transparent&brd=true&na=true&pin=false&hc=e72476&ltc=3f3f3f&lpc=ffffff&fc=ffffff&user_id=458601108&username=nelsoninstitute&sid=-1&susername=-1&tag=-1&stype=mine&t=9999993J1QqWweCP1icdAOxokK0S47qDWkG1AhZA-Kf-lZUsuRO7DzY37x6skA6CFu7a13BoVufGN9ueo" allowtransparency="true" frameborder="0" scrolling="no"  style="display:block;width:224px;height:116px;border:none;overflow:visible;" ></iframe>
+			</div><!-- close instagram-->
+     <div class="youtube">
+      <a href="https://www.youtube.com/user/nelsoninstitute" target="_blank">
+       <img alt="visit us on youtube" src="/images/ytlogo.jpg"/>
+      </a>
+     </div>
+     <!-- close youtube-->
+    </div>
+    <!-- close shadowbox -->
+    <br/>
+    <br/>
+   </div>
+   <!-- close bigcol -->
+   <div class="bigcol">
+    <h1>
+     NEWS
+    </h1>
+    <div class="shadowBox">
+     <br/>
+     <div id="newsBox">
+      <div class="newsRow">
+       <div class="newsPhoto" id="np3132">
+       </div>
+       <div class="newsDesc">
+        February 27, 2019
+        <br/>
+        <a href="news/story.php?story=3132">
+         Nelson Institute ranks among top programs for study abroad participants
+        </a>
+       </div>
+      </div>
+      <div class="newsRow">
+       <div class="newsPhoto" id="np3129">
+       </div>
+       <div class="newsDesc">
+        February 22, 2019
+        <br/>
+        <a href="news/story.php?story=3129">
+         Nelson alumni launch food waste policy and practice event
+        </a>
+       </div>
+      </div>
+      <div class="newsRow">
+       <div class="newsPhoto" id="np3130">
+       </div>
+       <div class="newsDesc">
+        February 20, 2019
+        <br/>
+        <a href="news/story.php?story=3130">
+         Conservation Coach
+        </a>
+       </div>
+      </div>
+      <div class="more">
+       <a href="news/index.php">
+        more »
+       </a>
+      </div>
+     </div>
+     <!-- close newsbox -->
+    </div>
+    <!-- close shadowBox -->
+    <br/>
+    <br/>
+    <h1>
+     Events
+    </h1>
+    <div class="shadowBox">
+     <br/>
+     <div class="eventRow">
+      <div class="eventDate">
+       MON
+       <br/>
+       Apr
+       <br/>
+       22
+      </div>
+      <div class="eventDesc">
+       <p>
+        <a href="/events/event.php?e=4069">
+         2019 Earth Day Conference - Imagine And Adapt: Possibilities In A Changing World
+        </a>
+        <br/>
+        Conference/Symposium
+       </p>
+      </div>
+     </div>
+     <!-- close eventrow -->
+     <div class="more">
+      <a href="events/index.php">
+       more »
+      </a>
+     </div>
+    </div>
+    <!-- close shadowbox -->
+    <br/>
+    <div id="indexExpertise">
+     <a href="/people/faculty.php">
+      <img alt="click to see our faculty" id="expertiseImg" src="images/facstaff_expertise.jpg"/>
+     </a>
+    </div>
+    <div id="indexJob">
+     <a href="/jobs/index.php">
+      <img alt="click to see environmental job openings" id="jobImg" src="images/findajob.jpg"/>
+     </a>
+    </div>
+   </div>
+   <!-- close bigcol -->
+   <div class="col3">
+    <div class="indexSupport">
+     <a href="http://nelson.wisc.edu/support.php">
+      <img alt="click to support the Nelson Institute" src="images/support1.png"/>
+     </a>
+    </div>
+    <br/>
+    <br/>
+    <div class="indexSupport">
+     <a href="http://nativenations.nelson.wisc.edu/" target="_blank">
+      <img alt="click to learn about native nations" src="images/btn_native_nations.jpg"/>
+     </a>
+    </div>
+    <br/>
+    <br/>
+    <div id="indexSpotlight">
+     <h1>
+      Spotlight
+     </h1>
+     <div id="spotlightPhoto">
+      <a href="news/story.php?story=3128">
+       <img alt="click for our spotlight story" src="images/news/spotlight_L.jpg?0.81108100 1552202084"/>
+      </a>
+     </div>
+     <p>
+      <a href="news/story.php?story=3128">
+       Nelson Institute teaching assistant to receive a 2018 Campus-Wide Teaching Assistant Award
+      </a>
+     </p>
+    </div>
+    <br/>
+    <br/>
+    <h1>
+     Email Updates
+    </h1>
+    <br/>
+    <div id="envelope">
+     Receive email alerts about Nelson Institute events.
+    </div>
+    <form action="/signup.php" enctype="multipart/form-data" id="sub" method="post" name="sub">
+     <label class="hidden" for="email-updates">
+      subscribe
+     </label>
+     <input class="newsInput" id="email-updates" name="email-updates" placeholder="EMAIL ADDRESS" type="text"/>
+     <input alt="click to subscribe" class="emailSubmit" name="submit" src="/images/news/arrow.png" type="image"/>
+    </form>
+    <br/>
+    <br/>
+    <h1>
+     About Us
+    </h1>
+    <br/>
+    <div id="meetDirector">
+     <a href="director.php">
+      <img alt="Click to learn more about Nelson's director" src="images/meet_director_index_L.jpg"/>
+     </a>
+    </div>
+    <br/>
+    <ul class="about">
+     <li>
+      <a href="about/index.php">
+       About Nelson
+      </a>
+     </li>
+     <li>
+      <a href="/about/nelson-legacy.php">
+       Nelson Legacy
+      </a>
+     </li>
+     <li>
+      <a href="/about/partnerships.php">
+       Partnerships
+      </a>
+     </li>
+     <li>
+      <a href="/people/faculty.php">
+       Faculty/Staff Directory
+      </a>
+     </li>
+    </ul>
+    <br/>
+    <div id="partners">
+     <h1 id="head">
+      Featured Partners
+     </h1>
+     <div id="partner-water">
+      <a href="http://www.water.wisc.edu/">
+       <img alt="water" id="partnerwateratuw" src="images/partner_wateratuw.jpg"/>
+      </a>
+     </div>
+     <div id="partner-sustainability">
+      <a href="http://sustainability.wisc.edu/">
+       <img alt="os" id="partneros" src="images/partner_OS.jpg"/>
+      </a>
+     </div>
+     <div id="partner-ecology">
+      <a href="http://ecology.wisc.edu/">
+       <img alt="partnerwe" id="partnerecology" src="images/partner_WE.jpg"/>
+      </a>
+     </div>
+     <div id="partner-wicci">
+      <a href="http://www.wicci.wisc.edu/" target="_blank">
+       <img alt="partnerwicci" id="partnerwicci" src="images/partner_wicci.jpg"/>
+      </a>
+     </div>
+     <div id="partner-univercity">
+      <a href="http://univercity.wisc.edu/" target="_blank">
+       <img alt="univercity" id="partneruc" src="images/partner_univercity.jpg"/>
+      </a>
+     </div>
+    </div>
+    <br style="clear: both;"/>
+    <br/>
+   </div>
+   <!-- close col3 -->
+   <br style="clear: both;"/>
+   <br/>
+   <div class="img1 img2 img3 img4 img5 img6" id="preload">
+   </div>
+   <br/>
+  </div>
+  <footer role="contentinfo">
+   <div id="footer">
+    <div class="footerCol1">
+     <p>
+      CONTACT US:
+     </p>
+     <p>
+      <strong>
+       Nelson Institute for Environmental Studies
+      </strong>
+      <br/>
+      122 Science Hall
+      <br/>
+      550 North Park St.
+      <br/>
+      Madison, WI 53706
+      <br/>
+      <a href="tel:6082655296">
+       (608) 265-5296
+      </a>
+      <br/>
+      <script type="text/javascript">
+       document.write('<n uers="znvygb:vasbezngvba@aryfba.jvfp.rqh">vasbezngvba@aryfba.jvfp.rqh'.replace(/[a-zA-Z]/g,
+	function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+      </script>
+     </p>
+    </div>
+    <div class="footerColNarrow">
+     <p>
+      <a href="/about/index.php">
+       ABOUT NELSON
+      </a>
+     </p>
+     <p>
+      <a href="/about/partnerships.php">
+       Partnerships
+      </a>
+      <br/>
+      <a href="/about/nelson-legacy.php">
+       Nelson Legacy
+      </a>
+      <br/>
+      <a href="/people/faculty.php">
+       Directory
+      </a>
+      <br/>
+      <a href="/support.php">
+       Support Nelson
+      </a>
+      <br/>
+     </p>
+    </div>
+    <div class="footerColWide">
+     <p>
+      INFORMATION FOR:
+     </p>
+     <p>
+      <a href="/undergraduate/index.php">
+       Prospective Undergraduate Students
+      </a>
+      <br/>
+      <a href="/graduate/prospective/index.php">
+       Prospective Graduate Students
+      </a>
+      <br/>
+      <a href="/alumni/index.php">
+       Alumni
+      </a>
+      <br/>
+      <a href="/jobs/index.php">
+       Job Seekers
+      </a>
+      <br/>
+      <a href="/media.php">
+       Media
+      </a>
+     </p>
+    </div>
+    <div class="footerCol">
+     <div id="uwFooter">
+      <a href="http://wisc.edu" target="_blank">
+       <img alt="UW logo" src="/images/uw-logo.svg"/>
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <div id="copyright">
+   <div id="copyrightText">
+    Copyright © 2019 The Board of Regents of the University of Wisconsin System. Feedback, questions or accessibility issues:
+    <script type="text/javascript">
+     document.write('<n uers="znvygb:jroznfgre@aryfba.jvfp.rqh">jroznfgre@aryfba.jvfp.rqh</n>'.replace(/[a-zA-Z]/g,
+	function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+    </script>
+   </div>
+  </div>
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2269569-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+ </body>
+</html>

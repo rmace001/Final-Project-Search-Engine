@@ -1,0 +1,310 @@
+https://accesspoint.uwsp.edu
+<html>
+ <head>
+  <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="noindex,nofollow" name="robots"/>
+  <title>
+   accesSPoint logout page
+  </title>
+  <link href="/public/include/css/apm.css" rel="stylesheet" type="text/css"/>
+  <script language="javascript" src="/public/include/js/common.js">
+  </script>
+  <script language="javascript" src="/public/include/js/u_plugin.js">
+  </script>
+  <script language="javascript">
+   function InsertActivexControl(clsid, params)
+      {
+          var container = document.getElementById("logoutActivexContainer");
+          
+          if (navigator.appName == "Microsoft Internet Explorer") {
+              var paramsCode = "";
+              for (var item in params) {
+                  paramsCode += "<param name='" + item + "' value='" + params[item] + "'>";
+              }
+              
+              container.innerHTML = 
+                  "<center><object classId=CLSID:" + clsid + " border=0 width=1 height=1>" +
+                  paramsCode + "</object></center>";
+          }
+          else {
+              var pluginHost = new UPluginHost("", container);
+              var control = {"clsid": clsid, "width": 1, "height": 1};
+              pluginHost.hostControl(control, params);
+          }
+      }
+	  
+      function OnLoad()
+      {
+        var isBrowserControl = false;
+        try {
+            isBrowserControl = ("undefined" != typeof(window.external))
+                && ("unknown" != typeof(window.external))
+                && ("undefined" != typeof(window.external.WebLogonNotifyUser))
+                && ("unknown" != typeof(window.external.WebLogonNotifyUser));
+        }
+        catch(e) {}
+
+        var display_session = get_cookie("LastMRH_Session");
+        if(null != display_session) {
+          document.getElementById("sessionDIV").innerHTML = '<BR>The session reference number: &nbsp;' + display_session + '<BR><BR>';
+          document.getElementById("sessionDIV").style.visibility = "visible";
+        }
+
+        if(isBrowserControl) {
+            window.external.WebLogonNotifyUser();
+        }
+        if(!isBrowserControl) {
+            document.getElementById("newSessionDIV").style.visibility = "visible";
+        }
+
+        try
+        {
+            if (get_cookie("F5_PWS") == "1")
+            {
+                document.cookie = "F5_PWS=0; path=/; expires=Fri, 01-Jan-1970 00:00:01 GMT";
+                var pwsClassId = "7E73BE8F-FD87-44EC-8E22-023D5FF960FF";
+                InsertActivexControl(pwsClassId, {"command": "exit"} );
+            }
+        }catch (e) {};
+      }
+  </script>
+ </head>
+ <body onload="OnLoad();">
+  <script>
+   try{
+
+    if(window.external && window.external.WebLogonOnAuthFailure) {
+        window.external.WebLogonOnAuthFailure();
+    }
+}catch(e){};
+    try {
+        window.external.OnHostClose();
+    } catch(e) { }
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="notranslate" name="google"/>
+  <meta content="en" http-equiv="Content-Language"/>
+  <meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible">
+   <meta content="initial-scale=1.0" id="viewport" name="viewport">
+    <meta context="noindex,nofollow" name="robots"/>
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i" rel="stylesheet"/>
+    <!-- universal custom css -->
+    <style>
+     #helpSection {
+    background-color: #dcdbea;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+#helpSection ul {
+    margin-top: 0; 
+    padding-top: 0;
+}
+.impTitle {
+    font-family: Impact, Arimo, Verdana, Sans-serif ;
+    font-size: 18px;
+}
+.headpadn {
+    padding-top: 60px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+.headpadn img {
+    max-width: 100%;
+    width: 100%;
+}
+#barcontainer {
+    position: absolute;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 500px;
+    margin: 0px 0px 0px auto;
+    background-color: rgba(255,255,255,0.9);
+    padding: 0px 40px 0px 40px;
+}
+#barcontainer ul {padding-left: 20px;}
+#barcontainer ul li {padding-bottom: 10px;}
+#frmContainer {
+    background-color: #FFF;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 20px;
+}
+#interaction_table_header h3.succ {color: #000;}
+#interaction_table_header h3.errr {
+    color: #b61d22;
+    margin: 0;
+}
+#newSessionDIV {
+    font-size: 11px !important;
+}
+
+@media screen and (max-width: 440px) {
+    #barcontainer {padding: 0px 20px 0px 20px;}
+}
+    </style>
+    <script language="javascript">
+     //orientation toolbox
+function setViewport(){
+    document.getElementById("viewport").setAttribute('content', Math.abs(window.orientation) == 90 ? 'width=device-height, initial-scale=1' : 'width=device-width, initial-scale=1.0' );
+}
+setViewport();
+window.onorientationchange = function() {
+    setViewport();
+}
+    </script>
+    <div id="barcontainer">
+     <table cellpadding="0" cellspacing="0" id="page_header">
+      <tr>
+       <td id="header_leftcell">
+        <!--<img src='/public/images/my/flogo.png'/>-->
+       </td>
+       <td id="header_rightcell">
+        <div class="headpadn">
+         <img alt="acceSPoint Student Information System" border="0" src="https://www.uwsp.edu/DesignCampus/login/accesspoint/accesspoint.png"/>
+        </div>
+       </td>
+      </tr>
+      <tr>
+       <td id="tbspce">
+       </td>
+       <td id="maxTimeoutTd">
+        <span id="maxTimeoutTag" title="">
+        </span>
+       </td>
+      </tr>
+     </table>
+     <script src="https://api-0d8d82ba.duosecurity.com/frame/hosted/Duo-F5-BIG-IP-v2.js">
+     </script>
+     <ul>
+      <li>
+       <strong>
+        Newly applied students
+       </strong>
+       , please log in using your ID number.
+      </li>
+      <li>
+       <strong>
+        Currently admitted students
+       </strong>
+       ,
+       <strong>
+        registered students
+       </strong>
+       , or
+       <strong>
+        faculty/staff
+       </strong>
+       , please log in with your current username and password.
+      </li>
+     </ul>
+     <div id="frmContainer">
+      <noscript>
+       <div id="noscript_warning_red">
+        JavaScript is not enabled. Please enable JavaScript in your browser or contact your system administrator for assistance.
+       </div>
+       <div id="noscript_warning_newsession">
+        To open a new session, please
+        <a href="/">
+         click here.
+        </a>
+       </div>
+      </noscript>
+      <table class="logout_page" id="main_table">
+       <tr>
+        <td id="main_table_info_cell">
+         <table id="interaction_table">
+          <tr>
+           <td id="interaction_table_header">
+            Your session could not be established.
+           </td>
+          </tr>
+          <tr>
+           <td class="interaction_table_option_cell">
+            <br/>
+            <div align="left" id="sessionDIV" style="visibility:hidden">
+            </div>
+            <font color="red">
+             Can not find session information in the request. This can happen because your browser restarted after an add-on was installed. If this occurred, click the link below to continue.  This can also happen because cookies are disabled in your browser. If so, enable cookies in your browser and start a new session.
+            </font>
+            <br/>
+            <br/>
+            Thank you for using accesSPoint.
+            <br/>
+            <br/>
+            <div id="newSessionDIV" style="visibility:hidden">
+             To open a new session, please
+             <a href="/">
+              click here.
+             </a>
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td class="interaction_table_footer">
+           </td>
+          </tr>
+         </table>
+        </td>
+        <td id="main_table_image_cell">
+         <img src="/public/images/my/tr.gif"/>
+        </td>
+       </tr>
+      </table>
+     </div>
+     <div id="helpSection">
+      <span class="impTitle">
+       Public Resources:
+      </span>
+      <br>
+       <a href="/psc/CSPRD/EMPLOYEE/SA/c/NUI_FRAMEWORK.PT_LANDINGPAGE.GBL">
+        Schedule of Classes (Timetable)
+       </a>
+       <br>
+        <br>
+         <span class="impTitle">
+          AccesSPoint Help:
+         </span>
+         <br>
+          <a href="https://www.uwsp.edu/infotech/Pages/Account/Accesspoint.aspx" target="_blank">
+           New Applied Student Accounts
+          </a>
+          <br>
+           <a href="https://www.uwsp.edu/infotech/Pages/Account/default.aspx" target="_blank">
+            Admitted or Registered Students and Faculty/Staff Accounts
+           </a>
+           <br/>
+           <a href="https://www.uwsp.edu/acadaff/accesspoint/help" target="_blank">
+            accesSPoint Tutorials
+           </a>
+           <br/>
+           <a href="https://www.uwsp.edu/infosecurity/Pages/Multi-Factor-Authentication/default.aspx" target="_blank">
+            Duo Authentication Information
+           </a>
+           <br/>
+           <a href="https://www.uwsp.edu/infosecurity/Pages/Multi-Factor-Authentication/MFA-FAQ.aspx" target="_blank">
+            Duo Authentication FAQs
+           </a>
+          </br>
+         </br>
+        </br>
+       </br>
+      </br>
+     </div>
+     <div id="page_footer">
+      <!--<div>University of Wisconsin Stevens Point</div>-->
+      <div>
+       <a href="https://www.uwsp.edu/infotech/Pages/ServiceDesk/default.aspx">
+        Information Technology Service Desk
+       </a>
+      </div>
+     </div>
+    </div>
+    <div class="inspectionHostDIVSmall" id="logoutActivexContainer">
+    </div>
+   </meta>
+  </meta>
+ </body>
+</html>
+

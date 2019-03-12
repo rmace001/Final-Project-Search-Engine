@@ -1,0 +1,1046 @@
+http://giving.tamu.edu/
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <title>
+   Texas A&amp;M Foundation
+  </title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="/images/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+  <link href="/images/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+  <link href="/images/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+  <link href="/images/favicons/manifest.json" rel="manifest"/>
+  <link color="#5bbad5" href="/images/favicons/safari-pinned-tab.svg" rel="mask-icon"/>
+  <meta content="#ffffff" name="theme-color"/>
+  <link href="/css/normalize.min-3.0.3.css" rel="stylesheet"/>
+  <link href="/css/jquery.fancybox.css" rel="stylesheet"/>
+  <link href="/css/jquery-ui.min.css" rel="stylesheet"/>
+  <link href="/css/font-awesome.min-4.4.0.css" rel="stylesheet"/>
+  <link href="/css/select2.css" rel="stylesheet"/>
+  <link href="/css/flexslider.css" rel="stylesheet"/>
+  <link href="/css/slick.css" rel="stylesheet"/>
+  <link href="/css/slick-theme.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300|Sintony:400,700" rel="stylesheet" type="text/css"/>
+  <link href="/css/skeleton.css" rel="stylesheet"/>
+  <script src="/js/jquery-1.12.4.min.js">
+  </script>
+  <script src="/js/jquery-ui.min.js?v=1">
+  </script>
+  <script src="/js/jquery.easing.1.3.js">
+  </script>
+  <script src="/js/jquery.fancybox.pack.js">
+  </script>
+  <script src="/js/helpers/jquery.fancybox-media.js">
+  </script>
+  <script src="/js/jquery.mask.min.js">
+  </script>
+  <script src="/js/jquery.rowsorter.min.js">
+  </script>
+  <script src="/js/jquery.validate.min.js">
+  </script>
+  <script src="/js/jquery.validate.additional.methods.js?v=3">
+  </script>
+  <script src="/js/modernizr-2.6.2-respond-1.1.0.min.js">
+  </script>
+  <script src="/js/select2.min.js">
+  </script>
+  <script src="/js/mediacheck.js">
+  </script>
+  <script src="/js/sortable.js">
+  </script>
+  <script src="/js/fidvids.js">
+  </script>
+  <script src="/js/masonry-4.0.0.js">
+  </script>
+  <script src="/js/imagesloaded-4.1.0.js">
+  </script>
+  <script src="/js/jquery.flexslider-min.js">
+  </script>
+  <script src="/js/slick.min.js?v=2">
+  </script>
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a0dfe86da6526bf">
+  </script>
+  <script src="https://www.google.com/recaptcha/api.js">
+  </script>
+  <link href="/css/main.css?v=100" rel="stylesheet" type="text/css"/>
+  <link href="/css/mediaqueries.css?v=53" rel="stylesheet"/>
+  <script src="/js/main.js?v=21">
+  </script>
+  <script type="text/javascript">
+   dataLayer = [];
+
+        
+
+        $(function () {
+            var year = new Date().getFullYear();
+            $('#year').html(year);
+
+            var cx = '004822432300513118197:kwuz0ki8o9u';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+
+            dataLayer.push({ 'userId': $('#hdnGuid').val() });
+
+            if ($('#hdnEmail').val() !== '') {
+                dataLayer.push({ 'userEmail': $('#hdnEmail').val() });
+            }
+
+            if ($('#hdnAdvanceId').val() !== '') {
+                dataLayer.push({ 'userAdvanceId': $('#hdnAdvanceId').val() });
+            }
+
+            $('.search-form button').click(function (e) {
+                e.preventDefault();
+                searchSubmit();
+            });
+
+        });
+
+        //Submit search query
+        function searchSubmit() {
+            var q1 = $('#searchbar-container .search-form .input-container input').val();
+            var q2 = $('.mobile-search-container .search-form input').val();
+
+            if (q1 !== "") {
+                window.location = '/search-results.aspx?q=' + q1;                
+            } else if (q2 !== "") {
+                window.location = '/search-results.aspx?q=' + q2;                
+            } else {
+                alert('Enter a search term.');
+            }
+        }
+  </script>
+  <style type="text/css">
+   .main {
+            padding: 0;
+        }
+  </style>
+  <script type="text/javascript">
+   $(function () {
+            LoadMoreNews();
+
+            // Homepage Rotator
+            $('.home-rotator .slides').slick({
+                dots: true,
+                fade: true,
+                adaptiveHeight: true,
+                infinite: true
+            });
+
+            //Pause video when opening full video
+            //$('.video-overlay-buttons a').click(function () {
+            //    $('#divVideo video').get(0).pause();
+            //})
+
+        });
+
+        function LoadMoreNews() {
+            var pg = parseInt($('#hdnPG').val());
+            pg++;
+
+            $.ajax({
+                type: 'POST',
+                async: 'false',
+                contentType: "application/json; charset=utf-8",
+                url: '/admin/resources/TAMF.asmx/LoadHomepageNews',
+                data: "{ pg: '" + pg + "' }",
+                dataType: 'text',
+                success: function (data) {
+                    $('#divNews').html(data);
+                    $('#hdnPG').val(pg);
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err.Message);
+                }
+            });
+        }
+  </script>
+ </head>
+ <body>
+  <!-- Google Tag Manager -->
+  <noscript>
+   <iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-N2RWDB" style="display:none;visibility:hidden" width="0">
+   </iframe>
+  </noscript>
+  <script>
+   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N2RWDB');
+  </script>
+  <!-- End Google Tag Manager -->
+  <header class="header">
+   <input id="hdnGuid" name="ctl00$hdnGuid" type="hidden"/>
+   <input id="hdnEmail" name="ctl00$hdnEmail" type="hidden"/>
+   <input id="hdnAdvanceId" name="ctl00$hdnAdvanceId" type="hidden"/>
+   <div id="searchbar-container">
+    <div class="wrapper">
+     <div class="searchbar">
+      <form class="search-form">
+       <div class="form-row">
+        <div class="input-container">
+         <input placeholder="Enter Search..." type="text"/>
+        </div>
+        <button class="search-button-bg" type="submit">
+         <i class="fa fa-search">
+         </i>
+        </button>
+        <div class="search-close">
+         <a href="#" id="closeSearch">
+          <i class="fa fa-times">
+          </i>
+         </a>
+        </div>
+       </div>
+      </form>
+     </div>
+    </div>
+   </div>
+   <!-- /.searchbar-container -->
+   <div class="topbar-container">
+    <div class="wrapper">
+     <div class="topbar">
+      <div class="topbar-right">
+       <a class="give-link" href="/give.aspx">
+        Give Now
+       </a>
+       <a class="spirit-link" href="https://spirit.txamfoundation.com">
+       </a>
+       <a class="search-link" href="#" id="activateSearch">
+        <i class="fa fa-search">
+        </i>
+       </a>
+      </div>
+      <div class="social-links">
+       <ul>
+        <li>
+         <a href="https://www.instagram.com/txamfoundation/" target="_blank">
+          <i class="fa fa-instagram">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://twitter.com/txamfoundation" target="_blank">
+          <i class="fa fa-twitter">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://www.facebook.com/TexasAMFoundation" target="_blank">
+          <i class="fa fa-facebook">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://www.youtube.com/user/AggieSpiritandMind" target="_blank">
+          <i class="fa fa-youtube">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://www.flickr.com/photos/texasamfoundation/" target="_blank">
+          <i class="fa fa-flickr">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://www.linkedin.com/company/texas-a&amp;m-foundation" target="_blank">
+          <i class="fa fa-linkedin">
+          </i>
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <!-- /.top-bar -->
+    </div>
+   </div>
+   <!-- /.topbar-containre -->
+   <div class="primary-nav-container">
+    <div class="wrapper">
+     <div class="logo">
+      <a href="/">
+       Texas A&amp;M Foundation
+      </a>
+     </div>
+     <nav class="primary-nav">
+      <!-- Primary Navigation Literal -->
+      <div id="divPrimaryNav">
+       <ul>
+        <li class="left-side">
+         <a href="/About.aspx">
+          About
+         </a>
+         <ul class="dropdown">
+          <li>
+           <a href="/About/Trustees.aspx">
+            Trustees
+           </a>
+          </li>
+          <li>
+           <a href="/About/Maroon-Coats.aspx">
+            Maroon Coats
+           </a>
+          </li>
+          <li>
+           <a href="/About/History.aspx">
+            History
+           </a>
+          </li>
+          <li>
+           <a href="/About/Location.aspx">
+            Location
+           </a>
+          </li>
+          <li>
+           <a href="/About/Financials.aspx">
+            Financials
+           </a>
+          </li>
+          <li>
+           <a href="/About/State-Registrations.aspx">
+            State Registrations
+           </a>
+          </li>
+          <li>
+           <a href="/About/Privacy-Statement-About.aspx">
+            Privacy Statement
+           </a>
+          </li>
+          <li>
+           <a href="/About/FAQs.aspx">
+            FAQs
+           </a>
+          </li>
+          <li>
+           <a href="/About/Careers.aspx">
+            Careers
+           </a>
+          </li>
+         </ul>
+         <li class="left-side">
+          <a href="/News.aspx">
+           News &amp; Media
+          </a>
+          <ul class="dropdown">
+           <li>
+            <a href="/News/News.aspx">
+             News
+            </a>
+           </li>
+           <li>
+            <a href="/News/Videos.aspx">
+             Videos
+            </a>
+           </li>
+           <li>
+            <a href="/News/Podcasts.aspx">
+             Podcasts
+            </a>
+           </li>
+           <li>
+            <a href="/News/Publications.aspx">
+             Publications
+            </a>
+           </li>
+           <li>
+            <a href="/News/Newsletter-Subscription.aspx">
+             Newsletter Subscription
+            </a>
+           </li>
+           <li>
+            <a href="/News/Request-Publications.aspx">
+             Request Publications
+            </a>
+           </li>
+          </ul>
+          <li class="left-side">
+           <a href="/Donors.aspx">
+            Donors
+           </a>
+           <ul class="dropdown">
+            <li>
+             <a href="/Donors/AM-Legacy-Society.aspx">
+              A&amp;M Legacy Society
+             </a>
+            </li>
+            <li>
+             <a href="/Donors/Sterling-C-Evans-Medal-Recipients.aspx">
+              Sterling C. Evans Medal
+             </a>
+            </li>
+           </ul>
+           <li class="right-side">
+            <a href="/Contact.aspx">
+             Contact
+            </a>
+            <ul class="dropdown">
+             <li>
+              <a href="/Contact/Executive-Staff.aspx">
+               Executive Staff
+              </a>
+             </li>
+             <li>
+              <a href="/Contact/Development-Staff.aspx">
+               Development Staff
+              </a>
+             </li>
+             <li>
+              <a href="/Contact/Update-Your-Information.aspx">
+               Update Your Information
+              </a>
+             </li>
+             <li>
+              <a href="/Contact/Request-a-Support-Kit.aspx">
+               Request a Support Kit
+              </a>
+             </li>
+             <li>
+              <a href="/Contact/W9-Request-Form.aspx">
+               Request a W9 Form
+              </a>
+             </li>
+             <li>
+              <a href="/Contact/Newsletter-Subscription.aspx">
+               Subscribe to our Newsletter!
+              </a>
+             </li>
+            </ul>
+            <li class="right-side">
+             <a href="/Gift-Impact.aspx">
+              Gift Impact
+             </a>
+             <ul class="dropdown">
+              <li>
+               <a href="/Gift-Impact/Faculty-Impact.aspx">
+                FACULTY IMPACT
+               </a>
+              </li>
+              <li>
+               <a href="/Gift-Impact/College-Impact.aspx">
+                College Impact
+               </a>
+              </li>
+              <li>
+               <a href="/Gift-Impact/Spirit-Impact.aspx">
+                Spirit Impact
+               </a>
+              </li>
+              <li>
+               <a href="/Gift-Impact/Student-Impact.aspx">
+                Student Impact
+               </a>
+              </li>
+             </ul>
+             <li class="right-side">
+              <a href="/How-to-Give.aspx">
+               How To Give
+              </a>
+              <ul class="dropdown">
+               <li>
+                <a href="/How-to-Give/The-Gift-Process.aspx">
+                 The Gift Process
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Scholarships.aspx">
+                 Scholarships
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Current-Gifts.aspx">
+                 Current Gifts
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Matching-Gifts.aspx">
+                 Matching Gifts
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Planned-Gifts.aspx">
+                 Planned Gifts
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Corporate-Gifts.aspx">
+                 Corporate Gifts
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Real-Estate.aspx">
+                 Real Estate Gifts
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Honorary-And-Memorial.aspx">
+                 Honorary &amp; Memorial Gifts
+                </a>
+               </li>
+               <li>
+                <a href="/How-to-Give/Online-Gifts.aspx">
+                 Online Gifts
+                </a>
+               </li>
+              </ul>
+             </li>
+            </li>
+           </li>
+          </li>
+         </li>
+        </li>
+       </ul>
+      </div>
+      <div class="topbar-right mobile">
+       <div class="give-link-container">
+        <a class="give-link" href="/give.aspx">
+         Give Now
+        </a>
+       </div>
+       <!-- no space
+                     -->
+       <div class="spirit-link-container">
+        <a class="spirit-link" href="/spirit">
+         <img src="/images/spirit-logo-white.png"/>
+        </a>
+       </div>
+      </div>
+      <!-- /.topbar-right.mobile -->
+      <div class="mobile-search-container searchbar">
+       <form class="search-form">
+        <div class="input-container">
+         <input placeholder="Enter Search..." type="text"/>
+        </div>
+        <button type="submit">
+         <i class="fa fa-search">
+         </i>
+        </button>
+       </form>
+      </div>
+     </nav>
+     <a class="mobile-nav-toggle" href="#">
+      <i class="fa fa-bars nonexpand">
+      </i>
+      <i class="fa fa-times expand">
+      </i>
+      Menu
+     </a>
+    </div>
+   </div>
+  </header>
+  <div class="main">
+   <nav class="tamu-flyout">
+    <!-- <![endif]-->
+    <a href="http://leadbyexample.tamu.edu/" target="_blank">
+     <span class="tamu-flyout__icon-wrap">
+      <img alt="Lead by Example" class="tamu-flyout__icon" src="/images/flyout.jpg"/>
+     </span>
+     <div>
+      <img alt="impact" class="tamu-flyout__left" src="/images/flyout-left.jpg"/>
+      <img alt="enrich" class="tamu-flyout__right" src="/images/flyout-right.jpg"/>
+     </div>
+    </a>
+    <div class="homepage-newsletter">
+     <a class="button maroon" href="/News/Newsletter-Subscription.aspx">
+      Subscribe to Our Newsletter
+     </a>
+    </div>
+   </nav>
+   <div class="home">
+    <form action="./" id="frm" method="post">
+     <div class="aspNetHidden">
+      <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwULLTEyOTYwODU1NTIPZBYCZg9kFgQCAw9kFgICBw8WAh4JaW5uZXJodG1sBfwWPHVsPjxsaSBjbGFzcz0nbGVmdC1zaWRlJz48YSBocmVmPScvQWJvdXQuYXNweCc+QWJvdXQ8L2E+PHVsIGNsYXNzPSdkcm9wZG93bic+PGxpPjxhIGhyZWY9Jy9BYm91dC9UcnVzdGVlcy5hc3B4Jz5UcnVzdGVlczwvYT48L2xpPjxsaT48YSBocmVmPScvQWJvdXQvTWFyb29uLUNvYXRzLmFzcHgnPk1hcm9vbiBDb2F0czwvYT48L2xpPjxsaT48YSBocmVmPScvQWJvdXQvSGlzdG9yeS5hc3B4Jz5IaXN0b3J5PC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9BYm91dC9Mb2NhdGlvbi5hc3B4Jz5Mb2NhdGlvbjwvYT48L2xpPjxsaT48YSBocmVmPScvQWJvdXQvRmluYW5jaWFscy5hc3B4Jz5GaW5hbmNpYWxzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9BYm91dC9TdGF0ZS1SZWdpc3RyYXRpb25zLmFzcHgnPlN0YXRlIFJlZ2lzdHJhdGlvbnM8L2E+PC9saT48bGk+PGEgaHJlZj0nL0Fib3V0L1ByaXZhY3ktU3RhdGVtZW50LUFib3V0LmFzcHgnPlByaXZhY3kgU3RhdGVtZW50PC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9BYm91dC9GQVFzLmFzcHgnPkZBUXM8L2E+PC9saT48bGk+PGEgaHJlZj0nL0Fib3V0L0NhcmVlcnMuYXNweCc+Q2FyZWVyczwvYT48L2xpPjwvdWw+PGxpIGNsYXNzPSdsZWZ0LXNpZGUnPjxhIGhyZWY9Jy9OZXdzLmFzcHgnPk5ld3MgJiBNZWRpYTwvYT48dWwgY2xhc3M9J2Ryb3Bkb3duJz48bGk+PGEgaHJlZj0nL05ld3MvTmV3cy5hc3B4Jz5OZXdzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9OZXdzL1ZpZGVvcy5hc3B4Jz5WaWRlb3M8L2E+PC9saT48bGk+PGEgaHJlZj0nL05ld3MvUG9kY2FzdHMuYXNweCc+UG9kY2FzdHM8L2E+PC9saT48bGk+PGEgaHJlZj0nL05ld3MvUHVibGljYXRpb25zLmFzcHgnPlB1YmxpY2F0aW9uczwvYT48L2xpPjxsaT48YSBocmVmPScvTmV3cy9OZXdzbGV0dGVyLVN1YnNjcmlwdGlvbi5hc3B4Jz5OZXdzbGV0dGVyIFN1YnNjcmlwdGlvbjwvYT48L2xpPjxsaT48YSBocmVmPScvTmV3cy9SZXF1ZXN0LVB1YmxpY2F0aW9ucy5hc3B4Jz5SZXF1ZXN0IFB1YmxpY2F0aW9uczwvYT48L2xpPjwvdWw+PGxpIGNsYXNzPSdsZWZ0LXNpZGUnPjxhIGhyZWY9Jy9Eb25vcnMuYXNweCc+RG9ub3JzPC9hPjx1bCBjbGFzcz0nZHJvcGRvd24nPjxsaT48YSBocmVmPScvRG9ub3JzL0FNLUxlZ2FjeS1Tb2NpZXR5LmFzcHgnPkEmTSBMZWdhY3kgU29jaWV0eTwvYT48L2xpPjxsaT48YSBocmVmPScvRG9ub3JzL1N0ZXJsaW5nLUMtRXZhbnMtTWVkYWwtUmVjaXBpZW50cy5hc3B4Jz5TdGVybGluZyBDLiBFdmFucyBNZWRhbDwvYT48L2xpPjwvdWw+PGxpIGNsYXNzPSdyaWdodC1zaWRlJz48YSBocmVmPScvQ29udGFjdC5hc3B4Jz5Db250YWN0PC9hPjx1bCBjbGFzcz0nZHJvcGRvd24nPjxsaT48YSBocmVmPScvQ29udGFjdC9FeGVjdXRpdmUtU3RhZmYuYXNweCc+RXhlY3V0aXZlIFN0YWZmPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Db250YWN0L0RldmVsb3BtZW50LVN0YWZmLmFzcHgnPkRldmVsb3BtZW50IFN0YWZmPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Db250YWN0L1VwZGF0ZS1Zb3VyLUluZm9ybWF0aW9uLmFzcHgnPlVwZGF0ZSBZb3VyIEluZm9ybWF0aW9uPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Db250YWN0L1JlcXVlc3QtYS1TdXBwb3J0LUtpdC5hc3B4Jz5SZXF1ZXN0IGEgU3VwcG9ydCBLaXQ8L2E+PC9saT48bGk+PGEgaHJlZj0nL0NvbnRhY3QvVzktUmVxdWVzdC1Gb3JtLmFzcHgnPlJlcXVlc3QgYSBXOSBGb3JtPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Db250YWN0L05ld3NsZXR0ZXItU3Vic2NyaXB0aW9uLmFzcHgnPlN1YnNjcmliZSB0byBvdXIgTmV3c2xldHRlciE8L2E+PC9saT48L3VsPjxsaSBjbGFzcz0ncmlnaHQtc2lkZSc+PGEgaHJlZj0nL0dpZnQtSW1wYWN0LmFzcHgnPkdpZnQgSW1wYWN0PC9hPjx1bCBjbGFzcz0nZHJvcGRvd24nPjxsaT48YSBocmVmPScvR2lmdC1JbXBhY3QvRmFjdWx0eS1JbXBhY3QuYXNweCc+RkFDVUxUWSBJTVBBQ1Q8L2E+PC9saT48bGk+PGEgaHJlZj0nL0dpZnQtSW1wYWN0L0NvbGxlZ2UtSW1wYWN0LmFzcHgnPkNvbGxlZ2UgSW1wYWN0PC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9HaWZ0LUltcGFjdC9TcGlyaXQtSW1wYWN0LmFzcHgnPlNwaXJpdCBJbXBhY3Q8L2E+PC9saT48bGk+PGEgaHJlZj0nL0dpZnQtSW1wYWN0L1N0dWRlbnQtSW1wYWN0LmFzcHgnPlN0dWRlbnQgSW1wYWN0PC9hPjwvbGk+PC91bD48bGkgY2xhc3M9J3JpZ2h0LXNpZGUnPjxhIGhyZWY9Jy9Ib3ctdG8tR2l2ZS5hc3B4Jz5Ib3cgVG8gR2l2ZTwvYT48dWwgY2xhc3M9J2Ryb3Bkb3duJz48bGk+PGEgaHJlZj0nL0hvdy10by1HaXZlL1RoZS1HaWZ0LVByb2Nlc3MuYXNweCc+VGhlIEdpZnQgUHJvY2VzczwvYT48L2xpPjxsaT48YSBocmVmPScvSG93LXRvLUdpdmUvU2Nob2xhcnNoaXBzLmFzcHgnPlNjaG9sYXJzaGlwczwvYT48L2xpPjxsaT48YSBocmVmPScvSG93LXRvLUdpdmUvQ3VycmVudC1HaWZ0cy5hc3B4Jz5DdXJyZW50IEdpZnRzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Ib3ctdG8tR2l2ZS9NYXRjaGluZy1HaWZ0cy5hc3B4Jz5NYXRjaGluZyBHaWZ0czwvYT48L2xpPjxsaT48YSBocmVmPScvSG93LXRvLUdpdmUvUGxhbm5lZC1HaWZ0cy5hc3B4Jz5QbGFubmVkIEdpZnRzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Ib3ctdG8tR2l2ZS9Db3Jwb3JhdGUtR2lmdHMuYXNweCc+Q29ycG9yYXRlIEdpZnRzPC9hPjwvbGk+PGxpPjxhIGhyZWY9Jy9Ib3ctdG8tR2l2ZS9SZWFsLUVzdGF0ZS5hc3B4Jz5SZWFsIEVzdGF0ZSBHaWZ0czwvYT48L2xpPjxsaT48YSBocmVmPScvSG93LXRvLUdpdmUvSG9ub3JhcnktQW5kLU1lbW9yaWFsLmFzcHgnPkhvbm9yYXJ5ICYgTWVtb3JpYWwgR2lmdHM8L2E+PC9saT48bGk+PGEgaHJlZj0nL0hvdy10by1HaXZlL09ubGluZS1HaWZ0cy5hc3B4Jz5PbmxpbmUgR2lmdHM8L2E+PC9saT48L3VsPjwvdWw+ZAIFD2QWAgIBD2QWEAIDD2QWAgIBDxYCHgRUZXh0BdccPHVsIGNsYXNzPSdzbGlkZXMnPjxsaSBjbGFzcz0ncm90YXRvci1zbGlkZSc+PGRpdiBjbGFzcz0ncm90YXRvci1pbWFnZSc+PGEgaHJlZj0naHR0cDovL3d3dy50eGFtZm91bmRhdGlvbi5jb20vTmV3cy9TdGlsbC1DYXVzaW5nLWEtSHVsbGFiYWxvby5hc3B4Jz48aW1nIHNyYz0naHR0cHM6Ly9jZG4udHhhbWZvdW5kYXRpb24uY29tL3JvdGF0b3IvQmlsbC1Mb25xdWlzdC5wbmcnIC8+PC9hPjwvZGl2PjxkaXYgY2xhc3M9J3dyYXBwZXInPjxkaXYgY2xhc3M9J3JvdGF0b3ItYmx1cmInPjxkaXYgY2xhc3M9J3JvdGF0b3ItYmx1cmItaW5uZXInPjxoNCBjbGFzcz0ndGl0bGUnPlN0aWxsIENhdXNpbmcgYSBIdWxsYWJhbG9vPC9oND48cD5PbGRlc3QgbGl2aW5nIFllbGwgTGVhZGVyIEJpbGwgTG9ucXVpc3Qg4oCZNDggZXhlbXBsaWZpZXMgbG95YWx0eSBhbmQgc2VydmljZSB0byBUZXhhcyBBJk0uPC9wPjwvZGl2PjxhIGhyZWY9J2h0dHA6Ly93d3cudHhhbWZvdW5kYXRpb24uY29tL05ld3MvU3RpbGwtQ2F1c2luZy1hLUh1bGxhYmFsb28uYXNweCcgY2xhc3M9J3JlYWQtbW9yZSc+PGkgY2xhc3M9J2ZhIGZhLXBsdXMnPjwvaT5SZWFkIE1vcmU8L2E+PC9kaXY+PC9kaXY+PC9saT48bGkgY2xhc3M9J3JvdGF0b3Itc2xpZGUnPjxkaXYgY2xhc3M9J3JvdGF0b3ItaW1hZ2UnPjxhIGhyZWY9J2h0dHA6Ly93d3cudHhhbWZvdW5kYXRpb24uY29tL05ld3MvVGV4YXMtQU0tUmVjZWl2ZXMtNy1NaWxsaW9uLUdpZnQtZm9yLU1lZGljYWwtYW5kLU51cnNpbmctRWR1Y2F0aW9uLmFzcHgnPjxpbWcgc3JjPSdodHRwczovL2Nkbi50eGFtZm91bmRhdGlvbi5jb20vcm90YXRvci9UaGUtS25vd2xlcy5wbmcnIC8+PC9hPjwvZGl2PjxkaXYgY2xhc3M9J3dyYXBwZXInPjxkaXYgY2xhc3M9J3JvdGF0b3ItYmx1cmInPjxkaXYgY2xhc3M9J3JvdGF0b3ItYmx1cmItaW5uZXInPjxoNCBjbGFzcz0ndGl0bGUnPiQ3IE1pbGxpb24gZm9yIE1lZGljaW5lIGFuZCBOdXJzaW5nPC9oND48cD5TdWUgYW5kIEpvZSBLbm93bGVzIOKAmTUwLCBNRCwgbWFrZSB0aGUgbGFyZ2VzdCBzY2hvbGFyc2hpcCBnaWZ0IGluIHRoZSBoaXN0b3J5IG9mIHRoZSBoZWFsdGggc2NpZW5jZXMgYXQgVGV4YXMgQSZNLjwvcD48L2Rpdj48YSBocmVmPSdodHRwOi8vd3d3LnR4YW1mb3VuZGF0aW9uLmNvbS9OZXdzL1RleGFzLUFNLVJlY2VpdmVzLTctTWlsbGlvbi1HaWZ0LWZvci1NZWRpY2FsLWFuZC1OdXJzaW5nLUVkdWNhdGlvbi5hc3B4JyBjbGFzcz0ncmVhZC1tb3JlJz48aSBjbGFzcz0nZmEgZmEtcGx1cyc+PC9pPlJlYWQgTW9yZTwvYT48L2Rpdj48L2Rpdj48L2xpPjxsaSBjbGFzcz0ncm90YXRvci1zbGlkZSc+PGRpdiBjbGFzcz0ncm90YXRvci1pbWFnZSc+PGEgaHJlZj0naHR0cDovL3d3dy50eGFtZm91bmRhdGlvbi5jb20vTmV3cy9NYXBwaW5nLXRoZS1Sb2FkLXRvLVN1Y2Nlc3MuYXNweCc+PGltZyBzcmM9J2h0dHBzOi8vY2RuLnR4YW1mb3VuZGF0aW9uLmNvbS9yb3RhdG9yL0dlcnNoZW4ucG5nJyAvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSd3cmFwcGVyJz48ZGl2IGNsYXNzPSdyb3RhdG9yLWJsdXJiJz48ZGl2IGNsYXNzPSdyb3RhdG9yLWJsdXJiLWlubmVyJz48aDQgY2xhc3M9J3RpdGxlJz5NYXBwaW5nIHRoZSBSb2FkIHRvIFN1Y2Nlc3M8L2g0PjxwPlNhbSBhbmQgQmFybmV5IEdlcnNoZW4g4oCZNjkgc3VwcG9ydCBBZ2dpZSBzdHVkZW50cyBpbiB0aGUgQ29ycHMgYW5kIE1heXMgQnVzaW5lc3MgU2Nob29sLjwvcD48L2Rpdj48YSBocmVmPSdodHRwOi8vd3d3LnR4YW1mb3VuZGF0aW9uLmNvbS9OZXdzL01hcHBpbmctdGhlLVJvYWQtdG8tU3VjY2Vzcy5hc3B4JyBjbGFzcz0ncmVhZC1tb3JlJz48aSBjbGFzcz0nZmEgZmEtcGx1cyc+PC9pPlJlYWQgTW9yZTwvYT48L2Rpdj48L2Rpdj48L2xpPjxsaSBjbGFzcz0ncm90YXRvci1zbGlkZSc+PGRpdiBjbGFzcz0ncm90YXRvci1pbWFnZSc+PGEgaHJlZj0naHR0cDovL3d3dy50eGFtZm91bmRhdGlvbi5jb20vTmV3cy9UaGUtUmVzb2x1dGlvbi1IYWJpdC5hc3B4Jz48aW1nIHNyYz0naHR0cHM6Ly9jZG4udHhhbWZvdW5kYXRpb24uY29tL3JvdGF0b3IvUmVzb2x1dGlvbnMucG5nJyAvPjwvYT48L2Rpdj48ZGl2IGNsYXNzPSd3cmFwcGVyJz48ZGl2IGNsYXNzPSdyb3RhdG9yLWJsdXJiJz48ZGl2IGNsYXNzPSdyb3RhdG9yLWJsdXJiLWlubmVyJz48aDQgY2xhc3M9J3RpdGxlJz5UaGUgUmVzb2x1dGlvbiBIYWJpdDwvaDQ+PHA+U28geW91IHRoaW5rIHlvdSBoYXZlIGVub3VnaCB3aWxscG93ZXIgdG8ga2VlcCB0aGF0IE5ldyBZZWFy4oCZcyByZXNvbHV0aW9uPyBTY2llbmNlIHJlc3BlY3RmdWxseSBkaXNhZ3JlZXMuPC9wPjwvZGl2PjxhIGhyZWY9J2h0dHA6Ly93d3cudHhhbWZvdW5kYXRpb24uY29tL05ld3MvVGhlLVJlc29sdXRpb24tSGFiaXQuYXNweCcgY2xhc3M9J3JlYWQtbW9yZSc+PGkgY2xhc3M9J2ZhIGZhLXBsdXMnPjwvaT5SZWFkIE1vcmU8L2E+PC9kaXY+PC9kaXY+PC9saT48bGkgY2xhc3M9J3JvdGF0b3Itc2xpZGUnPjxkaXYgY2xhc3M9J3JvdGF0b3ItaW1hZ2UnPjxhIGhyZWY9J2h0dHA6Ly93d3cudHhhbWZvdW5kYXRpb24uY29tL05ld3MvRnVsbHktUmVuZGVyZWQuYXNweCc+PGltZyBzcmM9J2h0dHBzOi8vY2RuLnR4YW1mb3VuZGF0aW9uLmNvbS9yb3RhdG9yL01pY2hlbGxlLVJvYmluc29uLnBuZycgLz48L2E+PC9kaXY+PGRpdiBjbGFzcz0nd3JhcHBlcic+PGRpdiBjbGFzcz0ncm90YXRvci1ibHVyYic+PGRpdiBjbGFzcz0ncm90YXRvci1ibHVyYi1pbm5lcic+PGg0IGNsYXNzPSd0aXRsZSc+RnVsbHkgUmVuZGVyZWQ8L2g0PjxwPkRpc25leSBBbmltYXRpb24gYXJ0aXN0IGFuZCB2aXN1YWxpemF0aW9uIGdyYWR1YXRlIE1pY2hlbGxlIFJvYmluc29uIOKAmTkxIGxpdmVzIHdoZXJlIGFydCBhbmQgdGVjaG5vbG9neSBtZWV0LjwvcD48L2Rpdj48YSBocmVmPSdodHRwOi8vd3d3LnR4YW1mb3VuZGF0aW9uLmNvbS9OZXdzL0Z1bGx5LVJlbmRlcmVkLmFzcHgnIGNsYXNzPSdyZWFkLW1vcmUnPjxpIGNsYXNzPSdmYSBmYS1wbHVzJz48L2k+UmVhZCBNb3JlPC9hPjwvZGl2PjwvZGl2PjwvbGk+PGxpIGNsYXNzPSdyb3RhdG9yLXNsaWRlJz48ZGl2IGNsYXNzPSdyb3RhdG9yLWltYWdlJz48YSBocmVmPSdodHRwOi8vd3d3LnR4YW1mb3VuZGF0aW9uLmNvbS9OZXdzL0J1c2luZXNzLUJvb3N0LmFzcHgnPjxpbWcgc3JjPSdodHRwczovL2Nkbi50eGFtZm91bmRhdGlvbi5jb20vcm90YXRvci9XYXluZS1Sb2JlcnRzLnBuZycgLz48L2E+PC9kaXY+PGRpdiBjbGFzcz0nd3JhcHBlcic+PGRpdiBjbGFzcz0ncm90YXRvci1ibHVyYic+PGRpdiBjbGFzcz0ncm90YXRvci1ibHVyYi1pbm5lcic+PGg0IGNsYXNzPSd0aXRsZSc+QnVzaW5lc3MgQm9vc3Q8L2g0PjxwPkFnZ2llIGNvdXBsZSBTaGFubm9uIOKAmTg2IGFuZCBXYXluZSBSb2JlcnRzIOKAmTg1IGNyZWF0ZSBsYXJnZXN0IHBsYW5uZWQgZ2lmdCBpbiBNYXlzIEJ1c2luZXNzIFNjaG9vbCBoaXN0b3J5LjwvcD48L2Rpdj48YSBocmVmPSdodHRwOi8vd3d3LnR4YW1mb3VuZGF0aW9uLmNvbS9OZXdzL0J1c2luZXNzLUJvb3N0LmFzcHgnIGNsYXNzPSdyZWFkLW1vcmUnPjxpIGNsYXNzPSdmYSBmYS1wbHVzJz48L2k+UmVhZCBNb3JlPC9hPjwvZGl2PjwvZGl2PjwvbGk+PC91bD5kAgkPFgIfAAWvAUZ1bmQgdW5kZXJncmFkdWF0ZSBzY2hvbGFyc2hpcHMgb3IgZ3JhZHVhdGUgZmVsbG93c2hpcHMgYW5kIGhlbHAgQWdnaWVzIGluIHNwZWNpZmljIHNpdHVhdGlvbnMsIHN1Y2ggYXMgZmlyc3QtZ2VuZXJhdGlvbiBjb2xsZWdlIHN0dWRlbnRzIG9yIHRob3NlIHdpdGggdXJnZW50IGZpbmFuY2lhbCBuZWVkcy5kAgsPFgIfAAWoAUNyZWF0ZSBhIGdpZnQgdG8gc3VwcG9ydCBmYWN1bHR5IHJlc2VhcmNoIGFuZCB0ZWFjaGluZyB0aHJvdWdoIGEgZmFjdWx0eSBjaGFpciwgdGVhY2hpbmcgYXdhcmQsIHByb2Zlc3NvcnNoaXAgb3IgZmVsbG93c2hpcCB0byBhdHRyYWN0IHN1cGVyaW9yIHByb2Zlc3NvcnMgdG8gVGV4YXMgQSZNLmQCDQ8WAh8ABZQBRGlyZWN0IHlvdXIgZ2lmdCB0byBhIHNwZWNpZmljIEEmTSBjb2xsZWdlLCBkZXBhcnRtZW50IG9yIHVuaXQuIFlvdSBtYXkgYWxzbyBzdXBwb3J0IGJ1aWxkaW5nIGNvbnN0cnVjdGlvbiwgZXF1aXBtZW50IHB1cmNoYXNlcyBvciBhIGxlY3R1cmUgc2VyaWVzLmQCDw8WAh8ABYUBQnVpbGQgdGhlIEFnZ2llIHNwaXJpdCB0aHJvdWdoIHN1cHBvcnQgZm9yIG91dHNpZGUgdGhlIGNsYXNzcm9vbSBhY3Rpdml0aWVzLCBzdWNoIGFzIEZpc2ggQ2FtcCwgdGhlIEJpZyBFdmVudCBvciB0aGUgQ29ycHMgb2YgQ2FkZXRzLmQCEQ8WAh8BBdoBPHA+PGEgaHJlZj0iaHR0cDovL2FubnVhbHJlcG9ydC50eGFtZm91bmRhdGlvbi5jb20vI3N0YXRpc3RpY3MiPjxzcGFuIGNsYXNzPSJpY29uIj48c3BhbiBjbGFzcz0iZmEgZmEtZ2lmdCI+PC9zcGFuPjwvc3Bhbj48c3BhbiBjbGFzcz0ibnVtYmVycyI+JDEuOTk1IEJpbGxpb248L3NwYW4+IDxzcGFuIGNsYXNzPSJ0ZXh0Ij4gVG90YWwgTmV0IEFzc2V0czwvc3Bhbj4gPC9hPjwvcD5kAhMPFgIfAQXrATxwPjxhIGhyZWY9Imh0dHA6Ly9hbm51YWxyZXBvcnQudHhhbWZvdW5kYXRpb24uY29tLyNzdGF0aXN0aWNzLyI+PHNwYW4gY2xhc3M9Imljb24iPjxzcGFuIGNsYXNzPSJmYSBmYS1ncmFkdWF0aW9uLWNhcCI+PC9zcGFuPjwvc3Bhbj4gPHNwYW4gY2xhc3M9Im51bWJlcnMiPiQzMTEuMiBNaWxsaW9uPC9zcGFuPiA8c3BhbiBjbGFzcz0idGV4dCI+R2lmdHMgdG8gVGV4YXMgQSZhbXA7TTwvc3Bhbj4gPC9hPjwvcD5kAhUPFgIfAQXqATxwPjxhIGhyZWY9Imh0dHA6Ly9hbm51YWxyZXBvcnQudHhhbWZvdW5kYXRpb24uY29tLyI+PHNwYW4gY2xhc3M9Imljb24iPjxzcGFuIGNsYXNzPSJmYSBmYS11bml2ZXJzaXR5Ij48L3NwYW4+PC9zcGFuPiA8c3BhbiBjbGFzcz0ibnVtYmVycyI+JDExMS4xIE1pbGxpb248L3NwYW4+IDxzcGFuIGNsYXNzPSJ0ZXh0Ij5GdW5kcyBNYWRlIEF2YWlsYWJsZSB0byBUZXhhcyBBJmFtcDtNPC9zcGFuPiA8L2E+PC9wPmRkaIaaFs6OoIayLUcNjyWZsehK3cG/kXKovS3TvSZ056k=">
+      </input>
+     </div>
+     <div class="aspNetHidden">
+      <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334">
+       <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="/wEdAAW+QlH1UcbEdqTiTolQWJCbdE9LYPy4LoZUdVQGDgOoPssK8QoailG6t44Fje9TgzHLIc7/aBSSFn652IkCS/2JPkn1F94/oMvLKWUBmPuODZADi9ZNxQ6ZNd7yxniHoQftIKQqjf4YZw+R4jhWC4ZY"/>
+      </input>
+     </div>
+     <input id="hdnPG" name="ctl00$MainContent$hdnPG" type="hidden" value="-1"/>
+     <section class="rotator-section">
+      <div class="home-rotator" id="divRotator">
+       <ul class="slides">
+        <li class="rotator-slide">
+         <div class="rotator-image">
+          <a href="http://www.txamfoundation.com/News/Still-Causing-a-Hullabaloo.aspx">
+           <img src="https://cdn.txamfoundation.com/rotator/Bill-Lonquist.png"/>
+          </a>
+         </div>
+         <div class="wrapper">
+          <div class="rotator-blurb">
+           <div class="rotator-blurb-inner">
+            <h4 class="title">
+             Still Causing a Hullabaloo
+            </h4>
+            <p>
+             Oldest living Yell Leader Bill Lonquist ’48 exemplifies loyalty and service to Texas A&amp;M.
+            </p>
+           </div>
+           <a class="read-more" href="http://www.txamfoundation.com/News/Still-Causing-a-Hullabaloo.aspx">
+            <i class="fa fa-plus">
+            </i>
+            Read More
+           </a>
+          </div>
+         </div>
+        </li>
+        <li class="rotator-slide">
+         <div class="rotator-image">
+          <a href="http://www.txamfoundation.com/News/Texas-AM-Receives-7-Million-Gift-for-Medical-and-Nursing-Education.aspx">
+           <img src="https://cdn.txamfoundation.com/rotator/The-Knowles.png"/>
+          </a>
+         </div>
+         <div class="wrapper">
+          <div class="rotator-blurb">
+           <div class="rotator-blurb-inner">
+            <h4 class="title">
+             $7 Million for Medicine and Nursing
+            </h4>
+            <p>
+             Sue and Joe Knowles ’50, MD, make the largest scholarship gift in the history of the health sciences at Texas A&amp;M.
+            </p>
+           </div>
+           <a class="read-more" href="http://www.txamfoundation.com/News/Texas-AM-Receives-7-Million-Gift-for-Medical-and-Nursing-Education.aspx">
+            <i class="fa fa-plus">
+            </i>
+            Read More
+           </a>
+          </div>
+         </div>
+        </li>
+        <li class="rotator-slide">
+         <div class="rotator-image">
+          <a href="http://www.txamfoundation.com/News/Mapping-the-Road-to-Success.aspx">
+           <img src="https://cdn.txamfoundation.com/rotator/Gershen.png"/>
+          </a>
+         </div>
+         <div class="wrapper">
+          <div class="rotator-blurb">
+           <div class="rotator-blurb-inner">
+            <h4 class="title">
+             Mapping the Road to Success
+            </h4>
+            <p>
+             Sam and Barney Gershen ’69 support Aggie students in the Corps and Mays Business School.
+            </p>
+           </div>
+           <a class="read-more" href="http://www.txamfoundation.com/News/Mapping-the-Road-to-Success.aspx">
+            <i class="fa fa-plus">
+            </i>
+            Read More
+           </a>
+          </div>
+         </div>
+        </li>
+        <li class="rotator-slide">
+         <div class="rotator-image">
+          <a href="http://www.txamfoundation.com/News/The-Resolution-Habit.aspx">
+           <img src="https://cdn.txamfoundation.com/rotator/Resolutions.png"/>
+          </a>
+         </div>
+         <div class="wrapper">
+          <div class="rotator-blurb">
+           <div class="rotator-blurb-inner">
+            <h4 class="title">
+             The Resolution Habit
+            </h4>
+            <p>
+             So you think you have enough willpower to keep that New Year’s resolution? Science respectfully disagrees.
+            </p>
+           </div>
+           <a class="read-more" href="http://www.txamfoundation.com/News/The-Resolution-Habit.aspx">
+            <i class="fa fa-plus">
+            </i>
+            Read More
+           </a>
+          </div>
+         </div>
+        </li>
+        <li class="rotator-slide">
+         <div class="rotator-image">
+          <a href="http://www.txamfoundation.com/News/Fully-Rendered.aspx">
+           <img src="https://cdn.txamfoundation.com/rotator/Michelle-Robinson.png"/>
+          </a>
+         </div>
+         <div class="wrapper">
+          <div class="rotator-blurb">
+           <div class="rotator-blurb-inner">
+            <h4 class="title">
+             Fully Rendered
+            </h4>
+            <p>
+             Disney Animation artist and visualization graduate Michelle Robinson ’91 lives where art and technology meet.
+            </p>
+           </div>
+           <a class="read-more" href="http://www.txamfoundation.com/News/Fully-Rendered.aspx">
+            <i class="fa fa-plus">
+            </i>
+            Read More
+           </a>
+          </div>
+         </div>
+        </li>
+        <li class="rotator-slide">
+         <div class="rotator-image">
+          <a href="http://www.txamfoundation.com/News/Business-Boost.aspx">
+           <img src="https://cdn.txamfoundation.com/rotator/Wayne-Roberts.png"/>
+          </a>
+         </div>
+         <div class="wrapper">
+          <div class="rotator-blurb">
+           <div class="rotator-blurb-inner">
+            <h4 class="title">
+             Business Boost
+            </h4>
+            <p>
+             Aggie couple Shannon ’86 and Wayne Roberts ’85 create largest planned gift in Mays Business School history.
+            </p>
+           </div>
+           <a class="read-more" href="http://www.txamfoundation.com/News/Business-Boost.aspx">
+            <i class="fa fa-plus">
+            </i>
+            Read More
+           </a>
+          </div>
+         </div>
+        </li>
+       </ul>
+      </div>
+     </section>
+     <section class="home-impact">
+      <div class="maroon-bar" style="top: -1px;">
+       <h2>
+        Your Gift Makes an Impact at Texas A&amp;M
+       </h2>
+      </div>
+      <div class="home-impact-areas">
+       <div class="wrapper">
+        <div class="impact-area">
+         <h3 class="title blue-icon">
+          <span class="icon-container">
+           <i class="fa fa-users">
+           </i>
+          </span>
+          Students
+         </h3>
+         <p class="description" id="impactStudents">
+          Fund undergraduate scholarships or graduate fellowships and help Aggies in specific situations, such as first-generation college students or those with urgent financial needs.
+         </p>
+         <a class="button gray" href="/Gift-Impact/Student-Impact.aspx">
+          <i class="fa fa-plus">
+          </i>
+          Learn More
+         </a>
+        </div>
+        <!-- no space
+
+             -->
+        <div class="impact-area">
+         <h3 class="title blue-icon">
+          <span class="icon-container">
+           <i class="fa fa-flask">
+           </i>
+          </span>
+          Faculty
+         </h3>
+         <p class="description" id="impactFaculty">
+          Create a gift to support faculty research and teaching through a faculty chair, teaching award, professorship or fellowship to attract superior professors to Texas A&amp;M.
+         </p>
+         <a class="button gray" href="/Gift-Impact/Faculty-Impact.aspx">
+          <i class="fa fa-plus">
+          </i>
+          Learn More
+         </a>
+        </div>
+        <!-- no space
+
+             -->
+        <div class="impact-area">
+         <h3 class="title blue-icon">
+          <span class="icon-container">
+           <i class="fa fa-institution">
+           </i>
+          </span>
+          College
+         </h3>
+         <p class="description" id="impactCollege">
+          Direct your gift to a specific A&amp;M college, department or unit. You may also support building construction, equipment purchases or a lecture series.
+         </p>
+         <a class="button gray" href="/Gift-Impact/College-Impact.aspx">
+          <i class="fa fa-plus">
+          </i>
+          Learn More
+         </a>
+        </div>
+        <!-- no space
+
+             -->
+        <div class="impact-area">
+         <h3 class="title blue-icon">
+          <span class="icon-container">
+           <i class="fa fa-thumbs-up">
+           </i>
+          </span>
+          Spirit
+         </h3>
+         <p class="description" id="impactSpirit">
+          Build the Aggie spirit through support for outside the classroom activities, such as Fish Camp, the Big Event or the Corps of Cadets.
+         </p>
+         <a class="button gray" href="/Gift-Impact/Spirit-Impact.aspx">
+          <i class="fa fa-plus">
+          </i>
+          Learn More
+         </a>
+        </div>
+       </div>
+      </div>
+      <!--/.home-impact-areas -->
+     </section>
+     <!-- /.home-impact --->
+     <section class="home-stats">
+      <div class="home-stats-box">
+       <h2 class="title">
+        In Fiscal Year 2018
+       </h2>
+       <div class="home-stats-column">
+        <p>
+         <a href="http://annualreport.txamfoundation.com/#statistics">
+          <span class="icon">
+           <span class="fa fa-gift">
+           </span>
+          </span>
+          <span class="numbers">
+           $1.995 Billion
+          </span>
+          <span class="text">
+           Total Net Assets
+          </span>
+         </a>
+        </p>
+       </div>
+       <!-- no space            
+         -->
+       <div class="home-stats-column">
+        <p>
+         <a href="http://annualreport.txamfoundation.com/#statistics/">
+          <span class="icon">
+           <span class="fa fa-graduation-cap">
+           </span>
+          </span>
+          <span class="numbers">
+           $311.2 Million
+          </span>
+          <span class="text">
+           Gifts to Texas A&amp;M
+          </span>
+         </a>
+        </p>
+       </div>
+       <!-- no space
+         -->
+       <div class="home-stats-column">
+        <p>
+         <a href="http://annualreport.txamfoundation.com/">
+          <span class="icon">
+           <span class="fa fa-university">
+           </span>
+          </span>
+          <span class="numbers">
+           $111.1 Million
+          </span>
+          <span class="text">
+           Funds Made Available to Texas A&amp;M
+          </span>
+         </a>
+        </p>
+       </div>
+       <div class="annual-report-link">
+        <a class="button maroon" href="http://annualreport.txamfoundation.com/" target="_blank">
+         Read the Annual Report
+        </a>
+       </div>
+      </div>
+      <!-- /.home-stats-box -->
+     </section>
+     <!-- /.home-stats --->
+     <section class="home-news">
+      <div class="homepage title-bar">
+       <h2>
+        News From Aggieland
+       </h2>
+      </div>
+      <div class="wrapper">
+       <div id="divNews">
+       </div>
+      </div>
+     </section>
+     <!-- /.home-news --->
+    </form>
+   </div>
+  </div>
+  <footer class="primary-footer">
+   <div class="wrapper">
+    <div class="footer-logo">
+     <a href="default.aspx">
+      <img src="/images/logo-lbe-small-white-v2.png"/>
+     </a>
+    </div>
+    <!-- nospace
+         -->
+    <div class="footer-mission">
+     <h5 class="title">
+      Mission
+     </h5>
+     <p>
+      The Texas A&amp;M Foundation’s mission is to unite generosity and vision to raise and manage major endowed gifts that support the future of Texas A&amp;M University.
+      <br/>
+      <br/>
+      The Texas A&amp;M Foundation is a
+      <br/>
+      501(c)(3) tax-exempt organization. Gifts made to the Foundation are tax deductible to the extent permitted by law.
+     </p>
+    </div>
+    <!-- nospace
+         -->
+    <div class="footer-contact">
+     <h5 class="title">
+      Contact
+     </h5>
+     <p>
+      The Texas A&amp;M Foundation
+      <br/>
+      401 George Bush Dr.
+      <br/>
+      College Station, TX 77840
+     </p>
+     <p>
+      Toll-Free:
+      <a href="tel:8003923310">
+       (800) 392-3310
+      </a>
+      <br/>
+      Main:
+      <a href="tel:9798458161">
+       (979) 845-8161
+      </a>
+      <br/>
+      Fax:
+      <a href="tel:9798453973">
+       (979) 845-3973
+      </a>
+      <br/>
+      Email:
+      <a href="mailto:info@txamfoundation.com">
+       info@txamfoundation.com
+      </a>
+      <br/>
+     </p>
+    </div>
+    <!-- no space
+         -->
+    <div class="footer-social">
+     <h5 class="title">
+      Follow
+     </h5>
+     <div class="social-links">
+      <ul>
+       <li>
+        <a href="https://www.instagram.com/txamfoundation/" target="_blank">
+         <i class="fa fa-instagram">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://twitter.com/txamfoundation" target="_blank">
+         <i class="fa fa-twitter">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.facebook.com/TexasAMFoundation" target="_blank">
+         <i class="fa fa-facebook">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.youtube.com/user/AggieSpiritandMind" target="_blank">
+         <i class="fa fa-youtube">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.flickr.com/photos/texasamfoundation/" target="_blank">
+         <i class="fa fa-flickr">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.linkedin.com/company/texas-a&amp;m-foundation" target="_blank">
+         <i class="fa fa-linkedin">
+         </i>
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="footer-give-button">
+      <a class="button small maroon" href="/give.aspx">
+       Give Now
+      </a>
+     </div>
+    </div>
+    <!-- nospace
+         -->
+    <div class="footer-twitter-feed">
+     <div class="twitter-header">
+      <h5 class="title">
+       Tweets
+      </h5>
+      <a class="twitter-follow-button" data-button="grey" data-show-count="false" data-show-screen-name="false" href="https://twitter.com/TXAMFoundation">
+       Follow @TwitterDev
+      </a>
+     </div>
+     <a class="twitter-timeline" data-chrome="noheader nofooter noborders transparent noscrollbar" data-theme="dark" data-tweet-limit="1" href="https://twitter.com/TXAMFoundation?ref_src=twsrc%5Etfw">
+      Tweets by TXAMFoundation
+     </a>
+     <script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js">
+     </script>
+    </div>
+   </div>
+  </footer>
+  <div class="disclaimer">
+   <div class="wrapper">
+    Copyright ©
+    <span id="year">
+    </span>
+    Texas A&amp;M Foundation
+    <span class="disclaimer-divider">
+     |
+    </span>
+    <a href="http://ifound.txamfoundation.com/">
+     Staff Login
+    </a>
+    <span class="disclaimer-divider">
+     |
+    </span>
+    <a href="http://campusclients.txamfoundation.com/">
+     Campus Clients
+    </a>
+   </div>
+  </div>
+ </body>
+</html>
+

@@ -1,0 +1,511 @@
+http://transcripts.wsu.edu/
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+ <!--<![endif]-->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="telephone=no" name="format-detection"/>
+  <meta content="address=no" name="format-detection"/>
+  <meta content="date=no" name="format-detection"/>
+  <meta content="email=no" name="format-detection"/>
+  <title>
+   Order Student Transcript
+  </title>
+  <!-- FAVICON -->
+  <link href="//repo.wsu.edu/spine/2/favicon.ico" rel="shortcut icon"/>
+  <!-- STYLESHEETS -->
+  <link href="/Bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
+  <link href="//repo.wsu.edu/spine/2/spine.min.css" rel="stylesheet" type="text/css"/>
+  <!-- RESPOND -->
+  <meta content="width=device-width, user-scalable=yes" name="viewport"/>
+  <!-- SCRIPTS -->
+  <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">
+  </script>
+  <script src="//repo.wsu.edu/spine/2/spine.min.js">
+  </script>
+  <script src="/scripts/colorbox/jquery.colorbox-min.js" type="text/javascript">
+  </script>
+  <link href="/scripts/colorbox/colorbox.css" rel="stylesheet" type="text/css"/>
+  <script src="/scripts/fancybox/jquery.fancybox.pack.js" type="text/javascript">
+  </script>
+  <link href="/scripts/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css">
+   <script src="/scripts/Common.js" type="text/javascript">
+   </script>
+   <script src="/Bootstrap/js/bootstrap.js" type="text/javascript">
+   </script>
+   <link href="/scripts/fullcalendar.2.1.1/fullcalendar.css" rel="stylesheet" type="text/css"/>
+   <script src="/scripts/fullcalendar.2.1.1/moment.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/fullcalendar.min.js" type="text/javascript">
+   </script>
+   <script src="/scripts/fullcalendar.2.1.1/gcal.js" type="text/javascript">
+   </script>
+   <!-- COMPATIBILITY -->
+   <!-- Include an HTML5 compatibility shim for HTML5 -->
+   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+   <!-- Ensure the Spine is displayed fully when no-JS -->
+   <noscript>
+    <style>
+     #spine .spine-sitenav ul ul li {
+        display: block !important;
+      }
+    </style>
+   </noscript>
+   <link href="/css/base.css" rel="stylesheet" type="text/css"/>
+   <!-- ANALYTICS -->
+   <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css"/>
+   <link href="/css/SpinePad1.css" rel="stylesheet" type="text/css"/>
+   <style type="text/css">
+    h1.pagetitle {display:none;}  
+        
+    .main-header {
+          background: #981e32 url('//registrar.wsu.edu/Images/dots.png');
+    }
+        
+    .main-header sup:not(.unset){
+          text-transform:none !important;
+    }
+    .firebrick{
+         color: firebrick;
+    }
+    .header-group{
+    	line-height: 100%;
+    }
+    span.ro_event_date {
+      font-weight:bolder;
+    }
+    div.ro_announcement_title {
+      font-weight:bolder;
+      font-size:1.2em;
+      padding-top:15px;
+    }
+    div.ro_announcement_narrative {
+      text-align:justify;
+    }
+    div.ro_faqs_title {
+      font-weight:bolder;
+      font-size:1.4em;
+      font-size:1.4rem;
+      padding-bottom:10px;
+    }
+   </style>
+   <script type="text/javascript">
+    $(function(){
+      $("#custom-header-title").html( $("#Umbraco_Page_Title").html() );
+    });
+    function showPaperOrders(){
+        $("#paper-orders").show("slide-down");
+      }
+   </script>
+   <script type="text/javascript">
+    $(document).ready(function(){
+      $(".jqbutton").button();
+      $(window).resize(resizeContent);
+      resizeContent();
+      setupRemoteContentLinks();
+    });
+	
+	function resizeContent(){
+      var newHeight = $(window).height();
+      var newWidth = $(window).width();
+      $(".resize-width").css("width", newWidth + "px");
+	}
+	
+	function setupRemoteContentLinks(){
+        $(".remote-content").each(function () {
+            $(this).on('click', function (e) {
+                var href = $(this).attr("href");
+                var title = $(this).attr("title");
+                if (title == undefined || title == null || title == "") {
+                    title = $(this).attr("alt");
+                    if (title == undefined || title == null || title == "") {
+                        title = "Info";
+                    }
+                }
+
+                var contentURL = "https://cms.em.wsu.edu/Ajax?Action=RemoteContent&URL=" + encodeURI(href);
+                var umbracoPageId = $(this).attr("rel");
+                if (umbracoPageId != undefined && umbracoPageId != null && umbracoPageId != "") {
+                    contentURL = "https://cms.em.wsu.edu/Ajax/?Action=RenderPage&PageId=" + umbracoPageId;
+                }
+
+                if (href != undefined && href != null && href != "") {
+                    // Load the remote content
+                    e.preventDefault();
+                    $.ajax({
+                        url: contentURL,
+                        type: 'GET',
+                        success: (data) => {
+                            $("<div>" + data + "</div>").dialog({
+                                height: "auto",
+                                width: "98%",
+                                modal: true,
+                                title: title,
+                                buttons: {
+                                    Close: function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+	}
+   </script>
+  </link>
+ </head>
+ <body>
+  <a class="screen-reader-shortcut" href="#wsu-main-content">
+   Skip to main content
+  </a>
+  <a class="screen-reader-shortcut" href="#spine-navigation">
+   Skip to navigation
+  </a>
+  <!-- WRAPPING -->
+  <div class="" id="jacket">
+   <div class="hybrid max-1980" id="binder">
+    <!-- CONTENT -->
+    <main id="wsu-main-content">
+     <header class="main-header" id="main-header" style="display:none;">
+      <div class="header-group hgroup guttered padded-bottom short">
+       <sup class="sup-header">
+        <span class="sup-header-default" id="sup-header">
+        </span>
+       </sup>
+       <sub class="sub-header">
+        <span class="sub-header-default" id="sub-header">
+        </span>
+       </sub>
+      </div>
+     </header>
+     <div class="resize-widths" id="custom-header">
+      <div id="custom-header-title-wrapper">
+       <span id="custom-header-title">
+       </span>
+      </div>
+     </div>
+     <!-- Responsive Sections -->
+     <section class="row single" id="main-content-area">
+      <article>
+       <form enctype="application/x-www-form-urlencoded" id="UmbracoCMSForm" method="post">
+        <!-- BEGIN UMBRACO MAIN CONTENT -->
+        <div id="Umbraco_Page_Title" style="display:none;">
+         transcripts.wsu.edu
+        </div>
+        <div id="Umbraco_Site_Name" style="display:none;">
+         Order Student Transcript
+        </div>
+        <div class="main-header">
+         <div class="header-group">
+          <sup>
+           Office of the Registrar
+          </sup>
+          <sub>
+           Order Student Transcript
+          </sub>
+         </div>
+        </div>
+        <!-- WRAPPING -->
+        <div class="column one" id="custom-column-1">
+         <h2>
+          How to Order an Official Transcript
+         </h2>
+         <h4>
+          ONLINE ORDER
+         </h4>
+         <p>
+          Washington State University has retained Credentials Inc. to accept transcript orders over the Internet. Transcripts ordered through Credentials Inc. are available for pick up or via USPS mail/FEDEX or can be delivered as an Electronic Transcript. If you need assistance with a transcript order, please call Credentials Customer Service at 847-716-3005. If you are uncomfortable placing an order over the Internet, please call Credentials Customer Service at 847-716-3005 to place your transcript request. There is an additional surcharge for placing orders over the telephone.
+         </p>
+         <p>
+          <span class="firebrick">
+           Official transcripts are not held for grades or degrees.
+          </span>
+          Current students should verify the status of final grades or degrees by reviewing their unofficial transcript prior to ordering an official transcript. For instructions on how to view an unofficial transcript go to the
+          <a href="https://registrar.wsu.edu/">
+           Registrar's web site
+          </a>
+          and in the “myWSU FAQs for Students” section select “How to View Unofficial Transcripts”.
+         </p>
+         <p style="font-size: 1.5rem; color: #981e32; font-weight: bold;">
+          <a href="https://www.credentials-inc.com/tplus/?ALUMTRO003800" style="text-decoration: underline;">
+           Order ONLINE
+          </a>
+          .
+         </p>
+         <!--
+        <p>Please click the "TranscriptsPlus" icon below to enter your online order.</p>
+        
+        <p>
+          <a href="https://www.credentials-inc.com/tplus/?ALUMTRO003800" target="_blank">
+            <img src="images/TranscriptsPlusLogo.png" style="width:60%;"/>
+          </a>
+        </p>
+        -->
+         <p style="font-size: 1.3rem;">
+          <a href="https://www.credentials-inc.com/cgi-bin/rechkcgi.pgm?TPORDER003800" rel="noopener" target="_blank">
+           Check the Status of Your ONLINE Order
+          </a>
+         </p>
+         <h4 style="font-size: 1.4em; font-weight: normal;">
+          You may submit a paper order but please note the following limitations:
+         </h4>
+         <ul>
+          <li>
+           Allow 5 business days for official transcript processing by WSU.
+          </li>
+          <li>
+           For official transcript sent by mail, please allow additional days for processing by the United States Postal Service (USPS) beyond the initial 5 business day processing time by WSU.
+          </li>
+          <li>
+           Electronic Transcripts are not available when using this option.
+          </li>
+          <li>
+           Credit card payment is not available when using this option.
+          </li>
+          <li>
+           FEDEX is not available when using this option.
+          </li>
+         </ul>
+         <p>
+          If you still wish to submit a paper order please click
+          <a onclick="showPaperOrders()">
+           here
+          </a>
+          .
+         </p>
+         <div id="paper-orders" style="display: none;">
+          <h4>
+           Paper Order
+          </h4>
+          <p>
+           Choose the campus below through which you wish to process your request and the link will display the paper Transcript Request Form. Complete the paper form and provide it to the appropriate campus Registrar’s Office as directed.
+          </p>
+          <ul>
+           <ul>
+            <ul>
+             <li>
+              <a data-udi="umb://media/fa7bd3e4c1414211bf7969397219d279" href="/media/760440/pullman.pdf" rel="noopener" target="_blank" title="Pullman transcripts request">
+               Pullman/Global
+              </a>
+             </li>
+             <li>
+              <a href="https://spokane.wsu.edu/studentaffairs/wp-content/uploads/sites/471/2016/02/transcript-request-12-1-15.pdf" rel="noopener" target="_blank">
+               Spokane
+              </a>
+             </li>
+             <li>
+              <a href="https://tricities.wsu.edu/documents/2017/07/official-transcript-request.pdf" rel="noopener" target="_blank">
+               Tri-Cities
+              </a>
+             </li>
+             <li>
+              <a href="http://studentaffairs.vancouver.wsu.edu/files/inserted-files/vancouvertranscript.pdf" rel="noopener" target="_blank">
+               Vancouver
+              </a>
+             </li>
+            </ul>
+           </ul>
+          </ul>
+         </div>
+         <h4>
+          Processing Fees for Official Transcript
+         </h4>
+         <ul>
+          <li>
+           $10 for each official transcript
+          </li>
+          <li>
+           Additional fees are charged for FEDEX delivery (available only for online orders)
+          </li>
+          <li>
+           Additional fees are charged for placing orders over the telephone (available only through Credentials Inc. transcript services)
+          </li>
+         </ul>
+         <h4>
+          Official Transcript Policies
+         </h4>
+         <ul>
+          <li>
+           Official Transcript orders will not be processed until all transcript holds are released.
+          </li>
+          <li>
+           In accordance with the Family Educational Rights and Privacy Act of 1974, records may not be released to a third party without the written, signed authorization of the student.
+          </li>
+          <li>
+           Student must present a picture I.D. to pick up an official transcript order.
+          </li>
+         </ul>
+         <h4>
+          Unofficial Transcripts
+         </h4>
+         <ul>
+          <li>
+           Current and former students who have access to myWSU may obtain an unofficial transcript through myWSU. Go to Student Homepage &gt; Academic Records &gt; View Unofficial Transcript. If you don’t remember your WSU user name and/or password or need to reset your WSU password please contact Cougtech at
+           <a href="mailto:cougtech@wsu.edu">
+            cougtech@wsu.edu
+           </a>
+           or 509-335-4357.
+          </li>
+         </ul>
+         <h4>
+          Non-WSU, International Transcript Request Form
+         </h4>
+         <ul>
+          <li>
+           <a href="/media/756469/non-wsu-intl-request-form.pdf" rel="noopener" target="_blank">
+            Request for Non-WSU, International Transcript
+           </a>
+           This link displays a form which allows you to request a copy of a transcript that was provided to WSU by an international educational institution. Please print the form from your browser, complete it, and return it to us by mail. The fees for this service are displayed on the form.
+          </li>
+         </ul>
+        </div>
+        <p>
+        </p>
+        <!-- END UMBRACO MAIN CONTENT -->
+       </form>
+      </article>
+     </section>
+    </main>
+    <!-- /CONTENT -->
+    <!-- SPINE -->
+    <div class="spine-column spine-column crimson" id="spine">
+     <div class="spine-glue" id="glue">
+      <header class="spine-header">
+       <a href="http://wsu.edu/" id="wsu-signature">
+        Washington State University
+       </a>
+      </header>
+      <!-- ACTIONS -->
+      <section class="spine-actions" id="wsu-actions">
+       <!-- Tabs -->
+       <ul class="spine-actions-tabs clearfix" id="wsu-actions-tabs">
+        <li class="spine-search-tab closed" id="wsu-search-tab">
+         <button>
+          Search
+         </button>
+        </li>
+        <li class="spine-contact-tab closed" id="wsu-contact-tab">
+         <button>
+          Contact
+         </button>
+        </li>
+        <li class="spine-share-tab closed" id="wsu-share-tab">
+         <button>
+          Share
+         </button>
+        </li>
+        <li class="spine-print-tab closed" id="wsu-print-tab">
+         <button>
+          Print
+         </button>
+        </li>
+       </ul>
+       <!-- Actions generated by spine.js here -->
+      </section>
+      <!--/#wsu-actions-->
+      <section class="spine-navigation" id="spine-navigation">
+       <nav class="spine-sitenav">
+        <!-- Menu Reloaded -->
+        <ul>
+         <li>
+          <a href="/">
+           Transcript Home
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-offsitenav">
+       </nav>
+      </section>
+      <!-- #navigation -->
+      <!-- Social and Global Links -->
+      <footer class="spine-footer">
+       <nav class="spine-social-channels" id="wsu-social-channels">
+        <ul>
+         <li class="facebook-channel">
+          <a href="https://facebook.com/wsupullman">
+           Facebook
+          </a>
+         </li>
+         <li class="twitter-channel">
+          <a href="https://twitter.com/wsupullman">
+           Twitter
+          </a>
+         </li>
+         <li class="youtube-channel">
+          <a href="https://www.youtube.com/washingtonstateuniv">
+           YouTube
+          </a>
+         </li>
+         <li class="directory-channel">
+          <a href="https://socialmedia.wsu.edu/">
+           Social media at WSU
+          </a>
+         </li>
+        </ul>
+       </nav>
+       <nav class="spine-global-links" id="wsu-global-links">
+        <ul>
+         <li class="mywsu-link">
+          <a href="https://my.wsu.edu/">
+           myWSU
+          </a>
+         </li>
+         <li class="access-link">
+          <a href="https://access.wsu.edu/">
+           Access
+          </a>
+         </li>
+         <li class="policies-link">
+          <a href="https://policies.wsu.edu/">
+           Policies
+          </a>
+         </li>
+         <li class="copyright-link">
+          <a href="https://copyright.wsu.edu">
+           ©
+          </a>
+         </li>
+        </ul>
+       </nav>
+      </footer>
+     </div>
+     <!--/glue-->
+    </div>
+    <!--/spine-->
+    <!-- /SPINE -->
+   </div>
+   <!--/cover-->
+  </div>
+  <!--/jacket-->
+  <!-- /WRAPPING -->
+  <!-- SITE CONTACT -->
+  <div itemscope="" itemtype="http://schema.org/Organization">
+   <meta content="" itemprop="department"/>
+   <meta content="Washington State University" itemprop="name"/>
+   <div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+    <meta content="French Administration 346" itemprop="location"/>
+    <meta content="PO Box 641035" itemprop="streetAddress"/>
+    <meta content="Pullman, WA" itemprop="addressLocality"/>
+    <meta content="" itemprop="addressRegion"/>
+    <meta content="99164-1035" itemprop="postalCode"/>
+   </div>
+   <meta content="509-335-5346" itemprop="telephone"/>
+   <meta content="registrar@wsu.edu" itemprop="email"/>
+   <meta content="" itemprop="contactPoint"/>
+  </div>
+  <div id="isMobile" style="display:none;">
+  </div>
+ </body>
+</html>
+

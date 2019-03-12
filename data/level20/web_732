@@ -1,0 +1,650 @@
+http://bus.rice.edu/
+<!DOCTYPE doctype html>
+<html class="no-js no-touch" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   Bus Tracker
+  </title>
+  <meta content="" name="description">
+   <meta content="2019.2.18.1" name="version"/>
+   <meta content="width=device-width, initial-scale=1" name="viewport"/>
+   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+   <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+   <link href="css/map/vendor.min.css" rel="stylesheet"/>
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700" rel="stylesheet" type="text/css"/>
+   <link href="css/map/main.min.css" rel="stylesheet"/>
+   <link href="custom/custom.css" rel="stylesheet"/>
+   <style type="text/css">
+    .ui-dialog { z-index: 1001 !important ;}
+
+        :focus {
+            border:solid blue 2px !important;
+        }
+        /*.ui-front { z-index: 1001 !important; }*/
+   </style>
+   <!--[if lt IE 9]>
+        <link rel="stylesheet" href="css/map/ie8.css">
+    <![endif]-->
+   <!--[if lt IE 9]>
+        <script src="scripts/map/iehacks.min.js" type="text/javascript"></script>
+    <![endif]-->
+  </meta>
+ </head>
+ <body>
+  <form action="default.aspx" id="Form1" method="post" name="Form1" tabindex="-1">
+   <div>
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUJMzM3ODkwOTQzZGQygz1H/Jyc9O1nxLW8H8eKb1nZ/w=="/>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+var baseURL ='/';
+var routeID ='';
+//]]>
+   </script>
+   <div>
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+   </div>
+  </form>
+  <div class="mainHeaderWrapper container-fluid">
+   <div class="colorTop" style="background-color:#ac9740;">
+   </div>
+   <header class="mainHeader container-fluid">
+    <span class="mainHeaderBtn routesBtn" id="routesBtn" tabindex="0" title="Toggle Routes">
+     <span>
+      Routes
+     </span>
+    </span>
+    <span class="mainHeaderBtn mainMenuBtn" id="mainMenuBtn" title="Toggle Menu">
+     <span>
+      Menu
+     </span>
+     <span class="alertCount" style="background-color:#ac9740;">
+      22
+     </span>
+    </span>
+    <h1 class="mainTitle">
+     Live Tracker
+    </h1>
+   </header>
+  </div>
+  <script type="text/javascript">
+  </script>
+  <nav class="sideMenu mainMenu" id="mainMenu">
+   <header class="menuHeader mainMenuHeader">
+    <span class="closeBtn" onfocus="toggleMenu('mainMenu','open',1200)" onsubmit="toggleMenu('mainMenu','close',1200)" tabindex="0" title="Close Menu">
+    </span>
+    <h3 class="menuTitle">
+     Menu
+    </h3>
+    <div class="clearfix">
+    </div>
+   </header>
+   <div class="menuBody">
+    <div class="menuClientLogo">
+     <div class="logoBox">
+      <img alt="Client Logo" src="images/clientLogo.jpg"/>
+     </div>
+    </div>
+    <ul class="menuNav mainNav">
+     <li class="tour">
+      <div onfocus="toggleMenu('mainMenu','open',1200,null)" style="padding:0px; cursor:pointer;" tabindex="0">
+       Take a Tour
+      </div>
+     </li>
+     <li class="changeAgency" style="display:none;">
+      <a href="#">
+       Change Agency
+      </a>
+     </li>
+     <li class="liveMap">
+      <a href="/" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0">
+       Live Map
+      </a>
+     </li>
+     <li class="alerts">
+      <a href="alerts.aspx" onfocus="toggleMenu('mainMenu','open',1200,null)">
+       Alerts
+       <span class="alertCount" style="background-color:#ac9740;">
+        22
+       </span>
+      </a>
+     </li>
+     <li class="custom">
+      <a href="" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0">
+       Some Other Link
+      </a>
+     </li>
+    </ul>
+    <ul class="menuNav appNav">
+     <li id="androidAppLink">
+      <a class="android" href="https://play.google.com/store/apps/details?id=com.ad.android.ridesystems.ridetraq&amp;feature=search_result#?t=W251bGwsMSwyLDEsImNvbS5hZC5hbmRyb2lkLnJpZGVzeXN0ZW1zLnJpZGV0cmFxIl0." onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0" target="_blank">
+       Android App
+      </a>
+     </li>
+     <li id="appleAppLink">
+      <a class="apple" href="http://itunes.apple.com/us/app/ride-systems/id455913117?mt=8" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0" target="_blank">
+       iPhone App
+      </a>
+     </li>
+     <li>
+      <span class="comment" id="contact_us" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0">
+       Contact us
+      </span>
+     </li>
+     <li>
+      <div class="timeWrapper">
+       <div class="currentTime">
+       </div>
+       <div class="currentTemp">
+       </div>
+      </div>
+     </li>
+    </ul>
+    <ul class="socialNav">
+     <li>
+      <button class="twitter" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0" title="Twitter" type="button">
+       Twitter
+      </button>
+     </li>
+     <li>
+      <button class="facebook" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0" title="Facebook" type="button">
+       Facebook
+      </button>
+     </li>
+     <li>
+      <button class="tumblr" onfocus="toggleMenu('mainMenu','open',1200,null)" tabindex="0" title="Tumblr" type="button">
+       Tumblr
+      </button>
+     </li>
+     <div class="clearfix">
+     </div>
+    </ul>
+   </div>
+   <footer class="menuFooter mainMenuFooter">
+    <a alt="Ride Systems" class="rideSystems" href="http://www.ride-systems.com/" onfocus="toggleMenu('mainMenu','open',1200,null)" role="button" style="line-height: 0; font-size: 0; color: transparent;" tabindex="0" target="_blank">
+     Ride Systems
+    </a>
+   </footer>
+  </nav>
+  <nav class="sideMenu routesMenu" id="routesMenu">
+   <header class="menuHeader">
+    <span class="closeBtn" tabindex="4" title="Close Menu">
+    </span>
+    <h3 class="menuTitle">
+     Routes
+    </h3>
+    <div class="routesToolbar">
+     <div class="btn-group activeRoutesToggle">
+      <a class="btn btn-default active" href="" id="routeListActive" onfocus="toggleMenu('routesMenu', 'open', 1200)" tabindex="1" title="Only list active routes">
+       Active
+      </a>
+      <a class="btn btn-default" href="" id="routeListAll" onfocus="toggleMenu('routesMenu', 'open', 1200)" tabindex="2" title="List all routes">
+       All
+      </a>
+     </div>
+     <ul class="routesTopLinks">
+      <li class="client">
+       <span class="icon schedule" title="Full Schedule">
+       </span>
+      </li>
+      <li>
+       <span class="icon showAllRoutes" id="showAllRoutesBtn" onfocus="toggleMenu('routesMenu', 'open', 1200)" tabindex="3" title="Show All Routes">
+       </span>
+      </li>
+      <div class="clearfix">
+      </div>
+     </ul>
+     <div class="clearfix">
+     </div>
+    </div>
+    <div class="clearfix">
+    </div>
+   </header>
+   <div class="menuBody">
+    <div class="menuClientLogo">
+     <div class="logoBox">
+      <img alt="Client Logo" src="images/clientLogo.jpg"/>
+     </div>
+    </div>
+    <div class="routeGroupsList">
+     <select id="routeGroups">
+     </select>
+    </div>
+    <ul class="routesList" id="routes">
+     <li class="route">
+      <div class="routeHeader">
+       <span class="toggleRouteBtn" tabindex="0" title="Show Route On Map">
+        <span class="iconColor" style="background-color:red;">
+        </span>
+       </span>
+       <div class="routeTitle">
+        <h3 class="title">
+         The Red Route
+        </h3>
+        <p class="routeSubscript">
+         6:00am - 6:00pm
+        </p>
+       </div>
+       <a class="detailsBtn" href="" tabindex="5">
+        <span>
+         Details
+        </span>
+       </a>
+       <div class="clearfix">
+       </div>
+      </div>
+      <div class="routeContent">
+       <h3 class="contentHeader">
+        Estimated Arrivals
+       </h3>
+       <div class="arrivalTimes">
+        <table>
+         <tbody>
+          <tr>
+           <td class="stopName">
+            <span>
+             Medical Tower
+            </span>
+           </td>
+           <td class="time highlight">
+            Arriving
+           </td>
+           <td class="time">
+            10 min
+           </td>
+          </tr>
+          <tr>
+           <td class="stopName">
+            <span>
+             Huntsman Center
+            </span>
+           </td>
+           <td class="time">
+            25min
+           </td>
+           <td class="time">
+            30min
+           </td>
+          </tr>
+          <tr>
+           <td class="stopName">
+            <span>
+             Some Really REally long Stop that needs to get cut off.
+            </span>
+           </td>
+           <td class="time">
+            5 min
+           </td>
+           <td class="time">
+            30min
+           </td>
+          </tr>
+          <tr>
+           <td class="stopName">
+            <span>
+             Medical Tower
+            </span>
+           </td>
+           <td class="time">
+            10 min
+           </td>
+           <td class="time">
+            Arriving
+           </td>
+          </tr>
+          <tr>
+           <td class="stopName">
+            <span>
+             Huntsman Center
+            </span>
+           </td>
+           <td class="time">
+            6:15pm
+           </td>
+           <td class="time">
+            6:35pm
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="moreInfo">
+        <a href="">
+         More Route Info
+        </a>
+       </div>
+       <div class="clearfix">
+       </div>
+      </div>
+     </li>
+    </ul>
+   </div>
+   <!-- .menuBody -->
+  </nav>
+  <div class="sideMenu infoPanel" id="infoPanel">
+   <header class="menuHeader">
+    <span class="closeBtn" title="Close">
+    </span>
+    <a class="favoritesIcon inactive toggleFavorite" href="#" id="routeStopFavorite" tabindex="-1" title="Add To Favorites">
+    </a>
+    <h3 class="menuTitle">
+     Stop Information
+    </h3>
+    <div class="clearfix">
+    </div>
+   </header>
+   <div class="menuBody">
+    <!-- 
+            <h2 class="stopRoutesName">The Stop Name Goes Here</h2>
+            <ul class="stopRoutes">
+                <li>
+                    <div class="routeIcon"><span class="iconColor" style="background-color:red;"></span></div>
+                    <div class="routeInfo">
+                        <h3 class="routeName">Route Name That Is Really Long</h3>
+                        <table class="arrivals">
+                            <tbody>
+                                <tr>
+                                    <td>Estimated Arrival: </td>
+                                    <td class="time">10 min</td>
+                                </tr>
+                                <tr>
+                                    <td>Then: </td>
+                                    <td class="time">10 min</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul> 
+            -->
+   </div>
+  </div>
+  <div class="sideMenu infoPanel new_css" id="favoritesPanel">
+   <header class="menuHeader">
+    <a class="closeBtn" href="#" onfocus="showFavorites()" title="Close">
+    </a>
+    <h3 class="menuTitle">
+     Favorite Stops
+    </h3>
+    <div class="clearfix">
+    </div>
+   </header>
+   <div class="menuBody">
+    <ul class="stopFavorites">
+    </ul>
+   </div>
+  </div>
+  <div class="liveMapWrapper container-fluid">
+   <div class="feedTicker" id="ticker" style="border-color:#ac9740;">
+    <ul class="ticker">
+    </ul>
+    <a class="readMore" href="alerts.aspx" title="More">
+     More...
+    </a>
+    <span class="closeBtn" tabindex="0" title="Close">
+    </span>
+   </div>
+   <!-- KEEP THESE COMMENTED OUT HTML BLOCKS - THEY CAN BE USEFUL FOR MODIFYING STYLE -->
+   <!-- <div class="busMarker">
+            <div class="direction north"></div>
+            <div class="dot" style="background-color:#004080;"></div>
+        </div> -->
+   <!-- <div class="busInfoBox" style="position:absolute;">
+            <h3 class="busName" style="border-color:#004080;">Bus 4403</h3>
+            <div class="capacityWrapper" style="border-color:#004080;">
+                <div class="capacity">
+                    <div class="meter empty" style="width:20%;"></div>
+                </div>
+            </div>
+            <div class="estimates">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="stop">Medical Towers (S)</td>
+                            <td class="time">15 min</td>
+                        </tr>
+                        <tr>
+                            <td class="stop">Huntsman Center</td>
+                            <td class="time">30 min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+   <div class="liveMap" id="map_canvas" style="height:100%; width:100%">
+   </div>
+   <footer class="mapFooter container-fluid">
+    <div class="footerHalf">
+     <a class="footerBtn findMeBtn" href="#" id="findMeBtn">
+      <span>
+       Find Me
+      </span>
+     </a>
+    </div>
+    <div class="footerHalf">
+     <a class="footerBtn favoritesBtn" href="#" id="favoritesBtn">
+      <span>
+       Favorites
+      </span>
+     </a>
+    </div>
+    <div class="clearfix">
+    </div>
+   </footer>
+  </div>
+  <div id="errorMessage">
+  </div>
+  <div id="labelStatus">
+  </div>
+  <div class="loadingScreen active" id="loadingScreen">
+   <img alt="Client Logo" src="Images/clientLogo.jpg"/>
+   <div class="loading loadingLarge">
+   </div>
+   <h1>
+    Loading
+   </h1>
+   <div class="rideSystems">
+   </div>
+   <div class="status">
+    Status:
+    <label id="status">
+    </label>
+   </div>
+  </div>
+  <div class="passwordScreen" id="passwordScreen">
+   <h1>
+    Please enter password
+   </h1>
+   <input aria-label="Password" autocapitalize="off" autocorrect="off" id="password" tabindex="-1" type="text"/>
+   <br/>
+   <br/>
+   <br/>
+   <button id="submitPassword">
+    Log in
+   </button>
+   <br/>
+   <br/>
+   <label id="passwordError" tabindex="-1">
+    abcd
+   </label>
+  </div>
+  <!--
+    <div id="iframeScreen" class="iframeScreen">
+        <span title="Close" class="closeBtn" ></span>
+        <iframe title="External Link">Loading...
+        </iframe>
+    </div>
+    -->
+  <div id="dialog-iframeScreen" style="z-index: 10001;">
+   <iframe style="width: 100%; height: 100%; background-color: white;" title="External Link">
+   </iframe>
+  </div>
+  <script src="https://widget.uservoice.com/X42Qimq6FUg194h9WMEHHA.js" type="text/javascript">
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;client=gme-doublemap" type="text/javascript">
+  </script>
+  <script src="scripts/map/vendor.min.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/template.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/route.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/vehicle.js?a" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Twitter.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Routes.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Vehicles.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Estimates.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/variables.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Template.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_GoogleAnalytics.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Overlays.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/main.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/utilities.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/vehicle_marker.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/stop_marker.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/map_Favorites.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/jquery.joyride-2.1.js" type="text/javascript">
+  </script>
+  <script src="Scripts/Map/Debug/custom_marker.js" type="text/javascript">
+  </script>
+  <script src="custom/custom.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   $('#mainMenu').on('focusout', function () {
+            var $elem = $(this);
+            setTimeout(function () {
+                var hasFocus = !!($elem.find(':focus').length > 0);
+                if (!hasFocus) {
+                    toggleMenu('mainMenu', 'close', 1200);
+                }
+            }, 10);
+        });
+        $('#favoritesPanel').on('focusout', function () {
+            var $elem = $(this);
+            setTimeout(function () {
+                var hasFocus = !!($elem.find(':focus').length > 0);
+                if (!hasFocus) {
+                    toggleMenu('favoritesPanel', 'close', 1200);
+                }
+            }, 10);
+        });
+        $('#routesMenu').on('focusout', function () {
+            var $elem = $(this);
+            setTimeout(function () {
+                var hasFocus = !!($elem.find(':focus').length > 0);
+                if (!hasFocus) {
+                    toggleMenu('routesMenu', 'close', 1200);
+                }
+            }, 10);
+        });
+  </script>
+  <!-- Tip Content -->
+  <ol id="joyRideTipContent">
+   <li data-id="routesBtn" data-options="tipAnimation:fade" data-text="Next">
+    <h2>
+     Routes
+    </h2>
+    <div>
+     Click the Routes Button
+     <span class="tour_routesBtn" style="display:inline-block;" title="Routes">
+     </span>
+     to open the routes menu
+    </div>
+    <br/>
+   </li>
+   <li data-button="Next" data-id="routeListAll" data-options="tipAnimation:fade">
+    <h2>
+     Show all Routes
+    </h2>
+    <p>
+     Toggle between active and all routes by choosing either "Active" or "All" in the Routes Menu
+    </p>
+   </li>
+   <li data-button="Next" data-class="routeTitle" data-options="tipAnimation:fade">
+    <h2>
+     Draw the Route
+    </h2>
+    <div>
+     Click the Route Button
+     <span class="tour_ToggleRouteBtn">
+      <span class="iconColor" style="background-color:#FF0000;">
+      </span>
+     </span>
+     to toggle the route on the map
+    </div>
+    <br/>
+   </li>
+   <li data-button="Next" data-class="routeTitle" data-options="tipAnimation:fade">
+    <h2>
+     Estimates
+    </h2>
+    <div>
+     Click the Details Button
+     <span class="tour_DetailsBtn">
+     </span>
+     to show Route Estimates
+    </div>
+    <br/>
+   </li>
+   <li data-button="Next" data-options="tipAnimation:fade">
+    <h2>
+     Stop
+    </h2>
+    <p>
+     Click a stop on the map to show more information, such as arrival times
+    </p>
+   </li>
+   <li data-button="Next" data-id="infoPanelHeader" data-options="tipAnimation:fade">
+    <h2>
+     Add to Favorites
+    </h2>
+    <div>
+     Click the Favorites Button
+     <span class="tour_FavoritesIcon inactive" style="display: inline;" title="Add to Favorites">
+     </span>
+     to add the Stop to your Favorites
+    </div>
+    <br/>
+   </li>
+   <li data-button="Next">
+    <h2>
+     Favorites and Find Me
+    </h2>
+    <div>
+     At the bottom of the screen you can click on the:
+     <br/>
+     <strong>
+      Find Me
+     </strong>
+     Button to show your current location
+     <br/>
+     <strong>
+      Favorites
+     </strong>
+     Button to show your Favorites
+    </div>
+    <br/>
+   </li>
+  </ol>
+  <script type="text/javascript">
+   _restrictRouteOnVehicleClick = true;
+  </script>
+ </body>
+</html>
+

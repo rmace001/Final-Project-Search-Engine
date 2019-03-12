@@ -1,0 +1,2331 @@
+http://calendar.tmcc.edu
+<!--
+PHP Events Calendar Main Functions file:
+/calendar/CalendarFunctions.php
+-->
+<!-- PHP Events Calendar -->
+<!-- CALENDAR :: Version Number: Version 1.3.0000 - Jan 20th 2015 -->
+<!-- CALENDAR :: Number of events found = 4415 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <title>
+   Events Calendar - Truckee Meadows Community College
+  </title>
+  <!-- New: Inner page 2col -->
+  <link href="/media/tmcc/includes/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+  <!-- bootstrap.min -->
+  <link href="/media/tmcc/includes/css/megamenu/meganavbar.min.css" rel="stylesheet"/>
+  <!-- meganavbar.min -->
+  <link href="/media/tmcc/includes/css/tmcc.css" rel="stylesheet"/>
+  <!-- tmcc -->
+  <link href="/media/tmcc/style-assets/css/default.css" media="print" rel="stylesheet"/>
+  <!-- print -->
+  <!-- global css asset references -->
+  <script src="/media/tmcc/includes/js/jquery/jquery-latest.min.js">
+  </script>
+  <!-- jquery -->
+  <!-- global script asset references -->
+  <!-- navigation object : Header Code -->
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3280930-1', 'tmcc.edu');
+  ga('send', 'pageview');
+  </script>
+  <!-- analytics -->
+  <link href="/media/tmcc/includes/css/new-calendar.css" media="all" rel="stylesheet" type="text/css">
+   <!-- New Calendar -->
+  </link>
+ </head>
+ <body>
+  <!-- Google Tag Manager -->
+  <noscript>
+   <iframe height="0" src="//www.googletagmanager.com/ns.html?id=GTM-P46R4L" style="display:none;visibility:hidden" width="0">
+   </iframe>
+  </noscript>
+  <script>
+   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P46R4L');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- navigation object : Page - Pre Body Code -->
+  <a class="sr-only sr-only-focusable" href="#main-content">
+   Skip to main content
+  </a>
+  <!-- TMCC Header -->
+  <header role="banner">
+   <div class="container header-seal">
+    <div class="row">
+     <div class="col-sm-5 col-xs-12">
+      <div class="header-logo">
+       <a href="/">
+        <img alt="TMCC Logo" class="img-responsive" src="/media/tmcc/includes/images/logo-header-lg.png"/>
+       </a>
+      </div>
+     </div>
+     <div class="col-sm-7 col-xs-12">
+      <div class="top-nav">
+       <ul class="list-inline">
+        <li>
+         <a href="/siteindex/">
+          A-Z Site Index
+         </a>
+        </li>
+        <li>
+         <a href="/about/contact-tmcc/faculty-and-staff-directory/">
+          Directory
+         </a>
+        </li>
+        <li>
+         <a href="/about/college-locations/">
+          Locations
+         </a>
+        </li>
+        <li>
+         <a href="/foundation/support-tmcc/make-gift/">
+          Make a Gift
+         </a>
+        </li>
+        <li>
+         <a href="http://my.tmcc.edu">
+          MyTMCC
+         </a>
+        </li>
+        <!-- top links -->
+       </ul>
+       <form action="/search/" class="navbar-form navbar-right">
+        <div class="input-group">
+         <input class="form-control" name="zoom_query" placeholder="Search..." title="Enter Text" type="search"/>
+         <div class="input-group-btn">
+          <button class="btn btn-default" title="Search">
+           <span class="glyphicon glyphicon-search">
+           </span>
+          </button>
+         </div>
+        </div>
+       </form>
+       <!-- search box -->
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <!-- tmcc header -->
+  <!-- TMCC Mega Menu -->
+  <div class="container-fluid megamenu">
+   <nav class="navbar navbar-inverse no-border-radius no-border no-shadow xs-height75 navbar-static-top " id="main_navbar" role="navigation">
+    <div class="container">
+     <div class="navbar-header">
+      <button class="navbar-toggle" data-target="#navbar-brand_size_lg" data-toggle="collapse" type="button">
+       <span class="sr-only">
+        Toggle navigation
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+       <span class="icon-bar">
+       </span>
+      </button>
+      <!--<ul class="nav navbar-nav navbar-left hidden-lg hidden-md hidden-sm">
+          <li><a href="javascript:void(0);" class="toggle_fixing"><i class="fa fa-chevron-down"></i>&nbsp;</a></li>
+        </ul>-->
+      <span class="navbar-brand navbar-left menu-xs hidden-lg hidden-md hidden-sm">
+       Site Navigation
+      </span>
+     </div>
+     <div class="collapse navbar-collapse" id="navbar-brand_size_lg">
+      <ul class="nav navbar-nav navbar-left">
+       <li class="dropdown-grid">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+         Future
+         <span class="hidden-sm">
+          Students
+         </span>
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <div class="dropdown-grid-wrapper no-shadow no-border-radius bordered">
+         <ul class="dropdown-menu col-xs-12 col-sm-6 col-md-9 col-lg-9" role="menu">
+          <li>
+           <div class="row">
+            <div class="col-md-12">
+             <p>
+              Welcome to TMCC. Choose Truckee Meadows Community College for quality college programs at an affordable price. TMCC is a great place to get started on academic or university 					transfer degrees, occupational training, career skill enhancement, and classes just for fun.
+              <br/>
+              See Also:
+              <a href="/students/future/">
+               All Resources for Future Students
+              </a>
+             </p>
+            </div>
+           </div>
+          </li>
+          <li class="divided">
+           <ul class="col-xs-12 col-sm-6 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Popular
+             </div>
+            </li>
+            <li>
+             <a href="http://stepstoenroll.tmcc.edu">
+              Steps to Enroll
+              <span class="glyphicon glyphicon-star" style="margin-left:3px;color:#ccc;font-size:12px;">
+              </span>
+             </a>
+            </li>
+            <li>
+             <a href="http://apply.tmcc.edu">
+              Apply Now!
+              <span class="glyphicon glyphicon-star" style="margin-left:3px;color:#ccc;font-size:12px;">
+              </span>
+             </a>
+            </li>
+            <li>
+             <a href="http://orientation.tmcc.edu">
+              Student Orientation
+             </a>
+            </li>
+            <li>
+             <a href="http://testing.tmcc.edu/">
+              Testing Services
+             </a>
+            </li>
+            <li>
+             <a href="http://transfer.tmcc.edu">
+              Transfer Students
+             </a>
+            </li>
+            <li>
+             <a href="/parents/">
+              Parents &amp; Families
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Important
+             </div>
+            </li>
+            <li>
+             <a href="/admissions/dates-and-deadlines/">
+              Dates/Deadlines
+             </a>
+            </li>
+            <li>
+             <a href="http://fees.tmcc.edu">
+              Tuition &amp; Fees
+             </a>
+            </li>
+            <li>
+             <a href="/financial-aid/">
+              Financial Aid
+             </a>
+            </li>
+            <li>
+             <a href="http://faq.tmcc.edu">
+              College FAQs
+             </a>
+            </li>
+            <li>
+             <a href="http://schedule.tmcc.edu/">
+              Class Schedule
+             </a>
+            </li>
+            <li>
+             <a href="http://catalog.tmcc.edu/">
+              College Catalog
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              College Info
+             </div>
+            </li>
+            <li>
+             <a href="/about/">
+              About TMCC
+             </a>
+            </li>
+            <li>
+             <a href="/president/">
+              President's Message
+             </a>
+            </li>
+            <li>
+             <a href="http://maps.tmcc.edu">
+              College Maps
+             </a>
+            </li>
+            <li>
+             <a href="http://tour.tmcc.edu/">
+              College Tours
+             </a>
+            </li>
+            <li>
+             <a href="http://locations.tmcc.edu">
+              Campus Locations
+             </a>
+            </li>
+            <li>
+             <a href="/institutional-research/publications/">
+              TMCC FactBook
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Resources
+             </div>
+            </li>
+            <li>
+             <a href="/advisement/">
+              Academic Advisement
+             </a>
+            </li>
+            <li>
+             <a href="/counseling/">
+              Counseling &amp; Careers
+             </a>
+            </li>
+            <li>
+             <a href="/disability-resource-center/">
+              Disability Resources
+             </a>
+            </li>
+            <li>
+             <a href="http://scholarships.tmcc.edu">
+              Scholarships
+             </a>
+            </li>
+            <li>
+             <a href="/veteran-services/">
+              Veteran Services
+             </a>
+            </li>
+            <li>
+             <a href="/students/future/">
+              View All Resources
+              <span class="glyphicon glyphicon-share-alt" style="margin-left:3px;color:#ccc;font-size:12px;">
+              </span>
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="dropdown-grid">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+         Current
+         <span class="hidden-sm">
+          Students
+         </span>
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <div class="dropdown-grid-wrapper no-shadow no-border-radius bordered">
+         <ul class="dropdown-menu col-xs-12 col-sm-6 col-md-9 col-lg-9" role="menu">
+          <li>
+           <div class="row">
+            <div class="col-md-12">
+             <p>
+              At TMCC, you get quality academic and university transfer programs, occupational training, career skill enhancement workshops and classes just for fun. We're glad you're here!
+              <br/>
+              See Also:
+              <a href="/students/current/">
+               All Resources for Current Students
+              </a>
+             </p>
+            </div>
+           </div>
+          </li>
+          <li class="divided">
+           <ul class="col-xs-12 col-sm-6 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Popular
+             </div>
+            </li>
+            <li>
+             <a href="http://my.tmcc.edu/">
+              MyTMCC
+             </a>
+            </li>
+            <li>
+             <a href="http://admissions.tmcc.edu/">
+              Admissions &amp; Records
+             </a>
+            </li>
+            <li>
+             <a href="/admissions/dates-and-deadlines/">
+              Dates &amp; Deadlines
+             </a>
+            </li>
+            <li>
+             <a href="/financial-aid/">
+              Financial Aid
+             </a>
+            </li>
+            <li>
+             <a href="/admissions/graduation-commencement/graduation-information/">
+              Graduation
+             </a>
+            </li>
+            <li>
+             <a href="http://library.tmcc.edu/">
+              Library
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Services
+             </div>
+            </li>
+            <li>
+             <a href="http://advisement.tmcc.edu/">
+              Academic Advisement
+             </a>
+            </li>
+            <li>
+             <a href="http://careercenter.tmcc.edu/">
+              Career Center
+             </a>
+            </li>
+            <li>
+             <a href="http://counseling.tmcc.edu/">
+              Counseling &amp; Careers
+             </a>
+            </li>
+            <li>
+             <a href="/fitness/">
+              Fitness Center
+             </a>
+            </li>
+            <li>
+             <a href="http://studentjobs.tmcc.edu">
+              Student Employment
+             </a>
+            </li>
+            <li>
+             <a href="http://tutoring.tmcc.edu/">
+              Tutoring &amp; Learning
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Online
+             </div>
+            </li>
+            <li>
+             <a href="http://my.tmcc.edu/support/">
+              Student Help Center
+             </a>
+            </li>
+            <li>
+             <a href="/email/">
+              Access TMCC Email
+             </a>
+            </li>
+            <li>
+             <a href="http://selfservice.tmcc.edu/">
+              Password Reset
+             </a>
+            </li>
+            <li>
+             <a href="http://video.tmcc.edu/">
+              Videos @ TMCC
+             </a>
+            </li>
+            <li>
+             <a href="http://webcollege.tmcc.edu/">
+              WebCollege Access
+             </a>
+            </li>
+            <li>
+             <a href="http://classes.tmcc.edu/">
+              Faculty Websites
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-3 h-divided">
+            <li class="mm-header">
+             <div>
+              Resources
+             </div>
+            </li>
+            <li>
+             <a href="http://bookstore.tmcc.edu/">
+              Bookstore
+             </a>
+            </li>
+            <li>
+             <a href="/administration/">
+              Administrative Offices
+             </a>
+            </li>
+            <li>
+             <a href="/instruction/">
+              Academic Programs
+             </a>
+            </li>
+            <li>
+             <a href="/diversity/">
+              Equity and Inclusion
+             </a>
+            </li>
+            <li>
+             <a href="/veterans-upward-bound/">
+              Veterans Programs
+             </a>
+            </li>
+            <li>
+             <a href="/students/current/">
+              View All Resources
+              <span class="glyphicon glyphicon-share-alt" style="margin-left:3px;color:#ccc;font-size:12px;">
+              </span>
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="dropdown-short">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+         Admissions
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <ul class="dropdown-menu no-shadow no-border-radius " role="menu">
+         <li class="divided">
+          <ul class="h-divided">
+           <li>
+            <a href="http://apply.tmcc.edu">
+             Apply Now!
+             <span class="glyphicon glyphicon-star-empty" style="margin-left:3px;color:#ccc;font-size:12px;">
+             </span>
+            </a>
+           </li>
+           <li>
+            <a href="/admissions/dates-and-deadlines/">
+             Dates &amp; Deadlines
+            </a>
+           </li>
+           <li>
+            <a href="/admissions/">
+             Admissions and Records
+            </a>
+           </li>
+           <li>
+            <a href="/financial-aid/">
+             Financial Aid
+            </a>
+           </li>
+           <li>
+            <a href="/advisement/">
+             Academic Advisement
+            </a>
+           </li>
+           <li>
+            <a href="/international-student-services/">
+             International Students
+            </a>
+           </li>
+           <li>
+            <a href="http://stepstoenroll.tmcc.edu/">
+             Steps to Enroll
+            </a>
+           </li>
+           <li>
+            <a href="http://fees.tmcc.edu">
+             Tuition and Fees
+            </a>
+           </li>
+           <li>
+            <a href="http://transfer.tmcc.edu">
+             Transfer Students
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <li class="dropdown-grid">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+         Academics
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <div class="dropdown-grid-wrapper no-shadow no-border-radius bordered" role="menu">
+         <ul class="dropdown-menu col-xs-12 col-sm-6 col-md-5 col-lg-5" role="menu">
+          <li class="divided">
+           <ul class="col-sm-6 col-xs-12 col-md-6 h-divided">
+            <li class="mm-header">
+             <div>
+              Popular
+             </div>
+            </li>
+            <li>
+             <a href="/instruction/">
+              All Academic Programs
+             </a>
+            </li>
+            <li>
+             <a href="/vpaa/">
+              Academic Divisions
+             </a>
+            </li>
+            <li>
+             <a href="http://catalog.tmcc.edu/degrees-certificates/">
+              Degrees/Certificates
+             </a>
+            </li>
+            <li>
+             <a href="http://schedule.tmcc.edu/">
+              Class Schedule
+             </a>
+            </li>
+            <li>
+             <a href="http://catalog.tmcc.edu/">
+              College Catalog
+             </a>
+            </li>
+            <li>
+             <a href="/esl/">
+              English Second Language
+             </a>
+            </li>
+            <li>
+             <a href="/adult-basic-education/program-services/">
+              HSE Preparation
+             </a>
+            </li>
+            <li>
+             <a href="http://webcollege.tmcc.edu">
+              WebCollege
+             </a>
+            </li>
+           </ul>
+           <ul class="col-sm-6 col-xs-12 col-md-6 h-divided">
+            <li class="mm-header">
+             <div>
+              Training
+             </div>
+            </li>
+            <li>
+             <a href="http://abe.tmcc.edu/">
+              Adult Education
+             </a>
+            </li>
+            <li>
+             <a href="http://wdce.tmcc.edu/">
+              Business Solutions
+             </a>
+            </li>
+            <li>
+             <a href="/fire-technology/full-time-fire-academy/">
+              Fire Academy
+             </a>
+            </li>
+            <li>
+             <a href="/math-skills-center/">
+              Math Skills Center
+             </a>
+            </li>
+            <li>
+             <a href="/applied-technologies/safety-center/">
+              Safety Center
+             </a>
+            </li>
+            <li>
+             <a href="http://tutoring.tmcc.edu/">
+              Tutoring &amp; Learning
+             </a>
+            </li>
+            <li>
+             <a href="http://writingcenter.tmcc.edu/">
+              Writing Center
+             </a>
+            </li>
+            <li>
+             <a href="/veterans-upward-bound/">
+              Veterans Programs
+             </a>
+            </li>
+           </ul>
+          </li>
+         </ul>
+        </div>
+       </li>
+       <li class="dropdown-grid">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+         <span class="hidden-sm">
+          College
+         </span>
+         Resources
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <ul class="dropdown-menu no-shadow no-border-radius pull-right padding15 col-xs-12 col-sm-6 col-md-6 col-lg-6" role="menu">
+         <li class="divided">
+          <ul class="col-sm-4 col-xs-12 col-md-4 h-divided">
+           <li>
+            <a href="/academic-support-center/">
+             Academic Support
+            </a>
+           </li>
+           <li>
+            <a href="http://abe.tmcc.edu/">
+             Adult Basic Education
+            </a>
+           </li>
+           <li>
+            <a href="/alumni/">
+             Alumni Association
+            </a>
+           </li>
+           <li>
+            <a href="http://bookstore.tmcc.edu">
+             Bookstore
+            </a>
+           </li>
+           <li>
+            <a href="http://childcare.tmcc.edu">
+             Child Care Center
+            </a>
+           </li>
+           <li>
+            <a href="/information-technology/students/computer-lab-hours/">
+             Computer Labs
+            </a>
+           </li>
+           <li>
+            <a href="http://counseling.tmcc.edu/">
+             Counseling &amp; Careers
+            </a>
+           </li>
+          </ul>
+          <ul class="col-sm-4 col-xs-12 col-md-4 h-divided">
+           <li>
+            <a href="/administration/">
+             Departments/Offices
+            </a>
+           </li>
+           <li>
+            <a href="/disability-resource-center/">
+             Disability Resources
+            </a>
+           </li>
+           <li>
+            <a href="/career-center/for-employers/employer-solutions/">
+             Employer Solutions
+            </a>
+           </li>
+           <li>
+            <a href="/diversity/">
+             Equity &amp; Inclusion
+            </a>
+           </li>
+           <li>
+            <a href="/foundation/">
+             Foundation Office
+            </a>
+           </li>
+           <li>
+            <a href="/human-resources/">
+             Human Resources
+            </a>
+           </li>
+           <li>
+            <a href="http://library.tmcc.edu/">
+             Library
+            </a>
+           </li>
+          </ul>
+          <ul class="col-sm-4 col-xs-12 col-md-4 h-divided">
+           <li>
+            <a href="/access-outreach-recruitment/">
+             Outreach/Recruitment
+            </a>
+           </li>
+           <li>
+            <a href="http://police.tmcc.edu/">
+             Police Services
+            </a>
+           </li>
+           <li>
+            <a href="http://sga.tmcc.edu/">
+             Student Government
+            </a>
+           </li>
+           <li>
+            <a href="http://fees.tmcc.edu">
+             Tuition &amp; Fees
+            </a>
+           </li>
+           <li>
+            <a href="http://tutoring.tmcc.edu/">
+             Tutoring &amp; Learning
+            </a>
+           </li>
+           <li>
+            <a href="http://wdce.tmcc.edu/">
+             Workforce Development
+            </a>
+           </li>
+           <li>
+            <a href="/veteran-services/">
+             Veteran Services
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <li class="dropdown-short">
+        <a class="dropdown-toggle xtrapad" data-toggle="dropdown" href="javascript:;">
+         About
+         <span class="hidden-sm">
+          TMCC
+         </span>
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <ul class="dropdown-menu no-shadow no-border-radius " role="menu">
+         <li class="divided">
+          <ul class="h-divided">
+           <li>
+            <a href="/president/">
+             President's Message
+            </a>
+           </li>
+           <li>
+            <a href="/about/">
+             Mission and Goals
+            </a>
+           </li>
+           <li>
+            <a href="http://locations.tmcc.edu/">
+             College Locations
+            </a>
+           </li>
+           <li>
+            <a href="http://maps.tmcc.edu/">
+             College/Campus Maps
+            </a>
+           </li>
+           <li>
+            <a href="/about/">
+             History of TMCC
+            </a>
+           </li>
+           <li>
+            <a href="/foundation/">
+             Foundation Office
+            </a>
+           </li>
+           <li>
+            <a href="/alumni/">
+             Alumni Association
+            </a>
+           </li>
+           <li>
+            <a href="http://tour.tmcc.edu/">
+             Campus Tour
+            </a>
+           </li>
+          </ul>
+         </li>
+        </ul>
+       </li>
+       <li class="dropdown-grid">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+         Find
+         <span class="visible-lg-inline-block">
+          Information
+         </span>
+         <span class="glyphicon glyphicon-triangle-bottom">
+         </span>
+        </a>
+        <div class="dropdown-grid-wrapper no-shadow no-border-radius bordered dropdown-menu-right" role="menu">
+         <div class="dropdown-menu col-xs-12 col-sm-3 col-md-3" role="menu">
+          <div class="row">
+           <div class="col-xs-12">
+            <div class="divided">
+             <ul class="h-divided" style="width: 100%">
+              <li>
+               <a href="/siteindex/">
+                A-Z Site Index
+               </a>
+              </li>
+              <li>
+               <a href="http://catalog.tmcc.edu">
+                College Catalog
+               </a>
+              </li>
+              <li>
+               <a href="http://faq.tmcc.edu">
+                College FAQs
+               </a>
+              </li>
+              <li>
+               <a href="/news/">
+                College News
+               </a>
+              </li>
+              <li>
+               <a href="http://calendar.tmcc.edu">
+                Events Calendar
+               </a>
+              </li>
+              <li>
+               <a href="http://people.tmcc.edu">
+                Telephone Directory
+               </a>
+              </li>
+              <li>
+               <a href="/search/">
+                Search Website
+               </a>
+              </li>
+             </ul>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </nav>
+  </div>
+  <!-- TMCC Dept. Banner Image -->
+  <!-- navigation object : Header Photo -->
+  <div class="container header-photo" style="background:#555 url(/media/tmcc/images/header-photo/random/dandini-campus-wide.jpg) repeat-x 0 0 !important;">
+   <h2 class="dept-title">
+    <a href="/calendar/">
+     <!-- navigation object : Name at Level 2 -->
+     Calendar
+    </a>
+   </h2>
+  </div>
+  <div class="container" id="section-content">
+   <!-- Breadcrumbs -->
+   <div class="row no-gutter breadcrumb-row">
+    <div class="col-md-9 col-xs-12">
+     <ol class="breadcrumb">
+      <!-- navigation object : breadcrumbs -->
+      <a href="/">
+       Home
+      </a>
+      »
+      <a href="/calendar/">
+       Calendar
+      </a>
+     </ol>
+    </div>
+    <div class="col-md-3 col-xs-12">
+     <div class="addthis_toolbox addthis_default_style addthis_20x20_style breadcrumb" id="addthis">
+      <a class="addthis_button_email">
+      </a>
+      <a class="addthis_button_preferred_1">
+      </a>
+      <a class="addthis_button_preferred_2">
+      </a>
+      <a class="addthis_button_preferred_3">
+      </a>
+      <a class="addthis_button_googletranslate">
+      </a>
+      <a class="addthis_button_compact">
+      </a>
+      <a class="addthis_counter addthis_bubble_style">
+      </a>
+     </div>
+    </div>
+   </div>
+   <!-- share this -->
+   <!-- Begin Main Content -->
+   <div class="row">
+    <div class="col-md-9 col-md-push-3 col-2-content" id="main-content">
+     <div style="float:right;">
+      <img alt="Calendar Icon" src="/media/tmcc/style-assets/images/calendar.png" style="margin-right:3px;vertical-align:text-top;"/>
+      <a href="http://www.tmcc.edu/web/downloads/submit-calendar-event/">
+       Submit Event
+      </a>
+     </div>
+     <h1>
+      Events Calendar
+     </h1>
+     <div class="" id="calendar_events">
+      <p class="view_period_range">
+       Sunday, March 03, 2019 - Saturday, March 09, 2019
+      </p>
+      <p class="view_period_switchers">
+       <a href="/calendar/?view=week&amp;month=2&amp;day=24&amp;year=2019&amp;">
+        &lt; Previous Week
+       </a>
+       |
+       <a href="/calendar/?view=week&amp;month=3&amp;day=10&amp;year=2019&amp;">
+        Next Week &gt;
+       </a>
+      </p>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered" style="margin-top:20px;">
+       <thead>
+        <tr class="table_text">
+         <th align="center" width="56%">
+          <div class="eventdate">
+           <a href="?view=day&amp;day=04&amp;month=3&amp;year=2019&amp;">
+            Monday, March 04, 2019
+           </a>
+          </div>
+         </th>
+         <th align="center" width="22%">
+          Time
+         </th>
+         <th align="center" width="22%">
+          Location
+         </th>
+        </tr>
+       </thead>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.43951&amp;timestamp=1551772740&amp;">
+           * Canceled * President's Planning Council Meeting
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         9-11 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 256, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46226&amp;timestamp=1551772740&amp;">
+           French Film Festival
+          </a>
+         </div>
+         <div class="description">
+          Movie screening with introduction, discussion and free French-themed refreshments.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         2-5 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         SIER 108, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered" style="margin-top:20px;">
+       <thead>
+        <tr class="table_text">
+         <th align="center" width="56%">
+          <div class="eventdate">
+           <a href="?view=day&amp;day=05&amp;month=3&amp;year=2019&amp;">
+            Tuesday, March 05, 2019
+           </a>
+          </div>
+         </th>
+         <th align="center" width="22%">
+          Time
+         </th>
+         <th align="center" width="22%">
+          Location
+         </th>
+        </tr>
+       </thead>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46046&amp;timestamp=1551859140&amp;">
+           Build a Standout LinkedIn Workshop
+          </a>
+         </div>
+         <div class="description">
+          Find out how to build a professional LinkedIn account that will attract recruiters.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         3:30-5 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 115, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46133&amp;timestamp=1551859140&amp;">
+           Take 5 with TMCC's Counseling Center
+          </a>
+         </div>
+         <div class="description">
+          Take 5 minutes out of your busy week to practice self care and de-stress!
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         11:30 a.m.-1 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         TMCC Cafe Area, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46181&amp;timestamp=1551859140&amp;">
+           SGA Mini Paint Party
+          </a>
+         </div>
+         <div class="description">
+          Enjoy acrylic painting along with music and FREE food and drinks!
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         Noon-2 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         Student Center, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered" style="margin-top:20px;">
+       <thead>
+        <tr class="table_text">
+         <th align="center" width="56%">
+          <div class="eventdate">
+           <a href="?view=day&amp;day=06&amp;month=3&amp;year=2019&amp;">
+            Wednesday, March 06, 2019
+           </a>
+          </div>
+         </th>
+         <th align="center" width="22%">
+          Time
+         </th>
+         <th align="center" width="22%">
+          Location
+         </th>
+        </tr>
+       </thead>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.45872&amp;timestamp=1551945540&amp;">
+           FLAMES: Car Ownership
+          </a>
+         </div>
+         <div class="description">
+          Thinking of purchasing a car? FLAMES can assist you in navigating the car buying process.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         10-11 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 255, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.45901&amp;timestamp=1551945540&amp;">
+           Wii Wednesday in the DISCO
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         9 a.m.-5 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 114, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46047&amp;timestamp=1551945540&amp;">
+           Career Exploration Workshop
+          </a>
+         </div>
+         <div class="description">
+          For potential students (those not enrolled at TMCC).
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         10-11:30 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 115, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46048&amp;timestamp=1551945540&amp;">
+           Veterans Interview Workshop
+          </a>
+         </div>
+         <div class="description">
+          Overcome your jitters and ace your next job interview.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         3-4:30 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 115, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46167&amp;timestamp=1551945540&amp;">
+           Career Exploration Workshop
+          </a>
+         </div>
+         <div class="description">
+          This workshop is open to current and returning students.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         10-11:30 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         Please call to register and receive location.
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46198&amp;timestamp=1551945540&amp;">
+           Learning Commons Grand Opening
+          </a>
+         </div>
+         <div class="description">
+          Join us to celebrate the grand opening of the Learning Commons in the Elizabeth Sturm Library.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         9-10 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         Library - Second Floor, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered" style="margin-top:20px;">
+       <thead>
+        <tr class="table_text">
+         <th align="center" width="56%">
+          <div class="eventdate">
+           <a href="?view=day&amp;day=07&amp;month=3&amp;year=2019&amp;">
+            Thursday, March 07, 2019
+           </a>
+          </div>
+         </th>
+         <th align="center" width="22%">
+          Time
+         </th>
+         <th align="center" width="22%">
+          Location
+         </th>
+        </tr>
+       </thead>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.44610&amp;timestamp=1552031940&amp;">
+           Library Committee Meeting
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         3:30-4:30 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         LIB 102, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered" style="margin-top:20px;">
+       <thead>
+        <tr class="table_text">
+         <th align="center" width="56%">
+          <div class="eventdate">
+           <a href="?view=day&amp;day=08&amp;month=3&amp;year=2019&amp;">
+            Friday, March 08, 2019
+           </a>
+          </div>
+         </th>
+         <th align="center" width="22%">
+          Time
+         </th>
+         <th align="center" width="22%">
+          Location
+         </th>
+        </tr>
+       </thead>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.44567&amp;timestamp=1552118340&amp;">
+           Faculty Senate Meeting
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         12:30 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         EDSN 180, Pennington Applied Tech Center
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.44617&amp;timestamp=1552118340&amp;">
+           Curriculum Review Committee Meeting
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         9-11 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         SIER 103, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.44631&amp;timestamp=1552118340&amp;">
+           Part-time Faculty Committee Meeting
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         10 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         RDMT 333, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.44661&amp;timestamp=1552118340&amp;">
+           WebCollege Faculty Advisory Committee Meeting
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         11 a.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         SIER 117, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.45474&amp;timestamp=1552118340&amp;">
+           HESI Testing
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         9 a.m.-3 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         HSC 103, Pennington Health Science Center
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.45657&amp;timestamp=1552118340&amp;">
+           Genealogy Open Lab
+          </a>
+         </div>
+         <div class="description">
+          Learn how to build your family tree. Discover your roots.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         11:30 a.m.-2 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         LIB 210, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.46228&amp;timestamp=1552118340&amp;">
+           WCSD Lead Teach Learn and Social Studies Conference
+          </a>
+         </div>
+         <div class="description">
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         7 a.m.-5 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         Student Center, Dandini Campus
+        </td>
+       </tr>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered" style="margin-top:20px;">
+       <thead>
+        <tr class="table_text">
+         <th align="center" width="56%">
+          <div class="eventdate">
+           <a href="?view=day&amp;day=09&amp;month=3&amp;year=2019&amp;">
+            Saturday, March 09, 2019
+           </a>
+          </div>
+         </th>
+         <th align="center" width="22%">
+          Time
+         </th>
+         <th align="center" width="22%">
+          Location
+         </th>
+        </tr>
+       </thead>
+      </table>
+      <table border="0" cellpadding="2" cellspacing="1" class="table table-bordered">
+       <tr>
+        <td width="56%">
+         <div class="eventtitle">
+          <a href="/calendar/?view=fulltext&amp;month=03&amp;day=09&amp;year=2019&amp;id=d.en.45960&amp;timestamp=1552204740&amp;">
+           Washoe County School District Social Studies Conference
+          </a>
+         </div>
+         <div class="description">
+          Social Studies Conference for WCSD staff and teachers.
+         </div>
+        </td>
+        <!--<td>Event Time</td>-->
+        <td width="22%">
+         8 a.m.-5 p.m.
+        </td>
+        <!--<td>Location</td>-->
+        <td width="22%">
+         Student Center, Dandini Campus
+        </td>
+       </tr>
+      </table>
+     </div>
+     <!-- Calendar -->
+    </div>
+    <div class="col-md-3 col-md-pull-9" id="leftCol">
+     <!-- section menu -->
+     <div class="sidebar" id="section-menu">
+      <div class="" id="calendar_box">
+       <table>
+        <thead>
+         <tr class="calendar-box-header">
+          <th>
+           <a href="/calendar/?view=week&amp;month=2&amp;day=1&amp;year=2019&amp;">
+            &lt;
+           </a>
+          </th>
+          <th colspan="5">
+           <a href="/calendar/?view=month&amp;month=03&amp;day=09&amp;year=2019&amp;">
+            March 2019
+           </a>
+          </th>
+          <th>
+           <a href="/calendar/?view=week&amp;month=4&amp;day=1&amp;year=2019&amp;">
+            &gt;
+           </a>
+          </th>
+         </tr>
+         <tr>
+          <th>
+           S
+          </th>
+          <th>
+           M
+          </th>
+          <th>
+           T
+          </th>
+          <th>
+           W
+          </th>
+          <th>
+           T
+          </th>
+          <th>
+           F
+          </th>
+          <th>
+           S
+          </th>
+         </tr>
+        </thead>
+        <tr>
+         <td class="fillday">
+          24
+         </td>
+         <td class="fillday">
+          25
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=26&amp;month=2&amp;year=2019&amp;">
+           26
+          </a>
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=27&amp;month=2&amp;year=2019&amp;">
+           27
+          </a>
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=28&amp;month=2&amp;year=2019&amp;">
+           28
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=01&amp;month=3&amp;year=2019&amp;">
+           1
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=02&amp;month=3&amp;year=2019&amp;">
+           2
+          </a>
+         </td>
+        </tr>
+        <tr>
+         <td class="thismonth viewrange">
+          3
+         </td>
+         <td class="thismonth viewrange hasevent">
+          <a href="/calendar/?view=day&amp;day=04&amp;month=3&amp;year=2019&amp;">
+           4
+          </a>
+         </td>
+         <td class="thismonth viewrange hasevent">
+          <a href="/calendar/?view=day&amp;day=05&amp;month=3&amp;year=2019&amp;">
+           5
+          </a>
+         </td>
+         <td class="thismonth viewrange hasevent">
+          <a href="/calendar/?view=day&amp;day=06&amp;month=3&amp;year=2019&amp;">
+           6
+          </a>
+         </td>
+         <td class="thismonth viewrange hasevent">
+          <a href="/calendar/?view=day&amp;day=07&amp;month=3&amp;year=2019&amp;">
+           7
+          </a>
+         </td>
+         <td class="thismonth viewrange hasevent">
+          <a href="/calendar/?view=day&amp;day=08&amp;month=3&amp;year=2019&amp;">
+           8
+          </a>
+         </td>
+         <td class="thismonth today viewrange hasevent">
+          <a href="/calendar/?view=day&amp;day=09&amp;month=3&amp;year=2019&amp;">
+           9
+          </a>
+         </td>
+        </tr>
+        <tr>
+         <td class="thismonth">
+          10
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=11&amp;month=3&amp;year=2019&amp;">
+           11
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=12&amp;month=3&amp;year=2019&amp;">
+           12
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=13&amp;month=3&amp;year=2019&amp;">
+           13
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=14&amp;month=3&amp;year=2019&amp;">
+           14
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=15&amp;month=3&amp;year=2019&amp;">
+           15
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=16&amp;month=3&amp;year=2019&amp;">
+           16
+          </a>
+         </td>
+        </tr>
+        <tr>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=17&amp;month=3&amp;year=2019&amp;">
+           17
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=18&amp;month=3&amp;year=2019&amp;">
+           18
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=19&amp;month=3&amp;year=2019&amp;">
+           19
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=20&amp;month=3&amp;year=2019&amp;">
+           20
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=21&amp;month=3&amp;year=2019&amp;">
+           21
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=22&amp;month=3&amp;year=2019&amp;">
+           22
+          </a>
+         </td>
+         <td class="thismonth">
+          23
+         </td>
+        </tr>
+        <tr>
+         <td class="thismonth">
+          24
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=25&amp;month=3&amp;year=2019&amp;">
+           25
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=26&amp;month=3&amp;year=2019&amp;">
+           26
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=27&amp;month=3&amp;year=2019&amp;">
+           27
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=28&amp;month=3&amp;year=2019&amp;">
+           28
+          </a>
+         </td>
+         <td class="thismonth hasevent">
+          <a href="/calendar/?view=day&amp;day=29&amp;month=3&amp;year=2019&amp;">
+           29
+          </a>
+         </td>
+         <td class="thismonth">
+          30
+         </td>
+        </tr>
+        <tr>
+         <td class="thismonth">
+          31
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=01&amp;month=4&amp;year=2019&amp;">
+           1
+          </a>
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=02&amp;month=4&amp;year=2019&amp;">
+           2
+          </a>
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=03&amp;month=4&amp;year=2019&amp;">
+           3
+          </a>
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=04&amp;month=4&amp;year=2019&amp;">
+           4
+          </a>
+         </td>
+         <td class="fillday hasevent">
+          <a href="/calendar/?view=day&amp;day=05&amp;month=4&amp;year=2019&amp;">
+           5
+          </a>
+         </td>
+         <td class="fillday">
+          6
+         </td>
+        </tr>
+       </table>
+      </div>
+      <div class="" id="view_switchers">
+       <a href="/calendar/?view=day&amp;month=03&amp;day=09&amp;year=2019&amp;">
+        Day
+       </a>
+       |
+       <span class="current">
+        Week
+       </span>
+       |
+       <a href="/calendar/?view=month&amp;month=03&amp;day=09&amp;year=2019&amp;">
+        Month
+       </a>
+       |
+       <a href="/calendar/?view=year&amp;month=03&amp;day=09&amp;year=2019&amp;">
+        Year
+       </a>
+       |
+       <a href="/calendar/?view=all&amp;month=03&amp;day=09&amp;year=2019&amp;">
+        All
+       </a>
+      </div>
+      <div class="" id="jumptoform">
+       <form method="get">
+        <fieldset>
+         <legend>
+         </legend>
+         <label for="month">
+          Go To:
+         </label>
+         <br/>
+         <select name="month">
+          <option value="1">
+           January
+          </option>
+          <option value="2">
+           February
+          </option>
+          <option selected="selected" value="3">
+           March
+          </option>
+          <option value="4">
+           April
+          </option>
+          <option value="5">
+           May
+          </option>
+          <option value="6">
+           June
+          </option>
+          <option value="7">
+           July
+          </option>
+          <option value="8">
+           August
+          </option>
+          <option value="9">
+           September
+          </option>
+          <option value="10">
+           October
+          </option>
+          <option value="11">
+           November
+          </option>
+          <option value="12">
+           December
+          </option>
+         </select>
+         <select name="year">
+          <option value="2014">
+           2014
+          </option>
+          <option value="2015">
+           2015
+          </option>
+          <option value="2016">
+           2016
+          </option>
+          <option value="2017">
+           2017
+          </option>
+          <option value="2018">
+           2018
+          </option>
+          <option selected="selected" value="2019">
+           2019
+          </option>
+          <option value="2020">
+           2020
+          </option>
+          <option value="2021">
+           2021
+          </option>
+          <option value="2022">
+           2022
+          </option>
+          <option value="2023">
+           2023
+          </option>
+          <option value="2024">
+           2024
+          </option>
+          <option value="2025">
+           2025
+          </option>
+          <option value="2026">
+           2026
+          </option>
+          <option value="2027">
+           2027
+          </option>
+          <option value="2028">
+           2028
+          </option>
+         </select>
+         <input type="submit" value="Go"/>
+        </fieldset>
+       </form>
+      </div>
+      <div class="" id="searchoptions">
+       <form method="get">
+        <fieldset>
+         <legend>
+         </legend>
+         <label for="keywords">
+          Search by Keyword:
+         </label>
+         <br/>
+         <input id="keywords" maxlength="80" name="keywords" size="25" type="text" value=""/>
+         <p>
+          Filter by Category:
+         </p>
+         <div class="category">
+          <input name="category" type="checkbox" value="Academic and Official Dates"/>
+          <span>
+           Academic and Official Dates
+          </span>
+         </div>
+         <div class="subcategory" style="display: none">
+          <input name="subcategory" type="checkbox" value="Academic and Official Dates"/>
+          <span>
+          </span>
+         </div>
+         <div class="category">
+          <input name="category" type="checkbox" value="College Meetings"/>
+          <span>
+           College Meetings
+          </span>
+         </div>
+         <div class="subcategory" style="display: none">
+          <input name="subcategory" type="checkbox" value="College Meetings"/>
+          <span>
+          </span>
+         </div>
+         <div class="category">
+          <input name="category" type="checkbox" value="Other Events"/>
+          <span>
+           Other Events
+          </span>
+         </div>
+         <div class="subcategory" style="display: none">
+          <input name="subcategory" type="checkbox" value="Other Events"/>
+          <span>
+          </span>
+         </div>
+         <div class="category">
+          <input name="category" type="checkbox" value="Administrative"/>
+          <span>
+           Administrative
+          </span>
+         </div>
+         <div class="subcategory" style="display: none">
+          <input name="subcategory" type="checkbox" value="Administrative"/>
+          <span>
+          </span>
+         </div>
+         <div class="category">
+          <input name="category" type="checkbox" value="Student Organizations and Clubs"/>
+          <span>
+           Student Organizations and Clubs
+          </span>
+         </div>
+         <div class="subcategory" style="display: none">
+          <input name="subcategory" type="checkbox" value="Student Organizations and Clubs"/>
+          <span>
+          </span>
+         </div>
+         <div class="category">
+          <input name="category" type="checkbox" value="Arts Culture and Entertainment"/>
+          <span>
+           Arts Culture and Entertainment
+          </span>
+         </div>
+         <div class="subcategory" style="display: none">
+          <input name="subcategory" type="checkbox" value="Arts Culture and Entertainment"/>
+          <span>
+          </span>
+         </div>
+         <input name="view" type="hidden" value="week"/>
+         <input name="month" type="hidden" value="03"/>
+         <input name="day" type="hidden" value="09"/>
+         <input name="year" type="hidden" value="2019"/>
+         <br/>
+         <input class="center-block" type="submit" value="Search by Keyword"/>
+        </fieldset>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- End Main Content -->
+  <!-- Footer -->
+  <div class="container-fluid">
+   <div class="page-top-footer">
+    <div class="container no-gutter">
+     <div class="col-md-3 col-sm-6 col-xs-12">
+      <h5 class="footer-header">
+       Information For
+      </h5>
+      <ul class="list-unstyled">
+       <li>
+        <a href="/students/current/">
+         Current Students
+        </a>
+       </li>
+       <li>
+        <a href="/students/future/">
+         Future Students
+        </a>
+       </li>
+       <li>
+        <a href="/facstaff/">
+         Faculty and Staff
+        </a>
+       </li>
+       <li>
+        <a href="/parents/">
+         Parents and Families
+        </a>
+       </li>
+       <li>
+        <a href="/alumni/">
+         Alumni and Friends
+        </a>
+       </li>
+       <li>
+        <a href="/career-center/for-employers/employer-solutions/">
+         Employer Solutions
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-md-3 col-sm-6 col-xs-12">
+      <h5 class="footer-header">
+       Online Resources
+      </h5>
+      <ul class="list-unstyled">
+       <li>
+        <a href="http://my.tmcc.edu/">
+         MyTMCC
+        </a>
+       </li>
+       <li>
+        <a href="/email/">
+         Email Login
+        </a>
+       </li>
+       <li>
+        <a href="/information-technology/students/">
+         Online Student Support
+        </a>
+       </li>
+       <li>
+        <a href="/faculty-websites/">
+         Faculty Web Pages
+        </a>
+       </li>
+       <li>
+        <a href="http://livesupport.tmcc.edu/">
+         Live Support
+        </a>
+       </li>
+       <li>
+        <a href="https://tmcc.instructure.com/">
+         WebCollege Canvas Login
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-md-3 col-sm-6 col-xs-12">
+      <h5 class="footer-header">
+       Helpful Links
+      </h5>
+      <ul class="list-unstyled">
+       <li>
+        <a href="http://schedule.tmcc.edu/">
+         Class Schedule
+        </a>
+       </li>
+       <li>
+        <a href="/media/tmcc/departments/police/police-annual-security-report.pdf">
+         College Safety &amp; Security Report
+        </a>
+       </li>
+       <li>
+        <a href="/access-outreach-recruitment/en-espanol/">
+         En Español
+        </a>
+       </li>
+       <li>
+        <a href="/faq/">
+         Frequently Asked Questions
+        </a>
+       </li>
+       <li>
+        <a href="/foundation/">
+         Give to TMCC
+        </a>
+       </li>
+       <li>
+        <a href="/human-resources/employment/">
+         Job Opportunities
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-md-3 col-sm-6 col-xs-12">
+      <h5 class="footer-header">
+       Featured Sites
+      </h5>
+      <ul class="list-unstyled">
+       <li>
+        <a href="http://apply.tmcc.edu/">
+         Apply for Admission
+        </a>
+       </li>
+       <li>
+        <a href="/catalog/">
+         College Catalog
+        </a>
+       </li>
+       <li>
+        <a href="/workforce-development-community-education/">
+         Community Education
+        </a>
+       </li>
+       <li>
+        <a href="/library/">
+         Elizabeth Sturm Library
+        </a>
+       </li>
+       <li>
+        <a href="http://scholarships.tmcc.edu/">
+         Scholarships
+        </a>
+       </li>
+       <li>
+        <a href="http://tour.tmcc.edu">
+         Virtual Campus Tour
+        </a>
+       </li>
+      </ul>
+     </div>
+     <div class="col-xs-12 text-center">
+      <div class="socialmedia-icons">
+       <a class="hideicon" href="http://www.facebook.com/TMCCNV" title="Follow us on Facebook">
+        <img alt="Facebook" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/facebook_off.png" width="35"/>
+       </a>
+       <a class="hideicon" href="http://www.twitter.com/tmccnevada" title="Follow us on Twitter">
+        <img alt="Twitter" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/twitter_off.png" width="35"/>
+       </a>
+       <a href="https://www.instagram.com/tmccnevada/" title="Follow us on Instagram">
+        <img alt="Instagram" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/instagram_off.png" width="35"/>
+       </a>
+       <a class="hideicon" href="http://www.youtube.com/tmccreno" title="Follow us on YouTube">
+        <img alt="YouTube" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/youtube_off.png" width="35"/>
+       </a>
+       <a href="https://www.flickr.com/photos/tmccnevada/albums" title="See us on Flickr">
+        <img alt="Flickr" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/flickr_off.png" width="35"/>
+       </a>
+       <a href="http://connect.tmcc.edu" title="Follow us on RSS">
+        <img alt="RSS" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/rss_off.png" width="35"/>
+       </a>
+       <a href="https://www.tmcc.edu/itunesu/" title="Follow us on iTunes U">
+        <img alt="iTunes U" class="rollover" height="35" src="/media/tmcc/images/icons/social-media-footer/itunes_off.png" width="35"/>
+       </a>
+      </div>
+      <!-- pub-hover links
+/media/tmcc/images/icons/social-media-footer/instagram_on.png
+/media/tmcc/images/icons/social-media-footer/facebook_on.png
+/media/tmcc/images/icons/social-media-footer/flickr_on.png
+/media/tmcc/images/icons/social-media-footer/itunes_on.png
+/media/tmcc/images/icons/social-media-footer/rss_on.png
+/media/tmcc/images/icons/social-media-footer/twitter_on.png
+/media/tmcc/images/icons/social-media-footer/youtube_on.png
+ -->
+      <!-- social media code -->
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- footer code links wrapper -->
+  <div class="container-fluid">
+   <div class="page-bottom-footer">
+    <div class="container">
+     <div class="row">
+      <div class="col-xs-12 col-md-10">
+       <ul class="footer-address">
+        <li>
+         Truckee Meadows Community College
+        </li>
+        <li>
+         7000 Dandini Boulevard
+         <span class="hidden-xxxs">
+          ,
+         </span>
+         <span class="visible-xxxs-inline">
+          <br/>
+         </span>
+         Reno, NV 89512
+        </li>
+        <li>
+         <span class="visible-xs-inline">
+          Telephone:
+         </span>
+         775-673-7111
+        </li>
+       </ul>
+       <ul class="footer-links">
+        <li>
+         <a href="/web-services/downloads/website-feedback-survey/">
+          Website Feedback
+         </a>
+        </li>
+        <li>
+         <a href="/web-services/downloads/problem/">
+          Report Errors
+         </a>
+        </li>
+        <li>
+         <a href="/disclaimer/">
+          Privacy
+         </a>
+        </li>
+        <li>
+         <a href="http://titleix.tmcc.edu/">
+          Title IX
+         </a>
+        </li>
+        <li>
+         <a href="/human-resources/employment/">
+          Employment at TMCC
+         </a>
+        </li>
+        <li>
+         <a href="/auxiliary-services/policies-and-procedures/tmcc-supplier/">
+          Doing Business with Us
+         </a>
+        </li>
+        <li>
+         <a href="/about/contact-tmcc/information-request/">
+          Contact Us
+         </a>
+        </li>
+       </ul>
+       <ul class="footer-eeo">
+        <li>
+         TMCC is an
+         <a href="http://eeo.tmcc.edu">
+          EEO/AA
+         </a>
+         institution.
+        </li>
+        <!-- footer before direct edit -->
+        <li>
+         Copyright
+         <a class="t4Edit-page" href="https://cms.tmcc.edu/terminalfour/SiteManager?ctfn=publish&amp;fnno=31&amp;sid=6947&amp;chid=17&amp;lang=en&amp;ede=true">
+          ©
+         </a>
+         <script type="text/javascript">
+          today=new Date();
+    y0=today.getFullYear();
+    document.write(y0);
+         </script>
+         TMCC. All rights reserved.
+        </li>
+       </ul>
+      </div>
+      <div class="col-xs-12 col-md-2">
+       <a href="http://www.tmcc.edu/">
+        <img alt="TMCC" class="rollover center-block" height="28" src="/media/tmcc/images/logo-footer_off.png" width="155"/>
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- footer after direct edit -->
+  <!-- navigation object : Footer Code -->
+  <!-- navigation object : General Footer Code -->
+  <script src="/media/tmcc/includes/js/bootstrap/bootstrap.min.js">
+  </script>
+  <!-- bootstrap -->
+  <script src="/media/tmcc/includes/js/global-footer.js">
+  </script>
+  <!-- global footer old: 29523 -->
+  <script src="/media/tmcc/includes/js/section-menu.js">
+  </script>
+  <!-- section-menu -->
+  <script src="//s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f988f5368a7ba19">
+  </script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+   var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/59528b8750fd5105d0c82eba/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+  </script>
+  <!--End of Tawk.to Script-->
+  <script type="text/javascript">
+   rlrctTRKDOM="rtsys.rtrk.com";
+(function() {
+var rct_load = document.createElement("script");
+rct_load.type = "text/javascript";
+rct_load.src = document.location.protocol+"//"+rlrctTRKDOM+"/rct_lct/js/rlrct1.js";
+(document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(rct_load); }
+)();
+  </script>
+  <!-- footer scripts -->
+ </body>
+</html>
+<!-- CALENDAR :: Processing Time: 2.3189008235931 seconds. -->
+

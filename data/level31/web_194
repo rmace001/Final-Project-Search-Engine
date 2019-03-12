@@ -1,0 +1,287 @@
+http://mymail.unl.edu/
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta content="IE=10.000" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta content="text/html;charset=utf-8" http-equiv="content-type"/>
+  <meta content="no-cache,no-store" http-equiv="cache-control"/>
+  <meta content="no-cache" http-equiv="pragma"/>
+  <meta content="-1" http-equiv="expires"/>
+  <meta content="Connecting to UNL" name="mswebdialog-title"/>
+  <title>
+   Sign In
+  </title>
+  <script type="text/javascript">
+   //<![CDATA[
+function LoginErrors(){this.userNameFormatError = 'Enter your user ID in the format \u0026quot;domain\\user\u0026quot; or \u0026quot;user@domain\u0026quot;.'; this.passwordEmpty = 'Enter your password.'; this.passwordTooLong = 'Password must be shorter than 128 characters.';}; var maxPasswordLength = 128;
+//]]>
+  </script>
+  <script type="text/javascript">
+   //<![CDATA[
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+function InputUtil(errTextElementID, errDisplayElementID) {
+
+    if (!errTextElementID)  errTextElementID = 'errorText'; 
+    if (!errDisplayElementID)  errDisplayElementID = 'error'; 
+
+    this.hasFocus = false;
+    this.errLabel = document.getElementById(errTextElementID);
+    this.errDisplay = document.getElementById(errDisplayElementID);
+};
+InputUtil.prototype.canDisplayError = function () {
+    return this.errLabel && this.errDisplay;
+}
+InputUtil.prototype.checkError = function () {
+    if (!this.canDisplayError){
+        throw new Error ('Error element not present');
+    }
+    if (this.errLabel && this.errLabel.innerHTML) {
+        this.errDisplay.style.display = '';        
+        var cause = this.errLabel.getAttribute('for');
+        if (cause) {
+            var causeNode = document.getElementById(cause);
+            if (causeNode && causeNode.value) {
+                causeNode.focus();
+                this.hasFocus = true;
+            }
+        }
+    }
+    else {
+        this.errDisplay.style.display = 'none';
+    }
+};
+InputUtil.prototype.setInitialFocus = function (input) {
+    if (this.hasFocus) return;
+    var node = document.getElementById(input);
+    if (node) {
+        if ((/^\s*$/).test(node.value)) {
+            node.focus();
+            this.hasFocus = true;
+        }
+    }
+};
+InputUtil.prototype.setError = function (input, errorMsg) {
+    if (!this.canDisplayError) {
+        throw new Error('Error element not present');
+    }
+    input.focus();
+
+    if (errorMsg) {
+        this.errLabel.innerHTML = errorMsg;
+    }
+    this.errLabel.setAttribute('for', input.id);
+    this.errDisplay.style.display = '';
+};
+InputUtil.makePlaceholder = function (input) {
+    var ua = navigator.userAgent;
+
+    if (ua != null && 
+        (ua.match(/MSIE 9.0/) != null || 
+         ua.match(/MSIE 8.0/) != null ||
+         ua.match(/MSIE 7.0/) != null)) {
+        var node = document.getElementById(input);
+        if (node) {
+            var placeholder = node.getAttribute("placeholder");
+            if (placeholder != null && placeholder != '') {
+                var label = document.createElement('input');
+                label.type = "text";
+                label.value = placeholder;
+                label.readOnly = true;
+                label.style.position = 'absolute';
+                label.style.borderColor = 'transparent';
+                label.className = node.className + ' hint';
+                label.tabIndex = -1;
+                label.onfocus = function () { this.nextSibling.focus(); };
+
+                node.style.position = 'relative';
+                node.parentNode.style.position = 'relative';
+                node.parentNode.insertBefore(label, node);
+                node.onkeyup = function () { InputUtil.showHint(this); };
+                node.onblur = function () { InputUtil.showHint(this); };
+                node.style.background = 'transparent';
+
+                node.setAttribute("placeholder", "");
+                InputUtil.showHint(node);
+            }
+        }
+    }
+};
+InputUtil.focus = function (inputField) {
+    var node = document.getElementById(inputField);
+    if (node) node.focus();
+};
+InputUtil.hasClass = function(node, clsName) {
+    return node.className.match(new RegExp('(\\s|^)' + clsName + '(\\s|$)'));
+};
+InputUtil.addClass = function(node, clsName) {
+    if (!this.hasClass(node, clsName)) node.className += " " + clsName;
+};
+InputUtil.removeClass = function(node, clsName) {
+    if (this.hasClass(node, clsName)) {
+        var reg = new RegExp('(\\s|^)' + clsName + '(\\s|$)');
+        node.className = node.className.replace(reg, ' ');
+    }
+};
+InputUtil.showHint = function (node, gotFocus) {
+    if (node.value && node.value != '') {
+        node.previousSibling.style.display = 'none';
+    }
+    else {
+        node.previousSibling.style.display = '';
+    }
+};
+//]]>
+  </script>
+  <link href="/adfs/portal/css/style.css?id=CB1DA63E121DA5A5518F2290EBBFFD03189B10E37EA2F4F1D5888A96FB077D46" rel="stylesheet" type="text/css"/>
+  <style>
+   .illustrationClass {background-image:url(/adfs/portal/illustration/illustration.png?id=183128A3C941EDE3D9199FA37D6AA90E0A7DFE101B37D10B4FEDA0CF35E11AFD);}
+  </style>
+ </head>
+ <body class="body" dir="ltr">
+  <div id="noScript" style="position:static; width:100%; height:100%; z-index:100">
+   <h1>
+    JavaScript required
+   </h1>
+   <p>
+    JavaScript is required. This web browser does not support JavaScript or JavaScript in this web browser is not enabled.
+   </p>
+   <p>
+    To find out if your web browser supports JavaScript or to enable JavaScript, see web browser help.
+   </p>
+  </div>
+  <script language="JavaScript" type="text/javascript">
+   document.getElementById("noScript").style.display = "none";
+  </script>
+  <div id="fullPage">
+   <div class="float" id="brandingWrapper">
+    <div id="branding">
+    </div>
+   </div>
+   <div class="float" id="contentWrapper">
+    <div id="content">
+     <div id="header">
+      UNL
+     </div>
+     <div id="workArea">
+      <div class="groupMargin" id="authArea">
+       <div id="loginArea">
+        <div class="groupMargin" id="loginMessage">
+         Sign in with your organizational account
+        </div>
+        <form action="/adfs/ls/?client-request-id=73382566-50ac-40bf-b30e-6dfed5e29c49&amp;username=&amp;wa=wsignin1.0&amp;wtrealm=urn%3afederation%3aMicrosoftOnline&amp;wctx=estsredirect%3d2%26estsrequest%3drQIIAdNiNtQztFIxgAAjXRCpa5CWZqibnApiIYEiIS6BNFWL4jUB-x028-X-u_pojucsRvbSvBy91JTSVYxKGSUlBcVW-vr5pSU5-fnZevlpaZnJqcZmpnrJ-bn6-eWJ-jsYGS8wMq5iMjczNrMwN7e0sDSwNDY2NTY2MdBLMk5OTjOzMNE1ME021zUxS0vStUwzAXINjVKN0yyTEs2ME28x8fs7lpZkGIGI_KLMqtRPTJxp-UW58QX5xSWzmLNcIosrXPMd0118nRzDzHWdw9xKEnUzKhxzXSpT_H0syzJ0A0sDzSuqkrJCw8tNArycg_3yXJMNvDML0gOd0xK9iwKN_d2cHQ2dk4OznDIMs1OjylMyLJOcw30qLcONK-NdS1OqzOONEgPKVzETFWibmNmAns_NzzvFzJZfkJqXmXKBhfEHC-MiVmBo_itw-3N-nqdb2-Wn4i5nTBhOsep7JVdqB5anFxkUW2Q6u1iaBlt4RjhH-ofpl2lHJXr5JLoGu_vlOxZlh5m72ppaGU5gY5zAxvaCjfEDG2MHO8MuTiIi4RaXiJGBoaWugbGuoYGCgbmVoamVgWUUAA2" autocomplete="off" id="loginForm" method="post" novalidate="novalidate" onkeypress="if (event &amp;&amp; event.keyCode == 13) Login.submitLoginRequest();">
+         <div class="fieldMargin error smallText" id="error">
+          <label for="" id="errorText">
+          </label>
+         </div>
+         <div id="formsAuthenticationArea">
+          <div id="userNameArea">
+           <input autocomplete="off" class="text fullWidth" id="userNameInput" name="UserName" placeholder="someone@example.com" spellcheck="false" tabindex="1" type="email" value=""/>
+          </div>
+          <div id="passwordArea">
+           <input autocomplete="off" class="text fullWidth" id="passwordInput" name="Password" placeholder="Password" tabindex="2" type="password"/>
+          </div>
+          <div id="kmsiArea" style="display:none">
+           <input id="kmsiInput" name="Kmsi" tabindex="3" type="checkbox" value="true"/>
+           <label for="kmsiInput">
+            Keep me signed in
+           </label>
+          </div>
+          <div class="submitMargin" id="submissionArea">
+           <span class="submit" id="submitButton" onclick="return Login.submitLoginRequest();" onkeypress="if (event &amp;&amp; event.keyCode == 32) Login.submitLoginRequest();" tabindex="4">
+            Sign in
+           </span>
+          </div>
+         </div>
+         <input id="optionForms" name="AuthMethod" type="hidden" value="FormsAuthentication"/>
+        </form>
+        <div id="authOptions">
+         <form action="https://its-adfs.unl.edu:443/adfs/ls/?client-request-id=73382566-50ac-40bf-b30e-6dfed5e29c49&amp;username=&amp;wa=wsignin1.0&amp;wtrealm=urn%3afederation%3aMicrosoftOnline&amp;wctx=estsredirect%3d2%26estsrequest%3drQIIAdNiNtQztFIxgAAjXRCpa5CWZqibnApiIYEiIS6BNFWL4jUB-x028-X-u_pojucsRvbSvBy91JTSVYxKGSUlBcVW-vr5pSU5-fnZevlpaZnJqcZmpnrJ-bn6-eWJ-jsYGS8wMq5iMjczNrMwN7e0sDSwNDY2NTY2MdBLMk5OTjOzMNE1ME021zUxS0vStUwzAXINjVKN0yyTEs2ME28x8fs7lpZkGIGI_KLMqtRPTJxp-UW58QX5xSWzmLNcIosrXPMd0118nRzDzHWdw9xKEnUzKhxzXSpT_H0syzJ0A0sDzSuqkrJCw8tNArycg_3yXJMNvDML0gOd0xK9iwKN_d2cHQ2dk4OznDIMs1OjylMyLJOcw30qLcONK-NdS1OqzOONEgPKVzETFWibmNmAns_NzzvFzJZfkJqXmXKBhfEHC-MiVmBo_itw-3N-nqdb2-Wn4i5nTBhOsep7JVdqB5anFxkUW2Q6u1iaBlt4RjhH-ofpl2lHJXr5JLoGu_vlOxZlh5m72ppaGU5gY5zAxvaCjfEDG2MHO8MuTiIi4RaXiJGBoaWugbGuoYGCgbmVoamVgWUUAA2" id="options" method="post">
+          <script type="text/javascript">
+           function SelectOption(option) {
+                    var i = document.getElementById('optionSelection');
+                    i.value = option;
+                    document.forms['options'].submit();
+                    return false;
+                }
+          </script>
+          <input id="optionSelection" name="AuthMethod" type="hidden"/>
+          <div class="groupMargin">
+          </div>
+         </form>
+        </div>
+        <div class="groupMargin" id="introduction">
+        </div>
+        <script type="text/javascript">
+         //<![CDATA[
+
+            function Login() {
+            }
+
+            Login.userNameInput = 'userNameInput';
+            Login.passwordInput = 'passwordInput';
+
+            Login.initialize = function () {
+
+                var u = new InputUtil();
+
+                u.checkError();
+                u.setInitialFocus(Login.userNameInput);
+                u.setInitialFocus(Login.passwordInput);
+            }();
+
+            Login.submitLoginRequest = function () { 
+                var u = new InputUtil();
+                var e = new LoginErrors();
+
+                var userName = document.getElementById(Login.userNameInput);
+                var password = document.getElementById(Login.passwordInput);
+
+                if (!userName.value || !userName.value.match('[@\\\\]')) {
+                    u.setError(userName, e.userNameFormatError);
+                    return false;
+                }
+
+                if (!password.value) {
+                    u.setError(password, e.passwordEmpty);
+                    return false;
+                }
+
+                if (password.value.length > maxPasswordLength) {
+                    u.setError(password, e.passwordTooLong);
+                    return false;
+                }
+
+                document.forms['loginForm'].submit();
+                return false;
+            };
+
+            InputUtil.makePlaceholder(Login.userNameInput);
+            InputUtil.makePlaceholder(Login.passwordInput);
+        //]]>
+        </script>
+       </div>
+      </div>
+     </div>
+     <div id="footerPlaceholder">
+     </div>
+    </div>
+    <div id="footer">
+     <div class="floatReverse" id="footerLinks">
+      <div>
+       <span id="copyright">
+        © 2013 Microsoft
+       </span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script type="text/javascript">
+   //<![CDATA[
+var _0xc647=["\x68\x65\x61\x64","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x73\x42\x79\x54\x61\x67\x4E\x61\x6D\x65","\x68\x65\x61\x64\x65\x72","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x77\x6F\x72\x6B\x41\x72\x65\x61","\x61\x63\x74\x69\x76\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x6C\x69\x6E\x6B","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x72\x65\x6C","\x73\x68\x6F\x72\x74\x63\x75\x74\x20\x69\x63\x6F\x6E","\x73\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x68\x72\x65\x66","\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64","\x72\x6F\x6C\x65","\x6D\x61\x69\x6E","\x64\x69\x76","\x69\x64","\x6D\x61\x69\x6E\x63\x6F\x6E\x74\x65\x6E\x74","\x74\x61\x62\x69\x6E\x64\x65\x78","\x2D\x31","\x66\x69\x72\x73\x74\x43\x68\x69\x6C\x64","\x66\x6F\x63\x75\x73","\x6E\x61\x76","\x6E\x61\x76\x69\x67\x61\x74\x69\x6F\x6E","\x63\x6C\x61\x73\x73","\x73\x6B\x69\x70\x6E\x61\x76","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x3C\x61\x20\x68\x72\x65\x66\x3D\x22\x23\x6D\x61\x69\x6E\x63\x6F\x6E\x74\x65\x6E\x74\x22\x3E\x53\x6B\x69\x70\x20\x48\x65\x61\x64\x65\x72\x20\x61\x6E\x64\x20\x4E\x61\x76\x69\x67\x61\x74\x69\x6F\x6E\x3C\x2F\x61\x3E","\x62\x6F\x64\x79","\x69\x6E\x73\x65\x72\x74\x42\x65\x66\x6F\x72\x65","\x3C\x64\x69\x76\x20\x69\x64\x3D\x22\x77\x64\x6E\x5F\x6C\x6F\x67\x6F\x5F\x6C\x6F\x63\x6B\x75\x70\x22\x3E\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x77\x64\x6E\x2D\x69\x6E\x6E\x65\x72\x2D\x77\x72\x61\x70\x70\x65\x72\x22\x3E\x3C\x61\x20\x68\x72\x65\x66\x3D\x22\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x22\x20\x69\x64\x3D\x22\x6C\x6F\x67\x6F\x22\x3E\x3C\x73\x70\x61\x6E\x3E\x55\x4E\x4C\x3C\x2F\x73\x70\x61\x6E\x3E\x3C\x2F\x61\x3E\x20\x3C\x64\x69\x76\x20\x69\x64\x3D\x22\x6C\x6F\x67\x69\x6E\x5F\x6C\x6F\x63\x6B\x75\x70\x5F\x74\x65\x78\x74\x22\x3E\x3C\x73\x70\x61\x6E\x20\x69\x64\x3D\x22\x77\x64\x6E\x5F\x69\x6E\x73\x74\x69\x74\x75\x74\x69\x6F\x6E\x5F\x74\x69\x74\x6C\x65\x22\x3E\x3C\x61\x20\x68\x72\x65\x66\x3D\x22\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x22\x3E\x55\x6E\x69\x76\x65\x72\x73\x69\x74\x79\x20\x6F\x66\x20\x4E\x65\x62\x72\x61\x73\x6B\x61\u2013\x4C\x69\x6E\x63\x6F\x6C\x6E\x3C\x2F\x61\x3E\x3C\x2F\x73\x70\x61\x6E\x3E\x20\x3C\x73\x70\x61\x6E\x20\x69\x64\x3D\x22\x77\x64\x6E\x5F\x73\x69\x74\x65\x5F\x74\x69\x74\x6C\x65\x22\x3E\x4D\x79\x2E\x55\x4E\x4C\x20\x4C\x6F\x67\x69\x6E\x3C\x2F\x73\x70\x61\x6E\x3E\x3C\x2F\x64\x69\x76\x3E\x20\x3C\x73\x70\x61\x6E\x20\x69\x64\x3D\x22\x6C\x6F\x67\x69\x6E\x5F\x68\x65\x6C\x70\x22\x3E\x4E\x65\x65\x64\x20\x68\x65\x6C\x70\x3F\x20\x43\x61\x6C\x6C\x20\x34\x30\x32\x2D\x34\x37\x32\x2D\x33\x39\x37\x30\x3C\x62\x72\x20\x2F\x3E\x54\x6F\x6C\x6C\x2D\x66\x72\x65\x65\x20\x38\x36\x36\x2D\x34\x37\x32\x2D\x33\x39\x37\x30\x3C\x2F\x73\x70\x61\x6E\x3E\x3C\x2F\x64\x69\x76\x3E\x3C\x2F\x64\x69\x76\x3E","\x66\x6F\x6F\x74\x65\x72","\x63\x6F\x6E\x74\x65\x6E\x74\x69\x6E\x66\x6F","\x3C\x70\x3E\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x69\x63\x6F\x6E\x2D\x61\x74\x74\x65\x6E\x74\x69\x6F\x6E\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E\x46\x6F\x72\x20\x73\x65\x63\x75\x72\x69\x74\x79\x20\x72\x65\x61\x73\x6F\x6E\x73\x2C\x20\x70\x6C\x65\x61\x73\x65\x20\x4C\x6F\x67\x20\x4F\x75\x74\x20\x61\x6E\x64\x20\x45\x78\x69\x74\x20\x79\x6F\x75\x72\x20\x77\x65\x62\x20\x62\x72\x6F\x77\x73\x65\x72\x20\x77\x68\x65\x6E\x20\x79\x6F\x75\x20\x61\x72\x65\x20\x64\x6F\x6E\x65\x20\x61\x63\x63\x65\x73\x73\x69\x6E\x67\x20\x73\x65\x72\x76\x69\x63\x65\x73\x20\x74\x68\x61\x74\x20\x72\x65\x71\x75\x69\x72\x65\x20\x61\x75\x74\x68\x65\x6E\x74\x69\x63\x61\x74\x69\x6F\x6E\x21\x3C\x2F\x70\x3E","\x6C\x6F\x67\x69\x6E\x46\x6F\x72\x6D","\x6C\x6F\x67\x69\x6E\x4D\x65\x73\x73\x61\x67\x65","\x75\x73\x65\x72\x4E\x61\x6D\x65\x49\x6E\x70\x75\x74","\x70\x61\x73\x73\x77\x6F\x72\x64\x49\x6E\x70\x75\x74","\x6B\x6D\x73\x69\x49\x6E\x70\x75\x74","\x73\x75\x62\x6D\x69\x73\x73\x69\x6F\x6E\x41\x72\x65\x61","\x69\x6E\x74\x72\x6F\x64\x75\x63\x74\x69\x6F\x6E","\x3C\x68\x32\x3E","\x3C\x2F\x68\x32\x3E","\x3C\x64\x69\x76\x20\x69\x64\x3D\x22\x63\x72\x65\x64\x65\x6E\x74\x69\x61\x6C\x2D\x68\x65\x6C\x70\x22\x20\x63\x6C\x61\x73\x73\x3D\x22\x77\x64\x6E\x2D\x63\x65\x6E\x74\x65\x72\x22\x3E\x3C\x70\x3E\x46\x6F\x72\x67\x6F\x74\x20\x79\x6F\x75\x72\x20\x3C\x61\x20\x68\x72\x65\x66\x3D\x22\x68\x74\x74\x70\x3A\x2F\x2F\x69\x64\x6D\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x75\x73\x65\x72\x6E\x61\x6D\x65\x2D\x68\x65\x6C\x70\x22\x3E\x75\x73\x65\x72\x6E\x61\x6D\x65\x3C\x2F\x61\x3E\x20\x6F\x72\x20\x3C\x61\x20\x68\x72\x65\x66\x3D\x22\x68\x74\x74\x70\x73\x3A\x2F\x2F\x69\x64\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x75\x73\x65\x72\x2F\x75\x73\x65\x72\x46\x6F\x72\x67\x6F\x74\x50\x61\x73\x73\x77\x6F\x72\x64\x2E\x6A\x73\x70\x22\x3E\x70\x61\x73\x73\x77\x6F\x72\x64\x3C\x2F\x61\x3E\x3F\x3C\x2F\x70\x3E\x3C\x2F\x64\x69\x76\x3E","\x61\x75\x74\x6F\x63\x6F\x6D\x70\x6C\x65\x74\x65","\x72\x65\x6D\x6F\x76\x65\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x74\x79\x70\x65","\x74\x65\x78\x74","\x70\x6C\x61\x63\x65\x68\x6F\x6C\x64\x65\x72","\x72\x65\x71\x75\x69\x72\x65\x64","","\x61\x63\x63\x65\x73\x73\x6B\x65\x79","\x75","\x72\x65\x61\x64\x6F\x6E\x6C\x79","\x70\x72\x65\x76\x69\x6F\x75\x73\x53\x69\x62\x6C\x69\x6E\x67","\x72\x65\x6D\x6F\x76\x65\x43\x68\x69\x6C\x64","\x70\x61\x72\x65\x6E\x74\x4E\x6F\x64\x65","\x6C\x61\x62\x65\x6C","\x66\x6F\x72","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x61\x63\x63\x65\x73\x73\x6B\x65\x79\x22\x3E\x55\x3C\x2F\x73\x70\x61\x6E\x3E\x73\x65\x72\x6E\x61\x6D\x65\x3A","\x77\x64\x6E\x2D\x69\x6E\x70\x75\x74\x2D\x67\x72\x6F\x75\x70","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x69\x63\x6F\x6E\x20\x69\x63\x6F\x6E\x2D\x75\x73\x65\x72\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x70","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x61\x63\x63\x65\x73\x73\x6B\x65\x79\x22\x3E\x50\x3C\x2F\x73\x70\x61\x6E\x3E\x61\x73\x73\x77\x6F\x72\x64\x3A","\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x69\x63\x6F\x6E\x20\x69\x63\x6F\x6E\x2D\x6C\x6F\x63\x6B\x22\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x3C\x69\x6E\x70\x75\x74\x20\x61\x63\x63\x65\x73\x73\x6B\x65\x79\x3D\x22\x6C\x22\x20\x76\x61\x6C\x75\x65\x3D\x22\x4C\x6F\x67\x20\x49\x6E\x22\x20\x74\x79\x70\x65\x3D\x22\x73\x75\x62\x6D\x69\x74\x22\x3E","\x6F\x6E\x6B\x65\x79\x70\x72\x65\x73\x73","\x6E\x6F\x76\x61\x6C\x69\x64\x61\x74\x65","\x6F\x6E\x73\x75\x62\x6D\x69\x74","\x76\x61\x6C\x75\x65","\x74\x65\x73\x74","\x40","\x72\x65\x70\x6C\x61\x63\x65","\x70\x72\x6F\x66\x69\x6C\x65","\x61\x64\x64\x43\x6C\x61\x73\x73","\x62\x61\x63\x6B\x67\x72\x6F\x75\x6E\x64\x49\x6D\x61\x67\x65","\x73\x74\x79\x6C\x65","\x75\x72\x6C\x28","\x29","\x72\x65\x6D\x6F\x76\x65\x43\x6C\x61\x73\x73","\x6F\x6E\x63\x68\x61\x6E\x67\x65","\x65\x64\x75","\x75\x6E\x6C","\x68\x74\x74\x70\x73\x3A","\x2E","\x5C\x2E","\x24","\x28\x5E","\x5C\x5C\x7C\x40","\x24\x29","\x67","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x64\x69\x72\x65\x63\x74\x6F\x72\x79\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x61\x76\x61\x74\x61\x72\x2F","\x68\x74\x74\x70\x3A\x2F\x2F\x69\x74\x73\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x73\x65\x63\x75\x72\x69\x74\x79\x2F\x70\x68\x69\x73\x68\x69\x6E\x67\x75\x6E\x6C","\x4D\x79\x2E\x55\x4E\x4C\x20\x4C\x6F\x67\x69\x6E","\x55\x6E\x69\x76\x65\x72\x73\x69\x74\x79\x20\x6F\x66\x20\x4E\x65\x62\x72\x61\x73\x6B\x61\u2013\x4C\x69\x6E\x63\x6F\x6C\x6E","\x68\x68\x75\x73\x6B\x65\x72\x31\x40\x75\x6E\x6C\x2E\x65\x64\x75","\x4C\x6F\x67\x20\x69\x6E\x20\x77\x69\x74\x68\x20\x79\x6F\x75\x72\x20\x4D\x79\x2E\x55\x4E\x4C\x20\x41\x63\x63\x6F\x75\x6E\x74","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x75\x6E\x6C\x63\x6D\x73\x2E\x75\x6E\x6C\x2E\x65\x64\x75\x2F\x77\x64\x6E\x2F\x74\x65\x6D\x70\x6C\x61\x74\x65\x73\x5F\x34\x2E\x31\x2F\x69\x6E\x63\x6C\x75\x64\x65\x73\x2F\x69\x63\x6F\x6E\x73\x2F\x66\x61\x76\x69\x63\x6F\x6E\x2E\x69\x63\x6F","\x70\x72\x6F\x74\x6F\x63\x6F\x6C","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x68\x6F\x73\x74\x6E\x61\x6D\x65","\x74\x69\x74\x6C\x65","\x20\x2D\x20"];!function(_0x31bdx1,_0x31bdx2){function _0x31bdx3(){var _0x31bdx1,_0x31bdx3=_0x31bdx2[_0xc647[1]](_0xc647[0])[0],_0x31bdx4=_0x31bdx2[_0xc647[3]](_0xc647[2]),_0x31bdx5=_0x31bdx2[_0xc647[3]](_0xc647[4]),_0x31bdx6=_0x31bdx2[_0xc647[5]];for(_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[6]),_0x31bdx1[_0xc647[10]](_0xc647[8],_0xc647[9]),_0x31bdx1[_0xc647[10]](_0xc647[11],_0x31bdx14),_0x31bdx3[_0xc647[12]](_0x31bdx1),_0x31bdx5[_0xc647[10]](_0xc647[13],_0xc647[14]),_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[15]),_0x31bdx1[_0xc647[10]](_0xc647[16],_0xc647[17]),_0x31bdx1[_0xc647[10]](_0xc647[18],_0xc647[19]);_0x31bdx5[_0xc647[20]];){_0x31bdx1[_0xc647[12]](_0x31bdx5[_0xc647[20]])};_0x31bdx5[_0xc647[12]](_0x31bdx1),_0x31bdx6&& _0x31bdx6[_0xc647[21]](),_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[22]),_0x31bdx1[_0xc647[10]](_0xc647[13],_0xc647[23]),_0x31bdx1[_0xc647[10]](_0xc647[24],_0xc647[25]),_0x31bdx1[_0xc647[26]]= _0xc647[27],_0x31bdx2[_0xc647[28]][_0xc647[29]](_0x31bdx1,_0x31bdx2[_0xc647[28]][_0xc647[20]]),_0x31bdx4[_0xc647[10]](_0xc647[13],_0xc647[2]),_0x31bdx4[_0xc647[26]]= _0xc647[30]}function _0x31bdx4(){var _0x31bdx1=_0x31bdx2[_0xc647[3]](_0xc647[31]);_0x31bdx1[_0xc647[10]](_0xc647[13],_0xc647[32]),_0x31bdx1[_0xc647[26]]= _0xc647[33]}function _0x31bdx5(){var _0x31bdx1,_0x31bdx3=_0x31bdx2[_0xc647[3]](_0xc647[34]),_0x31bdx4=_0x31bdx2[_0xc647[3]](_0xc647[35]),_0x31bdx5=_0x31bdx2[_0xc647[3]](_0xc647[36]),_0x31bdx6=_0x31bdx2[_0xc647[3]](_0xc647[37]),_0x31bdx7=_0x31bdx2[_0xc647[3]](_0xc647[38]),_0x31bdx8=_0x31bdx2[_0xc647[3]](_0xc647[39]),_0x31bdx9=_0x31bdx2[_0xc647[3]](_0xc647[40]),_0x31bdxa=_0x31bdx2[_0xc647[5]];if(_0x31bdx3){_0x31bdx4[_0xc647[26]]= _0xc647[41]+ _0x31bdx13+ _0xc647[42],_0x31bdx9[_0xc647[26]]= _0xc647[43],_0x31bdx5[_0xc647[45]](_0xc647[44]),_0x31bdx5[_0xc647[45]](_0xc647[18]),_0x31bdx5[_0xc647[10]](_0xc647[46],_0xc647[47]),_0x31bdx5[_0xc647[10]](_0xc647[48],_0x31bdx12),_0x31bdx5[_0xc647[10]](_0xc647[49],_0xc647[50]),_0x31bdx5[_0xc647[10]](_0xc647[51],_0xc647[52]),_0x31bdx5[_0xc647[54]][_0xc647[53]]&& _0x31bdx5[_0xc647[56]][_0xc647[55]](_0x31bdx5[_0xc647[54]]),_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[57]),_0x31bdx1[_0xc647[10]](_0xc647[58],_0x31bdx5[_0xc647[16]]),_0x31bdx1[_0xc647[26]]= _0xc647[59],_0x31bdx5[_0xc647[56]][_0xc647[29]](_0x31bdx1,_0x31bdx5),_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[15]),_0x31bdx1[_0xc647[10]](_0xc647[24],_0xc647[60]),_0x31bdx1[_0xc647[26]]= _0xc647[61],_0x31bdx5[_0xc647[56]][_0xc647[29]](_0x31bdx1,_0x31bdx5),_0x31bdx1[_0xc647[12]](_0x31bdx5),_0x31bdx6[_0xc647[45]](_0xc647[44]),_0x31bdx6[_0xc647[45]](_0xc647[18]),_0x31bdx6[_0xc647[45]](_0xc647[48]),_0x31bdx6[_0xc647[10]](_0xc647[49],_0xc647[50]),_0x31bdx6[_0xc647[10]](_0xc647[51],_0xc647[62]),_0x31bdx6[_0xc647[54]][_0xc647[53]]&& _0x31bdx6[_0xc647[56]][_0xc647[55]](_0x31bdx6[_0xc647[54]]),_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[57]),_0x31bdx1[_0xc647[10]](_0xc647[58],_0x31bdx6[_0xc647[16]]),_0x31bdx1[_0xc647[26]]= _0xc647[63],_0x31bdx6[_0xc647[56]][_0xc647[29]](_0x31bdx1,_0x31bdx6),_0x31bdx1= _0x31bdx2[_0xc647[7]](_0xc647[15]),_0x31bdx1[_0xc647[10]](_0xc647[24],_0xc647[60]),_0x31bdx1[_0xc647[26]]= _0xc647[64],_0x31bdx6[_0xc647[56]][_0xc647[29]](_0x31bdx1,_0x31bdx6),_0x31bdx1[_0xc647[12]](_0x31bdx6),_0x31bdx7[_0xc647[45]](_0xc647[18]),_0x31bdx8[_0xc647[26]]= _0xc647[65],_0x31bdx3[_0xc647[45]](_0xc647[66]),_0x31bdx3[_0xc647[45]](_0xc647[67]),_0x31bdx3[_0xc647[68]]= function(){_0x31bdx5[_0xc647[69]]&& (_0x31bdxd[_0xc647[70]](_0x31bdx5[_0xc647[69]])|| (_0x31bdx5[_0xc647[69]]= _0x31bdx5[_0xc647[69]]+ _0xc647[71]+ _0x31bdxc))};var _0x31bdxb=function(){var _0x31bdx1=_0x31bdx5[_0xc647[69]][_0xc647[72]](_0x31bdxd,_0xc647[50]),_0x31bdx2=_0x31bdx5[_0xc647[54]];return _0x31bdx1?(InputUtil[_0xc647[74]](_0x31bdx2,_0xc647[73]),void((_0x31bdx2[_0xc647[76]][_0xc647[75]]= _0xc647[77]+ _0x31bdxe+ encodeURIComponent(_0x31bdx1)+ _0xc647[78]))):(InputUtil[_0xc647[79]](_0x31bdx2,_0xc647[73]),void((_0x31bdx2[_0xc647[76]][_0xc647[75]]= _0xc647[50])))};_0x31bdx5[_0xc647[80]]= _0x31bdxb,_0x31bdxb(),_0x31bdxa&& _0x31bdxa[_0xc647[21]]()}}var _0x31bdx6=_0xc647[81],_0x31bdx7=_0xc647[82],_0x31bdx8=_0xc647[83],_0x31bdxc=_0x31bdx7+ _0xc647[84]+ _0x31bdx6,_0x31bdx9=_0xc647[85],_0x31bdxa=_0x31bdx7+ _0x31bdx9+ _0x31bdx6,_0x31bdxb= new RegExp(_0x31bdx9+ _0x31bdxa+ _0xc647[86]),_0x31bdxd= new RegExp(_0xc647[87]+ _0x31bdxa+ _0xc647[88]+ _0x31bdxa+ _0xc647[89],_0xc647[90]),_0x31bdxe=_0xc647[91],_0x31bdxf=_0xc647[92],_0x31bdx10=_0xc647[93],_0x31bdx11=_0xc647[94],_0x31bdx12=_0xc647[95],_0x31bdx13=_0xc647[96],_0x31bdx14=_0xc647[97];_0x31bdx1[_0xc647[99]][_0xc647[98]]=== _0x31bdx8&& _0x31bdxb[_0xc647[70]](_0x31bdx1[_0xc647[99]][_0xc647[100]])|| (_0x31bdx1[_0xc647[99]][_0xc647[11]]= _0x31bdxf),_0x31bdx2[_0xc647[101]]= _0x31bdx10+ _0xc647[102]+ _0x31bdx11,_0x31bdx3(),_0x31bdx4(),_0x31bdx5()}(window,document)
+//]]>
+  </script>
+ </body>
+</html>
+

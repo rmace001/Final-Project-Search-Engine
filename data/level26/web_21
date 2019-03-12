@@ -1,0 +1,273 @@
+http://design.colostate.edu/
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Richardson Design Center | Colorado State University
+  </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/chhs.min.css" rel="stylesheet"/>
+  <script src="js/modernizr-2.8.3.js">
+  </script>
+  <link href="//static.colostate.edu/fonts/proxima-nova/proxima.css" rel="stylesheet"/>
+  <link href="//static.colostate.edu/fonts/factoria/factoria.css" rel="stylesheet"/>
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
+  <script src="js/jquery-3.1.1.min.js">
+  </script>
+ </head>
+ <body>
+  <form action="./" id="form1" method="post">
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwULLTEwMDUyNjYzMjhkZMSLICAeV8+H3/lBDgoVK5b9PKhf2+QDQ/2FfchPKIQ1"/>
+   </div>
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+   </div>
+   <header>
+    <div class="container">
+     <div class="row">
+      <div class="logoContainer">
+       <div class="mainLogo">
+        <a href="http://www.colostate.edu/">
+         <img alt="" src="images/signature-oneline.svg"/>
+        </a>
+       </div>
+       <div class="secondarySignature">
+        <h2>
+         <a href="/">
+          Nancy Richardson Design Center
+         </a>
+        </h2>
+       </div>
+      </div>
+     </div>
+    </div>
+   </header>
+   <!-- CHHS Header -->
+   <div class="chhsHeader">
+    <div class="container">
+     <div class="row">
+      <nav class="navbar">
+       <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+         <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+          <span class="sr-only">
+           Toggle navigation
+          </span>
+          <span class="icon-bar">
+          </span>
+          <span class="icon-bar">
+          </span>
+          <span class="icon-bar">
+          </span>
+         </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav">
+          <li class="active">
+           <a href="default.aspx">
+            Home
+            <span class="sr-only">
+             (current)
+            </span>
+           </a>
+          </li>
+          <li>
+           <a href="about.aspx">
+            About
+           </a>
+          </li>
+          <li>
+           <a href="academics.aspx">
+            Academics
+           </a>
+          </li>
+          <li>
+           <a href="facility.aspx">
+            Facility
+           </a>
+          </li>
+          <li>
+           <a href="programs-and-resources.aspx">
+            Programs and Resources
+           </a>
+          </li>
+          <li>
+           <a href="research.aspx">
+            Research
+           </a>
+          </li>
+          <li>
+           <a href="people.aspx">
+            People
+           </a>
+          </li>
+         </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+       </div>
+       <!-- /.container-fluid -->
+      </nav>
+     </div>
+    </div>
+    <!-- End CHHS Header -->
+   </div>
+   <div>
+    <div class="container main">
+     <div class="row">
+      <div class="main-content">
+       <h1>
+        Welcome to the Nancy Richardson Design Center
+       </h1>
+       <p>
+        The Nancy Richardson Design Center is an iconic building and a hub for collaboration, learning, and design thinking at Colorado State University.
+       </p>
+       <!-- <strong>We are seeking a Fabrication Labs Coordinator for the Richardson Design Center - <a href="https://jobs.colostate.edu/postings/62018">see job listing on CSU's employment site</a>.</strong> -->
+       <img alt="Richardson Design Center" src="images/richardson-design-center-website1.jpg" width="100%"/>
+      </div>
+     </div>
+    </div>
+   </div>
+  </form>
+ </body>
+</html>
+<div class="row">
+ <div class="col-md-12" style="padding-right:20px;">
+  <h2>
+   Nancy Richardson Design Center Visual Tour
+  </h2>
+  <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/oK6uI4FzYkg" width="560">
+  </iframe>
+ </div>
+</div>
+<div class="row">
+ <div class="col-md-12" style="padding-right:20px;">
+  <h2>
+   News
+  </h2>
+  <div class="homeblog">
+  </div>
+  ​
+ </div>
+ <script>
+  $(document).ready(function() {
+                        $.ajax({
+
+                            dataType: 'json',
+                            url: 'https://chhs.source.colostate.edu/wp-json/wp/v2/posts?filter[tag]=nancy-richardson-design-center&per_page=3',
+                            type: 'GET',
+                            success: function(response) {
+
+                            // Here I'm building an article div with the title, excerpt and link to the live version.
+                            var divBody = '';
+                            $.each(response, function(index) {
+
+                                divBody += "<div class='articlewrapper'>";
+                                divBody += "<h3>" + response[index].title.rendered + "</h3>";
+                                if (response[index].featured_image) {
+                                    divBody += "<img width='100px' src='" + response[index].featured_image.source_url + "' style='margin:5px 10px 5px 10px; float:left;' /><br />";
+                                }
+                                divBody += "<p>" + response[index].excerpt.rendered + "</p>";
+
+                        
+                                divBody += "<a href='" + response[index].link + "'>Click to read more</a>";
+                                divBody += "</div><br />";
+
+                            });
+
+                        // Take our constructed div And put it into the above div
+                        $('.homeblog').html(divBody);
+                            }
+                        });
+                    });
+ </script>
+ <noscript>
+  Your browser must support JavaScript to view this content. 
+                        Please enable JavaScript in your browser settings then try again.
+ </noscript>
+</div>
+<footer>
+ <div class="top-footer">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-4">
+     <h3>
+      Location:
+     </h3>
+     <p style="color:white;">
+      Nancy Richardson Design Center
+      <!--   <br /><a href="" style="color:white;">[ENTER MAP LINK]</a>-->
+      <br/>
+      522 West Lake Street
+      <!--  <br />[ENTER CAMPUS DELIVERY ADDRESS]-->
+      <br/>
+      Fort Collins, CO 80523
+      <!--     <br />PH:  [ENTER PHONE]
+                        <br />Email: [ENTER EMAIL] -->
+     </p>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 donate">
+     <a href="https://advancing.colostate.edu/DESIGNCENTER" target="_blank">
+      <img onmouseout="this.src='http://dev.rdc.chhs.colostate.edu/images/Giving_button_282_78_main.jpg'" onmouseover="this.src='http://dev.rdc.chhs.colostate.edu/images/Giving_button_282_78_hover.jpg'" src="http://dev.rdc.chhs.colostate.edu/images/Giving_button_282_78_main.jpg" style="padding-bottom:10px; padding-top:10px;"/>
+     </a>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="bottom-footer">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-8">
+     <ul>
+      <li>
+       <a href="http://admissions.colostate.edu">
+        Apply to CSU
+       </a>
+      </li>
+      <li>
+       <a href="http://www.colostate.edu/info-contact.aspx">
+        Contact CSU
+       </a>
+      </li>
+      <li>
+       <a href="http://www.colostate.edu/info-disclaimer.aspx">
+        Disclaimer
+       </a>
+      </li>
+      <li>
+       <a href="http://www.colostate.edu/info-equalop.aspx">
+        Equal Opportunity
+       </a>
+      </li>
+      <li>
+       <a href="http://www.colostate.edu/info-privacy.aspx">
+        Privacy Statement
+       </a>
+      </li>
+     </ul>
+     <p class="copyright">
+      © 2017 Colorado State University
+     </p>
+    </div>
+    <div class="col-md-4">
+     <!--<p class="copyright">&copy; 2016 Colorado State University</p>-->
+     <div class="bottomlogo">
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</footer>
+<script src="js/bootstrap.min.js">
+</script>
+<script src="js/respond.min.js">
+</script>
+<div class="hidden" data-core-url="/" id="app-url">
+</div>
+

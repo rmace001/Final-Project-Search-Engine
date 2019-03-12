@@ -1,0 +1,1531 @@
+http://calendar.kennesaw.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="no-cache" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<html class="no-js" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:wairole="http://www.w3.org/2005/01/wai-rdf/GUIRoleTaxonomy#" xmlns:waistate="http://www.w3.org/2005/07/aaa">
+ <head id="ctl00_Head1">
+  <link href="KSUCustom/Styles/ksuCustom_RSSStyles.css" rel="stylesheet" type="text/css"/>
+  <link href="/DXR.axd?r=1_2-gwVNa" rel="stylesheet" type="text/css"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+   <meta content="NO-CACHE" http-equiv="CACHE-CONTROL">
+    <meta content="no-cache" http-equiv="Pragma">
+     <meta content="en" http-equiv="Content-Language">
+      <title>
+       :: Master Calendar ::
+      </title>
+      <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+      <link href="ShortcutIcon.ico" rel="shortcut icon" type="image/x-icon"/>
+      <style type="text/css">
+       #HeaderContainer h1{margin-top:5em;margin-left:40%;margin-right:40%;}
+        #PageLinksContainer {clear:both;margin-top:2em;bottom:1%;width: 100%;text-align: center;}
+        #FooterContainer{clear:both;margin-top:2em;bottom:1%;width: 100%;text-align: center;}
+        /*our footer text*/
+        .footer{font-size: smaller;color: #225d92;}
+        .callbackStatus{border:black thin solid;background-color: #fff8dc;}
+        div#CallbackStatus{position:fixed;clear:both;margin-top:.4em;padding:.5em;width:12em;}
+        div.centerRow{clear: both;text-align: center;}
+        @media screen
+        {
+            /*Centers the header (things above the menu) at the top of the page*/
+            /*.HeaderContainer
+            {
+                clear:both;
+	            width: 100%;
+	            text-align:center;
+            }*/
+        }
+        @media Print
+        {
+            .HeaderContainer
+            {
+                display:none;	
+            }
+        }
+      </style>
+      <link href="Styles/Calendar/dynamiccss.ashx" rel="stylesheet" type="text/css"/>
+      <script src="Includes/modernizr.custom.70372.js" type="text/javascript">
+      </script>
+      <!-- BegMod jheming 08/04/2015 - Use KSU styles -->
+      <link href="KSUCustom/Styles/ksuCustom_Default.css" rel="stylesheet"/>
+      <!-- EndMod jheming 08/04/2015 - Use KSU styles -->
+      <script src="Includes/Calendar/jquery-1.9.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery-ui-1.10.2.custom.min.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.tools.min.js" type="text/javascript">
+      </script>
+      <script src="Includes/json.js" type="text/javascript">
+      </script>
+      <script src="Includes/Globals.js" type="text/javascript">
+      </script>
+      <script src="Includes/Common.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.validate.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.mc.user.menu-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.mc.login-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/Utilities.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+       $(document).ready(function () {
+            if (helpTextMsg != '' || showHelpEdit) {
+                $('.help-text-icon').click(function () {
+                    openHelpText();
+                });
+                if (showHelpEdit) {
+                    $('.edit-Help-Link').show();
+                    $('.edit-Help-Link').click(function () {
+                        if(helpTextEditLink != '')
+                            document.location.href = helpTextEditLink;
+                    });
+                }
+            }
+            else {
+                $('.help-text-icon').hide();
+            }
+
+        });
+        function openHelpText() {
+            $('#helpTextDialog').modal({
+                closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
+                position: ["20%", ],
+                overlayId: 'helpText-overlay',
+                containerId: 'helpText-container',
+                onShow: function (dialog) {
+                    var modal = this;
+                    $('.helpTextMessage').append(helpTextMsg);
+                }
+            });
+        }
+      </script>
+      <link href="Styles/Calendar/eventgrid.css" rel="stylesheet"/>
+      <script src="Includes/Calendar/fluidgrid.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.ticker.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/html5placeholder.jquery.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/search.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.features.scoller-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/knockout-2.2.1.debug.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/knockout.mapping-latest.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/ko.lib.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/SideBySideKOViewModel.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.simplemodal.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.simplemodal-osx.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.print.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.group.box-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.dropdown.multiselect.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.mousedown.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/event-list-ko-viewmodel.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/DateFormat.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.eventlist.accordion-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.curtain-01.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.tooltip.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.eventgrid-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/event-curtains-data-ko-viewmodel.js" type="text/javascript">
+      </script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5220ba9a39b147c7" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.special.dates-0.1.js" type="text/javascript">
+      </script>
+      <script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false" type="text/javascript">
+      </script>
+      <link href="KSUCustom/Styles/ksuCustom_Default.css" rel="stylesheet"/>
+      <link href="KSUCustom/Styles/ksuCustom_Default_CalFiltersOverrides.css" rel="stylesheet"/>
+      <link href="KSUCustom/Styles/ksuCustom_RSSStyles.css" rel="stylesheet"/>
+      <script src="KSUCustom/Includes/jquery.js" type="text/jscript">
+      </script>
+      <script>
+       $(document).ready(function() {
+//            $('.flexslider').flexslider({
+//                animation: "slide",
+//                pauseOnHover: true,
+//                prevText: "",
+//                nextText: "",
+//                slideshowSpeed: 8000
+//            });
+
+			// Sidebar JS
+			function toggleSecondaryNav(e,a,s){console.log("toggleSecondaryNav",e);var i=s,r=e,n="fast";i.is(":visible")?(a.removeClass("minus").addClass("open-icon").removeClass("close-icon"),r.removeClass("active_section_transition"),i.slideUp(n)):(a.addClass("minus").addClass("close-icon").removeClass("open-icon"),r.addClass("active_section_transition"),i.slideDown(n))}function closeSecondaryNav(e,a,s){console.log("closeSecondaryNav",a),s="undefined"!=typeof s?s:!1;var i;if(i=s?"#mobile_high_council_chamber":".secondary_nav",!e.hasClass("second_tier")){var r=$(i+" li.active_section_transition, "+i+" li.active_section").not(a),n=r.children("ul"),l=r.children(".plus_wrapper");n.slideUp("fast"),r.removeClass("active_section_transition"),l.removeClass("minus").addClass("open-icon").removeClass("close-icon")}}var mobileQuery="56em",fullMobileQuery="40em";$(".secondary_nav li > a").filter($(".plus_wrapper").prev("a")).click(function(e){e.preventDefault();var a=$(this).parent("li"),s=a.parent("ul"),i=$(this).next(),r=i.next("ul");closeSecondaryNav(s,a),toggleSecondaryNav(a,i,r)}),$(".secondary_nav li > .plus_wrapper").click(function(){var e=$(this).parent("li"),a=e.parent("ul"),s=$(this),i=s.next("ul");closeSecondaryNav(a,e),toggleSecondaryNav(e,s,i)});var active=$(".secondary_nav .active"),activeParent=active.parent("ul");if(activeParent.hasClass("third_tier")){activeParent.show(),activeParent.prev(".plus_wrapper").addClass("minus");var rootWrapper=activeParent.parent("li").parent("ul");rootWrapper.show(),rootWrapper.prev(".plus_wrapper").addClass("minus")}else if(activeParent.hasClass("second_tier"))activeParent.show(),activeParent.prev(".plus_wrapper").addClass("minus");else{var childUl=active.children("ul");childUl.length>0&&(childUl.show(),active.children(".plus_wrapper").addClass("minus"))}
+		});
+      </script>
+      <style type="text/css">
+       /* Second/Third Tier Nav */
+		.secondary_nav ul .second_tier{clear:both;display:none}
+		.secondary_nav ul .second_tier li a{padding-left:8%;width:70%}
+		.secondary_nav ul .third_tier{clear:both;display:none}
+		.secondary_nav ul .third_tier li a{padding-left:12%;width:76%}
+		.secondary_nav .second_tier>li{-ms-transition:background-color .4s;-webkit-transition-property:background-color;-webkit-transition-duration:.4s;-webkit-transition:background-color .4s;transition:background-color .4s;background:#f2f2f2}
+		.secondary_nav .second_tier>li.active{background:#e5e5e5}
+		.secondary_nav .second_tier>li.active>a{color:#000}
+		.secondary_nav .second_tier>li.active_section{background:#888}
+		.secondary_nav .second_tier>li.active_section>a{color:#fff}
+		.secondary_nav .second_tier>li.active_section_transition{background:#888}
+		.secondary_nav .second_tier>li.active_section_transition>a{color:#fff}
+		.secondary_nav .third_tier>li{background:#e5e5e5;border-color:#ccc}
+		.secondary_nav .third_tier>li.active>a{color:#000}
+      </style>
+      <!-- BegMod jheming 05/23/2017 Adding Google Analytics -->
+      <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-73819267-3', 'auto');
+        ga('send', 'pageview');
+      </script>
+      <!-- EndMod jheming 05/23/2017 Adding Google Analytics -->
+     </meta>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body class="mc-bg-color-2" id="mcBody">
+  <div class="mcCon" id="mcCon">
+   <noscript>
+    Master Calendar requires Javascript to be supported and enabled.
+   </noscript>
+   <form action="/default.aspx" id="aspnetForm" method="post" name="aspnetForm">
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="lf4Cg+W94bP1YnDQb7uTctltabfuEc2lByuC0t3UWDqx+bindL1vU/wPiNxOo3f3NwZtugo2l2zLKgEKAZpjQtyrMtAdnYGR0iieib42LK3XJXR5fj4iRcGdvqHnI9Y0tl/s21UdXfuXYRlUxqws8ooWqjmOqcbviDGhNRCiMNYBti9ldz9383rae+lFBBHL2tof3GD949nkg9kdvJ5HFwJ8huIq2myB6gujBWUcRRMdR2BvVREhll5JcF22bmI0S8e9v8B/J/v/A3JZF2LvKtKkjKOwNdahTgapO7w6tlciSTA3zmMYPNiIZ1a0NJWusMcDxk7hU5eJa1/jKSRvCrFkR+Aul4cjlSyzPMw6sO7cH+X49V0Y9QY7NRPg6NbC3j4/LCDn5G3mrFzYIEBFxFuNews4AUegfNqlBSKxvKXTXkgpvZajpaHqanSdHvyhmy51dYZHCmhCQiyFSj+iE6nrILWDr3szGVJrqh3VI4i2ZlcRtHphV07jLEGyT2fekGgrc6nmgSVR5siNhlz4vKSVpmLDh3Gxo5LT3Vcx1UPWL2jJHZfz4cyVShCdE1H9xbBflJ2Cqt5Pd7Cfxb+AVbu2gBxyyuFuIOrEUb3WuYJPr9NKs2ZZK00gFFrfMh1lBZvFvYz+zO88LDw0xUgY0ZITJMbb3d624UCmfXrt9jX+hDO29XzFMxK6yrK/tOf0CwVsITmHatywcEH7420k0B//HbRk8XlFFehhdx8XVAqDkr3AStPB7QrbcKn5r5PtgAsWc61nvEkln7cYDkSJExyUPeb/you4SD466CAAEzdf/kLg9S00AVRPbpS9rp7T4pZ2UBcxn2NveNyoqarZk5rMf41WX4JXp5U2S6KQh5VEEBXSm4BISpjjounrVtzBeYHpWMlW/mluj0uwrPaCf1cShiCJP38bOwm8h05Qy+hrlIJINhsm8qqLQq+VcfmpJS3sBo/XJQj0Wgmx2VrRMR9On7NGjJ+gdaHOWlxMn2CEZyk0TFNLkFu196c5ZQuwc9vf5ezvxh0LhpLtlCpuPip0/CoKV4ReDKyaVpnCcdAgHAAG9gpXyzuhZrg8ff/CjxSgxMTLL0ddJkl8GHsPQI3k1e4WxPkacL1F5I3O61keq2imgKh12RZUR0H9lphI0zZR3Q8didFg8+LtiDIUKFZwD7WWo0ucmFSkIbsQAG44u1dytKdw4y/GRqv2cxDa09hlwR4jZ4BRbjFNcKA913pLZanjZNqAcPxKsEIkvGVadjgh93mo79KRXxTBqoR2VZviZ+q33v0HShgA9JsIgAaxqS3Ro0cJcaJnefogQ70GNI1jV+8OCSb6sSiVcgX1Qlp/BF0bqiFbjWTYLKutZYTIoa95bAUpGK8jrNAgCeqxQ1ZRqUv8KfDz434G+EkhhZ3KZulEtaILrDTwSKJrUnxr/+BPo17VvU1dPzg+dQN4WY3s"/>
+    <script type="text/javascript">
+     //<![CDATA[
+var announcementTxt = "Announcements";var featuredFeedTxt = "Featured Events";var checkAllTxt = "Check All";var expandAllTxt = "Expand All";var uncheckAllTxt = "Uncheck All";var collapseAllTxt = "Collapse All";var viewTxt = "View";var monthTxt = "Month";var yearTxt = "Year";var prevTxt = "Previous";var nextTxt = "Next";var alertTxt = "Alert";var showWeekends = true;var startWeekOn = 0;var displayView = 0;var displayFormat = 0;var listType = 1;var startdateInvalidmsg = "Start date must be earlier than end date.";var blinkPendingApproval = false;var pendingApprovalCount = 0;var pendingApprovaltxt = "Event(s) Pending Approval";var showAddEvent = false;var multipleSelectedtxt = "(Multiple Selected)";var selectMultipletxt = "Select Multiple";var allText = "(all)";var useSubLocation = false;var showFeaturedEvents = true;var showTimezonePicker = false;var expandCalendars = false;var noSpecialDatesMsg = "There are no special dates for the date selected.";var specialDatesTxt = "Special Dates";var calTimeStamp = '72082b00388a4434bbff190f7ac7bc87';var collaspeFilters = false;var tickerDelay = 5000;var helpTextEditLink = "/EditWebText.aspx?data=DDKzQnfoMIkKQQPSXGYI974KMnEbnY6ej%2bVgYsXSr1Q0F28%2fSstE0o038yP%2byxAkzHHGvk%2btSNg%3d"; var announcement = []; var events = [{"ticklers":[],"ID":1032950,"Title":"JCPenney Suit-Up Event","Description":"\u003cp\u003e\u003cspan class=\"secondary-detail\"\u003eShop select career dress apparel with an \nextra 40% off! This is a great opportunity to get everything you need to\n finish your look for that next interview or job fair - including suits,\n dresses, sport coats, dress pants, shoes, and accessories. There will \nbe giveaways and prizes, as well as a free mini makeover from the \nSephora inside JCPenney.\n\n\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan class=\"secondary-detail\"\u003e**This event is for all KSU Students, Faculty, Staff, and Alumni - must \nshow KSU ID to get discount.**\u003c/span\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5567","InfoDate":"Sunday, March 10, 2019","InfoTime":"5:00 PM - 9:00 PM","Location":null},{"ticklers":[],"ID":1023533,"Title":"All-Majors Job and Internship Fair","Description":"\u003cp\u003eWhether you\u0027re about to graduate, switching jobs, looking for an internship or just\n                              a freshman looking for networking experience, this event is something that\n                              no student at KSU can afford to miss.&nbsp;\n                           \u003c/p\u003e\u003cp\u003eProfessional dress and student ID required. \u003cbr\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5629","InfoDate":"Wednesday, March 20, 2019","InfoTime":"12:00 PM - 4:00 PM","Location":null},{"ticklers":[],"ID":1042376,"Title":"Honors Trivia Night","Description":"Join the Honors College for Honors Trivia Night in the Carmichael Student Center on the Kennesaw campus. An ice cream sundae bar will be provided and prizes will be awarded to top teams. We hope to see you on March 21st! This event is exclusively for Honors College students.","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5598","InfoDate":"Thursday, March 21, 2019","InfoTime":"5:00 PM - 7:00 PM","Location":null},{"ticklers":[],"ID":1040918,"Title":"A Day with Honors for Prospective Students","Description":"\u003cp\u003e\u003cspan style=\"font-size: 14px; color: #1d2129;\"\u003e\u003cspan\u003eIf you\u0027re a prospective student interested in the Honors College at KSU, register for A Day with Honors! During this event, you\u0027ll learn more about Honors scholarships, priority registration, Honors Housing, and our flexible curriculum that works with any major. You\u0027ll also receive a campus tour guided by a current Honors student! \u003c/span\u003e\u003ca href=\"https://honors.kennesaw.edu/prospective-students/scholars.php\" target=\"_blank\"\u003eClick here to register.\u003c/a\u003e\u003c/span\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5577","InfoDate":"Friday, March 22, 2019","InfoTime":"1:30 PM - 3:30 PM","Location":null},{"ticklers":[],"ID":1017329,"Title":"2018-19 Signature Series: Atlanta Symphony Orchestra","Description":"\u003cspan style=\"font-family: Tahoma; font-size: 12pt;\"\u003eLed by conductor Peter Oundjian, the Atlanta Symphony serves up a feast of orchestral indulgence. First, the \"utterly astounding\" (\u003ci\u003eThe Piano Files\u003c/i\u003e) Benjamin Grosvenor performs Johannes Brahms\u0027s barnstorming Piano Concerto No. 1. The performance concludes with Strauss\u0027 mind-blowing \u003ci\u003eAlso sprach Zarathustra\u003c/i\u003e. Used as the opening theme in \u003ci\u003e2001: A Space Odyssey\u003c/i\u003e, Strauss\u0027 tone poem was written \"to convey in music an idea of the evolution of the human race from its origin…,\" and is perfectly at home in this epic cinematic context.\u003c/span\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=3326","InfoDate":"Friday, March 22, 2019","InfoTime":"8:00 PM - 10:00 PM","Location":null},{"ticklers":[],"ID":1045629,"Title":"Spring Arts Festival","Description":"&nbsp;\u003cspan style=\"caret-color: #000000; color: #000000; font-family: Nunito, Arial, Helvetica, sans-serif; font-size: 19.200000762939453px; font-style: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none; display: inline !important; float: none;\"\u003eThe Spring Arts Festival at Kennesaw State is an annual community event offering the chance for art lovers of all ages to partake in visual and performing arts activities. Enjoy free activites for all ages!\u003c/span\u003e\u003cbr\u003e\u003cspan style=\"caret-color: #000000; color: #000000; font-family: Nunito, Arial, Helvetica, sans-serif; font-size: 19.200000762939453px; font-style: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration: none; display: inline !important; float: none;\"\u003e\n\n\t\n\t\t\n\t\t\n\t\n\t\n\t\t\u003c/span\u003e\u003cdiv class=\"page\" title=\"Page 1\"\u003e\n\t\t\t\u003cdiv class=\"section\"\u003e\n\t\t\t\t\u003cdiv class=\"layoutArea\"\u003e\n\t\t\t\t\t\u003cdiv class=\"column\"\u003e\n\t\t\t\t\t\t\u003cp\u003e\u003cspan style=\"font-size: 26.000000pt; font-family: \u0027GillSans\u0027; color: rgb(8.600000%, 57.600000%, 27.500000%)\"\u003eENJOY \u003c/span\u003e\u003cspan style=\"font-size: 26.000000pt; font-family: \u0027GillSans\u0027; font-style: italic; color: rgb(8.600000%, 57.600000%, 27.500000%)\"\u003eFREE\n\u003c/span\u003e\u003cspan style=\"font-size: 26.000000pt; font-family: \u0027GillSans\u0027; color: rgb(8.600000%, 57.600000%, 27.500000%)\"\u003eACTIVITIES\nFOR ALL AGES!\n\u003c/span\u003e\u003c/p\u003e\n\t\t\t\t\t\u003c/div\u003e\n\t\t\t\t\u003c/div\u003e\n\t\t\t\u003c/div\u003e\n\t\t\u003c/div\u003e\n\t\n","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5635","InfoDate":"Saturday, March 23, 2019","InfoTime":"11:00 AM - 4:00 PM","Location":null},{"ticklers":[],"ID":1040919,"Title":"A Day with Honors for Prospective Students","Description":"\u003cp\u003e\u003cspan style=\"font-size: 14px; color: #1d2129;\"\u003e\u003cspan\u003eIf you\u0027re a prospective student interested in the Honors College at KSU, register for A Day with Honors! During this event, you\u0027ll learn more about Honors scholarships, priority registration, Honors Housing, and our flexible curriculum that works with any major. You\u0027ll also receive a campus tour guided by a current Honors student! \u003c/span\u003e\u003ca href=\"https://honors.kennesaw.edu/prospective-students/scholars.php\" target=\"_blank\"\u003eClick here to register.\u003c/a\u003e\u003c/span\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5577","InfoDate":"Friday, April 26, 2019","InfoTime":"1:30 PM - 3:30 PM","Location":null},{"ticklers":[],"ID":1045854,"Title":"Excel Leadership Program","Description":"\u003cp\u003eThe Excel Leadership Program (ELP) is an extraordinary opportunity for faculty and staff to develop leadership skills and build relationships with other Kennesaw State University Colleagues. The program is a rewarding experience that will give each participant a sense of their value as a leader at Kennesaw State University.\u003c/p\u003e\u003cp\u003eWorking in a cohort of 20 - 24 faculty and staff, participants gain knowledge of their leadership style and develop skills critical for effective leadership.&nbsp; Excel boasts over 350 accomplished alumni who serve as leaders at Kennesaw State and other universities.\u003c/p\u003e\u003cp\u003eParticipants will gain knowledge of KSU\u0027s organizational structure, strategic goals, and mission as well as be exposed to leadership roles and operations at the University System Office and State Capitol.\u003cspan style=\"text-decoration: underline;\"\u003e&nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style=\"text-decoration: underline;\"\u003eProgram highlights include\u003c/span\u003e:\u003cbr\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eExploring leadership styles\u003c/li\u003e\u003cli\u003eLearning essential skills of effective and ethical leaders\u003c/li\u003e\u003cli\u003eDriving positive change with creative problem-solving\u003c/li\u003e\u003cli\u003eExperiencing hands on leadership through a team service learning project\u003c/li\u003e\u003cli\u003eNetworking with university, system-wide, and state government leaders to gain perspective on the policies and governance that affect our university\u003c/li\u003e\u003c/ul\u003eThe cost of the program is sponsored by the Center for University Learning and the Office of the President.&nbsp; Participants are asked to commit to attending the full schedule of events during the week of the program. All full-time university employees who are in good standing, and who have been employed a minimum of six months at the time of application, are eligible to apply for this program.\u003cp\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5640","InfoDate":"Monday, May 20, 2019","InfoTime":"8:00 AM - 5:00 PM","Location":null},{"ticklers":[],"ID":1045855,"Title":"Excel Leadership Program","Description":"\u003cp\u003eThe Excel Leadership Program (ELP) is an extraordinary opportunity for faculty and staff to develop leadership skills and build relationships with other Kennesaw State University Colleagues. The program is a rewarding experience that will give each participant a sense of their value as a leader at Kennesaw State University.\u003c/p\u003e\u003cp\u003eWorking in a cohort of 20 - 24 faculty and staff, participants gain knowledge of their leadership style and develop skills critical for effective leadership.&nbsp; Excel boasts over 350 accomplished alumni who serve as leaders at Kennesaw State and other universities.\u003c/p\u003e\u003cp\u003eParticipants will gain knowledge of KSU\u0027s organizational structure, strategic goals, and mission as well as be exposed to leadership roles and operations at the University System Office and State Capitol.\u003cspan style=\"text-decoration: underline;\"\u003e&nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style=\"text-decoration: underline;\"\u003eProgram highlights include\u003c/span\u003e:\u003cbr\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eExploring leadership styles\u003c/li\u003e\u003cli\u003eLearning essential skills of effective and ethical leaders\u003c/li\u003e\u003cli\u003eDriving positive change with creative problem-solving\u003c/li\u003e\u003cli\u003eExperiencing hands on leadership through a team service learning project\u003c/li\u003e\u003cli\u003eNetworking with university, system-wide, and state government leaders to gain perspective on the policies and governance that affect our university\u003c/li\u003e\u003c/ul\u003eThe cost of the program is sponsored by the Center for University Learning and the Office of the President.&nbsp; Participants are asked to commit to attending the full schedule of events during the week of the program. All full-time university employees who are in good standing, and who have been employed a minimum of six months at the time of application, are eligible to apply for this program.\u003cp\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5640","InfoDate":"Tuesday, May 21, 2019","InfoTime":"8:00 AM - 5:00 PM","Location":null},{"ticklers":[],"ID":1045856,"Title":"Excel Leadership Program","Description":"\u003cp\u003eThe Excel Leadership Program (ELP) is an extraordinary opportunity for faculty and staff to develop leadership skills and build relationships with other Kennesaw State University Colleagues. The program is a rewarding experience that will give each participant a sense of their value as a leader at Kennesaw State University.\u003c/p\u003e\u003cp\u003eWorking in a cohort of 20 - 24 faculty and staff, participants gain knowledge of their leadership style and develop skills critical for effective leadership.&nbsp; Excel boasts over 350 accomplished alumni who serve as leaders at Kennesaw State and other universities.\u003c/p\u003e\u003cp\u003eParticipants will gain knowledge of KSU\u0027s organizational structure, strategic goals, and mission as well as be exposed to leadership roles and operations at the University System Office and State Capitol.\u003cspan style=\"text-decoration: underline;\"\u003e&nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style=\"text-decoration: underline;\"\u003eProgram highlights include\u003c/span\u003e:\u003cbr\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eExploring leadership styles\u003c/li\u003e\u003cli\u003eLearning essential skills of effective and ethical leaders\u003c/li\u003e\u003cli\u003eDriving positive change with creative problem-solving\u003c/li\u003e\u003cli\u003eExperiencing hands on leadership through a team service learning project\u003c/li\u003e\u003cli\u003eNetworking with university, system-wide, and state government leaders to gain perspective on the policies and governance that affect our university\u003c/li\u003e\u003c/ul\u003eThe cost of the program is sponsored by the Center for University Learning and the Office of the President.&nbsp; Participants are asked to commit to attending the full schedule of events during the week of the program. All full-time university employees who are in good standing, and who have been employed a minimum of six months at the time of application, are eligible to apply for this program.\u003cp\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5640","InfoDate":"Wednesday, May 22, 2019","InfoTime":"8:00 AM - 5:00 PM","Location":null},{"ticklers":[],"ID":1045857,"Title":"Excel Leadership Program","Description":"\u003cp\u003eThe Excel Leadership Program (ELP) is an extraordinary opportunity for faculty and staff to develop leadership skills and build relationships with other Kennesaw State University Colleagues. The program is a rewarding experience that will give each participant a sense of their value as a leader at Kennesaw State University.\u003c/p\u003e\u003cp\u003eWorking in a cohort of 20 - 24 faculty and staff, participants gain knowledge of their leadership style and develop skills critical for effective leadership.&nbsp; Excel boasts over 350 accomplished alumni who serve as leaders at Kennesaw State and other universities.\u003c/p\u003e\u003cp\u003eParticipants will gain knowledge of KSU\u0027s organizational structure, strategic goals, and mission as well as be exposed to leadership roles and operations at the University System Office and State Capitol.\u003cspan style=\"text-decoration: underline;\"\u003e&nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style=\"text-decoration: underline;\"\u003eProgram highlights include\u003c/span\u003e:\u003cbr\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eExploring leadership styles\u003c/li\u003e\u003cli\u003eLearning essential skills of effective and ethical leaders\u003c/li\u003e\u003cli\u003eDriving positive change with creative problem-solving\u003c/li\u003e\u003cli\u003eExperiencing hands on leadership through a team service learning project\u003c/li\u003e\u003cli\u003eNetworking with university, system-wide, and state government leaders to gain perspective on the policies and governance that affect our university\u003c/li\u003e\u003c/ul\u003eThe cost of the program is sponsored by the Center for University Learning and the Office of the President.&nbsp; Participants are asked to commit to attending the full schedule of events during the week of the program. All full-time university employees who are in good standing, and who have been employed a minimum of six months at the time of application, are eligible to apply for this program.\u003cp\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5640","InfoDate":"Thursday, May 23, 2019","InfoTime":"8:00 AM - 5:00 PM","Location":null},{"ticklers":[],"ID":1045858,"Title":"Excel Leadership Program","Description":"\u003cp\u003eThe Excel Leadership Program (ELP) is an extraordinary opportunity for faculty and staff to develop leadership skills and build relationships with other Kennesaw State University Colleagues. The program is a rewarding experience that will give each participant a sense of their value as a leader at Kennesaw State University.\u003c/p\u003e\u003cp\u003eWorking in a cohort of 20 - 24 faculty and staff, participants gain knowledge of their leadership style and develop skills critical for effective leadership.&nbsp; Excel boasts over 350 accomplished alumni who serve as leaders at Kennesaw State and other universities.\u003c/p\u003e\u003cp\u003eParticipants will gain knowledge of KSU\u0027s organizational structure, strategic goals, and mission as well as be exposed to leadership roles and operations at the University System Office and State Capitol.\u003cspan style=\"text-decoration: underline;\"\u003e&nbsp;\u003c/span\u003e\u003c/p\u003e\u003cp\u003e\u003cspan style=\"text-decoration: underline;\"\u003eProgram highlights include\u003c/span\u003e:\u003cbr\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cul\u003e\u003cli\u003eExploring leadership styles\u003c/li\u003e\u003cli\u003eLearning essential skills of effective and ethical leaders\u003c/li\u003e\u003cli\u003eDriving positive change with creative problem-solving\u003c/li\u003e\u003cli\u003eExperiencing hands on leadership through a team service learning project\u003c/li\u003e\u003cli\u003eNetworking with university, system-wide, and state government leaders to gain perspective on the policies and governance that affect our university\u003c/li\u003e\u003c/ul\u003eThe cost of the program is sponsored by the Center for University Learning and the Office of the President.&nbsp; Participants are asked to commit to attending the full schedule of events during the week of the program. All full-time university employees who are in good standing, and who have been employed a minimum of six months at the time of application, are eligible to apply for this program.\u003cp\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5640","InfoDate":"Friday, May 24, 2019","InfoTime":"8:00 AM - 5:00 PM","Location":null},{"ticklers":[],"ID":1041821,"Title":"Run For Recovery","Description":"","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5590","InfoDate":"Saturday, August 24, 2019","InfoTime":"7:30 AM - 9:00 AM","Location":null},{"ticklers":[],"ID":1041820,"Title":"Collegiate Recovery Scholarship Breakfast","Description":"&nbsp;\u003cspan style=\"font-family: Nunito, Arial, Helvetica, sans-serif;\"\u003e\u003cspan style=\"font-size: 10pt;\"\u003eBy providing financial and academic support to students in recovery from addictive disorders, Kennesaw State University offers hope and a pathway to a college degree.\u003c/span\u003e\u003c/span\u003e\u003cp style=\"font-family: Nunito, Arial, Helvetica, sans-serif;\"\u003e\u003cspan style=\"font-size: 10pt;\"\u003eThe Celebration of Recovery Scholarship Breakfast is an annual event held to raise funds for Kennesaw State University’s Center for Young Adult Addiction and Recovery\u0027s Endowed and Non-Endowed Scholarships as well as the Student-Learning Initiatives in the Collegiate Recovery Community. The event also provides an opportunity to connect donors with their scholarship recipients and thank those who fund endowed and annual scholarships.\u003c/span\u003e\u003c/p\u003e\u003cp style=\"font-family: Nunito, Arial, Helvetica, sans-serif;\"\u003e\u003cspan style=\"font-size: 10pt;\"\u003eIn the 2017-18 academic year, more than 23 scholarships totaling $45,000 were awarded to student participates of the collegiate recovery program.\u003c/span\u003e\u003c/p\u003e","ImgSrc":"ImageWriter.aspx?ShowFullImage=1&ImageId=5589","InfoDate":"Friday, September 20, 2019","InfoTime":"7:30 AM - 9:00 AM","Location":null}];var calendars = [{"Id":50,"Name":"Academic Calendar","Selected":0},{"Id":36,"Name":"Athletics","Selected":0},{"Id":14,"Name":"Career Services","Selected":0},{"Id":40,"Name":"CETL","Selected":0},{"Id":4,"Name":"Coles College of Business","Selected":0},{"Id":6,"Name":"College of Humanities and Social Sciences","Selected":0},{"Id":7,"Name":"College of Science and Mathematics","Selected":0},{"Id":3,"Name":"College of the Arts","Selected":0},{"Id":42,"Name":"Consolidation Calendar","Selected":0},{"Id":21,"Name":"Department of Dance","Selected":0},{"Id":39,"Name":"Diversity and Inclusion Calendar","Selected":0},{"Id":1,"Name":"Featured Events","Selected":0},{"Id":13,"Name":"Global Affairs","Selected":0},{"Id":57,"Name":"Honors College","Selected":0},{"Id":27,"Name":"Music Events","Selected":0},{"Id":25,"Name":"Student Activities","Selected":0},{"Id":37,"Name":"Theatre, Performance Studies Events","Selected":0},{"Id":11,"Name":"Today's Events","Selected":0},{"Id":8,"Name":"University College","Selected":0}];var groupBoxData = [{"expanded":false,"checked":false,"text":"Academics &amp; Scholarship","id":1,"items":[{"checked":false,"text":"BioInnovation Calendar","id":67,"isCalendar":true,"link":""},{"checked":false,"text":"Coles College of Business","id":4,"isCalendar":true,"link":""},{"checked":false,"text":"College of Architecture and Construction Mgmnt","id":48,"isCalendar":true,"link":""},{"checked":false,"text":"College of Computing and Software Engineering","id":63,"isCalendar":true,"link":""},{"checked":false,"text":"College of Engineering and Engineering Technology","id":49,"isCalendar":true,"link":""},{"checked":false,"text":"College of Humanities and Social Sciences","id":6,"isCalendar":true,"link":""},{"checked":false,"text":"College of Science and Mathematics","id":7,"isCalendar":true,"link":""},{"checked":false,"text":"College of the Arts","id":3,"isCalendar":true,"link":""},{"checked":false,"text":"Department of Architecture","id":53,"isCalendar":true,"link":""},{"checked":false,"text":"Department of Construction Management","id":54,"isCalendar":true,"link":""},{"checked":false,"text":"Honors College","id":57,"isCalendar":true,"link":""},{"checked":false,"text":"ITeach","id":71,"isCalendar":true,"link":""},{"checked":false,"text":"KSU Writing Center","id":69,"isCalendar":true,"link":""},{"checked":false,"text":"University College","id":8,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Arts &amp; Culture","id":2,"items":[{"checked":false,"text":"Department of Dance","id":21,"isCalendar":true,"link":""},{"checked":false,"text":"Leven School of Culinary Sustainability&amp;Hospitalit","id":62,"isCalendar":true,"link":""},{"checked":false,"text":"Music Events","id":27,"isCalendar":true,"link":""},{"checked":false,"text":"School of Art and Design","id":66,"isCalendar":true,"link":""},{"checked":false,"text":"Theatre, Performance Studies Events","id":37,"isCalendar":true,"link":""},{"checked":false,"text":"Zuckerman Museum of Art Events","id":12,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Athletics","id":9,"items":[{"checked":false,"text":"Athletics","id":36,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Campus Life","id":6,"items":[{"checked":false,"text":"Auxiliary Services","id":65,"isCalendar":true,"link":""},{"checked":false,"text":"Career Services","id":14,"isCalendar":true,"link":""},{"checked":false,"text":"Student Activities","id":25,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Center for University Learning","id":10,"items":[{"checked":false,"text":"Center for University Learning","id":5,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Consolidation","id":14,"items":[{"checked":false,"text":"Consolidation Calendar","id":42,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Enrollment Services","id":8,"items":[{"checked":false,"text":"Academic Calendar","id":50,"isCalendar":true,"link":""},{"checked":false,"text":"Admissions","id":35,"isCalendar":true,"link":""},{"checked":false,"text":"Enrollment Services","id":52,"isCalendar":true,"link":""},{"checked":false,"text":"Financial Aid","id":32,"isCalendar":true,"link":""},{"checked":false,"text":"Visit","id":60,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Faculty and Staff","id":12,"items":[{"checked":false,"text":"CETL","id":40,"isCalendar":true,"link":""},{"checked":false,"text":"Human Resources","id":61,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Global Learning &amp; Diversity","id":3,"items":[{"checked":false,"text":"Diversity and Inclusion Calendar","id":39,"isCalendar":true,"link":""},{"checked":false,"text":"Global Affairs","id":13,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Public Interest &amp; Training","id":4,"items":[{"checked":false,"text":"EHS Calendar","id":45,"isCalendar":true,"link":""},{"checked":false,"text":"Featured Events","id":1,"isCalendar":true,"link":""},{"checked":false,"text":"Human Resources Development and Holiday Schedule","id":8,"isCalendar":false,"link":"https://web.kennesaw.edu/hr/content/holidays-2011"},{"checked":false,"text":"KSUTV","id":46,"isCalendar":true,"link":""},{"checked":false,"text":"Siegel Institute","id":20,"isCalendar":true,"link":""},{"checked":false,"text":"Sustainability","id":59,"isCalendar":true,"link":""},{"checked":true,"text":"Today\u0027s Events","id":11,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Sports, Recreation &amp; Wellness","id":5,"items":[{"checked":false,"text":"Center for Young Adult Addiction and Recovery","id":64,"isCalendar":true,"link":""},{"checked":false,"text":"Sports and Recreation","id":22,"isCalendar":true,"link":""}]},{"expanded":false,"checked":false,"text":"Student Success","id":7,"items":[{"checked":false,"text":"Commencement","id":1,"isCalendar":false,"link":"https://web.kennesaw.edu/registrar/students/graduation_main"},{"checked":false,"text":"Deadlines: Financial Aid","id":2,"isCalendar":false,"link":"http://www.kennesaw.edu/financial_aid/deadlines.html"},{"checked":false,"text":"Deadlines: Graduate Admissions","id":3,"isCalendar":false,"link":"http://www.kennesaw.edu/graduate/admissions/deadlines.shtml"},{"checked":false,"text":"Deadlines: Registrar","id":4,"isCalendar":false,"link":"https://web.kennesaw.edu/registrar/share/academic_calendars"},{"checked":false,"text":"Deadlines: Undergraduate Admissions","id":5,"isCalendar":false,"link":"http://www.kennesaw.edu/admissions/application_doc_deadlines.html"},{"checked":false,"text":"Orientations","id":6,"isCalendar":false,"link":"http://www.kennesaw.edu/studentsuccess/orientation/"},{"checked":false,"text":"Regents Testing","id":7,"isCalendar":false,"link":"http://www.kennesaw.edu/studentsuccess/testing/test_regents.html"}]}];var specialDates = [];
+var displayView = 0;var displayFormat = 0;var listType = 1;var keyWord = "";var eventlistData = [{"Id":1014561,"EventId":0,"Title":"EMBA ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Academic Event","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"Today\u0027s Events","EventDateTime":{"EventDateTime":"3/10/2019 6:00:00 AM","EventDuaration":720,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"KSU Center KC401 (62) Executive Classroom","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1014562,"EventId":0,"Title":"EMBA ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Academic Event","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"Today\u0027s Events","EventDateTime":{"EventDateTime":"3/10/2019 6:00:00 AM","EventDuaration":720,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"KSU Center KC402 (62) Executive Classroom","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1014560,"EventId":0,"Title":"EMBA ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Academic Event","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"Today\u0027s Events","EventDateTime":{"EventDateTime":"3/10/2019 6:00:00 AM","EventDuaration":720,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"KSU Center KC434 (6) Conference Room","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1014558,"EventId":0,"Title":"EMBA ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Academic Event","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"Today\u0027s Events","EventDateTime":{"EventDateTime":"3/10/2019 6:00:00 AM","EventDuaration":720,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"KSU Center KC428 (6) Breakout Room ","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1014559,"EventId":0,"Title":"EMBA ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Academic Event","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"Today\u0027s Events","EventDateTime":{"EventDateTime":"3/10/2019 6:00:00 AM","EventDuaration":720,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"KSU Center KC429 (6) Breakout Room ","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1041084,"EventId":0,"Title":"Softball Game ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Sports - Game/Match","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"Today\u0027s Events","EventDateTime":{"EventDateTime":"3/10/2019 8:00:00 AM","EventDuaration":840,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"Bailey Athletic Complex Softball Field","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1037885,"EventId":0,"Title":"Pilates ","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Sports- Recreation","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/10/2019 6:00:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"Siegel Student Rec & Activ Cnt SS1074 Fitness Studio 2 and 3","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1035039,"EventId":0,"Title":"Corespin","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Sports- Recreation","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/10/2019 7:00:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"Siegel Student Rec & Activ Cnt SS1069 Fitness Studio 1","Address":""},"UDFs":null,"EventKeyWords":null},{"Id":1034754,"EventId":0,"Title":"Yoga","Description":"","EventImageURL":"","isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":0,"EventTypeColor":"","EventTypeName":"Sports- Recreation","EventType":null,"AllowEdit":false,"Cancel":false,"CalendarName":"On Multiple Calendars","EventDateTime":{"EventDateTime":"3/10/2019 8:00:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":1,"Name":"Siegel Student Rec & Activ Cnt SS2090 Activity Room","Address":""},"UDFs":null,"EventKeyWords":null}];
+ var EventTypesFilterData = [{"expanded":true,"checked":false,"text":"Event Types","id":-1,"items":[{"checked":false,"text":"Academic Class","id":28},{"checked":false,"text":"Academic Event","id":55},{"checked":false,"text":"Breakfast/Brunch","id":30},{"checked":false,"text":"Ceremony","id":1},{"checked":false,"text":"ConEd & Professional Dev","id":18},{"checked":false,"text":"Conference","id":2},{"checked":false,"text":"Dinner","id":32},{"checked":false,"text":"Exhibit","id":11},{"checked":false,"text":"Fair","id":16},{"checked":false,"text":"Information Table","id":56},{"checked":false,"text":"Lecture","id":19},{"checked":false,"text":"Luncheon","id":33},{"checked":false,"text":"Meeting","id":8},{"checked":false,"text":"Open Lab","id":34},{"checked":false,"text":"Orientation","id":3},{"checked":false,"text":"Performance","id":12},{"checked":false,"text":"Reception","id":4},{"checked":false,"text":"Rehearsal","id":20},{"checked":false,"text":"RSO Open Meeting","id":48},{"checked":false,"text":"Service Project","id":21},{"checked":false,"text":"Signature Events","id":36},{"checked":false,"text":"Sports - Game/Match","id":23},{"checked":false,"text":"Sports - Race/Walk","id":39},{"checked":false,"text":"Sports - Recreation","id":40},{"checked":false,"text":"Sports- Race/Walk","id":81},{"checked":false,"text":"Sports- Recreation","id":82},{"checked":false,"text":"Training","id":41},{"checked":false,"text":"Wellness Event","id":84}]}]; var LocationFilterData = [{"expanded":true,"checked":false,"text":"Locations","id":-1,"items":[{"checked":false,"text":"Architecture Building-Marietta Campus","id":1120},{"checked":false,"text":"Austin Residence Complex","id":1127},{"checked":false,"text":"B: Administration Building (M)","id":1133},{"checked":false,"text":"BioInnovation Laboratory","id":1129},{"checked":false,"text":"Bobbie Bailey and Family Performance Center","id":50},{"checked":false,"text":"Bookstore","id":1139},{"checked":false,"text":"Burruss Building","id":45},{"checked":false,"text":"C: Lawrence V. Johnson Library (M)","id":88},{"checked":false,"text":"Campus Roads","id":1125},{"checked":false,"text":"Carmichael Student Center University Rooms","id":42},{"checked":false,"text":"CETL House #54: Conference Room","id":9},{"checked":false,"text":"CETL House #54: Lab","id":8},{"checked":false,"text":"Chastain Pointe","id":1124},{"checked":false,"text":"Clendenin Building","id":63},{"checked":false,"text":"Convocation Center","id":20},{"checked":false,"text":"Convocation Center","id":1131},{"checked":false,"text":"Convocation Center, Room 2016","id":57},{"checked":false,"text":"Convocation Center-Kennesaw Campus","id":72},{"checked":false,"text":"D: Mathematics (M)","id":1107},{"checked":false,"text":"Education Classroom Facility","id":1108},{"checked":false,"text":"English Building","id":93},{"checked":false,"text":"Fifth Third Bank Stadium","id":34},{"checked":false,"text":"Fine Arts Gallery, Wilson Building","id":10},{"checked":false,"text":"H: Academic Building (M)","id":74},{"checked":false,"text":"Horace W. Sturgis Library","id":1116},{"checked":false,"text":"Howard Logan Stillwell Theatre","id":54},{"checked":false,"text":"I1: Design Building 1 (M)","id":89},{"checked":false,"text":"I2: Design Building 2 (M)","id":1100},{"checked":false,"text":"J.M.Wilson Bldg.","id":51},{"checked":false,"text":"J: Atrium Building (M)","id":79},{"checked":false,"text":"Joe Mack Wilson Student Center- Marietta","id":97},{"checked":false,"text":"Kennesaw Campus","id":2},{"checked":false,"text":"Kennesaw Campus Green","id":60},{"checked":false,"text":"Kennesaw Campus- Wilson Building 103","id":1104},{"checked":false,"text":"Kennesaw Hall","id":65},{"checked":false,"text":"Kennesaw State University","id":96},{"checked":false,"text":"KSU Center","id":66},{"checked":false,"text":"KSU Center","id":33},{"checked":false,"text":"KSU Dance Theater, Marietta Campus","id":55},{"checked":false,"text":"KSU Sports and Recreation Park","id":38},{"checked":false,"text":"L: Civil Engineering Technology (M)","id":1123},{"checked":false,"text":"Legacy Gazebo","id":77},{"checked":false,"text":"Legacy Gazebo","id":62},{"checked":false,"text":"Leo Delle and Lex Jolley Lodge","id":3},{"checked":false,"text":"Leo Delle and Lex Jolley Lodge","id":1126},{"checked":false,"text":"Library","id":82},{"checked":false,"text":"M: W. Claire Harris Textile Center (M)","id":1105},{"checked":false,"text":"Marietta Campus","id":73},{"checked":false,"text":"Marietta Campus Parking Lots: P51, P30 and P35","id":59},{"checked":false,"text":"Marietta Campus, Field between Howell and Norton","id":1119},{"checked":false,"text":"Marietta Campus, H-230","id":53},{"checked":false,"text":"Marietta Campus, Q-202","id":56},{"checked":false,"text":"Marietta Campus- between Howell and Norton Halls","id":1103},{"checked":false,"text":"Marietta Campus- Gymnasium","id":71},{"checked":false,"text":"Marietta Campus- Student Center Ballroom","id":1109},{"checked":false,"text":"Math and Statistics","id":1112},{"checked":false,"text":"Miscellaneous Fields and Outdoor Spaces (M)","id":81},{"checked":false,"text":"Morgan Concert Hall, Bailey Performance Center","id":1110},{"checked":false,"text":"N: Architecture (M)","id":80},{"checked":false,"text":"Off Campus - Turner Field","id":35},{"checked":false,"text":"Onyx Theatre","id":16},{"checked":false,"text":"Outdoor Recreation Facility (M)","id":90},{"checked":false,"text":"Owl\u0027s Nest","id":91},{"checked":false,"text":"Pilcher Public Service Bldg","id":83},{"checked":false,"text":"Pilcher Public Service Bldg","id":14},{"checked":false,"text":"Prillaman Hall, HS 1000","id":1102},{"checked":false,"text":"Prillaman Health Sciences","id":75},{"checked":false,"text":"Prillaman Health Sciences, Indoor Plaza","id":49},{"checked":false,"text":"Q: Engineering Technology Center (M)","id":78},{"checked":false,"text":"R10: Housing Office (M)","id":1136},{"checked":false,"text":"R2: Norton Residence Hall (M)","id":1134},{"checked":false,"text":"S1: Recreation and Wellness Center (M)","id":1111},{"checked":false,"text":"S2: Gymnasium (M)","id":94},{"checked":false,"text":"Science Building","id":86},{"checked":false,"text":"Science Building","id":22},{"checked":false,"text":"Science Laboratory Building","id":1099},{"checked":false,"text":"Siegel Student Recreation and Activities Center","id":98},{"checked":false,"text":"Social Sciences Bldg","id":7},{"checked":false,"text":"Social Sciences Bldg","id":67},{"checked":false,"text":"Social Sciences Building, Room 1019","id":1106},{"checked":false,"text":"Social Sciences Building, Room 1021","id":58},{"checked":false,"text":"Sports and Entertainment Park","id":95},{"checked":false,"text":"Student Center","id":68},{"checked":false,"text":"Student Center","id":4},{"checked":false,"text":"Student Center Addition","id":69},{"checked":false,"text":"Student Rec & Wellness Center","id":12},{"checked":false,"text":"Sturgis Library","id":1115},{"checked":false,"text":"Technology Annex","id":84},{"checked":false,"text":"Technology Services","id":85},{"checked":false,"text":"The Commons","id":87},{"checked":false,"text":"The Globe-Marietta Campus","id":1121},{"checked":false,"text":"The Perch","id":92},{"checked":false,"text":"Town Point","id":1118},{"checked":false,"text":"UCA: University Columns Activity Center (M)","id":1137},{"checked":false,"text":"UE - Convocation Center Request","id":1128},{"checked":false,"text":"UE- I2 Reservation Request","id":1117},{"checked":false,"text":"University College","id":1113},{"checked":false,"text":"University College","id":23},{"checked":false,"text":"University Place Amphitheatre","id":39},{"checked":false,"text":"University Village Apartments","id":1138},{"checked":false,"text":"University Village Suites Apart","id":1135},{"checked":false,"text":"Visual Arts","id":1122},{"checked":false,"text":"Visual Arts","id":61},{"checked":false,"text":"Willingham Hall","id":1114},{"checked":false,"text":"Wilson Annex","id":27},{"checked":false,"text":"X: Stinger\u0027s Restaurant (M)","id":1101},{"checked":false,"text":"Zuckerman Museum of Art","id":1132},{"checked":false,"text":"Zuckerman Museum of Art","id":1130},{"checked":false,"text":"ZZ A: J.M. Wilson Student Center (M)","id":76}]}]; var DepartmentFilterData = [{"expanded":true,"checked":false,"text":"Dept/Organizations","id":-1,"items":[]}]; var showSubscribe = true;showExactMatch = true;currentDates = "3/10/2019|3/10/2019";var ems_timeSep = ":",mc_Help = "Help",mc_useHelpIcon = 0,ems_AM = "AM",ems_PM = "PM",ems_timeFormat = "h:mm tt",ems_timePicker = "Time Picker",eventDetailstxt = "Event Details",gotoString = "Go to the current month",todayString = "Today is",scrollLeftMessage = "Click to scroll to previous month. Hold mouse button to scroll automatically.",scrollRightMessage = "Click to scroll to next month. Hold mouse button to scroll automatically.",selectMonthMessage = "Click to select a month.",selectYearMessage = "Click to select a year.",selectDateMessage = "Select [date] as date.",ems_UnhandledCallback = "Unhandled Callback.",ems_FailedToLoadCallbackXml = "Error loading xml document from server",localizationKey = "en-US",localizationDateSeparator = "/",localizationDateFormat = "m/d/yyyy",ems_FirstDateViolation = "Date violates your first available event date",ems_LastDateViolation = "Date violates your last available event date",ems_InvalidDate = "Invalid Date",ems_InvalidTime = "Invalid Time",ems_CloseTheCalendar = "Close the Calendar",mc_rootDirectory = "/",ajaxRootDirectory = "",sSelectedColor = "rgb(175,188,33)";checkVersion("data=x3ijH9FTK9UfR1IPnJHJBB0vNIurQVtwSnGbxY%2bikSKDfpyXwL0zZA%3d%3d");Dea.pageCallback = function (mcObject) { WebForm_DoCallback('__Page','' + Dea.JSON.stringify(mcObject) + '',Dea.handleCallback,'' + mcObject.router + '',Dea.errorCallback,true)};var PathToRoot = '/';var isLoggedIn = false;var loginTxt = "Login";var logoutTxt = "Log Out";var helpTextMsg = "Calendar Help";var postionMenuRight = false;var showLogout = true;var showLogin = true;var showHelpEdit = false;var loginUsername = "";var showLoginTimezone = false;var showEmailPasswordLink = false; var logintimezonesData = [{"id":"73","name":"(GMT -12:00) Eniwetok, Kwajalein","bias":-720,"abbr":""},{"id":"72","name":"(GMT -11:00) Midway Island, Samoa","bias":-660,"abbr":""},{"id":"71","name":"(GMT -10:00) Hawaii","bias":-600,"abbr":"HAT"},{"id":"70","name":"(GMT -09:00) Alaska","bias":-540,"abbr":"AKT"},{"id":"69","name":"(GMT -08:00) Pacific Time","bias":-480,"abbr":"PT"},{"id":"83","name":"(GMT -08:00) Tijuana, Baja California","bias":-480,"abbr":""},{"id":"67","name":"(GMT -07:00) Arizona","bias":-420,"abbr":"MT"},{"id":"68","name":"(GMT -07:00) Mountain Time","bias":-420,"abbr":"MT"},{"id":"81","name":"(GMT -07:00) Chihuahua, La Paz, Mazatlan","bias":-420,"abbr":""},{"id":"63","name":"(GMT -06:00) Central America","bias":-360,"abbr":""},{"id":"64","name":"(GMT -06:00) Central Time","bias":-360,"abbr":"CT"},{"id":"65","name":"(GMT -06:00) Mexico City","bias":-360,"abbr":"CST"},{"id":"66","name":"(GMT -06:00) Saskatchewan","bias":-360,"abbr":""},{"id":"60","name":"(GMT -05:00) Bogota, Lima, Quito","bias":-300,"abbr":""},{"id":"61","name":"(GMT -05:00) Eastern Time","bias":-300,"abbr":"ET"},{"id":"62","name":"(GMT -05:00) Indiana - East","bias":-300,"abbr":"ET"},{"id":"84","name":"(GMT -04:30) Caracas","bias":-270,"abbr":""},{"id":"57","name":"(GMT -04:00) Atlantic Time - Canada","bias":-240,"abbr":"AT"},{"id":"58","name":"(GMT -04:00) Caracas, La Paz","bias":-240,"abbr":""},{"id":"59","name":"(GMT -04:00) Santiago","bias":-240,"abbr":""},{"id":"98","name":"(GMT -04:00) Atlantic Time - Puerto Rico","bias":-240,"abbr":"AST"},{"id":"56","name":"(GMT -03:30) Newfoundland","bias":-210,"abbr":""},{"id":"53","name":"(GMT -03:00) Brasilia","bias":-180,"abbr":"BRT"},{"id":"54","name":"(GMT -03:00) Buenos Aires, Georgetown","bias":-180,"abbr":""},{"id":"55","name":"(GMT -03:00) Greenland","bias":-180,"abbr":""},{"id":"86","name":"(GMT -03:00) Argentina","bias":-180,"abbr":"ART"},{"id":"94","name":"(GMT -04:00) Paraguay","bias":-180,"abbr":"PYST"},{"id":"52","name":"(GMT -02:00) Mid-Atlantic","bias":-120,"abbr":""},{"id":"80","name":"(GMT -03:00) Montevideo","bias":-120,"abbr":""},{"id":"1","name":"(GMT +00:00) Casablanca, Monrovia","bias":0,"abbr":""},{"id":"2","name":"(GMT +00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London","bias":0,"abbr":"GMT"},{"id":"92","name":"(GMT +00:00) Morroco","bias":0,"abbr":"WET"},{"id":"3","name":"(GMT +01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna","bias":60,"abbr":"CET"},{"id":"4","name":"(GMT +01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague","bias":60,"abbr":"CET"},{"id":"5","name":"(GMT +01:00) Brussels, Copenhagen, Madrid, Paris","bias":60,"abbr":"CET"},{"id":"6","name":"(GMT +01:00) Sarajevo, Skopje, Sofija, Vilnius, Warsaw, Zagreb","bias":60,"abbr":""},{"id":"7","name":"(GMT +01:00) West Central Africa","bias":60,"abbr":""},{"id":"50","name":"(GMT -01:00) Azores","bias":60,"abbr":""},{"id":"51","name":"(GMT -01:00) Cape Verde Is., Yerevan, Baku, Tbilisi","bias":60,"abbr":""},{"id":"8","name":"(GMT +02:00) Athens, Istanbul, Minsk","bias":120,"abbr":"EET"},{"id":"9","name":"(GMT +02:00) Bucharest","bias":120,"abbr":""},{"id":"10","name":"(GMT +02:00) Cairo","bias":120,"abbr":""},{"id":"11","name":"(GMT +02:00) Harare, Pretoria","bias":120,"abbr":""},{"id":"12","name":"(GMT +02:00) Helsinki, Riga, Tallinn","bias":120,"abbr":"EET"},{"id":"13","name":"(GMT +02:00) Jerusalem","bias":120,"abbr":""},{"id":"78","name":"(GMT +02:00) Amman","bias":120,"abbr":""},{"id":"79","name":"(GMT +02:00) Beirut","bias":120,"abbr":""},{"id":"82","name":"(GMT +02:00) Windhoek","bias":120,"abbr":""},{"id":"85","name":"(GMT +02:00) Turkey","bias":120,"abbr":"EET"},{"id":"95","name":"(GMT +02:00) Syria","bias":120,"abbr":"EET"},{"id":"14","name":"(GMT +03:00) Baghdad","bias":180,"abbr":"AT"},{"id":"15","name":"(GMT +03:00) Kuwait, Riyadh","bias":180,"abbr":"AT"},{"id":"16","name":"(GMT +03:00) Moscow, St. Petersburg, Volgograd","bias":180,"abbr":"MSK"},{"id":"17","name":"(GMT +03:00) Nairobi","bias":180,"abbr":""},{"id":"18","name":"(GMT +03:30) Tehran","bias":180,"abbr":""},{"id":"77","name":"(GMT +03:00) Tbilisi","bias":180,"abbr":""},{"id":"88","name":"(GMT +03:00) Kaliningrad","bias":180,"abbr":"EEST"},{"id":"19","name":"(GMT +04:00) Abu Dhabi, Muscat","bias":240,"abbr":""},{"id":"20","name":"(GMT +04:30) Kabul","bias":240,"abbr":""},{"id":"74","name":"(GMT +04:00) Baku","bias":240,"abbr":""},{"id":"75","name":"(GMT +04:00) Yerevan","bias":240,"abbr":""},{"id":"76","name":"(GMT +04:00) Manaus","bias":240,"abbr":""},{"id":"91","name":"(GMT +04:00) Mauritius","bias":240,"abbr":"MUT"},{"id":"21","name":"(GMT +05:00) Ekaterinburg","bias":300,"abbr":""},{"id":"22","name":"(GMT +05:00) Islamabad, Karachi, Tashkent","bias":300,"abbr":""},{"id":"24","name":"(GMT +05:45) Kathmandu","bias":300,"abbr":""},{"id":"93","name":"(GMT +05:00) Pakistan","bias":300,"abbr":"PKT"},{"id":"23","name":"(GMT +05:30) Calcutta, Chennai, Mumbai, New Delhi","bias":330,"abbr":"IST"},{"id":"27","name":"(GMT +06:00) Sri Jayawardenepura","bias":330,"abbr":""},{"id":"25","name":"(GMT +06:00) Almaty, Novosibirsk","bias":360,"abbr":""},{"id":"26","name":"(GMT +06:00) Astana, Dhaka","bias":360,"abbr":""},{"id":"28","name":"(GMT +06:30) Rangoon","bias":360,"abbr":""},{"id":"87","name":"(GMT +06:00) Bangladesh","bias":360,"abbr":"BST"},{"id":"29","name":"(GMT +07:00) Bangkok, Hanoi, Jakarta","bias":420,"abbr":"ICT"},{"id":"30","name":"(GMT +07:00) Krasnoyarsk","bias":420,"abbr":""},{"id":"31","name":"(GMT +08:00) Beijing, Chongqing, Hong Kong, Urumqi","bias":480,"abbr":"HKT"},{"id":"32","name":"(GMT +08:00) Irkutsk, Ulaan Bataar","bias":480,"abbr":""},{"id":"33","name":"(GMT +08:00) Kuala Lumpur, Singapore","bias":480,"abbr":"SGT"},{"id":"34","name":"(GMT +08:00) Perth","bias":480,"abbr":"WST"},{"id":"35","name":"(GMT +08:00) Taipei","bias":480,"abbr":""},{"id":"96","name":"(GMT +08:00) Ulaanbaatar","bias":480,"abbr":"ULAT"},{"id":"36","name":"(GMT +09:00) Osaka, Sapporo, Tokyo","bias":540,"abbr":"JST"},{"id":"37","name":"(GMT +09:00) Seoul","bias":540,"abbr":"SST"},{"id":"38","name":"(GMT +09:00) Yakutsk","bias":540,"abbr":""},{"id":"40","name":"(GMT +09:30) Darwin","bias":570,"abbr":"CST"},{"id":"41","name":"(GMT +10:00) Brisbane","bias":600,"abbr":"EST"},{"id":"43","name":"(GMT +10:00) Guam, Port Moresby","bias":600,"abbr":""},{"id":"45","name":"(GMT +10:00) Vladivostok","bias":600,"abbr":""},{"id":"39","name":"(GMT +09:30) Adelaide","bias":630,"abbr":"CST"},{"id":"42","name":"(GMT +10:00) Canberra, Melbourne, Sydney","bias":660,"abbr":"EST"},{"id":"44","name":"(GMT +10:00) Hobart","bias":660,"abbr":"EST"},{"id":"46","name":"(GMT +11:00) Magadan, Solomon Is., New Caledonia","bias":660,"abbr":""},{"id":"48","name":"(GMT +12:00) Fiji, Kamchatka, Marshall Is.","bias":720,"abbr":""},{"id":"89","name":"(GMT +12:00) Kamchatka","bias":720,"abbr":"PETT"},{"id":"90","name":"(GMT +12:00) Magadan","bias":720,"abbr":"MAGT"},{"id":"47","name":"(GMT +12:00) Auckland, Wellington","bias":780,"abbr":"NZT"},{"id":"49","name":"(GMT +13:00) Nuku\u0027alofa","bias":780,"abbr":""}]; var userMenu = [{"group":{"url":"MasterCalendar.aspx","title":"Calendar","urlMethod":1,"items":[]}}];//]]>
+    </script>
+    <input id="__VIEWSTATEENCRYPTED" name="__VIEWSTATEENCRYPTED" type="hidden" value=""/>
+    <input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="ynFc9o6Gps9BdLE2oM1nbgjkzl9LITGn8M+CrFKXy7TZJorhOI2ftkbumShtl7vaY/1flxhaiGlxjyop2wB3eh/AFC4="/>
+    <div class="HeaderContainer show-large" id="ctl00_HeaderContainer">
+     <link href="../KSUCustom/Styles/ksuCustom_Default.css" rel="stylesheet"/>
+     <div id="header">
+      <div class="inner_rim">
+       <!-- CHANGE "SMALL" TO SMALL, MEDIUM, LARGE, XLARGE TO SIZE BANNER -->
+       <div class="logo_container small">
+        <div class="top">
+         <a href="../">
+          <div alt="Kennesaw State University" class="logo">
+          </div>
+         </a>
+         <!-- CHANGE PAGE TITLE HERE-->
+         <p class="site_title" style="font-family:Montserrat">
+          <a href="./">
+           KSU Master Calendar
+          </a>
+         </p>
+        </div>
+        <div class="bottom">
+        </div>
+       </div>
+       <div id="header_nav">
+        <ul class="utility">
+         <li id="myksu">
+          <a href="http://www.kennesaw.edu/myksu/">
+           MyKSU
+          </a>
+         </li>
+         <li>
+          <a href="http://www.kennesaw.edu/azindex/">
+           A-Z Index
+          </a>
+         </li>
+         <li>
+          <a href="http://www.kennesaw.edu/directories.php">
+           Directories
+          </a>
+         </li>
+         <li>
+          <a href="http://www.kennesaw.edu/maps/">
+           Campus Maps
+          </a>
+         </li>
+        </ul>
+        <ul class="active">
+         <li class="featured mobile">
+          <a href="http://www.kennesaw.edu/apply.php">
+           Apply
+          </a>
+         </li>
+         <li class="featured mobile">
+          <a href="http://www.kennesaw.edu/visit.php">
+           Visit
+          </a>
+         </li>
+         <li class="featured mobile">
+          <a href="http://www.kennesaw.edu/give.php">
+           Give
+          </a>
+         </li>
+        </ul>
+       </div>
+       <!-- /header utility nav-->
+      </div>
+      <!-- /inner_rim -->
+     </div>
+     <!-- /header -->
+     <div id="gold_bar">
+      <ul id="high_council_chamber">
+       <li id="first_nav_point">
+        <a href="http://www.kennesaw.edu/about.php">
+         About KSU
+        </a>
+       </li>
+       <li>
+        <a href="http://www.kennesaw.edu/academics.php">
+         Academics
+        </a>
+       </li>
+       <li>
+        <a href="http://www.kennesaw.edu/admissions.php">
+         Admissions
+        </a>
+       </li>
+       <li>
+        <a href="http://www.kennesaw.edu/athletics.php">
+         Athletics
+        </a>
+       </li>
+       <li>
+        <a href="http://www.kennesaw.edu/campuslife.php">
+         Campus Life
+        </a>
+       </li>
+       <li>
+        <a href="http://www.kennesaw.edu/research.php">
+         Research
+        </a>
+       </li>
+       <li>
+        <a href="http://www.kennesaw.edu/global.php">
+         Global
+        </a>
+       </li>
+      </ul>
+     </div>
+     <!-- /goldbar -->
+     <div class="no_img" id="banner">
+      <!-- Begin Breadcrumbs Div -->
+      <div class="inner_rim">
+       <ul class="bread_crumb" style="padding:1em;font-size:small;float:right;">
+        <a href="https://reservations.kennesaw.edu/CustomBrowseEvents.aspx?data=fhHcq2BBKMqjwKyiipi1cASzPyKSEPqbjSWIlMTXfL3hX2x2XX%2fyn%2bZnCioy%2fNXfzwZIOVi40pAY7uLX%2b9RynQFa0tSh6Da4BJRzGFJW2ekxeY7TtSCnD%2fcRzA6MW1Lq" target="_blank">
+         Academic Classes
+        </a>
+        |
+        <a href="https://reservations.kennesaw.edu" target="_blank">
+         Request Space
+        </a>
+        |
+        <a href="http://www.kennesaw.edu/directionsparking.php">
+         Directions &amp; Parking
+        </a>
+        |
+        <a href="https://calendar.kennesaw.edu/RSSFeeds.aspx">
+         RSS Feeds
+        </a>
+        |
+        <a class="subscribe">
+         Notifications/iCal Feeds
+        </a>
+       </ul>
+      </div>
+     </div>
+     <!-- End Breadcrumbs Div -->
+     <div>
+     </div>
+     <!-- This is the end of the entire header -->
+     <script type="text/javascript">
+      //if (isLeft) {
+	//	$('.imgBanner').css({ 'margin': '20px -20px 20px -10px' });
+	//}
+
+	$(document).ready(function () {
+		$('.imgBanner').click(function () {
+			document.location.href = 'MasterCalendar.aspx';
+		});
+	});
+     </script>
+    </div>
+    <div class="HeaderContainer1 show-medium show-small" id="HeaderContainer1">
+     <div class="row mc-title-primary">
+      <div class="ml10">
+       KSU Master Calendar
+      </div>
+     </div>
+    </div>
+    <div class="row">
+     <div class="c-wrapper-active fl opacity-medium ml10 pointer help-text-icon" style="width:20px;height:20px" title="Help Text">
+      <div class="icon question" style="margin-left:-3px;margin-top:-2px">
+      </div>
+     </div>
+    </div>
+    <div id="page" style="padding-left:.2em; padding-right:.2em;">
+     <div class="outMessage" id="ctl00_lblOutMessage">
+     </div>
+     <div id="helpDialog">
+      <span class="clear helpDialog" id="ctl00_DefaultHelp">
+      </span>
+     </div>
+     <section class="main">
+      <div class="show-medium show-large" id="breakpointdetect">
+      </div>
+      <div class="show-large" id="fedetect">
+      </div>
+      <div class="row centered">
+       <div class="compatModeMessage" style="display: none">
+        <span>
+         It looks like you have enabled Internet Explorer Compatibility View.
+Master Calendar works best if you turn this off.
+        </span>
+        <span class="dismissCompatMode">
+         Dismiss
+        </span>
+       </div>
+       <div class="fluid three columns show-large filters-main-container">
+        <div style="height: 35px; line-height: 21px; vertical-align: middle; margin-right: 10px">
+         <div class="fr">
+          <div class="font-size-normal mc-color-3 font-weight-bold">
+           <div class="pending-notifications c-wrapper-active fl opacity-full">
+            <div class="fl icon important pointer" title="Pending Events">
+            </div>
+            <span>
+            </span>
+           </div>
+           <div class="login-container">
+            <div class="login-bar fl" style="height:35px;">
+             <div class="fl icon person-male" title="User Name">
+             </div>
+             <div class="fl">
+              <div class="fl pointer" onclick="$(this).next().trigger('click')" onkeypress="$(this).next().trigger('click')">
+               guest
+              </div>
+              <a class="size75 icon75 down75 pointer fl userMenu mt3 ml2" href="#" title="Menu Open/Close Arrow">
+              </a>
+              <span class="ml10 pointer login mt2" id="loginButton">
+              </span>
+              <div class="mc-boxshadow" id="loginForm" style="display: none">
+               <div class="font-size-normal mc-color-1" id="loginMessage">
+               </div>
+               <section class="form login-info" id="secLogin" style="clear: both">
+                <div>
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;clear:both;">
+                  <div>
+                   <label class="fl label-small" for="loginUserID">
+                    User Id
+                   </label>
+                   <input class="ml10 text defaultInvalid fl" id="loginUserID" name="userID" type="text"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;clear:both">
+                  <div>
+                   <label class="fl label-small" for="loginPassword">
+                    Password
+                   </label>
+                   <input autocomplete="off" class="ml10 text defaultInvalid fl" id="loginPassword" name="password" type="password"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="input-wrapper fl br-5 p5 space login-timezone" style="line-height:20px;clear:both">
+                  <div>
+                   <label class="fl label" for="loginTimeZone">
+                    Time zone
+                   </label>
+                   <select class="ml10 ddl-small" id="loginTimeZone" name="loginTimeZone">
+                   </select>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="mt10" style="line-height:20px;clear:both">
+                  <div class="fl mt5 ml20 font-size-normal mc-color-5 pointer email-my-pass">
+                   Email me my password
+                  </div>
+                  <div class="button selected fr br-5 p5" onclick="LoginUser($('#loginUserID').val(), $('#loginPassword').val(), $('#loginTimeZone').val())" onkeypress="LoginUser($('#loginUserID').val(), $('#loginPassword').val(), $('#loginTimeZone').val())" style="line-height:20px;">
+                   <div class="icon key fl">
+                   </div>
+                   Login
+                  </div>
+                  <div class="login-cancel button selected fr br-5 p5 mr10" onclick="$('.login').data('login').close()" onkeypress="$('.login').data('login').close()" style="line-height:20px;">
+                   <div class="icon x fl">
+                   </div>
+                   Cancel
+                  </div>
+                 </div>
+                </div>
+               </section>
+               <section id="secEmailPassword" style="clear: both; display: none">
+                <div class="fl mt20">
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;">
+                  <div>
+                   <label class="fl label-small" for="emailPassword">
+                    Email
+                   </label>
+                   <input class="ml10 text defaultInvalid" id="emailPassword" name="emailPassword" type="text"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="button selected fr br-5 p5 " onclick="EmailMyPassword($('#emailPassword').val());" onkeypress="EmailMyPassword($('#emailPassword').val());" style="line-height:20px;clear:both">
+                  <div class="icon email fl">
+                  </div>
+                  Email Me
+                 </div>
+                 <div class="email-password-cancel button selected fr br-5 p5 mr10" onclick="$('.login').data('login').close()" onkeypress="$('.login').data('login').close()" style="line-height:20px;">
+                  <div class="icon x fl">
+                  </div>
+                  Cancel
+                 </div>
+                </div>
+               </section>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="centered space" id="cal-container">
+         <input class="date" id="inlineCal" min="2004-02-20" title="Calendar Picker" type="date"/>
+        </div>
+        <section>
+         <div class="row centered search-box-small space" style="display:none;">
+          <div class="fl mt20" style="position:relative;z-index:1000">
+           <div class="fl mc-bg-color-5 search-box ml20">
+            <div class="icon loupe centered fl">
+            </div>
+            <div class="fl">
+             <input class="search-box-input mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" placeholder="Search for Events" title="Search for Events" type="text" value=""/>
+            </div>
+            <div class="go fl pl5 pointer">
+             GO
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <section>
+         <div class="row " id="subscribeHolder" style="margin-left:20px">
+          <div style="line-height:20px;vertical-align:middle">
+           <div class="icon star fl" title="Notifications/iCal Feeds">
+           </div>
+           <a class="subscribe font-size-normal">
+            Notifications/iCal Feeds
+           </a>
+          </div>
+         </div>
+        </section>
+        <section class="calendar-types-section">
+         <div class="centered side-box calendar-types" style="margin-top:5px;margin-left:-1px">
+          <div class="side-box-head calendar-side-box-head">
+           <div class="side-box-title fl">
+            Calendars
+           </div>
+           <div class="fr icon down pointer" title="Expand/Collapse Arrow">
+           </div>
+          </div>
+          <div>
+           <div class="p5 font-size-small">
+            <span class="pointer check-all">
+            </span>
+            <span class="fr pointer expand-all">
+            </span>
+           </div>
+          </div>
+          <div class="calendar-types-container">
+          </div>
+         </div>
+        </section>
+        <div class="centered side-box filters-box" style="margin-top: 20px; margin-left: -1px;display:none;">
+         <div class="side-box-head filter-side-box-head space">
+          <div class="side-box-title fl">
+           Filters
+          </div>
+          <div class="fr icon down pointer" title="Expand/Collapse Arrow">
+          </div>
+         </div>
+         <div class="filters-container">
+          <div class="input-wrapper fl br-5 p5 space" id="eventTypeFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_EventTypesLabel">
+              Event Types
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="EventTypesFilter" title="Event Types">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="locationFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_LocationsLabel">
+              Locations
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="LocationsFilter" title="Locations">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="sublocationFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_SubLocationLabel">
+              Rooms
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="SubLocationsFilter" title="Rooms">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="departmentFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_departmentsLabel">
+              Dept/Organizations
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="DepartmentsFilter" title="Dept/Organizations">
+            </select>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="sidebar left">
+         <div class="secondary_nav">
+          <h4 style="border-bottom: 1px solid black;margin-bottom:10px;">
+           General Interest
+          </h4>
+          <ul>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RVn%2b06Si%2bCgbIv0Oa7XM3da1Ib1X1M8uj7PKl7gDVF2XF66ZRNZr3EX%2f4%2bGNnNssI9weiQVuD%2fu5aeubS6k%2fxwfHVi6CEvOeMBlJHZ18CFxXLndB5ajnQlW%2fHdW2CalkwdenxkKJuQDOJwCFyeTRot%2bYHR2CxhcpzfEAKCCkwZRnNrLDg9H2X88JFE6jUsWhMnxDlYk7gQnwPqrPV00988y">
+             Arts &amp; Culture
+            </a>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=LsHn%2bnm71fRjHIIBfF3Nn%2fSdAI6hidfREdWPhUUUofaF3VWS57bH6N%2b5cnksI9SJltGKnwpI%2f0U%3d">
+             KSU Owls Athletics
+            </a>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xH%2f5V8zZWs12jgnX6cimG%2bgr42dANZs%2bzAm3Y9kyXf8%2fgwbpZPP%2fDdisJBmKQdzryEkKRRpvUc7Zw%3d%3d">
+             Academics &amp; Scholarship
+            </a>
+            <div class="plus_wrapper icon close-icon">
+             <span class="vertical">
+             </span>
+             <span class="horizontal">
+             </span>
+            </div>
+            <ul class="second_tier">
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xH%2f5V8zZWs12jgnX6cimG%2bgr42dANZs%2bzAm3Y9kyXf8%2fgwbpZPP%2fDdisJBmKQdzryEkKRRpvUc7Zw%3d%3d">
+               View All
+              </a>
+             </li>
+             <li>
+              <a href="https://www.kennesaw.edu/education/" target="_blank">
+               Bagwell College of Education
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xFAWzCjYYN57ZHy%2fTkUD%2fmz9m6p90bSndm7HS9BfN6guGbdVJeEPKl%2bRFGNzeBzAY3qsZQBEZZkTmkqd%2fnPtX3U%2bF3b87lSS9z0Ryy6E6EppAKek%2b3lOIlO7DsutWrU8OIMoGnhbP8mQzxEw1k%2b2h10fQzMJ%2bK4DS1JjC72FMgV%2fIfzVFzMVYMEF%2b3hhlflZII%3d">
+               Coles College of Business
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xG%2b5z21BMER2pMQxivNsdgKEwy%2fuDJjU3Mi0dgPXBaPgfbdXdF8%2fwMtM61pptNH4BPOgu5tbpqh5wXIqAohw4%2fzeWqvA8IIkMdoxNfqk23WJPF%2flc%2bUSVNog4RbE9n%2fdztQ7ngrikguUn1mDCRW5Q1X4%2bSMeInEAthfjp6OJFdHtCZNuZFdt00r1ut3tX2rrdQ%3d">
+               College of Architecture and Construction Management
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RWZcMdSNq%2bkE2rSus15kplQaaHLj9n8lHdH1RssymMD0REd9yBPcQ%2bhy4spgBFWspJrU219i0mscg%3d%3d">
+               College of the Arts
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=sGPTO%2fCuy5XXIFo1kIx9W8IAezTyR1l7C3EvuCUJsKxluxvTIb9YTQQ%2fSkU1LVpKHUlvUBhaCBzxp5YAunIVK%2bz8thX%2fm5z2rksTrGL%2f3GugSxrMDmMJqCTDEV3I21izZp%2fLuLq2MM6rH0Up%2fgRlCUrN1mMmM29Wagrbay9SBgEfBX8VAz6RR0EK%2fbg0d1Hewj40ZAfTu84%3d">
+               College of Computing and Software Engineering
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=UHcG9WyGjKq2CEP%2f6s1A2cRbdqYEpGfvxIkVbOIIW94ASsCLiO5Vr8ZFgjOZn%2bYhb5hunQ3FOLcKYH5b3H0UpOY9Jjxv9vL7wsUkDUroXZILUCm8OKX9QMzTYnn7uBG7D6AfkeCe1%2bhiXB%2fmPy96RtU4HRu9qkCUs1ujdslGLuWSeL%2f4ISeAj9Uik9%2bXTwRjsMHzYR6OCGo%3d">
+               ITeach
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=FtJxb7VQ2aMYoXl0oEd4SZ%2fhzKuPRJ3CFlV4xOX84AE3RNS1P%2fTwRht4wZ40S9EmWHTiv9Vk73wMhysFwOzws24jhomgWmehGQAoAV2Si%2b64qkI5SU%2fC1QJpMO%2bSuIqI6lNBucoOlohuJpjaBdQbfBlAX%2fZYiwQu%2bL4mlW4bpY7Uh%2fdk8HvFHPSes4bZMZ%2bvAXGYDdcJEuI%3d">
+               Honors College
+              </a>
+             </li>
+             <li>
+              <a href="http://www.kennesaw.edu/col_hhs/" target="_blank">
+               WellStar College of Health &amp; Human Services
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=UHcG9WyGjKp1xK1b%2byuk3ks9hYlVYQoFefte7k0tsAQKJ6BMWTa7lgrm706x3Xmgz0jLLewFLA4%3d">
+               College of Science &amp; Mathematics
+              </a>
+             </li>
+             <li>
+              <a href="http://www.kennesaw.edu/graduate/" target="_blank">
+               Graduate College
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=sGPTO%2fCuy5WbDn4%2fGji6dZtyA3oy15Z%2b81RrCLBgcZr%2bj1zJZ3KRW6G%2fkZoChFi5ao438TFXHRna%2b9k%2fqURefvo%2b43QE%2bNnvYVWsMBu1elfwTlIuVqbF6mLhpyRAD0FMwfrDWQL8G2sGHzIkr7iiOio%2fot0xr3qypktRMDhFZy1ip6HbMXRXCwmPTfoer%2fvX5K1Be8HVEB4%3d">
+               KSU Writing Center
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xGICQChWNETk4hfzC7LWN05qxNLA5GH6c31BArMzMZvnAvpvx1DEiTHeUQhzXZMsL6VCQ%2fvaeqhE6dckD7FyB2SK0ay1gzZbMCd7oXD%2f9KL6BGVA3gkWRi0Nb%2fFiriOEZ%2bCdWWGyMMAzO8%2fWXAR0jU1KEXr%2feP0ues3o3uuwfHNmg2aa%2baVobw2UsOKdGZypLw%3d">
+               Southern Polytechnic College of Engineering and Engineering Technology
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=cr7N8e0fDWPxtRFGt5uA%2f2qGGtJzmXHBRDJFB9C0UdWYZHTudhjCcvHM8lzXlVw0YeDweIxemIk%3d">
+               University College
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RXWZUPjLT8aSqiIefKKUlRl0h17%2fzt4V6F1SAkiFMoyrJ9IXBEwKOAEdSndvOMMegw%3d">
+             Global Engagement &amp; Diversity
+            </a>
+            <div class="plus_wrapper icon close-icon">
+             <span class="vertical">
+             </span>
+             <span class="horizontal">
+             </span>
+            </div>
+            <ul class="second_tier">
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RXWZUPjLT8aSqiIefKKUlRl0h17%2fzt4V6F1SAkiFMoyrJ9IXBEwKOAEdSndvOMMegw%3d">
+               View All
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=LsHn%2bnm71fTbsIotmBA%2bJNdzcmZlw7UjLhdb4etXMAOgG5iffOe%2b%2f%2fxc5u8tIw8w%2bcg9F%2bjBkkY%3d">
+               Diversity &amp; Inclusion
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RXai0wn6jt0COtsgmG8gzveNBpFibAVXihAHUSH2S07ERxWY0Be3dMqhjERYCOHpz0%3d">
+               Global Affairs
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RUeyZKT6jjtwpRR%2fB17XBRg3tGkVUUcwECfeKrLHDLwVTPOkE6JqZf3WHzHX3lB%2f40%3d">
+             Public Interest &amp; Training
+            </a>
+            <div class="plus_wrapper icon close-icon">
+             <span class="vertical">
+             </span>
+             <span class="horizontal">
+             </span>
+            </div>
+            <ul class="second_tier">
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RUeyZKT6jjtwpRR%2fB17XBRg3tGkVUUcwECfeKrLHDLwVTPOkE6JqZf3WHzHX3lB%2f40%3d">
+               View All
+              </a>
+             </li>
+             <li>
+              <a href="http://www.kennesaw.edu/stu_dev/alp/events.shtml" target="_blank">
+               Adult Learner Programs
+              </a>
+             </li>
+             <li>
+              <a href="http://www.kennesaw.edu/conflict/Events.html" target="_blank">
+               Center for Conflict Management
+              </a>
+             </li>
+             <li>
+              <a href="http://ccpe.kennesaw.edu/" target="_blank">
+               College of Continuing &amp; Professional Education
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xHjNlNXQIoLASuFZ%2fq5mUEv0huGwhKuJ%2bFCQzWdJSCSGkGeuQ57aDTOfaHNS65FbtI%3d">
+               Environmental Health &amp; Safety
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RXDtUCv0R2tMo86j%2fe084O6LZx2Qb9UUUg41XSAWidC6r%2fkFdAkEsNhBtuJwd2WLsM%3d">
+               Featured Events
+              </a>
+             </li>
+             <li>
+              <a href="http://www.kennesaw.edu/distancelearning.shtml" target="_blank">
+               Distance Learning Center
+              </a>
+             </li>
+             <li>
+              <a href="https://web.kennesaw.edu/etc/" target="_blank">
+               Educational Technology Center
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xEuUxwMN3rp1Zjl%2fqaD0onyzKKm8T076Gq%2bq%2fwi%2fTxmy6qgjeF2yZ%2fIQHk8DFsAC5Y%3d">
+               KSUTV
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=f1bM4GJyEC65oVcxG0D6S2Fpys%2fNcDTlucvWL574aqC9b6lAwsu82LjIcj%2bIe%2fQqh9biYvb5RQA%3d">
+               Siegel Institute for Leadership, Ethics &amp; Character
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=FtJxb7VQ2aOdbx4wikFqusFxa3wePxjWCKFPha2vupcdR6madOjQjXANK3P2jx2IAQOrV0L7t5FbYN%2bH5GOD%2bk%2fBE8oXeswUSc%2be97EiH5Rfdv9OIBcithTvN2adP2qtJZQi%2f9%2bFU2oyNNB5XxYZQShmWImh1yN9TcxNRZBuQUkqNzqRMn8fn2ja4qxD9bFiv%2fctDnSDmac%3d">
+               Sustainability
+              </a>
+             </li>
+             <li>
+              <a href="http://www.kennesaw.edu/education/trac/" target="_blank">
+               Teacher Resource &amp; Activities Center
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=Ai6R2a1%2f4RWFU2CUfofHP7q0gkvzd2g4iYk218Ura6qMHLtZmbqlQVgzZcK4SlD5L2lPPwLPpPgg1%2fi7WaCsJA%3d%3d">
+             Sports, Recreation &amp; Wellness
+            </a>
+            <div class="plus_wrapper icon close-icon">
+             <span class="vertical">
+             </span>
+             <span class="horizontal">
+             </span>
+            </div>
+            <ul class="second_tier">
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=sGPTO%2fCuy5UU%2bJVRdCeiEMEe7V2EdlbR%2bgzb2j%2bRb7NIfULSEvlWZl6P64M3yUXifzqYgCo6aBZMrBMYrf7MSZ%2bTcMCD2PwMYxj0Qg4BfDBQ2wHGPcdR7dawT0HucpGmpoDM9AY%2boHyazFFEonl2mHg%2bEkhtzzPVViKvEfjKgrAfnsXgcnKaEZW5iASxV2WnzAiwa5ciFoE%3d">
+               Center for Young Adult Addiction &amp; Recovery
+              </a>
+             </li>
+             <li>
+              <a href="http://www.ksuclubsports.com/" target="_blank">
+               Club Sports
+              </a>
+             </li>
+             <li>
+              <a href="http://studentsuccess.kennesaw.edu/wellness/" target="_blank">
+               Health &amp; Wellness
+              </a>
+             </li>
+             <li>
+              <a href="http://www.imleagues.com/School/Home.aspx?SchID=ca1c6716f8a5410780ec2f590318d2ce" target="_blank">
+               Intramural Sports
+              </a>
+             </li>
+             <li>
+              <a href="http://sportsrec.kennesaw.edu/" target="_blank">
+               Recreation Center
+              </a>
+             </li>
+            </ul>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=f1bM4GJyEC74uSbce%2fXDla6UjfGLWzxWLMToiY6HJaT22qxgB87XQQlRMARoSM4EkIKdV4MbUhQMrxkbacW2Kw%3d%3d">
+             Campus Life
+            </a>
+            <div class="plus_wrapper icon close-icon">
+             <span class="vertical">
+             </span>
+             <span class="horizontal">
+             </span>
+            </div>
+            <ul class="second_tier">
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=f1bM4GJyEC74uSbce%2fXDla6UjfGLWzxWLMToiY6HJaT22qxgB87XQQlRMARoSM4EkIKdV4MbUhQMrxkbacW2Kw%3d%3d">
+               View All
+              </a>
+             </li>
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=f1bM4GJyEC6POdvtkcV7PxFflZ5SCTdwd4MmlwV3ZFSU4LDoYwW5r5oj2YD8nYou6ezm5sto4IU%3d">
+               Student Activities
+              </a>
+             </li>
+             <li>
+              <a href="https://owllife.kennesaw.edu">
+               OwlLife
+              </a>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </div>
+         <!-- End General Interest-->
+         <div class="secondary_nav">
+          <h4 style="border-bottom: 1px solid black;margin-bottom:10px;">
+           Enrollment Services
+          </h4>
+          <ul>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=FtJxb7VQ2aOiRFTfPJR0%2bfONwEieuDgM3yOB4iaG3YMqik1hf%2fxKZUCBncP8NKNF1lJkvUxTifsZcsxOKeKxhsVv1X5%2b22Y9sLOibFU1SdgkZXb8ykw6enlqdCudb8qjql3BvMUZouS2LP52xNyiYAhh%2bCc7pZF4MBHYtV%2fqwmd2Tp6ZIn1y6jVxqKfbIAmqa%2b%2bE8fyuJJQ%3d">
+             Academic Calendar
+            </a>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=FtJxb7VQ2aPdM%2fbCmKa%2fRN5%2b21PSb9GZcje7gKY6TieFbvE%2foTlwqVXzqD7n1havG2iWgbvNsw232246CzvvQSvFx5YgtG0tPEBUq3rUASFPfRiC0YIewKODcFuRnn7y1NXPsA2bX4fAlH31goQgZYctulwY0g04tkQVDZberwD94dQmn31ln4slOBQPhnNjzQijDtDELgM%3d">
+             Enrollment Services
+            </a>
+           </li>
+          </ul>
+         </div>
+         <!-- End Enrollment Services -->
+         <div class="secondary_nav">
+          <h4 style="border-bottom: 1px solid black;margin-bottom:10px;">
+           Faculty &amp; Staff
+          </h4>
+          <ul>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=FtJxb7VQ2aPNeWAFnMTx9HTrBP6qotRC48TZJ319mC0W%2fKBLvMog%2fVZcTMgeZoBv3%2foLMLftrMc%3d">
+             Center for University Learning
+            </a>
+           </li>
+           <li>
+            <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=gr3zOeO%2f2xFzrNnhFeMteWraQMoQUWRkozbWBk7Q9deTK75FryAg64zzTrEGLWWw6MxPJzL57ZA%3d">
+             CETL
+            </a>
+           </li>
+           <li>
+            <a href="#">
+             Human Resources
+            </a>
+            <div class="plus_wrapper icon close-icon">
+             <span class="vertical">
+             </span>
+             <span class="horizontal">
+             </span>
+            </div>
+            <ul class="second_tier">
+             <li>
+              <a href="https://calendar.kennesaw.edu/MasterCalendar.aspx?data=sGPTO%2fCuy5WRfDP4ysO%2fF3OmJ0UVlpFKc118ZBHi2evgjhM%2beBzF3sB3GkP5w1j8LxDDOWiiTyqNxFyWaz%2fKihvsNHphUyAonBdn9Np2MWwbOfkhjZz3xQbeuDIkL2W8ES2XoneBHhq9pMq00rpdhgVLADTU6GSysRcbhug59ua2AHmnROlAhRMnGBMmawPQOThoR15E9D8%3d">
+               Human Resources
+              </a>
+             </li>
+             <li>
+              <a href="http://hr.kennesaw.edu/employees/holidays.php" target="_blank">
+               Holiday Calendar
+              </a>
+             </li>
+             <li>
+              <a href="http://payroll.kennesaw.edu/calendars.php" target="_blank">
+               Payroll Calendar
+              </a>
+             </li>
+            </ul>
+           </li>
+          </ul>
+         </div>
+         <!-- End Enrollment Services -->
+        </div>
+        <!-- /sidebar -->
+        <!-- /sidebar -->
+       </div>
+       <!-- ---------------- THIS CODE MUST STAY -------------- -->
+       <!-- Search -->
+       <section>
+        <div class="fluid search-results nine columns">
+         <div class="row" style="display:none;">
+          <div class="show-small show-medium mt10">
+          </div>
+          <div class="fr pointer back-to-events" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:10px;">
+           <div class="c-wrapper-active fl opacity-full">
+            <div class="fl icon back" title="Back to Calendar">
+            </div>
+           </div>
+           <div class="fl pl6 font-size-normal mc-color-3 font-weight-bold">
+            Back to Calendar
+           </div>
+          </div>
+          <div class="row pl6 mc-title-primary mc-boxshadow br-5" style="margin-bottom:10px;display:block">
+           Search Results
+          </div>
+          <div class="row space">
+           <div class="column three po fl">
+            <label class="fl" for="startDate">
+             From:
+            </label>
+            <div class="fl" id="sdCal-container">
+             <input class="fl" id="startDate" type="text"/>
+            </div>
+           </div>
+           <div class="column three po fl">
+            <label class="fl" for="endDate">
+             To:
+            </label>
+            <div class="fl" id="edCal-container">
+             <input class="fl" id="endDate" type="text"/>
+            </div>
+           </div>
+           <div class="column six po">
+            <div class="row centered search-box-large fl" style="display:block;">
+             <div class="fl" style="position:relative;z-index:1000;">
+              <div class="fl mc-bg-color-5 search-box ml20">
+               <div class="icon loupe pointer centered fl" title="Search">
+               </div>
+               <div class="fl">
+                <input aria-labeledby="largeSearchBox" class="search-box-input mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" id="largeSearchBox" placeholder="Search for Events" style="width:200px" title="Search for Events" type="text" value=""/>
+               </div>
+               <div class="go fl pl5 pointer">
+                GO
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </section>
+       <div class="fluid events nine columns" style="display:block">
+        <div class="row login-fluid show-small show-medium ">
+         <div class="twelve column mt5 mb5">
+          <div class="fr login-fluid-container">
+          </div>
+         </div>
+        </div>
+        <!-- BEGIN - Featured Events -->
+        <div class="show-large" id="feHolder">
+         <div class="row pl6 mc-title-primary mc-boxshadow br-5" style="margin-bottom:10px;display:block">
+          <div class="fl" id="ctl00_pc_FeaturedEventsLabel">
+           Featured Events
+          </div>
+          <div class="fr icon down pointer" onclick="UpDown(this,'.fetured-events-content')" onkeypress="UpDown(this,'.fetured-events-content')" style="margin-top:5px;" title="Expand/Collapse Arrow">
+          </div>
+         </div>
+         <section class="fetured-events space">
+          <div class="fetured-events-content fetured-events-content-horizontal-1" style="display:block;">
+           <div class="row box mc-bg-color-1 mc-border-style-solid mc-border-color-5 mc-border-width-3px p10">
+            <div class="row content p10">
+             <!-- Viewer Row -->
+             <div class="six columns scroller-image">
+              <!--Image Container-->
+             </div>
+             <div class="six columns scroller-text">
+              <h1 class="mc-color-3 font-size-Xlarge font-weight-bold space scroller-text-title pointer">
+              </h1>
+              <div style="overflow:auto;max-height:85px;margin-bottom:15px">
+               <p class="mc-color-4 font-size-normal space scroller-text-description" style="text-overflow:ellipsis">
+               </p>
+              </div>
+              <div class="mc-color-4 font-size-small font-weight-bold scroller-text-info">
+               <div class="info-date">
+               </div>
+               <div class="info-time">
+               </div>
+               <div class="info-location">
+               </div>
+              </div>
+              <div class="mc-color-4 font-size-normal space m4 pointer scroller-text-more">
+               more
+              </div>
+             </div>
+             <div class="scroller-playback-controls">
+              <div class="c-wrapper-active fl">
+               <div class="icon pointer play fl" title="Play">
+               </div>
+              </div>
+              <div class="c-wrapper-inactive fl">
+               <div class="icon pointer pause fl" title="Pause">
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="row scroller-control mc-bg-color-5">
+            <div class="fl mc-border-color-2 mc-border-style-solid mc-border-width-1px scroller">
+             <div class="prev-next pointer prev-item" title="Previous">
+             </div>
+             <div class="prev-group prev-group-img pointer" title="Previous Group">
+             </div>
+            </div>
+            <div class="fl items mc-color-4">
+             <div class="items-scroller" style="height:inherit;position:relative;">
+             </div>
+            </div>
+            <div class="fr mc-border-color-2 mc-border-style-solid mc-border-width-1px scroller">
+             <div class="prev-next pointer next-item" title="Next">
+             </div>
+             <div class="next-group next-group-img pointer" title="Next Group">
+             </div>
+            </div>
+           </div>
+          </div>
+         </section>
+        </div>
+        <!-- END - Featured Events -->
+        <!-- BEGIN KSU Content -->
+        <div class="content">
+         <!-- BEGIN - Events Feed -->
+         <div id="events">
+          <h1>
+           Upcoming Events
+          </h1>
+          <input id="ctl00_pc_ncUpcomingEventsS" name="ctl00_pc_ncUpcomingEventsS" type="hidden" value="0;8"/>
+          <script id="dxis_426507893" src="/DXR.axd?r=1_32-gwVNa" type="text/javascript">
+          </script>
+          <script id="dxis_426467798" src="/DXR.axd?r=1_35-gwVNa" type="text/javascript">
+          </script>
+          <script id="dxis_1061978343" src="/DXR.axd?r=1_47-gwVNa" type="text/javascript">
+          </script>
+          <script id="dxss_1423342349" type="text/javascript">
+           <!--
+window.__aspxServerFormID = 'aspnetForm';
+window.__aspxEmptyImageUrl = '/DXR.axd?r=1_3-gwVNa';
+//-->
+          </script>
+          <script id="dxss_463073712" type="text/javascript">
+           <!--
+var __dxLastScrollY = -1;
+function backtotop(anchorStr, offsetY){
+  scrollY = (document.documentElement.scrollTop || document.body.scrollTop);
+  if (__dxLastScrollY != scrollY){
+    location.href=anchorStr;
+    scrollX = (document.documentElement.scrollLeft || document.body.scrollLeft);
+    scrollY = (document.documentElement.scrollTop || document.body.scrollTop);
+    __dxLastScrollY = scrollY - offsetY;
+    window.scrollTo(scrollX, __dxLastScrollY);
+  }
+}
+
+//-->
+          </script>
+          <div style="padding:0px;">
+           <a name="ctl00_pc_ncUpcomingEvents_BT">
+            <font size="1">
+            </font>
+           </a>
+          </div>
+          <table border="0" cellpadding="0" cellspacing="0" class="dxncControl" id="ctl00_pc_ncUpcomingEvents" width="90%">
+           <tr>
+            <td class="dxncCtrl" id="ctl00_pc_ncUpcomingEvents_CCell" style="vertical-align:top;">
+             <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;" width="100%">
+              <tr>
+               <td class="dxncContent" id="ctl00_pc_ncUpcomingEvents_ICell">
+                <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+                 <tr>
+                  <td align="left" class="dxncItem" style="vertical-align:Top;">
+                   <table border="0" cellpadding="0" cellspacing="0" id="ctl00_pc_ncUpcomingEvents_ctl09" style="border-collapse:separate;" width="100%">
+                    <tr>
+                     <td valign="top" width="100%">
+                      <div class="dxncItemDate" style="text-align:Left;margin-bottom:9px;">
+                       <font size="5">
+                        3/10/2019
+                       </font>
+                      </div>
+                      <div class="dxncItemHeader" style="margin-bottom:3px;">
+                       <b>
+                        Softball Game
+                       </b>
+                      </div>
+                      <div class="dxncItemContent" style="border-bottom-color:#E5E5E5;border-bottom-style:Solid;border-bottom-width:1px;vertical-align:Top;padding-bottom:20px;line-height:20px;">
+                       8:00 AM to 10:00
+                       <span style="white-space:nowrap;">
+                        PM
+                        <span class="dxhl">
+                         <a class="dxhl" href="https://calendar.kennesaw.edu/EventDetails.aspx?data=hHr80o3M7J7Bj9HIVATaRjj3Go64lNgkAR4haE%2ffuAShmp4rgSqZAwH6qQL1PbUW">
+                          Details
+                         </a>
+                        </span>
+                       </span>
+                      </div>
+                     </td>
+                    </tr>
+                   </table>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td height="20">
+                   <div style="overflow:hidden;">
+                   </div>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td align="left" class="dxncItem" style="vertical-align:Top;">
+                   <table border="0" cellpadding="0" cellspacing="0" id="ctl00_pc_ncUpcomingEvents_ctl11" style="border-collapse:separate;" width="100%">
+                    <tr>
+                     <td valign="top" width="100%">
+                      <div class="dxncItemDate" style="text-align:Left;margin-bottom:9px;">
+                       <font size="5">
+                        3/11/2019
+                       </font>
+                      </div>
+                      <div class="dxncItemHeader" style="margin-bottom:3px;">
+                       <b>
+                        MAcc Lunch
+                       </b>
+                      </div>
+                      <div class="dxncItemContent" style="border-bottom-color:#E5E5E5;border-bottom-style:Solid;border-bottom-width:1px;vertical-align:Top;padding-bottom:20px;line-height:20px;">
+                       10:00 AM to 2:00
+                       <span style="white-space:nowrap;">
+                        PM
+                        <span class="dxhl">
+                         <a class="dxhl" href="https://calendar.kennesaw.edu/EventDetails.aspx?data=hHr80o3M7J4CdoayxiZyPSfFm14Z8jK2RgBx%2bq7aN1LK0SXXRxO0NR9FMmf71o%2bn">
+                          Details
+                         </a>
+                        </span>
+                       </span>
+                      </div>
+                     </td>
+                    </tr>
+                   </table>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td height="20">
+                   <div style="overflow:hidden;">
+                   </div>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td align="left" class="dxncItem" style="vertical-align:Top;">
+                   <table border="0" cellpadding="0" cellspacing="0" id="ctl00_pc_ncUpcomingEvents_ctl13" style="border-collapse:separate;" width="100%">
+                    <tr>
+                     <td valign="top" width="100%">
+                      <div class="dxncItemDate" style="text-align:Left;margin-bottom:9px;">
+                       <font size="5">
+                        3/11/2019
+                       </font>
+                      </div>
+                      <div class="dxncItemHeader" style="margin-bottom:3px;">
+                       <b>
+                        Geek Week- Kickoff Event
+                       </b>
+                      </div>
+                      <div class="dxncItemContent" style="border-bottom-color:#E5E5E5;border-bottom-style:Solid;border-bottom-width:1px;vertical-align:Top;padding-bottom:20px;line-height:20px;">
+                       1:00 PM to 3:00
+                       <span style="white-space:nowrap;">
+                        PM
+                        <span class="dxhl">
+                         <a class="dxhl" href="https://calendar.kennesaw.edu/EventDetails.aspx?data=hHr80o3M7J7gGqhQ%2bHufiN5r5A1YUh7cuM7o91HhDLoU8dwYo5%2bIjWkR%2foQU1cp3">
+                          Details
+                         </a>
+                        </span>
+                       </span>
+                      </div>
+                     </td>
+                    </tr>
+                   </table>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td height="20">
+                   <div style="overflow:hidden;">
+                   </div>
+                  </td>
+                 </tr>
+                 <tr>
+                  <td align="left" class="dxncItem" style="vertical-align:Top;">
+                   <table border="0" cellpadding="0" cellspacing="0" id="ctl00_pc_ncUpcomingEvents_ctl15" style="border-collapse:separate;" width="100%">
+                    <tr>
+                     <td valign="top" width="100%">
+                      <div class="dxncItemDate" style="text-align:Left;margin-bottom:9px;">
+                       <font size="5">
+                        3/11/2019
+                       </font>
+                      </div>
+                      <div class="dxncItemHeader" style="margin-bottom:3px;">
+                       <b>
+                        Geek Week- Kickoff Event (Marietta)
+                       </b>
+                      </div>
+                      <div class="dxncItemContent" style="border-bottom-color:#E5E5E5;border-bottom-style:Solid;border-bottom-width:1px;vertical-align:Top;padding-bottom:20px;line-height:20px;">
+                       5:30 PM to 7:30
+                       <span style="white-space:nowrap;">
+                        PM
+                        <span class="dxhl">
+                         <a class="dxhl" href="https://calendar.kennesaw.edu/EventDetails.aspx?data=hHr80o3M7J7W0crOb7xInfTxwSsik4FsdfjdohuT%2bS9078cmJ3f5xYox4h9bzLhv">
+                          Details
+                         </a>
+                        </span>
+                       </span>
+                      </div>
+                     </td>
+                    </tr>
+                   </table>
+                  </td>
+                 </tr>
+                </table>
+               </td>
+              </tr>
+              <tr>
+               <td class="dxncPPSpacing" height="12">
+               </td>
+              </tr>
+              <tr>
+               <td align="left" class="dxncPagerPanel">
+                <table border="0" cellpadding="0" cellspacing="0" class="dxpControl" id="ctl00_pc_ncUpcomingEvents_PGB" style="border-collapse:separate;">
+                 <tr>
+                  <td class="dxpCtrl">
+                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse:separate;">
+                    <tr>
+                     <td class="dxpSummary" nowrap="nowrap">
+                      Page:
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber dxpCurrentPageNumber">
+                      [1]
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN1')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       2
+                      </a>
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN2')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       3
+                      </a>
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN3')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       4
+                      </a>
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN4')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       5
+                      </a>
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN5')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       6
+                      </a>
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN6')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       7
+                      </a>
+                     </td>
+                     <td width="4">
+                      <div style="overflow:hidden;">
+                      </div>
+                     </td>
+                     <td class="dxpPageNumber" onclick="aspxDVPagerClick('ctl00_pc_ncUpcomingEvents', 'PN7')" style="cursor:pointer;">
+                      <a href="javascript:;" style="cursor:pointer;">
+                       8
+                      </a>
+                     </td>
+                    </tr>
+                   </table>
+                  </td>
+                 </tr>
+                </table>
+               </td>
+              </tr>
+             </table>
+            </td>
+           </tr>
+          </table>
+          <table border="0" cellpadding="0" cellspacing="0" class="dxncLoadingPanel" id="ctl00_pc_ncUpcomingEvents_LP" style="left:0px;top:0px;z-index:30000;display:none;">
+           <tr>
+            <td class="dx" style="padding-right:8px;">
+             <img align="middle" alt="" border="0" src="/DXR.axd?r=1_6-gwVNa"/>
+            </td>
+            <td class="dx" style="padding-left:0px;">
+             Loading…
+            </td>
+           </tr>
+          </table>
+          <script id="dxss_528115852" type="text/javascript">
+           <!--
+
+var dxo = new ASPxClientNewsControl('ctl00_pc_ncUpcomingEvents');
+window['ctl00_pc_ncUpcomingEvents'] = dxo;
+dxo.callBack = function(arg) { WebForm_DoCallback('ctl00$pc$ncUpcomingEvents',arg,aspxCallback,'ctl00_pc_ncUpcomingEvents',aspxCallbackError,true); };
+dxo.uniqueID = 'ctl00$pc$ncUpcomingEvents';
+dxo.InlineInitialize();
+
+//-->
+          </script>
+         </div>
+         <!-- END - Events Feed -->
+        </div>
+        <!-- END KSU Content -->
+        <!-- BEGIN Search Fluid -->
+        <div class="row search-fluid centered show-small show-medium space" style="margin-top:10px;">
+         <div class="twelve column centered">
+          <div class="mc-bg-color-5 search-box fl">
+           <div class="icon loupe pointer centered fl">
+           </div>
+           <div class="fl">
+            <input aria-labeledby="smallSearchBox" class="search-box-input-fluid mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" id="smallSearchBox" placeholder="Search for Events" style="width:200px" title="Search for Events" type="text" value=""/>
+           </div>
+           <div class="go fl pl5 pointer">
+            GO
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- END Search Fluid -->
+       </div>
+      </div>
+      <div class="row centered" style="display:none">
+       <div class="twelve columns">
+        <div class="centered">
+         Footer
+        </div>
+       </div>
+      </div>
+     </section>
+     <div class="center" id="PageLinksContainer">
+      <div class="centerRow">
+       <a href="CalendarManagers.aspx" id="ctl00_CalendarManagersLink" target="_blank">
+        Calendar Managers
+       </a>
+       <span id="linkSeperator">
+        |
+       </span>
+       <a href="RSSFeeds.aspx" id="ctl00_RssFeedsLink" target="_blank">
+        RSS Feeds
+       </a>
+      </div>
+     </div>
+     <div class="footer" id="FooterContainer">
+      <div id="footer">
+       <div class="inner_rim">
+        <div class="footer_columns">
+         <div class="contact_info" id="contact_info">
+          <h1>
+           University Contact Info
+          </h1>
+          <div class="kennesaw_campus">
+           <h2>
+            Kennesaw Campus
+           </h2>
+           <p>
+            1000 Chastain Road
+            <br/>
+            Kennesaw, GA 30144
+            <br/>
+            Phone: 470-578-6000
+           </p>
+          </div>
+          <div class="marietta_campus">
+           <h2>
+            Marietta Campus
+           </h2>
+           <p>
+            1100 South Marietta Pkwy
+            <br/>
+            Marietta, GA 30060
+            <br/>
+            Phone: 678-915-7778
+           </p>
+          </div>
+         </div>
+        </div>
+        <!-- /footer_columns -->
+        <hr class="meta_separator"/>
+        <div class="copyright">
+         <p>
+          ©
+          <span id="copyright-full-year">
+          </span>
+          Kennesaw State University. All Rights Reserved.
+         </p>
+        </div>
+        <script>
+         var d = new Date();
+                   document.getElementById("copyright-full-year").innerHTML = d.getFullYear();
+        </script>
+       </div>
+      </div>
+      <!-- /footer -->
+     </div>
+     <div class="callbackStatus" id="CallbackStatus" style="display: none; z-index: 2100">
+      <img alt="Loading" border="0" id="ctl00_LoadingImage" src="Images/Loading.gif" title="Loading"/>
+      <span id="ctl00_LoadingText">
+       Loading
+      </span>
+     </div>
+    </div>
+    <div class="br-10" id="helpTextDialog">
+     <div class="header pl6">
+      <span>
+       Help Text
+      </span>
+     </div>
+     <div class="p10" style="clear:both;">
+      <div class="fl pointer pr10 edit-Help-Link" style="display:none;">
+       <a>
+        Edit
+       </a>
+      </div>
+      <span class="helpTextMessage fl">
+      </span>
+     </div>
+    </div>
+    <script type="text/javascript">
+     //<![CDATA[
+var hidefilters = false;pageCount = "0";mc_useHelpIcon = 0;//]]>
+    </script>
+   </form>
+  </div>
+ </body>
+</html>

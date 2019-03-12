@@ -1,0 +1,1166 @@
+http://calendar.ung.edu
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="no-cache" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<html class="no-js" lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:wairole="http://www.w3.org/2005/01/wai-rdf/GUIRoleTaxonomy#" xmlns:waistate="http://www.w3.org/2005/07/aaa">
+ <head id="ctl00_Head1">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+   <meta content="NO-CACHE" http-equiv="CACHE-CONTROL">
+    <meta content="no-cache" http-equiv="Pragma">
+     <meta content="en" http-equiv="Content-Language">
+      <title>
+       :: Master Calendar ::
+      </title>
+      <link href="favicon.ico" rel="icon" type="image/x-icon"/>
+      <link href="ShortcutIcon.ico" rel="shortcut icon" type="image/x-icon"/>
+      <style type="text/css">
+       #HeaderContainer h1{margin-top:5em;margin-left:40%;margin-right:40%;}
+        #PageLinksContainer {clear:both;margin-top:2em;bottom:1%;width: 100%;text-align: center;}
+        #FooterContainer{clear:both;margin-top:2em;bottom:1%;width: 100%;text-align: center;}
+        /*our footer text*/
+        .footer{font-size: smaller;color: #225d92;}
+        .callbackStatus{border:black thin solid;background-color: #fff8dc;}
+        div#CallbackStatus{position:fixed;clear:both;margin-top:.4em;padding:.5em;width:12em;}
+        div.centerRow{clear: both;text-align: center;}
+        @media screen
+        {
+            /*Centers the header (things above the menu) at the top of the page*/
+            .HeaderContainer
+            {
+                clear:both;
+	            width: 100%;
+	            text-align:center;
+            }
+        }
+        @media Print
+        {
+            .HeaderContainer
+            {
+                display:none;	
+            }
+        }
+      </style>
+      <link href="Styles/Calendar/dynamiccss.ashx" rel="stylesheet" type="text/css"/>
+      <script src="Includes/modernizr.custom.70372.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery-1.9.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery-ui-1.10.2.custom.min.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.tools.min.js" type="text/javascript">
+      </script>
+      <script src="Includes/json.js" type="text/javascript">
+      </script>
+      <script src="Includes/Globals.js" type="text/javascript">
+      </script>
+      <script src="Includes/Common.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.validate.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.mc.user.menu-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.mc.login-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/Utilities.js" type="text/javascript">
+      </script>
+      <script type="text/javascript">
+       $(document).ready(function () {
+            if (helpTextMsg != '' || showHelpEdit) {
+                $('.help-text-icon').click(function () {
+                    openHelpText();
+                });
+                if (showHelpEdit) {
+                    $('.edit-Help-Link').show();
+                    $('.edit-Help-Link').click(function () {
+                        if(helpTextEditLink != '')
+                            document.location.href = helpTextEditLink;
+                    });
+                }
+            }
+            else {
+                $('.help-text-icon').hide();
+            }
+
+        });
+        function openHelpText() {
+            $('#helpTextDialog').modal({
+                closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
+                position: ["20%", ],
+                overlayId: 'helpText-overlay',
+                containerId: 'helpText-container',
+                onShow: function (dialog) {
+                    var modal = this;
+                    $('.helpTextMessage').append(helpTextMsg);
+                }
+            });
+        }
+      </script>
+      <link href="Styles/Calendar/eventgrid.css" rel="stylesheet"/>
+      <script src="Includes/Calendar/fluidgrid.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.ticker.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/html5placeholder.jquery.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/search.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.features.scoller-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/knockout-2.2.1.debug.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/knockout.mapping-latest.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/ko.lib.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/SideBySideKOViewModel.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.simplemodal.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.simplemodal-osx.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.print.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.group.box-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.dropdown.multiselect.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/jquery.mousedown.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/event-list-ko-viewmodel.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/DateFormat.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.eventlist.accordion-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.curtain-01.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.tooltip.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.eventgrid-0.1.js" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/event-curtains-data-ko-viewmodel.js" type="text/javascript">
+      </script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5220ba9a39b147c7" type="text/javascript">
+      </script>
+      <script src="Includes/Calendar/dea.special.dates-0.1.js" type="text/javascript">
+      </script>
+      <script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false" type="text/javascript">
+      </script>
+      <link href="/MasterCalendar/Styles/Custom.css" media="all" rel="Stylesheet" type="text/css"/>
+     </meta>
+    </meta>
+   </meta>
+  </meta>
+ </head>
+ <body class="mc-bg-color-2" id="mcBody">
+  <div class="mcCon" id="mcCon">
+   <noscript>
+    Master Calendar requires Javascript to be supported and enabled.
+   </noscript>
+   <form action="/mastercalendar/MasterCalendar.aspx" id="aspnetForm" method="post" name="aspnetForm">
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="fgMK2jB1lL1hRrJ0M5kJNdefHpj2W/51ompzWWl+OhuqBhfJspstGYjSPFcSJYG2snk/7zVlqwci3aC0Jz689MPMcKY="/>
+    <script type="text/javascript">
+     //<![CDATA[
+var announcementTxt = "Announcements";var featuredFeedTxt = "Featured Events";var checkAllTxt = "Check All";var expandAllTxt = "Expand All";var uncheckAllTxt = "Uncheck All";var collapseAllTxt = "Collapse All";var viewTxt = "View";var monthTxt = "Month";var yearTxt = "Year";var prevTxt = "Previous";var nextTxt = "Next";var alertTxt = "Alert";var showWeekends = true;var startWeekOn = 0;var displayView = 1;var displayFormat = 1;var listType = 1;var startdateInvalidmsg = "Start date must be earlier than end date.";var blinkPendingApproval = false;var pendingApprovalCount = 0;var pendingApprovaltxt = "Event(s) Pending Approval";var showAddEvent = false;var multipleSelectedtxt = "(Multiple Selected)";var selectMultipletxt = "Select Multiple";var allText = "(all)";var useSubLocation = true;var showFeaturedEvents = false;var showTimezonePicker = true;var expandCalendars = true;var noSpecialDatesMsg = "There are no special dates for the date selected.";var specialDatesTxt = "Special Dates";var calTimeStamp = '05fe7accb5b0467f988c27b32e558c44';var collaspeFilters = false;var tickerDelay = 10000;var helpTextEditLink = "/MasterCalendar/EditWebText.aspx?data=DDKzQnfoMIkKQQPSXGYI974KMnEbnY6ej%2bVgYsXSr1Q0F28%2fSstE0o038yP%2byxAkzHHGvk%2btSNg%3d"; var announcement = []; var events = [];var calendars = [{"Id":36,"Name":"Academic Calendar","Selected":0},{"Id":23,"Name":"All FacStaff Events","Selected":0},{"Id":33,"Name":"All Student Events","Selected":0},{"Id":32,"Name":"All UNG Public Events","Selected":0},{"Id":40,"Name":"Blue Ridge Public Events","Selected":0},{"Id":41,"Name":"Blue Ridge Student Events","Selected":0},{"Id":34,"Name":"Continuing Education","Selected":0},{"Id":27,"Name":"Cumming Public Events","Selected":0},{"Id":30,"Name":"Cumming Student Events","Selected":0},{"Id":25,"Name":"Dahlonega Public Events","Selected":0},{"Id":24,"Name":"Dahlonega Student Events","Selected":0},{"Id":26,"Name":"Gainesville Public Events","Selected":0},{"Id":29,"Name":"Gainesville Student Events","Selected":0},{"Id":42,"Name":"Important Student Dates","Selected":0},{"Id":28,"Name":"Oconee Public Events","Selected":0},{"Id":31,"Name":"Oconee Student Events","Selected":0},{"Id":37,"Name":"P&T \/ Academic Admin.","Selected":0},{"Id":35,"Name":"UNG Athletics","Selected":0}];var groupBoxData = [{"expanded":true,"checked":false,"text":"Public Events","id":5,"items":[{"checked":false,"text":"Academic Calendar","id":36,"isCalendar":true,"link":""},{"checked":true,"text":"All UNG Public Events","id":32,"isCalendar":true,"link":""},{"checked":false,"text":"Blue Ridge Public Events","id":40,"isCalendar":true,"link":""},{"checked":false,"text":"Cumming Public Events","id":27,"isCalendar":true,"link":""},{"checked":false,"text":"Dahlonega Public Events","id":25,"isCalendar":true,"link":""},{"checked":false,"text":"Gainesville Public Events","id":26,"isCalendar":true,"link":""},{"checked":false,"text":"Oconee Public Events","id":28,"isCalendar":true,"link":""},{"checked":false,"text":"UNG Athletics","id":35,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Student Calendars","id":4,"items":[{"checked":false,"text":"All Student Events","id":33,"isCalendar":true,"link":""},{"checked":false,"text":"Blue Ridge Student Events","id":41,"isCalendar":true,"link":""},{"checked":false,"text":"Cumming Student Events","id":30,"isCalendar":true,"link":""},{"checked":false,"text":"Dahlonega Student Events","id":24,"isCalendar":true,"link":""},{"checked":false,"text":"Gainesville Student Events","id":29,"isCalendar":true,"link":""},{"checked":false,"text":"Important Student Dates","id":42,"isCalendar":true,"link":""},{"checked":false,"text":"Oconee Student Events","id":31,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Community Calendars","id":2,"items":[{"checked":false,"text":"Continuing Education","id":34,"isCalendar":true,"link":""}]},{"expanded":true,"checked":false,"text":"Faculty &amp; Staff Calendars","id":6,"items":[{"checked":false,"text":"All FacStaff Events","id":23,"isCalendar":true,"link":""},{"checked":false,"text":"P&amp;T / Academic Admin.","id":37,"isCalendar":true,"link":""}]}];var specialDates = [];
+var displayView = 1;var displayFormat = 1;var listType = 1;var keyWord = "";var eventGridData = [{"EventDate":"3/10/2019","Total":0,"Events":[{"Id":203480,"EventId":79071,"Title":"UNG University of North Georgia Men\u0027s Tennis vs Northwood University","Notes":null,"Description":"UNG University of North Georgia Men\u0027s Tennis vs Northwood University","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/10/2019 12:00:00 AM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-300,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203479,"EventId":79070,"Title":"UNG University of North Georgia Women\u0027s Basketball vs Peach Belt Championship","Notes":null,"Description":"UNG University of North Georgia Women\u0027s Basketball vs Peach Belt Championship","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/10/2019 12:00:00 AM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-300,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203481,"EventId":79072,"Title":"UNG University of North Georgia Women\u0027s Tennis vs Northwood University","Notes":null,"Description":"UNG University of North Georgia Women\u0027s Tennis vs Northwood University","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/10/2019 12:00:00 AM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-300,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203482,"EventId":79073,"Title":"UNG University of North Georgia Softball vs University of West Florida","Notes":null,"Description":"UNG University of North Georgia Softball vs University of West Florida","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/10/2019 12:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203483,"EventId":79074,"Title":"UNG University of North Georgia Baseball vs USC Aiken","Notes":null,"Description":"UNG University of North Georgia Baseball vs USC Aiken","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/10/2019 1:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203484,"EventId":79075,"Title":"UNG University of North Georgia Softball vs Wingate University","Notes":null,"Description":"UNG University of North Georgia Softball vs Wingate University","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/10/2019 2:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552194000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]},{"EventDate":"3/11/2019","Total":0,"Events":[{"Id":148381,"EventId":52218,"Title":"Spring Break (no classes)","Notes":null,"Description":"","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#457c80","EventTypeName":null,"EventType":"Spring 2019","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/11/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552276800000)\/"},"Location":{"Id":0,"Name":"","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203485,"EventId":79076,"Title":"UNG University of North Georgia Women\u0027s Golf  Peggy Kirk Bell Invitational","Notes":null,"Description":"UNG University of North Georgia Women\u0027s Golf  Peggy Kirk Bell Invitational","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/11/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552276800000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]},{"EventDate":"3/12/2019","Total":0,"Events":[{"Id":148382,"EventId":52218,"Title":"Spring Break (no classes)","Notes":null,"Description":"","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#457c80","EventTypeName":null,"EventType":"Spring 2019","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/12/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552363200000)\/"},"Location":{"Id":0,"Name":"","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203486,"EventId":79077,"Title":"UNG University of North Georgia Men\u0027s Tennis vs University of Texas at Tyler","Notes":null,"Description":"UNG University of North Georgia Men\u0027s Tennis vs University of Texas at Tyler","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/12/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552363200000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203487,"EventId":79078,"Title":"UNG University of North Georgia Women\u0027s Tennis vs University of Texas at Tyler","Notes":null,"Description":"UNG University of North Georgia Women\u0027s Tennis vs University of Texas at Tyler","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/12/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552363200000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":197060,"EventId":77100,"Title":"Campus Tour","Notes":null,"Description":"","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"","EventTypeName":null,"EventType":"Open House","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/12/2019 10:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552363200000)\/"},"Location":{"Id":0,"Name":"CMG - Cumming (UC0124) 160","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":201801,"EventId":78678,"Title":"Taste of the Mountain","Notes":null,"Description":"","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"","EventTypeName":null,"EventType":"Reception","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/12/2019 4:30:00 PM","EventDuaration":240,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552363200000)\/"},"Location":{"Id":0,"Name":"DAH - Dining Hall (DA0121) Chow Hall","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203488,"EventId":79079,"Title":"UNG University of North Georgia Baseball at University of West Florida","Notes":null,"Description":"UNG University of North Georgia Baseball at University of West Florida","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/12/2019 7:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552363200000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]},{"EventDate":"3/13/2019","Total":0,"Events":[{"Id":148383,"EventId":52218,"Title":"Spring Break (no classes)","Notes":null,"Description":"","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#457c80","EventTypeName":null,"EventType":"Spring 2019","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/13/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552449600000)\/"},"Location":{"Id":0,"Name":"","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203491,"EventId":79082,"Title":"UNG University of North Georgia Men\u0027s Tennis vs Florida Southern College","Notes":null,"Description":"UNG University of North Georgia Men\u0027s Tennis vs Florida Southern College","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/13/2019 3:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552449600000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203490,"EventId":79081,"Title":"UNG University of North Georgia Women\u0027s Tennis vs Florida Southern College","Notes":null,"Description":"UNG University of North Georgia Women\u0027s Tennis vs Florida Southern College","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/13/2019 3:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552449600000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203489,"EventId":79080,"Title":"UNG University of North Georgia Baseball at University of West Florida","Notes":null,"Description":"UNG University of North Georgia Baseball at University of West Florida","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/13/2019 7:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552449600000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]},{"EventDate":"3/14/2019","Total":0,"Events":[{"Id":148384,"EventId":52218,"Title":"Spring Break (no classes)","Notes":null,"Description":"","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#457c80","EventTypeName":null,"EventType":"Spring 2019","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203495,"EventId":79086,"Title":"UNG University of North Georgia Men\u0027s Tennis vs Bluefield State College","Notes":null,"Description":"UNG University of North Georgia Men\u0027s Tennis vs Bluefield State College","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 9:00:00 AM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203494,"EventId":79085,"Title":"UNG University of North Georgia Women\u0027s Tennis vs Bluefield State College","Notes":null,"Description":"UNG University of North Georgia Women\u0027s Tennis vs Bluefield State College","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 9:00:00 AM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"Home - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":200192,"EventId":78425,"Title":"Staff Council Relay for Life Soup Sale","Notes":null,"Description":"","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"","EventTypeName":null,"EventType":"Club/Org Event","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 11:30:00 AM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"GVL - Administration (GV0001) 112 - (Multi-VTC) Presidents\u0027 Conf. Room","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":198463,"EventId":77638,"Title":"Campus Tour","Notes":null,"Description":"","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"","EventTypeName":null,"EventType":"Open House","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 2:00:00 PM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"CMG - Cumming (UC0124) 160","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203492,"EventId":79083,"Title":"UNG University of North Georgia Softball at UNC Pembroke","Notes":null,"Description":"UNG University of North Georgia Softball at UNC Pembroke","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 4:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203493,"EventId":79084,"Title":"UNG University of North Georgia Softball at UNC Pembroke","Notes":null,"Description":"UNG University of North Georgia Softball at UNC Pembroke","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/14/2019 6:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552536000000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]},{"EventDate":"3/15/2019","Total":0,"Events":[{"Id":148385,"EventId":52218,"Title":"Spring Break (no classes)","Notes":null,"Description":"","EventImageURL":null,"isAllDay":true,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#457c80","EventTypeName":null,"EventType":"Spring 2019","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/15/2019 8:00:00 AM","EventDuaration":60,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552622400000)\/"},"Location":{"Id":0,"Name":"","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":198497,"EventId":77646,"Title":"Friday Swing Lesson","Notes":null,"Description":"","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"","EventTypeName":null,"EventType":"Club/Org Event","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/15/2019 5:45:00 PM","EventDuaration":195,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552622400000)\/"},"Location":{"Id":0,"Name":"DAH - Memorial Hall (DA0011) 208","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203496,"EventId":79087,"Title":"UNG University of North Georgia Baseball at Georgia College","Notes":null,"Description":"UNG University of North Georgia Baseball at Georgia College","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/15/2019 6:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552622400000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]},{"EventDate":"3/16/2019","Total":0,"Events":[{"Id":203497,"EventId":79088,"Title":"UNG University of North Georgia Softball at Francis Marion University","Notes":null,"Description":"UNG University of North Georgia Softball at Francis Marion University","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/16/2019 1:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552708800000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203498,"EventId":79089,"Title":"UNG University of North Georgia Baseball at Georgia College","Notes":null,"Description":"UNG University of North Georgia Baseball at Georgia College","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/16/2019 3:00:00 PM","EventDuaration":180,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552708800000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null},{"Id":203499,"EventId":79090,"Title":"UNG University of North Georgia Softball at Francis Marion University","Notes":null,"Description":"UNG University of North Georgia Softball at Francis Marion University","EventImageURL":null,"isAllDay":false,"NoEndTime":false,"isSpecial":false,"Priority":2,"EventTypeColor":"#003893","EventTypeName":null,"EventType":"Athletics","AllowEdit":false,"Cancel":false,"CalendarName":null,"EventDateTime":{"EventDateTime":"3/16/2019 3:00:00 PM","EventDuaration":120,"EventTimeZone":"","DefaultUTCOffset":-240,"BaseDate":"\/Date(1552708800000)\/"},"Location":{"Id":0,"Name":"Away - See Full Schedule","Address":null},"UDFs":null,"EventKeyWords":null}]}];
+ var EventTypesFilterData = [{"expanded":true,"checked":false,"text":"Event Types","id":-1,"items":[{"checked":false,"text":"Alumni Event","id":26},{"checked":false,"text":"Art Exhibit /Reception","id":105},{"checked":false,"text":"Athletics","id":126},{"checked":false,"text":"Athletics - Baseball","id":67},{"checked":false,"text":"Athletics - Basketball","id":68},{"checked":false,"text":"Athletics - Soccer","id":70},{"checked":false,"text":"Athletics - Softball","id":71},{"checked":false,"text":"Athletics-Basketball","id":147},{"checked":false,"text":"Athletics-Football","id":125},{"checked":false,"text":"Banquet","id":73},{"checked":false,"text":"CE Course","id":74},{"checked":false,"text":"Ceremony","id":75},{"checked":false,"text":"Club/Org Event","id":107},{"checked":false,"text":"Club/Org Meeting","id":108},{"checked":false,"text":"Colloquium","id":30},{"checked":false,"text":"Concert","id":76},{"checked":false,"text":"Conference","id":77},{"checked":false,"text":"Corps Event","id":81},{"checked":false,"text":"CTLL Workshop","id":32},{"checked":false,"text":"Discussion","id":82},{"checked":false,"text":"Exhibit","id":83},{"checked":false,"text":"Fair","id":84},{"checked":false,"text":"Fall 2017","id":141},{"checked":false,"text":"Fall 2018","id":152},{"checked":false,"text":"Fall 2019","id":155},{"checked":false,"text":"Fall 2020","id":156},{"checked":false,"text":"Festival","id":85},{"checked":false,"text":"Film Event","id":86},{"checked":false,"text":"Fitness Class","id":87},{"checked":false,"text":"Fundraiser","id":88},{"checked":false,"text":"Graduation","id":89},{"checked":false,"text":"Guest Speaker","id":91},{"checked":false,"text":"Hearing","id":92},{"checked":false,"text":"Intramural Activity","id":110},{"checked":false,"text":"Lecture","id":94},{"checked":false,"text":"Literary Event","id":63},{"checked":false,"text":"Music Event","id":41},{"checked":false,"text":"Musical","id":95},{"checked":false,"text":"Non-Academic Event","id":117},{"checked":false,"text":"Open House","id":46},{"checked":false,"text":"Orientation","id":96},{"checked":false,"text":"Planetarium Show","id":113},{"checked":false,"text":"Presidential Event","id":53},{"checked":false,"text":"Public Service Event","id":61},{"checked":false,"text":"Reception","id":111},{"checked":false,"text":"Recital","id":112},{"checked":false,"text":"Science Fair/Olympiad","id":98},{"checked":false,"text":"Screening","id":99},{"checked":false,"text":"Speaker","id":104},{"checked":false,"text":"Spring 2018","id":153},{"checked":false,"text":"Spring 2019","id":157},{"checked":false,"text":"Spring 2020","id":158},{"checked":false,"text":"Student Activity","id":103},{"checked":false,"text":"Summer 2017","id":135},{"checked":false,"text":"Testing","id":100},{"checked":false,"text":"Theatre Performance","id":102},{"checked":false,"text":"Workshop","id":101}]}]; var LocationFilterData = [{"expanded":true,"checked":false,"text":"Locations","id":-1,"items":[{"checked":false,"text":"BLU - Blue Ridge","id":144},{"checked":false,"text":"CMG - City Hall","id":187},{"checked":false,"text":"CMG - Cumming (UC0124)","id":145},{"checked":false,"text":"DAH - Barnes Hall - Dahlonega","id":162},{"checked":false,"text":"DAH - Barnes Hall - Dahlonega","id":208},{"checked":false,"text":"DAH - Chestatee Building - Dahlonega","id":215},{"checked":false,"text":"DAH - Continuing Ed Center - DA0019)","id":163},{"checked":false,"text":"DAH - Convocation Center (DA0134)","id":188},{"checked":false,"text":"DAH - Convocation Center - Dahlonega","id":211},{"checked":false,"text":"DAH - Dining Hall (DA0121)","id":217},{"checked":false,"text":"DAH - Dining Hall - Dahlonega","id":164},{"checked":false,"text":"DAH - Downtown Office Building - Dahlonega","id":183},{"checked":false,"text":"DAH - Dunlap Hall - (DA008A)","id":165},{"checked":false,"text":"DAH - Dunlap Hall - Dahlonega","id":210},{"checked":false,"text":"DAH - Hansford Hall (DA0032)","id":166},{"checked":false,"text":"DAH - Hansford Hall - Dahlonega","id":206},{"checked":false,"text":"DAH - Health &amp; Natural Sciences - (DA0102)","id":190},{"checked":false,"text":"DAH - Health &amp; Natural Sciences - (DA0102)","id":167},{"checked":false,"text":"DAH - Hoag Student Center (DA0003)","id":168},{"checked":false,"text":"DAH - Hoag Student Center (DA0003)","id":191},{"checked":false,"text":"DAH - Library Technology Center (DA0109)","id":169},{"checked":false,"text":"DAH - Library Technology Center - Dahlonega","id":192},{"checked":false,"text":"DAH - Memorial Hall (DA0011)","id":193},{"checked":false,"text":"DAH - Memorial Hall (DA0011)","id":170},{"checked":false,"text":"DAH - Military Leadership Center (DA0017)","id":179},{"checked":false,"text":"DAH - Military Leadership Center (DA0017)","id":216},{"checked":false,"text":"DAH - Newton Oakes Center - DA008B","id":202},{"checked":false,"text":"DAH - Newton Oakes Center - DA008B","id":171},{"checked":false,"text":"DAH - Nix Fine Arts Center (DA0005)","id":172},{"checked":false,"text":"DAH - Nix Fine Arts Center (DA0005)","id":194},{"checked":false,"text":"DAH - Outdoor Reservable Spaces","id":195},{"checked":false,"text":"DAH - Outdoor Reservable Spaces","id":173},{"checked":false,"text":"DAH - Parking Lot Locations - Dahlonega","id":174},{"checked":false,"text":"DAH - Pine Valley","id":175},{"checked":false,"text":"DAH - Pine Valley - Dahlonega","id":213},{"checked":false,"text":"DAH - Recreation Center - Dahlonega","id":196},{"checked":false,"text":"DAH - Recreation Center - Dahlonega","id":176},{"checked":false,"text":"DAH - Rogers Hall (DA0031)","id":180},{"checked":false,"text":"DAH - Rogers Hall (DA0031)","id":212},{"checked":false,"text":"DAH - Stewart Student Success Center (DA0007)","id":177},{"checked":false,"text":"DAH - Stewart Student Success Center - Dahlonega","id":197},{"checked":false,"text":"DAH - Young Hall (DA0002)","id":198},{"checked":false,"text":"DAH - Young Hall (DA0002)","id":178},{"checked":false,"text":"GVL - Administration (GV0001)","id":184},{"checked":false,"text":"GVL - CEPA (GV0010)","id":150},{"checked":false,"text":"GVL - Dunlap/Mathis (GV0002)","id":157},{"checked":false,"text":"GVL - J. Foster Watkins - (GV0012)","id":151},{"checked":false,"text":"GVL - Library (GV0007)","id":160},{"checked":false,"text":"GVL - Lloyd Strickland (GV0006)","id":158},{"checked":false,"text":"GVL - Martha T Nesbitt - (GV0017)","id":152},{"checked":false,"text":"GVL - Music (GV0004)","id":159},{"checked":false,"text":"GVL - Oakwood (GV0016)","id":186},{"checked":false,"text":"GVL - Outdoor Reservable Space","id":153},{"checked":false,"text":"GVL - Parking Lot Locations - Gainesville","id":161},{"checked":false,"text":"GVL - Physical Education (GV0005)","id":154},{"checked":false,"text":"GVL - Science (GV0013)","id":155},{"checked":false,"text":"GVL - Student Center (GV0003)","id":156},{"checked":false,"text":"Home - See Full Schedule","id":78},{"checked":false,"text":"OCN - Administration (OC01)","id":149},{"checked":false,"text":"OCN - Classroom (OC02)","id":146},{"checked":false,"text":"OCN - Faculty Center (OC07)","id":147},{"checked":false,"text":"OCN - Student Resource Center (OC03)","id":148},{"checked":false,"text":"Off Campus Event","id":181},{"checked":false,"text":"Off Campus Event - Music Dept","id":214},{"checked":false,"text":"Online","id":182},{"checked":false,"text":"Rental Items","id":185}]}]; var SubLocationFilterData = [{"expanded":true,"checked":false,"text":"Rooms","id":-1,"items":[]}]; var DepartmentFilterData = [{"expanded":true,"checked":false,"text":"Departments","id":-1,"items":[{"checked":false,"text":"Registrar","id":1}]}]; var showSubscribe = true;showExactMatch = true;currentDates = "3/10/2019|3/16/2019";var ems_timeSep = ":",mc_Help = "Help",mc_useHelpIcon = 0,mc_allowSystemCheckAccess = 1,mc_localAddress = "168.30.241.40",mc_remoteHost = "66.215.35.104",ems_nosystemcheckacess = "Access to this page is restricted to the server that is hosting the application. To view version information see the About.aspx page",ems_AM = "AM",ems_PM = "PM",ems_timeFormat = "h:mm tt",ems_timePicker = "Time Picker",eventDetailstxt = "Event Details",gotoString = "Go to the current month",todayString = "Today is",scrollLeftMessage = "Click to scroll to previous month. Hold mouse button to scroll automatically.",scrollRightMessage = "Click to scroll to next month. Hold mouse button to scroll automatically.",selectMonthMessage = "Click to select a month.",selectYearMessage = "Click to select a year.",selectDateMessage = "Select [date] as date.",ems_UnhandledCallback = "Unhandled Callback.",ems_FailedToLoadCallbackXml = "Error loading xml document from server",localizationKey = "en-US",localizationDateSeparator = "/",localizationDateFormat = "m/d/yyyy",ems_FirstDateViolation = "Date violates your first available event date",ems_LastDateViolation = "Date violates your last available event date",ems_InvalidDate = "Invalid Date",ems_InvalidTime = "Invalid Time",ems_CloseTheCalendar = "Close the Calendar",mc_rootDirectory = "/MasterCalendar/",ajaxRootDirectory = "",sSelectedColor = "rgb(175,188,33)";checkVersion("data=x3ijH9FTK9UfR1IPnJHJBB0vNIurQVtwSnGbxY%2bikSKDfpyXwL0zZA%3d%3d");Dea.pageCallback = function (mcObject) { WebForm_DoCallback('__Page','' + Dea.JSON.stringify(mcObject) + '',Dea.handleCallback,'' + mcObject.router + '',Dea.errorCallback,true)};var PathToRoot = '/MasterCalendar/';var isLoggedIn = false;var loginTxt = "Login";var logoutTxt = "Log Out";var helpTextMsg = "";var postionMenuRight = false;var showLogout = true;var showLogin = true;var showHelpEdit = false;var loginUsername = "";var showLoginTimezone = false;var showEmailPasswordLink = true; var logintimezonesData = [{"id":"73","name":"(GMT -12:00) Eniwetok, Kwajalein","bias":-720,"abbr":""},{"id":"72","name":"(GMT -11:00) Midway Island, Samoa","bias":-660,"abbr":""},{"id":"71","name":"(GMT -10:00) Hawaii","bias":-600,"abbr":"HAT"},{"id":"70","name":"(GMT -09:00) Alaska","bias":-540,"abbr":"AKT"},{"id":"69","name":"(GMT -08:00) Pacific Time","bias":-480,"abbr":"PT"},{"id":"83","name":"(GMT -08:00) Tijuana, Baja California","bias":-480,"abbr":""},{"id":"67","name":"(GMT -07:00) Arizona","bias":-420,"abbr":"MT"},{"id":"68","name":"(GMT -07:00) Mountain Time","bias":-420,"abbr":"MT"},{"id":"81","name":"(GMT -07:00) Chihuahua, La Paz, Mazatlan","bias":-420,"abbr":""},{"id":"63","name":"(GMT -06:00) Central America","bias":-360,"abbr":""},{"id":"64","name":"(GMT -06:00) Central Time","bias":-360,"abbr":"CT"},{"id":"65","name":"(GMT -06:00) Mexico City","bias":-360,"abbr":"CST"},{"id":"66","name":"(GMT -06:00) Saskatchewan","bias":-360,"abbr":""},{"id":"60","name":"(GMT -05:00) Bogota, Lima, Quito","bias":-300,"abbr":""},{"id":"61","name":"(GMT -05:00) Eastern Time","bias":-300,"abbr":"ET"},{"id":"62","name":"(GMT -05:00) Indiana - East","bias":-300,"abbr":"ET"},{"id":"84","name":"(GMT -04:30) Caracas","bias":-270,"abbr":""},{"id":"57","name":"(GMT -04:00) Atlantic Time - Canada","bias":-240,"abbr":"AT"},{"id":"58","name":"(GMT -04:00) Caracas, La Paz","bias":-240,"abbr":""},{"id":"98","name":"(GMT -04:00) Atlantic Time - Puerto Rico","bias":-240,"abbr":"AST"},{"id":"56","name":"(GMT -03:30) Newfoundland","bias":-210,"abbr":""},{"id":"53","name":"(GMT -03:00) Brasilia","bias":-180,"abbr":"BRT"},{"id":"54","name":"(GMT -03:00) Buenos Aires, Georgetown","bias":-180,"abbr":""},{"id":"55","name":"(GMT -03:00) Greenland","bias":-180,"abbr":""},{"id":"59","name":"(GMT -04:00) Santiago","bias":-180,"abbr":""},{"id":"86","name":"(GMT -03:00) Argentina","bias":-180,"abbr":"ART"},{"id":"94","name":"(GMT -04:00) Paraguay","bias":-180,"abbr":"PYST"},{"id":"52","name":"(GMT -02:00) Mid-Atlantic","bias":-120,"abbr":""},{"id":"80","name":"(GMT -03:00) Montevideo","bias":-120,"abbr":""},{"id":"1","name":"(GMT +00:00) Casablanca, Monrovia","bias":0,"abbr":""},{"id":"2","name":"(GMT +00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London","bias":0,"abbr":"GMT"},{"id":"92","name":"(GMT +00:00) Morroco","bias":0,"abbr":"WET"},{"id":"3","name":"(GMT +01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna","bias":60,"abbr":"CET"},{"id":"4","name":"(GMT +01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague","bias":60,"abbr":"CET"},{"id":"5","name":"(GMT +01:00) Brussels, Copenhagen, Madrid, Paris","bias":60,"abbr":"CET"},{"id":"6","name":"(GMT +01:00) Sarajevo, Skopje, Sofija, Vilnius, Warsaw, Zagreb","bias":60,"abbr":""},{"id":"7","name":"(GMT +01:00) West Central Africa","bias":60,"abbr":""},{"id":"50","name":"(GMT -01:00) Azores","bias":60,"abbr":""},{"id":"51","name":"(GMT -01:00) Cape Verde Is., Yerevan, Baku, Tbilisi","bias":60,"abbr":""},{"id":"8","name":"(GMT +02:00) Athens, Istanbul, Minsk","bias":120,"abbr":"EET"},{"id":"9","name":"(GMT +02:00) Bucharest","bias":120,"abbr":""},{"id":"10","name":"(GMT +02:00) Cairo","bias":120,"abbr":""},{"id":"11","name":"(GMT +02:00) Harare, Pretoria","bias":120,"abbr":""},{"id":"12","name":"(GMT +02:00) Helsinki, Riga, Tallinn","bias":120,"abbr":"EET"},{"id":"13","name":"(GMT +02:00) Jerusalem","bias":120,"abbr":""},{"id":"78","name":"(GMT +02:00) Amman","bias":120,"abbr":""},{"id":"79","name":"(GMT +02:00) Beirut","bias":120,"abbr":""},{"id":"82","name":"(GMT +02:00) Windhoek","bias":120,"abbr":""},{"id":"85","name":"(GMT +02:00) Turkey","bias":120,"abbr":"EET"},{"id":"95","name":"(GMT +02:00) Syria","bias":120,"abbr":"EET"},{"id":"14","name":"(GMT +03:00) Baghdad","bias":180,"abbr":"AT"},{"id":"15","name":"(GMT +03:00) Kuwait, Riyadh","bias":180,"abbr":"AT"},{"id":"16","name":"(GMT +03:00) Moscow, St. Petersburg, Volgograd","bias":180,"abbr":"MSK"},{"id":"17","name":"(GMT +03:00) Nairobi","bias":180,"abbr":""},{"id":"18","name":"(GMT +03:30) Tehran","bias":180,"abbr":""},{"id":"77","name":"(GMT +03:00) Tbilisi","bias":180,"abbr":""},{"id":"88","name":"(GMT +03:00) Kaliningrad","bias":180,"abbr":"EEST"},{"id":"19","name":"(GMT +04:00) Abu Dhabi, Muscat","bias":240,"abbr":""},{"id":"20","name":"(GMT +04:30) Kabul","bias":240,"abbr":""},{"id":"74","name":"(GMT +04:00) Baku","bias":240,"abbr":""},{"id":"75","name":"(GMT +04:00) Yerevan","bias":240,"abbr":""},{"id":"76","name":"(GMT +04:00) Manaus","bias":240,"abbr":""},{"id":"91","name":"(GMT +04:00) Mauritius","bias":240,"abbr":"MUT"},{"id":"21","name":"(GMT +05:00) Ekaterinburg","bias":300,"abbr":""},{"id":"22","name":"(GMT +05:00) Islamabad, Karachi, Tashkent","bias":300,"abbr":""},{"id":"24","name":"(GMT +05:45) Kathmandu","bias":300,"abbr":""},{"id":"93","name":"(GMT +05:00) Pakistan","bias":300,"abbr":"PKT"},{"id":"23","name":"(GMT +05:30) Calcutta, Chennai, Mumbai, New Delhi","bias":330,"abbr":"IST"},{"id":"27","name":"(GMT +06:00) Sri Jayawardenepura","bias":330,"abbr":""},{"id":"25","name":"(GMT +06:00) Almaty, Novosibirsk","bias":360,"abbr":""},{"id":"26","name":"(GMT +06:00) Astana, Dhaka","bias":360,"abbr":""},{"id":"28","name":"(GMT +06:30) Rangoon","bias":360,"abbr":""},{"id":"87","name":"(GMT +06:00) Bangladesh","bias":360,"abbr":"BST"},{"id":"29","name":"(GMT +07:00) Bangkok, Hanoi, Jakarta","bias":420,"abbr":"ICT"},{"id":"30","name":"(GMT +07:00) Krasnoyarsk","bias":420,"abbr":""},{"id":"31","name":"(GMT +08:00) Beijing, Chongqing, Hong Kong, Urumqi","bias":480,"abbr":"HKT"},{"id":"32","name":"(GMT +08:00) Irkutsk, Ulaan Bataar","bias":480,"abbr":""},{"id":"33","name":"(GMT +08:00) Kuala Lumpur, Singapore","bias":480,"abbr":"SGT"},{"id":"34","name":"(GMT +08:00) Perth","bias":480,"abbr":"WST"},{"id":"35","name":"(GMT +08:00) Taipei","bias":480,"abbr":""},{"id":"96","name":"(GMT +08:00) Ulaanbaatar","bias":480,"abbr":"ULAT"},{"id":"36","name":"(GMT +09:00) Osaka, Sapporo, Tokyo","bias":540,"abbr":"JST"},{"id":"37","name":"(GMT +09:00) Seoul","bias":540,"abbr":"SST"},{"id":"38","name":"(GMT +09:00) Yakutsk","bias":540,"abbr":""},{"id":"40","name":"(GMT +09:30) Darwin","bias":570,"abbr":"CST"},{"id":"41","name":"(GMT +10:00) Brisbane","bias":600,"abbr":"EST"},{"id":"43","name":"(GMT +10:00) Guam, Port Moresby","bias":600,"abbr":""},{"id":"45","name":"(GMT +10:00) Vladivostok","bias":600,"abbr":""},{"id":"39","name":"(GMT +09:30) Adelaide","bias":630,"abbr":"CST"},{"id":"42","name":"(GMT +10:00) Canberra, Melbourne, Sydney","bias":660,"abbr":"EST"},{"id":"44","name":"(GMT +10:00) Hobart","bias":660,"abbr":"EST"},{"id":"46","name":"(GMT +11:00) Magadan, Solomon Is., New Caledonia","bias":660,"abbr":""},{"id":"48","name":"(GMT +12:00) Fiji, Kamchatka, Marshall Is.","bias":720,"abbr":""},{"id":"89","name":"(GMT +12:00) Kamchatka","bias":720,"abbr":"PETT"},{"id":"90","name":"(GMT +12:00) Magadan","bias":720,"abbr":"MAGT"},{"id":"47","name":"(GMT +12:00) Auckland, Wellington","bias":780,"abbr":"NZT"},{"id":"49","name":"(GMT +13:00) Nuku\u0027alofa","bias":780,"abbr":""}]; var userMenu = [{"group":{"url":null,"title":"Calendar","urlMethod":1,"items":[{"url":"https://calendar.ung.edu/VirtualEMS","title":"Event Request System (ID Required)","urlMethod":0}]}}];var isLeft = true;
+//]]>
+    </script>
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="28B11E50"/>
+    <input id="__VIEWSTATEENCRYPTED" name="__VIEWSTATEENCRYPTED" type="hidden" value=""/>
+    <div class="HeaderContainer show-large" id="ctl00_HeaderContainer">
+     <div class="row po">
+      <div class="twelve columns">
+       <div class="imgBanner centered pointer" id="ctl00_Header_imgBannerDiv">
+        <img alt="Banner Image" border="0" src="https://calendar.ung.edu/MasterCalendar/ImageWriter.aspx?data=IPkf9F3DB02brkflBAlm%2f3kgtOC2PMcv5wBx8J6PE%2fZ8aXgPSLkAWw%2bX%2f43ZgSvd"/>
+       </div>
+      </div>
+     </div>
+     <script type="text/javascript">
+      if (isLeft) {
+        $('.imgBanner').css({ 'margin': '20px -20px 20px -10px' });
+    }
+
+    $(document).ready(function () {
+        $('.imgBanner').click(function () {
+            document.location.href = 'MasterCalendar.aspx';
+        });
+    });
+     </script>
+    </div>
+    <div class="HeaderContainer1 show-medium show-small" id="HeaderContainer1">
+     <div class="row mc-title-primary">
+      <!--<div class=">EMS Master Calendar</div>-->
+      <div class="ml10" id="ctl00_Div2">
+       EMS Master Calendar
+      </div>
+     </div>
+    </div>
+    <div class="row">
+     <div class="c-wrapper-active fl opacity-medium ml10 pointer help-text-icon" style="width:20px;height:20px" title="Help Text">
+      <div class="icon question" style="margin-left:-3px;margin-top:-2px">
+      </div>
+     </div>
+    </div>
+    <div id="page" style="padding-left:.2em; padding-right:.2em;">
+     <div class="outMessage" id="ctl00_lblOutMessage">
+     </div>
+     <div id="helpDialog">
+      <span class="clear helpDialog" id="ctl00_DefaultHelp">
+      </span>
+     </div>
+     <section class="main">
+      <div class="show-medium show-large" id="breakpointdetect">
+      </div>
+      <div class="show-large" id="fedetect">
+      </div>
+      <div class="row centered">
+       <div "="" class="compatModeMessage" style="display:none">
+        <span>
+         It looks like you have enabled Internet Explorer Compatibility View.
+Master Calendar works best if you turn this off.
+        </span>
+        <span class="dismissCompatMode">
+         Dismiss
+        </span>
+       </div>
+       <div class="fluid three columns show-large filters-main-container">
+        <div style="height: 35px; line-height: 21px; vertical-align: middle; margin-right: 10px">
+         <div class="fr">
+          <div class="font-size-normal mc-color-3 font-weight-bold">
+           <div class="pending-notifications c-wrapper-active fl opacity-full">
+            <div class="fl icon important pointer" title="Pending Events">
+            </div>
+            <span>
+            </span>
+           </div>
+           <div class="login-container">
+            <div class="login-bar fl" style="height:35px;">
+             <div class="fl icon person-male" title="User Name">
+             </div>
+             <div class="fl">
+              <div class="fl pointer" onclick="$(this).next().trigger('click')" onkeypress="$(this).next().trigger('click')">
+               guest
+              </div>
+              <a class="size75 icon75 down75 pointer fl userMenu mt3 ml2" href="#" title="Menu Open/Close Arrow">
+              </a>
+              <span class="ml10 pointer login mt2" id="loginButton">
+              </span>
+              <div class="mc-boxshadow" id="loginForm" style="display: none">
+               <div class="font-size-normal mc-color-1" id="loginMessage">
+               </div>
+               <section class="form login-info" id="secLogin" style="clear: both">
+                <div>
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;clear:both;">
+                  <div>
+                   <label class="fl label-small" for="loginUserID">
+                    User Id
+                   </label>
+                   <input class="ml10 text defaultInvalid fl" id="loginUserID" name="userID" type="text"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;clear:both">
+                  <div>
+                   <label class="fl label-small" for="loginPassword">
+                    Password
+                   </label>
+                   <input autocomplete="off" class="ml10 text defaultInvalid fl" id="loginPassword" name="password" type="password"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="input-wrapper fl br-5 p5 space login-timezone" style="line-height:20px;clear:both">
+                  <div>
+                   <label class="fl label" for="loginTimeZone">
+                    Time zone
+                   </label>
+                   <select class="ml10 ddl-small" id="loginTimeZone" name="loginTimeZone">
+                   </select>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="mt10" style="line-height:20px;clear:both">
+                  <div class="fl mt5 ml20 font-size-normal mc-color-5 pointer email-my-pass">
+                   Email me my password
+                  </div>
+                  <div class="button selected fr br-5 p5" onclick="LoginUser($('#loginUserID').val(), $('#loginPassword').val(), $('#loginTimeZone').val())" onkeypress="LoginUser($('#loginUserID').val(), $('#loginPassword').val(), $('#loginTimeZone').val())" style="line-height:20px;">
+                   <div class="icon key fl">
+                   </div>
+                   Login
+                  </div>
+                  <div class="login-cancel button selected fr br-5 p5 mr10" onclick="$('.login').data('login').close()" onkeypress="$('.login').data('login').close()" style="line-height:20px;">
+                   <div class="icon x fl">
+                   </div>
+                   Cancel
+                  </div>
+                 </div>
+                </div>
+               </section>
+               <section id="secEmailPassword" style="clear: both; display: none">
+                <div class="fl mt20">
+                 <div class="input-wrapper fl br-5 p5 space" style="line-height:20px;">
+                  <div>
+                   <label class="fl label-small" for="emailPassword">
+                    Email
+                   </label>
+                   <input class="ml10 text defaultInvalid" id="emailPassword" name="emailPassword" type="text"/>
+                   <div class="c-wrapper-active fr opacity-medium ml10" style="width:20px;height:20px" title="Required">
+                    <div class="icon back" style="margin-left:-3px;margin-top:-2px">
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="button selected fr br-5 p5 " onclick="EmailMyPassword($('#emailPassword').val());" onkeypress="EmailMyPassword($('#emailPassword').val());" style="line-height:20px;clear:both">
+                  <div class="icon email fl">
+                  </div>
+                  Email Me
+                 </div>
+                 <div class="email-password-cancel button selected fr br-5 p5 mr10" onclick="$('.login').data('login').close()" onkeypress="$('.login').data('login').close()" style="line-height:20px;">
+                  <div class="icon x fl">
+                  </div>
+                  Cancel
+                 </div>
+                </div>
+               </section>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="centered space" id="cal-container">
+         <input class="date" id="inlineCal" min="2004-02-20" title="Calendar Picker" type="date"/>
+        </div>
+        <section>
+         <div class="row centered search-box-small space" style="display:block;">
+          <div class="fl mt20" style="position:relative;z-index:1000">
+           <div class="fl mc-bg-color-5 search-box ml20">
+            <div class="icon loupe centered fl">
+            </div>
+            <div class="fl">
+             <input class="search-box-input mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" placeholder="Search for Events" title="Search for Events" type="text" value=""/>
+            </div>
+            <div class="go fl pl5 pointer">
+             GO
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <section>
+         <div class="row " id="subscribeHolder" style="margin-left:20px">
+          <div style="line-height:20px;vertical-align:middle">
+           <div class="icon star fl" title="Notifications/iCal Feeds">
+           </div>
+           <a class="subscribe font-size-normal">
+            Notifications/iCal Feeds
+           </a>
+          </div>
+         </div>
+        </section>
+        <section class="calendar-types-section">
+         <div class="centered side-box calendar-types" style="margin-top:5px;margin-left:-1px">
+          <div class="side-box-head calendar-side-box-head">
+           <div class="side-box-title fl">
+            Calendars
+           </div>
+           <div class="fr icon down pointer" title="Expand/Collapse Arrow">
+           </div>
+          </div>
+          <div>
+           <div class="p5 font-size-small">
+            <span class="pointer check-all">
+            </span>
+            <span class="fr pointer expand-all">
+            </span>
+           </div>
+          </div>
+          <div class="calendar-types-container">
+          </div>
+         </div>
+        </section>
+        <div class="centered side-box filters-box" style="margin-top: 20px; margin-left: -1px">
+         <div class="side-box-head filter-side-box-head space">
+          <div class="side-box-title fl">
+           Filters
+          </div>
+          <div class="fr icon down pointer" title="Expand/Collapse Arrow">
+          </div>
+         </div>
+         <div class="filters-container">
+          <div class="input-wrapper fl br-5 p5 space" id="eventTypeFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_EventTypesLabel">
+              Event Types
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="EventTypesFilter" title="Event Types">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="locationFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_LocationsLabel">
+              Locations
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="LocationsFilter" title="Locations">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="sublocationFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_SubLocationLabel">
+              Rooms
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="SubLocationsFilter" title="Rooms">
+            </select>
+           </div>
+          </div>
+          <div class="input-wrapper fl br-5 p5 space" id="departmentFilterHolder" style="line-height: 20px;">
+           <div>
+            <div class="fl label-small">
+             <div class="fl" id="ctl00_pc_ctl00_departmentsLabel">
+              Departments
+             </div>
+            </div>
+            <select class="ddl-small multi-filter" id="DepartmentsFilter" title="Departments">
+            </select>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- Search -->
+       <section>
+        <div class="fluid search-results nine columns" style="display:none">
+         <div class="row">
+          <div class="show-small show-medium mt10">
+          </div>
+          <div class="fr pointer back-to-events" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:10px;">
+           <div class="c-wrapper-active fl opacity-full">
+            <div class="fl icon back" title="Back to Calendar">
+            </div>
+           </div>
+           <div class="fl pl6 font-size-normal mc-color-3 font-weight-bold">
+            Back to Calendar
+           </div>
+          </div>
+         </div>
+         <div class="row pl6 mc-title-primary mc-boxshadow br-5" style="margin-bottom:10px;display:block">
+          Search Results
+         </div>
+         <div class="row space">
+          <div class="column three po fl">
+           <label class="fl" for="startDate">
+            From:
+           </label>
+           <div class="fl" id="sdCal-container">
+            <input class="fl" id="startDate" type="text"/>
+           </div>
+          </div>
+          <div class="column three po fl">
+           <label class="fl" for="endDate">
+            To:
+           </label>
+           <div class="fl" id="edCal-container">
+            <input class="fl" id="endDate" type="text"/>
+           </div>
+          </div>
+          <div class="column six po">
+           <div class="row centered search-box-large fl" style="display:block;">
+            <div class="fl" style="position:relative;z-index:1000;">
+             <div class="fl mc-bg-color-5 search-box ml20">
+              <div class="icon loupe pointer centered fl" title="Search">
+              </div>
+              <div class="fl">
+               <input aria-labeledby="largeSearchBox" class="search-box-input mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" id="largeSearchBox" placeholder="Search for Events" style="width:200px" title="Search for Events" type="text" value=""/>
+              </div>
+              <div class="go fl pl5 pointer">
+               GO
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="space" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:30px;">
+          <div class="fl">
+           <input class="fl show-large" id="chkUseFilters" style="margin-top:3px;" type="checkbox"/>
+           <label class="fl font-size-normal pl10 pr10 show-large" for="chkUseFilters">
+            Use Selected Filters
+           </label>
+           <input class="fl" id="chkExactMatch" style="margin-top:3px;" type="checkbox"/>
+           <label class="fl font-size-normal pl10 pr10" for="chkExactMatch">
+            Use Exact Match
+           </label>
+           <div class="fl">
+            <input checked="" class="fl pl5 mt2" id="generalEvents" name="rdeventType" type="radio" value="0"/>
+            <label class="fl pl5 font-size-normal pl10 pr10" for="generalEvents">
+             General events
+            </label>
+           </div>
+           <div class="fl">
+            <input class="fl pl5 mt2" id="specialEvents" name="rdeventType" type="radio" value="1"/>
+            <label class="fl pl5 font-size-normal pl10 pr10" for="specialEvents">
+             Special dates
+            </label>
+           </div>
+          </div>
+         </div>
+         <section class="space">
+          <div class="font-size-Xlarge">
+           Your search for: '
+           <span class="font-weight-bold search-text-value">
+           </span>
+           ' returned (
+           <span class="font-weight-bold search-count-value">
+           </span>
+           ) result(s)
+          </div>
+          <section class="event-type-display-search space" role="navigation" style="margin-top:15px;">
+           <div class="row centered" style="margin-top:10px;">
+            <div class="pl10 pr10">
+             <div class="button normal fr">
+              <div class="icon export fl" title="Export">
+              </div>
+              Export
+             </div>
+            </div>
+           </div>
+          </section>
+          <section class="p10 search-list-bar">
+           <div class="row centered box el-container" data-bind="with:$root.searcheventlistVM">
+            <div>
+             <div class="row el-title show-large show-medium">
+              <div class="three columns title" data-bind="click:function(){sortBy('EventDate',$element)}">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                Event Date
+               </span>
+              </div>
+              <div class="four columns title" data-bind="click:function(){sortBy('Title',$element)}">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                Title
+               </span>
+              </div>
+              <div class="two columns title" data-bind="click:function(){sortBy('Location',$element)}">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                <div id="ctl00_pc_LocationSearchLabel">
+                 Location
+                </div>
+               </span>
+              </div>
+              <div class="two columns title" data-bind="click:function(){sortBy('CalendarName',$element)}">
+               <div class="icon down pointer fl mt4" title="Sort">
+               </div>
+               <span class="pointer fl">
+                Calendar
+               </span>
+              </div>
+              <div class="one columns title po">
+               <div class="icon expand centered" style="margin-top:1px;" title="Expand">
+               </div>
+              </div>
+             </div>
+             <div class="el-data-container">
+              <div class="el-data-item" data-bind="template: { name: 'searchResults-list-template', foreach: events}, searchListPost:{}">
+              </div>
+             </div>
+             <div class="row mc-color-3 p5 font-weight-bold more-results">
+              <span class="go pointer">
+               Load More Results
+              </span>
+             </div>
+            </div>
+           </div>
+          </section>
+          <!-- BEGIN - Block Event List - List-->
+          <section class="special-date-list space" style="display:none;">
+           <div class="row centered box el-container pr10" data-bind="with:$root.specialDatesVM">
+            <div>
+             <div class="row el-title show-large show-medium">
+              <div class="two columns title" data-bind="click:function(){sortBy('EventDate',$element)}">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                Event Date
+               </span>
+              </div>
+              <div class="four columns title" data-bind="click:function(){sortBy('Title',$element)}">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                Title
+               </span>
+              </div>
+              <div class="four columns title" data-bind="click:function(){sortBy('Notes',$element)}">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                <div id="ctl00_pc_Div2">
+                 Notes
+                </div>
+               </span>
+              </div>
+              <div class="two columns title" data-bind="click:function(){sortBy('CalendarName',$element)}">
+               <div class="icon down pointer fl mt4">
+               </div>
+               <span class="pointer fl">
+                Calendar
+               </span>
+              </div>
+             </div>
+             <div class="el-data-container p10">
+              <div class="el-data-item" data-bind="template: { name: 'specialDate-list-template',foreach: events}, specialListPost:{}">
+              </div>
+             </div>
+            </div>
+           </div>
+          </section>
+          <!-- END - Block Event List - List-->
+         </section>
+        </div>
+       </section>
+       <div class="fluid events nine columns" style="display:block">
+        <div class="row login-fluid show-small show-medium ">
+         <div class="twelve column mt5 mb5">
+          <div class="fr login-fluid-container">
+          </div>
+         </div>
+        </div>
+        <!-- BEGIN - Announcements Ticker -->
+        <div id="announcementHolder">
+         <section class="space show-large">
+          <div class="row">
+           <ul class="js-hidden" id="js-news">
+           </ul>
+          </div>
+         </section>
+        </div>
+        <!-- END - Announcements Ticker -->
+        <!-- BEGIN - Featured Events -->
+        <div class="show-large" id="feHolder">
+         <div class="row pl6 mc-title-primary mc-boxshadow br-5" style="margin-bottom:10px;display:block">
+          <div class="fl" id="ctl00_pc_FeaturedEventsLabel">
+           Featured Events
+          </div>
+          <div class="fr icon down pointer" onclick="UpDown(this,'.fetured-events-content')" onkeypress="UpDown(this,'.fetured-events-content')" style="margin-top:5px;" title="Expand/Collapse Arrow">
+          </div>
+         </div>
+         <section class="fetured-events space">
+          <div class="fetured-events-content fetured-events-content-horizontal-1" style="display:block;">
+           <div class="row box mc-bg-color-1 mc-border-style-solid mc-border-color-5 mc-border-width-3px p10">
+            <div class="row content p10">
+             <!-- Viewer Row -->
+             <div class="six columns scroller-image">
+              <!--Image Container-->
+             </div>
+             <div class="six columns scroller-text">
+              <h1 class="mc-color-3 font-size-Xlarge font-weight-bold space scroller-text-title pointer">
+              </h1>
+              <div style="overflow:auto;max-height:110px;margin-bottom:5px">
+               <p class="mc-color-4 font-size-normal space scroller-text-description" style="text-overflow:ellipsis">
+               </p>
+              </div>
+              <div class="mc-color-4 font-size-small font-weight-bold scroller-text-info">
+               <div class="info-date">
+               </div>
+               <div class="info-time">
+               </div>
+               <div class="info-location">
+               </div>
+              </div>
+              <div class="mc-color-4 font-size-normal space m4 pointer scroller-text-more">
+               more
+              </div>
+             </div>
+             <div class="scroller-playback-controls">
+              <div class="c-wrapper-active fl">
+               <div class="icon pointer play fl" title="Play">
+               </div>
+              </div>
+              <div class="c-wrapper-inactive fl">
+               <div class="icon pointer pause fl" title="Pause">
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="row scroller-control mc-bg-color-5">
+            <div class="fl mc-border-color-2 mc-border-style-solid mc-border-width-1px scroller">
+             <div class="prev-next pointer prev-item" title="Previous">
+             </div>
+             <div class="prev-group prev-group-img pointer" title="Previous Group">
+             </div>
+            </div>
+            <div class="fl items mc-color-4">
+             <div class="items-scroller" style="height:inherit;position:relative;">
+             </div>
+            </div>
+            <div class="fr mc-border-color-2 mc-border-style-solid mc-border-width-1px scroller">
+             <div class="prev-next pointer next-item" title="Next">
+             </div>
+             <div class="next-group next-group-img pointer" title="Next Group">
+             </div>
+            </div>
+           </div>
+          </div>
+         </section>
+        </div>
+        <!-- END - Featured Events -->
+        <!-- BEGIN - Block Event List -->
+        <!-- BEGIN - Block Event List - Selector Bar -->
+        <section class="space event-list-bar" role="navigation" style="margin-top:10px;">
+         <div class="row mc-title-primary br-5">
+          <div class="fl pl6 two column">
+           Events
+          </div>
+          <div class="ten column">
+           <div class="row">
+            <div class="column seven">
+             <div class="fl pr20 date-scroller">
+              <div class="icon previous-arrow fl mt5 mr5 pointer scroll-date" tabindex="0" title="Previous">
+              </div>
+              <span class="fl dateLabel">
+              </span>
+              <div class="icon next fl mt5 ml5 pointer scroll-date" tabindex="0" title="Next">
+              </div>
+             </div>
+            </div>
+            <div class="column five ">
+             <div class="display-type-buttons fr">
+              <div class="button normal fl" tabindex="0">
+               <div class="icon cal-week fl" style="margin-top:5px" title="Day">
+               </div>
+               Day
+              </div>
+              <div class="button normal fl" tabindex="0">
+               <div class="icon cal-week fl" style="margin-top:5px" title="Week">
+               </div>
+               Week
+              </div>
+              <div class="button normal fl" tabindex="0">
+               <div class="icon cal-month fl" style="margin-top:5px" title="Month">
+               </div>
+               Month
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - Selector Bar -->
+        <!-- BEGIN - Block Event List - Display Bar-->
+        <section class="event-type-display-nav space" role="navigation" style="margin-top:15px;">
+         <div class="row centered" style="margin-top:10px;">
+          <div class="pl10 pr10">
+           <div class="button trigger normal fl show-large show-medium" tabindex="0">
+            <div class="icon list fl" title="List">
+            </div>
+            List
+           </div>
+           <div class="button trigger normal fl show-large show-medium" tabindex="0">
+            <div class="icon grid fl" title="Calendar">
+            </div>
+            Calendar
+           </div>
+           <div class="button trigger normal fr" tabindex="0">
+            <div class="icon add fl" title="Add Event">
+            </div>
+            Add Event
+           </div>
+           <div class="time-zone normal fr br-5 p5" style="line-height:20px;">
+            <div class="icon world fl" title="Time zone">
+            </div>
+            <div class="pr6 time-zone-selected fl" data-bind="with:$root.timeZonesVM">
+             <label class="fl pr5" for="timezoneChangeddl">
+              Display as
+             </label>
+             <select class="fl tz-ddl ddl" data-bind="options: timeZones, optionsText: 'name', optionsValue: 'id', value:timeZones.id" id="timezoneChangeddl">
+             </select>
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - Display Bar-->
+        <!-- BEGIN - Special Dates -->
+        <div class="row special-dates show-large show-medium" style="margin-top:10px;">
+         <div class="twelve column special-date-func-list">
+         </div>
+        </div>
+        <!-- END - Special Dates -->
+        <!-- BEGIN Search Fluid -->
+        <div class="row search-fluid centered show-small show-medium space" style="margin-top:10px;">
+         <div class="twelve column centered">
+          <div class="mc-bg-color-5 search-box fl">
+           <div class="icon loupe pointer centered fl">
+           </div>
+           <div class="fl">
+            <input aria-labeledby="smallSearchBox" class="search-box-input-fluid mc-bg-color-1 mc-border-color-5 mc-border-style-solid mc-border-width-1px" id="smallSearchBox" placeholder="Search for Events" style="width:200px" title="Search for Events" type="text" value=""/>
+           </div>
+           <div class="go fl pl5 pointer">
+            GO
+           </div>
+          </div>
+         </div>
+        </div>
+        <!-- END Search Fluid -->
+        <!-- BEGIN Calendar Fluid -->
+        <div class="row calendars-fluid show-medium show-small">
+         <div class="button selected fl br-5 p5 ml20" onclick="setFluidCalBox(this)" onkeypress="setFluidCalBox(this)" style="line-height:20px;">
+          <div class="icon cal-week fl">
+          </div>
+          Select Calendar(s)
+         </div>
+        </div>
+        <!-- END Calendar Fluid -->
+        <!-- BEGIN Back to grid -->
+        <div class="row show-large show-medium back-to-calendar" style="margin-top:10px;display:none">
+         <div class="fr pointer back-to-events" style="height:22px;line-height:22px;vertical-align:middle;margin-bottom:10px;">
+          <div class="c-wrapper-active fl opacity-full">
+           <div class="fl icon back">
+           </div>
+          </div>
+          <div class="fl pl6 font-size-normal mc-color-3 font-weight-bold">
+           Back to events
+          </div>
+         </div>
+        </div>
+        <!-- END Back to grid -->
+        <!-- BEGIN - Block Event List - List-->
+        <section class="event-list space" style="display:block;">
+         <div class="row centered" data-bind="with:$root.eventlistVM">
+          <div class="margin-clear p10" data-bind="template: { name: 'event-list-template',foreach: events}, eventListPost:{}">
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - List-->
+        <!-- BEGIN - Block Event List - List-->
+        <section class="event-functional-list space" style="display:none;">
+         <div class="row centered box el-container pr10" data-bind="with:$root.eventlistVM">
+          <div>
+           <div class="row el-title show-large show-medium">
+            <div class="three columns title" data-bind="click:function(){sortBy('EventDate',$element)}">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              Event Date
+             </span>
+            </div>
+            <div class="four columns title" data-bind="click:function(){sortBy('Title',$element)}">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              Title
+             </span>
+            </div>
+            <div class="two columns title" data-bind="click:function(){sortBy('Location',$element)}">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              <div id="ctl00_pc_Div1">
+               Location
+              </div>
+             </span>
+            </div>
+            <div class="two columns title" data-bind="click:function(){sortBy('CalendarName',$element)}">
+             <div class="icon down pointer fl mt4">
+             </div>
+             <span class="pointer fl">
+              Calendar
+             </span>
+            </div>
+            <div class="one columns title po">
+             <div class="icon expand centered" style="margin-top:1px;">
+             </div>
+            </div>
+           </div>
+           <div class="el-data-container p10">
+            <div class="el-data-item" data-bind="template: { name: 'functional-list-template',foreach: events}, functionalListPost:{}">
+            </div>
+           </div>
+          </div>
+         </div>
+        </section>
+        <!-- END - Block Event List - List-->
+        <!-- BEGIN - Block Event List - Grid-->
+        <div class="event-grid-container row centered space p20">
+        </div>
+        <div class="tooltip-template" data-bind="with: $root.eventTTVM">
+         <div class="tooltip br-10 p10">
+          <div class="tooltip-close">
+           X
+          </div>
+          <div class="mc-color-3 font-size-large font-weight-bold pr10 space" style="clear:both">
+           <div class="fl icon edit pointer mt5" data-bind="click:function(){ CreateEditLink(event()); }, style: { display: event().AllowEdit() ? '' : 'none', marginTop: '-3px' }" title="Edit">
+           </div>
+           <div data-bind="text: event().Title, style: { textDecoration: event().Cancel()  ? 'line-through' : 'none'}">
+           </div>
+          </div>
+          <div class="mc-color-4 font-size-small fl space" style="width:100%">
+           <div class="fl mt2" data-bind="style: { backgroundColor: event().EventTypeColor }" style="width:10px;height:10px;">
+           </div>
+           <div class="fl ml2" data-bind="text: event().EventType">
+           </div>
+          </div>
+          <div class="mc-color-4 font-size-small font-weight-bold space">
+           <div data-bind="text: event().EventDateTime().DateFormated">
+           </div>
+           <div class="space" data-bind="text: event().isAllDay() ? 'All day event' : event().EventDateTime().TimeFormated">
+           </div>
+           <div data-bind="text: event().Location().Name">
+           </div>
+          </div>
+          <div class="mc-color-4 font-size-small" data-bind="text: event().setEllipsis($data.event(), 'Description', 150, $element)">
+          </div>
+          <div class=" mc-color-3 font-size-small pointer tooltip-more" style="text-align:right">
+           more
+          </div>
+          <div class="tooltip-arrow">
+          </div>
+         </div>
+        </div>
+        <!-- END - Block Event List - Grid-->
+       </div>
+       <!-- panel bottom -->
+       <!-- END - Block Event List -->
+      </div>
+      <div class="row centered" style="display:none">
+       <div class="twelve columns">
+        <div class="centered">
+         Footer
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- search box -->
+     <div class="search-box-modal mc-bg-color-5 mc-boxshadow mc-border-color-6 mc-border-style-solid mc-border-width-3px" style="display: none">
+     </div>
+     <!-- end search box -->
+     <!-- modal content -->
+     <div id="osx-modal-content">
+      <div class="pl6" id="osx-modal-title">
+       Announcements
+      </div>
+      <div class="close">
+       <a class="simplemodal-close" href="#">
+        x
+       </a>
+      </div>
+      <div id="osx-modal-data">
+      </div>
+     </div>
+     <div id="basic-modal-content">
+      <div id="event-loader">
+      </div>
+     </div>
+     <!-- end modal content -->
+     <!-- filter buttons -->
+     <div class="fr filter-buttons" style="display: none">
+      <div class="button selected fl br-5 p5" style="line-height: 20px;">
+       <div class="icon check fl">
+       </div>
+       Apply
+      </div>
+     </div>
+     <!-- end filter buttons -->
+     <script id="event-list-template" type="text/html">
+      <div class="box mc-border-style-solid mc-border-color-5 mc-border-width-3px br-10 fl mc-bg-color-1 space" data-bind="event:{mouseover:$parent.setTitleHover,mouseout:$parent.setTitleOut}">
+            <div class="row collapse mc-title-secondary br-t-7 event-func-list-header">
+                <div class="eleven column po">
+                    <div class="nine column">
+                        <div>
+                            <p class="pl6 middle fl" data-bind="text:$data.Title,style: { textDecoration: $data.Cancel()  ? 'line-through' : 'none', lineHeight: 'initial'}"></p>
+                        </div>
+                    </div>
+                    <div class="three column po">
+                        <span class="fr event-list-datetime-label" data-bind="text:$parent.formatDateTime($data, 'DateShort', $element)"></span>
+                    </div>
+                </div>
+                <div class="one column">
+                    <div class="pr6 event-list-expand-event"><div title="Expand" class="icon expand pointer fr" data-bind="click:function() { return $parent.bindAccordion('box', $data, $element); }"></div></div>
+                </div>
+            </div>
+
+            <div class="p10">
+                <div class="row">
+                    <!-- ko if: $data.EventImageURL() !== "" -->
+                    <div class="two column">
+                        <div class="fl mc-border-style-solid mc-border-color-5 mc-border-width-3px" style="max-width:100px">
+                            <img style="display:block" data-bind="attr: { src: $data.EventImageURL, alt: $data.Title, title: $data.Title }"/>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div data-bind="attr: { class: $data.EventImageURL() !== '' ? 'ten column font-size-normal' : 'twelve column font-size-normal' }">
+                        <div class="font-weight-bold event-list-datetime-label"><span data-bind="text:$data.isAllDay() ? 'All day event' : $parent.formatDateTime($data, 'TimeShort', $element)"></span><span data-bind="text:$data.Location.Name() != '' ? ', ' +  $data.Location.Name() : ''"></span></div>
+                        <div class="fl mt2" data-bind="style: { backgroundColor: $data.EventTypeColor(), display: $data.EventTypeColor() != '' ? '' : 'none',width: '10px', height: '10px' }, attr: { title: $data.EventTypeName() }"></div>
+                        <div class="fl ml2 font-weight-bold" data-bind="text:$data.EventTypeName()"></div>
+                        <br />
+                        <div class="event-list-description" data-bind="text:$parent.setEllipsis($data,'Description', 150, $element)"></div>
+                        <span class="fr" style="display:none"><a>more</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Accordion-->
+        <div class="accordion box mc-border-style-solid mc-border-color-4 mc-border-width-3px br-10 fl mc-bg-color-1 space" style="display:none;"></div>
+        <!-- END Accordion-->
+     </script>
+     <!--ON event-list-description || data-bind="text:$parent.setEllipsis($data,'Description', 150, $element)" -->
+     <!-- END Event List Template-->
+     <script id="functional-list-template" type="text/html">
+      <!-- ko if: $data.Title().length > 0 -->
+        <div class="funcBox" style="clear:both">
+            <div class="row el-data-row">
+                <div class="three columns po"><div class="pl6"><span data-bind="text:$data.isAllDay() ? $parent.formatDateTime($data, 'DateShort', $element) + ' (All day)' : $parent.formatDateTime($data, 'DateTimeShort', $element)"></span></div></div>
+                <!--<div class="two columns po"><div class="pl6"><span data-bind="text:$parent.formatDateTime($data, 'TimeShort', $element)"></span></div></div>-->
+                <div class="four columns po font-weight-bold">
+                     <div class="pl4">
+                        <div class="fl mt2" data-bind="style: { backgroundColor: $data.EventTypeColor(), display: $data.EventTypeColor() != '' ? '' : 'none',width: '10px', height: '10px' }, attr: { title: $data.EventTypeName() }"></div>
+                        <div class="fl ml2 font-weight-bold" data-bind="text:$data.Title(), style: { textDecoration: $data.Cancel()  ? 'line-through' : 'none'}"></div>
+                    </div>
+                </div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.Location.Name()"></div></div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.CalendarName()"></div></div>
+                <div class="one columns po">
+                    <div class="fr pr6 expand-trigger show-small">
+                        <span class="show-small fl label mt2">Expand</span>
+                        <div class="icon expand pointer fl" data-bind="click:$parent.bindAccordion"></div>
+                    </div>
+                    <div title="Expand" class="icon expand pointer expand-trigger-icon centered show-medium show-large" data-bind="click:function() { return $parent.bindAccordion('funcBox', $data, $element); }"></div>
+                </div>
+            </div>
+            <div class="row el-data-row-separator bg-color1">
+                <div class="two columns show-small show-medium show-large"></div>
+                <div class="six columns show-large show-medium"></div>
+                <div class="three columns  show-large show-medium"></div>
+                <div class="one columns show-large show-medium"></div>
+            </div>
+        </div>
+         <!-- Accordion-->
+         <div class="accordion searchBox mc-border-style-solid mc-border-color-4 mc-border-width-3px br-10 fl mc-bg-color-1 space mt5" style="display:none;min-width:100%"></div>
+        <!-- END Accordion-->
+        <!-- /ko -->
+     </script>
+     <script id="searchResults-list-template" type="text/html">
+      <!-- ko if: $data.Title().length > 0 -->
+        <div class="searchBox" style="clear:both">
+            <div class="row el-data-row">
+                <div class="three columns po"><div class="pl6"><span data-bind="text:$data.isAllDay() ? $parent.formatDateTime($data, 'DateShort', $element) + ' (All day)' : $parent.formatDateTime($data, 'DateTimeShort', $element)"></span></div></div>
+                <div class="four columns po font-weight-bold">
+                    <div class="pl4">
+                    <div class="fl mt2" data-bind="style: { backgroundColor: $data.EventTypeColor(), display: $data.EventTypeColor() != '' ? '' : 'none',width: '10px', height: '10px' }, attr: { title: $data.EventTypeName() }"></div>
+                    <div class="fl ml2 font-weight-bold" data-bind="text:$data.Title(), style: { textDecoration: $data.Cancel()  ? 'line-through' : 'none'}"></div>
+                    </div>
+                </div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.Location.Name()"></div></div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.CalendarName()"></div></div>
+                <div class="one columns po">
+                    <div class="fr pr6 expand-trigger show-small">
+                        <span class="show-small fl label mt2">Expand</span>
+                        <div class="icon expand pointer fl" data-bind="click:function() { return $parent.bindAccordion('searchBox', $data, $element); }"></div>
+                    </div>
+                    <div title="Expand" class="icon expand pointer expand-trigger-icon centered show-medium show-large" data-bind="click:function() { return $parent.bindAccordion('searchBox', $data, $element); }"></div>
+                </div>
+            </div>
+            <div class="row el-data-row-separator bg-color1">
+                <div class="two columns show-small show-medium show-large"></div>
+                <div class="six columns show-large show-medium"></div>
+                <div class="three columns  show-large show-medium"></div>
+                <div class="one columns show-large show-medium"></div>
+            </div>
+
+        </div>
+         <!-- Accordion-->
+         <div class="accordion searchBox mc-border-style-solid mc-border-color-4 mc-border-width-3px br-10 fl mc-bg-color-1 space mt5" style="display:none;min-width:100%"></div>
+        <!-- END Accordion-->
+        <!-- /ko -->
+     </script>
+     <script id="specialDate-list-template" type="text/html">
+      <!-- ko if: $data.Title().length > 0 -->
+        <div class="searchBox" style="clear:both">
+            <div class="row el-data-row">
+                <div class="two columns po"><div class="pl6"><span data-bind="text:$parent.formatDateTime($data, 'DateShort', $element)"></span></div></div>
+                <div class="four columns po font-weight-bold"><div class="fl pl6 font-weight-bold"  data-bind="text:$data.Title()"></div></div>
+                <div class="four columns po"><div class="pl6" data-bind="text:$data.Notes()"></div></div>
+                <div class="two columns po"><div class="pl6" data-bind="text:$data.CalendarName()"></div></div>
+            </div>
+            <div class="row el-data-row-separator bg-color1">
+                <div class="two columns show-small show-medium show-large"></div>
+                <div class="six columns show-large show-medium"></div>
+                <div class="three columns  show-large show-medium"></div>
+                <div class="one columns show-large show-medium"></div>
+            </div>
+        </div>
+        <!-- /ko -->
+     </script>
+     <div class="center" id="PageLinksContainer">
+      <div class="centerRow">
+       <a href="CalendarManagers.aspx" id="ctl00_CalendarManagersLink" target="_blank">
+        Calendar Managers
+       </a>
+       <span id="linkSeperator">
+        |
+       </span>
+       <a href="RSSFeeds.aspx" id="ctl00_RssFeedsLink" target="_blank">
+        RSS Feeds
+       </a>
+      </div>
+     </div>
+     <div class="footer" id="FooterContainer">
+     </div>
+     <div class="callbackStatus" id="CallbackStatus" style="display: none; z-index: 2100">
+      <img alt="Loading" border="0" id="ctl00_LoadingImage" src="Images/Loading.gif" title="Loading"/>
+      <span id="ctl00_LoadingText">
+       Loading
+      </span>
+     </div>
+    </div>
+    <div class="br-10" id="helpTextDialog">
+     <div class="header pl6">
+      <span>
+       Help Text
+      </span>
+     </div>
+     <div class="p10" style="clear:both;">
+      <div class="fl pointer pr10 edit-Help-Link" style="display:none;">
+       <a>
+        Edit
+       </a>
+      </div>
+      <span class="helpTextMessage fl">
+      </span>
+     </div>
+    </div>
+    <script type="text/javascript">
+     //<![CDATA[
+var hidefilters = false;mc_useHelpIcon = 0;//]]>
+    </script>
+   </form>
+  </div>
+ </body>
+</html>

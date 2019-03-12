@@ -1,0 +1,760 @@
+https://cardops.uark.edu
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta charset="utf-8"/>
+  <title>
+   Credit Card Operations
+  </title>
+  <meta name="Description"/>
+  <meta name="Keywords"/>
+  <meta name="Author"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" /> -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"/>
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css"/>
+  <link href="https://www.uark.edu/_resources/php/combine.php?t=css&amp;f=bootstrap-3.min.css,uark-style.css" rel="stylesheet"/>
+  <link href="https://www.uark.edu/_resources/js/nivo/nivo-slider.css" rel="stylesheet"/>
+  <link href="gridforms/gridforms.css" rel="stylesheet" type="text/css"/>
+  <!-- Nivo Slider -->
+  <script src="//www.uark.edu/_resources/js/jquery.js" type="text/javascript">
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js" type="text/javascript">
+  </script>
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
+<![endif]-->
+  <script src="~/gridforms/gridforms.js" type="text/javascript">
+  </script>
+  <script src="//www.uark.edu/_resources/includes/universal-www-google-analytics.inc" type="text/javascript">
+  </script>
+  <script src="/_resources/includes/secondary-google-analytics.inc" type="text/javascript">
+  </script>
+  <meta content="u19707mubHNaEz4fD6JNl9vtqlNAQSExWELYjpId_JE" name="google-site-verification"/>
+  <script type="application/ld+json">
+   {
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "University of Arkansas",
+  "url" : "http://www.uark.edu",
+  "sameAs" : [
+    "https://www.facebook.com/UofArkansas",
+    "https://twitter.com/uarkansas",
+    "https://plus.google.com/104159281704656057709/posts",
+	"https://www.youtube.com/user/UniversityArkansas",
+	"https://www.instagram.com/uarkansas/",
+	"https://www.linkedin.com/company/university-of-arkansas"
+  ]
+}
+  </script>
+  <style>
+   .ajax__combobox_itemlist {
+            position: absolute !important;            
+            overflow: auto !important;
+            top: auto !important;
+            left: auto !important;
+        }
+
+        tbody tr td.ajax__combobox_buttoncontainer {
+            padding-bottom: 3.2px;
+        }
+
+        .hiddencol {
+            display: none;
+        }
+
+        .valid {
+            border: 0;
+        }
+
+        .invalid {
+            border-color: #AA0000;
+            border-style: Dashed;
+        }
+
+        .navbar-toggle {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            min-height: 30px;
+            max-height: 30px;
+            z-index: inherit;
+            position: absolute;
+            float: left;
+            top: -30px;
+            padding: 5px;
+            width: 100%;
+            color: #333;
+        }
+
+        @media print {
+            @page {
+                size: auto; /* auto is the current printer page size */
+                margin: 0mm; /* this affects the margin in the printer settings */
+            }
+
+            .table-responsive {
+                border: none !important;
+            }
+
+            body {
+                background-color: #FFFFFF;
+                margin: 0px; /* the margin on the content before printing */
+            }
+
+                body a:link:after, body a:visited:after {
+                    content: "";
+                }
+        }
+
+        @media screen {
+            a[href$='SAFC00116'], a[href$='SAFC00115'], a[href$='SAFC00114'], a[href$='.pdf'], a[href$='.PDF'], a[href$='.doc'], a[href$='.DOC'], a[href$='.docx'], a[href$='.DOCX'], a[href$='.xlsx'] {
+                padding-right: 16px;
+            }
+
+                a[href$='SAFC00116']:after, a[href$='SAFC00115']:after, a[href$='SAFC00114']:after, a[href$='.pdf']:after, a[href$='.PDF']:after {
+                    content: ' \f1c1';
+                    font-family: FontAwesome;
+                    color: #000;
+                    position: absolute;
+                    padding-left: 1px;
+                    font-weight: 400;
+                }
+
+                a[href$='.doc']:after, a[href$='.DOC']:after, a[href$='.docx']:after, a[href$='.DOCX']:after {
+                    content: ' \f1c2';
+                    font-family: FontAwesome;
+                    color: #2a3281;
+                    position: absolute;
+                    padding-left: 1px;
+                    font-weight: 400;
+                }
+
+                a[href$='.xlsx']:after {
+                    content: ' \f1c3';
+                    font-family: FontAwesome;
+                    color: #000;
+                    position: absolute;
+                    padding-left: 1px;
+                    font-weight: 400;
+                }
+        }
+
+        /*safari*/
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            .btn {
+                background-color: rgb(240, 240, 240);
+            }
+
+            .btn-default {
+                background-color: #fff;
+            }
+        }
+
+        #oudirectedit {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            text-decoration: none;
+        }
+  </style>
+ </head>
+ <body class="landing">
+  <div id="skip">
+   <a href="#content">
+    Skip navigation
+   </a>
+  </div>
+  <div id="header-bg">
+  </div>
+  <div class="container hidden-print" id="opener" role="banner">
+   <a class="brand" href="http://www.uark.edu/">
+    University of Arkansas
+   </a>
+   <h1 id="site-heading-parent">
+    <a class="siteName" href="https://financial-affairs.uark.edu/" title="AVCF">
+     Office of Financial Affairs
+    </a>
+   </h1>
+   <h1 id="site-heading">
+    <a href="https://cardops.uark.edu/" title="Credit Card Operations">
+     Credit Card Operations
+    </a>
+   </h1>
+   <div id="search-stack">
+    <div class="form-group" role="search">
+     <!-- Form update for site search dropdown -->
+     <form action="//google.uark.edu/search" class="form-search" id="site-search" method="get" name="gsa">
+      <input id="proxystylesheet" name="proxystylesheet" type="hidden" value="uark_v_2"/>
+      <input name="client" type="hidden" value="uark_v_2"/>
+      <input name="domains" type="hidden" value="uark.edu"/>
+      <input name="oe" type="hidden" value="UTF-8">
+       <input name="ie" type="hidden" value="UTF-8"/>
+       <input name="output" type="hidden" value="xml_no_dtd"/>
+       <div class="dropdown">
+        <input aria-expanded="false" aria-haspopup="true" class="input-medium search-query dropdown-toggle" data-toggle="dropdown" id="searchbox" name="q" placeholder="Search this site" title="Site Search" type="text"/>
+        <ul aria-labelledby="searchbox" class="dropdown-menu" id="searchParameter">
+         <script>
+          var hostname = window.location.hostname;
+
+
+                                if (hostname == 'www.uark.edu' || hostname == 'arkansas.edu' || hostname == 'uark.edu') {
+                                    document.write('<li><label for="radioLabela"><input id="radioLabela" class="searchRadio" type="radio" name="sitesearch" value="http://' + hostname + '"  /><i class="fa fa-lg fa-dot-circle-o"></i> Search this site</label></li>');
+                                    document.write('<li><label for="radioLabelb"><input id="radioLabelb" class="searchRadio" type="radio" name="sitesearch" value="http://uark.edu" checked /><i class="fa fa-lg fa-dot-circle-o"></i>  Search all uark.edu</label></li>');
+                                }
+                                else {
+                                    document.write('<li><label for="radioLabela"><input id="radioLabela" class="searchRadio" type="radio" name="sitesearch" value="http://' + hostname + '" checked /><i class="fa fa-lg fa-dot-circle-o"></i> Search this site</label></li>');
+                                    document.write('<li><label for="radioLabelb"><input id="radioLabelb" class="searchRadio" type="radio" name="sitesearch" value="http://uark.edu" /><i class="fa fa-lg fa-dot-circle-o"></i> Search all uark.edu</label></li>');
+                                }
+         </script>
+        </ul>
+       </div>
+       <button class="searchButton" id="searchButton" name="sa" title="Go" type="submit" value="Search">
+       </button>
+      </input>
+     </form>
+     <!-- END Form update for site search dropdown -->
+    </div>
+    <div id="global-dropdown">
+     <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Links to important University of Arkansas pages">
+      <span class="hidden">
+       Links to important University of Arkansas pages
+      </span>
+      <i class="fa fa-lg fa-bars">
+      </i>
+     </a>
+     <ul class="dropdown-menu">
+      <li class="nav-header">
+       University of Arkansas
+      </li>
+      <li>
+       <a href="http://www.uark.edu/a-to-z.php" onclick="ga('event', 'global-dropdown', 'click', 'A-Z Index');">
+        A-Z Index
+       </a>
+      </li>
+      <li>
+       <a href="https://learn.uark.edu" onclick="ga('event', 'global-dropdown', 'click', 'Bb Learn');">
+        Blackboard Learn
+       </a>
+      </li>
+      <li>
+       <a href="http://campusmaps.uark.edu/" onclick="ga('event', 'global-dropdown', 'click', 'Campus Map');">
+        Campus Map
+       </a>
+      </li>
+      <li>
+       <a href="http://UAConnect.uark.edu/" onclick="ga('event', 'global-dropdown', 'click', 'UAConnect');">
+        UAConnect
+       </a>
+      </li>
+      <li>
+       <a href="http://directory.uark.edu/" onclick="ga('event', 'global-dropdown', 'click', 'Directory');">
+        Directory
+       </a>
+      </li>
+      <li>
+       <a href="http://email.uark.edu/" onclick="ga('event', 'global-dropdown', 'click', 'UARK Gmail');">
+        UARK Gmail
+       </a>
+      </li>
+      <li>
+       <a href="http://outlook.office.com" onclick="ga('event', 'global-dropdown', 'click', 'Exchange Mail');">
+        Exchange Mail
+       </a>
+      </li>
+      <li>
+       <a href="http://webbasis.uark.edu/" onclick="ga('event', 'global-dropdown', 'click', 'webBASIS');">
+        webBASIS
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <nav class="navbar navbar-default" role="navigation">
+  </nav>
+  <form action="./" autocomplete="off" id="ctl01" method="post">
+   <div class="aspNetHidden">
+    <input id="__EVENTTARGET" name="__EVENTTARGET" type="hidden" value=""/>
+    <input id="__EVENTARGUMENT" name="__EVENTARGUMENT" type="hidden" value=""/>
+    <input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUJMjQxNDQ3NDI4D2QWAmYPDxYEHg9fX0FudGlYc3JmVG9rZW4FIDUwOWUwYjA0YjZhYTRjNjhhZjMwNmEwYjg5YzI5MGQzHhJfX0FudGlYc3JmVXNlck5hbWVlZBYCAgMPZBYCAgEPZBYCAgMPPCsAFwQADxYGHgdDb250ZW50BeIJPHA+DQpBbnkgZGVwYXJ0bWVudCBwcm9jZXNzaW5nIHBheW1lbnQgY2FyZCB0cmFuc2FjdGlvbnMgdmlhIGEgd2ViIHNpdGUgb3IgUG9pbnQgb2YgU2FsZSAoUE9TKSBtYWNoaW5lIGlzIGFmZmVjdGVkIGJ5IHRoZSBQYXltZW50IENhcmQgSW5kdXN0cnkgRGF0YSBTZWN1cml0eSBTdGFuZGFyZCAoUENJIERTUykuIENyZWRpdCBDYXJkIE9wZXJhdGlvbnMgaXMgcmVzcG9uc2libGUgZm9yIG1haW50YWluaW5nIGNvbXBsaWFuY2Ugd2l0aCB0aGVzZSBzdGFuZGFyZHMgZm9yIHRoZSBVbml2ZXJzaXR5IG9mIEFya2Fuc2FzLg0KPC9wPg0KPHA+QWxsIFVuaXZlcnNpdHkgb2YgQXJrYW5zYXMgbWVyY2hhbnRzIGFyZSByZXF1aXJlZCB0byBiZWNvbWUgUENJIERTUyBjb21wbGlhbnQsIGFzIHdlbGwgYXMgYWRoZXJlIHRvIGFsbCBwb2xpY2llcyBpbiB0aGUgRmF5ZXR0ZXZpbGxlIFBvbGljaWVzIGFuZCBQcm9jZWR1cmVzIDMwOSBzZXJpZXMgZm9yIFBheW1lbnQgQ2FyZCBDb21wbGlhbmNlLjwvcD4NCjx1bCBpZD0idWxpc3RzIj4NCiAgICA8bGk+PGEgaHJlZj0iaHR0cDovL3ZjZmEudWFyay5lZHUvcG9saWNpZXMvZmF5ZXR0ZXZpbGxlL2F2Y2YvMzA5MC5waHAiPjMwOS4wIFBheW1lbnQgQ2FyZCBVc2FnZSBQb2xpY3k8L2E+PC9saT4NCiAgICA8bGk+PGEgaHJlZj0iaHR0cDovL3ZjZmEudWFyay5lZHUvcG9saWNpZXMvZmF5ZXR0ZXZpbGxlL2F2Y2YvMzA5MS5waHAiPjMwOS4xIFBheW1lbnQgQ2FyZCBTZWN1cml0eSBQb2xpY3k8L2E+PC9saT4NCiAgICA8bGk+PGEgaHJlZj0iaHR0cDovL3ZjZmEudWFyay5lZHUvcG9saWNpZXMvZmF5ZXR0ZXZpbGxlL2F2Y2YvMzA5Mi5waHAiPjMwOS4yIFBheW1lbnQgQ2FyZCBJbmNpZGVudCBSZXNwb25zZSBQb2xpY3k8L2E+PC9saT4NCiAgICA8bGk+PGEgaHJlZj0iaHR0cDovL3ZjZmEudWFyay5lZHUvcG9saWNpZXMvZmF5ZXR0ZXZpbGxlL2F2Y2YvMzA5My5waHAiPjMwOS4zIFBheW1lbnQgQ2FyZCBHbG9zc2FyeSBvZiBUZXJtczwvYT48L2xpPg0KPC91bD4NCjxwPlRyYWluaW5nIGFuZCByZS1jZXJ0aWZpY2F0aW9uIGlzIHJlcXVpcmVkIGZvciBhbGwgdXNlcnMgYW5kIGlzIG9mZmVyZWQgdGhyb3VnaG91dCB0aGUgeWVhci4gUGxlYXNlIHJldmlldyA8YSBocmVmPSJ0cmFpbmluZy5hc3B4Ij5UcmFpbmluZyBJbmZvcm1hdGlvbjwvYT4gZm9yIHRyYWluaW5nIGFuZCBjZXJ0aWZpY2F0aW9uIHJlcXVpcmVtZW50cyBmb3IgZGVwYXJ0bWVudGFsIHVzZXJzLjwvcD4eFUVuYWJsZUVtYmVkZGVkU2NyaXB0c2ceHEVuYWJsZUVtYmVkZGVkQmFzZVN0eWxlc2hlZXRnZAMQFgZmAgECAgIDAgQCBRYGFCsAAmQQFgNmAgECAhYDD2RkD2RkD2RkFgNmZmYUKwACZBAWDWYCAQICAgMCBAIFAgYCBwIIAgkCCgILAgwWDQ9kZA9kZA9kZA9kZA9kZA9kZA9kZA9kZA9kZA9kZA9kZA9kZA9kZBYNZmZmZmZmZmZmZmZmZhQrAAJkEBYCZgIBFgIPZGQPZGQWAmZmFCsAAmQQFgNmAgECAhYDD2RkD2RkD2RkFgNmZmYUKwACZBAWAWYWAQ9kZBYBZhQrAAJkEBYHZgIBAgICAwIEAgUCBhYHD2RkD2RkD2RkD2RkD2RkD2RkD2RkFgdmZmZmZmZmDxYGZmZmZmZmFgEFeVRlbGVyaWsuV2ViLlVJLkVkaXRvckNvbnRleHRNZW51LCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDE4LjIuNTE2LjQwLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQODxQrAAQPFgIeBE5hbWUFE1JhZEVkaXRvclN0YXRpc3RpY3MWAh4LZG9ja2luZ1pvbmUFBkJvdHRvbQ8WAh8FBRVSYWRFZGl0b3JEb21JbnNwZWN0b3JkDxYCHwUFFlJhZEVkaXRvck5vZGVJbnNwZWN0b3JkDxYEHwUFFlJhZEVkaXRvckh0bWxJbnNwZWN0b3IeB1Zpc2libGVoZA8UKwEEZmZmZhYBBXRUZWxlcmlrLldlYi5VSS5FZGl0b3JNb2R1bGUsIFRlbGVyaWsuV2ViLlVJLCBWZXJzaW9uPTIwMTguMi41MTYuNDAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNBQPFCsABxQrAAMWAh4DVGFnBQtNYWluVG9vbGJhcg8UKwALDxYGHgRUeXBlCyl2VGVsZXJpay5XZWIuVUkuRWRpdG9yVG9vbFR5cGUsIFRlbGVyaWsuV2ViLlVJLCBWZXJzaW9uPTIwMTguMi41MTYuNDAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49MTIxZmFlNzgxNjViYTNkNAEfBQUFUHJpbnQeCFNob3J0Q3V0BQ5DVFJMK1AgLyBDTUQrUBYCHgpSZW5kZXJNb2RlBQdDbGFzc2ljDxYEHwkLKwQBHwUFDkFqYXhTcGVsbENoZWNrFgIfCwUHQ2xhc3NpYw8WBh8JCysEAR8FBQ5GaW5kQW5kUmVwbGFjZR8KBQ5DVFJMK0YgLyBDTUQrRhYCHwsFB0NsYXNzaWMPFgYfCQsrBAEfBQUJU2VsZWN0QWxsHwoFDkNUUkwrQSAvIENNRCtBFgIfCwUHQ2xhc3NpYw8WBh8JCysEAR8FBQNDdXQfCgUOQ1RSTCtYIC8gQ01EK1gWAh8LBQdDbGFzc2ljDxYGHwkLKwQBHwUFBENvcHkfCgUOQ1RSTCtDIC8gQ01EK0MWAh8LBQdDbGFzc2ljDxYGHwkLKwQBHwUFBVBhc3RlHwoFDkNUUkwrViAvIENNRCtWFgIfCwUHQ2xhc3NpYxQrAAIPFgYfBQUKUGFzdGVTdHJpcB4IU2hvd1RleHRoHgRUZXh0ZRYEHwsFB0NsYXNzaWMeCXNpemV0b2Zp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CwUHQ2xhc3NpYw8WBB8JCysEAR8FBQdPdXRkZW50FgIfCwUHQ2xhc3NpYw8WAh8JCysECBYCHwsFB0NsYXNzaWMPFgQfCQsrBAEfBQURSW5zZXJ0T3JkZXJlZExpc3QWAh8LBQdDbGFzc2ljDxYEHwkLKwQBHwUFE0luc2VydFVub3JkZXJlZExpc3QWAh8LBQdDbGFzc2ljDxYCHwkLKwQIFgIfCwUHQ2xhc3NpYw8WBB8JCysEAR8FBRFUb2dnbGVUYWJsZUJvcmRlchYCHwsFB0NsYXNzaWMPFgQfCQsrBAEfBQUOWGh0bWxWYWxpZGF0b3IWAh8LBQdDbGFzc2ljFCsBFWZmZmZmZmZmZmZmZmZmZmZmZmZmZmQUKwADZA8UKwAEDxYEHwkLKwQEHwUFCUZvcmVDb2xvchYIHwsFB0NsYXNzaWMfDwUNcmVDb2xvclBpY2tlch4LaXRlbXNwZXJyb3cFAjEwHw4FBHRydWUPFgQfCQsrBAQfBQUJQmFja0NvbG9yFggfCwUHQ2xhc3NpYx8PBQ1yZUNvbG9yUGlja2VyHxEFAjEwHw4FBHRydWUPFgQfCQsrBAIfBQUKQXBwbHlDbGFzcxYEHwsFB0NsYXNzaWMfDwUMcmVBcHBseUNsYXNzFCsAAg8WBh8FBQ5Gb3JtYXRTdHJpcHBlch8MaB8NZRYEHwsFB0NsYXNzaWMfDgUEdHJ1ZQ8UKwAFDxYCHwUFCFN0cmlwQWxsZA8WAh8FBQhTdHJpcENzc2QPFgIfBQUJU3RyaXBGb250ZA8WAh8FBQlTdHJpcFNwYW5kDxYCHwUFCVN0cmlwV29yZGQUKwEFZmZmZmYUKwEEZmZmAgJkFCsAAxYCHwgFD0Ryb3Bkb3duVG9vbGJhcg8UKwAODxYEHwkLKwQEHwUFDEluc2VydFN5bWJvbBYIHwsFB0NsYXNzaWMfEQUBOB8OBQR0cnVlHw8FDnJlSW5zZXJ0U3ltYm9sFCsAAg8WBh8FBQtJbnNlcnRUYWJsZR8MaB8NZRYIHwsFB0NsYXNzaWMfDwUNcmVJbnNlcnRUYWJsZR8RBQE4Hw4FBHRydWUPFCsADQ8WAh8FBQtUYWJsZVdpemFyZGQPFgIfBQUOSW5zZXJ0Um93QWJvdmVkDxYCHwUFDkluc2VydFJvd0JlbG93ZA8WAh8FBQlEZWxldGVSb3dkDxYCHwUFEEluc2VydENvbHVtbkxlZnRkDxYCHwUFEUluc2VydENvbHVtblJpZ2h0ZA8WAh8FBQxEZWxldGVDb2x1bW5kDxYCHwUFDE1lcmdlQ29sdW1uc2QPFgIfBQUJTWVyZ2VSb3dzZA8WAh8FBRNTcGxpdENlbGxIb3Jpem9udGFsZA8WAh8FBQlTcGxpdENlbGxkDxYCHwUFCkRlbGV0ZUNlbGxkDxYCHwUFElNldFRhYmxlUHJvcGVydGllc2QUKwENZmZmZmZmZmZmZmZmZhQrAAIPFgYfBQURSW5zZXJ0Rm9ybUVsZW1lbnQfDGgfDWUWBB8LBQdDbGFzc2ljHw4FBHRydWUPFCsACw8WAh8FBQ5JbnNlcnRGb3JtRm9ybWQPFgIfBQUQSW5zZXJ0Rm9ybUJ1dHRvbmQPFgIfBQUSSW5zZXJ0Rm9ybUNoZWNrYm94ZA8WAh8FBRBJbnNlcnRGb3JtSGlkZGVuZA8WAh8FBRJJbnNlcnRGb3JtUGFzc3dvcmRkDxYCHwUFD0luc2VydEZvcm1SYWRpb2QPFgIfBQUPSW5zZXJ0Rm9ybVJlc2V0ZA8WAh8FBRBJbnNlcnRGb3JtU2VsZWN0ZA8WAh8FBRBJbnNlcnRGb3JtU3VibWl0ZA8WAh8FBRJJbnNlcnRGb3JtVGV4dGFyZWFkDxYCHwUFDkluc2VydEZvcm1UZXh0ZBQrAQtmZmZmZmZmZmZmZg8WBB8JCysEBB8FBQ1JbnNlcnRTbmlwcGV0FgIfCwUHQ2xhc3NpYw8WBB8JCysEAR8FBQ5JbWFnZU1hcERpYWxvZxYCHwsFB0NsYXNzaWMPFgYfCQsrBAIfBQUQSW5zZXJ0Q3VzdG9tTGluax8KBRZDVFJMK0FMVCtLIC8gQ01EK0FMVCtLFgQfCwUHQ2xhc3NpYx8PBQ1yZUN1c3RvbUxpbmtzDxYCHwkLKwQIFgIfCwUHQ2xhc3NpYw8WBB8JCysEAR8FBQ5Db252ZXJ0VG9Mb3dlchYCHwsFB0NsYXNzaWMPFgQfCQsrBAEfBQUOQ29udmVydFRvVXBwZXIWAh8LBQdDbGFzc2ljDxYCHwkLKwQIFgIfCwUHQ2xhc3NpYw8WBB8JCysEAh8FBQRab29tFgQfCwUHQ2xhc3NpYx8QBQM1ZW0PFgQfCQsrBAQfBQUNTW9kdWxlTWFuYWdlchYCHwsFB0NsYXNzaWMPFgYfCQsrBAEfBQUQVG9nZ2xlU2NyZWVuTW9kZR8KBQ1GMTEgLyBDTUQrRjExFgIfCwUHQ2xhc3NpYw8WBB8JCysEAR8FBQtBYm91dERpYWxvZxYCHwsFB0NsYXNzaWMUKwEOZgICAgJmZmZmZmZmZmZmZmQPFCsBB2ZmZmZmZmYWAQV3VGVsZXJpay5XZWIuVUkuRWRpdG9yVG9vbEdyb3VwLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDE4LjIuNTE2LjQwLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQWBGYPDxYIHwNnHwRnHwsLKXJUZWxlcmlrLldlYi5VSS5SZW5kZXJNb2RlLCBUZWxlcmlrLldlYi5VSSwgVmVyc2lvbj0yMDE4LjIuNTE2LjQwLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPTEyMWZhZTc4MTY1YmEzZDQBHwdoZBYCZg88KwAEAQAPFgofCwsrBQEfA2cfBGceFVNob3dDb250ZW50RHVyaW5nTG9hZGgeDkRlc3Ryb3lPbkNsb3NlaGRkAgMPZBYCZg8UKwACDxYCHwsLKwUBZGRkZE7QMJkePl2JkP/l0gWLqQyqQNTqgHs3zwXHH2PYxt40"/>
+   </div>
+   <script type="text/javascript">
+    //<![CDATA[
+var theForm = document.forms['ctl01'];
+if (!theForm) {
+    theForm = document.ctl01;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+   </script>
+   <script src="/WebResource.axd?d=_5pxh6QzU2JaTkKVVtWF2XSAxTpCsuJN0oes3cW1EQt4AVt5sTsmis55VzAMvuTWQli0YtCBM9x1FDReXI8fRKDtLhlL7Lu-scwnrcucMDE1&amp;t=636765251060000000" type="text/javascript">
+   </script>
+   <script src="/ScriptResource.axd?d=KtVch-nIJZ7u3fMjNp8EkHmmx8AqGhC8N3v59fqQ836TKzBmsedCdhyFUNiI1xyD7tbE71IMsPtU8ebTb33zQrew8XqAEH5PYpKRimUimFt_JaLMg4UElXV9iOAvs5Rbf1iJZXOmvnmcP3uhCFjThJ-rags5O9QCiXoMv2uLEJ81&amp;t=2b48f70a" type="text/javascript">
+   </script>
+   <script src="/ScriptResource.axd?d=NnjlTItF5qrSINe4MzAXpYoOSGQTU_lXxfvBxSe3gu2ME0cZO8TNFeT5F2Ju9aT30a_yUV0ixL3RmhIYhQSfTxrEchbIzjDKRJMoFoqbFqQwxHRYZ8cPb94OIUEqFX2LaeUsk2hBeN1DwU6RJXwJh3dC01IdoSnpR1kK1H6V9UpCM2n5s0B505NeRlmE4-t90&amp;t=2b48f70a" type="text/javascript">
+   </script>
+   <div class="aspNetHidden">
+    <input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="CA0B0334"/>
+   </div>
+   <div id="main-container" role="main">
+    <div class="container" style="padding-top: 20px;">
+     <div class="col-md-3" id="sidebar">
+      <p class="hidden-md hidden-lg">
+       <button class="btn btn-default" data-target=".navbar-ex2-collapse" data-toggle="collapse" type="button">
+        <i class="icon-chevron-down">
+        </i>
+        Menu
+       </button>
+      </p>
+      <nav class="collapse navbar-collapse sidenav navbar-ex2-collapse" role="navigation">
+       <ul class="nav nav-stacked">
+        <li>
+         <a href="audit.aspx">
+          Audit Procedures
+         </a>
+        </li>
+        <li>
+         <a href="cn.aspx">
+          CASHNet Information
+         </a>
+        </li>
+        <li>
+         <a href="incident.aspx">
+          Incident Reporting
+         </a>
+        </li>
+        <li>
+         <a href="listserv.aspx">
+          Listserv Information
+         </a>
+        </li>
+        <li>
+         <a href="pci.aspx">
+          PCI DSS Requirements
+         </a>
+        </li>
+        <li>
+         <a href="processing.aspx">
+          Processing Best Practices
+         </a>
+        </li>
+        <li>
+         <a href="terminal.aspx">
+          Processing Equipment
+         </a>
+        </li>
+        <li>
+         <a href="training.aspx">
+          Training Information
+         </a>
+        </li>
+       </ul>
+      </nav>
+      <br/>
+      <br/>
+      <address>
+       <p>
+        Credit Card Operations
+        <br/>
+        University of Arkansas
+        <br/>
+        127 Administration Building
+        <br/>
+        Fayetteville, Arkansas 72701
+        <br/>
+        <a href="mailto:cardops@uark.edu">
+         cardops@uark.edu
+        </a>
+       </p>
+      </address>
+     </div>
+     <div class="col-md-9" id="main">
+      <script type="text/javascript">
+       //<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$MainContent$ScriptManager1', 'ctl01', [], [], [], 90, 'ctl00');
+//]]>
+      </script>
+      <div id="ctl00_MainContent_RadEditor1" style="width:100%;">
+       <!-- 2018.2.516.40 -->
+       <p>
+        Any department processing payment card transactions via a web site or Point of Sale (POS) machine is affected by the Payment Card Industry Data Security Standard (PCI DSS). Credit Card Operations is responsible for maintaining compliance with these standards for the University of Arkansas.
+       </p>
+       <p>
+        All University of Arkansas merchants are required to become PCI DSS compliant, as well as adhere to all policies in the Fayetteville Policies and Procedures 309 series for Payment Card Compliance.
+       </p>
+       <ul id="ulists">
+        <li>
+         <a href="http://vcfa.uark.edu/policies/fayetteville/avcf/3090.php">
+          309.0 Payment Card Usage Policy
+         </a>
+        </li>
+        <li>
+         <a href="http://vcfa.uark.edu/policies/fayetteville/avcf/3091.php">
+          309.1 Payment Card Security Policy
+         </a>
+        </li>
+        <li>
+         <a href="http://vcfa.uark.edu/policies/fayetteville/avcf/3092.php">
+          309.2 Payment Card Incident Response Policy
+         </a>
+        </li>
+        <li>
+         <a href="http://vcfa.uark.edu/policies/fayetteville/avcf/3093.php">
+          309.3 Payment Card Glossary of Terms
+         </a>
+        </li>
+       </ul>
+       <p>
+        Training and re-certification is required for all users and is offered throughout the year. Please review
+        <a href="training.aspx">
+         Training Information
+        </a>
+        for training and certification requirements for departmental users.
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </form>
+  <section class="gray" id="prefooter">
+   <div class="container">
+    <div class="row">
+     <p style="text-align: center;">
+      Note: documents in Portable Document Format (PDF) require Adobe Acrobat Reader 5.0 or higher to view,
+      <a href="http://get.adobe.com/reader/">
+       download Adobe Acrobat Reader
+      </a>
+      .
+     </p>
+    </div>
+   </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <h3 id="footer-logo">
+       <a href="http://uark.edu">
+        UNIVERSITY OF ARKANSAS
+       </a>
+      </h3>
+      <ul class="list-unstyled" id="footer-global-links">
+       <li>
+        <a href="https://www.uark.edu/admissions/index.php" onclick="ga('event', 'footer-global-links', 'click', 'Admissions');">
+         Admissions
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/academics/index.php" onclick="ga('event', 'footer-global-links', 'click', 'Academics');">
+         Academics
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/campus-life/index.php" onclick="ga('event', 'footer-global-links', 'click', 'Campus Life');">
+         Campus Life
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/research/index.php" onclick="ga('event', 'footer-global-links', 'click', 'Research');">
+         Research
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/athletics/index.php" onclick="ga('event', 'footer-global-links', 'click', 'Athletics');">
+         Athletics
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/about/index.php" onclick="ga('event', 'footer-global-links', 'click', 'About');">
+         About
+        </a>
+       </li>
+      </ul>
+      <ul class="nav clearfix list-unstyled" id="social-stack">
+       <li>
+        <a href="https://www.facebook.com/UofArkansas" onclick="ga('event', 'social-stack', 'click', 'Facebook');">
+         <i class="fa fa-facebook">
+         </i>
+         <span class="sr-only">
+          Like us on Facebook
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://twitter.com/uarkansas" onclick="ga('event', 'social-stack', 'click', 'Twitter');">
+         <i class="fa fa-twitter">
+         </i>
+         <span class="sr-only">
+          Follow us on Twitter
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.youtube.com/user/UniversityArkansas" onclick="ga('event', 'social-stack', 'Youclick', 'YouTube');">
+         <i class="fa fa-youtube">
+         </i>
+         <span class="sr-only">
+          Watch us on YouTube
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://instagram.com/uarkansas" onclick="ga('event', 'social-stack', 'click', 'Instagram');">
+         <i class="fa fa-instagram">
+         </i>
+         <span class="sr-only">
+          See us on Instagram
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://pinterest.com/uofaadmissions/" onclick="ga('event', 'social-stack', 'click', 'Pinterest');">
+         <i class="fa fa-pinterest">
+         </i>
+         <span class="sr-only">
+          Join us on Pinterest
+         </span>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.linkedin.com/company/university-of-arkansas" onclick="ga('event', 'social-stack', 'click', 'LinkedIn');">
+         <i class="fa fa-linkedin">
+         </i>
+         <span class="sr-only">
+          Connect with us on LinkedIn
+         </span>
+        </a>
+       </li>
+      </ul>
+      <hr/>
+      <div class="row">
+       <div class="col-sm-3">
+        <i class="fa fa-map-marker pull-left fa-lg">
+        </i>
+        <address>
+         1 University of Arkansas
+         <br/>
+         Fayetteville, AR 72701
+         <br/>
+         479-575-2000
+        </address>
+        <a href="https://campusmaps.uark.edu/" onclick="ga('event', 'footer-global-links', 'click', 'Campus Maps');" title="View Campus Maps">
+         <img alt="Map of University of Arkansas Campus" class="img-responsive" src="//www.uark.edu/_resources/img/map.png"/>
+        </a>
+       </div>
+       <div class="col-sm-3 footer-news">
+        <h4>
+         <a href="https://news.uark.edu/" onclick="ga('event', 'footer-global-links', 'click', 'NEWS Home Page');" title="Arkansas Newswire">
+          NEWS
+         </a>
+        </h4>
+        <ul id="newsFooter">
+        </ul>
+        <script>
+         $(function () {
+                                    parseNews('//campusdata.uark.edu/apiv2/articles/articlesCommon?$orderby=publishDate+desc&$filter=Commons/any%28c:+c/id+eq+1%29&$top=3');
+
+
+                                });
+
+                                function parseNews(url) {
+                                    $.ajax({
+                                        url: url,
+                                        data: {},
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: 'jsonp',
+                                        jsonpCallback: 'Articles',
+                                        async: "true",
+                                        cache: "true",
+                                        success: function (articles) {
+                                            var list_data = '';
+                                            $.each(articles, function (key, a) {
+                                                var headline = a.headline;
+                                                headline = headline.replace("â€˜", "'").replace("â€™", "'").replace("â€œ", "\"").replace("â€", "\"");
+                                                list_data += '<li><a href="http://news.uark.edu/articles/' + a.id + '" onclick="gaSendEvent(this.href, \'footer-global-links\', \'news.uark.edu\/articles\/' + a.id + '\');">' + headline + '</a></li>';
+                                            })
+                                            $(list_data).appendTo("#newsFooter");
+                                        }
+                                    });
+
+                                }
+        </script>
+        <script>
+         $(function () {
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: 'https://calendars.uark.edu/RSSSyndicator.aspx?type=N&amp;category=32-0&amp;number=5&amp;rssid=25&amp;expire=Y&amp;sortorder=ASC',
+                                        data: {},
+                                        cache: 'true',
+                                        success: function (data) {
+                                            var list_data = '';
+
+                                            var $xml = $(data).find('item:lt(3)');
+                                            $xml.each(function () {
+                                                var $this = $(this); var headline = $this.find('title').text();
+                                                var link = $this.find('link').text();
+                                                list_data += '<li><a href="' + link + '" onclick="gaSendEvent(this.href, \'footer-global-links\', \' + headline + \');">' + headline + '</a></li>';
+                                            });
+
+                                            $(list_data).appendTo("#eventsFooter");
+                                        }
+                                    });
+                                });
+        </script>
+       </div>
+       <div class="col-sm-3 footer-events">
+        <h4>
+         <a href="https://calendars.uark.edu/" onclick="ga('event', 'footer-global-links', 'click', 'EVENTS Home Page');" title="Calendar Events">
+          EVENTS
+         </a>
+        </h4>
+        <ul id="eventsFooter">
+        </ul>
+       </div>
+       <div class="col-sm-3 footer-buttons">
+        <a class="btn btn-default btn-lg" href="https://application.uark.edu/" onclick="ga('event', 'footer-buttons', 'click', 'APPLY Online');">
+         <i class="fa fa-check fa-lg fa-fw">
+         </i>
+         <strong>
+          APPLY
+         </strong>
+         Online
+        </a>
+        <a class="btn btn-default btn-lg" href="http://visit.uark.edu/" onclick="ga('event', 'footer-buttons', 'click', 'Schedule a VISIT');">
+         <i class="fa fa-calendar fa-lg fa-fw">
+         </i>
+         Schedule a
+         <strong>
+          VISIT
+         </strong>
+        </a>
+        <a class="btn btn-default ca btn-lg" href="https://campaign.uark.edu/" onclick="ga('event', 'footer-buttons', 'click', 'Make a Gift');">
+         <strong>
+          Support
+         </strong>
+         Campaign Arkansas
+        </a>
+       </div>
+      </div>
+      <hr/>
+      <ul class="centered-nav vertical-divide list-unstyled footer-disclaimer">
+       <li>
+        <a href="https://emergency.uark.edu/" onclick="ga('event', 'footer-disclaimer', 'click', 'Emergency Information');">
+         Emergency Information
+        </a>
+       </li>
+       <li>
+        <a href="https://report.uark.edu/" onclick="ga('event', 'footer-disclaimer', 'click', 'Report a Concern');">
+         Report a Concern
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/privacy-policy.php" onclick="ga('event', 'footer-disclaimer', 'click', 'Privacy Policy');">
+         Privacy Policy
+        </a>
+       </li>
+       <li>
+        <a href="https://www.uark.edu/contact-us.php" onclick="ga('event', 'footer-disclaimer', 'click', 'Contact Us');">
+         Contact Us
+        </a>
+       </li>
+       <li>
+        <a href="https://m.uark.edu" onclick="ga('event', 'footer-disclaimer', 'click', 'Mobile');">
+         Mobile
+        </a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script>
+   var current_path = "/index.php";
+  </script>
+  <!-- javascripts that don't need to go in the head can go here -->
+  <!-- respond.js - Enables media queries in some unsupported browsers-->
+  <script src="//www.uark.edu/_resources/js/respond.js" type="text/javascript">
+  </script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="//www.uark.edu/_resources/php/combine.php?t=js&amp;f=nivo/jquery.nivo.slider.pack.js,bootstrap.min.js,oucampus.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function () {
+                                    $('#slider').nivoSlider({
+                                        effect: 'fade',
+                                        pauseTime: 6000, // How long each slide will show
+                                        pauseOnHover: true, // Stop animation while hovering
+                                    });
+                                });
+  </script>
+  <script src="//www.uark.edu/inc/js/tablesorter/jquery.tablesorter.min.js" type="text/javascript">
+  </script>
+  <script>
+   $(function () {
+                                           $('table.tablesorter').addClass('table-striped').tablesorter();
+                                       });
+  </script>
+  <!-- JS and CSS for search and mobile-menu -->
+  <script type="text/javascript">
+   $(function () {
+
+                                    $(".form-search").on("click", function () {
+                                        selectedValue = $(".form-search [name='sitesearch']:checked").val();
+                                        if (selectedValue == "http://uark.edu") {
+                                            $("label[for=radioLabela]").removeClass("searchSelected");
+                                            $("label[for=radioLabelb]").addClass("searchSelected");
+                                            $("#searchbox").attr("placeholder", "Search all uark.edu");
+                                        } else if ($.type(selectedValue) === "string") {
+                                            $("label[for=radioLabela]").addClass("searchSelected");
+                                            $("label[for=radioLabelb]").removeClass("searchSelected");
+                                            $("#searchbox").attr("placeholder", "Search this site");
+                                        }
+                                    });
+
+
+                                    $("#sidebar .nav-stacked").clone().addClass("visible-xs-block hidden-sm hidden-md hidden-lg").appendTo(".navbar-default .navbar-collapse");
+
+                                });
+  </script>
+  <!-- END JS and CSS for search and mobile-menu -->
+  <!--
+<script src="//www.uark.edu/_resources/js/oucampus-2.js" type="text/javascript" ></script>
+-->
+  <script type="text/javascript">
+   <!--
+        function directedit() {
+            var link = document.getElementById("oudirectedit").parentNode.innerHTML;
+            link.trim();
+            var anchor = link.replace("</a>", "Copyright of University of Arkansas</a>");
+            anchor = anchor.replace("oudirectedit", "none");
+            document.getElementById("directedit-footer").innerHTML = anchor;
+            //console.log(anchor);
+        }
+        window.onload = function () { directedit(); }
+//-->
+  </script>
+  <!--2017-10-13T15:07:00Z-->
+  <div id="hidden">
+   <a href="http://a.omniupdate.uark.edu/10?skin=oucampus&amp;account=www&amp;site=www&amp;action=de&amp;path=/index.pcf" id="oudirectedit" rel="nofollow">
+    <span class="hidden">
+     Edit webpage
+    </span>
+   </a>
+  </div>
+  <span id="directedit-footer">
+  </span>
+ </body>
+</html>
+

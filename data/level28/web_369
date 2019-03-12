@@ -1,0 +1,362 @@
+http://mail.uchospitals.edu
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Copyright (c) 2006 Microsoft Corporation.  All rights reserved. -->
+<!-- OwaPage = ASP.auth_logon_aspx -->
+<!-- {57A118C6-2DA9-419d-BE9A-F92B0F9A418B} -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+ <head>
+  <link href="/owa/14.3.439.0/themes/resources/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <meta content="text/html; CHARSET=utf-8" http-equiv="Content-Type"/>
+  <meta content="NOINDEX, NOFOLLOW" name="Robots"/>
+  <title>
+   Outlook Web App
+  </title>
+  <link href="/owa/14.3.439.0/themes/resources/logon.css" rel="stylesheet" type="text/css"/>
+  <link href="/owa/14.3.439.0/themes/resources/owafont.css" rel="stylesheet" type="text/css"/>
+  <script src="/owa/14.3.439.0/scripts/premium/flogon.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   <!--
+	var a_fRC = 1;
+	var g_fFcs = 1;
+	var a_fLOff = 0;
+	var a_fCAC = 1;
+	var a_fEnbSMm = 1;
+/// <summary>
+/// Is Mime Control installed?
+/// </summary>
+function IsMimeCtlInst(progid)
+{
+	if (!a_fEnbSMm)
+		return false;
+
+	var oMimeVer = null;
+
+	try 
+	{
+		// TODO: ingore this on none IE browser
+		//
+		//oMimeVer = new ActiveXObject(progid);
+	} 
+	catch (e)
+	{ 
+	}
+
+	if (oMimeVer != null)
+		return true;
+	else
+		return false;
+}
+
+/// <summary>
+/// Render out the S-MIME control if it is installed.
+/// </summary>
+function RndMimeCtl()
+{
+	if (IsMimeCtlInst("MimeBhvr.MimeCtlVer"))
+		RndMimeCtlHlpr("MimeNSe2k3", "D801B381-B81D-47a7-8EC4-EFC111666AC0", "MIMEe2k3", "mimeLogoffE2k3");
+
+	if (IsMimeCtlInst("OwaSMime.MimeCtlVer"))
+		RndMimeCtlHlpr("MimeNSe2k7sp1", "833aa5fb-7aca-4708-9d7b-c982bf57469a", "MIMEe2k7sp1", "mimeLogoffE2k7sp1");
+
+	if (IsMimeCtlInst("OwaSMime2.MimeCtlVer"))
+		RndMimeCtlHlpr("MimeNSe2k9", "4F40839A-C1E5-47E3-804D-A2A17F42DA21", "MIMEe2k9", "mimeLogoffE2k9");
+}
+
+/// <summary>
+/// Helper function to factor out the rendering of the S/MIME control.
+/// </summary>
+function RndMimeCtlHlpr(objid, classid, ns, id)
+{
+	document.write("<OBJECT id='" + objid + "' classid='CLSID:" + classid + "'></OBJECT>");
+	document.write("<?IMPORT namespace='" + ns + "' implementation=#" + objid + ">");
+	document.write("<" + ns + ":Logoff id='" + id + "' style='display:none'/>");
+}
+	-->
+  </script>
+ </head>
+ <body class="owaLgnBdy">
+  <noscript>
+   <div id="dvErr">
+    <table cellpadding="0" cellspacing="0">
+     <tr>
+      <td>
+       <img alt="" src="/owa/14.3.439.0/themes/base/warn.png"/>
+      </td>
+      <td style="width:100%">
+       To use Outlook Web App, browser settings must allow scripts to run. For information about how to allow scripts, consult the Help for your browser. If your browser doesn't support scripts, you can download
+       <a href="http://www.microsoft.com/windows/ie/downloads/default.mspx">
+        Windows Internet Explorer
+       </a>
+       for access to Outlook Web App.
+      </td>
+     </tr>
+    </table>
+   </div>
+  </noscript>
+  <form action="/owa/auth.owa" autocomplete="off" enctype="application/x-www-form-urlencoded" method="POST" name="logonForm">
+   <input name="destination" type="hidden" value="https://mail.uchospitals.edu/owa/"/>
+   <input name="flags" type="hidden" value="0"/>
+   <input name="forcedownlevel" type="hidden" value="0"/>
+   <table align="center" cellpadding="0" cellspacing="0" id="tblMain">
+    <tr>
+     <td colspan="3">
+      <table cellpadding="0" cellspacing="0" class="tblLgn">
+       <tr>
+        <td class="lgnTL">
+         <img alt="" src="/owa/14.3.439.0/themes/resources/lgntopl.gif"/>
+        </td>
+        <td class="lgnTM">
+        </td>
+        <td class="lgnTR">
+         <img alt="" src="/owa/14.3.439.0/themes/resources/lgntopr.gif"/>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+    <tr>
+     <td id="mdLft">
+     </td>
+     <td id="mdMid">
+      <table class="mid" id="tblMid">
+       <tr>
+        <td class="expl" id="expltxt">
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <hr/>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <table class="nonMSIE">
+          <col/>
+          <col class="w100"/>
+          <tr id="trSec">
+           <td colspan="2">
+            Security 
+									‎(
+            <a href="#" id="lnkShwSec" onclick="clkExp('lnkShwSec')">
+             show explanation
+            </a>
+            <a href="#" id="lnkHdSec" onclick="clkExp('lnkHdSec')" style="display:none">
+             hide explanation
+            </a>
+            )‎
+           </td>
+          </tr>
+          <tr>
+           <td>
+            <input checked="" class="rdo" id="rdoPblc" name="trusted" onclick="clkSec()" type="radio" value="0"/>
+           </td>
+           <td>
+            <label for="rdoPblc">
+             This is a public or shared computer
+            </label>
+           </td>
+          </tr>
+          <tr class="expl" id="trPubExp" style="display:none">
+           <td>
+           </td>
+           <td>
+            Select this option if you use Outlook Web App on a public computer. Be sure to sign out when you've finished and close all windows to end your session.
+           </td>
+          </tr>
+          <tr>
+           <td>
+            <input class="rdo" id="rdoPrvt" name="trusted" onclick="clkSec()" type="radio" value="4"/>
+           </td>
+           <td>
+            <label for="rdoPrvt">
+             This is a private computer
+            </label>
+           </td>
+          </tr>
+          <tr class="expl" id="trPrvtExp" style="display:none">
+           <td>
+           </td>
+           <td>
+            Select this option if you're the only person who uses this computer. Your server will allow a longer period of inactivity before signing you out.
+           </td>
+          </tr>
+          <tr class="wrng" id="trPrvtWrn" style="display:none">
+           <td>
+           </td>
+           <td>
+            Warning:  By selecting this option, you confirm that this computer complies with your organization's security policy.
+           </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <hr/>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <table class="nonMSIE">
+          <col/>
+          <col class="w100"/>
+          <tr>
+           <td>
+            <input checked="true" class="rdo" disabled="true" id="chkBsc" onclick="clkBsc();" type="checkbox"/>
+           </td>
+           <td nowrap="">
+            <label for="chkBsc">
+             Use the light version of Outlook Web App
+            </label>
+           </td>
+          </tr>
+          <tr class="disBsc" id="trBscExp">
+           <td>
+           </td>
+           <td>
+            The light version of Outlook Web App includes fewer features. Use it if you're on a slow connection or using a computer with unusually strict browser security settings. We also support the full Outlook Web App experience on some browsers on Windows, Mac, and Linux computers. To check out all the supported browsers and operating systems,
+            <a href="http://go.microsoft.com/fwlink/?LinkID=129362" id="bscLnk">
+             click here.
+            </a>
+           </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <hr/>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <table class="nonMSIE">
+          <col class="nowrap"/>
+          <col class="w100"/>
+          <col/>
+          <tr>
+           <td nowrap="">
+            <font color="#880000">
+             <b>
+              NOTE:
+             </b>
+            </font>
+           </td>
+           <td class="txtpad">
+            <font color="#880000">
+             Non-UCHAD accounts use "DOMAIN\username" syntax. Example:
+             <i>
+              BSDAD\kwillia1
+             </i>
+            </font>
+           </td>
+          </tr>
+          <tr>
+           <td nowrap="">
+            <label for="username">
+             User name:
+            </label>
+           </td>
+           <td class="txtpad">
+            <input class="txt" id="username" name="username" type="text"/>
+           </td>
+          </tr>
+          <tr>
+           <td nowrap="">
+            <label for="password">
+             Password:
+            </label>
+           </td>
+           <td class="txtpad">
+            <input class="txt" id="password" name="password" onfocus="g_fFcs=0" type="password"/>
+           </td>
+          </tr>
+          <tr>
+           <td align="right" class="txtpad" colspan="2">
+            <input class="btn" onclick="clkLgn()" type="submit" value="Sign in"/>
+            <input name="isUtf8" type="hidden" value="1"/>
+           </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <hr/>
+        </td>
+       </tr>
+      </table>
+      <table class="mid" id="tblMid2" style="display:none">
+       <tr>
+        <td>
+         <hr/>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <br/>
+         Please enable cookies for this Web site.
+         <br/>
+         <br/>
+         Cookies are currently disabled by your browser. Outlook Web App requires that cookies be enabled.
+         <br/>
+         <br/>
+         For information about how to enable cookies, see the Help for your Web browser.
+         <br/>
+         <br/>
+         <br/>
+        </td>
+       </tr>
+       <tr>
+        <td>
+         <hr/>
+        </td>
+       </tr>
+       <tr>
+        <td align="right" class="txtpad">
+         <input class="btn" onclick="clkRtry()" style="float: right" type="button" value="Retry"/>
+        </td>
+       </tr>
+      </table>
+      <table class="mid tblConn">
+       <tr>
+        <td align="right" class="tdConnImg" rowspan="2">
+         <img alt="" src="/owa/14.3.439.0/themes/resources/lgnexlogo.gif" style="vertical-align:top"/>
+        </td>
+        <td class="tdConn">
+         Connected to Microsoft Exchange on EXCASPR05CCD
+        </td>
+       </tr>
+       <tr>
+        <td class="tdCopy">
+         © 2010 Microsoft Corporation. All rights reserved.
+        </td>
+       </tr>
+      </table>
+     </td>
+     <td id="mdRt">
+     </td>
+    </tr>
+    <tr>
+     <td colspan="3">
+      <table cellpadding="0" cellspacing="0" class="tblLgn">
+       <tr>
+        <td class="lgnBL">
+         <img alt="" src="/owa/14.3.439.0/themes/resources/lgnbotl.gif"/>
+        </td>
+        <td class="lgnBM">
+        </td>
+        <td class="lgnBR">
+         <img alt="" src="/owa/14.3.439.0/themes/resources/lgnbotr.gif"/>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+  </form>
+ </body>
+</html>
+

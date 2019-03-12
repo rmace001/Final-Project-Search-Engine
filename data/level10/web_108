@@ -1,0 +1,695 @@
+http://www.ehs.berkeley.edu/
+<!DOCTYPE html>
+<head>
+ <meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+ <meta charset="utf-8"/>
+ <script type="text/javascript">
+  window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);
+ </script>
+ <meta content="width=device-width, initial-scale=1" name="viewport"/>
+ <meta content="Drupal 7 (https://www.drupal.org)" name="generator"/>
+ <link href="https://ehs.berkeley.edu/" rel="canonical"/>
+ <link href="https://ehs.berkeley.edu/" rel="shortlink"/>
+ <title>
+  Environment, Health &amp; Safety |
+ </title>
+ <link href="https://ehs.berkeley.edu/sites/default/files/css/css_xE-rWrJf-fncB6ztZfd2huxqgxu4WO-qwma6Xer30m4.css" media="all" rel="stylesheet" type="text/css"/>
+ <link href="https://ehs.berkeley.edu/sites/default/files/css/css_QnDqumlAmBiA-LkPKOOEj-wMlRQlYuHQdMmPGFs03GQ.css" media="all" rel="stylesheet" type="text/css"/>
+ <link href="https://ehs.berkeley.edu/sites/default/files/css/css_byDyV_Zd48K9Bh3Bwwx0hJJZ3Jd6Fd3FKXQbdoP21Zs.css" media="all" rel="stylesheet" type="text/css"/>
+ <link href="https://ehs.berkeley.edu/sites/default/files/css/css_Q8T1z3yuftzDx_pucqlGjkxuzo6_JEfrlZ53A0n6qi4.css" media="all" rel="stylesheet" type="text/css"/>
+ <link href="https://ehs.berkeley.edu/sites/default/files/css/css_RVaTAAdxkBO7xw58_ELplpEoHxaK5tPqhdiJFo2jgdU.css" media="all" rel="stylesheet" type="text/css"/>
+ <script src="https://ehs.berkeley.edu/sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js" type="text/javascript">
+ </script>
+ <script src="https://ehs.berkeley.edu/sites/default/files/js/js_0qGD1CqGsDpO1yJ1qzckatKYx8lDESM0HyyA0gOUh_k.js" type="text/javascript">
+ </script>
+ <script src="https://ehs.berkeley.edu/sites/default/files/js/js_oZR9wxkXE3X8SxfFC1y2XFymwwQX-aECjUcwlNFOXl8.js" type="text/javascript">
+ </script>
+ <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-25942351-1", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+ </script>
+ <script src="https://ehs.berkeley.edu/sites/default/files/js/js_atRLDTRIuAF4BAYhh5qvbAX3SPKfvvH-zmqGYGwQGt4.js" type="text/javascript">
+ </script>
+ <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"ehstheme","theme_token":"uWwgRmCaF-yCxJSINGOEOS3A7Jd1gNkTEkG4qkbrqnw","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"misc\/ui\/jquery.ui.core.min.js":1,"misc\/ui\/jquery.ui.widget.min.js":1,"misc\/ui\/jquery.ui.accordion.min.js":1,"sites\/all\/themes\/ehs\/js\/jquery.flexslider-min.js":1,"sites\/all\/themes\/ehs\/js\/slide.js":1,"sites\/all\/modules\/accordion_blocks\/accordion_init.js":1,"sites\/all\/modules\/dynamic_banner\/js\/banner.js":1,"sites\/all\/modules\/image_caption\/image_caption.min.js":1,"sites\/all\/modules\/video\/js\/video.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/entity_iframe\/modules\/entity_iframe_resize\/js\/entity-iframe-consumer.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/ehs\/js\/custom.js":1,"sites\/all\/themes\/ehs\/js\/accordian.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"misc\/ui\/jquery.ui.core.css":1,"misc\/ui\/jquery.ui.theme.css":1,"misc\/ui\/jquery.ui.accordion.css":1,"modules\/book\/book.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/accordion_blocks\/accordion_init.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/dynamic_banner\/css\/banner.css":1,"sites\/all\/modules\/panels\/css\/panels.css":1,"sites\/all\/modules\/video\/css\/video.css":1,"sites\/all\/modules\/custom_search\/custom_search.css":1,"sites\/all\/modules\/node_embed\/plugins\/node_embed\/node_embed.css":1,"sites\/all\/themes\/ehs\/css\/style.css":1}},"custom_search":{"form_target":"_self","solr":1},"better_exposed_filters":{"views":{"custom_blocks":{"displays":{"block_1":{"filters":[]},"block":{"filters":[]}}},"news_alerts":{"displays":{"block":{"filters":[]}}}}},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/":true}});
+//--><!]]>
+ </script>
+ <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body class="html front not-logged-in two-sidebars page-node">
+ <div id="wrapper">
+  <header id="header" role="banner">
+   <div id="logo">
+    <a href="/" title="Home">
+     <img src="https://ehs.berkeley.edu/sites/default/files/EHSWebHeader_0.png"/>
+    </a>
+   </div>
+   <section class="home-search">
+    <h2>
+     Search
+    </h2>
+    <div class="region region-searchblock">
+     <div class="block block-search" id="block-search-form">
+      <div class="content">
+       <form accept-charset="UTF-8" action="/" class="search-form" id="search-block-form" method="post" role="search">
+        <div>
+         <div class="container-inline">
+          <h2 class="element-invisible">
+           Search form
+          </h2>
+          <div class="form-item form-type-textfield form-item-search-block-form">
+           <input class="custom-search-box form-text" id="edit-search-block-form--2" maxlength="128" name="search_block_form" placeholder="" size="25" title="Enter the terms you wish to search" type="text" value=""/>
+          </div>
+          <div class="form-actions form-wrapper" id="edit-actions">
+           <input class="form-submit" id="edit-submit" name="op" type="submit" value="Go"/>
+          </div>
+          <input name="form_build_id" type="hidden" value="form-YE2bWIvesl7Es9DG8mAK7Qo-4vJHIDgtWrtP1i4dxOQ"/>
+          <input name="form_id" type="hidden" value="search_block_form"/>
+         </div>
+        </div>
+       </form>
+      </div>
+     </div>
+     <!-- /.block -->
+    </div>
+    <!-- /.region -->
+   </section>
+  </header>
+  <nav id="main-menu" role="navigation">
+   <a class="nav-toggle" href="#">
+    Navigation
+   </a>
+   <div class="menu-navigation-container">
+    <ul class="menu">
+     <li class="first leaf">
+      <a class="active" href="/">
+       Home
+      </a>
+     </li>
+     <li class="leaf">
+      <a href="/about-ehs">
+       About EH&amp;S
+      </a>
+     </li>
+     <li class="leaf">
+      <a href="/directory">
+       Staff Directory
+      </a>
+     </li>
+     <li class="leaf">
+      <a href="/contact-information-office-environment-health-safety">
+       Contact Us
+      </a>
+     </li>
+     <li class="last leaf">
+      <a href="/sitemap">
+       Site Map
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div class="clear">
+   </div>
+  </nav>
+  <!-- end main-menu -->
+  <div id="container">
+   <div id="breadcrumbs">
+    <h2 class="element-invisible">
+     You are here
+    </h2>
+    <nav class="breadcrumb">
+     <a class="active" href="/">
+      Home
+     </a>
+     » Welcome to Environment, Health &amp; Safety
+    </nav>
+   </div>
+   <div class="custom-innermenu">
+    <div class="region region-custominnermenu">
+     <div class="block block-views" id="block-views-custom-blocks-block-1">
+      <div class="content">
+       <div class="view view-custom-blocks view-id-custom_blocks view-display-id-block_1 custom-home-block view-dom-id-6b217cb5dd098f163aa6eb4cb76764af">
+        <div class="view-content">
+         <table class="views-view-grid cols-6">
+          <tbody>
+           <tr class="row-1 row-first row-last">
+            <td class="col-1 col-first">
+             <div class="views-field views-field-field-customergroup-icon">
+              <div class="field-content">
+               <a href="https://ehs.berkeley.edu/working-labs">
+                <img alt="" height="25" src="https://ehs.berkeley.edu/sites/default/files/lab-icon.png" title="Working in Labs" typeof="foaf:Image" width="25"/>
+               </a>
+              </div>
+             </div>
+            </td>
+            <td class="col-2">
+             <div class="views-field views-field-field-customergroup-icon">
+              <div class="field-content">
+               <a href="https://ehs.berkeley.edu/department-safety-coordinator">
+                <img alt="" height="25" src="https://ehs.berkeley.edu/sites/default/files/department-safety-icon.png" title="Department Safety Coordinator" typeof="foaf:Image" width="25"/>
+               </a>
+              </div>
+             </div>
+            </td>
+            <td class="col-3">
+             <div class="views-field views-field-field-customergroup-icon">
+              <div class="field-content">
+               <a href="https://ehs.berkeley.edu/construction-uc-berkeley">
+                <img alt="" height="25" src="https://ehs.berkeley.edu/sites/default/files/const-icon.png" title="Construction at Berkeley" typeof="foaf:Image" width="25"/>
+               </a>
+              </div>
+             </div>
+            </td>
+            <td class="col-4">
+             <div class="views-field views-field-field-customergroup-icon">
+              <div class="field-content">
+               <a href="https://ehs.berkeley.edu/building-coordinator">
+                <img alt="" height="25" src="https://ehs.berkeley.edu/sites/default/files/bldg-icon_0.png" title="Building Coordinator" typeof="foaf:Image" width="25"/>
+               </a>
+              </div>
+             </div>
+            </td>
+            <td class="col-5">
+             <div class="views-field views-field-field-customergroup-icon">
+              <div class="field-content">
+               <a href="https://ehs.berkeley.edu/shops-and-trades">
+                <img alt="" height="25" src="https://ehs.berkeley.edu/sites/default/files/sales-icon.png" title="Shops and Trades" typeof="foaf:Image" width="25"/>
+               </a>
+              </div>
+             </div>
+            </td>
+            <td class="col-6 col-last">
+             <div class="views-field views-field-field-customergroup-icon">
+              <div class="field-content">
+               <a href="https://ehs.berkeley.edu/managingsupervising">
+                <img alt="" height="25" src="https://ehs.berkeley.edu/sites/default/files/manage-icon.png" title="Managing/Supervising" typeof="foaf:Image" width="25"/>
+               </a>
+              </div>
+             </div>
+            </td>
+           </tr>
+          </tbody>
+         </table>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!-- /.block -->
+    </div>
+    <!-- /.region -->
+   </div>
+   <div class="content-sidebar-wrap">
+    <aside id="sidebar-first" role="complementary">
+     <div class="region region-sidebar-first">
+      <div class="block block-menu" id="block-menu-menu-lines-of-service">
+       <h2>
+        Lines of Service
+       </h2>
+       <div class="content">
+        <ul class="menu">
+         <li class="first collapsed">
+          <a href="/biosafety">
+           Biosafety
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/chemical-safety">
+           Chemical Safety
+          </a>
+         </li>
+         <li class="leaf">
+          <a href="/controlled-substances">
+           Controlled Substances
+          </a>
+         </li>
+         <li class="leaf">
+          <a href="/scientific-diving-program">
+           Diving Safety
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/environmental-protection">
+           Environmental Protection
+          </a>
+         </li>
+         <li class="leaf">
+          <a href="/equipment-and-tool-safety">
+           Equipment and Tool Safety
+          </a>
+         </li>
+         <li class="leaf">
+          <a href="/event-safety">
+           Event Safety
+          </a>
+         </li>
+         <li class="leaf">
+          <a href="/field-safety">
+           Field Research
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/fire-prevention">
+           Fire Prevention
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/food-water-safety">
+           Food &amp; Water Safety
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/hazardous-materials">
+           Hazardous Materials
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/laser-safety">
+           Laser Safety
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/radiation-safety">
+           Radiation Safety
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/recharge-services">
+           Recharge Services
+          </a>
+         </li>
+         <li class="collapsed">
+          <a href="/training">
+           Training
+          </a>
+         </li>
+         <li class="last collapsed">
+          <a href="/workplace-safety-program-0">
+           Workplace Safety
+          </a>
+         </li>
+        </ul>
+       </div>
+      </div>
+      <!-- /.block -->
+      <div class="block block-block" id="block-block-1">
+       <div class="content">
+        <div id="emergency">
+         <h1>
+          <a href="/how-do-i-deal-emergencyaccident">
+           <span style="color:#FFF0F5">
+            Emergency?
+           </span>
+          </a>
+         </h1>
+         <h2>
+          If someone is hurt:
+         </h2>
+         <p>
+          911 or (510) 642-3333
+         </p>
+         <h2>
+          Report a spill:
+         </h2>
+         <p>
+          (510) 642-3073
+         </p>
+        </div>
+       </div>
+      </div>
+      <!-- /.block -->
+     </div>
+     <!-- /.region -->
+    </aside>
+    <!-- /#sidebar-first -->
+    <div id="content">
+     <section id="post-content" role="main">
+      <h1 class="page-title">
+       Welcome to Environment, Health &amp; Safety
+      </h1>
+      <div class="region region-content">
+       <div class="block block-system" id="block-system-main">
+        <div class="content">
+        </div>
+       </div>
+       <!-- /.block -->
+       <div class="block block-views" id="block-views-custom-blocks-block">
+        <div class="content">
+         <div class="view view-custom-blocks view-id-custom_blocks view-display-id-block custom-home-block view-dom-id-730f406be23dde6c1685a4d979c21ad2">
+          <div class="view-content">
+           <div class="views-row views-row-1 views-row-odd views-row-first">
+            <div class="views-field views-field-field-customergroup-image">
+             <div class="field-content custom-image">
+              <img alt="" height="135" src="https://ehs.berkeley.edu/sites/default/files/styles/customer-image/public/labwebsize.jpg?itok=2EiuY8qq" typeof="foaf:Image" width="145"/>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <h1 class="field-content custom-title">
+              Working in Labs
+             </h1>
+            </div>
+            <div class="views-field views-field-field-customergroup-link">
+             <div class="field-content">
+              <a class="custom-link" href="https://ehs.berkeley.edu/working-labs ">
+               Learn more
+              </a>
+             </div>
+            </div>
+            <div class="views-field views-field-edit-node">
+             <span class="field-content edit-link">
+             </span>
+            </div>
+           </div>
+           <div class="views-row views-row-2 views-row-even">
+            <div class="views-field views-field-field-customergroup-image">
+             <div class="field-content custom-image">
+              <img alt="" height="135" src="https://ehs.berkeley.edu/sites/default/files/styles/customer-image/public/dscsmweb.jpg?itok=u3YKfRWe" typeof="foaf:Image" width="145"/>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <h1 class="field-content custom-title">
+              Department Safety Coordinator
+             </h1>
+            </div>
+            <div class="views-field views-field-field-customergroup-link">
+             <div class="field-content">
+              <a class="custom-link" href="https://ehs.berkeley.edu/department-safety-coordinator ">
+               Learn more
+              </a>
+             </div>
+            </div>
+            <div class="views-field views-field-edit-node">
+             <span class="field-content edit-link">
+             </span>
+            </div>
+           </div>
+           <div class="views-row views-row-3 views-row-odd">
+            <div class="views-field views-field-field-customergroup-image">
+             <div class="field-content custom-image">
+              <img alt="" height="135" src="https://ehs.berkeley.edu/sites/default/files/styles/customer-image/public/c-at-berkeley.png?itok=dfyXf2-W" typeof="foaf:Image" width="145"/>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <h1 class="field-content custom-title">
+              Construction at Berkeley
+             </h1>
+            </div>
+            <div class="views-field views-field-field-customergroup-link">
+             <div class="field-content">
+              <a class="custom-link" href="https://ehs.berkeley.edu/construction-uc-berkeley ">
+               Learn more
+              </a>
+             </div>
+            </div>
+            <div class="views-field views-field-edit-node">
+             <span class="field-content edit-link">
+             </span>
+            </div>
+           </div>
+           <div class="views-row views-row-4 views-row-even">
+            <div class="views-field views-field-field-customergroup-image">
+             <div class="field-content custom-image">
+              <img alt="" height="135" src="https://ehs.berkeley.edu/sites/default/files/styles/customer-image/public/bcsmweb_0.jpg?itok=-O_OrVJ1" typeof="foaf:Image" width="145"/>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <h1 class="field-content custom-title">
+              Building Coordinator
+             </h1>
+            </div>
+            <div class="views-field views-field-field-customergroup-link">
+             <div class="field-content">
+              <a class="custom-link" href="https://ehs.berkeley.edu/building-coordinator ">
+               Learn more
+              </a>
+             </div>
+            </div>
+            <div class="views-field views-field-edit-node">
+             <span class="field-content edit-link">
+             </span>
+            </div>
+           </div>
+           <div class="views-row views-row-5 views-row-odd">
+            <div class="views-field views-field-field-customergroup-image">
+             <div class="field-content custom-image">
+              <img alt="" height="135" src="https://ehs.berkeley.edu/sites/default/files/styles/customer-image/public/shopsmweb_0.jpg?itok=t014tTE5" typeof="foaf:Image" width="145"/>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <h1 class="field-content custom-title">
+              Shops and Trades
+             </h1>
+            </div>
+            <div class="views-field views-field-field-customergroup-link">
+             <div class="field-content">
+              <a class="custom-link" href="https://ehs.berkeley.edu/shops-and-trades ">
+               Learn more
+              </a>
+             </div>
+            </div>
+            <div class="views-field views-field-edit-node">
+             <span class="field-content edit-link">
+             </span>
+            </div>
+           </div>
+           <div class="views-row views-row-6 views-row-even views-row-last">
+            <div class="views-field views-field-field-customergroup-image">
+             <div class="field-content custom-image">
+              <img alt="" height="135" src="https://ehs.berkeley.edu/sites/default/files/styles/customer-image/public/managingsmweb_0.jpg?itok=burp7GbD" typeof="foaf:Image" width="145"/>
+             </div>
+            </div>
+            <div class="views-field views-field-title">
+             <h1 class="field-content custom-title">
+              Managing/ Supervising
+             </h1>
+            </div>
+            <div class="views-field views-field-field-customergroup-link">
+             <div class="field-content">
+              <a class="custom-link" href="https://ehs.berkeley.edu/managingsupervising ">
+               Learn more
+              </a>
+             </div>
+            </div>
+            <div class="views-field views-field-edit-node">
+             <span class="field-content edit-link">
+             </span>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <!-- /.block -->
+      </div>
+      <!-- /.region -->
+     </section>
+     <!-- /#main -->
+    </div>
+   </div>
+   <aside id="sidebar-second" role="complementary">
+    <div class="region region-sidebar-second">
+     <div class="block block-block" id="block-block-2">
+      <div class="content">
+       <div class="toplink-block">
+        <h1>
+         Top Links
+        </h1>
+        <ul>
+         <li>
+          <a href="workplace-safety/how-do-i-write-or-find-jsa-job-safety-analysis">
+           Job Safety Analysis (JSAs)
+          </a>
+         </li>
+         <li>
+          <a href="/lessons-learned-uc-berkeley">
+           Lessons Learned
+          </a>
+         </li>
+         <li>
+          <a href="/ppe">
+           PPE
+          </a>
+         </li>
+         <li>
+          <a href="/workplace-safety/how-do-i-report-accident">
+           Report an Accident
+          </a>
+         </li>
+         <li>
+          <a href="/hazardous-materials/safety-data-sheets-formerly-msds">
+           Safety Data Sheets
+          </a>
+         </li>
+        </ul>
+       </div>
+       <p>
+       </p>
+      </div>
+     </div>
+     <!-- /.block -->
+     <div class="block block-block" id="block-block-6">
+      <h2>
+       Web Applications
+      </h2>
+      <div class="content">
+       <script>
+        /**
+* Function that tracks a click on an outbound link in Analytics.
+* This function takes a valid URL string as an argument, and uses that URL string
+* as the event label. Setting the transport method to 'beacon' lets the hit be sent
+* using 'navigator.sendBeacon' in browser that support it.
+*/
+var trackOutboundLink = function(url) {
+   ga('send', 'event', 'outbound', 'click', url, {
+     'transport': 'beacon',
+     'hitCallback': function(){document.location = url;}
+   });
+}
+       </script>
+       <div class="toplink-block">
+        <p>
+         <span style="font-size:11px;">
+          <em>
+           CalNet authenication required
+          </em>
+         </span>
+        </p>
+        <ul>
+         <li>
+          <span style="font-size:12px;">
+           <a href="https://ehs.ucop.edu/chemicals" onclick="trackOutboundLink('https://ehs.ucop.edu/chemicals'); return false;" target="_blank">
+            Chemicals
+           </a>
+          </span>
+         </li>
+         <li>
+          <a href="https://jwas.ehs.berkeley.edu/eventpermit" onclick="trackOutboundLink('https://jwas.ehs.berkeley.edu/eventpermit'); return false;" target="_blank">
+           <span style="font-size:12px;">
+            Event Permit
+           </span>
+          </a>
+         </li>
+         <li>
+          <span style="font-size:12px;">
+           <a href="https://jwas.ehs.berkeley.edu/hwp" onclick="trackOutboundLink('https://jwas.ehs.berkeley.edu/hwp'); return false;" target="_blank">
+            Hazardous Waste Program (HWP)
+           </a>
+          </span>
+         </li>
+         <li>
+          <a href="https://jwas.ehs.berkeley.edu/lab" onclick="trackOutboundLink('https://jwas.ehs.berkeley.edu/lab'); return false;" target="_blank">
+           <span style="font-size:12px;">
+            Labs at Berkeley Roster Tool (L@B)
+           </span>
+          </a>
+         </li>
+         <li>
+          <span style="font-size:12px;">
+           <a href="https://ehs.ucop.edu/lhat" onclick="trackOutboundLink('https://ehs.ucop.edu/lhat'); return false;" target="_blank">
+            Lab Hazard Assessment Tool (LHAT)
+           </a>
+          </span>
+         </li>
+         <li>
+          <span style="font-size:12px;">
+           <a href="https://jwas.ehs.berkeley.edu/rsis" onclick="trackOutboundLink('https://jwas.ehs.berkeley.edu/rsis'); return false;" target="_blank">
+            Radiation Safety Info System (RSIS)
+           </a>
+          </span>
+         </li>
+         <li>
+          <span style="font-size:12px;">
+           <a href="https://jwas.ehs.berkeley.edu/srs" onclick="trackOutboundLink('https://jwas.ehs.berkeley.edu/srs'); return false;" target="_blank">
+            Service Recharge System (SRS)
+           </a>
+          </span>
+         </li>
+        </ul>
+       </div>
+       <p>
+       </p>
+      </div>
+     </div>
+     <!-- /.block -->
+     <div class="block block-block" id="block-block-4">
+      <div class="content">
+       <div class="anony-block">
+        <h1>
+         <a href="/anonymously-report-safety-concern">
+          Anonymously
+          <span>
+           report a safety concern
+          </span>
+         </a>
+        </h1>
+       </div>
+      </div>
+     </div>
+     <!-- /.block -->
+     <div class="block block-block" id="block-block-3">
+      <div class="content">
+       <div id="waste-block">
+        <a href="/hazardous-materials/how-do-i-dispose-waste">
+         How do I
+         <span>
+          dispose of waste?
+         </span>
+        </a>
+       </div>
+       <p>
+       </p>
+      </div>
+     </div>
+     <!-- /.block -->
+    </div>
+    <!-- /.region -->
+   </aside>
+   <!-- /#sidebar-first -->
+   <div class="clear">
+   </div>
+  </div>
+  <footer class="clearfix" id="footer">
+   <section class="copyright">
+    <div class="region region-footer-quicklinks">
+     <div class="block block-menu" id="block-menu-menu-footer-qlinks">
+      <h2>
+       &lt;none&gt;
+      </h2>
+      <div class="content">
+       <ul class="menu">
+        <li class="first leaf">
+         <a href="/contact-webmaster">
+          Feedback
+         </a>
+        </li>
+        <li class="leaf">
+         <a href="/employment" title="">
+          Employment
+         </a>
+        </li>
+        <li class="leaf">
+         <a href="/ehs-fact-sheets-and-publications" style="|" title="EH&amp;S Fact Sheets and Publications">
+          |   Fact Sheets &amp; Publications
+         </a>
+        </li>
+        <li class="last leaf">
+         <a href="http://berkeley.edu">
+          |  UC Berkeley Home Page
+         </a>
+        </li>
+       </ul>
+      </div>
+     </div>
+     <!-- /.block -->
+    </div>
+    <!-- /.region -->
+    Copyright © 2018 UC Regents; all rights reserved
+   </section>
+  </footer>
+ </div>
+ <script type="text/javascript">
+  window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"c4aace210f","applicationID":"2254181","transactionName":"MVcBYBECW0sFB0wNDggdNkYKTBpRCgBdHE8WWhM=","queueTime":0,"applicationTime":11,"atts":"HRACFlkYSEU=","errorBeacon":"bam.nr-data.net","agent":""}
+ </script>
+</body>
+

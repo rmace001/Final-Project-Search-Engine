@@ -1,0 +1,172 @@
+http://kc.uthscsa.edu
+<html>
+ <head>
+  <title>
+   UTHSCSA Knowledge Center - Login
+  </title>
+  <script language="JavaScript" src="/kc/includes/functions.js">
+  </script>
+  <script language="JavaScript">
+   var objWin;
+ function myopen(filename,menubar) {
+    if(objWin)objWin.close();
+    var w = "KC_POP"
+    var o = "top=0,left=0,scrollbars=yes,width=700"
+    if (menubar) {
+        o = o + ",height=300,menubar=yes,toolbar=yes"
+    }
+    else {
+        <!--filename = "pop_frm.asp?page=" + filename;-->
+        <!--o = o + ",height=320"-->
+    }
+    objWin = window.open(filename,w,o);
+ }
+ function check_form () {
+   if (document.the_form.Username.value == '') {
+       alert("You must enter your username.")
+       document.the_form.Username.focus();
+       return false;
+   }
+   if (document.the_form.Password.value == '') {
+       alert("You must enter your password.")
+       document.the_form.Password.focus();
+       return false;
+   }
+   document.the_form.ScreenWidth.value = window.screen.width;
+   document.the_form.ScreenHeight.value = window.screen.height;
+   return true;
+ }
+ function check_top() {
+   if (top.parent.length) top.location.href = "login.asp"
+ }
+  </script>
+  <style>
+   <!--
+  .title {
+    font-family:verdana;
+    font-size:14px;
+    font-weight:bold;
+    color:000088;
+  }
+  .menuitem {
+    font-family:arial;
+    font-size:11px;
+    font-weight:bold;
+    text-decoration:none;
+    color:white;
+  }
+  .reglink {  
+    font-family:arial;
+    font-size:11px;
+    text-decoration:underline;
+    color:blue;
+  }
+  .label {
+    font-family:arial;
+    font-size:12px;
+    font-weight:bold;
+  }
+  input {
+    font-family:arial;
+    font-size:12px;
+  }
+-->
+  </style>
+ </head>
+ <body bgcolor="white" onload="JavaScript:check_top()" onunload="if(objWin)objWin.close()">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+   <tr>
+    <td align="center" class="title" colspan="3" height="28">
+     Welcome to the Health Science Center Knowledge Center
+    </td>
+   </tr>
+   <tr>
+    <td colspan="3">
+     <table border="0" cellpadding="2" cellspacing="0" width="100%">
+      <tr>
+       <td>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <tr>
+          <td align="middle" bgcolor="#003366" height="18" width="100%">
+           <!--<a href="javascript:myopen('/kc/tour/tour_intro.asp',1)" class="menuitem">Tour</a>-->
+          </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+   <tr>
+    <td width="250">
+    </td>
+    <td align="middle" bgcolor="white" nowrap="" valign="top">
+     <br/>
+     <br/>
+     <br/>
+     <center>
+      <font face="arial,helvetica" size="-1">
+       <img align="center" alt="Knowledge Centre Logo" border="0" src="/kc/ut_content/images/ut_logo.jpg"/>
+      </font>
+      <form action="login.asp?" class="FormButton" method="post" name="the_form" onsubmit="return check_form();">
+       <input name="ScreenWidth" type="hidden"/>
+       <input name="ScreenHeight" type="hidden"/>
+       <font face="arial,helvetica" size="-1">
+        <input name="action" type="hidden" value="Username"/>
+       </font>
+       <table border="0" summary="This table is for formatting purposes only.">
+        <tr>
+         <td class="label">
+          Username:
+         </td>
+         <td>
+          <input maxlength="50" name="Username" size="20" value=""/>
+         </td>
+        </tr>
+        <tr>
+         <td class="label">
+          Password:
+         </td>
+         <td>
+          <input maxlength="50" name="Password" size="20" type="password"/>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          <br/>
+         </td>
+         <td>
+          <input class="FormButton" name="submit" type="submit" value="Submit"/>
+         </td>
+        </tr>
+        <tr>
+         <td colspan="2">
+         </td>
+        </tr>
+        <tr>
+         <td colspan="2">
+          <!--<li type="square"><a href="javascript:myopen('/kc/ut_help/ut_system_reqs.html',0)" class="reglink">System Requirements</a></li>-->
+          <!--<li type="square"><a href="javascript:myopen('/kc/ut_help/ut_login_help.html',0)" class="reglink">How to Log In?</a></li>-->
+         </td>
+        </tr>
+       </table>
+      </form>
+     </center>
+    </td>
+    <td align="right" valign="top" width="250">
+     <table border="0" cellpadding="2" cellspacing="0">
+      <tr>
+       <td>
+        <img align="right" alt="Splash Graphic" border="0" height="400" hspace="0" src="/kc/ut_content/images/ut_kc_login_image.jpg" vspace="0" width="250"/>
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+  <script language="JavaScript">
+   document.the_form.Username.focus();
+  </script>
+ </body>
+</html>
+
