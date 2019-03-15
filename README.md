@@ -1,4 +1,4 @@
-# finalproject-lightsabr
+# Finalproject-LightSABR
 finalproject-lightsabr created by GitHub Classroom
 
 # Team Members
