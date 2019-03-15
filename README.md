@@ -44,7 +44,7 @@ finalproject-lightsabr created by GitHub Classroom
     - Only search within `title` fields per web-document
 
 # Extension : Web Interface Front-end
-  - Please refer to the `FrontEnd` repository which can be found here:
+  - Please refer to our `FrontEnd` repository which can be found here:
       - https://github.com/McCuaslandBrett/FrontEnd
   - Allow User Queries
   - Display Ranked List of .edu Webpage Documents
