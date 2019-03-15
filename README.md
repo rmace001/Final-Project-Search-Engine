@@ -1,7 +1,7 @@
 # finalproject-lightsabr
 finalproject-lightsabr created by GitHub Classroom
 
-# Team Memebers
+# Team Members
 - Shiyao Feng 
 - Alexander Yee
 - Brett McCausland
