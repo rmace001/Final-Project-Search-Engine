@@ -1,7 +1,7 @@
-# finalproject-lightsabr
+# Finalproject-LightSABR
 finalproject-lightsabr created by GitHub Classroom
 
-# Team Memebers
+# Team Members
 - Shiyao Feng 
 - Alexander Yee
 - Brett McCausland
@@ -14,8 +14,7 @@ finalproject-lightsabr created by GitHub Classroom
     (a) Architecture.
     
     - Multi-threaded design
-          
-    - Using Apache Spark, Lucene, and ElasticSearch
+    - 
         
     (b) The Crawling or data collection strategy
     
@@ -29,19 +28,24 @@ finalproject-lightsabr created by GitHub Classroom
     
         
 - Structure HTML Data
-    - Store in `.csv` and `.json` Format
+    - Parse `.html` and convert to `.json` format
 
 - Indexer
     
     (a) Architecture
+    - Virtual cluster running Elasticsearch
   
     (b) Index Structures
   
     (c) Search Algorithm
+    - Pose queries through RESTful API over HTTP requests (`HEAD`, `GET`, `POST`, etc.)
     
     (d) Limitations
+    - Only search within `title` fields per web-document
 
-# Extension : Web Interface
+# Extension : Web Interface Front-end
+  - Please refer to our `FrontEnd` repository which can be found here:
+      - https://github.com/McCuaslandBrett/FrontEnd
   - Allow User Queries
   - Display Ranked List of .edu Webpage Documents
   -(Add Screenshot of webpage?)
