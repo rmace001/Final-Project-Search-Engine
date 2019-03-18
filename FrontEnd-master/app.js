@@ -57,12 +57,16 @@ app.post("/search",function(req,res){
       type: 'webdoc',
       body:{
         query: {
-            match: {"title": str}
+            multi_match: {
+              query: str,
+              fields: ["title", "body"]
+            }
         },
         highlight: {
             fields: {
-                
-                title: {}
+
+                title: {},
+                body: {}
             }
         }
       }
