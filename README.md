@@ -1,6 +1,9 @@
 # Finalproject-LightSABR
 finalproject-lightsabr created by GitHub Classroom
 
+Please checkout our Trello board for a comprehensive history of our team collaboration:
+https://trello.com/b/lz8MPUvc/cs172-final
+
 # Team Members
 - Shiyao Feng 
 - Alexander Yee
