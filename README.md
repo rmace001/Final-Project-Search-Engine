@@ -68,18 +68,22 @@ finalproject-lightsabr created by GitHub Classroom
            - }
 
     (c) Search Algorithm
-    - Pose queries through RESTful API over HTTP requests (`HEAD`, `GET`, `POST`, etc.)
-    
+    - Pose queries through RESTful API over HTTP requests (HEAD, GET, POST, etc.)
+    - Retrieve results based on multi-match of web-document fields: title, body
+
     (d) Limitations
-    - Only search within `title` fields per web-document
+    - Due to virtual cluster, only the host machine of the cluster may successfully make HTTP requests and thus run the application
 
 # Extension : Web Interface Front-end
   - Please refer to our `FrontEnd` repository which can be found here:
       - https://github.com/McCuaslandBrett/FrontEnd
-  - Allow User Queries
-  - Display Ranked List of .edu Webpage Documents
-  -(Add Screenshot of webpage?)
-  -(Explain the Web Interface lightly, maybe limitations?)
-   
+  - Frameworks used: 
+    - Express and Node.js
+    - Ping the cluster when executing the application
+    - Allow user queries through a search bar and submit button
+    - Display ranked list of .edu web page documents
+  - Limitations
+    - We wish to modify the Embedded JavaScript file (.ejs) to search for the matched words in a query and only highlight those
+    - The only way to access the virtual cluster is directly through the host running the virtual machine
    
 # Compiling and Running Instructions
