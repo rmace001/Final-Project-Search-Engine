@@ -54,7 +54,7 @@ finalproject-lightsabr created by GitHub Classroom
 - Indexer
     
     (a) Architecture
-    - Ubuntu Virtual Machine on Virtualbox
+    - Ubuntu Virtual Machine on Virtualbox serving as Elasticsearch cluster
   
     (b) Index Structures
     - JSON Mapping Structure of a Web-document
@@ -87,3 +87,12 @@ finalproject-lightsabr created by GitHub Classroom
     - The only way to access the virtual cluster is directly through the host running the virtual machine
    
 # Compiling and Running Instructions
+- Web Crawler
+    - When running the python web crawler (`multi-threading.py`), the text interface walks you through a number of crawling options
+    - See web crawler section under "The Crawling or data collection strategy" for the various options of web crawling
+- Setting up the virtual cluster
+    - Use VirtualBox (or whatever other VM or Local machine used to host the Elasticsearch server)
+    - Assuming that the virtual machine is already set up with Elasticsearch, this is step where the user logs into their virtual machine
+- Front End
+    - When connected to the Elasticsearch cluster, running the node application `FrontEnd/app.js` which will initially ping the cluster to make sure the server is online
+    - At this point, you may now launch the website(`localhost:3000`) and begin searching 
