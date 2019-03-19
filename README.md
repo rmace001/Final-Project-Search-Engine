@@ -14,11 +14,25 @@ finalproject-lightsabr created by GitHub Classroom
     (a) Architecture.
     
     - Multi-threaded design
-    - 
+    
+    - Duplicate detection
         
     (b) The Crawling or data collection strategy
     
-    - Handles Duplicate URLS...(explain how)
+    - Using multiple threading to get the URL from seed web, and extract links from it to other docs (URLs) without duplicates by        concurrent.futures and regular expression.
+    
+    - Using multiple threading to download each HTML file to a local folder by 16 multi-task.
+    
+    - In the data folder, the application creates a different level folder to keep the files.
+    
+    - The application allows user input the number of pages to crawl and number of levels to limit application.
+    
+    - The default setting of application: if the application gets the file over 1GB in some arbitrary level K, the application will stop when it finished web crawling in level K.
+    
+    - If the user wants to input the limit by page or level, the memory wouldn’t be limit by 1 GB
+    
+    - When web crawling reaches the max level, the application will stop until the job is at max level.
+
         
     (c) Data Structures employed.
     
