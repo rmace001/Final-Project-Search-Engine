@@ -90,8 +90,10 @@ finalproject-lightsabr created by GitHub Classroom
 - Web Crawler
     - When running the python web crawler (`multi-threading.py`), the text interface walks you through a number of crawling options
     - See web crawler section under "The Crawling or data collection strategy" for the various options of web crawling
-- Setting up the virtual cluster
-    - Use VirtualBox (or whatever other VM or Local machine used to host the Elasticsearch server)
+- Converting to `json` Format
+    - running `html_to_json.py` takes the `data/` folder and outputs `data.txt`
+- Setting Up the Virtual Cluster
+    - Use VirtualBox (or whatever other virtual machine/local machine used to host the Elasticsearch server)
     - Assuming that the virtual machine is already set up with Elasticsearch, this is step where the user logs into their virtual machine
     - Save `data.txt`as `.json` extension, and bulk-load `data.json` with a `PUT/POST` request
 - Front End
