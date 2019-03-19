@@ -36,10 +36,17 @@ finalproject-lightsabr created by GitHub Classroom
         
     (c) Data Structures employed.
     
-    - (Insert Data Structures Here)
+    - Python lists
+    - Dictionaries
+    - Queues
+    - Time
+    - Hurry filesize(file size)
+    - re(regular expression)
+    - The BeautifulSoup library
+    - The urllib.request module
     
     (d) Limitations
-    
+    - the multi-process of python is hard to control the shared variable-page_number, so the application will stop at Max ~ Max + 15. The reason why the application will stop at Max +15 is that I set 16 task to run the process.  
         
 - Structure HTML Data
     - Parse `.html` and convert to `.json` format
@@ -47,10 +54,19 @@ finalproject-lightsabr created by GitHub Classroom
 - Indexer
     
     (a) Architecture
-    - Virtual cluster running Elasticsearch
+    - Ubuntu Virtual Machine on Virtualbox
   
     (b) Index Structures
-  
+    - JSON Mapping Structure of a Web-document
+        - {
+           - id: number,
+           - title: string,
+           - url: string,
+           - level: string,
+           - filename: string,
+           - body: string
+           - }
+
     (c) Search Algorithm
     - Pose queries through RESTful API over HTTP requests (`HEAD`, `GET`, `POST`, etc.)
     
