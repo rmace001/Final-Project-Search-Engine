@@ -94,5 +94,6 @@ finalproject-lightsabr created by GitHub Classroom
     - Use VirtualBox (or whatever other VM or Local machine used to host the Elasticsearch server)
     - Assuming that the virtual machine is already set up with Elasticsearch, this is step where the user logs into their virtual machine
 - Front End
+    - To connect to the cluster, the user would have to modify the host's login information in `FrontEnd/app.js` to match their own login information
     - When connected to the Elasticsearch cluster, running the node application `FrontEnd/app.js` which will initially ping the cluster to make sure the server is online
-    - At this point, you may now launch the website(`localhost:3000`) and begin searching 
+    - At this point, you may now launch the website (`localhost:3000`) and begin searching 
