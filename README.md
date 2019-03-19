@@ -83,12 +83,12 @@ finalproject-lightsabr created by GitHub Classroom
     - Allow user queries through a search bar and submit button
     - Display ranked list of .edu web page documents
   - Limitations
-    - We wish to modify the Embedded JavaScript file (.ejs) to search for the matched words in a query and only highlight those
+    - We wish to modify the Embedded JavaScript file `FrontEnd/views/s.ejs` to search for the matched words in a query and only highlight those
     - The only way to access the virtual cluster is directly through the host running the virtual machine
    
 # Compiling and Running Instructions
 - Web Crawler
-    - When running the python web crawler (`multi-threading.py`), the text interface walks you through a number of crawling options
+    - When running the python web crawler `multi-threading.py`, the text interface walks you through a number of crawling options
     - See web crawler section under "The Crawling or data collection strategy" for the various options of web crawling
 - Converting to `json` Format
     - running `html_to_json.py` takes the `data/` folder and outputs `data.txt`
@@ -99,4 +99,4 @@ finalproject-lightsabr created by GitHub Classroom
 - Front End
     - To connect to the cluster, the user would have to modify the host's login information in `FrontEnd/app.js` to match their own login information
     - When connected to the Elasticsearch cluster, running the node application `FrontEnd/app.js` which will initially ping the cluster to make sure the server is online
-    - At this point, you may now launch the website (`localhost:3000`) and begin searching 
+    - At this point, you may now launch the website `localhost:3000` and begin searching 
